@@ -1,0 +1,264 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java": "66e9e45738d02de02e8c0d336e997c2e2878f96e1620d84ae532c663ebd3418c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": "a0254c980bdbead9800395cc2ea98704708cda4d7d81763fcd4d67b64f1c7620",
+    "tools/quality/architecture/PublicCanonicalAadValueTest.java": "354026c4087d7496e065179ae587293a5f18fb9837d5bbf8da1fb3ae96c0f66d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d",
+    "src/deployment/config/common.yml.template": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+    "src/deployment/config/web.yml.template": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28050-public-config16-normal-v1/manifest.json",
+    "sha256": "af6a8658316ece99367df2d2ac2b3fc8cafb38e276ae357ff2bb1536e0bde530"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28052-public-config16-static-v1/manifest.json",
+    "sha256": "c11ecef1960851ba1435806251276f995da97570a077234424a6ec101c576ff4"
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28048-public-config-pre-style-fixed-v1/manifest.json",
+    "sha256": "e92e0e2f55a7164820942119fffe3f6eea5719f765671cb4be04200f44b37d07"
+  },
+  "expectedTests": 16,
+  "newDefinitions": 1,
+  "fullPhysicalClasses": 4,
+  "rootCompilerUnchanged": true,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 15,
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "line": "22",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "SS324 explicit @Nullable byte[] canonical absent differsfromzero-length; defensiveclone preservingnull isrequired wire/HMACdata contract, PUBLIC001002 independentlyassert both/no NPE normalhandling"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "27",
+      "message": "Return an empty collection rather than null.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "SS324 same explicitabsent-vs-empty canonical value, changingtoemptywouldaltercanonicalbytes; callers musthonor @Nullable, rootNullAway+negativecontract tests required"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "117",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "SS343/352 fixednonsecret configuration-invalid catalog forclosedYAML scalar/Path validation, noinput/cause/credential retention; pureString/defaultSDK/defaultJDK only anddirectError isnotcaught. No callback/grant/DB/Root operation or blanketfatalguard inferred; fullunknownenvironment/provider quality remainsseparate"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "165",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "SS343/352 fixednonsecret configuration-invalid catalog forclosedYAML scalar/Path validation, noinput/cause/credential retention; pureString/defaultSDK/defaultJDK only anddirectError isnotcaught. No callback/grant/DB/Root operation or blanketfatalguard inferred; fullunknownenvironment/provider quality remainsseparate"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "line": "225",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "OwnedJUnit poolfinallyshutdownNow-await10; soleextraCanonicalField fixturehasexplicitnullvalue/noownedbuffer-or-IO andcloseisnoop beforeemptyTWR, actualownedbytearrays separatelyclosedinfinally andtestedwiped PUBLIC002"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "229",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "232",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "233",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "CloseResource",
+      "line": "70",
+      "message": "Ensure that resources like this CanonicalField object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "OwnedJUnit poolfinallyshutdownNow-await10; soleextraCanonicalField fixturehasexplicitnullvalue/noownedbuffer-or-IO andcloseisnoop beforeemptyTWR, actualownedbytearrays separatelyclosedinfinally andtestedwiped PUBLIC002"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "CloseResource",
+      "line": "211",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "OwnedJUnit poolfinallyshutdownNow-await10; soleextraCanonicalField fixturehasexplicitnullvalue/noownedbuffer-or-IO andcloseisnoop beforeemptyTWR, actualownedbytearrays separatelyclosedinfinally andtestedwiped PUBLIC002"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "211",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "216",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "223",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "224",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_NULLABLE_DATA_OR_SANITIZED_CONFIG_OR_OWNED_JUNIT",
+      "reason": "StandaloneJUnit pool4or8/32tasks/timedinvokeAll10 orFuture5/finallyshutdownNow-assertawait10, no application/backend thread"
+    }
+  ],
+  "independentSourceAnchors": [
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(4);",
+      "line": "211"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(4);",
+      "line": "211"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS)) {",
+      "line": "216"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "line": "223"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "line": "224"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "line": "225"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "line": "225"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "jobs.add(executor.submit(() -> WebNonSecretConfig.parse(\"\", \"\").canonicalSha256()));",
+      "line": "229"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "line": "232"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "line": "233"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "value = value == null ? null : value.clone();",
+      "line": "22"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "sourceAnchor": "return value == null ? null : value.clone();",
+      "line": "27"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (RuntimeException failure) {",
+      "line": "117"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (RuntimeException failure) {",
+      "line": "165"
+    },
+    {
+      "path": "tools/quality/architecture/PublicCanonicalAadValueTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var absent = new CanonicalField(\"a\", \"X1\", null);",
+      "line": "70"
+    }
+  ],
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "heldFixturesExtractedOrRewritten": false,
+  "onlyPublicTemplateCopies": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1979_public_config16_preflight.py",
+    "sha256": "3c0e2b040b5a219751fd013e42d7fa424550051c06f2a6bc17aaf1cc2980b853"
+  }
+}

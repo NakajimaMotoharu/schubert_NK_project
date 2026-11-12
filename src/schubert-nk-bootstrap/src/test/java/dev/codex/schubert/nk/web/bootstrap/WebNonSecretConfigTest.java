@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-WEB-CFG-001..006: SS343 literals, independent of production defaults. */
@@ -221,11 +222,15 @@ final class WebNonSecretConfigTest {
     assertEquals(
         INVALID,
         assertThrows(IllegalArgumentException.class, () -> config.value("password")).getMessage());
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new java.util.ArrayList<java.util.concurrent.Future<String>>();
       for (int i = 0; i < 32; i++)
         jobs.add(executor.submit(() -> WebNonSecretConfig.parse("", "").canonicalSha256()));
-      for (var job : jobs) assertEquals(config.canonicalSha256(), job.get());
+      for (var job : jobs) assertEquals(config.canonicalSha256(), job.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertTrue(config.canonicalSha256().matches("[0-9a-f]{64}"));
   }
