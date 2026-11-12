@@ -361,7 +361,8 @@ final class ReceiptReferencePortTest {
   void concurrentIndependentReadsNeverShareConnectionsStatementsOrResults() throws Exception {
     Fixture fixture = new Fixture();
     var repository = new ReceiptReferenceRepository(fixture.source());
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> repository.find(ID).orElseThrow());
       var second = workers.submit(() -> repository.find(ID).orElseThrow());
       for (var future : List.of(first, second)) {
@@ -369,6 +370,11 @@ final class ReceiptReferencePortTest {
         assertEquals(ID, value.receiptId());
         assertEquals(7, value.questionId());
         assertEquals(AT, value.submittedAt());
+      }
+    } finally {
+      workers.shutdownNow();
+      if (!workers.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("receipt reference workers did not terminate");
       }
     }
     assertEquals(2, fixture.connections.size());

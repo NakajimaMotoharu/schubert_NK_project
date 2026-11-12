@@ -1,0 +1,139 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:21:55.454539+09:00",
+  "source": "adfcd9f778100624aac179f36690f5165f46f911",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReference.java": "b8dff7e53fd4b8646817eb6673a57479d3746a37d01585c3e35c2eee749ff829",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceException.java": "da9b11facf9c66b91e19f8a5dce97509cc759c9d88aab63704419cc3e9777cd9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java": "91ca27ecb2aea560cd08b26c0ef605b2bbbac756afb673722eef816a1ddfb2c4",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModel.java": "a6fdfd6dab35fc6bf9ed401e984253eee589f5d3d17b3d2fe731f10898bdc4e8"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01104-PG01",
+      "methods": "ReceiptReference constructor/requireReceiptId/toString",
+      "testIds": [
+        "RCPT001",
+        "RCPTPORT003"
+      ],
+      "expected": "Only3immutable technicalvalues receipt26Crockford/publicid/question1..999999999999/non-nullmillisecondInstant; exactfixedredacteddiagnostic. Noowner/token/auth/body/responsecache/TTL/acceptanceproof. Publicvaluepathvalidationdoesnotauthorize."
+    },
+    {
+      "id": "P01104-PG02",
+      "methods": "Repository.register/find/read",
+      "testIds": [
+        "RCPT002/003/005",
+        "RCPTPORT001..009",
+        "GRAPH329001..003"
+      ],
+      "expected": "WebtechnicalroleonlythreecolumnINSERT ONCONFLICT DO NOTHING thenreadexacttuple; samePKsamevalueidempotent, different/missingtuplefailswithoutUPDATE. BindsindependentfixedSQL/knownUTC, count0or1only; exacttypednonnullResultSet/idmatch/singlerow. ShortREAD_COMMITTED ownedTX commit/closebeforefreshAPI; originalsetupfailureclosepolicyunchanged, handler/commitfailure rollbackonce+physicalcloseonce. Resources SQLvsunknownselectiontable/fatalgraph/constantdiagnostic/currentprimaryErrorpriority fromSSC329 unchanged, no providerdataretention."
+    },
+    {
+      "id": "P01104-PG03",
+      "methods": "QuestionAcceptedViewModel.from/getValues/getTopBar",
+      "testIds": [
+        "RCPT006E/F",
+        "QuestionControllerTest accepted tests"
+      ],
+      "expected": "EveryGET callerobtainsfreshIF030currentauth/owner afterlocatorTXreleased. questionid/receipt/time-millis/usernameallmatch andtypedQSDRSP01semanticvalidation; emptybodyreject. OnlyfreshAPIbodyfirst200Unicodecodepoints/JSTfixedtimestamp/receipt, immutableMap/requestscope/HTMLtemplateescape; nonmatching,otherowner,deleted,missing,unknownAPI neverfallbackcachedreceipt/session. ThismodeldoesnotitselfissueAPI, sofullcontroller/databaseassemblyisendingdependency."
+    },
+    {
+      "id": "P01104-PG04",
+      "methods": "DDL/cleanup sharedending",
+      "testIds": [
+        "RCPT003",
+        "WebReceiptcleanup/QA048"
+      ],
+      "expected": "Physicalthreecolumns PK+questionindex, restrictedSELECT/INSERT/DELETE/noUPDATE/nobusinessFKorgrant; finite/millisecondDBtime. Orphancleanuponlyphysicallyabsentquestions underdailybackup/currentrun/gates/atomic1000chunk/noTTL/logicaldeletionguess. OwnedbysharedDDL/batch notduplicatefees orproofbyrepositorypresence."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java",
+      "sha256": "5821c43a250ff36ef1280d505da9664aa87189fc8fed472f792eebc64642b3de",
+      "tests": 9,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_JDK_JDBC_INTERFACES_ONLY_NO_BACKEND"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptFailureGraph329Test.java",
+      "sha256": "f5a92b64eb2f5b560963454360422666731cc2fcc995ad8a5b35d3c320fdd466",
+      "tests": 3,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_JDK_JDBC_INTERFACES_ONLY_NO_BACKEND"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java",
+      "sha256": "21807c9377145120abe4b11dfa89663083041ce15a7ce522e9972bedf7a0b6e0",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_NO_METHOD_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceFaultTest.java",
+      "sha256": "cb047fc9ca40877f756a3dd7a0e70cf10be2a74f733297a82d634b0228dfd562",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_NO_METHOD_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java",
+      "sha256": "007a8bc2e809d5fa430986f5a9d3fe86cb9b2f48d87b11054a95e2e34359ed08",
+      "tests": 23,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_NO_METHOD_EXTRACTION"
+    }
+  ],
+  "workerBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27226-web-receipt-contract-v1/worker-before.json",
+    "sha256": "bc8f535d977eac28d10a71b4cba6c8cd8f21305778c5dfa17640a5b1e123673c"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P011-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FINITE_PORT_WORKER_AND_FRESH_API_DB_CONTROLLER_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1526_web_receipt_contract_audit.py",
+    "sha256": "7822aedddff458a46c3e100b8b9065ddfa19e8f947312d6edb6fc1ab167047b0"
+  }
+}

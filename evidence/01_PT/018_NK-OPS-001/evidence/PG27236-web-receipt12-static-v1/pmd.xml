@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T17:24:57.986">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptFailureGraph329Test.java">
+<violation beginline="141" endline="141" begincolumn="22" endcolumn="23" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptFailureGraph329Test" method="graph" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="173" endline="173" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptFailureGraph329Test.Fixture" method="repository" variable="source" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="186" endline="186" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptFailureGraph329Test.Fixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="216" endline="216" begincolumn="15" endcolumn="55" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptFailureGraph329Test.Fixture" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="237" endline="237" begincolumn="15" endcolumn="47" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptFailureGraph329Test.Fixture" method="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferencePortTest.java">
+<violation beginline="364" endline="364" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="364" endline="364" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="366" endline="366" begincolumn="19" endcolumn="74" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="367" endline="367" begincolumn="20" endcolumn="75" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="374" endline="379" begincolumn="7" endcolumn="6" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="375" endline="375" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="376" endline="376" begincolumn="12" endcolumn="58" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="concurrentIndependentReadsNeverShareConnectionsStatementsOrResults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="523" endline="523" begincolumn="32" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest.Statement" variable="bindings" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="594" endline="594" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.receipt" class="ReceiptReferencePortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

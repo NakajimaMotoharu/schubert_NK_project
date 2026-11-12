@@ -26,3 +26,6 @@ WBS-P011-02公開source契約/独立期待値/TestIDは[4097_P01102質問原子�
 
 
 WBS-P011-03公開source契約/独立期待値/TestIDは[4099_P01103質問command時刻原source契約対応.md](4099_P01103質問command時刻原source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P011-04公開source契約/独立期待値/TestIDは[4100_P01104Web受付参照原四source契約対応.md](4100_P01104Web受付参照原四source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
