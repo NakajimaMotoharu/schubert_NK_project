@@ -9,3 +9,6 @@ BUG2681は原StreamTestのpoolだけをfinite invokeAll/get10秒・finallyshutdo
 **I/O開示**: Stream/Reader wholefixtureはJUnit所有TempDirへ独立synthetic一時fileを書き、最大48MBを読み書きしてJUnitがcleanupする。Readerのfixture0640設定も自分の新規一時fileだけ。これは実Transfer原本/backup/master/native保持FD/root/credentialの操作ではない。テストのfile操作を0と報告しない。全190physicalを保持（Proto176/API8/Web3/Storage3）、実行class/Code/noCode/標準generatedfilter/CRCは独立postで別々に照合する。旧exec/coverage合成・手動除外0。
 
 Source固定push後command: `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1388_scenario_current_qualifier.py run <fixed-source>`、続けて1391独立post。source/環境/実command/exit/全XML/counter/BUG/YKT/証跡hashは当run manifestへjoin。開始時はUnit NOT_RUN、失敗/skipped/flaky未合格。SOURCE_REQUAL .1/.3/.6＋Testfinite .05/.15/.3= .15/.45/.9 cap2を着手前固定、実専有費null。元P00806/2・全451・正式1964/53・原190は増加させない。
+
+
+実行結果: Testsource fc538b5d4c8b3d8fc010bc5722db3fdcd94d7075 / Main a27bf16e22698294a5900b13f06a09d1d213d830。26906 genuine0/全148 FESabort0、[26908独立結果](../018_NK-OPS-001/evidence/PG26908-scenario-current-independent-v1/manifest.json) hash8af79bdc7fe619788578c2b9c357ee4b631cd96643e2329cfbb4c73b2ca5c54a。全190physical/CI177/code166/positive170CRC、L3600/M761/C166/B1060全miss0、oldexecunion/手動除外0。環境/実command/exit/有限修正・一時I/O/BUG/YKT scopeは[26912](../018_NK-OPS-001/evidence/PG26912-scenario148-whole-scope-result-v1/manifest.json)。2681/2360局所close、元190/正式/全451/nativereader未受入。

@@ -1,0 +1,2257 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "fc538b5d4c8b3d8fc010bc5722db3fdcd94d7075",
+    "productionCoreMain": "a27bf16e22698294a5900b13f06a09d1d213d830",
+    "inputHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/package-info.java": "3024da8f518755480fd1465df1932483613ab57179d72badd00d077181cd7bc2",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDelivery.java": "6400a4da0720ec7987f3aa4defe005014a232ed0475513fd90501b08366a2523",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/package-info.java": "319104c513bbb5834cbeaccb2821c5fb63e6aeedc470df811058a2feb8d7f8a4",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/ScenarioFilePublisher.java": "b9c5e02f9009afe5699f74fd41f576af9c9ac317486e8c1ab0aaf4b8cdccbc15",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/package-info.java": "a9f7e2731c228ec539b2bb4b3e0e9a1161662e162cf33dad6e39789d0909ccdd",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java": "c86d8e01903b09c050187c4da462e82279b86eb638d8a2e1f12ecbc09b80f2ae",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/package-info.java": "81360fb14c321eed795fb7fa2d68b5afabca317e44f41ab5b5ef9bf8844c3532",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReader.java": "39d4882340526f647f73b93669b45fc2e6570be220c23bd5aaf45a3012c1b359",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/FileIntegrityException.java": "0ae4adadc3ba54aa98aa352a39a174a9b776e8240f442d7f1f43704e394a4854",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/package-info.java": "d02a504b450f71ea4349d467b4fc620555656dc6c1bf774620ec9caf0f92c7ed",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "2a1233e46a8f05a0dbf7e42034ad3e34afecf14814ebf5111527db6b6e179284",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioSnapshotShapeTest.java": "c1f205a1e81e9edd886fc6230ae438851d0c4442901997ab57c31a0aecd7ed7b",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDeliveryTest.java": "59127e08ee2dc63a31dbd13070add804f721caf9bebf2d5b3934868448767fd5",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java": "cbc0edea1e3f26aac0a557a16f9edf8e2ebf1d0953bdea1b35aa71ce72e52870",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReaderTest.java": "34211a24be4ae7bc625c3ee4270a0cc359daf2ae6aea0627deaf39c1d9fe0626",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioFileFixture.java": "bab03337af5d15eb5b1ec8855dac3816043a3b22788ed152a5a34fc85ea59b80",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.java": "69f271a7a06d71ee1092b5a0513e47514829662c6389582f77e99eb340887a21",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": "fd024359248f91a8914f150c0c08a693471d9fbc1598f1814128cbc018d88853",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/package-info.java": "54d4e868e34662474a3178298f16cb6db1f3a298e893413f5d8bafe3686138ef",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java": "d48090054661c31083cfc359d177c49d59b37db0c00acb367c305d783ab0c500",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultContent.java": "0ac268929d38aaa696fcef33a2076d54f4c515235d756f43786571c94ce67130",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java": "6a76635372b373bc7c272b73caf93a2b7a1147303c1a59b3b8351a40578eb398",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultIoException.java": "5400632a88a04148012e884223b3dafadc343c4cf2fbb5634b67b7ce82c5759c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java": "687e584880dc5feec5e8a44e5a71834cc4a60ca7e80655ad402a283712ecbff0",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptor.java": "ce032e3ae674e58f436ed2a4583087b62528bfa7ed1b5c3b775f61698fd73c2c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java": "5860289eecdf5fc5619f2f7a6f83974cc9a581073ecc067ada0e01d9919150cd",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaType.java": "668f9faee48178fe74c2c691bbbd0b5389df427e17d1d3692254d38761e4aebe",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/package-info.java": "abd74d8806614494b8b00047075d64ff912ee59a900e9ea3ec990d2a62059fb0",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java": "f42304f14cb1bfeeb78be2d4589366593f6a9903eedb95514462a30f37ea47c3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java": "204ca119d0ad946294d03e3fb5d151f3c5ba541e97fe72dce960f024ae72cf50",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java": "2c292124a30ee4ed275ad2d43818b46c73c8f5648edd60914992da786e6f555b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": "3146b6c3d044f3191fcfa4e8687afbb0d57ee7645ff233ec4a0f02bdeb5421a2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java": "c62cfffa3b8616cc820480b8166919ce98c7f8c4f15fa4a2fc63e55659cc8e51",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutPayload.java": "37ca98b5f55870f438606e20006a2dd737a2690eb6c6f4276de87b90a87bec0c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java": "e67fe4d4ac4c38b5056b45ba60f481c8d8e77dc354dfe1ea543d220da302d8bb",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadData.java": "416ad3f4e119c5c7b637510f8f035793390ad7f8d0dd0b7ba7da7411b60bfb0d",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadRecord.java": "72789edba52cf9c59c6c9b2bbb2b382a409e390c7be24c6c4219087da9b40e81",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java": "39c381766f47ebf2e71ccac4709ebb13272ee2c1dde8720ab888774456b62440",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadValues.java": "c761ed2b16ebf55916abd1b91958c094d6fd31b491c9aea6662edee27a799e5d",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java": "222046f9576699922b9e7e0692ace81c43a345f3a7fc1b11c009143b7271b378",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": "1f109d93cb6e8e802ab1a9c0484cfe48689253a34f1322111dfbce58bd0a8cde",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.java": "5db4c6b32786b0803334a4c8f7949bf4be0b6936a71c94658f6cef78e970286b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java": "22ac1353bdc960042885401477ad0685849d126d2ecd6786e4ba488a9cb76e6b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java": "07b1b58d8ccd0cff7c1fd5a836abfd0b5cdf36b7906b6b31e1f1c41de1a91abe",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java": "975f2cf129e380283678c4d99122c8613e21622b31725ac88494f7da0de10883",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.java": "b3a30f36f4121ac716b0a68d729574c32dc8a09d2d63422b51736c52f6da95b3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData.java": "38f7177993c2eba0e5fce69a85d55ec420a25b9d6cb1900bbaa4ea49121607cf",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java": "5bf98b1c3f7c67fc33e331c122b64672eb216b2398208107ca225131e870629b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRecord.java": "5c74402ddfb935a3a7f59af52fa6758859c43d67ceedb6f0e082ad7548ba392a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.java": "099883bf78de39ddf48b0467c0f20b8b1e052cc89c2f1e4efd6be682bbe481ed",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.java": "58ff4b6dbd140e907ed8d9dd7d9f5225be0972ef6d9fb506a97ffb9c8e11ec7a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.java": "33b3117a8f54b441c63f676f2c3bc789ad7e82be7d841dbf11cd0425b219f6e8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.java": "1b1a8ca063746c14149c53c7121b1d2a8c31619fade43c41bb1780d671cdcec9",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java": "26a303d816443d7375731a897b323087f7eb04e60940b821df5a4e10783c160f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.java": "73516a6bb1892756bd5bb857f7404b1631af5e8b865234176a99ea9c0def2860",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.java": "40d4674e04d918235ab5509f79d07a6706b56cce5aa98382103e6a0aacea2c38",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData.java": "dfeaeeba960ca5b198f8cba945ea979a218b2d991b56852ec516b05b8c3ee846",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.java": "54c61eaac197e54d18a76d5c7f129d3b88f494e2022cc764155200ac44e70591",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogRecord.java": "c92c10612d4380661f4a82ee2d9f72ffd60407bb48cd934055520e1e3092603a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java": "5f78131cdb62aa454eb68ac962d1e58cf542947c45f94753697a63ebc4d09ad6",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java": "4d0dfd1f30653be3c16f16f4f273e2d2e089c546da7aa98b48c6e8f900de5adb",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.java": "ae9b2fb77ab83a4962537ecda88516243d3ce3e4713080d9945949308bda52ca",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java": "9ea09d9d4566e2c23b8ecfb0f68845f2e598217250c7305c1959f4cb29735192",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.java": "4bfc67a93038d2c833a21c9783417c65ab00c9fd03cc24bb91ef9a65bb696227",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.java": "3fdb04f41e7f22281747e06c959338db7d8df0548038f05286f55a362b032d2c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java": "76be7cbc0ad448d5db04b6f887107c07c730c8787de4a19ded78ac959b279796",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.java": "966cb8cd91e5cb839b17f516cc967a12449b9eee909e1d896e49b809a5a6fc1e",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData.java": "b527e7e808aef26b0406627165b8301b629aea1895d29ca1391f588d7f1c638f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.java": "5cd1305fb2372d39e20563e5ed6b18d0d2bb37e40eece3770dcbfedf2f91e008",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.java": "262f161786c74c973fb08de827241b895fae54b914e1e35409749d339f47114b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.java": "adcb506327201d9cd54b1a8d716a1d99f4803f1fe11833dcc3a45f0985318d68",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.java": "6ca2ed033acb1e238b7000f3c7d488afa8ac2fe74c9c9c9841362ba4e20785f3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord.java": "455da9904dcbde3b1d7be1dce720897c003138c2d9f1a736871deab7ac1de9b4",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.java": "1179f10e4c80515451240869c52ec9c113b89d883949171daa03660f58eacb73",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData.java": "b2e55cc1a3b15dad3cc7933e6a0dafe39e8c2d4b9afcf186248e08994c0f91c1",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.java": "c3e4d5a5e4de04642a361826684fa1f902681bbf455c754ad8fafb8c76ba262e",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.java": "28a578047a92633709aee42b08c52d113981ba4fd406dcc90984db96ebea4dbc",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.java": "69270c63ce61efded7400fdea0494290e60d6e3e20927612a5ad4a676e984f81",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.java": "3f398129709614dd5190184dd58f57175a193e3e51a958cc557ef8d050345f5f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.java": "7ed7ea562f6ee8a7fab5e299e4226c2a521c6014ddce4c5ea51d32986c71ae64",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/package-info.java": "2fbe92d4140d6941e535183ca3d276c9adbd10aae25286246a1ee3d38a1624c2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.java": "f5e5add9b4222ba2ab624bfe8a2ee3cfdacb65bca31df61856587390e2ef06d0",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData.java": "7632addc47ad41c0518e6b2dd1794e189d41f9549f00c02c2f106ce4fe5ff83e",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.java": "ff53c6d7cb77d2f6a21a31173b8468f4fbcbdcfba8a643fd5984adf2f0f559a1",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData.java": "e8a1c6393778b9a3fe1592dda7bdd8e46bf7a274b1cd3c6019f81fefe87d8053",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationRecord.java": "56c16891758b3cdfe1073bff5f9338b5db1085fd82e382e357bc91bf99386bb2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java": "c33f1d8853f19f0b927b903f2856d6029bc807f666de8700f26c8e062ec600e2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.java": "d13958aea41cfb4e846dbde2142a9fc90d8c253961d5ea7ff67808e9bec4407b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData.java": "93f793ea16d1b3c864ff9e5fa0d77dee2205f6040c27f1af295153f4c9a45cd9",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.java": "c8e961953b587bde006c568847331c325f9f79ae3ae41cb44b8dfb50a1cfdfdf",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData.java": "c3caddc69e01cca280fb7e06822c9748ae38d142c81b47df8d447b0a049dcbdf",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java": "e93c0affdb135f6af27adbc223d5de106748df8514188513a3ab4f66687c9128",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.java": "631b79eda983258ffe2ccb33a6a95ed74d498a7f058b95ea1730702211f39ec8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData.java": "d41802650a3f5312c4f7f6336f103f068c0d634010217356632ae12b80356942",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord.java": "5edf3044aca7b0932d099a2044053be6722c99e21ba82fd0adc28a930da82a37",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData.java": "13c895247b630d1fe12267361ba24fd94aede101167e78a6a7438dc55d0ac4e7",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.java": "dd1215daa281f971ba16134229338ee8a8cca0720a8469637e8c3b3a56a4a05b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData.java": "155ecfd10ec246a8beed2bbcf6799cb70fbd180f6fad5ec23cef3168258939ab",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameRecord.java": "3d23656ab88501d8ae046e4fea304037b2a0ba61bea78e0a2c7ece7b81b37d7f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.java": "961efbdfb469d7de55232aeb692551f1a07ab7c3791b96e4022231e9c970150f",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData.java": "3b551a1b7febfd1de9a83b62703b12e9d897328a2a3bdcde615204b467d195fd",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.java": "3b6b2262484845e71e3ccf6fee13d9b07a7c8d2a00c689fd83f736a6db9e4b3e",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.java": "4ad341d195f5e7ae6345afef839ed90d2dc18119c892e3037dc55dba91fafd21",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.java": "10e780b70f67c15c27e9f306b98ea2482927bbec124cb3de66239953ff5c994a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java": "757cad4dfa3e68ff373cf9e3109a28273f627c8aff27d265e87bc3348f5f4d7c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.java": "eaa6f96baffa023a0ee8739f0bcef478e02488bc9dccf0d2ae9c76986b9357d5",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData.java": "2f61f8299fcd69fa9ced3a88d4479e7cc789a9ca6b37a8bde5aeecff37437881",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.java": "04d454ee61c3cb5c902bc6de83ae4a14d87aebce90b903eca1d02035d92448d0",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord.java": "bd7098e3cdf5cc11a54ad737c6a5cfdd09d448eb7900594807ef6378c13f37f6",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.java": "3f54c2f51f1b8fdcb7a327f11fab1c1d5d714c36ff17e340b4caa3f38f7c31c8",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.java": "36a96085c16dae5702860cc2172962a62c79124a3fd94b5d94dc411b85646815",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData.java": "69c71b71ba91f229b013f699f7b1c59c7b679f4bce5b8dd0f4cad14c6a1e9004",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord.java": "2b9a229f61b077ec6719f7fc03faad9bb8d6c8c53596c1d92c19e55f5dc7450c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.java": "a2adaa30dca9965fdccf883af5fe78686d3b4350b1a600195b9f61e049c982cd",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.java": "0e7c5503c97d12aa835735ff8b968c6d5126f9f1a9867540af60432a8c41ba32",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.java": "bf012f1ce68157a7d4b62e17f6f996362454d58684301de5fb079d9e2281d29c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.java": "cc3a28d386fbfccd8f1508439706f8f7b033bc826d1b25a2a4b72fd82f1806d2",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AudioId.java": "76ef923a1a3252318a475663b45559a2233f1e65c5ad3d22b6cf9c92026bf3f6",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition.java": "1fa2440174428ce5529c8334891d36cfcc407fa12afeed607cf9077d4abbd629",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode.java": "5b4b7af1fc8cd8d9049ac0da29be74c82e61d1b68653eb3767690962778955a9",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.java": "cd23948f05d7b3b3b6b24b8c39f6d7efd6682b61903658d0bcff016b17036b13",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryId.java": "f4a1642d932924d09fc9364fddbc8f5f2a6b017f40a1fe3cc13b0ff86b7d552e",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryType.java": "91fad6df8d86dea4d97d122955f93bb830388197eb3bbb173eb5838d598104fd",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/GameCode.java": "fd1c8af391cdd029dca64986c4bf8e7660ef06382c2ac6ce199c0e22bca40b92",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.java": "b55789756f4af3ec1480a1dd7ec123d037efd0d0208a3d9699f06285b1e1b275",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java": "3bf4d89066c5da24649c0f970e5f0655c37d34f0bbd6120539b9a518c4905cd1",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogId.java": "5a8e7b00184d66c21d08dfd9fa49a46bb787b944e455715f3348fea8230a4cea",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.java": "34f8fe67f4f97f1ff339402003a11bd7ae5fe4e38208813f4562dc0eb9919839",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogType.java": "6977e3028c290197f23cc2d71f6ca241160d30720ebc8a71fdf65a83b71bdc88",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType.java": "a138a9d06104be25bf52c0401b34bea3230ae7670c65a1bcffd087469d6fd556",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode.java": "3d1c92bd613a428b5fa25dc6622fd90f71dd2d912d1c34cb7f93b9d952df3f9a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.java": "9754a3220c258db45262d9447bdbaadf95a80348e57eeb202b1a8fbbecc83ffd",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.java": "4cc72ad360d739a54818f19d87d7e83dde2cb7b5975f6fbf9f544e34b94a4f54",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.java": "0226b90638a1c81e4a60cedb85ac3aa261069a982a745d79711a691bc0f76753",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PairRole.java": "b881ac09eba717b335039d9deb660ceaf1c7d40de7692ae583647f9efb94c454",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java": "891c1c2ad213be265b4535abebdf8ee43a332ab952cabc4a9ca76372657b07b3",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.java": "448aca86c81f447fb392d2f3f762006559d42a9d720b9bf9b8a6b17564974bcb",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.java": "a0c57ac09481d1a033b35faf9059c7f9c2d152ad62563f9099078c97e3febf3c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java": "3a4c04729dd6c232f34157dc765180cf1643d7cb8011f51068907e5d5fd5ddf9",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.java": "c4e173ae47563d5220fac49b5664d2d7493f5e273eefaabca97899f3e93ccae7",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.java": "263a31fb0dc97901550336ceccc8d46ced8ecfd7cc78e8585f7ceb880bbebc4a",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.java": "b873745a1447f68db8c40d5742171b773af788f11c6c3e1a9efe792fc2ce7974",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserId.java": "482cd1b41f0f5e2408086ca0ea4e6742a2a1c0c80bc541249261c9c339564383",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserState.java": "39ae05a1645dd3297a674075a8cb63832ccdb31f00921e1167dfa6eb2be8c13c",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.java": "e879c3cb991e034111d597f8d25bdf34c9796a54e242c74ce6da04e1203d54db",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition.java": "decf1959f0a024b84a91980853b213f010c0fa94b633e30c8dabc371cf036c39",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java": "a14544397a3ce1c45ff3026c0463c2829ea35a39a8990056a368fc52cf7b6d4b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/package-info.java": "021dd67243c48a3b1139c0adce2c092ed6696e07c033f10437bbd928cc8059d6",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/package-info.java": "10791580ee1eb4c0dbfbc16d04b979a3d6829eeaa330596e9faffc13fe77987b",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938",
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java": "85e0d120423af8a1a8a3aa17a51f99e49a73a0a26f1486b30c880474d9f3c7b9",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "4c05d90d26badf81b4173a01fcb1484bb20c8f05c7133fd3408857825c8c50e4",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java": "01f12650ecff0e5dafa486d4eac507051b50789ea5cc914598e756e5bd0d6cf9",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": "2df42867a30590944b8ec0b0158d318256812ba66593125f7b1d07719bf89689",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java": "fd37c828db9db48c3bb81eb6b4c1382bf314143c967d8eea0afb6d2869ed92ef",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorUnicodeBoundaryTest.java": "ec4d02c910e8e109ab83f6ef441222256101c7db488466ade5f9ade80fe348de",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java": "97faf48280d3d1e6fdf24cae984fae531f718545274c4567f9ca4c26b163ab34",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java": "c7249b4a26e6515043c686362ce8b7d67e256c35bcb4cc01f8205bcaf7e3e06f",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": "ad2df79ad437b878561567c4364f458336669c1c0394c0c5e602b529bae483ef",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": "e3ea04e5b8a49be88eb3e0adcd2f5b5bc5a20f6793ba9e3be632545fe282b436",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadPaginationBoundaryTest.java": "6f8038c90b3854656b38c6b641a0c6ae4f5d0db66a12c562edf594e52c9c739d",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java": "fe63057e3a11162c11ef99ed376885da8c8b8202f41fbe0c4a10977f691d425c",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java": "39a6179bb4de73de4d3b4837023349607f6b08e0e8579c489279237292f099d4",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticDirectBoundaryTest.java": "1046e924ccb83eb256c0d87d77d5dcb7581544ada44eb42ed2942b539d2ff1ef",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/SemanticFieldValueTest.java": "b399e53307dabab625ac8cd2449b8edf87c8873e47265cdbea806d907c86354f",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/TypedUnsignedRangeBoundaryTest.java": "660978cfa05c15b98791ec78b08be544193de52144dbdf26a1bbbe756fae7d7a",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java": "ad7fc345ed8f7410258b3c20ec906eb6f4ebb391ad1fcee5f37ea8cbd1abc9d8",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/EnumWireCompatibilityTest.java": "e62586bd50012c93080f1772c5c2cb670837b8542d6fc6a6cf1c0e9527a58213",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathUnicodeBoundaryTest.java": "6f320895b8c8f765fccef35e2b387d13b143001cb9f92c2f2fea59be176216bb",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java": "dd40230045fec910c3ab2d1cada147a56859a8ff1d3081c70891551b061ba5aa",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java": "588bc19f5035c5b1d9e80979fc5376274a7ebace6df91d8f68fa1eec1e6f8c61",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java": "4b38735c88ffee065f3499688a29df85d1d3e97a51401d9f9ce0805f75e41cca",
+      "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackExceptionTest.java": "189a8e5fc185e9cf70c22a72ff25be675ab284e5dc62bfd7920988456829bda9",
+      "src/schubert-nk-protocol/src/test/resources/protocol/fields-ui234-236.tsv": "a430ddf02fa6cc28b0f0075b96aa97eff829876b7f3bd9412bd0db7c3637bd4b",
+      "src/schubert-nk-protocol/src/test/resources/protocol/layouts-ui233.tsv": "c4f290595f5cabf19c11877e2dea95627b4d42490116431bac3bfde58950d711",
+      "src/schubert-nk-protocol/src/test/resources/protocol/named-accessors-independent.tsv": "27b9a458374f5b9edda50d78fae42ee76dabf15d8d1ecd9c94e56dbab63162d5",
+      "src/schubert-nk-protocol/src/test/resources/protocol/named-types-ss323.tsv": "9529fce86672b27a435665331648110521be6f59c5fe3fe5ca516df5234c7a76",
+      "src/schubert-nk-protocol/src/test/resources/protocol/payload-golden-ui234-236.tsv": "49bb76ec610216042f8e53ed548f4d5e52707a8bbf930a9fc6c93300dfa24839"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "6c33b2a1c55b3f0d116083e5e99ef8a3e5b3a15245b170dc4d0794f85d2964f9",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/storage/package-info.class": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+      "dev/codex/schubert/nk/storage/StorageIoException.class": "4d421d4ad90741c3522a25b43d50d4607a0cf96bc96771452e126a709c81aa91",
+      "dev/codex/schubert/nk/web/storage/package-info.class": "0adc928650e695c2a25bb77944770697a30b59841daf2a8f74ab408e47ce21fd",
+      "dev/codex/schubert/nk/web/storage/FileIntegrityException.class": "5d5dfb4f3b91473bceaa9c897d6b5407724414f5061515d2991fe3f4765748c9",
+      "dev/codex/schubert/nk/web/storage/ScenarioRecordReader.class": "d388536a82b93586896428470d0d1bdc0736bc0f03055075401da05bce5c2af1",
+      "dev/codex/schubert/nk/protocol/time/JstWireTimestamp.class": "95b705f52c12cd51460d18121c497aa869016941172fa8f597013caf14588250",
+      "dev/codex/schubert/nk/protocol/time/package-info.class": "20d8294367a93078f486a0ffb84437a270fb078a3536aea9944caed0aa9e2604",
+      "dev/codex/schubert/nk/protocol/transport/package-info.class": "07b4dd1d738bef85da4aa58c6fd838837f89310d1649d91a1e5ff1b9965e27fc",
+      "dev/codex/schubert/nk/protocol/transport/BrokerTopology.class": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+      "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.class": "6ced347f4f8d26b653538db3e2dfd98617a3c8f73fce808f0d50f2154b5cd0c7",
+      "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.class": "f215e3d637a03bcbe196641af177c8f57bd952f558dabd8211de303189e378a0",
+      "dev/codex/schubert/nk/protocol/header/MessageKind.class": "24ab82b72218ac3b2dce2b3ad537f5217233c3607c81a5d2a7328e1950ed3003",
+      "dev/codex/schubert/nk/protocol/header/package-info.class": "987d1f0312f17698aa59b4ccd3af9bf7b72420ac17f1524e6f6f7c466e53fc68",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader.class": "3fb6b5614f7d2eef1f67353fbcb4035254d474bbaba158ae58326530203d5a61",
+      "dev/codex/schubert/nk/protocol/header/ResultCode.class": "4f7a958a5aa48b481ca95bac4f7154b18605903c327280397735ac2f99b6be81",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind.class": "23c3b4d6df12eee01c95bc60b62cdcc5e615211d8a69f03d981ef50b48f97dc1",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage.class": "e236efc1130643a1166c08c7d40ae2c986e404e69cc4bdfb54e43f1e57335361",
+      "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric.class": "6f14494d2833bc41dd327d85ca8d08976165c381e8998690fbcddbbbc8b78a3c",
+      "dev/codex/schubert/nk/protocol/layout/LayoutDefinition.class": "fd814a677ee8ba089f6e14052ed21f3d489f8c71f75ccbac3921bd5b6c48f0cc",
+      "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.class": "da482d383a61e9d44a6fdcad3ae429b5aca0a5ca1276e6858c6ac9f564eae4a3",
+      "dev/codex/schubert/nk/protocol/layout/PayloadValues.class": "1c1978d02ad1f8b44393a121194ec755987a04aeded587b5fe9d24162ae611f2",
+      "dev/codex/schubert/nk/protocol/layout/package-info.class": "74da8d5fe35347c69ddbf68334790312f97777503236fdb84b9cc193f470f8ed",
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.class": "d884ca560218032f393ebd560daae8de1a6c0be6295495ebfc95d1076f965af4",
+      "dev/codex/schubert/nk/protocol/layout/FieldValue$Text.class": "49e5e4d5d40607ef3c80ac49343f33b8cabb06c6636ff59e65ef1cf8a48a9be8",
+      "dev/codex/schubert/nk/protocol/layout/TypedFieldValues.class": "03ef140e4e7a7586a3a2e8f8c4003fecfee64b11b6efedc8be1da3006d3989aa",
+      "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.class": "10aff0cfac3d44004082d39e9a0041d1010ba0428041b42b48351d0f7f64f9ac",
+      "dev/codex/schubert/nk/protocol/layout/PayloadRecord.class": "b765c519a12149eec186ef06b71f6660ef222f20850ffeed94a7a3712ad5aafa",
+      "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset.class": "75537c92603d74b10363732adbdb67fddf1efb848e9914ba712fef0f0a756902",
+      "dev/codex/schubert/nk/protocol/layout/PayloadData.class": "0c654933dd8e64834f13a8c1f4b51b3c97de8f73e29469c2d3e811f1ff97a8ac",
+      "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1.class": "61174fede07185a9db7dd89e5aca2e73ae448de4dc22da2d9d0a4a9942297ded",
+      "dev/codex/schubert/nk/protocol/layout/FieldValue$Flag.class": "0ee83173d82b6cda633e1d75c7eb1c004d9c12b4f04006c9260dd15324eaf301",
+      "dev/codex/schubert/nk/protocol/layout/Padding.class": "eaeb5df947236ee9419c03d3c326dbd8f8c70588d4b3d8fcc302095812485505",
+      "dev/codex/schubert/nk/protocol/layout/FieldArea.class": "63784dc0933c18d4d409c4614c3819a8e9fe730e4fa6d47f44bc10af430305f5",
+      "dev/codex/schubert/nk/protocol/layout/FieldValue.class": "01ea6e8fd771a9472204a5234f351632a6b6f9ac96c9033b42f368c8bd25b777",
+      "dev/codex/schubert/nk/protocol/layout/FieldDefinition$1.class": "2caeec8800498c522c2127a4b68a77dd69d8c716d1a6dfb722c739671aa26556",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId.class": "40643fc30454fbb577d65115f940766673f58ff1c074eea884973f7c46158384",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.class": "a67423654bb00235ce3e07a82d8e91ac4e58a2e9a94113f5046d1b4c72b08ece",
+      "dev/codex/schubert/nk/protocol/layout/Presence.class": "2c1fc3cfc59e067f8211485dca20c6a213264e4a03dd045e8e8b5be4930546f3",
+      "dev/codex/schubert/nk/protocol/layout/LayoutValidationException.class": "53b903c253bfa7979efaf18d21d7a3b374d3166579dd407f10b8701fecdb54a1",
+      "dev/codex/schubert/nk/protocol/layout/FieldValueSet.class": "27f40d7515e63c7f0140bec7aab641df0186eb0423602348781c64e46398a387",
+      "dev/codex/schubert/nk/protocol/layout/LayoutPayload.class": "f80d51cc1b516c614452c2de4db508f9266acc5337ef38391014f3f1c0d7e71d",
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.class": "d2c46934e044267c594929a9fa2efa08c4732140e12276608363e235b201637e",
+      "dev/codex/schubert/nk/protocol/layout/LayoutFields.class": "6c52bbe495d5400ed1d5c30afeda6dd0b7b6fd8e41115ec2bccbb9dd6e95fbce",
+      "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.class": "4f144642585d6b57b6a42867cf2ebff0b39db9791d2b0a1134f0b30ec9d77764",
+      "dev/codex/schubert/nk/protocol/layout/FieldDefinition.class": "c7f0138c4b8b8e3e405fed4b97d7c7fb07d2ca3a2c37d2dfb620d9b05e1caf59",
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping.class": "9a7ed504590378042272a2884398413750d016925815cb108c73434237e77d36",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload.class": "4feed644bafead062a831ec770243d84b602012eb46b97819847849b6f2aa66b",
+      "dev/codex/schubert/nk/protocol/layout/LayoutRegistry.class": "058a7324d66043691ba54c21d6dc79583ed69c20219aa3e6ef96f939054ba36a",
+      "dev/codex/schubert/nk/protocol/layout/WireType.class": "9f805008975f2109b7fc96d69a8d959afae00484568a31e9d62e5c773da63f93",
+      "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields.class": "fc2dfd0169fcbd96479cbcb8eb2c74825e964d535d8e70add3930742702be543",
+      "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.class": "57bae1514c00bbfedf56419b8f5fee15220ecf93876e748d1f0b145e160345b5",
+      "dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.class": "7da565712e5596c704a620e330254812eb48fec3c9c5765a586b05b78f62ad29",
+      "dev/codex/schubert/nk/protocol/file/LargeResultIoException.class": "7ab369c4f95e2f780cb25583e33420b545ddc9a46fd29a771e0bfc90e60cdede",
+      "dev/codex/schubert/nk/protocol/file/package-info.class": "7813e8b57900416374ffc3ea1d5adc63d83714ef923d98ff663177c0c88e1015",
+      "dev/codex/schubert/nk/protocol/file/MediaDescriptor.class": "9a3b6d8185bd5b8f3194d9557a33b6fc6a4763e968bf38854aab9842847e3557",
+      "dev/codex/schubert/nk/protocol/file/ContentDisposition.class": "feaaab5ac703b53ff78cd25779bdb28cb76789a4cb7e7a02aed06a1ddbe6a7bf",
+      "dev/codex/schubert/nk/protocol/file/LargeResultContent.class": "5fb69f98ac30029c05a18babc8d8bf72b5ea2ca7a58e2be0b7acfcecd4c932d9",
+      "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1.class": "b75fad14ae693285fd2e17dc90e7b68e636e5aaa5d83e4a520cab2df3186acd4",
+      "dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.class": "8737d9b4d78b362a8d0b5733da5609bbf089358a2c8f644bc9d6c3abed768bd4",
+      "dev/codex/schubert/nk/protocol/file/MediaType.class": "15ce86cdab59803ecf830b224ab891aa20be7689bc2831a8a751e103bc2f9694",
+      "dev/codex/schubert/nk/protocol/codec/FieldEncodingException.class": "a2c4b4dea8b57f89373960f015b72ba5786dbb035b214282c39b3e858f7a7fec",
+      "dev/codex/schubert/nk/protocol/codec/PayloadCodec.class": "b3dcc0e32db9bce45044f5f7d198af40cb73a1184eb25ab020f0cbefc39c6d1a",
+      "dev/codex/schubert/nk/protocol/codec/package-info.class": "ebc96eb3121e26cf8fa0fbd0d9001f64ce24bce463a05f91969a932be8af1fcf",
+      "dev/codex/schubert/nk/protocol/codec/ProtocolValidator.class": "641f6b4abb4de6d44d13040302e205bbbcfbffea5beee1ece850fbbebf7bebe1",
+      "dev/codex/schubert/nk/protocol/codec/TransportBodyType.class": "c4a8e87bed5ecd07bea7b706d00bc0c3f174a0bf8efeae6a6a9ca91a58913243",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.class": "a78f21c6145a38d6449f1857dd0f98e88e3473c6e3e73596cc5864b4f184b212",
+      "dev/codex/schubert/nk/protocol/codec/TransportMetadata.class": "2d96de83c7373d83b6a42dde362646a81c96cd6b19081500b323a3ba2c006e3a",
+      "dev/codex/schubert/nk/protocol/codec/FieldCodec.class": "ec29af3e8e9b2ff2032b7394dd306ea3315b46a4bb13689331cf96de8881969b",
+      "dev/codex/schubert/nk/protocol/codec/PayloadCodec$1.class": "5052b51e968a819a9b73fe71cdfc27d57aeb9892c987f4036194cd6b72b520ff",
+      "dev/codex/schubert/nk/protocol/codec/ExpectedRoute.class": "c8d1d398a5764fb26d61599cf162bd60edb9f15cbd92e2cf2add862209fc25ff",
+      "dev/codex/schubert/nk/protocol/codec/HeaderCodec.class": "49fd7f743dc4f83efd9398eb42adb913dc90399935f43b815d673742cdf7703d",
+      "dev/codex/schubert/nk/protocol/codec/MessageEncodingException.class": "34cb2a93b480322b55f8ae73fb1614be759fa5ef89e1ed612a18b30c3e13a203",
+      "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.class": "ebde0f1ae2e978937605cb720b78ca2d5478ac8b62d32cc9959369088224d5aa",
+      "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.class": "588d7708b3e2526e0f97534e1b057c96e4b9113451188bc514d2339b597d74ae",
+      "dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.class": "6bc53ad62522ce286e191c23573c6e4c832d1b4d0b1daa8108471bbe1fee8fe1",
+      "dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData.class": "9c2dcdd92403eccedbf3229be5bfb94e2c65d97a304f1917416d3df2d0d4713f",
+      "dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.class": "b03c16f93564a2da80b88d123165ba32edeccd07643f470ded9a6eb1ba60ba5a",
+      "dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.class": "992c64b3bacc19cf5e257bc50235110ee565d3cb92e05e2d424e3473ffab56f8",
+      "dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData.class": "12c31b616c4ec82ca49b3b1226feddcdd1fb992726f85e18598342682a85bcae",
+      "dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.class": "93d7c43b9e31266f32cb5b1c33415fb4a73a024108d380d91cc184ac685b48f7",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.class": "584cbc362a528faeda89af99eff43e04d2fe45f430d2974f6faec888160deb23",
+      "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.class": "f9d973d4aff5f465475668b6e300102c977158e4b587028c118cdb8dd37f765b",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.class": "d5aeefc22e264550fb5352742c9242d0e4c72ca0a71ec0bcaf9420e089b774f0",
+      "dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.class": "1cbd74a6e682b592e01cdb872b980db34aff1777a44ffad6bde12a3defbed144",
+      "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.class": "b97c05ace0c33cd4a30486d175c0006adfe1703bea02ac4e36684b305e6f1a44",
+      "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.class": "2577684e8f647464a1da66c05206183f468477dd2f23bce53c3e6e491061eef8",
+      "dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.class": "9de2b407fea7fe8b178104f72ad4fdbd7fc2096ba566672192e5dc9787d3629b",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.class": "384c20dc2d73583e372090a02d1a75064cd4fb37b387b044bca50a22fa05d240",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.class": "15e54a9c05eb65b2d8de0fdd7d7f1f18e1a95ca51c4e4aba6640b881859d03f5",
+      "dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.class": "6fd7167ef1243cbf3dd0f7ad7638b8ef8926222fc7fcbaafee3708296e974937",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord.class": "78a03b70e0af2e688942675ae266f7025dcdd3fcc746fee5413ccbef19d75219",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData.class": "6047ef1db721997074708414a81124e1b1d4718d32f554b4edd1205f9408352f",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.class": "3be7cfd87f0352894d6fbbde602988b4772223e6e76f6bc16b4ae0161a481af1",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.class": "c09110f735d4562a09f96725b3470d933ac45417d7dd5077637d279af6f38536",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.class": "21a1d33078415ba7a2632670988433d1915ec71672994ef46eb7c039c375281e",
+      "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.class": "49fb9af637b5a175619fb05682836939b473b90a3b84a17cc0d3f62863cf9e84",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.class": "eaebf1052830978abeaf6c62aab0fc88c7b12083ecd151078b30e0977429cdec",
+      "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.class": "379af39037d3cda6ce939bbbddbfe37c7213760f43104e186341dfc75a3cc644",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.class": "162945f25ecfb0d470381c92d57662e93af92c694440bd4cbfc5f653950cf800",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.class": "b2e10b99c78f7248d30a0a7982fc9563bee308734ee6abc6a427a32d4886a1ef",
+      "dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData.class": "611707e1b96592f847625a0f6a48fd8a848cdefd4780e6d79c6ebe419549e9ba",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData.class": "165f429739a33316df20f161f478fa84774f78346f873854bd0dc3e6527cbf1b",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.class": "f719cbe15b08759dd088f390c301505863816efb7339d3be4aaba370e8412640",
+      "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord.class": "c2f7ed5a2768d9bdc55d01c57b8d4f6961021668c9cbaa8c9544b02d2c98d021",
+      "dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.class": "0fc726d0046558581ec04b19768cdb264365bf8d77aa11eee8880abbea3e15dd",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord.class": "2a744be3d6d80bd3914e706f318070df6c01b61b1fc4f5d34889993a82d62d5d",
+      "dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData.class": "fcb10c323d10acff5601c9a2a1c9f97b481c9890aa9ec29473e50acfbe9101f8",
+      "dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.class": "4b68e41b482de599228f3f1471615ca79716144994a141af3e5dd581c76d6962",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.class": "21e5f25b190d4f08d69c634b19f0969f196d85a787879e278e845c77267693b8",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.class": "b9be0332a48a4c25ace90d13125f10ca24071f7abb77f17abd991c26bd972d27",
+      "dev/codex/schubert/nk/protocol/layout/scenario/GameRecord.class": "0eaeee7d1fc70aa26905afbdfdc8669ac3211f23075f944938e6ffb0854fe4fb",
+      "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData.class": "4c45015357be20c713f07d92ca193b27525b2194b1fe3500ff5c74c50592e315",
+      "dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.class": "4c69d66bac3394cd9ef55c55d1477c6e2788a37e3ad19da2cc7088b0431fcbf5",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.class": "3818ea0d87c147669b343e374aca18bd3b1fa12c5451ab8f928c0ddf71a3d20e",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData.class": "12c3df2dbaabeee0422ecd8ec20892e5a8e1fa07b669dfa57c9cf0684e63b3db",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.class": "0498835d19d5c66143c04d510688d2edee0066d592a1c93a83430247897d3594",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationRecord.class": "28ae5bf1c29799647ad39282a851b9e853f4c7c4b25c457b4059209be0419967",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData.class": "13416c6822c71ac6cf9bc8b796607c3d4335f0fc0b1dace5369707da46d48d70",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData.class": "72ee94224a899c594aac4ad92abf848f77c8c27b3130f6b98a9481b9fd4892f2",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData.class": "825c3e01ff362159f4cfe64d793f98d4e1cdafcb1c4127fd4acce9a254f0de6a",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.class": "01034c0f11a4e3faaed1b5430413197a6da07b1602680e9e9d5a24e54220b64a",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData.class": "9f28dac14b4c843af04e0d0723dad610483da8de8048a751724432ec8050a3c4",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.class": "7cc9a32c7e082c9a1ceb9a47d9e6bd931bc5c999574faace71646e75c76b75a5",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.class": "cdd69dbe163542bd22709fde502bcc63248771f80f051eb7c6b23658d222b828",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.class": "6473113433b495daa6f4a3eea51cd7142efaf10055fd0ffe76107a6fa548781f",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.class": "3026f691697010b20dbd36e676b772f434010be217ba4858f1b3fd467cb5887a",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.class": "525a71f87c51353a4d69495f95077b8909a9a936b8f04b9bf1bf4ad87585f398",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord.class": "0b9dc150be0bcd6e8b4f9b63505987047f707e9d39bf8dee7ed151cf346bd8bc",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData.class": "644bd695a87c561977fec597b4bab70fd76061c9adb56b633ce9288c0b8c80a9",
+      "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.class": "d4526c9853f84472c249ccabac895b3624095b2e98ea661d42ea4b0da3df7dce",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.class": "7439e5b2bed3e25aeb95b6d21cce8699f9fd03f69edf5d4c9eb819d6ffc81ab4",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.class": "74c16e896e4d3fed154ef6c36d02be25c2ec0a1de898371c611fa9ece53b2deb",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogId.class": "7c853bc429452817fe419b9de7ca4e867e5058cabb57fd9b40af32335ba7f9b4",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogLevel.class": "af11a65772ac96179b9b582eb35c68318d50da76444b80166a6f05311cd8b488",
+      "dev/codex/schubert/nk/protocol/layout/semantic/package-info.class": "9044edb188ffbd4c019bd8eebe73ca5abedb6275f98ef1e59904fef63a395b91",
+      "dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode.class": "91b14847181ef0f46ee98010928c3fe900caec9b052a302e8217681dbba0a9e7",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition.class": "26fa36ae49d5b21bdd6beec33433410dd0a317cc312373674b87ee91a9c2549c",
+      "dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType.class": "0759eabfc968de7cec14c7618e1dbd4bafd46863263b95fc77c861853ad781b0",
+      "dev/codex/schubert/nk/protocol/layout/semantic/IdValue.class": "0bf3ad601c895a30631e3fed406bdfdc627ef92859430f0bc2f6b368b41220ef",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.class": "dd3b5861cdeafe6145f071ea3651e6d4c4d0e72f95e8b9ad79c2dc305f89a0cf",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserState.class": "c36365d178bc6990fea79ec0eecfedf48a2740ec56e8ff640afc72477e5a1019",
+      "dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.class": "74921cebab07338895647faff7cc557280b11f3886541ba9dc401043132195e9",
+      "dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.class": "3e2169d5f3e67580afa8af4e2e0c3f675f6d9e4b41c65b268ef017d65ffd9cbd",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AudioId.class": "ea68bf26917f00733294e51d053fdbe5cd55e74b6fed1c3e0b1bbdc49286acda",
+      "dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.class": "81dd3e6f2c0c2bbf01c594915fab64beb2b606e474b70db13a85dba437610f50",
+      "dev/codex/schubert/nk/protocol/layout/semantic/EntryType.class": "14f496b26b56aba406d858b82a648d7d68f3cd3889957ade9ea4a05730db2ca3",
+      "dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition.class": "7f49d0ed22781790f49bc16e4871cc12c575a75d61a26f3496758520e1839aa4",
+      "dev/codex/schubert/nk/protocol/layout/semantic/PairRole.class": "06d9184c7bb435689269478f913928c65a25a5c74d724b9e20f2844c7424cffb",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserId.class": "a2e18d90a0b85f321d85739467e5fe49b7d1ce1573b64504dc501bcbce59ec7a",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.class": "dfa554068c4052f8ce4120f41575e2003563963c2bd5b9f893293a3691476eb8",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AnimationListCategory.class": "08733b5c031a18d16cb5e43d194e5d51f3848441b3e76840d8a61bfb69069981",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.class": "d38db2b703803d97abf5fa73bec732dcbbddc5dea687412aa344773373c1ae33",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.class": "b083f91050b207eb459f4b05dd91b312d106f1ee8e8909515f996bbc53318977",
+      "dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.class": "ae394e8e080543a294f7f56e95c783a4e9fb29642b39fd882876ea00bdd0f4c8",
+      "dev/codex/schubert/nk/protocol/layout/semantic/EntryId.class": "0706b2f46b9af1dd0409a022605f1350ead6b579f828acc119dcaae271f93582",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogType.class": "16abeb98a98e841bd4717e668ae242a03c41cfca3036536103e79171d0aac150",
+      "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.class": "bc256362522898ea4762de86595fa4e5480b077762fb401410484df60a6f6a5a",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.class": "a62d5c9c9fa66be2df999d71465211d33ca3d2a127318baee2685017de0b004d",
+      "dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.class": "a3e61c8d6ca6e132715714f82e215647b5bfc7c00d9dda967385ea8be6802338",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AnimationCategory.class": "e31adad2ed4b12fb08fdc0ddbc4a029b33cf147ffbc199001252444dedd43df5",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.class": "8b227fefe15728b4e97b32f1ce23dbd7cfddd4d73e45872317ae3937c202348a",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode.class": "4cafa5834783226510a1de460603a98682cac13015fee68dbc615a5ccbdf017f",
+      "dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.class": "29a135b919bec008fbb78ecbf313f5273b244cc85e3c5eca41cdc46adda5cdcb",
+      "dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.class": "31e49470abee5232e0b818b49d67f398f148285237856a3ff096890142a665c5",
+      "dev/codex/schubert/nk/protocol/layout/semantic/GameCode.class": "faacd2afde55d78a71208fe40de03e8f2b46d06d1996935a064da78daad5bee1",
+      "dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.class": "31ded9bc982784688ccd057a50213a07b731acc18f10dc16a11a0f455da17e86",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.class": "168fb3bed04883ff0530d8f7b185ead780bdc5220f113e7a05e0cb78c6648646",
+      "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.class": "e7e01252b4c5e512db03a6178e3a1cf73613d6607d0fcd22f0af6ae383ad8b4b",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.class": "d734ddac5fbab168dd50c558e1079141b1f2921f6391f6df275b18feaf0aed5d",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.class": "830272f5b85646a211d4e353ad46c42287fbbac4ba54bc81ab71b36b593ab99d",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.class": "c5f1e3157170055a9d2c6714ae8824f843a310ae1f98ab1ab93ceb4563fc7b25",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData.class": "8c9bca1c7681f466d47a1938917b29f5dbb72edfcf4461f1924c342dab9d6f4f",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.class": "dd89d2b22d026a2cdeb12aa9c7636a16903cae685e69f02a7ad2a5c3cff303b5",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.class": "0e260393cf10d0b8bc9beb6ff76e6e0e2dde611dc31b4cc68771042b528ef023",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.class": "05e24e077e66087870995605dc76979fbe61fbb664402f111749c76ca3a48689",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserRecord.class": "bc9c1a0930ae4e42e81ef449280c5b363b275540480aac4233cb01679b94c4d2",
+      "dev/codex/schubert/nk/protocol/layout/log/LogRecord.class": "3a93f1ff74ce59cbede41dfc11dca3632a7ad69f3aed0fa9cfc403e968a4a004",
+      "dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.class": "3b4d0288c2c92a3856ef746cf11b766354b91e90cb85aa2443747c05346e7314",
+      "dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.class": "fc1e336e010e604bf27ed6522cd06335eb84fee1b8022a2cb7f5d3e8303ac04c",
+      "dev/codex/schubert/nk/api/persistence/package-info.class": "30b5ca01e005432485691c73ea7dff278e3dcb1394253c8fdea02734127166f9",
+      "dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.class": "418f59ba8ac827530c8fed3cd32acfee3d6ad31778c28ac57bb13fbf202b574a",
+      "dev/codex/schubert/nk/api/file/package-info.class": "8233168f74fa3796cef9603013aa8f112fd3ef4778dd08e1f9d56d318d4c2417",
+      "dev/codex/schubert/nk/api/file/ScenarioFilePublisher.class": "476268a90eb1483c6989d15f1de9b866cf241ab3c0c21bd95cdb02adb8ff0f90",
+      "dev/codex/schubert/nk/api/storage/package-info.class": "89b0a4ca35e152318e8932bbc1b7cf24cefad2bcc7f717911a7b9854f90b6e24",
+      "dev/codex/schubert/nk/api/storage/ScenarioRecordStream.class": "e343ed2b2369aead565a22d635ed8416a4e8a9111f5f93018c941f737111fd73",
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioDetailDelivery.class": "b9230f7794336f4bfbcb361dd9fbdc7f5fd69d490397442d676ed4091ae43de0",
+      "dev/codex/schubert/nk/api/application/scenario/package-info.class": "78fa64c63f4c9d33ac7a3c04ba0611383696970e4b2ba8f72fad567ac1a5dde4"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "pageConstantsCountsAndArithmeticAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+        "name": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+        "name": "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "name": "semanticEncodingHelpersRejectNullReferences()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "numericCodecChecksDigitsRangeAndOverflow()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "explicitRequestActionKeepsItsOwnClosedPair()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "headerConstructorRejectsEveryStructuralViolation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+        "name": "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+        "name": "enum001SerializedAnswerStateMatchesIndependentProtocolVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "name": "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "decodeRejectsTruncationExtraHashAndIoFailure()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "writesAndReadsHeaderlessExactRecordsWithIndependentHash()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "enumsMapOnlyApprovedWireValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "name": "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "name": "layoutDefinitionChecksEveryLengthAndKindInvariant()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "crossedAndUnknownActionsAreNeverNormalizedToSuccess()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "listRecordConditionsAndOrderingAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "authenticationContextValidatesAndRedacts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "allSixtyFourLayoutsRoundTripMinimumSuccessValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+        "name": "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+        "name": "page001SecondPageHasIndependentExpectedBounds()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "headerValidateAgainstRejectsEachMetadataMismatch()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "deletedNotificationNeverContainsAnswer()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "valuesAreImmutableNullSafeAndRedacted()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+        "name": "page002MaximumEffectivePageKeepsExactNineDigitArithmetic()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "omittedActionIsAllowedForRequestOnly()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "dispositionMapsOnlyIAndA()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+        "name": "allOtherResponseErrorProfilesRetainTheirIndividualContracts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "name": "formatsAndParsesStrictJstMilliseconds()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+        "name": "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "contentMetadataRejectsInvalidValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "rejectsEveryMimeCrossProductAndVideoAttachment()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+        "name": "loginLockAndFailurePreserveOnlyApprovedErrorFields()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+        "name": "catalogMatchesIndependentUi234To236Fixture()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+        "name": "nullNameIsRejectedBeforeWidthAndValueValidation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+        "name": "malformedLoginErrorBoundariesAndTypesAreRejected()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "fixedPayloadIsDefensiveAndWireMessageChecksLengths()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "name": "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+        "name": "rejectsMalformedDisplayFileNameWithoutReplacement()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "name": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "name": "semanticHelpersDecodeAndEncodeEverySupportedShape()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+        "name": "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+        "name": "sem003QuestionAndWebLogTextContracts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+        "name": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "metadataAndExpectedRouteEstablishNullAndRangeContracts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "name": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "transportAndRouteContractsRejectEveryMismatch()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "name": "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "name": "bug037RequiredAndOptionalDataSendersRejectBadTime()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "menuActionMatchesIndependentOffsetsAndRoundTrips()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "name": "iso009PrimaryAndProtocolAreRequired()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "name": "layoutIdAndFieldDefinitionAreStrictAndOneBased()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "existingHttpMetadataAndReservedRulesRemainEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+        "name": "rejectsMalformedStoragePathWithoutReplacement()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "name": "iso012DisabledPrimarySuppressionCannotHideProtocol()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "scenarioInlineAndLargeFileConditionsAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+        "name": "disabledPrimarySuppressionDoesNotHideRollbackFailure()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+        "name": "primaryAndRollbackMustBothBePresent()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "notificationCancellationAndQuestionStateConditionsAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "receiptWebAndDefensiveContractsAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "numericErrorFillerDoesNotBecomeBusinessZero()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "encodeRejectsUnknownMissingWrongTypeAndRecordViolations()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "everyCanonicalConstructorReferenceRejectsNull()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "loginUserPasswordDateAndSessionRulesAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "validHeadersCoverRequestResponseErrorAndEventProfiles()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "allNamedTypesHaveIndependentDirectionalFieldMeaning()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "everyResponseLayoutUsesExactErrorFillersAndNoRecords()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+        "name": "nfcGolden001HangulJamoFitsComposedByteWidth()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "independentConcurrentCallersDoNotMixCategories()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+        "name": "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "name": "mediaAnimationAndMusicConditionsAreEnforced()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+        "name": "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+        "name": "sem002InclusiveDateLimitsAndOneSidedFilters()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+        "name": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+        "name": "distinctEqualValuedNodesAreBothRetained()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "name": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+        "name": "page003RejectsIndependentRangeAndOneFieldArithmeticChanges()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+        "name": "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "name": "semanticValueObjectsNormalizeValidateCompareAndRedact()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "name": "sharedCodecProducesIdenticalBytesUnderConcurrentUse()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+        "name": "sem001PasswordCharacterByteAndUsernameLimits()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "everyOtherCategoryIsRejectedByNamedBoundary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "bug040StorageExtensionCannotBeHiddenByDisplayMetadata()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "legacyRequestMatchesIndependentOriginalBytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "name": "allN12IdentifierTypesEnforceTheSharedPositiveRange()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "name": "iso010SameNodeIsRetainedWithoutSelfSuppression()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "name": "nullUnknownAndNearMatchAddressesAreDenied()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "name": "headerReferencesRejectNullAtTheNamedInvariantBoundary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "responseAndEventHeadersRoundTripWithoutLeakingContext()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+        "name": "parserRejectsMalformedUnknownAndDuplicateRows()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "constructorRejectsNullComponents()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "acceptsExactlySevenSsc004ExtensionMimePairs()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "missingBlankUnknownAndWrongCaseCategoryFail()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+        "name": "zeroAndMaximumAreAcceptedAtEverySupportedWidth()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "name": "registryMatchesIndependentUi233Catalog()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+        "name": "sameNodeIsRetainedOnceWithoutSelfSuppression()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "name": "numericDigitLimitIsCheckedWithoutOverflow()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "recordFieldsAreCompleteImmutableAndRedacted()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "explicitCatalogMatchesIndependentSs323NamedTypeFixture()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+        "name": "rejectsMalformedLogicalIdentifierWithoutReplacement()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "booleanAndReservedFieldsRejectUnknownBytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+        "name": "layoutFieldsRejectWrongAreaGapLengthAndNull()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "name": "rejectsNonCanonicalTextPathsNamesSizesAndHashes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "name": "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "textDecodeIsStrictCanonicalAndOptionalAware()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "name": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "writeRejectsNullCountLengthAndIoFailure()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "name": "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "name": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "name": "headerEncodingMatchesIndependentUi232GoldenVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "name": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "name": "typedModelsAndHelpersRejectNullMissingAndWrongKinds()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "name": "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "name": "verificationRejectsAllThirtyTwoDigestBytePositions()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "name": "registryRejectsEmptyNullDuplicateAndKindMismatches()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+        "name": "snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+        "name": "snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+        "name": "snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+        "name": "fileMetadataAnd10001RecordsRejectAtShapeBeforeAnyResultEscapes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+        "name": "nullMetadataListAndListElementsAreContractRejectionsWithoutNullNormalization()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+        "name": "zeroAndOneInlineRecordsKeepOnlyTheirOwnedImmutableSnapshot()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+        "name": "r01ZeroThrough200RecordsStayInlineAndNeverPublish()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+        "name": "r02Above200PublishesOnceAndProjectsEveryFileDescriptorField()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+        "name": "r03NullPortFailureAndMismatchedDescriptorNeverFallbackOrRegenerate()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "name": "w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "name": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "name": "w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "name": "w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "name": "w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+        "name": "rd03GoldenRecordsThrough48000000BytesHaveBoundedBuffersAndImmutableOrderedValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+        "name": "rd04NullNonfreshClosedAndExactLengthHashFailuresNeverCloseCallerChannel()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+        "name": "rd04ZeroProgressReadSeekFailuresAndContentChangedAfterFirstHashAreRejected()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+        "name": "rd04ValidHashesDoNotPermitInvalidBytesOrSequenceAndBadHashPrecedesDecode()"
+      }
+    ],
+    "expectedTests": 148,
+    "selectedClasses": [
+      "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+      "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+      "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest"
+    ],
+    "session": "PG26906-SCENARIO-CURRENT148",
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26898-scenario-current-profile-v1/manifest.json",
+      "sha256": "1c673e58098cbc59abdaeae73905491815edd842d5dd7c1af84b96896be25e77"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26902-scenario-current-preflight-v1/manifest.json",
+      "sha256": "8b2233c5cb45cbdc1aba44fa9395450f86bbcbafbdad2b81c2589b20024de01f"
+    },
+    "oldExecUnion": false,
+    "actualBackendOrHeldClassActions": 0
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T05:03:43.000779+00:00",
+      "endUTC": "2026-11-12T05:03:46.474780+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/jacoco.exec,sessionid=PG26906-SCENARIO-CURRENT148,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26898-scenario-current-profile-v1/api-main:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26898-scenario-current-profile-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26304-protocol-unicode-full130-compile-v3/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26280-protocol-unicode-full130-compile-v1/resources:/home/mini/codex/project1/work/pgpt-runs/PG379/pg26278-protocol-unicode-main-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+        "--select-class",
+        "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+        "--select-class",
+        "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "001b90aef5073eeef06ba60d05e3700c3508a6b21df92bf143c7fed17a66dcc3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T05:03:46.475297+00:00",
+      "endUTC": "2026-11-12T05:03:46.740644+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26898-scenario-current-profile-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "ebb700753a46efc8b41426a46e099760958daaa72e877563902c6a8639f1bc44",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T05:03:46.740968+00:00",
+      "endUTC": "2026-11-12T05:03:46.955730+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26898-scenario-current-profile-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "aa7c4e7953455f2ffde0dd09a4d834caa0a1804e0468ba860479b39cecc43a33",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T05:03:46.956061+00:00",
+      "endUTC": "2026-11-12T05:03:47.120791+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg26906-scenario-current148-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "cb01f04f23d42415a925490dbf33e1f05695db6541838a74cd6ec554e4bcc1b1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "pageConstantsCountsAndArithmeticAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+      "name": "r02Above200PublishesOnceAndProjectsEveryFileDescriptorField()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "name": "enum002EverySemanticEnumRetainsItsFieldIndependentSerialDescriptor()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticEncodingHelpersRejectNullReferences()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericCodecChecksDigitsRangeAndOverflow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "explicitRequestActionKeepsItsOwnClosedPair()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerConstructorRejectsEveryStructuralViolation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.EnumWireCompatibilityTest",
+      "name": "enum001SerializedAnswerStateMatchesIndependentProtocolVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "descriptorAcceptsOnlyCanonicalPathHashAndLengthEquation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "allAllowlistedEnumsExposeExplicitWireValuesAndGenericConversion()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "decodeRejectsTruncationExtraHashAndIoFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "writesAndReadsHeaderlessExactRecordsWithIndependentHash()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "name": "w04One201And10000RecordsMatchEveryGoldenByteAndIndependentDigest()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "enumsMapOnlyApprovedWireValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037HeaderSenderRejectsBadTimeAndPreservesAdjacentContext()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutDefinitionChecksEveryLengthAndKindInvariant()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "crossedAndUnknownActionsAreNeverNormalizedToSuccess()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "listRecordConditionsAndOrderingAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "authenticationContextValidatesAndRedacts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "allSixtyFourLayoutsRoundTripMinimumSuccessValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+      "name": "relativePathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page001SecondPageHasIndependentExpectedBounds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerValidateAgainstRejectsEachMetadataMismatch()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+      "name": "zeroAndOneInlineRecordsKeepOnlyTheirOwnedImmutableSnapshot()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "deletedNotificationNeverContainsAnswer()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "valuesAreImmutableNullSafeAndRedacted()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page002MaximumEffectivePageKeepsExactNineDigitArithmetic()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "omittedActionIsAllowedForRequestOnly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "name": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+      "name": "rd04ZeroProgressReadSeekFailuresAndContentChangedAfterFirstHashAreRejected()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "dispositionMapsOnlyIAndA()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+      "name": "rd04NullNonfreshClosedAndExactLengthHashFailuresNeverCloseCallerChannel()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "allOtherResponseErrorProfilesRetainTheirIndividualContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "formatsAndParsesStrictJstMilliseconds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.PathUnicodeBoundaryTest",
+      "name": "displayPathRejectsMalformedUtf16ButPreservesValidSupplementaryScalars()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "contentMetadataRejectsInvalidValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "rejectsEveryMimeCrossProductAndVideoAttachment()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "loginLockAndFailurePreserveOnlyApprovedErrorFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "catalogMatchesIndependentUi234To236Fixture()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "name": "w05PreflightRejectsNullCountSequenceAndInvalidLastRecordBeforeAnyIo()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "nullNameIsRejectedBeforeWidthAndValueValidation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "malformedLoginErrorBoundariesAndTypesAreRejected()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fixedPayloadIsDefensiveAndWireMessageChecksLengths()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "typedHelpersConvertIntAndIdentifiersWithoutLosingWireKinds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedDisplayFileNameWithoutReplacement()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticHelpersDecodeAndEncodeEverySupportedShape()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "unsupportedWidthsAreRejectedBeforeNumericRangeEvaluation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem003QuestionAndWebLogTextContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "metadataAndExpectedRouteEstablishNullAndRangeContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "transportAndRouteContractsRejectEveryMismatch()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "xNumericWrappersAndGeneratedNumericRangesRejectNonCanonicalValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+      "name": "r01ZeroThrough200RecordsStayInlineAndNeverPublish()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.application.scenario.ScenarioDetailDeliveryTest",
+      "name": "r03NullPortFailureAndMismatchedDescriptorNeverFallbackOrRegenerate()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037RequiredAndOptionalDataSendersRejectBadTime()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "menuActionMatchesIndependentOffsetsAndRoundTrips()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso009PrimaryAndProtocolAreRequired()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutIdAndFieldDefinitionAreStrictAndOneBased()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "existingHttpMetadataAndReservedRulesRemainEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedStoragePathWithoutReplacement()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+      "name": "rd04ValidHashesDoNotPermitInvalidBytesOrSequenceAndBadHashPrecedesDecode()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso012DisabledPrimarySuppressionCannotHideProtocol()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "scenarioInlineAndLargeFileConditionsAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "disabledPrimarySuppressionDoesNotHideRollbackFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "primaryAndRollbackMustBothBePresent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "notificationCancellationAndQuestionStateConditionsAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "receiptWebAndDefensiveContractsAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericErrorFillerDoesNotBecomeBusinessZero()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "encodeRejectsUnknownMissingWrongTypeAndRecordViolations()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyCanonicalConstructorReferenceRejectsNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "loginUserPasswordDateAndSessionRulesAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "validHeadersCoverRequestResponseErrorAndEventProfiles()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "allNamedTypesHaveIndependentDirectionalFieldMeaning()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "everyResponseLayoutUsesExactErrorFillersAndNoRecords()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden001HangulJamoFitsComposedByteWidth()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "independentConcurrentCallersDoNotMixCategories()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorTest",
+      "name": "mediaAnimationAndMusicConditionsAreEnforced()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem002InclusiveDateLimitsAndOneSidedFilters()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "negativeAndFirstOverflowAreRejectedAtEverySupportedWidth()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "anonymousRequestKeepsOptionalAuditMetadataAbsentOnTheWire()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.storage.ScenarioRecordReaderTest",
+      "name": "rd03GoldenRecordsThrough48000000BytesHaveBoundedBuffersAndImmutableOrderedValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "distinctEqualValuedNodesAreBothRetained()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "supplementaryPairsKeepIndependentExactUtf8ByteBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadPaginationBoundaryTest",
+      "name": "page003RejectsIndependentRangeAndOneFieldArithmeticChanges()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticValueObjectsNormalizeValidateCompareAndRedact()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "sharedCodecProducesIdenticalBytesUnderConcurrentUse()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticDirectBoundaryTest",
+      "name": "sem001PasswordCharacterByteAndUsernameLimits()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "everyOtherCategoryIsRejectedByNamedBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "bug040StorageExtensionCannotBeHiddenByDisplayMetadata()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "legacyRequestMatchesIndependentOriginalBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "name": "w05ZeroNegativeWriteIoForceClosedAndNonfreshChannelsFailWithoutImplicitClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "allN12IdentifierTypesEnforceTheSharedPositiveRange()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso010SameNodeIsRetainedWithoutSelfSuppression()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "nullUnknownAndNearMatchAddressesAreDenied()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerReferencesRejectNullAtTheNamedInvariantBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "responseAndEventHeadersRoundTripWithoutLeakingContext()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+      "name": "fileMetadataAnd10001RecordsRejectAtShapeBeforeAnyResultEscapes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "parserRejectsMalformedUnknownAndDuplicateRows()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+      "name": "w05PartialWritesRemainBoundedAndForceOnlyAfterAll4800Bytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "constructorRejectsNullComponents()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "acceptsExactlySevenSsc004ExtensionMimePairs()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.TypedUnsignedRangeBoundaryTest",
+      "name": "zeroAndMaximumAreAcceptedAtEverySupportedWidth()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "missingBlankUnknownAndWrongCaseCategoryFail()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryMatchesIndependentUi233Catalog()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "sameNodeIsRetainedOnceWithoutSelfSuppression()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "numericDigitLimitIsCheckedWithoutOverflow()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "recordFieldsAreCompleteImmutableAndRedacted()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorUnicodeBoundaryTest",
+      "name": "rejectsMalformedLogicalIdentifierWithoutReplacement()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "explicitCatalogMatchesIndependentSs323NamedTypeFixture()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "booleanAndReservedFieldsRejectUnknownBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "layoutFieldsRejectWrongAreaGapLengthAndNull()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "malformedAndOverflowFailuresRetainDiagnosticCauseWithoutEchoingInput()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorTest",
+      "name": "rejectsNonCanonicalTextPathsNamesSizesAndHashes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioSnapshotShapeTest",
+      "name": "nullMetadataListAndListElementsAreContractRejectionsWithoutNullNormalization()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.SemanticFieldValueTest",
+      "name": "semanticHelpersRejectInvalidWireValuesWithoutReturningPartialObjects()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textDecodeIsStrictCanonicalAndOptionalAware()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "writeRejectsNullCountLengthAndIoFailure()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolSemanticTypeTest",
+      "name": "approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTables()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerEncodingMatchesIndependentUi232GoldenVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.WebLogActionContractTest",
+      "name": "nfcAndExactUtf8ByteBoundaryHaveIndependentExpectedBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest",
+      "name": "typedModelsAndHelpersRejectNullMissingAndWrongKinds()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.time.JstWireTimestampTest",
+      "name": "bug037ExpandedYearsAndUnrepresentableInstantsAreRejected()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.file.LargeResultRecordCodecTest",
+      "name": "verificationRejectsAllThirtyTwoDigestBytePositions()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryRejectsEmptyNullDuplicateAndKindMismatches()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "tests": 148,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false
+}
