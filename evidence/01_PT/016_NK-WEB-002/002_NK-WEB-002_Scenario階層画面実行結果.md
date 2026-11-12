@@ -114,3 +114,6 @@ WBS-P016-19公開source契約/独立期待値/TestIDは[4165_P01619受付完了�
 
 
 WBS-P016-20公開source契約/独立期待値/TestIDは[4166_P01620通知一覧原三artifact契約対応.md](4166_P01620通知一覧原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+P01620/22原検索入力26は[仕様](4167_P0162022通知質問検索原二十六単体仕様.md)／[結果](4168_P0162022通知質問検索原二十六単体結果.md)、二Form全source四100/全178partial、actualNQview/ownerAPI/HTTPDB/CHR/451別HOLD未受入。
