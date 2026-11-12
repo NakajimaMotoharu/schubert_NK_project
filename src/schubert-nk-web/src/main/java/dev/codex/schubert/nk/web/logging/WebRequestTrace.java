@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.web.logging;
 
 import dev.codex.schubert.nk.web.security.WebRequestContext;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import dev.codex.schubert.nk.web.view.TopBarViewModel;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -84,6 +85,7 @@ public final class WebRequestTrace {
     try {
       request.setAttribute(ATTRIBUTE, trace);
     } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
+      SessionStoreException.preserveFatal(attributeFailure);
       throw new IllegalStateException("request audit metadata is unavailable");
     }
     return trace;
@@ -95,6 +97,7 @@ public final class WebRequestTrace {
     try {
       value = request.getAttribute(ATTRIBUTE);
     } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
+      SessionStoreException.preserveFatal(attributeFailure);
       throw new IllegalStateException("request audit metadata is unavailable");
     }
     if (value == null) return Optional.empty();

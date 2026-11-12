@@ -1,0 +1,112 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:06:58.887313+09:00",
+  "source": "d77a911f011dd8a9160118a153238ece54e4cd49",
+  "productionCoreMain": "3c9e4913e1312b1410135fbb10ba7a9f8bdc639b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java": "ef9bbc81c79799528840f70f65f55056d08fd1ea0f9fd1a93d8212b946f4e630",
+    "src/schubert-nk-web/src/main/resources/templates/login.html": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528"
+    },
+    {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01601-PG01",
+      "methods": "LoginController.login/GETlogin",
+      "testIds": [
+        "PT-SCR-105",
+        "PT-SCR-108"
+      ],
+      "expected": "GET/login returnsfixedtemplate login only, no businessconnect/no formbinding/noauthcredentialread. POST/login belongsSecurityfilter, displaycontroller alone doesnotauthenticate; MockMvcwithoutfilterPOST405. ExplicitWebMvcConfiguration registersLogin/Menu/Erroronly/nocomponentscan, templateprefix/suffix/UTF8/HTML/cache/checkExists/closedViewNames/no redirect-forward/partialoutput, CSRFprocessor fixed. WholeLoginControllerTest4+allhelpers/config sourcefullyreviewed, ordinaryMockMvc possibleclosedprofile only; noHOLD extraction."
+    },
+    {
+      "id": "P01601-PG02",
+      "methods": "login.html title/form/input/navigation",
+      "testIds": [
+        "PT-SCR-105..106",
+        "LOGIN-DISPLAY-PORT"
+      ],
+      "expected": "QA045/DIF001 approvedtitle schubertNK - ログイン, h1schubertNK, ja/UTF8/viewport/css, visibleuser+passwordlabels, POST/login+resolvedhiddenCSRF, userrequired/autofocus/autocompleteusername, passwordtypepassword/required/autocompletecurrent-password/emptyredisplay. No password/token/context in responseorlog. Fixedtitlechangeonly CHR-A01 allowed; Currentbaseline untouched."
+    },
+    {
+      "id": "P01601-PG03",
+      "methods": "login.html locked/error/logout",
+      "testIds": [
+        "PT-SCR-107",
+        "LOCKED-LOGIN-DISPLAY"
+      ],
+      "expected": "Queryerror=>fixedincorrectcredentials; locked=>Current固定「ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。」; logout=>fixedloggedout; unknown/noquery=>nomessage; passwordremainsempty. QA055 approvednoactualremainingtimeinDOM/noGETdynamicstate/newDIF. Real0..900secondsRetryAfter isAPI/Loginhandler headercontract(notthesefixedwords); actualHTTP/auth/CHR remainsseparateunacceptedending."
+    },
+    {
+      "id": "P01601-PG04",
+      "methods": "existingPG24416DOM28/82snapshots",
+      "testIds": [
+        "LOGIN-DISPLAY-PORT",
+        "LOCKED-LOGIN-DISPLAY",
+        "USER-TEMPLATE-DOM"
+      ],
+      "expected": "All10 inputsource/Test/toolsand4resourcehashes unchanged; old28success/82publicDOM snapshots retainedoriginalsource3814a5/Main7aed, nojavaMainonCP/javaCoveragenull/fullMockMvcBrowserfalse. No repeated28/no oldexecunion/currentprojectsourcecertification. ActualLogin/authDB/session/RetryAfter/CHR/P01502/451 remainopen; byteconsistency alone noacceptance."
+    }
+  ],
+  "wholeLoginControllerTestReview": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
+    "sha256": "5255b728adf851b400649c9f0e9e107d9b8059df4e7a656cbbc6470c01e80a4d",
+    "tests": 4,
+    "setup": "explicitWebMvcConfiguration/noDB/noRoot/noactual4runtime",
+    "wholeBodyReviewed": true
+  },
+  "immutableDomProof": {
+    "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24416-login-user-dom-independent-v1/manifest.json",
+    "sha256": "e4a6de90f35c72ae6fb6d239666096ff6142bedf9e512053896df797162a699c"
+  },
+  "oldProofSource": "3814a5d0adcd3ac35b28397d791a42910e736356",
+  "oldProofMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+  "old28TestsReexecuted": 0,
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_P01502_REAL_AUTH_HEADER_CHR_AND_SAME_SOURCE_QUALITY_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1700_login_screen_contract_audit.py",
+    "sha256": "5e34187a39e7c26bebd148a8b411d1fe91fa1e6c6d45eeefeddd4991dc7ded6f"
+  }
+}

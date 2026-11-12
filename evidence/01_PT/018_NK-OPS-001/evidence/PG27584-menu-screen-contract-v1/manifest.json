@@ -1,0 +1,137 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:10:14.921877+09:00",
+  "source": "d77a911f011dd8a9160118a153238ece54e4cd49",
+  "productionCoreMain": "3c9e4913e1312b1410135fbb10ba7a9f8bdc639b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java": "7fa6583a49c37dedd196d696a2c0d7c45f2e7b7097044d63aa2aef5ef2915ad3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java": "892c36828ff005248b7d62b593124f9d853c583caf80a3e3e3bef142841057a3",
+    "src/schubert-nk-web/src/main/resources/templates/menu.html": "8369f16fb8b330b1a073003fa0b8c74e68e65b6ca579d85ad82f6582b7ad626a"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986"
+    },
+    {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01602-PG01",
+      "methods": "MenuController.show",
+      "testIds": [
+        "PT-WEB-142..147",
+        "MENU-AUDIT001..007"
+      ],
+      "expected": "GET/ only closedSessionPrincipal instance/nullModelnullprincipalreject; mapimmutableMenuVM thenmarkMenuViewed/returnmenu. Noqueryrole/id/clientselectedURL/noAPIbusinessupdate. Failurebeforecompletedmodel doesnotmark. URLroleallowlist issecuritychain owner, cardvisibility notauthorizationgrant."
+    },
+    {
+      "id": "P01602-PG02",
+      "methods": "MenuCard/MenuViewModel",
+      "testIds": [
+        "PT-WEB-142..147",
+        "MENU-PROJECTION001..006"
+      ],
+      "expected": "USERexact7 inCurrentorder: scenarios/search/animation/music/questions-new/notifications/questions. ADMINsame7thenlogs/admin-users exact9; titles/descriptions/hrefs fixedUI223 catalog, no sorting/reordering/userURL. Nonnullprincipal→TopBarclosedusername/role/schubertNK; immutablecards/redactedtoString/noauthobjectretained. Hidingcarddoesnotreplaceendpointrolecheck."
+    },
+    {
+      "id": "P01602-PG03",
+      "methods": "menu.html/layoutshared",
+      "testIds": [
+        "PT-WEB-142..147"
+      ],
+      "expected": "ja/layouttitle/topbar/aria mainmenu, enumerateimmutablecards preservingorder, th:text title+description escape, href fixedcatalogonly. TopBarlogoutPOST/CSRF fixedsharedlayout. HTMLresourcechecknotbrowser/authenticatedHTTP orrealCSRFproof."
+    },
+    {
+      "id": "P01602-PG04",
+      "methods": "WebRequestTrace.markMenuViewed/WebHttpLogKind.eligible/WebRequestLogProducer.complete sharedP00603",
+      "testIds": [
+        "MENU-AUDIT001..007",
+        "REQ001..016",
+        "PT-PRO-QA054"
+      ],
+      "expected": "Onlymodelmarker AND terminalGET/status200/routeexactslash/closedactor qualifiesMENU_VIEWED; REQUESTremainsfirstexistingevent. MenuobservationnewdistincteventID rejectsrequest/event/correlationcollision andusesowncorrelationifnobusinessmessage. claimCompletiononeCASpreventsrepeatedterminalREQUEST/action; noMMQbusinessrequest solelyforlog. Missingtrace marksnothing/loggingmetadataintegrity warning notinventedbusinesssuccess; eventdeliveryencryptedoutbox/inboxsameUUID/consistencyownedP00603/P00502/APIlog, feeonce. Trace.ensure/existing Servletattribute IAE/ISE fixedcatalog currentlydropsfatalgraph BUG2714 beforefix; threadscopeowner/order/idempotentclose preserved. Actualoutbox/DB/APIrecord notprovenby markeronly."
+    }
+  ],
+  "sharedTraceBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27584-menu-screen-contract-v1/before.json",
+    "sha256": "6209e92f7af1c0a134ecc8bc611f69270332b9eac8702280f120243282c38456"
+  },
+  "oldOrdinary15": {
+    "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24222-menu-audit-bounded-fifteen-independent-v1/manifest.json",
+    "sha256": "361b1aa10765513568436d02faab6ecc3c36ffdbd0ae24a8efa69f751d0bdbc3"
+  },
+  "oldOrdinary15InputsMatched": false,
+  "priorInputMatches": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MenuAuditContractTest.java": true,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java": false,
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": true,
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java": true,
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": true,
+    "evidence/01_PT/015_NK-WEB-001/input/051_menu_audit_bounded_qualifier.py": true,
+    "evidence/01_PT/015_NK-WEB-001/input/050_menu_audit_bounded_scope.json": true
+  },
+  "changedTestRequiresCurrentQualification": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java"
+  ],
+  "old15Rerun": 0,
+  "wholeMenuMvcFixture": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MenuMvcTest.java",
+    "sha256": "b3c291a7d8a0ee1157080b7e3bfd3ca3652cfe9279ea44b0a00ce21d92f21bde",
+    "reviewed": "imports/setup/independentcatalogonly",
+    "status": "HOLD_WHOLE_DB_BEFOREALL_ACTUAL4_TRANSITIVE_NO_EXTRACTION"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_SHARED_TRACE_FATAL_AND_ACTUAL_MENU_AUDIT_HTTP_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1705_menu_screen_contract_audit_finish.py",
+    "sha256": "ada0a90d9da2dc5508bf9b16f863581e490b9518211c1b8d5a8ceebae35067b1"
+  }
+}

@@ -33,3 +33,9 @@ P01504再送記録の原16＋graph4＋新fatal5全25仕様は[4121](../015_NK-WE
 [4121 再送記録通常25](../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md): PG27508-REVOCATION25固定全25成功、原赤3失敗別記/target2四100・全scopepartial・原WBS未受入。
 
 [4123 失効暗号通常16](../015_NK-WEB-001/4123_P01505失効暗号原七・新五全十六件単体仕様.md): PG27548-REVOCATION-CRYPTO16固定全16成功、原赤3失敗別記/target2四100・全scopepartial・原WBS未受入。
+
+
+WBS-P016-01公開source契約/独立期待値/TestIDは[4126_P01601Login画面原二artifact契約対応.md](4126_P01601Login画面原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-02公開source契約/独立期待値/TestIDは[4127_P01602Menu画面原四artifact契約対応.md](4127_P01602Menu画面原四artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

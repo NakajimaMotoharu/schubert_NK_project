@@ -1,0 +1,15 @@
+# P01602 SCR002 Menu USER7/ADMIN9・QA054閲覧記録
+
+NK-WEB-002。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG27584](../018_NK-OPS-001/evidence/PG27584-menu-screen-contract-v1/manifest.json)。
+
+- P01602-PG01 / MenuController.show / PT-WEB-142..147,MENU-AUDIT001..007: GET/ only closedSessionPrincipal instance/nullModelnullprincipalreject; mapimmutableMenuVM thenmarkMenuViewed/returnmenu. Noqueryrole/id/clientselectedURL/noAPIbusinessupdate. Failurebeforecompletedmodel doesnotmark. URLroleallowlist issecuritychain owner, cardvisibility notauthorizationgrant.
+
+- P01602-PG02 / MenuCard/MenuViewModel / PT-WEB-142..147,MENU-PROJECTION001..006: USERexact7 inCurrentorder: scenarios/search/animation/music/questions-new/notifications/questions. ADMINsame7thenlogs/admin-users exact9; titles/descriptions/hrefs fixedUI223 catalog, no sorting/reordering/userURL. Nonnullprincipal→TopBarclosedusername/role/schubertNK; immutablecards/redactedtoString/noauthobjectretained. Hidingcarddoesnotreplaceendpointrolecheck.
+
+- P01602-PG03 / menu.html/layoutshared / PT-WEB-142..147: ja/layouttitle/topbar/aria mainmenu, enumerateimmutablecards preservingorder, th:text title+description escape, href fixedcatalogonly. TopBarlogoutPOST/CSRF fixedsharedlayout. HTMLresourcechecknotbrowser/authenticatedHTTP orrealCSRFproof.
+
+- P01602-PG04 / WebRequestTrace.markMenuViewed/WebHttpLogKind.eligible/WebRequestLogProducer.complete sharedP00603 / MENU-AUDIT001..007,REQ001..016,PT-PRO-QA054: Onlymodelmarker AND terminalGET/status200/routeexactslash/closedactor qualifiesMENU_VIEWED; REQUESTremainsfirstexistingevent. MenuobservationnewdistincteventID rejectsrequest/event/correlationcollision andusesowncorrelationifnobusinessmessage. claimCompletiononeCASpreventsrepeatedterminalREQUEST/action; noMMQbusinessrequest solelyforlog. Missingtrace marksnothing/loggingmetadataintegrity warning notinventedbusinesssuccess; eventdeliveryencryptedoutbox/inboxsameUUID/consistencyownedP00603/P00502/APIlog, feeonce. Trace.ensure/existing Servletattribute IAE/ISE fixedcatalog currentlydropsfatalgraph BUG2714 beforefix; threadscopeowner/order/idempotentclose preserved. Actualoutbox/DB/APIrecord notprovenby markeronly.
+
+owned4artifact全文/UI223SS313QA054対応、USER7/ADMIN追加2の固定順/title説明href/closedprincipal/immutable非認可proof/thtextescapedとGETmenuを個別期待値へ記録。モデル構築後markerかつterminalGET200/route slash/actorでのみMENU_VIEWED、既REQUEST維持/UUID重複禁止/claimCompletion/correlationを共有P00603依存として明記。共有Trace二attributecatalogでfatalgraph破棄BUG2714修正前起票、全59限定siteOPEN。既PG24222全15はTraceTest一sourceだけ後続変更ありguardが不一致検出、PG27583で未実行失敗/部分台帳を保持、元工具/原成功は不変・再流用0。Main3/他Test一致、現在TraceTestと二guard後同source通常PTが必要。wholeMenuMvcDBfixtureHOLD/切出しなし、原/1だけ完了、/2 actualauditpersist/HTTP/451未受入。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1705_menu_screen_contract_audit_finish.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
