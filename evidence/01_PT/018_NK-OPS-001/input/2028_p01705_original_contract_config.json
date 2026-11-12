@@ -1,0 +1,124 @@
+{
+  "taskId": "WBS-P017-05",
+  "expectedOwned": 8,
+  "groupId": "PGPT-WBS65-P01705-ALL-EIGHT-ORIGINAL-SOURCE-ORACLE-PREPARATION-20261113",
+  "startConfig": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/2028_p01705_original_start.json",
+  "startRecord": "1195_WBS65P01705全八原artifact契約準備開始.json",
+  "scope": "Original P01705 all8public ownedArtifacts plusapprovedSS341/343/331 UI251 individualinput-oracle-TestID mapping only, referencecurrentpure16 scope, noRootfailedcohort investigation/actualDB-file-native-Backup-key operations. Canonical /1preparation cancompleteonlyafterfullall8source review; /2 realmanifest/hash/commit/prune and190 notaccepted. sharedRD BAK006/008 are owned P01703 and cross-reference only, requirementIds empty retained/no fee reassignment. 485 all8 artifact owners/current hashes checked separately. Runtime/SQL findings do not count as executedPT; SS333 checkedIO and compound precedence explicitly excluded from blanket fatalguard.",
+  "oraclePaths": [
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json"
+  ],
+  "designPrefixes": [
+    [
+      "documents/300_SS",
+      "341"
+    ],
+    [
+      "documents/300_SS",
+      "343"
+    ],
+    [
+      "documents/300_SS",
+      "331"
+    ],
+    [
+      "documents/200_UI",
+      "251"
+    ]
+  ],
+  "run": "PG28172",
+  "manifestDirectory": "PG28174-p01705-all-eight-artifact-contract-v1",
+  "checks": [
+    {
+      "id": "P01705-ORACLE01",
+      "methods": "BackupManifest constructor/time/run/directoryName/configurationBytes/totalBytes/toString",
+      "testIds": [
+        "BAT178..185",
+        "P01705-MANIFEST-BOUNDARY"
+      ],
+      "expected": "SS3416.4両完全handle/run一致、非skip/別id、µs/時系列/JST年1..9999、3size正long/合計overflowなし、固定3file hash小文字64。現在PG28166値8の独立713/712・歴史JST literal・null/immutable/64taskを同byte旧scope限定参照。実artifact/DB成功へ転用0。"
+    },
+    {
+      "id": "P01705-ORACLE02",
+      "methods": "BackupVersions constructor/toString",
+      "testIds": [
+        "BAT178..185",
+        "P01705-VERSION-BOUNDARY"
+      ],
+      "expected": "ASCII英数字先頭1..128/7token、schema001..999/000拒否、全null拒否と全値redact、実OS/SDK version一致はcaller未確認。PG28166当source四100のみ。"
+    },
+    {
+      "id": "P01705-ORACLE03",
+      "methods": "BackupManifestCodec encode/decode/field/digest/invalid",
+      "testIds": [
+        "BAT186..193",
+        "P01705-CODEC-GOLDEN"
+      ],
+      "expected": "SS341固定順ASCII JSON末尾LF/最大4096/UTC6/小文字UUID・hash/正数canonical、独立golden965byte SHA733939f4完全一致/全byte変異×3/1873最大長/配列所有。PG28166原16の内数8参照、実dump/config/credentialなし。"
+    },
+    {
+      "id": "P01705-ORACLE04",
+      "methods": "BackupArtifactVerifier constructors/verify/observePending/verifyWithin/inspectRetention/retentionSizesAgree/removeRetained/forcePending/verifyAt/directory/capture/metadata/names/read/guard/BundleSnapshot/NioIo",
+      "testIds": [
+        "BAT194..209",
+        "BAT258..273",
+        "ISSRET001..008",
+        "P01705-VERIFIER-FAULT"
+      ],
+      "expected": "SS3416.5/6.10: uid0・backup UID/GID0700 root-child同device、正確4file/root600/dump600専用主体/nlink1/全9属性ACL/前後同inode、65536stream/正進捗・正確EOF/hash/全4再保持、30分/割込/全close/全buffer消去、force同inode/衝突reason保持。保持原本/実native/DB/Root全TestHOLD。BUG2743 Runtime五の当三未修正、checkedIOとSS333優先は別保持。"
+    },
+    {
+      "id": "P01705-ORACLE05",
+      "methods": "BackupCommitService complete/interrupted",
+      "testIds": [
+        "BAT218..225",
+        "P01705-COMMIT-SQL-GRAPH"
+      ],
+      "expected": "SS3416.6入口autoCommittrue/RW/RC→false→DB-CONFIG同end/count inspect→commit→復元→割込検査、片commit0・既SUCCESS保存end、rollback一回・失敗時復元0/borrowedclose0。先行unknown/cleanup unknown優先は既BUG193通り、SQL graph catalog前はBUG2744未修正。元Test@BeforeAll実DB全HOLD、部分抽出/新fixture0。"
+    },
+    {
+      "id": "P01705-ORACLE06",
+      "methods": "BackupManifestPublisher constructors/create/write/verify/directory/capture/identity/metadata/guard",
+      "testIds": [
+        "BAT242..257",
+        "P01705-PUBLISH-NEWONLY"
+      ],
+      "expected": "SS3416.8既partのみ/CREATE_NEWroot600/元inode正進捗write-force-close/readback-EOF/公開前part同一・no-replace+sync/rename ctimeだけ許容/公開後全9属性とbyte同一、借用root非close・単調30分/消去・失敗part/final保全。namespace操作native全HOLD、現codec成功で補完しない。"
+    },
+    {
+      "id": "P01705-ORACLE07",
+      "methods": "BackupManifestReader constructors/read/readWithin/findCleanupClaims/retentionNames/Root/Directory/Files/Claim/names/digest/readAt/readClaimAt/directory/capture/readFile/decode/metadata/guard/NioIo",
+      "testIds": [
+        "BAT226..241",
+        "PT-OPS-BMR017..024",
+        "P01705-READER-BOUND"
+      ],
+      "expected": "SS3416.7名52ASCII一segment/同両完全handle/name、root-child0700/manifestroot600/1..4096/同device/9属性ACL/保持inode前後size-read-EOF・再名前再保持/root再一致、namespace4096上限・一意claims/二回fresh比較。pureCodec不正だけOptional.empty、未知IO正常補完0。BUG2743当二Runtime分類未修正・実native/Root全HOLD。"
+    },
+    {
+      "id": "P01705-ORACLE08",
+      "methods": "MorningBackupRetention constructors/directoryCalls/use/result/collect/recheck/guard/now/Result",
+      "testIds": [
+        "ISSRET001..009",
+        "P01705-RETENTION-SEVEN"
+      ],
+      "expected": "SS3416.3 NEW_SUCCESSだけ全4file+完全DB成功pair検証して古い名前順超過分、現在bundle保持/削除直前全再照合・3archive→manifest→実emptychild・親sync。同Root/M/A/原本/borrowedDB/元30分保持、FAILED/REUSED削除0、unknown/.part/nonDirectory/file-set/malformed/mismatch/nonSuccessは理由付き保護。partial失敗を完了化/自動再削除0、最後一覧/全kept/root/DB再確認。actualRoot-DB-native全HOLD、現pure16から推測不可。"
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+      "tests": 16,
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java"
+      ],
+      "oldScopeOnly": true
+    }
+  ],
+  "endingStatus": "ORIGINAL_PREPARATION_ONLY_ALL_EIGHT_INPUT_ORACLE_MAP_NOT_P01705_REAL_BACKUP_ACCEPTANCE",
+  "nextCommand": "ReadremainingfiveexactownedpublicMain BackupCommitService/BackupArtifactVerifier/ManifestPublisher/Reader/MorningBackupRetention fully withSS341/UI251/SS343331 origin/main; noactualfile/DB/Root/native/key operations orcalleeRootrecoveryinvestigation. Mapindependentfixture/postcondition/TestIDs fromwholeexistingpublicTests sourceonly whenneeded, HOLD runtime/privatebinary unchanged. Then completeonlycanonical/1 no/2deduction; subsequentallowednormalPT orpricedreusablehostprofiletool. Usage next04:55:54/freshquota/disk6.8GiB.",
+  "capPp": 2
+}
