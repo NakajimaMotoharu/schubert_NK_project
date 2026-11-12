@@ -328,11 +328,17 @@ final class QuestionCriticalAuditPortTest {
 
   @Test
   void port008IndependentWorkersShareNoMutableJdbcOrJson() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> readOne(0));
       var second = workers.submit(() -> readOne(1));
       assertEquals(QUESTION, first.get(5, TimeUnit.SECONDS).get(TARGET).getAsString());
       assertEquals(NOTIFICATION, second.get(5, TimeUnit.SECONDS).get(TARGET).getAsString());
+    } finally {
+      workers.shutdownNow();
+      if (!workers.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("question critical audit workers did not terminate");
+      }
     }
   }
 
