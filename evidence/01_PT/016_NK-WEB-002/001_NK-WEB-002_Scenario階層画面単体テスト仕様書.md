@@ -29,3 +29,5 @@ Java4coverage100%/NullAway/staticを要求。templateの各if/each分岐は空�
 
 
 P01504再送記録の原16＋graph4＋新fatal5全25仕様は[4121](../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md)。元19328成功は原source維持、未実行をPASSへ加算しない、費用主担当P01504一度だけ。
+
+[4121 再送記録通常25](../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md): PG27508-REVOCATION25固定全25成功、原赤3失敗別記/target2四100・全scopepartial・原WBS未受入。

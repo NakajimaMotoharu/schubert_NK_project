@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="5" skipped="0" failures="3" errors="0" time="0.104" hostname="npc1" timestamp="2026-11-12T20:35:51">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg27502-revocation-fatal-original-red5-v1/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="junit.jupiter.execution.parallel.enabled" value="false"/>
+<property name="junit.jupiter.extensions.autodetection.enabled" value="false"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar execute --disable-banner --class-path /home/mini/codex/project1/work/pgpt-runs/PG379/pg27502-revocation-fatal-original-red5-v1/main:/home/mini/codex/project1/work/pgpt-runs/PG379/pg27498-revocation25-normal-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar --select-class dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest --reports-dir /home/mini/codex/project1/work/pgpt-runs/PG379/pg27502-revocation-fatal-original-red5-v1/xml --fail-if-no-tests --details summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg27502-revocation-fatal-original-red5-v1"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder()" classname="dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest" time="0.003">
+<failure message="Unexpected exception type thrown, expected: &lt;java.lang.AssertionError&gt; but was: &lt;java.sql.SQLDataException&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:86)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 8 more
+	Suppressed: java.sql.SQLException: PUBLIC result close
+		at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:82)
+		... 5 more
+	Suppressed: java.sql.SQLException: PUBLIC statement close
+		at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:83)
+		... 5 more
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest]/[method:fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder()]
+display-name: fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder()
+]]></system-out>
+</testcase>
+<testcase name="fatal003NonfatalCyclesKeepClosedDataStateAndBorrowedOwner()" classname="dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest]/[method:fatal003NonfatalCyclesKeepClosedDataStateAndBorrowedOwner()]
+display-name: fatal003NonfatalCyclesKeepClosedDataStateAndBorrowedOwner()
+]]></system-out>
+</testcase>
+<testcase name="fatal004DirectErrorIsNotNormalizedAndBothResourcesClose()" classname="dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest]/[method:fatal004DirectErrorIsNotNormalizedAndBothResourcesClose()]
+display-name: fatal004DirectErrorIsNotNormalizedAndBothResourcesClose()
+]]></system-out>
+</testcase>
+<testcase name="fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph()" classname="dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest" time="0.002">
+<failure message="Unexpected exception type thrown, expected: &lt;java.lang.AssertionError&gt; but was: &lt;java.sql.SQLDataException&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph(PendingRevocationFatalPortTest.java:45)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 8 more
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest]/[method:fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph()]
+display-name: fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph()
+]]></system-out>
+</testcase>
+<testcase name="fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly()" classname="dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest" time="0.061">
+<failure message="Unexpected exception type thrown, expected: &lt;java.lang.AssertionError&gt; but was: &lt;java.sql.SQLDataException&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly(PendingRevocationFatalPortTest.java:32)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+	at dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 8 more
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest]/[method:fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly()]
+display-name: fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

@@ -1,0 +1,117 @@
+{
+  "actualExit": 0,
+  "source": "72f6f2d305046654942e16ba5c698b0268937ece",
+  "productionCoreMain": "922df4cdb2e9954627e879d6f864e13d67cadceb",
+  "atJST": "2026-11-12T20:37:39.773712+09:00",
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27510-revocation25-independent-v1/manifest.json",
+    "sha256": "dcc2f6f187d46fbe51a819e2b36d0a6512b9400f34bed5412c9e0aae889ac7aa"
+  },
+  "originalRed": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27502-revocation-fatal-original-red5-v1/manifest.json",
+    "sha256": "82d9adf368ae826c3be4faadad2c971bb87f0f501c705b94370237cf72af6c58"
+  },
+  "tests": 25,
+  "newDefinitions": 5,
+  "originalRedProductTests": 5,
+  "originalRedProductFailed": 3,
+  "MainSafeSourcesFreshCompiled": 9,
+  "physicalClasses": 9,
+  "positiveMainCrc": 6,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 770,
+      "missed": 153
+    },
+    "BRANCH": {
+      "covered": 72,
+      "missed": 9
+    },
+    "LINE": {
+      "covered": 168,
+      "missed": 24
+    },
+    "COMPLEXITY": {
+      "covered": 55,
+      "missed": 11
+    },
+    "METHOD": {
+      "covered": 20,
+      "missed": 5
+    },
+    "CLASS": {
+      "covered": 6,
+      "missed": 1
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "INSTRUCTION": {
+        "covered": 69,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 12,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 18,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 8,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 2,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/revocation/PendingRevocationRepository": {
+      "INSTRUCTION": {
+        "covered": 508,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 41,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 112,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 33,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 12,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "targetFour100": {
+    "dev/codex/schubert/nk/web/session/SessionStoreException": true,
+    "dev/codex/schubert/nk/web/revocation/PendingRevocationRepository": true
+  },
+  "wholeScopeFour100": false,
+  "scopeDescription": "BUG2709 Repo.read元1e相当normal新5で3失敗再現82d9adf3、固定全25/独立dcc2f6f1によりmetadata cause/suppressed/SQLnext Error同一/非fatal循環有限・固定22000・RS→PS close/二close失敗suppressed順位を確認、当障害限定閉鎖。BUG2710原Port16全assertions逆変換/Future5保持/finallyawait10/whole25正常完走で限定閉鎖、YKT2374七workerownerまで完了・全域へ拡大0。Root継承NullAway/lintWerror新Main9/9physical・SB0・PMDraw13個別JNI無しJUnit/JDBC文脈非該当/CSformat0/抑制0。Repo/helper target2全四100、全9のAAD/値型/InvalidRow等未網羅は保持。新5/延べ30実行（赤3失敗含む）・既16の確認再演だけを目的にせず変更後限定回帰、実DB/真正API/HTTP/451/原WBS終了は未受入、全54site横展開runtimeはOPEN。",
+  "bugStatus": {
+    "BUG2709": "CLOSED_LIMITED_METADATA_CONVERSION",
+    "BUG2710": "CLOSED_LIMITED_PORT_WORKER",
+    "YKT2359": "ALL54_LIMITED_SITES_RUNTIME_OPEN",
+    "YKT2374": "SEVEN_EXPLICIT_WORKERS_CLOSED_NOT_GLOBAL"
+  },
+  "global451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null
+}

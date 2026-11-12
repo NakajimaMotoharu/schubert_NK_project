@@ -1,0 +1,69 @@
+{
+  "startConfig": "evidence/01_PT/018_NK-OPS-001/input/1660_revocation25_start.json",
+  "postManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG27510-revocation25-independent-v1/manifest.json",
+  "redManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG27502-revocation-fatal-original-red5-v1/manifest.json",
+  "fixedTests": 25,
+  "newDefinitions": 5,
+  "safeMainSources": 9,
+  "priorRuns": 45,
+  "priorCounts": [
+    3260,
+    3246,
+    14
+  ],
+  "redRun": "PG27502-REVOCATION-FATAL-ORIGINAL-RED5",
+  "scopeDirectory": "PG27512-revocation25-scope-result-v1",
+  "revision": "WBS65-EXEC-FORECAST-157-REVOCATION25_AND_ORIGINAL_RED5",
+  "forecastName": "974_WBS65予実・再送記録二五件と原失敗五件後版157.json",
+  "resultName": "975_WBS65再送記録二五件通常PT結果.json",
+  "endConfigName": "1668_revocation25_close.json",
+  "technicalKind": "P01504_REVOCATION25_AND_ORIGINAL_RED5_SEPARATE",
+  "outcome": "GENUINE_FIXED25_SUCCESS_OLD_MAIN_RED3_FAILED_RETAINED_FULL9_PARTIAL",
+  "fixedScopeLabel": "WHOLE_PORT16_GRAPH4_NEW5_FIXED25_SAMEEXEC_REPO_HELPER2_100_FULL9_PARTIAL",
+  "newClassName": "dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest",
+  "newTestIds": [
+    "OPS-RVR-FATAL001",
+    "OPS-RVR-FATAL002",
+    "OPS-RVR-FATAL003",
+    "OPS-RVR-FATAL004",
+    "OPS-RVR-FATAL005"
+  ],
+  "bugStatus": {
+    "BUG2709": "CLOSED_LIMITED_METADATA_CONVERSION",
+    "BUG2710": "CLOSED_LIMITED_PORT_WORKER",
+    "YKT2359": "ALL54_LIMITED_SITES_RUNTIME_OPEN",
+    "YKT2374": "SEVEN_EXPLICIT_WORKERS_CLOSED_NOT_GLOBAL"
+  },
+  "description": "BUG2709 Repo.read元1e相当normal新5で3失敗再現82d9adf3、固定全25/独立dcc2f6f1によりmetadata cause/suppressed/SQLnext Error同一/非fatal循環有限・固定22000・RS→PS close/二close失敗suppressed順位を確認、当障害限定閉鎖。BUG2710原Port16全assertions逆変換/Future5保持/finallyawait10/whole25正常完走で限定閉鎖、YKT2374七workerownerまで完了・全域へ拡大0。Root継承NullAway/lintWerror新Main9/9physical・SB0・PMDraw13個別JNI無しJUnit/JDBC文脈非該当/CSformat0/抑制0。Repo/helper target2全四100、全9のAAD/値型/InvalidRow等未網羅は保持。新5/延べ30実行（赤3失敗含む）・既16の確認再演だけを目的にせず変更後限定回帰、実DB/真正API/HTTP/451/原WBS終了は未受入、全54site横展開runtimeはOPEN。",
+  "nextCommand": "ContinuecanonicalP01505 actualowned10Java crypto/retryworker/retrycoordinator/LogoutWireClient fullsource andQA05015min/expiryNULL/verified0000-0200onlydelete/drainjoin owners. WholeDB/JMS/actualWebStartupfixturesHOLD/noextraction; normalcrypto-only fixture wholeclosure inspectbeforepricing andreuseexistingunchangedproof first. Main922 unchanged, no globalApp/Root permission/native operations. Usage21:35:18guarded/freshquota boundary.",
+  "specPath": "evidence/01_PT/015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md",
+  "newSpecLabel": "4121 再送記録通常25",
+  "primaryDocuments": [
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/001_NK-WEB-001_単体テスト仕様書.md",
+      "link": "4121_P01504再送記録原十六・新五全二五件単体仕様.md"
+    },
+    {
+      "path": "evidence/01_PT/015_NK-WEB-001/002_NK-WEB-001_実行結果.md",
+      "link": "4121_P01504再送記録原十六・新五全二五件単体仕様.md"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md",
+      "link": "../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md"
+    },
+    {
+      "path": "evidence/01_PT/016_NK-WEB-002/002_NK-WEB-002_Scenario階層画面実行結果.md",
+      "link": "../015_NK-WEB-001/4121_P01504再送記録原十六・新五全二五件単体仕様.md"
+    }
+  ],
+  "ledgerAppend": [
+    {
+      "path": "documents/900_OTHER/910_台帳/915_障害表.md",
+      "text": "BUG-2709: 修正Main922df4cd/Test{SOURCE}、PG27502旧source新5の3失敗再現→PG27508固定全25成功/PG27510独立{POSTSHA}。Repo/helper四100、cause/suppressed/next Error同一・非fatal22000redaction・借用TX非所有/RS→PS各close/二closefail保持を確認。metadata変換一site再発防止/正常/境界/異常null/並行再試験完了、限定障害CLOSED/2026-11-12。実DB/HTTP/全54site/原WBS受入とは別。\n\nBUG-2710: Test修正{SOURCE}、27494元16全assertion逆変換/唯一workerFuture5/finallyshutdownNow-await10、PG27508全25正常終了/27510独立{POSTSHA}、限定fixture再試験完了CLOSED/2026-11-12。"
+    },
+    {
+      "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+      "text": "YKT-2359: BUG2709/Repo.read一siteは922df4cd/{SOURCE}/PG27510同25 {POSTSHA}で旧赤3→固定正常/finitefatalgraph/borrowed資源close後条件を確認。全54限定siteのruntimeは他未完を維持OPEN、検索やsource接続だけで完了しない。\n\nYKT-2374: 第七owner PendingRevocationPortTest {SOURCE}/PG27510同25、27494元全assertion逆変換/Future5/await10/専有二worker正常終端で修正確認。既六owner各独立証拠を保持して再演せず、今回含む限定七owner CLOSED・実DB/Root/actual4HOLD/未点検全域へ一般化0。"
+    }
+  ]
+}

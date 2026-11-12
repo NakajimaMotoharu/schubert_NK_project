@@ -1,0 +1,68 @@
+
+Failures (3):
+  JUnit Jupiter:PendingRevocationFatalPortTest:fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest', methodName = 'fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal001MetadataCauseErrorRetainsIdentityAndClosesOwnedOnly(PendingRevocationFatalPortTest.java:32)
+       [...]
+     Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:PendingRevocationFatalPortTest:fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest', methodName = 'fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal002DateTimeSuppressedSqlNextRetainsIdentityAndGraph(PendingRevocationFatalPortTest.java:45)
+       [...]
+     Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:PendingRevocationFatalPortTest:fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder()
+    MethodSource [className = 'dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest', methodName = 'fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <java.sql.SQLDataException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:86)
+       [...]
+     Caused by: java.sql.SQLDataException: stored revocation metadata is invalid
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.read(PendingRevocationRepository.java:185)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationRepository.claim(PendingRevocationRepository.java:92)
+       dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest$Jdbc.claim(PendingRevocationFatalPortTest.java:103)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+       Suppressed: java.sql.SQLException: PUBLIC result close
+         dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:82)
+         [...]
+       Suppressed: java.sql.SQLException: PUBLIC statement close
+         dev.codex.schubert.nk.web.revocation.PendingRevocationFatalPortTest.fatal005PrimaryFatalSurvivesTwoCloseFailuresInReverseResourceOrder(PendingRevocationFatalPortTest.java:83)
+         [...]
+
+Test run finished after 182 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         3 tests failed          ]
+
