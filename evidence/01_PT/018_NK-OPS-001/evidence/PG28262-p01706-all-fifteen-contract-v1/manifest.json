@@ -1,0 +1,196 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T06:18:25.061837+09:00",
+  "source": "56ae3eb93e15e5cf4d0e4d4c81145b21262d977f",
+  "productionCoreMain": "1ef5610854bf99cca938ae4b025b630e5e1a5d4b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupProfile.java": "4b9b04b202f3cafb60dfd69f420ea5e8e688ecf9db9d795998e55929e21ccdd6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java": "c8688816049150012c537335fd6db146c105857c85edb83bbf85d8a6dc85b383",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupCompletion.java": "aa0cbbd857fc274a2a09f5f1563602ef23f8e7530f6bf425b11148c5e0c5b43b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupPreparation.java": "33375542a65e27b2dc40ab5ed20950a27e0e1f12d6eaf6bc6906751b25dd305a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.java": "c4856097f2821e8bddf40472b77150f0ba8df5668979cbe24f0b8ac0a7242155",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupReuse.java": "844554df9dcd57b316d3da09c72613db829b2253b5be15e7102d84447c8d919f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupStage.java": "e163da9854ff2f10959373fd1fd6e415253888bff1cb4bd3f5f59dae1408fa09",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java": "e3c8c4eebb3f1d4ac53f3b32f3f497ccaebea609a0821bd9aeaabe61fe64b6f9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest.java": "37079ddb280f2d105ee147969e3f915e2a8f5adf61aba51325ba25775db68ec0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java": "7802746f57280dfba402b282ce7f2dec67588f546f9e5df77d81579105b62c77",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java": "8249ccf88e5620dc67d4f90a4206c9be05c810ea14693a6fa976ceb4e69e6e0d"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 3757,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "a1ef2c3baa02ce3c4396cdca3f9d2082be882044811907cffe4e4a07f8b17794"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01706-ORACLE01",
+      "methods": "BackupProfile.constructor/versions/toolHashes/encode/consume/group/field/grammar/invalid/toString",
+      "testIds": [
+        "BPROFILE001..004",
+        "PT-BAT-PROFILE1405003"
+      ],
+      "expected": "SS343/SSC110非秘密claimのみ: 固定NKBACKUPPROFILE1/8version/7toolhash canonicalASCII JSON+LF、mapexactkeyset/64小文字、所有input全終了wipe/4096上限/DEL127・UTF8外・改行順重複unknown拒否/null/immutable。toolauthority証明へ使わない。旧PG1405 classclosingは歴史限定、現explicitimport変更でMainbyte資格は転用しない。"
+    },
+    {
+      "id": "P01706-ORACLE02",
+      "methods": "BackupStartIntentFiles.create/createPublication/createService/requireClear/begin/observeQuarantine/retire/requirePresent/quarantinePublication/quarantineService/quarantineFixed/directory/file/close",
+      "testIds": [
+        "BFENCE001..006"
+      ],
+      "expected": "SS3415/3436.15: current同boot同service owner/context、newonlyroot600 durablemarker/parent同devinode・全close、clear失敗/不確定creationはstart0、不確定startはmarker保持。sameobject-token/currentmarker一致だけretire、非owner/既存/不正namespace変更0。観測/quarantine/退役実操作はHOLD。createService未完組立close優先BUG2750未修正。"
+    },
+    {
+      "id": "P01706-ORACLE03",
+      "methods": "CleanupBackupAdmission.constructors/verify/recover/unknown/unavailable",
+      "testIds": [
+        "CBA001..005"
+      ],
+      "expected": "SS3416.6/343: 現cleanup requestと真正manifest/hash/全artifact、単独admittedRW-RC-autoCommittrue借用DB、開始false→FORUPDATE inspect→rollback→復元true/interrupt前後。backup不成立はDELETE許可にしない、unknown primary優先とrollback失敗復元0/借用close0。knownSQL catalog五の当三BUG2749、全Test@BeforeAll実DBHOLD。"
+    },
+    {
+      "id": "P01706-ORACLE04",
+      "methods": "MorningBackupCompletion.complete/recheck/rows/receipt/morning/localExitCode/now/toString",
+      "testIds": [
+        "ISSCOMP004..006"
+      ],
+      "expected": "SS3415.1/SSC134: freshBackup真正receipt outcomeとexit一致、親invocation32hex/nonzero/child別、owner前後、同begins completion実操作→成功だけarchive.verify→DB全14列readback保持。失敗は真正非0両FAILEDでarchive0、local0は親操作終了だけ。sameThread/再読完全一致、旧outcome/claimをreceiptへ変換0、UNKNOWN/HOLD。"
+    },
+    {
+      "id": "P01706-ORACLE05",
+      "methods": "MorningBackupPreparation.execute/valid/Publisher/Continuation",
+      "testIds": [
+        "PT-OPS-MBPREP001..006"
+      ],
+      "expected": "SS3318.3/3416.1-2: completion無し/part非zero-run別、時計cutoff以後µs、request値をDB前検証、両begin atomiccommit後fullrun/step/nonSkip/started/別id確認してだけpublish→同scopecontinuation。無効/null/commit不明でworker/publish0、root/M-A/DB原本の外へ値能力持出0。"
+    },
+    {
+      "id": "P01706-ORACLE06",
+      "methods": "MorningBackupRequestPublication.constructors/create/openNative/openOwned/publish/check/unavailable",
+      "testIds": [
+        "PT-OPS-MBPUB001..010"
+      ],
+      "expected": "SS343固定rootrequestのみ: 同Morningcontext前後、newonlyroot600/readback-fsyncの既公開primitive、明示ownedresumeProof時のみreplacement、途中open/assembly/nullで一回close・完成Ownerだけtransfer、publisher全終了ownedclose/借用root文脈維持。未知複合はSS333、actualpublic/private intent/root操作HOLD。"
+    },
+    {
+      "id": "P01706-ORACLE07",
+      "methods": "MorningBackupReuse.execute/Continuation",
+      "testIds": [
+        "BRESUME-VM001"
+      ],
+      "expected": "SS3416.3/SSC116: 親budget/context/連続M-A/root借用/原成功pair保持、reader/verifier同inode全bundle→同run新skipbegin→Verification claim付きrequest→真正child再検証継続。完成callback再読manifest/fullbundle一致後だけcompleteReusedBackup、run/cutoff/原successbyte/endを書換0/古いnative成功の転用0。"
+    },
+    {
+      "id": "P01706-ORACLE08",
+      "methods": "MorningBackupStage.completedEpoch/freshVerifiedEpoch/resumeVerifiedEpoch/verifiedEpoch/freshEpoch/executeOwnedEpoch/fresh/resume/execute/executeOwned",
+      "testIds": [
+        "MBSTAGE001..004"
+      ],
+      "expected": "SS3436.15: 同M-A/原本/借用DB/INVALIDepoch同activation callbackを継続、fresh/resumeを明示、resume成功pairだけ再用 otherwise abandonedrequest証明、original/budget前後検証/完成workとpublicationを保持。stage単体はworker/backup/permit完了でない。任意run/epoch/opaque別owner/nullは非成功、actualscope全HOLD。"
+    },
+    {
+      "id": "P01706-ORACLE09",
+      "methods": "BackupUnitReceiptGate.create/stateProjection/capture/observe/observeTerminal/observeResult/requireStillPresent/requireStoppedResult/eligible/check/known/present/TerminalReceipt",
+      "testIds": [
+        "PT-OPS-BGATE001..008"
+      ],
+      "expected": "SS3415/343: 同gatebaseline非forge、対象phase限定/BROKER除外、前bus→kernelwhole→後bus全一致、新Invocation/単調startend/真正normalexitのみ。Backup非0とsignal-timeout-unknown区別、0はarchive証明でない。stop後coldGCは新成功0にせず同baseline-heldreceiptで照合、別gate/旧receipt拒否。合成receipt発行/実Root試行0。"
+    },
+    {
+      "id": "P01706-ORACLE10",
+      "methods": "BackupUnitStartClient.create/createWithBudget/beginNative/createService/createCaddy/caddyAdmissionFence/caddyFence/start/interrupted/Attempt status-requireRetained-retireReadyAfter-preserveObservation-retireAfter-awaitClient/closeBoth/closeOne",
+      "testIds": [
+        "PT-OPS-BSTART001..008",
+        "PT-OPS-CADDYFENCE001..003"
+      ],
+      "expected": "SS3415/343: 固定target/serviceのみ/所有service検査、marker durable後だけfixed systemctl args一回、client120秒と元budgetmin。client0≠worker-ready、null/不明delivery/streamclose/interruptはUNKNOWN/marker保持・destroy0。API-Web intent両方sameinode fence/親前後、部分退役不明は残り自動削除0、Caddy marker捏造0。未完factory二口BUG2750、実start/retire全HOLD。"
+    },
+    {
+      "id": "P01706-ORACLE11",
+      "methods": "BackupUnitTermination.create/forCleanupFailedBackup/quiescent/check/namespace/placement/NativeObservations/NioIo",
+      "testIds": [
+        "BTERM001..008"
+      ],
+      "expected": "SS3415: 真正hostproc1/cgroup NOFOLLOW祖先を保持、固定leaf MISSING一点のみ不在、presentならbus全process空+前後同snapshot、Id/Slice/Delegate/ControlGroup4field固定canonicalASCII/1024/全bytewipe、再open同identity・全close後帰還。失敗/祖先missing/permission/NULLを不在成功へしない、actualhost観測HOLD。"
+    },
+    {
+      "id": "P01706-ORACLE12",
+      "methods": "CleanupFailedBackupRequest.constructor/encode/consume/row/handle/receiptMatches/invalid/toString",
+      "testIds": [
+        "CFREQ001..006"
+      ],
+      "expected": "SS343SSC124比較dataのみ: NKCLEANFAIL1固定11key/ASCII-LF/canonical reencode同値・owned+canonical全wipe、nonzero boot/epoch/invocation、uint64 start>0/end>=start/exit1..255、同run両FAILED fullhandle/date/end/count1-0-1-0-COMMAND_FAILURE一致。receiptMatchesはcaller実観測比較だけで発行/DELETE/lock権限なし、旧claimを実receiptへ昇格0。"
+    },
+    {
+      "id": "P01706-ORACLE13",
+      "methods": "MorningBackupUnitCycle.create/execute/executeObserved/executeBackup/recheckCompletedBackup/retainUnresolvedOwner/executeHandoff/executeInspectorHandoff/requireHandoffTerminal/stopAndVerify/completedReceipt/startAndWait/retain/pausePreservingInterrupt",
+      "testIds": [
+        "PT-OPS-BUCYCLE001..006",
+        "PT-OPS-BUCYCLE3244001"
+      ],
+      "expected": "SS3415.1/343: 元親30分budget/rootとM-A原本DBrequest連続保持、freshresult→explicitstop→全kernel終端→真正完成/拒否→原本request→最後marker退役。送達後未知/期限/失敗は通常unwind禁止、retentionは成功ではない。Cleanup/Expiry advisoryhandoff一回、実receipt同identity・30拒否を別分類、Inspectorはunlock内stop後だけreacquire。actualRoot/失敗cohort/native関連HOLDを解除せずpureUnitで再現しない。"
+    },
+    {
+      "id": "P01706-ORACLE14",
+      "methods": "BackupFailureSnapshot.constructor/verifyLatest/verifyRow/toString",
+      "testIds": [
+        "CFDB001..004"
+      ],
+      "expected": "SS341/343SSC124: 同run/fullDB-CONFIG非skip別id同start/endedUTCµs、ownerguardとidentity参照を前後検査、最新attempt全14列FAILED/1-0-1-0/COMMAND_FAILURE固定文・余分row0、借用DB/resources全close。snapshotdataはworker実結果証明でない。knownSQL固定化一口BUG2749/元whole@BeforeAll実DBHOLD。"
+    },
+    {
+      "id": "P01706-ORACLE15",
+      "methods": "BackupStepRepository.constructor/Terminal/readTerminal/inspect/complete/readRow/guarded/success/validTime/present/require",
+      "testIds": [
+        "BAT210..217"
+      ],
+      "expected": "SS3416.6: 借用parenttransaction/trueclaimとid2FORUPDATE昇順/unique全2row/fullhandle日付UTC・errornull・RUNNINGzero又は両SUCCESS同保存end/countDB1-config2/byte実size、片成功不成立。再送は保存end不変、新2step同transactionfinish/再読。readTerminal先14列read→独立parse/unknownJDBCはdata補完0。knownSQLcatalog一口BUG2749/元Test実DBHOLD。"
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-06/1"
+  ],
+  "endingStatus": "ORIGINAL_PREPARATION_ONLY_ALL_FIFTEEN_INPUT_ORACLE_MAP_RUNTIME_HOLD",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2065_p01706_original_contract_config.json",
+    "sha256": "e17bf67a0eca5c5f6238111bc345de7e6e7acd280848df6e1b818b7fe7c3c605"
+  }
+}
