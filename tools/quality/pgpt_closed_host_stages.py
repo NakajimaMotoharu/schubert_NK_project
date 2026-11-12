@@ -61,10 +61,19 @@ def classify_source_findings(paths, anchors, raw, source_text):
     expected = set(); classified = []
     fields = {'path', 'rule', 'sourceAnchor', 'occurrences', 'reason', 'disposition'} | ({'message'} if message_mode else set())
     for a in anchors:
-        h.require(set(a) == fields and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
+        h.require(set(a) - {'sourceLine'} == fields and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
         h.require(a['path'] in paths, 'explicit static source scope')
         if message_mode: h.require(isinstance(a['message'], str) and a['message'], 'explicit actual finding message')
-        rows = [str(i + 1) for i, line in enumerate(source_text(a['path']).splitlines()) if line.strip() == a['sourceAnchor']]
+        lines = source_text(a['path']).splitlines()
+        if 'sourceLine' in a:
+            position = a['sourceLine']
+            h.require(type(position) is int and 1 <= position <= len(lines) and
+                      type(a['occurrences']) is int and a['occurrences'] == 1,
+                      'explicit one hashed-source line only')
+            h.require(lines[position - 1].strip() == a['sourceAnchor'], 'exact anchor at explicit source line')
+            rows = [str(position)]
+        else:
+            rows = [str(i + 1) for i, line in enumerate(lines) if line.strip() == a['sourceAnchor']]
         h.require(type(a['occurrences']) is int and a['occurrences'] >= 1 and len(rows) == a['occurrences'], 'independent exact source anchor')
         for line in rows:
             identity = (str(h.R / a['path']), a['rule'], line) + ((a['message'],) if message_mode else ())

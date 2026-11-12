@@ -1,0 +1,612 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2126_log_whole21_qualified_profile.json",
+    "sha256": "f263f74a0b81bf7bf1ec61f7b5d24e4dcd270ebdfb4c86a618aadcc7f0845cf3"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java": "14c7ddab5f5156bb31f86da057d7460f98c8863ea680bcabdf47505568f3bab1",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java": "65b367602ff1357acd24ec4d7ba30483dd6346a44882105a2e804c168e5f3856",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java": "948d471fb3d69fd417a3a52a17d46fc2e528814521158f336a0c055fa96b5590",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java": "89a3708504bedbc86eb7bdc7a99e84a61047ccb8fe2a9fad961c0944a687abe8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java": "e792d04a7b6409fbfb4696b7b295d242d5958740e084a42bb2f1b3d5592108ea",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java": "5a753a16012cee16134b37686d7ee7c26cde29e2a52449fe81bd2bd73a914597",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java": "57cd675756ee9d372388f562ee2242f75df95ce95173f56fe9b861b4723a2833",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java": "9edcb2e4156131cdd9a962878b2ffef8cb06cc15201dfaca6d45a96d7c10c8c9",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java": "0bbc59214a3793b3a964bb32fd2369f4216f633fa6bd7d13fc8625fb5fb1465f"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28444-log-classifier-metadata-prepare-v1/manifest.json",
+    "sha256": "eafd6f09d82e58ab501e933462867c9097ca04d7d83fd8e5ff964910242be3f5"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+    "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+    "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotUseThreads",
+      "line": "86",
+      "reason": "Batch CLI checks the current interrupt flag twice around the borrowed clock boundary under SS341 parent budget. These two sites create no thread or pool, do not clear a flag, and are unrelated to a J2EE web-container-managed thread prohibition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotUseThreads",
+      "line": "90",
+      "reason": "Batch CLI checks the current interrupt flag twice around the borrowed clock boundary under SS341 parent budget. These two sites create no thread or pool, do not clear a flag, and are unrelated to a J2EE web-container-managed thread prohibition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "117",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "226",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "236",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "264",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "274",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "117",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "226",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "236",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "264",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "274",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "176",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "220",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "230",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "258",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "268",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "176",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "220",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "230",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "258",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "268",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "181",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "181",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "223",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "233",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "261",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "271",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "rule": "CloseResource",
+      "line": "53",
+      "reason": "These are nonnull aliases of the exact original PreparedStatement/ResultSet already owned by the surrounding two try-with-resources declarations. No new resource is acquired by requireNonNull; the original owner closes it once on every return/throw, including null-provider contract rejection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "it is recommended to wrap resource 'checked' in try-with-resource declaration directly"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+      "rule": "CloseResource",
+      "line": "57",
+      "reason": "These are nonnull aliases of the exact original PreparedStatement/ResultSet already owned by the surrounding two try-with-resources declarations. No new resource is acquired by requireNonNull; the original owner closes it once on every return/throw, including null-provider contract rejection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "it is recommended to wrap resource 'row' in try-with-resource declaration directly"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "57",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "67",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "104",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "57",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "67",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "104",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "60",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "70",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "107",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "117",
+      "reason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "63",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "73",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "110",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "120",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "63",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "73",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "110",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "120",
+      "reason": "SS332/341 SSC063/337 direct owned JDBC and transaction recovery require all unknown Runtime/Error identities to be retained, with fixed redacted secondary and original known/unknown type priority. These exact catches rethrow failure, never treat NPE as normal, and never emit provider diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "67",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "68",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "83",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "71",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "87",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "73",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "89",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "CloseResource",
+      "line": "345",
+      "reason": "The test owns the only executor and always executes finally shutdownNow plus bounded awaitTermination10, including failed/timed Future3. Explicit finite cleanup replaces the unbounded ExecutorService.close contract; all original twenty task assertions are retained by byte-inverse proof BUG2755.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "345",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "350",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "362",
+      "reason": "Only the worker cleanup finally at immutable source line362 fails with AssertionError when its owned pool does not terminate within ten seconds. The other two identical finally anchors only restore IRQ state and have no finding. This bounded cleanup failure must not be fabricated as test success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "363",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "364",
+      "reason": "Independent JUnit owns this thread-state fixture and two-worker pool, not a J2EE application container. IRQ injection is always cleared in finally; all twenty independent memory-JDBC tasks have Future3 seconds and finally shutdownNow/await10 seconds. No service/native/shared connection is operated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "558",
+      "reason": "Each Fixture creates its own three mutable maps and is confined to exactly one test thread or one submitted task. Twenty tasks allocate twenty distinct Fixture/Connection instances; main-thread inspection happens only after Future.get handoff. No map has concurrent access or production shared state.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "559",
+      "reason": "Each Fixture creates its own three mutable maps and is confined to exactly one test thread or one submitted task. Twenty tasks allocate twenty distinct Fixture/Connection instances; main-thread inspection happens only after Future.get handoff. No map has concurrent access or production shared state.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "560",
+      "reason": "Each Fixture creates its own three mutable maps and is confined to exactly one test thread or one submitted task. Twenty tasks allocate twenty distinct Fixture/Connection instances; main-thread inspection happens only after Future.get handoff. No map has concurrent access or production shared state.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "735",
+      "reason": "This independent memory fixture implements only the explicit JDK Connection/PreparedStatement/ResultSet interface passed by the test. Its defining interface loader is required for typed Proxy identity; no application or native class discovery or J2EE context loader is used.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "f6ef6aef9baffbd324e8a0f3d1e762548e8e22a5814a075f87730441df4bb167"
+  }
+}
