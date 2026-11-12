@@ -1,0 +1,35 @@
+"""Independent static/input/owned scope admission for current pure4 normal10."""
+from pathlib import Path
+import hashlib,importlib.util,json,re,xml.etree.ElementTree as ET
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';W=R.parent/'pgpt-runs/PG379/pg26628-canonical-pure-main-v1';PC=B/'evidence/PG26640-canonical-test-compile-v2';PS=B/'evidence/PG26642-canonical-pure-static-v2';O=B/'evidence/PG26644-canonical-pure-preflight-v2';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text());assert not O.exists();m=load(PC/'manifest.json');s=load(PS/'manifest.json');assert m['actualExit']==s['actualExit']==0 and m['inputHashes']==s['inputHashes'];assert all(sha(R/p)==h for p,h in m['inputHashes'].items());assert m['mainClassHashes']=={str(p.relative_to(W/'target/classes')):sha(p) for p in (W/'target/classes').rglob('*.class')};assert len(m['mainClassHashes'])==5;assert m['testClassHashes']=={str(p.relative_to(W/'test-classes-v2')):sha(p) for p in (W/'test-classes-v2').rglob('*.class')}
+old=B/'evidence/PG26628-canonical-pure-main-v1/manifest.json';assert sha(old)==m['unchangedMainCompileReused']['sha256'];cm=load(old);assert cm['mainClassHashes']==m['mainClassHashes'];assert cm['stages']['nullaway-compile']['actualExit']==0 and cm['inputHashes']=={**m['inputHashes'],m['testSources'][0]:load(B/'evidence/PG26622-canonical-scalar-fixture-v1/manifest.json')['newSha256']}
+ns={'m':'http://maven.apache.org/POM/4.0.0'}
+def compiler(p):return next(x for x in ET.parse(p).findall('.//m:plugin',ns) if x.findtext('m:artifactId',namespaces=ns)=='maven-compiler-plugin')
+assert ET.tostring(compiler(R/'pom.xml'))==ET.tostring(compiler(W/'pom.xml'))
+for d,labels in [(PC,['test-compile']),(PS,['pmd','checkstyle'])]:
+ mm=load(d/'manifest.json')
+ for label in labels:
+  st=mm['stages'][label];assert not st['timedOut'] and st['actualExit'] in ([0,4] if label=='pmd' else [0])
+  for stream in ['stdout','stderr']:assert sha(d/(label+'.'+stream))==st[stream+'Sha256']
+rt=ET.parse(PS/'pmd.xml').getroot();assert not any(x.tag.rpartition('}')[2] in ['error','configerror'] for x in rt.iter());assert not ET.parse(PS/'checkstyle.xml').findall('.//error');sb=ET.parse(PS/'spotbugs.xml').getroot();assert not any(sb.findall('.//'+n) for n in ['BugInstance','MissingClass','Error']);assert {x.get('class') for x in sb.findall('.//ClassStats')}=={x.removesuffix('.class').replace('/','.') for x in m['mainClassHashes']};oldS=B/'evidence/PG26630-canonical-pure-static-v1';assert sha(oldS/'spotbugs.xml')==sha(PS/'spotbugs.xml') and sha(oldS/'manifest.json')==s['unchangedMainSpotbugsReused']['sha256']
+reasons={'NullAssignment':'SS3243 explicitly distinguishes null canonical field bytes from empty; JSpecify nullable value valid and cloned when present. Replacing null changes binary format.', 'ReturnEmptyCollectionRatherThanNull':'SS3243 null length FFFFFFFF differs empty0; nullable accessor preserves explicit domain union and returns defensive copy when present.', 'CloseResource':'CanonicalField is borrowed from request.fields; caller owns request terminal wipe, writer only clones value and wipes clone in writeValue finally. Closing borrowed field during HMAC would destroy next same-request verification. SecretBuffer original whole3 independently checks owner clone/close and failure wipe.', 'AvoidSynchronizedAtMethodLevel':'Package-private ByteArrayOutputStream override maintains same inherited synchronized monitor for buf/count write/reset/toString. Replacing monitor breaks inherited mutual exclusion; no class/global/public monitor coordination or external resource. Same owner whole3 checks every capacity and lifecycle.'}
+classified=[]
+for x in s['rawFindings']:
+ rule=x['rule'];assert rule in reasons
+ p=Path(x['path']);assert str(p.relative_to(R)) in m['mainSources'];classified.append(dict(**x,classification='CONTEXTUAL_NONAPPLICABLE',reason=reasons[rule],sourceSha256=sha(p)))
+assert len(classified)==7
+sp=importlib.util.spec_from_file_location('canonical_scalar_tokenizer',R/'evidence/01_PT/015_NK-WEB-001/input/042_seven_future_independent_post.py');lib=importlib.util.module_from_spec(sp);sp.loader.exec_module(lib);tok=lib.java_tokens
+source=(R/m['testSources'][0]).read_text();inverse=source
+for name in ['scalar001MalformedTextNeverAliasesQuestionMarkInCanonicalInput','scalar002SupplementaryNfcAndSignedNumberMatchIndependentVectors']:
+ match=re.search(r'  /\*\* PT-IDEM-U160[12][\s\S]*?void '+name+r'\s*\(\)\s*\{',inverse);assert match;begin=inverse.index('{',inverse.index('void '+name));depth=1;i=begin+1
+ while depth:depth+=(inverse[i]=='{')-(inverse[i]=='}');i+=1
+ inverse=inverse[:match.start()]+inverse[i:]
+assert tok(inverse)==tok((B/'evidence/PG26622-canonical-scalar-fixture-v1/original-operation-test.txt').read_text())
+red=load(B/'evidence/PG26624-canonical-scalar-red-v1/manifest.json');assert red['productActualExit']==1 and red['tests']==10 and red['failures']==1 and red['independentMalformedBoundariesExecutedAndFailed']==24
+for p in m['mainSources']:
+ if p.endswith(('/CanonicalField.java','/CanonicalRequest.java')):
+  current=(R/p).read_text();rest,n=re.subn(r'    // SS3243/BUG2669[^\n]*\n    if \([\s\S]*?    }\n','',current);assert n==1;original=(B/'evidence/PG26626-canonical-scalar-fix-v1'/ (Path(p).stem+'-before.txt')).read_text();assert tok(rest)==tok(original);assert 'Character.MIN_SURROGATE' in current and 'Character.MAX_SURROGATE' in current
+ else:assert sha(R/p)==red['inputHashes'][p]
+assert sha(R/m['testSources'][1])==red['inputHashes'][m['testSources'][1]];representation=load(B/'evidence/PG26639-canonical-fixture-representation-v1/manifest.json');assert representation['afterSha256']==sha(R/m['testSources'][0]) and len(representation['independentSameUtf16UnitRows'])==8 and representation['validCodepoints']==[0x10000,0x10ffff]
+assert len(m['dependencies'])==2 and all('/jspecify/' in p or p.endswith('junit-platform-console-standalone-1.13.4.jar') for p in m['dependencies']);assert m['expectedTests']==10 and len(m['selectedClasses'])==2
+O.mkdir();(O/'static-contextual-seven.json').write_text(json.dumps(classified,ensure_ascii=False,indent=2)+'\n');v=dict(actualExit=0,inputHashes=m['inputHashes'],dependencies=m['dependencies'],compileManifestSha256=sha(PC/'manifest.json'),staticManifestSha256=sha(PS/'manifest.json'),expectedTests=10,newDefinitions=2,originalEightPreserved=True,sourceChangedOnlyFactories2=True,scalarInvalidInputs=24,independentValidGolden2=True,rawPmd=7,staticApplicable=0,unclassified=0,processingErrors=0,checkstyle=0,spotbugs=0,spotbugsPhysicalClasses=5,NullAway='FRESH_SAME_MAIN5_UNCHANGED_TEST_ONLY_RECOMPILE',noUnwipeableEncodedValidationBuffer=True,actualHeldClassIOAndExternalOperations=0,productTestsExecuted=0,whole451Accepted=False,newAcceptance=0,formalUpdated=False,verifierSha256=sha(Path(__file__)));(O/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps(dict(actualExit=0,manifestSha256=sha(O/'manifest.json'),staticApplicable=0,processingErrors=0,expectedTests=10)))

@@ -39,6 +39,14 @@ public record CanonicalField(String name, String typeVersion, byte @Nullable [] 
   }
 
   private static CanonicalField encoded(String name, String type, String value) {
+    // SS3243/BUG2669: validate scalars without allocating an unwipeable encoded secret copy.
+    if (value
+        .codePoints()
+        .anyMatch(
+            codePoint ->
+                codePoint >= Character.MIN_SURROGATE && codePoint <= Character.MAX_SURROGATE)) {
+      throw new IllegalArgumentException("canonical text contains malformed UTF-16");
+    }
     byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
     try {
       return new CanonicalField(name, type, bytes);

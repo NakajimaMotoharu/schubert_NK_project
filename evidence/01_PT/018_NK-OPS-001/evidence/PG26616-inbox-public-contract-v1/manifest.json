@@ -1,0 +1,189 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T10:05:30.884824+09:00",
+  "source": "0109380bced8935b4b87e1802a3b79eec7ce46ee",
+  "productionCoreMain": "236ffddc83a08f1ba8f2ac5c3932e381371acd59",
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+  },
+  "ownedArtifacts": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecution.java": "03914a804c99f24c16010075bf9854199049d4026a5e180c8fcc5d686fae8caa",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "427b37bf360f201bd1509e336aa435f2a1db77c9f782b842aa2bf16fdcc28e3a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "ae5d61f51e59329ffcccf18c702a430fc15d4e3731b2ffb5544ec9788a4ba2eb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.java": "c7d2738376c3d732dfd9556d015c2a8ff91da469320db029a3368ed3d95eae22",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java": "0b10a762ba66659b57aa3ae924030faa75f5a4cab1cbf7a06cc1b65002e05661",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing.java": "18a929e349274567b7facf4a40d93edaf618b34b1cfd45d4e721b44bf84ccc55",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletion.java": "bc5b5d44493484ae2a5264b2019c07f6eb2887c2fb4f93f3dea75b9605f52928",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionConsistency.java": "e5a02cfb1cb7dc6e596a72b0f8a820aeb6807d953e939feadd5fd86e6e756eee",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionState.java": "fb20f0fda776d5ccfde69dd75e52b5bc5c6cc1d0e4ada0f2b04df99ffe6267b0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxException.java": "3d5cf68d628c17ccdb489e1c5199d43b144562d4b96df544580f7013eb1a680b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecution.java": "1b791d1eab0c318582bb27ce37f9f99cbb590901c7d8c4f03a0daaf42f2c31c1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecutionStatus.java": "349b9813318d93b15eb334a5ea5de8bd24f5cbfde96cec8114eafa8150aec7bb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxHandler.java": "bfcea96518d70ad59e0391f616d4ae0fb13c26df6ffcab5cefcd0f44fca842b4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxRequest.java": "5c4f01d72d17a234d201ee5de6e0a47fc5fed5be4d328b4f283544e0eaf69e1a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java": "09e9911b5f5418013364fadeb3f70e9dae33cc0b2df8c06016ce8972a953ec20",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java": "7f6747c6b267b81647554aa021ad95959a80dde08501e33b3488f14794c25568",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java": "f2b26e3f56a3bcce94417f76d10be38058549d3dda778b5fc4979e6324cc4d9e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/MessageStageGuard.java": "1fab02a8e5492425a14ae1c2b3cc516b15d71c21f44c2ae224ebdf9513169a63",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec.java": "bde8b74bd7b18d33bfbcd52d0a83a015e2b8badfca4821d06c48587166abedb6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException.java": "89e48100d374c9eb0e0b30381d8ea832e48114c86ce65a4dba734cbaefe8b703",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java": "66e9e45738d02de02e8c0d336e997c2e2878f96e1620d84ae532c663ebd3418c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec.java": "60a25ff3e340450537302fc93da9a645549b151969a778397c63e14e5cba6ef4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/package-info.java": "456d04bff4a8fcb406f84ae47df14e72be906d74888f5f074edbb64d7a57eb6c"
+  },
+  "contractChecks": [
+    {
+      "group": "CanonicalField/CanonicalRequest/OperationFingerprint/WipingByteArrayOutputStream",
+      "contract": "SS3243 NKOP1 length-prefixed big endian; NFC UTF8; null FFFFFFFF distinct empty; layout field order; secret clones/redaction and wipe; bounded1050000 scratch; fixed independent canonical/OpenSSL vector.",
+      "test": "PT-IDEM001002/WIPE001003",
+      "status": "CURRENT_PUBLIC_SOURCE_REVIEW_COMPLETE_NORMAL_PURE_CANDIDATE5_AND_SECRET3; UTF16 scalar reachability gap of globalYKT2328 requires local reproduction before fix"
+    },
+    {
+      "group": "InboxRequest/InboxResultReference/InboxCompletion/InboxExecution/BoundInboxExecution plus typed enums/exception/value carriers",
+      "contract": "SS3244..6 owner/token/layout/date/null and typed result union, original saved PK for token replay, never authentication authority. Snapshot metadata length29..1050000/version and fingerprint32 clone/redaction.",
+      "test": "PT-IDEM004006/B01B04 and InboxModelTest5",
+      "status": "SOURCE_AND_INDEPENDENT_UNION_EXPECTATIONS_REVIEWED; whole bound/JDBC fixtures actual held dependencies; no new runtime qualification"
+    },
+    {
+      "group": "JdbcInboxCoordinator/InboxCompletionConsistency/MessageStageGuard",
+      "contract": "Caller-owned nonautoCommit; Message locked lookup exact identity/HMAC; token owner lookup; savepoint23505 one recovery; no own commit/close; completion retention starts atcompletion no replay extension; readonly inspect oneSELECT noFORUPDATE; snapshot replacement exact saved metadata/cipher and affected1. Fair256stripes no DB whilewaiting, interruption restore.",
+      "test": "PT-IDEM004006/RO01RO04/SR01SR03/B01B04",
+      "status": "PUBLIC_SOURCE_REVIEWED_DIRECT_TEMPORARY_OR_KEYRING_RUNTIME_HELD; realDB/no fragment bypass"
+    },
+    {
+      "group": "FingerprintKeyRing/ResponseSnapshotCodec/ResultBoundResponseSnapshotCodec/ResponseSnapshotIdentity/ResponseSnapshotException",
+      "contract": "Current/previous version denyclosed, constanttime compare and wipe; NKENC1 level3 compression AESGCM AAD savedPK/layout/version/owner limits 1000000/1050000, exact envelope/trailing compression checks; NKREF1 QUESTION/JOB exact operationtoken+ref+wire binding.",
+      "test": "PT-IDEM007008/PT-DB-INBOX169176",
+      "status": "PUBLIC_SOURCE_REVIEWED_ONLY_ACTUAL_FOUR_CLASS_BINARY_IO_AND_RUNTIME_HELD"
+    }
+  ],
+  "candidateTests": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecutionTest.java",
+      "sha256": "1eaf645553d7b296962e21730d1a1e7c878ffed258c71fa7a7473ae790d98003",
+      "testDefinitions": 4,
+      "runtimeStatus": "HOLD_WHOLE_FIXTURE",
+      "directHeldDependencies": [
+        "FingerprintKeyRing",
+        "ResponseSnapshotCodec"
+      ],
+      "wholeOracleBodyReviewed": false,
+      "methodNames": [
+        "boundFirstMessageAndOperationTokenKeepOriginalAadIdentity",
+        "boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay",
+        "boundConcurrentInsertRecoveryAndProcessingUseStoredMessage",
+        "boundCompatibilityPreservesReadOnlyAndSnapshotReplacement"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+      "sha256": "22be9f9a5b0b943176fc650490a196ad593a0ce2f6ae47a70c3b18e1d90f57f6",
+      "testDefinitions": 3,
+      "runtimeStatus": "HOLD_WHOLE_FIXTURE",
+      "directHeldDependencies": [
+        "FingerprintKeyRing"
+      ],
+      "wholeOracleBodyReviewed": false,
+      "methodNames": [
+        "currentAndPreviousKeysVerifyWhileUnknownAndTamperedDenyClosed",
+        "fingerprintDefensivelyCopiesAndValidates",
+        "keyRingInvariantsNullContractsAndCloseAreEnforced"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java",
+      "sha256": "342820f02bd4e58561a4b732398ac5b676d434ba63a1f597096eef45a959e7eb",
+      "testDefinitions": 11,
+      "runtimeStatus": "HOLD_WHOLE_FIXTURE",
+      "directHeldDependencies": [
+        "FingerprintKeyRing"
+      ],
+      "wholeOracleBodyReviewed": false,
+      "methodNames": [
+        "completionRetentionStartsAtCompletionAndReplayNeverExtendsIt",
+        "sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected",
+        "tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing",
+        "anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions",
+        "handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic",
+        "transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed",
+        "concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed",
+        "readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing",
+        "readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks",
+        "readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults",
+        "readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "sha256": "6b76952a1d552a0d1a189c42c999435dc83439e94600a73f052f3a05b2069eeb",
+      "testDefinitions": 5,
+      "runtimeStatus": "SOURCE_CLOSED_PURE_JDK_CANDIDATE_NOT_EXECUTED",
+      "directHeldDependencies": [],
+      "wholeOracleBodyReviewed": true,
+      "methodNames": [
+        "goldenCanonicalAndHmacMatchIndependentOpenSslVector",
+        "nfcNormalizationAndNullEmptyDistinctionAreStable",
+        "canonicalModelsDefensivelyCopyAndRedact",
+        "invalidModelsAndFingerprintArgumentsAreRejected",
+        "unavailableHmacProviderProducesTypedStartupFailure"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java",
+      "sha256": "b3178f6508f427c47f62e19fee4d880f049c9a29a257e76421b31a864c3a64a2",
+      "testDefinitions": 7,
+      "runtimeStatus": "HOLD_WHOLE_FIXTURE",
+      "directHeldDependencies": [
+        "ResponseSnapshotCodec"
+      ],
+      "wholeOracleBodyReviewed": false,
+      "methodNames": [
+        "scope002QuestionScopeFrameMatchesIndependentCompressionAadAndJceCiphertext",
+        "fixedNonceCiphertextMatchesIndependentCompressionAndAadVector",
+        "zeroAndMaximumPlaintextRoundTripAndEveryLengthBoundaryIsGuarded",
+        "currentPreviousUnknownTamperAndEveryAadMutationDenyClosed",
+        "malformedTruncatedTrailingDictionaryAndCompressionBombStreamsAreRejected",
+        "identitySnapshotKeyAndLifecycleContractsRejectNullAndInvalidValues",
+        "unavailableAesProviderProducesTypedBoundedFailure"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest.java",
+      "sha256": "0a4930f135519734164e7d242949da1fc6282501aab43c8786e5a2bce943a1d7",
+      "testDefinitions": 8,
+      "runtimeStatus": "HOLD_WHOLE_FIXTURE",
+      "directHeldDependencies": [
+        "ResponseSnapshotCodec"
+      ],
+      "wholeOracleBodyReviewed": false,
+      "methodNames": [
+        "independentWriteAndReadAllRoutes",
+        "nullIdentityAndReferenceContracts",
+        "everyMetadataByteIsAuthenticated",
+        "exactLengthAndLegacyRejection",
+        "keysAadAndCipherDamage",
+        "borrowedOwnershipAndRedaction",
+        "concurrentBindingsNeverCross",
+        "equalBusinessTimesDoNotAuthorizeAnotherTarget"
+      ]
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P006-01/1"
+  ],
+  "endingStatus": "WBS-P006-01/2_NOT_ACCEPTED_NORMAL_GAP_AND_HELD_KEY_CRYPTO_DB_AND_P00401_P00503_EXIT_DEPENDENCIES",
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryIOAndExternalOperations": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1284_inbox_public_contract_audit.py",
+    "sha256": "eb01d5c679c5adf692442dbf4cef20fab765bb398a3029184489e7a6a8b34043"
+  }
+}

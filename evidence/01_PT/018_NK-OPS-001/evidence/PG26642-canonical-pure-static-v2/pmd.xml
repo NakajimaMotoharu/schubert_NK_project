@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T10:13:58.451">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java">
+<violation beginline="22" endline="22" begincolumn="29" endcolumn="33" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="CanonicalField" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="27" endline="27" begincolumn="5" endcolumn="49" rule="ReturnEmptyCollectionRatherThanNull" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="CanonicalField" method="value" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull" priority="1">
+Return an empty collection rather than null.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java">
+<violation beginline="49" endline="49" begincolumn="27" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="OperationFingerprint" method="canonicalBytes" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java">
+<violation beginline="20" endline="20" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="write" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="27" endline="27" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="write" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="47" endline="47" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="reset" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="58" endline="58" begincolumn="30" endcolumn="38" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="toString" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+</file>
+</pmd>

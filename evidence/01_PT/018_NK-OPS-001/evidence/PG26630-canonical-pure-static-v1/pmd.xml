@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T10:11:11.970">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java">
+<violation beginline="22" endline="22" begincolumn="29" endcolumn="33" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="CanonicalField" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="27" endline="27" begincolumn="5" endcolumn="49" rule="ReturnEmptyCollectionRatherThanNull" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="CanonicalField" method="value" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull" priority="1">
+Return an empty collection rather than null.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java">
+<violation beginline="49" endline="49" begincolumn="27" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.idempotency" class="OperationFingerprint" method="canonicalBytes" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java">
+<violation beginline="20" endline="20" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="write" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="27" endline="27" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="write" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="47" endline="47" begincolumn="28" endcolumn="33" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="reset" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+<violation beginline="58" endline="58" begincolumn="30" endcolumn="38" rule="AvoidSynchronizedAtMethodLevel" ruleset="Multithreading" package="dev.codex.schubert.nk.api.idempotency" class="WipingByteArrayOutputStream" method="toString" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedatmethodlevel" priority="3">
+Use block level locking rather than method level synchronization
+</violation>
+</file>
+<error filename="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java" msg="ContextedRuntimeException: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+Exception Context:
+	[1:Rule applied on node=!debug only! [StringLiteral:209:13]&quot;𐀀&quot;]
+---------------------------------">
+<![CDATA[org.apache.commons.lang3.exception.ContextedRuntimeException: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+Exception Context:
+	[1:Rule applied on node=!debug only! [StringLiteral:209:13]"𐀀"]
+---------------------------------
+	at net.sourceforge.pmd.util.AssertionUtil.contexted(AssertionUtil.java:265)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.applyOnIndex(RuleApplicator.java:79)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.apply(RuleApplicator.java:57)
+	at net.sourceforge.pmd.lang.rule.internal.RuleSets.apply(RuleSets.java:183)
+	at net.sourceforge.pmd.lang.impl.PmdRunnable.processSource(PmdRunnable.java:140)
+	at net.sourceforge.pmd.lang.impl.PmdRunnable.run(PmdRunnable.java:80)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+	at net.sf.saxon.str.StringTool.fromCharSequence(StringTool.java:107)
+	at net.sf.saxon.value.StringValue.<init>(StringValue.java:106)
+	at net.sf.saxon.value.StringValue.<init>(StringValue.java:91)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.DomainConversion.getAtomicRepresentation(DomainConversion.java:135)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.DomainConversion.convert(DomainConversion.java:62)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.AstAttributeNode.atomize(AstAttributeNode.java:73)
+	at net.sf.saxon.expr.Atomizer.getAtomizingIterator(Atomizer.java:600)
+	at net.sf.saxon.expr.Atomizer$AtomizerElaborator.lambda$elaborateForPull$0(Atomizer.java:679)
+	at net.sf.saxon.expr.AtomicSequenceConverter$AtomicSequenceConverterElaborator.lambda$elaborateForPull$0(AtomicSequenceConverter.java:536)
+	at net.sf.saxon.expr.CardinalityChecker$CardinalityCheckerElaborator.lambda$elaborateForPull$0(CardinalityChecker.java:506)
+	at net.sf.saxon.expr.elab.LazyPullEvaluator.evaluate(LazyPullEvaluator.java:39)
+	at net.sf.saxon.expr.SystemFunctionCall$SystemFunctionCallElaborator.lambda$elaborateForPull$2(SystemFunctionCall.java:618)
+	at net.sf.saxon.expr.FilterExpression$FilterExprElaborator$PositionalFilteredIterator.next(FilterExpression.java:1332)
+	at net.sourceforge.pmd.lang.rule.xpath.internal.SaxonXPathRuleQuery.evaluate(SaxonXPathRuleQuery.java:127)
+	at net.sourceforge.pmd.lang.rule.xpath.XPathRule.apply(XPathRule.java:101)
+	at net.sourceforge.pmd.lang.rule.RuleReference.apply(RuleReference.java:413)
+	at net.sourceforge.pmd.lang.rule.internal.RuleApplicator.applyOnIndex(RuleApplicator.java:77)
+	... 9 more
+]]>
+</error>
+</pmd>

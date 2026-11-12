@@ -34,6 +34,14 @@ public record CanonicalRequest(
     if (normalized.isEmpty()) {
       throw new IllegalArgumentException(name + " must not be empty");
     }
+    // SS3243/BUG2669: validate scalars without allocating an unwipeable encoded secret copy.
+    if (normalized
+        .codePoints()
+        .anyMatch(
+            codePoint ->
+                codePoint >= Character.MIN_SURROGATE && codePoint <= Character.MAX_SURROGATE)) {
+      throw new IllegalArgumentException("canonical text contains malformed UTF-16");
+    }
     return normalized;
   }
 

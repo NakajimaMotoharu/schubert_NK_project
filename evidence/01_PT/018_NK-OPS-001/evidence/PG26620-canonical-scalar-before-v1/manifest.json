@@ -1,0 +1,17 @@
+{
+  "actualExit": 0,
+  "status": "SUSPECTED_NOT_YET_REPRODUCED",
+  "source": "236ffddc83a08f1ba8f2ac5c3932e381371acd59",
+  "paths": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "427b37bf360f201bd1509e336aa435f2a1db77c9f782b842aa2bf16fdcc28e3a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "ae5d61f51e59329ffcccf18c702a430fc15d4e3731b2ffb5544ec9788a4ba2eb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+  },
+  "expected": "SS3243 NFC UTF8 inputs must not silently replace malformed UTF16 and alias literal questionmark at canonical HMAC boundary. Binary CanonicalField raw byte contract remains unchanged.",
+  "actualSource": "CanonicalField.text and Request owner/target allow isolated surrogate; getBytes UTF8 can replace with questionmark. Global YKT2328 index4/5 remain unverified.",
+  "bug": "BUG-2669",
+  "ykt": "YKT-2349",
+  "globalYkt": "YKT-2328",
+  "productTestsExecuted": 0
+}

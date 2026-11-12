@@ -198,6 +198,78 @@ class OperationFingerprintTest {
     }
   }
 
+  /** PT-IDEM-U1601; SS3243/BUG2669/YKT2349: 24 independent invalid scalar boundaries. */
+  @Test
+  void scalar001MalformedTextNeverAliasesQuestionMarkInCanonicalInput() {
+    var checks = new ArrayList<org.junit.jupiter.api.function.Executable>();
+    for (String value :
+        List.of(
+            new String(new char[] {0xd800}),
+            new String(new char[] {0xdc00}),
+            new String(new char[] {0xd800, 0xd800}),
+            new String(new char[] {0xdc00, 0xdc00}),
+            new String(new char[] {0x61, 0xd800}),
+            new String(new char[] {0xdc00, 0x61}),
+            new String(new char[] {0xd800, 0x62, 0xdc00}),
+            new String(new char[] {0xd800, 0xdc00, 0xd800}))) {
+      checks.add(
+          () ->
+              assertThrows(
+                  IllegalArgumentException.class, () -> CanonicalField.text("text", value)));
+      checks.add(
+          () ->
+              assertThrows(
+                  IllegalArgumentException.class,
+                  () ->
+                      new CanonicalRequest(
+                          value, QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, "t", List.of())));
+      checks.add(
+          () ->
+              assertThrows(
+                  IllegalArgumentException.class,
+                  () ->
+                      new CanonicalRequest(
+                          "7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, value, List.of())));
+    }
+    org.junit.jupiter.api.Assertions.assertAll(checks);
+    assertThrows(NullPointerException.class, () -> CanonicalField.text("text", null));
+  }
+
+  /** PT-IDEM-U1602; Python struct/HMAC vectors, no production-derived expected bytes. */
+  @Test
+  void scalar002SupplementaryNfcAndSignedNumberMatchIndependentVectors() {
+    String[] scalars = {Character.toString(0x10000), Character.toString(0x10ffff)};
+    String[] texts = {"c3a9f0908080", "c3a9f48fbfbf"};
+    String[] canonicals = {
+      "53434855424552542d4e4b2d4f50310000000137000000085153545245513031000000033030310000000d5155455354494f4e3af090808000000002000000047465787400000002583100000006c3a9f0908080000000066e756d626572000000024e31000000142d39323233333732303336383534373735383038",
+      "53434855424552542d4e4b2d4f50310000000137000000085153545245513031000000033030310000000d5155455354494f4e3af48fbfbf00000002000000047465787400000002583100000006c3a9f48fbfbf000000066e756d626572000000024e31000000142d39323233333732303336383534373735383038"
+    };
+    String[] digests = {
+      "24ed19cb4854b88331c77d27eaf8b436d541e0a90f790decff9a20ed0524a0f9",
+      "4c39919a09a337348d1974d79070781ee01590111ee2c5b0d2ec48ef605f8df3"
+    };
+    for (int index = 0; index < scalars.length; index++) {
+      try (var text = CanonicalField.text("text", "e\u0301" + scalars[index]);
+          var number = CanonicalField.number("number", Long.MIN_VALUE);
+          var request =
+              new CanonicalRequest(
+                  "7",
+                  QUESTION_REQUEST_LAYOUT,
+                  LAYOUT_VERSION,
+                  "QUESTION:" + scalars[index],
+                  List.of(text, number))) {
+        assertArrayEquals(HEX.parseHex(texts[index]), text.value());
+        assertArrayEquals(
+            "-9223372036854775808".getBytes(StandardCharsets.US_ASCII), number.value());
+        assertArrayEquals(
+            HEX.parseHex(canonicals[index]), OperationFingerprint.INSTANCE.canonicalBytes(request));
+        assertArrayEquals(
+            HEX.parseHex(digests[index]),
+            OperationFingerprint.INSTANCE.calculate(request, new byte[32]));
+      }
+    }
+  }
+
   private static int providerPosition(String name) {
     Provider[] providers = Security.getProviders();
     for (int index = 0; index < providers.length; index++) {

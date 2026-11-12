@@ -1,0 +1,337 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T10:01:14.622424+09:00",
+  "source": "0109380bced8935b4b87e1802a3b79eec7ce46ee",
+  "productionCoreMain": "236ffddc83a08f1ba8f2ac5c3932e381371acd59",
+  "workIds": [
+    "WBS-P005-04/1",
+    "WBS-P005-04/2"
+  ],
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider.java": "e34f85fb6c359595962afb863089e0f4c874dd78a4108981e1d623ec03b2d6e8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/TransactedJmsContextProvider.java": "3a7840dff5e3214ba6216604131bd676241393033a1c9912dd72a01ff82c4d4d"
+  },
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+  },
+  "publicSourceReviewChecks": [
+    {
+      "id": "P00504-PG01",
+      "result": "REVIEWED",
+      "expectation": "Loopback literal endpoint only; explicit 1..65535 port; no alternate transport/host/query/fallback.",
+      "source": "ArtemisConnectionFactoryProvider.java"
+    },
+    {
+      "id": "P00504-PG02",
+      "result": "REVIEWED",
+      "expectation": "SS321 SYNC/ASYNC/WEB_LOG windows1048576/0/65536; call2000, failure10000, ttl30000, initial3,reconnect-1,retry1000 multiplier2 cap30000; block durable/preAckfalse/topologyfalse.",
+      "source": "ArtemisConnectionFactoryProvider.java"
+    },
+    {
+      "id": "P00504-PG03",
+      "result": "REVIEWED_RUNTIME_HELD",
+      "expectation": "All dependencies validated before factory acquire; partially acquired factory closes once; close-failure identity/secondary policy and unknown owned resource registration require actual Temporary/ServiceProcessResources, not pure-runtime admission.",
+      "source": "ArtemisConnectionFactoryProvider.java"
+    },
+    {
+      "id": "P00504-PG04",
+      "result": "REVIEWED_ORIGINAL8_RETAINED",
+      "expectation": "Envelope header response kind/exact total length/1m cap before BytesMessage creation; literal wire, metadata order, every write/header failure identity, null/empty/reserved/internal/exact-cap fixtures already original8.",
+      "source": "JmsMessageFactory.java"
+    },
+    {
+      "id": "P00504-PG05",
+      "result": "REVIEWED_ORIGINAL4_RETAINED",
+      "expectation": "Borrowed transacted JMS context only; persistent2/TTL10000/FQQN and exact correlation, no commit/rollback/close owned by sender; independent manual wire and injected provider failure identity.",
+      "source": "ReplySender.java"
+    },
+    {
+      "id": "P00504-PG06",
+      "result": "REVIEWED_ABSTRACT_NO_EXECUTABLE_CODE",
+      "expectation": "TransactedJmsContextProvider is abstract open contract; no fake coverage assertion/test for abstract declaration.",
+      "source": "TransactedJmsContextProvider.java"
+    }
+  ],
+  "wholeSafeTestSourcesReviewed": [
+    "JmsReplyEnvelopeContractTest8",
+    "ReplySenderStageContractTest4"
+  ],
+  "wholeUnsafeTestRuntimeHeld": [
+    "ArtemisConnectionFactoryProviderTest4: direct actual TemporaryInfrastructureException and ServiceProcessResources plus actual ActiveMQConnectionFactory"
+  ],
+  "retainedEvidence": [
+    {
+      "label": "factory8",
+      "originalEvidence": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/PG23074-jms-boundary-independent-v1/manifest.json",
+        "sha256": "0b7db8261b59f946d346cc58b3d2c66ec8e3f1cdb26970d078c7f50f7aff5aff"
+      },
+      "originalSource": "8b5e880be9ce3e025619b3b4f29fb66edf99e5a1",
+      "tests": 8,
+      "testAndTargetSourceUnchanged": true,
+      "allNamedInitializedDependencySourcesUnchanged": true,
+      "dependencySourceComparison": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+          "historicalSha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+          "currentSha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+          "historicalSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+          "currentSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+          "historicalSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+          "currentSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java",
+          "historicalSha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+          "currentSha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+          "historicalSha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+          "currentSha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java",
+          "historicalSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+          "currentSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "historicalSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+          "currentSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "historicalSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+          "currentSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "historicalSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+          "currentSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java",
+          "historicalSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+          "currentSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "historicalSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+          "currentSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "historicalSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+          "currentSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+          "historicalSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+          "currentSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "historicalSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+          "currentSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+          "unchanged": true
+        }
+      ],
+      "normalPhysicalTargetsUnchanged": true,
+      "verifiedPublicFileCount": 48,
+      "originalTargetCoverage": {
+        "INSTRUCTION": {
+          "covered": 69,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 16,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "applicability": "RETAIN_ORIGINAL_LIMITED_TARGET_PROOF_NOT_A_NEW_CURRENT_WHOLE_RUN",
+      "newProductExecutions": 0,
+      "newTests": 0
+    },
+    {
+      "label": "sender4",
+      "originalEvidence": {
+        "path": "evidence/01_PT/005_NK-MSG-001/evidence/provisional/PG18612-reply-stage-unit-v1/manifest.json",
+        "sha256": "d2db189fae80f126ebf3f42165dc5f326d6a5437de87a2ef348b78d5379d0d05"
+      },
+      "originalSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "tests": 4,
+      "testAndTargetSourceUnchanged": true,
+      "allNamedInitializedDependencySourcesUnchanged": true,
+      "dependencySourceComparison": [
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JmsMessageFactory.java",
+          "historicalSha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+          "currentSha256": "90c2401c0755b6ef1bb7e15c3847d268d9401a30d7ea9a4409f7516d7c500957",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/ReplySender.java",
+          "historicalSha256": "c043943bdddd75ef916aa4e8db97b056a0c0a845286cf9c7757483ae9bb58ffe",
+          "currentSha256": "c043943bdddd75ef916aa4e8db97b056a0c0a845286cf9c7757483ae9bb58ffe",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+          "historicalSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+          "currentSha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+          "historicalSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+          "currentSha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java",
+          "historicalSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+          "currentSha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "historicalSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+          "currentSha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "historicalSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+          "currentSha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "historicalSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+          "currentSha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java",
+          "historicalSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+          "currentSha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "historicalSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+          "currentSha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "historicalSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+          "currentSha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java",
+          "historicalSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+          "currentSha256": "277dc29b07a2531b8c7d8307c0226762ff6b76fa2caef3849007bbcaf6aaffbc",
+          "unchanged": true
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "historicalSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+          "currentSha256": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+          "unchanged": true
+        }
+      ],
+      "normalPhysicalTargetsUnchanged": true,
+      "verifiedPublicFileCount": 4,
+      "originalTargetCoverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 40
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "applicability": "RETAIN_ORIGINAL_LIMITED_TARGET_PROOF_NOT_A_NEW_CURRENT_WHOLE_RUN",
+      "newProductExecutions": 0,
+      "newTests": 0
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P005-04/1"
+  ],
+  "originalEndingWorkStatus": {
+    "WBS-P005-04/2": "NOT_ACCEPTED_FACTORY_RUNTIME_AND_C04_EXIT_DEPENDENCY_HELD"
+  },
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualFactoryBrokerVmDbKeyCredentialHeldClassIO": 0,
+  "manualExclusions": [],
+  "oldExecCombined": false,
+  "next": "Canonical P00601 Inbox public-source and test admissibility audit; keep direct held4/runtime/DB tests held, independent normal pure value checks only after whole-source closure.",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1281_jms_factory_context_contract_audit.py",
+    "sha256": "92176e9713e63dc1690948535c8692a0dbad1fc2e03ea68c40aff35555cd7057"
+  }
+}

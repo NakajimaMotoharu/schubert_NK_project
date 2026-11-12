@@ -1,0 +1,65 @@
+[
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "rule": "NullAssignment",
+    "line": "22",
+    "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "SS3243 explicitly distinguishes null canonical field bytes from empty; JSpecify nullable value valid and cloned when present. Replacing null changes binary format.",
+    "sourceSha256": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "rule": "ReturnEmptyCollectionRatherThanNull",
+    "line": "27",
+    "message": "Return an empty collection rather than null.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "SS3243 null length FFFFFFFF differs empty0; nullable accessor preserves explicit domain union and returns defensive copy when present.",
+    "sourceSha256": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprint.java",
+    "rule": "CloseResource",
+    "line": "49",
+    "message": "Ensure that resources like this CanonicalField object are closed after use",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "CanonicalField is borrowed from request.fields; caller owns request terminal wipe, writer only clones value and wipes clone in writeValue finally. Closing borrowed field during HMAC would destroy next same-request verification. SecretBuffer original whole3 independently checks owner clone/close and failure wipe.",
+    "sourceSha256": "25f0c77746cdb01ce938f83fe0b019929f0aeb2e073db4f043abb3a41ba0995b"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "line": "20",
+    "message": "Use block level locking rather than method level synchronization",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Package-private ByteArrayOutputStream override maintains same inherited synchronized monitor for buf/count write/reset/toString. Replacing monitor breaks inherited mutual exclusion; no class/global/public monitor coordination or external resource. Same owner whole3 checks every capacity and lifecycle.",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "line": "27",
+    "message": "Use block level locking rather than method level synchronization",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Package-private ByteArrayOutputStream override maintains same inherited synchronized monitor for buf/count write/reset/toString. Replacing monitor breaks inherited mutual exclusion; no class/global/public monitor coordination or external resource. Same owner whole3 checks every capacity and lifecycle.",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "line": "47",
+    "message": "Use block level locking rather than method level synchronization",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Package-private ByteArrayOutputStream override maintains same inherited synchronized monitor for buf/count write/reset/toString. Replacing monitor breaks inherited mutual exclusion; no class/global/public monitor coordination or external resource. Same owner whole3 checks every capacity and lifecycle.",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+    "rule": "AvoidSynchronizedAtMethodLevel",
+    "line": "58",
+    "message": "Use block level locking rather than method level synchronization",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Package-private ByteArrayOutputStream override maintains same inherited synchronized monitor for buf/count write/reset/toString. Replacing monitor breaks inherited mutual exclusion; no class/global/public monitor coordination or external resource. Same owner whole3 checks every capacity and lifecycle.",
+    "sourceSha256": "1f751a0267c7d9f894806d67e5b9b3c05955038353d6f6bd6a44cfe3bd1217de"
+  }
+]
