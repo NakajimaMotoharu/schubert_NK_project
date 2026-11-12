@@ -369,21 +369,19 @@ class HttpMetricRecorderTest {
   void httpRec007ConcurrentActualProviderCounts() throws Exception {
     try (var registry = new InspectingRegistry()) {
       var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
-      try (var executor = Executors.newFixedThreadPool(4)) {
-        try {
-          var tasks = new ArrayList<Callable<Boolean>>();
-          for (int index = 0; index < 64; index++)
-            tasks.add(
-                () -> {
-                  recorder.record(SEARCH_PATH, GET_METHOD, 200, 1_000_000_000);
-                  return true;
-                });
-          for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
-            assertTrue(future.get());
-        } finally {
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-        }
+      var executor = Executors.newFixedThreadPool(4);
+      try {
+        var tasks = new ArrayList<Callable<Boolean>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(
+              () -> {
+                recorder.record(SEARCH_PATH, GET_METHOD, 200, 1_000_000_000);
+                return true;
+              });
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(future.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
       assertEquals(64.0, request(registry, SEARCH_PATH, GET_METHOD, SUCCESS_STATUS_LABEL).count());
       assertEquals(64, duration(registry, SEARCH_PATH).count());

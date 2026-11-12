@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "preliminaryOnly": true,
+  "fullQualityGateSatisfied": false,
+  "originalPreStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28122-http-metric28-pre-style-v1/manifest.json",
+    "sha256": "5f077cf66fe3c32cc8dcad04928421001b0eb766aaae9b7b36822adc28beb604"
+  },
+  "stages": {
+    "format-correct": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T19:11:00.281810+00:00",
+      "endUTC": "2026-11-12T19:11:00.847682+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T19:11:00.852819+00:00",
+      "endUTC": "2026-11-12T19:11:01.369262+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle-after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T19:11:01.369644+00:00",
+      "endUTC": "2026-11-12T19:11:02.236109+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28124-http-metric28-pre-style-admitted-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "rawFindings": [],
+  "processingErrors": [],
+  "checkstyleFindings": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java": "cdd8d6da87e199742bdc7c33cad637e485d14e2ab46603d711a23781446fc449",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java": "ddd4b35be315b612cc80587f619dad24e0c009280c92e471c4bb557fbe7ec950",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java": "636a7d33ddfb0882d34858486ec6a3de24068353dbdddb3ce0610416d5b98ecf"
+  },
+  "expandedOracleTokensIdentical": true,
+  "wrongLiteralNegativeRejected": true,
+  "otherSevenNonApplicableFormat0Unchanged": true,
+  "MainCompiled": false,
+  "MainChanged": false,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "expectedTests": 28,
+  "bug": "BUG2740",
+  "ykt": "YKT2391",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2008_http_metric28_format_admission.py",
+    "sha256": "304aed0853728e7687d922923e53d3b5f0b128420c76bc51b3507103a75d058b"
+  }
+}

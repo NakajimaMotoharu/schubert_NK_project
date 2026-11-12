@@ -1,0 +1,292 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java": "9ca3687779ab82d12966d3300d35d7acd8320e6020ad2d8acd0e829b55990483",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java": "29df7d74914a7a854c8d9ea345056ede3ca4d60cc0100f7c51b23efb2851a5a5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java": "9e16eee7268e7d6f4d5821d1e61411eacf74568b8871424ba90f41edd2caaca2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java": "cdd8d6da87e199742bdc7c33cad637e485d14e2ab46603d711a23781446fc449",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java": "ddd4b35be315b612cc80587f619dad24e0c009280c92e471c4bb557fbe7ec950",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java": "636a7d33ddfb0882d34858486ec6a3de24068353dbdddb3ce0610416d5b98ecf",
+    "src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt": "1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28126-http-metric28-normal-v1/manifest.json",
+    "sha256": "9a3742b980ad76e54ba924468368d0d4119abcc7db7d1807edbecb2e3606690d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28128-http-metric28-static-v1/manifest.json",
+    "sha256": "b907b27541166d08b38ebdd50511bdb952a0abd6a51f256f16ea9f0bbb15a9a8"
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28124-http-metric28-pre-style-admitted-v1/manifest.json",
+    "sha256": "2366ff03b5bbcad92a307ddc33faa7c42a13d03ecdf68e32b196ea7275e1e331"
+  },
+  "expectedTests": 28,
+  "newDefinitions": 0,
+  "fullPhysicalClasses": 11,
+  "rootCompilerUnchanged": true,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 17,
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "CloseResource",
+      "line": "226",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "OwnedJUnit explicit finally shutdownNow-boundedawait10 without implicitTWR infiniteclose, allformer assertions and SDK registry ownership preserved."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "226",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "233",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "236",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "237",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "133",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "SDK Timer typedProxy fixture must implement Timer in its defining classloader; no class discovery or external code/network/authority."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "372",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "OwnedJUnit explicit finally shutdownNow-boundedawait10 without implicitTWR infiniteclose, allformer assertions and SDK registry ownership preserved."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "372",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "381",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "383",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "384",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "462",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Method-local histogram snapshot map built/read only within one assertion call after task joins or sequential boundary fixture; not retained, published, shared or mutated by worker threads. ConcurrentMap would hide no actual shared state."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "CloseResource",
+      "line": "298",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "OwnedJUnit explicit finally shutdownNow-boundedawait10 without implicitTWR infiniteclose, allformer assertions and SDK registry ownership preserved."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "298",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "309",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "318",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "319",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_OWNED_JUNIT_FINITE_POOL_TYPED_PROXY_OR_LOCAL_SNAPSHOT",
+      "reason": "Existing standaloneJUnit owned4workers with timedinvokeAll10/64tasks or4x64timerwrites, completedorcancelled Futures and finally shutdownNow/assertawait10; no product/container worker pool."
+    }
+  ],
+  "independentSourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "372"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "372"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(future.get());",
+      "line": "381"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "line": "383"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "line": "384"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "226"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "226"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "line": "233"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "line": "236"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "line": "237"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "298"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "line": "298"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "line": "309"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "line": "318"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "line": "319"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Timer.class.getClassLoader(),",
+      "line": "133"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Double, Double> counts = new HashMap<>();",
+      "line": "462"
+    }
+  ],
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "heldFixturesExtractedOrRewritten": false,
+  "onlyPublicTemplateCopies": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2011_http_metric28_preflight.py",
+    "sha256": "d84f3d3928569cc2587a176766ddaf95082cab65a5468ae38aa00c62649b2cc7"
+  }
+}
