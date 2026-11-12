@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T19:31:04.339">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java">
+<violation beginline="124" endline="124" begincolumn="9" endcolumn="22" rule="UnusedReturnValue" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodec" method="decode" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#unusedreturnvalue" priority="3">
+Result of 'com.google.gson.stream.JsonReader.peek()' is ignored.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributeCodecTest.java">
+<violation beginline="333" endline="333" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="333" endline="333" begincolumn="16" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="339" endline="356" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="359" endline="364" begincolumn="7" endcolumn="6" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="360" endline="360" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="361" endline="361" begincolumn="12" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAttributeCodecTest" method="web015ConcurrentAttributesHaveNoCrossSessionState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPayloadCodecTest.java">
+<violation beginline="151" endline="151" begincolumn="23" endcolumn="25" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web018EnvelopeAndEveryAadFieldMutationReject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 16 in if statements
+</violation>
+<violation beginline="245" endline="245" begincolumn="9" endcolumn="14" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web020NullConfigurationIdentityAndClosedLifetime" variable="codec" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this SessionPayloadCodec object are closed after use
+</violation>
+<violation beginline="260" endline="260" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="260" endline="260" begincolumn="16" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="266" endline="276" begincolumn="13" endcolumn="38" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="294" endline="294" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="295" endline="300" begincolumn="9" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="304" endline="310" begincolumn="7" endcolumn="6" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="305" endline="305" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="306" endline="306" begincolumn="12" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web021ConcurrentNonceAndCallerMonitorIsolation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="350" endline="350" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="nextBytes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="356" endline="356" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="356" endline="356" begincolumn="16" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="358" endline="358" begincolumn="23" endcolumn="79" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" variable="encrypted" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="361" endline="365" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" variable="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="381" endline="388" begincolumn="7" endcolumn="6" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="383" endline="383" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="384" endline="384" begincolumn="12" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionPayloadCodecTest" method="web023RotationKeysAndCloseAreSerialized" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionIdTest.java">
+<violation beginline="92" endline="92" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="92" endline="92" begincolumn="16" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="97" endline="114" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="116" endline="121" begincolumn="7" endcolumn="6" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="117" endline="117" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="118" endline="118" begincolumn="12" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="WebSessionIdTest" method="web004ConcurrentIdsAndHashesShareNoMutableDigest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

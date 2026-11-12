@@ -89,7 +89,8 @@ class WebSessionIdTest {
   void web004ConcurrentIdsAndHashesShareNoMutableDigest() throws Exception {
     var random = new SecureRandom();
     var ids = ConcurrentHashMap.<String>newKeySet();
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var futures = new ArrayList<Future<Void>>();
       for (int i = 0; i < 100; i++)
         futures.add(
@@ -112,6 +113,11 @@ class WebSessionIdTest {
                   return null;
                 }));
       for (var future : futures) future.get(20, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("session identity workers did not terminate");
+      }
     }
     assertEquals(100, ids.size());
   }

@@ -330,7 +330,8 @@ class SessionAttributeCodecTest {
 
   @Test
   void web015ConcurrentAttributesHaveNoCrossSessionState() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var futures = new ArrayList<Future<Void>>();
       for (int i = 0; i < 100; i++) {
         final int n = i;
@@ -355,6 +356,11 @@ class SessionAttributeCodecTest {
                 }));
       }
       for (var future : futures) future.get(20, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("session attribute workers did not terminate");
+      }
     }
   }
 

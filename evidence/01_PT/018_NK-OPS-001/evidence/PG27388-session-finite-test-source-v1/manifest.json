@@ -1,0 +1,69 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-2705",
+  "horizontal": "YKT-2374",
+  "sourceBefore": "fa9b9fa81706b0e62a34c3bd374a3971c2495499",
+  "TestChanged3": true,
+  "ownedPools4": true,
+  "allOriginalAssertionsInverseExact": true,
+  "rows": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributeCodecTest.java",
+      "oldSha256": "54c9a088ec519b70dd19ed4a6f88c2640c0fb5b410f12e16e554e2d0f9170b02",
+      "newSha256": "5d3fe4a474c47ffd5e51302522c942bfcd91fc2b254326bffcb1ca1dfd1d302b",
+      "originalAllAssertionsInverseExact": true,
+      "changes": [
+        {
+          "before": "    try (var pool = Executors.newFixedThreadPool(10)) {",
+          "after": "    var pool = Executors.newFixedThreadPool(10);\n    try {"
+        },
+        {
+          "before": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    }\n  }",
+          "after": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    } finally {\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"session attribute workers did not terminate\");\n      }\n    }\n  }"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionPayloadCodecTest.java",
+      "oldSha256": "198d18af56d8c557d6c183c85829afe07d63956c3ff91a43f0a47c7ab1ff48f3",
+      "newSha256": "b99373952eefa8e11c137f5588c099308d25eca95ab79c1d581eeb5b3b302999",
+      "originalAllAssertionsInverseExact": true,
+      "changes": [
+        {
+          "before": "    try (var pool = Executors.newFixedThreadPool(10)) {",
+          "after": "    var pool = Executors.newFixedThreadPool(10);\n    try {"
+        },
+        {
+          "before": "    try (var pool = Executors.newFixedThreadPool(2)) {",
+          "after": "    var pool = Executors.newFixedThreadPool(2);\n    try {"
+        },
+        {
+          "before": "    } finally {\n      codec.close();\n    }\n  }",
+          "after": "    } finally {\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"session payload nonce workers did not terminate\");\n      }\n      codec.close();\n    }\n  }"
+        },
+        {
+          "before": "    } finally {\n      release.countDown();\n      codec.close();\n    }\n  }",
+          "after": "    } finally {\n      release.countDown();\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"session payload close workers did not terminate\");\n      }\n      codec.close();\n    }\n  }"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionIdTest.java",
+      "oldSha256": "e20e36be1e6448f4e9385a484aa77af7b576fa8a446358ba78786b2299f1f464",
+      "newSha256": "985a2275a38a1a486d61fc9fe50555a3f02c83f54d4aa9049aa3af41f2ea6d5d",
+      "originalAllAssertionsInverseExact": true,
+      "changes": [
+        {
+          "before": "    try (var pool = Executors.newFixedThreadPool(10)) {",
+          "after": "    var pool = Executors.newFixedThreadPool(10);\n    try {"
+        },
+        {
+          "before": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    }\n    assertEquals(100, ids.size());",
+          "after": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    } finally {\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"session identity workers did not terminate\");\n      }\n    }\n    assertEquals(100, ids.size());"
+        }
+      ]
+    }
+  ],
+  "productTestsExecuted": 0,
+  "actualBackendOrHeldClassActions": 0
+}

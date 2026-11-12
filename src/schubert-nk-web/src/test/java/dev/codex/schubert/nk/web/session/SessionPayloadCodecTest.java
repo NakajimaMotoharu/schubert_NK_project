@@ -257,7 +257,8 @@ class SessionPayloadCodecTest {
   @Test
   void web021ConcurrentNonceAndCallerMonitorIsolation() throws Exception {
     var codec = new SessionPayloadCodec("v2", KEY, "v1", OLD);
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var futures = new ArrayList<Future<EncryptedSessionPayload>>();
       for (int i = 0; i < 100; i++) {
         final int n = i;
@@ -301,6 +302,10 @@ class SessionPayloadCodecTest {
       }
       assertThrows(IllegalStateException.class, () -> codec.encrypt(IDENTITY, sample(false)));
     } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("session payload nonce workers did not terminate");
+      }
       codec.close();
     }
   }
@@ -348,7 +353,8 @@ class SessionPayloadCodecTest {
           }
         };
     var codec = new SessionPayloadCodec("v2", KEY, "v1", OLD, random);
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var encrypted = pool.submit(() -> codec.encrypt(IDENTITY, sample(true)));
       assertTrue(entered.await(20, TimeUnit.SECONDS));
       var close =
@@ -374,6 +380,10 @@ class SessionPayloadCodecTest {
       }
     } finally {
       release.countDown();
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("session payload close workers did not terminate");
+      }
       codec.close();
     }
   }
