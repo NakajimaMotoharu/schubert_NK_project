@@ -1,0 +1,1017 @@
+{
+  "actualExit": 0,
+  "source": "ccf138495840c47d9b9e638e489aca80b5fcdc17",
+  "productionCoreMain": "0e64916211565c7b7a84785628e3fc5449c69b6b",
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27836-read-wire-normal40-independent-v1/manifest.json",
+    "sha256": "4ed7b090510523572bcabd503b47b0026098214bc09f8b63b6969814ab73c823"
+  },
+  "technical": {
+    "kind": "P01507_READ_WIRE_NORMAL40",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27836-read-wire-normal40-independent-v1/manifest.json",
+      "sha256": "4ed7b090510523572bcabd503b47b0026098214bc09f8b63b6969814ab73c823"
+    },
+    "tests": 40,
+    "newDefinitions": 8,
+    "newAcceptance": 0,
+    "physicalClasses": 194,
+    "positiveMainCrc": 116,
+    "changedMainTwoSourcesAllFourPhysicalCounters": {
+      "INSTRUCTION": {
+        "covered": 493,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 111,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 16,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 42,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 37,
+        "missed": 0
+      }
+    },
+    "changedMainComponentFour100": true,
+    "fourFacadeFivePhysicalLmc100NaturalBranchZero": true,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 10763,
+        "missed": 7900
+      },
+      "BRANCH": {
+        "covered": 479,
+        "missed": 623
+      },
+      "LINE": {
+        "covered": 2164,
+        "missed": 1598
+      },
+      "COMPLEXITY": {
+        "covered": 591,
+        "missed": 790
+      },
+      "METHOD": {
+        "covered": 442,
+        "missed": 361
+      },
+      "CLASS": {
+        "covered": 113,
+        "missed": 62
+      }
+    },
+    "wholeScopeFour100": false,
+    "MainSourcesRebuilt": 13,
+    "MainChangedDuringPt": false,
+    "oldSourceRedControl": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27832-read-wire-old-source-red-control-v1/manifest.json",
+      "sha256": "79ffa6185a659b8e48271ade3e59775126cc07f7e2073fd9907df595562d886a"
+    },
+    "oldSourceExpectedRedFailures": 3,
+    "oldSourceFailuresNotPassOrCoverage": true,
+    "roster": {
+      "runs": 59,
+      "actualExecutions": 3477,
+      "success": 3449,
+      "failed": 28,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "changedSourcePhysical": [
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient",
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result"
+  ],
+  "fourFacadeNaturalBranchZero": [
+    "dev/codex/schubert/nk/web/messaging/AnimationWireClient",
+    "dev/codex/schubert/nk/web/messaging/LogSearchWireClient",
+    "dev/codex/schubert/nk/web/messaging/MusicWireClient",
+    "dev/codex/schubert/nk/web/messaging/ScenarioWireClient",
+    "dev/codex/schubert/nk/web/messaging/ScenarioWireClient$Result"
+  ],
+  "uncoveredFullSourceClasses": {
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": {
+      "INSTRUCTION": 62,
+      "BRANCH": 10,
+      "LINE": 13,
+      "COMPLEXITY": 11,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadValues": {
+      "INSTRUCTION": 8,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator": {
+      "INSTRUCTION": 624,
+      "BRANCH": 128,
+      "LINE": 125,
+      "COMPLEXITY": 98,
+      "METHOD": 13
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": {
+      "INSTRUCTION": 15,
+      "BRANCH": 1,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet": {
+      "INSTRUCTION": 38,
+      "BRANCH": 7,
+      "LINE": 5,
+      "COMPLEXITY": 8,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException": {
+      "INSTRUCTION": 4,
+      "LINE": 2,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": {
+      "INSTRUCTION": 30,
+      "BRANCH": 7,
+      "LINE": 7,
+      "COMPLEXITY": 8,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/WireMessage": {
+      "INSTRUCTION": 5,
+      "BRANCH": 3,
+      "LINE": 1,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog": {
+      "INSTRUCTION": 200,
+      "BRANCH": 21,
+      "LINE": 45,
+      "COMPLEXITY": 25,
+      "METHOD": 8
+    },
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload": {
+      "INSTRUCTION": 50,
+      "BRANCH": 5,
+      "LINE": 10,
+      "COMPLEXITY": 5,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Text": {
+      "INSTRUCTION": 5,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues": {
+      "INSTRUCTION": 262,
+      "BRANCH": 13,
+      "LINE": 42,
+      "COMPLEXITY": 40,
+      "METHOD": 29
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFields": {
+      "INSTRUCTION": 15,
+      "BRANCH": 3,
+      "LINE": 3,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog": {
+      "INSTRUCTION": 51,
+      "BRANCH": 8,
+      "LINE": 11,
+      "COMPLEXITY": 8,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition": {
+      "INSTRUCTION": 27,
+      "BRANCH": 6,
+      "LINE": 6,
+      "COMPLEXITY": 6
+    },
+    "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": {
+      "INSTRUCTION": 45,
+      "BRANCH": 10,
+      "LINE": 12,
+      "COMPLEXITY": 9
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": {
+      "INSTRUCTION": 34,
+      "BRANCH": 8,
+      "LINE": 9,
+      "COMPLEXITY": 9,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/web/messaging/PendingReply": {
+      "INSTRUCTION": 11,
+      "LINE": 2,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData": {
+      "INSTRUCTION": 37,
+      "LINE": 8,
+      "COMPLEXITY": 3,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData": {
+      "INSTRUCTION": 9,
+      "LINE": 2,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData": {
+      "INSTRUCTION": 146,
+      "LINE": 27,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData": {
+      "INSTRUCTION": 11,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData": {
+      "INSTRUCTION": 12,
+      "LINE": 4,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData": {
+      "INSTRUCTION": 24,
+      "LINE": 3,
+      "COMPLEXITY": 3,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData": {
+      "INSTRUCTION": 202,
+      "LINE": 36,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData": {
+      "INSTRUCTION": 56,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec": {
+      "INSTRUCTION": 337,
+      "BRANCH": 73,
+      "LINE": 59,
+      "COMPLEXITY": 53,
+      "METHOD": 5
+    },
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute": {
+      "INSTRUCTION": 92,
+      "BRANCH": 18,
+      "LINE": 14,
+      "COMPLEXITY": 10,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": {
+      "INSTRUCTION": 27,
+      "LINE": 5,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder": {
+      "INSTRUCTION": 10,
+      "BRANCH": 1,
+      "LINE": 2,
+      "COMPLEXITY": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": {
+      "INSTRUCTION": 118,
+      "BRANCH": 32,
+      "LINE": 24,
+      "COMPLEXITY": 30,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator": {
+      "INSTRUCTION": 112,
+      "BRANCH": 24,
+      "LINE": 22,
+      "COMPLEXITY": 13,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/MessageEncodingException": {
+      "INSTRUCTION": 4,
+      "LINE": 2,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec": {
+      "INSTRUCTION": 15,
+      "BRANCH": 3,
+      "LINE": 3,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder": {
+      "INSTRUCTION": 141,
+      "BRANCH": 10,
+      "LINE": 28,
+      "COMPLEXITY": 8,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldEncodingException": {
+      "INSTRUCTION": 5,
+      "LINE": 2,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": {
+      "INSTRUCTION": 99,
+      "BRANCH": 12,
+      "LINE": 17,
+      "COMPLEXITY": 7,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/NotificationState": {
+      "INSTRUCTION": 49,
+      "LINE": 10,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole": {
+      "INSTRUCTION": 28,
+      "LINE": 7,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/RelativePath": {
+      "INSTRUCTION": 32,
+      "BRANCH": 15,
+      "LINE": 5,
+      "COMPLEXITY": 16,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/MediaMimeType": {
+      "INSTRUCTION": 56,
+      "LINE": 11,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition": {
+      "INSTRUCTION": 28,
+      "LINE": 7,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/QuestionId": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/NotificationType": {
+      "INSTRUCTION": 35,
+      "LINE": 8,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory": {
+      "INSTRUCTION": 42,
+      "LINE": 9,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserId": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/NotificationId": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode": {
+      "INSTRUCTION": 10,
+      "BRANCH": 3,
+      "LINE": 2,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds": {
+      "INSTRUCTION": 10,
+      "BRANCH": 3,
+      "LINE": 2,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserState": {
+      "INSTRUCTION": 35,
+      "LINE": 8,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/AnswerState": {
+      "INSTRUCTION": 35,
+      "LINE": 8,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax": {
+      "INSTRUCTION": 2,
+      "BRANCH": 3,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/NotificationErrorCode": {
+      "INSTRUCTION": 49,
+      "LINE": 10,
+      "COMPLEXITY": 3,
+      "METHOD": 3,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex": {
+      "INSTRUCTION": 27,
+      "BRANCH": 5,
+      "LINE": 4,
+      "COMPLEXITY": 6,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/AudioId": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition": {
+      "INSTRUCTION": 3,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath": {
+      "INSTRUCTION": 27,
+      "BRANCH": 10,
+      "LINE": 4,
+      "COMPLEXITY": 11,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/IdValue": {
+      "INSTRUCTION": 5,
+      "BRANCH": 2,
+      "LINE": 1,
+      "COMPLEXITY": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/LargeResultIoException": {
+      "INSTRUCTION": 5,
+      "LINE": 2,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/LargeResultContent": {
+      "INSTRUCTION": 43,
+      "BRANCH": 8,
+      "LINE": 7,
+      "COMPLEXITY": 6,
+      "METHOD": 2,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec": {
+      "INSTRUCTION": 211,
+      "BRANCH": 22,
+      "LINE": 56,
+      "COMPLEXITY": 16,
+      "METHOD": 5,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptor": {
+      "INSTRUCTION": 86,
+      "LINE": 21,
+      "COMPLEXITY": 10,
+      "METHOD": 10,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/MediaType": {
+      "INSTRUCTION": 21,
+      "LINE": 4,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/ContentDisposition": {
+      "INSTRUCTION": 50,
+      "BRANCH": 3,
+      "LINE": 12,
+      "COMPLEXITY": 6,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator": {
+      "INSTRUCTION": 314,
+      "BRANCH": 78,
+      "LINE": 67,
+      "COMPLEXITY": 48,
+      "METHOD": 8,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/file/LargeResultDescriptor": {
+      "INSTRUCTION": 162,
+      "BRANCH": 22,
+      "LINE": 39,
+      "COMPLEXITY": 22,
+      "METHOD": 11,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/log/WebLogEventData": {
+      "INSTRUCTION": 290,
+      "LINE": 50,
+      "COMPLEXITY": 5,
+      "METHOD": 5,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData": {
+      "INSTRUCTION": 35,
+      "LINE": 11,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/log/LogRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData": {
+      "INSTRUCTION": 72,
+      "LINE": 15,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData": {
+      "INSTRUCTION": 53,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData": {
+      "INSTRUCTION": 52,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData": {
+      "INSTRUCTION": 164,
+      "LINE": 30,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData": {
+      "INSTRUCTION": 34,
+      "LINE": 6,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData": {
+      "INSTRUCTION": 74,
+      "LINE": 15,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData": {
+      "INSTRUCTION": 54,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData": {
+      "INSTRUCTION": 36,
+      "LINE": 8,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData": {
+      "INSTRUCTION": 111,
+      "LINE": 21,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationRecord": {
+      "INSTRUCTION": 162,
+      "LINE": 29,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData": {
+      "INSTRUCTION": 147,
+      "LINE": 27,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData": {
+      "INSTRUCTION": 290,
+      "LINE": 50,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData": {
+      "INSTRUCTION": 54,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData": {
+      "INSTRUCTION": 36,
+      "LINE": 8,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord": {
+      "INSTRUCTION": 146,
+      "LINE": 27,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData": {
+      "INSTRUCTION": 258,
+      "LINE": 45,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData": {
+      "INSTRUCTION": 72,
+      "LINE": 15,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData": {
+      "INSTRUCTION": 90,
+      "LINE": 18,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserRecord": {
+      "INSTRUCTION": 184,
+      "LINE": 33,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData": {
+      "INSTRUCTION": 112,
+      "LINE": 21,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData": {
+      "INSTRUCTION": 92,
+      "LINE": 18,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData": {
+      "INSTRUCTION": 54,
+      "LINE": 12,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData": {
+      "INSTRUCTION": 104,
+      "LINE": 20,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData": {
+      "INSTRUCTION": 36,
+      "LINE": 6,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData": {
+      "INSTRUCTION": 86,
+      "LINE": 17,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData": {
+      "INSTRUCTION": 165,
+      "LINE": 31,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData": {
+      "INSTRUCTION": 70,
+      "LINE": 15,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData": {
+      "INSTRUCTION": 34,
+      "LINE": 7,
+      "COMPLEXITY": 4,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData": {
+      "INSTRUCTION": 10,
+      "LINE": 4,
+      "COMPLEXITY": 3,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/header/CommonHeader": {
+      "INSTRUCTION": 73,
+      "BRANCH": 22,
+      "LINE": 11,
+      "COMPLEXITY": 23,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/header/MessageKind": {
+      "INSTRUCTION": 12,
+      "BRANCH": 3,
+      "LINE": 3,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext": {
+      "INSTRUCTION": 27,
+      "BRANCH": 5,
+      "LINE": 5,
+      "COMPLEXITY": 6,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": {
+      "INSTRUCTION": 12,
+      "BRANCH": 3,
+      "LINE": 3,
+      "COMPLEXITY": 3
+    },
+    "dev/codex/schubert/nk/protocol/transport/BrokerTopology": {
+      "INSTRUCTION": 53,
+      "BRANCH": 6,
+      "LINE": 10,
+      "COMPLEXITY": 9,
+      "METHOD": 6
+    },
+    "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException": {
+      "INSTRUCTION": 18,
+      "BRANCH": 2,
+      "LINE": 6,
+      "COMPLEXITY": 2,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException": {
+      "INSTRUCTION": 18,
+      "BRANCH": 2,
+      "LINE": 5,
+      "COMPLEXITY": 2,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData": {
+      "INSTRUCTION": 10,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/GameRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData": {
+      "INSTRUCTION": 11,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData": {
+      "INSTRUCTION": 33,
+      "LINE": 10,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData": {
+      "INSTRUCTION": 11,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData": {
+      "INSTRUCTION": 14,
+      "LINE": 4,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData": {
+      "INSTRUCTION": 8,
+      "LINE": 3,
+      "COMPLEXITY": 2,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp": {
+      "INSTRUCTION": 15,
+      "BRANCH": 3,
+      "LINE": 3,
+      "COMPLEXITY": 3
+    }
+  },
+  "bug2721": "LIMITED_ONE_COMMON_CONVERSION_CLOSED",
+  "ykt2359": "67_TOTAL_SITES_NOT_ALL_RUNTIME_CLOSED",
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "effortRate": null
+}
