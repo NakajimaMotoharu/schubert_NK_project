@@ -1,0 +1,24 @@
+"""Close two separately priced original preparation rows in one joint bounded group."""
+from pathlib import Path
+import csv,datetime,hashlib,json
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';S=R.parent/'PMO/pgpt-completion-stage-20261102';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));wr=lambda p,x:p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+start=ld(B/'input/1771_animation_browse_start.json');mp=B/'evidence/PG27704-animation-browse-four-contract-v1/manifest.json';m=ld(mp);assert m['actualExit']==0 and m['wholeOwnSourceReviewed'] and m['productTestsExecuted']==m['newAcceptance']==0
+old=R/ld(S/'checkpoint.json')['currentWbs65Forecast']['path'];assert ref(old)==start['forecastRef'];f=ld(old);ids=start['wbsLeafIds'];assert m['completedOriginalPreparationWorkIds']==[w+'/1' for w in ids]
+plan=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv';rows={r['実行ID']:r for r in csv.DictReader(plan.open(encoding='utf-8-sig'),delimiter='\t')};split=[]
+for w in ids:
+ assert all(w+'/'+p not in f['completedPlanWorkIds'] for p in ['1','2']);price={k:float(rows[w+'/1'][col]) for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]};split.append(dict(workId=w+'/1',completedPlanPricePp=price,endingWorkId=w+'/2',endingStatus='NOT_ACCEPTED'))
+ for k,x in price.items():
+  f['completedPlanPriceSumPp'][k]=round(f['completedPlanPriceSumPp'][k]+x,3)
+  for field in ['remainingOriginalPlanPricePp','revisedRemainingPp']:f[field][k]=round(f[field][k]-x,3)
+ f['completedPlanWorkIds'].append(w+'/1');f['completedPreparationWorkIds'].append(w+'/1');f['partiallyCompletedPlanWorkIds'].append(w)
+for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]:assert start['estimate'][k]==round(sum(float(rows[w+'/'+p][col]) for w in ids for p in ['1','2']),3)
+for k in ['canonicalSchedulePricePrefixBasePp','startedRowPriceSumBasePp']:f[k]=round(f[k]+start['estimate']['base'],3)
+text='SCR008/009の所有2VM+実2template全文/既有限AnimationTest全8をUI223235/SS313323へ対応。menu15/4/1/20・各0..999/sum整合/固定三link、一覧0..50/51拒否/total一致/Category-parent-uniqueID/oneSubpermain/先行Subも親行へ対応/API順保持/固定logicalIDencode/immutableclosedBean/escape/placeholder/MBを独立期待値へ明示。PG24476原16/PG24452DOM43の全入力hash不変は元scopeのみ参照・再実行0/新sourceの依存資格へ輸入0。共有wholeTest/共通費二重計上0。二つの原/1だけ各.087/.210/.420を完了、/2のactualHTTP/auth/IF/DB/CHR/451は未受入。'
+f.update(previousForecast=ref(old),revision='WBS65-EXEC-FORECAST-186-ANIMATION_MENU_LIST_PREPARATIONS',atJST=datetime.datetime.now().astimezone().isoformat(),remainingPriceAccountingNote=text+' price reduction is not work completion rate.');tech=dict(kind='P01608_P01609_ORIGINAL_PREPARATIONS_ONLY',evidence=ref(mp),ownSources=4,productTestsExecuted=0,newAcceptance=0,individualPriceSplits=split);f['latestGroupTechnicalResult']=tech;fp=D/'1045_WBS65予実・SCR008009原四artifact後版186.json';assert not fp.exists();wr(fp,f)
+c=dict(groupId=start['groupId'],recordPath=str((D/'1046_WBS65SCR008009原四artifact準備結果.json').relative_to(R)),manifestPath=str(mp.relative_to(R)),manifestSha256=sha(mp),terminalAtUTC=m['atJST'],run='PG27704',workIds=start['workIds'],outcome=m['endingStatus'],technical=tech,forecastRef=ref(fp),checkpointText=text+' 元190新0/正式1964-53/工数null。残'+str(f['revisedRemainingPp'])+'未較正。',nextCommand='ContinueP01610 Animation config/controller/wire/watchVM/template ownedfive wholepublic source and wholefixture safety/oldproof first. Noactual4/nativeFS/DB/Root/privateResult-forging or newseam. Price newfindings beforechanges, normalPT onlywhenclosed safe. Usage next23:40:01/freshquota; initial20review whenfreshused20.');wr(B/'input/1774_animation_browse_close.json',c)
+root=R/'evidence/01_PT/016_NK-WEB-002';p=root/'4137_P0160809Animationメニュー一覧個別契約対応.md';assert not p.exists();lines=['# SCR008/009 Animationメニュー・一覧個別契約','',text,'','source '+m['source']+' /Main '+m['productionCoreMain']+'。metadata command `python3 -B evidence/01_PT/018_NK-OPS-001/input/1772_animation_browse_contract.py` exit0、新製品PT0/coverage無し。独立manifest SHA256 '+sha(mp)+'。']
+for x in m['checks']:lines.extend(['','- '+x['id']+' / '+x['methods']+' / '+','.join(x['testIds'])+': '+x['expected']])
+lines+=['','元190新0/正式1964PT-53scope維持。/1だけ、/2の条件は未受入。期待値は承認design固定count/order/後条件と独立literal、製品methodから生成しない。'];p.write_text('\n'.join(lines)+'\n')
+for n in ['001_NK-WEB-002_Scenario階層画面単体テスト仕様書.md','002_NK-WEB-002_Scenario階層画面実行結果.md']:
+ q=root/n;q.write_text(q.read_text()+'\n\nP01608/09の個別契約と/2不足は['+p.name+']('+p.name+')。metadata準備のみ、原16/DOM43は元source参照・新PT0。\n')
+print(json.dumps(dict(actualExit=0,completedOriginalPreparations=2,totalCompletedPlanRows=len(f['completedPlanWorkIds']),remaining=f['revisedRemainingPp'],split=split)))

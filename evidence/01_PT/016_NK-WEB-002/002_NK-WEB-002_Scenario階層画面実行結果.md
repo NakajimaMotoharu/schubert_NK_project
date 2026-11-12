@@ -60,3 +60,6 @@ WBS-P016-06公開source契約/独立期待値/TestIDは[4133_P01606SCR006File一
 
 
 WBS-P016-07公開source契約/独立期待値/TestIDは[4134_P01607SCR007本文通信組立原九artifact契約対応.md](4134_P01607SCR007本文通信組立原九artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+P01608/09の個別契約と/2不足は[4137_P0160809Animationメニュー一覧個別契約対応.md](4137_P0160809Animationメニュー一覧個別契約対応.md)。metadata準備のみ、原16/DOM43は元source参照・新PT0。

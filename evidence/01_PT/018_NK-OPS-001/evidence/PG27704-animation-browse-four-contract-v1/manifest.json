@@ -1,0 +1,131 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T22:55:16.737902+09:00",
+  "source": "43df8524f37cb2e04e416abd10b4fe672252539b",
+  "productionCoreMain": "edaf641333266660ec79a6e070c98b7a79bbccac",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationMenuViewModel.java": "70b3771e48a510872f1e724b613ab36db563ee89cbfad7cfeaa1b5eb80b99475",
+    "src/schubert-nk-web/src/main/resources/templates/animation.html": "008fe35863ee9c48b82c674df78572573313b29c321686259a64e8191cbe5b4d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/AnimationListViewModel.java": "1e32880757caeddfa8eda52634a8b52dbd3aca2471eb0e04118f97b976063e4d",
+    "src/schubert-nk-web/src/main/resources/templates/animation-list.html": "cfec2c00935f2af53ee51eb1726cfc676e1040312a0632d172f7e9ff283ac702"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01608-PG01",
+      "wbsId": "WBS-P016-08",
+      "methods": "AnimationMenuViewModel.from/constructor/getters",
+      "testIds": [
+        "PT-WEB-230",
+        "PT-WEB-234..237",
+        "PT-SCR-046..053"
+      ],
+      "expected": "Non-null actor/data, wire eachcount0..999 beforeprojection; main+ova+(opening?1:0)==total required no overflow underthreeN3. Independent vectors15/4/true/20;0/0/false/0;999/0/false/999;998/0/true/999;0/999/false/999 and inconsistent sums reject. ClosedTopbar/immutableprimitives/noauthcontextinBean; redactedtoString. No parsingprovider orcatalogcatch to add speculative fatal guard."
+    },
+    {
+      "id": "P01608-PG02",
+      "wbsId": "WBS-P016-08",
+      "methods": "animation.html/sharedAnimationController.menu",
+      "testIds": [
+        "PT-WEB-230",
+        "PT-SCR-046..065",
+        "ANIMATION-BROWSE-DOM"
+      ],
+      "expected": "SCR008 fixed menu three links/main→ova→opening, count labels main/ova, opening entry retained, titleAnimation/sharedactions/scenario/search. Escapedth:text, fixed relativehref, no descriptor/context/physicalresolver. ControllerANMREQ01 nofunctiondata/oneverifiedresponse→projection→Model, verified0102 immediateend handled, no fallback oldWebdata. HTTP200/actualauth/APIresponse/CurrentCHR notaccepted byview/sourceaudit."
+    },
+    {
+      "id": "P01609-PG01",
+      "wbsId": "WBS-P016-09",
+      "methods": "AnimationListViewModel.from/Video/Row",
+      "testIds": [
+        "PT-WEB-231..237"
+      ],
+      "expected": "Non-nullactor/category/data/list/elements, copycount<=50 andexactANLRSPtotal; 51/countmismatchreject. OVAonlyOVA/no parent; MAINonlyMAINorSUBTRACK; SUBTRACKiffparentpresent, filebytes>=1, uniqueID/oneSubpermain, parentexistsandMAIN, empty-dot-dotdotlinkIDreject. APIinputorder preservedinflatvideos, rowsmainsequencewithpairedsub evenwhenSubappearsbeforemain; noresortbysyntheticfilesystem. Immutablelists andclosedVideo/RowBeans, emptylistlegalviewfixture only; URLencodeslogicalIDincludingUnicode/slash/query/hash/percent, displayPathonlyth:text/noPathresolve."
+    },
+    {
+      "id": "P01609-PG02",
+      "wbsId": "WBS-P016-09",
+      "methods": "animation-list.html",
+      "testIds": [
+        "PT-WEB-236",
+        "PT-SCR-046..065",
+        "ANIMATION-BROWSE-DOM"
+      ],
+      "expected": "OVAonefileonecard; MAINpairedrow/subtracklinkorplaceholder; title/category/displaypath/filebytesMBone decimal and fixedback/search/sharedactions. main/SUBTRACK15+OVA4+opening1 currentmanifest remains migration acceptance, not test fixture20 assumedproof. Escapedtext/non-dangerousrelativeencodedURI; template/resourceDOM originalproof retained independent actualHTTP/media/Browser/IF011/DB/native/CHR/451 endings still NOT_ACCEPTED."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24476-search-animation-view-bounded-sixteen-independent-v1/manifest.json",
+        "sha256": "f8b78eff11977bfb750a956092d49430da16731052b4ff85ba4395020cfc7c91"
+      },
+      "originalSource": "192a154e721f97f92d534c774349737ccbd44497",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 16,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "sourceGraphAndChangedProtocolNotRequalified": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+        "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+      },
+      "originalSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 43,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "sourceGraphAndChangedProtocolNotRequalified": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "wholePureTestEightReviewed": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java",
+    "sha256": "145dec791e5649a99f094083ac9012927381c9915026bce38528f16bac175992",
+    "finiteWorkerAlreadyVerified": true,
+    "repeated": false
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-08/1",
+    "WBS-P016-09/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_HTTP_AUTH_IF_DB_CHR_AND_SAME_SOURCE_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1772_animation_browse_contract.py",
+    "sha256": "50a6c0f4a81faf06d84d126abfe7c39d0d6870bff13c144f874f636d5c49a2ef"
+  }
+}
