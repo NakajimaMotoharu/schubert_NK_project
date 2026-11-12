@@ -1,0 +1,117 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T23:10:25.035444+09:00",
+  "source": "cd4fb7b627cf2359ac9514a230aba7fb0ac08fea",
+  "productionCoreMain": "edaf641333266660ec79a6e070c98b7a79bbccac",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java": "c7fd573ce7401edb3c5d9fdf4390199554166f342cb5e7ef7da85cf220fc2e31",
+    "src/schubert-nk-web/src/main/resources/templates/music.html": "fbbf5a79417693cff98acdc75eef97fd30561362ce95fff4ad2d8b703d68743f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicSectionViewModel.java": "f6154b043fc6bf9d370ce1e6931d427ff0ff673f298e040f8e1f69077710c654",
+    "src/schubert-nk-web/src/main/resources/templates/music-sections.html": "62b31b622da8c27fbfe8c238ea9a4579d12d22247bd2390b5dbfbbc88650d2e4"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01611-PG01",
+      "wbsId": "WBS-P016-11",
+      "methods": "MusicCategoryViewModel.from/Card/segment",
+      "testIds": [
+        "PT-WEB-246",
+        "248..253",
+        "PT-SCR-066",
+        "068..071"
+      ],
+      "expected": "Nonnullactor/data/list/elements; exactMCTRSPtotal and<=20, 21/mismatchreject. duplicatecategoryreject, linksegmentempty-dot-dotdotreject/UTF8reservedencode, immutablecopy/closedCards/Topbar/redactedtoString. APIcategoryorder曲→BGM→othercodepoint migrationdisplay_order preserved, no Webresort/rescan. TotalN6 recordtracks <=20*999999=19999980 safeint. Displaycounts only, no APIauthgrant."
+    },
+    {
+      "id": "P01611-PG02",
+      "wbsId": "WBS-P016-11",
+      "methods": "music.html",
+      "testIds": [
+        "PT-SCR-066",
+        "068..071"
+      ],
+      "expected": "TitleMusic, totalsubtitle129曲 for29+99+1, orderedcategories曲/BGM/その他, fixed分類を選択するlabel, encodedhref, escapedtext/sharedTopbar/logoutcsrf/scenario-search-animationnav. Empty0曲/no fabricated empty-results message. Max20cards/19999980曲. Actual public MVC template six candidate already exists; no resource43 success imported because that scope coversmusic-list notmusic/category-section templates."
+    },
+    {
+      "id": "P01612-PG01",
+      "wbsId": "WBS-P016-12",
+      "methods": "MusicSectionViewModel.from/Card/segment",
+      "testIds": [
+        "PT-WEB-247..253",
+        "PT-SCR-067..071"
+      ],
+      "expected": "Nonnullactor/category/data/list/elements; parentcategory andsectionsegments validated/encoded, <=100 exactMCSRSPtotal, 101/mismatchreject; uniquesectionname. Immutablecards/APIsectionorderゲーム→アニメ→キャラクターソング→others migrationdisplay_order preserved. Sum<=100*999999=99999900 safeint; slash/#/? encodedaslogicalsegments; no displaypath/localFS fallback. Values metadataonly."
+    },
+    {
+      "id": "P01612-PG02",
+      "wbsId": "WBS-P016-12",
+      "methods": "music-sections.html/sharedWebMvcConfiguration",
+      "testIds": [
+        "PT-SCR-067..071"
+      ],
+      "expected": "Escapedcategorytitle/head/header, totalsum29/section10,15,4 andencodedcategory-childhref inAPIorder. Music/searchback, shareduser/adminTopbar+logoutcsrf, no descriptor/context/nativepath. SixwholeMusicHierarchyTemplateTest usesactualWebMvcConfiguration/ThymeleafViewResolver/MockServlet only; requestCSRFpublicsynthetic andpublicSessionPrincipal inputs neverauthorizebusinesscall. Fulltest371linesreviewed, finiteFuture10+finallyshutdownNow/await10, sourceCSS/HTMLread andtracewrite confined toowned copied run snapshot. Mustfinish exacttransitiveclosure/sourceCRC/static/Resourcehandlersbeforeanyexecute, noheldfixture extraction or bypass; actualauth/HTTP/IF/DB/CHR/451 /2 ending pending."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "tests": 64,
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "wholeTemplateCandidate": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+    "sha256": "3a9f4da883b93f74ddca6ddc323504ebc9f5c6a69e2a00549dac1fa47528e072",
+    "tests": 6,
+    "wholeSourceReviewed": true,
+    "status": "CONDITIONAL_EXACT_TRANSITIVE_MAIN_SDK_RESOURCE_CLOSURE_BEFORE_PT",
+    "noExtraction": true
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-11/1",
+    "WBS-P016-12/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_SAME_SOURCE_TEMPLATE_NORMAL6_AUTH_HTTP_IF_DB_CHR_451_PENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1787_music_hierarchy_contract.py",
+    "sha256": "b4e522999fea2fc33ca0cc9a50d4fb67a3af94c081fb4aeae2d00bbcc3c3b0a7"
+  }
+}
