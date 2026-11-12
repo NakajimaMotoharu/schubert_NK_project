@@ -1,0 +1,111 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:54:55.086815+09:00",
+  "source": "3855c9d57a033416995afc6e680f15f3364ed024",
+  "productionCoreMain": "43d4489fda4018505827c8f125f93ef501c92e14",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/RouteListViewModel.java": "e2b1116b9e88e2496e7d5978d9e6963f6e40316347f1d19c8a44341b4a38daed",
+    "src/schubert-nk-web/src/main/resources/templates/scenario-routes.html": "e0a641d27ce6f637fd4dfbb5f14b0c0cbce46ab874fdf15d566126b289fe6c88"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01605-PG01",
+      "methods": "RouteListViewModel.from/Card",
+      "testIds": [
+        "PT-WEB-182..193"
+      ],
+      "expected": "CallerbindsnonnullclosedGameCode, verifiedRTERSP01 only; nonnullactor/list/elements/max50 and51rejectfixedinvalidroutesize. Immutablecopies/preservebackendPrefixascendingorder/routeName/fileCount asreturned, Webdoesnotsort/rebuildCurrentRouteName map. Prefix typed0..99→exacttwoASCII viaLocaleROOT02d, title prefix: routeName, href/scenarios/NUKITASHI[12]/NN, fixedup/scenarios, no untrustedURLorcontext/authobject. 0records legaldisplayvalue only; controllerownsHTTP404."
+    },
+    {
+      "id": "P01605-PG02",
+      "methods": "scenario-routes.html/sharedScenarioHierarchyController",
+      "testIds": [
+        "PT-SCR-001..016",
+        "SCENARIO-HIERARCHY-DOM"
+      ],
+      "expected": "GET/scenarios/{game:NUKITASHI[12]} separatednumericdetailroute; unknown/nonASCII/pathmismatch404beforebusinesshandler. RTE facadeone requestwithboundgame/currentactor, verifiedresult0102terminalimmediatereturn, zero routesCurrentcompatible404 notempty200. FixedgameRoutespage-specifictitle/closedgameheading/subtitle/brand, escapedtitle/game/filecount+files, gameup/searchnav/sharedlogoutCSRF. ActualHTTP/routebinding/404/role/CHR proof unacceptedhere; model+markupaloneinsufficient."
+    },
+    {
+      "id": "P01605-PG03",
+      "methods": "sharedGAM/RTE/page/Topbar/security",
+      "testIds": [
+        "PT-WEB-142..147",
+        "PT-WEB-182..193",
+        "PT-SCR-001..016"
+      ],
+      "expected": "SharedP008query/wire validation andP01502auth/API0102/P01507layout feeonce. APIownsrequestedgame/responseassociation/DBCurrentprefixname andrecordordering; WebownsclosedURL/readonlydisplay/empty404controllerboundary. NooldPTsuccessconfirmationrerun/newOriginal12count/currentSourceunion oractualDB/nativefile/Root/VM operations."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 64,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+        "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+      },
+      "originalSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 43,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-05/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_P01502_SHARED_WIRE_ACTUAL_HTTP_CHR_AND_SAME_SOURCE_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1740_route_screen_contract_audit.py",
+    "sha256": "2b1742dfc8e40df15d6d38ff20041f1e75aed5f5a26040f36c3f6b51e8980b18"
+  }
+}

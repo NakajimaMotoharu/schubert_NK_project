@@ -1,0 +1,110 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T21:52:10.518558+09:00",
+  "source": "3855c9d57a033416995afc6e680f15f3364ed024",
+  "productionCoreMain": "43d4489fda4018505827c8f125f93ef501c92e14",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/GameListViewModel.java": "4a32df1a4113ad4db863f03c2a48cc97515ec565bfe42c6dd8b4368f97037de4",
+    "src/schubert-nk-web/src/main/resources/templates/scenarios.html": "c98273df221eb44c64c3c5303acb75b806e1b916c253b67ebd8baec300370234"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01604-PG01",
+      "methods": "GameListViewModel.from/Card",
+      "testIds": [
+        "PT-WEB-182..193"
+      ],
+      "expected": "AlreadyverifiedGAMRSP01 only, nonnullprincipal/list/elements constructorinvariant, 0/1/10allowed11rejectfixedinvalidgame size. Immutablecopysnapshot, preserveAPIrecordorder(display_order), no manualN1/N2sort orduplicateelimination. CardclosedGameCode/wirevalue/title only andfixed/scenarios/NUKITASHI[12] URL; toStringredacted/display-onlyTopbar, nevercacheauthorizations orcontext."
+    },
+    {
+      "id": "P01604-PG02",
+      "methods": "scenarios.html/ScenarioHierarchyController sharedP008",
+      "testIds": [
+        "PT-SCR-001..016",
+        "SCENARIO-HIERARCHY-DOM"
+      ],
+      "expected": "GET/scenarios/GAM facadeoneverifiedcallthroughsharedP008, USER/ADMINprotectedbychain; 0102 invalidhandler thenimmediatereturn/no secondrender. SCR0040games successful200 empty該当するデータはありません; childrenSCR005006empty404 aredistinct. FixedScenarioGames heading/currentpage-specifictitle/brandspan schubertNK/escapedgamecode-title/no thutext, fixedsearchlink+sharedpostlogout/CSRF; exactCurrenttitle/actualHTTP/CHR-U02 remainendingproof notinferredfrommarkup."
+    },
+    {
+      "id": "P01604-PG03",
+      "methods": "sharedTopBar/layout/security/wire boundaries",
+      "testIds": [
+        "PT-WEB-142..147",
+        "PT-SCR-001..016"
+      ],
+      "expected": "P01507Topbar/layout andP01502session/role/CSRF, P008 typedGAM/layout/stringbyte checks eachownedonce. ModelconstructordoesnotauthorizeorqueryDB orrepairrecordordering. Filter/session/verifiedwire/actualHTTP/actualDB/CHR/451 same-source end dependencies remainunaccepted; nofeesfor redoing sharedexistingpassedordinaryproofs."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 64,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+        "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+      },
+      "originalSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 43,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_P01502_SHARED_WIRE_ACTUAL_HTTP_CHR_AND_SAME_SOURCE_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1736_game_screen_contract_audit.py",
+    "sha256": "ba71d5842d955de3a551b7634f02c34e691524f6530d9b816c7ec0f0bfda465a"
+  }
+}

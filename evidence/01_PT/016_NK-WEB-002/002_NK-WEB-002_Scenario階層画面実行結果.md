@@ -48,3 +48,12 @@ WBS-P016-02公開source契約/独立期待値/TestIDは[4127_P01602Menu画面原
 
 
 WBS-P016-03公開source契約/独立期待値/TestIDは[4130_P01603SCR003検索入力結果原四artifact契約対応.md](4130_P01603SCR003検索入力結果原四artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-04公開source契約/独立期待値/TestIDは[4131_P01604SCR004Game一覧原二artifact契約対応.md](4131_P01604SCR004Game一覧原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-05公開source契約/独立期待値/TestIDは[4132_P01605SCR005Route一覧原二artifact契約対応.md](4132_P01605SCR005Route一覧原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-06公開source契約/独立期待値/TestIDは[4133_P01606SCR006File一覧原二artifact契約対応.md](4133_P01606SCR006File一覧原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
