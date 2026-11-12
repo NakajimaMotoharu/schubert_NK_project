@@ -93,6 +93,7 @@ public final class UserQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -116,6 +117,7 @@ public final class UserQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -170,6 +172,7 @@ public final class UserQueryReplayService {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -199,6 +202,7 @@ public final class UserQueryReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }
@@ -219,6 +223,7 @@ public final class UserQueryReplayService {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       throw new TemporaryInfrastructureException();
     }
   }

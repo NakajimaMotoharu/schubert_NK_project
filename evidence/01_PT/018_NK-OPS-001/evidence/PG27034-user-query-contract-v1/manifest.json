@@ -1,0 +1,163 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T15:33:26.945065+09:00",
+  "source": "d5724e873d877d81cbeed9663697f8608f83fd99",
+  "productionCoreMain": "8995f6cb6341c0298613cee3714c0d20f113c0f1",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserApplicationAssembly.java": "5a3c632e3380181a51127dab5ee558d71a3b2b6f48994916362eb58a7061468f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java": "26c1ae5f478d9561660fbd010a6496ff3edbe5cdf5416535af50fe12021285c3",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryAuditWriter.java": "026ea309fb97c59d525ac8c668f324ce2275cea0dd8c59e26acbfd37f0492b7f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java": "37ea798b275a02412bdfd9939646939ed548e994b565d85e4bc14c215cd8f789",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java": "c85cf970f232c076bb5514a429388a7638a2bac2b9ffe9319f11a8f427f475fa",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryException.java": "43b3e1294cec96541b0899dbf6bff8478689fee51d92b4ea2494465f59593082",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01001-PG01",
+      "methods": "UserQueryRepository.search/detail/record/boundary; UserQueryException",
+      "testIds": [
+        "PT-ADM-001..007",
+        "PT-ADM-SQL001..009"
+      ],
+      "expected": "ADMIN checked before JDBC. Borrowed explicit read-only transaction only; no commit/connection close. Prefix NFC trim optional then literal escape backslash percent underscore + suffix%, role/state bind only, no credentials selected. One materialized count/page snapshot, fixed50, username C then ID order, total<=49999950, zero=>page1/pages1/firstlast0, effective min(request,pagecount). DISABLED precedence; ACTIVE locked_until>now =>LOCKED. Detail missing is absence, corrupt row never absence, active sessions revoked=false/expires>now count0..2. UTC typed OffsetDateTime binds, wire millis only; version0 allowed. Statements/results close; fatal graph before fixed catalog. Real SQL execution and DB results remain HOLD; public JDBC-interface oracle is not actual PostgreSQL proof."
+    },
+    {
+      "id": "P01001-PG02",
+      "methods": "UserQueryRequest.decode/header/detailRequest/responseLayoutId/canonical/query/validateResponse",
+      "testIds": [
+        "PT-ADM-040..043",
+        "PT-ADM-CORE001..004",
+        "PT-ADM-VAL001..004"
+      ],
+      "expected": "USRREQ01/UDTREQ01 strict layout/header/version/QS/payload/no records. Canonical owner currentactor ID, version001,target REQUEST:layout; USR fields usernamePrefix-X1/role-X1/state-X1/page-N1/pageSize-N1 originaldecoded NFC values, NULL optionals distinctempty, no repository trim/changed effectivepage/headerIDs/context/time into canonical. UDT userId N1. Request is not authorization. Response layout/data/targetID/fixed50/effectivepage/count coherence independently bound; caller closes each canonical and decode bytes wiped. Literal wire offsets and expected field bytes independent ofproduction methods."
+    },
+    {
+      "id": "P01001-PG03",
+      "methods": "UserQueryApplicationService.process/inspect/complete/persist/transaction; UserApplicationAssembly.queries/mutations",
+      "testIds": [
+        "PT-ADM-048..054",
+        "PT-ADM-ASSEMBLY-001..003"
+      ],
+      "expected": "First read-only currentauth/ADMIN/Inbox frozen query; final write reauth/ADMIN/owner before Inbox execute/audit/commit. Invalid auth0102/role0103 no protected projection. Message reuse mismatch permanent rejection audited; replay frozen response not current query, saved completion match. No JMS ownership/authfabrication. Owned connection commit success, SQL/Runtime/Error failure rollback once and close, preserve compoundfatal identity; keys/codecs/caller database ownership unchanged. Whole DB/auth/actual4 tests held; no coverage or runtime acceptance from code inspection."
+    },
+    {
+      "id": "P01001-PG04",
+      "methods": "UserQueryReplayService.captureSuccess/captureFailure/read/reply/failure; UserQueryAuditWriter.write",
+      "testIds": [
+        "PT-ADM-044..047",
+        "PT-ADM-049/050/052..054"
+      ],
+      "expected": "Frozen Userlist/detail originalquery/owner AAD, NONE ref, version001, exact layout/correlation/bodylength/sentAt/completedAt and COMPLETED0000 or ERROR0104(detail)/9001(list). Replay success0200 with freshheaderID/time/currentcontext, retained frozen payload not current DB; direct0102/0103/9000 allowed errors. Copy/wipe ownedbody/data/records and retain original24h completion/expiry. Audit four closed events security/MQ INFO/WARN with currentactor optional and fixedlayout/reason/type/step; no prefix/context/token/provider data. Insert exactly1 in finalcallerTX; UTC, username NFC/controlredaction. Five Replay catches currently discard wrappedfatal graph before fixedcatalog, BUG2689 source-only correction pending, actual4 runtime remainsHOLD."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationServiceTest.java",
+      "sha256": "f8da542db66ca21413ca8ff604bc7b4ffda6618df5c1e1381daccb74767677ad",
+      "tests": 7,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_OR_ACTUAL4_NO_METHOD_EXTRACTION",
+      "dbFixture": true,
+      "actualSnapshotCodec": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayServiceTest.java",
+      "sha256": "6894378a006537164a40ac17b49a2a84e94dd77d81b88acf3b5a3371a74df719",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_OR_ACTUAL4_NO_METHOD_EXTRACTION",
+      "dbFixture": false,
+      "actualSnapshotCodec": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java",
+      "sha256": "245b84e2fe0af87848385d8ed4de445c0dfd574b0dc02e6f226101521c3d9b4a",
+      "tests": 4,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_OR_ACTUAL4_NO_METHOD_EXTRACTION",
+      "dbFixture": true,
+      "actualSnapshotCodec": false
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/UserQueryRepositoryTest.java",
+      "sha256": "21e862c320130baadd1636a5cea8641a3d29b4b97243b93f2a653041fa27a062",
+      "tests": 8,
+      "wholeBodyReviewed": false,
+      "status": "HOLD_WHOLE_DB_OR_ACTUAL4_NO_METHOD_EXTRACTION",
+      "dbFixture": true,
+      "actualSnapshotCodec": false
+    }
+  ],
+  "additionalExistingWholeOracles": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryCanonicalCoreTest.java",
+      "sha256": "bff3bdd906735fc3b2b49d52f7a00ac7f1dad8a2ae515535eee09cb2660b42a1",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "status": "PURE_WHOLE_FIXTURE_PENDING_CURRENT_DEPENDENCY_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryResponseBoundaryTest.java",
+      "sha256": "72a9ccd0477fd81896d59d24224f14fb9e261ca9ad6a23a1d8e992ae8e93a1a1",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "status": "PURE_WHOLE_FIXTURE_PENDING_CURRENT_DEPENDENCY_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java",
+      "sha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9",
+      "tests": 9,
+      "wholeBodyReviewed": true,
+      "status": "PURE_WHOLE_FIXTURE_PENDING_CURRENT_DEPENDENCY_QUALIFICATION"
+    }
+  ],
+  "missingFatalBefore": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27034-user-query-contract-v1/before.json",
+    "sha256": "725057f0a9d8240e9585c69d81bbd68c4c4fdd7460779bd474682f20474290ec"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P010-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_FATAL_SOURCE_FIVE_PENDING_WHOLE_DB_ACTUAL4_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1443_user_query_contract_audit.py",
+    "sha256": "556198ab14c17e1e8d652f4d98e4c4f61315956a1893bdb82240f46e095454f9"
+  }
+}

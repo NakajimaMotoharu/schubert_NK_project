@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T15:29:10.272971+09:00",
+  "source": "d5724e873d877d81cbeed9663697f8608f83fd99",
+  "productionCoreMain": "8995f6cb6341c0298613cee3714c0d20f113c0f1",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java": "ef08039f88a085d44aaffc003c072b298c0fdba1b9e688773f45a70402eef62f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java": "e3d5ab3db698c38d1b825a09b5197dea8e490ef6bef1cc1f8a394b658b081d34",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00905-PG01",
+      "methods": "MediaController.audio/audioDownload/video/music/musicDownload; MediaMvcConfiguration.mediaController",
+      "testIds": [
+        "PT-MED-HTTP001",
+        "PT-MED-HTTP008"
+      ],
+      "expected": "SS313 fixed five GET routes (HEAD equivalent): audio I/A, video I, music I/A. Both USER/ADMIN and 0000/0200 use fresh API request, fresh request/correlation/context each call before file access. Inline200/206/416 actual allowlisted MIME; download200 full octet-stream ignoring Range. HEAD same authorization/headers with zero body. Exact private-no-store/nosniff/length/Accept-Ranges and no ETag/Last-Modified. POST405; anonymous403 before business. Explicit media assembly borrows dependencies and never declares full native ready."
+    },
+    {
+      "id": "P00905-PG02",
+      "methods": "MediaController.deliver input validation and verified response",
+      "testIds": [
+        "PT-MED-HTTP002",
+        "PT-MED-HTTP003",
+        "PT-MED-HTTP004",
+        "PT-MED-HTTP005"
+      ],
+      "expected": "Independent literal byte offsets and header/slice arrays. Audio ASCII1..12 digits positive ID canonicalizes zero-prefix; video/music NFC logical IDs checked before MQ. Null dependencies/arguments rejected and nonSessionPrincipal fails. Invalid IDs400/no send/open. Result0100/0101/0103/0104/0105/0106/0107/9000/9001 =>400/401/403/404/409/429/409/503/503. Malformed transport/layout/context/correlation/reserved/request type-ID-mode/path-MIME mismatch =>503/no file open, no internal path disclosure. Range boundary/overflow literal arrays independent of parser method."
+    },
+    {
+      "id": "P00905-PG03",
+      "methods": "MediaController.deliver SESSION_INVALID; ApiSessionInvalidHandler borrowed dependency",
+      "testIds": [
+        "PT-MED-HTTP006"
+      ],
+      "expected": "0102 on all five GET/HEAD media routes clears actual local encrypted-session repository entry/cookie/security context,401 without redirect, no body resend/file open. This requires whole encrypted-session/DB fixture and cannot be established by prior memory Media186 or source presence."
+    },
+    {
+      "id": "P00905-PG04",
+      "methods": "MediaController.ServletResponse.begin/body/write; deliver failure path",
+      "testIds": [
+        "PT-MED-HTTP007",
+        "PT-MED-HTTP009"
+      ],
+      "expected": "Precommit IO503 fixed error/no physical path; after commit preserve status and sent bytes, throw fixed IOException without cause and no second response. Client abort INFO/no alert. Stream20/no-wait,21st503 RetryAfter1; all release then subsequent request succeeds.100 concurrent request contexts/slices/log requestIDs isolated. Two whole Test TWR pool sites remain general BUG2177 pending; Future10 alone does not qualify bounded owner termination. No partial method execution or fixture substitution."
+    },
+    {
+      "id": "P00905-PG05",
+      "methods": "WebMediaAudit.constructor/version/record; Failure",
+      "testIds": [
+        "PT-MED-HTTP001",
+        "PT-MED-HTTP002",
+        "PT-MED-HTTP007",
+        "PT-MED-HTTP010"
+      ],
+      "expected": "UTC millisecond timestamp/fixed WEB/ACTION/app/config versions.200/206 =>MEDIA_STREAMED or MEDIA_DOWNLOADED SUCCESS;416=>MEDIA_RANGE_REJECTED DENIED; IO/BUSY ERROR with FILE_IO/RESOURCE_THREAD; CLIENT_ABORT INFO no errorCode. Record requestID/display username-role/logicalID/mediaType/status/bytes/reason only; never whole descriptor,path,name,hash,query,authcontext. Scrub CRLF/tab/U2028/U2029 in username. Versions ASCII firstalnum length1..64; bytes0..descriptorlength and statuses200/206/416/503 only, NONE503 rejected. Null and invalid inputs fail; logger failure propagates. These are explicit source/design expectations, not new runtime PASS."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MediaControllerTest.java",
+      "sha256": "821c6548d7fcdb5ffa2404d0198084585cfd2593625fcab495ce82f67f3aa933",
+      "testMethods": [
+        "http001FiveRoutesFreshApiBothRolesGetHeadAndSuccessProfiles",
+        "http002LiteralRangeHeadersAndSlices",
+        "http003InvalidAndNullInputsDoNotSendOrOpen",
+        "http004ErrorsMalformedTransportKeepFilesClosed",
+        "http005RequestBindingRejectsOtherDescriptors",
+        "http006ApiInvalidClearsActualEncryptedSessionForAllMediaRoutes",
+        "http007IoCommitAbortAndTwentyStreamAdmissionRelease",
+        "http008MvcFixedGetHeadRoutesAndSecurityRejectsAnonymous",
+        "http009ConcurrentRangeAndFreshContextStayIsolated",
+        "http010VerifiedProjectionAndClosedAuditContracts"
+      ],
+      "tests": 10,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "method index, lifecycle, literal response fixture, HTTP001..009, audit portion010; incomplete whole Test not claimed",
+      "status": "HOLD_WHOLE_DB_ACTUAL_SESSION_NO_EXTRACTION",
+      "beforeAllFixture": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+        "sha256": "e8396fcb045d4cb2a00b8d465a28e3cc09aef0c3653f885aee2c430f5aabe552"
+      },
+      "fixtureInvokes": [
+        "initdb",
+        "pg_ctl",
+        "Flyway migration"
+      ],
+      "unboundedPoolSites": 2
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P009-05/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_WHOLE_DB_SESSION_HTTP_NATIVE_FINITE_ENDING_DEPENDENCIES",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "existingMemory186IsNotHttpAuthenticationProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27002-media186-independent-v1/manifest.json",
+    "sha256": "2b166351a6ab0b5f5e64273dc4aaf3d1c24caca092ad8b2a17866bc998c188fe"
+  },
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1439_media_http_contract_audit.py",
+    "sha256": "a33c7aa518950cde292ac62a245aee5eb3f3fa3058fb37da0519919be2d1b6fa"
+  }
+}
