@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.revocation;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
@@ -93,6 +94,7 @@ public final class RevocationPayloadCodec implements AutoCloseable {
                 .array();
         return new EncryptedRevocationPayload(currentVersion, envelope);
       } catch (GeneralSecurityException | ProviderException failure) {
+        SessionStoreException.preserveFatal(failure);
         throw new RevocationPayloadException(RevocationPayloadException.Reason.CRYPTO_UNAVAILABLE);
       } finally {
         Arrays.fill(plaintext, (byte) 0);
@@ -136,6 +138,7 @@ public final class RevocationPayloadCodec implements AutoCloseable {
         plaintext = cipher.doFinal(stored, 8 + length + 12, 80);
         return AuthenticationContext.of(new String(plaintext, StandardCharsets.US_ASCII));
       } catch (GeneralSecurityException | ProviderException | IllegalArgumentException failure) {
+        SessionStoreException.preserveFatal(failure);
         throw invalid();
       } finally {
         Arrays.fill(stored, (byte) 0);

@@ -1,0 +1,135 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T20:42:53.535978+09:00",
+  "source": "32268836bdc29606b6b0492098bee0704e0cee9c",
+  "productionCoreMain": "922df4cdb2e9954627e879d6f864e13d67cadceb",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/ClaimedRevocation.java": "0d62d5d5c749ed7db388e0d96aacfda7bd8cc74edb07326abd945c61b33e2d4f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java": "7619c5d7d7f1e7904d5379123512e6a829691ab1eb2a06dd1305d44bdc7d6fe7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java": "c4e3c4ef95af5a79241392a21bd360f82b86d591335dce8ceda9c762bb6e1786",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadException.java": "b348ae32f6c4294a3e708b590fe46499386a0f1b516f7171d45574edc050ecf0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "ee2a5de2420d9fd0f73919a78de9a6b5cbfd8fa13836100f234bb33cc85b1252",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java": "974e90ecfa4daafb035c801940593ef63f48d0caf49f11fc355265ca1afe04b2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryException.java": "3164d1f7e0d4cfac3af0a3c234f4a6c09db7bb07f986c4f7bcd532f34841f51c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 680,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01505-PG01",
+      "methods": "RevocationPayloadCodec/Identity/EncryptedPayload/Exception",
+      "testIds": [
+        "RERUN003A..G"
+      ],
+      "expected": "Dedicatedrevoke NKENC1 AES256GCM/no compression/plainexact64lowerhex/currentwrite+previousread, separatekeypurpose/table fromsession. SixlengthprefixedAAD purpose/table/UUID/requestedepoch-nano/format/keyID, microsecondidentity. Envelopeexact101..116 dependingkey1..16, header/version/nonce/tag/identity/key/plaintext allclosed; keyscloned/paired/distinct, privateLock serializesclose, alltransientarrayszero finally. Errorgraph mustpropagatebeforeencryptCRYPTO_UNAVAILABLE/decryptPAYLOAD_INVALID, two missingguards BUG2711. FixedkeyUnavailable/payloadReasons notauthenticatedorremoteExpiryproof."
+    },
+    {
+      "id": "P01505-PG02",
+      "methods": "RetryCoordinator.dispatchOne/failed/transaction/LogoutWireClient",
+      "testIds": [
+        "RERUN005",
+        "S3WIRE001..008"
+      ],
+      "expected": "ClaimonefreshUUID/lease10sec fromdueDB/commit-closebeforedecrypt/send. Oversizednullablepayload retainsPAYLOAD_INVALID; decryptcurrentprevious/closedReason; no inventedcontext oractualTTL. Remaininglease muststrictlyexceed MAXIMUM_WAIT beforewire, otherwiseSTALE/noAPI. FixedLOGREQ01 facade validatesactualroute/header/body/context/correlation, true0000/0200 onlydeleteleaseCAS, other0102/rejected/unknown retains and5/30/300/900backoff/saturate100/noexpiryGC. TXreadcommitted/manualwrite, commit+closebeforepublishresult; rollbacksecondary/remainingclose beforefinitefatal, WebStartup attach helper actual4 held runtimeunaccepted. No tablemutatedduringJMS wait, noautomaticretryunknowncommit orotherRootpermission."
+    },
+    {
+      "id": "P01505-PG03",
+      "methods": "RetryWorker.start/run/closeWithin/Snapshot",
+      "testIds": [
+        "RERUN008A..E",
+        "NATIVE-BUDGET002"
+      ],
+      "expected": "Owneddaemon stablethread/privatecounters, scheduleinterval1ms..1min distinctDBbackoff15min. dispatchnormal completed++, Runtimeonlyafterfinitefatal classification failed++ andnextcycle, Error terminaluncaught no ordinaryretry. Healthrunning notactualjoinproof; closeactivefalse/interrupt/finiteactualjoin remaining0..30s, rejectselfjoin, interruptedrestoresflagandfixedfailure, timeoutretainsborrowedresources. OuterHTTPdrain→workerjoin→replies→DB/JMS/key, workerstartalone nevernativeREADY. Actualcoordinator/DB/actualWebStartup/Root/HOLD wholefixture notextracted."
+    },
+    {
+      "id": "P01505-PG04",
+      "methods": "ClaimedRevocation/FailureCode/Payload value dependency",
+      "testIds": [
+        "RERUN003004005",
+        "OPS-RVR-PORT001..016"
+      ],
+      "expected": "Publicvalueonly noauthorityproof: identitynonnull, pairedpayload-key, attempt0..100, lease>requested/micro; expiryNULL remainsunknown orstrict>requested. Corruptoversizepayload remainsnullable warning row, neverload>116/neverdeletenonconfirmed. SharedRepo code belongsP01504 andjustqualifiedPG27510normal25, samebyte values/lease/backoff sourcecontract reused withoutreexecution orduplicatefee, notactualDB/callerproof acceptance."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodecTest.java",
+      "sha256": "6baaa1a06d02a069dd6117d8d6722e414ef738665742cb12a2f192bdd6212ba2",
+      "tests": 7,
+      "wholeBodyReviewed": true,
+      "reviewedScope": "whole384lines+allindependentJCE/lengthprefixhelpers",
+      "status": "ORDINARY_WHOLE_CRYPTO7_PUBLIC_SYNTHETIC_BUT_TWO_FINITE_POOL_FIXES_REQUIRED"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinatorTest.java",
+      "sha256": "0b5fa9f866fe30b9723adffb919fc0e359e342f2edc89da58a5b19aed8b877e7",
+      "tests": 8,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_DB_JMS_ACTUAL4_NO_PARTIAL_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorkerTest.java",
+      "sha256": "7eb209ede098a06b1eb16916615181ac29b4972f8679780598992928ca69eb79",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_DB_JMS_ACTUAL4_NO_PARTIAL_EXTRACTION"
+    }
+  ],
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27520-revocation-retry-contract-v1/before.json",
+    "sha256": "16c91f6cf1e0151affc3ecd9f458853dfd2f2baa95de6f9a65b81785c02e8f95"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P015-05/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_CODEC_FATAL_AND_FINITE_TEST_WORKERS_DB_JMS_ACTUAL4_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1670_revocation_retry_contract_audit.py",
+    "sha256": "e36839f6007419574ceefa79c43f2908d582acf0751c1cf7990165b82a9424da"
+  }
+}
