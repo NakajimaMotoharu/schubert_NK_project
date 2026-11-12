@@ -19,3 +19,6 @@ PG190、RD123 QST003/101、UI224§5/7・236§12、SS311/312§8.1。AnswerProvide
 | PT-ASY-STB005 | concurrentCallsAndEvidence | 同provider64並行、AtomicInteger独立Clock | 全64時刻を独立期待集合と照合、重複/欠落なし、body空、公開traceに質問/秘密値なし |
 
 入力は公開合成文字のみ、Clockはtestで与えたliteral Instantを返しexpected生成にProduction methodを呼ばない。全line/method/class/branch100%、NullAway/static/negativeを要求。分岐のないclassは0/0（除外設定でなく計測対象）を明記する。結果/環境/command/sourcecommit/hashは002・evidence/manifest.jsonへ正式成功後記録。現在未実装・未実行。
+
+
+WBS-P012-01公開source契約/独立期待値/TestIDは[4102_P01201質問FIFO消費原二source契約対応.md](4102_P01201質問FIFO消費原二source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

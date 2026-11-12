@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:31:19.722369+09:00",
+  "source": "ca491b1259b7fa4bfaa36450690b0f7ef3a9089c",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumers.java": "47f4c3f1f56ce340dc578d84ea506c5b0d596c62cb99bfacccf932985ebf1494",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener.java": "a037c6586a68f6aa48424e2b9cc020aa37e2f357014299379b1ba01bdbed0cbc"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01201-PG01",
+      "methods": "QuestionWorkConsumers.start/constructor",
+      "testIds": [
+        "PT-JMS-CORE004..006",
+        "JMSOWN001",
+        "PT-JMS-CONS332"
+      ],
+      "expected": "Allocateprivateowner/lock/phasebeforeoneJMSContextacquisition, nullfactory/listener/signalsrejectbeforeget. Acquisitionthrowidentity/noownedcontextclose/nofatalnotification; successsetAutoStartfalse/transactedmode/singleASYNC_WORKFQQN/window0, registerlistenerbeforecontext.start. FIFO1 independentofsync4contexts; no addedconsumers/restart/replay."
+    },
+    {
+      "id": "P01201-PG02",
+      "methods": "registeredcallback/QuestionWorkListener.onMessage overloads",
+      "testIds": [
+        "PT-JMS-CORE005",
+        "PT-JMS-005/007",
+        "PT-JMS-RB319",
+        "PT-JMS-CONS332001..008"
+      ],
+      "expected": "Deliveryspecifcattempted/confirmedreset, synchronousdelegateunderASYNC_WORK/API_WORK metadata. COMMITTED_FATAL haltsandnotifiesterminalwithoutnewrollback. isolation/rollbackunknown/directError haltfatal; Errorrollbackatmostonceifnotalreadyattempted. OrdinaryJMS/runtime onlyconfirmedrollbackallowsbrokerretry; reachableError fromcause/suppressed/linked/next ishalt/ownerfatalnotification thenAPIreturn afternormalnotification, noErrorrethrowpolicychange. Haltedconsumerignoreslaterdelivery. Publiclistenercompat overload unchanged."
+    },
+    {
+      "id": "P01201-PG03",
+      "methods": "startupcleanup/stopDelivery/close/ready",
+      "testIds": [
+        "PT-JMS-CORE004/006",
+        "CORE008",
+        "JMSOWN001",
+        "consumerSSC333"
+      ],
+      "expected": "Startfailure: notifyfatal thenownedclose, preserveexistingprimary/notification/closing directErrorselection andunlinkedgraph classificationaftercleanup, selfsuppressionguard andretainedrawcause. stopDelivery makesreadyDOWN immediately; privatefinalmonitorserializesclose, closedonlyafternormalcontextclose, confirmedcloseidempotent/unconfirmedfailure notno-op. onUnconfirmed remainsoriginalhandoff: onlynormalreturnpermitslaterclassification, nonreturnUNKNOWNmustnotbecaughttoreachnextstage. No newnotification recovery or nativeownership inference."
+    },
+    {
+      "id": "P01201-PG04",
+      "methods": "sharedQuestionWorker/TransactedEventListener endings",
+      "testIds": [
+        "AWORK/realJMS retention domain"
+      ],
+      "expected": "Sharedworker implementation/persistence ownedP01203 andcommontransactedlistener/DLQ ownedP00503, no duplicatefee. Ordinaryproxy resultsnotactualbroker/nativeorcurrentDB. ACKonlyaftergenuinesavedstate/DLQSENT asapprovedSSC156, brokermax4/ordinarybackoff unchanged; actualendingsremainunaccepted."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkConsumersTest.java",
+      "sha256": "73beedcffb51fbb0a4611c8c58457254a85886807756bfd39249ba4085feb87c",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "index/imports andsetup/actualBroker method location",
+      "status": "HOLD_WHOLE_ACTUAL_BROKER_AND_ACTUAL4_NO_METHOD_EXTRACTION"
+    }
+  ],
+  "callbackBoundaryExplicitlyPreserved": true,
+  "speculativeCallbackCatchOrErrorRethrowChange": false,
+  "sharedWorkerOwner": "WBS-P012-03",
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P012-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_WHOLE_BROKER_ACTUAL4_ACK_DLQ_AND_OWNED_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1537_question_consumer_contract_audit.py",
+    "sha256": "2bfcda7590250bcfb38668c4fc413993fb5c71f075b977962a2403fc1dc1c9f6"
+  }
+}

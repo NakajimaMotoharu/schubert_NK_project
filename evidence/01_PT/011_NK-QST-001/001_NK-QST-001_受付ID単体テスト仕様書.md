@@ -34,3 +34,5 @@ WBS-P011-03公開source契約/独立期待値/TestIDは[4099_P01103質問command
 
 
 WBS-P011-04公開source契約/独立期待値/TestIDは[4100_P01104Web受付参照原四source契約対応.md](4100_P01104Web受付参照原四source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+[4101 Web受付参照通常12件](4101_P01104Web受付参照原十二件通常PT仕様.md): 27234/27238同source12成功、全7coverageは未網羅L4M3C1B2を保持、元DB/freshAPI終了依存HOLD。

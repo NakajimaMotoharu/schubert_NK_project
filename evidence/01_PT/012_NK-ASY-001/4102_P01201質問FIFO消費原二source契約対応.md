@@ -1,0 +1,15 @@
+# P01201 質問FIFO consumer・listener 原2source契約
+
+NK-ASY-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG27246](../018_NK-OPS-001/evidence/PG27246-question-consumer-contract-v1/manifest.json)。
+
+- P01201-PG01 / QuestionWorkConsumers.start/constructor / PT-JMS-CORE004..006,JMSOWN001,PT-JMS-CONS332: Allocateprivateowner/lock/phasebeforeoneJMSContextacquisition, nullfactory/listener/signalsrejectbeforeget. Acquisitionthrowidentity/noownedcontextclose/nofatalnotification; successsetAutoStartfalse/transactedmode/singleASYNC_WORKFQQN/window0, registerlistenerbeforecontext.start. FIFO1 independentofsync4contexts; no addedconsumers/restart/replay.
+
+- P01201-PG02 / registeredcallback/QuestionWorkListener.onMessage overloads / PT-JMS-CORE005,PT-JMS-005/007,PT-JMS-RB319,PT-JMS-CONS332001..008: Deliveryspecifcattempted/confirmedreset, synchronousdelegateunderASYNC_WORK/API_WORK metadata. COMMITTED_FATAL haltsandnotifiesterminalwithoutnewrollback. isolation/rollbackunknown/directError haltfatal; Errorrollbackatmostonceifnotalreadyattempted. OrdinaryJMS/runtime onlyconfirmedrollbackallowsbrokerretry; reachableError fromcause/suppressed/linked/next ishalt/ownerfatalnotification thenAPIreturn afternormalnotification, noErrorrethrowpolicychange. Haltedconsumerignoreslaterdelivery. Publiclistenercompat overload unchanged.
+
+- P01201-PG03 / startupcleanup/stopDelivery/close/ready / PT-JMS-CORE004/006,CORE008,JMSOWN001,consumerSSC333: Startfailure: notifyfatal thenownedclose, preserveexistingprimary/notification/closing directErrorselection andunlinkedgraph classificationaftercleanup, selfsuppressionguard andretainedrawcause. stopDelivery makesreadyDOWN immediately; privatefinalmonitorserializesclose, closedonlyafternormalcontextclose, confirmedcloseidempotent/unconfirmedfailure notno-op. onUnconfirmed remainsoriginalhandoff: onlynormalreturnpermitslaterclassification, nonreturnUNKNOWNmustnotbecaughttoreachnextstage. No newnotification recovery or nativeownership inference.
+
+- P01201-PG04 / sharedQuestionWorker/TransactedEventListener endings / AWORK/realJMS retention domain: Sharedworker implementation/persistence ownedP01203 andcommontransactedlistener/DLQ ownedP00503, no duplicatefee. Ordinaryproxy resultsnotactualbroker/nativeorcurrentDB. ACKonlyaftergenuinesavedstate/DLQSENT asapprovedSSC156, brokermax4/ordinarybackoff unchanged; actualendingsremainunaccepted.
+
+P01201 actualownConsumers/Listener2/193行全文、SS312321342354/SSC319332333のFIFO1/window0/transacted/配送別rollbackattempted-confirmed/API通知正常後return/terminalとDLQSENT依存/取得前所有確立/startup逆cleanup/未確認closephase/readyDOWNを独立期待値と既TestIDへ対応。onUnconfirmed非帰還UNKNOWNは既承認境界でありcatchして次へ進める変更を行わない。whole候補はactualbroker+actual4混在を確認HOLD/部分抽出0。共有QuestionWorkerはP01203へ分離、原/1準備のみ、原/2/actualbroker/DBACKDLQ/451終了依存未受入。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1537_question_consumer_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
