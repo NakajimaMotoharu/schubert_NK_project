@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.SQLException;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -16,6 +17,10 @@ final class JdbcResourceFailures {
     if (primary == null
         || (primary instanceof SQLException && !(secondary instanceof SQLException))) return true;
     if (!(primary instanceof SQLException)) primary.addSuppressed(new BatchRepositoryException());
+    else {
+      StorageIoException.preserveFatal(primary);
+      StorageIoException.preserveFatal(secondary);
+    }
     return false;
   }
 }

@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.batch.repository;
 import dev.codex.schubert.nk.api.maintenance.InspectorDbCredential;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -204,6 +205,14 @@ public final class CleanupDatabaseSession {
       return result;
     } catch (SQLException | IOException | BatchRepositoryException failure) {
       primary = failure;
+      if (failure instanceof SQLException || failure instanceof BatchRepositoryException) {
+        try {
+          StorageIoException.preserveFatal(failure);
+        } catch (Error fatal) {
+          primary = fatal;
+          throw fatal;
+        }
+      }
       throw unavailable();
     } catch (RuntimeException | Error failure) {
       primary = failure;
@@ -317,6 +326,11 @@ public final class CleanupDatabaseSession {
             || primary instanceof BatchRepositoryException;
     if (primary == null || (known && !(secondary instanceof SQLException))) return true;
     if (!known) primary.addSuppressed(new BatchRepositoryException());
+    else {
+      if (primary instanceof SQLException || primary instanceof BatchRepositoryException)
+        StorageIoException.preserveFatal(primary);
+      StorageIoException.preserveFatal(secondary);
+    }
     return false;
   }
 

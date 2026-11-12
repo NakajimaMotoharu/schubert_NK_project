@@ -1,0 +1,119 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T07:27:54.625802+09:00",
+  "sourceBefore": "a52abbed3b6afed116a62c33289db35564a986e2",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce"
+  },
+  "proof": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "beforeSha256": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7",
+      "afterSha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "originalByteInverseExactAfterFormat": true,
+      "guardCalls": 3
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "beforeSha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+      "afterSha256": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce",
+      "originalByteInverseExactAfterFormat": true,
+      "guardCalls": 2
+    }
+  ],
+  "stages": {
+    "format-CleanupDatabaseSession": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:27:52.658913+00:00",
+      "endUTC": "2026-11-12T22:27:53.124764+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-JdbcResourceFailures": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:27:53.125439+00:00",
+      "endUTC": "2026-11-12T22:27:53.491182+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:27:53.491785+00:00",
+      "endUTC": "2026-11-12T22:27:53.957937+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:27:53.958255+00:00",
+      "endUTC": "2026-11-12T22:27:54.625170+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28362-db-session-jdbc-source-static-v1/checkstyle.xml",
+        "@/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28362-db-session-jdbc-source-static-v1/sources.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalSourceInverseExact": true,
+  "guardCalls": 5,
+  "actualFatalPrimaryRecordedBeforeFinally": true,
+  "originalUnknownPrimaryCleanupSelectionAndCheckedIoUnchanged": true,
+  "normalSqlCredentialAndBorrowedResourceOrderUnchanged": true,
+  "bugs": [
+    "BUG2752",
+    "BUG2757"
+  ],
+  "productTestsExecuted": 0,
+  "MainCompiled": false,
+  "MainInitializedOrInvoked": false,
+  "coverage": null,
+  "ptStatus": "NOT_RUN_NOT_PASS",
+  "actualDbRootCredentialOperations": 0,
+  "ordinaryHelper8Qualification": "PRICED_NEXT_NOT_YET_RUN",
+  "wholeCleanupSessionDbTest": "HOLD_NO_EXTRACTION_OR_REPLACEMENT",
+  "verifierSha256": "d23bb0dbb3e738a1adcfbdbb085cfcebedfd6d28e0bb45bb3aef1b549c1f0bbd"
+}

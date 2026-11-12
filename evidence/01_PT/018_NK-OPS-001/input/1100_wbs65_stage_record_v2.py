@@ -40,7 +40,7 @@ R=Path.cwd(); S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path[:0]=[str(R/'tools/quality'),str(R/'tools/quality/vm/050_s1')]
 import pg998_metrics as metrics
 from pmo_quota_binding import append_start,digest,end_fields
-from pmo_group_context import build_context,validate_implementation_artifacts
+from pmo_group_context import build_context,validate_implementation_artifacts,collect_canonical_nodes
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_text())
 write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
@@ -55,7 +55,13 @@ now=dt.datetime.now(dt.timezone.utc).isoformat()
 rows=[json.loads(v) for v in metrics.EVENTS.read_bytes().splitlines()]
 if mode=='start':
  assert not any(v['groupId']==group for v in rows)
- validate_implementation_artifacts(c,load(R/'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json')['artifacts'])
+ canonical=None
+ if 'implementationOwnerLeafBindings' in c:
+  required=['documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json','documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json']
+  pins=c.get('implementationCanonicalPlans');assert isinstance(pins,list) and len(pins)==2 and {p['path'] for p in pins}==set(required)
+  for pin in pins:assert sha(R/pin['path'])==pin['sha256']
+  canonical=collect_canonical_nodes([load(R/path) for path in required])
+ validate_implementation_artifacts(c,load(R/'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json')['artifacts'],canonical)
  values=dict(build_context(group_id=group,category=c['category'],kind=c['kind'],scope=c['scope'],oracle_refs=c['oracleRefs']),costRevision='WBS-cost-v2-20261007-PMO',wbsLeafIds=c['wbsLeafIds'],source=c['source'],run=c['run'],estimateAtGroupStartPp=c['estimate'],groupCapPp=c['capPp'],managementPlan='WBS65-20261110',managementWorkIds=c['workIds'],originalEstimatesRetained=True,actualAllocatedPp=None,tokenTotals=None,nextCommand=c['nextCommand'])
  event=append_start(group,values,quotapath,digest(q),now)
  record=dict(actualExit=0,eventId=event,groupId=group,estimate=c['estimate'],quota=q,configSha256=sha(Path(cfgpath)),productTestsExecuted=0,newAcceptance=0)

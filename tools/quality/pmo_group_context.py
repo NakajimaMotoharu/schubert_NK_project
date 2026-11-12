@@ -64,7 +64,25 @@ def validate_context(group_id, fields):
              "group/context mismatch")
 
 
-def validate_implementation_artifacts(config, artifact_rows):
+def collect_canonical_nodes(plans):
+    """Collect authoritative plan nodes; no filesystem or caller-provided cost aliases."""
+    nodes = {}
+
+    def visit(value):
+        if isinstance(value, dict):
+            if isinstance(value.get('id'), str):
+                nodes[value['id']] = value
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for child in value:
+                visit(child)
+
+    visit(plans)
+    return nodes
+
+
+def validate_implementation_artifacts(config, artifact_rows, canonical_nodes=None):
     """BUG2745: bind production implementation labels before an event is appended.
 
     Pure metadata only. Existing historical events/configurations are never rewritten.
@@ -86,6 +104,40 @@ def validate_implementation_artifacts(config, artifact_rows):
         _require(isinstance(owner, str) and owner.startswith('WBS-'),
                  'registered production cost owner')
         owners.add(owner)
+    bindings = config.get('implementationOwnerLeafBindings')
+    if bindings is not None:
+        # BUG2758: 485 ownership can be a subdivided parent; 487 costs require leaves.
+        _require(isinstance(canonical_nodes, dict) and canonical_nodes,
+                 'authoritative canonical nodes required')
+        _require(isinstance(bindings, dict) and set(bindings) == owners,
+                 'exact implementation owner bindings')
+        selected = []
+        for owner, leaves in bindings.items():
+            _require(isinstance(leaves, list) and leaves and
+                     all(isinstance(leaf, str) for leaf in leaves) and
+                     len(leaves) == len(set(leaves)), 'explicit unique owner leaves')
+            reachable, pending = set(), [owner]
+            while pending:
+                node_id = pending.pop()
+                _require(isinstance(node_id, str) and node_id in canonical_nodes,
+                         'registered owner descendant')
+                if node_id in reachable:
+                    continue
+                reachable.add(node_id)
+                children = canonical_nodes[node_id].get('children', [])
+                _require(isinstance(children, list), 'canonical children list')
+                pending.extend(children)
+            for leaf in leaves:
+                _require(isinstance(leaf, str) and ':' not in leaf and
+                         leaf in reachable and not canonical_nodes[leaf].get('children'),
+                         'actual owner descendant leaf only')
+            selected.extend(leaves)
+        _require(len(selected) == len(set(selected)) and
+                 isinstance(config.get('wbsLeafIds'), list) and
+                 len(config['wbsLeafIds']) == len(selected) and
+                 set(config['wbsLeafIds']) == set(selected),
+                 'exact canonical implementation leaf set')
+        return
     _require(isinstance(config.get('wbsLeafIds'), list) and
              len(config['wbsLeafIds']) == len(owners) and
              set(config['wbsLeafIds']) == owners, 'implementation WBS artifact mismatch')

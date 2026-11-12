@@ -1,0 +1,58 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T07:23:00.790824+09:00",
+  "source": "a52abbed3b6afed116a62c33289db35564a986e2",
+  "productionCoreMain": "a52abbed3b6afed116a62c33289db35564a986e2",
+  "sourceRefs": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "sha256": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "sha256": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "sha256": "68f7c253171f2245f0b238f7c4481eaf5495acca9330aa750947f2ff1cd67ae0"
+    }
+  ],
+  "designs": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "branch": "origin/main",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "branch": "origin/main",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    }
+  ],
+  "wholeSourceReviewed": true,
+  "decision": [
+    "execute既知catch: SQLException又はBatchRepositoryExceptionだけguard、IOException自身の既定固定化は維持。guardがErrorを選択した場合catchしてactual primary=fatalを記録してから同identity再throw、finallyには古いknown SQLを残さない。",
+    "closeReplace: 元primarynull/known＋nonSQLsecondaryの型優先を先に維持。unknownprimaryはfresh固定secondaryのみ、known＋SQLsecondary破棄前にprimaryはSQL/BatchRepoの場合だけguardしsecondarySQLをguard。checkedIO primaryのgraphを一般分類しない。",
+    "finally ownedcredential.closeは固定ownedbuffer消去だけ（公開source全93行確認）、借用connectioncloseは一回で実priorityだけ変更前提に一致させる。credentials/DB実体は触れない。",
+    "JdbcResourceFailures: SQL＋SQL既知pairだけprimary→secondaryguard。nullprimaryやSQL＋unknownsecondary returntrue、unknownprimary元identity/fresh固定secondaryは不変更。全providerclose/transactionはcallerの責務。",
+    "Root-boundCleanupDatabaseSessionTest全体@BeforeAll DBのためHOLD。新純順位helper whole8はJDKThrowableと固定診断だけでDB/Root/native/authorityと独立、callerの受入/coverageではない。"
+  ],
+  "newBug": "BUG2757",
+  "MainChanged": false,
+  "MainCompiled": false,
+  "productTestsExecuted": 0,
+  "actualDbCredentialRootNativeOperations": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "helperUnitEligibility": "CLOSED_JDK_THROWABLE_GRAPH_ONLY_NEW_WHOLE_HELPER_TEST_NOT_DB_FIXTURE_EXTRACTION",
+  "runtimeHeld": "WHOLE_CLEANUP_DATABASE_SESSION_DB_ROOT_TEST_UNCHANGED",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2096b_db_session_owned_audit_result.py",
+    "sha256": "42661bb44537201decd64f5f429b82e8a8ee420dc9a3e41f8c5b96176df1ce5c"
+  },
+  "sourceLineCounts": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java": 326,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": 21,
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": 93
+  }
+}

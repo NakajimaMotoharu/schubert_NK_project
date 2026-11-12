@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T07:26:30.782724+09:00",
+  "checks": [
+    {
+      "id": "ACTUAL_TWO_OWNER_DESCENDANT_LEAVES",
+      "result": "ACCEPT"
+    },
+    {
+      "id": "ACTUAL_UNSPLIT_OWNER_SELF_LEAF",
+      "result": "ACCEPT"
+    },
+    {
+      "id": "LEGACY_DIRECT_OWNER_UNCHANGED",
+      "result": "ACCEPT"
+    },
+    {
+      "id": "MISSING_OWNER_BINDING",
+      "result": "REJECT"
+    },
+    {
+      "id": "UNRELATED_OWNER_LEAF",
+      "result": "REJECT"
+    },
+    {
+      "id": "PARENT_NOT_LEAF",
+      "result": "REJECT"
+    },
+    {
+      "id": "INVENTED_DESCENDANT",
+      "result": "REJECT"
+    },
+    {
+      "id": "DUPLICATE_OWNER_LEAVES",
+      "result": "REJECT"
+    },
+    {
+      "id": "COST_EXTRA_LEAF",
+      "result": "REJECT"
+    },
+    {
+      "id": "COST_PARENT_ALIAS",
+      "result": "REJECT"
+    },
+    {
+      "id": "EMPTY_BINDING",
+      "result": "REJECT"
+    },
+    {
+      "id": "NONTEXT_LEAF",
+      "result": "REJECT"
+    },
+    {
+      "id": "UNTRUSTED_NODES_MISSING",
+      "result": "REJECT"
+    },
+    {
+      "id": "MISSING_ACTUAL_NODE",
+      "result": "REJECT"
+    }
+  ],
+  "cases": 14,
+  "positive": 3,
+  "negative": 11,
+  "productTestsExecuted": 0,
+  "MainChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "tool": {
+    "path": "tools/quality/pmo_group_context.py",
+    "sha256": "1222eb42a23f2eabcae65558fdf42c10cd94b4c65aaad193bcbd2af27b03ce89"
+  },
+  "writer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py",
+    "sha256": "366b51fd76e647b9e534c383249ddfd538798c370987077b59c31a9ad47b8662"
+  },
+  "canonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "082dcc7a76ad10cf5c73169ea304cc8ee14bdbb9125a034abf81c984d1110c16"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "oldOriginalCostsChanged": false,
+  "planOrWbsArtifactsChanged": false,
+  "newExplicitBinding": {
+    "WBS-P017-01": [
+      "WBS-P017-01.02"
+    ],
+    "WBS-P017-07": [
+      "WBS-P017-07"
+    ]
+  },
+  "writerHashPinsAuthoritativePlansBeforeAppend": true,
+  "originalFailure": "2097 START 487 rejected parent WBS-P017-01; event0, Main0, no productretry",
+  "bug": "BUG2758"
+}
