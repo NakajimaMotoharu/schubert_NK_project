@@ -1,0 +1,232 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-4952",
+  "groupId": "PGPT-WBS65-BACKUP-PUBLIC-MANIFEST16-FINITE-WORKERS-NORMAL16-20261113",
+  "startEvent": "PGPT-20261008-4951",
+  "sourceAtGroupStart": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "estimate": {
+    "low": 0.225,
+    "base": 0.675,
+    "high": 1.35
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-12T19:29:18.227Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795012174,
+      "remainingPercent": 76
+    },
+    "secondary": null
+  },
+  "observedSharedPp": null,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28168-backup-manifest16-scope-join-v1/manifest.json",
+    "sha256": "74018a1d0d6ccfc7838245db3a5c23b539c66425a9158e71ab0cdf9bd16e5e07"
+  },
+  "outcome": "BACKUP_PUBLIC_WHOLE16_SUCCESS_FOUR_TARGET_SOURCE_FOUR100_FULL7_PARTIAL",
+  "technical": {
+    "kind": "BACKUP_PUBLIC_MANIFEST_NORMAL16",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+      "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+    },
+    "tests": 16,
+    "newDefinitions": 0,
+    "newAcceptance": 0,
+    "physicalClasses": 7,
+    "positiveMainCrc": 7,
+    "completeTargetSources": 4,
+    "targetCounters": {
+      "dev/codex/schubert/nk/batch/backup/BackupManifest": {
+        "INSTRUCTION": {
+          "covered": 213,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 26,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 41,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 21,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/batch/backup/BackupFileDigest": {
+        "INSTRUCTION": {
+          "covered": 28,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/batch/backup/BackupVersions": {
+        "INSTRUCTION": {
+          "covered": 73,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "dev/codex/schubert/nk/batch/file/BackupManifestCodec": {
+        "INSTRUCTION": {
+          "covered": 386,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 77,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 12,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "completeSourceComponentCounters": {
+      "LINE": {
+        "covered": 134,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 18,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 700,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 50,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 43,
+        "missed": 0
+      }
+    },
+    "allFourTargetSourcesFour100": true,
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": 7,
+        "BRANCH": 3,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+        "INSTRUCTION": 15,
+        "BRANCH": 4,
+        "LINE": 3,
+        "COMPLEXITY": 6,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStep": {
+        "INSTRUCTION": 3,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    "MainChanged": false,
+    "formerAssertionsPreserved": true,
+    "existingFixtureGoldenUnchanged": true,
+    "actualSyntheticOutputHash": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e",
+    "bug2742": "SELECTED_TWO_WORKERS_LIMITED_CLOSED",
+    "bug2741": "METADATA_SHAPE_CORRECTED_UNKNOWN_PERFILE_EQUALITY_REMAINS_NULL",
+    "ykt2387": "GLOBAL_OPEN",
+    "roster": {
+      "runs": 71,
+      "actualExecutions": 3689,
+      "success": 3661,
+      "failed": 28,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Continueoriginal P01705 explicitall8 publicsource/design341/wholeTests input-oracle mapping preparation .105/.262/.525 only ifallownedreviewed, actualfile/DB/Root/native runtime staysHOLD; no /2accepted justpurefourvalueproof. Beforemoreduplicatedprofiles pricebounded common closedhost qualifier reuse to reduce perprogramproducer duplication, preserve current static/CRC/independent post invariants and validate onlynecessary nextchangedprofile/no replay oldsuccess. Freshquota/Usage next04:55:54/disk6.8GiB; no stopatnormal16 orpush.",
+  "remainingEstimatePp": {
+    "low": 402.109,
+    "base": 848.63,
+    "high": 1664.55
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1193_WBS65予実・Backup公開値十六PT後版245.json",
+    "sha256": "88dd669adb415510d907650e5992560b10b772931292cce088decd3a194c450f"
+  },
+  "forecastNotActualCost": true
+}
