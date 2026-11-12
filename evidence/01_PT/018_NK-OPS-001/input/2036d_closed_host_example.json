@@ -1,0 +1,100 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28190-D-BACKUP-MANIFEST16",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java": "WBS-P017-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java": "WBS-P017-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java": "WBS-P017-03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java": "WBS-P017-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "WBS-P017-12"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4189_Backup公開manifest原十六単体仕様.md",
+      "sha256": "3aa61250749ed96ca6c0c2c8034c1fcb6e057ec71b368f18bd2e089f8e3abf92"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+      "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java",
+      "tests": 0
+    }
+  ],
+  "expectedTests": 16,
+  "resources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json",
+      "placement": "TEST_CLASSPATH"
+    }
+  ],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/backup/BackupFileDigest.class",
+    "dev/codex/schubert/nk/batch/backup/BackupManifest.class",
+    "dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+    "dev/codex/schubert/nk/batch/file/BackupManifestCodec.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/backup/BackupFileDigest",
+    "dev/codex/schubert/nk/batch/backup/BackupManifest",
+    "dev/codex/schubert/nk/batch/backup/BackupVersions",
+    "dev/codex/schubert/nk/batch/file/BackupManifestCodec"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-prestyle",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-prepare",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-static",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-preflight",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-unit",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-d-backup-manifest16-example-post"
+  },
+  "privateDirs": {
+    "prepare": "pg28190-d-backup-manifest16-example-prepare",
+    "unit": "pg28190-d-backup-manifest16-example-unit"
+  },
+  "newTestDefinitions": 0
+}

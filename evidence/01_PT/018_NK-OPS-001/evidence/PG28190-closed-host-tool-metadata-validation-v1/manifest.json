@@ -1,0 +1,227 @@
+{
+  "actualExit": 0,
+  "positiveProfiles": [
+    {
+      "case": "POSITIVE_a-api-config7",
+      "config": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036a_closed_host_example.json",
+        "sha256": "153e4f76b2bc328e6853c1e0f9470bcfd2781c430d31ab22ceaa5c5289bd3f85"
+      },
+      "originalPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28080-api-config7-normal-v1/manifest.json",
+        "sha256": "9e2dd8498c083deb4179eb90e7495aba1e52b44626c6b418c036d90b7bde259a"
+      },
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28090-api-config7-independent-v1/manifest.json",
+        "sha256": "fc05094dde47b16b9db0af60eb59d5aaebcba5085dcff42986f1ffb934b2dd11"
+      },
+      "wholeTests": 7,
+      "physicalClasses": 1,
+      "preparedSdkHashesIdentical": true,
+      "selectedClassesMetadataIdentical": true,
+      "productTestsExecuted": 0
+    },
+    {
+      "case": "POSITIVE_b-router18",
+      "config": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036b_closed_host_example.json",
+        "sha256": "9c076947abbe3c544d19c3e75ac971f9b3171180b143ec01c033f453aae92112"
+      },
+      "originalPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28102-router18-normal-v1/manifest.json",
+        "sha256": "49e8f13c8905318b18fd42c62dfd4b397e6887d8fb395d593b5a1f0697ee8041"
+      },
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+        "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd"
+      },
+      "wholeTests": 18,
+      "physicalClasses": 7,
+      "preparedSdkHashesIdentical": true,
+      "selectedClassesMetadataIdentical": true,
+      "productTestsExecuted": 0
+    },
+    {
+      "case": "POSITIVE_c-http-metric28",
+      "config": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036c_closed_host_example.json",
+        "sha256": "404bbe452fc28b5d3704bdba4e2bdc082bb1593519f8ea381eb4481506b8b21b"
+      },
+      "originalPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28126-http-metric28-normal-v1/manifest.json",
+        "sha256": "9a3742b980ad76e54ba924468368d0d4119abcc7db7d1807edbecb2e3606690d"
+      },
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28136-http-metric28-independent-v1/manifest.json",
+        "sha256": "3b470c5f1dae6fc774676a5d7bc56bc2dca6c82034cefac64043378da6ad5ef9"
+      },
+      "wholeTests": 28,
+      "physicalClasses": 11,
+      "preparedSdkHashesIdentical": true,
+      "selectedClassesMetadataIdentical": true,
+      "productTestsExecuted": 0
+    },
+    {
+      "case": "POSITIVE_d-backup-manifest16",
+      "config": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2036d_closed_host_example.json",
+        "sha256": "38417797dd417abcda47b105fc06be555ba9a1bea468712fc4276671c2410dcd"
+      },
+      "originalPrepare": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28156-backup-manifest16-normal-v1/manifest.json",
+        "sha256": "5d14cca45cced8393ace28bbc3c6d6f38e620cfd2fb1b4dc2421bdc99a226e86"
+      },
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+        "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+      },
+      "wholeTests": 16,
+      "physicalClasses": 7,
+      "preparedSdkHashesIdentical": true,
+      "selectedClassesMetadataIdentical": true,
+      "productTestsExecuted": 0
+    }
+  ],
+  "negativeChecks": [
+    {
+      "case": "MISSING_EXPLICIT_COST_OWNER",
+      "rejected": true,
+      "reason": "explicit qualification cost owner",
+      "metadataOnly": true
+    },
+    {
+      "case": "CLONED_OTHER_BUSINESS_COST_LABEL",
+      "rejected": true,
+      "reason": "explicit qualification cost owner",
+      "metadataOnly": true
+    },
+    {
+      "case": "MISSING_PRODUCT_OWNERS",
+      "rejected": true,
+      "reason": "explicit owner/oracle/closure, no defaults",
+      "metadataOnly": true
+    },
+    {
+      "case": "MISMATCHED_ARTIFACT_OWNER",
+      "rejected": true,
+      "reason": "artifact owner mismatch",
+      "metadataOnly": true
+    },
+    {
+      "case": "PARENT_ESCAPE",
+      "rejected": true,
+      "reason": "canonical relative name",
+      "metadataOnly": true
+    },
+    {
+      "case": "DUPLICATE_SOURCE",
+      "rejected": true,
+      "reason": "unique Main/Test paths",
+      "metadataOnly": true
+    },
+    {
+      "case": "QUALITY_EXCEPTION",
+      "rejected": true,
+      "reason": "no quality override",
+      "metadataOnly": true
+    },
+    {
+      "case": "COVERAGE_EXCLUSION",
+      "rejected": true,
+      "reason": "no quality override",
+      "metadataOnly": true
+    },
+    {
+      "case": "WRONG_WHOLE_COUNT",
+      "rejected": true,
+      "reason": "whole expected Test count",
+      "metadataOnly": true
+    },
+    {
+      "case": "NEGATIVE_TEST_COUNT",
+      "rejected": true,
+      "reason": "whole Test or unchanged helper count",
+      "metadataOnly": true
+    },
+    {
+      "case": "APPLICATION_JAR",
+      "rejected": true,
+      "reason": "prepared SDK only, no app/backend/native JAR",
+      "metadataOnly": true
+    },
+    {
+      "case": "UNOWNED_RUNTIME_PROPERTY",
+      "rejected": true,
+      "reason": "bounded child JVM property",
+      "metadataOnly": true
+    },
+    {
+      "case": "ROOT_OWNED_OUTPUT",
+      "rejected": true,
+      "reason": "canonical relative name",
+      "metadataOnly": true
+    },
+    {
+      "case": "REUSED_EVIDENCE_SLOT",
+      "rejected": true,
+      "reason": "distinct evidence slots",
+      "metadataOnly": true
+    },
+    {
+      "case": "MISSING_CLOSURE_ORACLE",
+      "rejected": true,
+      "reason": "explicit owner/oracle/closure, no defaults",
+      "metadataOnly": true
+    },
+    {
+      "case": "MISSING_SDK_PIN",
+      "rejected": true,
+      "reason": "explicit complete approved SDK hash set",
+      "metadataOnly": true
+    },
+    {
+      "case": "OLD_GROUP_ID_SYNTAX",
+      "rejected": true,
+      "reason": "profile id",
+      "metadataOnly": true
+    },
+    {
+      "case": "DUPLICATE_PHYSICAL_CLASS",
+      "rejected": true,
+      "reason": "explicit full physical universe",
+      "metadataOnly": true
+    },
+    {
+      "case": "UNKNOWN_TARGET",
+      "rejected": true,
+      "reason": "explicit executable targets",
+      "metadataOnly": true
+    },
+    {
+      "case": "PRIVATE_RESOURCE",
+      "rejected": true,
+      "reason": "public literal resource boundary",
+      "metadataOnly": true
+    }
+  ],
+  "metadataChecksPassed": 24,
+  "toolSources": {
+    "tools/quality/pgpt_closed_host_profile.py": "c1266e6b3b8030b40d9aa84c48770faaf786c6f6d0e06976a2d6571980a9b87c",
+    "tools/quality/pgpt_closed_host_stages.py": "40c84099dcfb858824acc351f5d42d2e6216ed30d2959cbd635dce4f20125e03",
+    "tools/quality/pgpt_closed_host_post.py": "5ce124b5882a4d027218a17d10ec9b357b1609fc8edde637debc13c6e5c57932"
+  },
+  "rootCompilerPolicy": true,
+  "javaOrMavenProcessesStarted": 0,
+  "productTestsExecuted": 0,
+  "oldProductRunsReplayed": 0,
+  "classOrExecFilesRead": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "toolRuntimeQualification": "PENDING_FIRST_NECESSARY_NEW_PROFILE_NO_PRODUCT_SUCCESS_REPLAY",
+  "scope": "PURE_SYNTAX_OWNER_METADATA_AND_RECORDED_MANIFEST_FIELDS_ONLY",
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2036b_closed_host_profile_metadata_continuation.py",
+    "sha256": "1bb2ead8d09c8354f33fc8c999001c72263175af0a2675106bf2f87ea7702d7a"
+  }
+}

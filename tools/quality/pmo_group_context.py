@@ -62,3 +62,30 @@ def validate_context(group_id, fields):
                              oracle_refs=fields["oracleReferences"])
     _require(all(fields.get(key) == value for key, value in expected.items()),
              "group/context mismatch")
+
+
+def validate_implementation_artifacts(config, artifact_rows):
+    """BUG2745: bind production implementation labels before an event is appended.
+
+    Pure metadata only. Existing historical events/configurations are never rewritten.
+    Selected quality runs retain their explicit F03 cost boundary; TOOL_FIX changes
+    do not claim to implement a production artifact.
+    """
+    if config.get('category') != 'IMPLEMENTATION' or config.get('kind') == 'TOOL_FIX':
+        return
+    paths = config.get('implementationArtifactPaths')
+    _require(isinstance(paths, list) and paths and len(paths) == len(set(paths)),
+             'explicit implementation artifact paths')
+    rows = {r['path']: r for r in artifact_rows}
+    owners = set()
+    for name in paths:
+        _require(isinstance(name, str) and name.startswith('src/') and
+                 '..' not in PurePosixPath(name).parts and name in rows,
+                 'registered production artifact')
+        owner = rows[name].get('costOwner', rows[name].get('owner'))
+        _require(isinstance(owner, str) and owner.startswith('WBS-'),
+                 'registered production cost owner')
+        owners.add(owner)
+    _require(isinstance(config.get('wbsLeafIds'), list) and
+             len(config['wbsLeafIds']) == len(owners) and
+             set(config['wbsLeafIds']) == owners, 'implementation WBS artifact mismatch')

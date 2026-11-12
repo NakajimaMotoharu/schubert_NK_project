@@ -1,0 +1,99 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28190-B-ROUTER18",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java": "WBS-P015-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "WBS-P015-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java": "WBS-P015-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": "WBS-P015-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "WBS-P015-01",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "WBS-P015-01",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "WBS-P015-01"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4185_内部エラー振分原十八単体仕様.md",
+      "sha256": "ddf6b00732cf4c36b0c4f060923e5f2650c51e9c117a42be0193f05ba021dde6"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+      "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "tests": 10
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "tests": 8
+    }
+  ],
+  "expectedTests": 18,
+  "resources": [],
+  "sdkJars": [
+    "jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar",
+    "org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar",
+    "org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar",
+    "commons-logging/commons-logging/1.3.5/commons-logging-1.3.5.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.3.5/commons-logging-1.3.5.jar": "6d7a744e4027649fbb50895df9497d109f98c766a637062fe8d2eabbb3140ba4"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.class",
+    "dev/codex/schubert/nk/web/security/LoginClientAddress.class",
+    "dev/codex/schubert/nk/web/security/WebRequestContext.class",
+    "dev/codex/schubert/nk/web/security/package-info.class",
+    "dev/codex/schubert/nk/web/session/InvalidSessionRowException.class",
+    "dev/codex/schubert/nk/web/session/SessionStoreException.class",
+    "dev/codex/schubert/nk/web/session/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-web/pom.xml"
+  ],
+  "systemProperties": {
+    "spring.security.strategy": "MODE_THREADLOCAL"
+  },
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-prestyle",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-prepare",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-static",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-preflight",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-unit",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-b-router18-example-post"
+  },
+  "privateDirs": {
+    "prepare": "pg28190-b-router18-example-prepare",
+    "unit": "pg28190-b-router18-example-unit"
+  },
+  "newTestDefinitions": 0
+}

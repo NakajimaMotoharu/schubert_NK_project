@@ -1,0 +1,81 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28190-A-API-CONFIG7",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": "WBS-P018-01"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4183_API非秘密設定原七単体仕様.md",
+      "sha256": "cd01a1effefd49f0d62ef7343d5ecd6c337acaea408b9af2c3a0785944fb7b3d"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28090-api-config7-independent-v1/manifest.json",
+      "sha256": "fc05094dde47b16b9db0af60eb59d5aaebcba5085dcff42986f1ffb934b2dd11"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "tests": 7
+    }
+  ],
+  "expectedTests": 7,
+  "resources": [
+    {
+      "path": "src/deployment/config/common.yml.template",
+      "placement": "PUBLIC_REPOSITORY"
+    },
+    {
+      "path": "src/deployment/config/api.yml.template",
+      "placement": "PUBLIC_REPOSITORY"
+    }
+  ],
+  "sdkJars": [
+    "org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {
+    "nk.pt.repository": "OWNED_PUBLIC_REPOSITORY"
+  },
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-prestyle",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-prepare",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-static",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-preflight",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-unit",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28190-a-api-config7-example-post"
+  },
+  "privateDirs": {
+    "prepare": "pg28190-a-api-config7-example-prepare",
+    "unit": "pg28190-a-api-config7-example-unit"
+  },
+  "newTestDefinitions": 0
+}
