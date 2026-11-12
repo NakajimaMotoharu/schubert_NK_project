@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
@@ -263,7 +264,8 @@ final class ErrorDispatchRestorePortTest {
 
   @Test
   void eightConcurrentRequestsKeepRestoredAndAnonymousAttributesSeparate() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 8; i++) {
         int index = i;
@@ -279,6 +281,9 @@ final class ErrorDispatchRestorePortTest {
                 }));
       }
       for (int i = 0; i < 8; i++) assertEquals(i % 2 == 0, jobs.get(i).get(10, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

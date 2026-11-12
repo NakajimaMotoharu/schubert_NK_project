@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28010-common-error22-pre-style-before-v1/manifest.json",
+    "sha256": "505d6c1227531d9c4c07df089038c7751131062b232dae85da5aa6c6afe97df1"
+  },
+  "proof": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java",
+      "beforeSha256": "1b23abc3012748d36be489230038a2509825049d1b24a58997ae6bde07e3b886",
+      "afterSha256": "0d6d8c7d2348cedc4679efa77f62572ef7b56b3e4da4a2b86c0383b3cecfbe78",
+      "kind": "FINITE_WORKER_FINALLY",
+      "allFormerAssertionsPreserved": true,
+      "sourceInverseExact": true,
+      "formatTokensIdentical": false,
+      "workerFutureBoundSeconds": 5,
+      "shutdownNowFinally": true,
+      "awaitTerminationSeconds": 10
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java",
+      "beforeSha256": "f60066157a18c43c02ba149168feb56e92cfc80c394a162281678084a3a195a7",
+      "afterSha256": "2e12986753db898eec6d852952b0ea0796e2445671cd3e135675943f1733d9fd",
+      "kind": "FINITE_WORKER_FINALLY",
+      "allFormerAssertionsPreserved": true,
+      "sourceInverseExact": true,
+      "formatTokensIdentical": false,
+      "workerFutureBoundSeconds": 10,
+      "shutdownNowFinally": true,
+      "awaitTerminationSeconds": 10
+    },
+    {
+      "path": "tools/quality/architecture/ErrorValueContractTest.java",
+      "beforeSha256": "e1788b9bdbde4d50739c64dedb3ce236d10285b5705817886406c0e73df3a9ba",
+      "afterSha256": "1a340f0e8194f734c277e54c5fb82d341a1e45781fec427a1310109b38d2aa46",
+      "kind": "FORMAT_ONLY",
+      "allFormerAssertionsPreserved": true,
+      "sourceInverseExact": false,
+      "formatTokensIdentical": true,
+      "workerFutureBoundSeconds": null,
+      "shutdownNowFinally": false,
+      "awaitTerminationSeconds": null
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java": "0d6d8c7d2348cedc4679efa77f62572ef7b56b3e4da4a2b86c0383b3cecfbe78",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java": "2e12986753db898eec6d852952b0ea0796e2445671cd3e135675943f1733d9fd",
+    "tools/quality/architecture/ErrorValueContractTest.java": "1a340f0e8194f734c277e54c5fb82d341a1e45781fec427a1310109b38d2aa46"
+  },
+  "stages": {
+    "format-ErrorControllerPortTest": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T17:50:18.917992+00:00",
+      "endUTC": "2026-11-12T17:50:19.434109+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorControllerPortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-ErrorDispatchRestorePortTest": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T17:50:19.434841+00:00",
+      "endUTC": "2026-11-12T17:50:19.900572+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRestorePortTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-ErrorValueContractTest": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T17:50:19.901285+00:00",
+      "endUTC": "2026-11-12T17:50:20.316663+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ErrorValueContractTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "MainCompiled": false,
+  "MainChanged": false,
+  "allFormerAssertionsPreserved": true,
+  "twoFiniteWorkerFinallyAdded": true,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1957_common_error_workers_style_fix.py",
+    "sha256": "c5876b19497dbca48e1adcb4ea806f459d2644911e4372371de7123881822ea5"
+  }
+}

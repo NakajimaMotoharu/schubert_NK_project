@@ -217,7 +217,8 @@ final class ErrorControllerPortTest {
 
   @Test
   void sharedControllerHasIndependentConcurrentRequestAndModelState() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       var first =
           executor.submit(
               () -> {
@@ -239,6 +240,9 @@ final class ErrorControllerPortTest {
       assertEquals(FIXED_UI.get(403), a.getMessage());
       assertEquals(new UUID(0, 2).toString(), b.getRequestId());
       assertEquals(405, b.getStatus());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

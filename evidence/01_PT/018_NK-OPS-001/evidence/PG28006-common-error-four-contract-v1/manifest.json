@@ -1,0 +1,114 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T02:46:48.334094+09:00",
+  "source": "c90596717721e952ac2fc81562b4080818dbdbf2",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebErrorDispatchFilter.java": "fe4147f94a4e62869ab69e3021184949fa89408d608e78d77edea11226a82d49",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/ErrorViewModel.java": "6f0861b6b343749426dac94b3e6234ca01d47978b0582976874a96cb6ef62b27",
+    "src/schubert-nk-web/src/main/resources/templates/error/error.html": "6fe51e31810e4481a1999e27fa136970945877a2ad12221411e617b1d10634d0"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 173,
+  "design": [
+    {
+      "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01624-PG01",
+      "methods": "ErrorController.error/ProblemViewFactory/ErrorViewModel",
+      "testIds": [
+        "PT-WEB-148..157",
+        "WEB-ERROR-PORT001..008",
+        "ERROR-VALUE001..006"
+      ],
+      "expected": "ReadERROR_STATUS_CODE only; internalERROR honorsclosedstatus independentmethod, nonERROR publicGET-HEAD allowed andothermethod405 plusAllowGETHEAD. Missingstatus404, unknown/foreignincludingnumericstring neverstringifies and503. Ninefixed400401403404405409416429503 messages; onlyserverrequestID/existingrequest-onlyTopBar, noErrorThrowable/message/path/URI/body/session/principalread. Nullports reject, externalcallbackunknownRuntime/Error preserveidentity, missing/mistypedservercontext neverfallback success."
+    },
+    {
+      "id": "P01624-PG02",
+      "methods": "WebErrorDispatchFilter.doFilter/WebDisplayContext.restore",
+      "testIds": [
+        "PT-WEB-ERRORRESTORE001..008"
+      ],
+      "expected": "HTTPrequest+response andexactERROR/error dispatcheronly; rejectnull/nonHTTP/wrongdispatch-path beforemutations. Restoreonlyexistingapprovedrequestdisplay snapshot, clearbothCSRFaliases thenifpresent sameparsedWebCsrfToken values torequestaliases, anonymous removesboth; nevergeneratesidentity/session/token/random orreadsprincipal/session. Corruptsnapshot failsclosed, attribute/downstreamchecked-runtime-Error preserveidentity/no fallback. PublicmemoryServlet unit usesonlysyntheticcloseddisplay values, notactualauthgrant/restore/DB operation."
+    },
+    {
+      "id": "P01624-PG03",
+      "methods": "ErrorViewModel/errorerror.html",
+      "testIds": [
+        "SCR-090",
+        "TST-001..005",
+        "ERROR-VALUE001..006"
+      ],
+      "expected": "ClosedimmutableStatus-UUID-OptionalTopBar only/noforeignThrowable retain; fixedsecretfreeREDACTEDdiagnostic andapprovedmessage. Exacttitleエラー - schubert NK, existingtopbar oranonymousschubert NK/menu/login, alertエラー/status/message/お問い合わせ番号, th:text only/noexception-queue-path-SQLcredentials/Markdown. RealHTTPsecurityheaders/cache/dispatchrouting/sessionlifetime remainwholeapplication obligation."
+    },
+    {
+      "id": "P01624-PG04",
+      "methods": "Originalscope/independentnormalPT/end",
+      "testIds": [
+        "WBS-P016-24:contract",
+        "WBS-P016-24:scope",
+        "WBS-P016-24:quality"
+      ],
+      "expected": "Allfour fullsource reviewed andsharedproblem/display/request closure explicit. ExistingErrorControllerPort8/Restore8 arewholepublicmemoryServlet/no@BeforeAll/DB/actual4, ErrorValue6 closedpublicDTO; finiteworkertermination requirement mustbeclosedbefore normalPT. No Root/cohort/native/realCSRFsessiongrant/heldfixture extraction; /1only, /2 actualHTTPsecuritychain/sessionDB/CHR/451 remainsunaccepted."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-24/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_HTTP_SECURITYCHAIN_SESSION_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1950_common_error_contract_config.json",
+    "sha256": "d58c88f5a706fcbec5addfad63b5ec7401cd05020911dcf403e282f235eadef3"
+  }
+}

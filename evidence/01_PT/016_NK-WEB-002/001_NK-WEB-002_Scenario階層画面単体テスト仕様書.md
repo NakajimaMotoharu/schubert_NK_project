@@ -127,3 +127,6 @@ WBS-P016-22公開source契約/独立期待値/TestIDは[4173_P01622質問一覧�
 
 
 WBS-P016-23公開source契約/独立期待値/TestIDは[4174_P01623質問明細原三artifact契約対応.md](4174_P01623質問明細原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-24公開source契約/独立期待値/TestIDは[4175_P01624共通エラー原四artifact契約対応.md](4175_P01624共通エラー原四artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
