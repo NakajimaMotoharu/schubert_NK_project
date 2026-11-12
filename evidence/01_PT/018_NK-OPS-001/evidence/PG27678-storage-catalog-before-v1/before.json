@@ -1,0 +1,37 @@
+{
+  "actualExit": 0,
+  "source": "6f7ecb86834295c65753103b48b9740c7e201533",
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java": "2531a763d1779b40ae132ad0c1d749eb374dab830e5acb2eaacf1a4d4d69f841",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "2a1233e46a8f05a0dbf7e42034ad3e34afecf14814ebf5111527db6b6e179284",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf"
+  },
+  "directoryCatchPatterns": [
+    "} catch (FileAlreadyExistsException ex) {",
+    "} catch (NoSuchFileException ex) {",
+    "} catch (IOException | NoSuchAlgorithmException ex) {"
+  ],
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+      "sha256": "f04cdc3ab62be8b6a3b1c89d23975cdc255177557b52c114e47c04ed1ccf9cd0"
+    }
+  ],
+  "reviewedWholePublicSource": true,
+  "productTestsExecuted": 0,
+  "resourceScopeDecision": {
+    "status": "NON_APPLICABLE_TO_GENERIC_FATAL_GUARD",
+    "reason": "SS333 paragraphs19/29 explicitly preserve primary Runtime/Error with a fixed redacted secondary, and prefer secondary Runtime/Error over primary IOException. ResourceScopeTest knownBodyFailures deliberately normalizes preexisting suppressed AssertionError. These approved compound precedence rules prohibit blanket graph promotion; leave all acquire/use/handoff and original tests unchanged.",
+    "changed": false
+  },
+  "directoryDecision": "Three FileOperation checked provider catalog conversions discard fatal cause/suppressed/SQL-next graphs; add module-local transient classifier before fixed COLLISION/MISSING/UNAVAILABLE mapping. No FS/native/root operation, actual caller runtime remains HOLD.",
+  "historicalAcceptedIdsRetained": [
+    "WBS-P003-04",
+    "WBS-P003-08"
+  ],
+  "newAcceptance": 0
+}

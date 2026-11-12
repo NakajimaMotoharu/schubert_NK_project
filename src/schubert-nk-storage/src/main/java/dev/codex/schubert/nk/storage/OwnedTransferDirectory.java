@@ -340,10 +340,13 @@ public final class OwnedTransferDirectory implements AutoCloseable {
     try {
       return operation.execute(capability);
     } catch (FileAlreadyExistsException ex) {
+      StorageIoException.preserveFatal(ex);
       throw new StorageIoException(StorageIoException.Reason.COLLISION);
     } catch (NoSuchFileException ex) {
+      StorageIoException.preserveFatal(ex);
       throw new StorageIoException(StorageIoException.Reason.MISSING);
     } catch (IOException | NoSuchAlgorithmException ex) {
+      StorageIoException.preserveFatal(ex);
       throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
   }

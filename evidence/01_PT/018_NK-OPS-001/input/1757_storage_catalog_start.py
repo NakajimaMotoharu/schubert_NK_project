@@ -1,0 +1,30 @@
+"""Price and ticket the public storage catalog dependency before changing source."""
+from pathlib import Path
+import datetime, hashlib, json, re, subprocess
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
+wr=lambda p,x:p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+old=D/'1033_WBS65予実・本文Reader四fatalPG後版181.json'; f=json.loads(old.read_text()); core='6f7ecb86834295c65753103b48b9740c7e201533'
+paths=['src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/'+n+'.java' for n in ['OwnedTransferDirectory','StorageIoException','ResourceScope']]
+assert all((R/p).read_bytes()==subprocess.check_output(['git','show',core+':'+p]) for p in paths)
+directory=(R/paths[0]).read_text(); patterns=['} catch (FileAlreadyExistsException ex) {','} catch (NoSuchFileException ex) {','} catch (IOException | NoSuchAlgorithmException ex) {']
+assert all(directory.count(p)==1 for p in patterns) and 'preserveFatal(' not in directory
+ledger=R/'documents/900_OTHER/910_台帳/915_障害表.md'; horizontal=R/'documents/900_OTHER/910_台帳/916_横展開管理台帳.md'
+assert max(map(int,re.findall(r'BUG-(\d+)',ledger.read_text())))==2717
+assert max(map(int,re.findall(r'YKT-(\d+)',horizontal.read_text())))==2375
+O=B/'evidence/PG27678-storage-catalog-before-v1';assert not O.exists();O.mkdir()
+design=R/'documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md'
+policy=next((R/'documents/400_PGPT').glob('**/411_*.md'))
+before=dict(actualExit=0,source=core,inputHashes={p:sha(R/p) for p in paths},directoryCatchPatterns=patterns,design=[ref(design),ref(policy)],reviewedWholePublicSource=True,productTestsExecuted=0,resourceScopeDecision=dict(status='NON_APPLICABLE_TO_GENERIC_FATAL_GUARD',reason='SS333 paragraphs19/29 explicitly preserve primary Runtime/Error with a fixed redacted secondary, and prefer secondary Runtime/Error over primary IOException. ResourceScopeTest knownBodyFailures deliberately normalizes preexisting suppressed AssertionError. These approved compound precedence rules prohibit blanket graph promotion; leave all acquire/use/handoff and original tests unchanged.',changed=False),directoryDecision='Three FileOperation checked provider catalog conversions discard fatal cause/suppressed/SQL-next graphs; add module-local transient classifier before fixed COLLISION/MISSING/UNAVAILABLE mapping. No FS/native/root operation, actual caller runtime remains HOLD.',historicalAcceptedIdsRetained=['WBS-P003-04','WBS-P003-08'],newAcceptance=0)
+wr(O/'before.json',before)
+ledger.write_text(ledger.read_text()+'\n\n## BUG-2718（PG、2026-11-12、OwnedTransferDirectory.execute三checked catalogのfatal graph破棄、修正前）\n\n対象OwnedTransferDirectory.execute(FileOperation)、P00304/SS333/411。重要度高/優先高。期待providerのcause/suppressed/SQLnext内Errorを有限分類し同一Errorを伝播、非fatalは既COLLISION/MISSING/UNAVAILABLE・path-free固定messageへ変換。実際FileAlreadyExistsException/NoSuchFileException/IOException-NoSuchAlgorithmExceptionの三catchがgraphを破棄。再現条件は公開FileOperationが当graphを含むchecked例外を返すこと。発見はsourceレビュー、実Root/FD/native/FS操作も再現PTも未実施NOT_RUN。原因catalog redaction前の分類漏れ、影響三catch・共有Reader/Storage利用者（新source資格は別）。YKT2359既63へ三を追加し全66限定site、全域/全runtime完了ではない。修正予定StorageIoExceptionへmodule内JDK-only有限identity graph分類口、execute三call。ResourceScopeの承認済み複合優先順位には適用せず変更しない。RD/UI/外部仕様/SQL/権限変更なし・QA不要。元17受入は元sourceの歴史値として維持し当変更を受入へ算入しない。修正commit/再試験/完了日未確定、状態OPEN。before証跡evidence/01_PT/018_NK-OPS-001/evidence/PG27678-storage-catalog-before-v1/before.json。\n')
+horizontal.write_text(horizontal.read_text()+'\n\n### YKT-2359 BUG2718追加（2026-11-12、修正前）\n\nOwnedTransferDirectory.execute三checked-provider境界を追加、原63+3=66限定site。StorageIoExceptionの固定理由は可変cause/suppressedを閉じない。module内純JDK transient分類口を実装し既三catchへ接続する。ResourceScope全139行/SS333§取得後規則/原ResourceScopeTest全文を照合し、明示primary/secondary順位・秘匿suppressedの例外規則で非該当、blanket guard追加0。Directory実FD/root/FS/nativeはHOLDで未実行、helper独立Unit合格も実caller再試験や横展開完了へ代用しない。全66site runtime未完OPEN。追加source PG .075/.225/.45、helper普通PTは別価格・元P003受入監査費と重複消化なし。\n')
+price=dict(low=.075,base=.225,high=.45);f.update(previousForecast=ref(old),revision='WBS65-EXEC-FORECAST-182-STORAGE_CATALOG_BEFORE',atJST=datetime.datetime.now().astimezone().isoformat())
+for k,v in price.items():
+ for field in ['additionalRequiredWorkGrossPp','additionalDiscoveredRemainingPp','revisedRemainingPp']:f[field][k]=round(f[field][k]+v,3)
+f['additionalDiscovery'].append('BUG2718 storage local graph classifier plus three Dir calls .075/.225/.45cap1; includes bounded source/design audit .025/.075/.15 and helper/call implementation .05/.15/.30. ResourceScope explicitly nonapplicable SS333 compound precedence unchanged. Later public helper-only PT separately priced, no actualFS/native/Root or historical17 acceptance revalidation.')
+fp=D/'1036_WBS65予実・storage分類着手前版182.json';assert not fp.exists();wr(fp,f)
+cfg=dict(groupId='PGPT-WBS65-STORAGE-CATALOG-THREE-SOURCE-ONLY-20261112',recordPath=str((D/'1037_WBS65storage分類PG開始.json').relative_to(R)),category='IMPLEMENTATION',kind='ADDITIONAL_FINDING',scope='BUG2718 three Directory conversions + StorageIoException finite graph helper, exact inverse and configured source style only; ResourceScope SS333 compound rules unchanged, caller runtime HOLD. .075/.225/.45cap1.',oracleRefs=[ref(O/'before.json')],wbsLeafIds=['WBS-P003-04'],source=core,run='PG27680',estimate=price,capPp=1,workIds=['P00304-STORAGE_CATALOG_FATAL3-SOURCE_ONLY_PG'],forecastRef=ref(fp),nextCommand='Implement local pure JDK classifier and exact three Directory calls, inverse/configuredstyle; source pin and independent join. Then price ordinary helper-only whole four tests/full helper report, no Root/FD/native/FS or ResourceScope change. ResumeP01608. Usage next23:40:01; freshquota/initial20 review when due.')
+wr(B/'input/1758_storage_catalog_start.json',cfg)
+print(json.dumps(dict(actualExit=0,before=ref(O/'before.json'),estimate=price,confirmedCatalogSites=66)))
