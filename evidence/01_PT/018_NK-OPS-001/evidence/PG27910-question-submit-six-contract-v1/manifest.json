@@ -1,0 +1,192 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T01:44:17.136877+09:00",
+  "source": "2d3792401ef628c5348f1138b9ca4e4a2ed4bf34",
+  "productionCoreMain": "016283eb5e98a5e729ca65ac1acf1ff41b367e71",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/QuestionMvcConfiguration.java": "f32797744b1bdf9afbb4ce4e0be1f78d87775957a1b52070b5529c9152d81616",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java": "b638c01e7c6a4992be893928ffc191cdc1f92220a7918bb4bd1c9552e18bdd33",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java": "725f0fbe38aaec853e50da6eb5ea060eb0a8fe7e4a18faa5ddb9febce3f03b6f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java": "7f6299cc4d6acd5fa944a02eade9c826f0f1268951c8c17a63b4b641bebde1a0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionSubmitViewModel.java": "13b364659934a4d7cd92bbce8b7a66b1f1e7fb9877a40fad50ac57bdbdc6f053",
+    "src/schubert-nk-web/src/main/resources/templates/questions/new.html": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 795,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01618-PG01",
+      "methods": "QuestionMvcConfiguration/QuestionAcceptanceMvcConfiguration/QuestionController.newForm",
+      "testIds": [
+        "QST-001",
+        "RCPT006A",
+        "PT-QRY-HTTP008..009"
+      ],
+      "expected": "RD123line7 Loginusercaninputandsend. Legacytwoarg read-onlyQuestionMVC intentionallytokens+receiptsabsent, cannotordinaryReady/newPOST; fullordinarycomposition isQuestionAcceptanceMVC ownedP01619 withsamecurrentcore lifecycle andrestrictedWeblocator. Fullpair constructedtogether, no impossiblepartialpair branch. GETnew issuesQSB tokenonlyexplicitform; capacity409 withoutnewUUID, sessionfailure503; USERADMINauthenticatedclosedprincipal only, no newauthority grant. ExternalModel/session catchfatalgraph currentlyBUG2728 source-defect, fixseparately notpass."
+    },
+    {
+      "id": "P01618-PG02",
+      "methods": "QuestionSubmitForm.bind/operationToken/displayValues/toRequest/close",
+      "testIds": [
+        "PT-QST-FORM001..008"
+      ],
+      "expected": "Exactlyquestion/operation_token requiredsinglefields, optional_csrfignorednotretained becausechainvalidates; unknown/missing/list0-multiple error, nullmap-key-list-element boundaryfailfast. NFC withouttrim then1..4096UTF8bytes/no trailingASCIIspace/control/unpairedsurrogate; invalidcontrol clearsredisplaybody not silentlytrimmed, byteoverflow retainsinput forcorrection. Canonical lowercase36UUID syntax only/noissueorownerproof. Constructorchararray/requestscope, tempencodedbytesfinallywipe, idempotentclose thenoperationToken/display/request allreject. Immutableissues/requestdisplayquestiononly, UUIDseparatehiddenfield; neverbody/sessionflash/log. DTO/Stringcopies separatelyowned. IndependentQSB4144 bytes: question0/4096,UUID4096/36,padding4132/12."
+    },
+    {
+      "id": "P01618-PG03",
+      "methods": "QuestionController.submit/redisplay/accepted/locator dependency",
+      "testIds": [
+        "RCPT006B..F",
+        "PT-QST-FORM001..008",
+        "QA048",
+        "QA049"
+      ],
+      "expected": "Requirefullpair beforebind; invalid400 noMQ, validsame-session QSBpurpose require andtoken retained across503/timeout, no auto newUUID or businessresubmit. OnefreshQSB request/context; verified0102 immediate localinvalidend. Onlyverified0000/0200 afterAPI persistence/internalQueue confirmation maycomplete tokenretention, registerpublicReceiptReference, fixedrelative302 /questions/accepted/<26publicid>. HeaderStatus/body snapshot notbusinessproof. Formclosefinally allunknown+known exits, redisplayrequestonly escapedbody/sameUUID. Receiptinsert usesrestrictedWeb shortTX anddoesnotincludeowner/body/token; noTXspansMQ. GETaccepted validatespublicID/locatorfind, freshQSD API on everyGET andmatchesid/receipt/millisecondtime/username beforedisplay; noGET resubmit/fallback toWebsnapshot/oldsuccess. ActualDB/session/owner/API/handoff remainsHOLD, wirememory13 notproof of those dependencies."
+    },
+    {
+      "id": "P01618-PG04",
+      "methods": "QuestionSubmitViewModel/new.html/QuestionAcceptedViewModel dependency",
+      "testIds": [
+        "REQUEST-DISPLAY003..007",
+        "RCPT006A..F",
+        "PT-QST-DOM001..008"
+      ],
+      "expected": "NewFormQSBpurposeonly/emptybody/issues/notice; redisplaysamepublicUUID/requestbody, immutableclosedvalues/topbar/no arbitraryDTO. Actualtemplate title質問要求/textarea6rows/required/escapedth:text/hiddenoperationUUID/byte4096message/menu/externalscript. CSRFfilter/normalSpringprocessor handlesPOST, standaloneprojection isnot security acceptance. Acceptedfactory identity/owner andPayloadSemanticValidator beforeimmutablemap, JSTsecond+200Unicode codepoints withno split surrogate, noMarkdown/rawHTML; NQlist/detailViews aredifferentfourheldsources andnotcompiled/replaced. ClientJSruntime belongsP01625 separate, initialliteral4096counter notfullJS proof."
+    },
+    {
+      "id": "P01618-PG05",
+      "methods": "Historical RequestDisplay10/currentBusiness13/wholeForm8 ordinary candidate",
+      "testIds": [
+        "REQUEST-DISPLAY001..010",
+        "PT-WEB-S3WIRE001..013",
+        "PT-QST-FORM001..008"
+      ],
+      "expected": "3470/PG18190 oldwhole10source andTest hash matches onlyoldscope, no oldcoverage transfer/replay. PG27904 currentwhole13 realwire/DTO vectors independentlyqualified andnotrepeatedforaudit. ExistingwholeQuestionSubmitForm8 entire280lines andRequestDisplay10 entire235lines reviewed; bothpublic synthetic DTO/purpose/time only, noactualRoot/DB/tokenissue/authority/heldNQviews. Later onecurrent18 sharedprofile afterexactclosure andpre-style gate. Characterization/451/endcriterion isnot met byprep ornormalpure18."
+    }
+  ],
+  "requirement485": {
+    "id": "QST-001",
+    "source": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+    "line": 7,
+    "text": "Login利用者が質問要求画面から質問を入力し、送信できること。",
+    "acceptance": "UNASSESSED"
+  },
+  "internalDependencies": [
+    {
+      "id": "WBS-P016-19",
+      "role": "fullordinaryQuestionAcceptanceMVC withrealreceipt andsamecoretokens, existingapproved notnewcapability"
+    }
+  ],
+  "defectNotAccepted": {
+    "bug": "BUG-2728",
+    "before": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27912-question-controller-catalog-before-v1/before.json",
+      "sha256": "c72ac7ed8b304ea86afa6c2c007f24b74b9d715d573461fc03a703d3e5ef49f2"
+    },
+    "sites": 14,
+    "sourceNotYetFixed": true,
+    "runtime": "HOLD"
+  },
+  "immutablePriorProofMatches": [
+    {
+      "raw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG18190-request-display-ten-pt-v1/manifest.json",
+        "sha256": "be260ea2a4ad517e319a1bbbb8c90055ec7483354176fa20269a057ad041aed5"
+      },
+      "tests": 10,
+      "oldSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+      "ownedModelHashes": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionSubmitViewModel.java": "13b364659934a4d7cd92bbce8b7a66b1f1e7fb9877a40fad50ac57bdbdc6f053",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionAcceptedViewModel.java": "a6fdfd6dab35fc6bf9ed401e984253eee589f5d3d17b3d2fe731f10898bdc4e8",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReference.java": "b8dff7e53fd4b8646817eb6673a57479d3746a37d01585c3e35c2eee749ff829",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/UserCreateViewModel.java": "a2500110cedb6b4b38221a483191d9164f757709e404dcb190eaf1a869a80e82"
+      },
+      "test": {
+        "path": "tools/quality/architecture/RequestDisplayContractTest.java",
+        "sha256": "a15b7b47560b2b5590902e1bcf8907993c187c2e267dd82149032fcaf980807b"
+      },
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "currentWire": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27904-business-wire13-independent-v1/manifest.json",
+        "sha256": "44717badbd547a96740e8c7b285229c30d68c04fecd901f80dd72adfe13fbdb7"
+      },
+      "tests": 13,
+      "notReexecuted": true,
+      "actualBusinessAcceptance": false
+    }
+  ],
+  "wholeNormalCandidates": [
+    {
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+        "sha256": "3470a69bb98ee7825309ec48cb30185614c90acbb4e3af35765b079c2563fdff"
+      },
+      "tests": 8,
+      "wholeSourceReviewed": true
+    },
+    {
+      "test": {
+        "path": "tools/quality/architecture/RequestDisplayContractTest.java",
+        "sha256": "a15b7b47560b2b5590902e1bcf8907993c187c2e267dd82149032fcaf980807b"
+      },
+      "tests": 10,
+      "wholeSourceReviewed": true
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-18/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_BUG2728_ACTUAL_SUBMIT_HTTP_SESSION_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1884_question_submit_contract.py",
+    "sha256": "dd69b4c4ff01e443ff37f3e40b7f49903ec1d7b7fa3ad2086e430274d593697b"
+  }
+}

@@ -13,6 +13,7 @@ import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.form.QuestionDeleteForm;
 import dev.codex.schubert.nk.web.form.QuestionSearchForm;
 import dev.codex.schubert.nk.web.form.QuestionSubmitForm;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyException;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
 import dev.codex.schubert.nk.web.messaging.QuestionWireClient;
@@ -101,9 +102,11 @@ public final class QuestionController {
       model.addAttribute(LITERAL_PAGE, QuestionSubmitViewModel.newForm(actor, token));
       return "questions/new";
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }
@@ -137,9 +140,11 @@ public final class QuestionController {
         session = session(request);
         tokens.orElseThrow().require(session, LITERAL_QSBREQ01, form.operationToken());
       } catch (OperationTokenConflictException conflict) {
+        JmsRequestReplyException.preserveFatal(conflict);
         response.sendError(409);
         return null;
       } catch (SessionStoreException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         return redisplay(actor, model, response, form, 503, RETRY);
       }
       final ProtectedReadWireClient.Result result;
@@ -180,9 +185,11 @@ public final class QuestionController {
         response.setStatus(302);
         return null;
       } catch (OperationTokenConflictException conflict) {
+        JmsRequestReplyException.preserveFatal(conflict);
         response.sendError(409);
         return null;
       } catch (SessionStoreException | ReceiptReferenceException failure) {
+        JmsRequestReplyException.preserveFatal(failure);
         return redisplay(actor, model, response, form, 503, RETRY);
       }
     } finally {
@@ -215,6 +222,7 @@ public final class QuestionController {
     try {
       found = receipts.orElseThrow().find(target);
     } catch (ReceiptReferenceException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       response.sendError(503);
       return null;
     }
@@ -274,6 +282,7 @@ public final class QuestionController {
     try {
       return WebSessionId.parse(session.getId());
     } catch (IllegalArgumentException malformed) {
+      JmsRequestReplyException.preserveFatal(malformed);
       throw new OperationTokenConflictException();
     }
   }
@@ -435,9 +444,11 @@ public final class QuestionController {
                   "issues",
                   Map.of()));
         } catch (OperationTokenConflictException conflict) {
+          JmsRequestReplyException.preserveFatal(conflict);
           response.sendError(409);
           return null;
         } catch (SessionStoreException failure) {
+          JmsRequestReplyException.preserveFatal(failure);
           response.sendError(503);
           return null;
         }
@@ -481,9 +492,11 @@ public final class QuestionController {
       session = session(request);
       tokens.orElseThrow().require(session, LITERAL_QDLREQ01, input.operationToken());
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
     }
     final ProtectedReadWireClient.Result result;
@@ -512,9 +525,11 @@ public final class QuestionController {
           .orElseThrow()
           .completeVerified(session, LITERAL_QDLREQ01, input.operationToken(), result.resultCode());
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
     }
     response.setHeader("Location", "/questions");

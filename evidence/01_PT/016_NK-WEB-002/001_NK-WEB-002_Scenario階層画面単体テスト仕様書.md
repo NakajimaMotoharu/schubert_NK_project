@@ -100,3 +100,6 @@ P01615/16/17原pureUser32は[仕様](4155_P016151617原User三二件通常単体
 
 
 P01615新User検索入力8は[仕様](4157_P01615User検索入力八単体仕様.md)/[結果](4158_P01615User検索入力八単体結果.md)、Form全source四100/全177partial、actualHTTP/認可/DB/CHR/451は別未受入。
+
+
+WBS-P016-18公開source契約/独立期待値/TestIDは[4161_P01618質問受付原六artifact契約対応.md](4161_P01618質問受付原六artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
