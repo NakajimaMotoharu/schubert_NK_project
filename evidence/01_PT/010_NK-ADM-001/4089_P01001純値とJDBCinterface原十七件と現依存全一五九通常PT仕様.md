@@ -11,3 +11,6 @@ Program NK-ADM-001、UserQueryRequest/Repository/Exception。関連RD FUN009/AUT
 実行: `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1450_user_query159_qualifier.py run <固定HEAD>`。JUnit1.13.4/JDK25.0.4/JaCoCo0.8.15、UTC/JST設定・command/終了コード/input/sourcehash/coverage/XML/CRC/環境は27058/独立postへ記録。期待159/FESabort0、同一source/class-CRC/session、独立期待値は上記literalとSS byte offset/bind/SQL後条件。実PostgreSQL後条件とnative/auth終端は未実行の別gate。
 
 実行結果・coverage・エビデンスhash・BUG再試験状態は実終端と独立確認後に追記する。coverageだけのassertionや除外を追加しない。
+
+
+結果: source 4a8cda433bd79b83782c0eba1b1cbfe05952866c / Main eac757a58af15160001cd5909a5b6e5168f1848e、27058全159成功/FESabort0、[27060独立](../018_NK-OPS-001/evidence/PG27060-user-query159-independent-v1/manifest.json) hash7d5d7d425541f9c5101e3a33f1a5c9e7f65336503b992ae2658d42fb901cd4ce。192physical/173positiveCRC、Request全四100。全体L3817covered/13miss M808/3 C169/1 B1133/21、Repository/QueryException未網羅を除外せず保持。実DB/原/2/451/正式未受入、BUG2689runtimeOPEN、2690/2691はmetadata限定close。環境/command/exit/XML/hashはmanifest。
