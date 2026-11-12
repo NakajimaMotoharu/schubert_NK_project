@@ -1,0 +1,355 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T03:06:52.539247+09:00",
+  "source": "8b49eed23e94103cb63e3f5bf9122fb0cca96864",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429",
+    "src/schubert-nk-web/src/main/resources/static/css/schubert.css": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+    "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+    "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+    "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 418,
+  "design": [
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01625-PG01",
+      "methods": "operation-post-submit.js wholeIIFE/event handler",
+      "testIds": [
+        "PT-WEB-OPSJS2646-A..F",
+        "UI222§8"
+      ],
+      "expected": "Eachform[data-operation-submit] ownsclosedtoken/buttonstructure andsubmittedboolean; missingtoken/nobutton failsfixedstructure, absentforms inert, invalidsubmit prevent/report withoutdisable, correctedvalid disablesallbuttons withoutchanginghiddenUUID, secondsubmit preventDefault, independentforms independentstate. No tokenissue/authgrant/businesssend/automatedretry; APIidempotency remainsserver authority."
+    },
+    {
+      "id": "P01625-PG02",
+      "methods": "question-input-validation.js wholeIIFE/validate/input/submit",
+      "testIds": [
+        "PT-QST-JS001-A..H",
+        "QST-001"
+      ],
+      "expected": "Absentform inert/closedquestion-remaining-button required, initialandinput NFC UTF8counter4096 minusbytecount withoutchangingrawvalue. 1..4096 required, malformedUTF16 viaencode-decode mismatch/allC0-C1-controls/trailingASCIIspace rejected; no trim, NBSP/fullwidthspace retained, BOMnotdiscarded, fixedvalidationmessage. Submitrevalidateswithoutinputevent/invalidprevent-report/validdisablesbutton, no automaticresend/UUIDrewrite. PublicDOMeventdouble isnot realbrowser/HTTP proof."
+    },
+    {
+      "id": "P01625-PG03",
+      "methods": "log-search-validation.js/search-speaker-submit.js wholeIIFE/validate/submit",
+      "testIds": [
+        "PT-SCR092-A..H",
+        "PT-SCR025-A..H"
+      ],
+      "expected": "Absentpage inert/closedcontrols; logq256-action64-path256 andScenarioq256-speaker128-chapter256 NFCUTF8 limits. FourrawCRLF-TAB-NUL andmalformedUTF16 rejected, JavaASCIItrim forbytevalidationonly/no rawrewrite, NBSP-BOM retained; immutablepercontrol events, allinvalidfieldschecked beforeprevent/report, correctedinput submit. Scenario gamechange requestSubmit nativevalidation anddoesnotbypassinvalidfield; no network orsession sourceaccess. Fullservervalidation remainsauthoritative."
+    },
+    {
+      "id": "P01625-PG04",
+      "methods": "schubert.css allselectors/media900/Currentretainedstyles",
+      "testIds": [
+        "PT-SCR010",
+        "PT-SCR017..033",
+        "PT-SCR046..053",
+        "PT-SCR084..091",
+        "BUG2350/YKT2095"
+      ],
+      "expected": "RetainedCurrentlogin/menu/scenario/search/animation/log scopedstyles, outlinefocus/pre-wrapbody/overflowtext; responsive900singlecolumns/sourceorder kept. Video1280shell/aspect16:9/viewport150; Music playerdownloadrules scopedmusic/song, missingplayerplaceholder andresponsive2→1. CSS sourcefullreview andoldtypedresources only, no inventCSSbranchcoverage/screenshot orrealbrowserCurrentcomparison."
+    },
+    {
+      "id": "P01625-PG05",
+      "methods": "Four existingNode harnesses andhistoricalresource proof",
+      "testIds": [
+        "WBS-P016-25:contract",
+        "WBS-P016-25:scope",
+        "WBS-P016-25:quality"
+      ],
+      "expected": "FourwholeexistingNodeTests 6+8+8+8=30 independentgoldenDOMevents/TextEncoder-Decoder/JDK-compatibleliteral vectors fullyread; publicold5Javawrappers/30Node case andresourceL-F-B100 areoldscopeonly. ExactcurrentJS/Test/Nodebinary andpublicmanifest/XMLsourcebindings checkedwithoutreexecute. No oldJavaJars/classinit orwholeMainqualification/currentformaltransfer; newPT/coverage/190accepted0. /1only, /2 realbrowser-CSS/CHR/sameMain451 remainunaccepted."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-25.01/1",
+    "WBS-P016-25.02/1",
+    "WBS-P016-25.03/1",
+    "WBS-P016-25.04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_BROWSER_CSS_CHR_SAME_MAIN_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1967b_four_js_node_only_proof_metadata.py",
+    "sha256": "0afcb2ce5dbe20d8ae4008ca2767b554642aff312e84e8ea331c5851cc1294a9"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1965b_four_js_css_subdivided_config.json",
+    "sha256": "efc3bf8f5d6697eb7646a3eb7c33f5418ec8d64983f2b12e20a1dfe6e3074b3c"
+  },
+  "baseArtifactReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28030-four-js-css-five-contract-v1/manifest.json",
+    "sha256": "bbfcf14407900cb008dcb10fba04642adcd979f31e5dbc82539b0f35b9217e1e"
+  },
+  "originalResourceProof": {
+    "raw": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14778-web-four-script-resources-pt-v1/manifest.json",
+      "sha256": "5f4205513895cd2ea19ca369d5bffe6d1a752cc959a5ed04913a028ab247d7f8"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14780-web-four-script-resources-post-v1/manifest.json",
+      "sha256": "93523a10ae49e619195a4a228a528a822c32184adb218cb78268eb998752ef05"
+    },
+    "independent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14782-web-four-script-resources-independent-v1/manifest.json",
+      "sha256": "e9e6bb114098d6d02d38b502822916dd350b1db70c4de1f0e81d0e8775a5a70d"
+    },
+    "publicSavedManifest": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14784-web-four-script-resources-public-save-v1/manifest.json",
+      "sha256": "a7395c0eb45453f56861866c14749c1911655fbf3ff928fe30d3a2729089602f"
+    },
+    "oldSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+    "originalJavaWrappers": 5,
+    "originalNodeChildren": 30,
+    "wrappersAndChildrenNotSummed": true,
+    "resourcePrograms": 4,
+    "exactCurrentJsAndNodeTestAndNodeBytes": true,
+    "wholeOldJavaWrapperInputsCurrent": false,
+    "copiedTemplateDifferences": [
+      {
+        "path": "src/schubert-nk-web/src/main/resources/templates/questions/new.html",
+        "oldSha256": "199d2b490c33bc708d6c459cf4681d2a4307eaf25f18a8fcd3617e1d94125cb4",
+        "currentSha256": "a71649b7e8237ad7962e32d92103d87dd92eb84343b77881f3970b3010038643"
+      }
+    ],
+    "originalGuardFailure": {
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/1967_four_js_original_proof_metadata.py",
+        "sha256": "c02f7c0b8963ecc4ca1f5d1f36eef2dcf740b15bc93825adeb6ab6dabcae42c7"
+      },
+      "reason": "UnrelatedoldJavaWrapperQuestionHTMLdiff detectedbeforepublishing; retainednottransferred. ResourceNode4 independentinputs sameexactbytes; thisisnotPTreplayorqualityrelaxation."
+    },
+    "resources": [
+      {
+        "resource": {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js",
+          "sha256": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad"
+        },
+        "wholeExistingNodeTest": {
+          "path": "src/schubert-nk-web/src/test/javascript/log-search-validation.test.cjs",
+          "sha256": "0a05c57bd6ef7ee97311d2130ccd6fa34e8e4ea7edb23be76f7f97bd76a68ed4"
+        },
+        "cases": [
+          "PT-SCR092-A missing page stays inert",
+          "PT-SCR092-B fixed form structure",
+          "PT-SCR092-C ASCII boundary from UI225",
+          "PT-SCR092-D Unicode controls and malformed pairs",
+          "PT-SCR092-E NFC and ASCII trim byte vectors",
+          "PT-SCR092-F all invalid fields block native GET",
+          "PT-SCR092-G fixed Unicode byte edges",
+          "PT-SCR092-H corrected input permits submit"
+        ],
+        "nodeTests": 8,
+        "oldCoverage": {
+          "branchPercent": 100,
+          "classCounter": "NOT_APPLICABLE_JAVASCRIPT_RESOURCE",
+          "functionPercent": 100,
+          "linePercent": 100
+        },
+        "oldTapHash": "d335a4f33829dc65d7976a87b2e3ae90f663f5dae8fd611d4f648d81f8fac8d5",
+        "oldScopeOnly": true,
+        "rerun": false,
+        "currentJavaQualificationTransferred": false
+      },
+      {
+        "resource": {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js",
+          "sha256": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429"
+        },
+        "wholeExistingNodeTest": {
+          "path": "src/schubert-nk-web/src/test/javascript/operation-post-submit.test.cjs",
+          "sha256": "1bab02dd52161343c7d6403abaf62b74dd044d02eac1b496bf2535917ba65f45"
+        },
+        "cases": [
+          "PT-WEB-OPSJS2646-A no update form leaves document inert",
+          "PT-WEB-OPSJS2646-B token/button structure is closed",
+          "PT-WEB-OPSJS2646-C valid keyboard submit disables every submit button and preserves token",
+          "PT-WEB-OPSJS2646-D invalid then corrected submit never locks invalid form",
+          "PT-WEB-OPSJS2646-E second submit is suppressed without reissuing operation",
+          "PT-WEB-OPSJS2646-F independent forms retain independent submission state"
+        ],
+        "nodeTests": 6,
+        "oldCoverage": {
+          "branchPercent": 100,
+          "classCounter": "NOT_APPLICABLE_JAVASCRIPT_RESOURCE",
+          "functionPercent": 100,
+          "linePercent": 100
+        },
+        "oldTapHash": "58a9095dbfda48ab462b96843603d6325cbb33298e2471161685c2a53d875c3c",
+        "oldScopeOnly": true,
+        "rerun": false,
+        "currentJavaQualificationTransferred": false
+      },
+      {
+        "resource": {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js",
+          "sha256": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa"
+        },
+        "wholeExistingNodeTest": {
+          "path": "src/schubert-nk-web/src/test/javascript/question-input-validation.test.cjs",
+          "sha256": "869254f2f9b7b1a31d938d8f8537836a5b28f8813be99aaa60cbf4e5e7426f95"
+        },
+        "cases": [
+          "PT-QST-JS001-A absent form is inert",
+          "PT-QST-JS001-B closed required structure",
+          "PT-QST-JS001-C initial count and required validation",
+          "PT-QST-JS001-D ASCII byte boundary",
+          "PT-QST-JS001-E independent NFC and Unicode byte vectors",
+          "PT-QST-JS001-F controls and malformed pairs",
+          "PT-QST-JS001-G no trimming and trailing ASCII only",
+          "PT-QST-JS001-H fresh input/submit never auto resends"
+        ],
+        "nodeTests": 8,
+        "oldCoverage": {
+          "branchPercent": 100,
+          "classCounter": "NOT_APPLICABLE_JAVASCRIPT_RESOURCE",
+          "functionPercent": 100,
+          "linePercent": 100
+        },
+        "oldTapHash": "94d879ec5fb7dd7adc6dc324f6ed9e36c6052232fc95a328b80ce731af309b6f",
+        "oldScopeOnly": true,
+        "rerun": false,
+        "currentJavaQualificationTransferred": false
+      },
+      {
+        "resource": {
+          "path": "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js",
+          "sha256": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa"
+        },
+        "wholeExistingNodeTest": {
+          "path": "src/schubert-nk-web/src/test/javascript/search-speaker-submit.test.cjs",
+          "sha256": "22f9f1fbdff29f1cacc59a2c87366a079231238fd0dc4723632ce56d2b3ffe48"
+        },
+        "cases": [
+          "PT-SCR025-A absent form and registration",
+          "PT-SCR025-B missing template controls",
+          "PT-SCR025-C independent ASCII byte boundaries",
+          "PT-SCR025-D Unicode and forbidden controls",
+          "PT-SCR025-E NFC and Java ASCII trim compatibility",
+          "PT-SCR025-F all invalid fields stop submit",
+          "PT-SCR025-G input clears errors and permits valid submit",
+          "PT-SCR025-H game change uses native submission"
+        ],
+        "nodeTests": 8,
+        "oldCoverage": {
+          "branchPercent": 100,
+          "classCounter": "NOT_APPLICABLE_JAVASCRIPT_RESOURCE",
+          "functionPercent": 100,
+          "linePercent": 100
+        },
+        "oldTapHash": "c02600942bc8c8733f8897994c0681e2c301db310bcd5c70c09dc3de150c21aa",
+        "oldScopeOnly": true,
+        "rerun": false,
+        "currentJavaQualificationTransferred": false
+      }
+    ],
+    "xml": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14780-web-four-script-resources-post-v1/TEST-dev.codex.schubert.nk.web.view.LogSearchScriptTest.xml",
+        "sha256": "f4a1aa086b1530d9b7c6a220b720dea138a80beb85d12e999a96b0ff837b0aa1",
+        "cases": [
+          {
+            "classname": "dev.codex.schubert.nk.web.view.LogSearchScriptTest",
+            "name": "log092BrowserInputScript"
+          }
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14780-web-four-script-resources-post-v1/TEST-dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest.xml",
+        "sha256": "795fbc9076f6591cbd5faf364660783e716884ec1c87acac47167014f8bc9ae9",
+        "cases": [
+          {
+            "classname": "dev.codex.schubert.nk.web.view.ScenarioSearchScriptTest",
+            "name": "search025BrowserInputScript"
+          }
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14780-web-four-script-resources-post-v1/TEST-dev.codex.schubert.nk.web.view.OperationPostScriptTest.xml",
+        "sha256": "76edac13e5faf87ac11f15208fbd0ca8470c16b84e76a96f6a62e0e173903b76",
+        "cases": [
+          {
+            "classname": "dev.codex.schubert.nk.web.view.OperationPostScriptTest",
+            "name": "operation2646001IndependentEventContractsAndEveryScriptCounter"
+          },
+          {
+            "classname": "dev.codex.schubert.nk.web.view.OperationPostScriptTest",
+            "name": "operation2646002OnlyApprovedUpdateTemplatesConnectExternalScript"
+          }
+        ]
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14780-web-four-script-resources-post-v1/TEST-dev.codex.schubert.nk.web.view.QuestionInputScriptTest.xml",
+        "sha256": "31f357810d8b8c98de1a57962fd550039c85f58160a5f1b149a9aae296082a24",
+        "cases": [
+          {
+            "classname": "dev.codex.schubert.nk.web.view.QuestionInputScriptTest",
+            "name": "questionInput001BrowserInputScript"
+          }
+        ]
+      }
+    ],
+    "nodeBinary": {
+      "path": "/home/mini/codex/project1/work/toolchain/node-v24.19.0/bin/node",
+      "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+      "version": "v24.19.0"
+    },
+    "oldStatusesSuccessfulOnly": true,
+    "javaSourceProgramsQualified": 0,
+    "savedPrivateOrRawTapLogsReread": false,
+    "oldJavaJarsReadOrHashed": false,
+    "newProductExecutions": 0,
+    "newCoverage": 0,
+    "currentFormalOrWholeJavaMainTransferred": false
+  },
+  "preparationRowResponsibilities": {
+    "WBS-P016-25.01/1": "Fiveownedartifact/script-entry-DOMinputorder inventory",
+    "WBS-P016-25.02/1": "Independent30Nodefixtures normal-boundary-unknown-missing expectations",
+    "WBS-P016-25.03/1": "ExactoldfourResourcecode-Test-Node/terminal/XML-LFB-counter constraints andunexecutedcurrentMain separation",
+    "WBS-P016-25.04/1": "FullCSS/UIretainedstyles andHTML/CSSsecret-trace/visualCHR-debt acceptancecriteria"
+  }
+}

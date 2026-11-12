@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T03:06:52.539247+09:00",
+  "source": "8b49eed23e94103cb63e3f5bf9122fb0cca96864",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/resources/static/js/operation-post-submit.js": "771029cb5f80dd32d17af01a5fb8e7fe471a615268de6645d543f57001050429",
+    "src/schubert-nk-web/src/main/resources/static/css/schubert.css": "fbd384882662d4ae16d6b65e3576b5b135a5257241b919862a763f99b08c3456",
+    "src/schubert-nk-web/src/main/resources/static/js/log-search-validation.js": "b5cfbc9a689c91d0f14461e3e46dadb88844b5d0c38358d762dd241a5458efad",
+    "src/schubert-nk-web/src/main/resources/static/js/question-input-validation.js": "742ebf22201034123b5e96fbb82b9fe25d0f8a5f0260651a42c011389a10cafa",
+    "src/schubert-nk-web/src/main/resources/static/js/search-speaker-submit.js": "dcf25a57a0e304391a0d3c880c263db246e296d6a7af0322283ddb72fa3e48fa"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 418,
+  "design": [
+    {
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01625-PG01",
+      "methods": "operation-post-submit.js wholeIIFE/event handler",
+      "testIds": [
+        "PT-WEB-OPSJS2646-A..F",
+        "UI222§8"
+      ],
+      "expected": "Eachform[data-operation-submit] ownsclosedtoken/buttonstructure andsubmittedboolean; missingtoken/nobutton failsfixedstructure, absentforms inert, invalidsubmit prevent/report withoutdisable, correctedvalid disablesallbuttons withoutchanginghiddenUUID, secondsubmit preventDefault, independentforms independentstate. No tokenissue/authgrant/businesssend/automatedretry; APIidempotency remainsserver authority."
+    },
+    {
+      "id": "P01625-PG02",
+      "methods": "question-input-validation.js wholeIIFE/validate/input/submit",
+      "testIds": [
+        "PT-QST-JS001-A..H",
+        "QST-001"
+      ],
+      "expected": "Absentform inert/closedquestion-remaining-button required, initialandinput NFC UTF8counter4096 minusbytecount withoutchangingrawvalue. 1..4096 required, malformedUTF16 viaencode-decode mismatch/allC0-C1-controls/trailingASCIIspace rejected; no trim, NBSP/fullwidthspace retained, BOMnotdiscarded, fixedvalidationmessage. Submitrevalidateswithoutinputevent/invalidprevent-report/validdisablesbutton, no automaticresend/UUIDrewrite. PublicDOMeventdouble isnot realbrowser/HTTP proof."
+    },
+    {
+      "id": "P01625-PG03",
+      "methods": "log-search-validation.js/search-speaker-submit.js wholeIIFE/validate/submit",
+      "testIds": [
+        "PT-SCR092-A..H",
+        "PT-SCR025-A..H"
+      ],
+      "expected": "Absentpage inert/closedcontrols; logq256-action64-path256 andScenarioq256-speaker128-chapter256 NFCUTF8 limits. FourrawCRLF-TAB-NUL andmalformedUTF16 rejected, JavaASCIItrim forbytevalidationonly/no rawrewrite, NBSP-BOM retained; immutablepercontrol events, allinvalidfieldschecked beforeprevent/report, correctedinput submit. Scenario gamechange requestSubmit nativevalidation anddoesnotbypassinvalidfield; no network orsession sourceaccess. Fullservervalidation remainsauthoritative."
+    },
+    {
+      "id": "P01625-PG04",
+      "methods": "schubert.css allselectors/media900/Currentretainedstyles",
+      "testIds": [
+        "PT-SCR010",
+        "PT-SCR017..033",
+        "PT-SCR046..053",
+        "PT-SCR084..091",
+        "BUG2350/YKT2095"
+      ],
+      "expected": "RetainedCurrentlogin/menu/scenario/search/animation/log scopedstyles, outlinefocus/pre-wrapbody/overflowtext; responsive900singlecolumns/sourceorder kept. Video1280shell/aspect16:9/viewport150; Music playerdownloadrules scopedmusic/song, missingplayerplaceholder andresponsive2→1. CSS sourcefullreview andoldtypedresources only, no inventCSSbranchcoverage/screenshot orrealbrowserCurrentcomparison."
+    },
+    {
+      "id": "P01625-PG05",
+      "methods": "Four existingNode harnesses andhistoricalresource proof",
+      "testIds": [
+        "WBS-P016-25:contract",
+        "WBS-P016-25:scope",
+        "WBS-P016-25:quality"
+      ],
+      "expected": "FourwholeexistingNodeTests 6+8+8+8=30 independentgoldenDOMevents/TextEncoder-Decoder/JDK-compatibleliteral vectors fullyread; publicold5Javawrappers/30Node case andresourceL-F-B100 areoldscopeonly. ExactcurrentJS/Test/Nodebinary andpublicmanifest/XMLsourcebindings checkedwithoutreexecute. No oldJavaJars/classinit orwholeMainqualification/currentformaltransfer; newPT/coverage/190accepted0. /1only, /2 realbrowser-CSS/CHR/sameMain451 remainunaccepted."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-25.01/1",
+    "WBS-P016-25.02/1",
+    "WBS-P016-25.03/1",
+    "WBS-P016-25.04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_BROWSER_CSS_CHR_SAME_MAIN_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1965b_four_js_css_subdivided_config.json",
+    "sha256": "efc3bf8f5d6697eb7646a3eb7c33f5418ec8d64983f2b12e20a1dfe6e3074b3c"
+  }
+}
