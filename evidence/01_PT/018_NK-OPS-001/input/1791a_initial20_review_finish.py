@@ -1,0 +1,4 @@
+"""Finish only saved review's missing event/checkpoint tail, preserve existing tickets/receipt."""
+from pathlib import Path
+import datetime,hashlib,json,sys
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';S=R.parent/'PMO/pgpt-completion-stage-20261102';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));wr=lambda p,x:p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n');p=D/'1059_WBS65初回共有使用20見直し.json';assert sha(p)==ld(B/'evidence/PG27741-initial20-partial-import-record-v1/manifest.json')['reviewSha256'];now=datetime.datetime.now().astimezone().isoformat();original=B/'input/1791_initial20_review.py';s=original.read_text();tail=s[s.index('sys.path[:0]='):];assert 'BUG-2720' not in tail and 'YKT-2377' not in tail;exec(compile(tail,str(original),'exec'),globals())
