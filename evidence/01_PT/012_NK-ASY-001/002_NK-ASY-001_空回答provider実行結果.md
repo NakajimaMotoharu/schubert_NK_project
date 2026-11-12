@@ -14,3 +14,9 @@ command: `JAVA_HOME=/home/mini/codex/project1/work/toolchain/jdk-25.0.4 ./mvnw -
 
 
 WBS-P012-01公開source契約/独立期待値/TestIDは[4102_P01201質問FIFO消費原二source契約対応.md](4102_P01201質問FIFO消費原二source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P012-02公開source契約/独立期待値/TestIDは[4103_P01202空回答provider原四source契約対応.md](4103_P01202空回答provider原四source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P012-03公開source契約/独立期待値/TestIDは[4104_P01203質問worker原source契約対応.md](4104_P01203質問worker原source契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

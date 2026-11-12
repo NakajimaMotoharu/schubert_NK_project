@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:37:19.232653+09:00",
+  "source": "d51f64815730ea7517791d3905e2a1b22341e8f1",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java": "e3cf7a1056e03ce46380893697cb2d2faefa02a88ea966a14ff99646763b3c83"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01203-PG01",
+      "methods": "process/decodeWire/checkRunning/job/begin",
+      "testIds": [
+        "AWORK001/002/009/010/011"
+      ],
+      "expected": "Actualdeliverymetadata mandatory; QWKREQ01/001 internalheader semantic/320wire. Stop/interrupted refusesbeforework. Lockjob thenexactjob-question-owner/receipt/originalM0-correlatedW!=M0/receivedmillis/header/time/workOutboxwire/profilenoDLQ andnotificationaccepted/state match. CANCELLEDterminal, COMPLETEDverifiedterminal, ERRORexistingproof branch; RECEIVED->PROCESSING CASexact1 setsW/startUTCmicro/retrymin(count-1,3)/version andnotification+criticalaudit inoneTX. ExistingPROCESSINGmustsameW, retrycountercapped3only; no clock/identityguess. ProviderinvokedoutsideDBTX/ownedconnectionclosed."
+    },
+    {
+      "id": "P01203-PG02",
+      "methods": "complete/questionDeletion/deletion/bindDeletion/verifyCompleted",
+      "testIds": [
+        "AWORK001/003/007/009/010"
+      ],
+      "expected": "SecondTX re-lock/revalidatejob/W; AnswerUTCmicroyear1..9999 notbeforestarted/received, NFCbodywellformedUTF8<=4096, emptySTUBvalid. Copy currentquestionlogicaldeletiontuple intoanswer; existinganswer mustsamebody/STUB/time/deletion orDATA_INTEGRITY fixedbusinessERROR. InsertanswerUKone orreuse, job/notificationCOMPLETED timestampssameat/version+1/criticalaudit atomic. Concurrent/replayedCOMPLETED verifiesprovider/time/deletionwithoutnewprovider/answer/audit. No physicalquestiondelete/cancelafterPROCESSING."
+    },
+    {
+      "id": "P01203-PG03",
+      "methods": "fail/businessError/errorStage/awaitSent/dlqSent",
+      "testIds": [
+        "AWORK004/005/006/008/012/013"
+      ],
+      "expected": "ExpectedAnswerBusinessException PROCESS_FAILED atomicallyERROR(noordinaryretryDLQ). Runtimeprovider count<4 temporaryrollback; >=4 SYSTEM_UNAVAIL ERROR+onePENDING DLQdispatchD!=W preservingoriginalWbody/header/correlation/transport/count/at immutablemetadata. Actualcountnotcapped. OutboxRequest->requireProfile rejectsD==W beforeenqueue. DBcommitandphysicalclose beforewake; newD genuineSENT withexactwire/profile/metadata/created/senttimestamp/clearedleases beforeoriginalACK. Pending/Errorrowpollconnectionfree10ms, stop/interruption non-success; ERRORre-deliveryusesexistingD notnewrow/provider. Durableproofcorruption temporarynotfatal-ACK. BrokerW/Dtwo physicalcopiespossible notexactone assumption."
+    },
+    {
+      "id": "P01203-PG04",
+      "methods": "transaction/now/time/optionalTime/validBody/audit",
+      "testIds": [
+        "AWORK005/009/010/011/012"
+      ],
+      "expected": "Borrowedpool/provider/dispatcher/stop, ownsConnection/TX andSQLresourcesonly. READ_COMMITTED/statement_timeout1500/lock_timeout500; handler/commitSQLRuntimeError rollbackonce/secondaryattachexistingport/physicalTWRclose, ambiguousclose notsuccess. FixedUTCmicro/finitevalues/nonnulltypedSQL/affectedexact1/singleResult. No rawprovider/answer/question/auth/token log; onlyfixedaction/state/errorCode/publicreceipt/numericIDs andNFCsanitizedusername. FiniteUTF8REPORT malformedbodyfalse thenbusinesserror, no expectedsynthesizedfromproduction. Rawwirezero finally. SharedSQL/codec/outbox owners notdoublefee."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest.java",
+      "sha256": "472654195a7d05fdd82e6b5dcf7f339ef9d40d21810198bac40d88d3bfe31844",
+      "tests": 13,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "index/imports/setup only; no individual test extraction",
+      "status": "HOLD_WHOLE_REAL_DB_BROKER_ACTUAL4"
+    }
+  ],
+  "sharedDlqProfileBoundary": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+    "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53",
+    "reviewedScope": "requireProfile method only; D!=W andQWK001/320 validation",
+    "owner": "WBS-P005-03_SHARED_NO_DUPLICATE_FEE"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P012-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_REAL_WORKER_DB_ACK_DLQSENT_SAME_SOURCE_AND_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1545_question_worker_contract_audit.py",
+    "sha256": "b7fd4fdee0600ae251d89bc73a2d547acfc79b5c61717bd4a08f9a544742bc6d"
+  }
+}

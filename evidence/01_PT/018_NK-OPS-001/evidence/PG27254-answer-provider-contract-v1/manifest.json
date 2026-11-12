@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:33:51.633413+09:00",
+  "source": "d51f64815730ea7517791d3905e2a1b22341e8f1",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerBusinessException.java": "d62fea79f8c806dcb68ffa5ac25b68c006b6f778a8f00035201fafee2ddd3212",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerProvider.java": "c1ea12b834d243d1940041d4bfab9c559d96dee5e667195ded2fafa938785ac7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/StubAnswerProvider.java": "719addcd16754a2179b04a31ec7a17130c912fef362adbcbcc347ec523f4816f"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01202-PG01",
+      "methods": "StubAnswerProvider constructor/answer/AnswerProvider.answer",
+      "testIds": [
+        "PT-ASY-STB001/002/003/005"
+      ],
+      "expected": "Clockandquestionrequirednonnull; initialproviderreturnsbodyempty/currentClockinstant, exactlyoneclockreadpernonnullcall, noclocksreadfornullquestion. ClockRuntime/Error originalidentity/nullclockresultfails, noexternalcalls/log/retainedbody/persistence. 64privatecallswith8workers independentlyexpectNOW+i fori0..63, timeoutinvokeAll5/finallyawait10, exactpublicgoldenfile inprivateJUnitcwd. Clockrawprecisionpreservedhere; workerdoesfiniteUTCmicro/ordervalidation later."
+    },
+    {
+      "id": "P01202-PG02",
+      "methods": "AnswerResult constructor/accessors/toString",
+      "testIds": [
+        "PT-ASY-STB002/004"
+      ],
+      "expected": "Immutablebodyandtimebothnonnull (emptybodyvalid), accessorsretainexactvalues, equalvalues equality/hash anddifferentbody/timediffer, literalAnswerResult[REDACTED] noquestion/answer/time."
+    },
+    {
+      "id": "P01202-PG03",
+      "methods": "AnswerBusinessException constructor/workerboundary",
+      "testIds": [
+        "PT-QST-AWORK005",
+        "worker error ending"
+      ],
+      "expected": "Fixedanswer could not be produced diagnostic only/noprovidertext/cause retained. EmptySTUBnotitselfsyntheticbusinessfailure; actualworker decidesclosedbusinessERROR vsretry onlyunderapprovedjob/notification/audit/transaction. Thisfourthclass notcoveredbyoldprovider5; do notclaimfullownerfour100 fromoldtwoMain measurements."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/StubAnswerProviderTest.java",
+      "sha256": "513fca124fec88289b1534a6cd5aba79b476f41131dc7b811de66585f22b2fd2",
+      "tests": 5,
+      "wholeBodyReviewed": true,
+      "status": "EXISTING_WHOLE_FINITE_JDK_TEST5_UNCHANGED_NO_REPLAY"
+    }
+  ],
+  "unchangedHistoricalFive": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27254-answer-provider-contract-v1/unchanged-five-proof-reuse.json",
+    "sha256": "24217fde52938a36ed6aac6f4a4f362df95a24914d58c0aa94e58fafffbe6ee1"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P012-02/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ALLFOUR_OWNERS_SHARED_WORKER_EXIT_AND_451_SAME_SOURCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1541_answer_provider_contract_audit.py",
+    "sha256": "5618dcb8aa0827a4f6c2f091395816b3e0bb9ea2f04176c615f5bde36f187d43"
+  }
+}
