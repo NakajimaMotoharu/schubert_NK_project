@@ -53,3 +53,6 @@ ServiceDatabaseSourcePortTest/PT-OPS-DBSRCPORT-001～014、3793/input506・23700
 
 
 YKT2387独立純値/非秘密解析 normal16の当Program結果は[4182_Web非秘密設定原七単体結果.md](4182_Web非秘密設定原七単体結果.md)。公開AAD9/設定7の内数を区別、全4physical限定四100/全project資格・actual4/DB/Rootとは別。
+
+
+API非秘密設定原七の当Program限定結果は[4184](4184_API非秘密設定原七単体結果.md)。固定Main1の四counter100とruntime配備・実DB-MQ・全451を区別する。
