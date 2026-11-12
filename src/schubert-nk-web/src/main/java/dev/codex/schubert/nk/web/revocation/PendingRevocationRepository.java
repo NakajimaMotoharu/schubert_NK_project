@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.revocation;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
@@ -182,6 +183,7 @@ public final class PendingRevocationRepository {
           required(result.getObject("lease_until", OffsetDateTime.class)).toInstant(),
           keyVersion);
     } catch (IllegalArgumentException | DateTimeException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SQLDataException("stored revocation metadata is invalid", "22000");
     }
   }

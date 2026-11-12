@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T20:13:15.429144+09:00",
+  "source": "91806bf7fee4b519a3ef69d68cd19e32a40d6ba0",
+  "productionCoreMain": "1e442e0e41156e16cc22984b97aa6aab9618919b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogoutMvcConfiguration.java": "30b066a53b873c54e273836fd611ebc48bde69a1bb8bf04b0f7654804e216d68",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogoutController.java": "93f164a1a35e675de653bf1d2638647482cc21332a8dca7bf2b72d8cf321e0f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java": "3d70b8745bdb01b825ce89d933a1b8ace8110f147f609b817237e609bc1f067a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java": "5c3cfd9965aa0e90666dc3344fe51513a9a3bb6fa51e2071d3f4290e3c028e4a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 451,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01504-PG01",
+      "methods": "LocalLogoutCoordinator.logout",
+      "testIds": [
+        "RERUN006"
+      ],
+      "expected": "Capturedtrustedcontext/localID only, noHTTPboundraw expiryguess. ExistingLOGREQ01 facade verifiesmatchingreply; true0000/0200 invalidatelocal thenCONFIRMED; 0102/APIrejected/closedwireunavailable orinvalidresponse retainsencryptedqueue andlocaldelete sameTX→QUEUED. RevokeUUID/requestedUTCmicro; expiryunknownNULL, no request+8h guess. Failureenqueue/commit/close independentlytrieslocaldelete, attachessecondary selfguard thenfinitefatalclassification/fixedstoreerror, neverclaimed durablequeue/confirmed success onunknown. ProtectedReadWireException isfinalcause-suppression-disabled catalog (sourcechecked) so catchdoesnotdiscardanexternalfatalgraph."
+    },
+    {
+      "id": "P01504-PG02",
+      "methods": "PendingRepository.enqueue/claim/markFailure/removeConfirmed/read",
+      "testIds": [
+        "RERUN004005",
+        "OPS-RVR-PORT001..016"
+      ],
+      "expected": "BorrowedmanualTX/noowncommitrollbackcloseconnection, ownedPS/RSclose. Enqueueencryptedbytes/keyID only/exact1 row/attempt0/next+5sec/nullknownexpiry bounds. Claimlimit1..100 due<=now andlease<=now, SQLskiplocked/leaseCAS thenrequestedAt-id stableimmutableprojection. Maxcipher116; >116nevergetBytes/nullablepayload retainedfixedwarn, <29/mismatch/typeinvalidreject. Failurescountsat100 anddelay30/300/900forever; CASid/owner/until/attempt/livelease. Deleteonlypackagecallerverified0000/0200 not0102/expiry. Currentread IAE/DateTime catchlosesproviderError→22000 (BUG2709); allotherrawSQLerrors retainoriginalgraph toowner, no unnecessarycatchrewrite."
+    },
+    {
+      "id": "P01504-PG03",
+      "methods": "LocalLogoutHandler.handle/execute/invalidate/clear",
+      "testIds": [
+        "RERUN007A..H"
+      ],
+      "expected": "Authenticatedclosedactor/trustedRequestContext/configuredRepo sameinstance/getSession(false), no new session/grant/redirecttarget. Oncoordinatorfailure stillinvalidateownedHttpSession thenfatal/fixed503, directIOException remainsraw afterclear notnormal success. Onlocalterminal firstinvalidate/auditfixedLOGOUT_SUCCEEDED orQUEUED then302fixed/login?logout onlyuncommitted. Alwaysclear display/CSRF andSecurityContext evencleanupfails, preserveprimaryfatalandsecondary selfguard; nocookie/DB/privateaccessoutsideexistingSpringowner."
+    },
+    {
+      "id": "P01504-PG04",
+      "methods": "LogoutMvcConfig/LogoutController",
+      "testIds": [
+        "RERUN007"
+      ],
+      "expected": "OnlyPOST/logout registeredthroughnormalCSRF/auth chain, explicitinjectedhandlernonnull; no bypassGET/publicmethod/extraAPI invocation. NativeHTTP/Spring/DBresourceclosures andactualAPIsuccessproof remainwholeintegrationunit scopeHOLD, notprovedbySQLportfixture orsourcewiring."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinatorTest.java",
+      "sha256": "372c6a650cbd734bfce4bbce0fe853db337612fd0c92acab3815ec1eb18145ad",
+      "tests": 8,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_TRANSITIVE_WEBSTARTUP_OR_HTTP_JMS_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepositoryTest.java",
+      "sha256": "2d64e4e150dc592ea642b9a50d9ab640247b8be81d6f3cc91b87ff256a5258ad",
+      "tests": 9,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_TRANSITIVE_WEBSTARTUP_OR_HTTP_JMS_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/LogoutControllerTest.java",
+      "sha256": "7a07a2338cf9f260cf6b2aa418ebcf1f2e2b51270faa19432a8b1ac8f02902e5",
+      "tests": 8,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_TRANSITIVE_WEBSTARTUP_OR_HTTP_JMS_NO_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/PendingRevocationPortTest.java",
+      "sha256": "4b4d55796b4fbfe687936912ce556a9e919923cc5a949182af3f7f5f58352e77",
+      "tests": 16,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/index only; full685lines requiredbeforefreshPT",
+      "status": "ORDINARY_MEMORY_JDBC_CANDIDATE_REQUIRES_WHOLE_REVIEW_BEFORE_EXECUTION"
+    }
+  ],
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27480-local-logout-contract-v1/before.json",
+    "sha256": "c90cf817f4f2d2d0fec37b3b0f7ac3063448101247b36e52d7011f6203e12e5c"
+  },
+  "oldSingleRepository16Proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27480-local-logout-contract-v1/historical-repository16-proof-match.json",
+    "sha256": "32921a2dfe153a142fff88e0bbd408c902f3ef299bb685af3aae58bcb9caf90c"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P015-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_METADATA_FATAL_SITE_LOCAL_ATOMIC_DB_AND_HTTP_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1653_local_logout_contract_audit.py",
+    "sha256": "8f70aaa62b3db0661b81a7b6470421d4117224342fb4bc9293a62cdcb8c66784"
+  }
+}
