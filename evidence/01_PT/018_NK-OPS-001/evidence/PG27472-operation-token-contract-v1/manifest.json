@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T20:04:18.453899+09:00",
+  "source": "2584de1ec47b3c0e69487e504252ddaa5ac33178",
+  "productionCoreMain": "1e442e0e41156e16cc22984b97aa6aab9618919b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/OperationTokenConflictException.java": "888084c0b0fcd8c4d5c85cfc2578c13f0e04ff5ff959d4205675568a84b2d118",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationToken.java": "6a982c339aef53a2297725c114a8cfe023557b3cf36a953c599916e48eaa6f57",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java": "10a9e72bf9e7379e3c866612bb413aeafa00d3326260e2f7fee36d2e06e46fba"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 215,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01503-PG01",
+      "methods": "SessionOperationToken/ConflictException",
+      "testIds": [
+        "TOKV201..205",
+        "TOKV207208"
+      ],
+      "expected": "Immutablepurpose/UUID/issuedAt; approvedeightwritepurposes only/nullcontainers rejection, pendinglegacyconstructor andoptionalcompleted>=issued. CompletionretentionnotAPIproof. Fixed409conflict noautomaticnewUUID/API/retry. ValuecurrentV2schema old27422 full12/targetTokenandSchemafour100 reusedexactsource/allinputs, noTestreplay orglobalqualification."
+    },
+    {
+      "id": "P01503-PG02",
+      "methods": "Lifecycle.issue/issueForForms",
+      "testIds": [
+        "TOKV207208",
+        "SSC177"
+      ],
+      "expected": "Freshcurrentrowmanualshortmutate only, explicitnewformvisiblepurposeslist1..10 validatedbeforeupdate. Ifpending+requested>10 returnunchangedwithoutclock/UUID generation then409, no partialpending list. Free slotsfirst; whenfull retireoneoldestcompletedAt only/tiespersistedlistorder, neverpending. UUIDcandidate checkedagainstentireoriginalretainedset inclretired pluscurrentcandidates; collision/timeerror rollbackwholeTX/noautomaticretry orAPI. atomicIssued list becomespubliconlyafterrepositorysuccess/commitclose, UUID/CSPRNGownership remainscaller."
+    },
+    {
+      "id": "P01503-PG03",
+      "methods": "Lifecycle.require/completeVerified/find/mutate",
+      "testIds": [
+        "TOKV207208"
+      ],
+      "expected": "Retainedpendingorconsumed samepurpose+UUID requirefreshrow; absent/retired/expired409/noresurrection. CallerfirstverifiesgenuinecurrentAPIowner/layout/token/HMAC/storedresult; methodacceptsonly0000/0200 andneverestablishesproof. Firstcompletiononly fromcurrentpending, existingcompletionunchanged; unknownnoreinsert; currentattributes principal/CSRF/saved retained. NoJMS/API/DBsimultaneousownership, staleSnapshotdeltas donotcomplete/retire/reinsert. NonnullClock/UUID, shortboundedcallback, commit/closeunknown notsuccess. Sourcehasnocataloggraphdiscard; delegatedRepoalreadyownedTXguard, no newBGfix found."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+      "sha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8",
+      "tests": 11,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/setup/index only",
+      "status": "HOLD_WHOLE_REAL_DB_TRANSITIVE_REPOSITORY_WEBSTARTUP_NO_EXTRACTION"
+    }
+  ],
+  "unchangedProofReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27472-operation-token-contract-v1/unchanged-schema12-proof-reuse.json",
+    "sha256": "5264165d92877711d8e7559e7fe043407aa9775b4a3875dec4914c7a1d2edba5"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P015-03/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_REAL_DB_API_PROOF_LIFECYCLE_PARALLEL_AND_SAME_SOURCE_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1649_operation_token_contract_audit.py",
+    "sha256": "4b6a57797ffaff52455af96e08ea122b3619c65137c5007473d6dd8da5e699cd"
+  }
+}

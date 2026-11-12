@@ -1,0 +1,13 @@
+# P01503 Operation token保持・消費・再送・上限 原3source
+
+NK-WEB-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG27472](../018_NK-OPS-001/evidence/PG27472-operation-token-contract-v1/manifest.json)。
+
+- P01503-PG01 / SessionOperationToken/ConflictException / TOKV201..205,TOKV207208: Immutablepurpose/UUID/issuedAt; approvedeightwritepurposes only/nullcontainers rejection, pendinglegacyconstructor andoptionalcompleted>=issued. CompletionretentionnotAPIproof. Fixed409conflict noautomaticnewUUID/API/retry. ValuecurrentV2schema old27422 full12/targetTokenandSchemafour100 reusedexactsource/allinputs, noTestreplay orglobalqualification.
+
+- P01503-PG02 / Lifecycle.issue/issueForForms / TOKV207208,SSC177: Freshcurrentrowmanualshortmutate only, explicitnewformvisiblepurposeslist1..10 validatedbeforeupdate. Ifpending+requested>10 returnunchangedwithoutclock/UUID generation then409, no partialpending list. Free slotsfirst; whenfull retireoneoldestcompletedAt only/tiespersistedlistorder, neverpending. UUIDcandidate checkedagainstentireoriginalretainedset inclretired pluscurrentcandidates; collision/timeerror rollbackwholeTX/noautomaticretry orAPI. atomicIssued list becomespubliconlyafterrepositorysuccess/commitclose, UUID/CSPRNGownership remainscaller.
+
+- P01503-PG03 / Lifecycle.require/completeVerified/find/mutate / TOKV207208: Retainedpendingorconsumed samepurpose+UUID requirefreshrow; absent/retired/expired409/noresurrection. CallerfirstverifiesgenuinecurrentAPIowner/layout/token/HMAC/storedresult; methodacceptsonly0000/0200 andneverestablishesproof. Firstcompletiononly fromcurrentpending, existingcompletionunchanged; unknownnoreinsert; currentattributes principal/CSRF/saved retained. NoJMS/API/DBsimultaneousownership, staleSnapshotdeltas donotcomplete/retire/reinsert. NonnullClock/UUID, shortboundedcallback, commit/closeunknown notsuccess. Sourcehasnocataloggraphdiscard; delegatedRepoalreadyownedTXguard, no newBGfix found.
+
+所有ConflictException/OperationToken/Lifecycle三source215行とSS314QA049/SSC177/332352を全文対応。fresh currentrow/明示visibleform一括issue・free先行/不足時UUID0・consumed最古だけ退役/同時刻list順・原保持UUID全体collision拒否/firstcompletion/目的-token不変/失効退役非再生成/409明示再GET/noAPIretryを独立期待値へ記録。公開completeVerifiedは真正APIproofを確立しないcaller契約、DB/JMS同時保有0。既27422Schema12は全入力hash/当正常byteScope一致を照合し原source/範囲のまま再利用、新PT0・他scopeへ合算0。実DBwholeLifecyclefixtureはHOLD/切出しなし。新仕様違反や変更なし、原/1だけ完了、原/2・実DB/APIproof/並行/451未受入。
+
+実行: `python3 -B /home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/1649_operation_token_contract_audit.py` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
