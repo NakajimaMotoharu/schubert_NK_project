@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "source": "9d37371a084938396c25eb83035577972d3cab3d",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "atJST": "2026-11-13T03:56:46.358394+09:00",
+  "reviewed": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "c48aaae03b6901d3511ac2cda416c0f184044b6baefcf307d64c69997937a63c",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 7,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "sha256": "8168e79aabf6711644e77179ddc3741a7767a1c30080a5e2c6dedc6b5e2a987f",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 10,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "sha256": "48832e4824132c3518ceaed9d451065a94265a5ea90850e1f136701628fd982e",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 10,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sha256": "735fd06e311206d2d547e6eda0dfa042a7fc7ba78a565b88a47a32d3459d8ea0",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 8,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "sha256": "5bd0874a3c2814c2faa8ee13b160f41d2493b7cb44ced1343caeed1464650bae",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 6,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistryTest.java",
+      "sha256": "636a7d33ddfb0882d34858486ec6a3de24068353dbdddb3ce0610416d5b98ecf",
+      "originalSource": "9d37371a084938396c25eb83035577972d3cab3d",
+      "wholeTests": 12,
+      "wholeBodyReviewed": true,
+      "eligibility": "PURE_HOST_PUBLIC_CONFIG_OR_OWNED_METRIC_OR_EMPTY_THREADLOCAL_SERVLET",
+      "workerFixRequired": false
+    }
+  ],
+  "safeExistingTests": 53,
+  "firstFourTests": 35,
+  "companions": 18,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "futureEstimates": {
+    "API_CFG7": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    },
+    "ERROR_ROUTER18": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.5
+    },
+    "HTTP_METRIC28": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.1
+    }
+  },
+  "inventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28067-worker-explicit-factory-expanded-inventory-v1/manifest.json",
+    "sha256": "c924e3ed0b29129ea0bedc4cedcf4de9c543d67d1fde64066f347d8ef42485c9"
+  },
+  "historical111IsLimitedQuery": true,
+  "wholeThreadUniverseKnown": false,
+  "workerFindings": 5,
+  "alreadyCorrectWorkerNonApplicable": "OverflowSafeHttpMeterRegistryTest explicit timed invokeAll/Future/finally shutdownNow-await10 without ExecutorService TWR",
+  "callbackExceptionPriority": "InternalErrorDispatchRouter finally precedence retained including later Runtime overriding earlier Error; not a fatal-guard change",
+  "metricSdk": "Current committed Web POM Micrometer1.17.1; no upgrade",
+  "heldClassBinaryAccess": false,
+  "backendOrVmOrGrantActions": 0,
+  "heldFixtureExtraction": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1985_next4_host_triage_close.py",
+    "sha256": "265eb4a3ab78958d64c28ca134394a7a0d58abf971d636367651c147a8bf70dd"
+  }
+}

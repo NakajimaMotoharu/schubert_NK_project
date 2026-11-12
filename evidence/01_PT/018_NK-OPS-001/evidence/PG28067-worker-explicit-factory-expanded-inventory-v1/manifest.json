@@ -1,0 +1,1186 @@
+{
+  "actualExit": 0,
+  "command": [
+    "rg",
+    "--pcre2",
+    "--multiline",
+    "--json",
+    "try\\s*\\(\\s*(?:var|(?:java\\.util\\.concurrent\\.)?ExecutorService)\\s+[A-Za-z_$][A-Za-z0-9_$]*\\s*=\\s*(?:java\\.util\\.concurrent\\.)?Executors\\.new[A-Za-z0-9_$]*\\(",
+    "src",
+    "tools/quality/architecture",
+    "--glob",
+    "*.java",
+    "--glob",
+    "!RootFailedStartRecoveryTest.java",
+    "--glob",
+    "!RootFailedStartPairRecoveryTest.java",
+    "--glob",
+    "!SnapshotKeyCloseWitness.java"
+  ],
+  "actualCommandExit": 0,
+  "queryScope": "EXPLICIT_EXECUTORS_FACTORY_TWR_ANY_VARIABLE_OR_DECLARED_EXECUTOR_SERVICE_NOT_COMPLETE_TYPE_RESOLVED_THREAD_UNIVERSE",
+  "matches": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java",
+      "line": 300,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxProcessExecTest.java",
+      "line": 257,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.java",
+      "line": 267,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "line": 67,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupStepRepositoryTest.java",
+      "line": 459,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "line": 151,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseContentsValueTest.java",
+      "line": 176,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java",
+      "line": 126,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "line": 343,
+      "statement": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceConfigFilesTest.java",
+      "line": 221,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "line": 247,
+      "statement": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "line": 318,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "line": 569,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspectorTest.java",
+      "line": 85,
+      "statement": "try (var workers = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCallsTest.java",
+      "line": 154,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "line": 88,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxFileLockTest.java",
+      "line": 387,
+      "statement": "try (var executor = Executors.newFixedThreadPool(32)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcScenarioSnapshotReplacementTest.java",
+      "line": 127,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupFileLockTest.java",
+      "line": 267,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseApprovalTest.java",
+      "line": 115,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxStartupAdmissionTest.java",
+      "line": 476,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "line": 265,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxExecDescriptorsTest.java",
+      "line": 284,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor();"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifestTest.java",
+      "line": 593,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinatorTest.java",
+      "line": 1086,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java",
+      "line": 67,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxDirectoryCallsTest.java",
+      "line": 237,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHoldTest.java",
+      "line": 39,
+      "statement": "try (var foreign = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/StartupProofFrameTest.java",
+      "line": 244,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ChildStartupContextTest.java",
+      "line": 510,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerificationTest.java",
+      "line": 850,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmissionTest.java",
+      "line": 566,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryTest.java",
+      "line": 508,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java",
+      "line": 469,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecutionTest.java",
+      "line": 232,
+      "statement": "try (var workers = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArgumentsTest.java",
+      "line": 108,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepositoryTest.java",
+      "line": 571,
+      "statement": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java",
+      "line": 268,
+      "statement": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxPortTest.java",
+      "line": 611,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest.java",
+      "line": 200,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcherTest.java",
+      "line": 207,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetimeTest.java",
+      "line": 180,
+      "statement": "try (var executor = java.util.concurrent.Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java",
+      "line": 5747,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java",
+      "line": 5934,
+      "statement": "try (var otherThread = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "line": 442,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 66,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 257,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiStopBudgetTest.java",
+      "line": 279,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "line": 192,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "line": 82,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredentialTest.java",
+      "line": 196,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "line": 364,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccessTest.java",
+      "line": 137,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPumpTest.java",
+      "line": 441,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPumpTest.java",
+      "line": 473,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPumpTest.java",
+      "line": 506,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPumpTest.java",
+      "line": 539,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationPumpTest.java",
+      "line": 576,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClientTest.java",
+      "line": 149,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxCleanupPublicationTest.java",
+      "line": 195,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxCleanupPublicationTest.java",
+      "line": 251,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "line": 168,
+      "statement": "try (var workers = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateStatePortTest.java",
+      "line": 206,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/CommittedTerminalAdmissionContractTest.java",
+      "line": 85,
+      "statement": "try (var executor = java.util.concurrent.Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/CommittedTerminalAdmissionContractTest.java",
+      "line": 197,
+      "statement": "try (var executor = java.util.concurrent.Executors.newFixedThreadPool(count)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeTest.java",
+      "line": 575,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalogTest.java",
+      "line": 462,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "line": 170,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "line": 365,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "line": 119,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmissionTest.java",
+      "line": 56,
+      "statement": "try (var threads = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmissionTest.java",
+      "line": 326,
+      "statement": "try (var workers = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "line": 380,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "line": 389,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningProcessMainTest.java",
+      "line": 172,
+      "statement": "try (var executor = java.util.concurrent.Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGateTest.java",
+      "line": 212,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "line": 219,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxPublicationPortTest.java",
+      "line": 111,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningStopPassTest.java",
+      "line": 226,
+      "statement": "try (var workers = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningStopPassTest.java",
+      "line": 327,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningBackupRetentionTest.java",
+      "line": 376,
+      "statement": "try (var pool = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java",
+      "line": 466,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java",
+      "line": 181,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java",
+      "line": 315,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java",
+      "line": 353,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestReaderTest.java",
+      "line": 309,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "line": 147,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/HeldMediaFileInspectorTest.java",
+      "line": 95,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttemptTest.java",
+      "line": 534,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitTerminationTest.java",
+      "line": 316,
+      "statement": "try (var workers = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricSourceTest.java",
+      "line": 340,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "line": 195,
+      "statement": "try (var workers = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java",
+      "line": 372,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java",
+      "line": 611,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcessTest.java",
+      "line": 838,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupUnitTerminationTest.java",
+      "line": 559,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootReleaseAdmissionTest.java",
+      "line": 907,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFilesTest.java",
+      "line": 371,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "line": 263,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "line": 581,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiCustomMetricPayloadTest.java",
+      "line": 608,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "line": 149,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolverTest.java",
+      "line": 373,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "line": 258,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionViewOwnerTest.java",
+      "line": 360,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+      "line": 132,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "line": 256,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupCommitServiceTest.java",
+      "line": 415,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "line": 492,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "line": 553,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "line": 590,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "line": 816,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+      "line": 1093,
+      "statement": "try (ExecutorService executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "line": 443,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/StartupSchemaProjectionTest.java",
+      "line": 250,
+      "statement": "try (var pool = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSourceTest.java",
+      "line": 250,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiOutboxObservationSourceTest.java",
+      "line": 281,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+      "line": 680,
+      "statement": "try (var waiter = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+      "line": 711,
+      "statement": "try (var waiter = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+      "line": 740,
+      "statement": "try (var starter = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+      "line": 768,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "line": 282,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/ApiSyncRequestDispatcherTest.java",
+      "line": 160,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupAdmissionFileTest.java",
+      "line": 374,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningControlScopeTest.java",
+      "line": 426,
+      "statement": "try (var workers = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "line": 80,
+      "statement": "try (var pool = Executors.newFixedThreadPool(32)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceFileLockTest.java",
+      "line": 105,
+      "statement": "try (var pool = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmissionTest.java",
+      "line": 166,
+      "statement": "try (var other = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmissionTest.java",
+      "line": 359,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessorTest.java",
+      "line": 132,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootReleaseApprovalReaderTest.java",
+      "line": 393,
+      "statement": "try (var pool = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "line": 189,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopyTest.java",
+      "line": 466,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRetirementRecordsTest.java",
+      "line": 255,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFilesTest.java",
+      "line": 551,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/StartupPermitRecordsTest.java",
+      "line": 305,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorkerTest.java",
+      "line": 652,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupTransactionPortTest.java",
+      "line": 345,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncherTest.java",
+      "line": 218,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java",
+      "line": 261,
+      "statement": "try (var pool = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/LogCleanupProgressBoundaryTest.java",
+      "line": 223,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "line": 36,
+      "statement": "try (ExecutorService workers = Executors.newFixedThreadPool(3)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "line": 96,
+      "statement": "try (ExecutorService workers = Executors.newFixedThreadPool(20)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogRequestTest.java",
+      "line": 262,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationServiceTest.java",
+      "line": 507,
+      "statement": "try (var pool = java.util.concurrent.Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationServiceTest.java",
+      "line": 541,
+      "statement": "try (var pool = java.util.concurrent.Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioRepositoryTest.java",
+      "line": 745,
+      "statement": "try (var executor = java.util.concurrent.Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequestTest.java",
+      "line": 297,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest.java",
+      "line": 32,
+      "statement": "try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest.java",
+      "line": 97,
+      "statement": "try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest.java",
+      "line": 132,
+      "statement": "try (var workers = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCriticalAuditPortTest.java",
+      "line": 571,
+      "statement": "try (var workers = Executors.newFixedThreadPool(3)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+      "line": 232,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+      "line": 255,
+      "statement": "try (var pool = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceTest.java",
+      "line": 209,
+      "statement": "try (var executor = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationServiceTest.java",
+      "line": 481,
+      "statement": "try (var pool = java.util.concurrent.Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationServiceTest.java",
+      "line": 516,
+      "statement": "try (var pool = java.util.concurrent.Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "line": 165,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifierTest.java",
+      "line": 422,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+      "line": 463,
+      "statement": "try (var pool = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+      "line": 427,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java",
+      "line": 230,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "line": 553,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "line": 459,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebSessionSnapshotPortTest.java",
+      "line": 131,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "line": 256,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAuditPortTest.java",
+      "line": 232,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MediaControllerTest.java",
+      "line": 481,
+      "statement": "try (var workers = Executors.newFixedThreadPool(20)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptPortTest.java",
+      "line": 414,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ContentDetailControllerTest.java",
+      "line": 488,
+      "statement": "try (var executor = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/TargetBusinessControllerTest.java",
+      "line": 352,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationVerifierJdbcPortTest.java",
+      "line": 382,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "line": 187,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/JdbcSessionStorePortTest.java",
+      "line": 437,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFormLoginTest.java",
+      "line": 252,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "line": 42,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapperTest.java",
+      "line": 84,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/WebRequestSecurityTest.java",
+      "line": 487,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "line": 193,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java",
+      "line": 176,
+      "statement": "try (var executor = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionServiceTest.java",
+      "line": 199,
+      "statement": "try (var executor = Executors.newFixedThreadPool(16)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinatorTest.java",
+      "line": 337,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "line": 536,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ContextHashTest.java",
+      "line": 26,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ContextHashTest.java",
+      "line": 47,
+      "statement": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java",
+      "line": 906,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogOutboxPortTest.java",
+      "line": 455,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "line": 523,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java",
+      "line": 743,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinatorTest.java",
+      "line": 371,
+      "statement": "try (var pool = Executors.newFixedThreadPool(12)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticatorTest.java",
+      "line": 460,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfDeniedHandlerPortTest.java",
+      "line": 192,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JdbcWebSessionStoreTest.java",
+      "line": 599,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.java",
+      "line": 525,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SessionAuthenticationStrategyPortTest.java",
+      "line": 149,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InfrastructureFailureFilterPortTest.java",
+      "line": 154,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java",
+      "line": 284,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/FormCsrfRequestPortTest.java",
+      "line": 251,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "line": 348,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "line": 340,
+      "statement": "try (var executor = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "line": 443,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "line": 469,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSessionCsrfPortTest.java",
+      "line": 177,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/EncryptedSecurityContextPortTest.java",
+      "line": 251,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java",
+      "line": 307,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "line": 210,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "line": 261,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "line": 579,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "line": 606,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CsrfFilterFactoryPortTest.java",
+      "line": 184,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "line": 364,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "line": 365,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetricsTest.java",
+      "line": 380,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "line": 372,
+      "statement": "try (var executor = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "line": 493,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "line": 554,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "line": 591,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "line": 817,
+      "statement": "try (var worker = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+      "line": 179,
+      "statement": "try (var pool = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "line": 338,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetricsTest.java",
+      "line": 389,
+      "statement": "try (var workers = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeCodecsTest.java",
+      "line": 216,
+      "statement": "try (var workers = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeRemainderTest.java",
+      "line": 82,
+      "statement": "try (var threads = Executors.newFixedThreadPool(4)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLifetimeOrdinaryCloseTest.java",
+      "line": 45,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLifetimeOrdinaryCloseTest.java",
+      "line": 64,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoaderTest.java",
+      "line": 84,
+      "statement": "try (var executor = Executors.newFixedThreadPool(8)) {"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionTest.java",
+      "line": 77,
+      "statement": "try (var executor = Executors.newSingleThreadExecutor()) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 792,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 823,
+      "statement": "try (var pool = Executors.newFixedThreadPool(2)) {"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+      "line": 864,
+      "statement": "try (var pool = Executors.newFixedThreadPool(10)) {"
+    }
+  ],
+  "matchedSites": 230,
+  "matchedFiles": 185,
+  "previousNarrowPattern": "executor|pool only, fixedthreadpool only",
+  "historical111NotWholeUniverse": true,
+  "allMatchesUnassessed": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "protectedNamesExcludedBeforeRead": [
+    "RootFailedStartRecoveryTest.java",
+    "RootFailedStartPairRecoveryTest.java",
+    "SnapshotKeyCloseWitness.java"
+  ]
+}
