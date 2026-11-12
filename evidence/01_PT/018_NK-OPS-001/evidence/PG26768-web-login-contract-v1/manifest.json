@@ -1,0 +1,359 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:46:36.118766+09:00",
+  "source": "408c0f1394d4746730b1ab1706b3d182d619caea",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter.java": "3e5c47f78431971bab573f91f1c5421e33a693035d55a16de08560105c385da7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java": "95ba9e2b71c5b5288e9185d833897adf82949554374de6e5cced94c46b27b7b7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginContextProbe.java": "65b26fb1ccb7aad49ce727aaa88d8f6af4f175de7e4c4afbe5fabbcff09ae45d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java": "8d2663bca11722d79875316bc0542fd7723694cae656d0a78302b87e4f42de9d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java": "7110dd99b3f90c82230d2884f7818df52c392a2368db505f9ccf67b90d31100c"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+  },
+  "checks": [
+    {
+      "id": "P00706-PG01",
+      "source": "LoginFormAuthenticationConverter.convert/single",
+      "testIds": [
+        "PT-WEB-084..089",
+        "LoginFormConverterPortTest original13"
+      ],
+      "expected": "POST/login, UTF8/formmedia and charset, only username/password/_csrf body keys, reservedkeys in decoded/casefoldedquery rejected, single nonempty user/password values, CaddyverifiednumericIP details. Returns untrusted exactstandard token with consumedchar[], not authentication or session write. CSRF comparison remains separate chain."
+    },
+    {
+      "id": "P00706-PG02",
+      "source": "MqAuthenticationProvider.authenticate/supports/MqLoginContextProbe.isActive/decode",
+      "testIds": [
+        "PT-WEB-060..067"
+      ],
+      "expected": "Exact unauthenticated standard token/stringusername/char[]password/trustedIP only, unsupportedtypes never grant, always erasecredentials. API0000 directlyclosedprincipal; replay0200 freshGAMIF003 currentcontext probe distinctID and fullheader/correlation/context/length/records/semantic, valid0102 false/no grant, faults fixedunavailable. CurrentAPIrole only earlyWebprojection; laterAPIreauth mandatory. Scripted synchronous pure JMS API sender, no actual broker."
+    },
+    {
+      "id": "P00706-PG03",
+      "source": "MqLoginFailureHandler.onAuthenticationFailure",
+      "testIds": [
+        "PT-WEB-113..120",
+        "MqLoginFailurePortTest original6"
+      ],
+      "expected": "Locked auditthen Retry-After API0..900/locationlogin?locked/status302; badcredential audit/locationerror302; structuralform400, lostCaddytrust403 noerrorredispatch+PROXY_DENIED, othertransport503. No session/error diagnostic persistence, QA055 fixedscreenmessage unchanged."
+    },
+    {
+      "id": "P00706-PG04",
+      "source": "MqLoginSuccessHandler.onAuthenticationSuccess",
+      "testIds": [
+        "PT-WEB-113..120",
+        "SessionLoginHandlerTest wholeDBheld"
+      ],
+      "expected": "Only identical closedprincipal after customfixation; own contextsave readonlyequalityguard, captureactor, closedSavedRequest orroot302, criticalaudit before finalLocation/status; no secondfixation/APIcall/URLsession rewriting. Exceptions not normal success; actual encryptedrow/HTTP chain未受入."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqAuthenticationProviderTest.java",
+      "sha256": "bc370aa23c185d93a38d0e4c7055cb561706baddd9274922ffdf43b8c7ffb2d5",
+      "tests": 5,
+      "fullPublicSourceReviewed": true,
+      "status": "CURRENT_WHOLE_5_PLUS_3_NORMAL_TARGET2_FOUR100_HELPER4_GAPS_RETAINED"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginContextProbeTest.java",
+      "sha256": "28bdd0de98eed54f0eb42c2c148d5eb3bbfe045213033fb3e78b65018d5cdb8c",
+      "tests": 3,
+      "fullPublicSourceReviewed": true,
+      "status": "CURRENT_WHOLE_5_PLUS_3_NORMAL_TARGET2_FOUR100_HELPER4_GAPS_RETAINED"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionLoginHandlerTest.java",
+      "sha256": "16143dddb808bd69ab7d9a9316319de1c847639e6505e5a06e0ad0c51565bf92",
+      "status": "HOLD_WHOLE_REAL_DB_FIXTURE_NO_METHOD_SELECTION",
+      "fullPublicSourceReviewed": false,
+      "importsAndSetupAdmissionRead": true
+    }
+  ],
+  "retainedOriginalProofs": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG20392-login-form-converter-thirteen-v1/manifest.json",
+        "sha256": "01d9ef4206bc4aa2094c2e0d1febca72c0c58b1a3873961c1df93e34eb026d05"
+      },
+      "originalSource": "9a7945ae9f6e7bae25871486df298e26abe5167d",
+      "originalTests": 13,
+      "targetSourceAndTestAndPhysicalUnchanged": true,
+      "originalCounters": {
+        "dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter": {
+          "INSTRUCTION": {
+            "covered": 202,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 38,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 44,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 23,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 4,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "scope": "HISTORICAL_TARGET_ONLY_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    },
+    {
+      "proof": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG21064-login-failure-http-six-v1/manifest.json",
+        "sha256": "f691b66f59494be9108aa42ebdae4c58b0cbe405ab135f470cf4e8c5cf2a9223"
+      },
+      "originalSource": "9b49efba1e44faf3d2dd4d31e123e874e2434ad1",
+      "originalTests": 6,
+      "targetSourceAndTestAndPhysicalUnchanged": true,
+      "originalCounters": {
+        "dev/codex/schubert/nk/web/security/MqLoginFailureHandler": {
+          "INSTRUCTION": {
+            "covered": 110,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 8,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 33,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 6,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 2,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "scope": "HISTORICAL_TARGET_ONLY_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    }
+  ],
+  "currentNormal162": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26784-web-login-independent-v1/manifest.json",
+    "sha256": "e8859eb259f63df1c03ceeb4dc00e7a9b99528344d31b18d24de49c9fda40210"
+  },
+  "currentOwnTargetCounters": {
+    "dev/codex/schubert/nk/web/security/MqAuthenticationProvider": {
+      "INSTRUCTION": {
+        "covered": 174,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 28,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 35,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 19,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/web/security/MqLoginContextProbe": {
+      "INSTRUCTION": {
+        "covered": 243,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 20,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 49,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 17,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "fullClosureCounters": {
+    "INSTRUCTION": {
+      "covered": 18936,
+      "missed": 130
+    },
+    "BRANCH": {
+      "covered": 1145,
+      "missed": 35
+    },
+    "LINE": {
+      "covered": 3822,
+      "missed": 32
+    },
+    "COMPLEXITY": {
+      "covered": 1403,
+      "missed": 24
+    },
+    "METHOD": {
+      "covered": 806,
+      "missed": 4
+    },
+    "CLASS": {
+      "covered": 174,
+      "missed": 2
+    }
+  },
+  "helperDeficits": {
+    "dev/codex/schubert/nk/web/session/InvalidSessionRowException": {
+      "INSTRUCTION": {
+        "covered": 0,
+        "missed": 3
+      },
+      "LINE": {
+        "covered": 0,
+        "missed": 1
+      },
+      "COMPLEXITY": {
+        "covered": 0,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 0,
+        "missed": 1
+      },
+      "CLASS": {
+        "covered": 0,
+        "missed": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/session/SessionPrincipal": {
+      "INSTRUCTION": {
+        "covered": 63,
+        "missed": 5
+      },
+      "BRANCH": {
+        "covered": 5,
+        "missed": 5
+      },
+      "LINE": {
+        "covered": 14,
+        "missed": 1
+      },
+      "COMPLEXITY": {
+        "covered": 3,
+        "missed": 5
+      }
+    },
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "INSTRUCTION": {
+        "covered": 0,
+        "missed": 69
+      },
+      "BRANCH": {
+        "covered": 0,
+        "missed": 12
+      },
+      "LINE": {
+        "covered": 0,
+        "missed": 18
+      },
+      "COMPLEXITY": {
+        "covered": 0,
+        "missed": 8
+      },
+      "METHOD": {
+        "covered": 0,
+        "missed": 2
+      },
+      "CLASS": {
+        "covered": 0,
+        "missed": 1
+      }
+    },
+    "dev/codex/schubert/nk/web/security/ClosedWebAuthentication": {
+      "INSTRUCTION": {
+        "covered": 12,
+        "missed": 53
+      },
+      "BRANCH": {
+        "covered": 0,
+        "missed": 18
+      },
+      "LINE": {
+        "covered": 2,
+        "missed": 12
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 10
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 1
+      }
+    }
+  },
+  "fullClosureFour100": false,
+  "normalOwn8DistinctFromPriorFilterMock8": true,
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-06/1"
+  ],
+  "endingStatus": "P00706/2_UNACCEPTED_HELPER4_QUALITY_HTTP_DB_EXIT_DEPENDENCIES",
+  "productTestsExecuted": 162,
+  "newDefinitions": 0,
+  "MainChanged": false,
+  "TestChanged": 2,
+  "bugs": [
+    "BUG-2675",
+    "BUG-2676"
+  ],
+  "ykt": [
+    "YKT-2355",
+    "YKT-2356"
+  ],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1342_web_login_contract_audit.py",
+    "sha256": "6a116136b64d75d0b59620d74705b9ae1c1c484ebb57b29d49c65917def95e35"
+  }
+}
