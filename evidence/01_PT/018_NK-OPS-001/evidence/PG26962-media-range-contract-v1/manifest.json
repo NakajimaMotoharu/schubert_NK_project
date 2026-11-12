@@ -1,0 +1,189 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T14:37:10.143939+09:00",
+  "source": "96367b4511b1ebaf87f626cec8337c501a8ec789",
+  "productionCoreMain": "8995f6cb6341c0298613cee3714c0d20f113c0f1",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/ContentDispositionFactory.java": "bea7e8303973b079388d311b940b71b897f4a25d0816adf355bf8f5524bdd9f0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/DescriptorFileResolver.java": "e9b36e0155e5a49f5667b3668bc11fb84d4aa031f865188cd5e3529a0d878653",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/HttpByteRangeParser.java": "cd0d4e341a08ae32a6110e4bfa33e5ef8b5ab19eaea8b570decafb1682862f8d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java": "5d5869e2c2edeafcfcd1251a9b5ea0f7eb2ebe31e79a89544e799bd5dd9976a6",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaDeliveryException.java": "1b67c19a97f0cd35f193bc38ad1e155a4691f54ce6ad0c58d9bb37728cc77585",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java": "2eea32c993a8aa57d4b21c31382e73078459b7a4097249e7a540a4fafc5e7c5f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/package-info.java": "61d2e2c3db6780bcd7c5d248d8516f714f0381a650e2ef79b58b7c908fe3dbea",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/FileIntegrityException.java": "0ae4adadc3ba54aa98aa352a39a174a9b776e8240f442d7f1f43704e394a4854",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/package-info.java": "d02a504b450f71ea4349d467b4fc620555656dc6c1bf774620ec9caf0f92c7ed"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": {
+    "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+  },
+  "checks": [
+    {
+      "id": "P00904-PG01",
+      "methods": "HttpByteRangeParser.parseFirst/decimal/Full/Partial/Unsatisfiable; ContentDispositionFactory.create",
+      "testIds": [
+        "PT-MED-001..005"
+      ],
+      "expected": "Optionalempty=>full200 positiveN12 size; invalidsize/headerunit/grammar/ASCIIdecimal/negative/zero suffix/end<start/start>=size/arithmeticoverflow=>416. bytes=caseinsensitive; trim FIRSTcomma-spec only, laterinvalidignored. Inclusivepartial minrequestedend,total-1,start+1048575 =>max1MiB; openended/suffix exactformula. Full/Partial publicvalueinvariants andliteralrecordcontracts. HeaderASCII fallbackdownload.bin plusRFC5987 UTF8percent; I/attachment mode, space%20/+%2B/*%2A/Japaneseliteral, invalidCRLF/quote/slash/NUL/UTF8bytebounds blockeddescriptor. JDKURLEncoder pureencoding isnot network I/O."
+    },
+    {
+      "id": "P00904-PG02",
+      "methods": "MediaBodyStreamer.copy; MediaRangeService.constructor/deliver/respond; MediaDeliveryException",
+      "testIds": [
+        "PT-MED-006/007",
+        "PT-MED-027..032",
+        "PT-MED-PORT001..008"
+      ],
+      "expected": "Callerowned freshverifiedchannel/output. Nonnegativeinterval overflow andfilesize precheck, positionstart, <=65536buffer/exactlength, zero/eof/IO fixedfailure, neverimplicitclose/flush orsecondresponse aftercommit. Descriptor request type/id/mode bindsBEFOREpermit/file; semaphorenowait config1..20/default20,21stbusy503RetryAfter1; allnormal/checkedIO/runtime/finally release permits. Mediaport tests useonlymemorychannel/syntheticresponse, notauthenticatedHTTP. 200full/206ContentRange/416bytes*/total+ContentLength0; HEADsameheadersnoBody; attachment ignoresRange/octetstream; AcceptRanges/nosniff/private-no-store/dispositionexactheaders. NativeResolver+nativeServicefixtures wholeHOLD, memoryport8existingwhole oracle coverssamepublictarget without extracting them."
+    },
+    {
+      "id": "P00904-PG03",
+      "methods": "DescriptorFileResolver.read; FileIntegrityException; packageinfos",
+      "testIds": [
+        "PT-MED-026",
+        "PT-SCN-008-RD04/RD05"
+      ],
+      "expected": "OnlyafterfreshAPIauth/MQ binding, calleradmittedroot, exactrelativepathsegments/size, file callbackwithinownedheldinode andclose bysource. Resolver notauthgrant anddoesnotrepair/createfiles. Errorsfixed503/unavailable no physicalpaths. NativewholeResolver1HOLD; no nullmethodselection. SharedFileIntegrity andstoragepackage unchanged proof fromcurrentScenario148 retained, notduplicatefee orfreshfakecoverage."
+    },
+    {
+      "id": "P00904-PG04",
+      "methods": "MediaResponseDecoder.decode/decodeVerified/project/binding/sameContext/Result",
+      "testIds": [
+        "PT-MED-037..040",
+        "PT-MED-VERIFIED001..004"
+      ],
+      "expected": "Rawfullbody256..2064 clone/wipe, exactAUD/VID/MED layout001/header/length/correlation/currentcontext constanttime/profile, requestid/type/disposition/allowedMIME/path/name/size/SHA validatebeforeprojection. Failurecodes exactno descriptor/video; freshprivateResult viaLEGITIMATE in-memory MediaDescriptorWireClient.exchange only forverifiedprojection, notforgedprivateconstructor/authauthority. Typedrequestrecordsnone/data-type/pairedlayout/ownerlogicalid normalizeNFC, videoextra fields; independentUI232/235 literaloffsetreplybytes. WholeRaw4+Verified4 futuresbounded butpoolTWRclose unbounded; BUG2684 beforefix. SharedProtectedReadWireClient currentfullsafe163/194 qualification lineage andcompletehelperclosure must beverified before normal. No broker/keys/root/native auth issuances."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionFactoryTest.java",
+      "sha256": "63c0af6fe961b11ec05b2bf9db4f730f2768537d8b69b9c7cf1a4e29b6ae025c",
+      "tests": 1,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": false,
+      "actualNative": false,
+      "workerCloseUnbounded": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/DescriptorFileResolverTest.java",
+      "sha256": "c8e9c49aa5be4a5d408099c3dc497e73cd2cd4ada3207fbcd017c3fa294123d9",
+      "tests": 1,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "status": "HOLD_WHOLE_NATIVE_ROOT_NO_METHOD_EXTRACTION",
+      "ownsSyntheticTempFile": true,
+      "actualNative": true,
+      "workerCloseUnbounded": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+      "sha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": false,
+      "actualNative": false,
+      "workerCloseUnbounded": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "sha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa",
+      "tests": 2,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": true,
+      "actualNative": false,
+      "workerCloseUnbounded": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangeServiceTest.java",
+      "sha256": "8a661bf3f899b0f88b30309d4c3eedc896d5355aaac1af8c00440ed27f2f819c",
+      "tests": 6,
+      "wholeBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "status": "HOLD_WHOLE_NATIVE_ROOT_NO_METHOD_EXTRACTION",
+      "ownsSyntheticTempFile": true,
+      "actualNative": true,
+      "workerCloseUnbounded": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "sha256": "8926c5cf8508861e8e41a44ef9ab90b3c03fdbebd8362c7a937caf26a9e0ac21",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": false,
+      "actualNative": false,
+      "workerCloseUnbounded": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "sha256": "5a4ae3d37f9b2b31f54cd50a8e1c135d05ea36f4fac197bdf465459d4d71cc52",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": false,
+      "actualNative": false,
+      "workerCloseUnbounded": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java",
+      "sha256": "7e7e59d58974d577196b547038a1f9aa7e4b470a76a09b038b941606458eba4a",
+      "tests": 8,
+      "wholeBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "status": "WHOLE_PURE_OR_SYNTHETIC_HOST_TEST_PENDING_FINITE_AND_FULL_HELPER_CLOSURE",
+      "ownsSyntheticTempFile": false,
+      "actualNative": false,
+      "workerCloseUnbounded": true
+    }
+  ],
+  "additionalExistingWholeOracleFiles": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java"
+  ],
+  "workerFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26962-media-range-contract-v1/worker-before.json",
+    "sha256": "ef720f8095a10fa565473d3ab168d54e0dbb8cbe671ff86b057c8b1e0af7aec5"
+  },
+  "retainedParser4": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25684-web-range-parser-whole4-independent-v1/manifest.json",
+      "sha256": "5c523ea9a42ee0abc406b8c643862857242f2357a46bdcbb9aa1712d07074a55"
+    },
+    "targetAndTestSourceIdentical": true,
+    "wholeJdkOnlyNoProtocolDrift": true,
+    "newExecutions": 0
+  },
+  "sharedFileIntegritySameSourceProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26908-scenario-current-independent-v1/manifest.json",
+    "sha256": "8af79bdc7fe619788578c2b9c357ee4b631cd96643e2329cfbb4c73b2ca5c54a"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P009-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_THREE_FINITE_OWNERS_FULL_HELPER_CLOSURE_NORMAL_NATIVE_EXIT",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1419_media_range_contract_audit.py",
+    "sha256": "a3f65c4d581ecd61a6c191753aafa86c303bc7d53a29d810d0f428a4f82b89c8"
+  }
+}

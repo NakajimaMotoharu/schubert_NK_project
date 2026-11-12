@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-12T14:45:02.216">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java">
+<violation beginline="122" endline="122" begincolumn="17" endcolumn="34" rule="EqualsNull" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="nullAndConstructedSelectionsKeepInvariants" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+<violation beginline="135" endline="135" begincolumn="17" endcolumn="37" rule="EqualsNull" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="nullAndConstructedSelectionsKeepInvariants" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+<violation beginline="144" endline="144" begincolumn="15" endcolumn="19" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="nullAndConstructedSelectionsKeepInvariants" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="164" endline="164" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="oneHundredConcurrentParsesHaveNoSharedState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="164" endline="164" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="oneHundredConcurrentParsesHaveNoSharedState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="175" endline="175" begincolumn="21" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="oneHundredConcurrentParsesHaveNoSharedState" variable="results" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="183" endline="183" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="oneHundredConcurrentParsesHaveNoSharedState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="184" endline="184" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="HttpByteRangeParserTest" method="oneHundredConcurrentParsesHaveNoSharedState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java">
+<violation beginline="33" endline="33" begincolumn="13" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="exactIntervalsUseBoundedWritesAndLeaveResourcesOpen" variable="target" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Output object are closed after use
+</violation>
+<violation beginline="44" endline="44" begincolumn="9" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="exactIntervalsUseBoundedWritesAndLeaveResourcesOpen" variable="shortSource" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Channel object are closed after use
+</violation>
+<violation beginline="46" endline="46" begincolumn="9" endcolumn="15" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="exactIntervalsUseBoundedWritesAndLeaveResourcesOpen" variable="target" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Output object are closed after use
+</violation>
+<violation beginline="67" endline="67" begincolumn="11" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="nullBoundsAndIoFailuresDoNotClaimCompleteTransfer" variable="source" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Channel object are closed after use
+</violation>
+<violation beginline="69" endline="69" begincolumn="11" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="nullBoundsAndIoFailuresDoNotClaimCompleteTransfer" variable="target" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Output object are closed after use
+</violation>
+<violation beginline="81" endline="81" begincolumn="9" endcolumn="15" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="nullBoundsAndIoFailuresDoNotClaimCompleteTransfer" variable="source" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Channel object are closed after use
+</violation>
+<violation beginline="84" endline="84" begincolumn="9" endcolumn="15" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest" method="nullBoundsAndIoFailuresDoNotClaimCompleteTransfer" variable="target" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Output object are closed after use
+</violation>
+<violation beginline="136" endline="136" begincolumn="35" endcolumn="42" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaBodyStreamerTest.Channel" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to reads in operand
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaRangePortTest.java">
+<violation beginline="248" endline="248" begincolumn="17" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="254" endline="254" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="254" endline="254" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="258" endline="267" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="pending" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="272" endline="282" begincolumn="13" endcolumn="42" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" variable="rejected" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="294" endline="294" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="296" endline="296" begincolumn="11" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="twoConcurrentRequestsObserveOnePermitWithoutSharingResponseState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="385" endline="400" begincolumn="25" endcolumn="43" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaRangePortTest" method="verify" variable="headers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java">
+<violation beginline="215" endline="215" begincolumn="9" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaResponseDecoderTest" method="med040ConcurrentDecodeOwnsBytesAndIsolatesRequests" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="215" endline="215" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaResponseDecoderTest" method="med040ConcurrentDecodeOwnsBytesAndIsolatesRequests" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="221" endline="244" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaResponseDecoderTest" method="med040ConcurrentDecodeOwnsBytesAndIsolatesRequests" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="248" endline="248" begincolumn="7" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaResponseDecoderTest" method="med040ConcurrentDecodeOwnsBytesAndIsolatesRequests" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="250" endline="250" begincolumn="11" endcolumn="58" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaResponseDecoderTest" method="med040ConcurrentDecodeOwnsBytesAndIsolatesRequests" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java">
+<violation beginline="168" endline="168" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="168" endline="168" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="170" endline="170" begincolumn="21" endcolumn="95" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" variable="success" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="172" endline="176" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" variable="failure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="181" endline="181" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="183" endline="183" begincolumn="11" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.media" class="MediaVerifiedProjectionTest" method="concurrentProjectionOfOneImmutableResultHasIndependentBinding" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

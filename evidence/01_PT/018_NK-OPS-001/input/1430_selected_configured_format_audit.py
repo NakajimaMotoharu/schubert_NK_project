@@ -1,0 +1,11 @@
+"""Eight immutable earlier selected receipts, configured format only; source and old PT untouched."""
+from pathlib import Path
+import hashlib,json
+import pg9666_pagination_static as c
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';TC=R.parent/'toolchain';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text());ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));O=B/'evidence/PG26994-selected-configured-format-audit-v1';assert not O.exists();sources={};rows=[]
+for name in ['PG26810-web-auth-helper-current-static-v1','PG26872-snapshot-current-static-v1','PG26900-scenario-current-static-v1','PG26946-manifest-current-static-v1','PG26738-authorization-current-static-v1','PG26846-scenario-fatal-source-static-v1','PG26876-regenerator-fatal-source-static-v1','PG26928-media-fatal-source-static-v1']:
+ p=B/'evidence'/name/'manifest.json';m=load(p);names=[Path(x) for x in m['stages']['format']['command'] if x.endswith('.java')];assert names and m['stages']['format']['actualExit']==0
+ for q in names:
+  rp=str(q.relative_to(R));assert not any(x in q.name for x in ['RootFailedStartRecoveryTest','RootFailedStartPairRecoveryTest','SnapshotKeyCloseWitness']);assert sha(q)==m['inputHashes'][rp];sources[rp]=sha(q)
+ rows.append(dict(receipt=ref(p),sourcePaths=[str(q.relative_to(R)) for q in names],originalFormatExit=0))
+O.mkdir();c.SLOT=O;stage=c.step('configured-format',[str(TC/'jdk-25.0.4/bin/java'),'-jar',str(TC/'google-java-format-1.36.1-all-deps.jar'),'--skip-reflowing-long-strings','--dry-run','--set-exit-if-changed',*[str(R/p) for p in sorted(sources)]],R);assert stage['actualExit']==0 and not stage['timedOut'] and all(sha(R/p)==h for p,h in sources.items());v=dict(actualExit=0,stages={'configured-format':stage},sources=sources,receiptLineage=rows,sourceChanged=False,productTestsExecuted=0,sharedOrMainCompilationReexecuted=False,previousPtReexecuted=False,globalMavenFormatHold2596Maintained=True,bug='BUG-2685',horizontal='YKT-2363',toolSha256=sha(Path(__file__).resolve()));(O/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,earlierScopes=8,deduplicatedSources=len(sources),productTestsExecuted=0,manifestSha256=sha(O/'manifest.json'))))

@@ -251,7 +251,8 @@ final class MediaRangePortTest {
               source.read(descriptor, operation);
             },
             1);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       Reply first = new Reply();
       var pending =
           workers.submit(
@@ -289,6 +290,9 @@ final class MediaRangePortTest {
       call(service, descriptor(ContentDisposition.INLINE), Optional.empty(), true, new Reply());
       assertEquals(2, source.opens);
       assertEquals(2, source.closes);
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), "media range executor terminated");
     }
   }
 

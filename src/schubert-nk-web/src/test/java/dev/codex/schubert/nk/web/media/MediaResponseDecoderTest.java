@@ -212,7 +212,8 @@ class MediaResponseDecoderTest {
 
   @Test
   void med040ConcurrentDecodeOwnsBytesAndIsolatesRequests() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var jobs = new ArrayList<java.util.concurrent.Future<Boolean>>();
       for (int i = 0; i < 100; i++) {
         String id = "track-" + i;
@@ -243,6 +244,10 @@ class MediaResponseDecoderTest {
                 }));
       }
       for (var job : jobs) assertTrue(job.get(10, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(
+          executor.awaitTermination(10, TimeUnit.SECONDS), "media decoder executor terminated");
     }
   }
 

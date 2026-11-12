@@ -165,7 +165,8 @@ final class MediaVerifiedProjectionTest {
     TypedPayloadValues valid = request(MediaType.AUDIO, LOGICAL_ID, ContentDisposition.INLINE);
     TypedPayloadValues wrong = request(MediaType.AUDIO, "8", ContentDisposition.INLINE);
     var response = exchange(valid, MediaType.AUDIO, LOGICAL_ID, ContentDisposition.INLINE, SUCCESS);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var success = workers.submit(() -> MediaResponseDecoder.decodeVerified(valid, response));
       var failure =
           workers.submit(
@@ -176,6 +177,10 @@ final class MediaVerifiedProjectionTest {
       assertEquals(
           LOGICAL_ID, success.get(5, TimeUnit.SECONDS).descriptor().orElseThrow().logicalId());
       assertTrue(failure.get(5, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(
+          workers.awaitTermination(10, TimeUnit.SECONDS), "media projection executor terminated");
     }
     assertEquals("ProtectedReadResponse[REDACTED]", response.toString());
     assertEquals(
