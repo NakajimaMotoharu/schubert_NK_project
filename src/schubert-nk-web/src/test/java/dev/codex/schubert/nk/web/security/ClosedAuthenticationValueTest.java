@@ -1,0 +1,179 @@
+package dev.codex.schubert.nk.web.security;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.web.session.InvalidSessionRowException;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
+import org.jspecify.annotations.Nullable;
+import org.junit.jupiter.api.Test;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+/**
+ * PT-WEB-CLOSEDVAL001..004; SS314 §7.2.1/7.2.6,331,354/SSC328; P00706/P015 shared pure value
+ * contracts. Public synthetic token objects and Throwable graphs, no session/DB/key.
+ */
+final class ClosedAuthenticationValueTest {
+  private static final String ROLE_USER_EXPECTED = "ROLE_USER";
+  private static final Instant AT = Instant.parse("2026-11-12T00:00:00Z");
+  private static final AuthenticationContext CONTEXT = AuthenticationContext.of("a".repeat(64));
+
+  private static SessionPrincipal principal(String name, UserRole role) {
+    return new SessionPrincipal(name, role, CONTEXT, AT);
+  }
+
+  private static UsernamePasswordAuthenticationToken token(
+      Object principal, @Nullable Object credentials, String authority) {
+    return UsernamePasswordAuthenticationToken.authenticated(
+        principal, credentials, List.of(new SimpleGrantedAuthority(authority)));
+  }
+
+  @Test
+  void principalUsesLiteralNfcUnicodeAndClosedNullBoundaries() {
+    var value = principal("e\u0301", UserRole.USER);
+    assertEquals("é", value.username());
+    assertEquals("é", value.getName());
+    assertEquals(UserRole.USER, value.role());
+    assertSame(CONTEXT, value.authenticationContext());
+    assertEquals(AT, value.loginAt());
+    assertEquals("SessionPrincipal[REDACTED]", value.toString());
+    String boundary = Character.toString(0x10ffff).repeat(16);
+    assertEquals(boundary, principal(boundary, UserRole.ADMIN).username());
+    for (String invalid :
+        List.of(
+            "",
+            "x ",
+            "x\ny",
+            boundary + "x",
+            new String(new char[] {(char) 0xd800}),
+            new String(new char[] {(char) 0xdc00}))) {
+      var failure =
+          assertThrows(IllegalArgumentException.class, () -> principal(invalid, UserRole.USER));
+      assertEquals("session principal is invalid", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+    assertThrows(NullPointerException.class, () -> principal(null, UserRole.USER));
+    assertThrows(NullPointerException.class, () -> principal("u", null));
+    assertThrows(
+        NullPointerException.class, () -> new SessionPrincipal("u", UserRole.USER, null, AT));
+    assertThrows(
+        NullPointerException.class, () -> new SessionPrincipal("u", UserRole.USER, CONTEXT, null));
+  }
+
+  @Test
+  void closedProjectionRequiresExactTokenAndLiteralRoleAuthority() {
+    assertTrue(ClosedWebAuthentication.principal(null).isEmpty());
+    var anonymous =
+        new AnonymousAuthenticationToken(
+            "public-test-label",
+            "synthetic-anonymous",
+            List.of(new SimpleGrantedAuthority("ROLE_ANONYMOUS")));
+    assertTrue(ClosedWebAuthentication.principal(anonymous).isEmpty());
+    for (var entry :
+        Map.of(UserRole.USER, ROLE_USER_EXPECTED, UserRole.ADMIN, "ROLE_ADMIN").entrySet()) {
+      var p = principal("synthetic-user", entry.getKey());
+      var actual = ClosedWebAuthentication.authenticated(p);
+      assertTrue(actual.isAuthenticated());
+      assertNull(actual.getCredentials());
+      assertNull(actual.getDetails());
+      assertEquals(
+          List.of(entry.getValue()),
+          actual.getAuthorities().stream().map(a -> a.getAuthority()).toList());
+      assertSame(p, ClosedWebAuthentication.principal(actual).orElseThrow());
+    }
+    var p = principal("synthetic-user", UserRole.USER);
+    var unauthenticated = UsernamePasswordAuthenticationToken.unauthenticated(p, null);
+    var withDetails = token(p, null, ROLE_USER_EXPECTED);
+    withDetails.setDetails("public-test-details");
+    var emptyAuthorities = UsernamePasswordAuthenticationToken.authenticated(p, null, List.of());
+    var twoAuthorities =
+        UsernamePasswordAuthenticationToken.authenticated(
+            p,
+            null,
+            List.of(
+                new SimpleGrantedAuthority(ROLE_USER_EXPECTED),
+                new SimpleGrantedAuthority("OTHER")));
+    for (var invalid :
+        List.of(
+            new DerivedToken(p),
+            unauthenticated,
+            token("untrusted-name", null, ROLE_USER_EXPECTED),
+            token(p, "public-test-credential", ROLE_USER_EXPECTED),
+            withDetails,
+            emptyAuthorities,
+            twoAuthorities,
+            token(p, null, "ROLE_ADMIN"))) {
+      var failure =
+          assertThrows(
+              SessionStoreException.class, () -> ClosedWebAuthentication.principal(invalid));
+      assertEquals("session storage is unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+    assertThrows(NullPointerException.class, () -> ClosedWebAuthentication.authenticated(null));
+  }
+
+  @Test
+  void fixedStoreFailureConstructorsHaveLiteralRedactedDiagnostics() {
+    for (SessionStoreException failure :
+        List.of(new SessionStoreException(), new InvalidSessionRowException())) {
+      assertEquals("session storage is unavailable", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void fatalGraphOrderUsesIndependentIdentitiesAndCyclesTerminate() {
+    var first = new IllegalStateException("synthetic-provider-a");
+    var second = new IllegalArgumentException("synthetic-provider-b");
+    first.initCause(second);
+    second.initCause(first);
+    var sqlFirst = new SQLException("synthetic-sql-a");
+    var sqlSecond = new SQLException("synthetic-sql-b");
+    sqlFirst.setNextException(sqlSecond);
+    sqlSecond.setNextException(sqlFirst);
+    first.addSuppressed(sqlFirst);
+    sqlSecond.addSuppressed(first);
+    assertDoesNotThrow(() -> SessionStoreException.preserveFatal(first));
+    assertDoesNotThrow(() -> SessionStoreException.preserveFatal(new SQLException("synthetic")));
+    var direct = new AssertionError("synthetic-fatal-direct");
+    assertSame(
+        direct,
+        assertThrows(AssertionError.class, () -> SessionStoreException.preserveFatal(direct)));
+    var cause = new AssertionError("synthetic-fatal-cause");
+    var suppressed = new AssertionError("synthetic-fatal-suppressed");
+    var root = new SQLException("synthetic-provider", cause);
+    root.addSuppressed(suppressed);
+    assertSame(
+        cause, assertThrows(AssertionError.class, () -> SessionStoreException.preserveFatal(root)));
+    var nextFatal = new AssertionError("synthetic-fatal-next");
+    var nextRoot = new SQLException("synthetic-next-root");
+    nextRoot.setNextException(new SQLException("synthetic-next", nextFatal));
+    assertSame(
+        nextFatal,
+        assertThrows(AssertionError.class, () -> SessionStoreException.preserveFatal(nextRoot)));
+  }
+
+  private static final class DerivedToken extends UsernamePasswordAuthenticationToken {
+    private static final long serialVersionUID = 1L;
+
+    DerivedToken(SessionPrincipal principal) {
+      super(principal, null, List.of(new SimpleGrantedAuthority(ROLE_USER_EXPECTED)));
+    }
+  }
+}
