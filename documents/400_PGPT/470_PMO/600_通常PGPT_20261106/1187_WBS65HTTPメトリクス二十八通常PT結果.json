@@ -1,0 +1,192 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-4948",
+  "groupId": "PGPT-WBS65-HTTP-METRIC28-FINITE-WORKERS-NORMAL28-20261113",
+  "startEvent": "PGPT-20261008-4947",
+  "sourceAtGroupStart": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 2.1
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-12T19:16:19.012Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795012175,
+      "remainingPercent": 76
+    },
+    "secondary": null
+  },
+  "observedSharedPp": null,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28138-http-metric28-scope-join-v1/manifest.json",
+    "sha256": "3b0fa655caf7a500b7324a4f055925311af78d11138d7eccb48b8a18625693d6"
+  },
+  "outcome": "HTTP_METRIC_WHOLE28_SUCCESS_ALL11_PHYSICAL_THREE_SOURCE_FOUR100",
+  "technical": {
+    "kind": "HTTP_METRIC_NORMAL28",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28136-http-metric28-independent-v1/manifest.json",
+      "sha256": "3b470c5f1dae6fc774676a5d7bc56bc2dca6c82034cefac64043378da6ad5ef9"
+    },
+    "tests": 28,
+    "newDefinitions": 0,
+    "newAcceptance": 0,
+    "physicalClasses": 11,
+    "positiveMainCrc": 9,
+    "completeExecutableSourceCount": 3,
+    "codeClasses": 9,
+    "sourceCounters": {
+      "HttpMetricContract": {
+        "COMPLEXITY": {
+          "covered": 35,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 645,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 28,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 13,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 120,
+          "missed": 0
+        }
+      },
+      "HttpMetricRecorder": {
+        "COMPLEXITY": {
+          "covered": 13,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 214,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 5,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 16,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 37,
+          "missed": 0
+        }
+      },
+      "OverflowSafeHttpMeterRegistry": {
+        "COMPLEXITY": {
+          "covered": 31,
+          "missed": 0
+        },
+        "INSTRUCTION": {
+          "covered": 367,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 21,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 20,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 69,
+          "missed": 0
+        }
+      }
+    },
+    "completeSourceComponentCounters": {
+      "COMPLEXITY": {
+        "covered": 79,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 226,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 9,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 1226,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 54,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 49,
+        "missed": 0
+      }
+    },
+    "allThreeSourceFour100": true,
+    "wholeScopeFour100": true,
+    "naturalNoCode": [
+      "dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport",
+      "dev/codex/schubert/nk/web/monitoring/package-info"
+    ],
+    "naturalBranchZeroClasses": [
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method"
+    ],
+    "branchZeroMeaning": "NATURAL_NA_NOT_MISSING_COVERAGE_OR_MANUAL_EXCLUSION",
+    "MainChanged": false,
+    "formerAssertionsPreserved": true,
+    "bug2738": "ALL_FIVE_SELECTED_WORKERS_VERIFIED_LIMITED_CLOSED",
+    "bug2740Ykt2391": "ONE_TEST_LEXICAL_FORMAT_ONLY_OTHER_SEVEN_NONAPPLICABLE_LIMITED_CLOSED",
+    "ykt2387": "GLOBAL_OPEN_EXPANDED230_FACTORY_QUERY_PLUS_COMPANION_CONTRACT_TWR_OUTSIDE_QUERY",
+    "roster": {
+      "runs": 70,
+      "actualExecutions": 3673,
+      "success": 3645,
+      "failed": 28,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "ContinueWBS65 originaldependency afterP01625/P017 Root-dependencyHOLD: pricebounded publicsource closure of independent batch BackupManifest/BackupVersions/BackupManifestCodec andexistingwholeManifestValues/Codec Tests beforeanydynamicwork; classifyactualDB-native-Root/keys andpriorproof first, no newfixture/extraction/replayconfirmation. IfHOLD leaveonlythatrange andcontinueallowedhost WebMetricCatalog/CustomPayload whole-source review pricedbeforestart. Currentthreegroups53 success are additionalqualification not190acceptance orglobalquality. Freshquota/Usage next04:55:54/disklargegate.",
+  "remainingEstimatePp": {
+    "low": 402.109,
+    "base": 848.63,
+    "high": 1664.55
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1186_WBS65予実・HTTPメトリクス二十八PT後版242.json",
+    "sha256": "5018b56f995400fc7d3196a359a6da21b0da9729ebf8e15257275f4a819cff34"
+  },
+  "forecastNotActualCost": true
+}

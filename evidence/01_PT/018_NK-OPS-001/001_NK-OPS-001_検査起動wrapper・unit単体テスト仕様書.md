@@ -56,3 +56,6 @@ YKT2387独立純値/非秘密解析 normal16の当Program結果は[4182_Web非�
 
 
 API非秘密設定原七の当Program限定結果は[4184](4184_API非秘密設定原七単体結果.md)。固定Main1の四counter100とruntime配備・実DB-MQ・全451を区別する。
+
+
+HTTP metrics原whole28の当Program結果は[4188](4188_HTTPメトリクス原二十八単体結果.md)。全11physical/三実行可能source九code四100、自然NoCode/branch0は明示、actual exporter/network/全451は別。
