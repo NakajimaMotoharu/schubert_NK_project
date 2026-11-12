@@ -106,3 +106,6 @@ WBS-P016-18公開source契約/独立期待値/TestIDは[4161_P01618質問受付�
 
 
 P01618/19と要求表示共有の原18は[仕様](4163_P0161819質問入力表示原十八単体仕様.md)/[結果](4164_P0161819質問入力表示原十八単体結果.md)、5source同exec四100/全186partial、actualHTTP/認可/token/DB/CHR/451は別未受入。
+
+
+WBS-P016-19公開source契約/独立期待値/TestIDは[4165_P01619受付完了原二artifact契約対応.md](4165_P01619受付完了原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
