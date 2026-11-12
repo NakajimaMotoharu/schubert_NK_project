@@ -17,3 +17,8 @@ ResourceScopeのprimary/secondary優先順位はSS333の例外規則がある。
 
 
 source固定commit edaf641333266660ec79a6e070c98b7a79bbccac、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG27684-storage-catalog-source-join-v1/manifest.json) SHA767f6b769022ae5484baf1a4ab2d49f963deb1471392230e6e4749f471631dc7。StorageIoExceptionへ既有限identity/cause-suppressed-SQLnext分類algorithmをmodule内実装、OwnedDirectory三catchへ既理由変換前call。元6f7へexactinverse/GJF-CS0。ResourceScopeはSS333明示複合優先規則により非該当、未変更。実Dir runtime/DB/native/Root/FS/actual4未実施・BUG2718OPEN、helperUnitは後続別価格。旧P00304/08受入は元source歴史で維持し新sourceへ合算0。 製品PT0、runtime/coverage未受入。
+
+
+実行source f557e11ee0df831af5e5da14aa4d00250f981d0a / Production edaf641333266660ec79a6e070c98b7a79bbccac。PG27688元Root compiler compile→PG27689 import-only Test compile→PG27692独立preflight→1764a qualifier run→1767 independent post。実行command/cwd/start/end/exit/tool環境はPG27696のunit-/original-保存証拠とmanifest/files SHA256へ一意対応。
+
+GRAPH001=fixedReasonsAndNullContract、002=directCauseAndSuppressedIdentityAndOrder、003=sqlNextAndMixedEdgesRetainIdentity、004=nonFatalCyclesAndDuplicateEdgesFinishWithoutMutation。新helper全4成功/FESabort0、独立PG27696/71e496cd：全3physical/2positiveCRC・package-info自然noCodeのみ、同exec全selected scope L24/M4/C2/B12を含む全counter100。RootそのままNullAway新Main2、PMD0/CS0/SB0/format0。初回Teststarimport1は未実行stageで訂正・Testのみ再compile、Maincompile不再演、旧静的失敗PG27690保全。新4定義はpublic memory graph/SQLnext/cycle/null/identity固定期待値、実Dir/root/native/FS/privategrant/actual4代替0。BUG2718三caller実runtimeは未実施OPEN、ResourceScope優先規則未変更。原190新0/正式1964-53/工数null。
