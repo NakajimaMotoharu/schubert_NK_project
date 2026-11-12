@@ -164,7 +164,8 @@ class SessionOperationTokenV2Test {
     assertThrows(
         IllegalArgumentException.class,
         () -> new SessionAttributes(Optional.empty(), Optional.empty(), Optional.empty(), tokens));
-    try (var pool = Executors.newFixedThreadPool(10)) {
+    var pool = Executors.newFixedThreadPool(10);
+    try {
       var futures = new ArrayList<Future<Void>>();
       for (int n = 0; n < 100; n++)
         futures.add(
@@ -175,6 +176,11 @@ class SessionOperationTokenV2Test {
                   return null;
                 }));
       for (var future : futures) future.get(20, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("session token v2 workers did not terminate");
+      }
     }
   }
 }

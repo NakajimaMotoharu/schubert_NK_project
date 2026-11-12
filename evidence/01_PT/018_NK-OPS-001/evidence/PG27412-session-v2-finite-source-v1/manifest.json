@@ -1,0 +1,20 @@
+{
+  "actualExit": 0,
+  "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+  "sourceBefore": "25c8a4e8f799f4c50f3fa7ea9807894f17f8ce79",
+  "oldSha256": "4a26d6e28fd142bbe6d18e406f6921225c743d7f81b94ce10e0296f08153047d",
+  "newSha256": "429dbd000e47d9a61cd586706ca25c099ee1beabaded610adaa66246cbd4e3ea",
+  "originalAllAssertionsInverseExact": true,
+  "changes": [
+    {
+      "before": "    try (var pool = Executors.newFixedThreadPool(10)) {",
+      "after": "    var pool = Executors.newFixedThreadPool(10);\n    try {"
+    },
+    {
+      "before": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    }\n  }",
+      "after": "      for (var future : futures) future.get(20, TimeUnit.SECONDS);\n    } finally {\n      pool.shutdownNow();\n      if (!pool.awaitTermination(10, TimeUnit.SECONDS)) {\n        throw new AssertionError(\"session token v2 workers did not terminate\");\n      }\n    }\n  }"
+    }
+  ],
+  "productTestsExecuted": 0,
+  "bug": "BUG-2706"
+}
