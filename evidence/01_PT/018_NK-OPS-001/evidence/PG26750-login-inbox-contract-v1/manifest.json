@@ -1,0 +1,131 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:24:48.124463+09:00",
+  "source": "83cdfbb95fa493290ba729010042cec12d4f6160",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapper.java": "50338664a18e23204f238395928749ee9be293161ae6dc88d0cf3db98aaf23a2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java": "13b3fab309016c671d89c9a7d78cfb46ecaaa142041e01c4867e668b88cfb3c6"
+  },
+  "design": {
+    "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+  },
+  "checks": [
+    {
+      "id": "P00704-PG01",
+      "source": "AuthenticationResponseMapper.login/logout/temporaryLoginFailure",
+      "testIds": [
+        "PT-AUT-WIRE-001..003"
+      ],
+      "expectation": "LGNRSP432 DATA: username0/64, role64/5, context69/64, issued133/17, expires150/17, retry167/6, remaining173/3, message176/256. USER/ADMIN literal, JSTmillis truncation, failure identity blank; locked Current fixed15minute text/Retry1or900. Logout24 DATA17date+7space. Golden manual byte offsets independent of production."
+    },
+    {
+      "id": "P00704-PG02",
+      "source": "LoginInboxService.execute/decode/canonical",
+      "testIds": [
+        "PT-AUT-INBOX-001..009"
+      ],
+      "expectation": "Transport checks precede layout/version/typed LGN decode. NFCname/loginpassword/numericIP no scoped DNS. Anonymousowner/no operationtoken, canonical names/value/password/IP, requestMessage/correlation stable, receivedmicros retention7days; onlyInboxNEW authenticates/session/counter/audit, IN_PROGRESS9000 nonpersisted. Identity mismatch permanent; password/data/canonical wiped. CallerTX, noJMS/HTTP/commit."
+    },
+    {
+      "id": "P00704-PG03",
+      "source": "LoginReplayService.capture/restore/validateSession/wire",
+      "testIds": [
+        "PT-AUT-REPLAY-001..005"
+      ],
+      "expectation": "Freeze initial688 header+432 DATA, successCOMPLETED/AUTH_SESSION vs failureERROR/NONE. Restore closedlayout001/length688/correlation/state/code and full payloadsemantic; successful snapshot binds UUID/owner/createdMessage/decryptedcontext/hash/immutableissued+initial8h. Header freshMessage/sentmillis/correlation=requestMessage, successreplay0200/failure0101or0106 unchanged. No reauthentication/reissue/touch/revoke/counter/audit; present authority remains separate DB verify. Fixed9000 on SQL/crypto/metadata/ownedclose, buffers wiped."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapperTest.java",
+      "sha256": "d42472923a2399840df438ba00f9cf6e46619bc4fff1f567a8a46e99c98116ec",
+      "tests": 3,
+      "status": "NO_FRESH_RUN_PENDING_FINITE_FUTURE_AND_EXECUTOR_OWNERSHIP_REMEDY",
+      "fullBodyReviewed": true,
+      "methodIndexReviewed": true,
+      "actualHeldClassNames": []
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "sha256": "02e4ea99e5306a6977f0726574c60763e35254bd1a7a671599921adb2dcf2ce6",
+      "tests": 14,
+      "status": "HOLD_WHOLE_REAL_DB_AND_ACTUAL_HELD_CLASS_DEPENDENCIES",
+      "fullBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "actualHeldClassNames": [
+        "ResponseSnapshotCodec",
+        "FingerprintKeyRing",
+        "TemporaryInfrastructureException"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+      "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+      "tests": 5,
+      "status": "HOLD_WHOLE_REAL_DB_AND_ACTUAL_HELD_CLASS_DEPENDENCIES",
+      "fullBodyReviewed": false,
+      "methodIndexReviewed": true,
+      "actualHeldClassNames": [
+        "ResponseSnapshotCodec"
+      ]
+    }
+  ],
+  "retainedMapperOriginal3": {
+    "independent": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15388-auth-response-mapper-three-independent-v1/manifest.json",
+      "sha256": "e4b7f18e4085cb8c0c51b0f5a90b284b0490c31d939feb7cbd27995177c913cb"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15386-auth-response-mapper-three-post-v2/manifest.json",
+      "sha256": "5aefc24bbc8bbd2ecb6a36bafe8ed439ee3208da641771c8e8787efe54d3b59b"
+    },
+    "unit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15384-auth-response-mapper-three-pt-v1/manifest.json",
+      "sha256": "f32bdb8fa5350ca001c9454587ba5cc3140500fb92d74672fe7b5b69e83ea492"
+    },
+    "originalSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+    "targetSourceTestAndPhysicalIdentical": true,
+    "originalTargetOnlyCounters": {
+      "BRANCH": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 34,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      }
+    },
+    "wholeCurrentDependenciesQualified": false,
+    "currentCanonical2AndProtocol3ChangesNotTransferred": true,
+    "newExecutions": 0
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-04/1"
+  ],
+  "endingStatus": "P00704/2_NOT_ACCEPTED_ACTUAL_INBOX_SNAPSHOT_DB_FINITE_MAPPER_OWNER_AND_EXIT_DEPENDENCIES",
+  "wholeOwnSourceReviewed": true,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1331_login_inbox_contract_audit.py",
+    "sha256": "0d426bccfdcbd6a8f17b97f3eba5401bfd115de7492a780045e8b88dfb82b775"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T12:28:38.392982+09:00",
+  "source": "83cdfbb95fa493290ba729010042cec12d4f6160",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java": "014b66889f0fcff7372ca4b709e8124852bde3c084e18a6ba0cadf663604c0b9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java": "8894228a382268524f7a56f808de50a14b2461719e03e1b57c362655a8b2380b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java": "8ecc73a652c4bd9c96ed096c55a159a06cc4f62b99eb128f0c1070e6982d3ddf"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+  },
+  "checks": [
+    {
+      "id": "P00705-PG01",
+      "source": "AuthSessionRevocationService.logout/logoutCurrent",
+      "testIds": [
+        "PT-AUT-008-R01..04",
+        "PG20958 eight synthetic JDBC"
+      ],
+      "expectation": "Explicit callerTX User→session lock then clock sampled micros. Known alreadyrevoked returns originalrevokedAt/0200 without actor/touch or newrevoke; otherwise expiry<=now stagesEXPIRED+0102 criticalaudit then denies, ACTIVEonlynewLOGOUT+0000. Separate request audit once, InboxsameMessage replay does not call revoke. SQL NULL/affected1/close faults fixed9000; no session ID/raw/hash/cipher log."
+    },
+    {
+      "id": "P00705-PG02",
+      "source": "AuthSessionRevocationService.revokeAll",
+      "testIds": [
+        "PT-AUT-008-R03/R04",
+        "PG20958 eight synthetic JDBC"
+      ],
+      "expectation": "Fresh DB-authenticatedADMIN supplied by caller, targetN12 and reasonsDISABLED/PASSWORD_RESET/ADMIN only. Userlock then activeunrevoked sessionUUIDascending lock; each guardedupdate1 and correspondingactor/target/message/corr criticalaudit in samebusinessTX. No owncommit/rollback/close or unauthorized principal grant."
+    },
+    {
+      "id": "P00705-PG03",
+      "source": "LogoutInboxService.execute/owner",
+      "testIds": [
+        "PT-AUT-LOGOUT-INBOX-001..006",
+        "expiry-fence additional cases in whole fixture"
+      ],
+      "expectation": "LOGREQ01 validated, rawhash owner-only Userlock; unknownowner0102/noInbox; no active actor/authentication/touch at lookup. Knownowner Inbox ownerdecimal/LOGREQ01/001 targetREQUEST:LOGREQ01 DATA0/notoken/headercontext outsidefingerprint, seven-day retention; NEWonlylogoutCurrent. Invalidexpiry persistsEXPIRED fence+0102snapshot by callerTX; IN_PROGRESS9000/nonpersisted; sameowner sameMessage replay never revokes another context."
+    },
+    {
+      "id": "P00705-PG04",
+      "source": "LogoutReplayService.captureSuccess/captureDenied/failure/restore/validateSession/wire",
+      "testIds": [
+        "PT-AUT-LOGOUT-INBOX-001..006",
+        "metadata tamper/expiry cases in whole fixture"
+      ],
+      "expectation": "Initial280byte/24DATA frozenencrypted, successCOMPLETED/AUTH_SESSION vs0102ERROR/NONE. AAD request/layout001/owner. Restore closedheader/length/correlation/layout/state/code/fullsemantic; successsnapshot original context hash matches referenced UUID/owner/revoked=true/originalrevokedAt millis. Freshresponse Message/time/correlation=requestMessage/currentrequestcontext; successful replay0200, failed0102 retained, no DB updates/idle/authgrant. Buffers wiped and fixed9000."
+    }
+  ],
+  "retainedOriginalProofs": [
+    {
+      "proof": {
+        "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20958-session-revocation-oracle-fixed-eight-v1/manifest.json",
+        "sha256": "4c312a768b0a51edf5ae7efce76bc4023c3b1e453f4cf16bdd82b3128ac69d95"
+      },
+      "originalSource": "3a2c29bd755f0ed6158464ad3b5715bc51be4617",
+      "originalMain": "fb189b11ee9dc39a5ef269f4018b809439cfc0f9",
+      "originalTests": 8,
+      "inputHashes": {
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationService.java": "014b66889f0fcff7372ca4b709e8124852bde3c084e18a6ba0cadf663604c0b9",
+        "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java": "4fa2ce49efef57b89472882f7347c50d6ccf61705d8e559c5bed1e2a3d8425dc"
+      },
+      "physical": {
+        "dev/codex/schubert/nk/api/security/AuthSessionRevocationService": "7a95c995f54ddbd4e6fbe282ae07b61a6213de1dd8fed9fddc733040a61e0027"
+      },
+      "counters": {
+        "dev/codex/schubert/nk/api/security/AuthSessionRevocationService": {
+          "INSTRUCTION": {
+            "covered": 468,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 36,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 110,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 25,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 7,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      },
+      "status": "ORIGINAL_RUN_TARGET_SOURCE_TEST_AND_PHYSICAL_IDENTICAL_NOT_CURRENT_WHOLE_DEPENDENCY_QUALIFICATION",
+      "newExecutions": 0
+    }
+  ],
+  "originalRevocationIndependentPost": {
+    "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG20964-session-revocation-independent-post-v1/manifest.json",
+    "sha256": "478831522707b849ab95ea59d0e6306296be64c58d8b15f20f9de4cb911928d2"
+  },
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java",
+      "sha256": "fb08bb5f49818298542e7b6711f2106e34c55a342dd081dda92a668ed2bafbaf",
+      "fullPublicSourceReviewed": false,
+      "publicMethodIndexReviewed": true,
+      "tests": 8,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE_NO_PARTIAL_SELECTION",
+      "independentExpectations": "Currentclock after User/session locks, literal expiry equality/oldrevokedAt/0102 fence SQL postconditions and critical audit atomicity, snapshot/state/ref/replay context binding; actualDB not executed"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LogoutInboxServiceTest.java",
+      "sha256": "e18f014a8e3ba8a5ef79acfbfbb8c94fe0735bde2daf1afa85497befc65e831a",
+      "fullPublicSourceReviewed": false,
+      "publicMethodIndexReviewed": true,
+      "tests": 13,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE_NO_PARTIAL_SELECTION",
+      "independentExpectations": "Currentclock after User/session locks, literal expiry equality/oldrevokedAt/0102 fence SQL postconditions and critical audit atomicity, snapshot/state/ref/replay context binding; actualDB not executed"
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-05/1"
+  ],
+  "endingStatus": "WBS-P007-05/2_NOT_ACCEPTED_ACTUAL_DB_EXPIRY_FENCE_SNAPSHOT_REPLAY_ADMIN_DEPENDENCIES_AND_WHOLE451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1334_logout_contract_audit.py",
+    "sha256": "0c1af4ed623d30ff1aac6e77796c6ad46a1414be6166c4a133877711ed07907c"
+  }
+}
