@@ -1,0 +1,193 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptId.java": "32e2d84c19a05c4655c6911e0b27374c13fb6b4d3ef09ead40e60877305d5d2f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator.java": "a4cb4c03f5dbdb225632d6abf4c2465fbb414ce09b0894f0b6649c83c7bc145d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/package-info.java": "633d8f8820c8d1b5c4862cba1d1a902979e5badcad70c0e5aff074add485d33b",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java": "43ed69b0ff0a8f8bc7f44dafaa0ac72b2c30db3c5dbafa76069b3d9cafeb773c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java": "f38c3a9a52c3c26f40983ceb220e882975187c7b2b3480c1ffd88c18d3c74bbf"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27202-receipt13-profile-v1/manifest.json",
+    "sha256": "70c9d02f847332cf95961bacbbdfa3c4b4cb849d808458fcc3b7ebec22900b2f"
+  },
+  "normalStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22106-api-stop-static-independent-input-v1/six-static.json",
+    "sha256": "0580a14592d3fc00820183034c584208e45b002802d2e3e173b5f752c7cf19f2"
+  },
+  "mainStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/manifest.json",
+    "sha256": "2d200777b5983362f972cd00e83b64dbf265851bd9688eb6684a6442e4549298"
+  },
+  "testStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27206-receipt13-static-v1/manifest.json",
+    "sha256": "809d9e75c134212e0e42044905a41872ec523c6eeb26de0a234d5df2284053f1"
+  },
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "145",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "JUnitcaller owns histogram; workers return values andcallermergesonlyafterboundedFuture, no concurrentmapwrites."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "147",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "JUnitcaller owns histogram; workers return values andcallermergesonlyafterboundedFuture, no concurrentmapwrites."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "CloseResource",
+      "line": "148",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "Explicitfinally shutdownNow andawaitTermination10 forownedworker. TWRwouldrestoreunboundedclose."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "148",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "153",
+      "message": "Use ReentrantLock rather than synchronization",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "Intentionalpublicmonitorheld oracle proves productionprivate-lockindependence. Replacingmonitorwouldremove assertion."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "159",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "160",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "CloseResource",
+      "line": "204",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "Explicitfinally shutdownNow andawaitTermination10 forownedworker. TWRwouldrestoreunboundedclose."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "204",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "208",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "211",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "212",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "CloseResource",
+      "line": "103",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "Explicitfinally shutdownNow andawaitTermination10 forownedworker. TWRwouldrestoreunboundedclose."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "103",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "105",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "106",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandaloneJUnit cleanup failure must fail the test when owned worker outlives ten seconds; does not convert product failure to success or alter expected result. Actual worker completion independently required."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "107",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "108",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_FINITE_TEST_CONTEXT",
+      "reason": "StandalonewholeJUnit boundedprivate-memory threads, notJ2EE/requestserver; Future5/finitefinally, noexternalbackend."
+    }
+  ],
+  "expectedTests": 13,
+  "fullPhysicalClasses": 3,
+  "originalFourOraclesByteInverse": true,
+  "receiptNineUnchanged": true,
+  "newDefinitions": 0,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 18,
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1517_receipt13_preflight.py",
+    "sha256": "c7c17bc86a638da0cadce4d82614ad0b12eb234004bd803048ffcf1cebe340e1"
+  }
+}

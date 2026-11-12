@@ -100,8 +100,14 @@ final class QuestionReceiptRecoveryTest {
 
   private static QuestionReceiptId fromAnotherThread(QuestionReceiptIdGenerator generator)
       throws Exception {
-    try (ExecutorService worker = Executors.newSingleThreadExecutor()) {
+    ExecutorService worker = Executors.newSingleThreadExecutor();
+    try {
       return worker.submit(generator::generate).get(5, TimeUnit.SECONDS);
+    } finally {
+      worker.shutdownNow();
+      if (!worker.awaitTermination(10, TimeUnit.SECONDS)) {
+        throw new AssertionError("receipt recovery worker did not terminate");
+      }
     }
   }
 }
