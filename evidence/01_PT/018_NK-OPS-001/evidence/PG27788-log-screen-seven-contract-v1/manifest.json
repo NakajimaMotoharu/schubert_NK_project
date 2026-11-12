@@ -1,0 +1,171 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T23:56:42.685535+09:00",
+  "source": "91ca01535d94fae635c04d3c71ef6caa0ae0a2e1",
+  "productionCoreMain": "edaf641333266660ec79a6e070c98b7a79bbccac",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java": "2bd503e7b08e3b6cb85f7bf14f8677c50a98c086509d8dfebc66049615e29958",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java": "918e32335e79eb0f7d093e4fdb3c08f093d92ecfcfcaa8d853caf3ee53d41eb7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java": "d3022a7ea6ac2e00f14d5719f9d9b00bce3b509f4dac7d66091444d818d8c642",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java": "4606ebc5e433903fa46f1a356d38368bb7ae4871efb4c30892932a560908154b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModel.java": "3785d2e215d44597db335dba052ef19a5f44e970c4c4d69eb8fbe2163363761f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/LogSearchViewModel.java": "25ad7a58607a98cea252e8eea8e40eb5d15285d9487b0990b0933b1fca0516da",
+    "src/schubert-nk-web/src/main/resources/templates/logs.html": "7bbd176e40d8a9f5b67be8f57cd27d42ccafd5e3bcabc95a56d75c370ce62708"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "5ab9d595a5b8c94278e0ea2c37677bfe1c0359063cab1623a4331d0044776770"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01614-PG01",
+      "methods": "LogMvcConfiguration/LogController.search/LogSearchWireClient",
+      "testIds": [
+        "PT-SCR093..104",
+        "PT-WEB270..277"
+      ],
+      "expected": "ExplicitborrowedLGS client/invalidhandler, nobootstrapresources. ClosedSessionPrincipalADMINor403beforebind/MQ; invalidformstatus400+logs/noMQ, validonefreshLGSREQ01. ClosedProtectedReadWirecatalog503; verified0102 immediatehandler-end; otherResultCodefixedmapper. Successprivatepayload/type/nonempty projection mustmatchrequest, IAE/ClassCast/NoSuch caughtonlyclosedpureprojections; externalModelcallbackoutsidecatch, rawIO/Error retained. FacadeallowlistLGS only/no update grant. WholeLogControllerBeforeAllDB actual4HOLD/noextract; constructorBean ownerFixture actualWebStartupExceptionHOLD. QA054 LOG_SEARCHED belongsAPIfirstsuccess once-per-message notWebduplicatecallback."
+    },
+    {
+      "id": "P01614-PG02",
+      "methods": "LogSearchForm.bind/date/invalidCharacters/toRequest",
+      "testIds": [
+        "PT-WEB278..285",
+        "SSC073"
+      ],
+      "expected": "Exactly8fields q/log_type/action/path/level/from/to/page; unknownname/multivalued/emptylist fixedBINDING; map/list/elements null failfastboundary notcaughtasnormal. CRLFtabNUL/unpairedUTF16 checkedbeforeNFC+ASCIItrim; q256/action64/path256 bytes; enumsclosedempty allowed. Missing/empty page1, signedASCIIint<=0 floor1, positive<=999999, plus/nonASCII/decimal/exponent/overflowreject. Datetime-local strict4digit year0001..9999 andexistenttime, HH:mm optional:ss/.1..3ms, nooffset/zone/24/leapsecond; fixedJST+09→Instant/no rounding. Eachsideoptional; bothordered/<=31days inclusive. No externalproviderhooks in Stringparse/DateTime catches. isValid onlyissuesempty; invalid toRequest fails, valid wire fixedpage100/optionalempty. Closedcopiedsnapshots/redacteddiagnostic."
+    },
+    {
+      "id": "P01614-PG03",
+      "methods": "LogSearchResultsViewModel.from/Row",
+      "testIds": [
+        "PT-WEB262..269"
+      ],
+      "expected": "ADMIN required, PageViewModel100 invariant/exactrowcount; uniqueID/time desc thenIDstrictdesc, noWebresort ormixoldresults. RowdisplayUTCISO string isexistingcomponentliteral, optionalIDs/method/path/status/elapsed/address/details normalizedtoempty/Optional withoutstringifyingforeignobjects. Escapedview only; sourceAPIredaction separate requirement. AllclosedimmutableBeans/no rawrequest/session/context/descriptor inHTML. Same-sourcePage branch50/100 will requirewholePage8 alongsideLog100 context ifneeded."
+    },
+    {
+      "id": "P01614-PG04",
+      "methods": "LogSearchViewModel.success/invalid/Filters/FieldError/pageLink",
+      "testIds": [
+        "PT-WEB286..293"
+      ],
+      "expected": "ADMINonly/non-null closedform; successrequiresvalidform, boundeffectivePage=min(request,totalPages), invalidrequiresissues/Optionalresultsabsent. StableField.values errororder withfixedfield/code messages; normalizedinputretainedincludingunknownoptionerror. Allsevenfiltersencodedintoexactprevnextquery+page/neverdropconditions. Bothpaginatorsconsistent; malformedforeigninputneverbusinessquery. No credential/session fields orrawexception."
+    },
+    {
+      "id": "P01614-PG05",
+      "methods": "logs.html/wholeLogSearchTemplateTest",
+      "testIds": [
+        "PT-SCR084..091"
+      ],
+      "expected": "RealsharedWebMVC resolver/actualLogs template, fixedfilterslabels/order/type-levelallowlists/datetime-localstep.001/GETfilter nohiddenCSRF, sharedlogoutonlyPOSTCSRFpublicfixture; rowoptionalfields/detailsclosed/escapedtext, UTCISOexistingliteral/100records/empty/middle-lastpage linksbothnav. Invalid400retainsvalues/errorfixedorder/noresult/count/pager, noinlineJS/utext. CSS/JS realresourcehandlers andoriginalbyte viaownedcopiedsnapshot; JSfilecontentcheck isnot JSruntime approval(P01625). Fulloriginaltemplate8/479lines andfinite64pool/Future10/finallyshutdown-assertawait10 read, noDB/privateResult/HOLDtype. ScopeisordinaryMockMVC resource rendering, notactualsecuritychain/APIauth ornetwork. Prior43resourceDOM doesnotcoverlogs: no transfer; normalwholeTemplate8+Form8+Results8+View8+Page8 plannedaftercloseddependency price."
+    },
+    {
+      "id": "P01614-PG06",
+      "methods": "QA051/QA054 log ownership comparison",
+      "testIds": [
+        "CHR-L01",
+        "PT-SCR014",
+        "PT-WEB-LOG"
+      ],
+      "expected": "QA051 answeredtwopointsapproved UIC010/SSC184, QA054MENU_VIEWED/LOG_SEARCHED approved; no repeatedapproval. Currentbaseline/oldlogsretained, actioncatalogandcorrelatedsafeprojection/missingduplicate0 must be independentlyimplemented/measured. Template/source/previousPTdoesnotacceptsame-sourceactualNK CHRL01 orrealDB/Oubox/audit/loss. AllactualVM/Root/DB/keys/native/permit andactual4HOLD retained."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24396-web-six-form-bounded-fiftysix-independent-v1/manifest.json",
+        "sha256": "ea97726181dbdf1c210d2316c70467ad0765b7b8ef011ee10d01c5758b013d96"
+      },
+      "tests": 56,
+      "originalSource": "2dd95b08fd3d03307a4a3d26ba7eeef824b640c3",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24370-pure-view-seven-bounded-sixtyfour-independent-v1/manifest.json",
+        "sha256": "bb83280e8349a3049e2ce6956d01d6bbb2b59a3eae2945e73a8962a40b633ec5"
+      },
+      "tests": 64,
+      "originalSource": "ed2e968a8381c491ba8df6986e59d48afb0b9c0f",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24326-read-four-bounded-thirtytwo-independent-v1/manifest.json",
+        "sha256": "f851f82027183619f5395d36b6f3bb4892c73cb2593309c599aa5ad5a799b258"
+      },
+      "tests": 32,
+      "originalSource": "99acc908a59b3a929814b42cc6777b9e51381d24",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "wholeTemplateCandidate": {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchTemplateTest.java",
+    "sha256": "ec94acb49cd3815248462f80bf9e776a012421eea8e277799cf322657b1f52f2",
+    "tests": 8,
+    "lines": 479,
+    "wholeSourceReviewed": true,
+    "status": "CONDITIONAL_CLOSED_EXACT_TRANSITIVE_MAIN_SDK_RESOURCES_BEFORE_NORMAL_PT"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-14/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_HTTP_AUTH_LOG_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1814_log_screen_contract.py",
+    "sha256": "7525a33bdd1e268295957ec11ee3587809441db8a650abbf767de166f4bd332d"
+  }
+}

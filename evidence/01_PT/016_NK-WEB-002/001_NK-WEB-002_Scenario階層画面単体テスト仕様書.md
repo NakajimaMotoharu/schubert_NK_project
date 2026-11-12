@@ -79,3 +79,6 @@ WBS-P016-13公開source契約/独立期待値/TestIDは[4143_P01613Music曲一�
 
 
 P01613の公開モデル6新規Unitは[仕様](4144_P01613MusicTrack公開六単体仕様.md)/[結果](4145_P01613MusicTrack公開六単体結果.md)。target100/全180partial、原/2や実ControllerのHOLDは維持。
+
+
+WBS-P016-14公開source契約/独立期待値/TestIDは[4146_P01614Log原七artifact契約対応.md](4146_P01614Log原七artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
