@@ -1,0 +1,207 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T10:44:40.583315+09:00",
+  "source": "3106a96acb454131851555a405de0db9902ac06b",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java": "24759417295528fcda7b59a4c3055c2310ed406b6a507ebdb3af581cc8558498",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java": "a07d0f37eaca52eb2037816617c9a9d4fab82386ddb67af1310f9208291c3238",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java": "98cd13d71d07dadf4bb2a65b2d40f9222c0ee1f7d35bc6dfcd46abd1724c9956",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java": "76b0c079bbc7704ccf64ee9a42acf88c0f9f4fc8fd461ff5d306d6ff48e11c66",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java": "8299e7a3b9bef6f654b780dbd06d3831c3a137f806fafdc8e8e480c0473e3738",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java": "f3c66010f1eb56ff3634dbf89519d9230e8008ad61764261b1a18b8dd64129af",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java": "a040ed22b820dccdb7da66a7af28dcdc1ea0a43c295aae150202090daac127df",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogSendException.java": "86e86c4d60e6e522532e08bab5ead7c42a30d52cbc03f6b5ae0226fa510992e8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java": "cca61d521d8e4bf246f63e0821aa5a134d853f2240161707d947cf9f4071878f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5"
+  },
+  "designs": [
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    }
+  ],
+  "checks": [
+    {
+      "group": "WebLogPayloadCodec/Identity/EncryptedPayload/PayloadException",
+      "tests": "PT-IDEM012015 codec9 whole source",
+      "contract": "2336exact validated WLGEVT01, NKENC1 byteversion1/keyId1..16/nonce12/tag16, public independentAAD8fields bigendian/NFCwire, original identity/correlation binding; current/previous/unknownkey denyclosed; privateReentrantLock and all transient arrays wipe afteroperation, close terminal and caller arrays unchanged. actualdeployed keys not accessed.",
+      "status": "TARGET_UNCHANGED_OLD9_PRESERVED_BUT_THREE_PROTOCOL_SOURCES_CHANGED_NEEDS_CURRENT_NORMAL_REQUAL"
+    },
+    {
+      "group": "ClaimedWebLog/Report/SendException",
+      "tests": "PT-IDEM012 valuebounds",
+      "contract": "N12 id,attempt0..100,closedworkerASCII1..64,null/time/identity/payload,redaction; report0..100 widened sum. Opaque ciphertext is not authenticity proof.",
+      "status": "PUBLIC_SOURCE_REVIEWED_NO_NEW_RUNTIME_CLAIM"
+    },
+    {
+      "group": "WebLogMessageSender/Dispatcher/ReplayWorker",
+      "tests": "PT-IDEM012/W01 +GRAPH323/FAIL321",
+      "contract": "Authenticate/decode beforeopen; borrowedcodec, ownedJMScommit/rollback/close; persistentTTL0/FQQN/MessageIDdup; fixedfailurecode graphfatal beforemark/retry; shortDB/close all failurepriority; finiteworker interval1ms..1min/defaultclose5s/closeWithin0..30s/ownthread stopandjoin, callbacknull/failure notsuccess.",
+      "status": "SOURCE_REVIEWED_DIRECT_ACTUAL_WEBSTARTUP_WHOLE_RUNTIME_HELD"
+    },
+    {
+      "group": "WebLogApplicationRuntime",
+      "tests": "PT-SCR127133/START324001003",
+      "contract": "OuterDB/broker/key borrowed. Reply first thenworker/HTTP; normalHTTP drain→workerjoin→reply stop; unknownstartup cleanup retainsframe originalfailure/downstream viafence, no continuation or reclaim. Retain old directhelper normal evidence bounds only.",
+      "status": "SOURCE_REVIEWED_ENDING_HELD_OPEN_GAP_STARTPATH_ERROR_ROUTING",
+      "remaining": "startPath currently catches LifecycleException/RuntimeException only after replies acquired; helper startupFailure typed Exception. Error path is not claimed covered by helper1574 historical qualification. Source search finds no ordinary Main caller of this legacy owner, not an unreachable exclusion. Before any code remedy must fix exact startup Error/owner contract and whole admissible independent proof; actual ownership/ServiceProcessResources/held4 tests remain held. Retain within original /2 work, no new acceptance or extra fee."
+    },
+    {
+      "group": "RequestLogMvcConfiguration/WebRequestRouteInterceptor/WebSecurityAudit/package",
+      "tests": "Trace10 input32; Audit6 input9",
+      "contract": "Registered MVC route metadata only; boundedREQUEST/SECURITY/action allowlists, actor/IP/redaction and numericformat, noauthauthority. No rawcontext/cookie/credential/logcause. Reuse original fullsource oracles and finiteworker review exacthash.",
+      "status": "PRIOR_INPUTS_ALL_UNCHANGED_NO_CONFIRMING_REPLAY"
+    }
+  ],
+  "previousEvidenceApplicability": [
+    {
+      "label": "codec9",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25760-weblog-codec-whole9-independent-v1/manifest.json",
+        "sha256": "2a9228374b8ed2b84f4976c8eee4575c650cf2ed62e603e8da242548f1d89596"
+      },
+      "preflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25778-weblog-codec-current-console-preflight-v2/manifest.json",
+        "sha256": "0e66edee0104ce5bbb2dc9e8e5aec5418f8a739f56fae554682fcd84feef71b5"
+      },
+      "originalSource": "6f0457c3f2af56c1eebaaf49631bf7eb38d5189a",
+      "originalCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "originalTests": 9,
+      "sourceInputs": 173,
+      "changedDependencies": [
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+          "oldSha256": "270d7dff5951b47086836bb2f49ca526ebc4c03581a0cce8f9fcd3f8e950727d",
+          "newSha256": "5860289eecdf5fc5619f2f7a6f83974cc9a581073ecc067ada0e01d9919150cd"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java",
+          "oldSha256": "2718fe6494806fc87dc3d081f82ed220616a07d53bf6eb39a23de579b3c6e7e3",
+          "newSha256": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02"
+        },
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java",
+          "oldSha256": "0700ba6f2ef1263a690a0acd3030ad97455951c8dd66ebf632debeca6ff80fa1",
+          "newSha256": "3a4c04729dd6c232f34157dc765180cf1643d7cb8011f51068907e5d5fd5ddf9"
+        }
+      ],
+      "currentWholeScopeQualified": false,
+      "retainedScope": "ORIGINAL_RUN_AND_UNCHANGED_TARGET_ONLY",
+      "newProductExecutions": 0
+    },
+    {
+      "label": "audit6",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25984-security-audit-whole6-independent-v1/manifest.json",
+        "sha256": "998da6529d4a5ad4e003fcc19f63ee9bcb436d4888fa1700d814aa86d70dcb27"
+      },
+      "preflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25980-security-audit-current-console-preflight-v1/manifest.json",
+        "sha256": "2de3a05fa52390131e5cd86c89007178d9096bf256be1f8e7f572e8fd51eb49e"
+      },
+      "originalSource": "9f4ac22bc466d64babe62828b78e35b2414f6e82",
+      "originalCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "originalTests": 6,
+      "sourceInputs": 9,
+      "changedDependencies": [],
+      "currentWholeScopeQualified": true,
+      "retainedScope": "ALL_PRIOR_INPUTS_UNCHANGED_ORIGINAL_RUN_BOUNDS_RETAINED",
+      "newProductExecutions": 0
+    },
+    {
+      "label": "trace10",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25920-request-trace-whole10-independent-v1/manifest.json",
+        "sha256": "71dd6d9e7930968d5fa7c34f935d2cf8695f51fdc149f4faf155233f1e8983ca"
+      },
+      "preflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25916-request-trace-current-console-preflight-v1/manifest.json",
+        "sha256": "ca3602eab4e3190cdf29dfc4f5f8659356983d5f99e6345123a30efbecf263b9"
+      },
+      "originalSource": "cbe58516aeb265d19bc2bd33c6f134a61d11763f",
+      "originalCoreMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "originalTests": 10,
+      "sourceInputs": 32,
+      "changedDependencies": [],
+      "currentWholeScopeQualified": true,
+      "retainedScope": "ALL_PRIOR_INPUTS_UNCHANGED_ORIGINAL_RUN_BOUNDS_RETAINED",
+      "newProductExecutions": 0
+    }
+  ],
+  "candidateFixtureAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntimeTest.java",
+      "sha256": "846ea4e21a28b3b0680da35d0d431d2bd85060dbb3ef8a0095d0dcadf7c80663",
+      "tests": 10,
+      "status": "HOLD_WHOLE_FIXTURE_NO_FRAGMENT_SELECTION",
+      "holdReasons": [
+        "WHOLE_REAL_DB_BROKER_FIXTURE",
+        "ACTUAL_WebStartupException_OR_ServiceProcessResources_DEPENDENCY"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDispatcherTest.java",
+      "sha256": "0baac6ee57464b86157d140f4dcb06b5d4eaad4f6bb430b38b7d2e1bd944e363",
+      "tests": 10,
+      "status": "HOLD_WHOLE_FIXTURE_NO_FRAGMENT_SELECTION",
+      "holdReasons": [
+        "WHOLE_REAL_DB_BROKER_FIXTURE",
+        "ACTUAL_WebStartupException_OR_ServiceProcessResources_DEPENDENCY"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+      "sha256": "1104e033c3a2d59d903ff5c9bb34445a631a04d17adfb818f397b2750f7e61c9",
+      "tests": 7,
+      "status": "HOLD_WHOLE_FIXTURE_NO_FRAGMENT_SELECTION",
+      "holdReasons": [
+        "WHOLE_REAL_DB_BROKER_FIXTURE",
+        "ACTUAL_WebStartupException_OR_ServiceProcessResources_DEPENDENCY"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "sha256": "f54b35a27b058b7efba49a24240e8a64d9979d3af662e3de8613fec5b0131a2c",
+      "tests": 9,
+      "status": "SAFE_PRIOR_WHOLE_FIXTURE_SOURCE_CLOSURE_REUSED",
+      "holdReasons": []
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorkerTest.java",
+      "sha256": "8cefebc7964540a8445b478a2fc8aba24b85199ea1ae0908a9bc88ed9462b310",
+      "tests": 10,
+      "status": "HOLD_WHOLE_FIXTURE_NO_FRAGMENT_SELECTION",
+      "holdReasons": [
+        "WHOLE_REAL_DB_BROKER_FIXTURE",
+        "ACTUAL_WebStartupException_OR_ServiceProcessResources_DEPENDENCY"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "sha256": "e77824a9326be0b7c56dbd07558b2fc3f6fdf974a1c684e2020ee8fed082a50b",
+      "tests": 6,
+      "status": "SAFE_PRIOR_WHOLE_FIXTURE_SOURCE_CLOSURE_REUSED",
+      "holdReasons": []
+    }
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P006-04/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_CODEC_CHANGED_PROTOCOL_REQUAL_AND_HELD_ACTUAL_STARTUP_DB_JMS_AND_EXIT_DEPENDENCIES",
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualHeldClassBinaryAndBackendActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1305_weblog_worker_public_contract_audit.py",
+    "sha256": "c6b2c8e15487036d8da5fbc2b165cbe84c0b74deab6ebc0706715c7c2c7bc1dd"
+  }
+}
