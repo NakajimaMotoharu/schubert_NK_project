@@ -1,0 +1,144 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T02:33:44.398649+09:00",
+  "source": "f49c0cd819c3f8df1b306a5c2c53709c6c72ca9b",
+  "productionCoreMain": "089a7eb5de7d743e17d5524f012095fa70673f76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java": "b80f7275d73a387f3cddc4ae12c90d3182296bf3cd19b60904dcd85780ee3bba",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java": "d72bcfd34e479f47dca4593d01bb8c0404f818f7e9dfc7a00450d34a4f8e159e",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java": "24483e135ee03f1a9c6bb3bfe8736c60f646d6fa3e1a418d0d932cb072c90ac9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java": "c73d6d50c61b068b632c452f4af2ac570f1ba0bcbc0809d31f051efc05a51284",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java": "f945859ec735eb33390de809b3f65177dda579536c8f2749a9c433aa52df12cf",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java": "4221d0482e8b5f84224a2ec7d91cba648046d5e23bcef3112c5bf6f48353a7cd",
+    "src/schubert-nk-web/src/main/resources/templates/notifications/detail.html": "10e4f709e65f4da0ee7f6afe05c13b3cc21cb3a0ad497a52ba1a2a2408824701"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 589,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01621-PG01",
+      "methods": "NotificationBusinessMvcConfiguration/NotificationMvcConfiguration/Controllerconstructors",
+      "testIds": [
+        "NTC-BIZ",
+        "PT-NTF-HTTP008..010"
+      ],
+      "expected": "FullordinaryBusiness assembly suppliescurrent-row samecore SessionOperationTokenLifecycle; legacy2arg read-only configuration neverco-imported/asordinaryready. Shared MVC resolver. Constructoronly fixture stilldependsactualownerSession/WebStartupException andremainsHOLD, nofakegrant/extractedfixture."
+    },
+    {
+      "id": "P01621-PG02",
+      "methods": "Controller.list/detail/showDetail",
+      "testIds": [
+        "PT-NTF-HTTP001..010",
+        "PT-NTF-DETAIL001..008"
+      ],
+      "expected": "EveryGET currentownerAPI NTS/NTD, noownerinputevenADMIN, typednumericid1..12digits/id>0 malformed404. Invalidsearch400 noMQ, validated0102 endsactualsession; mappederrors unchanged. PureclosedDTOprojection tuple/id/state-semantic validation503; Model callbackoutsidepurecatch. RECEIVED alone onevisibleCANCEL token issue; existingredisplay sameUUID withoutnewissue, no GETtoken whennotreceived. SourcePG plannedBUG2733 callback sevenfatalguards, runtimeHOLD remainsopen."
+    },
+    {
+      "id": "P01621-PG03",
+      "methods": "Controller.cancel/session/CancelForm/TargetOperationInput",
+      "testIds": [
+        "NTC-BIZ001..",
+        "PT-TARGET001..008"
+      ],
+      "expected": "POST closedfields operation=CANCEL/canonicalUUID/path-id-match/confirmtrue, CSRFsecuritychain required; invalidform redisplays400 usingfreshread/no businesssend. requirecurrentowner/session-purpose UUID beforeNTC, no pre-update detailGET orautobusinessretry. APIauthoritative currentowner/state/HMAC/replay, 0102end; 400409503 redisplayssameUUID/lateststate, NOT_CANCELLABLE fixed現在の状態では取り消せません。 Verifiedsuccess only completes0000/0200 andredirect302 fixednumericpath. Legacyreadonly cancel503; actualauth/tokenstorage/DB/HTTP notprovenbyFormunit."
+    },
+    {
+      "id": "P01621-PG04",
+      "methods": "NotificationWireClient/DetailViewModel/templatesnotificationsdetail",
+      "testIds": [
+        "PT-WEB-S3WIRE001..008",
+        "PT-NTF-DETAIL001..008",
+        "NTC-BIZ"
+      ],
+      "expected": "ClosedNTS-NTD-NTC facade/currentcorrelation/context/layout/semantic guard; priorbusinesswire13 exactsameinputhashes canbereferencedoldscopeonly/noreplay. DetailrequestedIDequalsresponse plusNTDsemantic states, immutablemap/JSTseconds; deletedhidesbothbody/completedalonequestionlink, emptyanswer（空の回答）, state-specific timestamps/errorcode-usererror, RECEIVED cancelonly. Actualtemplateescapedth:text, fixedback, confirmPOST/operation/id/UUID/CSRF/onesubmitJS, no handwrittenrawHTML. HeldDetailVM compile/init/runtimeNOT_RUN andnotstubbed."
+    },
+    {
+      "id": "P01621-PG05",
+      "methods": "Scope/fulloriginalartifact/qualityend",
+      "testIds": [
+        "WBS-P016-21:contract",
+        "WBS-P016-21:scope",
+        "WBS-P016-21:quality"
+      ],
+      "expected": "Allsevenownedartifacts/read-only fullsource withsharedTargetOperationInput ownershiprecord. No old43DOM orpureForm/ProtectedRead success becomesactualHTTP/ownerDB/CHR/451. /1preparation only, /2 dependent ending andoriginal190 remainNOT_ACCEPTED. Private4/Root/VM/realDB/grant actions0."
+    }
+  ],
+  "beforeFixFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27965-notification-controller-seven-before-v1/manifest.json",
+    "sha256": "1ee8e8ebef8d06d4f7e9e337b879056d74c19f924ccb8f369ff22c5b5f406a34"
+  },
+  "oldWireProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27904-business-wire13-independent-v1/manifest.json",
+    "sha256": "44717badbd547a96740e8c7b285229c30d68c04fecd901f80dd72adfe13fbdb7"
+  },
+  "oldWireScopeOnly": true,
+  "wireReplayed": 0,
+  "heldViewBinaryActions": 0,
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-21/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_OWNER_API_TOKEN_SESSION_DB_HTTP_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "partialProducerFailure": {
+    "producer": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/1924_notification_detail_contract.py",
+      "sha256": "a2a6b9af46e4456b3d14d4f8c91f67f70e346ee31fb0d2c687f56ad82a57fc61"
+    },
+    "reason": "OriginalguessedPG27836 dirname absent; continuationfoundactualread40 hasnofivebusinessfacade key andfailedclosed. UseactualPG27904business13 withNotificationWireClient exactinput hash; bothpriorproducers archived, ledger/beforebyte notrerun, no productexecution/newbudget.",
+    "withinOriginalGroup": true
+  },
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1924c_notification_detail_exact_business_proof.py",
+    "sha256": "ad8315b91c81ebbb2da3fd51a4a4799a4494e703aa37e091a98f6bdc505792e8"
+  }
+}

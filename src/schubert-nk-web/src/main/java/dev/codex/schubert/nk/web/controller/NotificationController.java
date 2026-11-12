@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
 import dev.codex.schubert.nk.web.error.WebResultMapper;
 import dev.codex.schubert.nk.web.form.CancelForm;
 import dev.codex.schubert.nk.web.form.NotificationSearchForm;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyException;
 import dev.codex.schubert.nk.web.messaging.NotificationWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException;
@@ -217,9 +218,11 @@ public final class NotificationController {
                   "issues",
                   Map.of()));
         } catch (OperationTokenConflictException conflict) {
+          JmsRequestReplyException.preserveFatal(conflict);
           response.sendError(409);
           return null;
         } catch (SessionStoreException failure) {
+          JmsRequestReplyException.preserveFatal(failure);
           response.sendError(503);
           return null;
         }
@@ -267,9 +270,11 @@ public final class NotificationController {
       session = session(request);
       tokens.orElseThrow().require(session, LITERAL_NTCREQ01, input.operationToken());
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
     }
     final ProtectedReadWireClient.Result result;
@@ -306,9 +311,11 @@ public final class NotificationController {
           .orElseThrow()
           .completeVerified(session, LITERAL_NTCREQ01, input.operationToken(), result.resultCode());
     } catch (OperationTokenConflictException conflict) {
+      JmsRequestReplyException.preserveFatal(conflict);
       response.sendError(409);
       return null;
     } catch (SessionStoreException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       return showDetail(id, actor, model, request, response, Optional.of(form), 503, RETRY);
     }
     response.setHeader("Location", "/notifications/" + id.value());
@@ -322,6 +329,7 @@ public final class NotificationController {
     try {
       return WebSessionId.parse(current.getId());
     } catch (IllegalArgumentException malformed) {
+      JmsRequestReplyException.preserveFatal(malformed);
       throw new OperationTokenConflictException();
     }
   }
