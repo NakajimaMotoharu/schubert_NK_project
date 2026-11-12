@@ -1,0 +1,148 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T06:25:19.344880+09:00",
+  "sourceBefore": "3d597a188bccb9d5aac83addeda093ca24d8c632",
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java": "981579862df5c211339e23eaa91fd797a88add3c8eb1a7905ea95342b31afdfc",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java": "5701431aeaea563ada90e518817d0e7d339a63b48625e975c99bb2fbaada1934"
+  },
+  "proof": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+      "beforeSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+      "afterSha256": "981579862df5c211339e23eaa91fd797a88add3c8eb1a7905ea95342b31afdfc",
+      "explicitWrapperInverseOriginalByteExactAfterFormat": true,
+      "normalAssemblyBodyProof": [
+        {
+          "factory": "BackupStartIntentFiles.createService",
+          "normalBodySha256": "3266a9623dc18231a485f8ad8c472af07b815aee48e11a7ed228e0d9a6395ba1",
+          "normalBodyTokensUnchanged": true,
+          "acquireBeforeAssembly": true,
+          "normalTransferDoesNotClose": true
+        }
+      ],
+      "wholeRemainderByteUnchanged": true,
+      "changedFactories": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+      "beforeSha256": "505591e7159e2e8d8cb86ffab1e7395ca9d7cdd9e4c796f14d66064a54cd600c",
+      "afterSha256": "5701431aeaea563ada90e518817d0e7d339a63b48625e975c99bb2fbaada1934",
+      "explicitWrapperInverseOriginalByteExactAfterFormat": true,
+      "normalAssemblyBodyProof": [
+        {
+          "factory": "BackupUnitStartClient.beginNative",
+          "normalBodySha256": "283688478ea3619aeea0c8d7666d0d4ffb2475b1591b3cdec19db677ce951eaf",
+          "normalBodyTokensUnchanged": true,
+          "retireThenCloseBodyUnchanged": true,
+          "normalTransferDoesNotClose": true
+        },
+        {
+          "factory": "BackupUnitStartClient.createService marker assembly",
+          "normalBodySha256": "3a822158171a7c162d77d4a09f5622158d2b7c2e684a39dbc42f098ecf7211f4",
+          "normalBodyTokensUnchanged": true,
+          "allRetireObserveRetainedBodiesUnchanged": true,
+          "normalTransferDoesNotClose": true
+        }
+      ],
+      "wholeRemainderByteUnchanged": true,
+      "changedFactories": 2
+    }
+  ],
+  "stages": {
+    "format-BackupStartIntentFiles": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T21:25:17.071842+00:00",
+      "endUTC": "2026-11-12T21:25:17.537182+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-BackupUnitStartClient": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T21:25:17.540945+00:00",
+      "endUTC": "2026-11-12T21:25:18.057042+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T21:25:18.060799+00:00",
+      "endUTC": "2026-11-12T21:25:18.576774+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T21:25:18.577127+00:00",
+      "endUTC": "2026-11-12T21:25:19.344160+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28280-p01706-three-factory-handoff-source-static-v1/checkstyle.xml",
+        "@/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28280-p01706-three-factory-handoff-source-static-v1/sources.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalSourceInverseExact": true,
+  "inverseMeaning": "RestoreOnlyThreeExplicitWrappersAfterAllNormalBodyTokenEqualityAndWholeRemainderByteEquality",
+  "changedFactories": 3,
+  "normalAssemblyAndCompletedOwnerBodiesUnchanged": true,
+  "completeOwnerTransferredOnce": true,
+  "incompleteOwnerReleasedOnceByExistingResourceScope": true,
+  "resourceScopeImplementationUnchanged": true,
+  "resourceScopeSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+  "compoundPriority": "ExistingSS333IOExceptionVsUnknownPrimaryAndSecondaryNoBlanketFatalGuard",
+  "actualAuthorityRulesChanged": false,
+  "bug": "BUG2750",
+  "horizontal": "YKT2395_OPEN",
+  "productTestsExecuted": 0,
+  "MainCompiled": false,
+  "MainInitializedOrInvoked": false,
+  "coverage": null,
+  "ptStatus": "NOT_RUN_NOT_PASS",
+  "runtimeStatus": "HOLD_ROOT_NATIVE_INTENT_WHOLE_TESTS_NO_EXTRACTION_OR_NEW_FIXTURE",
+  "actualBackendOrBackupOrRootOperations": 0,
+  "verifierSha256": "ac77c367b44613e5f7266d73d42c963d55e9b0682d9c8efcb81b5a14d304c19a"
+}

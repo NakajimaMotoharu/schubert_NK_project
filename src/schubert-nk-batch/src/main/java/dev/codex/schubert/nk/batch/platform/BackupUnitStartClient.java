@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.platform;
 
 import dev.codex.schubert.nk.batch.file.BackupStartIntentFiles;
+import dev.codex.schubert.nk.storage.ResourceScope;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
@@ -194,22 +195,17 @@ public final class BackupUnitStartClient {
   private static MarkerLease beginNative(
       RootStartupContext root, RootStartupContext.Snapshot expected, Target target)
       throws IOException {
-    var marker = BackupStartIntentFiles.create(root, expected, target);
-    try {
-      var token = marker.begin();
-      // This owner and exact token must survive the external start and the whole parent cycle.
-      return () -> {
-        marker.retire(token);
-        marker.close();
-      };
-    } catch (IOException | RuntimeException | Error failure) {
-      try {
-        marker.close();
-      } catch (IOException closeFailure) {
-        failure.addSuppressed(closeFailure);
-      }
-      throw failure;
-    }
+    return ResourceScope.<BackupStartIntentFiles, MarkerLease, IOException>handoff(
+        () -> BackupStartIntentFiles.create(root, expected, target),
+        BackupStartIntentFiles::close,
+        marker -> {
+          var token = marker.begin();
+          // This owner and exact token must survive the external start and the whole parent cycle.
+          return () -> {
+            marker.retire(token);
+            marker.close();
+          };
+        });
   }
 
   static BackupUnitStartClient create(
@@ -316,33 +312,27 @@ public final class BackupUnitStartClient {
         () -> root.recheck(morning),
         () -> policy.requireSafe(unit),
         new MaintenanceUnitStopClient.NativeStart()::execute,
-        () -> {
-          var marker = BackupStartIntentFiles.createService(root, morning, service, issued);
-          try {
-            var token = marker.begin();
-            return new MarkerLease() {
-              public void retire() throws IOException {
-                marker.retire(token);
-                marker.close();
-              }
+        () ->
+            ResourceScope.<BackupStartIntentFiles, MarkerLease, IOException>handoff(
+                () -> BackupStartIntentFiles.createService(root, morning, service, issued),
+                BackupStartIntentFiles::close,
+                marker -> {
+                  var token = marker.begin();
+                  return new MarkerLease() {
+                    public void retire() throws IOException {
+                      marker.retire(token);
+                      marker.close();
+                    }
 
-              public void closeObservation() throws IOException {
-                marker.close();
-              }
+                    public void closeObservation() throws IOException {
+                      marker.close();
+                    }
 
-              public void requireRetained() throws IOException {
-                marker.requirePresent(token);
-              }
-            };
-          } catch (IOException | RuntimeException | Error failure) {
-            try {
-              marker.close();
-            } catch (IOException closeFailure) {
-              failure.addSuppressed(closeFailure);
-            }
-            throw failure;
-          }
-        },
+                    public void requireRetained() throws IOException {
+                      marker.requirePresent(token);
+                    }
+                  };
+                }),
         unit,
         Optional.of(budget));
   }

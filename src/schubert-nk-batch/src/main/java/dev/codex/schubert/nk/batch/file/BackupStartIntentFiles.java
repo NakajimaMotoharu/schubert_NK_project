@@ -135,39 +135,34 @@ public final class BackupStartIntentFiles implements AutoCloseable {
         morning.service() == RootStartupContext.Service.MORNING
             && issued.state() == StartupPermitRecords.State.ISSUED);
     context.recheck(morning);
-    var directory =
-        OwnedTransferDirectory.open(
-            LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup"));
-    try {
-      var security = LinuxInodeSecurity.create();
-      var permits = new StartupPermitFiles(directory, security);
-      require(issued.equals(permits.current()));
-      permits.readIssued();
-      var owner = new StartupLaunchFiles(directory, security, issued).readOwner();
-      require(
-          owner.morning().invocation().equals(morning.invocation())
-              && owner.morning().pid() == morning.pid()
-              && owner.morning().startTicks() == morning.startTicks());
-      owner.parentsGuard().check();
-      return new BackupStartIntentFiles(
-          directory,
-          security,
-          new InspectorEnvironmentPublisher.NioIo(),
-          () -> {
-            context.recheck(morning);
-            owner.parentsGuard().check();
-            require(issued.equals(permits.current()));
-            permits.readIssued();
-          },
-          issued.epoch() + "." + service.name() + ".start.intent");
-    } catch (IOException | RuntimeException | Error failure) {
-      try {
-        directory.close();
-      } catch (IOException closeFailure) {
-        failure.addSuppressed(closeFailure);
-      }
-      throw failure;
-    }
+    return ResourceScope.<OwnedTransferDirectory, BackupStartIntentFiles, IOException>handoff(
+        () ->
+            OwnedTransferDirectory.open(
+                LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup")),
+        OwnedTransferDirectory::close,
+        directory -> {
+          var security = LinuxInodeSecurity.create();
+          var permits = new StartupPermitFiles(directory, security);
+          require(issued.equals(permits.current()));
+          permits.readIssued();
+          var owner = new StartupLaunchFiles(directory, security, issued).readOwner();
+          require(
+              owner.morning().invocation().equals(morning.invocation())
+                  && owner.morning().pid() == morning.pid()
+                  && owner.morning().startTicks() == morning.startTicks());
+          owner.parentsGuard().check();
+          return new BackupStartIntentFiles(
+              directory,
+              security,
+              new InspectorEnvironmentPublisher.NioIo(),
+              () -> {
+                context.recheck(morning);
+                owner.parentsGuard().check();
+                require(issued.equals(permits.current()));
+                permits.readIssued();
+              },
+              issued.epoch() + "." + service.name() + ".start.intent");
+        });
   }
 
   BackupStartIntentFiles(

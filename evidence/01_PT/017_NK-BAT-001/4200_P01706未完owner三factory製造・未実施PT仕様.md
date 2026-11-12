@@ -1,0 +1,5 @@
+# P01706未完owner三factory製造・未実施PT
+
+BUG2750/YKT2395、BFENCE/BSTART/IOFACT、SS333/343/SSC308。二Main三factoryの未完owner組立だけ既存ResourceScope.handoffへ接続し、元のcontext/epoch/marker/正常組立/返却ownerのretire-close/観測保持bodyを全token同一に保つ。完成ownerはtransferしcloseしない、組立失敗/nullだけ一回close・SS333 IOException/unknown複合型優先/固定secondaryへ従う。既完owner退役中不明で自動close/unlinkしない。
+
+PG28280は三wrapper逆変換で元sourcebyte完全一致・全normalbody token同一・他全領域byte不変/GJF-CSのsourcePGのみ。Maincompile/NullAway/PMD/SB/元Root-native-intent実経路wholePT/coverageはHOLD未実施、BUG2750/YKT2395 OPEN。追加必要PTはacquire前callback検査、各組立点IO/runtime/NPE/Error/null、全primary-secondary型matrix、正常transferclose0・未完close1・既ownerretire未知保持を独立oracleで元wholeTestへ対応し、旧ResourceScope単体成功をcallerへ転用しない。実factory/intent/permit/Unit/cohortの試し操作0、部分抽出/新fixture0。
