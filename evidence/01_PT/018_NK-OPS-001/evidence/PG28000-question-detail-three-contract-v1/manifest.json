@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T02:43:53.710351+09:00",
+  "source": "075e0a02e0e8346be1d1b1919e87f9ec7fc3f4cb",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java": "0655e04b7cd37e9d9e3570db7386b92547e4c38cafc3501615a680233faab7d0",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java": "6a10ebbadbc52df317de2fec18b68aab3275d832b5f73e0c4edfe24935b1903c",
+    "src/schubert-nk-web/src/main/resources/templates/questions/detail.html": "106063b219b894417619b35cd8a120cffc4f4aa21432f59bfcf6b54f7595e9f2"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 167,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01623-PG01",
+      "methods": "QuestionDeleteForm.bind/toRequest/TargetOperationInput",
+      "testIds": [
+        "QST-007",
+        "PT-TARGET001..008",
+        "QDL-BIZ001..009"
+      ],
+      "expected": "ClosedDELETE/positiveN12 path-id-equality/canonicalUUID36/confirmtrue/fourfields plusCSRFtransport only; unknownowner/nullkey rejects, missing-null-empty-multiplefield explicitinvalid; topmapnull invariant; immutablecopieddisplay redacteddiagnostic. Independent48bytegolden and100finiteparallel currentTarget8 sameinputs referencedwithoutreplay, notactualtoken issuing orAPI replay/grant/HMAC proof."
+    },
+    {
+      "id": "P01623-PG02",
+      "methods": "QuestionDetailViewModel.from/constructor/label",
+      "testIds": [
+        "QST-006",
+        "QST-008",
+        "PT-QRY-HTTP006,011",
+        "QDL-BIZ001,009"
+      ],
+      "expected": "NonemptyactiveMbody/targetIDequalsresponse; USERusernameown, ADMINallrole projectionguard; QSDRSP01 semanticrelations; immutableclosedvalues/JSTseconds/summaryfirst100Unicode codepoints notUTF16split/answered-only answerandtime/fixedlabels回答済み-未回答-エラー. FourNQviewdynamicHOLD meansnoclasscompile/init/newTestorfixture/labelruntime; source-only notcurrentprojectionPT success."
+    },
+    {
+      "id": "P01623-PG03",
+      "methods": "questions/detail.html/sharedQuestionController.delete/showDetail",
+      "testIds": [
+        "QST-007",
+        "QST-010",
+        "QDL-BIZ",
+        "QA049"
+      ],
+      "expected": "Exact質問回答明細/displayreceipt/ownerADMINonly/questionfull/JSTtimestamps/state/answered-onlyanswer fixed（空の回答）, allth:text escape/noMarkdown. Deleteconfirm summary100codepoint/confirmcheck required/POSTfixednumericpath/id-operationDELETE-retainedUUID-CSRF, onesubmitJS; no GETdelete. ControllerfreshAPI owner/state verification, verified0000/0200 completion then302/questions; absent/otherowner404 noexistenceleak, duplicateverifiedsuccess accepted, oldtokenstatus409/no autoreissue. SameUUID redisplay andpendingconsumed10 invariant; actualAPI/DB/sessionHOLD andBUG2728 runtime notclosedbyForm8."
+    },
+    {
+      "id": "P01623-PG04",
+      "methods": "Originalscope/independentoracle/end",
+      "testIds": [
+        "WBS-P016-23:contract",
+        "WBS-P016-23:scope",
+        "WBS-P016-23:quality"
+      ],
+      "expected": "Allthreefullsource mappedtoUI224236/RD123; Template/Formproof notactualHTTP or业务postcondition. Logicaldeletedquestion immediatelyhidden viaauthoritativeAPI, no statecancellationconflation; physicaldeletebackupgate laterPBatch/SQL independently. /1only, /2 currentowner-roleAPI/securityTokenDB/HTTP/CHR/451 unaccepted/new1900."
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27990-target-forms8-independent-v1/manifest.json",
+        "sha256": "c42c5325f48b79ee085814a20a674d9a0b6008376a15116778d8f0262a561dce"
+      },
+      "oldSource": "072618de3b2c162b07cdf9a5a9ba50dbc773e93e",
+      "oldScopeOnly": false,
+      "unchangedInputPaths": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-23/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_OWNER_ROLE_API_DELETE_TOKEN_DB_HTTP_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1946_question_detail_contract_config.json",
+    "sha256": "c846e6cac18b2da24290b4d9fc86f4d215a65ab2a656ca89fdad3685a13a4085"
+  }
+}

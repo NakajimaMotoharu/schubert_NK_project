@@ -1,0 +1,129 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T02:42:47.079621+09:00",
+  "source": "075e0a02e0e8346be1d1b1919e87f9ec7fc3f4cb",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java": "1308c621d4fb8673cae5440a7691ba1a17bf20b13f53251ab23dfb220f4351b4",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/QuestionListViewModel.java": "eef4e7d0a88a56f5209e5ece2ceec9cb5abd57dc292cd8b380816419b583f497",
+    "src/schubert-nk-web/src/main/resources/templates/questions/list.html": "d164e7957f53807c40d46d3247c1354202607f905eedd82f7971cd2a1d483af2"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 373,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01622-PG01",
+      "methods": "QuestionSearchForm.bind/date/toRequest",
+      "testIds": [
+        "QST-005",
+        "QST-008",
+        "QSFORM001..014",
+        "PT-QRY-HTTP001..003,012"
+      ],
+      "expected": "USERcannot supplyevenemptyusername anddisplayalwaysblank; ADMIN64UTF8exactfilter, keyword256UTF8partialmatch businessAPI only. NFC/trim afterrawcontrols-unpairedsurrogate rejection; closedstateempty/ANSWERED/UNANSWERED/ERROR, sixsinglefields/nullinvariant/snapshotimmutable. StrictJST yyyy-MM-dd inclend23:59:59.999, year0invalid/366days bound, page0negclamp1/max999999/intoverflowinvalid andsize50. Current26 sameForm/Proto input hashes andfullsourcefour100 referencednoreplay; no actualAPIauthorization fromtypedrole."
+    },
+    {
+      "id": "P01622-PG02",
+      "methods": "QuestionListViewModel.success/invalid/row/link",
+      "testIds": [
+        "PT-QRY-HTTP004,005,011,012",
+        "QDL-BIZ001,006"
+      ],
+      "expected": "Actor-role equalsform-admin, exactpage50/effectiveclampedrequest androwcount, PayloadSemanticValidator QSSRSP01; uniqueIDs/USERcurrentusername only/summary<=100Unicode/orderSubmittedAtDESC-idDESC. Immutable closedrows/JSTseconds/optionalanswerblank/threefixedlabels throughheldQuestionDetailViewModel.label; fixednumericdetail and#delete-confirmanchor. Bothpagers retain allfilters withUTF8encoding, usernameonlyADMIN. Invalidform hasno page/rows. FourViewdynamicHOLD appliesbothlist+labelcallee, no newfixture/Test/compile/init/dynamiccounters."
+    },
+    {
+      "id": "P01622-PG03",
+      "methods": "questions/list.html",
+      "testIds": [
+        "PT-QRY-HTTP008",
+        "QDL-BIZ",
+        "QST-007"
+      ],
+      "expected": "Exact質問回答 title/Keyword-From-To-roleconditionalusername-state GET fields andfourstateoptions, escapedissue/body/owner/date fields. Count/pagers andemptyresult section conditional, USERhasnoownerheader/cell/input. Columns受付日時-利用者ADMIN-質問-回答状態-回答日時-操作, detail/deleteconfirmationanchor only; deleteactionPOST+confirmation belongsDetail/token path not directGETdelete. No renderingproof toactualownerAPI/DB/session/CHR/451 conversion."
+    },
+    {
+      "id": "P01622-PG04",
+      "methods": "Originalscope/end/independentqualification",
+      "testIds": [
+        "WBS-P016-22:contract",
+        "WBS-P016-22:scope",
+        "WBS-P016-22:quality"
+      ],
+      "expected": "Allthree source fullreview, same-source publicForm14 in26run separatefromunexecutedheldViews/template actualHTTP. /1preparation only, /2 dependencies actualowner-roleAPI/securityDB/CHR/451 notaccepted. Old43DOM orold64views notcurrentfullqualification; no oldexec arithmetic/new190/effortpercent."
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27958-nq-search26-independent-v1/manifest.json",
+        "sha256": "264750fb036a23edd58414976c0ac6b9c70128ff6c0c786856b77a71600eb7ea"
+      },
+      "oldSource": "3e803f346561a89541de41f37644b9ecb4be9cee",
+      "oldScopeOnly": false,
+      "unchangedInputPaths": [
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSearchForm.java"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-22/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_OWNER_ROLE_API_DB_HTTP_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1942_question_list_contract_config.json",
+    "sha256": "4b1abf6403bbf9aa3f055f9f114957800f576b32d5bf7dd6bf59a20bb01dd137"
+  }
+}

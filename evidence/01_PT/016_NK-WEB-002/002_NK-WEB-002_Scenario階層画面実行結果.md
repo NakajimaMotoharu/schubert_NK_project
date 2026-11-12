@@ -123,3 +123,9 @@ WBS-P016-21公開source契約/独立期待値/TestIDは[4169_P01621通知明細�
 
 
 P01621/23原取消削除8は[仕様](4171_P0162123取消削除原八単体仕様.md)／[結果](4172_P0162123取消削除原八単体結果.md)、三完全source component四100/全179partial、実TokenDB/ownerAPI/HTTP/CHR/451別HOLD未受入。
+
+
+WBS-P016-22公開source契約/独立期待値/TestIDは[4173_P01622質問一覧原三artifact契約対応.md](4173_P01622質問一覧原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-23公開source契約/独立期待値/TestIDは[4174_P01623質問明細原三artifact契約対応.md](4174_P01623質問明細原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
