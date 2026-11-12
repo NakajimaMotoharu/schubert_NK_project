@@ -1,0 +1,65 @@
+{
+  "source": "33c6baa2d65bc9b0ea779d16336c6b82c9511262",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java": "a44c27a8e9b3869fd01ef90dae2a28bfebc0f5f78b4bd0d417b12eb3b319daae"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/api/security/package-info.class": "7acfe02db974f1eb7fbe258501c4e304b73c72650a4e422af58e27000c3b2a1b",
+    "dev/codex/schubert/nk/api/security/PasswordHasher.class": "a81f02c40b7f2e33715856a66c4e992c70454aa83d55867a4436a777ff207c7a",
+    "dev/codex/schubert/nk/api/security/PasswordPolicy.class": "eb344e646e8e81226188776cafb9975f63dbdcb306bdaa8087b453606e725679"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+      "name": "loginAndCreationBoundariesDifferAndInputsAreConsumed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+      "name": "nfcSupplementaryAndUsernameComparisonUseExplicitValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+      "name": "malformedControlAndNullContractsRejectWithoutRetainingInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordHasherTest",
+      "name": "fixedSaltIndependentPbkdf2VectorAndNfcMatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordHasherTest",
+      "name": "encodeUsesFreshSaltAndFull256BytePassword()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.PasswordHasherTest",
+      "name": "invalidStoredGenerationAndInputsAreBoundedAndConsumed()"
+    }
+  ],
+  "expectedTests": 6,
+  "selectedClasses": [
+    "dev.codex.schubert.nk.api.security.PasswordPolicyTest",
+    "dev.codex.schubert.nk.api.security.PasswordHasherTest"
+  ],
+  "session": "PG26710-PASSWORD-WHOLE6",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26700-password-pure-profile-v1/manifest.json",
+    "sha256": "d390b50019f9d6c6e8058745c5f2a5a912acf407ba00cde59d2eac6dd3c4a7be"
+  },
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26708-password-pure-preflight-v1/manifest.json",
+    "sha256": "d8ed618a8217490dfec8bdfdccf0d9d9dc41f6b20ad9e2192b2feefab54ee90a"
+  },
+  "oldExecUnion": false,
+  "actualCredentialsOrHeldOrBackendActions": 0
+}

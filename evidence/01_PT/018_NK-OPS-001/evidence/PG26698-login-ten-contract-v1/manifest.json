@@ -1,0 +1,204 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T11:42:56.298117+09:00",
+  "source": "33c6baa2d65bc9b0ea779d16336c6b82c9511262",
+  "productionCoreMain": "62960fc3b5d4a67cf7bd9df887b668169d10f87f",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationService.java": "453a743084bbbe3d8cd859db1246faee5c27af1cc3f46484cb1ea07e98baee51",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LockedLoginAttempt.java": "71655d2fa7fa5fe730d9d1ca20e7f713e669760f32af4437fed064873066e7a4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAccount.java": "f78519bcbdcb4d906fa63010239a8f31398f1564d5fdb1ffcd9602e3dac4b2a0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptKind.java": "493c8b03e7791a044be87f4fadeb1c7c7c95588aba1174cb38baa0b5a3b56f7b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptRepository.java": "ed47df13b0b33a93bdfea58f0998bf299361c22b463c6e49a679df13a026bc02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java": "393f52726e83c3ea52fe34c7385c0da413d49306a476894255602fe82880c352",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java": "4710a12a0c95eb7dfa45dd67d53a69b8a08dd25b70d94d7ddf172da9a9e308f6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java": "e78c47b80b4037897a2ec8e3455759ebe183af845c28ce37e7f10833a7faee8b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608"
+  },
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+    "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+    "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+  },
+  "checks": [
+    {
+      "id": "P00701-PG01",
+      "sources": [
+        "AuthenticationService",
+        "LoginAccount",
+        "LockedLoginAttempt",
+        "LoginAuditReason",
+        "LoginAuditWriter"
+      ],
+      "expected": "AnonymousInboxNEW only, User→IP lock; prelockednohash/nolockextension; activeknown correctpassword clears+issue+criticalaudit samecallerTX, absent/disabled dummy samefactor and genericfailure; inputpassword erased all exits, fixedinfrastructure no provider/credential leak, verifiednumericIP, displayaudit distinctUnicodekey.",
+      "tests": "PT-AUT004 originalAuthService8 realDBheld, originalmemory16 target1 fullcode preserved exactcurrent source/physical, wholedependencies not asserted"
+    },
+    {
+      "id": "P00701-PG02",
+      "sources": [
+        "LoginAttemptRepository",
+        "LoginAttemptState",
+        "LoginAttemptKind"
+      ],
+      "expected": "USER5/IP10,15minwindow strictoutside> endpointinclusive, locked_until>now strict, failedthresholdrequest106, re-failureatexactunlockedwindowendpointmayrelock perSSC009, no lockedextension; ceilretry0..900. callerTX Userlock beforeIP UPSERT/lock, requiredSQLNULL/roles/statusdenyclosed, affected1 and rollbackownedcaller.",
+      "tests": "PT-AUT003/D01D05; originalwindow9 target2 exactCRC+physical/source unchanged retained; originalRepo6 wholeactualDBheld"
+    },
+    {
+      "id": "P00701-PG03",
+      "sources": [
+        "PasswordPolicy",
+        "PasswordHasher"
+      ],
+      "expected": "Login1..256UTF8 vscreation12..128codepoints/256bytes, NFC/no trailingASCIIspace/control/surrogate, username insensitive inequality, no mixeddemand; consumedchar arrays. PBKDF2v1-HMACSHA256/salt16/310000/256bits/secret empty/96hex; futureunknown denyclosed, no silentgenerationchange.",
+      "tests": "PT-AUT001002 originalwhole3+3 current6/3physical/2positiveCRC/L44M10C2B22allmiss0; independentliteral/JCA and publicPythonvector; Main/Test unchanged, noactualcredentials"
+    },
+    {
+      "id": "P00701-PG04",
+      "sources": [
+        "LoginAuditWriter",
+        "AuthenticationService"
+      ],
+      "expected": "SamebusinessTX SECURITY LOGIN_SUCCEEDED/FAILED/LOCKED, fixedoutcome/reason/retry, safeNFC displayusername/numericIP/message/correlation, no password/session/context/exception, insert1; no separatecommit/close.",
+      "tests": "PT-AUT004/oldAuditPort7 andAuthmemory16 remain originalbounded evidence; DB/exitdependency unresolved"
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceTest.java",
+      "sha256": "be9dd86bd0244c79a60b66354c901371f5acae529ce000b6096d89c98b9d1985",
+      "tests": 8,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE",
+      "fullBodySourceReviewed": false,
+      "realDbMarkers": [
+        "ApiLogDatabaseFixture"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java",
+      "sha256": "81c90422652e9314a1aac1a04cd4a911e655c866aa24f761b2a4b057e07c565e",
+      "tests": 6,
+      "status": "HOLD_WHOLE_REAL_DATABASE_FIXTURE",
+      "fullBodySourceReviewed": false,
+      "realDbMarkers": [
+        "ApiLogDatabaseFixture"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptStateTest.java",
+      "sha256": "8de7da1fea134d4f1973ac003287dccee971dad697859f6014f0a32743930391",
+      "tests": 5,
+      "status": "PRIOR_WINDOW9_BYTE_EQUIVALENT_TARGET2_RETAINED_NOT_REPLAYED",
+      "fullBodySourceReviewed": true,
+      "realDbMarkers": []
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+      "sha256": "a44c27a8e9b3869fd01ef90dae2a28bfebc0f5f78b4bd0d417b12eb3b319daae",
+      "tests": 3,
+      "status": "CURRENT_NORMAL6_QUALIFIED",
+      "fullBodySourceReviewed": true,
+      "realDbMarkers": []
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java",
+      "sha256": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55",
+      "tests": 3,
+      "status": "CURRENT_NORMAL6_QUALIFIED",
+      "fullBodySourceReviewed": true,
+      "realDbMarkers": []
+    }
+  ],
+  "originalWindow9": {
+    "originalRunManifest": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/pure-login-window-sequence/manifest.json",
+      "sha256": "4abd079a1c4a37e33068c282b3c1f794f01f20280624419f58e4c937d90a34b4"
+    },
+    "originalSource": "e49eb0cc84c62ace468cf389938b23f3e56ba520",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12944-login-policy-post-v1/manifest.json",
+      "sha256": "a6d70118ffcbc9dc1ccbdf56e3ed711d1811561cc2043a1bf7a2af0ec771d426"
+    },
+    "currentTargets": [
+      {
+        "name": "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+        "currentNormalPhysicalSha256": "aceb4284db52163e29ebbfd7e3c626613a8fd5417a292af57893bdb9ebed1054",
+        "crc64": "0a87fa7a9dd5e8c9",
+        "originalCounters": {
+          "BRANCH": {
+            "covered": 0,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 7,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 3,
+            "missed": 0
+          }
+        }
+      },
+      {
+        "name": "dev/codex/schubert/nk/api/security/LoginAttemptState",
+        "currentNormalPhysicalSha256": "e70c59cf352a1d1335ed25e97a0aa9e856c75a5c5e2ab4255e849ada16014d69",
+        "crc64": "7cbd29ad6269ad55",
+        "originalCounters": {
+          "BRANCH": {
+            "covered": 38,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 34,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 7,
+            "missed": 0
+          }
+        }
+      }
+    ],
+    "scope": "BYTE_EQUIVALENT_TARGET2_HISTORICAL_RUN_ONLY_NOT_CURRENT_TEST5_EXECUTION",
+    "newProductExecutions": 0
+  },
+  "originalAuthMemory16": {
+    "proof": {
+      "path": "evidence/01_PT/007_NK-AUT-001/evidence/PG23816-authentication-memory-port-independent-v1/manifest.json",
+      "sha256": "16d8ffd9c4e0be2e2afe54608b0a4a7b7c1844739982baea5643f952190fea1b"
+    },
+    "originalSource": "1349b86209a707abde09ed7b32dbf3b8c462a9a2",
+    "target1CurrentSourceAndPhysicalUnchanged": true,
+    "wholeDependencyQualified": false,
+    "newProductExecutions": 0
+  },
+  "currentPassword6": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG26712-password-pure-independent-v1/manifest.json",
+    "sha256": "ab1d92fdf7bf05fedbbff930e9ce1b3d4aa06fe9d10e71b057d85580c8921258"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P007-01/1"
+  ],
+  "endingStatus": "WBS-P007-01/2_NOT_ACCEPTED_REAL_DB_SESSION_AUDIT_AND_P00401_P00601_EXIT_DEPENDENCIES",
+  "newProductExecutions": 6,
+  "newTestDefinitions": 0,
+  "MainOrTestChanged": false,
+  "additionalBudgetPp": 0,
+  "originalGroupEstimateRetained": true,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "actualBackendCredentialsAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1316_login_ten_contract_audit.py",
+    "sha256": "dcf7069f6b9da53b2647ee7706dd1eafb6f53a90c433fbd5344072772f103ba3"
+  }
+}
