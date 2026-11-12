@@ -1,0 +1,59 @@
+
+Failures (3):
+  JUnit Jupiter:SessionPayloadFatalContractTest:fatal005FatalOperationStillAllowsIdempotentClose()
+    MethodSource [className = 'dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest', methodName = 'fatal005FatalOperationStillAllowsIdempotentClose', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.session.SessionPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.fatal005FatalOperationStillAllowsIdempotentClose(SessionPayloadFatalContractTest.java:93)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.session.SessionPayloadException: session encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.session.SessionPayloadCodec.encrypt(SessionPayloadCodec.java:98)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.lambda$fatal005FatalOperationStillAllowsIdempotentClose$0(SessionPayloadFatalContractTest.java:93)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:SessionPayloadFatalContractTest:fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph()
+    MethodSource [className = 'dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest', methodName = 'fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.session.SessionPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph(SessionPayloadFatalContractTest.java:47)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.session.SessionPayloadException: session encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.session.SessionPayloadCodec.encrypt(SessionPayloadCodec.java:98)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.lambda$fatal002SuppressedSqlNextReachesSameFatalWithoutChangingGraph$0(SessionPayloadFatalContractTest.java:47)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:SessionPayloadFatalContractTest:fatal001ProviderCauseKeepsExactFatalAndWipesNonce()
+    MethodSource [className = 'dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest', methodName = 'fatal001ProviderCauseKeepsExactFatalAndWipesNonce', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.session.SessionPayloadException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.fatal001ProviderCauseKeepsExactFatalAndWipesNonce(SessionPayloadFatalContractTest.java:32)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.session.SessionPayloadException: session encrypted payload rejected: CRYPTO_UNAVAILABLE
+       dev.codex.schubert.nk.web.session.SessionPayloadCodec.encrypt(SessionPayloadCodec.java:98)
+       dev.codex.schubert.nk.web.session.SessionPayloadFatalContractTest.lambda$fatal001ProviderCauseKeepsExactFatalAndWipesNonce$0(SessionPayloadFatalContractTest.java:32)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 155 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         3 tests failed          ]
+

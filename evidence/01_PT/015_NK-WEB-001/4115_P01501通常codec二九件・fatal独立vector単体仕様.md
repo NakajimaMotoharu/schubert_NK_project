@@ -19,3 +19,6 @@ Main fa9b9fa8（CODEC2+Repo.hashの既fatal口四接続）、新Test pinは実�
 費用.25/.75/1.5pp cap2、原見積り不変更。PG27394は新5だけを元de781相当のnormal実classへ実行する故障再現。期待失敗3が成立しても製品PASSでなく元失敗として保存、旧成功確認の再演なし。PG27400は固定Test sourceの変更後全29を一回、PG27402は独立source/CRC/init/単exec・元OS終了/XML/全@Test/FESaborted0/四counterを検証。全192依存missと自然branch0は保持、必要target100のみ実測成立後記載する。新5のunique定義とred/fixedの延べ実行を区別する。
 
 実行: `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1617_session_fatal_original_red_control.py <Test source>`、次に`1615_session29_qualifier.py run <同Test source>`。PG27394の製品終了1を判定工具0と混同しない。元Bugs/fatal41site・Repo.hash・実DB/Spring/認証/CHR/native/451の終了依存は未受入、正式1964PT/53scope・元190新0・工数null維持。IT/ST合格を宣言しない。
+
+
+実結果 Testsource3c8456529d/Mainfa9b9fa8、PG27394原新5=3失敗2成功/終了1（期待故障検査0）、PG27400固定全29成功/終了0/FESabort0。PG27402独立manifest SHA df4856709a4e79f047d34b27b9199ab3b85d3bad06a7ca3f1133a7ae98f787c5、全192physical/15positiveCRC、PayloadCodec L103/M10/C1/B42とSessionStore L18/M2/C1/B12全100。AttributeはL114全実行でも7instructions/1method/1branchがQA049完了metadata未網羅、全192未網羅を保持。BUG2705三fixture/YKT2374五限定owner閉鎖、BUG2704/原WBS/451の終了依存は未受入。
