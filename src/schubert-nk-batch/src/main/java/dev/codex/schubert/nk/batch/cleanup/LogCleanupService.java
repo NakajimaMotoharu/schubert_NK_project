@@ -7,6 +7,7 @@ import dev.codex.schubert.nk.batch.repository.CleanupKind;
 import dev.codex.schubert.nk.batch.repository.CleanupReason;
 import dev.codex.schubert.nk.batch.repository.CleanupRepository;
 import dev.codex.schubert.nk.batch.repository.LogCleanupProgress;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -71,9 +72,11 @@ public final class LogCleanupService {
             return new LogCleanupSummary(run, initial.before(), progress);
           });
     } catch (CleanupStoppedException failure) {
+      StorageIoException.preserveFatal(failure);
       // BUG-145/YKT-113: resource closure can append raw JDBC suppressed diagnostics.
       throw new CleanupStoppedException(failure.reason());
     } catch (SQLException | BatchRepositoryException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
     }
   }
@@ -124,6 +127,10 @@ public final class LogCleanupService {
     if (primary == null || (known(primary) && !known(secondary))) return true;
     if (!known(primary))
       primary.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
+    else {
+      StorageIoException.preserveFatal(primary);
+      StorageIoException.preserveFatal(secondary);
+    }
     return false;
   }
 
@@ -179,6 +186,8 @@ public final class LogCleanupService {
           throw failure;
         }
         if (!known(cleanupFailure)) throw cleanupFailure;
+        StorageIoException.preserveFatal(failure);
+        StorageIoException.preserveFatal(cleanupFailure);
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
       throw failure;
@@ -267,6 +276,7 @@ public final class LogCleanupService {
           }
         }
       } catch (SQLException failure) {
+        StorageIoException.preserveFatal(failure);
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
     }

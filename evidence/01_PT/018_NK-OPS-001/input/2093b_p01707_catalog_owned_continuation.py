@@ -1,0 +1,58 @@
+"""BUG2751/2754: only selected known diagnostic graph-loss paths, inverse all original bytes."""
+from pathlib import Path
+import ast,datetime,hashlib,json,re,subprocess,sys,xml.etree.ElementTree as ET
+R=Path.cwd();sys.path.insert(0,str(R/'tools/quality'));import pg9666_pagination_static as steps
+B=R/'evidence/01_PT/018_NK-OPS-001';TC=R.parent/'toolchain';c=json.loads((B/'input/2092_p01707_catalog_source_start.json').read_text());O=B/'evidence/PG28344-p01707-six-main-sixteen-catalog-source-static-v1';assert O.exists() and not (O/'manifest.json').exists();ledger=(R/'documents/900_OTHER/910_台帳/915_障害表.md').read_text();assert '## BUG-2751' in ledger and '## BUG-2754' in ledger;helper=B/'input/1861_user_display_format_gate.py';nodes=[n for n in ast.parse(helper.read_text()).body if isinstance(n,ast.FunctionDef) and n.name=='tokens'];exec(compile(ast.Module(body=nodes,type_ignores=[]),str(helper),'exec'),globals());changes=[]
+for path in c['implementationArtifactPaths']:
+ p=R/path;old=subprocess.check_output(['git','show',c['source']+':'+path],text=True);assert p.read_text()==old or (p.stem=='LogCleanupService' and (O/(p.stem+'-before.txt')).read_text()==old);new=old;inverse=[]
+ def rep(a,b,count):
+  global new
+  assert new.count(a)==count,(p.name,a,new.count(a),count);new=new.replace(a,b);inverse.append((b,a,count))
+ imp='import dev.codex.schubert.nk.storage.StorageIoException;\n'
+ if imp not in new:
+  idx=new.index('import ');new=new[:idx]+imp+new[idx:];inverse.append((imp,'',1))
+ if p.stem in ['LogCleanupService','StepCleanupService']:
+  for sig in ['    } catch (CleanupStoppedException failure) {\n','    } catch (SQLException | BatchRepositoryException failure) {\n']:
+   rep(sig,sig+'      StorageIoException.preserveFatal(failure);\n',1)
+  if p.stem=='LogCleanupService':
+   a='''    if (!known(primary))
+      primary.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
+    return false;''';b='''    if (!known(primary))
+      primary.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
+    else {
+      StorageIoException.preserveFatal(primary);
+      StorageIoException.preserveFatal(secondary);
+    }
+    return false;''';rep(a,b,1)
+   a='        if (!known(cleanupFailure)) throw cleanupFailure;\n';rep(a,a+'        StorageIoException.preserveFatal(failure);\n        StorageIoException.preserveFatal(cleanupFailure);\n',1)
+   a='      } catch (SQLException failure) {\n';rep(a,a+'        StorageIoException.preserveFatal(failure);\n',1);expectedCalls=7
+  else:
+   a='''            && !(cleanupFailure instanceof CleanupStoppedException)) throw cleanupFailure;
+        throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);''';b='''            && !(cleanupFailure instanceof CleanupStoppedException)) throw cleanupFailure;
+        StorageIoException.preserveFatal(failure);
+        StorageIoException.preserveFatal(cleanupFailure);
+        throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);''';rep(a,b,1);expectedCalls=4
+ elif p.stem=='CleanupWorkerRequestFiles':
+  a='            } catch (java.nio.file.DirectoryIteratorException failure) {\n';count=new.count(a)
+  if count:rep(a,a+'              StorageIoException.preserveFatal(failure);\n',count)
+  expectedCalls=2
+ else:
+  var='known' if p.stem=='CleanupTerminalRepository' else 'failure';a='    } catch (SQLException '+var+') {\n';n={'CleanupRepository':2,'CleanupStepRepository':1,'CleanupTerminalRepository':3}[p.stem];rep(a,a+'      StorageIoException.preserveFatal('+var+');\n',n);expectedCalls=n
+ reverse=new
+ for add,remove,count in reversed(inverse):assert reverse.count(add)==count;reverse=reverse.replace(add,remove)
+ assert reverse==old;assert new.count('StorageIoException.preserveFatal(')-old.count('StorageIoException.preserveFatal(')==expectedCalls,(p.name,new.count('StorageIoException.preserveFatal('),expectedCalls);changes.append((p,old,new,inverse,expectedCalls))
+steps.SLOT=O;stages={};proof=[]
+for p,old,new,inverse,count in changes:
+ label='format-'+p.stem
+ if p.stem=='LogCleanupService':
+  assert (O/(p.stem+'-before.txt')).read_text()==old
+  stages[label]=json.loads((O/(label+'-exit.safe.json')).read_text());assert stages[label]['actualExit']==0
+ else:
+  assert p.read_text()==old and not (O/(label+'-exit.safe.json')).exists()
+  (O/(p.stem+'-before.txt')).write_text(old);p.write_text(new)
+  stages[label]=steps.step(label,[str(TC/'jdk-25.0.4/bin/java'),'-jar',str(TC/'google-java-format-1.36.1-all-deps.jar'),'--skip-reflowing-long-strings','--replace',str(p)],R)
+ assert stages[label]['actualExit']==0 and tokens(new.replace('import dev.codex.schubert.nk.storage.StorageIoException;',''))==tokens(p.read_text().replace('import dev.codex.schubert.nk.storage.StorageIoException;',''));reverse=p.read_text()
+ for add,remove,n in reversed(inverse):assert reverse.count(add)==n;reverse=reverse.replace(add,remove)
+ assert reverse==old;proof.append(dict(path=str(p.relative_to(R)),beforeSha256=hashlib.sha256(old.encode()).hexdigest(),afterSha256=hashlib.sha256(p.read_bytes()).hexdigest(),originalByteInverseExactAfterFormat=True,guardCalls=count,originalUnknownTypeSelectionFirstUnchanged=True))
+assert sum(p['guardCalls'] for p in proof)==19;listing=O/'sources.txt';listing.write_text(''.join(str(R/p)+'\n' for p in c['implementationArtifactPaths']));stages['format-after']=steps.step('format-after',[str(TC/'jdk-25.0.4/bin/java'),'-jar',str(TC/'google-java-format-1.36.1-all-deps.jar'),'--skip-reflowing-long-strings','--dry-run','--set-exit-if-changed',*[str(R/p) for p in c['implementationArtifactPaths']]],R);stages['checkstyle']=steps.step('checkstyle',[str(TC/'jdk-25.0.4/bin/java'),'-jar',str(TC/'static-gates-20261015/checkstyle-14.3.0-all.jar'),'-c',str(R/'tools/quality/static/checkstyle.xml'),'-f','xml','-o',str(O/'checkstyle.xml'),'@'+str(listing)],R);okay=all(x['actualExit']==0 and not x['timedOut'] for x in stages.values()) and not ET.parse(O/'checkstyle.xml').findall('.//error');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();m=dict(actualExit=0 if okay else 1,atJST=datetime.datetime.now().astimezone().isoformat(),sourceBefore=c['source'],inputHashes={p:sha(R/p) for p in c['implementationArtifactPaths']},proof=proof,stages=stages,originalSourceInverseExact=True,normalizationBoundaries=16,guardCalls=19,bugs=['BUG2751','BUG2754'],unknownPrimaryAndCleanupTypeSelectionUnchanged=True,checkedIoAndResourceScopeAndPureParseUnchanged=True,sqlTransactionLiteralsAuthorityAndResourceOrderUnchanged=True,sourceHelperSha256=sha(R/'src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java'),productTestsExecuted=0,MainCompiled=False,MainInitializedOrInvoked=False,coverage=None,ptStatus='NOT_RUN_NOT_PASS',ordinaryLog19Status='INTERNAL_EXACT_GUARD_SIGNATURE_WITNESS_PENDING',actualDbRootNativeWorkerStatus='HOLD_WHOLE_TESTS_NO_EXTRACTION',newAcceptance=0,verifierSha256=sha(Path(__file__).resolve()));(O/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');assert okay
+p=R/'evidence/01_PT/017_NK-BAT-001/4206_P01707既知十六境界製造・未実施PT仕様.md';assert not p.exists();p.write_text('# P01707既知十六境界製造・未実施PT\n\nBUG2751/2754、YKT2359、SS312/331/332/333/341/343/352、UI251、NTF006007011/QST009。五Main SQL・停止・knownpair14とDirectoryIterator2、計六Main十六境界/十九helpercallだけ。元unknown primary/cleanup型選択の後のknown fallbackのみgraph分類、pureparse/checkedIO/ResourceScope/SQL/transaction/資源順序/authority不変更。PG28344全元byte逆変換/GJF-CS0、Main compile/NullAway-PMD-SB/製品PT/coverage未実施。\n\n既存LogCleanupTransactionPortTest原whole19はmemory JDBC独立、Guard既存byte証拠・workerBUG2755・新fatalvectorを別必要資格として残す。独立oracleはfixedSQL/全column/rollback一回・正常時のみ復元/commit後rollback0/borrowedclose0/knownpair cause-suppressed-next循環/unknown元identityと型優先、fatalgraphのhelper成功をcaller成功へ転用0。元realDB/Root/native/request wholeTestはHOLD、部分抽出・代替fixture0。BUG2751/2754はOPEN、修正だけでPTPASS/coverage100としない。\n');p=R/'documents/400_PGPT/440_判断/441_実装判断記録.md';s=p.read_text();import re;assert max(map(int,re.findall(r'PG-D-(\d+)',s)))==357;p.write_text(s+'\n\n## PG-D-358：P01707既知十六診断境界のfatal graph保持（2026-11-13）\n\nBUG2751/2754/YKT2359。SS312/352を内部具体化、unknown primary/cleanup型の既定選択を変えずknown fallbackのみprimary→secondary分類。停止reason固定前・SQL固定前・DirectoryIterator固定前へ計十九call。SS333 checkedIO/pureparse/SQL/transaction/authority/外部仕様不変更、新QA/SSC不要。六Main元body逆変換/GJF-CS sourcePGのみ、ordinaryLog19型証拠pending・元wholeDB/native/Root PTはHOLD、coverage/BUG閉鎖0。\n');print(json.dumps(dict(actualExit=0,changedSources=6,normalizationBoundaries=16,guardCalls=19,originalSourceInverseExact=True,productTestsExecuted=0)))

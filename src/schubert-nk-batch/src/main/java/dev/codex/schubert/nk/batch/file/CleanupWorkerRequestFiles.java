@@ -266,6 +266,7 @@ public final class CleanupWorkerRequestFiles {
             try (var names = java.nio.file.Files.newDirectoryStream(held)) {
               require(!names.iterator().hasNext());
             } catch (java.nio.file.DirectoryIteratorException failure) {
+              StorageIoException.preserveFatal(failure);
               throw unavailable();
             }
             guard();
@@ -300,6 +301,7 @@ public final class CleanupWorkerRequestFiles {
                 require(observed.add(filename.toString()));
               }
             } catch (java.nio.file.DirectoryIteratorException failure) {
+              StorageIoException.preserveFatal(failure);
               throw unavailable();
             }
             require(observed.equals(expected));
