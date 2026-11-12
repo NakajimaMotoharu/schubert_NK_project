@@ -1,0 +1,120 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T17:42:07.242670+09:00",
+  "source": "8dcfe74618d7cbfe6eb807b8a1b51ddc2cba4751",
+  "productionCoreMain": "13e6c050db76b202b03b1d7653cc368c178cae76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryException.java": "c9c44b231ab9e0ac1fb7b43f2af2b73d076a6c46edb1513c96e56a8c74b5ce90"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01301-PG01",
+      "methods": "QuestionQueryRequest.decode/header/questionScope/detailRequest/usernameSpecified/responseLayoutId",
+      "testIds": [
+        "QRY009..012",
+        "NTF009",
+        "QRY-PLAIN001..008"
+      ],
+      "expected": "OnlyQSS/QSD/NTS/NTDREQ01 version001/synchronousREQUEST/currentheader semantic/fixedbody. Ownbodycopyalwayszero ondecodeexit; badlayout/bytes/semanticfixedPermanentno rawcause. Retainedheadernotauthgrant, QSscope onlyQuestionlayout, detailtype flags, usernameSpecified onlyQSS. Responsefirst3prefixRSP01, nooperationtoken mutation."
+    },
+    {
+      "id": "P01301-PG02",
+      "methods": "canonical/optional/query",
+      "testIds": [
+        "QRY-PLAIN001..004/008",
+        "QRY009..012/NTF009"
+      ],
+      "expected": "Canonicalowner decimalactorID/001/REQUEST:layout. Originalorderedfields: QSS keyword,username,answerState,submittedFrom,submittedTo,page,pageSize; NTS notificationType,dates,page,pageSize; QSD questionId; NTD notificationId. Optionalnull distinctempty, X1/T1/N1, UTCInstantliteral dates, originalpage999999 retaineddespiteeffectiveclamp. TemporaryUTF8copieszero finally andcallerclosescanonical; currentauth/HMAC/readonlySQL/QueryScopeFrame implementedbysharedowners notprovedhere. Repository/Connection/Actor nonnull beforedispatch."
+    },
+    {
+      "id": "P01301-PG03",
+      "methods": "validateResponse/validatePage/QuestionQueryException",
+      "testIds": [
+        "QRY-PLAIN005..008",
+        "QRY-BIND001..004",
+        "QRY003/005"
+      ],
+      "expected": "Responseexactlayout/type anddetailoriginalID (questionvsnotificationdistinct), effectivePage=min(original,totalPages), typedcodecsemantics validatespageSize50/recordcounts/time/receipt. Emptyresults effective1, reject0/wrongfamily/targetID/size/count. Exceptionfixedquestion query is unavailable/nonnullResultCode, noSQL/cause/providertext. No productionmethod generatesexpectedvalues."
+    },
+    {
+      "id": "P01301-PG04",
+      "methods": "sharedNotificationRepository projection/ordering/currentauth ending",
+      "testIds": [
+        "NTF001..005",
+        "QueryApplication/replay/ScopeFrame ending"
+      ],
+      "expected": "Alwaysnotificationowner actorID evenADMIN, sameownerquestion/job/statejoin, logicaldeletedquestionkeepsnotificationbutbody/answer/questionIdNULL. ImmutablecopyreadonlyTX beforecurrentwriteauth/snapshotstate; notificationorder state_changed_at(updated_at) DESC,idDESC/page50, originalrequestcanonical unchanged. ActualDB/username/owner/currentrole/savedframe/twoTX areexitdependencies, notacceptancebythisrequestcomponent."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryPlainContractTest.java",
+      "sha256": "4ebc371e0b1680ad73d5a137eecaff9ca77976ca222304c13cc027a8325c1132",
+      "tests": 8,
+      "wholeBodyReviewed": true,
+      "status": "ELIGIBLE_WHOLE_PLAIN_JDK_PROTOCOL_CANONICAL_NO_BACKEND"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java",
+      "sha256": "9388f89830fff72af50ca24c30ed9508d1e417d836819755f42580d9131ff953",
+      "tests": 2,
+      "wholeBodyReviewed": false,
+      "reviewedScope": "imports/index andcanonical examples only",
+      "status": "HOLD_WHOLE_ACTUAL_KEYRING_NO_METHOD_EXTRACTION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryResponseBindingTest.java",
+      "sha256": "9b04113db75e98c0ecbaccd5e5b10987c93036b4183ebf7dc223a8cf35ab5205",
+      "tests": 4,
+      "wholeBodyReviewed": true,
+      "status": "HOLD_TRANSITIVE_HELPER_WHOLE_KEYRING_CLASS_NO_REWRITE_OR_COPY_TO_BYPASS"
+    }
+  ],
+  "sharedRepository": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+    "sha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd",
+    "owner": "WBS-P014-01",
+    "reviewedScope": "SQLdeclarations andnotificationSearch/detail methods only",
+    "feeDuplicated": false
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P013-01/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_SHARED_OWNER_SQL_AUTH_SCOPE_AND_SAME_SOURCE_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1549_notification_query_contract_audit.py",
+    "sha256": "3d4a4704c58e8e107c6f04f9856a755a18471c8580e1f0b2d553e19429732835"
+  }
+}
