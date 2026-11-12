@@ -1,0 +1,113 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28330-CLEANUP-PUBLIC-VALUES14",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java": "WBS-P017-07"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4204_Cleanup公開値原十四単体仕様.md",
+      "sha256": "31fac706d117ef136de8938f7e2d9ac7b2058518f8c3d72b4921bd5b66b5459d"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28314-p01707-owner-oracle-pure-value-join-v1/manifest.json",
+      "sha256": "d29e86ec71bf5a35661e89a76d6b06c826e75255b0e88a27cb522e586cbcd18f"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "934f144c1c2c2432cbd84835283b9323dd8ecf13",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupValueBoundaryTest.java",
+      "tests": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupValueContractTest.java",
+      "tests": 4
+    }
+  ],
+  "expectedTests": 14,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupReason.class",
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class",
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+    "dev/codex/schubert/nk/batch/repository/CleanupKind",
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk",
+    "dev/codex/schubert/nk/batch/repository/CleanupReason",
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason",
+    "dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28320-cleanup-values14-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28322-cleanup-values14-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28324-cleanup-values14-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28326-cleanup-values14-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28330-cleanup-values14-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28332-cleanup-values14-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg28322-cleanup-values14-prepare-v1",
+    "unit": "pg28330-cleanup-values14-unit-v1"
+  },
+  "newTestDefinitions": 0
+}

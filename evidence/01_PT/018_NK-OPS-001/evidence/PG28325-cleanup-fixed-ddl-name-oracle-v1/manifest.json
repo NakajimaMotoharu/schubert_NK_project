@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T07:00:03.309471+09:00",
+  "source": "638061c62c2bd1d6fa4d34729561b6dea4f319ad",
+  "ddlSourceHashes": {
+    "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+    "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+    "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+    "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+    "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb"
+  },
+  "independentExpectedNames": [
+    "schubert.maintenance_cleanup_notifications",
+    "schubert.maintenance_cleanup_questions",
+    "schubert.maintenance_cleanup_sessions",
+    "schubert.maintenance_cleanup_message_stores",
+    "schubert.maintenance_cleanup_logs",
+    "schubert.maintenance_cleanup_web_receipt_references",
+    "schubert.maintenance_cleanup_batch_runs",
+    "schubert.maintenance_cleanup_inbox_progress",
+    "schubert.maintenance_cleanup_log_progress"
+  ],
+  "matchedDeclarations": {
+    "schubert.maintenance_cleanup_notifications": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql"
+    ],
+    "schubert.maintenance_cleanup_questions": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql"
+    ],
+    "schubert.maintenance_cleanup_sessions": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql"
+    ],
+    "schubert.maintenance_cleanup_message_stores": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql"
+    ],
+    "schubert.maintenance_cleanup_logs": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+      "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql"
+    ],
+    "schubert.maintenance_cleanup_web_receipt_references": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql"
+    ],
+    "schubert.maintenance_cleanup_batch_runs": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql"
+    ],
+    "schubert.maintenance_cleanup_inbox_progress": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql"
+    ],
+    "schubert.maintenance_cleanup_log_progress": [
+      "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql"
+    ]
+  },
+  "vectorOrigin": "HANDWRITTEN_COUNTS_METADATA_TEST_VECTOR_CROSSCHECKED_TO_DDL_NOT_PRODUCTION_FUNCTION_METHOD",
+  "allNineDeclared": true,
+  "actualDdlOrSqlExecuted": false,
+  "productTestsExecuted": 0,
+  "semanticRetentionFkNotTested": true,
+  "newAcceptance": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2086_cleanup14_static_oracle_admission.py",
+    "sha256": "a564ee9ca71b7c0e892d63520f58e8354943a72aaf9881b316158d41905d2c0e"
+  }
+}

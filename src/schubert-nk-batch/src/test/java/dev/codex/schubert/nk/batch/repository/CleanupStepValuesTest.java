@@ -340,7 +340,8 @@ final class CleanupStepValuesTest {
 
   @Test
   void concurrentValues() throws Exception {
-    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+    var pool = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       List<Future<CleanupStepChunk>> values = new ArrayList<>();
       for (int i = 0; i < 64; i++) {
         int n = i;
@@ -360,6 +361,10 @@ final class CleanupStepValuesTest {
         assertEquals(new CleanupCounts(i, i, 0), v.counts());
         assertEquals(i == 0, v.complete());
       }
+    } finally {
+      pool.shutdownNow();
+      if (!pool.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("owned cleanup value workers did not terminate");
     }
   }
 }

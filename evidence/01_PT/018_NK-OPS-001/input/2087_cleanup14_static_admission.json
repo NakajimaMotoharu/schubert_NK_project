@@ -1,0 +1,72 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28330-CLEANUP-PUBLIC-VALUES14",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28322-cleanup-values14-prepare-v1/manifest.json",
+    "sha256": "d6cba156933df007753eed6f2243bdf369d17cb06b13c5b7e3212f0b1850c863"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28324-cleanup-values14-static-v1/manifest.json",
+    "sha256": "1064d5be7b17a54fec88e265db041cec7ae764281914208bd623e13d40373b7d"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "occurrences": 1,
+      "reason": "This sole Test-owned virtual executor is always shutdownNow in finally and awaitTermination10 is asserted while allFuture waits retain5seconds. It intentionally avoids unbounded implicitclose perBUG2753; no shared or application resource exists.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These exact create/submit/shutdown/await sites are the closedJUnit64independent immutable-value concurrency test, not JakartaEE unmanaged work. The same single executor and finiteFuture5/finallyawait10 bound the whole owner; no external operation is performed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.submit(",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These exact create/submit/shutdown/await sites are the closedJUnit64independent immutable-value concurrency test, not JakartaEE unmanaged work. The same single executor and finiteFuture5/finallyawait10 bound the whole owner; no external operation is performed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "occurrences": 1,
+      "reason": "This Test-only finally throws AssertionError precisely if its own worker resource fails to terminate within10seconds; otherwise the original assertions and exceptions remain unchanged. A failed resource postcondition must fail the test, never become business success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These exact create/submit/shutdown/await sites are the closedJUnit64independent immutable-value concurrency test, not JakartaEE unmanaged work. The same single executor and finiteFuture5/finallyawait10 bound the whole owner; no external operation is performed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "if (!pool.awaitTermination(10, TimeUnit.SECONDS))",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "reason": "These exact create/submit/shutdown/await sites are the closedJUnit64independent immutable-value concurrency test, not JakartaEE unmanaged work. The same single executor and finiteFuture5/finallyawait10 bound the whole owner; no external operation is performed.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "independentDdlNameOracleProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28325-cleanup-fixed-ddl-name-oracle-v1/manifest.json",
+    "sha256": "c1a0ca67fb9f95f839cc27d899f4ca24562874a01e62bbd93fc0213d93e7daf7"
+  }
+}
