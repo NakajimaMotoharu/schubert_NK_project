@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
@@ -175,6 +176,7 @@ public final class BackupStepRepository {
       guarded(manifest);
       return states.getFirst();
     } catch (SQLException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }

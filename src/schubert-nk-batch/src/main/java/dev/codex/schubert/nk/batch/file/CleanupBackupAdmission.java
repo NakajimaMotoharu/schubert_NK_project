@@ -73,6 +73,7 @@ public final class CleanupBackupAdmission {
       if (interrupted.getAsBoolean()) throw unavailable();
       return claims;
     } catch (SQLException | BatchRepositoryException failure) {
+      StorageIoException.preserveFatal(failure);
       throw unavailable();
     }
   }
@@ -88,13 +89,19 @@ public final class CleanupBackupAdmission {
         primary.addSuppressed(new BatchRepositoryException());
         return;
       }
+      StorageIoException.preserveFatal(primary);
+      StorageIoException.preserveFatal(cleanup);
       throw unavailable();
     } catch (RuntimeException | Error cleanup) {
       if (unknown(primary)) {
         primary.addSuppressed(new BatchRepositoryException());
         return;
       }
-      if (cleanup instanceof BatchRepositoryException) throw unavailable();
+      if (cleanup instanceof BatchRepositoryException) {
+        StorageIoException.preserveFatal(primary);
+        StorageIoException.preserveFatal(cleanup);
+        throw unavailable();
+      }
       throw cleanup;
     }
   }
