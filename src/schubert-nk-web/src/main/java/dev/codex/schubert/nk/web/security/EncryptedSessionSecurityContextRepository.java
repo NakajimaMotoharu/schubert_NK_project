@@ -71,6 +71,7 @@ public final class EncryptedSessionSecurityContextRepository implements Security
       // Exactly one atomic authenticate/ID+CSRF rotation; no second set during saveContext.
       session.setAttribute(SpringWebSession.PRINCIPAL, principal);
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -85,6 +86,7 @@ public final class EncryptedSessionSecurityContextRepository implements Security
       if (!(value instanceof SessionPrincipal principal)) throw new SessionStoreException();
       return Optional.of(principal);
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }

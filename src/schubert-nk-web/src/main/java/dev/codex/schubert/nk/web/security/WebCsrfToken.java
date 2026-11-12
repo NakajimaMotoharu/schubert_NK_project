@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.security.MessageDigest;
 import java.security.ProviderException;
 import java.security.SecureRandom;
@@ -38,6 +39,7 @@ public final class WebCsrfToken {
       random.nextBytes(bytes);
       return parse(HexFormat.of().formatHex(bytes));
     } catch (ProviderException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new IllegalStateException("CSRF generation is unavailable");
     } finally {
       Arrays.fill(bytes, (byte) 0);

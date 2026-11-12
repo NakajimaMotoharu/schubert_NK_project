@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,6 +48,7 @@ public final class WebRequestContext {
       if (value instanceof WebRequestContext context) return Optional.of(context);
       throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     }
   }
@@ -60,6 +62,7 @@ public final class WebRequestContext {
     try {
       value = request.getAttribute(ID_ATTRIBUTE);
     } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
+      SessionStoreException.preserveFatal(attributeFailure);
       throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
     }
     UUID id;
@@ -71,6 +74,7 @@ public final class WebRequestContext {
       try {
         request.setAttribute(ID_ATTRIBUTE, id);
       } catch (IllegalArgumentException | IllegalStateException attributeFailure) {
+        SessionStoreException.preserveFatal(attributeFailure);
         throw new IllegalStateException(LITERAL_WEB_REQUEST_CONTEXT_IS_UNAVAILABLE);
       }
     } else if (value instanceof UUID typed) id = typed;

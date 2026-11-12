@@ -1,0 +1,45 @@
+{
+  "actualExit": 1,
+  "classification": "SAME_BUG2708_SUBSTRING_INDENT_ALIAS",
+  "partialOwnSourceState": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java",
+      "currentSha256": "04fda87259b490fb56cbfb1417d6f0d2b82bef99c568f38814e0a8571ccd53d9",
+      "beforeSha256": "f5b117c9d9a9473a45b602c3ce97a6e92198b27490ac284e7281956cd7b42f37"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java",
+      "currentSha256": "985be6ce11ee44e0550e88c3c86c99fdfe2de644ebfd785e0e4304974f9bbcae",
+      "beforeSha256": "3fa8bd5ce5e2af1341085c78fb909041951bd82c17c094377da6dcb66765c1b1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+      "currentSha256": "c113970e17d8e8c17805e67415671e9a0bdc0fcbe93d90d31b49e716c372c6d7",
+      "beforeSha256": "e4cff5e703bf4613c4f2e5097b1f26de5599fcdf465de75f96577e8d6afee972"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+      "currentSha256": "14d69f5999d9c225bde9190ef757635553ce7da8322f129ea4206bd0924e758d",
+      "beforeSha256": "d6ff8eec25554583f88ad34f79ced1bf34aec6303b286ceb65b6ddae15835da2"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler.java",
+      "currentSha256": "2cfc160928f53d24b0250bb7c7586ddf40a053e838dc9b772e610319d9ee9902",
+      "beforeSha256": "ed3f7037197d481e702ea0d8f6f937dc7a38c4fac1fa115e018b515bdce00707"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfToken.java",
+      "currentSha256": "acfd96289153f972423d5ba259d025bcb0bbb64f37ac4316699f2d2af7f1330a",
+      "beforeSha256": "7d08fa404c8f4594d865d6caa2d05587eda320a4cfb5a7c06d44daef0eaf0f36"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+      "currentSha256": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+      "beforeSha256": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb"
+    }
+  ],
+  "sourceChangesKept": true,
+  "productTestsExecuted": 0,
+  "actualHeldClassOrBackendActions": 0,
+  "reason": "A less-indented inserted string is a suffix-substring of a more-indented line; exact full line identity required, notstr.count."
+}

@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-2707",
+  "horizontal": "YKT-2359",
+  "sites": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java",
+      "sha256": "f5b117c9d9a9473a45b602c3ce97a6e92198b27490ac284e7281956cd7b42f37",
+      "missingFatalCatchSites": [
+        {
+          "line": 28,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException | NoSuchElementException failure) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java",
+      "sha256": "3fa8bd5ce5e2af1341085c78fb909041951bd82c17c094377da6dcb66765c1b1",
+      "missingFatalCatchSites": [
+        {
+          "line": 66,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+      "sha256": "e4cff5e703bf4613c4f2e5097b1f26de5599fcdf465de75f96577e8d6afee972",
+      "missingFatalCatchSites": [
+        {
+          "line": 43,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        },
+        {
+          "line": 59,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        },
+        {
+          "line": 83,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+      "sha256": "d6ff8eec25554583f88ad34f79ced1bf34aec6303b286ceb65b6ddae15835da2",
+      "missingFatalCatchSites": [
+        {
+          "line": 73,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        },
+        {
+          "line": 87,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler.java",
+      "sha256": "ed3f7037197d481e702ea0d8f6f937dc7a38c4fac1fa115e018b515bdce00707",
+      "missingFatalCatchSites": [
+        {
+          "line": 43,
+          "catch": "} catch (IllegalArgumentException malformed) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfToken.java",
+      "sha256": "7d08fa404c8f4594d865d6caa2d05587eda320a4cfb5a7c06d44daef0eaf0f36",
+      "missingFatalCatchSites": [
+        {
+          "line": 40,
+          "catch": "} catch (ProviderException failure) {"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+      "sha256": "b14439675537e10360d052246415ed3addcb68a757a78452d3127af767f6c9eb",
+      "missingFatalCatchSites": [
+        {
+          "line": 49,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException failure) {"
+        },
+        {
+          "line": 62,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException attributeFailure) {"
+        },
+        {
+          "line": 73,
+          "catch": "} catch (IllegalArgumentException | IllegalStateException attributeFailure) {"
+        }
+      ]
+    }
+  ],
+  "sourceFiles": 7,
+  "missingSites": 12,
+  "runtimeExecuted": false
+}

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.util.NoSuchElementException;
@@ -26,6 +27,7 @@ public final class CaddyClientAddressResolver {
         throw new CaddyRequestRejectedException();
       return new LoginClientAddress(single(request, "X-Forwarded-For"));
     } catch (IllegalArgumentException | IllegalStateException | NoSuchElementException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new CaddyRequestRejectedException();
     }
   }

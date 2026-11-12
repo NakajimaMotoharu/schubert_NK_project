@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.web.security;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Event;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit.Route;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -64,6 +65,7 @@ public final class CaddyTransportContextFilter implements Filter {
     try {
       http.setAttribute(WebRequestContext.ATTRIBUTE, context);
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new IllegalStateException("web request context is unavailable");
     }
     chain.doFilter(request, response);

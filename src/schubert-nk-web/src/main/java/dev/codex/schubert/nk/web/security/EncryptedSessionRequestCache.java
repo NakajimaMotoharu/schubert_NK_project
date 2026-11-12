@@ -41,6 +41,7 @@ public final class EncryptedSessionRequestCache implements RequestCache {
           .getSession()
           .setAttribute(SpringWebSession.SAVED_REQUEST, target.orElseThrow().location());
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -57,6 +58,7 @@ public final class EncryptedSessionRequestCache implements RequestCache {
       if (!(value instanceof String location)) throw new SessionStoreException();
       return new SavedGet(SavedScreenTarget.fromGet("GET", location).location());
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }
@@ -81,6 +83,7 @@ public final class EncryptedSessionRequestCache implements RequestCache {
       var session = request.getSession(false);
       if (session != null) session.removeAttribute(SpringWebSession.SAVED_REQUEST);
     } catch (IllegalArgumentException | IllegalStateException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new SessionStoreException();
     }
   }

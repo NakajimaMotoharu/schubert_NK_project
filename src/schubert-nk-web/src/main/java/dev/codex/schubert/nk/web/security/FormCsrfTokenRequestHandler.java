@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
@@ -41,6 +42,7 @@ public final class FormCsrfTokenRequestHandler implements CsrfTokenRequestHandle
       if (values == null || values.length != 1 || values[0] == null) return null;
       return WebCsrfToken.parse(values[0]).formValue();
     } catch (IllegalArgumentException malformed) {
+      SessionStoreException.preserveFatal(malformed);
       return null;
     }
   }
