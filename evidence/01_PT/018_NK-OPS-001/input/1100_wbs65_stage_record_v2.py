@@ -17,6 +17,25 @@ def resolve_end_main_identity(start_source, config, manifest):
     if 'sourceAfter' in config:
         assert manifest.get('source') == manifest.get('productionCoreMain') == after
     return after
+def validate_forecast_additional_boundary(forecast):
+    """BUG2720/YKT2377: estimates must balance before any new group event is written."""
+    from decimal import Decimal
+    import math
+    fields=['additionalRequiredWorkGrossPp','additionalCompletedWorkPp','additionalDiscoveredRemainingPp']
+    values={}
+    for field in fields:
+        row=forecast.get(field)
+        if not isinstance(row,dict) or set(row)!={'low','base','high'}:
+            raise ValueError('FORECAST_ADDITIONAL_FIELDS:'+field)
+        for key,value in row.items():
+            if type(value) not in (int,float) or not math.isfinite(value) or value<0:
+                raise ValueError('FORECAST_ADDITIONAL_VALUE:'+field+':'+key)
+        if not row['low']<=row['base']<=row['high']:
+            raise ValueError('FORECAST_ADDITIONAL_ORDER:'+field)
+        values[field]={key:Decimal(str(value)) for key,value in row.items()}
+    for key in ['low','base','high']:
+        if values[fields[0]][key]!=values[fields[1]][key]+values[fields[2]][key]:
+            raise ValueError('FORECAST_ADDITIONAL_GROSS_MISMATCH:'+key)
 R=Path.cwd(); S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path[:0]=[str(R/'tools/quality'),str(R/'tools/quality/vm/050_s1')]
 import pg998_metrics as metrics
@@ -31,6 +50,7 @@ forecastRef=c.get('forecastRef');forecast=None
 if forecastRef is not None:
  p=R/forecastRef['path'];assert forecastRef['path'].startswith('documents/400_PGPT/470_PMO/600_通常PGPT_20261106/') and p.suffix=='.json' and sha(p)==forecastRef['sha256']
  forecast=load(p);points=forecast['revisedRemainingPp'];assert set(points)=={'low','base','high'} and 0<=points['low']<=points['base']<=points['high']
+if mode=='start' and forecast is not None:validate_forecast_additional_boundary(forecast)
 now=dt.datetime.now(dt.timezone.utc).isoformat()
 rows=[json.loads(v) for v in metrics.EVENTS.read_bytes().splitlines()]
 if mode=='start':
