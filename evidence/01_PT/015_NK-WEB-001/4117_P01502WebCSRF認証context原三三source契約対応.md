@@ -20,3 +20,6 @@ NK-WEB-001。対象source/hash、承認設計commit/hash、独立期待値/TestI
 
 
 BUG2707 PG27438七source十二既SessionStorefatal口/必要import五のみ接続、元fa9b逆変換完全一致・configuredformat/CS0。工具BUG2708/YKT2375は27435失敗/27437独立5負例/27438全七で限定閉鎖、製品PT0。Maincompile/runtime/coverage未実施、projection/CSRF実終了と全53fatalruntimeはOPEN。
+
+
+source固定commit 1e442e0e41156e16cc22984b97aa6aab9618919b、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG27442-web-security-fatal12-source-join-v1/manifest.json) SHAc75a799f2dbc6f8a9d399c4e70b65710bf3db861efe68dd82119287cdb402e9b。BUG2707七source十二既SessionStorefatal口+必要import五のみ、元fa9b逆変換/27438configuredGJF-CS0 e7e8f023、HTTP/CSRF/権限/Cookie/保存先/通常fixedcatalog不変。最初二次工具多重度failureとformat1を保持、BUG2708/YKT2375はmixedindent/duplicate/欠落/余分/foreignの独立工具5と全七inverseで限定閉鎖、製品PTへ加算0。工具内部是正配賦.01/.025/.05から.015/.05/.1へ見直し（全行同一性/importformat）、元群.1/.3/.6内で原費用不変更・二重計上0。限定全53fatal site runtime/再発防止は未完OPEN。 製品PT0、runtime/coverage未受入。

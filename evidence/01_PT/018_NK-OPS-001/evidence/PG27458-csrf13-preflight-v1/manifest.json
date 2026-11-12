@@ -1,0 +1,91 @@
+{
+  "actualExit": 0,
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfToken.java": "35a0205df2a497b2705ecdf9f43083654ae2455865ef57a89610f023af716827",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java": "190c32dc5d249e1323a3eb5075c9eead35f1cce5bf2f0956972220024d22b380",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java": "3ab62c90af53ffb1e6fd9f01e650324bb16e201fd4eeecc7a5ba21f2127d7a10",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "a946c07a2cd3b6c28d0ee244c42dd41de4706e03378418ec4462ae53c72551c0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfFatalContractTest.java": "69f1f3d147f658bce474e38ae082d3924699ccec7e9676167e42a0315581d881",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27448-csrf13-normal-v1/manifest.json",
+    "sha256": "4991e3009305e47db0cc90483e61002f140581398f8aff988fc0ae37e5c7959b"
+  },
+  "testAndChangedMainStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27450-csrf13-static-v1/manifest.json",
+    "sha256": "b8418ae3c2ea23dafef7c97b5fdf166279ae3b2fd2643595fc76f9e89384f01f"
+  },
+  "unchangedMainStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22122-current7aed-lineage-style-v1/manifest.json",
+    "sha256": "2d200777b5983362f972cd00e83b64dbf265851bd9688eb6684a6442e4549298"
+  },
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "rule": "CloseResource",
+      "line": "98",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "ExistingwholeJUnit privateexecutor hasinvokeAll20/Future20/finallyshutdownNow/await10asserted; replacingwithTWRwouldrestoreunboundedclose. No productcontainer resource."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "98",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own10workers andboundedinvokeAll/Futures/finallyjoin; no J2EE/businessservice/remoteoperation."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "113",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own10workers andboundedinvokeAll/Futures/finallyjoin; no J2EE/businessservice/remoteoperation."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "117",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own10workers andboundedinvokeAll/Futures/finallyjoin; no J2EE/businessservice/remoteoperation."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "118",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "disposition": "NOT_APPLICABLE_EXPLICIT_ORDINARY_TEST_CONTEXT_NO_SUPPRESSION",
+      "reason": "StandaloneJUnit own10workers andboundedinvokeAll/Futures/finallyjoin; no J2EE/businessservice/remoteoperation."
+    }
+  ],
+  "expectedTests": 13,
+  "fullPhysicalClasses": 5,
+  "newDefinitions": 5,
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "pmdRawFindings": 5,
+  "manualSuppressionAdded": false,
+  "actualBackendOrHeldClassActions": 0,
+  "heldFixturesExtractedOrRewritten": false,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "fullReportExpectedPartial": true,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1644_csrf13_preflight.py",
+    "sha256": "2d4cdbebd19fa883ff18db0c9822b905c2ba46f41fd9453ed2638a00af1584db"
+  }
+}
