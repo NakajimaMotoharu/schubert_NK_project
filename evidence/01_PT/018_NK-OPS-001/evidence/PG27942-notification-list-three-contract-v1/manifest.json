@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T02:22:40.928734+09:00",
+  "source": "33aa95be9ce1789fa84b936f9691a6c35e91785f",
+  "productionCoreMain": "089a7eb5de7d743e17d5524f012095fa70673f76",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/NotificationSearchForm.java": "2ef67ea5d4b3829d5c48b8e2c6734473d3cdca1e09f24b7ff8c2859053297cfa",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/NotificationListViewModel.java": "0d9826eecee7a3e0e63e779dac32949bced1748bff8d927b58e10c23160b5ed7",
+    "src/schubert-nk-web/src/main/resources/templates/notifications/list.html": "cb9ecfb4c5105b537acfd3733136e20b737b3aa31af04262986874e1c34236aa"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 346,
+  "design": [
+    {
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01620-PG01",
+      "methods": "NotificationSearchForm.bind/date/toRequest",
+      "testIds": [
+        "NTFORM001..012",
+        "PT-NTF-HTTP001..010"
+      ],
+      "expected": "Only type/from/to/page single-valued fields; unknown owner fails even ADMIN, closed type empty/ACCEPTED/COMPLETED/ERROR; defaults page1 size50, signednegative clamped1, max999999 andoverflow invalid. Raw control/unpairedsurrogate rejected before NFC/trim. Strict yyyy-MM-dd year1..9999/calendar, JSTfrom00:00 andto23:59:59.999, inclusive366days upperbound andinverse invalid. Null map/key/list/element rejected, immutabledefensive snapshots, invalid conversion failsfixedsecretfree, no owner/auth/session/provider action."
+    },
+    {
+      "id": "P01620-PG02",
+      "methods": "NotificationListViewModel.success/invalid/row/link",
+      "testIds": [
+        "PT-NTF-HTTP001..010",
+        "NTF-001"
+      ],
+      "expected": "Display-only actor/immutableclosedrecords andpage50; effectivepage matchesclampedrequest, exactrowcount/uniqueIDs/state-type consistency, summary<=100codepoints/deleted exact削除済み. UpdatedAt DESC thenID DESC, JSTseconds, three fixedJapanese type labels and fixednumericdetail. Filters retained/UTF8encoded in bothpagers, invalidform hasnorows/page. Owner authorization remainsbusinessAPI; ADMIN neverbroaden scope. FourheldNQviews dynamicHOLD per3471/2065: no newfixture/classcompile/init/dynamiccounter ortestextraction."
+    },
+    {
+      "id": "P01620-PG03",
+      "methods": "notifications/list.html",
+      "testIds": [
+        "PT-NTF-HTTP001..010"
+      ],
+      "expected": "通知 title/shareduseraction/GET search/type-fouroptions/two dates, noownerinput. Explicitfieldissue alert, count/pagers onlywithpage, emptytext該当するデータはありません, columns区分-受付ID-受付日時-最終更新日時-概要-操作, escapedth:text values/no rawHTML; 明細link only/no delete or POST. OriginaltemplateDOM/historicalprojection proof mustnotbe transferred to currentfullHTTP/DB/CHR success."
+    },
+    {
+      "id": "P01620-PG04",
+      "methods": "NotificationSearchInputContractTest whole12 independent boundary",
+      "testIds": [
+        "NTFORM001..012"
+      ],
+      "expected": "WholeexistingpureTest coverspublicForm/JDK/protocolDTO only, no@BeforeAll/DB/heldview import, independentlyfixedUTC/literalpage/types/daterange/null/immutable/diagnostic oracles; no Controller fixture copied. Teststyle preprocessing token-equivalence andfullunchangedRootNullAway/static gate required beforeonecurrent qualification, priorwhole56 not repeated forconfirmation. /1preparation only; /2 actualauth/ownerAPI/DB/CHR/451 remainunaccepted."
+    }
+  ],
+  "independentWholeFormTest": {
+    "path": "tools/quality/architecture/NotificationSearchInputContractTest.java",
+    "sha256": "3cd834e9f5d8e41ba0ac27d90ec9af2f5b4d7ea670099a03c5547817fff77717"
+  },
+  "existingWholeFormTests": 12,
+  "heldViewBinaryActions": 0,
+  "internalDependencies": [
+    "WBS-P015-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-20/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_OWNER_API_HTTP_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1907_notification_list_contract.py",
+    "sha256": "0c3ac25fcf95de3de961849c4e2cbe240b10dda2095adc996d58f824c4d7e71f"
+  }
+}

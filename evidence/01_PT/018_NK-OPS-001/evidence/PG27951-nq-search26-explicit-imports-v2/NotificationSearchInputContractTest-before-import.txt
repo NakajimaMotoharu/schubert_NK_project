@@ -1,0 +1,224 @@
+package dev.codex.schubert.nk.web.form;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
+
+/** NTF/UI224236/SS313: NTFORM001..012; pure input contract, no view/controller fixture. */
+public final class NotificationSearchInputContractTest {
+  private static final String TYPE_KEY = "type";
+  private static final String FROM_KEY = "from";
+  private static final String PAGE_KEY = "page";
+  private static final String ERROR_VALUE = "ERROR";
+  private static final String PUBLIC_VALUE = "PUBLIC";
+  private static final String LEAP_DAY_VALUE = "2024-02-29";
+
+  private static Map<String, List<String>> one(String k, String v) {
+    return Map.of(k, List.of(v));
+  }
+
+  private static void bad(String k, String v) {
+    var f = NotificationSearchForm.bind(one(k, v));
+    assertFalse(f.isValid());
+    assertTrue(f.getIssues().containsKey(k));
+    assertEquals(
+        "invalid notification search form",
+        assertThrows(IllegalArgumentException.class, f::toRequest).getMessage());
+  }
+
+  @Test
+  void ntform001DefaultsHaveNoOwnerOrDates() {
+    var f = NotificationSearchForm.bind(Map.of());
+    assertTrue(f.isValid());
+    assertTrue(f.getIssues().isEmpty());
+    assertEquals(1, f.getPage());
+    assertEquals(Map.of(TYPE_KEY, "", FROM_KEY, "", "to", "", PAGE_KEY, ""), f.getValues());
+    var d = f.toRequest();
+    assertEquals(Optional.empty(), d.notificationType());
+    assertEquals(Optional.empty(), d.submittedFrom());
+    assertEquals(Optional.empty(), d.submittedTo());
+    assertEquals(1, d.page());
+    assertEquals(50, d.pageSize());
+  }
+
+  @Test
+  void ntform002OnlyThreeNotificationTypesBecomeEnums() {
+    String[] in = {"ACCEPTED", "COMPLETED", ERROR_VALUE};
+    NotificationType[] out = {
+      NotificationType.ACCEPTED, NotificationType.COMPLETED, NotificationType.ERROR
+    };
+    for (int i = 0; i < in.length; i++) {
+      var f = NotificationSearchForm.bind(one(TYPE_KEY, in[i]));
+      assertTrue(f.isValid());
+      assertEquals(Optional.of(out[i]), f.toRequest().notificationType());
+    }
+    for (String v : List.of("accepted", PUBLIC_VALUE, "ANSWERED")) bad(TYPE_KEY, v);
+  }
+
+  @Test
+  void ntform003PageClampAndUpperBoundaryHaveLiteralResults() {
+    String[] in = {"", "0", "-0", "-1", "-2147483648", "1", "2", "999999", "000002"};
+    int[] out = {1, 1, 1, 1, 1, 1, 2, 999999, 2};
+    for (int i = 0; i < in.length; i++) {
+      var f = NotificationSearchForm.bind(one(PAGE_KEY, in[i]));
+      assertTrue(f.isValid());
+      assertEquals(out[i], f.getPage());
+      assertEquals(out[i], f.toRequest().page());
+      assertEquals(50, f.toRequest().pageSize());
+    }
+  }
+
+  @Test
+  void ntform004InvalidAndOverflowPagesRemainFailures() {
+    for (String value :
+        List.of("+1", "1.0", PUBLIC_VALUE, "1000000", "2147483647", "2147483648", "-2147483649")) {
+      var f = NotificationSearchForm.bind(one(PAGE_KEY, value));
+      assertFalse(f.isValid());
+      assertEquals(1, f.getPage());
+      assertTrue(f.getIssues().containsKey(PAGE_KEY));
+      assertThrows(IllegalArgumentException.class, f::toRequest);
+    }
+  }
+
+  @Test
+  void ntform005IndependentJstUtcPairsAndMissingSides() {
+    var from = NotificationSearchForm.bind(one(FROM_KEY, LEAP_DAY_VALUE));
+    assertTrue(from.isValid());
+    assertEquals(
+        Optional.of(Instant.parse("2024-02-28T15:00:00Z")), from.toRequest().submittedFrom());
+    assertEquals(Optional.empty(), from.toRequest().submittedTo());
+    var to = NotificationSearchForm.bind(one("to", LEAP_DAY_VALUE));
+    assertTrue(to.isValid());
+    assertEquals(Optional.empty(), to.toRequest().submittedFrom());
+    assertEquals(
+        Optional.of(Instant.parse("2024-02-29T14:59:59.999Z")), to.toRequest().submittedTo());
+  }
+
+  @Test
+  void ntform006SameDayAnd366DayMinusMillisecondAreAllowedNotTheNextDay() {
+    var same =
+        NotificationSearchForm.bind(
+            Map.of(FROM_KEY, List.of(LEAP_DAY_VALUE), "to", List.of(LEAP_DAY_VALUE)));
+    assertTrue(same.isValid());
+    var max =
+        NotificationSearchForm.bind(
+            Map.of(FROM_KEY, List.of("2024-01-01"), "to", List.of("2024-12-31")));
+    assertTrue(max.isValid());
+    assertEquals(
+        Optional.of(Instant.parse("2023-12-31T15:00:00Z")), max.toRequest().submittedFrom());
+    assertEquals(
+        Optional.of(Instant.parse("2024-12-31T14:59:59.999Z")), max.toRequest().submittedTo());
+    for (Map<String, List<String>> p :
+        List.of(
+            Map.of(FROM_KEY, List.of("2024-01-01"), "to", List.of("2025-01-01")),
+            Map.of(FROM_KEY, List.of("2024-01-02"), "to", List.of("2024-01-01")))) {
+      var f = NotificationSearchForm.bind(p);
+      assertFalse(f.isValid());
+      assertEquals("受付日は366日以内で指定してください。", f.getIssues().get("to"));
+      assertThrows(IllegalArgumentException.class, f::toRequest);
+    }
+  }
+
+  @Test
+  void ntform007StrictDatesRejectInvalidYearFormatAndCalendar() {
+    for (String name : List.of(FROM_KEY, "to"))
+      for (String value :
+          List.of(
+              "0000-01-01",
+              "2025-02-29",
+              "2024-13-01",
+              "2024-01-32",
+              "2024-2-29",
+              "2024-02-29T00:00")) bad(name, value);
+  }
+
+  @Test
+  void ntform008UnknownOwnerAndNonSingleParametersAreNeverIgnored() {
+    var unknown = NotificationSearchForm.bind(one("owner", PUBLIC_VALUE));
+    assertFalse(unknown.isValid());
+    assertTrue(unknown.getIssues().containsKey("form"));
+    for (String name : List.of(TYPE_KEY, FROM_KEY, "to", PAGE_KEY))
+      for (List<String> values : List.of(List.<String>of(), List.of(PUBLIC_VALUE, PUBLIC_VALUE))) {
+        var f = NotificationSearchForm.bind(Map.of(name, values));
+        assertFalse(f.isValid());
+        assertTrue(f.getIssues().containsKey(name));
+      }
+  }
+
+  @Test
+  void ntform009ControlAndSurrogateChecksPrecedeTrimWhileSpacesRemainOptional() {
+    for (String name : List.of(TYPE_KEY, FROM_KEY, "to", PAGE_KEY))
+      for (String value :
+          List.of("\u0000", "\u007f", "\u0085", "\uD800", "\uDC00", "é", "\uE000", "\uD800\uDC00"))
+        bad(name, value);
+    var f =
+        NotificationSearchForm.bind(
+            Map.of(
+                TYPE_KEY,
+                List.of(" ACCEPTED "),
+                FROM_KEY,
+                List.of(" "),
+                "to",
+                List.of(" "),
+                PAGE_KEY,
+                List.of(" 2 ")));
+    assertTrue(f.isValid());
+    assertEquals(Optional.of(NotificationType.ACCEPTED), f.toRequest().notificationType());
+    assertEquals(Optional.empty(), f.toRequest().submittedFrom());
+    assertEquals(Optional.empty(), f.toRequest().submittedTo());
+    assertEquals(2, f.getPage());
+  }
+
+  @Test
+  void ntform010NullMapKeyListAndElementNeverCreateAForm() {
+    assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(null));
+    var key = new HashMap<String, List<String>>();
+    key.put(null, List.of(PUBLIC_VALUE));
+    assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(key));
+    var list = new HashMap<String, List<String>>();
+    list.put(TYPE_KEY, null);
+    assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(list));
+    var values = new ArrayList<String>();
+    values.add(null);
+    assertThrows(
+        NullPointerException.class, () -> NotificationSearchForm.bind(Map.of(TYPE_KEY, values)));
+  }
+
+  @Test
+  void ntform011SnapshotsAndIssueMapsAreImmutableCopies() {
+    var values = new ArrayList<>(List.of(ERROR_VALUE));
+    var in = new HashMap<String, List<String>>();
+    in.put(TYPE_KEY, values);
+    var f = NotificationSearchForm.bind(in);
+    values.set(0, "CHANGED");
+    in.clear();
+    assertEquals(ERROR_VALUE, f.getValues().get(TYPE_KEY));
+    assertEquals(Optional.of(NotificationType.ERROR), f.toRequest().notificationType());
+    assertThrows(UnsupportedOperationException.class, () -> f.getValues().put(TYPE_KEY, "CHANGED"));
+    assertThrows(
+        UnsupportedOperationException.class, () -> f.getIssues().put("form", PUBLIC_VALUE));
+    assertTrue(f.isValid());
+    assertTrue(NotificationSearchForm.bind(Map.of()).isValid());
+  }
+
+  @Test
+  void ntform012ConversionFailureAndDiagnosticRemainValueFree() {
+    var f = NotificationSearchForm.bind(one(TYPE_KEY, "PUBLIC_UNRECOGNIZED"));
+    assertEquals("NotificationSearchForm[REDACTED]", f.toString());
+    var ex = assertThrows(IllegalArgumentException.class, f::toRequest);
+    assertEquals("invalid notification search form", ex.getMessage());
+    assertNull(ex.getCause());
+    assertEquals(0, ex.getSuppressed().length);
+    assertFalse(f.isValid());
+    assertEquals(
+        Optional.of(NotificationType.ERROR),
+        NotificationSearchForm.bind(one(TYPE_KEY, ERROR_VALUE)).toRequest().notificationType());
+  }
+}

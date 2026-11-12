@@ -111,3 +111,6 @@ P01618/19と要求表示共有の原18は[仕様](4163_P0161819質問入力表�
 
 
 WBS-P016-19公開source契約/独立期待値/TestIDは[4165_P01619受付完了原二artifact契約対応.md](4165_P01619受付完了原二artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P016-20公開source契約/独立期待値/TestIDは[4166_P01620通知一覧原三artifact契約対応.md](4166_P01620通知一覧原三artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。
