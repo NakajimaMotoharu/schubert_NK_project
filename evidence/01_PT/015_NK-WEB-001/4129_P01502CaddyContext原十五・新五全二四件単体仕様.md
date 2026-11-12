@@ -1,0 +1,25 @@
+# P01502 Caddy・request context 原15・graph4・新fatal5 通常24件仕様
+
+NK-WEB-001/WBS-P015-02、UI226/SS313314342352、BUG2707/YKT2359の既修正12siteのうちResolver1・Filter1・Context3の計5siteを検証する。Main43d4489fda4018505827c8f125f93ef501c92e14、当guard実装は1e442e0eの既実装、今回Main変更0。Token1siteは既CSRF13で限定確認済、Cache/SecurityContext/Formの残6siteは実session/actual4依存HOLDを維持し、5site検証へ合算しない。
+
+|新Test ID|CaddyContextFatalContractTest method|独立期待値|
+|---|---|---|
+|OPS-CADDY-FATAL001|fatal001ResolverClosedForwardingVectorsAndProviderGraph|IAE/ISE/NoSuchElementのsuppressed SQLnext Error同一、loopback IPv4/IPv6＋単一https/XFFだけ受理。peer/Forwarded/単一header/null/未知/重複不正は固定proxy拒否、DNSせずliteralのみ|
+|OPS-CADDY-FATAL002|fatal002FilterContextSaveKeepsFatalAndNeverDispatches|context属性保存IAE/ISEのError同一、downstream0・未commit・context未設定・server UUID保持、非fatal循環固定理由/直接Error非変換|
+|OPS-CADDY-FATAL003|fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies|context属性取得IAE/ISEのError同一、循環は固定理由、直接Error非変換、異型objectのtoStringを呼ばない|
+|OPS-CADDY-FATAL004|fatal004IdentifyIdReadGraphAndStableServerIdentity|requestId属性取得graphのError同一/循環・直接Error契約、client headerを採らずUUID(0,31)生成一回で固定|
+|OPS-CADDY-FATAL005|fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure|requestId属性保存graphのError同一、失敗後属性未設定・不正なfallbackなし、循環固定理由/直接Error非変換|
+
+例外は公開合成Throwable/SQLException値graphだけでJDBC接続しない。独立期待値は固定文字列、保持したError identity、RFC5737/3849のpublic IP、固定UUID、明示downstream counter/response未commit/属性後条件から作る。production methodでexpectedを生成しない。Spring mock/JDK Servlet interface以外の認証・権限・private proofを作らない。実Caddy/HTTP/TLS/VM/Root/資格/鍵/DB/native/opaque snapshotは操作せず、SS314のmemory transport契約を試す。数値IPはofLiteralでDNS lookupを行わない。
+
+原wholeCaddyTransportPortTest5（319行）を維持し、信頼済dispatch/再dispatch、非HTTP、拒否403一度/no sendError、client再束縛禁止、null/save-fault/安全なaudit JSONを検証する。原wholeWebRequestTraceTest10（477行）とSessionFailureGraphTest1/JdbcGraph328Test3もそのまま同execに入れ、Contextの既存正常・異型/null・ID整合・属性例外・並行/owner後条件と有限fatalgraphを必要関連回帰として確認する。全5class24件、原HOLD fixtureからの抽出なし。新5は5秒SEPARATE_THREAD、原TraceのworkerはFuture5/10・finallyawait10維持。公開controller/config source一覧は既固定snapshotだけを読取る。
+
+開始見積りは.125/.375/.75pp cap2。直前の提案.15/.45/.9から、PG27600と同一の20Main/23physical+Protocol176=199をreuseしMain再compile/SB再実行が不要な分だけ開始前に見直した。元費用/各群開始費/完了点は不変更、値引きを完成実績へ換算しない。内訳は新5/赤対照.075/.225/.45、限定Testcompile・既Main/static再利用・24件同exec・独立post.05/.15/.3。
+
+Java25.0.4/Maven3.9.12、RootそのままErrorProne2.50/NullAway0.14.1/JSpecify/Werrorの既Main compileをsource/hash/23class/Root設定/SDKで再認証する。Gson2.14/annotation2.48と既Servlet/Spring SDKは同hash。JUnit1.13.4/JaCoCo0.8.15/PMD7.28recordfix/CS14.3/GJF1.36.1。PG27620は新5＋原Port5だけをjavac、Trace/helper3fixtureは現sourceの既class/hashを保持。新Test最初の静的解析で重複header literal2件を検出し、独立literalをTest内定数へまとめて是正した。PG27621は元byte逆変換/GJF非comment token一致を記録し、新Testだけ再compile、古いclass/初回出力は保持した。PTはまだ実行していない段階の是正であり成功へ算入しない。
+
+PG27626の新Test raw0/CSformat0、原Portの既raw7はJDK Servlet Proxyの宣言loader・fixture単一thread map・Proxy.equalsの意図したidentity比較として個別非該当、抑制なし。Main20と不変Test3の静的解析はPG27602/27608の同source/hash証跡を参照する。PG27628でRoot current compiler/全入力/SDK/199physical/新Test定数化と不変assertion・分類を独立照合する。
+
+PG27624赤対照は、3target classの旧normal byteだけを限定差替えし、他Mainはcurrent Core43dのまま保持する。旧target sourceはfa9b9fa81706b0e62a34c3bd374a3971c2495499のsource byteに一致する。これは旧project全体の全回帰ではない。新5の想定5失敗0成功/製品exit1を別記し、検査工具exit0や固定PT成功と混同しない。PG27630固定source全24を一度、PG27632で終了0/XML/全@Test/FESabort0/CRC/init/単session/全199とtarget3の四counterを検証する。target100は実測後のみ、全199の未実行分は除外・別exec合算しない。
+
+実行 `PYTHONPATH=tools/quality python3 -B evidence/01_PT/018_NK-OPS-001/input/1724a_caddy_context_original_red_control_v2.py <固定Testsource>`、続いて `1722a_caddy_context24_qualifier_v2.py run <同source>`。実測/hashはpost後に追記。実transport認証・実API/Web/CHR/451/元190の終了依存は未受入、正式1964PT/53scope・工数率null、IT/ST完了宣言なし。
