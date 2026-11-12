@@ -1,0 +1,78 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-4950",
+  "groupId": "PGPT-WBS65-P01705-BACKUP-PUBLIC-VALUE-WHOLE-TEST-ELIGIBILITY-20261113",
+  "startEvent": "PGPT-20261008-4949",
+  "sourceAtGroupStart": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "productionCoreMain": "e16500d7df27a55082f8c69a68c510414167dbb4",
+  "estimate": {
+    "low": 0.075,
+    "base": 0.225,
+    "high": 0.45
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-12T19:20:32.651Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795012174,
+      "remainingPercent": 76
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28144-backup-public-value-eligibility-v1/manifest.json",
+    "sha256": "6203088cd08bce36a3467888e4506bfafa158480982e2a60ed6b0a8dc713f92c"
+  },
+  "outcome": "PURE_BACKUP_PUBLIC_VALUE_WHOLE16_ELIGIBLE_TWO_WORKERS_FINDING",
+  "technical": {
+    "kind": "BACKUP_PUBLIC_VALUE_ELIGIBILITY",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28144-backup-public-value-eligibility-v1/manifest.json",
+      "sha256": "6203088cd08bce36a3467888e4506bfafa158480982e2a60ed6b0a8dc713f92c"
+    },
+    "MainSources": 7,
+    "existingWholeTests": 16,
+    "productTestsExecuted": 0,
+    "newAcceptance": 0,
+    "futureEstimate": {
+      "low": 0.225,
+      "base": 0.675,
+      "high": 1.35
+    },
+    "toolRework": {
+      "bug": "BUG2741",
+      "failureEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28143-backup-eligibility-public-metadata-shape-before-v1/manifest.json",
+        "sha256": "608a7d8489c7403caa16200c6f44f642dba06ab5a9d2b35be9e6bf8761900c76"
+      },
+      "cause": "Public historical aggregate hash field was string not per-file map",
+      "perFileHistoricalEquality": null,
+      "correctedProducer": "2016b_backup_values_eligibility_close.py",
+      "exclusiveCost": null,
+      "productRetestsForToolCorrection": 0,
+      "fixCommitPending": true
+    }
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Startalreadypriced BackupManifestValues8/Codec8 .225/.675/1.35cap2.5; twoFuture5/finallyshutdownNow-await10 exactinverse, preserveexistingfixture/golden23independentscalars andallassertions. ClosedJDKMain7/JSpecify-JUnit only/noprotocolorSDK, resourceimmutablecopy, onlyownedcwd synthetictrace JSON. PrestyleuniquePATHlabels/RootNullAway/fullstatic/sourcepin/whole16/independentpost, fullMainhelpercoverage missesretained. NoactualBackup/native/DB/key/Root orP017parentacceptance. Usage next04:55:54/freshquota/disk6.8GiB.",
+  "remainingEstimatePp": {
+    "low": 402.334,
+    "base": 849.305,
+    "high": 1665.9
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1190_WBS65予実・Backup公開値分類後版244.json",
+    "sha256": "f4ba049a3792467203d057bf5c9f249f1e6def4ee79331b656852f82552865bd"
+  },
+  "forecastNotActualCost": true
+}

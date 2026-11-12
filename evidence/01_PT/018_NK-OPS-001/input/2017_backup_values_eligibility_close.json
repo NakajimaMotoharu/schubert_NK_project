@@ -1,0 +1,47 @@
+{
+  "groupId": "PGPT-WBS65-P01705-BACKUP-PUBLIC-VALUE-WHOLE-TEST-ELIGIBILITY-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1191_WBS65Backup公開値候補分類結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG28144-backup-public-value-eligibility-v1/manifest.json",
+  "manifestSha256": "6203088cd08bce36a3467888e4506bfafa158480982e2a60ed6b0a8dc713f92c",
+  "terminalAtUTC": "2026-11-13T04:20:02.305451+09:00",
+  "run": "PG28144",
+  "workIds": [
+    "WBS-P01705-BACKUP_PUBLIC_VALUE_NORMAL_ELIGIBILITY"
+  ],
+  "outcome": "PURE_BACKUP_PUBLIC_VALUE_WHOLE16_ELIGIBLE_TWO_WORKERS_FINDING",
+  "technical": {
+    "kind": "BACKUP_PUBLIC_VALUE_ELIGIBILITY",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28144-backup-public-value-eligibility-v1/manifest.json",
+      "sha256": "6203088cd08bce36a3467888e4506bfafa158480982e2a60ed6b0a8dc713f92c"
+    },
+    "MainSources": 7,
+    "existingWholeTests": 16,
+    "productTestsExecuted": 0,
+    "newAcceptance": 0,
+    "futureEstimate": {
+      "low": 0.225,
+      "base": 0.675,
+      "high": 1.35
+    },
+    "toolRework": {
+      "bug": "BUG2741",
+      "failureEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28143-backup-eligibility-public-metadata-shape-before-v1/manifest.json",
+        "sha256": "608a7d8489c7403caa16200c6f44f642dba06ab5a9d2b35be9e6bf8761900c76"
+      },
+      "cause": "Public historical aggregate hash field was string not per-file map",
+      "perFileHistoricalEquality": null,
+      "correctedProducer": "2016b_backup_values_eligibility_close.py",
+      "exclusiveCost": null,
+      "productRetestsForToolCorrection": 0,
+      "fixCommitPending": true
+    }
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1190_WBS65予実・Backup公開値分類後版244.json",
+    "sha256": "f4ba049a3792467203d057bf5c9f249f1e6def4ee79331b656852f82552865bd"
+  },
+  "checkpointText": "P01705公開Manifest/Versions/Codecと閉依存全7Main・既whole16/helper1/golden965byteを全読取、実Backup/DB/Root/鍵/native操作なしで通常Unit可能。BUG2742二workerのFuture/close無期限を修正前起票、次16 .225/.675/1.35を先行追加見積。PG495は歴史manifest/hashの該当分だけ参照し現在資格へ転用0、製品実行0・P017親/1や/2・原190新受入0。 正式1964-53/工数null、残{'low': 402.334, 'base': 849.305, 'high': 1665.9}未較正。 旧metadata aggregate hash型誤認はBUG2741/PG28143へ保存、b版は個別byte照合不明をnull保持、製品再演0/修正commit記録までOPEN。",
+  "nextCommand": "Startalreadypriced BackupManifestValues8/Codec8 .225/.675/1.35cap2.5; twoFuture5/finallyshutdownNow-await10 exactinverse, preserveexistingfixture/golden23independentscalars andallassertions. ClosedJDKMain7/JSpecify-JUnit only/noprotocolorSDK, resourceimmutablecopy, onlyownedcwd synthetictrace JSON. PrestyleuniquePATHlabels/RootNullAway/fullstatic/sourcepin/whole16/independentpost, fullMainhelpercoverage missesretained. NoactualBackup/native/DB/key/Root orP017parentacceptance. Usage next04:55:54/freshquota/disk6.8GiB."
+}
