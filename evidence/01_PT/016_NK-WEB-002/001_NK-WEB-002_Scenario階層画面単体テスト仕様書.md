@@ -73,3 +73,6 @@ P01611/12の個別契約と/2不足は[4140_P0161112Music分類区分個別契�
 
 
 P01611/12の既全14通常PTは[仕様](4141_P0161112原Music十四単体テスト仕様.md)と[結果](4142_P0161112原Music十四単体結果.md)。新定義0/同execVM2 target100/full211partial、実業務/CHR/原190の/2未受入。
+
+
+WBS-P016-13公開source契約/独立期待値/TestIDは[4143_P01613Music曲一覧原五artifact契約対応.md](4143_P01613Music曲一覧原五artifact契約対応.md)。metadataのみ、新PT/coverage/正式受入0。

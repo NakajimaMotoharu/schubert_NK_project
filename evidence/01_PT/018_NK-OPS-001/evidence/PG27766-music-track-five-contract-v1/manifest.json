@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T23:36:19.035710+09:00",
+  "source": "fb119072af6fec6ce3b68e1d347f54d75cebf5ce",
+  "productionCoreMain": "edaf641333266660ec79a6e070c98b7a79bbccac",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java": "681d5853d5f5bdb1f2927b0808daee17771e7be5a440ab5880353b90532bb986",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MusicWireClient.java": "f72dc90a27ee19b3e9f575a70702f1bc08d48f3bfc23eb13ddae888129080137",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MusicTrackViewModel.java": "8bb4bc900c773b4e172c723827a8e558c83133fe882df9d11adf0237cecabf8e",
+    "src/schubert-nk-web/src/main/resources/templates/music-list.html": "59264dd712a377d0fe7da5b30e4277b2cea5d4ba4d450b7db1cbc765b3fcfc6d"
+  },
+  "wholeOwnSourceReviewed": true,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01613-PG01",
+      "methods": "MusicMvcConfiguration/MusicController.categories/sections/exchange",
+      "testIds": [
+        "PT-SCR-072..083",
+        "PT-SCR-MUSIC-BEAN001002"
+      ],
+      "expected": "ExplicitMusicbean/importWebMVC borrowsfacade/invalidhandler, no bootstrapready/ownershipgrant. ControllerMCT/MCS only; trackGET belongsContentDetailController SSC176. MCTemptyvalid200; MCSempty404. categoryFieldCodec64beforeNFC/reject400, one freshMCS/MCT verifiedreply beforeclosedprojection. IAEfixed503 catches onlyclosedtypedDTO/URIs/immutableprojection, Model.addAttributeoutsidecatch, no speculativefatalguard. ProtectedReadWireException closedcause/suppressiondisabled; 0102 handler+immediateterminal, otherresult fixedmapper. Constructor-onlyMusicMvcBeanPort2 callsMvcBeanPortFixture→SecurityContextOwnerPortFixture→EncryptedWebSessionRepository→actualWebStartupException: HOLDdespite no intendedDB callback. Noattempt/classpayload/stub/splitting or constructorTestreplacement."
+    },
+    {
+      "id": "P01613-PG02",
+      "methods": "MusicWireClient.constructor/exchange",
+      "testIds": [
+        "PT-WEB-254..261"
+      ],
+      "expected": "OnlyMCTREQ01/MCSREQ01/MTRREQ01 delegatedexistingverifiedProtectedRead, no descriptor/updates. Clock/UUID/timeout/JMSsender borrowed, context/correlation/type/binding checkedbyownerP005. Oldwholefour32 currentsource/Testbytesmatch onlyoriginalruntime scope, cannotimportoldProto/exec intoedaf. Current fourwire requalification canbepricedonceafterLogownersreview, withoutactualJMS/DB/Root."
+    },
+    {
+      "id": "P01613-PG03",
+      "methods": "MusicTrackViewModel.from/constructor/segment/displayTitle",
+      "testIds": [
+        "PT-CONTENT",
+        "PT-MUSIC-TRACK-PUBLIC001..006"
+      ],
+      "expected": "Nonnullactor/category/section/data/list/elements; <=200 exactMTRtotal, matchingcategory/section, uniqueID, bytes>=1, nondecreasingdisplay_order; tieTrackIDorder isverifiedwire/APIresponsibility beforeview. Flattracks preserveAPIorder, logicalIDonlyencodedmedia/downloadhref, displayPath/bytesmetadata only. For曲 groupstoredpair_key/role inLinkedHashMap firstappearanceorder, NONE→single:ID, otherspair:keyrequired, roleInstrumental/main slots Optional andduplicatesreject; main title wins evenifinstrumental arrivedfirst. Displaytitleonly removesleadingdigits-digits-space andInst/Instrument suffix perCurrentUI, neverrecomputesstoredpairkey/role/order or filesystem. Outputimmutable maps/lists/topbar/category/section/title/count/songs/categoryHref/tracks/pairs; toStringredacted. PublicDTO model-only UnitcanbecreatedindependentlywithUIliteralvectors, notextractheldContentController method orforgeprotectedResult/grant."
+    },
+    {
+      "id": "P01613-PG04",
+      "methods": "music-list.html/sharedContentDetailController.tracks/media owners",
+      "testIds": [
+        "PT-CONTENT",
+        "MUSIC-LIST-DOM001..008"
+      ],
+      "expected": "FreshMTR category64/section128 input normalized/bound; emptytrack404/sharedContentowner; its threecatalogfatalPGsourcefix remainsruntimeHOLD. Non曲 flatrows escapedtitle/path/MBone decimal/playercontrols/preloadnone/DL. 曲 pairedrows showdisplaypairtitle/Main/Instrumentalplayer-DL orsideplaceholder, noindividualpath/MB; APIrecordorder andstoredpairfields only. Category/Music/Searchback/escapedTopbar. ResourceDOM43 includeswholeMusicList8, preserveoldscope/hash/no replay; resourceMapfixture neverauthgrant. Actualcontrollers/HTTP/DB/MQ/native/media/CurrentCHR/same-source451 /2 ending remainsNOT_ACCEPTED."
+    }
+  ],
+  "immutablePriorProofMatches": [
+    {
+      "original": {
+        "path": "evidence/01_PT/015_NK-WEB-001/evidence/PG24326-read-four-bounded-thirtytwo-independent-v1/manifest.json",
+        "sha256": "f851f82027183619f5395d36b6f3bb4892c73cb2593309c599aa5ad5a799b258"
+      },
+      "originalSource": "99acc908a59b3a929814b42cc6777b9e51381d24",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 32,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/016_NK-WEB-002/evidence/PG24452-six-resource-dom-independent-v1/manifest.json",
+        "sha256": "8252688c6079afe59f95b623b884f9cd252747f2eafd958c56020d2df8075606"
+      },
+      "originalSource": "9a4a32f2a1ef0e64cbe3a41f8ec88a6235fde8bd",
+      "originalMain": "7aed8eace7c844c2f79f2e39db766faf914890d5",
+      "tests": 43,
+      "wholeInputHashesMatched": true,
+      "oldScopeOnly": true,
+      "reexecuted": 0,
+      "newSourceSuccessTransferred": false
+    }
+  ],
+  "wholeControllerFixture": "HOLD_BEFOREALL_DB",
+  "wholeBeanFixture": "HOLD_TRANSITIVE_ACTUAL_WEBSTARTUP_EXCEPTION_NO_STUB_OR_EXTRACTION",
+  "heldDependencyFoundInPublicSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "sha256": "15effa0383744b006e1de247124bcc59c563ce832e67be27e6a7d8382059c31f"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P016-13/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_ACTUAL_HTTP_AUTH_MEDIA_DB_CHR_451",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendNativeOrHeldClassActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1803_music_track_contract.py",
+    "sha256": "24ff7ef33ef760e8640050537688a461cb1afbf6f506fe375431844865aea52c"
+  }
+}
