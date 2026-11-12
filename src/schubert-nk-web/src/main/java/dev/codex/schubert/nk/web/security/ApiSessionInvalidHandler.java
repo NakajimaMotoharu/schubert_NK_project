@@ -60,6 +60,7 @@ public final class ApiSessionInvalidHandler {
         if (verifiedSelfReset && session == null) throw new SessionStoreException();
         if (session != null) session.invalidate();
       } catch (IllegalArgumentException | IllegalStateException failure) {
+        SessionStoreException.preserveFatal(failure);
         throw new SessionStoreException();
       }
       if (!verifiedSelfReset) {

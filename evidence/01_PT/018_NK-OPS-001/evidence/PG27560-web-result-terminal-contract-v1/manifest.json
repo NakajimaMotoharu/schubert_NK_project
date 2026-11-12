@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-12T20:58:36.091255+09:00",
+  "source": "6c6ee65ab1beb703f09db6d7d7eb517127c6cec1",
+  "productionCoreMain": "334c66d8e1a5955392e7797ed90603dbc81de0b7",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/error/WebResultMapper.java": "2e66557050fa5fdf21e593b6be9708ef0b944f8c7ad056073230b8be5f8e05f1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java": "4fa8c1c3de0a3d5e2093e43a8f25f7aac82049bf6b3230bacb9a07c6646caf12"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedSourceLines": 111,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "42450b515b0737b4f519945e161cae93195e1edf",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01506-PG01",
+      "methods": "WebResultMapper.httpStatus",
+      "testIds": [
+        "PT-WEB-158"
+      ],
+      "expected": "Exactly12 enumwirecodes, not13: 0000/0200=>200,0100=>400,0101/0102=>401,0103=>403,0104=>404,0105/0107=>409,0106=>429,9000/9001=>503; nullrejected. PuregenericHTTPclassification notactualHTTPwriter; controllerstillownfieldredisplay/conflictrefresh/0102 immediate terminal. Newnormal standalonepublic enum test may beindependentbut notextractoldheldmethod orcertifyactualHTTP."
+    },
+    {
+      "id": "P01506-PG02",
+      "methods": "ApiSessionInvalidHandler.handle/handleVerifiedSelfReset/terminate",
+      "testIds": [
+        "PT-WEB-159..165",
+        "PT-ADM-SELFRESET"
+      ],
+      "expected": "Onlyalreadyverifiedbusiness0102 reacheshandle, neverrequest-boundresultparameter. Closedprincipal/serverWebRequestContext required; clearDisplay/SecurityContext, configuredSessionRepository referenceidentity mustmatchbeforegetSession(false), status401/invalidatecurrentlocalonly/no create/noAPILogout/noMQretry. OnlyverifiedselfUPW0000/0200 requiresactor+existingsession, suppresssynthetic0102audit and302/login. Ordinary0102recordsAPI_SESSION_INVALIDonce withrequest/client/actor/ALL_WEB, committedresponserejected; navigationGET302/login?session-expired, POST/AJAX/media401sendError. FinallySecurityContextclear evenfailure. Sessiongetter/invalidate IAE/ISE externalboundarymustpreservefatalgraph beforefixedSessionStorecatalog; missingonecall BUG2713. RawIOException retainsoriginalgraph, noextra catalog guardneeded."
+    },
+    {
+      "id": "P01506-PG03",
+      "methods": "SpringEncryptedSessionRepository bridge/shared dependencies",
+      "testIds": [
+        "PT-WEB-044..049",
+        "PT-WEB-159..165"
+      ],
+      "expected": "Sessioninvalidate actuallydelegatesconfiguredSpringbridgedeleteById→lifecycle.invalidate. MalformedIDpureparseandnullclosed, no arbitrarycredentialcontext fromuserHTTP. Sharedbridge/session/securityaudit/fixedwirefacade costs ownedP01501/P00502; no duplicatedsource/PTfee. ActualDB deletion/audit/HTTP/order/noncontinuation/ownerended proof requiredfor/2 andremainHOLD, normalenum classification is insufficient."
+    }
+  ],
+  "candidateAdmission": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ApiSessionInvalidTest.java",
+      "sha256": "cf1a1779882b349d1b8d72f019263497c22fd8056d3cdb9f695907e6818a6beb",
+      "reviewed": "imports/setup/first159boundaryonly",
+      "status": "HOLD_WHOLE_DB_BEFOREALL_ACTUAL4_TRANSITIVE_NO_PARTIAL_METHOD_EXTRACTION"
+    }
+  ],
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27560-web-result-terminal-contract-v1/before.json",
+    "sha256": "c6a2fccee8a91595eb99527a5525f5108005296d16794ce358a5d064d3ce93f1"
+  },
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P015-06/1"
+  ],
+  "endingStatus": "NOT_ACCEPTED_TERMINAL_FATAL_SOURCE_AND_DB_HTTP_ENDING",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualBackendAndHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1688_web_result_contract_audit.py",
+    "sha256": "52caa7a49defca8eeec398058febc09b3616366314f8073223364005f891e4f1"
+  }
+}
