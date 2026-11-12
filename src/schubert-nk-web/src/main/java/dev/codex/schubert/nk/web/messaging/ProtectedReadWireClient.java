@@ -120,6 +120,7 @@ public final class ProtectedReadWireClient {
         | IllegalArgumentException
         | IllegalStateException
         | DateTimeException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       throw new ProtectedReadWireException(Reason.UNAVAILABLE);
     }
   }
