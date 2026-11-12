@@ -1,0 +1,5 @@
+# Log標準enum生成classの実測補足
+
+4210の予定全22に対し、PG28406のRootNullAway Main16/wholeTest21コンパイルはともに0、実全23であったため予定物理数の検査だけ失敗し製品Test未起動。BUG2760/YKT2393へ修正前登録。追加はCleanupRepository$1一つであり、当SourceFile・ACC_SYNTHETIC・唯一のsynthetic int[] field・clinit一methodをPG28405 javapで確認、JaCoCo0.8.15標準readerは全counter0である。標準生成mapも物理一覧/byte/CRC/CodeMethods1を残し、独自coverage除外・到達不能指定・自然branch0の見せかけ100化をしない。
+
+元source/Test/fixture/独立期待値/Guard依存/Rootcompilerは不変更。旧prestyle/両compile成功を元command/exit/hashとsource・tool byte一致で明示継承し、未実施static/preflight/whole21/独立postだけを継続する。Log対象は全1source/nested5physical（実行可能3class）の四counter100が必要、全依存23の未網羅は保持する。生成map標準filterが実runで異なる場合は未受入、任意抑制で合格にしない。

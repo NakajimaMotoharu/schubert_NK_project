@@ -342,7 +342,8 @@ final class LogCleanupTransactionPortTest {
 
   @Test
   void independentConnectionsInParallel() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var futures = new ArrayList<java.util.concurrent.Future<Fixture>>();
       for (int i = 0; i < 20; i++)
         futures.add(
@@ -358,6 +359,10 @@ final class LogCleanupTransactionPortTest {
         assertEquals(0, f.rollbacks);
         f.assertBorrowed();
       }
+    } finally {
+      workers.shutdownNow();
+      if (!workers.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("owned log transaction workers did not terminate");
     }
   }
 
@@ -375,6 +380,54 @@ final class LogCleanupTransactionPortTest {
       assertEquals(phase.equals(RECOVER_ROLLBACK) ? 0 : 1, f.restores);
       f.assertBorrowed();
     }
+  }
+
+  /** LOGTX2751001: literal fatal identity and SS341 clean-recovery resource postconditions. */
+  @Test
+  void fatalKnownBodyGraphPreservedAfterSuccessfulRecovery() {
+    for (int edge = 0; edge < 3; edge++) {
+      var f = new Fixture();
+      var fatal = new AssertionError("SYNTHETIC_FATAL_BODY");
+      f.failures.put(POINT_BODY, fatalSqlGraph(edge, fatal));
+      assertSame(fatal, assertThrows(Error.class, () -> service().execute(f.connection, RUN)));
+      assertEquals(0, fatal.getSuppressed().length);
+      assertEquals(1, f.rollbacks);
+      assertEquals(1, f.restores);
+      assertEquals(0, f.commits);
+      assertTrue(f.autoCommit);
+      assertEquals("LOCK,BEGIN,BODY,ROLLBACK,RESTORE,UNLOCK", String.join(",", f.events));
+      f.assertBorrowed();
+    }
+  }
+
+  /** LOGTX2751002: retain fatal rollback identity while a retained lease fails disposal. */
+  @Test
+  void fatalKnownRollbackGraphPreservedThroughLeaseFailure() {
+    for (int edge = 0; edge < 3; edge++) {
+      var f = new Fixture();
+      var fatal = new AssertionError("SYNTHETIC_FATAL_ROLLBACK");
+      f.failures.put(POINT_BODY, new SQLException("SYNTHETIC_NORMAL_SQL_BODY"));
+      f.failures.put(RECOVER_ROLLBACK, fatalSqlGraph(edge, fatal));
+      assertSame(fatal, assertThrows(Error.class, () -> service().execute(f.connection, RUN)));
+      fixedSecondaries(fatal, 1);
+      assertEquals(1, f.rollbacks);
+      assertEquals(0, f.restores);
+      assertEquals(0, f.commits);
+      assertFalse(f.autoCommit);
+      assertEquals("LOCK,BEGIN,BODY,ROLLBACK", String.join(",", f.events));
+      f.assertBorrowed();
+    }
+  }
+
+  private static SQLException fatalSqlGraph(int edge, Error fatal) {
+    var sql = new SQLException("SYNTHETIC_SQL_GRAPH");
+    switch (edge) {
+      case 0 -> sql.initCause(fatal);
+      case 1 -> sql.addSuppressed(fatal);
+      case 2 -> sql.setNextException(new SQLException("SYNTHETIC_SQL_LINK", fatal));
+      default -> throw new IllegalArgumentException("unknown fixture graph edge");
+    }
+    return sql;
   }
 
   private static LogCleanupService service() {

@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T08:00:00.031176+09:00",
+  "bug": "BUG2760",
+  "originalFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28406-log-whole21-prepare-v1/original-physical-scope-failure.safe.json",
+    "sha256": "165a37a785312303d44b7ebc6f646bbfdb05c8162f588c625df294bdf5d6c5d8"
+  },
+  "originalProfile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2114_log_whole21_profile.json",
+    "sha256": "591c166ec5970505c8a46005c31fd6235a95cbd132bd6f35682ba950c1c1bf7b"
+  },
+  "originalMainCompileExit": 0,
+  "originalTestCompileExit": 0,
+  "originalStagesPreservedNoReexecution": true,
+  "sourceInputsUnchanged": true,
+  "measuredPhysicalClasses": [
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.class",
+    "dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$ChunkProgress.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SessionLease.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlAction.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService$SqlRelease.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupService.class",
+    "dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.class",
+    "dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupReason.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class",
+    "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class"
+  ],
+  "standardMap": {
+    "className": "dev/codex/schubert/nk/batch/repository/CleanupRepository$1",
+    "enumClass": "dev.codex.schubert.nk.batch.repository.CleanupKind",
+    "sourcePath": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java"
+  },
+  "standardMapSha256": "0940ef9638224e3f01cc41f72c957790121e0e81f80434f09df457d360ad394f",
+  "standardMapCodeMethods": 1,
+  "standardAnalyzerInstructions": 0,
+  "sourceFileSyntheticOneArrayFieldAndOneClinitVerified": true,
+  "stages": {
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:59:59.650016+00:00",
+      "endUTC": "2026-11-12T22:59:59.764796+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28406-log-whole21-prepare-v1/target/classes/dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "74247f6b8b6155b88c4ac659c82619c0dfee7613d8799612cfa642c57b1bd468",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "javap": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-12T22:59:59.765095+00:00",
+      "endUTC": "2026-11-12T23:00:00.030360+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-v",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28406-log-whole21-prepare-v1/target/classes/dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "8adeace1e55e27a08b9bd3082566d6187d970f9de1c27d001857e1dc519f101f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "productTestsExecuted": 0,
+  "MainOrTestChanged": false,
+  "manualCoverageExclusions": [],
+  "coverageEngineDefaultSyntheticFilterOnly": true,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2115_log_whole21_owned_physical_continuation.py",
+    "sha256": "6ae244dca2e2690ba1478229a54d8c2811b1d0dac9cb0ec9bd598cd30302ffa6"
+  }
+}
