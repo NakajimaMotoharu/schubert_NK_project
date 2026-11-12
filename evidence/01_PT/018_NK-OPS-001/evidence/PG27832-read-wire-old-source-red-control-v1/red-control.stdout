@@ -1,0 +1,62 @@
+
+Failures (3):
+  JUnit Jupiter:ProtectedReadFatalContractTest:fatal001SenderCauseRetainsIdentityWipesAndReleasesCapacity()
+    MethodSource [className = 'dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest', methodName = 'fatal001SenderCauseRetainsIdentityWipesAndReleasesCapacity', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.messaging.ProtectedReadWireException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.fatal001SenderCauseRetainsIdentityWipesAndReleasesCapacity(ProtectedReadFatalContractTest.java:63)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.messaging.ProtectedReadWireException: protected read exchange rejected
+       dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient.exchange(ProtectedReadWireClient.java:123)
+       dev.codex.schubert.nk.web.messaging.AnimationWireClient.exchange(AnimationWireClient.java:31)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.lambda$fatal001SenderCauseRetainsIdentityWipesAndReleasesCapacity$2(ProtectedReadFatalContractTest.java:63)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:ProtectedReadFatalContractTest:fatal002JmsLinkedRetainsIdentityAndWipesAfterCheckedFailure()
+    MethodSource [className = 'dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest', methodName = 'fatal002JmsLinkedRetainsIdentityAndWipesAfterCheckedFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.messaging.ProtectedReadWireException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.fatal002JmsLinkedRetainsIdentityAndWipesAfterCheckedFailure(ProtectedReadFatalContractTest.java:93)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.messaging.ProtectedReadWireException: protected read exchange rejected
+       dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient.exchange(ProtectedReadWireClient.java:123)
+       dev.codex.schubert.nk.web.messaging.AnimationWireClient.exchange(AnimationWireClient.java:31)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.lambda$fatal002JmsLinkedRetainsIdentityAndWipesAfterCheckedFailure$2(ProtectedReadFatalContractTest.java:93)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+  JUnit Jupiter:ProtectedReadFatalContractTest:fatal003IdentifierAndClockCallbacksCannotNormalizeWrappedError()
+    MethodSource [className = 'dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest', methodName = 'fatal003IdentifierAndClockCallbacksCannotNormalizeWrappedError', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.AssertionError> but was: <dev.codex.schubert.nk.web.messaging.ProtectedReadWireException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.fatal003IdentifierAndClockCallbacksCannotNormalizeWrappedError(ProtectedReadFatalContractTest.java:115)
+       [...]
+     Caused by: dev.codex.schubert.nk.web.messaging.ProtectedReadWireException: protected read exchange rejected
+       dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient.exchange(ProtectedReadWireClient.java:123)
+       dev.codex.schubert.nk.web.messaging.AnimationWireClient.exchange(AnimationWireClient.java:31)
+       dev.codex.schubert.nk.web.messaging.ProtectedReadFatalContractTest.lambda$fatal003IdentifierAndClockCallbacksCannotNormalizeWrappedError$2(ProtectedReadFatalContractTest.java:115)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 214 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         3 tests found           ]
+[         0 tests skipped         ]
+[         3 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         3 tests failed          ]
+
