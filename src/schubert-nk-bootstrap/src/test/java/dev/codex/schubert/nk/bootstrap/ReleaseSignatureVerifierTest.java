@@ -144,11 +144,55 @@ final class ReleaseSignatureVerifierTest {
     }
   }
 
+  /** SIGN009/BUG2793: independent public provider fault graphs, never a private signing key. */
+  @Test
+  void sign009KnownProviderFatalGraphsKeepIdentityAndEraseAllOwnedClones() {
+    for (int graph = 0; graph < 3; graph++) {
+      var marker = new AssertionError("public fatal verification marker");
+      var failure = new GeneralSecurityException("public provider fault");
+      if (graph == 0) failure.initCause(marker);
+      else if (graph == 1) failure.addSuppressed(marker);
+      else {
+        var cycle = new IllegalStateException("public cyclic provider fault");
+        failure.initCause(cycle);
+        cycle.initCause(failure);
+        cycle.addSuppressed(marker);
+      }
+      byte[] key = hex(PREFIX + PUBLIC1);
+      byte[] message = hex("72");
+      byte[] signature = hex(SIGN2);
+      var retained = new AtomicReference<List<byte[]>>();
+      int[] calls = {0};
+      var subject =
+          new ReleaseSignatureVerifier(
+              key,
+              (k, m, s) -> {
+                calls[0]++;
+                assertTrue(k != key && m != message && s != signature);
+                assertArrayEquals(hex(PREFIX + PUBLIC1), k);
+                assertArrayEquals(hex("72"), m);
+                assertArrayEquals(hex(SIGN2), s);
+                retained.set(List.of(k, m, s));
+                throw failure;
+              });
+      assertSame(
+          marker, assertThrows(AssertionError.class, () -> subject.verify(message, signature)));
+      assertEquals(1, calls[0]);
+      assertEquals(0, marker.getSuppressed().length);
+      assertEquals(3, retained.get().size());
+      for (byte[] owned : retained.get()) assertArrayEquals(new byte[owned.length], owned);
+      assertArrayEquals(hex(PREFIX + PUBLIC1), key);
+      assertArrayEquals(hex("72"), message);
+      assertArrayEquals(hex(SIGN2), signature);
+    }
+  }
+
   @Test
   void sign008ConcurrentNativeProviderAndMalformedPoint() throws Exception {
     var subject = first();
     var barrier = new CyclicBarrier(4);
-    try (var executor = Executors.newFixedThreadPool(4)) {
+    var executor = Executors.newFixedThreadPool(4);
+    try {
       var futures = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 4; i++)
         futures.add(
@@ -160,6 +204,9 @@ final class ReleaseSignatureVerifierTest {
                   return true;
                 }));
       for (var future : futures) assertTrue(future.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertThrows(
         IOException.class,

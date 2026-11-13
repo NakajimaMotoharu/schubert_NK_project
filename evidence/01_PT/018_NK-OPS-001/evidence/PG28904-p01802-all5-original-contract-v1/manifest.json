@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T13:33:56.787934+09:00",
+  "source": "abf3c9bf2d3ac565190ab661992c2ec8dc0c06e3",
+  "productionCoreMain": "4f4a4de52db5c2599a65cbc4bbaeb5237eb58986",
+  "ownedSourceHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java": "5c535995426d4e18179189259e8ef12d08d7ac2d1a6e068bb164454f5e8f0c2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": "a1e08af58cc36682e9224bcebb4b70b6891730dd6d7935c9a5f7d86c9d5c0ba0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "1579d05037690746840b972c8b7c694b3aa3967c93f1e76bf5cf5dc48449a6e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": "3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 1356,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01802-ORACLE01",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java",
+      "methods": "ReleaseApproval.constructor/parse/encode/version/manifestSha256",
+      "testIds": [
+        "PT-OPS-APPROVAL001..008"
+      ],
+      "expected": "SCM001..005/SS34311.1SSC096: immutablepublicclaims only notauthority; exactASCII NKRELEASEAPPROVAL1 LF version1..64token LF manifest_sha256 lowerhex64 LF, bytes1..192, noCR-BOM-unknown-duplicate-order-extra-null. Defensiveclone+wipetemporary, callerinputunchanged. No key/algorithm/path/approvedboolean accepted; independentlytrustedRootapproval required elsewhere. PureIAEgrammar unchanged."
+    },
+    {
+      "id": "P01802-ORACLE02",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "methods": "ReleaseInventory.Artifact/Dependency/parse/fields/dependencies/artifacts/migrations/typedscalar/inventory/immutableaccessors",
+      "testIds": [
+        "PT-OPS-BOMPROFILE001..016"
+      ],
+      "expected": "SS3439.1/11.1 strictUTF8noBOM1..1MiB/GsonSTRICTnest4/exactkeyorder+types/numbercanonical/profileNKRELEASE1. Cap2048artifacts/512deps/1000migrations, ASCIIrelativepath no traversal/ancestorfileconflict, path-coordinateorder/sameGAoneversion. Exactregisteredlibs; requiredVERSION/api-web-batch andsharedprotocolapi-web,storage-bootstrapall3 sameversion/hash-size; SQLexternalnames=expectedmigration/lastschema. Originalbytesigned notreserialized; schemaexpectedfromsignedSQL notDB. Claimsimmutable/defensive/noOSoractualDBauthority. PureparseIAE/ISE fixedfailureunchanged."
+    },
+    {
+      "id": "P01802-ORACLE03",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "methods": "ReleasePayloadVerification.constructor/verify/layout/executable/add/walk/checked/own/names/read/archive/agreement/sqlChecksum",
+      "testIds": [
+        "PT-OPS-FULLBOM001..019"
+      ],
+      "expected": "SS3439.1/11.1 exactdeclaredtree+manifest+SHA256SUMS/unknownemptydirs-files-aliasesreject, readonlyheldroot0750/files0640/fixedexecutables0750/samedevice/noACL/retainedmetadata/reopenbeforeafter/allownedclose. Manifestapprovaldigest/versionfixed; allpayloadsize/hash/strictchannelpositiveprogress-position-EOF; no appclassload. ZIPentryunique/noabsolute-backslash-parent/nestedjar, concreteClassPathdeclaredonly/sharedclassshadowreject, APIonlyembeddedSQLexactbyte-SHA andindependentFlyway13.4 BOMfirstline/LF-CRLFignored signedCRC32. Publicpayload verificationnotapprovalissuance/Root/activationauthority; realFDwholeTestHOLD/noextraction."
+    },
+    {
+      "id": "P01802-ORACLE04",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "methods": "ReleaseSignatureVerifier.constructors/verify/require/NativeCrypto.verify",
+      "testIds": [
+        "PT-OPS-SIGN001..008"
+      ],
+      "expected": "SS34311.1 fixedEd25519/pinnedDER44 prefix302a300506032b6570032100 and64sig/originalManifest<=1MiB. Candidatecannotchoosekey/algorithm; publickeyonlyfromtrustedcaller, no privatekey/signing/publisher. Clonekey-message-sig beforeprovider; zeroallthreefinally everypath, borrowedinputsunchanged. KnownGeneralSecurityException fixedIOException no cause/raw; unknownRuntime/Erroridentity/non-success; nestedfatalbeforefixedcatalogmissing BUG2793. RFCpublicgolden fixture allowed onlyafterwholeTestaudit, no operationalkeyfile."
+    },
+    {
+      "id": "P01802-ORACLE05",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+      "methods": "StartupReleaseManifest.Contents/create/createHost/constructors/sha256/publicInformation/verify/verifyCandidate/inspectApplication/selected/released/manifest/checked/version/NioIo",
+      "testIds": [
+        "PT-OPS-RELEASE001..011"
+      ],
+      "expected": "SS343SSC089095096097: sameheldcurrentselector canonicalabsolute releases/version, root-onlycurrent symlink versus NOFOLLOWtargettree, rootUID/gid/modes/link1+devino/ACL/fullmetadata repeated/reopened/allclose. sha256 digestonlynotfullBOMauthority; publicInformation onlysameadmitteddigest/version fixedpublicfields. Candidate pathnevercurrentmutation, verifyclaimsnotpermit/Rootapproval. bounded1MiB positivechannelprogress/EOF/exactsize andsameinode; currentmanifestpathread lacks strictcount-vsposition/EOF guards BUG2794. WholeRoot/nativefixtureHOLD; publicContents immutablecopies/naturaldata notauthority."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P018-02/1"
+  ],
+  "endingStatus": "P01802_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2216_p01802_original_contract_config.json",
+    "sha256": "dbd44664cfc700ce85b96106e027526b0a15629596f97891e21cc5b1fe5a1514"
+  }
+}

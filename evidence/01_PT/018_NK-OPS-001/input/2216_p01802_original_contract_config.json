@@ -1,0 +1,81 @@
+{
+  "taskId": "WBS-P018-02",
+  "expectedOwned": 5,
+  "groupId": "PGPT-WBS65-P01802-ALL5-ORIGINAL-PREPARATION-20261113",
+  "startConfig": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/2216_p01802_original_start.json",
+  "startRecord": "1399_WBS65P01802全五準備開始.json",
+  "scope": "OriginalP01802 publicsource5/BOM-inventory-hash-signature-immutable contract+independentoracles preparationonly. No actualkey-read/signatureissuance/Root-VM-deploy-filemutation/credential/service operations. ProtectedRoot2/actual4byte/names-only2 untouched. Source/Testmetadataonly; oldactualnativehistorynotcurrentadmission.",
+  "oraclePaths": [
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json"
+  ],
+  "designPrefixes": [
+    [
+      "documents/300_SS",
+      "343"
+    ],
+    [
+      "documents/300_SS",
+      "311"
+    ],
+    [
+      "documents/200_UI",
+      "251"
+    ]
+  ],
+  "run": "PG28902",
+  "manifestDirectory": "PG28904-p01802-all5-original-contract-v1",
+  "checks": [
+    {
+      "id": "P01802-ORACLE01",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java",
+      "methods": "ReleaseApproval.constructor/parse/encode/version/manifestSha256",
+      "testIds": [
+        "PT-OPS-APPROVAL001..008"
+      ],
+      "expected": "SCM001..005/SS34311.1SSC096: immutablepublicclaims only notauthority; exactASCII NKRELEASEAPPROVAL1 LF version1..64token LF manifest_sha256 lowerhex64 LF, bytes1..192, noCR-BOM-unknown-duplicate-order-extra-null. Defensiveclone+wipetemporary, callerinputunchanged. No key/algorithm/path/approvedboolean accepted; independentlytrustedRootapproval required elsewhere. PureIAEgrammar unchanged."
+    },
+    {
+      "id": "P01802-ORACLE02",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "methods": "ReleaseInventory.Artifact/Dependency/parse/fields/dependencies/artifacts/migrations/typedscalar/inventory/immutableaccessors",
+      "testIds": [
+        "PT-OPS-BOMPROFILE001..016"
+      ],
+      "expected": "SS3439.1/11.1 strictUTF8noBOM1..1MiB/GsonSTRICTnest4/exactkeyorder+types/numbercanonical/profileNKRELEASE1. Cap2048artifacts/512deps/1000migrations, ASCIIrelativepath no traversal/ancestorfileconflict, path-coordinateorder/sameGAoneversion. Exactregisteredlibs; requiredVERSION/api-web-batch andsharedprotocolapi-web,storage-bootstrapall3 sameversion/hash-size; SQLexternalnames=expectedmigration/lastschema. Originalbytesigned notreserialized; schemaexpectedfromsignedSQL notDB. Claimsimmutable/defensive/noOSoractualDBauthority. PureparseIAE/ISE fixedfailureunchanged."
+    },
+    {
+      "id": "P01802-ORACLE03",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "methods": "ReleasePayloadVerification.constructor/verify/layout/executable/add/walk/checked/own/names/read/archive/agreement/sqlChecksum",
+      "testIds": [
+        "PT-OPS-FULLBOM001..019"
+      ],
+      "expected": "SS3439.1/11.1 exactdeclaredtree+manifest+SHA256SUMS/unknownemptydirs-files-aliasesreject, readonlyheldroot0750/files0640/fixedexecutables0750/samedevice/noACL/retainedmetadata/reopenbeforeafter/allownedclose. Manifestapprovaldigest/versionfixed; allpayloadsize/hash/strictchannelpositiveprogress-position-EOF; no appclassload. ZIPentryunique/noabsolute-backslash-parent/nestedjar, concreteClassPathdeclaredonly/sharedclassshadowreject, APIonlyembeddedSQLexactbyte-SHA andindependentFlyway13.4 BOMfirstline/LF-CRLFignored signedCRC32. Publicpayload verificationnotapprovalissuance/Root/activationauthority; realFDwholeTestHOLD/noextraction."
+    },
+    {
+      "id": "P01802-ORACLE04",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "methods": "ReleaseSignatureVerifier.constructors/verify/require/NativeCrypto.verify",
+      "testIds": [
+        "PT-OPS-SIGN001..008"
+      ],
+      "expected": "SS34311.1 fixedEd25519/pinnedDER44 prefix302a300506032b6570032100 and64sig/originalManifest<=1MiB. Candidatecannotchoosekey/algorithm; publickeyonlyfromtrustedcaller, no privatekey/signing/publisher. Clonekey-message-sig beforeprovider; zeroallthreefinally everypath, borrowedinputsunchanged. KnownGeneralSecurityException fixedIOException no cause/raw; unknownRuntime/Erroridentity/non-success; nestedfatalbeforefixedcatalogmissing BUG2793. RFCpublicgolden fixture allowed onlyafterwholeTestaudit, no operationalkeyfile."
+    },
+    {
+      "id": "P01802-ORACLE05",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+      "methods": "StartupReleaseManifest.Contents/create/createHost/constructors/sha256/publicInformation/verify/verifyCandidate/inspectApplication/selected/released/manifest/checked/version/NioIo",
+      "testIds": [
+        "PT-OPS-RELEASE001..011"
+      ],
+      "expected": "SS343SSC089095096097: sameheldcurrentselector canonicalabsolute releases/version, root-onlycurrent symlink versus NOFOLLOWtargettree, rootUID/gid/modes/link1+devino/ACL/fullmetadata repeated/reopened/allclose. sha256 digestonlynotfullBOMauthority; publicInformation onlysameadmitteddigest/version fixedpublicfields. Candidate pathnevercurrentmutation, verifyclaimsnotpermit/Rootapproval. bounded1MiB positivechannelprogress/EOF/exactsize andsameinode; currentmanifestpathread lacks strictcount-vsposition/EOF guards BUG2794. WholeRoot/nativefixtureHOLD; publicContents immutablecopies/naturaldata notauthority."
+    }
+  ],
+  "existingProofs": [],
+  "endingStatus": "P01802_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "nextCommand": "Reviewwhole5publicMain/originMainSS3438-11 SCM001..005 independentBOM/hash/canonicalsignature/immutablepayloadoracles andexistingwholeTestnames/history only. Registeractualsourceflawbeforefix, noactualkey/sign/VM/Root/deploy/sourceartifactreading. /2notaccepted. Freshquota/usage14:22:09/diskgate.",
+  "capPp": 1.5,
+  "canonicalCostLeafIds": [
+    "WBS-P018-02"
+  ]
+}
