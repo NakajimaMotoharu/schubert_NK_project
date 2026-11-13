@@ -1,0 +1,202 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5027",
+  "groupId": "PGPT-WBS65-ARTEMIS-ORIGINAL26-NEW5-WHOLE31-NORMAL-20261113",
+  "startEvent": "PGPT-20261008-5026",
+  "sourceAtGroupStart": "a81ffb6bcb3850f109021e743df40d915fdd7c4b",
+  "productionCoreMain": "a81ffb6bcb3850f109021e743df40d915fdd7c4b",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 3.6
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-13T01:23:25.827Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795012174,
+      "remainingPercent": 71
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 1,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28606-mq29-scope-source-price-independent-join-v1/manifest.json",
+    "sha256": "00b2374b0f77eceebe76c143594eace96c5e73b38b5a1f4ccf429b06910ac360"
+  },
+  "outcome": "FRESH_WHOLE6_29_SUCCESS_ORIGINAL31_FAILURE_PARENT_WHOLE2_HELD_PARTIAL_PRICE_RETAINED",
+  "technical": {
+    "kind": "MQ_FAILED31_AND_FRESH29_WHOLE_CLASS_SEPARATE_TERMINALS",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28604-mq29-post-v1/manifest.json",
+      "sha256": "242a18a868c758357f91ea3c5c32e1a6783f592be8c394384bf05c3836697c02"
+    },
+    "actualExecutionsThisGroup": 60,
+    "successfulExecutionsThisGroup": 59,
+    "failedExecutionsThisGroup": 1,
+    "freshIndependentWholeTests": 29,
+    "newDefinitionsIntroduced": 5,
+    "newDefinitionsInFreshRun": 0,
+    "originalWholeParentTestsHeld": 2,
+    "physicalClasses": 26,
+    "positiveMainCrc": 16,
+    "completeSourceFour100": {
+      "dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient": {
+        "INSTRUCTION": {
+          "covered": 260,
+          "missed": 0
+        },
+        "BRANCH": {
+          "covered": 34,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 51,
+          "missed": 0
+        },
+        "COMPLEXITY": {
+          "covered": 24,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "completeSourceComponentFour100": false,
+    "targetCounters": {
+      "BRANCH": {
+        "covered": 73,
+        "missed": 31
+      },
+      "LINE": {
+        "covered": 178,
+        "missed": 72
+      },
+      "COMPLEXITY": {
+        "covered": 65,
+        "missed": 51
+      },
+      "INSTRUCTION": {
+        "covered": 878,
+        "missed": 352
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 37,
+        "missed": 27
+      }
+    },
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "INSTRUCTION": 21,
+        "LINE": 4,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "INSTRUCTION": 25,
+        "BRANCH": 3,
+        "LINE": 6,
+        "COMPLEXITY": 4,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard": {
+        "INSTRUCTION": 18,
+        "BRANCH": 3,
+        "LINE": 3,
+        "COMPLEXITY": 3,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient": {
+        "INSTRUCTION": 200,
+        "BRANCH": 28,
+        "LINE": 35,
+        "COMPLEXITY": 17,
+        "METHOD": 3
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient": {
+        "INSTRUCTION": 164,
+        "BRANCH": 10,
+        "LINE": 30,
+        "COMPLEXITY": 9,
+        "METHOD": 4
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation": {
+        "INSTRUCTION": 77,
+        "BRANCH": 1,
+        "LINE": 17,
+        "COMPLEXITY": 2,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation$Evidence": {
+        "INSTRUCTION": 2,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient": {
+        "INSTRUCTION": 203,
+        "BRANCH": 35,
+        "LINE": 41,
+        "COMPLEXITY": 20,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient": {
+        "INSTRUCTION": 273,
+        "BRANCH": 30,
+        "LINE": 54,
+        "COMPLEXITY": 48,
+        "METHOD": 25
+      },
+      "dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient": {
+        "INSTRUCTION": 41,
+        "BRANCH": 7,
+        "LINE": 6,
+        "COMPLEXITY": 9,
+        "METHOD": 2
+      }
+    },
+    "runtimeSdkBackendOrParentInitObserved": [],
+    "MainChanged": false,
+    "TestChanged": true,
+    "newAcceptance": 0,
+    "roster": {
+      "runs": 79,
+      "actualExecutions": 3806,
+      "success": 3777,
+      "failed": 29,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Continue625P01711fourMain wholepublicsource/SS32112-3419-331 expiry7day-audit contracts first, theneligibleexistingpurewholeTests aftercompleteGuarddefaultnegative/othertransitiveclosure audit; extendSDKprofileonlyafterexactsource/provenanceprice ifneeded, no actualBroker/Root/native orheldTestextraction. ParentDeadline2 remainsHOLD/noOuter-runtime-orGuardoverride workaround, oldfailed31 andfresh29 neverreplayforconfirmation. BUG2766remainingcatalog/parentRoot/managementcoverageholes, BUG2767finiteworker whole2unqualified, BUG2773scopehold tracked. Freshquota/usage11:13:36/N-Tnull/disk6.9GiBlargegate.",
+  "remainingEstimatePp": {
+    "low": 401.369,
+    "base": 846.834,
+    "high": 1660.95
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1328_WBS65予実・MQ二九限定後版295.json",
+    "sha256": "6b32185443b554a246153e0156bc1a0f78a178c7742e7f90b86530d2a68e9d5a"
+  },
+  "forecastNotActualCost": true
+}

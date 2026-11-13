@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="29" skipped="0" failures="0" errors="0" time="0.292" hostname="npc1" timestamp="2026-11-13T10:15:51">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg28602-mq29-unit-v1/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="junit.jupiter.execution.parallel.enabled" value="false"/>
+<property name="junit.jupiter.extensions.autodetection.enabled" value="false"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar execute --disable-banner --class-path /home/mini/codex/project1/work/pgpt-runs/PG379/pg28572-mq31-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg28572-mq31-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar --select-class dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest --select-class dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest --select-class dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest --select-class dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest --select-class dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest --select-class dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest --reports-dir /home/mini/codex/project1/work/pgpt-runs/PG379/pg28602-mq29-unit-v1/xml --fail-if-no-tests --details summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg28602-mq29-unit-v1"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="opsMq030FailClosedAndNoLaterChecks()" classname="dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest]/[method:opsMq030FailClosedAndNoLaterChecks()]
+display-name: opsMq030FailClosedAndNoLaterChecks()
+]]></system-out>
+</testcase>
+<testcase name="everyParameterKeyValueAndObjectTypeIsCheckedBeforeStarted()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:everyParameterKeyValueAndObjectTypeIsCheckedBeforeStarted()]
+display-name: everyParameterKeyValueAndObjectTypeIsCheckedBeforeStarted()
+]]></system-out>
+</testcase>
+<testcase name="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes()" classname="dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest]/[method:interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes()]
+display-name: interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes()
+]]></system-out>
+</testcase>
+<testcase name="encoderPreservesUnknownAndRedactsDeclaredFailures()" classname="dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest]/[method:encoderPreservesUnknownAndRedactsDeclaredFailures()]
+display-name: encoderPreservesUnknownAndRedactsDeclaredFailures()
+]]></system-out>
+</testcase>
+<testcase name="exactSingletonReturnsSevenLiteralFieldsAndImmutableIndependentResults()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:exactSingletonReturnsSevenLiteralFieldsAndImmutableIndependentResults()]
+display-name: exactSingletonReturnsSevenLiteralFieldsAndImmutableIndependentResults()
+]]></system-out>
+</testcase>
+<testcase name="startedMustBeTheBooleanTrueAndBothReadersAreCalledOnce()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:startedMustBeTheBooleanTrueAndBothReadersAreCalledOnce()]
+display-name: startedMustBeTheBooleanTrueAndBothReadersAreCalledOnce()
+]]></system-out>
+</testcase>
+<testcase name="nonStringManagementValuesRejectBeforeStartedRead()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:nonStringManagementValuesRejectBeforeStartedRead()]
+display-name: nonStringManagementValuesRejectBeforeStartedRead()
+]]></system-out>
+</testcase>
+<testcase name="brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce()" classname="dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest]/[method:brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce()]
+display-name: brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce()
+]]></system-out>
+</testcase>
+<testcase name="opsMq029OrderedReadOnlyObservation()" classname="dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest]/[method:opsMq029OrderedReadOnlyObservation()]
+display-name: opsMq029OrderedReadOnlyObservation()
+]]></system-out>
+</testcase>
+<testcase name="nullBoundariesRejectBeforeAnyReaderAndDefaultWiringHasNoQuery()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:nullBoundariesRejectBeforeAnyReaderAndDefaultWiringHasNoQuery()]
+display-name: nullBoundariesRejectBeforeAnyReaderAndDefaultWiringHasNoQuery()
+]]></system-out>
+</testcase>
+<testcase name="eachDeclaredParserGraphStopsBeforeStartedOrSessionAccess()" classname="dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest]/[method:eachDeclaredParserGraphStopsBeforeStartedOrSessionAccess()]
+display-name: eachDeclaredParserGraphStopsBeforeStartedOrSessionAccess()
+]]></system-out>
+</testcase>
+<testcase name="eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried()]
+display-name: eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried()
+]]></system-out>
+</testcase>
+<testcase name="checkedEncoderGraphPreservesFatalAndExistingIoContract()" classname="dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest]/[method:checkedEncoderGraphPreservesFatalAndExistingIoContract()]
+display-name: checkedEncoderGraphPreservesFatalAndExistingIoContract()
+]]></system-out>
+</testcase>
+<testcase name="opsMqObj001RejectsEachNonObjectExtraPropsBeforeStartedRead()" classname="dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest" time="0.101">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest]/[method:opsMqObj001RejectsEachNonObjectExtraPropsBeforeStartedRead()]
+display-name: opsMqObj001RejectsEachNonObjectExtraPropsBeforeStartedRead()
+]]></system-out>
+</testcase>
+<testcase name="queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges()" classname="dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest]/[method:queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges()]
+display-name: queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges()
+]]></system-out>
+</testcase>
+<testcase name="malformedJsonAndWrongStringTypesHaveFixedDiagnostics()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:malformedJsonAndWrongStringTypesHaveFixedDiagnostics()]
+display-name: malformedJsonAndWrongStringTypesHaveFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="opsMqObj002RejectsEachNonObjectParamsBeforeStartedRead()" classname="dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest]/[method:opsMqObj002RejectsEachNonObjectParamsBeforeStartedRead()]
+display-name: opsMqObj002RejectsEachNonObjectParamsBeforeStartedRead()
+]]></system-out>
+</testcase>
+<testcase name="readerRuntimeAndErrorsKeepIdentityAndSuccessfulCallsAreNotCached()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:readerRuntimeAndErrorsKeepIdentityAndSuccessfulCallsAreNotCached()]
+display-name: readerRuntimeAndErrorsKeepIdentityAndSuccessfulCallsAreNotCached()
+]]></system-out>
+</testcase>
+<testcase name="extraPropertiesMustBeAnEmptyObject()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:extraPropertiesMustBeAnEmptyObject()]
+display-name: extraPropertiesMustBeAnEmptyObject()
+]]></system-out>
+</testcase>
+<testcase name="parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure()" classname="dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest]/[method:parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure()]
+display-name: parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure()
+]]></system-out>
+</testcase>
+<testcase name="undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead()]
+display-name: undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead()
+]]></system-out>
+</testcase>
+<testcase name="exactAcceptorFieldsNameAndFactoryRejectOneIndependentDifference()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:exactAcceptorFieldsNameAndFactoryRejectOneIndependentDifference()]
+display-name: exactAcceptorFieldsNameAndFactoryRejectOneIndependentDifference()
+]]></system-out>
+</testcase>
+<testcase name="encoderForwardsExactInputsAndRejectsMissingPort()" classname="dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest]/[method:encoderForwardsExactInputsAndRejectsMissingPort()]
+display-name: encoderForwardsExactInputsAndRejectsMissingPort()
+]]></system-out>
+</testcase>
+<testcase name="parserNullContractIsCheckedAtConstructorAndResultBoundary()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:parserNullContractIsCheckedAtConstructorAndResultBoundary()]
+display-name: parserNullContractIsCheckedAtConstructorAndResultBoundary()
+]]></system-out>
+</testcase>
+<testcase name="topologyAdaptersKeepFatalIdentityBeforeAnyLaterStage()" classname="dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest]/[method:topologyAdaptersKeepFatalIdentityBeforeAnyLaterStage()]
+display-name: topologyAdaptersKeepFatalIdentityBeforeAnyLaterStage()
+]]></system-out>
+</testcase>
+<testcase name="declaredTopologyProviderGraphKeepsErrorAndOrdinaryFailureStaysRedacted()" classname="dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisCatalogFatalBoundaryTest]/[method:declaredTopologyProviderGraphKeepsErrorAndOrdinaryFailureStaysRedacted()]
+display-name: declaredTopologyProviderGraphKeepsErrorAndOrdinaryFailureStaysRedacted()
+]]></system-out>
+</testcase>
+<testcase name="opsMq031MalformedPressureAndFatalContracts()" classname="dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest]/[method:opsMq031MalformedPressureAndFatalContracts()]
+display-name: opsMq031MalformedPressureAndFatalContracts()
+]]></system-out>
+</testcase>
+<testcase name="arrayCardinalityAndEveryNonObjectElementReject()" classname="dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest]/[method:arrayCardinalityAndEveryNonObjectElementReject()]
+display-name: arrayCardinalityAndEveryNonObjectElementReject()
+]]></system-out>
+</testcase>
+<testcase name="detailedNestedDataHasNoMutableInputOrOutputAliases()" classname="dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest]/[method:detailedNestedDataHasNoMutableInputOrOutputAliases()]
+display-name: detailedNestedDataHasNoMutableInputOrOutputAliases()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
