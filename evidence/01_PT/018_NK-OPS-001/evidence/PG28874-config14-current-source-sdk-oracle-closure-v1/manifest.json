@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T13:25:52.119333+09:00",
+  "productionCoreMain": "4f4a4de52db5c2599a65cbc4bbaeb5237eb58986",
+  "mainInputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": "a5646e0931961db5aa6aba20d303d33e85c2693ab1e252160752249fb0b8ad9a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": "3bb45310175acaf596d4f9047e3cfd350f690693b5dfd71a3c9b76aa7460b0cd",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0"
+  },
+  "testInputHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d"
+  },
+  "wholeMainReviewed": true,
+  "mainScope": "Whole current Api/Web nonsecret configuration and exact qualified StorageIoException helper; no Root signatures.",
+  "wholeTestReview": [
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+        "sha256": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb"
+      },
+      "wholeLines": 223,
+      "wholeTests": 7,
+      "wholeBodyReviewed": true,
+      "independentLiteralExpected": true,
+      "finiteWorkers": "32jobs/8threads/get5s/finallyshutdownNow+await10sassert",
+      "ioScope": "Onlyowned3nonsecrettemplatecopies read via nk.pt.repository; no backend/credential source",
+      "newDefinitions": 0
+    },
+    {
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+        "sha256": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d"
+      },
+      "wholeLines": 252,
+      "wholeTests": 7,
+      "wholeBodyReviewed": true,
+      "independentLiteralExpected": true,
+      "finiteWorkers": "32jobs/8threads/get5s/finallyshutdownNow+await10sassert",
+      "ioScope": "Onlyowned3nonsecrettemplatecopies read via nk.pt.repository; no backend/credential source",
+      "newDefinitions": 0
+    }
+  ],
+  "independentGolden": {
+    "ApiNonSecretConfigTest": {
+      "canonical": "nk.api.async-consumers=1\nnk.api.storage.asset-manifest-entries=59627\nnk.api.storage.asset-root=/srv/schubert-nk/data/assets\nnk.api.storage.transfer-root=/srv/schubert-nk/data/transfer\nnk.api.sync-consumers.initial=4\nnk.api.sync-consumers.max=8\nnk.db.connect-timeout=3s\nnk.db.pool.api.max=8\nnk.db.pool.api.min=2\nnk.db.url=jdbc:postgresql://127.0.0.1:5432/schubert_nk\nnk.inbox.reference-retention=24h\nnk.inbox.update-retention=7d\nnk.monitoring.mode=STANDARD\nnk.mq.async-work=nk.async.work\nnk.mq.dlq=nk.dead.letter\nnk.mq.expiry=nk.expiry\nnk.mq.sync-reply=nk.sync.reply.web\nnk.mq.sync-request=nk.sync.request\nnk.mq.url=tcp://127.0.0.1:61616\nnk.mq.web-log=nk.web.log\nnk.outbox.sent-retention=7d\nnk.protocol.version=001\nnk.time.display-zone=Asia/Tokyo\n",
+      "sha256": "afec3045ebed78de9d1fab75daf34d7ca4e2bd990b110f3c6afac97def435796",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+        "sha256": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb"
+      }
+    },
+    "WebNonSecretConfigTest": {
+      "canonical": "nk.db.connect-timeout=3s\nnk.db.pool.web.max=2\nnk.db.pool.web.min=1\nnk.db.url=jdbc:postgresql://127.0.0.1:5432/schubert_nk\nnk.monitoring.mode=STANDARD\nnk.mq.url=tcp://127.0.0.1:61616\nnk.protocol.version=001\nnk.time.display-zone=Asia/Tokyo\nnk.web.http.address=127.0.0.1\nnk.web.http.port=8080\nnk.web.management.port=8081\nnk.web.media.max-range-bytes=1048576\nnk.web.media.max-streams=20\nnk.web.mq.reply-timeout=2s\nnk.web.mq.wait.initial=12\nnk.web.mq.wait.max=20\nnk.web.session.idle-timeout=8h\nnk.web.session.max-per-user=2\nnk.web.storage.asset-root=/srv/schubert-nk/data/assets\nnk.web.storage.transfer-root=/srv/schubert-nk/data/transfer\n",
+      "sha256": "98cfeb71e1c4cb5a0805975b3efa3cb52ec89ca48f739b5a15c73a24a1fc22b8",
+      "source": {
+        "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+        "sha256": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d"
+      }
+    }
+  },
+  "resources": {
+    "src/deployment/config/common.yml.template": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+    "src/deployment/config/api.yml.template": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267",
+    "src/deployment/config/web.yml.template": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7"
+  },
+  "sdk": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+    "sha256": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947",
+    "pomSha256": "8ec0716898c6985b0a09a5f1c384023226964a4f5ab7b18b2bcddee9df45d979",
+    "localCentralJarAndPomSha1Matched": true,
+    "source": "https://codeberg.org/snakeyaml/snakeyaml-engine",
+    "version": "3.1.1",
+    "kind": "ORDINARY_THIRD_PARTY_PARSER_NO_APPLICATION_BACKEND_NATIVE_OR_HELD_CLASS"
+  },
+  "changedSourcePg": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28864-settings-five-main-source-static-v1/manifest.json",
+    "sha256": "962820f3462b666b8ab251f768cd46376bffa13d1f1b1b5f0d140a44eca6f816"
+  },
+  "wholeTestCount": 14,
+  "mainCount": 3,
+  "expectedPhysical": 4,
+  "originalTestsUnchanged": true,
+  "newDefinitions": 0,
+  "heldClassOrRealBackendActions": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2212_config14_source_profile.py",
+    "sha256": "00249bf283e6d573fff3cadef79e613647fa49ee51a6635f82f8f1ee0c9581a4"
+  },
+  "wholeMainLineCounts": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": 202,
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": 203,
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": 47
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2213_config14_closed_profile.json",
+    "sha256": "88e18d74670117ed4b431ac75a8314bc754f04996afae370e04310e2f5e8c76e"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": "a5646e0931961db5aa6aba20d303d33e85c2693ab1e252160752249fb0b8ad9a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": "3bb45310175acaf596d4f9047e3cfd350f690693b5dfd71a3c9b76aa7460b0cd",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java": "ca0762458d24466e5ec9226fb24067250a5d17035e0bdfbecd931851e90fe74d",
+    "src/deployment/config/common.yml.template": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+    "src/deployment/config/api.yml.template": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267",
+    "src/deployment/config/web.yml.template": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28880-config14-prepare-v1/manifest.json",
+    "sha256": "3776a1e514b9228e1711b990cc57757d2172b28372bdff67cbfe1a276797d170"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28882-config14-static-v1/manifest.json",
+    "sha256": "946253e1990b4ad0c54a0647d4062c3e656d4edbdabf9add0498d82c2323f3ee"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2214_config14_static_admission.json",
+    "sha256": "9c5d95ba35d880ca864ec646cda1349683aacfa20d449c4ae61f6a850503e5b5"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "125",
+      "reason": "SS3434-5 strict nonsecret YAML/path configuration boundary deliberately emits one value-free invalid-configuration error for rejected parser/input values; no assembly/business/DB failure is handled here and no success is returned by this clause. BUG2791 fatal cause/suppressed/cycle graph is preserved before the fixed catalog. Independent malformed/null/structure/path/URL vectors assert fixed failure; raw YAML, cause and suppressed values never enter diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "172",
+      "reason": "SS3434-5 strict nonsecret YAML/path configuration boundary deliberately emits one value-free invalid-configuration error for rejected parser/input values; no assembly/business/DB failure is handled here and no success is returned by this clause. BUG2791 fatal cause/suppressed/cycle graph is preserved before the fixed catalog. Independent malformed/null/structure/path/URL vectors assert fixed failure; raw YAML, cause and suppressed values never enter diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "118",
+      "reason": "SS3434-5 strict nonsecret YAML/path configuration boundary deliberately emits one value-free invalid-configuration error for rejected parser/input values; no assembly/business/DB failure is handled here and no success is returned by this clause. BUG2791 fatal cause/suppressed/cycle graph is preserved before the fixed catalog. Independent malformed/null/structure/path/URL vectors assert fixed failure; raw YAML, cause and suppressed values never enter diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "167",
+      "reason": "SS3434-5 strict nonsecret YAML/path configuration boundary deliberately emits one value-free invalid-configuration error for rejected parser/input values; no assembly/business/DB failure is handled here and no success is returned by this clause. BUG2791 fatal cause/suppressed/cycle graph is preserved before the fixed catalog. Independent malformed/null/structure/path/URL vectors assert fixed failure; raw YAML, cause and suppressed values never enter diagnostics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "line": "192",
+      "reason": "This exact executor is owned by the whole Test and enclosed in an unconditional finally shutdownNow then asserted awaitTermination10s; each of32 jobs is get5s bounded. Explicit finite close is used instead of Java25 ExecutorService.close whose wait is unbounded. Every task only parses literals and returns a hash; failed join/get fails the Test and is never counted as success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "192",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "196",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "200",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "201",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "CloseResource",
+      "line": "225",
+      "reason": "This exact executor is owned by the whole Test and enclosed in an unconditional finally shutdownNow then asserted awaitTermination10s; each of32 jobs is get5s bounded. Explicit finite close is used instead of Java25 ExecutorService.close whose wait is unbounded. Every task only parses literals and returns a hash; failed join/get fails the Test and is never counted as success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "229",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "232",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "233",
+      "reason": "The exact J2EE-container thread restriction does not govern this standalone JUnit parser concurrency fixture. A private eight-worker pool runs32 immutable literal jobs, futureget5s and unconditional shutdownNow/await10s asserted; no app server, native process, backend, shared authority or external side effect. Identical independently fixed canonical result and worker termination are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
