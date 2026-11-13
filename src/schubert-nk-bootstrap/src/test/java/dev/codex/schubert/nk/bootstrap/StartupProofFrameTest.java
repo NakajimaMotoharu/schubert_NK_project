@@ -12,8 +12,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-PROOF-001..008, literal public vector independent of schema/production encoder. */
@@ -241,10 +242,16 @@ final class StartupProofFrameTest {
 
   @Test
   void proof008ConcurrentIndependentImmutableFrames() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
-      var work = new ArrayList<Callable<byte[]>>();
-      for (int i = 0; i < 32; i++) work.add(() -> StartupProofFrame.parse(bytes(GOLDEN)).encode());
-      for (var result : executor.invokeAll(work)) assertArrayEquals(bytes(GOLDEN), result.get());
+    var executor = Executors.newFixedThreadPool(8);
+    try {
+      var work = new ArrayList<Future<byte[]>>();
+      for (int i = 0; i < 32; i++)
+        work.add(executor.submit(() -> StartupProofFrame.parse(bytes(GOLDEN)).encode()));
+      for (var result : work) assertArrayEquals(bytes(GOLDEN), result.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      if (!executor.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("proof frame workers did not terminate");
     }
   }
 
