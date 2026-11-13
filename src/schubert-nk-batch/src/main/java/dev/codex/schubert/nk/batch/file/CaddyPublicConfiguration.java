@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -117,6 +118,7 @@ public final class CaddyPublicConfiguration {
       root.recheck(morning);
       return context;
     } catch (GeneralSecurityException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new IOException("Caddy TLS admission unavailable");
     } finally {
       Arrays.fill(bytes, (byte) 0);

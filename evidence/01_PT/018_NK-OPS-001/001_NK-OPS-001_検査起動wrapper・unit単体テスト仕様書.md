@@ -65,3 +65,6 @@ HTTP metrics原whole28の当Program結果は[4188](4188_HTTPメトリクス原�
 
 
 [MPOL8静的不足・通常PT未実施](4238_MPOL原七新一静的不足・通常PT未実施結果.md)。Main13/Test8 compileのみ、Missing1/生PMD79未分類、実PT0/coverage未測定、受入0。
+
+
+WBS-P018-01公開source契約/独立期待値/TestIDは[4239_P01801全十六artifact契約・独立期待値対応.md](4239_P01801全十六artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,6 +91,7 @@ public final class ConfigurationGroupResolver {
       return result[0];
     } catch (InterruptedException failure) {
       Thread.currentThread().interrupt();
+      StorageIoException.preserveFatal(failure);
       throw unavailable();
     } catch (IOException failure) {
       // Normalize known I/O only after all owned scopes have finished.
@@ -134,8 +136,10 @@ public final class ConfigurationGroupResolver {
     } catch (ExecutionException failure) {
       Throwable cause = Objects.requireNonNull(failure.getCause(), "reader failure");
       if (cause instanceof IOException) throw unavailable();
-      if (cause instanceof RuntimeException)
+      if (cause instanceof RuntimeException) {
+        StorageIoException.preserveFatal(cause);
         throw new IllegalStateException("configuration group reader failed");
+      }
       // The owned Callable invokes only read: IOException, unchecked exception or Error.
       throw (Error) cause;
     }

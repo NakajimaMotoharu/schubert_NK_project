@@ -67,6 +67,7 @@ public final class InspectorCredentialLoader {
       if (length.isEmpty()) return Optional.empty();
       return Optional.of(InspectorAesCredential.consume(Arrays.copyOf(buffer, length.getAsInt())));
     } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      if (!(failure instanceof IOException)) StorageIoException.preserveFatal(failure);
       throw new InspectorCredentialException();
     } finally {
       Arrays.fill(buffer, (byte) 0);
@@ -82,6 +83,7 @@ public final class InspectorCredentialLoader {
       require(before.equals(root.atDirectory(this::directory)));
       return InspectorDbCredential.consume(Arrays.copyOf(buffer, length));
     } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      if (!(failure instanceof IOException)) StorageIoException.preserveFatal(failure);
       throw new InspectorCredentialException();
     } finally {
       Arrays.fill(buffer, (byte) 0);
@@ -139,6 +141,7 @@ public final class InspectorCredentialLoader {
       require(before.equals(root.atDirectory(this::directory)));
       return Arrays.copyOf(buffer, length);
     } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      if (!(failure instanceof IOException)) StorageIoException.preserveFatal(failure);
       throw new InspectorCredentialException();
     } finally {
       Arrays.fill(buffer, (byte) 0);
@@ -158,6 +161,7 @@ public final class InspectorCredentialLoader {
       require(before.equals(root.atDirectory(this::directory)));
       return Arrays.copyOf(buffer, length);
     } catch (IOException | IllegalArgumentException | UnsupportedOperationException failure) {
+      if (!(failure instanceof IOException)) StorageIoException.preserveFatal(failure);
       throw new InspectorCredentialException();
     } finally {
       Arrays.fill(buffer, (byte) 0);
@@ -185,8 +189,10 @@ public final class InspectorCredentialLoader {
               });
       return OptionalInt.of(length);
     } catch (StorageIoException failure) {
-      if (failure.reason() == StorageIoException.Reason.MISSING && !entered.get() && optional)
+      if (failure.reason() == StorageIoException.Reason.MISSING && !entered.get() && optional) {
+        StorageIoException.preserveFatal(failure);
         return OptionalInt.empty();
+      }
       throw failure;
     }
   }
