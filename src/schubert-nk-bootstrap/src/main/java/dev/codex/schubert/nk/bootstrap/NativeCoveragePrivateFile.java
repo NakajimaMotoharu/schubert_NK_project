@@ -340,10 +340,18 @@ final class NativeCoveragePrivateFile {
               FileState original = file(held, security, uid, gid, 0x8180, io);
               require(original.size() == 0);
               try (var channel = channel(channels.write(held))) {
+                require(channel.position() == 0);
                 var buffer = ByteBuffer.wrap(bytes);
-                while (buffer.hasRemaining()) require(channel.write(buffer) > 0);
+                while (buffer.hasRemaining()) {
+                  int positionBefore = buffer.position();
+                  int written = channel.write(buffer);
+                  require(
+                      written > 0
+                          && written == buffer.position() - positionBefore
+                          && channel.position() == buffer.position());
+                }
                 channel.force(true);
-                require(channel.size() == bytes.length);
+                require(channel.size() == bytes.length && channel.position() == bytes.length);
               }
               FileState after = file(held, security, uid, gid, 0x8180, io);
               require(original.identity().equals(after.identity()) && after.size() == bytes.length);
@@ -427,19 +435,18 @@ final class NativeCoveragePrivateFile {
       throws IOException, NoSuchAlgorithmException {
     var hash = MessageDigest.getInstance("SHA-256");
     try (var channel = channel(channels.read(held))) {
-      require(channel.size() == size);
+      require(channel.size() == size && channel.position() == 0);
       var buffer = ByteBuffer.allocate(8192);
       long count = 0;
       while (true) {
         int n = channel.read(buffer);
-        if (n < 0) break;
-        // PG-D804/2476: retain the original short-circuit update and one require call.
-        boolean withinSize = n > 0;
-        if (withinSize) {
-          count += n;
-          withinSize = count <= size;
+        if (n < 0) {
+          require(n == -1 && buffer.position() == 0 && channel.position() == count);
+          break;
         }
-        require(withinSize);
+        require(n > 0 && n == buffer.position() && n <= size - count);
+        count += n;
+        require(channel.position() == count);
         buffer.flip();
         hash.update(buffer);
         buffer.clear();

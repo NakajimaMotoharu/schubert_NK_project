@@ -1,0 +1,84 @@
+{
+  "status": "SPEC_ONLY_NOT_PRODUCT_PT",
+  "vectors": [
+    {
+      "id": "CHANNEL-SPEC-1",
+      "input": "initial read position nonzero",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-2",
+      "input": "positive read count with buffer position0",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-3",
+      "input": "positive read count different from buffer.position",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-4",
+      "input": "read count exceeds declared remaining size",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-5",
+      "input": "channel position differs from accumulated count",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-6",
+      "input": "EOF -2",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-7",
+      "input": "EOF -1 with data in buffer",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-8",
+      "input": "EOF -1 with mismatched channel position",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-9",
+      "input": "initial write position nonzero",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-10",
+      "input": "positive write count with unchanged buffer",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-11",
+      "input": "write count differs from buffer delta",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-12",
+      "input": "write channel position differs from buffer.position",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    },
+    {
+      "id": "CHANNEL-SPEC-13",
+      "input": "force changes final position",
+      "expected": "REJECT_FIXED_NON_SUCCESS",
+      "executionStatus": "SPEC_ONLY_NOT_RUN"
+    }
+  ],
+  "normalExpected": "Valid FileChannel partial reads/writes advance count-buffer-channel equally, initial0, EOF-1 only, force preserves endposition, same original bytes/SHA256 and all resource closes. Positive implementation execution notperformed."
+}
