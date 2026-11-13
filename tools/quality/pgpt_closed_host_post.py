@@ -155,8 +155,13 @@ def verify(c, config, source):
     probes = {n: (crc, int(hit), int(total)) for crc, hit, total, n in re.findall(r'^([0-9a-f]{16})\s+(\d+) of\s+(\d+)\s+(\S+)$', ex, re.M)}
     test_names = {n[:-6] for n in b['testClassHashes']}
     observed = {n for n in probes if n.startswith('dev/codex/schubert/nk/') and n not in test_names}
+    type_only_guard = signature is not None and c.get('guardTypeOnly') is not None
     if signature is not None:
-        require(guard_name in observed, 'fresh real Guard execution required')
+        if type_only_guard:
+            require(guard_name not in probes, 'type-only Guard must have no executed probe')
+            require(method_counts[guard_name] == 2, 'two real default methods, no initializer')
+        else:
+            require(guard_name in observed, 'fresh real Guard execution required')
     require(observed <= analyzed | set(maps) and all(probes[n][0] == ids[n] and probes[n][1] > 0 for n in observed), 'positive same-Main CRC only')
     import pgpt_artemis_sdk
     initialized_all = set(re.findall(r"Initializing '([^']+)'", (unit / 'class-init.log').read_text()))
@@ -165,7 +170,8 @@ def verify(c, config, source):
     require(not any(n.rpartition('/')[2].split('$')[0] in policy.DENIED for n in init), 'held class initialized')
     require(not set(c.get('forbiddenInitializedClasses', [])) & init, 'source-reviewed compile-only JDBC parent initialized')
     real = init & set(ids)
-    require(real - observed <= no_code and observed <= real, 'class init and exec membership')
+    legitimate_unexecuted_interface = {guard_name} if type_only_guard else set()
+    require(real - observed <= no_code | legitimate_unexecuted_interface and observed <= real, 'class init and exec membership')
     bindings = {}
     for n in init - set(ids):
         match = re.fullmatch(r'(dev/codex/schubert/nk/[^+]+)\$\$Lambda\+0x[0-9a-f]+', n)
@@ -178,6 +184,9 @@ def verify(c, config, source):
     for key, row in coverage.items():
         for field in ['covered', 'missed']: require(sum(counters(el).get(key, {}).get(field, 0) for el in classes.values()) == row[field], 'independent full counter sum')
     uncovered = {n: {k: row['missed'] for k, row in counters(el).items() if row['missed'] > 0} for n, el in classes.items() if any(row['missed'] > 0 for row in counters(el).values())}
+    if type_only_guard:
+        require(all(row['covered'] == 0 for row in counters(classes[guard_name]).values()),
+                'all real unexecuted Guard counters remain fully missed')
     targets = {n: counters(classes[n]) for n in c['targetClasses']}
     component = {key: dict(covered=sum(v.get(key, {}).get('covered', 0) for v in targets.values()), missed=sum(v.get(key, {}).get('missed', 0) for v in targets.values())) for key in set().union(*(set(v) for v in targets.values()))}
     component100 = all(component.get(k, {}).get('covered', 0) > 0 and component[k]['missed'] == 0 for k in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
@@ -197,6 +206,7 @@ def verify(c, config, source):
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
     result['guardSignature'] = signature
+    result['guardExecutionMode'] = 'TYPE_ONLY_ALL_COUNTERS_MISSED' if type_only_guard else ('FRESH_POSITIVE_REQUIRED' if signature is not None else None)
     result['analysisOnlyContext'] = analysis_context
     result['reviewedArtemisSdk'] = sdk_runtime
     policy.write_json(out / 'manifest.json', result)

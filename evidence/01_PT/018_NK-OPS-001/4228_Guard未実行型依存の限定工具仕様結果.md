@@ -1,0 +1,7 @@
+# Guard未実行型依存の限定工具仕様・結果
+
+WBS-F03/SS311・351/451。PG28676は既Expiry資源whole3/helper68/全11Mainを保存済み全読証跡と現在hashで照合し、変化したRunReferenceだけPG28664のwhole10を参照する。全Guard source/実byte/CRC/witnessは元正規資格のまま。明示guardTypeOnlyはこのwholeTestとhelperに限定し、全sourcehash・sourceClosure pinが一致する時だけ許可。新Guard生成/override/人工呼出/Outer実行は追加しない。
+
+既定profileは元通りGuardのfresh実probe必須。type-onlyは逆にGuard probe0・全coverage counter covered0・実code method2/initializer0を独立postで要求し、全missesを残す。自然なinterface型初期化だけは実code未実行として区別、Outer/Root/native初期化禁止は維持。全scopeを100%へ読み替えず全451未受入。
+
+PG28678 metadata16（正3/負13）終了0、sourceproofを使った全11currenthash/whole3helper・悪mode/未pin/別Main/Test/抽出/SDK/property/reflectionを拒否。class/cache/SDK読取・Productcompile/runtime/PTは0。実compiler/static/Unit command/counter算出は変更せず他4tool byte同一。実Product通常4は次群で価格固定後に実行し、metadataをPT PASSやcoverageへ算入しない。

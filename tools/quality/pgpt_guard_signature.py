@@ -36,6 +36,7 @@ def digest(path):
 
 
 def syntax(c):
+    type_only(c)
     option = c.get('reviewedGuardSignature')
     if option is None:
         return
@@ -58,6 +59,65 @@ def syntax(c):
     forbidden = c.get('forbiddenInitializedClasses', [])
     require(isinstance(forbidden, list) and FORBIDDEN_INIT <= set(forbidden),
             'outer and native factory initialization forbidden')
+
+
+def type_only(c):
+    """Opt-in for one fully reviewed JDBC read Test, retaining every Guard miss."""
+    option = c.get('guardTypeOnly')
+    if option is None:
+        return None
+    require(c.get('reviewedGuardSignature') is not None and isinstance(option, dict) and
+            set(option) == {'sourceClosure'}, 'explicit witnessed type-only dependency')
+    pin = option['sourceClosure']
+    require(isinstance(pin, dict) and set(pin) == {'path', 'sha256'} and
+            re.fullmatch('[0-9a-f]{64}', pin['sha256']) and
+            pin['path'].startswith('evidence/01_PT/018_NK-OPS-001/evidence/') and
+            pin['path'].endswith('/manifest.json') and
+            pin in c.get('closureProofs', []), 'explicit type-only source proof pin')
+    expected = {'ExpiryAuditResourceFailureTest.java', 'JdbcResourceCases.java'}
+    require({Path(t['path']).name for t in c['testSources']} == expected and
+            len(c['testSources']) == 2 and
+            sorted(t['tests'] for t in c['testSources']) in [[0, 3], [0, 4]],
+            'only whole reviewed Expiry resource Test and original helper')
+    require(not c.get('sdkJars') and not c.get('systemProperties') and
+            c.get('reviewedArtemisSdk') is None and not c.get('reviewedReflection'),
+            'no backend SDK, reflection or property execution permission')
+    return pin
+
+
+def checked_type_only(c):
+    pin = type_only(c)
+    if pin is None:
+        return
+    path = R / pin['path']
+    require(digest(path) == pin['sha256'], 'type-only source proof hash')
+    witness = json.loads(path.read_text())
+    require(witness.get('schema') == 'PGPT_GUARD_TYPE_ONLY_SOURCE_V1' and
+            witness.get('actualExit') == 0 and witness.get('guardDefaultCodeCalls') == 0 and
+            witness.get('noGuardInstancesOrOverrides') is True and
+            witness.get('allGuardCountersRetained') is True,
+            'reviewed non-executed type contract')
+    expected_main = {'ExpiryAuditRepository', 'RunReferenceRepository', 'RunReferences',
+                     'BatchRun', 'BatchStepAttempt', 'BatchStep', 'BatchStepResult',
+                     'SuccessRunLookup', 'JdbcResourceFailures', 'BatchRepositoryException',
+                     'StorageIoException'}
+    require(len(c['mainSources']) == 11 and
+            {Path(n).stem for n in c['mainSources']} == expected_main,
+            'exact previously reviewed Main closure')
+    require(witness.get('mainInputHashes') == {n: digest(R / n) for n in c['mainSources']} and
+            witness.get('wholeTestHashes') == {t['path']: digest(R / t['path']) for t in c['testSources']},
+            'all current whole source bytes reviewed and pinned')
+    for item in c['testSources']:
+        text = (R / item['path']).read_text()
+        require(not re.search(r'\b(?:Guard|MaintenanceOwnerFrame|ClassLoader|MethodHandles)\b|'
+                              r'\.(?:successful|stage|finish|forName|getDeclaredMethod|invoke)\s*\(', text),
+                'no Guard instance, default call, reflection or other repository phase')
+    text = (R / SOURCE).read_text()
+    start = text.index('  public interface Guard {')
+    end = text.index('\n  private static final String[] KEYS', start)
+    require(text[start:end].count('default ') == 2 and
+            'static ' not in text[start:end] and '{\n    long remainingNanos()' in text[start:end],
+            'unchanged interface has no initializer, only two unexecuted defaults')
 
 
 def validate_witness(c, witness, pre, current_source_sha):
@@ -105,6 +165,7 @@ def checked(c):
     source = R / SOURCE
     require(source.is_file() and not source.is_symlink(), 'regular unchanged source')
     validate_witness(c, witness, json.loads(prepath.read_text()), digest(source))
+    checked_type_only(c)
     for name in c['mainSources'] + [t['path'] for t in c['testSources']]:
         validate_closed_text((R / name).read_text())
     return witness
