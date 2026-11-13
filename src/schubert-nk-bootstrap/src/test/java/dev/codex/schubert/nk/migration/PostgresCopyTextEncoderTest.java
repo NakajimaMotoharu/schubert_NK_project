@@ -73,7 +73,8 @@ final class PostgresCopyTextEncoderTest {
         },
         encoder.encodeRow(List.of("あé🎵")));
     assertArrayEquals(
-        new byte[] {0x65, (byte) 0xcc, (byte) 0x81, 10}, encoder.encodeRow(List.of("e\u0301")));
+        new byte[] {0x65, (byte) 0xcc, (byte) 0x81, 10},
+        encoder.encodeRow(List.of(new String(new char[] {(char) 0x0065, (char) 0x0301}))));
   }
 
   @Test
@@ -111,15 +112,25 @@ final class PostgresCopyTextEncoderTest {
   void copy009NulAndUnpairedSurrogateRefusedAtEveryPosition() {
     for (String invalid :
         List.of(
-            "\0", "a\0b", "\ud800", "a\ud800", "\ud800A", "\ud800\ud800", "\udc00", "a\udc00")) {
+            "\0",
+            "a\0b",
+            new String(new char[] {(char) 0xd800}),
+            new String(new char[] {(char) 0x0061, (char) 0xd800}),
+            new String(new char[] {(char) 0xd800, (char) 0x0041}),
+            new String(new char[] {(char) 0xd800, (char) 0xd800}),
+            new String(new char[] {(char) 0xdc00}),
+            new String(new char[] {(char) 0x0061, (char) 0xdc00}))) {
       assertThrows(IllegalArgumentException.class, () -> encoder.encodeRow(List.of(invalid)));
     }
     assertArrayEquals(
         new byte[] {0x41, (byte) 0xf0, (byte) 0x90, (byte) 0x80, (byte) 0x80, 0x42, 10},
-        encoder.encodeRow(List.of("A\ud800\udc00B")));
+        encoder.encodeRow(
+            List.of(
+                new String(
+                    new char[] {(char) 0x0041, (char) 0xd800, (char) 0xdc00, (char) 0x0042}))));
     assertArrayEquals(
         new byte[] {(byte) 0xf4, (byte) 0x8f, (byte) 0xbf, (byte) 0xbf, 10},
-        encoder.encodeRow(List.of("\udbff\udfff")));
+        encoder.encodeRow(List.of(new String(new char[] {(char) 0xdbff, (char) 0xdfff}))));
   }
 
   @Test

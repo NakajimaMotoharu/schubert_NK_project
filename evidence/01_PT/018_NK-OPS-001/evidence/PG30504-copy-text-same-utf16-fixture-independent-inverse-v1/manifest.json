@@ -1,0 +1,89 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T21:12:37.038252+00:00",
+  "bug": "BUG-2872",
+  "ykt": "YKT-2409",
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30502-copy-text-unicode-fixture-before-fix-v1/before-test.java.txt",
+    "sha256": "ce412a32b37b309852b2e6c48d5baf3d546c961f7d128629a04a29b5de77993c"
+  },
+  "afterTest": {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+    "sha256": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8"
+  },
+  "fixtureUtf16Vectors": [
+    {
+      "originalLiteral": "\"e\\u0301\"",
+      "utf16Units": [
+        101,
+        769
+      ]
+    },
+    {
+      "originalLiteral": "\"\\ud800\"",
+      "utf16Units": [
+        55296
+      ]
+    },
+    {
+      "originalLiteral": "\"a\\ud800\"",
+      "utf16Units": [
+        97,
+        55296
+      ]
+    },
+    {
+      "originalLiteral": "\"\\ud800A\"",
+      "utf16Units": [
+        55296,
+        65
+      ]
+    },
+    {
+      "originalLiteral": "\"\\ud800\\ud800\"",
+      "utf16Units": [
+        55296,
+        55296
+      ]
+    },
+    {
+      "originalLiteral": "\"\\udc00\"",
+      "utf16Units": [
+        56320
+      ]
+    },
+    {
+      "originalLiteral": "\"a\\udc00\"",
+      "utf16Units": [
+        97,
+        56320
+      ]
+    },
+    {
+      "originalLiteral": "\"A\\ud800\\udc00B\"",
+      "utf16Units": [
+        65,
+        55296,
+        56320,
+        66
+      ]
+    },
+    {
+      "originalLiteral": "\"\\udbff\\udfff\"",
+      "utf16Units": [
+        56319,
+        57343
+      ]
+    }
+  ],
+  "allNineRuntimeInputUnitSequencesEqual": true,
+  "allOtherJavaTokensAndAllExpectedByteTokensInverseEqual": true,
+  "wholeOriginalDefinitions": 12,
+  "newAdditionalTestDefinitions": 0,
+  "MainByteUnchanged": true,
+  "MainSha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+  "pmdSuppressionOrExclusion": 0,
+  "productTestsExecuted": 0,
+  "actualDbRootVmNativeKeyUnitActions": 0,
+  "fullStaticAndUnitNotYetRetested": true
+}
