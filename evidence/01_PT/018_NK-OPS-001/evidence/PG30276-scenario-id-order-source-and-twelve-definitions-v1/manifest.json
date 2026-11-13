@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T19:32:10.184767+00:00",
+  "sourceAtGroupStart": "72449924b1b2f0b5624ae600ab687f77ccbfb8a6",
+  "ssc": "SSC343",
+  "approvedMain": "1f1eccc4575a78ac3989b045f9cc6a0041ac0dcd",
+  "registeredOwner": "WBS-P019-03",
+  "costLeaf": "WBS-P019-03.02",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+      "sha256": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "sha256": "3049e810bd7b34071cd585c1295c444e7d4b1829800e49d2162a53f94a974815"
+    }
+  ],
+  "commands": [
+    {
+      "label": "format-check",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java"
+      ],
+      "ownerPid": 611785,
+      "pid": 611845,
+      "startUTC": "2026-11-13T19:32:08.679278+00:00",
+      "endUTC": "2026-11-13T19:32:09.144958+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG30276-scenario-id-order-source-and-twelve-definitions-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java"
+      ],
+      "ownerPid": 611785,
+      "pid": 611870,
+      "startUTC": "2026-11-13T19:32:09.144979+00:00",
+      "endUTC": "2026-11-13T19:32:09.811403+00:00",
+      "actualExit": 0
+    }
+  ],
+  "newMainSources": 1,
+  "newWholeTestDefinitions": 12,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "MainClassCompiled": false,
+  "physicalClassesPlanned": 3,
+  "importsOnlyJdkJSpecify": true,
+  "actualRootVmDbNativeKeyUnitDeployFileOperations": 0,
+  "originalMasterAccessed": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

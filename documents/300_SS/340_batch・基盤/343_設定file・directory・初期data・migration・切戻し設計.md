@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC343 Scenario entry移行ID対応と現行ID順の不変値（2026-11-14、PG詳細補足）
+
+SS343§10のID対応/表示順固定を、UI223§3.2・UI254§4・SS331/V002の既存条件のまま内部部品`ScenarioEntryMigrationMap`へ具体化する。対象はglobal `script_entries`だけで、file別entry_index、games/script_files/speaker/audio/link、動画/musicのcategory/pair/順序を代用しない。現行ID維持やbookmark互換を追加しない。Actual ETL/全件数/DB・game/FK・表示結果の受入は別に残す。
+
+入力IdPairはcurrentId/targetIdのlong二値。currentIdは採取済みのsigned値を改変/再解釈せず保持し、targetIdはV002 identity/CHECKとEntryId/wireの1..999999999999だけを許容する。currentIdとtargetIdはそれぞれ重複拒否。sourceの数値昇順（減算比較や文字列順ではない）へ並べ、1始まりdenseのdisplayOrderを一度固定する。再採番したtargetの大小・入力List順は表示順へ影響させない。Java Listのint件数に対する1始まり順位はN12以内であり、不要な到達不能branchで検査を増やさない。公開MappedEntryもtarget/order各1..N12をconstructorで保護する。
+
+入力List/要素のnullは拒否、保存List/MapはList.copyOf/Map.copyOf等で不変性を明示する。mappings返却Listは変更不能、返却canonical byte[]は毎回別所有。lookup(currentId)は当mapに登録したtupleだけを返し、未知を0/先頭/新IDへ補完せず固定安全例外で拒否する。返値はID/順位の宣言データであり、実DB存在/完全性/ロード成功/起動・配備権限ではない。
+
+canonicalはASCII/LFのheader `NKMIGSCENARIOORDER1`一行に続き、currentId TAB targetId TAB displayOrder LFの三列、currentId数値昇順。longの正準decimal（sourceはsigned可）を使用しBOM/escape/余剰列なし。空mapはheaderのみでlookup拒否、必要移行件数を満たすとはみなさない。record/aggregate診断は固定redactionとし原本DB/本文/credentialをログへ含めない。
+
+PT-MIG-ORDER001..012は(10→100,2→900)からの手書き2/900/1・10/100/2、signed source両端/0とN12 target/order上下境界、source/target個別重複/null、immutable入力/返値/byte、未知lookup、空、gapと再順序、有限64task/8workerを独立literalで検証する。Future各5秒・finally shutdownNow/await10秒で未終端fail。Production sort/encoderからexpectedを作らない。全Main/Testの通常static/PT/全physical四counterと独立postを行い、実Current/DB/ETL/Root/native/CHR/全451/ITSTや全scope同source資格を当局所結果で閉じない。RD/UI/外部電文/DDL/画面の仕様は変更せず、新QA不要。
+
+
 ## SSC342 移行素材inventoryの純metadata値・canonical差分（2026-11-14、PG内詳細補足）
 
 P01903/SS343§10のcanonical manifestの内部単位を次で固定する。RD141/161・UI254の移行対象、全file件数/byte/SHA、表示順/ID対応、非移行log/account、現行原本保全、移行/切戻し判定は変更しない。これは未実装artifactの詳細化で、新しい業務仕様・操作権限・DIFを追加しない。
