@@ -1,0 +1,16 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T16:47:24.909130+00:00",
+  "sourceCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "testSource": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+    "sha256": "6a771cff5dad26f8b9f469667169f113b3e91be172fe52f400e53d543615dc32"
+  },
+  "method": "concurrentUse",
+  "wholeDefinitions": 8,
+  "observation": "Implicit ExecutorService.close in try-with-resources is not bounded by Future.get5s. If taskfails/hangs thecleanup canwaitwithoutdeadline. No dynamicfailureprobe executed.",
+  "testExecuted": 0,
+  "bug": "BUG-2858",
+  "horizontal": "YKT-2387",
+  "plannedFix": "Preserveall64independentliteraloracles andold8methods; explicitfinallyshutdownNow+awaitTermination10s assertion beforeleavingwholeTest"
+}

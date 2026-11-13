@@ -1,0 +1,296 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-14T01:44:43.703372+09:00",
+  "source": "c094c6435f91a81ac88a1d77468ad44d9278ca3f",
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java": "7de62c1de31b281a763fba4de977756b63e466e288a220e6a494272194772b03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java": "999ccc9f609901804ddd967448a868875bc5f071df7e27cf66cd28a9daca1cd5",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "d4d8f244943923c428596dd5629c942fe207fb9d51a6a7872c3fa7190a71e319",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java": "d5b3b9e2cd40ba30304a6f69a065c63c2ada73af49781b644e1274f3419c4d24"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 1344,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "8767f3cbcb48a67e91e7951aadb6f35dd3a27304f938da2d4a448f63caa6f5ae"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01702-PREP-001",
+      "artifact": "MorningNewRunAdmission",
+      "methods": "create/openCredentials",
+      "testIds": [
+        "PT-OPS-MNEW001-011"
+      ],
+      "expected": "OnlyMORNINGfreshRoot/release; dedicatedfixedloopbackDB andretainedoriginal insideResourceScope; literalprivatecredentialdirectory, no arbitraryenv/path capability. DoesnotownA/stop/invalidate/permit.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-002",
+      "artifact": "MorningNewRunAdmission",
+      "methods": "execute/executeOwned/executeVerified",
+      "testIds": [
+        "PT-OPS-MNEW001-011"
+      ],
+      "expected": "NN root/database/original/clock/UUIDsupplier/callback. root→freshUUID+UTCcutofftruncatedµs→distinctactivation→DBrequireUnused→durableoriginalstart→exactrun+activation+pending→callback→allrootrechecks. NN result returnedonlyafterbothownersclose; sameDB/originalscope continuous.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-003",
+      "artifact": "MorningNewRunAdmission",
+      "methods": "scopedOriginalProof verify/verifyRetained",
+      "testIds": [
+        "PT-OPS-MNEW001-011"
+      ],
+      "expected": "Onlysameownerthread/activecallback, rootbeforeafter; pendingverify andcompletedverifydistinct, retainedproofnotdefault freshpathlookup. Attemptedbutuncertaincompletionpermanentlyrefusesnormalproof; noowner capabilityexport.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-004",
+      "artifact": "MorningNewRunAdmission",
+      "methods": "scopedOriginalProof complete/referenceRun",
+      "testIds": [
+        "PT-OPS-MNEW001-011"
+      ],
+      "expected": "Completionexactactivation, immutableexistingdone, onenewcompletionattempt; beforeverify→attempted→exactreturnedvalue→completedreadback/root/owner→statecommit. Referencecurrentpending/completedcapability accordingtoactualstate, priorUUID/timeNN; uncertaintyneverrevertstopending.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-005",
+      "artifact": "MorningResumeAdmission",
+      "methods": "create/executeVerified",
+      "testIds": [
+        "PT-OPS-MRESUME001-010"
+      ],
+      "expected": "ExplicitNNresumeUUID only, no newcutoff/auto-selectedrun. freshactivationdistinctfromrun→dedicatedDB→sameoriginalresume→samefixedrun/cutoff→DBrequireConsistent→samecallbackproof/root/lifetime. Returnedoriginalnotproof ofownerwithoutretainedport; actualfile/nativeidentityendingpending.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-006",
+      "artifact": "BatchRun",
+      "methods": "constructor/toString",
+      "testIds": [
+        "PT-BAT-001"
+      ],
+      "expected": "id/cutoffNN; independentUTC0001-01-01 inclusive and9999-12-31T23:59:59.999999Z inclusive/µs grid; rejects year0/year10000/nanofraction. Redactedfixeddiagnostic; UUIDvaluenotownership.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-007",
+      "artifact": "MaintenanceActivation/MaintenanceRunState",
+      "methods": "constructor/businessDate/toString",
+      "testIds": [
+        "PT-BAT-038-045",
+        "PT-BAT-058-081"
+      ],
+      "expected": "Activationrun/idNN; businessdateIANAAsia/Tokyo includinghistoricalLMT. StateOptionalNN andpresentcompletionactivationvalueequalsrequired; matchingnewinstanceaccepted/differentid-run-cutoffrefused. fixedredaction, notparentcompletionauthority.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-008",
+      "artifact": "BatchStep/BatchStepResult",
+      "methods": "closedenum/constructor/code/summary",
+      "testIds": [
+        "PT-BAT-130-137"
+      ],
+      "expected": "Exactly10orderedsteps/backupfirsttwo; fourterminalstatus/elevenreasons withfixedcodesummary. Negativeanycounterrefused; SUCCESS requiresfailure0; SKIPPEDall0. NONEonlySUCCESS, twoSKIPreasonsSKIPPED, PROTECTEDWARNING, ABANDONEDFAILED, otherWARNINGorFAILED. No inventedtarget=sumcondition.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-009",
+      "artifact": "BatchRepositoryException",
+      "methods": "constructor",
+      "testIds": [
+        "PT-BAT-010-015"
+      ],
+      "expected": "Literalbatchrepositoryoperationfailed withoutprovidertext/cause; originaltypedSQLnormalizationnotunknownRuntimeNPE/Errorcatch. Existinghelperproofdoesnotproveeverycatalogcaller.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-010",
+      "artifact": "BatchRunRepository",
+      "methods": "constructor/begin variants",
+      "testIds": [
+        "PT-BAT-138-153"
+      ],
+      "expected": "BorrowedNNConnection no configure/commit/rollback/close. Fixedrun/timeµs→refsconsistent→JSTdatehistoryorderedrowlocklimit100. SixdeletiononlybackupUnavailable; otherkindrefusedbeforeSQL.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-011",
+      "artifact": "BatchRunRepository",
+      "methods": "begin/history",
+      "testIds": [
+        "PT-BAT-138-153"
+      ],
+      "expected": "wholehistoryvalidatedbeforeanyabandonwrite: <=99 rows, unique1..999999999999 ids, strictlyincreasingattempt<=99, exactday/step/knownstatus/nonnegativecounts/finiteµsstart<=now; ownrunstart>=cutoff, RUNNINGendNULL, othersendpresent>=start<=now. Runningonlyexplicitrecover andsameUUID, ordinarynonbackupSUCCESS<=1, maximum99refusesnewattempt.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-012",
+      "artifact": "BatchRunRepository",
+      "methods": "begin/abandon/insert",
+      "testIds": [
+        "PT-BAT-138-153"
+      ],
+      "expected": "Oldsame-runRUNNING becomesFAILED/ABANDONED exactguardonce; newattemptmax+1. NormalnonbackupSUCCESSskip, normalresumebackuponlysame-runSUCCESSskip; manualbackupmultiSUCCESSretained. BackupUnavailabletakestheexplicitreason/all0 currentSKIP, notpriorSUCCESS. NewINSERT exactonevalidid only/handle/time/columns andrefsagain; callerTXownscommit.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-013",
+      "artifact": "BatchRunRepository",
+      "methods": "finish/verifyFinished",
+      "testIds": [
+        "PT-BAT-138-153",
+        "PT-BAT-RUN1405001-002"
+      ],
+      "expected": "attempt/result/timeNN, skippedorend<startrejectbeforeJDBC. UPDATE complete14fieldsbyexact6-partRUNNING+NULLendhandle; changed1or0only, changed0 requiresallstoredterminalcolumns equality readback. verifyFinishedreadonly/noUPDATE; refs guardbeforeafter andUTCOffsetDateTime bind.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-014",
+      "artifact": "BatchRunRepository",
+      "methods": "verifyAlreadySuccessful/verifyBackupUnavailable",
+      "testIds": [
+        "PT-BAT-138-153"
+      ],
+      "expected": "RequiresactualcurrentSKIPhandle, ended=start/statusSKIPPED/all0 andrespectivematchingreason+fixedsummary; independentlysamecurrenthandleexists. NeverreusepriorSUCCESS ascurrentpostcondition; no writes orconversiontomockedsuccess.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-015",
+      "artifact": "BatchRunRepository",
+      "methods": "history/insert/replayed/abandon/finish resources",
+      "testIds": [
+        "PT-BAT-138-153"
+      ],
+      "expected": "EveryStatement/ResultSetquerytimeout5/nonNULLprojection; acquiredresourceprotectedimmediately/recordprimary/directreversecloseonce; unknownprimaryidentity/freshfixedsecondary/selfsuppressionavoidance viaJdbcResourceFailures. SQLonlyoutercatalog catches5; currentSSC341limitedtoMorning, othercallerfatalapplicabilitynotinferred/actualfaultPTpending. No newSQL/TX/closecalls.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    },
+    {
+      "id": "P01702-PREP-016",
+      "artifact": "BatchRunRepository",
+      "methods": "privateHistory/diagnostics",
+      "testIds": [
+        "PT-BAT-130-137"
+      ],
+      "expected": "StoredHistoryredactionliteralBatchStepHistory[identity/time=<redacted>], datavalueonly. ExistingStepwhole8 genuinelyexecutedPG28252/post28254 onoldercomponent; threeStep-sourcefiveclassfour100/full13partial preserved. Twochangedhelperinputs preventall-input/globaltransfer. No replay; existingpendingStep8instructionisSTALE andsupersededbythisevidencejoin.",
+      "refusalOrMissing": "No actualRoot/DB/retainedoriginal/native/Unit/Backup/permit/intent action; all /2 andsame-sourcewhole451/endings remainunaccepted"
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29750-runstate-completion8-post-v1/manifest.json",
+        "sha256": "5d3ca04e476d1cac350e9ea639e07ff115a87a4cd1a6ce7273022ddb07b0f89f"
+      },
+      "oldSource": "07e2adcb33346ad602104d0f993b186a370cbbc8",
+      "oldScopeOnly": "RunState/Run/Activation/Completion whole8 only, unchangedfullinputcomponent bytes; noadmission/Repository/globalauthority",
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.java",
+        "pom.xml",
+        "src/schubert-nk-batch/pom.xml",
+        "tools/quality/static/pmd.xml",
+        "tools/quality/static/checkstyle.xml"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    },
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+        "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+      },
+      "oldSource": "6eeb048538f8e83bbfefbcd467563b2fdfe1100e",
+      "oldScopeOnly": "Purehelper whole12 only; source3f65 same component, notactualMorning/DB/parent",
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+        "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java",
+        "pom.xml",
+        "src/schubert-nk-batch/pom.xml",
+        "src/schubert-nk-storage/pom.xml",
+        "tools/quality/static/pmd.xml",
+        "tools/quality/static/checkstyle.xml"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    },
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28254-batch-step-values8-post-v1/manifest.json",
+        "sha256": "02f1cee27d7805734476c5710dd0b31503b5a7dd7a46326ad39ab9f6fdac7915"
+      },
+      "oldSource": "c72f6b550b3e735b78c42cf4bbc2cdb1b8298714",
+      "oldScopeOnly": "Historicalwhole8/threeStep-sourcefiveclassfour100 only. Full13remainsuncovered/twohelperschanged; no oldexec/globaltransfer orreplay. BUG2746 workerlimitedclosed.",
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchStepValuesTest.java"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-02.01/1",
+    "WBS-P017-02.02/1",
+    "WBS-P017-02.03/1"
+  ],
+  "endingStatus": "ORIGINAL_THREE_ADMISSION_RUN_PUBLIC_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2420_p01702_audit_contract.json",
+    "sha256": "d4a534169b29e682dfe5056c086fb53fb66211662235ca71ac7331a422c414d5"
+  }
+}

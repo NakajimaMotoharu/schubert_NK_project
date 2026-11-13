@@ -31,6 +31,8 @@ import org.junit.jupiter.api.function.Executable;
 
 /** SS343 6.13; SSC-055/PG-D-156; PT-BAT-038..045. All expected bytes are hand-written. */
 final class MaintenanceRecordsTest {
+  private static final String SUCCESS_LINE = "0\n";
+  private static final String WARNING_LINE = "10\n";
   private static final String RUN_ID = "12345678-9abc-def0-8123-456789abcdef";
   private static final String ACTIVATION_ID = "fedcba98-7654-3210-8fed-cba987654321";
   private static final String CUTOFF = "2026-09-12T04:05:06.123456Z";
@@ -48,8 +50,8 @@ final class MaintenanceRecordsTest {
   void literalRecords() throws Exception {
     assertEquals(72, ascii(ANCHOR).length);
     assertEquals(109, ascii(ACTIVATION).length);
-    assertEquals(140, ascii(DONE + "0\n").length);
-    assertEquals(141, ascii(DONE + "10\n").length);
+    assertEquals(140, ascii(DONE + SUCCESS_LINE).length);
+    assertEquals(141, ascii(DONE + WARNING_LINE).length);
     byte[] anchorBytes = MaintenanceRecords.anchor(RUN);
     byte[] activationBytes = MaintenanceRecords.activation(ACTIVE);
     trace("PT-BAT-038-anchor.txt", anchorBytes);
@@ -110,7 +112,7 @@ final class MaintenanceRecordsTest {
 
   @Test
   void malformedSources() {
-    for (String golden : List.of(ANCHOR, ACTIVATION, DONE + "0\n", DONE + "10\n")) {
+    for (String golden : List.of(ANCHOR, ACTIVATION, DONE + SUCCESS_LINE, DONE + WARNING_LINE)) {
       for (byte[] wrong :
           List.of(
               new byte[0],
@@ -150,7 +152,7 @@ final class MaintenanceRecordsTest {
 
   @Test
   void scalarAliases() throws Exception {
-    for (String golden : List.of(ANCHOR, ACTIVATION, DONE + "0\n", DONE + "10\n")) {
+    for (String golden : List.of(ANCHOR, ACTIVATION, DONE + SUCCESS_LINE, DONE + WARNING_LINE)) {
       for (String wrongId :
           List.of(RUN_ID.toUpperCase(Locale.ROOT), "1-1-1-1-1", "g" + RUN_ID.substring(1)))
         rejectAs(golden, ascii(golden.replace(RUN_ID, wrongId)));
@@ -165,7 +167,7 @@ final class MaintenanceRecordsTest {
               "0000-01-01T00:00:00.000000Z"))
         rejectAs(golden, ascii(golden.replace(CUTOFF, wrongTime)));
     }
-    for (String golden : List.of(ACTIVATION, DONE + "0\n"))
+    for (String golden : List.of(ACTIVATION, DONE + SUCCESS_LINE))
       for (String bad :
           List.of(ACTIVATION_ID.toUpperCase(Locale.ROOT), "z" + ACTIVATION_ID.substring(1)))
         rejectAs(golden, ascii(golden.replace(ACTIVATION_ID, bad)));
@@ -176,7 +178,9 @@ final class MaintenanceRecordsTest {
             "2026-09-12T04:05:06.123455Z",
             "2026-02-30T05:06:07.234567Z",
             "2026-09-12T05:06:07.234567z"))
-      failure(() -> MaintenanceRecords.readCompletion(ascii((DONE + "0\n").replace(END, badEnd))));
+      failure(
+          () ->
+              MaintenanceRecords.readCompletion(ascii((DONE + SUCCESS_LINE).replace(END, badEnd))));
     // Valid different identities/times are data, not authentication failures of this parser.
     String different = ANCHOR.replace(RUN_ID, "02345678-9abc-def0-8123-456789abcdef");
     assertEquals(
@@ -231,13 +235,13 @@ final class MaintenanceRecordsTest {
   void ownershipAndRedaction() throws Exception {
     byte[] anchor = ascii(ANCHOR);
     byte[] activation = ascii(ACTIVATION);
-    byte[] done = ascii(DONE + "0\n");
+    byte[] done = ascii(DONE + SUCCESS_LINE);
     var readRun = MaintenanceRecords.readAnchor(anchor);
     var readActive = MaintenanceRecords.readActivation(activation);
     var readDone = MaintenanceRecords.readCompletion(done);
     assertArrayEquals(ascii(ANCHOR), anchor);
     assertArrayEquals(ascii(ACTIVATION), activation);
-    assertArrayEquals(ascii(DONE + "0\n"), done);
+    assertArrayEquals(ascii(DONE + SUCCESS_LINE), done);
     Arrays.fill(anchor, (byte) 0);
     Arrays.fill(activation, (byte) 0);
     Arrays.fill(done, (byte) 0);
@@ -258,7 +262,7 @@ final class MaintenanceRecordsTest {
     second = MaintenanceRecords.completion(readDone);
     assertNotSame(first, second);
     first[0] = 'X';
-    assertArrayEquals(ascii(DONE + "0\n"), second);
+    assertArrayEquals(ascii(DONE + SUCCESS_LINE), second);
     assertEquals("MaintenanceActivation[identity/cutoff=<redacted>]", readActive.toString());
     assertEquals("MaintenanceCompletion[identity/time=<redacted>]", readDone.toString());
     var same = new MaintenanceActivation(new BatchRun(RUN.id(), RUN.cutoff()), ACTIVE.id());
@@ -279,7 +283,8 @@ final class MaintenanceRecordsTest {
 
   @Test
   void concurrentUse() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(8)) {
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var futures = new ArrayList<Future<MaintenanceCompletion>>();
       for (int index = 1; index <= 64; index++) {
         final int value = index;
@@ -300,7 +305,7 @@ final class MaintenanceRecordsTest {
                           + "\n"
                           + END
                           + "\n"
-                          + (value % 2 == 0 ? "0\n" : "10\n");
+                          + (value % 2 == 0 ? SUCCESS_LINE : WARNING_LINE);
                   assertArrayEquals(ascii(expected), MaintenanceRecords.completion(complete));
                   assertEquals(complete, MaintenanceRecords.readCompletion(ascii(expected)));
                   return complete;
@@ -315,6 +320,10 @@ final class MaintenanceRecordsTest {
       }
       assertEquals(64, actual.size());
       assertEquals(32, warnings);
+    } finally {
+      executor.shutdownNow();
+      if (!executor.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("owned maintenance record workers did not terminate");
     }
   }
 

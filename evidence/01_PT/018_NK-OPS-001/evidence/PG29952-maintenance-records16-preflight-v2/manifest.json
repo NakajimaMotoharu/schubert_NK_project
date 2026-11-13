@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2423b_maintenance_records16_profile.json",
+    "sha256": "d4046d3e5b3ccd6daff2269e12e7e942dc3c66b656ff07729c21381d6df2ae3d"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "3713fb2ce03a4ec926c4d193051373348da922c15d5f22e8f43cabd215b36dcd",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java": "8e9020955933dde695b79965d5cf61014b9a7ba919b96e88bf253a76357a42fb",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java": "3c83d4b28a61325e4d997bfe7a92d92ea0f2ff79bbf03d4b8e37185c2335b80e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java": "86b1750c00970b0ac06710b363e12657ef1797822db776ae91a7a90752a822c5",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirementValueCodecTest.java": "f412bed95f0b0671199594c199fa9d040243092ec28bee8ead268e3dab1ee68d",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29948-maintenance-records16-prepare-v2/manifest.json",
+    "sha256": "c5aaad040a3dd59acf0c6c91042ff091fa0d2e800381c7296497275b7115d549"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29950-maintenance-records16-static-v2/manifest.json",
+    "sha256": "b5894b82e661b6040948029538df7307e76176152b2967769709e36a1f27dec5"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2424_maintenance_records16_static_admission.json",
+    "sha256": "5f9a7079d7096838ba933b42b4e52e0aac9c5985c3931ae2486c638d03fd0b1c"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "CloseResource",
+      "line": "286",
+      "reason": "This exact executor is owned before try and every exit reaches finally shutdownNow plus bounded awaitTermination10s, with nontermination an explicit failing assertion. ExecutorService.close would be unbounded; no resource owner is ignored or returned.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "286",
+      "reason": "This exact pool/submit/shutdown/await site belongs only to a whole JUnit data-codec test, not a managed J2EE/webapp component. It owns8workers, joinsall64futures5s andfinallyshutdownNow/await10assert; no business async or authority callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "292",
+      "reason": "This exact pool/submit/shutdown/await site belongs only to a whole JUnit data-codec test, not a managed J2EE/webapp component. It owns8workers, joinsall64futures5s andfinallyshutdownNow/await10assert; no business async or authority callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "323",
+      "reason": "This exact test finally enforces the independently required worker termination postcondition. Its InterruptedException or AssertionError must fail the Test and cannot return PASS; it neither returns nor normalizes the original failure. Not a production business finally policy exception.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "324",
+      "reason": "This exact pool/submit/shutdown/await site belongs only to a whole JUnit data-codec test, not a managed J2EE/webapp component. It owns8workers, joinsall64futures5s andfinallyshutdownNow/await10assert; no business async or authority callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "325",
+      "reason": "This exact pool/submit/shutdown/await site belongs only to a whole JUnit data-codec test, not a managed J2EE/webapp component. It owns8workers, joinsall64futures5s andfinallyshutdownNow/await10assert; no business async or authority callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
