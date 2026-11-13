@@ -1,5 +1,14 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC348 Scenario Entry対応表とCOPY row batchの結合検証（2026-11-14、PG詳細補足）
+
+SS34310.1.4、SS331/V002・UI223/242/254のID対応・表示順・型/参照条件を、内部ScenarioEntryCopyBatchで具体化する。既PlacementMapとScenarioEntryCopyRowを受け、List件数一致・target entry ID一意・対応表全targetに一rowを要求する。row先頭五列id/game/file/display_order/entry_indexを対応表と完全一致で検証し、未知/欠落/余剰を補完しない。複数rowのcreated_atはcallerが一回採取した同一canonical UTCを要求し、空は空batch値として許容するが全移行完了を示さない。
+
+保存/送信順はtarget ID大小や入力順でなく対応表のglobal Current表示順。文字列/本文をtrim/正規化/再採番しない。private immutable Listを保持し、copyBytesは既COPY encoderへ全row fieldを同順で渡す。header/SQL/terminatorを追加せず毎回byte別所有、固定redaction/安全診断/null契約でbody等を出力しない。実Current抽出・全件数/データ適合性/speaker-FK/DB/pg_temp/COPY/transaction/権限・実業務表示は別条件として残す。
+
+PT-MIG-BATCH001..012は固定三row全byte/global order、件数/空/重複/未知、game/file/order/index各不一致、共通時刻、入力/List/byte所有、null/固定診断、finite8worker64task/Future5/finallyshutdownNow-await10を独立literalで確認する。新Batch1と既Row1/Copy1/Placement4/Entry3/File4の全14physicalを同source必要whole72単一execで静的/CRC-init/四counter/実JVMCodeと独立postへ対応。新定義12のみ、旧成功の合算/coverage除外/品質規則抑制なし。実ETL/Root/native/CHR/全451/ITST受入は別で、haruka権限等の既HOLDを解除しない。
+
+
 ## SSC347 script_entries十二列COPY行の型・nullable・文字検証（2026-11-14、PG詳細補足）
 
 SS343§10.1.4、SS331§2/V002、UI223/242§4.4/254の既条件をScenarioEntryCopyRowへ具体化する。入力Listは12列の送信文字列で、id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_atの順に固定し、generated body_searchを除く。新DDL/外部ID/本文変換を追加せず、実Current抽出・全件数/ID対応/FK/DB/pg_temp/transaction/driver/COPYの成功は別条件である。
