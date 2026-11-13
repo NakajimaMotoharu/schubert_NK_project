@@ -1,0 +1,94 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG29004-HTTP-LEASE-OWNER-ORIGINAL2-NEW1-NORMAL3",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28994-valve3-prepare-v1/manifest.json",
+    "sha256": "ad2a3c0adcc5ec4cc745d38dfc4d85de2a808e8d2a97f94af43d8a5a74d003bc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28996-valve3-static-v1/manifest.json",
+    "sha256": "3c65de12bd844e73ede603d6f26e0ba7ba908de848bd9a5ef33391f50ae1389d"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 34,
+      "occurrences": 1,
+      "reason": "admit atomically checks stopping, previously admitted and ownerStopping before one retainedAccepting publication; same private monitor as acquire/refuse/drain. No multi-lock/J2EE container policy: standalone native HTTP ownership gate, not EJB.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 42,
+      "occurrences": 1,
+      "reason": "accepting reads retainedAccepting under same lock used by ownership acquire/refuse. Supplier is captured stop notification. This is a synchronous ownership read and no provider wait inside the monitor.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 48,
+      "occurrences": 1,
+      "reason": "acquire checks admission and increments active in one monitor transaction. Replacing only this monitor with another lock breaks synchronization with terminal completed/drain, no lock order inversion or nested external resource acquisition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 56,
+      "occurrences": 1,
+      "reason": "completed validates active>=1 and decrements once, notifyAll on the same monitor as finite wait. Lease AtomicBoolean prevents duplicate terminal completion; lock is object-private.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 65,
+      "occurrences": 1,
+      "reason": "refuse sets stopping and accepting false atomically before further request acquire; same monitor as admit/acquire/drain. No independent lock or blocking vendor calls.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "sourceLine": 76,
+      "occurrences": 1,
+      "reason": "drain establishes stop state and loops on active with remaining relative deadline, lock.wait releases the same monitor until actual completion; time <=30s and IRQ restored on fixed failure. This explicit monitor protocol is internal standalone lifecycle ownership, not a container transaction.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "sourceLine": 85,
+      "occurrences": 1,
+      "reason": "This call is Object.wait on a private ownership monitor, not creation/start of a webapp thread. It releases the lock while waiting only until remaining<=30s deadline; interruption restores IRQ and fails, actual terminal lease is the only success proof.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java",
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceAnchor": "return admission == candidate;",
+      "sourceLine": 28,
+      "occurrences": 1,
+      "reason": "BUG2799 requires admission gate object identity: two distinct gates must never share terminal ownership even if future equals implementations compare data. Two adapters using the identical gate are explicitly allowed and covered by HTTPLEASE003. Reference identity is the required owner contract, not content equality.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

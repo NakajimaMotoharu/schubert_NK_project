@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2235_valve3_closed_profile.json",
+    "sha256": "ff06edec775c03788b87ce1a9769294272074a65428de3b8de698943c1b4e710"
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java": "3cae791a664d44482e46234eef715f06aeb5278674691262dd8abc9cd71a7a75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java": "dd0cda3ed6582fed7cd1d05ce1505d8b4bbfa77eb2984cd275b7c585e57ee130",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValveTest.java": "f0918c508fdaf84a3ef603a5120dd29735cc33da6eb4ef03467fe601a9e76f24",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28994-valve3-prepare-v1/manifest.json",
+    "sha256": "ad2a3c0adcc5ec4cc745d38dfc4d85de2a808e8d2a97f94af43d8a5a74d003bc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28996-valve3-static-v1/manifest.json",
+    "sha256": "3c65de12bd844e73ede603d6f26e0ba7ba908de848bd9a5ef33391f50ae1389d"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2236_valve3_static_admission.json",
+    "sha256": "cce551b6932d5aa4e72de1a246fa7c90013dc0efef1cfad43c0a02ee131f2514"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "34",
+      "reason": "admit atomically checks stopping, previously admitted and ownerStopping before one retainedAccepting publication; same private monitor as acquire/refuse/drain. No multi-lock/J2EE container policy: standalone native HTTP ownership gate, not EJB.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "42",
+      "reason": "accepting reads retainedAccepting under same lock used by ownership acquire/refuse. Supplier is captured stop notification. This is a synchronous ownership read and no provider wait inside the monitor.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "48",
+      "reason": "acquire checks admission and increments active in one monitor transaction. Replacing only this monitor with another lock breaks synchronization with terminal completed/drain, no lock order inversion or nested external resource acquisition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "56",
+      "reason": "completed validates active>=1 and decrements once, notifyAll on the same monitor as finite wait. Lease AtomicBoolean prevents duplicate terminal completion; lock is object-private.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "65",
+      "reason": "refuse sets stopping and accepting false atomically before further request acquire; same monitor as admit/acquire/drain. No independent lock or blocking vendor calls.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "76",
+      "reason": "drain establishes stop state and loops on active with remaining relative deadline, lock.wait releases the same monitor until actual completion; time <=30s and IRQ restored on fixed failure. This explicit monitor protocol is internal standalone lifecycle ownership, not a container transaction.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java",
+      "rule": "DoNotUseThreads",
+      "line": "85",
+      "reason": "This call is Object.wait on a private ownership monitor, not creation/start of a webapp thread. It releases the lock while waiting only until remaining<=30s deadline; interruption restores IRQ and fails, actual terminal lease is the only success proof.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "28",
+      "reason": "BUG2799 requires admission gate object identity: two distinct gates must never share terminal ownership even if future equals implementations compare data. Two adapters using the identical gate are explicitly allowed and covered by HTTPLEASE003. Reference identity is the required owner contract, not content equality.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
