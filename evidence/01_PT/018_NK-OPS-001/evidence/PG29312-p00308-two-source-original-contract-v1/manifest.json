@@ -1,0 +1,116 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T18:00:56.595174+09:00",
+  "source": "6e3369decaf08baf95d758976f795c592e0c69ed",
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java": "0bbc59214a3793b3a964bb32fd2369f4216f633fa6bd7d13fc8625fb5fb1465f",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 212,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00308-ORACLE01",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "methods": "ResourceScope.use/Action",
+      "testIds": [
+        "RSCOPE001..008"
+      ],
+      "expected": "SS333 SSC063 explicittypedpriority unchanged: validateports beforeownership; bodythenclose oncebeforereturn; callbacknullablevalueallowed. UnknownRuntime/Error primaryidentity preserved evenifcleanupunknown, addonefreshsafeStorageIo secondary. KnownIO+unknownclose promotesunknown; IO/IO=>fixedUNAVAILABLE; loneStorageIo reason onlyifnosuppressed/rawcausewiped. NPEneverconvertedtosuccess, nestedreverseclose/no retry/no otherowner. ExistingYKT2359 explicitlymarksResourceScope nonapplicable forglobalfatalnormalization: do notreplaceapprovedIO/unknownpriority oroldoracles."
+    },
+    {
+      "id": "P00308-ORACLE02",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "methods": "ResourceScope.acquire/Acquire/Release/OwnedAction",
+      "testIds": [
+        "IOFACT001..012"
+      ],
+      "expected": "SS333 SSC308: allcallbacks/nonNullvalidation beforefactory; factorycheckedE/Runtime/Error staysidentity andbody/release0. Nonnullresourceprotected immediately; nullR=>NPE/bodyrelease0. SameR onecloseafterbody, nullablebodyresultnotnullresource permitted. AssemblyIO/unknown obeysameusepriority/secret-freefixedsecondary; successfulbodycannotreturnbeforeclose. No nativeauthority substitute oracquisitionretry."
+    },
+    {
+      "id": "P00308-ORACLE03",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "methods": "ResourceScope.handoff",
+      "testIds": [
+        "IOFACT013..018"
+      ],
+      "expected": "SS333 BUG1414/YKT1178: primitiveflag andcallbacks fullycreatedbeforeRacquisition; completeTnonNull checkedwhileResourceowned; failed/nullassembly closesRonce withsame typedpriority; factoryfails bodyclose0. Lastsuccessfultransferflag makeshelperreleaseNOOP; returnedcompleteowner alone ownsR. No doubleclose/partialownerescape/earlyflag/authgrant."
+    },
+    {
+      "id": "P00308-ORACLE04",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java",
+      "methods": "create/create(os,architecture,symbols)/constructor/nowNanos/unavailable",
+      "testIds": [
+        "PT-OPS-COWNER001..004"
+      ],
+      "expected": "SS3417.3/343 samebootCLOCK_MONOTONIC only, Linux64 amd64/x86_64/aarch64; fixedclock_gettime/readclock1 andstruct16byte/alignment8 seconds0/nanos8. returncode0/sec>=0/nanos0..999999999/exactmultiply-add elsefixedIOExceptionno rawcause. No walltime/nanoTime/fallback/nativebootauthority. Arenaownedconfinedclosedonallpaths. RealnativewholeclockTestsHOLD, no selectedmethod/nativeLookup/bootstrap."
+    },
+    {
+      "id": "P00308-ORACLE05",
+      "artifact": "SOURCE_RUN_DEPENDENCY_SEPARATION",
+      "methods": "wholeResourceScopeTest8/FactoryResourceScopeTest18 source closure",
+      "testIds": [
+        "RSCOPE001..008",
+        "IOFACT001..018"
+      ],
+      "expected": "HistoricalPG22970 genuine26successful onlyownsource; currentResourceScope andbothwholeTest bytesmatch, StorageIoException byteschanged afteroldrun. Therefore do notreplayforconfirmation ortransferoldwhole-sourcequality: nextnormal26 mayberequired solelyforactualchangeddependency, afterallFactoryTest677body/SDK review. FullLinuxclock/parentcriteria andoldformal1964-53 remainunaccepted."
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22970-pure-resource-independent-v1/manifest.json",
+        "sha256": "8a4b286fcdeb02e97c82c4649cbda91fb66c19364aeaba262231a84d017c3105"
+      },
+      "oldSource": "1c75c8a40572ddce1305fcd21dbeab34eda87512",
+      "oldScopeOnly": true,
+      "unchangedInputPaths": [
+        "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+        "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+        "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P002-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P003-08/1"
+  ],
+  "endingStatus": "ORIGINAL_RESOURCE_CLOCK_SOURCE_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2285_p00308_original_contract_config.json",
+    "sha256": "9015a5ac0f6d3c19cb1b058b0f439747540a94af02800d3deb4153ae2ed7466f"
+  }
+}
