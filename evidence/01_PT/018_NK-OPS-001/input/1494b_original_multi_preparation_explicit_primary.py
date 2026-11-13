@@ -4,6 +4,7 @@ import csv,datetime,hashlib,json,sys
 R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path.insert(0,str(R/'tools/quality'))
 from pgpt_wbs_canonical_progress import validated_snapshot
+from pgpt_preparation_price_bridge import preparation_deduction
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text());write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
 a=load(Path(sys.argv[1]));primary=a.get('primaryDocumentNames');
 if primary is not None:
@@ -15,10 +16,12 @@ leaves=start['wbsLeafIds'];assert 1<=len(leaves)<=4;work=[v+'/1' for v in leaves
 assert all(v not in f['completedPlanWorkIds'] for v in work) and all(v+'/2' not in f['completedPlanWorkIds'] for v in leaves)
 plan=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv'
 rows={x['実行ID']:x for x in csv.DictReader(plan.open(encoding='utf-8-sig'),delimiter='\t')};prepared=[rows[v] for v in work];both=[rows[v+'/'+str(n)] for v in leaves for n in [1,2]]
+deductions=[preparation_deduction(f,leaf,{k:float(rows[leaf+'/1'][col]) for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]}) for leaf in leaves]
 for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]:
  x=round(sum(float(v[col]) for v in prepared),3);assert round(sum(float(r[col]) for r in both),3)==start['estimate'][k]
  f['completedPlanPriceSumPp'][k]=round(f['completedPlanPriceSumPp'][k]+x,3)
- for field in ['remainingOriginalPlanPricePp','revisedRemainingPp']:f[field][k]=round(f[field][k]-x,3)
+ f['remainingOriginalPlanPricePp'][k]=round(f['remainingOriginalPlanPricePp'][k]-x,3)
+ f['revisedRemainingPp'][k]=round(f['revisedRemainingPp'][k]-sum(item[k] for item in deductions),3)
 f['previousForecast']=ref(old);f['revision']=a['revision'];f['atJST']=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat();f['completedPlanWorkIds'].extend(work);f['completedPreparationWorkIds'].extend(work);f['partiallyCompletedPlanWorkIds'].extend(leaves)
 for k in ['canonicalSchedulePricePrefixBasePp','startedRowPriceSumBasePp']:f[k]=round(f[k]+start['estimate']['base'],3)
 f['remainingPriceAccountingNote']=a['description']+' Original /1 preparation only; /2/190/451 not accepted, source unchanged and no new PT.'

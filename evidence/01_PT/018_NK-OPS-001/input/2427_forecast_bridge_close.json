@@ -1,0 +1,33 @@
+{
+  "groupId": "PGPT-WBS65-K03-F03-PREPARATION-PRICE-BRIDGE-CORRECTION-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1619_WBS65二重控除訂正・全価格bridge結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29988-price-bridge10-and-full-forecast-reconciliation-v1/manifest.json",
+  "manifestSha256": "7bc82c729a4551398501003cf83051b4f0cee6e3d8009fd184ad403118521e37",
+  "terminalAtUTC": "2026-11-13T17:05:19.739339+00:00",
+  "run": "PG29988",
+  "workIds": [
+    "K03_F03_PREPARATION_DUPLICATE_PRICE_CORRECTION"
+  ],
+  "outcome": "PRICE_ONLY_CORRECTION_AND_TEN_TOOL_TESTS_NOT_PRODUCT_ACCEPTANCE",
+  "technical": {
+    "kind": "PLANNING_PRICE_CORRECTION_ONLY",
+    "toolTests": 10,
+    "oldToolRun8Preserved": true,
+    "productTestsExecuted": 0,
+    "newAcceptance": 0,
+    "correctionPp": {
+      "low": 1.587,
+      "base": 4.227,
+      "high": 8.455
+    },
+    "canonical625Rows": 164,
+    "actualAllocatedPp": null,
+    "effortRate": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1618_WBS65予実・二重控除訂正と全価格bridge版410.json",
+    "sha256": "96dca4531f6633d4616c98a3136deecc1f2f401ace8105bd78954cbb43cb2b64"
+  },
+  "checkpointText": "40pp見直しBUG2861/YKT2407: F03/1とP00501/1の二重控除を原各版/hash/625価格で確定、合計1.587/4.227/8.455だけ残予測へ加算訂正。新版410残398.834/840.952/1649.265は完成/実費ではない。全三価格は原行残404.884/855.152/1677.665＋追加残1.6/4.8/9.6＋過去partial再見積り-7.65/-19/-38で独立一致。P020旧増額/legacy参照、G13.07/A3同時原控除、P00103原+追加は各非該当訂正0。1494b完了/1941b開始へ旧負parent又はlegacy準備の明示price/evidence bridge必須guard、独立工具10成功/初期8別source保全。製品PT/Main/Test変更0・新原190受入0/工数null、正本164/625/正式1964-53/App96run4121exec4092success歴史29維持。原費/群開始/SV枠/実費null不変。",
+  "nextCommand": "Publishpricebridgeguard/test10/records only; noJava/productPTreplay. ThenP01703 allpublicbackupvaluecontracts ornextsafeordinaryUnit. Step8alreadycompletedno replay/reprice. ExistingRootVMDBnativeBackupkeyintentpermitHOLD remain, original190new0/formal1964-53/effortnull. Freshquota/hourly02:18:34JST; continuePGPT noordinarygroupstop."
+}

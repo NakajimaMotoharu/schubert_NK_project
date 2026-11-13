@@ -3,6 +3,14 @@ from pathlib import Path
 import csv,datetime,hashlib,json,subprocess,sys
 R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';S=R.parent/'PMO/pgpt-completion-stage-20261102';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));wr=lambda p,j:p.write_text(json.dumps(j,ensure_ascii=False,indent=2)+'\n');mode,config=sys.argv[1:];a=ld(Path(config));leaves=a.get('canonicalCostLeafIds',[a['taskId']]);assert 1<=len(leaves)<=4 and len(set(leaves))==len(leaves);task=next(x for x in ld(R/'documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json')['tasks'] if x['id']==a['taskId']);ck=ld(S/'checkpoint.json');now=datetime.datetime.now().astimezone().isoformat()
 if mode=='start':
+ sys.path.insert(0,str(R/'tools/quality'))
+ from pgpt_preparation_price_bridge import preparation_deduction
+ current=ld(R/ck['currentWbs65Forecast']['path'])
+ for leaf in leaves:
+  import csv as price_csv
+  price_plan=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv'
+  row=next(x for x in price_csv.DictReader(price_plan.open(encoding='utf-8-sig'),delimiter='\t') if x['実行ID']==leaf+'/1')
+  preparation_deduction(current,leaf,{k:float(row[col]) for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]})
  plan=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv';rows=[x for x in csv.DictReader(plan.open(encoding='utf-8-sig'),delimiter='\t') if x['実行ID'] in [leaf+'/'+str(n) for leaf in leaves for n in [1,2]]];assert len(rows)==2*len(leaves);price={k:round(sum(float(x[c]) for x in rows),3) for k,c in [('low','低位pp'),('base','標準pp'),('high','高位pp')]};o=R/a['startConfig'];assert not o.exists();c=dict(groupId=a['groupId'],recordPath=str((D/a['startRecord']).relative_to(R)),category='CONTRACT_AUDIT',kind='ORIGINAL_PLAN',scope=a['scope'],oracleRefs=[ref(R/p) for p in a['oraclePaths']],wbsLeafIds=leaves,source=ck['productionCoreMain'],run=a['run'],estimate=price,capPp=a.get('capPp',2),workIds=[leaf+'/'+str(n) for leaf in leaves for n in [1,2]],forecastRef=ck['currentWbs65Forecast'],nextCommand=a['nextCommand']);wr(o,c);print(dict(actualExit=0,estimate=price));raise SystemExit(0)
 assert mode=='audit';start=ld(R/a['startConfig']);assert ck['ordinaryActiveGroup']==start['groupId'];own={p:sha(R/p) for p in task['ownedArtifacts']};assert len(own)==a['expectedOwned'];commit=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip();design=[]
 for base,prefix in a['designPrefixes']:
