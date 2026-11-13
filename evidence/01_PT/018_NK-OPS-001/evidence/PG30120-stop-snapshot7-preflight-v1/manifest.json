@@ -1,0 +1,125 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2450_stop_snapshot7_profile.json",
+    "sha256": "f60a6b86d211e00318ff5cd67526ae6e0f94bbce517a141252ddde525846ceff"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java": "767e81698cf113cf65b1bd7a6d939dcff07dee94725d297dc78984d9817cc3b4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java": "e764ee58aacff2e95fbc30f9102fe40295a25ac0b41df0aaa3ef03a625e34733",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java": "7fc17a56562d8b48535ca53304ec9c4c75a0e11098d842460a0bdf85dc9e547f",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30116-stop-snapshot7-prepare-v1/manifest.json",
+    "sha256": "358bfc6a0a9387e569a3814af905be8d5736c7ea05e1b70f6fc6cc0b6b4f7776"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30118-stop-snapshot7-static-v1/manifest.json",
+    "sha256": "f995a45b0d8da4e5e205fbdd8ef7c5fc25121f02d5fc48c7fdbcb910e059da93"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2452_stop_snapshot7_static_admission.json",
+    "sha256": "1974098bc97c7caf1e403d2c3616117d85ad469fe1fdf879fc7ee2e47c7db280"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "43",
+      "reason": "This exact HashMap is method-local to parse, never shared or returned. Every parse call owns its independent map, and private snapshot constructor immediately Map.copyOf freezes contents; observedValues exposes only an unmodifiable derived List. There is no concurrent mutable access, so a concurrent map would not solve an applicable defect.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "CloseResource",
+      "line": "213",
+      "reason": "The exact executor is acquired before try; every exit executes finally shutdownNow and bounded awaitTermination10s with failing nontermination assertion. Implicit ExecutorService.close would wait without a bound. No returned or ignored resource owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "213",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "218",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "226",
+      "reason": "This exact Test cleanup must fail on an unclosed worker or interrupt. It cannot return PASS after uncertain termination. This is a test resource postcondition, not a production exception priority exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "227",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "228",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "232",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "234",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "236",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action. Interrupt-set/read/clear sites only verify that this pure parser preserves caller cancellation; finally clears the Test-owned flag, not a production worker interrupt.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

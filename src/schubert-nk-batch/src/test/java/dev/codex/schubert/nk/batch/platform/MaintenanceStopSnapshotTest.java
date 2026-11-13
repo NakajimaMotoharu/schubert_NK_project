@@ -13,8 +13,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** MSTOP001..007: independent 12field literal, not genuine root/kernel or stop acceptance. */
@@ -69,6 +70,23 @@ final class MaintenanceStopSnapshotTest {
       assertEquals("", snapshot.controlGroup());
       assertTrue(snapshot.quiescent());
       assertEquals("MaintenanceStopSnapshot[redacted]", snapshot.toString());
+      assertEquals(
+          List.of(
+              NAMES.get(i),
+              "loaded",
+              "inactive",
+              "dead",
+              "",
+              "0",
+              "0",
+              "system.slice",
+              "no",
+              "",
+              "",
+              "0"),
+          snapshot.observedValues());
+      assertThrows(
+          UnsupportedOperationException.class, () -> snapshot.observedValues().set(0, "changed"));
     }
     assertTrue(parse(COLD.replace("inactive", "failed").replace("dead", "failed")).quiescent());
     assertEquals(
@@ -192,17 +210,23 @@ final class MaintenanceStopSnapshotTest {
 
   @Test
   void mstop007IndependentParallelAndNoAmbientAuthorization() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(8)) {
-      var tasks = new ArrayList<Callable<Boolean>>();
+    var workers = Executors.newFixedThreadPool(8);
+    try {
+      var tasks = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 64; i++) {
         tasks.add(
-            () -> {
-              var snapshot = parse(COLD);
-              assertEquals("MaintenanceStopSnapshot[redacted]", snapshot.toString());
-              return snapshot.matches(parse(COLD)) && snapshot.quiescent();
-            });
+            workers.submit(
+                () -> {
+                  var snapshot = parse(COLD);
+                  assertEquals("MaintenanceStopSnapshot[redacted]", snapshot.toString());
+                  return snapshot.matches(parse(COLD)) && snapshot.quiescent();
+                }));
       }
-      for (var result : workers.invokeAll(tasks)) assertTrue(result.get());
+      for (var result : tasks) assertTrue(result.get(5, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      if (!workers.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("stop snapshot workers did not terminate");
     }
     try {
       Thread.currentThread().interrupt();

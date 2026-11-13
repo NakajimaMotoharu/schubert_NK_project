@@ -1,0 +1,83 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG30122-STOP-SNAPSHOT-PURE7",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "WBS-P018-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4267_停止snapshot原七・独立十二値と有限worker通常PT仕様.md",
+      "sha256": "c2fa38327d8734c7ba0646d3d5df38fd85ce69f6aa26021bd37ca69ac2128370"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30106-p01804-whole-candidates-and-worker-before-fix-v1/manifest.json",
+      "sha256": "f018a9e3a923db2991a670c2bed5e1c9f21d9e5e307ff08b5780455931aa5eda"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshotTest.java",
+      "tests": 7
+    }
+  ],
+  "expectedTests": 7,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class",
+    "dev/codex/schubert/nk/batch/platform/StopGateException.class",
+    "dev/codex/schubert/nk/batch/platform/StopGateFailure.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnit",
+    "dev/codex/schubert/nk/batch/platform/StopGateException",
+    "dev/codex/schubert/nk/batch/platform/StopGateFailure"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG30126-stop-snapshot7-prestyle-source-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG30116-stop-snapshot7-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG30118-stop-snapshot7-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG30120-stop-snapshot7-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG30122-stop-snapshot7-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG30124-stop-snapshot7-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg30116-stop-snapshot7-prepare-v1",
+    "unit": "pg30122-stop-snapshot7-unit-v1"
+  },
+  "newTestDefinitions": 0,
+  "priorPrestyleNotForCurrentSource": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30114-stop-snapshot7-prestyle-v1/manifest.json",
+    "reason": "Initial mutation script anchor-count assertion failed before write, original finiteworker not yet installed; following formatter reflowed equivalent COLD string. Original prestyle retained, not transferred to changed source; new source restores original COLD bytes and requires fresh prestyle.",
+    "productTestsExecuted": 0
+  }
+}
