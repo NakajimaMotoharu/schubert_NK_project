@@ -1,0 +1,111 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T22:45:22.199410+00:00",
+  "source": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+  "bug": "BUG-2873",
+  "exactInverseAllOtherBytes": true,
+  "originalWhole12Retained": true,
+  "newTestDefinitions": 0,
+  "mainUnchanged": true,
+  "commands": [
+    {
+      "label": "format-source-only",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java"
+      ],
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle-source-only",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG30592-gate12-source-proof-and-haruka-permission-hold-v2/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java"
+      ],
+      "actualExit": 0
+    }
+  ],
+  "reviewedSources": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+      "lines": 667
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "d6972cfed749f503da34b08d2498af9b8f61709b1174759779d3cfc93198697e",
+      "lines": 751
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "lines": 126
+    },
+    {
+      "path": "program/characterization/pom.xml",
+      "sha256": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b",
+      "lines": 157
+    }
+  ],
+  "sourceReview": {
+    "allGateMain667": true,
+    "wholeTestHelpersReviewed": true,
+    "reachableNetworkDbProcessExecution": false,
+    "realCurrentCapture": false,
+    "baselinePromotionOnlyNewFixture": true,
+    "originalBaselineReadOnly": true,
+    "dummyJavaCaddyPgCtlNeverExecuted": true,
+    "expectedFromIndependentLiteralsAndApprovedPublicReports": true,
+    "realHighDiskGiB": 20,
+    "lowTempDiskGiBLessThan": 20,
+    "commonBundleNeeded58": true,
+    "old46NotReplayed": true
+  },
+  "hostAttempt1": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30586-haruka-readonly-gate-eligibility-v1/manifest.json",
+    "sha256": "1d798075cfb7e075cdb9138d4f1fed295100e6c369374136f1b8f4ebe1d7b5f5"
+  },
+  "hostAttempt2Terminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30588-haruka-readonly-gate-eligibility-recorded-v2/terminal.json",
+    "sha256": "38ec69a62ca97f024be45595c2271844b6f55a37ce07eeb3d0359df9f18df682"
+  },
+  "hostAttempt2Failure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30588-haruka-readonly-gate-eligibility-recorded-v2/failure.json",
+    "sha256": "dbe222ce61b1eecc7064241a985038bcfa7fcd4843b099294603ca57bc8cddeb"
+  },
+  "hostEligibility": "HOLD_BUG2874_PERMISSION_PREREQUISITE_INCOMPLETE",
+  "hostCurrentResources": null,
+  "hostCurrentOwnedJobs": null,
+  "harukaActualTestExecutions": 0,
+  "sourceUploads": 0,
+  "newRuntimeJobs": 0,
+  "permissionChanges": 0,
+  "alternatePathOrUserRetry": 0,
+  "aruOperations": 0,
+  "existingHoldsReleased": false,
+  "testsExecuted": 0,
+  "coverage": null,
+  "formalAccepted": false,
+  "newAcceptance": 0,
+  "bugsOpen": [
+    "BUG-2873",
+    "BUG-2874"
+  ],
+  "horizontalOpen": [
+    "YKT-2387",
+    "YKT-2410"
+  ]
+}

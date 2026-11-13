@@ -275,11 +275,12 @@ class GateCliTest {
   }
 
   @Test
-  @org.junit.jupiter.api.DisplayName("PT-CHR-PATH-002 parentless output rejected before temporary path")
+  @org.junit.jupiter.api.DisplayName(
+      "PT-CHR-PATH-002 parentless output rejected before temporary path")
   void jsonWriterRejectsParentlessOutputWithoutNpe() {
-    assertFalse(Files.exists(Path.of("null.part")), "isolated snapshot has no foreign temporary file");
-    assertThrows(
-        IllegalArgumentException.class, () -> GateCli.writeJson(Path.of("/"), Map.of()));
+    assertFalse(
+        Files.exists(Path.of("null.part")), "isolated snapshot has no foreign temporary file");
+    assertThrows(IllegalArgumentException.class, () -> GateCli.writeJson(Path.of("/"), Map.of()));
   }
 
   @Test
@@ -526,7 +527,8 @@ class GateCliTest {
     Path output = temporaryDirectory.resolve("atomic/concurrent.json");
     CountDownLatch serializationStarted = new CountDownLatch(1);
     CountDownLatch releaseSerialization = new CountDownLatch(1);
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var first =
           executor.submit(
               (Callable<Void>)
@@ -540,6 +542,10 @@ class GateCliTest {
           IllegalStateException.class, () -> GateCli.writeJson(output, Map.of("value", "second")));
       releaseSerialization.countDown();
       first.get(5, TimeUnit.SECONDS);
+    } finally {
+      releaseSerialization.countDown();
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals("first", JSON.readTree(output.toFile()).path("value").asText());
     assertFalse(Files.exists(output.resolveSibling("concurrent.json.part")));
