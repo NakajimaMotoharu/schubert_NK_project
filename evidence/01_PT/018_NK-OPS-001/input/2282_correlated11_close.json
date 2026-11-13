@@ -1,0 +1,105 @@
+{
+  "groupId": "PGPT-WBS65-CORRELATED-QA054-WHOLE9-NEW2-NORMAL11-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1482_WBS65相関QA054通常十一結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29290-correlated11-source-result-join-v1/manifest.json",
+  "manifestSha256": "a1a3f77d1299ebd632f6df47b1cfc91ab033d72502371885492e85a3f2ef49d5",
+  "terminalAtUTC": "2026-11-13T08:42:41.050539+00:00",
+  "run": "PG29290",
+  "workIds": [
+    "WBS-P020_CORRELATED_QA054_WHOLE9_NEW2_NORMAL11"
+  ],
+  "outcome": "CORRELATED_TOOL_WHOLE11_SUCCESS_TARGET_ALL_SOURCE_FOUR100_FULL_BUNDLE_HOLD",
+  "technical": {
+    "kind": "CORRELATED_QA054_WHOLE9_NEW2_NORMAL11_TARGET_SOURCE_FOUR100",
+    "toolSource": "55f4b3265b32d900aeb200fc0e25492e6852ca0c",
+    "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+    "run": "PG29286",
+    "tests": 11,
+    "newDefinitions": 2,
+    "MainChanged": false,
+    "wholeClass": true,
+    "targetCounters": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "1050"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "226"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "188"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "130"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "17"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "wholeScopeCounters": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "6348",
+        "covered": "1050"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "641",
+        "covered": "226"
+      },
+      {
+        "type": "LINE",
+        "missed": "1217",
+        "covered": "188"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "476",
+        "covered": "130"
+      },
+      {
+        "type": "METHOD",
+        "missed": "149",
+        "covered": "17"
+      },
+      {
+        "type": "CLASS",
+        "missed": "9",
+        "covered": "1"
+      }
+    ],
+    "physicalClasses": 10,
+    "exactUnchangedMainPhysicalStaticReuse": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29258-chr-tool-independent-post-v1/manifest.json",
+      "sha256": "4196ea20e607fd3280e8ca3fca1cfa3f746391b2d8b5cd723756cf739d73a93b"
+    },
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29288-correlated11-independent-post-v1/manifest.json",
+      "sha256": "3a22479ade3fb2c8746ad00a648acd7958f93ab868ed59438eef8c75fe428db9"
+    },
+    "wholeBundleAccepted": false,
+    "appRosterDelta": 0,
+    "newAcceptance": 0,
+    "effortRate": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1481_WBS65予実・相関QA054通常十一後版360.json",
+    "sha256": "62afef12b7de2afcd34f832c0134d3c97f6760cb528e7eb332b7b12499107345"
+  },
+  "checkpointText": "QA054 Correlated全325行をPGreviewし実装追加不要、旧whole9はTest内3定数化のRootformatter逆変換で元期待値一致。固定ToolTestsource55f4b3265bで元9+新2 whole11全成功・F/E/skip0、独立PG29288終了0。target全source I1050/L188/M17/C1/B226 miss0で四100。二operationのmenu/log_search→MENU_VIEWED/LOG_SEARCHED、初回1/両側重複/片側欠落、Webmenu witness2stageとAPIlog別経路、HTTP GET/root/200・N12/同sizefield差替えを独立literalで検証。Main5/physical10は元PG29258と全byte一致、Rootpom/rules不変に基づきMain静的を参照し不要再解析0、changedTest全RootPMD/CS/GJFをfresh実行してraw3は旧pureJUnit thread3siteだけを個別分類。AppMain98/eeba不変、actualDB/capture/Root/VM/HTTP/Browser/native/credential/master0。全工具bundle/実CHR/QA051finalはHOLD、旧sourcecoverage合算0。Tool通常11/新2はApp試験rosterや正式1964-53・元190へ加算0、工数null。",
+  "nextCommand": "Continuecanonical625 P02002 originalpreparation fromactual rowprices/children. Reviewlisted public NK Characterization adapter/remaining source andapproved SS355/362, explicitowner/criteria/Testwhole safety beforeanyexecute. PreserveToolwhole46/Correlated11 originalsource evidence noreplay. GateCli12 real20GiB/HOLD actualCurrent-NK/Root/native/DB/capture remains; nextindependentPGPT ifdependentwhole class unsafe. Freshquota beforegroup, active no ordinary stop."
+}

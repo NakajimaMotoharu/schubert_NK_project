@@ -1,0 +1,495 @@
+{
+  "actualExitCode": 0,
+  "source": "55f4b3265b32d900aeb200fc0e25492e6852ca0c",
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "run": "PG29286",
+  "atUTC": "2026-11-13T08:41:21.765572+00:00",
+  "tests": 11,
+  "newDefinitions": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "wholeClass": true,
+  "originalWhole9InverseProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29276-correlated11-source-oracles-v1/manifest.json",
+    "sha256": "f55f1c2a532e52d28680dc6bed3ea11f61879bee60ab8739707ebe517b2ede67"
+  },
+  "sourceInputsUnchanged": true,
+  "originalBaseline27Unchanged": true,
+  "physicalClassHashes": {
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": "2cf722153a94e2a8ca96a2836475f0f67d3f8eed59a700a48dd284727bf408c2",
+    "dev/codex/schubert/characterization/ArtifactComparator.class": "23acce8a1882cc1b53168fc79aaa8745f69f0fb9baa57245c6f05cec67a76c4e",
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": "ed52a027ef7685e12fd6a320a6fde5bd6b489ebaccbb220a61419d6baea4b4f0",
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": "d69013c51fd7c55990645c93e6bc880a60e04db026eb8865be2cae0750d79c80",
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": "7ae9e0a05d4a68852bee63698dae326f3c6245f8206b893218dda14a599bb890",
+    "dev/codex/schubert/characterization/GateCli.class": "a6cee44183f3f1c7adef9b58035c4989c19f792c6c7f6b24c14a8bfcc2893f64",
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": "e3fdb3905e47c56071c5c4e10dcbd6797d1886d2d6a90fd40c99371d10ae031e",
+    "dev/codex/schubert/characterization/GateContractValidator.class": "c6f28edda8c2f1e5e02e5d32ffe18b2ba9f8a91d4d18d6b0fbf11240a660978d",
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": "bbdfbbdc098fffcb83102bef3eb8e1d84af8860217330d104cc11114fbc00c53",
+    "dev/codex/schubert/characterization/TargetAdapter.class": "a31b5fb44c9933b6660936e6cbffb59ff9b0021636b7aae42393b3c957e3852b"
+  },
+  "exactMainPhysicalIdentityReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29258-chr-tool-independent-post-v1/manifest.json",
+    "sha256": "4196ea20e607fd3280e8ca3fca1cfa3f746391b2d8b5cd723756cf739d73a93b"
+  },
+  "sameSourceMainStaticReused": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29260-chr-static-exact-applicability-v1/manifest.json",
+    "sha256": "3f5e5e98680873d1635db7556b659b6bc3d484282ac2840dd3aa45a949d95a3f"
+  },
+  "newTestStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29280-correlated11-test-static-v1/manifest.json",
+    "sha256": "7b889278acc02cee39e410635d981260532f0d582c85dfeba8ccdd79c577887d"
+  },
+  "newTestRawClassified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "beginline": "329",
+      "endline": "329",
+      "begincolumn": "24",
+      "endcolumn": "55",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.characterization",
+      "class": "CorrelatedLogEvidenceValidatorTest",
+      "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+      "variable": "workers",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "try (var workers = Executors.newFixedThreadPool(2)) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same unchanged original pure-JUnit two finite JSON tasks, not a J2EE Web application or container lifecycle. Independent snapshots; owned executor; no transport/DB/service operation."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "beginline": "330",
+      "endline": "330",
+      "begincolumn": "18",
+      "endcolumn": "88",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.characterization",
+      "class": "CorrelatedLogEvidenceValidatorTest",
+      "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+      "variable": "good",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var good = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(healthy));",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same unchanged original pure-JUnit two finite JSON tasks, not a J2EE Web application or container lifecycle. Independent snapshots; owned executor; no transport/DB/service operation."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "beginline": "331",
+      "endline": "331",
+      "begincolumn": "17",
+      "endcolumn": "86",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.characterization",
+      "class": "CorrelatedLogEvidenceValidatorTest",
+      "method": "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+      "variable": "bad",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var bad = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(faulty));",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same unchanged original pure-JUnit two finite JSON tasks, not a J2EE Web application or container lifecycle. Independent snapshots; owned executor; no transport/DB/service operation."
+    }
+  ],
+  "newTestStaticApplicable": 0,
+  "newTestStaticUnclassified": 0,
+  "spotbugsMain10Reuse": "Exact SHA256 physical identity, Root compiler/pom/rules unchanged; not another source acceptance or rerun",
+  "targetFour100": true,
+  "targetCounters": [
+    {
+      "type": "INSTRUCTION",
+      "missed": "0",
+      "covered": "1050"
+    },
+    {
+      "type": "BRANCH",
+      "missed": "0",
+      "covered": "226"
+    },
+    {
+      "type": "LINE",
+      "missed": "0",
+      "covered": "188"
+    },
+    {
+      "type": "COMPLEXITY",
+      "missed": "0",
+      "covered": "130"
+    },
+    {
+      "type": "METHOD",
+      "missed": "0",
+      "covered": "17"
+    },
+    {
+      "type": "CLASS",
+      "missed": "0",
+      "covered": "1"
+    }
+  ],
+  "allCounters": [
+    {
+      "type": "INSTRUCTION",
+      "missed": "6348",
+      "covered": "1050"
+    },
+    {
+      "type": "BRANCH",
+      "missed": "641",
+      "covered": "226"
+    },
+    {
+      "type": "LINE",
+      "missed": "1217",
+      "covered": "188"
+    },
+    {
+      "type": "COMPLEXITY",
+      "missed": "476",
+      "covered": "130"
+    },
+    {
+      "type": "METHOD",
+      "missed": "149",
+      "covered": "17"
+    },
+    {
+      "type": "CLASS",
+      "missed": "9",
+      "covered": "1"
+    }
+  ],
+  "allPhysicalCounters": {
+    "dev/codex/schubert/characterization/ArtifactComparator.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "1091",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "104",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "210",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "78",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "26",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "47",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "7",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "2",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "2",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "13",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "2",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "2",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "2",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/TargetAdapter$Target.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "61",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "7",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "14",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "9",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "5",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/GateCli$TreeStats.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "12",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "1",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "1",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "1",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/GateContractValidator.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "2577",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "253",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "486",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "179",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "49",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/GateCli$BaselineNumbers.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "28",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "6",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "4",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "4",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "1",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "0",
+        "covered": "1050"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "0",
+        "covered": "226"
+      },
+      {
+        "type": "LINE",
+        "missed": "0",
+        "covered": "188"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "0",
+        "covered": "130"
+      },
+      {
+        "type": "METHOD",
+        "missed": "0",
+        "covered": "17"
+      },
+      {
+        "type": "CLASS",
+        "missed": "0",
+        "covered": "1"
+      }
+    ],
+    "dev/codex/schubert/characterization/GateCli.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "2162",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "197",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "423",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "154",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "53",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ],
+    "dev/codex/schubert/characterization/TargetAdapter.class": [
+      {
+        "type": "INSTRUCTION",
+        "missed": "357",
+        "covered": "0"
+      },
+      {
+        "type": "BRANCH",
+        "missed": "74",
+        "covered": "0"
+      },
+      {
+        "type": "LINE",
+        "missed": "70",
+        "covered": "0"
+      },
+      {
+        "type": "COMPLEXITY",
+        "missed": "47",
+        "covered": "0"
+      },
+      {
+        "type": "METHOD",
+        "missed": "10",
+        "covered": "0"
+      },
+      {
+        "type": "CLASS",
+        "missed": "1",
+        "covered": "0"
+      }
+    ]
+  },
+  "fullScopePhysicalClasses": 10,
+  "coverageExclusions": [],
+  "fullBundleAccepted": false,
+  "formalAcceptanceAdded": 0,
+  "appRosterDelta": 0,
+  "effortCompletionRate": null,
+  "privateXmlSha256": "226a82afbd8e9ba1df2d6d6350f38e6ef6faf1d9a7adecc4c221ae015af5b923",
+  "privateJacocoXmlSha256": "9929468664c8ed010399c66411406fafebd662b903c6b90b30b20b29f6216e55",
+  "privateExecSha256": "c60422bc12c940ccf23ba624b01ebd9546b70fef95a3b1e2f132bdb043aa59eb",
+  "terminal": {
+    "source": "55f4b3265b32d900aeb200fc0e25492e6852ca0c",
+    "actualExitCode": 0,
+    "timedOut": false,
+    "endUTC": "2026-11-13T08:40:58.527322+00:00",
+    "logSha256": "abff70cc289d6acd66f6c22f6d5127e9dc9fb0ae1b8ab93a8f9961768f5de5c6",
+    "beginSha256": "cb2eebab9a2d28ba401b2720db4715482d476aa93626e93b4e6a1ba6b744a725"
+  },
+  "verifierSha256": "70ec0d132e14b498f270e1622e21073d74b6a32c73252838af2a02660fdfbeb9"
+}
