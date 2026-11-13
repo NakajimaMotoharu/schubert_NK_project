@@ -28,6 +28,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -164,6 +165,7 @@ final class CleanupMaintenanceWork {
         borrowed.setAutoCommit(true);
         guard.check();
       } catch (SQLException known) {
+        StorageIoException.preserveFatal(known);
         throw unavailable();
       }
     }
@@ -257,6 +259,7 @@ final class CleanupMaintenanceWork {
       guard.check();
       return attempt;
     } catch (SQLException known) {
+      StorageIoException.preserveFatal(known);
       throw unavailable();
     }
     // Ambiguous commit is never repaired here: CleanupDatabaseSession disposes the owner.
@@ -284,6 +287,7 @@ final class CleanupMaintenanceWork {
       c.setAutoCommit(true);
       guard.check();
     } catch (SQLException known) {
+      StorageIoException.preserveFatal(known);
       throw unavailable();
     }
   }

@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.file;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
@@ -61,6 +62,7 @@ public final class CleanupProcessMain {
         | dev.codex.schubert.nk.batch.repository.BatchRepositoryException
         | dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessException
         | dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeException known) {
+      if (!(known instanceof IOException)) StorageIoException.preserveFatal(known);
       return 30;
     }
   }
@@ -76,6 +78,7 @@ public final class CleanupProcessMain {
         | dev.codex.schubert.nk.batch.repository.BatchRepositoryException
         | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException
         | dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff.Failure known) {
+      if (!(known instanceof IOException)) StorageIoException.preserveFatal(known);
       return 30;
     }
   }

@@ -1,0 +1,95 @@
+{
+  "taskId": "WBS-P017-08",
+  "expectedOwned": 6,
+  "groupId": "PGPT-WBS65-P01708-ALL-SIX-ORIGINAL-ORACLE-PREPARATION-20261113",
+  "startConfig": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/2130_p01708_original_start.json",
+  "startRecord": "1294_WBS65P01708全六契約準備開始.json",
+  "scope": "OriginalP01708 all6publicMain1371lines/design/oracle/TestID sourcepreparation only. RealCleanup/Expiry/process/Root-native-DB-intent/permit/Unit operationsHOLD, no actual4binary/protectedRootTests/heldfixture extraction. Canonical/1 onlyafterallownedreviewed, /2/451/190 runtimequalification remainsunaccepted.",
+  "oraclePaths": [
+    "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG28456-log-analysis-context-post-v1/manifest.json"
+  ],
+  "designPrefixes": [
+    [
+      "documents/300_SS",
+      "341"
+    ],
+    [
+      "documents/300_SS",
+      "343"
+    ],
+    [
+      "documents/300_SS",
+      "331"
+    ],
+    [
+      "documents/200_UI",
+      "251"
+    ]
+  ],
+  "run": "PG28462",
+  "manifestDirectory": "PG28464-p01708-all-six-contract-v1",
+  "checks": [
+    {
+      "id": "P01708-ORACLE01",
+      "methods": "CleanupExpiryExecution.execute/mq/executeAuthenticated/requireOwner/mqTimeoutMillis/verifyPriorExpiry/verifyPriorAudit/verify",
+      "testIds": [
+        "EMAIN",
+        "ESKIP001",
+        "EXP711001..008",
+        "EXPIRY-AUDIT-SSC302001..014"
+      ],
+      "expected": "SS3419/SSC111117125/302: fixedExpiry privatecredential・sameMorning原run/cutoff/activation/Epoch/30min/kernel/Brokerinvocation/DBschema前認証。7日固定selector/before-target-bytesをRUNNINGへcommit、後purge実afterだけterminalへcommit/readback、unknownafterはNULL・推定0補填0。実purge失敗+postOpsnoncriticalはWARNING10、critical/health異常FAILED30。元SUCCESSと今回SKIP独立read+freshselected0/Opsnormal・元audit更新0。全ownedcredentials/connection/MQ閉鎖・borrowedclose caller一回、null拒否/UnknownError非成功。knownfatal欠落三境界BUG2764OPEN。"
+    },
+    {
+      "id": "P01708-ORACLE02",
+      "methods": "CleanupMaintenanceWork.constructors/requireProfile/execute/executeFailed/transferStep/ordinary/inbox/begin/finish/cleanupResult/inspect/transfer/run/now",
+      "testIds": [
+        "CEXEC001",
+        "CINSPECT001..004",
+        "TRANSFER001..003",
+        "CFDB001..004"
+      ],
+      "expected": "SS3417/7.3/SSC119124175: NTF→QST→SESSION→Inbox実子/同run END差分＋OutboxfinishDBreadback→LOG→同一CLEAN_BATCH_RUN step WEB_RECEIPTS-BATCH_RUNS-INBOX_PROGRESS-LOG_PROGRESS→実Transfer。Backup失敗は六実SKIP/BACKUP_UNAVAILABLE/all0をcommit/readback・DELETE/Inspector0、Transferは実行省略0。開始・終了commit後別TXreadback/rollback、commit曖昧はowner破棄し補修0。Inspectorは前summary/元M-A/deadline・advisory再取得・freshreceipt/allkernel後だけenv-owner-intent順退役。pureoverflowは固定拒否、SQL三catalog BUG2764OPEN。"
+    },
+    {
+      "id": "P01708-ORACLE03",
+      "methods": "CleanupNativeExecution.execute/verifyFailedPair/verifyOriginalAndCurrent",
+      "testIds": [
+        "CEXEC001",
+        "CINSPECT001..004",
+        "CFDB001..004"
+      ],
+      "expected": "SS3436.17: currentRoot actor/readonlyhostBackup・固定credential path/NSS、ownerclaimsだけでauthority0、最初guardはDB/MQcredentials取得前。元原本/INVALID/current/前後context/API-Webquiet・sameBackup成功pairか実失敗pairのみ排他選択。失敗pairは実freshnonzeroBackup/DB全14列をguard各境界再照合、独立autocommit読取だけTXown rollback/restore、borrowedactiveTXはcommit/設定0。実失敗cohort回収/起動/退役はこのreviewで実施しない。SQL-BRE catalog BUG2764OPEN。"
+    },
+    {
+      "id": "P01708-ORACLE04",
+      "methods": "CleanupNativePreflight.verify/applicationsStopped/requireApplicationsStopped/openBackup",
+      "testIds": [
+        "NCLEAN001..004"
+      ],
+      "expected": "SS341343SSC104: actualfixedRootRelease/currentCredentialLocation、API/Web順のfreshquietを最初/全ownedclose後に再確認、Backup readonly/NSS/全artifactとownedDB閉鎖後だけ観測返却。固定callbackのfalse/knownStop/IO/unknown/nullは非成功、knownIO identityは既requireApplicationsStoppedのまま、StopGate固定化前graph欠落BUG2764OPEN。実system/kernel/privatepath/rootcapabilityはHOLD、観測をDELETE許可としない。"
+    },
+    {
+      "id": "P01708-ORACLE05",
+      "methods": "CleanupPreflight.constructors/verify/check/unavailable",
+      "testIds": [
+        "CPR001..004"
+      ],
+      "expected": "SS341343: read-onlyportでgate→request→原本→UTCmicro固定now>=cutoff→ownedDBバックアップverify→request/原本再読一致→gate前後IRQを確認後だけ同run/cutoff観測返却。constructor/API/nullprovider拒否、pure同値不一致/時刻逆行/IRQ/既IOは固定失敗、unknownRuntime/Errorは元非成功。DBportは資源close済みだけ返す契約であり削除/実Root/Unit/boot/DBauthorityではない。既Testは先頭110行のみ確認、全fixture/Root型閉包は未資格。"
+    },
+    {
+      "id": "P01708-ORACLE06",
+      "methods": "CleanupProcessMain.constructors/main/runExpiry/runNative/run/fatal",
+      "testIds": [
+        "CMAIN001..004",
+        "EMAIN"
+      ],
+      "expected": "SS341343SSC299: Java25固定noargsは真正Cleanup、唯一--expiryだけ真正Expiry、他args70/operation0。genuinework0/10/30だけそのまま、他既結果30、known失敗30・未知Runtime/Errorを正常化0、uncaught診断は固定cleanup process failedのみ。legacyreadonlypreflightは成功観測でも30であり0/10を作らない。injectedportsの論理試験を実process親/termination/Nativeauthorityへ転用しない。knownRuntime二catalog BUG2764OPEN、checkedIO既定不変更。"
+    }
+  ],
+  "existingProofs": [],
+  "endingStatus": "P01708_WHOLE_SIX_ORIGINAL_PREPARATION_ONLY_RUNTIME_UNACCEPTED",
+  "nextCommand": "Readall6publicMain1371lines beforeaudit/close, mapindependentSS341/343 oracle/TestIDs includingnull-exception-transaction-resourcepost/explicitfailureandownedstop, no realRoot/Cleanup/Expiry/native/DB/VM/intent/permit/no heldTestbody. CheckactualcandidatewholeTests forallowedpurecallback independence onlyafterMainfullreview; pricenecessarynewPG/PT beforeedit/run. RecordBUGbeforefix/SSCfollowsclassification ifneeded. Freshquota/usage09:06:30/diskgate.",
+  "capPp": 2
+}

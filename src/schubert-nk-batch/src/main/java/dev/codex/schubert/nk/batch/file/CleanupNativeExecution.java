@@ -21,6 +21,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -180,6 +181,7 @@ final class CleanupNativeExecution {
       }
       base.check();
     } catch (java.sql.SQLException | BatchRepositoryException known) {
+      StorageIoException.preserveFatal(known);
       throw new IOException("failed Backup DB observation unavailable");
     }
   }

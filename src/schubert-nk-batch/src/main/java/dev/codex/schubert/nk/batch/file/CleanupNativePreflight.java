@@ -14,6 +14,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -121,6 +122,7 @@ final class CleanupNativePreflight {
         if (!observation.quiescent(unit)) throw unavailable();
       }
     } catch (StopGateException known) {
+      StorageIoException.preserveFatal(known);
       throw unavailable();
     }
   }

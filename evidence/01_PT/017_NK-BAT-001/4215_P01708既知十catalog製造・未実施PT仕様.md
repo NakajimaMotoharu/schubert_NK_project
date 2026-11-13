@@ -1,0 +1,5 @@
+# P01708既知十catalogの製造仕様
+
+BUG2764/YKT2359、OPS009-017/DAT009/BAK/BKO/AVL、UI251、SS312/332SSC199310/333/341/343/352。CleanupExpiryExecutionの既SQL-ActiveMQ固定IO化・既purge失敗・既posthealth失敗、MaintenanceWork三SQL固定化、NativeExecution既SQL-BatchRepo固定化、NativePreflight既StopGate固定化、ProcessMainの既Cleanup/Expiry二Runtime固定exitの十箇所だけfatalgraphを保持する。ProcessMainのIOExceptionは既定どおり分類せず、純parse/overflow/未知型優先/借用資源・TX順序・通常BackupFAILEDを実失敗cohortと混同しない。
+
+PG28470は五Mainの元body逆変換一致、GJF-CS0。RootNullAway/Maincompile/fullstatic/wholePT/coverageは未実施、BUG2764/YKT2359はOPEN。実DB/Root/Native/Unit/鍵/intent/permit操作0、既wholeTest部分抽出や代替fixture0。独立期待値はcause/suppressed/nextの元Error identity、既IOは固定exit、未知Runtime/Error元identity、known非fatalは従来結果、借用close/TX/owner順不変。実測前にPASS/coverageへ算入しない。

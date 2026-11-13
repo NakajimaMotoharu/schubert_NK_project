@@ -26,6 +26,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -174,6 +175,7 @@ final class CleanupExpiryExecution {
         Arrays.fill(ops, '\0');
       }
     } catch (SQLException | ActiveMQException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new IOException("Expiry execution unavailable");
     }
   }
@@ -258,12 +260,14 @@ final class CleanupExpiryExecution {
       after = actual.afterCount();
       purgeSucceeded = true;
     } catch (ArtemisExpiryPurgeException actualFailure) {
+      StorageIoException.preserveFatal(actualFailure);
       // Real attempted purge. No fabricated after=0/before and no unexecuted FAILED.
     }
     boolean healthy = false;
     try {
       healthy = work.healthy();
     } catch (ArtemisManagementReadinessException actualHealthFailure) {
+      StorageIoException.preserveFatal(actualHealthFailure);
       /* Actual Ops failure blocks startup. */
     }
     BatchStepResult.Status status =
