@@ -1,0 +1,98 @@
+{
+  "groupId": "PGPT-WBS65-SSC346-COPY-TEXT-NEW12-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1703_WBS65COPYtext新十二通常結果.json",
+  "sourceAfter": "e9e5d0f0031742bbc604503deb6417b7b7829ac4",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG30522-copy-text12-independent-source-trace-join-v1/manifest.json",
+  "manifestSha256": "ae3c3e38f4b203e4cd533ab235f68896ea967967b2a9f3c104732a8ca9699c90",
+  "terminalAtUTC": "2026-11-13T21:25:43.032243+00:00",
+  "run": "PG30522",
+  "workIds": [
+    "P01903_SSC346_COPY_TEXT_NEW12_NORMAL"
+  ],
+  "outcome": "NEW_COPY_TEXT_WHOLE12_ONE_PHYSICAL_ACTUAL_JVM_SIX_METHODS_FOUR100_NOT_DB_COPY_OR_FORMAL",
+  "technical": {
+    "kind": "NEW_PURE_COPY_TEXT_ENCODER_WHOLE12_ONE_PHYSICAL_FOUR100",
+    "source": "ab49fcb7847faab8948950101e481d37cab49caa",
+    "productionCoreMain": "e9e5d0f0031742bbc604503deb6417b7b7829ac4",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30518-copy-text12-post-v2/manifest.json",
+      "sha256": "926266d462cdc58241e9b63e6a415f5be8721732a619b55deff9a48e818a4b09"
+    },
+    "actualExecutions": 12,
+    "newTestDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 113,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 200,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 33,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 44,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 26,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 6,
+    "jacocoDefaultMethods": 6,
+    "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 5,
+    "applicable": 0,
+    "unclassified": 0,
+    "newProductionDefects": 0,
+    "newStaticToolFixtureDefects": 1,
+    "relatedBug": "BUG-2872",
+    "relatedYkt": "YKT-2409",
+    "initialProcessingErrorRetained": 1,
+    "newProcessingErrors": 0,
+    "actualOriginalMasterRootVmDbNativeKeyFileDriverSqlCopyIntentPermitUnitDeployActions": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "reworkWithinOriginalEstimate": {
+      "low": 0.02,
+      "base": 0.06,
+      "high": 0.12
+    },
+    "verificationRemainingWithinOriginalEstimate": {
+      "low": 0.28,
+      "base": 0.84,
+      "high": 1.68
+    },
+    "actualCost": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1702_WBS65予実・COPYtext新十二通常後版443.json",
+    "sha256": "b9e099e349edd604fa4361e9fad6fb67f877896799fc4ad80b8fd4a63a639160"
+  },
+  "checkpointText": "SSC346新PostgresCopyTextEncoderをCoree9e5d0f003・実行sourceab49fcb784で初実行、PG30516真正12/FES0/新定義12。PG30518独立post全1CRC/初期化/単一exec/XML、I200/L44/M6/C1/B33 miss0・全scope四100、実JVMCode6とJaCoCo既定6も一致（当部品限定、global生成code扱いは未承認）。RootNullAway/lintWerror/CS/SB/missingerror0、PMDraw5はsourceごとの8worker64task/Future5/finallyshutdownNow-await10所有と非J2EEへ対応し適用/未分類0。原PG30488 PMD StringLiteral Unicode escape処理error1を保持、BUG2872修正3bd156ee27で九fixtureを同UTF16 char配列へ、PG30504全入力unit・全他token/期待byte不変、PG30512処理error0と当whole12/postで再試験。Main不具合0/解析fixture障害1、抑制/除外/旧exec合算0。NULL/空/literal marker・七escape/UTF8 scalar/NUL/孤立surrogate/列幅/null/入力byte所有/非NFC非変換/有限並行を独立hexで検証。実DB/driver/SQL/COPY/RootVMnative鍵Unit操作0、実受入を代用しない。App105run/4241exec/4212caseSuccess/歴史29、正本184/625・元190新0/正式1964-53/工数null。normal.3/.9/1.8のみ完了、手戻り.02/.06/.12は同群内・gross追加0/実費token null。",
+  "nextCommand": "PublishCopyTextnew12 andBUG2872limitedclose; SSC346ledger-onlymainqualificationstatus canjoinnextSSC347newmigrationrowdetail duringcontinuouswork. Thenimplementremainingapprovedmigrationrow/COPYstagingvalidation orotherindependentWBS withprice/owner/detailfirst. Encoder ispuredata; businessNFC/control/DDL/FK/DB/COPY/transaction remains separate, no silentnormalization. Rexec5normalHOLDwithunchangedguards; TargetAdapterold3/PG29254reuseonly. App105/4241/4212/29/canonical184/formal1964-53/new0/effortnull, freshquota/hourly07:22:22JST. Continuepastordinarycommit/report."
+}

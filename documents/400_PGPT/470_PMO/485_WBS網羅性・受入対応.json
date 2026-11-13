@@ -550588,11 +550588,90 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
-      "acceptance": "NOT_RUN",
-      "state": "SOURCE_CREATED_WHOLE12_TEST_DEFINITIONS_NOT_RUN",
+      "acceptance": "UNASSESSED",
+      "state": "PURE_COPY_TEXT_COMPONENT_NORMAL12_FOUR100_ACTUAL_DB_COPY_ETL_UNACCEPTED",
       "relatedSsc": "SSC-346",
       "testIds": "PT-MIG-COPY001..012",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "NEW_PURE_COPY_TEXT_ENCODER_WHOLE12_ONE_PHYSICAL_FOUR100",
+        "source": "ab49fcb7847faab8948950101e481d37cab49caa",
+        "productionCoreMain": "e9e5d0f0031742bbc604503deb6417b7b7829ac4",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30518-copy-text12-post-v2/manifest.json",
+          "sha256": "926266d462cdc58241e9b63e6a415f5be8721732a619b55deff9a48e818a4b09"
+        },
+        "actualExecutions": 12,
+        "newTestDefinitions": 12,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 113,
+        "physicalClasses": 1,
+        "positiveMainCrc": 1,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 200,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 33,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 44,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 26,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 6,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+        },
+        "actualJvmCodeMethods": 6,
+        "jacocoDefaultMethods": 6,
+        "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 5,
+        "applicable": 0,
+        "unclassified": 0,
+        "newProductionDefects": 0,
+        "newStaticToolFixtureDefects": 1,
+        "relatedBug": "BUG-2872",
+        "relatedYkt": "YKT-2409",
+        "initialProcessingErrorRetained": 1,
+        "newProcessingErrors": 0,
+        "actualOriginalMasterRootVmDbNativeKeyFileDriverSqlCopyIntentPermitUnitDeployActions": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.3,
+          "base": 0.9,
+          "high": 1.8
+        },
+        "reworkWithinOriginalEstimate": {
+          "low": 0.02,
+          "base": 0.06,
+          "high": 0.12
+        },
+        "verificationRemainingWithinOriginalEstimate": {
+          "low": 0.28,
+          "base": 0.84,
+          "high": 1.68
+        },
+        "actualCost": null
+      }
     }
   ],
   "layouts": [
@@ -555392,6 +555471,85 @@
       "low": 0.25,
       "base": 0.75,
       "high": 1.5
+    },
+    "actualCost": null
+  },
+  "currentCopyTextWhole12PG30516": {
+    "kind": "NEW_PURE_COPY_TEXT_ENCODER_WHOLE12_ONE_PHYSICAL_FOUR100",
+    "source": "ab49fcb7847faab8948950101e481d37cab49caa",
+    "productionCoreMain": "e9e5d0f0031742bbc604503deb6417b7b7829ac4",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30518-copy-text12-post-v2/manifest.json",
+      "sha256": "926266d462cdc58241e9b63e6a415f5be8721732a619b55deff9a48e818a4b09"
+    },
+    "actualExecutions": 12,
+    "newTestDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 113,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 200,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 33,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 44,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 26,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 6,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 6,
+    "jacocoDefaultMethods": 6,
+    "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 5,
+    "applicable": 0,
+    "unclassified": 0,
+    "newProductionDefects": 0,
+    "newStaticToolFixtureDefects": 1,
+    "relatedBug": "BUG-2872",
+    "relatedYkt": "YKT-2409",
+    "initialProcessingErrorRetained": 1,
+    "newProcessingErrors": 0,
+    "actualOriginalMasterRootVmDbNativeKeyFileDriverSqlCopyIntentPermitUnitDeployActions": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "reworkWithinOriginalEstimate": {
+      "low": 0.02,
+      "base": 0.06,
+      "high": 0.12
+    },
+    "verificationRemainingWithinOriginalEstimate": {
+      "low": 0.28,
+      "base": 0.84,
+      "high": 1.68
     },
     "actualCost": null
   }
