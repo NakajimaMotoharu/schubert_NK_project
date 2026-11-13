@@ -1,0 +1,151 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG28840-MPOL-ORIGINAL7-NEW1-NORMAL",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java": "WBS-P018-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java": "WBS-P018-04",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "WBS-P003-08",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4237_MPOL原七新一通常単体仕様.md",
+      "sha256": "67d7588a13548c363ee11d16852387c7fde6b36a10357cdbb9aad3890f2794fc"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28828-mpol8-static-source-correction-v1/manifest.json",
+      "sha256": "ebbc2e6a12d818a73e7bccf1e96f0d6d147f576571fa5dfb26ab006f57843809"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28782-real-outcome-static-byte-witness-v1/manifest.json",
+      "sha256": "b6ab59cc3fcc8d88ae3174af9bc430d257c4cbb076fd0f8667e7f9c1af37aa31"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "b302f48301aa19c779554fb4d4cb52e21ccf9df8",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeFixture.java",
+      "tests": 0
+    }
+  ],
+  "expectedTests": 8,
+  "resources": [],
+  "sdkJars": [
+    "com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar": "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/platform/ApplicationStopGate$StateSource.class",
+    "dev/codex/schubert/nk/batch/platform/ApplicationStopGate.class",
+    "dev/codex/schubert/nk/batch/platform/ApplicationUnit.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader$Start.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$QueryProcess.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$Reader.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$SafeStream.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot$Target.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnit.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$NativeSource.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$Source.class",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.class",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome.class",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$OwnedQuery.class",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope$QueryWork.class",
+    "dev/codex/schubert/nk/batch/platform/ProcessResourceScope.class",
+    "dev/codex/schubert/nk/batch/platform/StopGateException.class",
+    "dev/codex/schubert/nk/batch/platform/StopGateFailure.class",
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess.class",
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$Start.class",
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$StdIo.class",
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource.class",
+    "dev/codex/schubert/nk/batch/platform/UnitStateParser.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+    "dev/codex/schubert/nk/storage/ResourceScope.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy",
+    "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy$NativeSource"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG28830-mpol8-qualified-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG28832-mpol8-qualified-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG28834-mpol8-qualified-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG28836-mpol8-qualified-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG28840-mpol8-qualified-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG28842-mpol8-qualified-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg28832-mpol8-qualified-prepare-v1",
+    "unit": "pg28840-mpol8-qualified-unit-v1"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": [
+    "dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle",
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome",
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess"
+  ],
+  "reviewedUnstartedProcess": {
+    "sourceWitness": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28828-mpol8-static-source-correction-v1/manifest.json",
+      "sha256": "ebbc2e6a12d818a73e7bccf1e96f0d6d147f576571fa5dfb26ab006f57843809"
+    },
+    "typeWitness": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28782-real-outcome-static-byte-witness-v1/manifest.json",
+      "sha256": "b6ab59cc3fcc8d88ae3174af9bc430d257c4cbb076fd0f8667e7f9c1af37aa31"
+    }
+  }
+}

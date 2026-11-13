@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** SS341/342/SSC101 independent fixed-policy oracle; does not issue stop. */
@@ -27,6 +29,88 @@ final class MaintenanceUnitStopPolicyTest {
           "schubert-nk-expiry-cleanup.service",
           "schubert-nk-backup.service",
           "artemis.service");
+
+  private enum NativePoint {
+    START,
+    WAIT
+  }
+
+  /** MPOL008/BUG2782: declared query faults never become ordinary sanitized success/failure. */
+  @Test
+  void mpol008NativePortFatalGraphsPreserveIdentityAndEveryOwnedPostcondition() {
+    for (var point : NativePoint.values()) {
+      for (int graph = 0; graph < 3; graph++) {
+        var marker = new AssertionError("public fatal query marker");
+        var failure = new StopGateException(StopGateFailure.TIMEOUT);
+        switch (graph) {
+          case 0 -> failure.initCause(marker);
+          case 1 -> failure.addSuppressed(marker);
+          default -> {
+            var cycle = new IllegalStateException("public cyclic query fault");
+            failure.initCause(cycle);
+            cycle.initCause(failure);
+            cycle.addSuppressed(marker);
+          }
+        }
+        var child = new InspectorUnitProbeFixture.Child(policy("caddy.service"));
+        child.hook =
+            (name, count) -> {
+              if (point == NativePoint.WAIT && name.equals("wait")) throw failure;
+            };
+        var starts = new AtomicInteger();
+        var reader =
+            new InspectorUnitProbe.NativeReader(
+                command -> {
+                  assertEquals(
+                      List.of(
+                          "/usr/bin/systemctl",
+                          "--system",
+                          "--no-pager",
+                          "--no-ask-password",
+                          "show",
+                          "--property=Id,LoadState,KillMode,SendSIGKILL",
+                          "caddy.service"),
+                      command);
+                  starts.incrementAndGet();
+                  if (point == NativePoint.START) throw failure;
+                  return child;
+                });
+        assertSame(
+            marker,
+            assertThrows(
+                AssertionError.class,
+                () ->
+                    new MaintenanceUnitStopPolicy(
+                            new MaintenanceUnitStopPolicy.NativeSource(reader))
+                        .requireSafe(MaintenanceUnit.CADDY)));
+        assertEquals(1, starts.get());
+        assertEquals(0, marker.getSuppressed().length);
+        if (point == NativePoint.START) {
+          assertEquals(List.of(), child.order);
+          assertEquals(0, child.destroyed);
+          assertEquals(0, child.output.closed);
+          assertEquals(0, child.input.closed);
+          assertEquals(0, child.error.closed);
+        } else {
+          child.allClosed();
+          child.wiped();
+          assertEquals(1, child.destroyed);
+          assertEquals(
+              List.of(
+                  "get.stdout",
+                  "get.stdin",
+                  "get.stderr",
+                  "stdin.close",
+                  "stderr.close",
+                  "wait",
+                  "stdout.close",
+                  "alive",
+                  "destroy"),
+              child.order);
+        }
+      }
+    }
+  }
 
   private static byte[] policy(String name) {
     return ("Id=" + name + "\nLoadState=loaded\nKillMode=control-group\nSendSIGKILL=no\n")
@@ -216,7 +300,8 @@ final class MaintenanceUnitStopPolicyTest {
   @Test
   void mpol007IndependentParallelAndNoStopAuthority() throws Exception {
     assertNotNull(MaintenanceUnitStopPolicy.create());
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new ArrayList<Callable<Boolean>>();
       for (int i = 0; i < 64; i++) {
         final int index = i % NAMES.size();
@@ -228,7 +313,11 @@ final class MaintenanceUnitStopPolicyTest {
               return Arrays.equals(input, new byte[input.length]);
             });
       }
-      for (var result : pool.invokeAll(tasks)) assertTrue(result.get());
+      for (var result : pool.invokeAll(tasks, 5, TimeUnit.SECONDS))
+        assertTrue(result.get(5, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(5, TimeUnit.SECONDS));
     }
     // This reader only requests systemctl show. No fixed policy vector can dispatch stop.
     assertEquals("Id,LoadState,KillMode,SendSIGKILL", MaintenanceUnitStopPolicy.PROPERTIES);

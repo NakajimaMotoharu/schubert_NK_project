@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.GOLDEN;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,6 +20,9 @@ import java.util.function.BiConsumer;
 
 /** Public synthetic process/reader fault ports; no private production reflection, UNIT009..016. */
 final class InspectorUnitProbeFixture {
+  private static final String GOLDEN =
+      "Id=schubert-nk-inbox-inspector.service\nLoadState=loaded\nActiveState=active\nSubState=exited\nJob=\nMainPID=0\nControlPID=0\nInvocationID=123456789abcdef08123456789abcdef\nExecMainCode=1\nExecMainStatus=10\nExecMainStartTimestampMonotonic=1234567\nExecMainExitTimestampMonotonic=2345678\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=no\nKillMode=control-group\nSendSIGKILL=no\n";
+
   private InspectorUnitProbeFixture() {}
 
   static final class Script implements InspectorUnitProbe.Reader {
@@ -49,9 +51,13 @@ final class InspectorUnitProbeFixture {
 
     @Override
     public byte[] readState() throws IOException {
+      int currentState = stateAt;
+      stateAt++;
       return next(
           "state",
-          states.get(Math.min(stateAt++, states.size() - 1)).getBytes(StandardCharsets.US_ASCII));
+          states
+              .get(Math.min(currentState, states.size() - 1))
+              .getBytes(StandardCharsets.US_ASCII));
     }
 
     @Override

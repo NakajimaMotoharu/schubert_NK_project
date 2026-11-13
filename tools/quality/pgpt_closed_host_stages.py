@@ -23,6 +23,8 @@ def prepared(c, config):
     pgpt_guard_signature.validate_prepared(c, m, work)
     import pgpt_analysis_symbols
     pgpt_analysis_symbols.validate_prepared(c, m, work)
+    import pgpt_unstarted_process
+    pgpt_unstarted_process.validate_prepared(c, m, work)
     return p, m, work
 
 
@@ -43,10 +45,13 @@ def static(c, config, extra):
     sg = h.TC / 'static-gates-20261015'
     libs = [sg / 'record-fix-v1/pmd-record-1298.jar', *sorted((sg / 'pmd-bin-7.28.0/lib').glob('*.jar'))]
     compile_only = [m['guardSignature']['compileCarrier']['path']] if m.get('guardSignature') is not None else []
+    if m.get('unstartedProcess') is not None: compile_only.append(m['unstartedProcess']['compileCarrier']['path'])
     stages = {'pmd': h.steps.step('pmd', [str(h.JAVA), '-cp', ':'.join(map(str, libs)), 'net.sourceforge.pmd.cli.PmdCli', 'check', '--file-list', str(listing), '--rulesets', str(h.R / 'tools/quality/static/pmd.xml'), '--use-version', 'java-25', '--aux-classpath', str(h.TC / 'jdk-25.0.4/lib/jrt-fs.jar') + ':' + str(work / 'target/classes') + ':' + ':'.join([*m['dependencies'], *compile_only]), '--no-cache', '--format', 'xml', '--report-file', str(out / 'pmd.xml')], h.R)}
     stages['checkstyle'] = h.steps.step('checkstyle', [str(h.JAVA), '-jar', str(sg / 'checkstyle-14.3.0-all.jar'), '-c', str(h.R / 'tools/quality/static/checkstyle.xml'), '-f', 'xml', '-o', str(out / 'checkstyle.xml'), '@' + str(listing)], h.R)
     stages['format'] = h.steps.step('format', [str(h.JAVA), '-jar', str(h.TC / 'google-java-format-1.36.1-all-deps.jar'), '--skip-reflowing-long-strings', '--dry-run', '--set-exit-if-changed', *[str(h.R / p) for p in paths]], h.R)
     analyzer_pom = ['-f', str(work / 'spotbugs-analysis-only-context.pom.xml')] if c.get('reviewedAnalysisOnlyContext') is not None else []
+    if c.get('reviewedUnstartedProcess') is not None:
+        analyzer_pom = ['-f', str(work / 'spotbugs-no-outer.pom.xml')]
     stages['spotbugs'] = h.steps.step('spotbugs', [str(h.MAVEN), '-o', '--no-transfer-progress', *analyzer_pom, '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check'], work)
     shutil.copyfile(work / 'target/spotbugsXml.xml', out / 'spotbugs.xml')
     sb = ET.parse(out / 'spotbugs.xml').getroot()
@@ -59,10 +64,14 @@ def static(c, config, extra):
 def classify_source_findings(paths, anchors, raw, source_text):
     """One identity per actual message when a rule emits several findings at one site."""
     message_mode = any('message' in a for a in anchors)
-    expected = set(); classified = []
+    from collections import Counter
+    expected = Counter(); classified = []
     fields = {'path', 'rule', 'sourceAnchor', 'occurrences', 'reason', 'disposition'} | ({'message'} if message_mode else set())
     for a in anchors:
-        h.require(set(a) - {'sourceLine'} == fields and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
+        h.require(set(a) - {'sourceLine', 'rawMultiplicity'} == fields and a['disposition'] == 'NOT_APPLICABLE' and isinstance(a['reason'], str) and len(a['reason']) >= 24, 'independent per-site applicability explanation')
+        multiplicity = a.get('rawMultiplicity', 1)
+        h.require(type(multiplicity) is int and multiplicity >= 1 and
+                  (multiplicity == 1 or 'sourceLine' in a and message_mode), 'explicit exact raw-message multiplicity')
         h.require(a['path'] in paths, 'explicit static source scope')
         if message_mode: h.require(isinstance(a['message'], str) and a['message'], 'explicit actual finding message')
         lines = source_text(a['path']).splitlines()
@@ -79,12 +88,12 @@ def classify_source_findings(paths, anchors, raw, source_text):
         for line in rows:
             identity = (str(h.R / a['path']), a['rule'], line) + ((a['message'],) if message_mode else ())
             h.require(identity not in expected, 'duplicate finding classification')
-            expected.add(identity)
+            expected[identity] = multiplicity
             row = dict(path=a['path'], rule=a['rule'], line=line, reason=a['reason'], disposition=a['disposition'])
             if message_mode: row['message'] = a['message']
-            classified.append(row)
+            classified.extend(dict(row) for _ in range(multiplicity))
     actual = [(x['path'], x['rule'], x['line']) + ((x['message'],) if message_mode else ()) for x in raw]
-    h.require(len(actual) == len(expected) and set(actual) == expected, 'unclassified/applicable static finding; no blanket Test exemption')
+    h.require(Counter(actual) == expected, 'unclassified/applicable static finding; no blanket Test exemption')
     return classified
 
 
@@ -141,6 +150,7 @@ def run(c, config, extra):
     cmd = [str(h.JAVA), '-Djava.io.tmpdir=' + str(unit / 'tmp'), '-Dfile.encoding=UTF-8', '-Duser.timezone=Asia/Tokyo', '-Djunit.jupiter.execution.parallel.enabled=false', '-Djunit.jupiter.extensions.autodetection.enabled=false', *properties, '-javaagent:' + str(agent) + '=destfile=' + str(unit / 'jacoco.exec') + ',sessionid=' + c['id'] + ',append=false', '-Xlog:class+init=info:file=' + str(unit / 'class-init.log'), '-jar', str(h.CONSOLE), 'execute', '--disable-banner', '--class-path', runtime, *[arg for name in m['selectedClasses'] for arg in ['--select-class', name]], '--reports-dir', str(unit / 'xml'), '--fail-if-no-tests', '--details', 'summary']
     begin = dict(source=source, productionCoreMain=c['productionCoreMain'], config=h.ref(config), prepare=h.ref(pp), preflight=h.ref(pf), inputHashes=m['inputHashes'], metadataPins=pins, dependencies=m['dependencies'], physicalClassHashes=m['physicalClassHashes'], testClassHashes=m['testClassHashes'], expectedCases=m['expectedCases'], selectedClasses=m['selectedClasses'], session=c['id'], expectedTests=c['expectedTests'], oldExecUnion=False, coverageExclusions=[], backendOrHeldClassActions=0)
     begin['guardSignature'] = m.get('guardSignature')
+    begin['unstartedProcess'] = m.get('unstartedProcess')
     h.write_json(out / 'begin.json', begin)
     stages = {'unit': h.steps.step('unit', cmd, unit)}
     for label, args in [('coverage', ['report', str(unit / 'jacoco.exec'), '--classfiles', str(work / 'component'), '--xml', str(unit / 'coverage.xml')]), ('classinfo', ['classinfo', str(work / 'component')]), ('execinfo', ['execinfo', str(unit / 'jacoco.exec')])]:

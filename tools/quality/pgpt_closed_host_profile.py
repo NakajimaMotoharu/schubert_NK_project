@@ -121,6 +121,8 @@ def validate_syntax(c):
         require(path.startswith('evidence/') and Path(path).suffix in ['.md', '.json'] and '/private' not in path.lower(), 'public proof only')
     import pgpt_artemis_sdk
     pgpt_artemis_sdk.syntax(c)
+    import pgpt_unstarted_process
+    pgpt_unstarted_process.syntax(c)
     validate_optional_capabilities(c)
     import pgpt_guard_signature
     pgpt_guard_signature.syntax(c)
@@ -157,7 +159,9 @@ def validate_optional_capabilities(c):
         signature_fence = c.get('reviewedGuardSignature') is not None and name in guard.FORBIDDEN_INIT
         import pgpt_analysis_symbols as analysis
         analysis_fence = c.get('reviewedAnalysisOnlyContext') is not None and name in analysis.NAMES
-        require(name + '.class' in c['physicalClasses'] or signature_fence or analysis_fence, 'forbidden initialization in full physical scope or exact signature/analysis fence')
+        import pgpt_unstarted_process as process
+        process_fence = c.get('reviewedUnstartedProcess') is not None and name in process.FORBIDDEN_INIT
+        require(name + '.class' in c['physicalClasses'] or signature_fence or analysis_fence or process_fence, 'forbidden initialization in full physical scope or exact signature/analysis fence')
     for item in reflection:
         require(item['targetClass'].split('$')[0].replace('.', '/') in forbidden, 'JDBC parent must not initialize')
     maps = c.get('standardCompilerSwitchMaps', [])
@@ -175,7 +179,8 @@ def validate_optional_capabilities(c):
 def input_paths(c):
     import pgpt_guard_signature as guard
     import pgpt_analysis_symbols as analysis
-    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS + ([guard.SOURCE] if c.get('reviewedGuardSignature') is not None else []) + (analysis.SOURCE_PATHS if c.get('reviewedAnalysisOnlyContext') is not None else [])
+    import pgpt_unstarted_process as process
+    return c['mainSources'] + [t['path'] for t in c['testSources']] + [r['path'] for r in c.get('resources', [])] + c['pomInputs'] + QUALITY_INPUTS + ([guard.SOURCE] if c.get('reviewedGuardSignature') is not None else []) + (analysis.SOURCE_PATHS if c.get('reviewedAnalysisOnlyContext') is not None else []) + ([process.SOURCE, process.TESTDIR + 'InspectorUnitSnapshotTest.java'] if c.get('reviewedUnstartedProcess') is not None else [])
 
 
 def validate_owners(c, owners):
@@ -183,7 +188,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk', 'pgpt_unstarted_process']]
     return {p: digest(R / p) for p in paths}
 
 
@@ -209,12 +214,15 @@ def checked_inputs(c):
         require(proof.get('forbiddenInitializedClasses') == c.get('forbiddenInitializedClasses'), 'all JDBC parents remain runtime-forbidden')
         source = (R / item['testPath']).read_text()
         require(source.count(item['sourceAnchor']) == source.count('Class.forName') == 1, 'no additional reflection call')
+    import pgpt_unstarted_process as process
+    process.checked(c)
     for path in c['mainSources'] + [t['path'] for t in c['testSources']]:
         text = (R / path).read_text()
         for item in c.get('reviewedReflection', []):
             if path == item['testPath']:
                 text = text.replace(item['sourceAnchor'], '', 1)
-        require(not any(x in text for x in [*DENIED, '@BeforeAll', '@TestFactory', '@ParameterizedTest', 'ProcessBuilder', 'DriverManager', 'DataSource', 'Class.forName', 'java.lang.foreign', 'java.net.Socket']), 'outside closed ordinary host scope')
+        require(not any(x in text for x in [*DENIED, '@BeforeAll', '@TestFactory', '@ParameterizedTest', 'DriverManager', 'DataSource', 'Class.forName', 'java.lang.foreign', 'java.net.Socket']), 'outside closed ordinary host scope')
+        require('ProcessBuilder' not in text or process.allow_builder(c, path, text), 'outside closed ordinary host ProcessBuilder scope')
     import pgpt_guard_signature
     pgpt_guard_signature.checked(c)
     import pgpt_analysis_symbols
@@ -298,6 +306,8 @@ def prepare(c, config):
     out = environment(c, 'prepare'); work.mkdir(); (work / 'test-classes').mkdir()
     import pgpt_guard_signature as guard
     signature = guard.create_compile_carrier(c, work)
+    import pgpt_unstarted_process as process
+    type_signature = process.create_compile_carrier(c, work)
     for p in c['mainSources']:
         to = work / 'src/main/java' / p.split('/src/main/java/')[1]
         to.parent.mkdir(parents=True, exist_ok=True); to.write_bytes((R / p).read_bytes())
@@ -321,12 +331,18 @@ def prepare(c, config):
     if signature is not None:
         d = add(ds, 'dependency')
         for n, v in [('groupId', 'dev.codex.schubert.quality'), ('artifactId', 'real-guard-compile-symbols'), ('version', '1'), ('scope', 'system'), ('systemPath', signature['compileCarrier']['path'])]: add(d, n, v)
+    if type_signature is not None:
+        d = add(ds, 'dependency')
+        for n, v in [('groupId', 'dev.codex.schubert.quality'), ('artifactId', 'real-outcome-compile-symbols'), ('version', '1'), ('scope', 'system'), ('systemPath', type_signature['compileCarrier']['path'])]: add(d, n, v)
     add(add(root, 'build'), 'plugins').append(copy.deepcopy(compiler))
     ET.ElementTree(root).write(work / 'pom.xml', encoding='unicode', xml_declaration=True)
     stages = {'nullaway-compile': steps.step('nullaway-compile', [str(MAVEN), '-o', '--no-transfer-progress', '-Dmaven.repo.local=' + str(TC / 'm2/repository'), '-Dmaven.test.skip=true', 'compile'], work)}
     require(stages['nullaway-compile']['actualExit'] == 0 and not stages['nullaway-compile']['timedOut'], 'Main compile failed; no retry')
     guard.copy_runtime_interface(signature, work)
+    process.copy_runtime_enum(type_signature, work)
+    process.create_analysis_pom(type_signature, work)
     compile_only = [signature['compileCarrier']['path']] if signature is not None else []
+    if type_signature is not None: compile_only.append(type_signature['compileCarrier']['path'])
     stages['test-compile'] = steps.step('test-compile', [str(JAVAC), '--release', '25', '-g', '-proc:none', '-implicit:none', '-encoding', 'UTF-8', '-Xlint:all', '-Werror', '-cp', str(work / 'target/classes') + ':' + ':'.join([*deps, *compile_only]), '-d', str(work / 'test-classes'), *[str(R / t['path']) for t in c['testSources']]], R)
     require(stages['test-compile']['actualExit'] == 0 and not stages['test-compile']['timedOut'], 'whole Test compile failed; no retry')
     physical = class_hashes(work / 'target/classes')
@@ -336,7 +352,7 @@ def prepare(c, config):
     import pgpt_analysis_symbols as analysis
     analysis_context = analysis.create_owned_context(c, work) if c.get('reviewedAnalysisOnlyContext') is not None else None
     m = dict(actualExit=0, config=ref(config), inputHashes=hashes, dependencies=deps, toolHashes=tool_hashes(), physicalClassHashes=physical, testClassHashes=class_hashes(work / 'test-classes'), expectedCases=cases, selectedClasses=sorted({x['classname'] for x in cases}), stages=stages, preliminaryStyle=ref(pre), rootCompilerSha256=hashlib.sha256(ET.tostring(compiler)).hexdigest(), subsetPomSha256=digest(work / 'pom.xml'), productTestsExecuted=0, MainCompiled=True, wholeProjectMainRebuilt=False, verifier=ref(Path(__file__).resolve()))
-    m.update(analysisOnlyContext=analysis_context, guardSignature=signature, freshMainSourceCount=len(c['mainSources']), reusedRuntimeSignatureClassCount=1 if signature is not None else 0)
+    m.update(unstartedProcess=type_signature, analysisOnlyContext=analysis_context, guardSignature=signature, freshMainSourceCount=len(c['mainSources']), reusedRuntimeSignatureClassCount=1 if signature is not None else 0)
     write_json(out / 'manifest.json', m)
     return m
 

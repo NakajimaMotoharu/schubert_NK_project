@@ -112,6 +112,39 @@ def verify(c, config, source):
         require(required_forbidden <= set(c.get('forbiddenInitializedClasses', [])), 'no outer/native initialization permission')
     else:
         require(signature is None, 'no implicit signature component')
+    type_symbols = b.get('unstartedProcess')
+    if c.get('reviewedUnstartedProcess') is not None:
+        import zipfile
+        type_base = 'dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle'
+        type_enum = type_base + '$Outcome'
+        type_hashes = {
+            type_base: 'dbf0c01bee5c1955ce41b11858d6d855c0ab8d7bf503814951fd8a11ee9216d9',
+            type_enum: '86ccc00797c876ed4688bf412cc38c1dbdeba5c9813c495f8fe2ea2fd87dd50a',
+        }
+        require(type_symbols == prep.get('unstartedProcess') and isinstance(type_symbols, dict), 'same witnessed static type receipt')
+        type_carrier = work / 'outcome-compile-symbols.jar'
+        require(type_symbols['compileCarrier'] == dict(path=str(type_carrier), sha256=sha(type_carrier)) and type_symbols['runtimeInitializationPermitted'] is False, 'immutable own compile-only type carrier')
+        with zipfile.ZipFile(type_carrier) as archive:
+            require(len(archive.namelist()) == 2 and set(archive.namelist()) == {n + '.class' for n in type_hashes}, 'exact two real normal type bytes')
+            require(all(hashlib.sha256(archive.read(n + '.class')).hexdigest() == v for n, v in type_hashes.items()), 'real normal class hash equality')
+        require(physical[type_enum + '.class'] == type_hashes[type_enum] and type_base + '.class' not in physical, 'real enum only, parent absent from runtime/report')
+        require(ids[type_enum] == '9bca5185cf2ba25e', 'real enum static CRC, no prior execution claim')
+        analyzer = work / 'spotbugs-no-outer.pom.xml'
+        require(type_symbols.get('analyzerPom') == dict(path=str(analyzer), sha256=sha(analyzer)), 'exact no-Outer analyzer POM hash')
+        compiler_root = ET.parse(work / 'pom.xml').getroot()
+        ns = compiler_root.tag.split('}')[0] + '}' if '}' in compiler_root.tag else ''
+        deps_node = compiler_root.find(ns + 'dependencies')
+        require(deps_node is not None, 'compiler dependencies')
+        compiler_only = [d for d in deps_node if d.findtext(ns + 'artifactId') == 'real-outcome-compile-symbols']
+        require(len(compiler_only) == 1 and compiler_only[0].findtext(ns + 'systemPath') == str(type_carrier), 'only exact compiler type carrier removed for analysis')
+        deps_node.remove(compiler_only[0])
+        require(ET.tostring(compiler_root) == ET.tostring(ET.parse(analyzer).getroot()), 'independent whole analyzer POM equality, no rule/exclusion change')
+        type_runtime = cmd[cmd.index('--class-path') + 1].split(':')
+        require(type_runtime == [str(work / 'target/classes'), str(work / 'test-classes'), *b['dependencies']] and str(type_carrier) not in type_runtime, 'static carrier never runtime path')
+        type_forbidden = {type_base, type_enum, 'dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot', 'dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess'}
+        require(type_forbidden <= set(c.get('forbiddenInitializedClasses', [])), 'no actual process/Root/snapshot or enum execution permission')
+    else:
+        require(type_symbols is None, 'no implicit unstarted process/type capability')
     analysis_context = prep.get('analysisOnlyContext')
     if c.get('reviewedAnalysisOnlyContext') is not None:
         import pgpt_analysis_symbols as analysis
@@ -187,6 +220,13 @@ def verify(c, config, source):
     if type_only_guard:
         require(all(row['covered'] == 0 for row in counters(classes[guard_name]).values()),
                 'all real unexecuted Guard counters remain fully missed')
+    if type_symbols is not None:
+        never_executed = {type_enum, 'dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot', 'dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess'}
+        for name in never_executed:
+            require(name not in probes and name not in init and all(row['covered'] == 0 for row in counters(classes[name]).values()), 'all unexecuted real type/factory counters remain missed')
+        reader = classes['dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader']
+        streaming = [x for x in reader.findall('method') if x.get('name') in ['executeStreaming', 'queryFailure'] or x.get('name', '').startswith('lambda$executeStreaming$')]
+        require(len(streaming) >= 2 and all(all(row['covered'] == 0 for row in counters(x).values()) for x in streaming), 'unqualified streaming lifetime path never executed or credited')
     targets = {n: counters(classes[n]) for n in c['targetClasses']}
     component = {key: dict(covered=sum(v.get(key, {}).get('covered', 0) for v in targets.values()), missed=sum(v.get(key, {}).get('missed', 0) for v in targets.values())) for key in set().union(*(set(v) for v in targets.values()))}
     component100 = all(component.get(k, {}).get('covered', 0) > 0 and component[k]['missed'] == 0 for k in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
@@ -205,6 +245,9 @@ def verify(c, config, source):
             shutil.copyfile(path, out / name); files[name] = sha(out / name)
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
+    result['unstartedProcess'] = type_symbols
+    result['unstartedProcessInitializationObserved'] = []
+    result['unqualifiedStreamingExecutionObserved'] = False
     result['guardSignature'] = signature
     result['guardExecutionMode'] = 'TYPE_ONLY_ALL_COUNTERS_MISSED' if type_only_guard else ('FRESH_POSITIVE_REQUIRED' if signature is not None else None)
     result['analysisOnlyContext'] = analysis_context

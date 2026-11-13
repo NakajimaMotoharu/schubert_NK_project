@@ -62,3 +62,6 @@ HTTP metrics原whole28の当Program結果は[4188](4188_HTTPメトリクス原�
 
 
 閉host共通工具・群ownerの仕様/metadata結果は[4193](4193_閉host共通工具・群owner検証仕様.md)とPG28194/95/98。41 metadata/source checks・append順序確認は製品PT/coverageへ加算せず、初回必要profile runtime資格は未実施を保持する。
+
+
+[MPOL8静的不足・通常PT未実施](4238_MPOL原七新一静的不足・通常PT未実施結果.md)。Main13/Test8 compileのみ、Missing1/生PMD79未分類、実PT0/coverage未測定、受入0。
