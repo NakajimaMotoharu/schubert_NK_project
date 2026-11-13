@@ -1,5 +1,27 @@
 # PT・IT試験観点詳細設計
 
+## SSC341 Morning既知SQL catalog境界・独立故障PT（2026-11-13）
+
+SS332 SSC341、SS341/343、BUG2852/YKT2359。production分類methodをexpected生成に使わず、fixtureで事前固定したError/unknown object identity、SQLSTATE、固定catalog、literal close/wipe/operation件数と既typed優先を期待値とする。元20変換siteはPG29726の公開source hash/行/捕捉型で固定し、queryのResultSet/Statement二scopeとexecuteの所有connectionを別に確認する。
+
+|Test ID|独立入力・期待値と後条件|
+|---|---|
+|PT-MDB-CAT341-001|非fatal SQL/Batch例外の既固定IOException message/cause/suppressedを保持、成功へ戻さず取得済connection close1/credential消費1。|
+|PT-MDB-CAT341-002|SQL cause/suppressed/nextの各Errorを元identityで伝播。未知provider文字列を新catalogへ出さない。|
+|PT-MDB-CAT341-003|非fatal自己next/相互cause/suppressed循環は有限帰還し既固定診断、同一Throwableの再利用も自己抑制しない。|
+|PT-MDB-CAT341-004|最外known SQL内Error＋未知cleanupの二故障で、分類後の実Errorがprimaryとして保持される。owned close/credentialwipeを省略しない。|
+|PT-MDB-CAT341-005|非fatal SQL primary＋未知cleanupは既cleanup元identityの選択を保持、SQL graphだけを理由に元非fatal型順位を変更しない。|
+|PT-MDB-CAT341-006|body成功＋SQL close内Errorは成功値を返さず元Error、SQL close非fatalは既固定IOException。close再試行0。|
+|PT-MDB-CAT341-007|SQL/Batch primary＋SQL secondaryはprimary graph→secondary graph。片方/両方Errorと両非fatalを独立に確認。|
+|PT-MDB-CAT341-008|checked IOException/CleanupStoppedException primaryの既固定化/typed policyは不変、SQL専用確認を一般化しない。|
+|PT-MDB-CAT341-009|未知Runtime/Error primaryの同一性・fresh固定secondary・suppression無効/同一objectを既表どおり確認、raw secondaryを公開しない。|
+|PT-MDB-CAT341-010|null/欠落・取得前拒否・credential consume/wipe/Properties clear・Session callback後失効と異thread拒否の既契約を退行させない。|
+|PT-MDB-CAT341-011|query rows→statement→owned connectionの必要close各1、未取得close0、追加commit/rollback/SQL/stop0、原role/SQL/bind/timeout/所有後条件を維持する。|
+|PT-MDB-CAT341-012|当source whole MorningDB/owner/実DB依存の関連回帰・全scope四counter・NullAway/静的・原本/同run/同budget/終了依存を照合し、部品source reviewを実所有や正式451に代用しない。|
+
+実環境の前提未成立なら製品PTはNOT_RUN、coverageは未測定として残す。新しいfake DB/Root/issuer authority、held Testのmethod抽出、拒否操作のprobe/retryを行わない。独立した既許可host作業は継続できる。PG/静的代替は製品PT PASS・実測counter・正式1964/53・IT/STに加算しない。
+
+
 ## SSC340 条件付きNN・複合CHECK NULL負例PG/PT（2026-11-13）
 
 BUG2846/YKT2405、SS331 SSC340、WBS-P004-01.01～03。独立期待値は次表の正常/拒否結果とSS331に置き、production SQL式やproduction methodをexpected生成器にしない。各負例は他のNN/FK/state/size条件を満たした合成rowを使い、SQLSTATE23514に加えて対象constraint名を確認する。他制約やFKによる拒否を当条件の再試験成功へ算入しない。
