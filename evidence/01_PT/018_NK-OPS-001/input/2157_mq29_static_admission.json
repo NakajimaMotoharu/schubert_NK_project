@@ -1,0 +1,354 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28602-MQ-WHOLE6-INDEPENDENT29-NORMAL",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28592-mq29-retained-prepare-v1/manifest.json",
+    "sha256": "7c6ef2db3d25e58482d8898755496439103acf333f8d24a2848b238287467e2c"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28594-mq29-retained-static-v1/manifest.json",
+    "sha256": "fca5f6873844c062551d1859dd9da2167adfcd71a9f730050ebebb92034e29dd"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (RuntimeException | Error unknown) {",
+      "sourceLine": 101,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (RuntimeException | Error unknown) {",
+      "sourceLine": 101,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Exception in try-catch block",
+      "sourceAnchor": "} catch (Exception failure) {",
+      "sourceLine": 103,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (failure instanceof InterruptedException) Thread.currentThread().interrupt();",
+      "sourceLine": 109,
+      "occurrences": 1,
+      "reason": "SS321/343 checked management interruption must restore the calling thread interrupt flag before propagating the fixed failure or original fatal. These exact two sites create no thread or pool and are outside the J2EE container-managed thread-use rule.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "sourceLine": 288,
+      "occurrences": 1,
+      "reason": "SS321/343 checked management interruption must restore the calling thread interrupt flag before propagating the fixed failure or original fatal. These exact two sites create no thread or pool and are outside the J2EE container-managed thread-use rule.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (RuntimeException | Error unknown) {",
+      "sourceLine": 321,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (RuntimeException | Error unknown) {",
+      "sourceLine": 321,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Exception in try-catch block",
+      "sourceAnchor": "} catch (Exception failure) {",
+      "sourceLine": 323,
+      "occurrences": 1,
+      "reason": "SS321 management SDK declares checked Exception for operation encoding and ClientRequestor cleanup. Both exact Runtime/Error clauses immediately rethrow the same object; the following checked-only catalog preserves fatal graphs, restores IRQ and retains existing IOException normalization. NPE is never caught and treated as a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 36,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "var session = unusedSession(uses);",
+      "sourceLine": 64,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "var session = unusedSession(uses);",
+      "sourceLine": 98,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "ClientSession session = unusedSession();",
+      "sourceLine": 60,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 364,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertFalse(Thread.currentThread().isInterrupted());",
+      "sourceLine": 166,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "boolean original = Thread.interrupted();",
+      "sourceLine": 171,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(Thread.currentThread().isInterrupted());",
+      "sourceLine": 192,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(Thread.interrupted());",
+      "sourceLine": 194,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 197,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (original) Thread.currentThread().interrupt();",
+      "sourceLine": 198,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 216,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 64,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientMessage.class.getClassLoader(),",
+      "sourceLine": 27,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertFalse(Thread.currentThread().isInterrupted());",
+      "sourceLine": 81,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "declared instanceof InterruptedException, Thread.currentThread().isInterrupted());",
+      "sourceLine": 102,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 103,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 106,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "var session =",
+      "sourceLine": 121,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 124,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertFalse(Thread.currentThread().isInterrupted());",
+      "sourceLine": 143,
+      "occurrences": 1,
+      "reason": "This exact JUnit assertion/injection/finally restoration concerns the current fixture thread interrupt bit only. It neither creates an application thread nor operates a service. Fatal propagation and restoration are independent expected outcomes, and the fixture clears/restores its prior bit on every exit.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "ClientSession session = unusedSession();",
+      "sourceLine": 33,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "ClientSession session = unusedSession();",
+      "sourceLine": 50,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ClientSession object are closed after use",
+      "sourceAnchor": "ClientSession session = unusedSession();",
+      "sourceLine": 75,
+      "occurrences": 1,
+      "reason": "The declared ClientSession is an in-memory JDK Proxy from this whole fixture; its handler rejects unanticipated methods and opens no connection, transport or OS resource. The Production contract borrows the supplied interface and must not close it. Calling close here would invoke an unintended provider method rather than release an owned resource; all handler counts and early-stop postconditions are asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "message": "Avoid using literals such as 5 in if statements",
+      "sourceAnchor": "if (failing == 5) throw new IllegalArgumentException(\"synthetic private broker reply\");",
+      "sourceLine": 146,
+      "occurrences": 1,
+      "reason": "This one immutable independent oracle enumerates the six approved read stages as ordinals 0..5 and injects failure at the final pressure stage5. The same whole Test asserts failedStep+1 callbacks and their exact literal sequence. The ordinal is fixed fixture input from SS321 six-stage order, with no configurable business value or Production-derived expected constant; this disposition applies only to this exact hashed source line146.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ClientSession.class.getClassLoader(),",
+      "sourceLine": 185,
+      "occurrences": 1,
+      "reason": "This whole pure JUnit fixture implements the explicit fixed vendor ClientSession or ClientMessage interface through a typed Proxy. The defining interface loader preserves SDK method identity. There is no application class discovery, arbitrary loader input, native type or J2EE deployment-context lookup.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

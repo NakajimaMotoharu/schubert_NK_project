@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-13T09:55:56.780">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java">
+<violation beginline="101" endline="101" begincolumn="14" endcolumn="30" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="encodeOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="101" endline="101" begincolumn="33" endcolumn="38" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="encodeOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="103" endline="103" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="encodeOperation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Exception in try-catch block
+</violation>
+<violation beginline="109" endline="109" begincolumn="50" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="managementFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="288" endline="288" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="321" endline="321" begincolumn="14" endcolumn="30" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="query" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="321" endline="321" begincolumn="33" endcolumn="38" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="query" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="323" endline="323" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementReadinessClient" method="query" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Exception in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java">
+<violation beginline="36" endline="36" begincolumn="13" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="AcceptorObjectBoundaryTest" method="unusedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="64" endline="64" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="AcceptorObjectBoundaryTest" method="opsMqObj001RejectsEachNonObjectExtraPropsBeforeStartedRead" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="98" endline="98" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="AcceptorObjectBoundaryTest" method="opsMqObj002RejectsEachNonObjectParamsBeforeStartedRead" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java">
+<violation beginline="60" endline="60" begincolumn="19" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="AcceptorPolicyPortTest" method="exactSingletonReturnsSevenLiteralFieldsAndImmutableIndependentResults" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="364" endline="364" begincolumn="13" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="AcceptorPolicyPortTest" method="unusedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisCatalogFatalBoundaryTest.java">
+<violation beginline="166" endline="166" begincolumn="17" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="checkedEncoderGraphPreservesFatalAndExistingIoContract" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="171" endline="171" begincolumn="24" endcolumn="30" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="192" endline="192" begincolumn="20" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="194" endline="194" begincolumn="20" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="197" endline="197" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="198" endline="198" begincolumn="21" endcolumn="27" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="216" endline="216" begincolumn="13" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisCatalogFatalBoundaryTest" method="failing" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java">
+<violation beginline="64" endline="64" begincolumn="13" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisDetailedValuesTest" method="unused" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java">
+<violation beginline="27" endline="27" begincolumn="17" endcolumn="53" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="encoderForwardsExactInputsAndRejectsMissingPort" variable="message" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="81" endline="81" begincolumn="17" endcolumn="23" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="encoderPreservesUnknownAndRedactsDeclaredFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="102" endline="102" begincolumn="55" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="encoderPreservesUnknownAndRedactsDeclaredFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="103" endline="103" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="encoderPreservesUnknownAndRedactsDeclaredFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="106" endline="106" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="encoderPreservesUnknownAndRedactsDeclaredFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="121" endline="121" begincolumn="11" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="124" endline="124" begincolumn="19" endcolumn="55" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="143" endline="143" begincolumn="19" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisManagementEncoderBoundaryTest" method="parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisParentDeadlineTest.java">
+<violation beginline="67" endline="67" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisParentDeadlineTest" method="exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="68" endline="68" begincolumn="19" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisParentDeadlineTest" method="exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="115" endline="115" begincolumn="29" endcolumn="35" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisParentDeadlineTest" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="119" endline="119" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.mq" class="ArtemisParentDeadlineTest" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java">
+<violation beginline="33" endline="33" begincolumn="19" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisStartupObservationTest" method="opsMq029OrderedReadOnlyObservation" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="50" endline="50" begincolumn="19" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisStartupObservationTest" method="opsMq030FailClosedAndNoLaterChecks" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="75" endline="75" begincolumn="19" endcolumn="26" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisStartupObservationTest" method="opsMq031MalformedPressureAndFatalContracts" variable="session" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ClientSession object are closed after use
+</violation>
+<violation beginline="146" endline="146" begincolumn="26" endcolumn="27" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisStartupObservationTest" method="assembly" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 5 in if statements
+</violation>
+<violation beginline="185" endline="185" begincolumn="13" endcolumn="49" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.mq" class="ArtemisStartupObservationTest" method="unusedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

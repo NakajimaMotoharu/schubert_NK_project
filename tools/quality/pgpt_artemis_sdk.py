@@ -32,12 +32,14 @@ MAIN_PATHS = frozenset(MAIN_BASE + n + '.java' for n in MAIN_NAMES) | {STORAGE}
 TEST_BASE = MAIN_BASE.replace('/src/main/', '/src/test/')
 TEST_NAMES = frozenset([
     'ArtemisStartupObservationTest', 'ArtemisDetailedValuesTest',
-    'ArtemisParentDeadlineTest', 'ArtemisManagementEncoderBoundaryTest',
+    'ArtemisManagementEncoderBoundaryTest',
     'AcceptorPolicyPortTest', 'AcceptorObjectBoundaryTest',
     'ArtemisCatalogFatalBoundaryTest',
 ])
 TEST_PATHS = frozenset(TEST_BASE + n + '.java' for n in TEST_NAMES)
 FORBIDDEN_INIT = frozenset([
+    # BUG2773: its default Guard negative branch requires the held Outer runtime.
+    'dev/codex/schubert/nk/batch/mq/ArtemisParentDeadlineTest',
     'org/apache/activemq/artemis/api/core/client/ActiveMQClient',
     'org/apache/activemq/artemis/api/core/client/ClientRequestor',
     'org/apache/activemq/artemis/core/client/impl/ServerLocatorImpl',

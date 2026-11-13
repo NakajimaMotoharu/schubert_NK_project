@@ -1,0 +1,37 @@
+
+Failures (1):
+  JUnit Jupiter:ArtemisParentDeadlineTest:exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime()
+    MethodSource [className = 'dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest', methodName = 'exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.io.IOException> but was: <java.lang.NoClassDefFoundError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest.exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime(ArtemisParentDeadlineTest.java:88)
+       [...]
+     Caused by: java.lang.NoClassDefFoundError: dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame
+       dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame$Guard.check(MaintenanceOwnerFrame.java:41)
+       dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient.withParentDeadline(ArtemisManagementReadinessClient.java:47)
+       dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest.lambda$exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime$8(ArtemisParentDeadlineTest.java:91)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+     Caused by: java.lang.ClassNotFoundException: dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame
+       java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:377)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:557)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+       [...]
+
+Test run finished after 513 ms
+[        10 containers found      ]
+[         0 containers skipped    ]
+[        10 containers started    ]
+[         0 containers aborted    ]
+[        10 containers successful ]
+[         0 containers failed     ]
+[        31 tests found           ]
+[         0 tests skipped         ]
+[        31 tests started         ]
+[         0 tests aborted         ]
+[        30 tests successful      ]
+[         1 tests failed          ]
+
