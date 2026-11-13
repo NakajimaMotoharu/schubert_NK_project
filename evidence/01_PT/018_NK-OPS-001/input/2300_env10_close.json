@@ -1,0 +1,79 @@
+{
+  "groupId": "PGPT-WBS65-BUG2830-INSPECTOR-PURE-ENV-ORIGINAL-WHOLE10-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1503_WBS65Inspector環境通常十結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29392-env10-current-source-join-v1/manifest.json",
+  "manifestSha256": "efaf4f81d031effbd2285c91d89fd8e8a4e0cae4df27c67a3a6ee07566235f8d",
+  "terminalAtUTC": "2026-11-13T10:34:45.151918+00:00",
+  "run": "PG29392",
+  "workIds": [
+    "P00404_PURE_ENV10_FINITE_NORMAL"
+  ],
+  "outcome": "INSPECTOR_ENV_ORIGINAL_WHOLE10_FINITE_WORKER_TARGET_FOUR100_PARENT_HOLD",
+  "technical": {
+    "kind": "INSPECTOR_ENV_ORIGINAL_WHOLE10_FINITE_WORKER_TARGET_TWO_SOURCE_FOUR100",
+    "source": "a41eec5d479d41530aba757babee17059e0a57c1",
+    "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29382-env10-post-v1/manifest.json",
+      "sha256": "6935762b175fedac0b7cd6c069ce3b57519b37f4a2dea7df4ab527c6d8b00a43"
+    },
+    "tests": 10,
+    "newDefinitions": 0,
+    "MainChanged": false,
+    "testClassesChanged": 2,
+    "physicalClasses": 3,
+    "targetSourceCount": 2,
+    "targetCounters": {
+      "LINE": {
+        "covered": 23,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 18,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 124,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 14,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": 7,
+        "BRANCH": 3,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 1
+      }
+    },
+    "newAcceptance": 0,
+    "effortRate": null,
+    "appRoster": {
+      "runs": 89,
+      "actualExecutions": 3905,
+      "success": 3876,
+      "failed": 29,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    },
+    "toolRosterNotCombined": true
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1502_WBS65予実・Inspector環境通常十後版367.json",
+    "sha256": "4e94305ab79ae4e00fcd4f84072b370b0f56946d40a747764e272e7f0179e962"
+  },
+  "checkpointText": "InspectorRunEnvironment原4+StaticEnvironment原6の全10件を固定sourcea41eec5d479dで通常実行、全成功/FESabort0、PG29382独立post0。元golden/期待値は正規化inverseで全件不変、新定義0/Main変更0。BUG2830の無期限invokeAll/TWRcloseをtimed5秒＋finally shutdownNow/await10秒へ是正し、worker終端assert合格。RootJava25NullAway Main3/physical3compile0、SB bugs/missing/errors0・GJF/CS0、RootPMD生10は実際の2有限JUnit fixtureだけへ個別分類し適用/未分類0、抑制0。対象2全sourceはI124/L23/M5/C2/B18 miss0で四100。関連BatchRun未網羅I7/B3/L2/M1を全scopeへ保持し除外/旧exec合算0。公開template一件のみ固定読取、actualRoot/VM/DB/key/native/actual4.class操作0。BUG2831 modulePOM誤継承は元profile/styleを保存して別profileのbatchPOMで再style/compile/static/postを確認。元190新0/正式1964-53/工数null、App技術roster89run/3905実行/3876成功/歴史29失敗、Toolとは別。",
+  "nextCommand": "Startpriced P00404_SIX_MAIN_SOURCE_FIXES .5/1.5/3cap4 fromforecast366 remaining367 once: BUG2825/26/27/2829 sixMain minimalexistingfatalgraph guard/seek EOF position checks. Revieweachwhole source andrelated publichelper/SS; sourcePG/inverse/GJF-CS only, noactual4.class/Root/native/DB/credential/wholeheldTests. Runtime newcases unpricedNULL/held, noPTcoverage acceptance. ThenpricedBUG2828handoff bookkeeping audit .2/.6/1.2cap2, preserveunknownprimary/reacquirefinally; existingBUG2783 remainsHOLD."
+}
