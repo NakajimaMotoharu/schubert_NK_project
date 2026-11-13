@@ -1,5 +1,24 @@
 # DB物理・DDL・index・権限設計
 
+## SSC340 nullable複合CHECKのTRUE確定・V029追補（2026-11-13）
+
+BUG2846/YKT2405、WBS-P004-01.01～03、DAT001～009/UI241242243、PT-DB-NULL340-001～015。既承認の条件付きNN・ペアNULL・状態/参照整合をSQLへ落とす詳細補足であり、列・table・role/grant・index・wire・業務状態・保持期限を追加/変更しない。[PostgreSQL18 CHECK仕様](https://www.postgresql.org/docs/18/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS)では条件のNULLも通過するため、単にnullable値をIN/比較/正規表現/byte長へ渡しただけで条件付きNNを証明してはならない。
+
+次の五制約は正規条件全体のTRUEだけを許可し、FALSE及びNULL/UNKNOWNは23514として拒否する。`IS TRUE`又は同じ三値論理を確実に二値化する明示NN条件を用いる。既存の正常値・正常なNULL組合せと境界は保持する。
+
+|Table / constraint|正規条件・条件付きNN|半端NULLの独立拒否例|
+|---|---|---|
+|`auth_sessions.ck_auth_sessions_revocation`|未失効はrevoked_at/revoke_reasonともNULL。失効済はrevoked_at NN、revoke_reasonは既6値LOGOUT/DISABLED/PASSWORD_RESET/ADMIN/EXPIRED/REPLACEDのNN。|revoked=true、revoked_at有、revoke_reason=NULL|
+|`media_assets.ck_media_assets_pair`|VIDEOはpair_key/pair_roleともNULL。MUSICはpair_role NNでM/I/Nだけ。M/Iはpair_key NNかつ1～256 UTF-8 byte、Nはpair_key NULL。|MUSIC＋M/I＋keyNULL、MUSIC＋roleNULL|
+|`notifications.ck_notifications_error`|ERRORは既5値error_code NNとerror_message NN。他stateは両NULL。|ERROR＋codeNULL＋message有|
+|`request_inbox.ck_request_inbox_response_snapshot_pair`|body/keyともNULL、又はbody NNで29～1,050,000 byteかつkey NN/既ID format。再構成不可結果のsnapshot必須は324/352の既規則を維持。|ciphertext有＋keyNULL|
+|`request_inbox.ck_request_inbox_result_reference`|PROCESSING用の全NULL、NONE＋両refNULL、AUTH_SESSION＋UUIDだけNN、USER/QUESTION/JOB/SCENARIO_FILE＋N12 bigint IDだけNN。state側の条件も従来どおり適用。|USER等type有＋idNULL＋uuidNULL|
+
+V001～028とprovisioning/001_roles.sqlのbyte/checksumを保持し、`V029__strict_nullable_compound_checks.sql`で同名五CHECKをFlyway所有の同一migration transaction内に置換・検証する。NOT VALIDで既データを見逃さず、既存不整合でvalidationが失敗した場合はtransactionをrollbackして旧定義/旧行を保全する。値の推測、理由の補完、半端pairの削除/正規化、既migrationの書換えを行わない。制約数159/24 table、FK/UK/index/role/grant・既成功応答は不変更とし、版29の正常適用・拒否・旧checksum・schema履歴を独立照合する。
+
+NULLを明示的に許すoptional条件、特にQA050のpending_context_revocations.expires_at=NULL（未知期限）は本是正の対象外であり、NULLから削除許可や認可を作らない。SQL外の参照実在/暗号/owner検査もこのCHECKで代替しない。DDL作成/公開・静的確認はDB適用やDB PT合格を意味せず、既存実DB/権限/VM等HOLDは維持する。
+
+
 SSC310補足（BUG1530/YKT1290、2026-10-20）：SSC200の保持Expiry監査readbackはSS332SSC310に従い、read内owned Statement/ResultSet二scopeで既SSC063199例外順位を維持する。未知provider障害をclose SQLで置換せず、DB不正投影とprovider未知を分離する。DB schema/DDL/grant/SQL/監査全列・元cutoff/同日SUCCESS・query前後guard/借用transactionは不変更。SS343SSC304のsuccessful直下JavaTWRとstage/finish直下契約は別scopeとして維持する。設計反映自体は当source PG/PT・実DB/原本/native成功を意味しない。
 
 SSC201（2026-10-06、SSC200/BUG788/YKT562、実装前具体化）：V028はmaintenance_read_success_progress(uuid,timestamptz,text,timestamptz)をappend-only追加する。引数は元run、原本元cutoff、CLEAN_LOGまたはCLEAN_INBOX_OUTBOX、元SUCCESS ended_at。NULL/非finite/UTC0001～9999外/未知stepは22023、自己backend/現在DB/bigint71419602 Exclusive granted不足は55000。nk_owner/SECURITY DEFINER/search_path=pg_catalog,schubert/TimeZone=UTC、PUBLIC REVOKE・schubert_batchだけEXECUTE。関数はOS/原本/成功rowの権限を授与せず、借用READ COMMITTED TX/同DB排他のもとで固定PK全rowを一度読むだけ。不存在0行、cutoff不一致/END欠落・非finite/END<cutoffまたはEND>元SUCCESS終了/全count非負・算術不一致/cursor NULL契約・Log位置境界不整合は55000。Log全8列とInbox全7列をrow_to_json全row/UTC textとしてSHA256(convert_to(...,'UTF8'))→lowerhex64のproof_sha256 text一列へsealし、cursor/参照ID/秘密のrawを返さない。基表grant/DML/row lock/修復/補完0、新table/index/column0、V001～027不変。累積progressは試行間継承を許すため一試行の件数と安易に同値にせず、完全SUCCESS14列・元原本と別に全保存状態/ENDを照合する。独立fixed JSON hash・全拒否・権限と旧migration hash/SQL後条件をPTし、同新source DB/BOM schema許可/Backup検査/nativeを横断する。
