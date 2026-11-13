@@ -1,0 +1,112 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T17:51:42.001733+09:00",
+  "source": "86cf0a831a3e35524a3d9d3e92258381ac5dfb23",
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java": "65258747a2876004a921a86841b9bea32cd599a9301d7d6fb9e97c0fcec3db49",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java": "dcd291953325f6023c13cc65a096031c910891267080ebe47a1f7d035e85865b"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 129,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/200_UI/210_アーキテクチャ/212_コンポーネント・接続設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00405-ORACLE01",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java",
+      "methods": "ApiJdbcPool.constructor/open",
+      "testIds": [
+        "PT-OPS-DBPOOL-001..003"
+      ],
+      "expected": "SS311/342/343 callerownsadmittedsource/credential/role andlifetime. Real failfastHikari boundedpool max8/min2/connect3000/validate2000/init1ms, autoCommittrue/readOnlyfalse/noMBean; no lazy-success. Opening pool isnot DB/JMS readiness or authorityproof. UTC/role/timeouts inheritedfromadmittedSource and343environment, not guessed bypoolwrapper. RealPG wholeTest BeforeAllrequired, HOLD/no parameter-null method extraction."
+    },
+    {
+      "id": "P00405-ORACLE02",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+      "methods": "RequiredColumn.requireValue",
+      "testIds": [
+        "PT-QUALITY-002"
+      ],
+      "expected": "RD DAT009/UI241242/SS331332354: nonnull JDBCvalue returnedbyidentity withno default/conversion; SQL NULL throwsredacted SQLDataException SQLSTATE22004/fixedsafe message/no cause. Existingwhole1 independentlyassertsString/Instant/bytearray identity andnullboundary. JSpecify nullableinput/nonNullreturn pluspackageNullMarked, no driverannotationassumption. Originalsource/Testunchanged since7aed; no confirmationreplay."
+    },
+    {
+      "id": "P00405-ORACLE03",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java",
+      "methods": "JdbcSyncRequestProcessor.constructor/process",
+      "testIds": [
+        "PT-AUT-TX-001..004",
+        "TX329001..008",
+        "BOUNDARY329001..002",
+        "ATTACHMENT330001..003"
+      ],
+      "expected": "SS311312324332: oneownedConnection perrequest, autoCommitfalse; Clock.instant onceforhandler; commitbefore return/reply, close beforecallerreceivesbytes; no JMS/noXA/noautomaticDBretry. SQL/RTE/Error fromhandler/commit rollsbackonce; rollbacksecondarycannot skipconnectionclose. setAutoCommitfailure beforeinnertransaction stillTWRclose, no inventedrollback. Permanentprotocol returnsfixedprotocolonlyifcleanupconfirmed; uncertaincommit/close/nonfatalfailurefixedTemporary, fatalgraphsameError retained. ActualTemporaryInfrastructureException.class HOLD/no compile/loading; no fakeauthority replacement."
+    },
+    {
+      "id": "P00405-ORACLE04",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java",
+      "methods": "LogProjectionDatabaseException.constructor",
+      "testIds": [
+        "PT-IDEM-012",
+        "WebLogIngestServiceTest.transactionFailuresNeverReportSuccessAndAlwaysReleaseConnection"
+      ],
+      "expected": "SS312351 uncertainDB projection isretryable, not successfulACK, no rawSQL/parameter/cause construction inthisnoargerror. Fixed internal diagnostic only; caller TX/ACK resourceconditions validated byownWebLogingest scope. ExistingwholecallerincludesrealDB andembeddedArtemis, HOLDwholeclass/no method extraction; constructor sourcealone isnot DBpostcondition qualification."
+    },
+    {
+      "id": "P00405-ORACLE05",
+      "artifact": "RELATED_SS332_UTC_AND_OWNER_BOUNDARIES",
+      "methods": "shared JDBC4.2 UTC bind/read andouter transaction owner",
+      "testIds": [
+        "PT-QUALITY-002",
+        "PT-AUT-TX-001..004"
+      ],
+      "expected": "SS332section2/SSC056 fixedUTC: setObject Instant.atOffset(UTC), getObject OffsetDateTime thennullcontract andtoInstant; noTimestamp/getTimestamp defaultzone/historicalcalendar. RequiredColumn checksnullonly, poolwrapper doesnot bindtimestamps, actualbindsownedbyrepositoryotherWBSnotrecosted here. Source4have noTimestampcalls. SinglebusinessInstant andTX lockconditionsseparatefromJMS/outboxstageclock. F02/F03/wholeDB/realnativeendingdependencies remainunaccepted."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P004-05/1"
+  ],
+  "endingStatus": "ORIGINAL_PUBLIC_CONTRACT_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2283_p00405_original_contract_config.json",
+    "sha256": "c05df6862bea1a619df61d96b67d63681750c970752fa0ab7703966c414d3d95"
+  }
+}
