@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -64,11 +65,15 @@ final class ServiceCredentialLocationTest {
   @Test
   void opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot() throws Exception {
     Path expected = Path.of(ROOT);
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       var tasks = new java.util.ArrayList<java.util.concurrent.Future<Path>>();
       for (int i = 0; i < 32; i++)
         tasks.add(pool.submit(() -> ServiceCredentialLocation.read(Map.of(KEY, ROOT)).directory()));
       for (var task : tasks) assertEquals(expected, task.get(10, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "fixture workers not stopped");
     }
   }
 

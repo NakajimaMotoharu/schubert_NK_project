@@ -1,0 +1,116 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T22:10:23.508355+09:00",
+  "source": "77406885c4e28d8b85e88079ed7b47c1ec8c4c52",
+  "productionCoreMain": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "ownedSourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java": "1d6f6922f1ed8ecdd2df6a3eddb62f059952ac43eeaa34f6a0aaa6cb4a58f2a7",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "5764718de5644b4e008e5407748b277cdd1e87abf001889a555a2e802c58b99a"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 328,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/253_性能・容量・可用性・セキュリティ設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "edc41bda36671fb2f5e1a446ec2167b4ded902889876cedaffd07d2a6d34de07"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00307-NonSecretConfigSource",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java",
+      "methods": "read(Service)/Contents contract",
+      "testIds": [
+        "PT-OPS-CFGFILE-001",
+        "PT-OPS-CFGFILE-007"
+      ],
+      "expected": "SS3434 fixednonsecretYAML sourceinterface, NullMarked serviceinput/Contentsoutput; no secrets/env/file/authorityoperationininterface. YAMLsemantic validation/crossfileatomicrollout belongsstartupcaller."
+    },
+    {
+      "id": "P00307-ServiceConfigFiles",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+      "methods": "production/Service/Contents/read/inspect/readOne/checked/Snapshot",
+      "testIds": [
+        "PT-OPS-CFGFILE-001",
+        "PT-OPS-CFGFILE-007"
+      ],
+      "expected": "SS3432/4 exactcommon.yml thenapi.ymlorweb.yml underadmittedretaineddirectory, rootproduction/etc/schubert-nk identityroot/schubert. 1..16384bytes strictUTF8REPORT, channelreadpositiveprogress/nomore16384, before/afteridenticaldevice/inode/mode/nlink/size/ctime andsizebefore/after. dir0750/nlink>=1,file0640/nlink1; exactprincipal/integer/long/FileTime types andexpecteddevice. Closeownedchannel/entry/root once, fixedunavailable nofile/pathdiagnostics, no create/repair/chmod/secretread. StaticouterRETAINED_PRODUCTION bindsLinuxDirectoryCalls: actualouterinitialization/wholeconfigIO remainsHOLD, dataenum reference alone doesnotproveadmission."
+    },
+    {
+      "id": "P00307-ServiceCredentialId",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+      "methods": "enum constants/forService/service/fileName/kind",
+      "testIds": [
+        "PT-OPS-CREDID-001",
+        "PT-OPS-CREDID-004"
+      ],
+      "expected": "SS3423436 exactAPI5 db-api,mq-api,api-context-aes-current,api-inbox-response-aes-current,operation-hmac-current; Web5 db-web,mq-web,web-session-aes-current,web-revoke-aes-current,web-log-aes-current. First2PASSWORD,last3KEY each, immutableordereddisjoint10 closedIDs; nullservice boundaryreject, nofilename construction/fallback/actualcredentialIO. Enumlabelsarenonsecretmetadata; realwholeOuterbyte/initializerclosure mustbequalifiedbeforedataTestexecution, no signaturefake."
+    },
+    {
+      "id": "P00307-ServiceCredentialLocation",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+      "methods": "read/directory/toString",
+      "testIds": [
+        "PT-OPS-CREDLOC-001",
+        "PT-OPS-CREDLOC-005"
+      ],
+      "expected": "SS3434/6 onlyexplicitMap CREDENTIALS_DIRECTORY key, rejectnullkey/casealias, missing/null/empty/>4096/NUL/CR/LFvalue; lexicalabsolute/nonnormalized/nonrootpath, 4096boundaryallowed, noenvget/fileexists/credentialbytequery. CaptureonlyPath notunrelatedMap values, toStringfixedREDACTED. IndependentPath.ofliteralexpected/null/control/concurrency5wholeTests usefreshsyntheticMap, noactualrootorcredentialoperation. ExistingBUG1798/2465 finitegetsourcehistory kept; outerexecutorclose needs finitecleanup beforefreshwhole5 normalPT."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P002-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P003-07/1"
+  ],
+  "endingStatus": "ORIGINAL_NONSECRET_CONFIG_AND_LOCATION_PUBLIC_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2363_p00307_audit_contract.json",
+    "sha256": "7ff00ee61434c151c40019d5a8f1a46e118a01da3e0cae07aa67ee8b23d24bf1"
+  }
+}

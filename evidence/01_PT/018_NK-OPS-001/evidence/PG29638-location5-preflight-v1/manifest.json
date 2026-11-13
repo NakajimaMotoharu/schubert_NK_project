@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2367_location5_closed_profile.json",
+    "sha256": "e4a11cf58ddf62ca81880ba398f93829708207943902c6e00b5d5fb4d320f1cc"
+  },
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "5764718de5644b4e008e5407748b277cdd1e87abf001889a555a2e802c58b99a",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java": "fad1b3c44ba57b7e00ae2052bc8830c4ec12f05dddd07984843a362ea2fe3591",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29634-location5-prepare-v1/manifest.json",
+    "sha256": "27d2582815e27599fd931d80e2fe369804c1b92b9aa630deb0eebdb698f23ef8"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29636-location5-static-v1/manifest.json",
+    "sha256": "300c69557c39c8047236827d135fc01397e174591e81524557e60433e2509c38"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2368_location5_static_admission.json",
+    "sha256": "d6df93c9709f92b9d2e0bea7bc8d170f60bc4049be8914dec3899215040d257a"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "CloseResource",
+      "line": "68",
+      "reason": "WholeTest opsCredloc005 owns this localExecutorService in plaintry/finally, always shutdownNow and awaitTermination10seconds withfailedassert ifnotterminated. An unboundedTWRclose was the recordedBUG2844; explicittermination isresource release, not an omittedrelease. PureMap/Path32 tasks/get10 retained, actualfullTesttermination mustpass in newUnit beforequalification.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "68",
+      "reason": "This exactsite is Test-localfixedpool8 allocation. PMD rule targets J2EE application/service thread creation; thisis the owned JUnitfixture, noServlet/business/Root/nativeworker. No blanketTest exemption: eachsite isboundtofullsourcehash andthe whole5 mustprove its finitecleanup; noactualenv/file/credentialaccess.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "72",
+      "reason": "This exactsite is Test-local32 pureMap/Path submissions. PMD rule targets J2EE application/service thread creation; thisis the owned JUnitfixture, noServlet/business/Root/nativeworker. No blanketTest exemption: eachsite isboundtofullsourcehash andthe whole5 mustprove its finitecleanup; noactualenv/file/credentialaccess.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "75",
+      "reason": "This exactsite is finally-ownedshutdownNow. PMD rule targets J2EE application/service thread creation; thisis the owned JUnitfixture, noServlet/business/Root/nativeworker. No blanketTest exemption: eachsite isboundtofullsourcehash andthe whole5 mustprove its finitecleanup; noactualenv/file/credentialaccess.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "76",
+      "reason": "This exactsite is finally-ownedawaitTermination10withassertTrue. PMD rule targets J2EE application/service thread creation; thisis the owned JUnitfixture, noServlet/business/Root/nativeworker. No blanketTest exemption: eachsite isboundtofullsourcehash andthe whole5 mustprove its finitecleanup; noactualenv/file/credentialaccess.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

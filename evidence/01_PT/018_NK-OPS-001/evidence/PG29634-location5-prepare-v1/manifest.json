@@ -1,0 +1,122 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2367_location5_closed_profile.json",
+    "sha256": "e4a11cf58ddf62ca81880ba398f93829708207943902c6e00b5d5fb4d320f1cc"
+  },
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "5764718de5644b4e008e5407748b277cdd1e87abf001889a555a2e802c58b99a",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java": "fad1b3c44ba57b7e00ae2052bc8830c4ec12f05dddd07984843a362ea2fe3591",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/storage/ServiceCredentialLocation.class": "d07c26eea0b9e34ed669ab09ee192e5c34d56d3561edecaa49a4ca3ea734594b"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.class": "7eb1c528d996709da79bbc7d68607787364b149e86a3e241dfa9fcd2c01aacdb"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "name": "opsCredloc001AcceptsPrivateAbsoluteLocationWithoutOtherEnvironmentRetention()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "name": "opsCredloc002RejectsMissingEmptyRelativeAndRoot()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "name": "opsCredloc003RejectsAliasTraversalAndControlBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "name": "opsCredloc004BoundsAndNullContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest",
+      "name": "opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.storage.ServiceCredentialLocationTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T13:15:04.170859+00:00",
+      "endUTC": "2026-11-13T13:15:06.691841+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29634-location5-prepare-v1",
+      "stdoutSha256": "684e27c192d9c70b8c8d16e0497eb265b12c39ff62d9a84418fd6fde27b45093",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T13:15:06.692171+00:00",
+      "endUTC": "2026-11-13T13:15:07.358603+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29634-location5-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29634-location5-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29632-location5-prestyle-v1/manifest.json",
+    "sha256": "2e9f157c23fd0235514117b149002a63a301d90853d7bc2096f26e21a0a4c845"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "32e6760a01f8fba647f6306d1af88cdbbe5f8c423ac86df7affc15022879cf46",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 1,
+  "reusedRuntimeSignatureClassCount": 0
+}
