@@ -1,0 +1,15 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T17:08:41.501192+00:00",
+  "bug": "BUG2862",
+  "horizontal": "YKT2387",
+  "source": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+  "sha256": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1",
+  "method": "concurrentIndependentConsumption",
+  "wholeDefinitions": 9,
+  "observation": "invokeAll(tasks) withouttimeout, result.get withouttimeout andimplicitExecutorclose unbounded; 32canonicaldata tasks intended finite",
+  "plannedFix": "submit32, Future.get5seconds each, explicitfinallyshutdownNow/await10assert, preserveallold9goldens/bytewipe/null/boundary checks",
+  "productTestsExecuted": 0,
+  "newCostNotYetAdded": true,
+  "authorityBackendOperations": 0
+}

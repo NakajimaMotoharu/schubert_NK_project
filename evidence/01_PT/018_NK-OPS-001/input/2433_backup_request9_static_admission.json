@@ -1,0 +1,74 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30020-BACKUP-PURE-REQUEST9",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30014-backup-pure-request9-prepare-v1/manifest.json",
+    "sha256": "cd9c08bf0741d87948924fbf46578d8dc513219a5f9f6981bd5b0bc129448faa"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30016-backup-pure-request9-static-v1/manifest.json",
+    "sha256": "f4e7fbd53a80b6ddc8bfbf8a4923496678967afa18fe825cb0401782aec09bfb"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "sourceLine": 171,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact executor is acquired before try and every exit executes finallyshutdownNow plus boundedawaitTermination10s and nonterminationfailingassert. ExecutorService.close would be unbounded; no returnedorignoredowner, no actualBackup process.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "sourceLine": 171,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact pool/submit/shutdown/await site is in a whole JUnit pure codec Test, not a managed J2EE application. It owns4workers/32independentbytefixtures, joinswithFuture5s andfinallyshutdownNow-await10assert; no business async/Root/native/Backup authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 176,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact pool/submit/shutdown/await site is in a whole JUnit pure codec Test, not a managed J2EE application. It owns4workers/32independentbytefixtures, joinswithFuture5s andfinallyshutdownNow-await10assert; no business async/Root/native/Backup authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 185,
+      "occurrences": 1,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "reason": "The exact Testfinally checks requiredworkertermination. InterruptedException or AssertionError must fail the Test, never returnPASS or normalize an earlier failure. This enforces test resourcepostconditions, not a productionbusiness exceptionpriority exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 186,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact pool/submit/shutdown/await site is in a whole JUnit pure codec Test, not a managed J2EE application. It owns4workers/32independentbytefixtures, joinswithFuture5s andfinallyshutdownNow-await10assert; no business async/Root/native/Backup authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "if (!executor.awaitTermination(10, TimeUnit.SECONDS))",
+      "sourceLine": 187,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact pool/submit/shutdown/await site is in a whole JUnit pure codec Test, not a managed J2EE application. It owns4workers/32independentbytefixtures, joinswithFuture5s andfinallyshutdownNow-await10assert; no business async/Root/native/Backup authority.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

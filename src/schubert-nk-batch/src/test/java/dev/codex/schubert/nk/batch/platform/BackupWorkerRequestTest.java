@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-BREQ001..008 fixed request codec; root/file/worker admission tested separately. */
@@ -167,17 +168,24 @@ final class BackupWorkerRequestTest {
 
   @Test
   void concurrentIndependentConsumption() throws Exception {
-    try (var executor = Executors.newFixedThreadPool(4)) {
-      var tasks = new ArrayList<Callable<Boolean>>();
+    var executor = Executors.newFixedThreadPool(4);
+    try {
+      var tasks = new ArrayList<Future<Boolean>>();
       for (int n = 0; n < 32; n++)
         tasks.add(
-            () -> {
-              byte[] input = bytes(GOLDEN);
-              assertEquals(new BackupWorkerRequest(RUN, START), BackupWorkerRequest.consume(input));
-              assertArrayEquals(new byte[input.length], input);
-              return true;
-            });
-      for (var result : executor.invokeAll(tasks)) assertTrue(result.get());
+            executor.submit(
+                () -> {
+                  byte[] input = bytes(GOLDEN);
+                  assertEquals(
+                      new BackupWorkerRequest(RUN, START), BackupWorkerRequest.consume(input));
+                  assertArrayEquals(new byte[input.length], input);
+                  return true;
+                }));
+      for (var result : tasks) assertTrue(result.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      if (!executor.awaitTermination(10, TimeUnit.SECONDS))
+        throw new AssertionError("owned backup request workers did not terminate");
     }
   }
 }

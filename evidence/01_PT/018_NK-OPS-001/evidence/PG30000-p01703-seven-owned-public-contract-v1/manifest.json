@@ -1,0 +1,293 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-14T02:10:42.217581+09:00",
+  "source": "f4bc5e20b028cabe19e36c3703111a97c13bd05b",
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java": "5cc172c91118403e73b9b562d8c0286ba6716391b8dd156181ad5e3d0b1bfd65",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseCopy.java": "1ef0d4dd1cf5c73b8467ec147a83e00a966281cdd027cb40ab84522f40b8c47b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupDatabaseWorker.java": "2b2553e8469c07e35b2df211635fd820b7863248b5140c250edb284cbacaaecc",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java": "f0f148b8345d9e5f33497f4fa3e8a90bb00140badd89cffe72376b0c066e458f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java": "6adcab52b4556a1ad56dfef2a5e98dfb986773793b1b32f85c11fea7f459d35e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java": "a70de6c02dec8e284d145d5323d11c9c50c94a7078769136951d4f286ee7d743",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequest.java": "32197ff409b28d61df222cc42ce71740bcfc44b8d3dc066660dca41040fe4c4b"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 2173,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "8767f3cbcb48a67e91e7951aadb6f35dd3a27304f938da2d4a448f63caa6f5ae"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0"
+    },
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "03794704417dbfbcb6e3b56fe784bec6bca31919",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01703-PREP-001",
+      "artifact": "BackupFileDigest",
+      "methods": "constructor/toString",
+      "testIds": [
+        "PT-BAT-178-185"
+      ],
+      "expected": "NNlowerhex64/strictpositiveLong claimedsize andfixedredaction only; doesnotreadactualfile/digestorproveBackupsuccess. ExistingManifestwhole16 hascurrentmatchingbytes/fullscopepartial preserved.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-002",
+      "artifact": "BackupWorkerRequest/Verification",
+      "methods": "constructor/directoryName",
+      "testIds": [
+        "PT-OPS-BREQ001-009"
+      ],
+      "expected": "NNrun/time/Optional, nonzeroUUID, UTC0000-12-31T14:41:01Z..9999-12-31T14:59:59.999999Z inclusive/µs, independentAsiaTokyohistoricalLMTname. VerificationNNlowerhex64/positiveLongdumpSize, no path/command/UID/role/DBattempt field.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-003",
+      "artifact": "BackupWorkerRequest",
+      "methods": "encode/consume",
+      "testIds": [
+        "PT-OPS-BREQ001-009"
+      ],
+      "expected": "Closed NKBACKUP1threeLFrows versus NKBACKUPVERIFY1sixLFrows, ASCII32..126plusLF/max400, strictkeys/order/terminalLF/UUIDtimecountcanonicalreencode; allownedinput andtemporarycanonicalbyteswipefinally evenparsefailure. Purevalue/codecnotworker/admissionauthority.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-004",
+      "artifact": "BackupDatabaseCopy",
+      "methods": "constructor/capture/directory/bound",
+      "testIds": [
+        "PT-OPS-DBCP001-008"
+      ],
+      "expected": "DedicatedUID/GID1..uint32, borrowedadmittedprivate tmpfs0700/rootand0600regularnlink1 file, device/inode/size<=65536/ACLempty/RW/effectiveuid/interrupt allchecked. No runtimeprovisionorparentM-A/Unitownershipclaim.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-005",
+      "artifact": "BackupDatabaseCopy",
+      "methods": "dump/write/verify",
+      "testIds": [
+        "PT-OPS-DBCP001-008"
+      ],
+      "expected": "Ownedraw1..65536 consumedallpaths, newprivatepart→emptymetadata→progresscheckedwriteforce→sameinodefullreadback/namebind→rawzero→genuinedumpcallback→allterminalpositive→sameoriginalfile→overwritezerosverify→unlinkpartsynconlysuccess. Unknown/IOretainscopy/no automaticrepair, everychannelResourceScope reverseclose.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-006",
+      "artifact": "BackupDatabaseWorker",
+      "methods": "main/execute/admit/NativePorts",
+      "testIds": [
+        "PT-OPS-BWORK001-010"
+      ],
+      "expected": "Noargs only, fixedworkerUID/GID/groups/zeroCaps/NNP/selfcgroup andUnitrunningPID+Invocation; exactsystemdcredential/tmpfs/backup roots via retainedFD. ActualM/A/root/run/readiness/role/30min/allcgroupterminalcallerresponsibility, no receipt-onlyauthority.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-007",
+      "artifact": "BackupDatabaseWorker",
+      "methods": "execute fresh",
+      "testIds": [
+        "PT-OPS-BWORK001-010"
+      ],
+      "expected": "Consumeclosedrequestundercredentialsowner→runtime/backupdifferentinode→sameFSnew0700part→newemptydump0600→dedicatedtemporarypgpasscopy→exactdump→positiveunchangedoutfile/fullnamebeforeafter/allownersclose. Rawsecretalwayszero; no DBsteplog/manifest/7generation fromworker.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-008",
+      "artifact": "BackupDatabaseWorker",
+      "methods": "verifyExisting/digest",
+      "testIds": [
+        "PT-OPS-BWORK001-010"
+      ],
+      "expected": "Verifyprofileopenscompletedexistingdirectory, exactdump size/hash streaming65536 andEOF, metadata/name/parent unchanged, genuinepg_restorelistordinaryUID, selfNSS/Unitrechecked. No pgpass/newdump/archivecreation/DBupdate, publicmanifestclaimisnotactualparentmanifestbinding.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-009",
+      "artifact": "BackupWorkerRequestFiles",
+      "methods": "prepare/write/verify",
+      "testIds": [
+        "PT-OPS-BREQFILE001-010"
+      ],
+      "expected": "Root-onlytmpfsrequestsource fixedbackup-request, NNpart/request, privateCREATE_NEW→allprogress/sizeforce→fullreadback→noreplacepublish→samePublishedFile/fullname/directoryidentity; ownencodedbyte finallywipe, existingdifferentrequestnot overwritten.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-010",
+      "artifact": "BackupWorkerRequestFiles",
+      "methods": "read/retire",
+      "testIds": [
+        "PT-OPS-BREQFILE001-010"
+      ],
+      "expected": "Bounded401buffer/fullinodeandname/sizestability/readexact/EOF→pureconsume→allbufferswipe. RetireonlyactualcallerfullUnitterminal proof andexactexpectedcurrentbyte/inode, unlink+sync/nameownershipnotinferredfromreadsuccess; no automaticmissingretire.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-011",
+      "artifact": "BackupWorkerRequestFiles",
+      "methods": "prepareResume/prepareResumeReplacement",
+      "testIds": [
+        "PT-OPS-BREQFILE001-010"
+      ],
+      "expected": "MISSINGonlyfirstreadadmitsnewprepare afterbeforeafterdirproof. Sameexpectedretainedreadtwice. Replacementmustsamerequest.run/strictolderstarted, synchronoussameowneroldABANDONEDDBpairproof→oldreadback/dirunchanged→retireoldthennewonly; no rawDBrepair/identityguess.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-012",
+      "artifact": "BackupArchiveProcess",
+      "methods": "dump/verifyDump",
+      "testIds": [
+        "PT-OPS-ARCHPROC001-008"
+      ],
+      "expected": "Fixedpg_dumpcustom/noowner/noprivileges/exact3schemas/DBnameordinaryschubert_backup; fixedloopbackPGHOST5432/PGCONNECT5/heldPGPASSFILEpathnotsecretvalue, genuinepg_restorelist afterdump. verifyonlyrestorelist no password/archive creation. RetainedFD3..intMax projectedthroughparentPID forchild; no arbitrarypath/SQL.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-013",
+      "artifact": "BackupArchiveProcess",
+      "methods": "configuration/credentials/tar/names",
+      "testIds": [
+        "PT-OPS-ARCHPROC001-008"
+      ],
+      "expected": "Rootonlyconfigtar; credential tarstdout→agekernelpipe, neverplaintextcredentialarchive. Fixedabsoluteexecutables/envPATHLANGC, allowlistunique1..32namesASCIIword1..64/singlecomponent/NULseparated/tarverbatimnull/norecursion. Inputbytefinallyzero, callerauthenticatesandholdssource/output/recipient.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-014",
+      "artifact": "BackupArchiveProcess",
+      "methods": "execute/streams/StdIoOwner/remaining",
+      "testIds": [
+        "PT-OPS-ARCHOWN001-008"
+      ],
+      "expected": "FactoryportsNN/primaryownerbuiltbeforestart, processcount exact/nonnull/allstdioowners evennullablegetter partial protected, firststdinwritecloseonce, allwaitexit0 withinoneoriginal30min+parentbudget beforeworksuccess. IOcatalogfixed/unknownexistingResourceScopetypedpriority; allbyteFDownersretainedthroughterminal.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-015",
+      "artifact": "BackupArchiveProcess",
+      "methods": "TerminalPlan/NativeStart/PendingHold",
+      "testIds": [
+        "PT-OPS-ARCHOWN001-008"
+      ],
+      "expected": "TERMallacquiredchildren thenconfirmallterminal; fiveSecondrequesttimeout/interrupt/unknownnotterminalproof, noSIGKILL. Unknowncollection/startPipeline/childstatequarantines borrowedFD/callback, interruptrecord/restoreonlyafterwholeterminal. Quarantineisnotextensionofsuccessful30minbudget orwholeUnit/cgroupproof, actualRoot/workerconnectionendingHOLD.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-016",
+      "artifact": "MorningBackupArtifacts",
+      "methods": "complete/withTools/withInputs",
+      "testIds": [
+        "PT-OPS-BARCHIVE001-008"
+      ],
+      "expected": "Parentroot/30min/releaseapproval/hostmanifestsourceBOM beforeandafter; eightCONFIG/seventeenCREDENTIALSfixedcatalog withSS197Inspector additions/actualNSSgroup/mode/ACL/fullinode, actualtoolhash/version/schema/host/profile/recipientbinding. Holdallinputsuntilreverseclose, no plaintextsecret/credentialkeyexport.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-017",
+      "artifact": "MorningBackupArtifacts",
+      "methods": "complete/write/bytes/sha/check",
+      "testIds": [
+        "PT-OPS-BARCHIVE001-008"
+      ],
+      "expected": "Genuineconfigtar+agecredentialarchive/observePending actualdump/config/credentialclaims, fixedcompleteDB+CONFIGhandles/realcontentstartendµs. Atomicclaimholderisnotpublication: allinputsclose+releaseequal→newmanifest/Bundlepublish→dedicatedDBcompleteBackup actualreadback→budget/rootagain. Positiveprogress/EOF/size/fullmetadata andbufferfinallywipe; no SHAclaim-as-success/retentionpermission.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    },
+    {
+      "id": "P01703-PREP-018",
+      "artifact": "Backup whole system",
+      "methods": "BAK/BKO requirement ending dependencies",
+      "testIds": [
+        "PT-OPS-BARCHIVE001-008"
+      ],
+      "expected": "Masterexcluded/threeDBschemas+config/credential variabledata/day7/last-success-beforeprune/backupbeforebusinessdelete andRPO-RTO24h requirements retainactualartifact/DB/owner/retention/native/ITSTending dependencies. Currentinitiallocalfixedsource isnotfutureNAS/restoreperformance acceptance. Wholecandidate44Rootnativeheld, request9purecandidateworkerBUG2862 beforefix, actualtests0.",
+      "refusalOrMissing": "ActualBackupDBVMRootnative/credentialkey/Unit/permitintent/archive/retention/HOLD unchanged; /2/451 unaccepted"
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+        "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+      },
+      "oldSource": "02ecffab9df24582227c5da3ca694cf4cb6ebcc9",
+      "oldScopeOnly": "Only exactpublicManifest4targetsource/whole16, full7sourcespartial; BackupFileDigestclaim component. No reexecution/currentglobal/actualBackuptransfer.",
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java",
+        "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json",
+        "pom.xml",
+        "src/schubert-nk-batch/pom.xml"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-03.01/1",
+    "WBS-P017-03.02/1",
+    "WBS-P017-03.03/1"
+  ],
+  "endingStatus": "ORIGINAL_THREE_BACKUP_PUBLIC_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "b6fb411342c753ae165651c72cea5120475d342874fd5ea68c82db461fed7333"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2429_p01703_audit_contract.json",
+    "sha256": "7bd4cf42e51487189446785b8a1d39ea5c52fa9a005ac90a2a54128cd1b4483f"
+  }
+}
