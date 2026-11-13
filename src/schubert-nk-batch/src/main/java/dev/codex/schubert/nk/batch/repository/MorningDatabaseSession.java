@@ -510,6 +510,12 @@ public final class MorningDatabaseSession {
       }
     } catch (SQLException | IOException | BatchRepositoryException failure) {
       primary = failure;
+      try {
+        preserveCatalogFatal(failure);
+      } catch (Error fatal) {
+        primary = fatal;
+        throw fatal;
+      }
       throw unavailable();
     } catch (RuntimeException | Error failure) {
       primary = failure;
@@ -520,7 +526,10 @@ public final class MorningDatabaseSession {
         try {
           connection.close();
         } catch (SQLException secondary) {
-          if (closeReplace(primary, secondary)) throw unavailable();
+          if (closeReplace(primary, secondary)) {
+            preserveCatalogFatal(secondary);
+            throw unavailable();
+          }
         } catch (RuntimeException | Error secondary) {
           if (closeReplace(primary, secondary)) {
             throw secondary;
@@ -535,6 +544,13 @@ public final class MorningDatabaseSession {
     gate.check();
   }
 
+  // SSC341: preserve typed IO/unknown policy; classify only known SQL catalog discards.
+  private static void preserveCatalogFatal(Throwable failure) {
+    if (failure instanceof SQLException || failure instanceof BatchRepositoryException) {
+      dev.codex.schubert.nk.storage.StorageIoException.preserveFatal(failure);
+    }
+  }
+
   private static boolean closeReplace(@Nullable Throwable primary, Throwable secondary) {
     boolean known =
         primary instanceof SQLException
@@ -542,6 +558,11 @@ public final class MorningDatabaseSession {
             || primary instanceof BatchRepositoryException;
     if (primary == null || (known && !(secondary instanceof SQLException))) return true;
     if (!known) primary.addSuppressed(new BatchRepositoryException());
+    else if ((primary instanceof SQLException || primary instanceof BatchRepositoryException)
+        && secondary instanceof SQLException) {
+      preserveCatalogFatal(primary);
+      preserveCatalogFatal(secondary);
+    }
     return false;
   }
 
@@ -730,6 +751,7 @@ public final class MorningDatabaseSession {
         if (!scalar(connection, HELD)) throw unavailable();
         return observed;
       } catch (SQLException | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -810,6 +832,7 @@ public final class MorningDatabaseSession {
         if (!scalar(connection, HELD)) throw unavailable();
         return eligible;
       } catch (SQLException | BatchRepositoryException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -849,6 +872,7 @@ public final class MorningDatabaseSession {
             held,
             actual);
       } catch (SQLException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -896,6 +920,7 @@ public final class MorningDatabaseSession {
         backupBegins = result;
         return result;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -951,6 +976,7 @@ public final class MorningDatabaseSession {
         guard(); // Close every JDBC resource before allowing an observed pair to escape.
         return observed;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1007,6 +1033,7 @@ public final class MorningDatabaseSession {
         backupCommitted = true;
         return result;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1034,6 +1061,7 @@ public final class MorningDatabaseSession {
         completionGuard(expected);
         backupFinished = true;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1086,6 +1114,7 @@ public final class MorningDatabaseSession {
         if (!consistent) throw unavailable();
         guard();
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1146,6 +1175,7 @@ public final class MorningDatabaseSession {
         completionGuard(expected);
         recheckConsistent(run);
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1164,6 +1194,7 @@ public final class MorningDatabaseSession {
         backupFinished = true;
         return ended;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1210,6 +1241,7 @@ public final class MorningDatabaseSession {
                     BatchStepResult.Reason.COMMAND_FAILURE))
             && configuration.equals(database)) backupFailureEnded = endedAt;
       } catch (SQLException failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       }
     }
@@ -1243,6 +1275,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -1280,6 +1313,7 @@ public final class MorningDatabaseSession {
         guard();
         return result;
       } catch (SQLException | InspectorLockHandoff.Failure failure) {
+        preserveCatalogFatal(failure);
         throw unavailable();
       } finally {
         inHandoff = false;
@@ -1362,6 +1396,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -1386,6 +1421,7 @@ public final class MorningDatabaseSession {
         guard();
         return result;
       } catch (SQLException | InspectorLockHandoff.Failure known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       } finally {
         inHandoff = false;
@@ -1468,6 +1504,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -1511,6 +1548,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -1563,6 +1601,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
@@ -1629,6 +1668,7 @@ public final class MorningDatabaseSession {
       } catch (SQLException
           | BatchRepositoryException
           | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+        preserveCatalogFatal(known);
         throw unavailable();
       }
     }
