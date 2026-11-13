@@ -1,0 +1,40 @@
+{
+  "groupId": "PGPT-WBS65-BUG2796-API-TWO-MAIN-THREE-CATALOG-SOURCE-PG-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1415_WBS65API開始枠転記誤り取消・訂正.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG28963-api-start-receipt-invalid-cancelled-v1/manifest.json",
+  "manifestSha256": "b42e20c628348459ba5433bce5ca7d861167c436e2fd935caa0132b85ab6f668",
+  "terminalAtUTC": "2026-11-13T14:03:33.808151+09:00",
+  "run": "PG28963",
+  "workIds": [
+    "WBS-F03-BUG2796_API_TWO_MAIN_THREE_CATALOG_SOURCE_PG"
+  ],
+  "outcome": "CANCELLED_INVALID_START_RECEIPT_NO_IMPLEMENTATION_NOT_PRODUCT_PASS",
+  "technical": {
+    "kind": "START_QUOTA_TRANSCRIPTION_ERROR_CORRECTION",
+    "originalIncorrectEvent": "PGPT-20261008-5070",
+    "originalIncorrectUsed": 31,
+    "actualOriginalToolUsed": 32,
+    "actualOriginalToolRemaining": 68,
+    "invalidStartObservationMustNotBeUsedForConsumption": true,
+    "observedSharedPp": null,
+    "productSourceOrTestEdits": 0,
+    "productTestsExecuted": 0,
+    "newAcceptance": 0,
+    "completedEstimatePp": {
+      "low": 0,
+      "base": 0,
+      "high": 0
+    },
+    "pendingOriginalEstimateUnchanged": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 0.9
+    }
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1413_WBS65予実・API二Main製造追加版334.json",
+    "sha256": "9bd03b2a9f0624c6260c90b52eb7d8dd30e4e7db09714438beb7317aad773ee1"
+  },
+  "checkpointText": "BUG2798: fresh原tool実値32/68をcallerが31/69と誤転記したevent5070を元記録保持のまま取消訂正。source/Test変更・製品操作0、同原tool値32をPG28963へ保持。元誤receiptから共有差を算出しない（null）、枠reset/短期制約も原値のまま。価格.15/.45/.9未完保持・実費ではない。次群はtoolから構造化取得した別fresh観測で同残件を継承し、forecast追加課金0。正式1964-53/190新0/工数null。",
+  "nextCommand": "CreatecorrectedcontinuationgroupforBUG2796 withsamepending.15/.45/.9/cap1.5; capturequotausingpmo_quota_binding.receipt directlyfromfreshget_usage_limits structuredresult, no numericmanualcopy, sourceMainae1 unchanged. No actualsourcePG/Test started. Appendcorrectionnotrewriteevent5070. Continueonlyfresh>10/allHOLDunchanged."
+}

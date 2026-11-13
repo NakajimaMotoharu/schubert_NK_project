@@ -77,3 +77,6 @@ WBS-P018-02公開source契約/独立期待値/TestIDは[4243_P01802全五artifac
 
 
 署名原八新一通常単体結果：[4245_署名原八新一通常単体結果.md](4245_署名原八新一通常単体結果.md)。通常whole9成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
+
+
+WBS-P018-05公開source契約/独立期待値/TestIDは[4247_P01805全二十六artifact契約・独立期待値対応.md](4247_P01805全二十六artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。

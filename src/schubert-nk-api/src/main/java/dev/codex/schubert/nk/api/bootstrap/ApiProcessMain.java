@@ -15,6 +15,7 @@ import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
@@ -82,6 +83,7 @@ public final class ApiProcessMain {
       var inputs = Objects.requireNonNull(input.load(), "startup inputs");
       return new ServiceStartupAdmission.Configuration<>(inputs, inputs.config().canonicalSha256());
     } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      StorageIoException.preserveFatal(failure);
       failureCode[0] = 70;
       throw new IOException("non-secret configuration unavailable");
     }
@@ -142,6 +144,7 @@ public final class ApiProcessMain {
     try {
       inputs = new ApiStartupInputs(source, environment).load();
     } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      StorageIoException.preserveFatal(failure);
       return 70;
     } catch (IOException failure) {
       return 50;

@@ -32,6 +32,7 @@ import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.StorageIdentity;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
@@ -344,6 +345,7 @@ public final class ApiApplicationPreparation {
               clock));
       operation.run(Map.copyOf(processors), outbox);
     } catch (NoSuchAlgorithmException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new IOException("API cryptography unavailable");
     }
   }
