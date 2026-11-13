@@ -95,3 +95,6 @@ Web停止原六新一通常七結果：[4255_Web停止原六新一通常七結�
 
 
 WBS-P018-07公開source契約/独立期待値/TestIDは[4257_P01807全三artifact契約・独立期待値対応.md](4257_P01807全三artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P018-08.01,WBS-P018-08.02,WBS-P018-08.03公開source契約/独立期待値/TestIDは[4258_P01808三子全五artifact契約・独立期待値対応.md](4258_P01808三子全五artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
