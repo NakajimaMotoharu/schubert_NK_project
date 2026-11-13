@@ -1,0 +1,174 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30426-ENTRY-FILE-CLOSED-THREE-COMPONENTS-36",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30420-entry-file-closed36-prepare-v1/manifest.json",
+    "sha256": "8a1ed7f39393ddd327979b53d0100644842a9036a00ceda7ce1bcf5c710f89a3"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30422-entry-file-closed36-static-v1/manifest.json",
+    "sha256": "58c2a75914d2c5a2a19b478636d247d680536ca767d7a00de05a15e2dd1feabe"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "The exact executor is acquired before try; every exit executes finally shutdownNow and bounded awaitTermination10s with failing nontermination assertion. Implicit ExecutorService.close would wait without a bound. No returned or ignored resource owner.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.submit(",
+      "sourceLine": 168,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "reason": "This exact Test cleanup must fail on an unclosed worker or interrupt. It cannot return PASS after uncertain termination. This is a test resource postcondition, not a production exception priority exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.shutdownNow();",
+      "sourceLine": 180,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "if (!workers.awaitTermination(10, TimeUnit.SECONDS))",
+      "sourceLine": 181,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 252,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact executor is acquired before try and every exit executes finally shutdownNow plus awaitTermination10s with failing postcondition assertion. Each of64 Futures joins5s. Ownership remains local to whole JUnit Test; implicit close may wait unbounded and is not substituted for termination evidence.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 252,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 257,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 268,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"owned worker termination\");",
+      "sourceLine": 269,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact executor is acquired before try, retained by this JUnit test, and every exit executes finally shutdownNow plus awaitTermination10s with a failing resource-postcondition assertion. Each of64 Future joins has5s bound. Implicit close can wait unbounded; no leaked or ignored owner.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 195,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 207,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"owned worker termination\");",
+      "sourceLine": 208,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

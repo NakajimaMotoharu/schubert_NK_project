@@ -1,0 +1,114 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG30426-ENTRY-FILE-CLOSED-THREE-COMPONENTS-36",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/015_Entryとfile移行参照・順序接続の独立十二仕様.md",
+      "sha256": "62f80d2ac96a5894e8bd969d4a573362b25c03050af96fce0057d04fea64b371"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/011_Scenario現行ID順移行対応・独立十二仕様.md",
+      "sha256": "99207d39350c4fc3dbce506f211d7fd1f126e75fadacce38504f92d4294cbeb7"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+      "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30396-entry-file-placement-manufacture-source-identity-v1/manifest.json",
+      "sha256": "c28f1f16b541e5ac7fc9f8b0336c65b739e8d4992a7d4dbd597ba38b0d54674c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30392-entry-placement-exact-admission-and-support-closure-v1/manifest.json",
+      "sha256": "7186b672bba99a9d96276ff60be40419af15acaf4e9b6e1f1f7eb6def9a6af73"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30412-entry-file-placement12-post-v1/manifest.json",
+      "sha256": "4843be347a2bbef97ab966a5f3ab08f6fd1b66399bdaf3595cebd3eaaffed8ee"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "24fff256ecba4b544780816a4e2d02c1c134bd08",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "tests": 12
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "tests": 12
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "tests": 12
+    }
+  ],
+  "expectedTests": 36,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG30418-entry-file-closed36-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG30420-entry-file-closed36-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG30422-entry-file-closed36-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG30424-entry-file-closed36-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG30426-entry-file-closed36-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG30428-entry-file-closed36-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg30420-entry-file-closed36-prepare-v1",
+    "unit": "pg30426-entry-file-closed36-unit-v1"
+  },
+  "newTestDefinitions": 0
+}
