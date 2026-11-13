@@ -550182,11 +550182,104 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "8c3545bc49bf241158057d27c046117f239ba219e431cea94a3912a89180664a",
-      "acceptance": "NOT_RUN",
-      "state": "EXPLICIT_IMMUTABLE_RETENTION_FIXED_NORMAL_NOT_RUN",
+      "acceptance": "UNASSESSED",
+      "state": "PURE_COMPONENT_NORMAL12_FOUR100_FULL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-342",
       "testIds": "PT-MIG-ASSET001..012",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "NEW_PURE_MIGRATION_METADATA_WHOLE12",
+        "source": "783ecf9d9189eb8127e3070e128f2b6ea0d1ab08",
+        "productionCoreMain": "72449924b1b2f0b5624ae600ab687f77ccbfb8a6",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30230-migration-asset12-post-v3/manifest.json",
+          "sha256": "b8906cb7531309ef8d1099b12d5e6af2116d5f6fff07f5edc86cbf2d49087090"
+        },
+        "actualExecutions": 12,
+        "newTestDefinitions": 12,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 109,
+        "physicalClasses": 5,
+        "positiveMainCrc": 5,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 459,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 68,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 88,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 52,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 18,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 5,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+        },
+        "actualJvmCodeMethods": 43,
+        "jacocoDefaultMethods": 18,
+        "generatedFilterPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sourceFixes": [
+          "BUG2867",
+          "BUG2868"
+        ],
+        "actualOriginalMasterRootVmDbNativeKeyFileIntentPermitUnitDeployActions": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.3,
+          "base": 0.9,
+          "high": 1.8
+        },
+        "normalGroupReworkSubsets": [
+          {
+            "bug": "BUG2867",
+            "estimate": {
+              "low": 0.05,
+              "base": 0.15,
+              "high": 0.3
+            }
+          },
+          {
+            "bug": "BUG2868",
+            "estimate": {
+              "low": 0.02,
+              "base": 0.06,
+              "high": 0.12
+            }
+          }
+        ],
+        "normalVerificationSubset": {
+          "low": 0.23,
+          "base": 0.69,
+          "high": 1.38
+        },
+        "actualCost": null
+      }
     }
   ],
   "layouts": [
@@ -554587,5 +554680,98 @@
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java",
     "scope": "DECLARED_METADATA_ONLY_NO_RUNTIME_AUTHORITY",
     "formalAccepted": false
+  },
+  "currentMigrationAssetWhole12PG30228": {
+    "kind": "NEW_PURE_MIGRATION_METADATA_WHOLE12",
+    "source": "783ecf9d9189eb8127e3070e128f2b6ea0d1ab08",
+    "productionCoreMain": "72449924b1b2f0b5624ae600ab687f77ccbfb8a6",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30230-migration-asset12-post-v3/manifest.json",
+      "sha256": "b8906cb7531309ef8d1099b12d5e6af2116d5f6fff07f5edc86cbf2d49087090"
+    },
+    "actualExecutions": 12,
+    "newTestDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 109,
+    "physicalClasses": 5,
+    "positiveMainCrc": 5,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 459,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 68,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 88,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 52,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 18,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 5,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+    },
+    "actualJvmCodeMethods": 43,
+    "jacocoDefaultMethods": 18,
+    "generatedFilterPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "sourceFixes": [
+      "BUG2867",
+      "BUG2868"
+    ],
+    "actualOriginalMasterRootVmDbNativeKeyFileIntentPermitUnitDeployActions": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "normalGroupReworkSubsets": [
+      {
+        "bug": "BUG2867",
+        "estimate": {
+          "low": 0.05,
+          "base": 0.15,
+          "high": 0.3
+        }
+      },
+      {
+        "bug": "BUG2868",
+        "estimate": {
+          "low": 0.02,
+          "base": 0.06,
+          "high": 0.12
+        }
+      }
+    ],
+    "normalVerificationSubset": {
+      "low": 0.23,
+      "base": 0.69,
+      "high": 1.38
+    },
+    "actualCost": null
   }
 }
