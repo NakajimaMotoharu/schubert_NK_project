@@ -1,0 +1,5 @@
+# 固定query二Main五catalog製造・未実施PT仕様
+
+InspectorUnitProbe/NativeReader三口、SystemctlStateSource二口、BUG2782/YKT2359/SS3417.4・343352、UNIT009..016/MPOL005。実ownerはP00404とP01804三子、共有SourcePG価格を一回だけ追加。knownStopGate再固定二口、IRQ変換三口でwipe/IRQ復元後にfatalgraphを保持、既IOException固定化/ProcessResourceScope優先/既RuntimeErrorunwrapは不変更。実systemctl/busctl/stop/Root/VM/DB/実processを呼ばない。
+
+PG28792は元全body逆変換/GJF-CS0のsourcePGだけ、Maincompile/NullAway/fullstatic/PT/coverageは未実施・BUG2782OPEN。BUG2783streamingworker終端は別未修正/未実行で全missを残す。既全MPOL7と必要newfatal1を、Root不使用/NativeProcess未初期化/実二値Outcome型staticbyteのstrictoptin資格後に実施する。WholeTestを抽出せず新Root/enum/receiptを模造しない。

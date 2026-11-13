@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Arrays;
@@ -84,10 +85,12 @@ final class SystemctlStateSource implements ApplicationStopGate.StateSource {
       return bytes[0];
     } catch (StopGateException failure) {
       Arrays.fill(bytes[0], (byte) 0);
+      StorageIoException.preserveFatal(failure);
       throw new StopGateException(failure.reason());
     } catch (InterruptedException failure) {
       Arrays.fill(bytes[0], (byte) 0);
       Thread.currentThread().interrupt();
+      StorageIoException.preserveFatal(failure);
       throw new StopGateException(StopGateFailure.INTERRUPTED);
     } catch (IOException failure) {
       Arrays.fill(bytes[0], (byte) 0);
