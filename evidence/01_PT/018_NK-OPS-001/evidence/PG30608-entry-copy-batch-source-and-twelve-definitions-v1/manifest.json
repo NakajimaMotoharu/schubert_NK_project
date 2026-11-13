@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T22:53:28.802340+00:00",
+  "sourceAtGroupStart": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+  "ssc": "SSC348",
+  "approvedMain": "119f6b99ca192c241d7b1b052cf5b20f08fff6c4",
+  "registeredOwner": "WBS-P019-03",
+  "costLeaf": "WBS-P019-03.02",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+      "sha256": "775a18db09b960de86088ea052d8454eb48b0b3609f83616ee761917a82c3988"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "sha256": "11d12471658e2a97b75cad70ea8b96b90590acec3d3f16b8db7a8a540063ead0"
+    }
+  ],
+  "commands": [
+    {
+      "label": "format-check",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java"
+      ],
+      "ownerPid": 654060,
+      "pid": 654121,
+      "startUTC": "2026-11-13T22:53:27.319888+00:00",
+      "endUTC": "2026-11-13T22:53:27.734947+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG30608-entry-copy-batch-source-and-twelve-definitions-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java"
+      ],
+      "ownerPid": 654060,
+      "pid": 654147,
+      "startUTC": "2026-11-13T22:53:27.734967+00:00",
+      "endUTC": "2026-11-13T22:53:28.400855+00:00",
+      "actualExit": 0
+    }
+  ],
+  "newMainSources": 1,
+  "newWholeTestDefinitions": 12,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "MainClassCompiled": false,
+  "physicalClassesPlanned": 1,
+  "importsOnlyJdkJSpecify": true,
+  "actualRootVmDbNativeKeyUnitDeployFileOperations": 0,
+  "originalMasterAccessed": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
