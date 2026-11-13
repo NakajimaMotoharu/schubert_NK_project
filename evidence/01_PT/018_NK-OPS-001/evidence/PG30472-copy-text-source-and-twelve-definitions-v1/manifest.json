@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T21:05:55.260209+00:00",
+  "sourceAtGroupStart": "24fff256ecba4b544780816a4e2d02c1c134bd08",
+  "ssc": "SSC346",
+  "approvedMain": "c26d7f2c9e4afb317dbc256d9a7a6b6283525ea7",
+  "registeredOwner": "WBS-P019-03",
+  "costLeaf": "WBS-P019-03.02",
+  "sourceHashes": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "sha256": "ce412a32b37b309852b2e6c48d5baf3d546c961f7d128629a04a29b5de77993c"
+    }
+  ],
+  "commands": [
+    {
+      "label": "format-check",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java"
+      ],
+      "ownerPid": 634157,
+      "pid": 634218,
+      "startUTC": "2026-11-13T21:05:53.813809+00:00",
+      "endUTC": "2026-11-13T21:05:54.279507+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG30472-copy-text-source-and-twelve-definitions-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java"
+      ],
+      "ownerPid": 634157,
+      "pid": 634243,
+      "startUTC": "2026-11-13T21:05:54.279528+00:00",
+      "endUTC": "2026-11-13T21:05:54.897567+00:00",
+      "actualExit": 0
+    }
+  ],
+  "newMainSources": 1,
+  "newWholeTestDefinitions": 12,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "MainClassCompiled": false,
+  "physicalClassesPlanned": 1,
+  "importsOnlyJdkJSpecify": true,
+  "actualRootVmDbNativeKeyUnitDeployFileOperations": 0,
+  "originalMasterAccessed": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

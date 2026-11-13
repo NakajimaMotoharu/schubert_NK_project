@@ -1,0 +1,20 @@
+"""SSC346 COPY text field encoding detail only; no SQL/server/driver or source-data execution."""
+from pathlib import Path
+import subprocess,json,re,hashlib,difflib,datetime
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';main=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip();ss=next((r/'documents/300_SS').glob('**/343*.md'));ledger=r/'documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md';base=subprocess.check_output(['git','show',main+':'+str(ss.relative_to(r))],text=True);oldledger=subprocess.check_output(['git','show',main+':'+str(ledger.relative_to(r))],text=True);assert max(map(int,re.findall(r'^## SSC-(\d+)\b',oldledger,re.M)))==345 and ss.read_text()==base
+addition=r'''## SSC346 移行COPY text送信fieldの純byte encoding（2026-11-14、PG詳細補足）
+
+SS343§10.1.4のCOPYとSS331§2のUTF8型を、bootstrapのPostgresCopyTextEncoderへ具体化する。既存inventory/ID/file/entry対応部品とは別の送信用data変換で、DB/driver/SQL/FSの操作を持たない。[PostgreSQL18 COPY Text Format](https://www.postgresql.org/docs/18/sql-copy.html)のdefault text/TAB/NULL backslash-Nを固定する。Current generator copy_value/copy_rowは参照codeのみ、master/DBやそのgeneratorの実行をoracleにしない。RD/UI/DDL/電文/業務値を変更せず、新QA不要。
+
+encodeRowはnullable String fieldを持つnonnull List、encodeRowsはそのnonnull rowのnonnull Listを受ける。null outer/rowは拒否、null fieldはNULL値として許容。rowは一列以上、複数rowの列数を一致させ、空outerはzero bytesとして返す（移行完了ではない）。各入力をprivate snapshotにし、保存可変state/入力の外部保持なし、返却byte[]は毎回別所有、診断は固定redaction。
+
+UTF8 dataは列間TAB/行末LF、header/SQL/終端なし。nullはraw `\N`、空文字は空field、literal `\N`はbackslashを二重化して区別。backslash/TAB/LF/CR/BS/FF/VTはCOPYの標準escapeへ、literal backslash-periodも二重backslashとしてfield内に保つ。NUL/孤立surrogateを固定安全例外で拒否、正しいsurrogate pairをUTF8化する。trim/数値変換/NFC正規化やcolumn別control/byte/DDL型/FK検証はしない。既callerの業務検証/実ロード/全件数/権限/transaction成功を代用しない。
+
+PT-MIG-COPY001..012は手書き二row、NULL/空/literal backslash-N、七escape、ASCII quote/ordinary文字、あ/é/音符の固定UTF8 hexと非NFC列保持、literal backslash-periodとSQL風文字列、null/欠落/empty/ragged row、NUL/孤立high/low/正pair、入力/返却byte不変、安全診断、数値風文字、有限8worker64task（各Future5秒・finallyshutdownNow/await10秒・非終端fail）を検証する。expectedは独立hex/ASCII literalで、Production encoder/Current generatorから作らない。全1physicalを通常static/固定Git whole12/独立CRC初期化/単一exec/全四counterで照合し、除外/抑制/旧exec合算0。実PostgreSQL解釈/driver/COPY/pg_temp/DB/全移行/Current/RootVMnative/CHR/全451/ITSTの未完を当局所結果で閉じない。
+
+'''
+entry='''\n\n## SSC-346 移行COPY text fieldの純UTF8 encoder（2026-11-14、PG、設計確定）
+
+SS34310.1.4/SS3312・UI254・RD141161/WBS-P01903.02。PostgreSQL18 defaulttextのNULL/空/literalbackslash/七escape/行列/UTF8scalarを未実装pureencoderへ具体化する。NFC/業務column/DDL/FK検証はcallerに残し、元body/rawblock等を暗黙変換しない。sourcecode/独立whole12を予定、実DB/SQL/driver/FS/RootVMnative/権限操作0。上位外部仕様変更不要・QA不要。状態: 設計確定、main公開待ち、PG/通常PT/実COPY・ETL未完。設計source/mainと限定実績は後記。
+'''
+newss=base.split('\n',1)[0]+'\n\n'+addition+base.split('\n',1)[1];newledger=oldledger.rstrip()+entry;local=ledger.read_text();assert max(map(int,re.findall(r'^## SSC-(\d+)\b',local,re.M)))==345;ss.write_text(newss);ledger.write_text(local.rstrip()+entry);patch=''.join(difflib.unified_diff(base.splitlines(True),newss.splitlines(True),fromfile='a/'+str(ss.relative_to(r)),tofile='b/'+str(ss.relative_to(r))))+''.join(difflib.unified_diff(oldledger.splitlines(True),newledger.splitlines(True),fromfile='a/'+str(ledger.relative_to(r)),tofile='b/'+str(ledger.relative_to(r))));e=b/'evidence/PG30466-ssc346-copy-text-detail-only-main-patch-v1';e.mkdir();p=e/'design-only-main-patch.json';p.write_text(json.dumps(dict(baseMain=main,paths=[str(ss.relative_to(r)),str(ledger.relative_to(r))],patchUtf8Sha256=hashlib.sha256(patch.encode()).hexdigest(),patch=patch),ensure_ascii=False,indent=2)+'\n');(e/'manifest.json').write_text(json.dumps(dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),ssc='SSC346',baseMain=main,patch=dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest()),reference='https://www.postgresql.org/docs/18/sql-copy.html',sourceMainCreated=False,actualDbRootVmNativeKeyUnitOps=0,productTestsExecuted=0,newAcceptance=0,designOnlyMainPublicationPending=True),indent=2)+'\n');print(json.dumps(dict(actualExit=0,ssc='SSC346',designFiles=2,sourceMainCreated=0)))

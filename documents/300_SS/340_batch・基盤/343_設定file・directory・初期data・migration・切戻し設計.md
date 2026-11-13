@@ -1,5 +1,16 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC346 移行COPY text送信fieldの純byte encoding（2026-11-14、PG詳細補足）
+
+SS343§10.1.4のCOPYとSS331§2のUTF8型を、bootstrapのPostgresCopyTextEncoderへ具体化する。既存inventory/ID/file/entry対応部品とは別の送信用data変換で、DB/driver/SQL/FSの操作を持たない。[PostgreSQL18 COPY Text Format](https://www.postgresql.org/docs/18/sql-copy.html)のdefault text/TAB/NULL backslash-Nを固定する。Current generator copy_value/copy_rowは参照codeのみ、master/DBやそのgeneratorの実行をoracleにしない。RD/UI/DDL/電文/業務値を変更せず、新QA不要。
+
+encodeRowはnullable String fieldを持つnonnull List、encodeRowsはそのnonnull rowのnonnull Listを受ける。null outer/rowは拒否、null fieldはNULL値として許容。rowは一列以上、複数rowの列数を一致させ、空outerはzero bytesとして返す（移行完了ではない）。各入力をprivate snapshotにし、保存可変state/入力の外部保持なし、返却byte[]は毎回別所有、診断は固定redaction。
+
+UTF8 dataは列間TAB/行末LF、header/SQL/終端なし。nullはraw `\N`、空文字は空field、literal `\N`はbackslashを二重化して区別。backslash/TAB/LF/CR/BS/FF/VTはCOPYの標準escapeへ、literal backslash-periodも二重backslashとしてfield内に保つ。NUL/孤立surrogateを固定安全例外で拒否、正しいsurrogate pairをUTF8化する。trim/数値変換/NFC正規化やcolumn別control/byte/DDL型/FK検証はしない。既callerの業務検証/実ロード/全件数/権限/transaction成功を代用しない。
+
+PT-MIG-COPY001..012は手書き二row、NULL/空/literal backslash-N、七escape、ASCII quote/ordinary文字、あ/é/音符の固定UTF8 hexと非NFC列保持、literal backslash-periodとSQL風文字列、null/欠落/empty/ragged row、NUL/孤立high/low/正pair、入力/返却byte不変、安全診断、数値風文字、有限8worker64task（各Future5秒・finallyshutdownNow/await10秒・非終端fail）を検証する。expectedは独立hex/ASCII literalで、Production encoder/Current generatorから作らない。全1physicalを通常static/固定Git whole12/独立CRC初期化/単一exec/全四counterで照合し、除外/抑制/旧exec合算0。実PostgreSQL解釈/driver/COPY/pg_temp/DB/全移行/Current/RootVMnative/CHR/全451/ITSTの未完を当局所結果で閉じない。
+
+
 ## SSC345 Scenario entry所属file・entry_indexと移行対応の接続（2026-11-14、PG詳細補足）
 
 SS343§10、SS331/V002/V004・UI223§3.2/4/5・UI254の既存ID/表示順/FK条件を内部ScenarioEntryPlacementMapで接続する。SSC343のglobal entry順とSSC344のfile/game順を再実装せず二mapを再利用する。RD/UI/DDL/電文を変更せず、新QA不要。実Currentからのgame/entry_index抽出の正しさ、実DB件数/FK/ロード/権限は別条件である。
