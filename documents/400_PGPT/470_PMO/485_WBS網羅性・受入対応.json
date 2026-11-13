@@ -532752,6 +532752,36 @@
         "originCommit": "226fbb6c5348ae0ade9d25f8c579c43d653298a9",
         "implementationSupportOnly": true,
         "additionalBudgetPp": 0
+      },
+      {
+        "kind": "DDL",
+        "owner": "WBS-P004-01",
+        "costOwner": "WBS-P004-01",
+        "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+        "historicalPath": null,
+        "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878",
+        "acceptance": "NOT_RUN",
+        "state": "SOURCE_CREATED_DB_PT_NOT_RUN",
+        "relatedSsc": "SSC-340",
+        "relatedBug": "BUG-2846",
+        "relatedYkt": "YKT-2405",
+        "testIds": [
+          "PT-DB-NULL340-001",
+          "PT-DB-NULL340-002",
+          "PT-DB-NULL340-003",
+          "PT-DB-NULL340-004",
+          "PT-DB-NULL340-005",
+          "PT-DB-NULL340-006",
+          "PT-DB-NULL340-007",
+          "PT-DB-NULL340-008",
+          "PT-DB-NULL340-009",
+          "PT-DB-NULL340-010",
+          "PT-DB-NULL340-011",
+          "PT-DB-NULL340-012",
+          "PT-DB-NULL340-013",
+          "PT-DB-NULL340-014",
+          "PT-DB-NULL340-015"
+        ]
       }
     ],
     "acceptedLeafDelta": 0,
@@ -550087,6 +550117,36 @@
       "sha256": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
       "acceptance": "UNASSESSED",
       "counterApplicability": "NO_EXECUTABLE_CODE_METADATA_PHYSICAL_RETAINED"
+    },
+    {
+      "kind": "DDL",
+      "owner": "WBS-P004-01",
+      "costOwner": "WBS-P004-01",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+      "historicalPath": null,
+      "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878",
+      "acceptance": "NOT_RUN",
+      "state": "SOURCE_CREATED_DB_PT_NOT_RUN",
+      "relatedSsc": "SSC-340",
+      "relatedBug": "BUG-2846",
+      "relatedYkt": "YKT-2405",
+      "testIds": [
+        "PT-DB-NULL340-001",
+        "PT-DB-NULL340-002",
+        "PT-DB-NULL340-003",
+        "PT-DB-NULL340-004",
+        "PT-DB-NULL340-005",
+        "PT-DB-NULL340-006",
+        "PT-DB-NULL340-007",
+        "PT-DB-NULL340-008",
+        "PT-DB-NULL340-009",
+        "PT-DB-NULL340-010",
+        "PT-DB-NULL340-011",
+        "PT-DB-NULL340-012",
+        "PT-DB-NULL340-013",
+        "PT-DB-NULL340-014",
+        "PT-DB-NULL340-015"
+      ]
     }
   ],
   "layouts": [
@@ -551093,6 +551153,16 @@
       "wbs": "WBS-P019-02",
       "owner": "WBS-P018-02",
       "reason": "共通署名/BOM/3class検証を一元化。190ID履歴は保全、独立費/独立達成は除外。"
+    },
+    {
+      "id": "SCOPE-SSC340-V029",
+      "type": "APPEND_ONLY_SQL_REPAIR",
+      "owner": "WBS-P004-01",
+      "addedArtifacts": 1,
+      "addedJavaOuterClasses": 0,
+      "acceptedDelta": 0,
+      "budgetAlreadyPriced": true,
+      "reason": "Five existing named conditional-NN CHECKs; same tables/columns/grants/indexes, old28 immutable; no DB execution"
     }
   ],
   "measurementBindings": {

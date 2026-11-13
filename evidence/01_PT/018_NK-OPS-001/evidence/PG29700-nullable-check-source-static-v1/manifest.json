@@ -1,0 +1,115 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T14:23:10.695916+00:00",
+  "commands": [
+    {
+      "label": "format-check",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java"
+      ],
+      "pid": 550686,
+      "ownerPid": 550625,
+      "startUTC": "2026-11-13T14:23:07.996236+00:00",
+      "endUTC": "2026-11-13T14:23:08.611867+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29700-nullable-check-source-static-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java"
+      ],
+      "pid": 550716,
+      "ownerPid": 550625,
+      "startUTC": "2026-11-13T14:23:08.611888+00:00",
+      "endUTC": "2026-11-13T14:23:09.528604+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "javac-compile-only",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-classpath",
+        "/home/mini/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar:/home/mini/.m2/repository/org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar:/home/mini/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/mini/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/mini/.m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/.m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29700-db-test-compile-only",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java"
+      ],
+      "pid": 550758,
+      "ownerPid": 550625,
+      "startUTC": "2026-11-13T14:23:09.528622+00:00",
+      "endUTC": "2026-11-13T14:23:10.695892+00:00",
+      "actualExit": 0
+    }
+  ],
+  "classpath": [
+    {
+      "path": "/home/mini/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar",
+      "sha256": "d1bb81abfd9e03418306b4e6a3390c8db52c58372e749c2980ac29f0c08278f1"
+    },
+    {
+      "path": "/home/mini/.m2/repository/org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar",
+      "sha256": "1c25ca641ebaae44ff3ad21ca1b2ef68d0dd84bfeb07c4805ba7840899b77408"
+    },
+    {
+      "path": "/home/mini/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "path": "/home/mini/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "/home/mini/.m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar",
+      "sha256": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93"
+    },
+    {
+      "path": "/home/mini/.m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar",
+      "sha256": "e6147827cb883a8bb359231202e8d0d32e0f8e905caf0e20d2890e36dcd12251"
+    },
+    {
+      "path": "/home/mini/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar",
+      "sha256": "53ca085f4a150f703f49e1aabd935bd03b43e1ea3d55d135438292af22cef56b"
+    }
+  ],
+  "files": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java": "f8e0cd5945117fce45b3a2910f8b6faabe6503aa935e9271fd4b9b456dc57f80",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java": "a7d34f796d4869bcf9e07743c508c03aed8809d138c35e79223f67b62495a8cc"
+  },
+  "tools": {
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac": "2136da000c36cd6ea5e714ecf8ea7fb4e41f29c75849b6b7e62531373b91a3b1",
+    "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4",
+    "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+  },
+  "classInitialization": false,
+  "TestExecution": false,
+  "DBConnection": false,
+  "migrationExecution": false,
+  "actualDbRoleVmRootOperations": 0,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "state": "STATIC_COMPILE_ONLY_NOT_DB_PT"
+}

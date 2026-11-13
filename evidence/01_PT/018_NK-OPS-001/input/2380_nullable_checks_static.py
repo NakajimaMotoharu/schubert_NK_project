@@ -1,0 +1,15 @@
+"""Source/static checks only: javac does not run or initialize the held DB Test."""
+from pathlib import Path
+import datetime,hashlib,json,subprocess,os,re,xml.etree.ElementTree as X
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG29700-nullable-check-source-static-v1';assert not e.exists();e.mkdir();private=r.parent/'pgpt-runs/PG379/pg29700-db-test-compile-only';assert not private.exists();private.mkdir(mode=0o700)
+test=r/'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java';inventory=test.with_name('MigrationInventory.java');tc=r.parent/'toolchain';java=tc/'jdk-25.0.4/bin/java';javac=tc/'jdk-25.0.4/bin/javac';gjf=tc/'google-java-format-1.36.1-all-deps.jar';cs=tc/'static-gates-20261015/checkstyle-14.3.0-all.jar';m2=Path('/home/mini/.m2/repository')
+jars=[m2/p for p in ['org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar','org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar','org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar','org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar','org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar','org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar','com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar']];assert all(p.is_file() for p in jars)
+commands=[]
+for label,args in [('format-check',[str(java),'-jar',str(gjf),'--skip-reflowing-long-strings','--dry-run','--set-exit-if-changed',str(test),str(inventory)]),('checkstyle',[str(java),'-jar',str(cs),'-c',str(r/'tools/quality/static/checkstyle.xml'),'-f','xml','-o',str(e/'checkstyle.xml'),str(test),str(inventory)]),('javac-compile-only',[str(javac),'--release','25','-Xlint:all','-Werror','-proc:none','-classpath',':'.join(map(str,jars)),'-d',str(private),str(test),str(inventory)])]:
+ start=datetime.datetime.now(datetime.timezone.utc).isoformat()
+ with (e/(label+'.stdout')).open('xb') as out,(e/(label+'.stderr')).open('xb') as err:
+  p=subprocess.Popen(args,cwd=r,stdout=out,stderr=err,stdin=subprocess.DEVNULL);exit=p.wait(timeout=180)
+ commands.append(dict(label=label,command=args,pid=p.pid,ownerPid=os.getpid(),startUTC=start,endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),actualExit=exit))
+ if exit:break
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();m=dict(actualExit=commands[-1]['actualExit'],atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),commands=commands,classpath=[dict(path=str(p),sha256=sha(p)) for p in jars],files={str(p.relative_to(r)):sha(p) for p in [test,inventory]},tools={str(p):sha(p) for p in [java,javac,gjf,cs]},classInitialization=False,TestExecution=False,DBConnection=False,migrationExecution=False,actualDbRoleVmRootOperations=0,productTestsExecuted=0,coverage=None,state='STATIC_COMPILE_ONLY_NOT_DB_PT')
+(e/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=m['actualExit'],commands=[(x['label'],x['actualExit']) for x in commands],productTestsExecuted=0)));raise SystemExit(m['actualExit'])

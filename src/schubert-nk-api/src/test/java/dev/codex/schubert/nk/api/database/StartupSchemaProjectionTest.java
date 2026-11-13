@@ -35,7 +35,7 @@ final class StartupSchemaProjectionTest {
       List.of(
           "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013",
           "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026",
-          "027", "028");
+          "027", "028", "029");
 
   @BeforeAll
   static void start() throws Exception {
@@ -74,8 +74,8 @@ final class StartupSchemaProjectionTest {
         assertTrue(rows.getBoolean("success"));
       }
       assertFalse(rows.next());
-      // SSC201: 28 versioned rows plus the unchanged schema-creation row.
-      assertEquals(29, rank + 1);
+      // SSC340: 29 versioned rows plus the unchanged schema-creation row.
+      assertEquals(30, rank + 1);
     }
   }
 
