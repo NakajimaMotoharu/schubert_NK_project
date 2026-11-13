@@ -1,0 +1,41 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T18:56:08.420625+00:00",
+  "bug": "BUG2868",
+  "horizontal": "YKT292",
+  "source": "3828ec22c52204c9c319868c551dee5b1e75a57b",
+  "originalStatic": "evidence/01_PT/018_NK-OPS-001/evidence/PG30202-migration-asset12-static-v2/manifest.json",
+  "finding": "SpotBugs EI_EXPOSE_REP",
+  "runtimeMutableAliasNotDemonstrated": true,
+  "plannedFix": "Explicit List.copyOf at immutable snapshot retention, no suppression or business contract change",
+  "normalGroupTotalEstimateRetained": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 1.8
+  },
+  "reworkSubsets": [
+    {
+      "bug": "BUG2867",
+      "estimate": {
+        "low": 0.05,
+        "base": 0.15,
+        "high": 0.3
+      }
+    },
+    {
+      "bug": "BUG2868",
+      "estimate": {
+        "low": 0.02,
+        "base": 0.06,
+        "high": 0.12
+      }
+    }
+  ],
+  "remainingVerificationEstimate": {
+    "low": 0.23,
+    "base": 0.69,
+    "high": 1.38
+  },
+  "actualCost": null,
+  "productTestsExecuted": 0
+}

@@ -89,7 +89,8 @@ public final class AssetMigrationManifest {
         throw invalid();
       bytes = sum(bytes, entry.byteLength());
     }
-    retainedEntries = snapshot.stream().sorted(Comparator.comparing(Entry::currentPath)).toList();
+    retainedEntries =
+        List.copyOf(snapshot.stream().sorted(Comparator.comparing(Entry::currentPath)).toList());
     byteLength = bytes;
   }
 
