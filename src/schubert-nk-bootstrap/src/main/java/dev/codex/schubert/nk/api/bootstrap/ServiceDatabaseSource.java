@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -84,12 +85,14 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
           return connection;
         } catch (SQLException failure) {
           discard(connection, failure);
+          StorageIoException.preserveFatal(failure);
           throw unavailable();
         } catch (RuntimeException | Error failure) {
           discard(connection, failure);
           throw failure;
         }
       } catch (SQLException failure) {
+        StorageIoException.preserveFatal(failure);
         throw unavailable();
       } finally {
         properties.clear();
@@ -103,8 +106,10 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
     try {
       connection.close();
     } catch (SQLException cleanup) {
+      JdbcAdmissionFailures.beforeDiscard(primary, cleanup);
       if (!(primary instanceof SQLException)) primary.addSuppressed(unavailable());
     } catch (RuntimeException | Error cleanup) {
+      JdbcAdmissionFailures.beforeDiscard(primary, cleanup);
       if (primary instanceof SQLException) throw cleanup;
       // Do not add raw provider data or self-suppression. Unknown primary keeps its identity.
       primary.addSuppressed(unavailable());

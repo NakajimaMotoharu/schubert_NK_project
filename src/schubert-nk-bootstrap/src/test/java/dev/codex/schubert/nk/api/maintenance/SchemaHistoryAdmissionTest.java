@@ -361,7 +361,8 @@ final class SchemaHistoryAdmissionTest {
   @Test
   void opsSchema008IndependentConcurrentOwners() throws Exception {
     var admission = new SchemaHistoryAdmission(RELEASE);
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var barrier = new java.util.concurrent.CyclicBarrier(8);
       var tasks = new ArrayList<java.util.concurrent.Future<int[]>>();
       for (int i = 0; i < 8; i++)
@@ -375,6 +376,9 @@ final class SchemaHistoryAdmissionTest {
                 }));
       for (var task : tasks)
         assertArrayEquals(new int[] {1, 1, 0}, task.get(5, java.util.concurrent.TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
@@ -524,5 +528,74 @@ final class SchemaHistoryAdmissionTest {
       return type.cast(
           Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
     }
+  }
+
+  @Test
+  void opsSchema010KnownSqlFatalGraphsCloseOwnersAndPreserveOriginalIdentity() {
+    for (String site :
+        List.of(
+            FIXTURE_PREPARESTATEMENT_CB987D1F,
+            "setQueryTimeout",
+            "executeQuery",
+            FIXTURE_NEXT_CA1733B5,
+            FIXTURE_ROWCLOSE_4440E762,
+            FIXTURE_STATEMENTCLOSE_D5A13A63)) {
+      for (int graph = 0; graph < 4; graph++) {
+        var marker = new LinkageError("synthetic SQL fatal");
+        var failure = new SQLException("synthetic SQL provider", "P0001");
+        if (graph == 0) failure.initCause(marker);
+        else if (graph == 1) failure.addSuppressed(marker);
+        else if (graph == 2) {
+          var cycle = new SQLException("synthetic SQL cycle", failure);
+          failure.initCause(cycle);
+          cycle.addSuppressed(marker);
+        } else failure.setNextException(new SQLException("synthetic SQL next", marker));
+        var probe = new Probe();
+        probe.faults.put(site, failure);
+        assertSame(
+            marker,
+            assertThrows(
+                LinkageError.class,
+                () -> new SchemaHistoryAdmission(RELEASE).inspect(probe.connection())));
+        int rows =
+            List.of(FIXTURE_PREPARESTATEMENT_CB987D1F, "setQueryTimeout", "executeQuery")
+                    .contains(site)
+                ? 0
+                : 1;
+        int statements = site.equals(FIXTURE_PREPARESTATEMENT_CB987D1F) ? 0 : 1;
+        assertArrayEquals(new int[] {rows, statements, 0}, probe.closed);
+        assertNull(marker.getCause());
+        assertEquals(0, marker.getSuppressed().length);
+      }
+    }
+    var primaryMarker = new LinkageError("synthetic SQL primary fatal");
+    var primary = new Probe();
+    primary.faults.put(FIXTURE_NEXT_CA1733B5, new SQLException("synthetic SQL", primaryMarker));
+    primary.faults.put(FIXTURE_ROWCLOSE_4440E762, new IllegalStateException("synthetic row close"));
+    assertSame(
+        primaryMarker,
+        assertThrows(
+            LinkageError.class,
+            () -> new SchemaHistoryAdmission(RELEASE).verify(primary.connection())));
+    assertArrayEquals(new int[] {1, 1, 0}, primary.closed);
+    assertEquals(0, primaryMarker.getSuppressed().length);
+    var secondaryMarker = new LinkageError("synthetic SQL secondary fatal");
+    var secondary = new Probe();
+    secondary.faults.put(FIXTURE_NEXT_CA1733B5, new SQLException("synthetic ordinary SQL"));
+    secondary.faults.put(
+        FIXTURE_ROWCLOSE_4440E762, new SQLException("synthetic SQL", secondaryMarker));
+    secondary.faults.put(
+        FIXTURE_STATEMENTCLOSE_D5A13A63, new IllegalStateException("synthetic statement close"));
+    assertSame(
+        secondaryMarker,
+        assertThrows(
+            LinkageError.class,
+            () -> new SchemaHistoryAdmission(RELEASE).verify(secondary.connection())));
+    assertArrayEquals(new int[] {1, 1, 0}, secondary.closed);
+    assertNull(secondaryMarker.getCause());
+    assertEquals(1, secondaryMarker.getSuppressed().length);
+    assertEquals(
+        "database admission resource failure", secondaryMarker.getSuppressed()[0].getMessage());
+    assertNull(secondaryMarker.getSuppressed()[0].getCause());
   }
 }
