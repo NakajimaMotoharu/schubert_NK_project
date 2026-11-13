@@ -4,10 +4,12 @@ No product type is loaded or initialized. This module opens no application JAR
 and supplies no Root/native/owner authority or execution permission.
 """
 from pathlib import Path
+import copy
 import hashlib
 import json
 import re
 import zipfile
+import xml.etree.ElementTree as ET
 
 R = Path(__file__).resolve().parents[2]
 RUNS = R.parent / 'pgpt-runs/PG379'
@@ -112,6 +114,37 @@ def create_carrier(c, work):
                 purpose='STATIC_ANALYZER_AUX_ONLY_NEVER_PRODUCT_RUNTIME')
 
 
+def analyzer_root(compiler_root, carrier_path):
+    """Add exactly one analysis-only dependency; the compiler tree stays unchanged."""
+    root = copy.deepcopy(compiler_root)
+    ns = compiler_root.tag.split('}')[0] + '}' if '}' in compiler_root.tag else ''
+    deps = root.find(ns + 'dependencies')
+    require(deps is not None, 'owned compiler dependencies required')
+    dep = ET.SubElement(deps, ns + 'dependency')
+    for name, value in [('groupId', 'dev.codex.schubert.quality'),
+                        ('artifactId', 'analysis-only-six-symbols'), ('version', '1'),
+                        ('scope', 'system'), ('systemPath', str(carrier_path))]:
+        ET.SubElement(dep, ns + name).text = value
+    return root
+
+
+def create_owned_context(c, work):
+    value = create_carrier(c, work)
+    pom = work / 'spotbugs-analysis-only-context.pom.xml'
+    require(not pom.exists(), 'new-only owned analyzer POM')
+    root = ET.parse(work / 'pom.xml').getroot()
+    ET.ElementTree(analyzer_root(root, value['carrier']['path'])).write(
+        pom, encoding='unicode', xml_declaration=True)
+    value['analyzerPom'] = dict(path=str(pom), sha256=digest(pom))
+    return value
+
+
+def validate_analyzer_root(compiler_root, actual, carrier_path):
+    expected = analyzer_root(compiler_root, carrier_path)
+    require(ET.tostring(expected) == ET.tostring(actual),
+            'only the explicit analysis dependency added to compiler POM')
+
+
 def validate_prepared(c, manifest, work):
     value = manifest.get('analysisOnlyContext')
     if c.get('reviewedAnalysisOnlyContext') is None:
@@ -128,3 +161,9 @@ def validate_prepared(c, manifest, work):
             str(carrier) not in manifest['dependencies'], 'analysis carrier absent runtime dependencies')
     require(not {n + '.class' for n in NAMES} & set(manifest['physicalClassHashes']),
             'analysis classes absent product class directories')
+    if 'analyzerPom' in value:
+        pom = work / 'spotbugs-analysis-only-context.pom.xml'
+        require(value['analyzerPom'] == dict(path=str(pom), sha256=digest(pom)),
+                'exact owned analyzer POM')
+        validate_analyzer_root(ET.parse(work / 'pom.xml').getroot(),
+                               ET.parse(pom).getroot(), str(carrier))

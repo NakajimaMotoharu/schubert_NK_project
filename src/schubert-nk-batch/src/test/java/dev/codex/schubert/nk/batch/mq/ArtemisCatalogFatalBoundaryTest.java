@@ -1,0 +1,224 @@
+package dev.codex.schubert.nk.batch.mq;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.lang.reflect.Proxy;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.apache.activemq.artemis.api.core.ActiveMQException;
+import org.apache.activemq.artemis.api.core.client.ClientSession;
+import org.junit.jupiter.api.Test;
+
+/** BUG2766/YKT2359; SS312/321/333/352; MQCAT001..005, no broker or connection. */
+final class ArtemisCatalogFatalBoundaryTest {
+  private static final int SUPPRESSED_GRAPH = 1;
+  private static final String FATAL_TEXT = "PT_PUBLIC_FATAL";
+  private static final String PUBLIC_TEXT = "PT_PUBLIC";
+
+  @Test
+  void topologyAdaptersKeepFatalIdentityBeforeAnyLaterStage() {
+    for (int graph = 0; graph < 3; graph++) {
+      var marker = new AssertionError(FATAL_TEXT);
+      var declared = new ArtemisReadinessException();
+      attach(declared, marker, graph);
+      var calls = new AtomicInteger();
+      var later = new AtomicInteger();
+      var subject =
+          new ArtemisStartupObservation(
+              session -> {
+                calls.incrementAndGet();
+                throw declared;
+              },
+              session -> later.incrementAndGet(),
+              session -> later.incrementAndGet(),
+              session -> later.incrementAndGet(),
+              session -> later.incrementAndGet(),
+              session -> {
+                later.incrementAndGet();
+                return Map.of();
+              });
+      assertSame(
+          marker,
+          assertThrows(
+              AssertionError.class,
+              () -> subject.inspect(failing("NO_SESSION_CALL", declared, new AtomicInteger()))));
+      assertEquals(1, calls.get());
+      assertEquals(0, later.get());
+      var reads = new AtomicInteger();
+      assertSame(
+          marker,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  new ArtemisStartupObservation()
+                      .inspect(failing("addressQuery", declared, reads))));
+      assertEquals(1, reads.get());
+      assertEquals(0, marker.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void declaredTopologyProviderGraphKeepsErrorAndOrdinaryFailureStaysRedacted() {
+    for (int graph = 0; graph < 3; graph++) {
+      var marker = new AssertionError(FATAL_TEXT);
+      var provider = new ActiveMQException("PT_PUBLIC_PROVIDER");
+      attach(provider, marker, graph);
+      var calls = new AtomicInteger();
+      assertSame(
+          marker,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  new ArtemisReadinessClient()
+                      .inspectTopology(failing("addressQuery", provider, calls))));
+      assertEquals(1, calls.get());
+    }
+    var calls = new AtomicInteger();
+    var denied =
+        assertThrows(
+            ArtemisReadinessException.class,
+            () ->
+                new ArtemisReadinessClient()
+                    .inspectTopology(
+                        failing("addressQuery", new ActiveMQException(PUBLIC_TEXT), calls)));
+    assertEquals("Artemis effective Queue topology is unavailable", denied.getMessage());
+    assertNull(denied.getCause());
+    assertEquals(0, denied.getSuppressed().length);
+    assertEquals(1, calls.get());
+  }
+
+  @Test
+  void eachDeclaredParserGraphStopsBeforeStartedOrSessionAccess() {
+    for (int graph = 0; graph < 3; graph++) {
+      for (RuntimeException parser :
+          List.of(
+              new org.apache.activemq.artemis.commons.shaded.json.JsonException(PUBLIC_TEXT),
+              new ClassCastException(PUBLIC_TEXT),
+              new IllegalStateException(PUBLIC_TEXT))) {
+        var marker = new AssertionError(FATAL_TEXT);
+        attach(parser, marker, graph);
+        var parses = new AtomicInteger();
+        var started = new AtomicInteger();
+        var subject =
+            new ArtemisAcceptorReadinessClient(
+                session -> "[]",
+                session -> {
+                  started.incrementAndGet();
+                  return true;
+                },
+                json -> {
+                  assertEquals("[]", json);
+                  parses.incrementAndGet();
+                  throw parser;
+                });
+        assertSame(
+            marker,
+            assertThrows(
+                AssertionError.class,
+                () -> subject.inspect(failing("NO_SESSION_CALL", parser, new AtomicInteger()))));
+        assertEquals(1, parses.get());
+        assertEquals(0, started.get());
+      }
+    }
+  }
+
+  @Test
+  void checkedEncoderGraphPreservesFatalAndExistingIoContract() {
+    for (int graph = 0; graph < 3; graph++) {
+      var marker = new AssertionError(FATAL_TEXT);
+      var provider = new ActiveMQException("PT_PUBLIC_PROVIDER");
+      attach(provider, marker, graph);
+      assertSame(
+          marker,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  ArtemisManagementReadinessClient.encodeOperation(
+                      null,
+                      "PT_RESOURCE",
+                      "PT_OPERATION",
+                      (message, resource, operation, arguments) -> {
+                        throw provider;
+                      })));
+    }
+    var io = new IOException("PT_PUBLIC_IO", new AssertionError("PT_PUBLIC_IO_CAUSE"));
+    var denied =
+        assertThrows(
+            ArtemisManagementReadinessException.class,
+            () ->
+                ArtemisManagementReadinessClient.encodeOperation(
+                    null,
+                    "PT_RESOURCE",
+                    "PT_OPERATION",
+                    (message, resource, operation, arguments) -> {
+                      throw io;
+                    }));
+    assertEquals("Artemis effective broker configuration is unavailable", denied.getMessage());
+    assertNull(denied.getCause());
+    assertEquals(0, denied.getSuppressed().length);
+    assertFalse(Thread.currentThread().isInterrupted());
+  }
+
+  @Test
+  void interruptedExchangeRestoresFlagBeforeOriginalFatalEscapes() {
+    boolean original = Thread.interrupted();
+    try {
+      for (int graph = 0; graph < 3; graph++) {
+        var marker = new AssertionError(FATAL_TEXT);
+        var interrupted = new InterruptedException("PT_PUBLIC_INTERRUPTED");
+        attach(interrupted, marker, graph);
+        var calls = new AtomicInteger();
+        assertSame(
+            marker,
+            assertThrows(
+                AssertionError.class,
+                () ->
+                    ArtemisManagementReadinessClient.read(
+                        null,
+                        "PT_ATTRIBUTE",
+                        (session, attribute) -> {
+                          assertNull(session);
+                          assertEquals("PT_ATTRIBUTE", attribute);
+                          calls.incrementAndGet();
+                          throw interrupted;
+                        })));
+        assertTrue(Thread.currentThread().isInterrupted());
+        assertEquals(1, calls.get());
+        assertTrue(Thread.interrupted());
+      }
+    } finally {
+      Thread.interrupted();
+      if (original) Thread.currentThread().interrupt();
+    }
+  }
+
+  private static void attach(Throwable provider, Error marker, int graph) {
+    if (graph == 0) provider.initCause(marker);
+    else if (graph == SUPPRESSED_GRAPH) provider.addSuppressed(marker);
+    else {
+      var cycle = new IllegalStateException("PT_PUBLIC_CYCLE");
+      provider.initCause(cycle);
+      cycle.initCause(provider);
+      cycle.addSuppressed(marker);
+    }
+  }
+
+  private static ClientSession failing(String expected, Throwable failure, AtomicInteger calls) {
+    return (ClientSession)
+        Proxy.newProxyInstance(
+            ClientSession.class.getClassLoader(),
+            new Class<?>[] {ClientSession.class},
+            (proxy, method, arguments) -> {
+              assertEquals(expected, method.getName());
+              calls.incrementAndGet();
+              throw failure;
+            });
+  }
+}

@@ -333,8 +333,10 @@ def prepare(c, config):
     require(set(physical) == set(c['physicalClasses']), 'full physical class universe differs')
     import shutil
     shutil.copytree(work / 'target/classes', work / 'component')
+    import pgpt_analysis_symbols as analysis
+    analysis_context = analysis.create_owned_context(c, work) if c.get('reviewedAnalysisOnlyContext') is not None else None
     m = dict(actualExit=0, config=ref(config), inputHashes=hashes, dependencies=deps, toolHashes=tool_hashes(), physicalClassHashes=physical, testClassHashes=class_hashes(work / 'test-classes'), expectedCases=cases, selectedClasses=sorted({x['classname'] for x in cases}), stages=stages, preliminaryStyle=ref(pre), rootCompilerSha256=hashlib.sha256(ET.tostring(compiler)).hexdigest(), subsetPomSha256=digest(work / 'pom.xml'), productTestsExecuted=0, MainCompiled=True, wholeProjectMainRebuilt=False, verifier=ref(Path(__file__).resolve()))
-    m.update(guardSignature=signature, freshMainSourceCount=len(c['mainSources']), reusedRuntimeSignatureClassCount=1 if signature is not None else 0)
+    m.update(analysisOnlyContext=analysis_context, guardSignature=signature, freshMainSourceCount=len(c['mainSources']), reusedRuntimeSignatureClassCount=1 if signature is not None else 0)
     write_json(out / 'manifest.json', m)
     return m
 

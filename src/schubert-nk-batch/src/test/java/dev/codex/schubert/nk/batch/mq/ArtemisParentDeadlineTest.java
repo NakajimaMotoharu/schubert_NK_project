@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -72,12 +73,15 @@ final class ArtemisParentDeadlineTest {
                       throw new AssertionError(known);
                     }
                   });
+          thread.setDaemon(true);
           thread.start();
           try {
-            thread.join();
-          } catch (InterruptedException known) {
-            throw new AssertionError(known);
+            await(thread);
+          } finally {
+            thread.interrupt();
+            await(thread);
           }
+          assertFalse(thread.isAlive(), "bounded independent worker must terminate");
           assertEquals(2000, other[0]);
           return true;
         });
@@ -106,5 +110,14 @@ final class ArtemisParentDeadlineTest {
         NullPointerException.class,
         () -> ArtemisManagementReadinessClient.withParentDeadline(() -> 1, () -> null));
     assertEquals(2000, ArtemisManagementReadinessClient.requestTimeoutMillis());
+  }
+
+  private static void await(Thread worker) {
+    try {
+      worker.join(10_000);
+    } catch (InterruptedException known) {
+      Thread.currentThread().interrupt();
+      throw new AssertionError(known);
+    }
   }
 }

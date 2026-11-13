@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T09:54:00.645177+09:00",
+  "cases": [
+    {
+      "label": "exact one analysis dependency and compiler not mutated",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "label": "remove analysis dependency",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "change compiler plugin identity",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "replace analyzer carrier path",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "change a genuine SDK dependency version",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "add a second analysis dependency",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "change explicit analysis scope",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "only the explicit analysis dependency added to compiler POM"
+    },
+    {
+      "label": "compiler XML remains byte-identical",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    }
+  ],
+  "metadataCases": 8,
+  "compilerCallsUnchanged": true,
+  "compilerAndRuntimeAndCounterUnchangedFunctions": [
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "compiler_element",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "prestyle",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "expected_cases",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "class_hashes",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "checked_inputs",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "validate_syntax",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "prepared",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "run",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "preflight",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "classify_source_findings",
+      "unchanged": true
+    }
+  ],
+  "legacyWithoutOptionUsesNoCarrier": true,
+  "newScope": "Existingqualifiedsixsymbolsonly; no additionaltypes/SDK/Productsource/runtimepermissions",
+  "fixtureConstantFix": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28565-mq31-symbolic-graph-mode-source-v1/manifest.json",
+    "sha256": "b06f3d86cd11797c376c96b9d306e24e9542a92ca258b5a06e2e2bb05f007215"
+  },
+  "whole31AssertionsOraclesUnchanged": true,
+  "MainOrProductionByteChanged": false,
+  "newProductDefinitions": 0,
+  "ProductTestsExecuted": 0,
+  "sourceChangeRequiresFreshSourceQualification": true,
+  "oldCompileAndStaticSuccessPreserved": true
+}

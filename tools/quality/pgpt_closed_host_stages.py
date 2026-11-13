@@ -46,7 +46,8 @@ def static(c, config, extra):
     stages = {'pmd': h.steps.step('pmd', [str(h.JAVA), '-cp', ':'.join(map(str, libs)), 'net.sourceforge.pmd.cli.PmdCli', 'check', '--file-list', str(listing), '--rulesets', str(h.R / 'tools/quality/static/pmd.xml'), '--use-version', 'java-25', '--aux-classpath', str(h.TC / 'jdk-25.0.4/lib/jrt-fs.jar') + ':' + str(work / 'target/classes') + ':' + ':'.join([*m['dependencies'], *compile_only]), '--no-cache', '--format', 'xml', '--report-file', str(out / 'pmd.xml')], h.R)}
     stages['checkstyle'] = h.steps.step('checkstyle', [str(h.JAVA), '-jar', str(sg / 'checkstyle-14.3.0-all.jar'), '-c', str(h.R / 'tools/quality/static/checkstyle.xml'), '-f', 'xml', '-o', str(out / 'checkstyle.xml'), '@' + str(listing)], h.R)
     stages['format'] = h.steps.step('format', [str(h.JAVA), '-jar', str(h.TC / 'google-java-format-1.36.1-all-deps.jar'), '--skip-reflowing-long-strings', '--dry-run', '--set-exit-if-changed', *[str(h.R / p) for p in paths]], h.R)
-    stages['spotbugs'] = h.steps.step('spotbugs', [str(h.MAVEN), '-o', '--no-transfer-progress', '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check'], work)
+    analyzer_pom = ['-f', str(work / 'spotbugs-analysis-only-context.pom.xml')] if c.get('reviewedAnalysisOnlyContext') is not None else []
+    stages['spotbugs'] = h.steps.step('spotbugs', [str(h.MAVEN), '-o', '--no-transfer-progress', *analyzer_pom, '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check'], work)
     shutil.copyfile(work / 'target/spotbugsXml.xml', out / 'spotbugs.xml')
     sb = ET.parse(out / 'spotbugs.xml').getroot()
     raw, errors = findings(out / 'pmd.xml')

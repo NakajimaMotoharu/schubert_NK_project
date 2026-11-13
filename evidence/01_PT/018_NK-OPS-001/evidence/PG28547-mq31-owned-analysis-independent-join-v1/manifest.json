@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T09:45:52.959043+09:00",
+  "oldSuccessfulPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28538-mq31-prepare-v1/manifest.json",
+    "sha256": "dcbf49c7d3f12c7353805d4dc9eb7408e527d6fb2511984b85038585e4fcba69"
+  },
+  "newPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28546-mq31-owned-analysis-prepare-v1/manifest.json",
+    "sha256": "15c06b13d525bd6e69ccbacadceb1ecafcd3dbab477f98f736c0003726a2e019"
+  },
+  "oldProfile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2152_mq31_corrected_closed_profile.json",
+    "sha256": "984e05cfa3b988038c6c353315c6cd11a85404ab67cc9cda7648f7c77d284c56"
+  },
+  "newProfile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2153_mq31_owned_analysis_profile.json",
+    "sha256": "8d7fb33605228f396b96a4fe4794fec85ec90ed3357a27515c2c52a5bb40b9da"
+  },
+  "sameMainTestSources": true,
+  "samePhysical26AndTestBytes": true,
+  "compilerPomUnchanged": true,
+  "rootCompilerAstUnchanged": [
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "prepare",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "compiler_element",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_profile.py",
+      "function": "prestyle",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "prepared",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "static",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_closed_host_stages.py",
+      "function": "run",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_guard_signature.py",
+      "function": "create_compile_carrier",
+      "unchanged": true
+    },
+    {
+      "path": "tools/quality/pgpt_guard_signature.py",
+      "function": "copy_runtime_interface",
+      "unchanged": true
+    }
+  ],
+  "exactSixDataCarrier": {
+    "witness": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28428-six-analysis-symbols-exact-byte-witness-v1/manifest.json",
+      "sha256": "5155c32b4ae1790f1099aab7a2409e7b2c7da27e000f74df176f048cf7bf2ca5"
+    },
+    "carrier": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28538-mq31-prepare-v1/analysis-only-six-symbols.jar",
+      "sha256": "eef9f6c9d8cd515cd4bcedce8cedf78571d49ffa2a5aea1b7830dd94fddbb474"
+    },
+    "classes": {
+      "dev/codex/schubert/nk/bootstrap/ChildStartupContext": "43c7498c60c01d4c3347a4d25d30e8ecae04d9218f3270a3679671d1a798883d",
+      "dev/codex/schubert/nk/bootstrap/ChildStartupContext$MaintenanceParent": "567f7e3d1af3acb03e8674fcd6edd131f6f9ee20c68947b96eef35164910c341",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Clock": "0cc54f52b842e150834ed3c79970911c59d144740fb1ca6957449a0e3cc1c642",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent": "2cd864d63ca3e50cd41384c7fd1dfcc729c09fc2b09a0a7356110a8c286eb59d",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$ParentProbe": "37bf1420f75c85449d11037bb7f0a4f83496b60fc387520e24a4bf6dc2ef2613",
+      "dev/codex/schubert/nk/storage/LinuxMonotonicClock": "cd7d9013e0f7bd37ecd0fe19c261e738fbff01f363b50e7109fcc995205677e1"
+    },
+    "purpose": "STATIC_ANALYZER_AUX_ONLY_NEVER_PRODUCT_RUNTIME"
+  },
+  "analysisOnlyPomSha256": "ae38caf87beb0c6662a17d4f617f3f417204132f60e5b45c145ba33289218962",
+  "productTestsExecuted": 0,
+  "MainOrTestChanged": false,
+  "RootMainAndTestCompilersReexecuted": false,
+  "realBrokerRootNativeDbActions": 0,
+  "oldPlannedUnitWasNeverStarted": true
+}
