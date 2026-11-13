@@ -1,0 +1,5 @@
+# Expiry既知六catalogの製造仕様
+
+BUG2774/YKT2359、MQ009/OPS009/DAT009/UI251/SS32112・331・332SSC310§9・3419・352。ArtemisExpiryPurgeClient既ARME二口とExpiryAuditRepository既SQL/Runtime四口の固定化直前に重大Errorを保持する六callだけ。全元body逆変換一致・SQL/bind/queryTimeout/7dayselector/計数/nullableafter/owner-TX-Resource順は不変。特にsuccessful直下usingJdbcは既Java25TWR/self-suppression・同secondaryを維持し、stage/finishのTWR及び既Runtime変換tierを変更しない。readのみの既SS332typedclose/unknown型優先も不変。
+
+PG28620はGJF-CS0とsource製造差の確認だけ、RootMaincompile/NullAway-PMD-SB/実Broker-DB-parent wholePT/coverageは未受入。BUG2774OPEN、metadata準備を実purge/DBcommit/真正親終了としない。次に既wholeResourceFailure3と68独立合成期待値のMain閉包・型だけのGuard依存を別価格で確認し、不必要なGuard呼出によるprobe/coverage作成を禁止する。

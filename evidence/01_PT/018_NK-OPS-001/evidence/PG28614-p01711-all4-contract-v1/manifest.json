@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T10:39:16.281448+09:00",
+  "source": "891d897044c169f64b290da55473cbb18bafc335",
+  "productionCoreMain": "a81ffb6bcb3850f109021e743df40d915fdd7c4b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java": "5e6bf8b77ab12f406e2a52c93fcecef70923393672b94702fae934fd6f4d19cb",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java": "bddc97fdbbc5e24ae9cce492dad5eb5fac47fd7b3af720686c0e5a3457c849dc",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.java": "5e3698a3375d8cb82dbb8cc66426a415db5d3bf06a9aab46abfe25436d327ae2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 829,
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01711-ORACLE01",
+      "methods": "MorningExpiryExecution.execute",
+      "testIds": [
+        "EXPARENT001..005"
+      ],
+      "expected": "SS3419/343SSC125: 同Root-M/A-原本/current INVALID/boot-Epoch-activation/真正Broker manager前後+kernelactorと元30min保持。handoff中のOSparentguardはDB再帰を呼ばず、actualDBbeginExpiry UTCµs→owner/newrequestだけ公開、 priorは保持原SUCCESS全handle/auditend。専用advisory一回handoff/真正receipt後にDB全結果observe、同owner-request readback後expiry-request→owner退役。30は既拒否、未知/未設定結果は非成功、realRoot/DB/Unit/native/permit操作HOLD。"
+    },
+    {
+      "id": "P01711-ORACLE02",
+      "methods": "ArtemisExpiryPurgeClient.constructors/observe/purgeObserved/product/selectorCutoff/selector/nonnegative/integer/Observation/Result/ManagementOperations",
+      "testIds": [
+        "MQ023..028",
+        "MQUNKNOWN003"
+      ],
+      "expected": "SS32112/3419: cutoffUTC-7dayをmsceil、fixed _AMQ_ACTUAL_EXPIRY < numericのみ/Expiry qのみ/borrowedclose0。before-count-byte-selected実観測・selected<=before/estimate=floor(bytes*selected/before)・0count特例/overflow非成功。durablestage後だけ同count-byte-selected再照合→selected0ならremove0→actualremoved/aftercount/afterbytes照合、未知after0補完なし、APIcallerがstagecommit/health閾値判定を所有。null拒否/IntegerLong以外型不正/未知RuntimeErroridentity保持・knownARME二catalogBUG2774。pureMath overflowは既拒否不変更。"
+    },
+    {
+      "id": "P01711-ORACLE03",
+      "methods": "ArtemisExpiryPurgeException.constructor",
+      "testIds": [
+        "MQ023..028"
+      ],
+      "expected": "SS312/352: fixedmessage Artemis Expiry cleanup did not complete、provider detail/selector/secret causeを外へ返さない既catalog。例外型はRootowner/DBstage/実purge結果の能力ではない。"
+    },
+    {
+      "id": "P01711-ORACLE04",
+      "methods": "ExpiryAuditRepository.constructor/Stage/Snapshot/Prior/successful/stage/finish/read/validSnapshot/matchesStage/matchesTerminal/bindHandle/validAttempt/guarded/required/verifySuccessfulAudit/usingJdbc",
+      "testIds": [
+        "BAT284..287",
+        "EXP200001",
+        "EXP310001..003",
+        "EXP-AUDIT-SSC304"
+      ],
+      "expected": "SS3318/3419/SS332SSC310: 借用RCactiveTX/同run reference毎境界、nonSkipCLEAN_EXPIRY/全handleのPK-TX UPDATE・querytimeout5/binds固定、7daycutoff/positivecounts/unknownafterNULLとterminalSUCCESS actualtarget全件/endedµs一致。stage再送は保存RUNNING全field同値だけ、finish再送はstatus-counts-cutoff-before-after-end-code-summary全同値。callerがstagecommit→actualpurge→terminalcommit/独立readback、当Repoはconnection commit/rollback/config/close0。successful latestday最大二row/原runlookup/全auditSUCCESS/ended<=observed/errorsnull、read必須null/invalidSnapshotだけSQLDataException、unknownprovideridentityとtypedclose順位、同Throwableselfsuppなし。usingJdbcは別の既Java25TWR二scope、同secondaryとselfsuppressionを意図的に維持し共通順位helperへ統一しない。stage/finishの既Runtime固定化tier/TWRも不変更、六knowncatalogうち当四BUG2774。"
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-11/1"
+  ],
+  "endingStatus": "P01711_WHOLE4_ORIGINAL_PREPARATION_ONLY_RUNTIME_UNACCEPTED",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2159_p01711_original_contract_config.json",
+    "sha256": "d6c28cd75dec25e8868de0b359f76985c8b1b9d527767196e0cbecbc0a10e20d"
+  }
+}

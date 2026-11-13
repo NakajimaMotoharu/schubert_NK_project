@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.batch.mq;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
@@ -66,6 +67,7 @@ public final class ArtemisExpiryPurgeClient {
       long estimated = beforeCount == 0 ? 0 : product(beforeBytes, selected) / beforeCount;
       return new Observation(cutoff, beforeCount, selected, beforeBytes, estimated);
     } catch (ArtemisManagementReadinessException declaredProvider) {
+      StorageIoException.preserveFatal(declaredProvider);
       throw new ArtemisExpiryPurgeException();
     }
   }
@@ -114,6 +116,7 @@ public final class ArtemisExpiryPurgeClient {
           observation.beforeBytes() - afterBytes,
           afterBytes);
     } catch (ArtemisManagementReadinessException declaredProvider) {
+      StorageIoException.preserveFatal(declaredProvider);
       throw new ArtemisExpiryPurgeException();
     }
   }

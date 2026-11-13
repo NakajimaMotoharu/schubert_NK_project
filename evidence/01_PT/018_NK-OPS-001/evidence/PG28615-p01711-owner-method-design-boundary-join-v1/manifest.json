@@ -1,0 +1,80 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T10:39:16.226069+09:00",
+  "ownerCount": 4,
+  "ownerRows": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java",
+      "owner": "WBS-P017-11",
+      "costOwner": "WBS-P017-11",
+      "historicalSha256": "09646cecfb870234c872959cde18f5d9ac3dbc889c9a6b71f1d1d1e5b83e8cff",
+      "currentSha256": "5e6bf8b77ab12f406e2a52c93fcecef70923393672b94702fae934fd6f4d19cb",
+      "same": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+      "owner": "WBS-P017-11",
+      "costOwner": "WBS-P017-11",
+      "historicalSha256": "bddc97fdbbc5e24ae9cce492dad5eb5fac47fd7b3af720686c0e5a3457c849dc",
+      "currentSha256": "bddc97fdbbc5e24ae9cce492dad5eb5fac47fd7b3af720686c0e5a3457c849dc",
+      "same": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.java",
+      "owner": "WBS-P017-11",
+      "costOwner": "WBS-P017-11",
+      "historicalSha256": "5e3698a3375d8cb82dbb8cc66426a415db5d3bf06a9aab46abfe25436d327ae2",
+      "currentSha256": "5e3698a3375d8cb82dbb8cc66426a415db5d3bf06a9aab46abfe25436d327ae2",
+      "same": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "owner": "WBS-P017-11",
+      "costOwner": "WBS-P017-11",
+      "historicalSha256": "11fe3d148300de353f6f4e1da0e8cc720f11a89912099e6faf9eef201e012c06",
+      "currentSha256": "8d04ab28261de2e41ccc24790d732922f02c823aad5c0f374d6040e99cbe9a7e",
+      "same": false
+    }
+  ],
+  "inventoryHashDrift": 2,
+  "requirementIds": [],
+  "candidateWholeTests": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClientTest.java",
+      "sha256": "0e50b2eda7a4e8136a2daf0668081d046fa1854e830c34bf1b62ce8996377d88",
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq026RealBrokerRemovesOnlyActualExpiredMessage",
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq023FixedCutoffCountAndByteReconciliationWithoutCallerSelector",
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq024RejectsEveryCounterDriftOverflowAndProviderFailure",
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq025RejectsMissingMalformedOrUnboundedManagementSelector",
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq027RejectsUnstagedOrDriftedObservationBeforeRemove",
+        "dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClientTest#opsMq028StrictSevenDayCutoffRetainsSubmillisecondPrecision"
+      ],
+      "runtime": "HOLD_REAL_BROKER_OR_DB_WHOLE_NO_EXTRACTION",
+      "assertionQualification": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepositoryTest.java",
+      "sha256": "063ce9583b011cc7c8c13afa44b63d0b2d22f62e41aee92f5865c11c68f9d08c",
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#exp3202001EmptyAndSameRunSuccessUseLiteralAuditWithoutMutation",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#exp3366001PriorSuccessRevalidatesEveryReadbackWithoutMutation",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#exp3202002SuccessRefusesForeignDayFutureEndNullAndSqlBeforeAnyRewrite",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#exp200001SameDayForeignSuccessUsesRetainedCutoffAndDoesNotRewriteAudit",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#bat284StageIsInvisibleUntilCallerCommitAndKeepsExactCutoff",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#bat285TerminalSuccessAndExactReplayCannotRewriteOldResult",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#bat286RollbackUnknownAfterAndSameRunAttemptAreNeverGuessed",
+        "dev.codex.schubert.nk.batch.repository.ExpiryAuditRepositoryTest#bat287NullInvalidHandleAndTerminalAreRejectedWithoutMutation"
+      ],
+      "runtime": "HOLD_REAL_BROKER_OR_DB_WHOLE_NO_EXTRACTION",
+      "assertionQualification": false
+    }
+  ],
+  "candidateWholeMethodCount": 14,
+  "explicitSs332Ssc310DifferentResourceContractsPreserved": true,
+  "usingJdbcNotToBeUnifiedOrChanged": true,
+  "internalRuntimeTierNotChanged": true,
+  "newAcceptance": 0,
+  "productTestsExecuted": 0,
+  "formalUpdated": false
+}
