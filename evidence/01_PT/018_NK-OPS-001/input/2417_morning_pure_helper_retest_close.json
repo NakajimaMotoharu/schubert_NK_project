@@ -1,0 +1,113 @@
+{
+  "groupId": "PGPT-WBS65-MORNING-PURE-SQL12-SAME-TEST-RETEST-AFTER-BUG2857-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1607_WBS65Morning純十二件是正後通常結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29904-morning-pure-retest-source-ykt-join-v1/manifest.json",
+  "manifestSha256": "5b1beb27dfbe8469d716606b5be104ca08c22796baf9820fa5ef8a2ed3736a59",
+  "terminalAtUTC": "2026-11-13T16:27:46.381679+00:00",
+  "run": "PG29904",
+  "workIds": [
+    "F03_BUG2852_PURE_HELPER_WHOLE12_NORMAL_SUBSET"
+  ],
+  "outcome": "SAME12_NEW_MAIN_RETEST_JACOCO_FOUR100_ORIGINAL_QUALIFICATION_PRICE_ONCE",
+  "technical": {
+    "kind": "SAME_PURE12_NEW_MAIN_RETEST_JACOCO_FOUR100_NO_ORACLE_CHANGE",
+    "source": "6eeb048538f8e83bbfefbcd467563b2fdfe1100e",
+    "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+      "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+    },
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newDefinitionDelta": 0,
+    "sourceDefinedCases": 12,
+    "MainChangedByBugFix": 1,
+    "physicalClasses": 4,
+    "positiveMainCrc": 4,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 162,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 34,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "priorCoverage": {
+      "INSTRUCTION": {
+        "covered": 165,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 35,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "testSourceSha256": "95e6b836793434461ea17d1e527020cb7772aca782fbbd0dac5b6e8822f40ea2",
+    "independentExpectedUnchanged": true,
+    "defaultAnalyzerMethodObservation": {
+      "actualJvmCodeMethodCounts": {
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason": 5,
+        "dev/codex/schubert/nk/storage/StorageIoException": 3,
+        "dev/codex/schubert/nk/batch/repository/MorningSqlFailures": 3,
+        "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": 1
+      },
+      "actualJvmCodeMethods": 12,
+      "jacocoReportedMethods": {
+        "covered": 7,
+        "missed": 0
+      },
+      "jacocoConfigurationExclusions": [],
+      "note": "JaCoCo0.8.15 default analyzer counters are reported, with actual JVM Code method counts separately retained. Private empty utility constructor and compiler-generated enum methods account for the difference. No custom filter, reflection or unreachable waiver added; this component result does not authorize whole-451/F03 method-policy or compiler-generated-code exceptions."
+    },
+    "sourceFixBug": "BUG-2857",
+    "horizontal": "YKT-2406",
+    "actualDbRootVmNativeKeyActions": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1606_WBS65予実・Morning純十二件是正後通常完了版406.json",
+    "sha256": "58ca2e91e9a80df589ac0c499025ee23b11bcff6fd843ce16000b0dca1054d88"
+  },
+  "checkpointText": "BUG2857条件簡約後Core3f65/Testsource6eeb048538のPG29896は同一12byte/全独立期待値を固定した必要再試験、真正12/FES0・新定義増分0。PG29898独立postで全4物理CRC/初期化・一exec・L38/M7/C4/B34/I162 miss0、JaCoCo既定解析の四指標100。旧PG29862/64の12成功だが35/36品質未達を保全し、期待値変更/除外/到達不能免除/旧exec合算0。RootNullAway/lint-Werror/PMD-CS-SB raw/適用/未分類/missing/error0。YKT2406の修正1/非該当5は各flow/hashと24型論理証明・元未達/新34全branchをPG29904へ結合、BUG2857/YKT2406を当source条件範囲限定close。BUG2856 assertoperandは源保全/分離incrementと全12・PMD0で限定close。BUG2852の実Morning20caller/全65/DB/原本/ownedclose・wipe・Session失効/Root/native終了依存は未実施OPEN。実JVM Code method12とJaCoCo method7の既定filter差を明記し、全451/F03/生成code例外承認や全module達成へ代用しない。元normal価格.2/.6/1.2は本是正後に一度だけ完了、失敗試行の価格完了0/実費配賦NULLを維持。技術95run/4105exec/4076caseSuccess/歴史29（反復/品質未達12含む）・元190新0/正式1964-53/工数NULL/正本161。",
+  "nextCommand": "ContinuecanonicalP01702 publiccontract9Main (new/resume/records/Repository) /1 threechildren, reuseonlyexactscope oldRunState8/helper12 records withinputhash andno confirmationreplay. OriginalRoot/DB/VM/native/Backup/key/permit/intentHOLD maintained. Remaining internalStep8 closure .15/.45/.9 alreadypriced, couldresolvefullRepo/privateHistory/initialization/standardphysical support beforeanywhole8; notautomaticDBHOLD. MaintenanceRecordsTest concurrentUse implicitTWR fixedpool observedineligibility, recordnewBUG/YKT2387 beforeanyfuturefix andpriceincrementalscope, no heldRetirementTestextraction. Finishmeaningfulpublication ofcurrentrecords first, freshquota/40reviewifused40/usage02:18:34JST thencontinueallowedPGPT; no usualgroupstop."
+}

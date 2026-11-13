@@ -1,0 +1,153 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T16:27:46.381679+00:00",
+  "source": "6eeb048538f8e83bbfefbcd467563b2fdfe1100e",
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "technical": {
+    "kind": "SAME_PURE12_NEW_MAIN_RETEST_JACOCO_FOUR100_NO_ORACLE_CHANGE",
+    "source": "6eeb048538f8e83bbfefbcd467563b2fdfe1100e",
+    "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+      "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+    },
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newDefinitionDelta": 0,
+    "sourceDefinedCases": 12,
+    "MainChangedByBugFix": 1,
+    "physicalClasses": 4,
+    "positiveMainCrc": 4,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 162,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 34,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "priorCoverage": {
+      "INSTRUCTION": {
+        "covered": 165,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 35,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "testSourceSha256": "95e6b836793434461ea17d1e527020cb7772aca782fbbd0dac5b6e8822f40ea2",
+    "independentExpectedUnchanged": true,
+    "defaultAnalyzerMethodObservation": {
+      "actualJvmCodeMethodCounts": {
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason": 5,
+        "dev/codex/schubert/nk/storage/StorageIoException": 3,
+        "dev/codex/schubert/nk/batch/repository/MorningSqlFailures": 3,
+        "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": 1
+      },
+      "actualJvmCodeMethods": 12,
+      "jacocoReportedMethods": {
+        "covered": 7,
+        "missed": 0
+      },
+      "jacocoConfigurationExclusions": [],
+      "note": "JaCoCo0.8.15 default analyzer counters are reported, with actual JVM Code method counts separately retained. Private empty utility constructor and compiler-generated enum methods account for the difference. No custom filter, reflection or unreachable waiver added; this component result does not authorize whole-451/F03 method-policy or compiler-generated-code exceptions."
+    },
+    "sourceFixBug": "BUG-2857",
+    "horizontal": "YKT-2406",
+    "actualDbRootVmNativeKeyActions": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null
+  },
+  "branchFixEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+    "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1"
+  },
+  "horizontalTargets": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+      "beforeSha256": "16e6c332e4c34093787f5a281cfa27085a0fa21c9219bd21abeed4e8264fd5f0",
+      "afterSha256": "de45d4030a20160aaa8dc3f4aa3fca634a424e27841e8dc84efe3acfd36ba57f",
+      "disposition": "AFFECTED: else known=true and prior nonSQL branch returned, trailing SQL test dominated",
+      "changed": true
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "beforeSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+      "afterSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+      "disposition": "NOT_AFFECTED: private wrapper delegates policy; no secondary type predicate",
+      "changed": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "beforeSha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "afterSha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "disposition": "NOT_AFFECTED: else executes directly without repeated secondary type predicate",
+      "changed": false
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+      "beforeSha256": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce",
+      "afterSha256": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce",
+      "disposition": "NOT_AFFECTED: SQL/unknown selector else has no repeated secondary SQL condition",
+      "changed": false
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "beforeSha256": "571478ad292c963718e8476af06e96f5e3d27d39e8f99b45f8b6ec79eaf4e05e",
+      "afterSha256": "571478ad292c963718e8476af06e96f5e3d27d39e8f99b45f8b6ec79eaf4e05e",
+      "disposition": "NOT_AFFECTED: beforeDiscard is separate and runs before selector early return, secondary false reachable",
+      "changed": false
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java",
+      "beforeSha256": "91ca27ecb2aea560cd08b26c0ef605b2bbbac756afb673722eef816a1ddfb2c4",
+      "afterSha256": "91ca27ecb2aea560cd08b26c0ef605b2bbbac756afb673722eef816a1ddfb2c4",
+      "disposition": "NOT_AFFECTED: pair test precedes early return; both SQL/nonSQL secondary paths feasible",
+      "changed": false
+    }
+  ],
+  "allSixTargetsFixedOrReasonedAndSourceBound": true,
+  "regressionAgainstRedundantPredicate": "Original same12 source failed 35/36 gate, current code sameTest source achieves34/34; counter miss flag must be checked before quality credit",
+  "formalAcceptanceAdded": 0,
+  "whole451Accepted": false
+}
