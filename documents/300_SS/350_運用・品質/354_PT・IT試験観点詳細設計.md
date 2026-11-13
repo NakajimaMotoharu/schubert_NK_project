@@ -1,5 +1,30 @@
 # PT・IT試験観点詳細設計
 
+## SSC340 条件付きNN・複合CHECK NULL負例PG/PT（2026-11-13）
+
+BUG2846/YKT2405、SS331 SSC340、WBS-P004-01.01～03。独立期待値は次表の正常/拒否結果とSS331に置き、production SQL式やproduction methodをexpected生成器にしない。各負例は他のNN/FK/state/size条件を満たした合成rowを使い、SQLSTATE23514に加えて対象constraint名を確認する。他制約やFKによる拒否を当条件の再試験成功へ算入しない。
+
+|Test ID|入力・操作と独立期待値|
+|---|---|
+|PT-DB-NULL340-001|MUSIC M/IのkeyNULLと空/257byteを拒否、1/256byteを許容。|
+|PT-DB-NULL340-002|MUSIC roleNULL/未知値を拒否。M/I/Nごとの正規組合せを固定literalで許容。|
+|PT-DB-NULL340-003|VIDEO両NULLを許容、どちらか一方又は両方の非NULLを拒否。|
+|PT-DB-NULL340-004|MUSIC N/keyNULLを許容、N/key非NULLを拒否。|
+|PT-DB-NULL340-005|失効済sessionのreasonNULL/未知値又はrevoked_atNULLを拒否、既6値reason＋時刻を許容。|
+|PT-DB-NULL340-006|未失効session両NULLを許容、時刻又は理由が残る組合せを拒否。|
+|PT-DB-NULL340-007|Notification ERRORのcodeNULL/message有及びcode有/messageNULLを拒否、既5code＋messageを許容。|
+|PT-DB-NULL340-008|非ERRORのerror pair両NULLを許容、片方/両方有を拒否。|
+|PT-DB-NULL340-009|Inbox ciphertext有/keyNULL及び逆片方NULLを拒否、両NULLの許容は既state/sensitive-result条件も同時に確認。|
+|PT-DB-NULL340-010|snapshot両NNでbyte29/1,050,000を許容、28/1,050,001/不正keyを拒否。暗号実体ではなく非秘密合成byteでDB長/ペア条件だけを試験。|
+|PT-DB-NULL340-011|USER/QUESTION/JOB/SCENARIO_FILEでidNULL又はuuid有を拒否、N12 min/maxとUUID NULLを許容。|
+|PT-DB-NULL340-012|AUTH_SESSIONはUUIDだけNN、NONEは両refNULL、PROCESSINGは全関連NULL。半端/未知type/範囲外を拒否。|
+|PT-DB-NULL340-013|版28の不整合rowを保全したupgradeは版29validation失敗・rollback、旧row/旧constraint/旧checksumを保持し、成功履歴を捏造しない。失敗履歴の有無は実DB/Flyway契約に従い観測する。|
+|PT-DB-NULL340-014|正常upgrade/validate/冪等再適用、旧28resource byte/checksum不変、24table/159CHECK/FK/UK/index/rolegrantとschema履歴六列の不変を照合する。|
+|PT-DB-NULL340-015|明示optional NULL/QA050未知expiryの保全、既state/lease/operationtoken/owner/参照・暗号/保持の他gateを退行させない。|
+
+PGではappend-only DDL・主担当artifact・版一覧・独立SQL fixture・TestID・rollback手順/traceを一貫させる。実DB PTは固定source/run・必要権限/所有が成立した後に行い、whole候補の抽出・fake authority/DB・無許可SQL実行をしない。HOLD中のPG強化review/許可静的代替はNOT_RUNのDB PT、未測定coverage/null及び残存リスクと分離して記録し、PASS/四counter100/正式451/IT-STへ混ぜない。全体の既coverage100%・同source全scope/run・CHR/DIF・終了依存は緩和しない。
+
+
 ## SSC335 Web管理lock/join残budget PG/PT（2026-10-22）
 
 BUG1627/YKT1380、PT-WEB-MGMT335001～003。自己所有ephemeral loopback HttpServer/実executor、有限latch/watchdogと二workerだけを使い、実VM/Web/Root/cohort/原本/鍵/permit/Unit操作を要しない。旧Mainで零budget競合・lock待機中IRQ・既IRQでstartとの競合の有限反例を保存し、同Test bytesと全既oracleを固定した是正後に通常PTする。入力null/負/>30秒、正常/再close、stop/join不確定、取得前準備・例外優先は旧表も維持する。
