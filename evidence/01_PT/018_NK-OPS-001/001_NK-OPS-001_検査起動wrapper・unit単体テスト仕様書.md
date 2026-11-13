@@ -116,3 +116,6 @@ StartupProofFrame元whole8の有限workerと全3physical四100は[4265](4265_起
 
 
 WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/TestIDは[4266_P01804停止所有寿命十七Main・独立契約.md](4266_P01804停止所有寿命十七Main・独立契約.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+停止snapshot原whole7有限workerと12値独立oracle・全4四100は[4268](4268_停止snapshot原七同source・独立通常PT結果.md)、Core3f65/Test1970/PG30122・30124。実停止/全451未。
