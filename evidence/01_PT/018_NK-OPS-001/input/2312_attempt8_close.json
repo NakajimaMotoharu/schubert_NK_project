@@ -1,0 +1,106 @@
+{
+  "groupId": "PGPT-WBS65-INSPECTION-ATTEMPT-ORIGINAL-WHOLE8-FINITE-WORKER-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1513_WBS65InspectionAttempt原八結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29438-attempt8-current-source-join-v1/manifest.json",
+  "manifestSha256": "834710c3f217664113e60b555f4eec557b61f20383197fe6bcc623a51d175527",
+  "terminalAtUTC": "2026-11-13T10:47:36.031381+00:00",
+  "run": "PG29438",
+  "workIds": [
+    "P00404_INSPECTION_ATTEMPT_WHOLE8_FINITE_NORMAL"
+  ],
+  "outcome": "ORIGINAL_WHOLE8_FINITE_WORKER_TARGET_FOUR100_RELATED_REAL_GATES_HOLD",
+  "technical": {
+    "kind": "INSPECTION_ATTEMPT_ORIGINAL_WHOLE8_FINITE_WORKER_TARGET_SOURCE_FOUR100",
+    "source": "b8f5261a03405b7fd7e2cfafa2e22dbb11e9220f",
+    "productionCoreMain": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/manifest.json",
+      "sha256": "a2a61b3def2b92069c84e7b751df1daa21e451beaabd5e1a677ceebee024718b"
+    },
+    "tests": 8,
+    "newDefinitions": 0,
+    "MainChanged": false,
+    "testClassesChanged": 1,
+    "physicalClasses": 7,
+    "targetSourceCount": 1,
+    "targetCounters": {
+      "COMPLEXITY": {
+        "covered": 17,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 210,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 36,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 24,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/batch/repository/InspectionSummary": {
+        "INSTRUCTION": 2,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": 7,
+        "BRANCH": 3,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+        "INSTRUCTION": 5,
+        "BRANCH": 5,
+        "LINE": 1,
+        "COMPLEXITY": 5
+      },
+      "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion": {
+        "INSTRUCTION": 47,
+        "BRANCH": 6,
+        "LINE": 10,
+        "COMPLEXITY": 5,
+        "METHOD": 2,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": {
+        "INSTRUCTION": 30,
+        "LINE": 7,
+        "COMPLEXITY": 4,
+        "METHOD": 4,
+        "CLASS": 1
+      }
+    },
+    "newAcceptance": 0,
+    "effortRate": null,
+    "appRoster": {
+      "runs": 90,
+      "actualExecutions": 3913,
+      "success": 3884,
+      "failed": 29,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    },
+    "toolRosterNotCombined": true
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1512_WBS65予実・InspectionAttempt原八後版371.json",
+    "sha256": "65b97a6fe06db377c496aafdef936a4d1b1ed9a9b675c17f25ddc07ae1252201"
+  },
+  "checkpointText": "InspectionAttempt元whole8を固定sourceb8f5261a0340で全成功/FESabort0、PG29434独立post0。BUG2833 executor無期限TWRcloseだけfinallyshutdownNow/await10秒assertへ是正し原8期待値/fixtureはinverse不変、新定義0/Main変更0。RootJava25NullAway Main6/physical7compile0、SB全7 bugs/missing/errors0・GJF-CS0、PMD全5を有限JUnit fixtureへ個別分類して適用/未分類0。対象全InspectionAttempt I210/L36/M5/C1/B24 miss0で四100。関連5sourceの未網羅を全scopeへ保持、除外/旧exec合算0。MaintenanceCompletion/Activationは全outer公開sourceをcompileし型/権限stub無し、観測値は実DB/子/Backup/Root成功証明でない。actualRoot/VM/DB/key/native/actual4.class操作0。App技術roster90run/3913実行/3884成功/歴史29失敗、Toolとは別、元190新0/正式1964-53/工数null。",
+  "nextCommand": "Continueactualcanonical625 unprepared/1 sourcecontracts andgenuinewholepureTest candidates. Firstinspectcurrent originalcompleted146/preparation120 andcanonicalremainingrows, notnonexistentP02002; chooseowner/source/fullTestclosure/dependencies beforeprice. No repeatcompletedenv10/Attempt8/Tool46/Correlated11/Resource26 forconfirmation. Maincorebba104 vs7aed, actualRoot/VM/DB/Backup/key/native/actual4.class/heldTests2 stayHOLD. Freshquota/usage due20:33:52JST."
+}
