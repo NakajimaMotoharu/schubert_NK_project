@@ -1,0 +1,99 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T12:05:24.749381+09:00",
+  "source": "ccb4da91b0e459002ba9570a9182e68896db11c1",
+  "productionCoreMain": "48928c9d10cf7ff84c882a6febef002845d15eef",
+  "wholeCandidateTests": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidenceTest.java",
+      "sha256": "b58a35ec59e2f413756b7acb5bcf779939348df891d8cb12937b9af0fbc18440",
+      "wholeBodyAndHelpersFullyRead": true,
+      "lines": 697,
+      "tests": 5,
+      "decision": "HOLD_UNQUALIFIED_TRANSITIVE_ROOT_TYPED_RECEIPT_AND_COMPLEX_FIXTURE: whole5/697 lines, independent v2 golden raw frames and full tenstep inputs. Calls MorningBackupCompletion/MorningProcess.archive and existing ExpiryReceiptFixture/BackupStepFixture; full real typed closure not qualified, no new receipt/Root/Guard surrogate or extracted encoder method."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningProcessMainTest.java",
+      "sha256": "1c37250cfb10ffaff6a87fc8732b4228571cbd8204bbb1297ee9f7c93a916bab",
+      "wholeBodyAndHelpersFullyRead": true,
+      "lines": 346,
+      "tests": 11,
+      "decision": "HOLD_ACTUAL_NATIVE_CLOCK_AND_REFLECTION_COMPLEX_FIXTURE: whole11/346 lines. run/runCompleted calls real MorningParentBudget.create/LinuxMonotonicClock, includes constructor reflection and same-root dependent Prestart fixture. Existing unbounded executor cleanup BUG2781 second site; no native invocation or method extraction."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootStartupPendingTest.java",
+      "sha256": "71d26b092b5e748ba04d016255166df48217d011bf9bf934d5ed1103e8d23450",
+      "wholeBodyAndHelpersFullyRead": true,
+      "lines": 85,
+      "tests": 3,
+      "decision": "HOLD_ROOT_SNAPSHOT_TYPE: whole3/85 lines. Existing self() constructs RootStartupContext.Snapshot and checks data identity only, but real Root type runtime/compiler closure not qualified; do not create another Root snapshot/authority fixture or promote verifySelf to startup proof. Actualwait/IRQ/MISSING catalog newBUG2780 not exercised by these3."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCompletionChecksTest.java",
+      "sha256": "f725443f8c024f5b8406605341f33971634515743b03c9e1a8dd37c5d872c598",
+      "wholeBodyAndHelpersFullyRead": true,
+      "lines": 202,
+      "tests": 5,
+      "decision": "HOLD_REFLECTION_AND_COMPLEX_TRANSITIVE_FIXTURE: whole5/202 lines, txowner002 reflects MorningDatabaseSession.Access and calls MorningCompletionEvidenceTest.fixture/database; only other pure methods cannot be extracted. Existing source correctly distinguishes fullpeer/DBoutsideTX and retainedownerinsideTX, but Guard/Root/receipt whole closure incomplete."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicyTest.java",
+      "sha256": "b9804b33eb028770bac620fabe176883ad8a627aa92fdc0f2282264ae43114f4",
+      "wholeBodyAndHelpersFullyRead": true,
+      "lines": 236,
+      "tests": 7,
+      "decision": "CONDITIONAL_PURE_WHOLE7_NOT_QUALIFIED_YET: whole7/236 lines, all literal8policy/two ordering/null/512byte/known-unknownIRQ/wipe and existing Child provides Start fake process, no stop authority or actualcommand. Existing create() constructs defaultreader but doesnotinvoke it. Need literal GOLDEN dependency isolation from unselected Snapshot Test, BUG2781 boundedworker fix, BUG2782 twoMaincatalog PG, full remaining pure dependencies reviewed, and explicit exact-source optin forbidding NativeProcess init/streamingcode; not accepted by relaxing generic ProcessBuilder fence."
+    }
+  ],
+  "totalCandidateDefinitions": 31,
+  "totalCandidateLines": 1566,
+  "additionalWholeSourceRead": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java": "b4b7fc677bbe515cd048ba73e673afdd9a24fc0174d97694ed1035c74a9de0ef",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java": "cfd6a67fba5f487f3e3f5195ca9a308c1c9ad447a295fe22b8ed230ae8cac9a0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java": "a1cec7d9ec384cf8f4a69c50b7f295433f528446567de2d66504cfd710bf5e23",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java": "6ea511aa08b6182d29cc67da0b7d6ea77112a612ff31c57bee36306042bf2313",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbeFixture.java": "75b62aea8f3e4fbc558ec24698c7ff7d1faf4f477f34addb17e5e58f1283da2b"
+  },
+  "literalGoldenDeclarationOnlyRead": {
+    "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshotTest.java",
+    "wholeBodyRead": false,
+    "field": "GOLDEN",
+    "lineRange": "1..65"
+  },
+  "existingExactByteContractsReused": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28744-p01712-three-child-all16-contract-v1/manifest.json",
+      "sha256": "e09153d4b20dc3be4b36fa9641badc656f04977a6ba9d0f311f42feeb01e05ff"
+    }
+  ],
+  "transitiveClosureComplete": false,
+  "wholeHoldClasses": 4,
+  "conditionallyIndependentClasses": 1,
+  "remainingPureSourceDependenciesToRead": [
+    "InspectorUnitSnapshot.java",
+    "ApplicationStopGate.java",
+    "ApplicationUnit.java",
+    "SystemdState.java"
+  ],
+  "necessaryNewFindings": [
+    "BUG2781",
+    "BUG2782",
+    "BUG2783"
+  ],
+  "allOriginalCandidateBytesUnchanged": true,
+  "newFixturesOrProductTests": 0,
+  "productClassesCompiledLoadedInitialized": 0,
+  "actualRootDbVmCohoRecoveryPermitIntentActions": 0,
+  "heldRoot2BodyStatHashClassActions": 0,
+  "alternativeQualificationOrPartialMethodExecution": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2189_p01712_candidate_review_close.py",
+    "sha256": "e1ea8117a6286884bc946d9453ec9ea8f2e090d9a561b2a016afcb2dcc58ce39"
+  }
+}
