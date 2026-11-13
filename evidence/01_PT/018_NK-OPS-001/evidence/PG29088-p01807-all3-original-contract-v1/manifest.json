@@ -1,0 +1,83 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T15:10:23.906223+09:00",
+  "source": "b2f633fb21ef27302e1511dcb91a1ec60b2d7972",
+  "productionCoreMain": "631fa26b708ddeb5d5c60b11f33786a0ee326a8b",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java": "e5e4b289865f86279ec541a13753fa4cc44f8f8ccacbf9d28a9f8d92735ccb9d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java": "f59b7bd1461b04da66e7726d414a2128b6739e54f8e10d3e7e33f813d8e654eb",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java": "bb546fa7c261e71d7d923eedbc7b5d64efda3ceff6e6c7f05e570e2e12acb617"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 834,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01807-ORACLE01",
+      "artifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java",
+      "methods": "MorningCaddyReadiness.create/configuration/profile/cold/coldInvocation/ready/listeners/kernelAddress/closeLoginInput/NativeIo",
+      "testIds": [
+        "CADDY455/SSC178180192308/CADDYSTREAM001..006"
+      ],
+      "expected": "SS342343: exactcaddy.service Type notify/Restart no/KillMode control-group/SendSIGKILL no/NoNewPrivileges yes/caps-empty/caddy user-group/timeout30s; exactsystemctl keys and fixed/usr/bin/caddy validate/run only. Cold noInvocation requiresnoexecution; priornormal/reloadcleared history rejectsoldgeneration only, never readinessauthority. create/ready sameMorning parentbudget andRoot recheck, newgenerationnotprior, capturedactorPID identity, managerbeforeafterequal, actualowned TLSlogin200 withCA+hostname andlistenerinodeintersection. fixedD778 port/literalIP kernelbyteorder. nullHTTPbody is natural empty stream only, commonResourceScope unchanged; fullclose/failurepriorities maintained. All actual root/manager/proc/socket/TLS/service operations HOLD, source and literalcontracts only."
+    },
+    {
+      "id": "P01807-ORACLE02",
+      "artifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningParentBudget.java",
+      "methods": "MorningParentBudget.create/borrow/constructors/remainingNanos/deadlineNanos/requireWithin",
+      "testIds": [
+        "MBUDGET001..002/nativeBorrow"
+      ],
+      "expected": "SS341342343SSC107119: one Linux CLOCK_MONOTONIC30minute parentbudget, 1800000000000ns exact; child never restarts. elapsed=now-began supports signedwrap but elapsed<0 or >=limit fails. borrowedpositiveabsolute deadline bounds remaining by min(parentelapsed, borrowed-now), both mustwithinlimit. deadline Math.addExact overflow fixedIO, notclockreset. Sameboot/owner independently required; clockdata grantsnoRoot authority. requireWithin onlybudgetproof notUnittermination. WholeParentBudgetTest3 includes realnativeclock factory/borrow, HOLD/no methodextraction."
+    },
+    {
+      "id": "P01807-ORACLE03",
+      "artifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "methods": "MorningServiceReadiness.create/constructor/ready/ordinary/ascii/listeners/NativeIo",
+      "testIds": [
+        "READY428001..006"
+      ],
+      "expected": "SS342343SSC164: sameRoot/Morning/capturedservice generation recheck beforeafter. API8091/Web8081 managementonly, exactUID/GIDall4/groups/NoNewPrivs1/all5capszero, exactsingleMain cmdline token andownedloopbacklistenerinode. ready requiresordinarybeforeafter, literalhealth200 {status:UP}/info200 exactfiveorderedpublicvalues, sameownedlistenerintersection andguardafter. No management-only proof from oneHTTPresponse. proc/readcaps/status<=16384, nettable<=2097152, FDentries<=65536, fixedGETpath/noProxy/noredirect/500ms, readonly boundedHTTPbody andallclose. Observationonly neverpermit/intent retirement/DONE/Rootownershipauthority. NativeIO wholeTestclosure unqualified, no actualqueries performed."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P018-07/1"
+  ],
+  "endingStatus": "P01807_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2251_p01807_original_contract_config.json",
+    "sha256": "369c7cbc825fe343abad02333d65cf170c6acfc6a348e13bce3f1ca0c1739b4b"
+  }
+}

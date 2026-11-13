@@ -92,3 +92,6 @@ Web稼働判定終端フラグ通常六結果：[4253_Web稼働判定終端フ�
 
 
 Web停止原六新一通常七結果：[4255_Web停止原六新一通常七結果.md](4255_Web停止原六新一通常七結果.md)。通常whole7成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
+
+
+WBS-P018-07公開source契約/独立期待値/TestIDは[4257_P01807全三artifact契約・独立期待値対応.md](4257_P01807全三artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
