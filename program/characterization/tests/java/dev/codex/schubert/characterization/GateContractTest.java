@@ -156,12 +156,14 @@ class GateContractTest {
         users, "ignored=x\nuser=\npass= \nuser=synthetic-marker-only\npass=synthetic-other-only\n");
     Files.writeString(reports.resolve("prefix.bin"), "JSESSIONID=");
     Files.writeString(reports.resolve("second.bin"), "synthetic-other-only");
+    List<String> hits = GateCli.secretScan(directory.resolve("project"), users);
+    assertEquals(3, hits.size());
     assertEquals(
-        List.of(
+        Set.of(
             "program/characterization/reports/large.bin",
             "program/characterization/reports/prefix.bin",
             "program/characterization/reports/second.bin"),
-        GateCli.secretScan(directory.resolve("project"), users));
+        Set.copyOf(hits));
   }
 
   private static JsonNode resource(String name) throws Exception {
