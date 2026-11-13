@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
 import dev.codex.schubert.nk.api.file.ServiceProcessResources;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.io.IOException;
 import java.lang.ref.Reference;
 import java.util.Objects;
@@ -38,6 +39,7 @@ final class WebRuntimeExecution {
       start.run();
       await.run();
     } catch (LifecycleException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new IOException("Web HTTP startup unavailable");
     } finally {
       stop.run();

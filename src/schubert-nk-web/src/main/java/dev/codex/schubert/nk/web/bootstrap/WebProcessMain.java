@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -104,6 +105,7 @@ public final class WebProcessMain {
     try {
       inputs = new WebStartupInputs(source, environment).load();
     } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      SessionStoreException.preserveFatal(failure);
       return 70;
     } catch (IOException failure) {
       return 50;
@@ -158,6 +160,7 @@ public final class WebProcessMain {
       var inputs = loader.load();
       return new ServiceStartupAdmission.Configuration<>(inputs, inputs.config().canonicalSha256());
     } catch (IllegalArgumentException | NoSuchAlgorithmException failure) {
+      SessionStoreException.preserveFatal(failure);
       failureCode[0] = 70;
       throw new IOException("non-secret configuration unavailable");
     }
