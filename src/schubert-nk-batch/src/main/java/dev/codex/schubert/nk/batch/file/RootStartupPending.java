@@ -118,6 +118,7 @@ final class RootStartupPending {
         io.pause();
       } catch (InterruptedException interrupted) {
         Thread.currentThread().interrupt();
+        StorageIoException.preserveFatal(interrupted);
         throw new IOException("root launch unavailable");
       }
     }
@@ -129,6 +130,7 @@ final class RootStartupPending {
       return Optional.of(Objects.requireNonNull(read.read()));
     } catch (StorageIoException absent) {
       if (absent.reason() != StorageIoException.Reason.MISSING) throw absent;
+      StorageIoException.preserveFatal(absent);
       return Optional.empty();
     }
   }

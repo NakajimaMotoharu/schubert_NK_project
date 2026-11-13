@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import dev.codex.schubert.nk.storage.StorageRootLayout;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -144,6 +145,7 @@ final class MorningStartupRoots {
       try {
         return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(actual));
       } catch (NoSuchAlgorithmException failure) {
+        StorageIoException.preserveFatal(failure);
         throw new IOException("root digest unavailable");
       } finally {
         Arrays.fill(actual, (byte) 0);

@@ -21,6 +21,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -746,6 +747,7 @@ final class MorningStartupLaunchOwner {
       Thread.sleep(25);
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
+      StorageIoException.preserveFatal(interrupted);
       throw new IOException("service startup unavailable");
     }
   }

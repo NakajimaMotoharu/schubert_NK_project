@@ -9,6 +9,7 @@ import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -419,6 +420,7 @@ public final class MorningProcessMain {
     try {
       return java.util.HexFormat.of().formatHex(factory.create().digest(bytes));
     } catch (java.security.NoSuchAlgorithmException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new IOException("prestart digest unavailable");
     }
   }
@@ -562,6 +564,7 @@ public final class MorningProcessMain {
     } catch (IOException
         | StopGateException
         | dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException known) {
+      if (!(known instanceof IOException)) StorageIoException.preserveFatal(known);
       return 30;
     }
   }

@@ -5,6 +5,7 @@ import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.batch.repository.BatchStepResult;
 import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository;
 import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -287,6 +288,7 @@ final class MorningPrestartEvidence {
       return HexFormat.of()
           .formatHex(Objects.requireNonNull(factory.create(), "SHA-256 instance").digest(frame));
     } catch (NoSuchAlgorithmException unavailable) {
+      StorageIoException.preserveFatal(unavailable);
       throw new IOException("prestart digest unavailable");
     }
   }
