@@ -1168,3 +1168,6 @@ PG-D369/016085086と安全016 PG454-graph-selected-v8を対応付けた。126PT1
 2026-10-13追記：439_Root世代guard残分岐の構造調査（430_実装判断、未確定候補/除外なし）、018証跡681～685/017証跡683686と公開safe manifestを追加。Main2741維持、限定host/Bootstrap成果を正式1964PT/53scopeへ加算しない。最新現況456/依存460/WBS486。
 
 同native起動のowned partial HTTP/worker残budget/config honoring/lifetime/外側UNKNOWN保持を初回製造し、独立173PT26suite/FES0/静的6zero・12class全counter0へ接続した。17対象counter/未到達を016085086/安全PG454-native-selected-v4へ保存、NativeRuntime/ordinary mainは実VM未受入で正式run24/1964/53scope/48.3%不変。次同source共有群fresh全6→必要Caddy/同原本complete/intent退役→signed27/実親/APIWeb/CHR/native正式、通常単位で停止0。現況456/依存460。
+
+
+2026-11-13 NK-MIG-001：migration起動履歴境界の[PT仕様](../../evidence/01_PT/019_NK-MIG-001/001_NK-MIG-001_単体テスト仕様書.md)・[結果](../../evidence/01_PT/019_NK-MIG-001/002_NK-MIG-001_実行結果.md)を019へ作成。現主Schema/helperとP01805関連参照を区別、現在は準備のみ/未実行、実DB/migration/IT-ST完了ではない。

@@ -1,0 +1,134 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T15:45:49.355143+09:00",
+  "source": "b9fada949e009f36c69096b75cf2881eac9e70b5",
+  "productionCoreMain": "75d0cacb4f9802877466aa1b068c6fa181a3a76a",
+  "ownedSourceHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "bf179887c2496723d5ddb4ee0be02c5e599ecba781f5b8338367bb21648627a5",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "4c0d9cd86b28b98d08d223dbb6f87c80f40d1b5226a9361add1ba28ea327fd2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "667d73ca5509235a18c393910d9cbea603bf4acc615a4536b66b6993b822aa7e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "74af333322423838ae2a2a7218d8b374d82dab9fe51fee22275267ba749a8500"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 454,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01901-ORACLE01",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "methods": "JdbcAdmissionFailures.replace",
+      "testIds": [
+        "DBADMIT003/SCHEMA006010"
+      ],
+      "expected": "SS343SSC084095: primarynull→secondary, primarySQL+secondarynonSQL→secondary, otherwise originalprimary retained. ForunknownnonSQLprimary addonlyfixedSQL08001 diagnostic/no rawprovider/selfsuppression. Existing64literaltype matrix independent ofProduction helper unchanged. BUG2806 knownSQLcause/suppressed/nextfatal classification beforediscard/replace missing, pendingnormalPT; directordinarymatrixnotrewritten."
+    },
+    {
+      "id": "P01901-ORACLE02",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "methods": "SchemaHistoryAdmission.Row/constructor/verify/inspect/required/require",
+      "testIds": [
+        "SCHEMA001..010"
+      ],
+      "expected": "SS3313.3/SS3439.1SSC095129: signedreleaseexpected sixcolumns, notobservedDBoracle. SCHEMA rank0/versionNULL/typeSCHEMA/scriptquoted schubert_meta/checksumNULL/successtrue; SQLrank1..999/versionexact3digits non000/ascending/scriptVversion__lowername1..200.sql/checksumnonnull/successtrue. Expected1..1000 immutablecopied rows no null/rankgap/duplicateversion. Exact fixedstartup_schema_history query orderedinstalledrank/timeout5; rejectNULL,wrongcolumns/missing/extra/failedrows/IRQbeforeafter. Realobservedimmutablecopyafterrows+statementclose, borrowedconnectionneverconfigure/close. SQLfixed08001/nocause, unknownidentitypriority; BUG2806 fatalgraph gap, whole9logicalJDBCportTestread andBUG2807 boundedexecutor pending, no realDB."
+    },
+    {
+      "id": "P01901-ORACLE03",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "methods": "ServiceDatabaseAdmission.constructor/verify/required",
+      "testIds": [
+        "DBADMIT001..004"
+      ],
+      "expected": "SS342343SSC082: APIrole schubert_app/Webrole schubert_web_session andexactjdbc:postgresql://127.0.0.1:port1..65535/lowercaseDBname grammar, noquery/alternatehost/user-suppliedSQL. Borrowedautocommittrue/readOnlyfalse, fixedone-row effective_role/login_role/database/recoveryfalse typednonNULL, noextra row. Alwaysrows+statementclose, borrowedconnectionneverclose/configure; SQLfixed08001/redacted, unmodeledRuntime/Erroridentity priority. CurrentprimaryP01805/referenceonlyhere; BUG2806catalog/helperfatal gapnotaccepted."
+    },
+    {
+      "id": "P01901-ORACLE04",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "methods": "ServiceDatabaseSource.constructors/getConnection/discard/options/wrapper/close/toString",
+      "testIds": [
+        "DBSOURCE001..006"
+      ],
+      "expected": "SS342343SSC081082084: fixedrole/applicationName/login-timeout3, validatedcredential charcopy1..65536 consumed+zeroed evenconstructorfailure. State lock protects ownedpassword andconnectioncreation; perconnectPropertiesclearedfinally; no physicalerasurepromise forimmutableJDBCString. Everyreturnedconnection admittedbyidentity; deniedconnectioncloseattempted beforefailure, borrowedreturns callerowned. Caller sourceclose onlyafterpool, wipesinternalchars/idempotent; afterclosedfixed08001. User-passwordoverride unsupported0A000, logWriternullonly, timeout3only/wrappertypechecked, REDACTEDtoString. CurrentprimaryP01805/referenceonly; BUG2806SQLfatal redaction/discardgap pending, no credential/realJDBC connect executed."
+    },
+    {
+      "id": "P01901-CHILD1",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "methods": "Contract WBS-P019-01.01",
+      "testIds": [
+        "SCHEMA001009/DBADMIT/DBSOURCE"
+      ],
+      "expected": "Inventory currentfourlistedpublicsources andsignedSQL/BOMexpectedversion, notruntimeDB-derivedexpected. CurrentprimarySchema/helper2 andrelatedP01805DBsource/admission2; noownership/costduplicate. No Flyway/DDL/migration executed."
+    },
+    {
+      "id": "P01901-CHILD2",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "methods": "Contract WBS-P019-01.02",
+      "testIds": [
+        "SCHEMA002003004005006010"
+      ],
+      "expected": "Independentfixture literal SCHEMArow+V001 SQLrank1/checksum-170000001 forunitports, notclaimsaboutactualsignedrelease. Boundary1000rows/maxrank999/lowercasefilenames, mismatch/old/unknown/NULL/extra allreject withownerclose. Whole9reviewedbutnotrun, BUG2806/2807pending; no observingDBtocalculateexpected."
+    },
+    {
+      "id": "P01901-CHILD3",
+      "artifact": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "methods": "Contract WBS-P019-01.03",
+      "testIds": [
+        "SCHEMA001006007008009010"
+      ],
+      "expected": "Fixedreadprojection/timeout5 andbothownedJDBCchildrenclose onallnormal/SQL/runtime/error paths, borrowedConnectionclosed0. Failure neverappliesDDL/migration orchangesversion; inspectorreadsactualimmutable6columnsnotexpectedlist. Startupadmission never grantsmigration/retry/Root authority; realSQLpostconditions/restart/native/451 andall/2unaccepted."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-P018-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P019-01.01/1",
+    "WBS-P019-01.02/1",
+    "WBS-P019-01.03/1"
+  ],
+  "endingStatus": "P01901_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2260_p01901_original_contract_config.json",
+    "sha256": "dce4e29b8498c40f983cb5afff4cfd6f1e5fd988d2e3e71ff24ecb70eef27801"
+  },
+  "currentPrimarySourceCount": 2,
+  "currentRelatedSourceCount": 2,
+  "currentOwnerPartition": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29140-p01901-current-owner-history-test-index-v1/manifest.json",
+    "sha256": "6a1963bbf51b4928defdcea155cb9fa065841d5b0ae8910e647fc6b8b6a32829"
+  },
+  "legacyOwnedSourceHashesKeyMeaning": "481 listed4 sources, actual485 primarySchema/helper2 plus relatedP01805DBsource/admission2; no ownership or cost transfer"
+}
