@@ -67,12 +67,10 @@ public final class ScenarioFileMigrationMap {
       if (positions.containsKey(key) || !targetIds.add(pair.targetFileId())) throw invalid();
       positions.put(key, files.size());
       // Validated game index is 0/1; List's int count bounds each dense ordinal within N12.
+      ranks[pair.gameId() - 1]++;
       files.add(
           new MappedFile(
-              pair.gameId(),
-              pair.currentFileId(),
-              pair.targetFileId(),
-              ++ranks[pair.gameId() - 1]));
+              pair.gameId(), pair.currentFileId(), pair.targetFileId(), ranks[pair.gameId() - 1]));
     }
     retainedFiles = List.copyOf(files);
     retainedPositions = Map.copyOf(positions);
