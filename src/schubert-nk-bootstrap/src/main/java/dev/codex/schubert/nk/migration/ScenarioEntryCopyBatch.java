@@ -15,6 +15,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class ScenarioEntryCopyBatch {
+  private static final int MAXIMUM_TRANSACTION_TIMESTAMPS = 1;
   private final List<ScenarioEntryCopyRow> retainedRows;
 
   public ScenarioEntryCopyBatch(
@@ -29,7 +30,7 @@ public final class ScenarioEntryCopyBatch {
       if (byTarget.put(target, row) != null) throw invalid();
       timestamps.add(Objects.requireNonNull(row.fields().get(11)));
     }
-    if (timestamps.size() > 1) throw invalid();
+    if (timestamps.size() > MAXIMUM_TRANSACTION_TIMESTAMPS) throw invalid();
     var ordered = new ArrayList<ScenarioEntryCopyRow>();
     for (var entry : placement.entries()) {
       @Nullable ScenarioEntryCopyRow row = byTarget.get(entry.targetEntryId());
