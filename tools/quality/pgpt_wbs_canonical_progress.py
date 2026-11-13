@@ -1,0 +1,70 @@
+"""Canonical WBS row counts, kept separate from legacy notes, forecasts and effort.
+
+BUG2836/K03.02. Pure metadata only: no product, VM, process, DB or credential access.
+"""
+from collections import Counter
+from decimal import Decimal
+
+
+def _ids(value):
+    if not isinstance(value, (list, tuple)) or any(not isinstance(x, str) or not x for x in value):
+        raise ValueError('explicit nonempty string IDs required; missing is not zero')
+    return list(value)
+
+
+def derive_progress(master_ids, completed_ids, legacy_preparation_entries):
+    master = _ids(master_ids)
+    completed = _ids(completed_ids)
+    legacy = _ids(legacy_preparation_entries)
+    if len(master) != len(set(master)):
+        raise ValueError('duplicate canonical master rows')
+    canonical, done = set(master), set(completed)
+    valid_done = canonical & done
+    preparation = {x for x in legacy if x in canonical and x.endswith('/1')}
+    unknown = sorted(done - canonical)
+    duplicates = sorted(x for x, n in Counter(completed).items() if n > 1)
+    not_completed = sorted(preparation - done)
+    first = sum(x.endswith('/1') for x in valid_done)
+    second = sum(x.endswith('/2') for x in valid_done)
+    return dict(
+        canonicalRowCount=len(master),
+        uniqueCompletedRows=len(valid_done),
+        completedStage1Rows=first,
+        completedStage2Rows=second,
+        completedStandaloneRows=len(valid_done) - first - second,
+        unknownCompletedIds=unknown,
+        duplicateCompletedIds=duplicates,
+        legacyPreparationEntryCount=len(legacy),
+        legacyPreparationDistinctEntryCount=len(set(legacy)),
+        legacyPreparationCanonicalStage1References=len(preparation),
+        legacyPreparationCanonicalCompletedStage1Rows=len(preparation & done),
+        legacyPreparationDuplicateEntries=sorted(x for x, n in Counter(legacy).items() if n > 1),
+        legacyPreparationNoncanonicalLabels=sorted(set(legacy) - canonical),
+        preparationRowsNotCompleted=not_completed,
+        coherent=not unknown and not duplicates,
+        coherenceScope="PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+        legacyPreparationMatchesPrimary=not not_completed,
+        effortCompletionRate=None,
+        rowsAreNotEffortWeights=True,
+        legacyEntriesAreNotCanonicalRowCounts=True,
+    )
+
+
+def validated_snapshot(rows, forecast, table_ref):
+    """Report canonical counts and reconcile original row prices, never actual dedicated cost."""
+    if not isinstance(rows, list) or any(not isinstance(r, dict) for r in rows):
+        raise ValueError('explicit canonical table rows required')
+    result = derive_progress([r['実行ID'] for r in rows], forecast['completedPlanWorkIds'],
+                             forecast['completedPreparationWorkIds'])
+    if result['canonicalRowCount'] != 625 or not result['coherent']:
+        raise ValueError('canonical625 completion references are incoherent')
+    by_id = {r['実行ID']: r for r in rows}
+    sums = {}
+    for key, column in [('low', '低位pp'), ('base', '標準pp'), ('high', '高位pp')]:
+        value = sum((Decimal(by_id[n][column]) for n in forecast['completedPlanWorkIds']), Decimal(0))
+        if value != Decimal(str(forecast['completedPlanPriceSumPp'][key])):
+            raise ValueError('canonical completed original row price mismatch: ' + key)
+        sums[key] = float(value)
+    result.update(masterTable=dict(table_ref), completedCanonicalOriginalPricePp=sums,
+                  pricesAreForecastNotActualCost=True, formalAcceptanceDerivedFromRowCount=False)
+    return result

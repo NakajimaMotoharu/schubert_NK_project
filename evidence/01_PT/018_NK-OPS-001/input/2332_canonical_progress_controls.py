@@ -1,0 +1,21 @@
+"""Eight independent metadata controls; never counted as application PT."""
+from pathlib import Path
+import sys,json,hashlib,csv
+r=Path.cwd();sys.path.insert(0,str(r/'tools/quality'));from pgpt_wbs_canonical_progress import derive_progress,validated_snapshot
+cases=[]
+def check(name,condition):assert condition,name;cases.append(dict(id=name,result='PASS_METADATA_ONLY'))
+a=derive_progress([],[],[]);check('META01_EMPTY',a['canonicalRowCount']==0 and a['uniqueCompletedRows']==0 and a['effortCompletionRate'] is None)
+a=derive_progress(['A/1','A/2','B'],['A/1','B'],['A/1','note','A/1']);check('META02_MIXED_LEGACY',a['uniqueCompletedRows']==2 and a['completedStage1Rows']==1 and a['completedStandaloneRows']==1 and a['legacyPreparationEntryCount']==3 and a['legacyPreparationCanonicalStage1References']==1 and a['legacyPreparationDuplicateEntries']==['A/1'] and a['legacyPreparationNoncanonicalLabels']==['note'] and a['coherent'])
+a=derive_progress(['A/1'],['A/1','A/1'],[]);check('META03_DUPLICATE_COMPLETED',a['uniqueCompletedRows']==1 and a['duplicateCompletedIds']==['A/1'] and not a['coherent'])
+a=derive_progress(['A/1'],['UNKNOWN'],[]);check('META04_UNKNOWN_COMPLETED',a['uniqueCompletedRows']==0 and a['unknownCompletedIds']==['UNKNOWN'] and not a['coherent'])
+a=derive_progress(['A/1'],[],['A/1']);check('META05_UNCOMPLETED_PREPARATION',a['preparationRowsNotCompleted']==['A/1'] and a['uniqueCompletedRows']==0 and a['legacyPreparationCanonicalCompletedStage1Rows']==0 and a['coherent'] and not a['legacyPreparationMatchesPrimary'])
+try:derive_progress(['A/1','A/1'],[],[])
+except ValueError:check('META06_DUPLICATE_MASTER',True)
+else:raise AssertionError('duplicate master accepted')
+for invalid in [None,[None],['']]:
+ try:derive_progress(invalid,[],[])
+ except ValueError:pass
+ else:raise AssertionError('missing ID accepted')
+check('META07_NULL_MISSING_EMPTY_ID',True)
+b=r/'evidence/01_PT/018_NK-OPS-001';d=r/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';f=json.loads((d/'1530_WBS65予実・正本進捗集計是正追加版378.json').read_text());table=r.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv';rows=list(csv.DictReader(table.open(encoding='utf-8-sig'),delimiter='\t'));sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();a=validated_snapshot(rows,f,dict(path=str(table),sha256=sha(table)));check('META08_ACTUAL625_LITERAL_ORACLE',a['canonicalRowCount']==625 and a['uniqueCompletedRows']==149 and a['completedStage1Rows']==121 and a['completedStage2Rows']==10 and a['completedStandaloneRows']==18 and a['legacyPreparationEntryCount']==123 and a['legacyPreparationCanonicalStage1References']==109 and a['legacyPreparationCanonicalCompletedStage1Rows']==107 and a['preparationRowsNotCompleted']==['WBS-F03/1','WBS-P005-01/1'] and a['completedCanonicalOriginalPricePp']==dict(low=16.59,base=42.31,high=85.945) and a['coherent'])
+assert len(cases)==8;o=b/'evidence/PG29510-canonical-progress-eight-metadata-controls-v2';assert not o.exists();o.mkdir();m=dict(actualExit=0,metadataControls=cases,controlCount=8,productTestsExecuted=0,MainChanged=False,canonicalSnapshot=a,legacyArraysOrOriginalPricesRewritten=False,formalUpdated=False,effortRate=None,moduleSha256=sha(r/'tools/quality/pgpt_wbs_canonical_progress.py'));(o/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,metadataControls=8,canonicalDone=149,stage1=121,stage2=10,standalone=18,canonicalLegacyPreparation=109,productTestsExecuted=0)))

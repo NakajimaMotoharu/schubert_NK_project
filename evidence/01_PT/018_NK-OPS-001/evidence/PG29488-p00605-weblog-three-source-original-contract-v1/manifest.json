@@ -1,0 +1,114 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T20:27:56.806925+09:00",
+  "source": "31e24071cacf01798802ad022d36f0d348239046",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java": "8ea171d65f2229f41fc033dff6a66078159d9761106d7b1d264a83a421879036",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java": "08a590ebc3ab4dd19cc06d4f89fa598ca5eb8458f14d406910e63139cabc01f7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java": "7ed75f6a4a7a81a96ae5c95e9c6bba192d7f6fe2aa8437622cf5052ebea67df5"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 356,
+  "design": [
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/200_UI/210_アーキテクチャ/213_処理方式・状態遷移設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "c2a89cca35a18de5cfae5eadd76a0cb8929733ddb4e494e97dca09943d00cbfd"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "ef3526f0be56007b81318e442b064db936a696db6a52a4fc8ffbc45b87acff6f"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "a046cee1c5af87942cd72465289d5ca629f7a53d4696cc36d6d5b8b701bc9986"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00605-ORACLE01",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "methods": "WebLogIngestService.constructor/process/ingest/decode/insert",
+      "testIds": [
+        "IDEM012",
+        "QA054_MENU",
+        "LOG_PROJECTION"
+      ],
+      "expected": "SS3513.3/QA054/SS331332: onlyWLGEVT01 REQUEST/HTTP_REQUEST_COMPLETED(defaultREQUESTactiononly) orACTION/MENU_VIEWED; unknown/LOG_SEARCHED/crosspair/missingACTION rejectbeforeDB. StrictDetails1024byteallowlist/duplicatekey/null/type/rootJSONreject, wireactorRole nottrusted; normalizeddisplayrole fromownfield, noauthoritygrant. Noquery/fragment/scopedIP metadata, literalIPonly. Fixed17columnSQL WEBservice/source_message_id UK, oneUTCJDBC4.2 shortTX insert+commit beforeACK; repeatINSERT0/alloldcolumnsunchanged, actor_user_id remainsNULL. Failure rollback/ownedclose oneeach, SQLprovidergraph classifiedafterclose into fixedretry signal; noWebDB/keyaccess. SQLliteral single-row admits0/1 underconformingPostgreSQL, notalternateauthorityfixture."
+    },
+    {
+      "id": "P00605-ORACLE02",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers.java",
+      "methods": "WebLogConsumers.start/ready/terminalFailureObserved/stopDelivery/close",
+      "testIds": [
+        "JMS015",
+        "RB319",
+        "SSC332333"
+      ],
+      "expected": "SS321: owner/state beforecontextacquisition, oneWEB_LOG transactedconsumer/noautostart, perdeliveryattempted/confirmed reset. CommittedDLQfatal terminalhalt/onTerminal, directError/typedunconfirmed fatal notification, onlyconfirmednonfatal rollback brokerretry. EmbeddedgraphError noordinaryretry; APIfatal notifythenreturn policy differsWebreplyrethrow. Startupdirectprimary/notification/close existingpriority andunlinkedsecondarygraph retainedafterallrequiredclose; onUnconfirmednativeUNKNOWN nonreturnnotcaughtforprogress. Stopdeliveryhalts, close serialized/closedonlynormalreturn; failuregraphretainedcause beforeoutergroupclassifier. Noactualconsumer/readinesscertfromfixture."
+    },
+    {
+      "id": "P00605-ORACLE03",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/WebLogListener.java",
+      "methods": "WebLogListener.constructor/onMessage(public/internal)",
+      "testIds": [
+        "JMS005",
+        "007",
+        "RB319"
+      ],
+      "expected": "FixedBrokerTopology.WEB_LOG/API_WEB_LOG TransactedEventListener delegation. Publiccheckedidentity/preflight stayssame; internalattempted/confirmed synchronoussamecontextports, noappcontext/DBauthorityfrommethodreturn. Guard/bodyvalidation→processorDBcommit→JMScommit; permanentprotocolDLQ+ACKcommit thenfatal. Listenerdoesnotcreate/owncontextoradditionalretry."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P005-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P006-05/1"
+  ],
+  "endingStatus": "ORIGINAL_WEBLOG_INGEST_PUBLIC_CONTRACT_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2326_p00605_audit_contract.json",
+    "sha256": "d4314d8c7589cddecfe691c93cc288df17b7d279a44b0f6b26083586b02a7567"
+  }
+}

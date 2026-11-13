@@ -38,6 +38,8 @@ def validate_forecast_additional_boundary(forecast):
             raise ValueError('FORECAST_ADDITIONAL_GROSS_MISMATCH:'+key)
 R=Path.cwd(); S=R.parent/'PMO/pgpt-completion-stage-20261102'
 sys.path[:0]=[str(R/'tools/quality'),str(R/'tools/quality/vm/050_s1')]
+import csv
+from pgpt_wbs_canonical_progress import validated_snapshot
 import pg998_metrics as metrics
 from pmo_quota_binding import append_start,digest,end_fields
 from pmo_group_context import build_context,validate_implementation_artifacts,collect_canonical_nodes
@@ -50,6 +52,10 @@ forecastRef=c.get('forecastRef');forecast=None
 if forecastRef is not None:
  p=R/forecastRef['path'];assert forecastRef['path'].startswith('documents/400_PGPT/470_PMO/600_通常PGPT_20261106/') and p.suffix=='.json' and sha(p)==forecastRef['sha256']
  forecast=load(p);points=forecast['revisedRemainingPp'];assert set(points)=={'low','base','high'} and 0<=points['low']<=points['base']<=points['high']
+if forecast is not None and 'canonical625Progress' in forecast:
+ plan_table=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv'
+ with plan_table.open(encoding='utf-8-sig') as stream:canonical_rows=list(csv.DictReader(stream,delimiter='\t'))
+ assert forecast['canonical625Progress']==validated_snapshot(canonical_rows,forecast,dict(path=str(plan_table),sha256=sha(plan_table)))
 if mode=='start' and forecast is not None:validate_forecast_additional_boundary(forecast)
 now=dt.datetime.now(dt.timezone.utc).isoformat()
 rows=[json.loads(v) for v in metrics.EVENTS.read_bytes().splitlines()]
@@ -76,9 +82,11 @@ else:
  bound['quotaAfter']=q['primary'];bound['quotaBefore']=first['quotaReceipt']['observation']['primary']
  values=dict(bound,wbsLeafIds=first['wbsLeafIds'],workCategory=first['workCategory'],workAttributionKind=first['workAttributionKind'],source=endMain,sourceAtGroupStart=first['source'],run=c['run'],estimateAtGroupStartPp=first['estimateAtGroupStartPp'],groupCapPp=first['groupCapPp'],managementPlan='WBS65-20261110',managementWorkIds=c['workIds'],managementOutcome=c['outcome'],technicalMeasurementDelta=c['technical'],acceptedDelta=dict(closedIds=[],reopenedIds=[],criteriaSatisfied=[],evidenceRefs=[]),sourceEvidenceRefs=[dict(path=c['manifestPath'],sha256=c['manifestSha256'])],newAcceptance=0,effortCompletionRate=None,nextCommand=c['nextCommand'],groupBoundary='END')
  if forecast is not None:values.update(remainingEstimatePp=forecast['revisedRemainingPp'],remainingForecastRef=forecastRef,forecastNotActualCost=True)
+ if forecast is not None and 'canonical625Progress' in forecast:values['canonical625Progress']=forecast['canonical625Progress']
  event=metrics.append(group,'CHECKPOINT',values)
  record=dict(actualExit=0,eventId=event,groupId=group,startEvent=first['eventId'],sourceAtGroupStart=first['source'],productionCoreMain=endMain,estimate=first['estimateAtGroupStartPp'],quota=q,observedSharedPp=bound['observedSharedPp'],actualAllocatedPp=None,N=None,T=None,manifest=dict(path=c['manifestPath'],sha256=c['manifestSha256']),outcome=c['outcome'],technical=c['technical'],newAcceptance=0,formalTests=1964,formalScopes=53,effortRate=None,nextCommand=c['nextCommand'])
 if forecast is not None:record.update(remainingEstimatePp=forecast['revisedRemainingPp'],remainingForecastRef=forecastRef,forecastNotActualCost=True)
+if forecast is not None and 'canonical625Progress' in forecast:record['canonical625Progress']=forecast['canonical625Progress']
 out.parent.mkdir(parents=True,exist_ok=True);write(out,record)
 for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
  d=bind_current_identity(load(S/name),metrics.subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),endMain if mode=='end' else c['source']);d.update(lastEventId=event,currentQuota=q,mayFinishTurn=False,executionAllowed=True,newImplementationAllowed=True,pgptAllComplete=False,ordinaryActiveGroup=group if mode=='start' else None,ordinaryGroupNotYetClosed=mode=='start',phase='WBS65_'+mode.upper(),nextCommand=c['nextCommand'],latestWbs65Record=dict(path=str(out.relative_to(R)),sha256=sha(out)))
@@ -86,10 +94,15 @@ for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
   d.setdefault('wbs65Results',[]).append(record)
   d['newImplementationAllowed']=bound['newImplementationAllowedByQuota']
  if forecast is not None:d.update(currentWbs65Forecast=forecastRef,currentWbs65RemainingEstimatePp=forecast['revisedRemainingPp'])
+ if forecast is not None and 'canonical625Progress' in forecast:d['currentCanonicalWbsProgress']=forecast['canonical625Progress']
  write(S/name,d)
 if mode=='end':
  when=dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).isoformat()
- text='\n## 最新checkpoint（'+when+'、WBS65 '+','.join(c['workIds'])+'）\n\n'+c['checkpointText']+' event '+event+'。次: '+c['nextCommand']+'\n\n'
+ checkpoint_text=c['checkpointText']
+ if forecast is not None and 'canonical625Progress' in forecast:
+  counts=forecast['canonical625Progress']
+  checkpoint_text+=' 正本WBS '+str(counts['uniqueCompletedRows'])+'/'+str(counts['canonicalRowCount'])+'行（/1='+str(counts['completedStage1Rows'])+'、/2='+str(counts['completedStage2Rows'])+'、単独='+str(counts['completedStandaloneRows'])+'）、legacy準備参照は完了行数/工数率にしない。'
+ text='\n## 最新checkpoint（'+when+'、WBS65 '+','.join(c['workIds'])+'）\n\n'+checkpoint_text+' event '+event+'。次: '+c['nextCommand']+'\n\n'
  for n in ['456_領域別進捗・利用枠・中断再開管理.md','460_基盤残件・再開優先順.md']:
   p=R/'documents/400_PGPT/450_品質'/n;t=p.read_text();a,b=t.split('\n',1);p.write_text(a+'\n'+text+b)
 print(json.dumps(dict(actualExit=0,event=event,mode=mode,remaining=q['primary']['remainingPercent'],recordSha256=sha(out))))

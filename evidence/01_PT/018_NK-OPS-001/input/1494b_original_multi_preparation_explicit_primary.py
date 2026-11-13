@@ -2,6 +2,8 @@
 from pathlib import Path
 import csv,datetime,hashlib,json,sys
 R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';D=R/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';S=R.parent/'PMO/pgpt-completion-stage-20261102'
+sys.path.insert(0,str(R/'tools/quality'))
+from pgpt_wbs_canonical_progress import validated_snapshot
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();load=lambda p:json.loads(p.read_text());write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
 a=load(Path(sys.argv[1]));primary=a.get('primaryDocumentNames');
 if primary is not None:
@@ -20,6 +22,7 @@ for k,col in [('low','低位pp'),('base','標準pp'),('high','高位pp')]:
 f['previousForecast']=ref(old);f['revision']=a['revision'];f['atJST']=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat();f['completedPlanWorkIds'].extend(work);f['completedPreparationWorkIds'].extend(work);f['partiallyCompletedPlanWorkIds'].extend(leaves)
 for k in ['canonicalSchedulePricePrefixBasePp','startedRowPriceSumBasePp']:f[k]=round(f[k]+start['estimate']['base'],3)
 f['remainingPriceAccountingNote']=a['description']+' Original /1 preparation only; /2/190/451 not accepted, source unchanged and no new PT.'
+f['canonical625Progress']=validated_snapshot(list(rows.values()),f,dict(path=str(plan),sha256=sha(plan)))
 tech=dict(kind=w+'_ORIGINAL_PREPARATION_ONLY',evidence=ref(mp),ownSources=len(m['ownedSourceHashes']),MainOrTestChanged=False,productTestsExecuted=0,newAcceptance=0);f['latestGroupTechnicalResult']=tech
 fp=D/a['forecastName'];assert not fp.exists();write(fp,f)
 c=dict(groupId=start['groupId'],recordPath=str((D/a['resultName']).relative_to(R)),manifestPath=str(mp.relative_to(R)),manifestSha256=sha(mp),terminalAtUTC=m['atJST'],run=start['run'],workIds=start['workIds'],outcome=m['endingStatus'],technical=tech,forecastRef=ref(fp),nextCommand=a['nextCommand'],checkpointText=a['description']+' 原/1準備のみ完了、原/2未受入。版'+a['revision']+'残'+str(f['revisedRemainingPp'])+'未較正。元190新0/正式1964-53/工数null。')
