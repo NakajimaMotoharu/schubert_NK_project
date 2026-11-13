@@ -1,0 +1,55 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T16:21:43.200251+09:00",
+  "source": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "run": "PG29210-WHOLE_TEST_QUALIFICATION_HOLD",
+  "outcome": "METADATA_HOLD_NOT_PRODUCT_PASS",
+  "tests": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourceTest.java",
+      "sha256": "11cfda93861504c096c8499317ccbf7c07ec5e08db545beeb5a5408cf8eb1658",
+      "canonicalMethods": [
+        "opsDbsource001BothFixedRolesAndInputErasure",
+        "opsDbsource002EveryPhysicalPoolConnectionIsAdmitted",
+        "opsDbsource003NullProviderWrongRoleAndSqlFailuresCloseBeforeRefusal",
+        "opsDbsource004UnknownAndCompoundFailuresPreserveIdentity",
+        "opsDbsource005OptionsNullUrlSizeAndConstructorFailureErasure",
+        "opsDbsource006ConcurrentConnectionsAndPrivateMonitor"
+      ],
+      "beforeAllRealDatabaseRequired": true,
+      "wholeBodyReviewed": false,
+      "headerReadThroughLine": 205,
+      "executed": 0
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/ServiceDatabaseAdmissionTest.java",
+      "sha256": "70c4cd29a10c9f363deccfc15b4513df72a67d40e2ed05e999e86f60de41f73d",
+      "canonicalMethods": [
+        "opsDbadmit001ExactApiAndWebRolesOnIsolatedPg",
+        "opsDbadmit002WrongRoleTransactionAndReadonlyRejectWithoutOwningConnection",
+        "opsDbadmit003RowsNullMismatchDuplicateAndSqlFaultsFailClosed",
+        "opsDbadmit004StrictUrlAndNullContracts"
+      ],
+      "beforeAllRealDatabaseRequired": true,
+      "wholeBodyReviewed": false,
+      "headerReadThroughLine": 90,
+      "executed": 0
+    }
+  ],
+  "qualification": "Both class-level BeforeAll constructs real isolated PG and opens admin connection before any test. Existing realDB HOLD applies to whole classes. No method extraction, replacement authority fixture or trial startup.",
+  "wholeTestQualificationSucceeded": false,
+  "sourceOrTestChanged": false,
+  "compilerOrDriverOrDatabaseStarted": false,
+  "sourceProfileCreated": false,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "coverage": null,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2268_related_db_hold_close.py",
+    "sha256": "8fda909547a2e11f616b4ad9fef319a88b08910c38eb3cb0e5e2ce4d32df63be"
+  }
+}
