@@ -1,0 +1,294 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T19:54:46.691820+09:00",
+  "source": "62f991b4c492deb46b25a55820ae345f38745169",
+  "productionCoreMain": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+  "ownedSourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java": "93599988b634badfe849f38f66abc4125ab5cc25e404c32fbda688f0060e101c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java": "81a3c31e993d9fba59ad5fdbfa7d26d26d8f21541e81fd885fb2dec5ba222c16",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java": "2478a0eb7438a76f10e15719fd9c647c899ec62895fdb8ba7a8e26d72bfc3e6c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java": "0d2a1a7c5eceda3627e62e6d3f87a1868653fc7328a2d69e15c1ecc7ec605c12",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsContextFactory.java": "c0ee93a61df9c1c02f1682986cba4343923228b17c08582a3153d4a6de105443",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java": "c5f203ba37122bdf0303a251b7c68f0d293cde9ed267d6ba428a43239a3c4eb1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": "c5740de502e5044d49e6c9b8e3cc2fd31e2a7e1da2612dadc3ef293dca6f1041",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java": "055dfa7bb41118b3a1d412af02dec07c0c43f071783c6c6cb93d29ee1e1fd8f8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java": "eb1a8d9cbc013cd171ea658cad67511a6adceee78c34db39f0ebdb1f3bd8a02a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java": "74b5301c980f31406886a84a933e450f50092235215f1cf9a78b27423c9b73ed",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.java": "f22edac4ccb7f971a0123045be353b5cfe1eed0aadb496aabca520f69dce0879",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java": "5003b09aff1093dab0f672518d1962d5b2a9f0b95698d11d0295639ebe3b3a54",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java": "9c654ea40f781e8600cfb6254cbb52f0ee0f2072261d145701fc721ca28a5a6c"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 1820,
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46"
+    },
+    {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00502-ORACLE01",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+      "methods": "ArtemisReplyConsumer.onMessage/isolateFatal/rollbackAfterFailure",
+      "testIds": [
+        "JMS006",
+        "009",
+        "014"
+      ],
+      "expected": "SS3217/SSC319332: publicnull/transactedpreflight unchanged; decode→atomiccorrelation→commit; permanentprotocol DLQsend+sameACKcommit→CommittedFatal. Knownproviderfailure rollback attemptedbeforecall/confirmedonlynormalreturn; nofalseconfirm/extraACK/retry. DirectError registrationowner doesbest-effortrollbackonce."
+    },
+    {
+      "id": "P00502-ORACLE02",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+      "methods": "ArtemisReplyConsumers.bind/start/deliveryFailure/ready/close",
+      "testIds": [
+        "JMS014",
+        "WEBR319001..005"
+      ],
+      "expected": "SS321SSC319332333: onecontext, preallocatedattempt/confirmed states resetperdelivery; confirmednonfatal onlybrokerretry, fatalgraph terminal/halted andnotifyonce/rethrow sameError afternotification, nosecondrollback ifattempted. Startupclose/directfatal table/finitegraphsecondary; serialclose phase flags onlyonsuccess, nativeUNKNOWNretainsouterowner."
+    },
+    {
+      "id": "P00502-ORACLE03",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java",
+      "methods": "ArtemisReplyDlqSender.send/safeDeliveryCount/safeValue",
+      "testIds": [
+        "JMS006",
+        "009"
+      ],
+      "expected": "SS32110/11: no bodyread/reencode, sanitized allowlistonly/originaladdressqueue, transportmax128/canonicalUUID/layout8 orUNAVAILABLE, delivery>=1, persistentfixedDLQTTL, callerownscommit. Publicsend null/transactedreject; pureUUID parsecatch nonprovider."
+    },
+    {
+      "id": "P00502-ORACLE04",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+      "methods": "ArtemisRequestSender.send/sendOwned/rollbackAfterFailure/closeAfterFailure",
+      "testIds": [
+        "JMS003",
+        "009",
+        "WEB321001"
+      ],
+      "expected": "MQ022023/SS321: validateQprofile/correlation/bodylength beforecontext; BytesMessage persistentREQTTL5000/replyTo fixedaddress/protocol001, one send/commit; ownedcloseonce includingfatal, preserveexistingdirectcloseError priority/selfattachmentguard and classifygraphafterclose. No automaticrequest retry."
+    },
+    {
+      "id": "P00502-ORACLE05",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java",
+      "methods": "CommittedFatalReplyException.constructor",
+      "testIds": [
+        "JMS006",
+        "009"
+      ],
+      "expected": "Cause-bearing internalcarrier after durablefatal isolation; fixedmessage, processnonzero viaowner, notordinaryretry norproofofDBtransaction."
+    },
+    {
+      "id": "P00502-ORACLE06",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsContextFactory.java",
+      "methods": "JmsContextFactory.open",
+      "testIds": [
+        "JMS014"
+      ],
+      "expected": "Functionalborrowedfactory returnscaller-ownedtransactedcontext; credentialnotexposed; actualopen/backendnotexecutedinpreparation."
+    },
+    {
+      "id": "P00502-ORACLE07",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+      "methods": "JmsReplyDecoder.decode/requiredArtemisAddress/requiredDeliveryCount/requiredProperty/parseUuid",
+      "testIds": [
+        "JMS005",
+        "008",
+        "JMSR2659"
+      ],
+      "expected": "MQ022023030/SS3218/232: Bytesonly, body0..1M beforecopy/getBody exact, permanentfixedreplyaddress orcanonicalFQQN, noreplyTo, lowerUUIDtext exact, property/header/length/profile/QSB S/A match. Provideracquisition outsidepuremalformedcatches; SDKfailures preserveidentity, noDLQauthorityfromdecoder."
+    },
+    {
+      "id": "P00502-ORACLE08",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+      "methods": "JmsRequestReplyClient.constructors/exchange/onReply/pendingCount/lateReplyCount",
+      "testIds": [
+        "JMS007",
+        "010"
+      ],
+      "expected": "SS3216/9: registerbeforesendonce, body256..1M, timeout1ns..2s, semaphoreinitial12/max20, registry20; sendergetsclone, timeout/interrupt/latefailure cancelandreleaseallpaths; IRQrestored; noautomaticretry. Producer2s calltimeout separate, no unapprovedendtoendtimer specchange."
+    },
+    {
+      "id": "P00502-ORACLE09",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+      "methods": "JmsRequestReplyException.constructors/reason/preserveFatal",
+      "testIds": [
+        "JMS007",
+        "010",
+        "BUG2721"
+      ],
+      "expected": "PrivateCAPACITY/TIMEOUT/INTERRUPTED catalog; finiteidentityvisited cause/suppressed/SQLnext/JMSlinked classifier rethrowssameError/noI/O. Cause-bearingoldcatalog notnewsecretlog. Wholehelperquality needsactualcurrentinputlineage, notoldclassassumption."
+    },
+    {
+      "id": "P00502-ORACLE10",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestSender.java",
+      "methods": "JmsRequestSender.send",
+      "testIds": [
+        "JMS003",
+        "007"
+      ],
+      "expected": "Borrowedport transactedpersistent send boundary, callercontrolscorrelation/bodyclone; noadditionalbusinessretry/authority."
+    },
+    {
+      "id": "P00502-ORACLE11",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java",
+      "methods": "MediaDescriptorWireClient.constructor/exchange",
+      "testIds": [
+        "WEB-S3WIRE001..008"
+      ],
+      "expected": "TrustedfixedAUDREQ01/VIDREQ01/MEDREQ01allowlist facade, HTTPcannotchoosecapability. Delegatesprotectedread/contextbinding, noimplicitpermissionorDBgrant."
+    },
+    {
+      "id": "P00502-ORACLE12",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java",
+      "methods": "PendingReply.constructor/completion/complete/fail/toString",
+      "testIds": [
+        "JMS008",
+        "CORRELATION006007"
+      ],
+      "expected": "Ownedfuture neverexposed; eachcompletionthenApply clonesbytes, completionclonesinput, callercompletes/cancelsderivedviewdoesnotcompleteowner. ExplicitUUID/deadlinenonnull, bodyredacted, correlationdata notsessioncredential."
+    },
+    {
+      "id": "P00502-ORACLE13",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+      "methods": "ProtectedReadWireClient.constructor/exchange/requestPayload/decode/sameContext/Result",
+      "testIds": [
+        "WEB166..173",
+        "238..245",
+        "BUG2721"
+      ],
+      "expected": "Requestallowlist/norecords/nonnullcontext, timeout1ns..2s, UUID/header/NFCcodec, allrequest/reply/record/contextbufferswipe; expectedRSP/layout/correlation/currentcontext+resultprofile validated beforetypedresult. Outerknownprovidergraph classifiedbeforeUNAVAILABLE, pureclosedcodecinput/responsevalidation retainINVALID_INPUT/RESPONSE. NoHTTP/sessiongrant/retry/SQL."
+    },
+    {
+      "id": "P00502-ORACLE14",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.java",
+      "methods": "ProtectedReadWireException.constructor/reason",
+      "testIds": [
+        "WEB238..245"
+      ],
+      "expected": "FixedsecretfreeINVALID_INPUT/INVALID_RESPONSE/UNAVAILABLE, nonnullreason, cause/suppressiondisabled. Notrawproviderdiagnosticcarrier."
+    },
+    {
+      "id": "P00502-ORACLE15",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+      "methods": "ReplyCorrelationRegistry.constructor/register/complete/expire/cancel",
+      "testIds": [
+        "JMS008",
+        "CORRELATION006007"
+      ],
+      "expected": "Capacity1..20/strictfuturedeadline/duplicateatomic, completeexpirecancel singleremoval/permitreturn; atdeadline islate, notnewscreenresult; unknown/late metricexact; sixterminalorders andderivedfutureviewisolation whole7 alreadycurrentbyteproved, no confirmationrerun."
+    },
+    {
+      "id": "P00502-ORACLE16",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+      "methods": "ValidatedReply.record/body/toString",
+      "testIds": [
+        "JMS005",
+        "008"
+      ],
+      "expected": "NonnullUUID/body, inputandgetter cloned, bodyredacted. Purecopyvalue fromdecoder, notACK/session/authorizationproof."
+    },
+    {
+      "id": "P00502-ORACLE17",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+      "methods": "WebBrokerContexts.create/configureOwned/open/close",
+      "testIds": [
+        "JMS-WEB001..003",
+        "FACT311001..003",
+        "334008"
+      ],
+      "expected": "SS3216/SSC311334: fixedloopback/port1..65535/nk_webrole/12settings, allownerstatebeforefactoryacquire, configurationfailurecloseonce, borrowedpasswordcopywiped aftercreateContext. Startup/liveclosingknownfatalgraphs classifiedafterrequiredclose/onUnconfirmed; selectednativeUNKNOWNisnonreturn/retainsowner, no permissionfromlocalfixture."
+    },
+    {
+      "id": "P00502-ORACLE18",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+      "methods": "web.messaging.package-info.NullMarked",
+      "testIds": [
+        "ALL_P00502"
+      ],
+      "expected": "Nullabilitypackagecontract only, no executableMainmethods/coveragefabrication. Eachboundaryvalidatesnonnull andcloneownership; noNPEcatchnormalization."
+    },
+    {
+      "id": "P00502-ORACLE19",
+      "artifact": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+      "methods": "MqLoginClient.constructor/exchange/encodeRequest/decodeReply/Reply",
+      "testIds": [
+        "WEB054..059",
+        "BUG2834"
+      ],
+      "expected": "MQ021/036 UI226232234: loginonlyMQ noDB/passwordcomparison/sessiongrant, NFCtrimusername/NFCpassword/literalIPnoscopedIPv6,640request/688response, code0000/0200/0101/0106/9000 allowlist/contextusernamebinding/retryafter, original0200stillcurrentcontextprobe prerequisite. Allpassword/request/sentclone/reply/data wipedincludingunknowncallbacks. BUG2834knownJMS/IAE/ISE callbackgraph lostbeforeUNAVAILABLE isunfixedfinding; no normalreplay can certifyfatalnegative."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P002-03",
+    "WBS-C04"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P005-02/1"
+  ],
+  "endingStatus": "ORIGINAL_P00502_PUBLIC_CONTRACT_ONLY_RUNTIME_QUALIFICATION_SEPARATE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2314_p00502_audit_contract.json",
+    "sha256": "105ee73bf0c07180939e04a4390fc13a62bab33e4f3351ccec9e851ecf3b298e"
+  }
+}

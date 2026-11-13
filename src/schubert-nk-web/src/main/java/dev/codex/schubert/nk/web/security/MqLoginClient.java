@@ -135,6 +135,8 @@ public final class MqLoginClient {
         | IllegalArgumentException
         | IllegalStateException
         | DateTimeException exception) {
+      // BUG2834: retain fatal graph identity; existing finally still wipes every owned buffer.
+      JmsRequestReplyException.preserveFatal(exception);
       throw new MqLoginExchangeException(MqLoginExchangeException.Reason.UNAVAILABLE);
     } finally {
       Arrays.fill(password, '\0');
