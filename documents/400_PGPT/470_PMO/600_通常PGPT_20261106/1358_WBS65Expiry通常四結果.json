@@ -1,0 +1,207 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5041",
+  "groupId": "PGPT-WBS65-EXPIRY-ORIGINAL3-NEW1-WHOLE4-NORMAL-20261113",
+  "startEvent": "PGPT-20261008-5040",
+  "sourceAtGroupStart": "3c6123a6df082bccef70da70178846bb0b81601e",
+  "productionCoreMain": "3c6123a6df082bccef70da70178846bb0b81601e",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 1.8
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-13T02:37:21.558370+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 29,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795012175,
+      "remainingPercent": 71
+    },
+    "secondary": null
+  },
+  "observedSharedPp": null,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28736-expiry4-current-source-scope-join-v1/manifest.json",
+    "sha256": "d043096aadf66bdee3b0d1397959edc2617af30b5b912455234c53ca978175a9"
+  },
+  "outcome": "EXPIRY_WHOLE4_SUCCESS_PARTIAL_FULL_SOURCE_COVERAGE_GUARD_ALL_MISSED",
+  "technical": {
+    "kind": "EXPIRY_CURRENT_ORIGINAL3_NEW1_WHOLE4_NORMAL_PARTIAL",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28712-expiry4-post-v1/manifest.json",
+      "sha256": "ad417f1f8fb37104540fd87a3633256ed17b1eff94aead365b62e95bd9d38088"
+    },
+    "tests": 4,
+    "newDefinitions": 1,
+    "newAcceptance": 0,
+    "physicalClasses": 21,
+    "positiveMainCrc": 10,
+    "completeTargetSources": 0,
+    "targetClasses": 2,
+    "targetCounters": {
+      "LINE": {
+        "covered": 83,
+        "missed": 162
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 37,
+        "missed": 143
+      },
+      "COMPLEXITY": {
+        "covered": 17,
+        "missed": 95
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 14
+      },
+      "INSTRUCTION": {
+        "covered": 377,
+        "missed": 832
+      }
+    },
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+        "INSTRUCTION": 12,
+        "BRANCH": 7,
+        "LINE": 3,
+        "COMPLEXITY": 8,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Prior": {
+        "INSTRUCTION": 15,
+        "LINE": 4,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+        "INSTRUCTION": 53,
+        "BRANCH": 14,
+        "LINE": 15,
+        "COMPLEXITY": 12
+      },
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Snapshot": {
+        "INSTRUCTION": 2,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status": {
+        "INSTRUCTION": 27,
+        "LINE": 5,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository$Stage": {
+        "INSTRUCTION": 42,
+        "BRANCH": 8,
+        "LINE": 6,
+        "COMPLEXITY": 6,
+        "METHOD": 2,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason": {
+        "INSTRUCTION": 143,
+        "BRANCH": 30,
+        "LINE": 31,
+        "COMPLEXITY": 25,
+        "METHOD": 4,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchRun": {
+        "INSTRUCTION": 7,
+        "BRANCH": 3,
+        "LINE": 2,
+        "COMPLEXITY": 4,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/RunReferences": {
+        "INSTRUCTION": 20,
+        "BRANCH": 10,
+        "LINE": 3,
+        "COMPLEXITY": 9,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStepResult": {
+        "INSTRUCTION": 82,
+        "BRANCH": 24,
+        "LINE": 8,
+        "COMPLEXITY": 14,
+        "METHOD": 2,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/BatchStep": {
+        "INSTRUCTION": 3,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      },
+      "dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository": {
+        "INSTRUCTION": 830,
+        "BRANCH": 143,
+        "LINE": 161,
+        "COMPLEXITY": 94,
+        "METHOD": 13
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+        "INSTRUCTION": 21,
+        "LINE": 4,
+        "COMPLEXITY": 1,
+        "METHOD": 1,
+        "CLASS": 1
+      },
+      "dev/codex/schubert/nk/storage/StorageIoException": {
+        "INSTRUCTION": 17,
+        "BRANCH": 1,
+        "LINE": 4,
+        "COMPLEXITY": 3,
+        "METHOD": 2
+      },
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard": {
+        "INSTRUCTION": 24,
+        "BRANCH": 4,
+        "LINE": 5,
+        "COMPLEXITY": 4,
+        "METHOD": 2,
+        "CLASS": 1
+      }
+    },
+    "MainChanged": false,
+    "TestChanged": true,
+    "roster": {
+      "runs": 81,
+      "actualExecutions": 3820,
+      "success": 3791,
+      "failed": 29,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    }
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Continuecanonical625 P01712threechild/1 originalpreparation .315/.786/1.575 cap2.5 afterfullownedsource/currentMain/history/SS341oracles andexistingwholeTestnames; noactualintent/Root/VM/native/DB/Backup/cohort operations. Type-onlyGuard qualificationcomplete forwholeExpiry4, no confirmreplay ofRunRef10/Expiry4. PreserveBug2774remainingfivecatalog andallGuardmisses. Freshquota/usage12:13:43/disk6.9GiBlargegate.",
+  "remainingEstimatePp": {
+    "low": 401.264,
+    "base": 846.572,
+    "high": 1660.425
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1357_WBS65予実・Expiry通常四後版309.json",
+    "sha256": "e37c3e1880654a00c20344e6c1f666916992ea4baf1197c93ae7481273f9356f"
+  },
+  "forecastNotActualCost": true
+}
