@@ -1,0 +1,89 @@
+{
+  "groupId": "PGPT-WBS65-SSC347-SCENARIO-COPY-ROW-CLOSED24-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1712_WBS65ScenarioEntry行新十二と必要二部品二十四通常結果.json",
+  "sourceAfter": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG30568-scenario-copy-row24-independent-source-trace-join-v1/manifest.json",
+  "manifestSha256": "eeeb033a0cdc957aaba5bedfae2f16fd4c15505634fa0e5481132c0682e3b0eb",
+  "terminalAtUTC": "2026-11-13T22:10:38.379989+00:00",
+  "run": "PG30568",
+  "workIds": [
+    "P01903_SSC347_SCENARIO_COPY_ROW12_AND_NEEDED_CLOSED24_NORMAL"
+  ],
+  "outcome": "NEW_SCENARIO_ROW12_PLUS_REQUIRED_ENCODER12_SINGLE_EXEC_TWO_PHYSICAL_FOUR100_NOT_DB_ETL_OR_INFRA_ACCEPTANCE",
+  "technical": {
+    "kind": "NEW_SCENARIO_COPY_ROW12_AND_REQUIRED_ENCODER12_CLOSED24",
+    "source": "d62e842dca815cd8068ac53f9eb3a715a46a9b08",
+    "productionCoreMain": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30564-scenario-copy-row24-post-v1/manifest.json",
+      "sha256": "a53629c7605ce0ff3140a1435eb16d2c51e48bf5d17e704220fad7ac7d9136d0"
+    },
+    "actualExecutions": 24,
+    "newUniqueTestDefinitions": 12,
+    "existingEncoderDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 114,
+    "physicalClasses": 2,
+    "positiveMainCrc": 2,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 520,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 91,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 101,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 67,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 18,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 18,
+    "jacocoDefaultMethods": 18,
+    "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 10,
+    "applicable": 0,
+    "unclassified": 0,
+    "newProductionOrFixtureDefects": 0,
+    "actualDbDriverSqlCopyCurrentRootVmNativeKeyUnitOperations": 0,
+    "aruNewOperations": 0,
+    "harukaRemoteOperations": 0,
+    "harukaPmoBaseReportedOnly": true,
+    "allIndividualHoldsRetained": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
+    },
+    "actualCost": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1711_WBS65予実・ScenarioEntry行新十二と必要全二部品二十四後版446.json",
+    "sha256": "324cb84e621e5f918ceafdd2a181ef86d52fa1eeb6e9d2a2976e70efe11c3993"
+  },
+  "checkpointText": "SSC347新ScenarioEntryCopyRowをCore689c5ffff9・実行sourced62e842dcaで初検証、PG30562 Row12+支援Copy12の必要変更群whole24/FES0、新定義Row12だけ。PG30564単一exec全2CRC/初期化/XML、I520/L101/M18/C2/B91 miss0・全scope四100、実JVMCode Row12+Copy6=18対既定18一致（当scope限定/global451未承認）。RootNullAway/lintWerror/PMD適用0/CS/SB/missingerror0、raw10は両Testごとの8worker64task/Future5/finallyshutdownNow-await10所有/非J2EEをexactsourceで対応、未分類0。全12列/生成列除外、N12-game-int/nullable/type-speaker、NFC/UTF8-body4096-label128/無上限raw/control改行、UTCyear0001-9999/µs/canonical、入力/List/byte所有・有限並行を独立DDL/literal/byte算術で確認。新障害0/除外抑制旧exec合算0。App106run/4265exec/4236caseSuccess/歴史29、正本184/625・元190新0/正式1964-53/工数null、normal.4/1.2/2.4のみ完了/実費token null。外部操作0、aru新規禁止/既job勝手停止0/haruka直接OS基盤はPMO報告のみ、PGPT fresh認証/個別条件/業務schema配備・既HOLD未認定。実DB/COPY/Root/全ETL/CHR/native/ITSTは当局所成功で閉じない。",
+  "nextCommand": "PublishRow24proof andSSC347ledger-onlylimitedqualification to main aftersource/evidencecommit. ThennecessaryexternalWBS eligibility: fullGateCliTest12 remaining source/helpers sideeffects andexistingcurrent source/hash/46oldtooltests no-confirmation status, beforeplanningharuka-specific freshreadonly auth/pin/resources/source/ownership group. HarukaPMODIRECT_OS_BASE_READY isnotPGPT acceptance: no VM/aruoldfixeddriver/source/run/keys/permit reuse, no DBrole/schema/app/nativeRoot/HOLDrelease. GateCLI onlycapacity20GiB preconditionmaybereassessedifwholeoperationssafe; do notexecuteunknownHOLD. ContinuelocalindependentPGPTifblocked, normalreport/PMOwaitnotstop. SourceCore689c5/Unitd62e/App106/4265/4236/29/canonical184/formal1964-53/effortnull. Freshquota/hourly07:22:22JST."
+}

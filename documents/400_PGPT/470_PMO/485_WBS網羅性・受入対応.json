@@ -550679,11 +550679,81 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
-      "acceptance": "NOT_RUN",
-      "state": "SOURCE_CREATED_WHOLE12_TEST_DEFINITIONS_NOT_RUN",
+      "acceptance": "UNASSESSED",
+      "state": "ROW12_AND_REQUIRED_ENCODER12_SINGLE_EXEC_FOUR100_ACTUAL_DB_COPY_ETL_UNACCEPTED",
       "relatedSsc": "SSC-347",
       "testIds": "PT-MIG-ROW001..012",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "NEW_SCENARIO_COPY_ROW12_AND_REQUIRED_ENCODER12_CLOSED24",
+        "source": "d62e842dca815cd8068ac53f9eb3a715a46a9b08",
+        "productionCoreMain": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30564-scenario-copy-row24-post-v1/manifest.json",
+          "sha256": "a53629c7605ce0ff3140a1435eb16d2c51e48bf5d17e704220fad7ac7d9136d0"
+        },
+        "actualExecutions": 24,
+        "newUniqueTestDefinitions": 12,
+        "existingEncoderDefinitions": 12,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 114,
+        "physicalClasses": 2,
+        "positiveMainCrc": 2,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 520,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 91,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 101,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 67,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 18,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 2,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+        },
+        "actualJvmCodeMethods": 18,
+        "jacocoDefaultMethods": 18,
+        "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 10,
+        "applicable": 0,
+        "unclassified": 0,
+        "newProductionOrFixtureDefects": 0,
+        "actualDbDriverSqlCopyCurrentRootVmNativeKeyUnitOperations": 0,
+        "aruNewOperations": 0,
+        "harukaRemoteOperations": 0,
+        "harukaPmoBaseReportedOnly": true,
+        "allIndividualHoldsRetained": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.4,
+          "base": 1.2,
+          "high": 2.4
+        },
+        "actualCost": null
+      }
     }
   ],
   "layouts": [
@@ -555562,6 +555632,76 @@
       "low": 0.28,
       "base": 0.84,
       "high": 1.68
+    },
+    "actualCost": null
+  },
+  "currentScenarioEntryCopyRow24PG30562": {
+    "kind": "NEW_SCENARIO_COPY_ROW12_AND_REQUIRED_ENCODER12_CLOSED24",
+    "source": "d62e842dca815cd8068ac53f9eb3a715a46a9b08",
+    "productionCoreMain": "689c5ffff95dd73cb717f2709bd5e4d384001dee",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30564-scenario-copy-row24-post-v1/manifest.json",
+      "sha256": "a53629c7605ce0ff3140a1435eb16d2c51e48bf5d17e704220fad7ac7d9136d0"
+    },
+    "actualExecutions": 24,
+    "newUniqueTestDefinitions": 12,
+    "existingEncoderDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 114,
+    "physicalClasses": 2,
+    "positiveMainCrc": 2,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 520,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 91,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 101,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 67,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 18,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 18,
+    "jacocoDefaultMethods": 18,
+    "actualJvmCodeMethodCountMatchesDefaultForThisComponent": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 10,
+    "applicable": 0,
+    "unclassified": 0,
+    "newProductionOrFixtureDefects": 0,
+    "actualDbDriverSqlCopyCurrentRootVmNativeKeyUnitOperations": 0,
+    "aruNewOperations": 0,
+    "harukaRemoteOperations": 0,
+    "harukaPmoBaseReportedOnly": true,
+    "allIndividualHoldsRetained": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
     },
     "actualCost": null
   }
