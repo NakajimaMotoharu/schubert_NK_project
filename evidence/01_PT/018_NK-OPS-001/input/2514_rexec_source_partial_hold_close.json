@@ -1,0 +1,85 @@
+{
+  "groupId": "PGPT-WBS65-BUG2870-2871-ORIGINAL-REXEC5-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1696_WBS65原argv五件source是正通常PT保留結果.json",
+  "sourceAfter": "24fff256ecba4b544780816a4e2d02c1c134bd08",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG30456-rexec-source-only-partial-close-normal-hold-v1/manifest.json",
+  "manifestSha256": "65a0f1d556fc379d04b7a2af36c2c46c64af226548763d0f30a6c1bc1354bb84",
+  "terminalAtUTC": "2026-11-13T20:50:23.602355+00:00",
+  "run": "PG30456",
+  "workIds": [
+    "F03_BUG2870_2871_REXEC_ORIGINAL5_SOURCE_CLOSURE_WORKER_ORACLE_NORMAL"
+  ],
+  "outcome": "PARTIAL_SOURCE_FIX_ONLY_WHOLE5_NOT_RUN_HOLD_NORMAL_CLOSURE_RULE",
+  "technical": {
+    "kind": "REXEC_WHOLE5_SOURCE_WORKER_AND_ORACLE_FIXED_NORMAL_HOLD",
+    "source": "740569193098e3ca1d69ec1e365f85f77c8fa54d",
+    "productionCoreMain": "24fff256ecba4b544780816a4e2d02c1c134bd08",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30448-rexec-oracle-inverse-and-ordinary-scope-hold-v1/manifest.json",
+      "sha256": "9ba655d6cd7330bcf3a6bc5703f342508c5890317ef0a0bc580c1becce36bac3"
+    },
+    "wholeOriginalDefinitions": 5,
+    "newTestDefinitions": 0,
+    "productTestsExecuted": 0,
+    "productClassesCompiled": 0,
+    "coverage": null,
+    "bugs": [
+      "BUG-2870",
+      "BUG-2871"
+    ],
+    "bugsStatus": "SOURCE_CORRECTED_RETEST_NOT_RUN_OPEN",
+    "horizontal": [
+      "YKT-2387",
+      "YKT-2408"
+    ],
+    "sourceCorrectionAndClosureCompletedEstimate": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.1
+    },
+    "normalStillRemainingEstimate": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
+    },
+    "originalGroupStartEstimate": {
+      "low": 0.75,
+      "base": 2.25,
+      "high": 4.5
+    },
+    "rawClosureSourceLines": 1739,
+    "formatAndCheckstyleSourceOnly": 0,
+    "normalFullStaticNotRun": true,
+    "normalUnitNotRun": true,
+    "normalPostNotRun": true,
+    "ordinaryHostGuardUnchanged": true,
+    "normalOutsideScopeReasons": [
+      {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+        "sha256": "2c09eebf305c537bf18c00ae38774ada72269b94529c2c6f749e55cc953cfaab",
+        "closedHostForbiddenTokens": [
+          "ProcessBuilder"
+        ]
+      },
+      {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+        "sha256": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df",
+        "closedHostForbiddenTokens": [
+          "java.lang.foreign"
+        ]
+      }
+    ],
+    "actualVmRootDbNativeKeyUnitArgvExecution": 0,
+    "alternativeOrExtractedTypeExecution": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualCost": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1695_WBS65予実・原argv五件source是正通常保留版440.json",
+    "sha256": "eb0c6ef5ded6ef244d68b19f178d2d2326ae587811f19c9800dbf0f9dbdcc1d1"
+  },
+  "checkpointText": "原FixedServiceExecArgumentsTest全5のBUG2870 worker4/40taskをFuture5/finallyshutdownNow-await10へ、BUG2871のworker/agent期待値を元Web/API手書きList.of二goldenの独立helperへ是正。全旧literal/他Java token逆一致・Main11全byte不変、GJF/CS source検査0。修正source7405691930を通常push、PG30444全11/1739行closure・PG30446元vector・PG30448独立inverse/原producerdraft是正を保存。通常host工具はwholeSource中java.lang.foreign/ProcessBuilderを許可しないため、元ServiceConfigFiles外側をenumだけへ抽出/置換せず、normalprepare/compile/fullstatic/Unit5/postを一度も試さず当scope保留。scope制約は事前読取で確認した内部guardでplatform拒否ではない、迂回/工具guard変更/実argv/NSS/VMRootDBnative鍵Unit操作0。BUG2870/2871とYKT2387/2408は再試験未でOPEN。元群.75/2.25/4.5中closure+source.35/1.05/2.1だけ完了、normal.4/1.2/2.4残を保持、全5成功/coverageへ加算0。App104/4229/4200/歴史29・正本184/625・元190新0/正式1964-53/工数null、実費token null。",
+  "nextCommand": "ContinueotherapprovedindependentPGPT; argv5 wholeclosureFFM/ProcessBuilderHOLDonlycandidate, no normalrunnerguard changes/extractedenum/alternateexecution. InspectTargetAdapterTest whole3 source/resources andexistingqualificationroster; comparator/GateValidator PG29254alreadylimitedqualifiednotconfirmationrerun; GateCli12 stillspace20GiB/HOLD. TargetAdapter ownTempDir/publiccatalog24/Jackson onlypossible afterfullscopeandexistingtoolrunnerreview. Orremainingcanonicalpreparation/source PG. CurrentMain24fff, Test740569, App104/4229/4200/29/canonical184/formal1964-53/new0/effortnull. Freshquota/hourly06:22:20JST, do notstopordinaryhold/report."
+}

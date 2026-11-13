@@ -82,3 +82,6 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 
 
 停止snapshot原whole7有限workerと12値独立oracle・全4四100は[4268](4268_停止snapshot原七同source・独立通常PT結果.md)、Core3f65/Test1970/PG30122・30124。実停止/全451未。
+
+
+原argv5のsource是正と通常PT未実行HOLDは[4270](4270_原argv五件source是正・通常PT保留結果.md)。BUG2870/2871未完、製品試験加算0。
