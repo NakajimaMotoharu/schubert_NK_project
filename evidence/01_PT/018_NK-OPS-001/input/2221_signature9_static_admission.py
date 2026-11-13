@@ -1,0 +1,19 @@
+from pathlib import Path
+from collections import Counter
+import hashlib,json,sys
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p));c=ld(B/'input/2220_signature9_closed_profile.json');m=ld(R/c['slots']['static']/'manifest.json');assert m['spotbugs']['bugs']==m['spotbugs']['missing']==m['spotbugs']['errors']==0 and not m['processingErrors'];rows=Counter((r['path'],r['rule'],r['line'],r['message']) for r in m['rawFindings']);anchors=[]
+for (path,rule,line,message),multiplicity in rows.items():
+ p=Path(path);rel=str(p.relative_to(R));line=int(line);anchor=p.read_text().splitlines()[line-1].strip();assert p.name=='ReleaseSignatureVerifierTest.java'
+ if rule=='AvoidLiteralsInIfCondition':
+  assert line==154 and anchor=='else if (graph == 1) failure.addSuppressed(marker);';reason='The independent SIGN009 oracle enumerates exactly three published local fault-graph cases:0 cause,1 suppressed,2 cyclic cause with suppressed fatal. Literal1 selects the second explicit oracle row; it is not a business threshold or configurable secret policy. Original Error identity and clone lifecycle are independently asserted for all3 cases, with no Production method used to calculate expected.'
+ elif rule=='CompareObjectsWithEquals':
+  assert line==171 and anchor=='assertTrue(k != key && m != message && s != signature);' and multiplicity==3;reason='This exact assertion intentionally compares three byte-array references to prove exclusive cloned ownership; content equality is independently asserted on the next three lines. Replacing reference identity by content equality would invert the required isolation oracle. All three raw findings at this source line are retained via explicit rawMultiplicity3, not dropped as duplicate warnings.'
+ elif rule=='CloseResource':
+  assert anchor=='var executor = Executors.newFixedThreadPool(4);';reason='The exact four-worker executor is owned by this whole Test and always shutdownNow then awaitTermination10s asserted in finally. Barrier5s and every Futureget5s are bounded. Explicit bounded termination replaces Java25 ExecutorService.close unbounded wait per BUG2795. Timeout or failed join fails the Test; no backend/process/keyfile is accessed.'
+ elif rule=='DoNotUseThreads':
+  assert anchor in ['var executor = Executors.newFixedThreadPool(4);','executor.submit(','executor.shutdownNow();','assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));'];reason='This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.'
+ else:raise AssertionError((rule,line))
+ row=dict(path=rel,rule=rule,message=message,sourceAnchor=anchor,sourceLine=line,occurrences=1,reason=reason,disposition='NOT_APPLICABLE')
+ if multiplicity!=1:row['rawMultiplicity']=multiplicity
+ anchors.append(row)
+sys.path.insert(0,str(R/'tools/quality'));import pgpt_closed_host_stages as stage;classified=stage.classify_source_findings(c['mainSources']+[x['path'] for x in c['testSources']],anchors,m['rawFindings'],lambda p:(R/p).read_text());assert len(classified)==len(m['rawFindings'])==9;p=B/'input/2221_signature9_static_admission.json';assert not p.exists();p.write_text(json.dumps(dict(schema='PGPT_STATIC_ADMISSION_V1',profile=c['id'],prepare=ref(R/c['slots']['prepare']/'manifest.json'),static=ref(R/c['slots']['static']/'manifest.json'),sourceAnchors=anchors),ensure_ascii=False,indent=2)+'\n');print('raw9 retained/classified incl identity triple, applicable0/unclassified0')

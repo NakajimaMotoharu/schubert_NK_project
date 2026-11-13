@@ -1,0 +1,85 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28930-SIGNATURE-ORIGINAL8-NEW1-NORMAL9",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28920-signature9-prepare-v1/manifest.json",
+    "sha256": "5c7d96ed99c8914a2304d46eb370264cb4aa39cf4a42855a48818e436fcbea35"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28922-signature9-static-v1/manifest.json",
+    "sha256": "0d713b91b6cad3dd94cb643a6d0e2c3fc64b13c07acfb20e49a3cb09e8384f72"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "message": "Avoid using literals such as 1 in if statements",
+      "sourceAnchor": "else if (graph == 1) failure.addSuppressed(marker);",
+      "sourceLine": 154,
+      "occurrences": 1,
+      "reason": "The independent SIGN009 oracle enumerates exactly three published local fault-graph cases:0 cause,1 suppressed,2 cyclic cause with suppressed fatal. Literal1 selects the second explicit oracle row; it is not a business threshold or configurable secret policy. Original Error identity and clone lifecycle are independently asserted for all3 cases, with no Production method used to calculate expected.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "message": "Use equals() to compare object references.",
+      "sourceAnchor": "assertTrue(k != key && m != message && s != signature);",
+      "sourceLine": 171,
+      "occurrences": 1,
+      "reason": "This exact assertion intentionally compares three byte-array references to prove exclusive cloned ownership; content equality is independently asserted on the next three lines. Replacing reference identity by content equality would invert the required isolation oracle. All three raw findings at this source line are retained via explicit rawMultiplicity3, not dropped as duplicate warnings.",
+      "disposition": "NOT_APPLICABLE",
+      "rawMultiplicity": 3
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "sourceLine": 194,
+      "occurrences": 1,
+      "reason": "The exact four-worker executor is owned by this whole Test and always shutdownNow then awaitTermination10s asserted in finally. Barrier5s and every Futureget5s are bounded. Explicit bounded termination replaces Java25 ExecutorService.close unbounded wait per BUG2795. Timeout or failed join fails the Test; no backend/process/keyfile is accessed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "sourceLine": 194,
+      "occurrences": 1,
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 199,
+      "occurrences": 1,
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 208,
+      "occurrences": 1,
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "sourceLine": 209,
+      "occurrences": 1,
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
