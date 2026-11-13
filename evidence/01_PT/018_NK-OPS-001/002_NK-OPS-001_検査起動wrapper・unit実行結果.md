@@ -70,3 +70,6 @@ WBS-F03/1公開品質scope/不足条件: [PG29526](evidence/PG29526-f03-public-s
 
 
 F03公開source guard追補BUG2839: [PG29556](evidence/PG29556-main-delta-guard-public-metadata-v1/manifest.json)。原v1を保全し現Main105/当coreとの差0を独立に確認、新PT/coverage/正式0。
+
+
+WBS-P018-03.01,WBS-P018-03.02,WBS-P018-03.03公開source契約/独立期待値/TestIDは[4263_P01803現行二十二Main・epoch許可所有launch契約.md](4263_P01803現行二十二Main・epoch許可所有launch契約.md)。metadataのみ、新PT/coverage/正式受入0。
