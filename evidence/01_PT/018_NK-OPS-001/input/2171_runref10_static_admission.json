@@ -1,0 +1,374 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28662-RUNREF-ORIGINAL9-NEW1-NORMAL",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28654-runref10-prepare-v1/manifest.json",
+    "sha256": "933c13fa4bdda114e3bf37646803c0ab9312dae2f0fe7e148a320abf215ed8ff"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28656-runref10-static-v1/manifest.json",
+    "sha256": "54421e4dbad06fef3650dc46707ca298df4c87e35221bbc48e065cf561839abd"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 29,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "var checked = present(statement);",
+      "sourceLine": 40,
+      "occurrences": 1,
+      "reason": "SS331 resource ownership requires borrowed Connection unchanged and owned ResultSet then PreparedStatement closed exactly once. These acquired objects are enclosed by explicit nested try/finally with typed JdbcResourceFailures priority, rather than Java TWR self-suppression semantics. Whole Test independently checks every acquisition/body/close failure, null acquisition and exact close counts; this exact analyzer report does not model the explicit nullable resource close path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "var values = present(row);",
+      "sourceLine": 47,
+      "occurrences": 1,
+      "reason": "SS331 resource ownership requires borrowed Connection unchanged and owned ResultSet then PreparedStatement closed exactly once. These acquired objects are enclosed by explicit nested try/finally with typed JdbcResourceFailures priority, rather than Java TWR self-suppression semantics. Whole Test independently checks every acquisition/body/close failure, null acquisition and exact close counts; this exact analyzer report does not model the explicit nullable resource close path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 62,
+      "occurrences": 1,
+      "reason": "SS331 explicit cleanup priority intentionally permits a fatal/unknown secondary to replace a weaker SQL catalog while preserving the primary/suppressed graph and attempting outer cleanup. Removing this throw changes the approved resource contract. Independent whole-Test vectors cover body/close combinations and same-object/self-suppressed cases; no exception becomes normal success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 70,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 70,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 73,
+      "occurrences": 1,
+      "reason": "SS331 explicit cleanup priority intentionally permits a fatal/unknown secondary to replace a weaker SQL catalog while preserving the primary/suppressed graph and attempting outer cleanup. Removing this throw changes the approved resource contract. Independent whole-Test vectors cover body/close combinations and same-object/self-suppressed cases; no exception becomes normal success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 77,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 77,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 81,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceAnchor": "fixture.values[column] = null;",
+      "sourceLine": 142,
+      "occurrences": 1,
+      "reason": "Deliberate negative fixture input: each of the four nullable JDBC projections is independently set null, expected fixed SQL catalog and both owned closes are asserted. Null is not stored into a Production invariant or used to compute the expected result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertEquals(false, Thread.currentThread().isInterrupted());",
+      "sourceLine": 221,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "sourceLine": 225,
+      "occurrences": 1,
+      "reason": "The owned executor is always shutdownNow in finally and its bounded five-second awaitTermination is asserted. Java ExecutorService.close is intentionally avoided because it can await indefinitely and violate the test lifetime contract. Success requires actual worker termination, not merely issuance of cleanup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "sourceLine": 225,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "worker.submit(",
+      "sourceLine": 228,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (phase.equals(ENTRY_POINT)) Thread.currentThread().interrupt();",
+      "sourceLine": 230,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "return Thread.currentThread().isInterrupted();",
+      "sourceLine": 233,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 235,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "worker.shutdownNow();",
+      "sourceLine": 240,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));",
+      "sourceLine": 241,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertEquals(false, Thread.currentThread().isInterrupted());",
+      "sourceLine": 245,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "sourceLine": 254,
+      "occurrences": 1,
+      "reason": "The owned executor is always shutdownNow in finally and its bounded five-second awaitTermination is asserted. Java ExecutorService.close is intentionally avoided because it can await indefinitely and violate the test lifetime contract. Success requires actual worker termination, not merely issuance of cleanup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "sourceLine": 254,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var first = workers.submit(() -> new RunReferenceRepository(one.connection()).read(RUN));",
+      "sourceLine": 256,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var second = workers.submit(() -> new RunReferenceRepository(two.connection()).read(other));",
+      "sourceLine": 257,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "workers.shutdownNow();",
+      "sourceLine": 261,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+      "sourceLine": 262,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<Integer, Object> bindings = new HashMap<>();",
+      "sourceLine": 383,
+      "occurrences": 1,
+      "reason": "Each independent Fixture belongs to a single worker; no Fixture map is shared between concurrent writers. Main-thread assertions read only after Future.get establishes completion and finally confirms termination. Two-parent test uses two distinct fixture/maps; ConcurrentHashMap would not verify this ownership requirement.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (point.equals(interruptAt)) Thread.currentThread().interrupt();",
+      "sourceLine": 399,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "sourceLine": 412,
+      "occurrences": 1,
+      "reason": "The independent in-memory JDK Proxy implements exactly the named public JDBC interface using that interface defining loader. It opens no DB connection or resource and rejects unapproved methods. Context-loader discovery is neither needed nor part of this standalone JUnit fixture.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "PreparedStatement.class.getClassLoader(),",
+      "sourceLine": 441,
+      "occurrences": 1,
+      "reason": "The independent in-memory JDK Proxy implements exactly the named public JDBC interface using that interface defining loader. It opens no DB connection or resource and rejects unapproved methods. Context-loader discovery is neither needed nor part of this standalone JUnit fixture.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "sourceLine": 473,
+      "occurrences": 1,
+      "reason": "The independent in-memory JDK Proxy implements exactly the named public JDBC interface using that interface defining loader. It opens no DB connection or resource and rejects unapproved methods. Context-loader discovery is neither needed nor part of this standalone JUnit fixture.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

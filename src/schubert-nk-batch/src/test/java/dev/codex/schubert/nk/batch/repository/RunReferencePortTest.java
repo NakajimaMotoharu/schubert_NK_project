@@ -293,6 +293,56 @@ final class RunReferencePortTest {
 
   // RUNPORT009-END
 
+  /** RUNPORT010/BUG2775: fixed provider-point table and independent fatal graph identities. */
+  @Test
+  void knownSqlFatalGraphsNeverBecomeFixedRepositoryFailures() {
+    var points =
+        new ArrayList<>(
+            List.of(
+                AUTO,
+                READONLY,
+                ISOLATION,
+                PREPARE,
+                TIMEOUT,
+                BIND_ONE,
+                BIND_TWO,
+                QUERY,
+                FIRST_NEXT,
+                SECOND_NEXT,
+                ROW_CLOSE,
+                STATEMENT_CLOSE));
+    points.addAll(COLUMNS);
+    assertEquals(16, points.size());
+    for (String point : points) {
+      for (int graph = 0; graph < 3; graph++) {
+        Fixture fixture = new Fixture();
+        var marker = new AssertionError("own fatal provider marker");
+        var provider = new SQLException("own declared provider fault");
+        switch (graph) {
+          case 0 -> provider.initCause(marker);
+          case 1 -> provider.addSuppressed(marker);
+          default -> {
+            var cycle = new IllegalStateException("own cyclic provider graph");
+            provider.initCause(cycle);
+            cycle.initCause(provider);
+            cycle.addSuppressed(marker);
+          }
+        }
+        fixture.faults = Map.of(point, provider);
+        assertSame(
+            marker,
+            assertThrows(
+                AssertionError.class,
+                () -> new RunReferenceRepository(fixture.connection()).read(RUN)),
+            point);
+        assertEquals(0, marker.getSuppressed().length);
+        boolean statement = !List.of(AUTO, READONLY, ISOLATION, PREPARE).contains(point);
+        boolean row = statement && !List.of(TIMEOUT, BIND_ONE, BIND_TWO, QUERY).contains(point);
+        fixture.assertClosed(statement ? 1 : 0, row ? 1 : 0);
+      }
+    }
+  }
+
   private static List<Throwable> providerFailures() {
     var values = new ArrayList<>(failures());
     values.add(new IllegalArgumentException("own provider argument"));

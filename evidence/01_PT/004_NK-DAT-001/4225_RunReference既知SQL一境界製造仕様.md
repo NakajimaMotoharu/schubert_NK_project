@@ -3,3 +3,6 @@
 NK-DAT-001/WBS-P004-03、Batch共通参照。DAT009/OPS009/UI251/SS3313.12・332063199・352、BUG2775/YKT2359。read最外SQLException固定化直前のStorageIoException.preserveFatal一call/importだけ。全元bodyはbyte逆変換一致、query5/UTC二bind/Booleanprojection/null-SQLDataException/ownedrow-statement逆順closeと未知primary/固定secondary/同一Throwable/borrowedConnection操作0/IRQ前後の契約は不変更。PG28636 GJF-CS0のみ、Maincompile/PT/coverage未実施OPEN。
 
 BUG2776により当sourcePGは誤ownerのstart拒否後に先行完了していた事実をPG28638へ保存。価格.075/.225/.45は事前固定済み、正規owner P00403のevent5034は実際の後付け時刻であり遡及しない。source破棄/再製造/元証拠上書き0、登録guard metadata7と既成果hash照合だけを実施した。次は既wholeRunReferencePort9全448行・二worker有限と新fatal1を同source通常PTで資格化し、JDBC proxyを実DB/親所有の代用にしない。
+
+
+source固定commit 3c6123a6df082bccef70da70178846bb0b81601e、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28644-runref-one-source-join-v1/manifest.json) SHA7d53ca84721162fbb1024b0853c09c5b612787d36bc62f8c8abc79f2036a30a2。BUG2775RunReference.read SQL固定化一口だけfatalgraph保持、元全body byte逆変換/GJF-CS0。元typedclose/unknown優先/全SQL/UTCbind/query5/借用Connection操作0/IRQ前後を全保持。485実owner/costOwner P00403/NK-DAT-001へBUG2776誤認是正、旧P01701.03/forecast301/誤start拒否と未登録時の先行PG完了をPG28638へ実時系列保存。価格は事前固定不変更、実start event5034は後付け時刻を明記しsource再製造/rollback0、登録guard metadata7・既成果hash照合のみ。Maincompile/fullstatic/PT/coverageは未実施、BUG2775OPEN。 製品PT0、runtime/coverage未受入。

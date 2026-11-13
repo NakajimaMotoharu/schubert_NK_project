@@ -1,0 +1,28 @@
+"""Explicit raw-message/source-line dispositions; no analyzer policy suppression."""
+from pathlib import Path
+import hashlib,json,sys
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';sys.path.insert(0,str(R/'tools/quality'));import pgpt_closed_host_stages as stage
+ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
+c=ld(B/'input/2170_runref10_closed_profile.json');m=ld(R/c['slots']['static']/'manifest.json');assert m['actualExit']==0 and m['spotbugs']['bugs']==m['spotbugs']['missing']==m['spotbugs']['errors']==0;anchors=[]
+for row in m['rawFindings']:
+ p=Path(row['path']);rel=str(p.relative_to(R));line=int(row['line']);anchor=p.read_text().splitlines()[line-1].strip();test='/src/test/java/' in rel;rule=row['rule']
+ if rule=='DoNotUseThreads':
+  assert 'Thread.' in anchor or 'Executors.' in anchor or 'worker.' in anchor or 'workers.' in anchor;reason='This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.'
+ elif rule=='CloseResource' and not test:
+  assert anchor in ['var checked = present(statement);','var values = present(row);'];reason='SS331 resource ownership requires borrowed Connection unchanged and owned ResultSet then PreparedStatement closed exactly once. These acquired objects are enclosed by explicit nested try/finally with typed JdbcResourceFailures priority, rather than Java TWR self-suppression semantics. Whole Test independently checks every acquisition/body/close failure, null acquisition and exact close counts; this exact analyzer report does not model the explicit nullable resource close path.'
+ elif rule=='AvoidCatchingGenericException':
+  assert not test and anchor in ['} catch (SQLException | RuntimeException | Error failure) {','} catch (SQLException | RuntimeException | Error secondary) {'];reason='These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.'
+ elif rule=='DoNotThrowExceptionInFinally':
+  assert not test and anchor in ['} finally {'];reason='SS331 explicit cleanup priority intentionally permits a fatal/unknown secondary to replace a weaker SQL catalog while preserving the primary/suppressed graph and attempting outer cleanup. Removing this throw changes the approved resource contract. Independent whole-Test vectors cover body/close combinations and same-object/self-suppressed cases; no exception becomes normal success.'
+ elif rule=='NullAssignment':
+  assert test and anchor=='fixture.values[column] = null;';reason='Deliberate negative fixture input: each of the four nullable JDBC projections is independently set null, expected fixed SQL catalog and both owned closes are asserted. Null is not stored into a Production invariant or used to compute the expected result.'
+ elif rule=='CloseResource' and test:
+  assert anchor in ['var worker = Executors.newSingleThreadExecutor();','var workers = Executors.newFixedThreadPool(2);'];reason='The owned executor is always shutdownNow in finally and its bounded five-second awaitTermination is asserted. Java ExecutorService.close is intentionally avoided because it can await indefinitely and violate the test lifetime contract. Success requires actual worker termination, not merely issuance of cleanup.'
+ elif rule=='UseConcurrentHashMap':
+  assert test and anchor=='final Map<Integer, Object> bindings = new HashMap<>();';reason='Each independent Fixture belongs to a single worker; no Fixture map is shared between concurrent writers. Main-thread assertions read only after Future.get establishes completion and finally confirms termination. Two-parent test uses two distinct fixture/maps; ConcurrentHashMap would not verify this ownership requirement.'
+ elif rule=='UseProperClassLoader':
+  assert test and anchor in ['Connection.class.getClassLoader(),','PreparedStatement.class.getClassLoader(),','ResultSet.class.getClassLoader(),'];reason='The independent in-memory JDK Proxy implements exactly the named public JDBC interface using that interface defining loader. It opens no DB connection or resource and rejects unapproved methods. Context-loader discovery is neither needed nor part of this standalone JUnit fixture.'
+ else:raise AssertionError((rel,rule,line,anchor))
+ anchors.append(dict(path=rel,rule=rule,message=row['message'],sourceAnchor=anchor,sourceLine=line,occurrences=1,reason=reason,disposition='NOT_APPLICABLE'))
+classified=stage.classify_source_findings(c['mainSources']+[x['path'] for x in c['testSources']],anchors,m['rawFindings'],lambda p:(R/p).read_text());assert len(classified)==len(m['rawFindings'])==36
+out=B/'input/2171_runref10_static_admission.json';assert not out.exists();out.write_text(json.dumps(dict(schema='PGPT_STATIC_ADMISSION_V1',profile=c['id'],prepare=ref(R/c['slots']['prepare']/'manifest.json'),static=ref(R/c['slots']['static']/'manifest.json'),sourceAnchors=anchors),ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,raw=36,explicitSourceMessageLine=36,applicable=0,unclassified=0)))
