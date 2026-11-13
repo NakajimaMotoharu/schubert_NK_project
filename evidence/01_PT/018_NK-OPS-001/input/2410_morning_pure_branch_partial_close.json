@@ -1,0 +1,78 @@
+{
+  "groupId": "PGPT-WBS65-MORNING-PURE-SQL-WHOLE12-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1600_WBS65Morning純十二件分岐未達結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29868-morning-pure-branch-partial-and-sweep-v1/manifest.json",
+  "manifestSha256": "958f03347732f5b34ac043bed4cc3bab1698aa605e4b353312b12eb312c86c9f",
+  "terminalAtUTC": "2026-11-13T16:01:30.683819+00:00",
+  "run": "PG29868",
+  "workIds": [
+    "F03_BUG2852_PURE_HELPER_WHOLE12_NORMAL_SUBSET"
+  ],
+  "outcome": "12_TEST_CASES_SUCCESS_BUT_BRANCH35_OF36_NOT_QUALIFIED_NO_COMPLETION_PRICE_CREDIT",
+  "technical": {
+    "kind": "PURE_MORNING12_REAL_TESTS_SUCCESS_BRANCH1_UNQUALIFIED",
+    "source": "733989ec6296f355083cf47ee0ccb2f2392deeb5",
+    "productionCoreMain": "cc46ac4df68bd3f189f63a75b649e7ead4b7dd12",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29864-morning-pure-sql12-post-v3/manifest.json",
+      "sha256": "6f8cdf7e50ff3a5ff7bbf3105e0a3681e2de0beb098c2125ae49072b47c4430d"
+    },
+    "tests": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newDefinitions": 12,
+    "physicalClasses": 4,
+    "positiveMainCrc": 4,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 165,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 35,
+        "missed": 1
+      },
+      "LINE": {
+        "covered": 38,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 24,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": false,
+    "scopeQualified": false,
+    "qualityCredit": 0,
+    "completionPriceCredit": 0,
+    "newAcceptance": 0,
+    "effortRate": null,
+    "bug": "BUG-2857",
+    "horizontal": "YKT-2406",
+    "reworkSourceEstimate": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.3
+    },
+    "originalNormalEstimateRemains": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.2
+    }
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1599_WBS65予実・Morning純十二分岐未達是正追加版404.json",
+    "sha256": "4ebe352cd296f6fef6989930ce0cd93f0eb8ad8874e2673e89fd5c05b6b13029"
+  },
+  "checkpointText": "PG29862/Testsource733989ec629/Corecc46の純例外whole12は真正成功/FES0、PG29864は全4CRC/全静的0・L38M7C4/I165 miss0だがbranch35/36で全scope品質未達。合格・価格完了・元190受入へ算入0。冗長knownSQL後段のsecondarySQL条件falseが先行guardで消えることを公開source flowで確認しBUG2857/YKT2406へ修正前起票、5source8hitと委譲wrapper計6の個別flow/非該当根拠hashをPG29868へ記録。全期待値/Test12を固定して条件を等価簡約し再測する。完了価格0、元通常見積.2/.6/1.2を保持、追加source修正.05/.15/.3を別計上。技術94run/4093exec/4064caseSuccess/歴史29は品質未達12を明示しunique/正式にしない。実Root/DB/native/VM/原本/鍵操作0、正式1964-53/工数NULL/正本161/元190新0。",
+  "nextCommand": "StartBUG2857 sourceREWORK .05/.15/.3cap1 (ownerP01701.03), preserve sourceTest12 bytes7339 andalloracles. Removeonly dominated && secondary instanceof SQLException inMorningSqlFailures else-if; independentBoolean32typecases proof andsixYKTtarget dispositions, sourceGJFCS/noDBRoot action. PinnewMainCore thenreturntooriginalnormalqualification .2/.6/1.2 (creditedonlyonceafterfour100), freshcompile/fullstatic andonewhole12 onnewSource mandatoryretest notoldconfirmation. Preserveold12casesuccess/branchgap, no exclusion/unreachablewaiver/expectationchange, no groupstop. Freshquota/usage00:42:31JST, conservative40ppreviewwhenfreshused40."
+}

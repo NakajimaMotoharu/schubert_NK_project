@@ -31,8 +31,7 @@ final class MorningSqlFailures {
             || primary instanceof BatchRepositoryException;
     if (primary == null || (known && !(secondary instanceof SQLException))) return true;
     if (!known) primary.addSuppressed(new BatchRepositoryException());
-    else if ((primary instanceof SQLException || primary instanceof BatchRepositoryException)
-        && secondary instanceof SQLException) {
+    else if (primary instanceof SQLException || primary instanceof BatchRepositoryException) {
       preserveCatalogFatal(primary);
       preserveCatalogFatal(secondary);
     }
