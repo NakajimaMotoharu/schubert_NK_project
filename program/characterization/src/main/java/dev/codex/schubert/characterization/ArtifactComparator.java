@@ -22,8 +22,9 @@ public final class ArtifactComparator {
   private static final String VALUE_PASS = "PASS";
 
   private static final String MODE_DIFFERENCE = "difference";
+  private static final String MODE_CONTRACT = "contract";
   private static final ObjectMapper JSON = new ObjectMapper();
-  private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", "contract");
+  private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
   private ArtifactComparator() {}
 
@@ -202,7 +203,7 @@ public final class ArtifactComparator {
       if (MODE_DIFFERENCE.equals(mode)) {
         valid &= require(changed, "OBSERVATION_DIFFERENCE_REQUIRED:" + observationKey, failures);
       }
-      if ("contract".equals(mode)) {
+      if (MODE_CONTRACT.equals(mode)) {
         valid &= require(!changed, "OBSERVATION_CONTRACT_CHANGED:" + observationKey, failures);
       }
       // BUG2812: invalid observations must never consume an otherwise unregistered drift.

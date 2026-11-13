@@ -400,8 +400,7 @@ public final class GateCli {
     int[] matched = new int[targets.size()];
     // This method owns the stream. Matching state survives every internal buffer boundary.
     try (InputStream input = new BufferedInputStream(Files.newInputStream(file))) {
-      int next;
-      while ((next = input.read()) != -1) {
+      for (int next = input.read(); next != -1; next = input.read()) {
         for (int pattern = 0; pattern < targets.size(); pattern++) {
           byte[] target = targets.get(pattern);
           int position = matched[pattern];

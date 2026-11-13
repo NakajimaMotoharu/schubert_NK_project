@@ -148,6 +148,20 @@ class GateContractTest {
     assertEquals(
         List.of("program/characterization/reports/large.bin"),
         GateCli.secretScan(directory.resolve("project"), users));
+    Files.createDirectories(directory.resolve("project/program/characterization/baseline"));
+    Files.write(
+        directory.resolve("project/program/characterization/baseline/no-hit.bin"),
+        new byte[] {0, (byte) 0xff});
+    Files.writeString(
+        users, "ignored=x\nuser=\npass= \nuser=synthetic-marker-only\npass=synthetic-other-only\n");
+    Files.writeString(reports.resolve("prefix.bin"), "JSESSIONID=");
+    Files.writeString(reports.resolve("second.bin"), "synthetic-other-only");
+    assertEquals(
+        List.of(
+            "program/characterization/reports/large.bin",
+            "program/characterization/reports/prefix.bin",
+            "program/characterization/reports/second.bin"),
+        GateCli.secretScan(directory.resolve("project"), users));
   }
 
   private static JsonNode resource(String name) throws Exception {

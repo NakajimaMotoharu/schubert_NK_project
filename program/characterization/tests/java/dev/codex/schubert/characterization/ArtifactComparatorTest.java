@@ -23,6 +23,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** DIF narrow-allowlist oracle. PT-CHR-G05-003/004, PT-CHR-NK-002。 */
 class ArtifactComparatorTest {
+  private static final String FIXTURE_DIF015 = "DIF-015";
+  private static final String FIXTURE_OBSERVATIONS = "observations";
+  private static final String FIXTURE_EXPECTED_NK = "expectedNk";
   private static final String FIXTURE_EXTRA = "extra";
 
   private static final String ASYNC_MENU_DIFFERENCE = "DIF-003";
@@ -204,7 +207,7 @@ class ArtifactComparatorTest {
               "in-memory invalidated",
               "encrypted persistent continuation"),
           new Oracle(
-              "DIF-015",
+              FIXTURE_DIF015,
               FIXTURE_CHR_A01,
               FIXTURE_HTTP_PATH,
               "contract",
@@ -388,7 +391,7 @@ class ArtifactComparatorTest {
     Fixture fixture = fixture("observation-envelope");
     writeJson(
         fixture.observations(),
-        JSON.createObjectNode().put("version", 0).put("observations", "not-array"));
+        JSON.createObjectNode().put("version", 0).put(FIXTURE_OBSERVATIONS, "not-array"));
     ArtifactComparator.ComparisonResult result =
         ArtifactComparator.compare(
             fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -402,7 +405,7 @@ class ArtifactComparatorTest {
   void rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations() throws Exception {
     Fixture fixture = fixture("observation-failures");
     ObjectNode envelope = (ObjectNode) JSON.readTree(fixture.observations().toFile());
-    ArrayNode observations = (ArrayNode) envelope.path("observations");
+    ArrayNode observations = (ArrayNode) envelope.path(FIXTURE_OBSERVATIONS);
     ObjectNode positive = (ObjectNode) observations.get(0);
     observations.add(positive.deepCopy());
 
@@ -485,7 +488,7 @@ class ArtifactComparatorTest {
             "AUTHENTICATED",
             "ADMIN");
     missingExpected.remove("expectedCurrent");
-    missingExpected.remove("expectedNk");
+    missingExpected.remove(FIXTURE_EXPECTED_NK);
     observations.add(missingExpected);
 
     observations.add(
@@ -543,7 +546,7 @@ class ArtifactComparatorTest {
             "nk"));
     observations.add(
         observation(
-            "DIF-015",
+            FIXTURE_DIF015,
             FIXTURE_CHR_A01,
             FIXTURE_HTTP_PATH,
             "contract",
@@ -698,13 +701,13 @@ class ArtifactComparatorTest {
     Fixture contract = fixture("isolated-contract-change");
     mutate(
         contract.nk().resolve(FIXTURE_CHR_A01_JSON),
-        root -> ((ObjectNode) root.path("dif")).put("DIF-015", "/changed-path"));
+        root -> ((ObjectNode) root.path("dif")).put(FIXTURE_DIF015, "/changed-path"));
     mutate(
         contract.observations(),
         root -> {
-          for (JsonNode item : root.path("observations")) {
-            if ("DIF-015".equals(item.path("id").asText())) {
-              ((ObjectNode) item).put("expectedNk", "/changed-path");
+          for (JsonNode item : root.path(FIXTURE_OBSERVATIONS)) {
+            if (FIXTURE_DIF015.equals(item.path("id").asText())) {
+              ((ObjectNode) item).put(FIXTURE_EXPECTED_NK, "/changed-path");
             }
           }
         });
@@ -713,7 +716,7 @@ class ArtifactComparatorTest {
             contract.project(), contract.current(), contract.nk(), contract.observations());
     assertFalse(changed.passed());
     assertEquals(List.of("CHR-A01:/dif/DIF-015"), changed.unregisteredDifferences());
-    assertEquals(List.of("DIF-015"), changed.unusedDifferences());
+    assertEquals(List.of(FIXTURE_DIF015), changed.unusedDifferences());
     assertEquals(
         List.of(
             "OBSERVATION_CONTRACT_CHANGED:DIF-015:CHR-A01:/dif/DIF-015",
@@ -725,7 +728,8 @@ class ArtifactComparatorTest {
     mutate(
         invalid.observations(),
         root ->
-            ((ObjectNode) root.path("observations").get(0)).put("expectedNk", "wrong-expectation"));
+            ((ObjectNode) root.path(FIXTURE_OBSERVATIONS).get(0))
+                .put(FIXTURE_EXPECTED_NK, "wrong-expectation"));
     ArtifactComparator.ComparisonResult rejected =
         ArtifactComparator.compare(
             invalid.project(), invalid.current(), invalid.nk(), invalid.observations());
@@ -801,7 +805,7 @@ class ArtifactComparatorTest {
         (caseId, artifact) -> uncheckedWriteJson(nk.resolve(caseId + ".json"), artifact));
     Path observations = root.resolve("observations.json");
     ObjectNode envelope = JSON.createObjectNode().put("version", 1);
-    envelope.set("observations", observationItems);
+    envelope.set(FIXTURE_OBSERVATIONS, observationItems);
     envelope.set("correlatedLogEvidence", CorrelatedLogEvidenceValidatorTest.fixture());
     ObjectNode artifactBinding = envelope.putObject("correlatedLogArtifacts");
     artifactBinding.set(FIXTURE_CURRENT, currentArtifacts.get(FIXTURE_CHR_L01).deepCopy());
@@ -829,7 +833,7 @@ class ArtifactComparatorTest {
         .put("selector", selector)
         .put("jsonPointer", pointer)
         .put("expectedCurrent", expectedCurrent)
-        .put("expectedNk", expectedNk);
+        .put(FIXTURE_EXPECTED_NK, expectedNk);
   }
 
   private static ObjectNode object(ObjectNode parent, String name) {
