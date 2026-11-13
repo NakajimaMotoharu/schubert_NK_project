@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC344 Scenario fileのゲーム内順と全体前後対応（2026-11-14、PG詳細補足）
+
+UI223§3.2/4/5・UI254§4、SS331/V002/V004、SS343§10のfile ID対応・表示順を純metadata部品`ScenarioFileMigrationMap`へ具体化する。Entryのglobal順を扱うSSC343とは別範囲で、file内entry_index、Route prefix、speaker候補、audio link、動画/music、全DB/game/FK検証を代用しない。既存gamesのid/display_orderはV004通り1/1・2/2、file target IDとdisplay_orderは既N12を維持する。RD/UI/DDL/電文の変更や新DIFはない。
+
+FilePairはgameId/currentFileId/targetFileId。gameIdはNK固定game1/2へ解決済みの値とし、実Current game対応の正しさはETL側の独立条件。source keyはgameIdとsigned currentFileIdの組、同game同sourceは拒否し別game同sourceは混合しない。targetは全gameを通じて1..999999999999で一意。game数値順→各game内currentFileIdの数値昇順を固定し、各gameで1始まりdense displayOrderを付与する。target再採番大小・入力List順を表示順へ使用しない。MappedFileもgameとtarget/order各N12をconstructorで検査する。List件数intに対するdense順位はN12内で、到達不能な余剰branchは追加しない。
+
+保存List/位置Mapを明示copyして不変化し、null入力/要素・重複・不正範囲を拒否する。lookup(game,source)は当tupleだけ、unknownや不正gameを先頭/0へ補完しない。previous/nextは全保存順（games.display_order→files.display_order）で隣を返し、game1の最後とgame2の最初も接続する。最初/最後だけOptional.empty、未知sourceを端と混同しない。返値は宣言ID/順位であり、実DB存在・全file件数・game/FK・ロード成功・権限の証明ではない。
+
+canonical ASCII/LFはheader `NKMIGFILEORDER1`の後にgameId TAB currentFileId TAB targetFileId TAB displayOrder LF。数値正準decimal、source signedを保持、game/source数値順でBOM/escape/余剰列なし。返却byte[]は毎回別所有、record/aggregate診断は固定redaction。空mapはheaderのみ、lookup/navigationは未知拒否で、移行完了を意味しない。
+
+PT-MIG-FILEORDER001..012はgame1(2→900/order1,10→100/order2)・game2(1→50/order1)の手書き全byte、signed source両端/0・game別同source、source/target重複、game1/2・N12上下境界/null、不変入力/List/byte、既存/未知lookup、game内及び跨ぎ前後/両端、空/gap/入力再順序、所有8worker64taskを独立literalで検証する。Future各5秒・finallyshutdownNow/await10秒で未終端fail。Main/FilePair/MappedFile/privateSourceKey全4physicalの通常static/PT/CRC初期化/全四counterと独立postを確認し、actualMaster/DB/ETL/Root/native/CHR/全451/ITST未完は当局所結果で閉じない。
+
+
 ## SSC343 Scenario entry移行ID対応と現行ID順の不変値（2026-11-14、PG詳細補足）
 
 SS343§10のID対応/表示順固定を、UI223§3.2・UI254§4・SS331/V002の既存条件のまま内部部品`ScenarioEntryMigrationMap`へ具体化する。対象はglobal `script_entries`だけで、file別entry_index、games/script_files/speaker/audio/link、動画/musicのcategory/pair/順序を代用しない。現行ID維持やbookmark互換を追加しない。Actual ETL/全件数/DB・game/FK・表示結果の受入は別に残す。
