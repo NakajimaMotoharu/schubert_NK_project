@@ -1,0 +1,402 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T22:48:11.018865+09:00",
+  "source": "d510ea4c70dcd518c1fbaa8f67824ce126219bc3",
+  "productionCoreMain": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql": "f687a36d1e296d38306997808b0f4440e484e24dd37b3862476fb470e56930da",
+    "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e",
+    "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e",
+    "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e",
+    "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+    "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql": "79623b56b8fe9d27af75df6a5db5cf47f4b93fb7b5ae2b9eb4d19ce6d6624052",
+    "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql": "3b93f98b801c967c78113f3931b89b32aa9dc821d336af6c81076efc26da0401",
+    "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql": "a90b338170322bd190335d2cfd382bb36b6f8b1243410345ef35b54dda928412",
+    "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql": "537c7844709ed116f23fa60c64ae378e79eadad79f2e8003bbfd688f42335312",
+    "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0",
+    "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+    "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+    "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql": "d56446bcfb7b3fa74ad0939baa3e2c0d263dd8a975cb7e3a9ce06bac2be85a74",
+    "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+    "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b",
+    "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8",
+    "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql": "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce",
+    "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql": "8799bd8dbe60b34e8c7a4e507ad54b2c41979be47973943b5e868d1224f302c9",
+    "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
+    "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql": "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983",
+    "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql": "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e",
+    "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735",
+    "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql": "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492",
+    "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql": "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b",
+    "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql": "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
+    "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb",
+    "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql": "622c0e17246cb86b417381e4687b3e5e52c8b63c7035515e08304ec76dd28c79",
+    "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql": "692d09eb4b639b9aec83cdec942f8511aec43bd3dd51e2dffb623782321a46a9",
+    "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql": "6021aa46d94cbf8edac059b6c14fc36381c0bad7ceca2930b5939ee9ba6b5522"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 3323,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "20b41969b96a61d90e110a1dd8b0e94f293a23dfe2be017066c3db90acd72e1d"
+    },
+    {
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "62288789c1d5db11f6742eae151e517eb081f2d0d88da8ab819cef905cac768c"
+    },
+    {
+      "path": "documents/200_UI/240_データ/241_DB論理構成設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "f6864bee106c4cfccb5a68a423d186a5973398c497ff3f3a34605f08420c68d2"
+    },
+    {
+      "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5"
+    },
+    {
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00401-DDL-001",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql",
+      "methods": "schemas/extension/defaultACL",
+      "testIds": [
+        "PT-DB-001",
+        "PT-DB-002",
+        "PT-DB-012"
+      ],
+      "expected": "SS3313: 3owner-nk_owner schemas andpg_trgm/publicCREATEdeny, ownerdefaultPUBLICno tables/sequences/functions; historyschema precreatedbyFlyway transfersowner, no passworddata."
+    },
+    {
+      "id": "P00401-DDL-002",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "methods": "account/session/master tables/conditionalconstraints",
+      "testIds": [
+        "PT-DB-003",
+        "PT-DB-004",
+        "PT-DB-006",
+        "PT-DB-007",
+        "PT-DB-008",
+        "PT-DB-009",
+        "PT-DB-010"
+      ],
+      "expected": "SS3314/5: N12id/N9version, strictUTF8bytes/enum/UK/FK/deleteactions/identityNoCycle, conditionalrevocation andMUSIC M/I keyNN/NkeyNULL/VIDEObothNULL. BUG2846: currentCHECK UNKNOWN admits nullableinvalidcases; registerSSC340 notrepairdata orchangeoldmigration."
+    },
+    {
+      "id": "P00401-DDL-003",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+      "methods": "business/message/log/Web technical tables",
+      "testIds": [
+        "PT-DB-003",
+        "PT-DB-004",
+        "PT-DB-008",
+        "PT-DB-009"
+      ],
+      "expected": "SS3316/7/8/9: state/time/nullpairs, owner/operationtokenconditional andunique, encryptedSnapshot29..1050000/pairedkey, typerefexclusiveNN; notificationsERRORcode/messageNN, otherstatesNULL; leasepair/sentatiffSENT. BUG2846 candidatechecks ERRORcodeNULL, ciphertext-keyNULL, USERidNULL notDBtested; oldCHECKsourcekept."
+    },
+    {
+      "id": "P00401-DDL-004",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "methods": "btree/partial indexes andfixedtwo-game initialdata",
+      "testIds": [
+        "PT-DB-005",
+        "PT-DB-011"
+      ],
+      "expected": "SS331indices perowner/time/FIFO/dispatch/lease; operationUK owner+tokenconditionalnonnull, originalsuccesspartialindex laterV017exceptbackups. Onlyapprovedfixed2games initialcatalog, noactualmaster/dump/credentials."
+    },
+    {
+      "id": "P00401-DDL-005",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+      "methods": "GIN/views/maintenanceallowlist/ACL",
+      "testIds": [
+        "PT-DB-005",
+        "PT-DB-011",
+        "PT-DB-012"
+      ],
+      "expected": "SS3313/11: fiveGINtrgm/security-barrieraggregate-safeviews, PUBLICrevoke androle-specificUSAGE/DML/sequence/EXECUTE. Maintenancedefiner fixedsearchpath andclosedobjects. LaterV006/11/13/14/20/26 replaceolderfunctions; baseDDLnotcurrentbehavior alone."
+    },
+    {
+      "id": "P00401-DDL-006",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
+      "methods": "cleanupNULLbounds/Outboxretention",
+      "testIds": [
+        "PT-DB-001",
+        "PT-DB-011",
+        "PT-IDEM-013"
+      ],
+      "expected": "Explicitnullrun/cutoff/limit rejects; fixedanchoredretention168h outbox/unleased, combinedchunk<=1000, noNULLlimitunboundedfallback. HistoricalInboxdelete laterremovedbyV011, notcurrentadmission."
+    },
+    {
+      "id": "P00401-DDL-007",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql",
+      "methods": "usernamecomparisonkey96byte",
+      "testIds": [
+        "PT-AUT-NAME-004",
+        "PT-DB-001"
+      ],
+      "expected": "SS3314/314: UTF8display/wire64 unchanged, Locale.ROOTcomparisonexpansion<=96, originalvalues/UK/grants remain; appendonlyoldchecksums."
+    },
+    {
+      "id": "P00401-DDL-008",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql",
+      "methods": "readlockauthInboxboundary",
+      "testIds": [
+        "PT-DB-INBOX-017",
+        "PT-DB-INBOX-024"
+      ],
+      "expected": "SS3313.4: cutofffinite, advisory71419602 andsamequerylockedbothbackupSUCCESS/date/ended gate; oneexpiredterminalAUTHresponse bymessagePK, refsharelock; NOdecrypt/deletionauthorityfromSQL, inspectorcolumnallowlist only."
+    },
+    {
+      "id": "P00401-DDL-009",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql",
+      "methods": "conditionalauthInboxdelete",
+      "testIds": [
+        "PT-DB-INBOX-025",
+        "PT-DB-INBOX-032"
+      ],
+      "expected": "OwnedprivateTX/currentxact/hash32/lockedcandidateandref, exactLGNLOG versions/layouts/noToken/ref/time/168h. Mismatchedxactfalse, null/invalidargument22023, busy55P03/backups55000; nointermediatecommitorrawkeyread."
+    },
+    {
+      "id": "P00401-DDL-010",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+      "methods": "fullInboxcandidateandrestricteddelete",
+      "testIds": [
+        "PT-DB-INBOX-049",
+        "PT-DB-INBOX-056"
+      ],
+      "expected": "AnyexpiredCOMPLETED/ERRORcandidate includesunknownprotectedlayout; supportedrefrows locked. Deletionclosed24route/version/token/reference/retention whitelist only, unknownnotdeleted. LaterV015/16 extensions areexplicit, noimplicitpermission."
+    },
+    {
+      "id": "P00401-DDL-011",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql",
+      "methods": "batchOutboxonlycleanup",
+      "testIds": [
+        "PT-DB-INBOX-065",
+        "PT-DB-INBOX-072"
+      ],
+      "expected": "BatchcannotdeleteInbox: onlySENToutbox older168h/unleased ordered1000budget, LOCK_BUSY/BACKUP_GATEfixed0 notcompletewholeparent; separateInspector mandatory."
+    },
+    {
+      "id": "P00401-DDL-012",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+      "methods": "durableInboxprogress",
+      "testIds": [
+        "PT-DB-INBOX-073",
+        "PT-DB-INBOX-080"
+      ],
+      "expected": "Progresscursor/count/protected=inspected-deleted monotonic andsamecallerTX asdelete; expectedafter/count/CAS/xactbinding, ENDrequiresnoeligiblecandidate, unknownnotzero. privatecontroltable appdeny/backupSELECT; 400d/noactive-failedrun cleanup."
+    },
+    {
+      "id": "P00401-DDL-013",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql",
+      "methods": "fixedretentionandlockedbackupgate",
+      "testIds": [
+        "PT-DB-INBOX-089",
+        "PT-DB-INBOX-096"
+      ],
+      "expected": "Runstartanchorfinite; notificationscompleted/error24hinclusive/cancelledstrictcutoff; logs90d/holdcutoff; batch400d keepcurrent/RUNNING/FAILEDruns, backupgateandlock mandatory. No arbitraryretention override oroldSQLrewrite."
+    },
+    {
+      "id": "P00401-DDL-014",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql",
+      "methods": "durableLogprogress/NOWAIT",
+      "testIds": [
+        "PT-DB-INBOX-153",
+        "PT-DB-INBOX-160"
+      ],
+      "expected": "90dtuplecursor (time,id), heldrowsadvanceskipnotdelete, allprogress/deletionssameTX. NOWAITfailurewholeblockrollback; allcountsunknownuntilcertifiedreadback, zerochunknotinferredempty; 400dGC keepsactive-failedruns."
+    },
+    {
+      "id": "P00401-DDL-015",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+      "methods": "questionqueryInboxwhitelist",
+      "testIds": [
+        "PT-DB-INBOX-161",
+        "PT-DB-INBOX-168"
+      ],
+      "expected": "OnlyNTS/NTD/QSS/QSD queryroutes added, sameowner/ref/crypto/time/lockcontract; noextraBusinessroles orundefinedlayoutcleanup."
+    },
+    {
+      "id": "P00401-DDL-016",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "methods": "questionmutationreferences/workidentity",
+      "testIds": [
+        "PT-DB-INBOX-177",
+        "PT-DB-INBOX-192"
+      ],
+      "expected": "QWKcorrelationunique conditional, QUESTION/JOB targetlockedwithdependentrows/absentFKparentguard, sourceworkexactlayout/version/body320 andborrowedleaseprojection; QSB/NTC/QDLcompletedrefexclusive vsERROR NONE,168h retention."
+    },
+    {
+      "id": "P00401-DDL-017",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql",
+      "methods": "backupsuccesshistorypartialUK",
+      "testIds": [
+        "PT-DB-INBOX-233",
+        "PT-DB-INBOX-240"
+      ],
+      "expected": "SS3318.2/QAbackup: multipleBACKUP_DB/CONFIG SUCCESS samebusinessdate allowed, attempt1..99andUK preserved; nohistoryrewrite, otherstepssingleSUCCESS remains."
+    },
+    {
+      "id": "P00401-DDL-018",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql",
+      "methods": "runreferenceprojection",
+      "testIds": [
+        "PT-DB-INBOX-241",
+        "PT-DB-INBOX-248"
+      ],
+      "expected": "Samebackendheldadvisory/source run+fixedcutoff one statementsnapshot fourbooleans; noagefilter/backfill/rowcloseorfileauthority, unknownrootnotreconstructedfromDB."
+    },
+    {
+      "id": "P00401-DDL-019",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+      "methods": "parentInboxsummaryprojection",
+      "testIds": [
+        "PT-DB-INBOX-251",
+        "PT-DB-INBOX-258"
+      ],
+      "expected": "Heldlock/privatecontrolPK/read-only one row, absent=zeroROWS notzero-countsuccess; cutoffmismatch55000, completeonlycompleted_atNN; noextraDML/grants."
+    },
+    {
+      "id": "P00401-DDL-020",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql",
+      "methods": "atomicstepcleanupandcounts",
+      "testIds": [
+        "PT-DB-INBOX-259",
+        "PT-DB-INBOX-266",
+        "PT-BAT-154",
+        "PT-BAT-177"
+      ],
+      "expected": "Backup→parentstep→candidate lockorder, exactid/run/date/attempt/start RUNNING/CAS andcounts, chunk+audit sameTX/overflowrollback; SKIPLOCKEDzero needsEXISTSremainingcheck, nonOK totalsNULL/notcomplete, questionFKconflict deferred nofalseEND."
+    },
+    {
+      "id": "P00401-DDL-021",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql",
+      "methods": "Expirybeforeafteraudit",
+      "testIds": [
+        "PT-DB-016",
+        "PT-BAT-284"
+      ],
+      "expected": "Append3nullableExpiryauditcolumns, legacySUCCESSfailsnocertifyingbackfill, othersteps3NULL, successfulbefore-after=target=success/failure0. LaterV022 allowsstagedbefore/unknownafter, nooldbyteschange."
+    },
+    {
+      "id": "P00401-DDL-022",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+      "methods": "stagedExpiryconstraint",
+      "testIds": [
+        "PT-DB-018"
+      ],
+      "expected": "NonExpiry3NULL; unobservednotSUCCESS; finitebeforeNN,target<=before, afterNULLonlynonSUCCESS/success0; observed0<=after<=before andSUCCESSexactdelta. CASEelsefalse, incompleteunknownneverguessed."
+    },
+    {
+      "id": "P00401-DDL-023",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql",
+      "methods": "startuphistoryfixedprojection",
+      "testIds": [
+        "PT-DB-SCHEMA001",
+        "PT-DB-SCHEMA008"
+      ],
+      "expected": "Exactlysixinstalled_rank/version/type/script/checksum/success columns SQLSTABLEdefiner fixedpg_catalog,pg_temp; nofailed/NULLversionfilter, ownernk_owner/PUBLICdeny/app-web-batchEXECUTEonly/nobasetableSELECT."
+    },
+    {
+      "id": "P00401-DDL-024",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql",
+      "methods": "NotificationRECEIVEDmigration",
+      "testIds": [
+        "PT-QST-STATE-001",
+        "PT-QST-STATE-003"
+      ],
+      "expected": "LockedlegacyACCEPTED onlymapsRECEIVED ifjoinedJobRECEIVED, otherwisewholetransactionreject/oldhistoryandrowsretained, no guessingstate. Newstateallowlist5, grantsunchanged; noactualmigrationhere."
+    },
+    {
+      "id": "P00401-DDL-025",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql",
+      "methods": "DLQoutboximmutablemetadata",
+      "testIds": [
+        "PT-QST-DLQ-DB"
+      ],
+      "expected": "LegacyDLQmustrejectwithoutinventedmetadata; ordinaryallDLQcolsNULL, DLQallmetadataNN/ASCII/canonicalfixed320 layoutQWK+version001, messageIddistinct+uniqueoriginal; triggerrejectidentityrewrites/reclassification, dispatchstatusonlymutable. ExplicitNN soBUG2846 UNKNOWN cause nonaffected."
+    },
+    {
+      "id": "P00401-DDL-026",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql",
+      "methods": "Webreceipttechnicalreference/cleanup",
+      "testIds": [
+        "RCPT001",
+        "RCPT006"
+      ],
+      "expected": "QA048: receipt26/questionN12/msfinite timestamp, technicalnoowner/token/body/businessFK; WebSELECTINSERTDELETE notUPDATE, batchclosedcleanupfnonly; parent8cleanupkinds/identity/CAS retained. Orphanonlycleanup, nofabricatedbusinessresult."
+    },
+    {
+      "id": "P00401-DDL-027",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql",
+      "methods": "pendingrevocationunknownexpiry",
+      "testIds": [
+        "RERUN002"
+      ],
+      "expected": "QA050 unknownAPIexpiryNULL intentionallyallowed andretained, priorvalues/checks/lease/index/grants unchanged. CHECKUNKNOWN undernullableexpiry isintentional optional notBUG2846 repairtarget; nopruneorreauthorizefromNULL."
+    },
+    {
+      "id": "P00401-DDL-028",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql",
+      "methods": "retainedsuccessprogressseal",
+      "testIds": [
+        "REF200001"
+      ],
+      "expected": "Read-onlyheldadvisory+fixedrun/cutoff/end/step2 allowlist; absentzeroROWS/notSHAofempty, completeprogressvalidcounts/cursor/time beforecanonicalSHA256. No rawcursor/basetablegrant/decryptkey orreuseoldproof asnativeauthority."
+    },
+    {
+      "id": "P00401-DDL-roles",
+      "artifact": "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
+      "methods": "provisioningrolesandtimeouts",
+      "testIds": [
+        "PT-DB-012",
+        "PT-OPS-PGCFG-005"
+      ],
+      "expected": "Eightfixedroles nk_ownerNOLOGIN/othersleastprivilege; migrationonlyownerSET/noADMINorINHERIT, denySUPER/CREATEDB/CREATEROLE/replication/bypassRLS, fixedsearchpath/timeouts andUTC. Passwordsassignedoutofband, no actualrole/provision/permissionmutationhere."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P004-01.01/1",
+    "WBS-P004-01.02/1",
+    "WBS-P004-01.03/1"
+  ],
+  "endingStatus": "ORIGINAL_THREE_DDL_PUBLIC_CONTRACT_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2371_p00401_audit_contract.json",
+    "sha256": "4e27950274121b09beb9103ed7cf86853eb944b7be7b25275c01bb8e9eba984b"
+  }
+}
