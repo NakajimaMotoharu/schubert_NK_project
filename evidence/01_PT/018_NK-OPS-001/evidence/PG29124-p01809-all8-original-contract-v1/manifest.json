@@ -1,0 +1,148 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T15:30:17.081988+09:00",
+  "source": "297191edd3343d50e5c76706f86b1a8f8b9e8589",
+  "productionCoreMain": "75d0cacb4f9802877466aa1b068c6fa181a3a76a",
+  "ownedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java": "c48ab148fb695a6ec0e859406fb473fd56ccbe56dd229e1dd5f6296e9d348157",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessor.java": "d87277bdb8b89af1da9ee8f2aa0c0d8a3a4408f589f62c7d2dff0fb5e61e943f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java": "03c3244c0be52031e75ca4a188ddf4ee97ff6cc0f541791ab3de5d5b51d45d88",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java": "d5efa4df9df7e10fd959c1f515e624fee369b0ce290583ffdb84f459c904f832",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java": "638db2cccb40d2607e7a81b015266cc42bada424ab3110e815664b526713be03"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 573,
+  "design": [
+    {
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d1d3c2727fd0660c70071edda87f939b9095a0c1bcc7e4135977684a8995038c"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "7fd863c949513a9aed9cdf24f117d090e5d48b324e2d19588bb6982c5bacbe19"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528"
+    },
+    {
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01809-ORACLE01",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "methods": "LogRequest.decode/header/responseLayoutId/canonical/query/validateResponse/optional/toString",
+      "testIds": [
+        "ADM061..063"
+      ],
+      "expected": "SS3239.5/324332: strictLGSREQ01/v1 decode once, copydata alwayswipe, safePermanentProtocolException forclosedpuregrammarfailures. CanonicalUSERid/layout/version/REQUEST:LGSREQ01 andoriginal keyword/logType/action/path/level/fromAt/toAt/page/pageSize withdistinct optional null versus empty; noProduction-generated HMAC expected. CallerownsCanonicalRequest close. Querydelegatesborrowedconnection/repository/actor noauthgrant. LGSRSP01 pagedresponse andeffectivePage=min(requestPage,totalPages), codec independentlychecks allcounts/bytes. No realquery here."
+    },
+    {
+      "id": "P01809-ORACLE02",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/ApiLogPathApplicationRuntime.java",
+      "methods": "ApiLogPathApplicationRuntime.start/startWithLogin/startWithLoginAndLog/ready/terminalFailureObserved/processor/close",
+      "testIds": [
+        "JMS018/AUT-INBOX009/ADM075"
+      ],
+      "expected": "SS311312314321323324: initialLogin→GameContext→Log pathonly, notfullAPIreadiness. Callerownskeycodecsuntillistenersstopped. Database/JMS dependencyprobe beforemessaging, Loginoutertransaction versusGame/Log stagedprocessors distinct. ProductionLogin/Log assemblyrequired, callerGamecontextnotfakeforreadiness. Messagingownsreceivegroups/close. Actual4 typeddependencies/DB-JMSwholeTest closureHOLD, no startup performed."
+    },
+    {
+      "id": "P01809-ORACLE03",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/LogPathSyncRequestProcessor.java",
+      "methods": "LogPathSyncRequestProcessor.constructor/process",
+      "testIds": [
+        "JMS017"
+      ],
+      "expected": "SS311312314321323324: fixed LGNREQ01→login/GAMREQ01→game/LGSREQ01→log, selectedoriginalrequest onlyonce andnonnullencodedreply. Structurallyvalidunregisteredlayout is TemporaryInfrastructure retryrollback not protocolDLQ success. That actual4.class remainsHOLD: no stub/substitution/compile/load. Constructors nullreject, no auth/readinessauthority fromroute lookup."
+    },
+    {
+      "id": "P01809-ORACLE04",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "methods": "RequestLogDetails.normalize/string/invalid",
+      "testIds": [
+        "IDEM012"
+      ],
+      "expected": "SS3513.3: strictJSONobject<=1024UTF8bytes/nesting2/duplicate-unknown-trailing-root-comments reject. OnlyresponseBytes canonicalinteger0..999999999999/userAgentFamily ASCIIallowlist1..32/truncatedboolean/projectionStatus PENDINGorFAILED. Fixedsafeerrornocause, no rawproviderdiagnostics. InputcannotsetactorRole; serverDBrole optionalappended USER/ADMIN. EmptyinputOptional normalizes {}, fieldorderpreserved foracceptedscalars. ThisclassisREQUEST-onlydetails; QA054 extra logtypes elsewhere do notexpanddetails allowlist. Existingwhole2 covers1024/1025,unknown/null/wrongtype/duplicates/trailing/role literals."
+    },
+    {
+      "id": "P01809-ORACLE05",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginApplicationAssembly.java",
+      "methods": "LoginApplicationAssembly.create",
+      "testIds": [
+        "AUT-INBOX007..008"
+      ],
+      "expected": "SS311312314323324332: connectrealJdbcInboxCoordinator/AuthenticationService(LoginAttemptRepository,PasswordHasher,AuthSessionService,LoginAuditWriter)/LoginReplayService withsamecontexts/snapshots/hashes. AllborrowedcodecsnonNull/caller-ownedthroughlistenerstop, Clockfixedcaller; no connection/transaction/broker acquired here. Actualfingerprint/snapshotclassHOLD; no keyorrealassemblyexecution."
+    },
+    {
+      "id": "P01809-ORACLE06",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+      "methods": "LoginResult.Success/Failure constructors/resultCode/retryAfterSeconds/toString",
+      "testIds": [
+        "AUT004"
+      ],
+      "expected": "SS312314/UI234: disjointsuccess actor+issuednonNull/sameuserID/SUCCESS/retry0; failureonlyAUTHENTICATION_FAILEDwith0orLOCKEDwith1..900seconds. No dummysuccessfields, safeFailure toString onlywirecode/retry, successREDACTED. QA055fixed15min screenwordingunchanged; actualRetry-After follows remainingseconds, notforced900."
+    },
+    {
+      "id": "P01809-ORACLE07",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+      "methods": "LoginUsername.constructor/value/key/invalidCodePoint/toString",
+      "testIds": [
+        "AUT-NAME001..003"
+      ],
+      "expected": "SS314SSC014/331/UI226242: NFC thentrim, display1..64UTF8bytes/nonblank/no remainingcontrol ormalformedUnicode; Locale.ROOT lowercasekey<=96bytes (Unicode3/2), originaldisplayforaudi/wire. U0130x32 display64/key96 andcontextual Greeksigma literal; factoryforusercreation same. Surrogatecodepointsreject butvalidsupplementaryscalarsallowed. RE​​DACTEDtoString noidentity. Existingwhole3 hasliteralboundary/null/control/unpairedsurrogate andfullJava25scalar expansionregression; Locale restoredfinally."
+    },
+    {
+      "id": "P01809-ORACLE08",
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutApplicationAssembly.java",
+      "methods": "LogoutApplicationAssembly.create",
+      "testIds": [
+        "AUT-LOGOUT-ASSEMBLY001..003"
+      ],
+      "expected": "SS312314324SSC149: sameborrowedfingerprints/snapshots/clock, commonContextHash passedtoAuthSessionRevocationService/LogoutReplayService andInboxcoordinator, no extraauth/transaction. Callerretainskeyowneruntilactuallistenerstop. Actual4class/realassemblyDB-JMS-HOLD unchanged."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P018-09/1"
+  ],
+  "endingStatus": "P01809_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2258_p01809_original_contract_config.json",
+    "sha256": "5e7d467853ec63dfc3804e4724c972a4ca21385f8532055659d3f06487aaefa9"
+  }
+}

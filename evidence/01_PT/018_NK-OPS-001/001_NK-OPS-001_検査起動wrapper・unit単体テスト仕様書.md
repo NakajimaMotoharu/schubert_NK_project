@@ -98,3 +98,6 @@ WBS-P018-07公開source契約/独立期待値/TestIDは[4257_P01807全三artifac
 
 
 WBS-P018-08.01,WBS-P018-08.02,WBS-P018-08.03公開source契約/独立期待値/TestIDは[4258_P01808三子全五artifact契約・独立期待値対応.md](4258_P01808三子全五artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P018-09公開source契約/独立期待値/TestIDは[4260_P01809ログ主四認証関連四・独立期待値対応.md](4260_P01809ログ主四認証関連四・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
