@@ -3,3 +3,6 @@
 InspectorUnitProbe/NativeReader三口、SystemctlStateSource二口、BUG2782/YKT2359/SS3417.4・343352、UNIT009..016/MPOL005。実ownerはP00404とP01804三子、共有SourcePG価格を一回だけ追加。knownStopGate再固定二口、IRQ変換三口でwipe/IRQ復元後にfatalgraphを保持、既IOException固定化/ProcessResourceScope優先/既RuntimeErrorunwrapは不変更。実systemctl/busctl/stop/Root/VM/DB/実processを呼ばない。
 
 PG28792は元全body逆変換/GJF-CS0のsourcePGだけ、Maincompile/NullAway/fullstatic/PT/coverageは未実施・BUG2782OPEN。BUG2783streamingworker終端は別未修正/未実行で全missを残す。既全MPOL7と必要newfatal1を、Root不使用/NativeProcess未初期化/実二値Outcome型staticbyteのstrictoptin資格後に実施する。WholeTestを抽出せず新Root/enum/receiptを模造しない。
+
+
+source固定commit b302f48301aa19c779554fb4d4cb52e21ccf9df8、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28796-query-two-source-join-v1/manifest.json) SHA8614b9aa3b12ebc4ee8d3eea2dbf20c7c4e8bd0e3cc2ba5a5f32768994e20345。BUG2782固定query二Main五knowncatalog（StopGate2/IRQ3）へwipe・IRQ復元後のfatalgraph保持を追加。元全sourcebyte逆変換/GJF-CS0、既IOException固定化/ProcessResourceScopeprimary-secondary優先/queryFailure既RuntimeErrorunwrap/streaming寿命/全固定command/正常出力不変更。actualsystemctl-busctl/Root/VM/DB/realProcess/credential/cohort0。Maincompile/NullAway/fullstatic/通常PT/coverageは未実施でBUG2782OPEN、BUG2783streamingworker別未解決/未実行。 製品PT0、runtime/coverage未受入。
