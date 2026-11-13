@@ -1,0 +1,85 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29896-MORNING-PURE-SQL12",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4238_Morning純SQL例外helper十二件単体仕様.md",
+      "sha256": "2550b347be378ad78617cfae52df2dcd6cbbcac044dbe9dbe670bf60c6d5aa8d"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4239_BUG2857冗長型条件の等価簡約・同一PT再測仕様.md",
+      "sha256": "e3cb68365e193e642b969b73c1a2c94aaa66b773ebbd870f1af5a19a9770ab3c"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+      "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29840-pure-helper-identity-oracle-addition-before-unit-v1/manifest.json",
+      "sha256": "962a0775c95fc0fa9dc88322b448fc8ce4f54924b4130bc6988344b037f3e01c"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java",
+      "tests": 12
+    }
+  ],
+  "expectedTests": 12,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException",
+    "dev/codex/schubert/nk/storage/StorageIoException",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-storage/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29886-morning-pure-sql12-prestyle-v4b",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29890-morning-pure-sql12-prepare-v4",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29892-morning-pure-sql12-static-v4",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29894-morning-pure-sql12-preflight-v4",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4"
+  },
+  "privateDirs": {
+    "prepare": "pg29890-morning-pure-sql12-prepare-v4",
+    "unit": "pg29896-morning-pure-sql12-unit-v4"
+  },
+  "newTestDefinitions": 0
+}

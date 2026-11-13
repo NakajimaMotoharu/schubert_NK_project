@@ -1,0 +1,39 @@
+{
+  "groupId": "PGPT-WBS65-BUG2857-DOMINATED-SQL-PREDICATE-SOURCE-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1603_WBS65Morning冗長SQL条件是正結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29880-morning-predicate-fixed-source-pin-v1/manifest.json",
+  "manifestSha256": "1f48c847a81a64e737631fb1c95fcec0ff06665700234f82eea34faf1e674b4a",
+  "terminalAtUTC": "2026-11-13T16:11:46.120474+00:00",
+  "run": "PG29880",
+  "workIds": [
+    "P01701_BUG2857_DOMINATED_SQL_CONDITION_SOURCE"
+  ],
+  "sourceAfter": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "outcome": "BUG2857_SOURCE_EQUIVALENT_SIMPLIFICATION_FIXED_SAME12_RETEST_PENDING",
+  "technical": {
+    "kind": "BUG2857_REDUNDANT_SQL_CONJUNCTION_REMOVED_SOURCE_ONLY",
+    "source": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+    "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+      "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1"
+    },
+    "changedMain": 1,
+    "uniqueChangedMain": 108,
+    "independentSymbolicCases": 24,
+    "testBytesUnchanged": true,
+    "sourceGjfCheckstyle0": true,
+    "horizontalTargets": 6,
+    "productTestsExecuted": 0,
+    "coverage": null,
+    "normal12RetestPending": true,
+    "newAcceptance": 0,
+    "effortRate": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1602_WBS65予実・Morning冗長SQL条件是正後版405.json",
+    "sha256": "3b4c4fba602e458b0e002e9953a520b6c095b01f9b93871c90a438c74dd0d035"
+  },
+  "checkpointText": "BUG2857の冗長secondarySQL条件だけ除去し新Core 3f65cf67391b729feeca63f7b037e7c1f82db9e8へ固定、Java実差108維持。PG29874は全元sourceの当一条件逆変換/Java literal同一・SS341独立24型表で選択とguard適用が前後同じ・GJF/CS0を確認、元12Testsource7339のbyte/期待値は変更0。YKT2406は6対象の修正1/非該当5のflow/hashを個別化、実再測まだでOPEN。source修正価格.05/.15/.3だけ完了、元未達normal .2/.6/1.2は未完維持。元PG29862 true12ケース成功/PG29864 branch35/36・品質未達を保存、source是正を新PT/PASS/coverageへ加算0。App技術94run/4093exec/4064caseSuccess（うち最新12は品質未達）/歴史29、元190新0/正式1964-53/工数NULL/正本161、実Root/DB/native/VM/原本/鍵HOLD維持。",
+  "nextCommand": "ReturntooriginaluncreditedF03 Morningpure12 normalgate .2/.6/1.2cap2 onnewMainCore 3f65cf67391b729feeca63f7b037e7c1f82db9e8. Cloneexplicitprofilev3 to freshslots v4, Testsourcehash7339 unchanged, RootNullAway/fullPMD-CS-SB/currentGitpin/onewhole12/independent4physicalpost. Expect allvalidpredicatebranches nowactualreport; ifmisses remain preserveandfixactualcause, neverexcludeorchangeexpected. Archiveoriginalsuccessful12/branchgap separate. YKT2406 sixflow/hashdispositions +newvalid12 branchretestbeforeclose; BUG2852 actualMorning20/whole65/RootDBlifetime remainsOPEN. Freshquota/40conservativereviewwhenused40/usage00:42:31JST; no normalgroupstop."
+}
