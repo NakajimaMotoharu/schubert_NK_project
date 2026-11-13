@@ -73,3 +73,6 @@ F03公開source guard追補BUG2839: [PG29556](evidence/PG29556-main-delta-guard-
 
 
 WBS-P018-03.01,WBS-P018-03.02,WBS-P018-03.03公開source契約/独立期待値/TestIDは[4263_P01803現行二十二Main・epoch許可所有launch契約.md](4263_P01803現行二十二Main・epoch許可所有launch契約.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+StartupProofFrame元whole8の有限workerと全3physical四100は[4265](4265_起動proof原八同source・独立通常PT結果.md)、Core3f65/Testb2c2/PG30086・30088。実権限/起動全体/451未受入。
