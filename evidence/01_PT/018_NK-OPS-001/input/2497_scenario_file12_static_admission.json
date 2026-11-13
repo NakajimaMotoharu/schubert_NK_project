@@ -1,0 +1,64 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30362-SCENARIO-FILE-ORDER-NEW12",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30356-scenario-file-order12-prepare-v2/manifest.json",
+    "sha256": "7907abbbef756047be697beccdda9500181f8359704792e13e4c87b93761a4d2"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30358-scenario-file-order12-static-v2/manifest.json",
+    "sha256": "cda1da557618af9ec3fb52ec4b7db2213c65a878adc91ac1159aba4a76b0dcec"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact executor is acquired before try, retained by this JUnit test, and every exit executes finally shutdownNow plus awaitTermination10s with a failing resource-postcondition assertion. Each of64 Future joins has5s bound. Implicit close can wait unbounded; no leaked or ignored owner.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 195,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 207,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"owned worker termination\");",
+      "sourceLine": 208,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
