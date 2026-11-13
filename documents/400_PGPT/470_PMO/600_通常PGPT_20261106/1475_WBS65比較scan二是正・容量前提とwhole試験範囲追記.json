@@ -1,0 +1,29 @@
+{
+  "schema": "PGPT_GROUP_SCOPE_AMENDMENT_V1",
+  "createdAt": "2026-11-13T08:15:05.885284+00:00",
+  "groupId": "PGPT-WBS65-BUG2811-BUG2812-CHR-COMMON-TOOL-TWO-FIXES-20261113",
+  "originalStart": "PGPT-20261008-5101",
+  "originalStartUnchanged": true,
+  "estimateUnchanged": {
+    "low": 0.8,
+    "base": 2.4,
+    "high": 4.8,
+    "cap": 7
+  },
+  "reason": "Actual GateCliTest preflight success requires20GiB; work6.5GiB/tmp7.4GiB. Wholeclass12 HOLD, no method extraction or fake free-space. Existing conditionalR3 retained, latest PMO retention no eligible release candidate; no oldFD retry/no protected deletion/remote transfer. Original predicted counts were method-only; Negative class has10 plain+7 parameterized invocations.",
+  "wholeClasses": {
+    "ArtifactComparatorTest": 9,
+    "GateContractTest": 8,
+    "GateContractValidatorNegativeTest": 17,
+    "TargetAdapterTest": 3,
+    "CorrelatedLogEvidenceValidatorTest": 9
+  },
+  "predictedInvocations": 46,
+  "wholeClassHold": {
+    "GateCliTest": 12
+  },
+  "physicalMainPolicy": "All5 unchanged scope, no exclusion. Full bundle100/451 HOLD until wholeTool qualification; selected test/report only is NOT bundle verify success.",
+  "prohibitedActionsExecuted": false,
+  "formalNewAcceptance": 0,
+  "effortCompletionRate": null
+}

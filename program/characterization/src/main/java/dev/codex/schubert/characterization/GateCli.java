@@ -3,7 +3,9 @@ package dev.codex.schubert.characterization;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileStore;
 import java.nio.file.Files;
@@ -376,7 +378,6 @@ public final class GateCli {
             projectRoot.resolve("program/characterization/reports"))) {
       if (!Files.exists(root)) continue;
       for (Path file : regularFiles(root, path -> true)) {
-        if (Files.size(file) > 10 * 1024 * 1024) continue;
         if (containsAny(file, values) || containsAny(file, List.of("JSESSIONID="))) {
           hits.add(projectRoot.relativize(file).toString());
         }
@@ -385,20 +386,45 @@ public final class GateCli {
     return hits;
   }
 
+  /** SS355/G06, BUG2811: exact UTF-8 bytes over the entire file, bounded working memory. */
   static boolean containsAny(Path file, List<String> values) throws IOException {
-    byte[] content = Files.readAllBytes(file);
-    for (String value : values) {
-      byte[] target = value.getBytes(StandardCharsets.UTF_8);
-      if (target.length == 0 || target.length > content.length) continue;
-      outer:
-      for (int start = 0; start <= content.length - target.length; start++) {
-        for (int index = 0; index < target.length; index++) {
-          if (content[start + index] != target[index]) continue outer;
+    if (file == null || values == null || values.stream().anyMatch(java.util.Objects::isNull)) {
+      throw new IllegalArgumentException("file and nonnull search values are required");
+    }
+    List<byte[]> targets =
+        values.stream()
+            .filter(value -> !value.isEmpty())
+            .map(value -> value.getBytes(StandardCharsets.UTF_8))
+            .toList();
+    List<int[]> prefixes = targets.stream().map(GateCli::prefixes).toList();
+    int[] matched = new int[targets.size()];
+    // This method owns the stream. Matching state survives every internal buffer boundary.
+    try (InputStream input = new BufferedInputStream(Files.newInputStream(file))) {
+      int next;
+      while ((next = input.read()) != -1) {
+        for (int pattern = 0; pattern < targets.size(); pattern++) {
+          byte[] target = targets.get(pattern);
+          int position = matched[pattern];
+          while (position > 0 && target[position] != (byte) next) {
+            position = prefixes.get(pattern)[position - 1];
+          }
+          if (target[position] == (byte) next) position++;
+          if (position == target.length) return true;
+          matched[pattern] = position;
         }
-        return true;
       }
     }
     return false;
+  }
+
+  private static int[] prefixes(byte[] pattern) {
+    int[] result = new int[pattern.length];
+    for (int index = 1, length = 0; index < pattern.length; index++) {
+      while (length > 0 && pattern[index] != pattern[length]) length = result[length - 1];
+      if (pattern[index] == pattern[length]) length++;
+      result[index] = length;
+    }
+    return result;
   }
 
   /** SS355 / PT-CHR-NUM001..005: pure numeric metadata, no publication or permission grant. */

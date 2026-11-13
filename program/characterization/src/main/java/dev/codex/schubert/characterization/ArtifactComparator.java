@@ -202,12 +202,17 @@ public final class ArtifactComparator {
       if (MODE_DIFFERENCE.equals(mode)) {
         valid &= require(changed, "OBSERVATION_DIFFERENCE_REQUIRED:" + observationKey, failures);
       }
+      if ("contract".equals(mode)) {
+        valid &= require(!changed, "OBSERVATION_CONTRACT_CHANGED:" + observationKey, failures);
+      }
+      // BUG2812: invalid observations must never consume an otherwise unregistered drift.
       if (changed) {
         valid &=
             require(
-                claimedDifferences.add(differenceKey),
+                !claimedDifferences.contains(differenceKey),
                 "OBSERVATION_OVERLAP:" + differenceKey,
                 failures);
+        if (valid) claimedDifferences.add(differenceKey);
       }
       if (valid) usedRules.add(id);
     }

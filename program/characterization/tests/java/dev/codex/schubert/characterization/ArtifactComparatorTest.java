@@ -692,6 +692,54 @@ class ArtifactComparatorTest {
         () -> ArtifactComparator.requiredArtifactFileName(Path.of("/")));
   }
 
+  /** PT-CHR-DIF015-001 / BUG2812: one drift, no overlapping claim or unrelated failure. */
+  @Test
+  void contractChangeAndInvalidClaimCannotHideUnregisteredDrift() throws Exception {
+    Fixture contract = fixture("isolated-contract-change");
+    mutate(
+        contract.nk().resolve(FIXTURE_CHR_A01_JSON),
+        root -> ((ObjectNode) root.path("dif")).put("DIF-015", "/changed-path"));
+    mutate(
+        contract.observations(),
+        root -> {
+          for (JsonNode item : root.path("observations")) {
+            if ("DIF-015".equals(item.path("id").asText())) {
+              ((ObjectNode) item).put("expectedNk", "/changed-path");
+            }
+          }
+        });
+    ArtifactComparator.ComparisonResult changed =
+        ArtifactComparator.compare(
+            contract.project(), contract.current(), contract.nk(), contract.observations());
+    assertFalse(changed.passed());
+    assertEquals(List.of("CHR-A01:/dif/DIF-015"), changed.unregisteredDifferences());
+    assertEquals(List.of("DIF-015"), changed.unusedDifferences());
+    assertEquals(
+        List.of(
+            "OBSERVATION_CONTRACT_CHANGED:DIF-015:CHR-A01:/dif/DIF-015",
+            "UNREGISTERED_DIFF:CHR-A01:/dif/DIF-015",
+            "UNUSED_DIF:DIF-015"),
+        changed.failures());
+
+    Fixture invalid = fixture("isolated-invalid-claim");
+    mutate(
+        invalid.observations(),
+        root ->
+            ((ObjectNode) root.path("observations").get(0)).put("expectedNk", "wrong-expectation"));
+    ArtifactComparator.ComparisonResult rejected =
+        ArtifactComparator.compare(
+            invalid.project(), invalid.current(), invalid.nk(), invalid.observations());
+    assertFalse(rejected.passed());
+    assertEquals(List.of("CHR-U01:/dif/DIF-001"), rejected.unregisteredDifferences());
+    assertEquals(List.of("DIF-001"), rejected.unusedDifferences());
+    assertEquals(
+        List.of(
+            "OBSERVATION_NK_VALUE:DIF-001:CHR-U01:/dif/DIF-001",
+            "UNREGISTERED_DIFF:CHR-U01:/dif/DIF-001",
+            "UNUSED_DIF:DIF-001"),
+        rejected.failures());
+  }
+
   private Fixture fixture(String name) throws Exception {
     Path root = temporaryDirectory.resolve(name);
     Path project = root.resolve("project");

@@ -2,6 +2,7 @@ package dev.codex.schubert.characterization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -104,6 +105,49 @@ class GateContractTest {
     assertTrue(result.passed(), () -> "unexpected failures: " + result.failures());
     assertEquals(24, result.metrics().get("caseCount"));
     assertEquals(0, result.metrics().get("failureCount"));
+  }
+
+  /** PT-CHR-G06-STREAM-001 / BUG2811: literal byte offsets, not scanner-generated expected. */
+  @Test
+  void fullByteScanIncludesLargeFilesBoundariesPrefixesEmptyAndIo(@TempDir Path directory)
+      throws Exception {
+    Path binary = directory.resolve("binary.dat");
+    byte[] bytes = new byte[10 * 1024 * 1024 + 37];
+    byte[] marker = "合成-marker-aaaab".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+    for (int offset : List.of(0, 8191, bytes.length - marker.length)) {
+      java.util.Arrays.fill(bytes, (byte) 0xff);
+      System.arraycopy(marker, 0, bytes, offset, marker.length);
+      Files.write(binary, bytes);
+      assertTrue(GateCli.containsAny(binary, List.of("unmatched", "合成-marker-aaaab")));
+      assertFalse(GateCli.containsAny(binary, List.of("marker-aaaac", "")));
+    }
+    Files.writeString(binary, "aaaaab");
+    assertTrue(GateCli.containsAny(binary, List.of("aaaab")));
+    assertFalse(GateCli.containsAny(binary, List.of("aaaaac")));
+    assertThrows(IllegalArgumentException.class, () -> GateCli.containsAny(null, List.of("x")));
+    assertThrows(IllegalArgumentException.class, () -> GateCli.containsAny(binary, null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> GateCli.containsAny(binary, java.util.Arrays.asList("x", null)));
+    Files.write(binary, new byte[0]);
+    assertFalse(GateCli.containsAny(binary, List.of("x", "")));
+    assertFalse(GateCli.containsAny(binary, List.of()));
+    assertThrows(
+        java.io.IOException.class,
+        () -> GateCli.containsAny(directory.resolve("absent"), List.of("x")));
+
+    // Only owned synthetic files; no operational credential/master/current capture is read.
+    Path reports = directory.resolve("project/program/characterization/reports");
+    Files.createDirectories(reports);
+    Path users = directory.resolve("synthetic-users.txt");
+    Files.writeString(users, "user=synthetic-marker-only\npass=synthetic-other-only\n");
+    java.util.Arrays.fill(bytes, (byte) 0xff);
+    byte[] canary = "synthetic-marker-only".getBytes(java.nio.charset.StandardCharsets.UTF_8);
+    System.arraycopy(canary, 0, bytes, bytes.length - canary.length, canary.length);
+    Files.write(reports.resolve("large.bin"), bytes);
+    assertEquals(
+        List.of("program/characterization/reports/large.bin"),
+        GateCli.secretScan(directory.resolve("project"), users));
   }
 
   private static JsonNode resource(String name) throws Exception {
