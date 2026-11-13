@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T12:48:49.543299+00:00",
+  "productionCoreMainBefore": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "MainChanged": 1,
+  "newDefinitions": 1,
+  "newQualifiedDefinitions": 0,
+  "wholeOriginalDefinitions": 8,
+  "wholeCurrentDefinitions": 9,
+  "oldWholeEightNormalizedInverseEqual": true,
+  "oldWholeMainNormalizedInverseEqual": true,
+  "sourceGjfCheckstyle0": true,
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java": "009b87f24bdcb9c2c592992d150f869afa51a3844c04fb4ba378dbe68e4f251b",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java": "f1a7ac2456560958ef0a2d01a72b29d143352d99a2e3d0f7b433a392d60021dd"
+  },
+  "toolHashes": {
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+    "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4",
+    "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2",
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "commands": [
+    {
+      "label": "format",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java"
+      ],
+      "pid": 533563,
+      "ownerPid": 533502,
+      "startUTC": "2026-11-13T12:48:45.138613+00:00",
+      "endUTC": "2026-11-13T12:48:45.704409+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "format-check",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java"
+      ],
+      "pid": 533588,
+      "ownerPid": 533502,
+      "startUTC": "2026-11-13T12:48:45.704431+00:00",
+      "endUTC": "2026-11-13T12:48:46.220517+00:00",
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29578-sealed-duplicate-source-manufacture-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/LinuxSealedProofTest.java"
+      ],
+      "pid": 533614,
+      "ownerPid": 533502,
+      "startUTC": "2026-11-13T12:48:46.220569+00:00",
+      "endUTC": "2026-11-13T12:48:46.987172+00:00",
+      "actualExit": 0
+    }
+  ],
+  "independentAliasInputs": [
+    128,
+    129,
+    65535
+  ],
+  "expectedState": "SAME_FD_NOT_NEW_OWNERSHIP; CALLBACK0; ORIGINAL_CLOSE1",
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "wholeTestRuntime": "HOLD_NOT_RUN_NO_EXTRACTION",
+  "actualNativeFdRootVmDbKeyOperations": 0,
+  "bug": "BUG-2840",
+  "horizontal": "YKT-2404",
+  "bugState": "SOURCE_FIXED_STATIC_MORE_PENDING_RUNTIME_NOT_RUN"
+}

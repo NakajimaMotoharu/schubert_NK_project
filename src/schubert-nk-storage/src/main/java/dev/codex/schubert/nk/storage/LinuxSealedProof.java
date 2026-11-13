@@ -170,13 +170,19 @@ public final class LinuxSealedProof {
     // F_SEAL_SEAL|SHRINK|GROW|WRITE; no future mutation or removal of seals.
     if (fcntl.call(descriptor, 1033, REQUIRED_SEALS) != 0) throw unavailable();
     return ResourceScope.acquire(
-        () -> new Descriptor(() -> fcntl.call(descriptor, 1030, 128)), // F_DUPFD_CLOEXEC
+        () -> new Descriptor(() -> duplicateReserved(descriptor)), // F_DUPFD_CLOEXEC
         Descriptor::close,
         owned -> {
           int reserved = owned.fd;
           if (reserved < 128 || reserved > 65535) throw unavailable();
           return operation.execute(reserved);
         });
+  }
+
+  // SS333/BUG2840: the original FD is already owned, not a newly acquired duplicate.
+  private int duplicateReserved(int original) {
+    int reserved = fcntl.call(original, 1030, 128);
+    return reserved == original ? -1 : reserved;
   }
 
   /**

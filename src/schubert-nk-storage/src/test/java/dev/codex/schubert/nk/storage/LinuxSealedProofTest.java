@@ -315,6 +315,30 @@ final class LinuxSealedProofTest {
     }
   }
 
+  /** PT-OPS-SEAL-009: alias results create no second owner; native Test HOLD remains. */
+  @Test
+  void opsSeal009SameDescriptorResultNeverCreatesSecondOwner() {
+    for (int original : List.of(128, 129, 65535)) {
+      var fixture = new Fixture(VECTOR);
+      fixture.original = original;
+      fixture.reserved = original;
+      unavailable(
+          assertThrows(
+              StorageIoException.class,
+              () -> fixture.calls().withProof(VECTOR, fd -> fail("aliased owner callback"))));
+      assertArrayEquals(VECTOR, fixture.written.toByteArray());
+      assertEquals(
+          List.of(
+              FIXTURE_CREATE_5498A731,
+              "mode:" + original + ":384",
+              "write:" + original,
+              "fcntl:" + original + ":1033:15",
+              "fcntl:" + original + ":1030:128",
+              "close:" + original),
+          fixture.events);
+    }
+  }
+
   private static void unavailable(StorageIoException failure) {
     assertEquals(StorageIoException.Reason.UNAVAILABLE, failure.reason());
     assertEquals("transfer storage operation failed", failure.getMessage());
@@ -331,6 +355,7 @@ final class LinuxSealedProofTest {
     long readResult = Long.MIN_VALUE;
     int seals = 15;
     int reserved = 129;
+    int original = 17;
     int chunk = 8193;
     Throwable cleanupUnknown;
 
@@ -344,7 +369,7 @@ final class LinuxSealedProofTest {
             assertEquals("schubert-startup-proof", name.getString(0));
             assertEquals(3, flags);
             events.add(FIXTURE_CREATE_5498A731);
-            return failed.equals(FIXTURE_CREATE_5498A731) ? -1 : 17;
+            return failed.equals(FIXTURE_CREATE_5498A731) ? -1 : original;
           },
           (fd, buffer, count) -> {
             events.add("write:" + fd);
