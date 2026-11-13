@@ -161,6 +161,50 @@ def owner_counts(values):
     return result
 
 
+def preparation_projection(view, base, frozen_legacy, current_registry, tasks,
+                           git_names, task_id, registered_additions):
+    """Project preparatory ownership only; never reuse the baseline byte or runtime claims.
+
+    Frozen legacy rows are independently pinned by the original view digest. Later public
+    registrations remain explicit inputs; they cannot silently replace a retired source.
+    """
+    require(value_digest(frozen_legacy) == view['preservedLegacyArtifactRowsDigest'],
+            'frozen legacy preparation digest mismatch')
+    rows = resolve_descriptors(view, base, frozen_legacy, tasks, git_names)
+    by_task = {row['id']: row for row in tasks}
+    require(task_id in by_task and by_task[task_id]['executionRole'] != 'REFERENCE_ONLY',
+            'invalid preparation owner')
+    historical = {row['path']: row for row in frozen_legacy}
+    current = {row['path']: row for row in current_registry}
+    require(len(current) == len(current_registry), 'duplicate current registration')
+    require(set(historical) <= set(current), 'historical registration removed')
+    require(type(registered_additions) is list and len(registered_additions) == len(set(registered_additions))
+            and set(current) - set(historical) == set(registered_additions),
+            'unlisted post-baseline registration')
+    for name, row in historical.items():
+        require(all(current[name][key] == row[key] for key in ('owner', 'costOwner', 'kind')),
+                'historical ownership changed')
+    resolved = {row['path']: row for row in rows}
+    for name in registered_additions:
+        safe_relative(name)
+        row = current[name]
+        require(name.startswith('src/') and ('/src/main/java/' in name or '/src/main/resources/' in name)
+                and row['owner'] == row['costOwner'] and row['owner'] in by_task
+                and by_task[row['owner']]['executionRole'] != 'REFERENCE_ONLY'
+                and row['acceptance'] in ('UNASSESSED', 'NOT_RUN'),
+                'unqualified public registration owner required')
+        if name in resolved:
+            require(all(resolved[name][key] == row[key] for key in ('owner', 'costOwner', 'kind')),
+                    'registered baseline ownership changed')
+        else:
+            resolved[name] = row
+    owned = sorted(name for name, row in resolved.items() if row['owner'] == task_id)
+    require(owned, 'empty preparation source projection')
+    return dict(paths=owned, baselineSource=view['source'], runtimeQualified=False,
+                wholeAcceptance=False, baselineByteQualificationTransferred=False,
+                registeredAdditions=list(registered_additions), newAcceptance=0)
+
+
 def full_audit_hold(structure, inventory):
     require(structure['status'] == 'PASS_CURRENT_STATIC_SOURCE_STRUCTURE_ONLY'
             and structure['runtimeQualified'] is False and structure['wholeWbsAccepted'] is False,
