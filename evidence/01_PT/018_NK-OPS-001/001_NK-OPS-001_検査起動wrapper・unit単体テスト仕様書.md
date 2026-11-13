@@ -68,3 +68,6 @@ HTTP metrics原whole28の当Program結果は[4188](4188_HTTPメトリクス原�
 
 
 WBS-P018-01公開source契約/独立期待値/TestIDは[4239_P01801全十六artifact契約・独立期待値対応.md](4239_P01801全十六artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+API Web設定原十四通常単体結果：[4242_APIWeb設定原十四通常単体結果.md](4242_APIWeb設定原十四通常単体結果.md)。通常whole14成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
