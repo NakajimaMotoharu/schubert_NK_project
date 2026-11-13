@@ -1,0 +1,5 @@
+# NK-CHR-001 比較scan二是正・通常四十六結果
+
+比較Tool2Mainを是正、source029c35c032固定でwhole5/46全成功・F/E/skip0、PG29258独立post0。全5Main/10physical除外0、Scanner3method I222/L44/M3/B36 miss0、Comparator2physical全四100。RootJava25offline build/Spotless0、SBbugs/missing/errors0、CS0、PMD生22は各site根拠で適用0/未分類0・元report保持。全scope L350/M37/C2/B200未網羅は保持しGateCli whole12実20GiB前提HOLD、bundle100/451/実CHR未受入。旧44invocation期待値の逆変換/不変更一致、新2定義のみ。PG29246は追加oracleの未規定列挙順仮定で46中1失敗、修正後sourceだけ再試験、元失敗保持。BUG2811/2812限定是正・2813/14/15/16工具/試験是正を証跡へ対応。source src eeba/Main98不変、実Root/VM/DB/HTTP/Browser/native/credential/master0。価格.6/1.8/3.6のみ計画完了、残.2/.6/1.2を全工具資格へ保持、実費/工数ではない。正式1964-53/元190新0/工数null。
+
+仕様：[011_NK-CHR-001_比較scan二是正・通常工具試験仕様.md](011_NK-CHR-001_比較scan二是正・通常工具試験仕様.md)。run PG29254 / Toolsource 029c35c032291a2f93894713de37ef0387071ea9。独立post evidence/01_PT/018_NK-OPS-001/evidence/PG29258-chr-tool-independent-post-v1/manifest.json SHA256 4196ea20e607fd3280e8ca3fca1cfa3f746391b2d8b5cd723756cf739d73a93b。全XML/command/時刻/exit/input/sourcebyte/physicalhash/静的指摘/counterは上記manifest群。Currentbaseline27file前後不変。元5446成功46を現sourceへ足さない。App試験rosterは87/3869/3840/29のまま、Tool46を別列で記録する。
