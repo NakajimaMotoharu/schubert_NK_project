@@ -1,0 +1,10 @@
+"""BUG2830 finite test-owner correction only; all original whole10 business oracles retained."""
+from pathlib import Path
+import json,hashlib
+R=Path.cwd();T=R/'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform';O=R/'evidence/01_PT/018_NK-OPS-001/evidence/PG29368-env10-fixture-finite-source-v1';assert not O.exists();O.mkdir();rows=[]
+for name,var,size,work,anchor in [('InspectorRunEnvironmentTest','executor',16,'tasks','    assertEquals(64, identities.size());'),('InspectorStaticEnvironmentTest','pool',8,'work','    assertArrayEquals(bytes(GOLDEN), golden);')]:
+ p=T/(name+'.java');old=p.read_text();(O/(name+'.before.java.txt')).write_text(old);a=f'    try (var {var} = Executors.newFixedThreadPool({size})) {{';b=f'    var {var} = Executors.newFixedThreadPool({size});\n    try {{';assert old.count(a)==1;s=old.replace(a,b);call=f'{var}.invokeAll({work})';assert s.count(call)==1;s=s.replace(call,f'{var}.invokeAll({work}, 5, TimeUnit.SECONDS)');end='    }\n'+anchor;assert s.count(end)==1;final=f'    }} finally {{\n      {var}.shutdownNow();\n      assertTrue({var}.awaitTermination(10, TimeUnit.SECONDS), "fixture workers not stopped");\n    }}\n';s=s.replace(end,final+anchor)
+ if name=='InspectorStaticEnvironmentTest':
+  assert 'import static org.junit.jupiter.api.Assertions.assertTrue;' not in s;s=s.replace('import static org.junit.jupiter.api.Assertions.assertThrows;','import static org.junit.jupiter.api.Assertions.assertThrows;\nimport static org.junit.jupiter.api.Assertions.assertTrue;')
+ p.write_text(s);rows.append(dict(path=str(p.relative_to(R)),beforeSha256=hashlib.sha256(old.encode()).hexdigest(),oldDefinitions=old.count('@Test'),newDefinitions=s.count('@Test'),businessOracleChanged=False))
+(O/'manifest.json').write_text(json.dumps(dict(actualExit=0,BUG='2830',rows=rows,sourceMainChanged=False,productTestsExecuted=0,normalWhole10='NOT_RUN',sourceTransformation='Onlyexecutor lexicalscope+timedinvokeAll+boundedfinally; Rootformatted inverse follows',prohibitedActions=0),indent=2)+'\n');print('two whole fixtures finite; no Main/value/oracle edits')

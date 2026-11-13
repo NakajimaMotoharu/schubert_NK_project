@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -144,7 +145,8 @@ final class InspectorStaticEnvironmentTest {
   void concurrentValidation() throws Exception {
     byte[] golden = bytes(GOLDEN);
     byte[] bad = config(URL, "v1,v1");
-    try (var pool = Executors.newFixedThreadPool(8)) {
+    var pool = Executors.newFixedThreadPool(8);
+    try {
       List<Callable<Integer>> work = new ArrayList<>();
       for (int i = 0; i < 64; i++)
         work.add(
@@ -154,8 +156,12 @@ final class InspectorStaticEnvironmentTest {
               return 1;
             });
       int finished = 0;
-      for (var future : pool.invokeAll(work)) finished += future.get(5, TimeUnit.SECONDS);
+      for (var future : pool.invokeAll(work, 5, TimeUnit.SECONDS))
+        finished += future.get(5, TimeUnit.SECONDS);
       assertEquals(64, finished);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), "fixture workers not stopped");
     }
     assertArrayEquals(bytes(GOLDEN), golden);
   }

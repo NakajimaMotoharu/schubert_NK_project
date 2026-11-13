@@ -1,0 +1,86 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29380-INSPECTOR-ENV-ORIGINAL-WHOLE10-BOUNDED-FIXTURE",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/4230_Inspector環境原四原六通常十・有限worker仕様.md",
+      "sha256": "2b40d3629072682ccfbdfe0fc523d3a963030345fb9619463bb5fb8ccc010cc2"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29370-env10-oracle-inverse-closed-source-v1/manifest.json",
+      "sha256": "fb63021eac5f2399646e15db56c0b75ff069d73bcd8cd00a775c2c5c51f22555"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "tests": 6
+    }
+  ],
+  "expectedTests": 10,
+  "resources": [
+    {
+      "path": "src/deployment/config/inbox-inspector.env.template",
+      "placement": "PUBLIC_REPOSITORY"
+    }
+  ],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment",
+    "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {
+    "nk.pt.repository": "OWNED_PUBLIC_REPOSITORY"
+  },
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29386-env10-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29374-env10-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29376-env10-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29378-env10-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29380-env10-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29382-env10-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29374-env10-prepare-v1",
+    "unit": "pg29380-env10-unit-v1"
+  },
+  "newTestDefinitions": 0,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

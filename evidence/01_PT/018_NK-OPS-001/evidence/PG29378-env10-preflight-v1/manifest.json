@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2298b_env10_closed_profile.json",
+    "sha256": "3a2c714116810bd8b22eaf60ecd77cb7b354c056f9d96f35f1fffd2937631c3c"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java": "0faabe383f02947cf0be44ade1a356efee8dea14276b14aef4956dabd604d8cf",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java": "164f6dfe9f1143f86b868ada1b0a7d5a5687b6fc42fc901941a4f0193f702258",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java": "8b8bfa361ca56fd5ec58e75b5a0276c4ba5fcaa8c79013833940fc577cb95109",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java": "5d7c4be03a087a9414391da8ba2d2a59dfa723ae8b36f7c05cf2263a6c7afc0b",
+    "src/deployment/config/inbox-inspector.env.template": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29374-env10-prepare-v1/manifest.json",
+    "sha256": "85ba8c28163eb0e096f8ea7f76b69c790119272c8d336f73ca1e3781e37f6161"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29376-env10-static-v1/manifest.json",
+    "sha256": "1b6d3acfe942de8ae906aeab6f59b2448f449f4aee2751ebdeb41f99587ef8c2"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2299_env10_static_admission.json",
+    "sha256": "dccc71d21001de5b4b578f42edc72ad9015114a5687016a10a31bc3ca28866db"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "CloseResource",
+      "line": "119",
+      "reason": "Executor is released in the unconditional finally via shutdownNow and asserted finite awaitTermination10SECONDS. AutoCloseable.close/TWR would wait indefinitely and reintroduce BUG2830. Cancellation or failure remains failed PT, never a normal result.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "119",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "129",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "135",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "136",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "CloseResource",
+      "line": "148",
+      "reason": "Executor is released in the unconditional finally via shutdownNow and asserted finite awaitTermination10SECONDS. AutoCloseable.close/TWR would wait indefinitely and reintroduce BUG2830. Cancellation or failure remains failed PT, never a normal result.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "148",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "159",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "163",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "164",
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

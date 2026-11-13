@@ -1,0 +1,124 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG29380-INSPECTOR-ENV-ORIGINAL-WHOLE10-BOUNDED-FIXTURE",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29374-env10-prepare-v1/manifest.json",
+    "sha256": "85ba8c28163eb0e096f8ea7f76b69c790119272c8d336f73ca1e3781e37f6161"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29376-env10-static-v1/manifest.json",
+    "sha256": "1b6d3acfe942de8ae906aeab6f59b2448f449f4aee2751ebdeb41f99587ef8c2"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(16);",
+      "sourceLine": 119,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "rawMultiplicity": 1,
+      "reason": "Executor is released in the unconditional finally via shutdownNow and asserted finite awaitTermination10SECONDS. AutoCloseable.close/TWR would wait indefinitely and reintroduce BUG2830. Cancellation or failure remains failed PT, never a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(16);",
+      "sourceLine": 119,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var result : executor.invokeAll(tasks, 5, TimeUnit.SECONDS)) {",
+      "sourceLine": 129,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 135,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"fixture workers not stopped\");",
+      "sourceLine": 136,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 148,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "rawMultiplicity": 1,
+      "reason": "Executor is released in the unconditional finally via shutdownNow and asserted finite awaitTermination10SECONDS. AutoCloseable.close/TWR would wait indefinitely and reintroduce BUG2830. Cancellation or failure remains failed PT, never a normal result.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 148,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "for (var future : pool.invokeAll(work, 5, TimeUnit.SECONDS))",
+      "sourceLine": 159,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), \"fixture workers not stopped\");",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit original64-task deterministic concurrency fixture, not a J2EE Web application. Timed invokeAll5SECONDS and get5SECONDS, finally shutdownNow and asserted awaitTermination10SECONDS own all workers. No Root/backend/native authority.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

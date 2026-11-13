@@ -116,7 +116,8 @@ final class InspectorRunEnvironmentTest {
   @Test
   void concurrentUse() throws Exception {
     Set<byte[]> identities = Collections.newSetFromMap(new IdentityHashMap<>());
-    try (var executor = Executors.newFixedThreadPool(16)) {
+    var executor = Executors.newFixedThreadPool(16);
+    try {
       var tasks = new ArrayList<Callable<byte[]>>();
       for (int i = 0; i < 64; i++)
         tasks.add(
@@ -125,11 +126,14 @@ final class InspectorRunEnvironmentTest {
               InspectorRunEnvironment.requireMatches(RUN, bytes(GOLDEN));
               return InspectorRunEnvironment.encode(RUN);
             });
-      for (var result : executor.invokeAll(tasks)) {
+      for (var result : executor.invokeAll(tasks, 5, TimeUnit.SECONDS)) {
         byte[] value = result.get(5, TimeUnit.SECONDS);
         assertArrayEquals(bytes(GOLDEN), value);
         assertTrue(identities.add(value));
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "fixture workers not stopped");
     }
     assertEquals(64, identities.size());
   }
