@@ -1,0 +1,73 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T14:45:56.322672+09:00",
+  "provenance": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/provenance.json",
+    "sha256": "d2bcb6514b157e468925bda90bc1b02335b4e127889aa250570f3e166476a241"
+  },
+  "metadata": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.connector.Connector.txt",
+      "sha256": "6007be7b53d9200137572d441b9100d5d638ce49cad63c82cc7ce470409fcab9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.connector.Request.txt",
+      "sha256": "81dda91f59e473f7995d61cc6e8d5533fe2dc736f29d95c925e4d4a83e3dca44"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.connector.Response.txt",
+      "sha256": "18cc8206fff232a5396b53b8e33444613ab7b057aba99832078d9380248ef8db"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.util.LifecycleBase.txt",
+      "sha256": "e07f359d4619043eb868554b08d7afb9ec33b9a6bd189b8f02d0e9e4d27fc7e1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.util.LifecycleMBeanBase.txt",
+      "sha256": "ffa98db3a1115ee22bb907b86473d278382c4aca99f051db649115eb4b23f486"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.catalina.valves.ValveBase.txt",
+      "sha256": "b713b0ca75ebeaa84d0b57587ea451e7907575609865660c64a736d8d52676bf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.AbstractProtocol.txt",
+      "sha256": "cf40d05820ef0532d302d8b9000d8141b57eba4cba0bdb7aef41948d6d3b200e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.ProtocolHandler.txt",
+      "sha256": "487a8962e4e3182191f696bb73a2503d535454d23e91cdd18371219c3e20e898"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.Request.txt",
+      "sha256": "c6bc120db628f3c6acccd5f7e2c544ec9ace6ba9c355c4c05ea8355a3f6df644"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.Response.txt",
+      "sha256": "6e0e7326837df5b7d961485eb521707cbe7fc7934ffa3cfa761e9df2e114e70c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.http11.AbstractHttp11Protocol.txt",
+      "sha256": "87d77832b2dc821956d35db968cd88f0aacba441b6ce85b679b4825cf83fc7c7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.coyote.http11.Http11NioProtocol.txt",
+      "sha256": "1ab0cbde710ec948463765a5a51bbb00ad612b61052110493663d60d1ea8b59e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.tomcat.util.net.AbstractEndpoint.txt",
+      "sha256": "5221857c0252a5d52515700f20a05bedb8c4a0a3071a4b7e57570d605afbf10c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.tomcat.util.net.AbstractNetworkChannelEndpoint.txt",
+      "sha256": "88d37f74a4c595cb6073e3ec30a2b2ba8057fa4ea1f7e14752c4c02b34304936"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28986-tomcat-sdk-constructor-metadata-v1/org.apache.tomcat.util.net.NioEndpoint.txt",
+      "sha256": "356805c8d27b36d80b9f92dbddcec97db98d32df2381293f26cd1c2040698ae5"
+    }
+  ],
+  "qualification": "Connector default HTTP/1.1 -> ProtocolHandler exact Http11NioProtocol -> NioEndpoint constructors allocate state only. Endpoint serverSock/poller null; AbstractProtocol binds handler and properties only. LifecycleBase NEW; no init/start/bind/selector-open/poller/startInternal invoked. Connector clinit APR status uses resource lookup only not native init. Coyote Request/Response and Catalina wrappers allocate maps/buffers/metadata. ValveBase only lifecycle fields. Product tests invoke no init/start/network/Root or private files.",
+  "productClassMetadataRead": 0,
+  "actualHttpOrBackendOperations": 0
+}

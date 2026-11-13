@@ -80,4 +80,56 @@ final class WebHttpAdmissionValveTest {
     valve.log(request, response, 0);
     gate.drain(Duration.ZERO);
   }
+
+  @Test
+  void httpLease003ForeignGateCannotDispatchOrCompleteButSameGateAdaptersCan() throws Exception {
+    var gateA = new WebHttpAdmission();
+    var gateB = new WebHttpAdmission();
+    var valveA = new WebHttpAdmissionValve(gateA);
+    var valveB = new WebHttpAdmissionValve(gateB);
+    var sameGate = new WebHttpAdmissionValve(gateA);
+    var callsA = new AtomicInteger();
+    var callsB = new AtomicInteger();
+    valveA.setNext(
+        new ValveBase(true) {
+          @Override
+          public void invoke(Request req, Response res) {
+            callsA.incrementAndGet();
+          }
+        });
+    valveB.setNext(
+        new ValveBase(true) {
+          @Override
+          public void invoke(Request req, Response res) {
+            callsB.incrementAndGet();
+          }
+        });
+    sameGate.setNext(valveA.getNext());
+    var request = new Request(new Connector(), new org.apache.coyote.Request());
+    var response = new Response(new org.apache.coyote.Response());
+    String attribute = WebHttpAdmissionValve.class.getName() + ".lease";
+    gateA.admit();
+    gateB.admit();
+    valveA.invoke(request, response);
+    Object originalLease = request.getAttribute(attribute);
+    var rejected =
+        assertThrows(
+            jakarta.servlet.ServletException.class, () -> valveB.invoke(request, response));
+    assertEquals("Web HTTP lease unavailable", rejected.getMessage());
+    assertEquals(1, callsA.get());
+    assertEquals(0, callsB.get());
+    assertSame(originalLease, request.getAttribute(attribute));
+    valveB.log(request, response, 0);
+    assertThrows(IOException.class, () -> gateA.drain(Duration.ZERO));
+    gateB.drain(Duration.ZERO);
+    sameGate.invoke(request, response);
+    assertEquals(2, callsA.get());
+    assertSame(originalLease, request.getAttribute(attribute));
+    assertThrows(IOException.class, () -> gateA.drain(Duration.ZERO));
+    sameGate.log(request, response, 0);
+    gateA.drain(Duration.ZERO);
+    valveA.log(request, response, 0);
+    sameGate.log(request, response, 0);
+    gateA.drain(Duration.ZERO);
+  }
 }

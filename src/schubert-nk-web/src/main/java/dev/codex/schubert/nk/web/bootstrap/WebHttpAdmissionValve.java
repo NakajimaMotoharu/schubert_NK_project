@@ -24,6 +24,10 @@ final class WebHttpAdmissionValve extends ValveBase implements AccessLog {
   private final class Lease {
     private final AtomicBoolean finished = new AtomicBoolean();
 
+    boolean ownedBy(WebHttpAdmission candidate) {
+      return admission == candidate;
+    }
+
     void complete() {
       if (finished.compareAndSet(false, true)) admission.completed();
     }
@@ -46,7 +50,7 @@ final class WebHttpAdmissionValve extends ValveBase implements AccessLog {
         return;
       }
       request.setAttribute(ATTRIBUTE, new Lease());
-    } else if (!(lease instanceof WebHttpAdmissionValve.Lease)) {
+    } else if (!(lease instanceof WebHttpAdmissionValve.Lease owned) || !owned.ownedBy(admission)) {
       throw new ServletException("Web HTTP lease unavailable");
     }
     Objects.requireNonNull(getNext(), "next valve").invoke(request, response);
@@ -57,7 +61,8 @@ final class WebHttpAdmissionValve extends ValveBase implements AccessLog {
     // Missing terminal metadata must never manufacture confirmation of an outstanding lease.
     if (request == null || response == null) return;
     Object lease = request.getAttribute(ATTRIBUTE);
-    if (lease instanceof WebHttpAdmissionValve.Lease owned) owned.complete();
+    if (lease instanceof WebHttpAdmissionValve.Lease owned && owned.ownedBy(admission))
+      owned.complete();
   }
 
   @Override

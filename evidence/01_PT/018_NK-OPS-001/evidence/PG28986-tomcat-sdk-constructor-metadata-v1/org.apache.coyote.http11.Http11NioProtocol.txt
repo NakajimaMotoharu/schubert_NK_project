@@ -1,0 +1,78 @@
+Compiled from "Http11NioProtocol.java"
+public class org.apache.coyote.http11.Http11NioProtocol extends org.apache.coyote.http11.AbstractHttp11Protocol<org.apache.tomcat.util.net.NioChannel> {
+  private static final org.apache.juli.logging.Log log;
+
+  public org.apache.coyote.http11.Http11NioProtocol();
+    Code:
+         0: aload_0
+         1: new           #1                  // class org/apache/tomcat/util/net/NioEndpoint
+         4: dup
+         5: invokespecial #3                  // Method org/apache/tomcat/util/net/NioEndpoint."<init>":()V
+         8: invokespecial #7                  // Method "<init>":(Lorg/apache/tomcat/util/net/NioEndpoint;)V
+        11: return
+
+  public org.apache.coyote.http11.Http11NioProtocol(org.apache.tomcat.util.net.NioEndpoint);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #12                 // Method org/apache/coyote/http11/AbstractHttp11Protocol."<init>":(Lorg/apache/tomcat/util/net/AbstractEndpoint;)V
+         5: return
+
+  protected org.apache.juli.logging.Log getLog();
+    Code:
+         0: getstatic     #17                 // Field log:Lorg/apache/juli/logging/Log;
+         3: areturn
+
+  public void setSelectorTimeout(long);
+    Code:
+         0: aload_0
+         1: invokevirtual #21                 // Method getEndpoint:()Lorg/apache/tomcat/util/net/AbstractEndpoint;
+         4: checkcast     #1                  // class org/apache/tomcat/util/net/NioEndpoint
+         7: lload_1
+         8: invokevirtual #25                 // Method org/apache/tomcat/util/net/NioEndpoint.setSelectorTimeout:(J)V
+        11: return
+
+  public long getSelectorTimeout();
+    Code:
+         0: aload_0
+         1: invokevirtual #21                 // Method getEndpoint:()Lorg/apache/tomcat/util/net/AbstractEndpoint;
+         4: checkcast     #1                  // class org/apache/tomcat/util/net/NioEndpoint
+         7: invokevirtual #29                 // Method org/apache/tomcat/util/net/NioEndpoint.getSelectorTimeout:()J
+        10: lreturn
+
+  public void setPollerThreadPriority(int);
+    Code:
+         0: aload_0
+         1: invokevirtual #21                 // Method getEndpoint:()Lorg/apache/tomcat/util/net/AbstractEndpoint;
+         4: checkcast     #1                  // class org/apache/tomcat/util/net/NioEndpoint
+         7: iload_1
+         8: invokevirtual #33                 // Method org/apache/tomcat/util/net/NioEndpoint.setPollerThreadPriority:(I)V
+        11: return
+
+  public int getPollerThreadPriority();
+    Code:
+         0: aload_0
+         1: invokevirtual #21                 // Method getEndpoint:()Lorg/apache/tomcat/util/net/AbstractEndpoint;
+         4: checkcast     #1                  // class org/apache/tomcat/util/net/NioEndpoint
+         7: invokevirtual #37                 // Method org/apache/tomcat/util/net/NioEndpoint.getPollerThreadPriority:()I
+        10: ireturn
+
+  protected java.lang.String getNamePrefix();
+    Code:
+         0: aload_0
+         1: invokevirtual #41                 // Method isSSLEnabled:()Z
+         4: ifeq          17
+         7: aload_0
+         8: invokevirtual #45                 // Method getSslImplementationShortName:()Ljava/lang/String;
+        11: invokedynamic #49,  0             // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        16: areturn
+        17: ldc           #53                 // String http-nio
+        19: areturn
+
+  static {};
+    Code:
+         0: ldc           #8                  // class org/apache/coyote/http11/Http11NioProtocol
+         2: invokestatic  #55                 // Method org/apache/juli/logging/LogFactory.getLog:(Ljava/lang/Class;)Lorg/apache/juli/logging/Log;
+         5: putstatic     #17                 // Field log:Lorg/apache/juli/logging/Log;
+         8: return
+}

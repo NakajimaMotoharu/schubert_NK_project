@@ -1,0 +1,232 @@
+Compiled from "ValveBase.java"
+public abstract class org.apache.catalina.valves.ValveBase extends org.apache.catalina.util.LifecycleMBeanBase implements org.apache.catalina.Contained,org.apache.catalina.Valve {
+  protected static final org.apache.tomcat.util.res.StringManager sm;
+
+  protected boolean asyncSupported;
+
+  protected org.apache.catalina.Container container;
+
+  protected org.apache.juli.logging.Log containerLog;
+
+  protected org.apache.catalina.Valve next;
+
+  public org.apache.catalina.valves.ValveBase();
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: invokespecial #1                  // Method "<init>":(Z)V
+         5: return
+
+  public org.apache.catalina.valves.ValveBase(boolean);
+    Code:
+         0: aload_0
+         1: invokespecial #7                  // Method org/apache/catalina/util/LifecycleMBeanBase."<init>":()V
+         4: aload_0
+         5: aconst_null
+         6: putfield      #12                 // Field container:Lorg/apache/catalina/Container;
+         9: aload_0
+        10: aconst_null
+        11: putfield      #16                 // Field containerLog:Lorg/apache/juli/logging/Log;
+        14: aload_0
+        15: aconst_null
+        16: putfield      #20                 // Field next:Lorg/apache/catalina/Valve;
+        19: aload_0
+        20: iload_1
+        21: putfield      #24                 // Field asyncSupported:Z
+        24: return
+
+  public org.apache.catalina.Container getContainer();
+    Code:
+         0: aload_0
+         1: getfield      #12                 // Field container:Lorg/apache/catalina/Container;
+         4: areturn
+
+  public void setContainer(org.apache.catalina.Container);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #12                 // Field container:Lorg/apache/catalina/Container;
+         5: return
+
+  public boolean isAsyncSupported();
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field asyncSupported:Z
+         4: ireturn
+
+  public void setAsyncSupported(boolean);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #24                 // Field asyncSupported:Z
+         5: return
+
+  public org.apache.catalina.Valve getNext();
+    Code:
+         0: aload_0
+         1: getfield      #20                 // Field next:Lorg/apache/catalina/Valve;
+         4: areturn
+
+  public void setNext(org.apache.catalina.Valve);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #20                 // Field next:Lorg/apache/catalina/Valve;
+         5: return
+
+  public void backgroundProcess();
+    Code:
+         0: return
+
+  protected void initInternal() throws org.apache.catalina.LifecycleException;
+    Code:
+         0: aload_0
+         1: invokevirtual #28                 // Method getContainer:()Lorg/apache/catalina/Container;
+         4: astore_1
+         5: aload_1
+         6: ifnonnull     25
+         9: new           #32                 // class java/lang/IllegalStateException
+        12: dup
+        13: getstatic     #34                 // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        16: ldc           #38                 // String valveBase.noContainer
+        18: invokevirtual #40                 // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        21: invokespecial #46                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        24: athrow
+        25: aload_0
+        26: invokespecial #49                 // Method org/apache/catalina/util/LifecycleMBeanBase.initInternal:()V
+        29: aload_0
+        30: aload_1
+        31: invokeinterface #52,  1           // InterfaceMethod org/apache/catalina/Container.getLogger:()Lorg/apache/juli/logging/Log;
+        36: putfield      #16                 // Field containerLog:Lorg/apache/juli/logging/Log;
+        39: return
+
+  protected void startInternal() throws org.apache.catalina.LifecycleException;
+    Code:
+         0: aload_0
+         1: getstatic     #58                 // Field org/apache/catalina/LifecycleState.STARTING:Lorg/apache/catalina/LifecycleState;
+         4: invokevirtual #64                 // Method setState:(Lorg/apache/catalina/LifecycleState;)V
+         7: return
+
+  protected void stopInternal() throws org.apache.catalina.LifecycleException;
+    Code:
+         0: aload_0
+         1: getstatic     #68                 // Field org/apache/catalina/LifecycleState.STOPPING:Lorg/apache/catalina/LifecycleState;
+         4: invokevirtual #64                 // Method setState:(Lorg/apache/catalina/LifecycleState;)V
+         7: return
+
+  public java.lang.String toString();
+    Code:
+         0: aload_0
+         1: invokestatic  #71                 // Method org/apache/catalina/util/ToStringUtil.toString:(Lorg/apache/catalina/Contained;)Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getObjectNameKeyProperties();
+    Code:
+         0: new           #77                 // class java/lang/StringBuilder
+         3: dup
+         4: ldc           #79                 // String type=Valve
+         6: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+         9: astore_1
+        10: aload_0
+        11: invokevirtual #28                 // Method getContainer:()Lorg/apache/catalina/Container;
+        14: astore_2
+        15: aload_1
+        16: aload_2
+        17: invokeinterface #82,  1           // InterfaceMethod org/apache/catalina/Container.getMBeanKeyProperties:()Ljava/lang/String;
+        22: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        25: pop
+        26: iconst_0
+        27: istore_3
+        28: aload_2
+        29: invokeinterface #90,  1           // InterfaceMethod org/apache/catalina/Container.getPipeline:()Lorg/apache/catalina/Pipeline;
+        34: astore        4
+        36: aload         4
+        38: ifnull        112
+        41: aload         4
+        43: invokeinterface #94,  1           // InterfaceMethod org/apache/catalina/Pipeline.getValves:()[Lorg/apache/catalina/Valve;
+        48: astore        5
+        50: aload         5
+        52: arraylength
+        53: istore        6
+        55: iconst_0
+        56: istore        7
+        58: iload         7
+        60: iload         6
+        62: if_icmpge     112
+        65: aload         5
+        67: iload         7
+        69: aaload
+        70: astore        8
+        72: aload         8
+        74: ifnonnull     80
+        77: goto          106
+        80: aload         8
+        82: aload_0
+        83: if_acmpne     89
+        86: goto          112
+        89: aload         8
+        91: invokeinterface #100,  1          // InterfaceMethod org/apache/catalina/Valve.getClass:()Ljava/lang/Class;
+        96: aload_0
+        97: invokevirtual #106                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       100: if_acmpne     106
+       103: iinc          3, 1
+       106: iinc          7, 1
+       109: goto          58
+       112: iload_3
+       113: ifle          129
+       116: aload_1
+       117: ldc           #109                // String ,seq=
+       119: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       122: pop
+       123: aload_1
+       124: iload_3
+       125: invokevirtual #111                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       128: pop
+       129: aload_0
+       130: invokevirtual #106                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       133: invokevirtual #114                // Method java/lang/Class.getName:()Ljava/lang/String;
+       136: astore        5
+       138: aload         5
+       140: bipush        46
+       142: invokevirtual #119                // Method java/lang/String.lastIndexOf:(I)I
+       145: istore        6
+       147: iload         6
+       149: iflt          163
+       152: aload         5
+       154: iload         6
+       156: iconst_1
+       157: iadd
+       158: invokevirtual #125                // Method java/lang/String.substring:(I)Ljava/lang/String;
+       161: astore        5
+       163: aload_1
+       164: ldc           #129                // String ,name=
+       166: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       169: pop
+       170: aload_1
+       171: aload         5
+       173: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       176: pop
+       177: aload_1
+       178: invokevirtual #131                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       181: areturn
+
+  public java.lang.String getDomainInternal();
+    Code:
+         0: aload_0
+         1: invokevirtual #28                 // Method getContainer:()Lorg/apache/catalina/Container;
+         4: astore_1
+         5: aload_1
+         6: ifnonnull     11
+         9: aconst_null
+        10: areturn
+        11: aload_1
+        12: invokeinterface #133,  1          // InterfaceMethod org/apache/catalina/Container.getDomain:()Ljava/lang/String;
+        17: areturn
+
+  static {};
+    Code:
+         0: ldc           #2                  // class org/apache/catalina/valves/ValveBase
+         2: invokestatic  #136                // Method org/apache/tomcat/util/res/StringManager.getManager:(Ljava/lang/Class;)Lorg/apache/tomcat/util/res/StringManager;
+         5: putstatic     #34                 // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+         8: return
+}

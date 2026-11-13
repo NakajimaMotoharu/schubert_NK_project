@@ -1,0 +1,2292 @@
+Compiled from "Response.java"
+public class org.apache.catalina.connector.Response implements jakarta.servlet.http.HttpServletResponse {
+  private static final org.apache.juli.logging.Log log;
+
+  protected static final org.apache.tomcat.util.res.StringManager sm;
+
+  private static final org.apache.tomcat.util.http.parser.MediaTypeCache MEDIA_TYPE_CACHE;
+
+  protected static final int SC_EARLY_HINTS;
+
+  protected final org.apache.coyote.Response coyoteResponse;
+
+  protected final org.apache.catalina.connector.OutputBuffer outputBuffer;
+
+  protected org.apache.catalina.connector.CoyoteOutputStream outputStream;
+
+  protected org.apache.catalina.connector.CoyoteWriter writer;
+
+  protected boolean appCommitted;
+
+  protected boolean included;
+
+  private boolean isCharacterEncodingSet;
+
+  protected boolean usingOutputStream;
+
+  protected boolean usingWriter;
+
+  protected final org.apache.tomcat.util.buf.UEncoder urlEncoder;
+
+  protected final org.apache.tomcat.util.buf.CharChunk redirectURLCC;
+
+  private jakarta.servlet.http.HttpServletResponse applicationResponse;
+
+  protected org.apache.catalina.connector.Request request;
+
+  protected org.apache.catalina.connector.ResponseFacade facade;
+
+  public org.apache.catalina.connector.Response(org.apache.coyote.Response);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: sipush        8192
+         5: invokespecial #3                  // Method "<init>":(Lorg/apache/coyote/Response;I)V
+         8: return
+
+  public org.apache.catalina.connector.Response(org.apache.coyote.Response, int);
+    Code:
+         0: aload_0
+         1: invokespecial #9                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iconst_0
+         6: putfield      #14                 // Field appCommitted:Z
+         9: aload_0
+        10: iconst_0
+        11: putfield      #18                 // Field included:Z
+        14: aload_0
+        15: iconst_0
+        16: putfield      #21                 // Field isCharacterEncodingSet:Z
+        19: aload_0
+        20: iconst_0
+        21: putfield      #24                 // Field usingOutputStream:Z
+        24: aload_0
+        25: iconst_0
+        26: putfield      #27                 // Field usingWriter:Z
+        29: aload_0
+        30: new           #30                 // class org/apache/tomcat/util/buf/UEncoder
+        33: dup
+        34: getstatic     #32                 // Field org/apache/tomcat/util/buf/UEncoder$SafeCharsSet.WITH_SLASH:Lorg/apache/tomcat/util/buf/UEncoder$SafeCharsSet;
+        37: invokespecial #38                 // Method org/apache/tomcat/util/buf/UEncoder."<init>":(Lorg/apache/tomcat/util/buf/UEncoder$SafeCharsSet;)V
+        40: putfield      #41                 // Field urlEncoder:Lorg/apache/tomcat/util/buf/UEncoder;
+        43: aload_0
+        44: new           #45                 // class org/apache/tomcat/util/buf/CharChunk
+        47: dup
+        48: invokespecial #47                 // Method org/apache/tomcat/util/buf/CharChunk."<init>":()V
+        51: putfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        54: aload_0
+        55: aconst_null
+        56: putfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        59: aload_0
+        60: aconst_null
+        61: putfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        64: aload_0
+        65: aconst_null
+        66: putfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        69: aload_0
+        70: aload_1
+        71: putfield      #64                 // Field coyoteResponse:Lorg/apache/coyote/Response;
+        74: aload_0
+        75: new           #1                  // class org/apache/catalina/connector/OutputBuffer
+        78: dup
+        79: iload_2
+        80: aload_1
+        81: invokespecial #68                 // Method org/apache/catalina/connector/OutputBuffer."<init>":(ILorg/apache/coyote/Response;)V
+        84: putfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        87: return
+
+  public org.apache.coyote.Response getCoyoteResponse();
+    Code:
+         0: aload_0
+         1: getfield      #64                 // Field coyoteResponse:Lorg/apache/coyote/Response;
+         4: areturn
+
+  public org.apache.catalina.Context getContext();
+    Code:
+         0: aload_0
+         1: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+         4: invokevirtual #75                 // Method org/apache/catalina/connector/Request.getContext:()Lorg/apache/catalina/Context;
+         7: areturn
+
+  public void recycle();
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #81                 // Method org/apache/catalina/connector/OutputBuffer.recycle:()V
+         7: aload_0
+         8: iconst_0
+         9: putfield      #24                 // Field usingOutputStream:Z
+        12: aload_0
+        13: iconst_0
+        14: putfield      #27                 // Field usingWriter:Z
+        17: aload_0
+        18: iconst_0
+        19: putfield      #14                 // Field appCommitted:Z
+        22: aload_0
+        23: iconst_0
+        24: putfield      #18                 // Field included:Z
+        27: aload_0
+        28: iconst_0
+        29: putfield      #21                 // Field isCharacterEncodingSet:Z
+        32: aload_0
+        33: aconst_null
+        34: putfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        37: aload_0
+        38: invokevirtual #84                 // Method getRequest:()Lorg/apache/catalina/connector/Request;
+        41: invokevirtual #88                 // Method org/apache/catalina/connector/Request.getDiscardFacades:()Z
+        44: ifeq          107
+        47: aload_0
+        48: getfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        51: ifnull        66
+        54: aload_0
+        55: getfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        58: invokevirtual #92                 // Method org/apache/catalina/connector/ResponseFacade.clear:()V
+        61: aload_0
+        62: aconst_null
+        63: putfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        66: aload_0
+        67: getfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        70: ifnull        85
+        73: aload_0
+        74: getfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        77: invokevirtual #101                // Method org/apache/catalina/connector/CoyoteOutputStream.clear:()V
+        80: aload_0
+        81: aconst_null
+        82: putfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        85: aload_0
+        86: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        89: ifnull        121
+        92: aload_0
+        93: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        96: invokevirtual #108                // Method org/apache/catalina/connector/CoyoteWriter.clear:()V
+        99: aload_0
+       100: aconst_null
+       101: putfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+       104: goto          121
+       107: aload_0
+       108: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+       111: ifnull        121
+       114: aload_0
+       115: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+       118: invokevirtual #111                // Method org/apache/catalina/connector/CoyoteWriter.recycle:()V
+       121: return
+
+  public long getContentWritten();
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #112                // Method org/apache/catalina/connector/OutputBuffer.getContentWritten:()J
+         7: lreturn
+
+  public long getBytesWritten(boolean);
+    Code:
+         0: iload_1
+         1: ifeq          15
+         4: aload_0
+         5: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         8: invokevirtual #116                // Method org/apache/catalina/connector/OutputBuffer.flush:()V
+        11: goto          15
+        14: astore_2
+        15: aload_0
+        16: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        19: iload_1
+        20: invokevirtual #125                // Method org/apache/coyote/Response.getBytesWritten:(Z)J
+        23: lreturn
+      Exception table:
+         from    to  target type
+             4    11    14   Class java/io/IOException
+
+  public void setAppCommitted(boolean);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #14                 // Field appCommitted:Z
+         5: return
+
+  public boolean isAppCommitted();
+    Code:
+         0: aload_0
+         1: getfield      #14                 // Field appCommitted:Z
+         4: ifne          41
+         7: aload_0
+         8: invokevirtual #131                // Method isCommitted:()Z
+        11: ifne          41
+        14: aload_0
+        15: invokevirtual #134                // Method isSuspended:()Z
+        18: ifne          41
+        21: aload_0
+        22: invokevirtual #137                // Method getContentLength:()I
+        25: ifle          45
+        28: aload_0
+        29: invokevirtual #141                // Method getContentWritten:()J
+        32: aload_0
+        33: invokevirtual #137                // Method getContentLength:()I
+        36: i2l
+        37: lcmp
+        38: iflt          45
+        41: iconst_1
+        42: goto          46
+        45: iconst_0
+        46: ireturn
+
+  public org.apache.catalina.connector.Request getRequest();
+    Code:
+         0: aload_0
+         1: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+         4: areturn
+
+  public void setRequest(org.apache.catalina.connector.Request);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+         5: return
+
+  public jakarta.servlet.http.HttpServletResponse getResponse();
+    Code:
+         0: aload_0
+         1: getfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+         4: ifnonnull     19
+         7: aload_0
+         8: new           #93                 // class org/apache/catalina/connector/ResponseFacade
+        11: dup
+        12: aload_0
+        13: invokespecial #142                // Method org/apache/catalina/connector/ResponseFacade."<init>":(Lorg/apache/catalina/connector/Response;)V
+        16: putfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        19: aload_0
+        20: getfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        23: ifnonnull     34
+        26: aload_0
+        27: aload_0
+        28: getfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        31: putfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        34: aload_0
+        35: getfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        38: areturn
+
+  public void setResponse(jakarta.servlet.http.HttpServletResponse);
+    Code:
+         0: aload_1
+         1: astore_2
+         2: aload_2
+         3: instanceof    #145                // class jakarta/servlet/http/HttpServletResponseWrapper
+         6: ifeq          20
+         9: aload_2
+        10: checkcast     #145                // class jakarta/servlet/http/HttpServletResponseWrapper
+        13: invokevirtual #147                // Method jakarta/servlet/http/HttpServletResponseWrapper.getResponse:()Ljakarta/servlet/ServletResponse;
+        16: astore_2
+        17: goto          2
+        20: aload_2
+        21: aload_0
+        22: getfield      #60                 // Field facade:Lorg/apache/catalina/connector/ResponseFacade;
+        25: if_acmpeq     44
+        28: new           #151                // class java/lang/IllegalArgumentException
+        31: dup
+        32: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        35: ldc           #157                // String response.illegalWrap
+        37: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        40: invokespecial #165                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        43: athrow
+        44: aload_0
+        45: aload_1
+        46: putfield      #52                 // Field applicationResponse:Ljakarta/servlet/http/HttpServletResponse;
+        49: return
+
+  public void setSuspended(boolean);
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: iload_1
+         5: invokevirtual #168                // Method org/apache/catalina/connector/OutputBuffer.setSuspended:(Z)V
+         8: return
+
+  public boolean isSuspended();
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #172                // Method org/apache/catalina/connector/OutputBuffer.isSuspended:()Z
+         7: ireturn
+
+  public boolean isClosed();
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #173                // Method org/apache/catalina/connector/OutputBuffer.isClosed:()Z
+         7: ireturn
+
+  public void setError();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #176                // Method org/apache/coyote/Response.setError:()V
+         7: return
+
+  public boolean isError();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #179                // Method org/apache/coyote/Response.isError:()Z
+         7: ireturn
+
+  public boolean isErrorReportRequired();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #182                // Method org/apache/coyote/Response.isErrorReportRequired:()Z
+         7: ireturn
+
+  public boolean setErrorReported();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #185                // Method org/apache/coyote/Response.setErrorReported:()Z
+         7: ireturn
+
+  public void resetError();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #188                // Method org/apache/coyote/Response.resetError:()V
+         7: return
+
+  public void finishResponse() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #191                // Method org/apache/catalina/connector/OutputBuffer.close:()V
+         7: return
+
+  public int getContentLength();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #194                // Method org/apache/coyote/Response.getContentLength:()I
+         7: ireturn
+
+  public java.lang.String getContentType();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #195                // Method org/apache/coyote/Response.getContentType:()Ljava/lang/String;
+         7: areturn
+
+  public java.io.PrintWriter getReporter() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #199                // Method org/apache/catalina/connector/OutputBuffer.isNew:()Z
+         7: ifeq          44
+        10: aload_0
+        11: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        14: invokevirtual #202                // Method org/apache/catalina/connector/OutputBuffer.checkConverter:()V
+        17: aload_0
+        18: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        21: ifnonnull     39
+        24: aload_0
+        25: new           #109                // class org/apache/catalina/connector/CoyoteWriter
+        28: dup
+        29: aload_0
+        30: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        33: invokespecial #205                // Method org/apache/catalina/connector/CoyoteWriter."<init>":(Lorg/apache/catalina/connector/OutputBuffer;)V
+        36: putfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        39: aload_0
+        40: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        43: areturn
+        44: aconst_null
+        45: areturn
+
+  public void flushBuffer() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #116                // Method org/apache/catalina/connector/OutputBuffer.flush:()V
+         7: return
+
+  public int getBufferSize();
+    Code:
+         0: aload_0
+         1: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+         4: invokevirtual #208                // Method org/apache/catalina/connector/OutputBuffer.getBufferSize:()I
+         7: ireturn
+
+  public java.lang.String getCharacterEncoding();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #211                // Method org/apache/coyote/Response.getCharsetHolder:()Lorg/apache/tomcat/util/buf/CharsetHolder;
+         7: invokevirtual #215                // Method org/apache/tomcat/util/buf/CharsetHolder.getName:()Ljava/lang/String;
+        10: astore_1
+        11: aload_1
+        12: ifnonnull     31
+        15: aload_0
+        16: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+        19: astore_2
+        20: aload_2
+        21: ifnull        31
+        24: aload_2
+        25: invokeinterface #221,  1          // InterfaceMethod org/apache/catalina/Context.getResponseCharacterEncoding:()Ljava/lang/String;
+        30: astore_1
+        31: aload_1
+        32: ifnonnull     42
+        35: getstatic     #226                // Field org/apache/coyote/Constants.DEFAULT_BODY_CHARSET:Ljava/nio/charset/Charset;
+        38: invokevirtual #232                // Method java/nio/charset/Charset.name:()Ljava/lang/String;
+        41: astore_1
+        42: aload_1
+        43: areturn
+
+  public jakarta.servlet.ServletOutputStream getOutputStream() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field usingWriter:Z
+         4: ifeq          23
+         7: new           #237                // class java/lang/IllegalStateException
+        10: dup
+        11: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        14: ldc           #239                // String coyoteResponse.getOutputStream.ise
+        16: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        19: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        22: athrow
+        23: aload_0
+        24: iconst_1
+        25: putfield      #24                 // Field usingOutputStream:Z
+        28: aload_0
+        29: getfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        32: ifnonnull     50
+        35: aload_0
+        36: new           #102                // class org/apache/catalina/connector/CoyoteOutputStream
+        39: dup
+        40: aload_0
+        41: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        44: invokespecial #242                // Method org/apache/catalina/connector/CoyoteOutputStream."<init>":(Lorg/apache/catalina/connector/OutputBuffer;)V
+        47: putfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        50: aload_0
+        51: getfield      #97                 // Field outputStream:Lorg/apache/catalina/connector/CoyoteOutputStream;
+        54: areturn
+
+  public java.util.Locale getLocale();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #243                // Method org/apache/coyote/Response.getLocale:()Ljava/util/Locale;
+         7: areturn
+
+  public java.io.PrintWriter getWriter() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field usingOutputStream:Z
+         4: ifeq          23
+         7: new           #237                // class java/lang/IllegalStateException
+        10: dup
+        11: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        14: ldc           #247                // String coyoteResponse.getWriter.ise
+        16: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        19: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        22: athrow
+        23: aload_0
+        24: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        27: invokevirtual #249                // Method org/apache/catalina/connector/Request.getConnector:()Lorg/apache/catalina/connector/Connector;
+        30: invokevirtual #253                // Method org/apache/catalina/connector/Connector.getEnforceEncodingInGetWriter:()Z
+        33: ifeq          44
+        36: aload_0
+        37: aload_0
+        38: invokevirtual #258                // Method getCharacterEncoding:()Ljava/lang/String;
+        41: invokevirtual #261                // Method setCharacterEncoding:(Ljava/lang/String;)V
+        44: aload_0
+        45: iconst_1
+        46: putfield      #27                 // Field usingWriter:Z
+        49: aload_0
+        50: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        53: invokevirtual #202                // Method org/apache/catalina/connector/OutputBuffer.checkConverter:()V
+        56: aload_0
+        57: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        60: ifnonnull     78
+        63: aload_0
+        64: new           #109                // class org/apache/catalina/connector/CoyoteWriter
+        67: dup
+        68: aload_0
+        69: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        72: invokespecial #205                // Method org/apache/catalina/connector/CoyoteWriter."<init>":(Lorg/apache/catalina/connector/OutputBuffer;)V
+        75: putfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        78: aload_0
+        79: getfield      #104                // Field writer:Lorg/apache/catalina/connector/CoyoteWriter;
+        82: areturn
+
+  public boolean isCommitted();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #264                // Method org/apache/coyote/Response.isCommitted:()Z
+         7: ireturn
+
+  public void reset();
+    Code:
+         0: aload_0
+         1: getfield      #18                 // Field included:Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        12: invokevirtual #265                // Method org/apache/coyote/Response.reset:()V
+        15: aload_0
+        16: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        19: invokevirtual #268                // Method org/apache/catalina/connector/OutputBuffer.reset:()V
+        22: aload_0
+        23: iconst_0
+        24: putfield      #24                 // Field usingOutputStream:Z
+        27: aload_0
+        28: iconst_0
+        29: putfield      #27                 // Field usingWriter:Z
+        32: aload_0
+        33: iconst_0
+        34: putfield      #21                 // Field isCharacterEncodingSet:Z
+        37: return
+
+  public void resetBuffer();
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: invokevirtual #269                // Method resetBuffer:(Z)V
+         5: return
+
+  public void resetBuffer(boolean);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          24
+         7: new           #237                // class java/lang/IllegalStateException
+        10: dup
+        11: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        14: ldc_w         #272                // String coyoteResponse.resetBuffer.ise
+        17: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        20: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        23: athrow
+        24: aload_0
+        25: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        28: iload_1
+        29: invokevirtual #274                // Method org/apache/catalina/connector/OutputBuffer.reset:(Z)V
+        32: iload_1
+        33: ifeq          51
+        36: aload_0
+        37: iconst_0
+        38: putfield      #24                 // Field usingOutputStream:Z
+        41: aload_0
+        42: iconst_0
+        43: putfield      #27                 // Field usingWriter:Z
+        46: aload_0
+        47: iconst_0
+        48: putfield      #21                 // Field isCharacterEncodingSet:Z
+        51: return
+
+  public void setBufferSize(int);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifne          17
+         7: aload_0
+         8: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        11: invokevirtual #199                // Method org/apache/catalina/connector/OutputBuffer.isNew:()Z
+        14: ifne          34
+        17: new           #237                // class java/lang/IllegalStateException
+        20: dup
+        21: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        24: ldc_w         #276                // String coyoteResponse.setBufferSize.ise
+        27: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        30: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        33: athrow
+        34: aload_0
+        35: getfield      #71                 // Field outputBuffer:Lorg/apache/catalina/connector/OutputBuffer;
+        38: iload_1
+        39: invokevirtual #278                // Method org/apache/catalina/connector/OutputBuffer.setBufferSize:(I)V
+        42: return
+
+  public void setContentLength(int);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: i2l
+         3: invokevirtual #282                // Method setContentLengthLong:(J)V
+         6: return
+
+  public void setContentLengthLong(long);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        20: lload_1
+        21: invokevirtual #286                // Method org/apache/coyote/Response.setContentLength:(J)V
+        24: return
+
+  public void setContentType(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_1
+        17: ifnonnull     44
+        20: aload_0
+        21: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        24: aconst_null
+        25: invokevirtual #289                // Method org/apache/coyote/Response.setContentType:(Ljava/lang/String;)V
+        28: aload_0
+        29: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        32: getstatic     #292                // Field org/apache/tomcat/util/buf/CharsetHolder.EMPTY:Lorg/apache/tomcat/util/buf/CharsetHolder;
+        35: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+        38: aload_0
+        39: iconst_0
+        40: putfield      #21                 // Field isCharacterEncodingSet:Z
+        43: return
+        44: getstatic     #300                // Field MEDIA_TYPE_CACHE:Lorg/apache/tomcat/util/http/parser/MediaTypeCache;
+        47: aload_1
+        48: invokevirtual #304                // Method org/apache/tomcat/util/http/parser/MediaTypeCache.parse:(Ljava/lang/String;)[Ljava/lang/String;
+        51: astore_2
+        52: aload_2
+        53: ifnonnull     65
+        56: aload_0
+        57: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        60: aload_1
+        61: invokevirtual #310                // Method org/apache/coyote/Response.setContentTypeNoCharset:(Ljava/lang/String;)V
+        64: return
+        65: aload_2
+        66: iconst_1
+        67: aaload
+        68: ifnonnull     82
+        71: aload_0
+        72: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        75: aload_1
+        76: invokevirtual #310                // Method org/apache/coyote/Response.setContentTypeNoCharset:(Ljava/lang/String;)V
+        79: goto          159
+        82: aload_0
+        83: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        86: aload_2
+        87: iconst_0
+        88: aaload
+        89: invokevirtual #310                // Method org/apache/coyote/Response.setContentTypeNoCharset:(Ljava/lang/String;)V
+        92: aload_0
+        93: getfield      #27                 // Field usingWriter:Z
+        96: ifne          159
+        99: aload_0
+       100: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+       103: aload_2
+       104: iconst_1
+       105: aaload
+       106: invokestatic  #313                // Method org/apache/tomcat/util/buf/CharsetHolder.getInstance:(Ljava/lang/String;)Lorg/apache/tomcat/util/buf/CharsetHolder;
+       109: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+       112: aload_0
+       113: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+       116: invokevirtual #211                // Method org/apache/coyote/Response.getCharsetHolder:()Lorg/apache/tomcat/util/buf/CharsetHolder;
+       119: invokevirtual #317                // Method org/apache/tomcat/util/buf/CharsetHolder.validate:()V
+       122: goto          154
+       125: astore_3
+       126: getstatic     #322                // Field log:Lorg/apache/juli/logging/Log;
+       129: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+       132: ldc_w         #326                // String coyoteResponse.encoding.invalid
+       135: iconst_1
+       136: anewarray     #10                 // class java/lang/Object
+       139: dup
+       140: iconst_0
+       141: aload_2
+       142: iconst_1
+       143: aaload
+       144: aastore
+       145: invokevirtual #328                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       148: aload_3
+       149: invokeinterface #331,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       154: aload_0
+       155: iconst_1
+       156: putfield      #21                 // Field isCharacterEncodingSet:Z
+       159: return
+      Exception table:
+         from    to  target type
+           112   122   125   Class java/io/UnsupportedEncodingException
+
+  public void setCharacterEncoding(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: getfield      #27                 // Field usingWriter:Z
+        20: ifeq          24
+        23: return
+        24: aload_0
+        25: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        28: aload_1
+        29: invokestatic  #313                // Method org/apache/tomcat/util/buf/CharsetHolder.getInstance:(Ljava/lang/String;)Lorg/apache/tomcat/util/buf/CharsetHolder;
+        32: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+        35: aload_0
+        36: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        39: invokevirtual #211                // Method org/apache/coyote/Response.getCharsetHolder:()Lorg/apache/tomcat/util/buf/CharsetHolder;
+        42: invokevirtual #317                // Method org/apache/tomcat/util/buf/CharsetHolder.validate:()V
+        45: goto          76
+        48: astore_2
+        49: getstatic     #322                // Field log:Lorg/apache/juli/logging/Log;
+        52: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        55: ldc_w         #326                // String coyoteResponse.encoding.invalid
+        58: iconst_1
+        59: anewarray     #10                 // class java/lang/Object
+        62: dup
+        63: iconst_0
+        64: aload_1
+        65: aastore
+        66: invokevirtual #328                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+        69: aload_2
+        70: invokeinterface #331,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+        75: return
+        76: aload_0
+        77: aload_1
+        78: ifnull        85
+        81: iconst_1
+        82: goto          86
+        85: iconst_0
+        86: putfield      #21                 // Field isCharacterEncodingSet:Z
+        89: return
+      Exception table:
+         from    to  target type
+            35    45    48   Class java/io/UnsupportedEncodingException
+
+  public void setCharacterEncoding(java.nio.charset.Charset);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: getfield      #27                 // Field usingWriter:Z
+        20: ifeq          24
+        23: return
+        24: aload_0
+        25: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        28: aload_1
+        29: invokestatic  #337                // Method org/apache/tomcat/util/buf/CharsetHolder.getInstance:(Ljava/nio/charset/Charset;)Lorg/apache/tomcat/util/buf/CharsetHolder;
+        32: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+        35: aload_0
+        36: aload_1
+        37: ifnull        44
+        40: iconst_1
+        41: goto          45
+        44: iconst_0
+        45: putfield      #21                 // Field isCharacterEncodingSet:Z
+        48: return
+
+  public void setLocale(java.util.Locale);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        20: aload_1
+        21: invokevirtual #340                // Method org/apache/coyote/Response.setLocale:(Ljava/util/Locale;)V
+        24: aload_0
+        25: getfield      #27                 // Field usingWriter:Z
+        28: ifeq          32
+        31: return
+        32: aload_0
+        33: getfield      #21                 // Field isCharacterEncodingSet:Z
+        36: ifeq          40
+        39: return
+        40: aload_1
+        41: ifnonnull     57
+        44: aload_0
+        45: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        48: getstatic     #292                // Field org/apache/tomcat/util/buf/CharsetHolder.EMPTY:Lorg/apache/tomcat/util/buf/CharsetHolder;
+        51: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+        54: goto          131
+        57: aload_0
+        58: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+        61: astore_2
+        62: aload_2
+        63: ifnull        131
+        66: aload_2
+        67: aload_1
+        68: invokeinterface #344,  2          // InterfaceMethod org/apache/catalina/Context.getCharset:(Ljava/util/Locale;)Ljava/lang/String;
+        73: astore_3
+        74: aload_3
+        75: ifnull        131
+        78: aload_0
+        79: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        82: aload_3
+        83: invokestatic  #313                // Method org/apache/tomcat/util/buf/CharsetHolder.getInstance:(Ljava/lang/String;)Lorg/apache/tomcat/util/buf/CharsetHolder;
+        86: invokevirtual #296                // Method org/apache/coyote/Response.setCharsetHolder:(Lorg/apache/tomcat/util/buf/CharsetHolder;)V
+        89: aload_0
+        90: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        93: invokevirtual #211                // Method org/apache/coyote/Response.getCharsetHolder:()Lorg/apache/tomcat/util/buf/CharsetHolder;
+        96: invokevirtual #317                // Method org/apache/tomcat/util/buf/CharsetHolder.validate:()V
+        99: goto          131
+       102: astore        4
+       104: getstatic     #322                // Field log:Lorg/apache/juli/logging/Log;
+       107: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+       110: ldc_w         #326                // String coyoteResponse.encoding.invalid
+       113: iconst_1
+       114: anewarray     #10                 // class java/lang/Object
+       117: dup
+       118: iconst_0
+       119: aload_3
+       120: aastore
+       121: invokevirtual #328                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       124: aload         4
+       126: invokeinterface #331,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       131: return
+      Exception table:
+         from    to  target type
+            89    99   102   Class java/io/UnsupportedEncodingException
+
+  public java.lang.String getHeader(java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          13
+        11: aconst_null
+        12: areturn
+        13: aload_1
+        14: iconst_0
+        15: invokevirtual #353                // Method java/lang/String.charAt:(I)C
+        18: istore_2
+        19: iload_2
+        20: bipush        67
+        22: if_icmpeq     31
+        25: iload_2
+        26: bipush        99
+        28: if_icmpne     86
+        31: aload_1
+        32: ldc_w         #357                // String Content-Type
+        35: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        38: ifeq          49
+        41: aload_0
+        42: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        45: invokevirtual #195                // Method org/apache/coyote/Response.getContentType:()Ljava/lang/String;
+        48: areturn
+        49: aload_1
+        50: ldc_w         #363                // String Content-Length
+        53: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        56: ifeq          86
+        59: aload_0
+        60: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        63: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        66: ldc2_w        #368                // long -1l
+        69: lcmp
+        70: ifeq          84
+        73: aload_0
+        74: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        77: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        80: invokestatic  #370                // Method java/lang/String.valueOf:(J)Ljava/lang/String;
+        83: areturn
+        84: aconst_null
+        85: areturn
+        86: aload_0
+        87: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        90: invokevirtual #374                // Method org/apache/coyote/Response.getMimeHeaders:()Lorg/apache/tomcat/util/http/MimeHeaders;
+        93: aload_1
+        94: invokevirtual #378                // Method org/apache/tomcat/util/http/MimeHeaders.getHeader:(Ljava/lang/String;)Ljava/lang/String;
+        97: areturn
+
+  public java.util.Collection<java.lang.String> getHeaderNames();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #374                // Method org/apache/coyote/Response.getMimeHeaders:()Lorg/apache/tomcat/util/http/MimeHeaders;
+         7: astore_1
+         8: aload_1
+         9: invokevirtual #383                // Method org/apache/tomcat/util/http/MimeHeaders.size:()I
+        12: istore_2
+        13: new           #386                // class java/util/ArrayList
+        16: dup
+        17: iload_2
+        18: invokespecial #388                // Method java/util/ArrayList."<init>":(I)V
+        21: astore_3
+        22: iconst_0
+        23: istore        4
+        25: iload         4
+        27: iload_2
+        28: if_icmpge     53
+        31: aload_3
+        32: aload_1
+        33: iload         4
+        35: invokevirtual #390                // Method org/apache/tomcat/util/http/MimeHeaders.getName:(I)Lorg/apache/tomcat/util/buf/MessageBytes;
+        38: invokevirtual #393                // Method org/apache/tomcat/util/buf/MessageBytes.toString:()Ljava/lang/String;
+        41: invokeinterface #398,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        46: pop
+        47: iinc          4, 1
+        50: goto          25
+        53: aload_0
+        54: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        57: invokevirtual #264                // Method org/apache/coyote/Response.isCommitted:()Z
+        60: ifne          107
+        63: aload_0
+        64: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        67: invokevirtual #195                // Method org/apache/coyote/Response.getContentType:()Ljava/lang/String;
+        70: ifnull        83
+        73: aload_3
+        74: ldc_w         #357                // String Content-Type
+        77: invokeinterface #398,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        82: pop
+        83: aload_0
+        84: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        87: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        90: ldc2_w        #368                // long -1l
+        93: lcmp
+        94: ifeq          107
+        97: aload_3
+        98: ldc_w         #363                // String Content-Length
+       101: invokeinterface #398,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       106: pop
+       107: aload_3
+       108: areturn
+
+  public java.util.Collection<java.lang.String> getHeaders(java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          15
+        11: invokestatic  #404                // InterfaceMethod java/util/Set.of:()Ljava/util/Set;
+        14: areturn
+        15: aload_1
+        16: iconst_0
+        17: invokevirtual #353                // Method java/lang/String.charAt:(I)C
+        20: istore_2
+        21: iload_2
+        22: bipush        67
+        24: if_icmpeq     33
+        27: iload_2
+        28: bipush        99
+        30: if_icmpne     106
+        33: aload_1
+        34: ldc_w         #357                // String Content-Type
+        37: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        40: ifeq          64
+        43: aload_0
+        44: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        47: invokevirtual #195                // Method org/apache/coyote/Response.getContentType:()Ljava/lang/String;
+        50: astore_3
+        51: aload_3
+        52: ifnull        60
+        55: aload_3
+        56: invokestatic  #410                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;)Ljava/util/Set;
+        59: areturn
+        60: invokestatic  #404                // InterfaceMethod java/util/Set.of:()Ljava/util/Set;
+        63: areturn
+        64: aload_1
+        65: ldc_w         #363                // String Content-Length
+        68: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        71: ifeq          106
+        74: aload_0
+        75: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        78: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        81: ldc2_w        #368                // long -1l
+        84: lcmp
+        85: ifeq          102
+        88: aload_0
+        89: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        92: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        95: invokestatic  #370                // Method java/lang/String.valueOf:(J)Ljava/lang/String;
+        98: invokestatic  #410                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;)Ljava/util/Set;
+       101: areturn
+       102: invokestatic  #404                // InterfaceMethod java/util/Set.of:()Ljava/util/Set;
+       105: areturn
+       106: aload_0
+       107: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+       110: invokevirtual #374                // Method org/apache/coyote/Response.getMimeHeaders:()Lorg/apache/tomcat/util/http/MimeHeaders;
+       113: aload_1
+       114: invokevirtual #413                // Method org/apache/tomcat/util/http/MimeHeaders.values:(Ljava/lang/String;)Ljava/util/Enumeration;
+       117: astore_3
+       118: new           #417                // class java/util/LinkedHashSet
+       121: dup
+       122: invokespecial #419                // Method java/util/LinkedHashSet."<init>":()V
+       125: astore        4
+       127: aload_3
+       128: invokeinterface #420,  1          // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+       133: ifeq          156
+       136: aload         4
+       138: aload_3
+       139: invokeinterface #425,  1          // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+       144: checkcast     #349                // class java/lang/String
+       147: invokeinterface #429,  2          // InterfaceMethod java/util/Set.add:(Ljava/lang/Object;)Z
+       152: pop
+       153: goto          127
+       156: aload         4
+       158: areturn
+
+  public java.lang.String getMessage();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #430                // Method org/apache/coyote/Response.getMessage:()Ljava/lang/String;
+         7: areturn
+
+  public int getStatus();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #433                // Method org/apache/coyote/Response.getStatus:()I
+         7: ireturn
+
+  public void addCookie(jakarta.servlet.http.Cookie);
+    Code:
+         0: aload_0
+         1: getfield      #18                 // Field included:Z
+         4: ifne          14
+         7: aload_0
+         8: invokevirtual #131                // Method isCommitted:()Z
+        11: ifeq          15
+        14: return
+        15: aload_0
+        16: aload_1
+        17: invokevirtual #436                // Method generateCookieString:(Ljakarta/servlet/http/Cookie;)Ljava/lang/String;
+        20: astore_2
+        21: aload_2
+        22: ifnonnull     26
+        25: return
+        26: aload_0
+        27: ldc_w         #440                // String Set-Cookie
+        30: aload_2
+        31: aload_0
+        32: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+        35: invokeinterface #442,  1          // InterfaceMethod org/apache/catalina/Context.getCookieProcessor:()Lorg/apache/tomcat/util/http/CookieProcessor;
+        40: invokeinterface #446,  1          // InterfaceMethod org/apache/tomcat/util/http/CookieProcessor.getCharset:()Ljava/nio/charset/Charset;
+        45: invokevirtual #451                // Method addHeader:(Ljava/lang/String;Ljava/lang/String;Ljava/nio/charset/Charset;)V
+        48: return
+
+  public void addSessionCookieInternal(jakarta.servlet.http.Cookie);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_1
+         9: invokevirtual #455                // Method jakarta/servlet/http/Cookie.getName:()Ljava/lang/String;
+        12: astore_2
+        13: ldc_w         #440                // String Set-Cookie
+        16: astore_3
+        17: aload_2
+        18: invokedynamic #458,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        23: astore        4
+        25: aload_0
+        26: aload_1
+        27: invokevirtual #436                // Method generateCookieString:(Ljakarta/servlet/http/Cookie;)Ljava/lang/String;
+        30: astore        5
+        32: aload         5
+        34: ifnonnull     38
+        37: return
+        38: iconst_0
+        39: istore        6
+        41: aload_0
+        42: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        45: invokevirtual #374                // Method org/apache/coyote/Response.getMimeHeaders:()Lorg/apache/tomcat/util/http/MimeHeaders;
+        48: astore        7
+        50: aload         7
+        52: invokevirtual #383                // Method org/apache/tomcat/util/http/MimeHeaders.size:()I
+        55: istore        8
+        57: iconst_0
+        58: istore        9
+        60: iload         9
+        62: iload         8
+        64: if_icmpge     125
+        67: aload         7
+        69: iload         9
+        71: invokevirtual #390                // Method org/apache/tomcat/util/http/MimeHeaders.getName:(I)Lorg/apache/tomcat/util/buf/MessageBytes;
+        74: invokevirtual #393                // Method org/apache/tomcat/util/buf/MessageBytes.toString:()Ljava/lang/String;
+        77: ldc_w         #440                // String Set-Cookie
+        80: invokevirtual #461                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        83: ifeq          119
+        86: aload         7
+        88: iload         9
+        90: invokevirtual #464                // Method org/apache/tomcat/util/http/MimeHeaders.getValue:(I)Lorg/apache/tomcat/util/buf/MessageBytes;
+        93: invokevirtual #393                // Method org/apache/tomcat/util/buf/MessageBytes.toString:()Ljava/lang/String;
+        96: aload         4
+        98: invokevirtual #467                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+       101: ifeq          119
+       104: aload         7
+       106: iload         9
+       108: invokevirtual #464                // Method org/apache/tomcat/util/http/MimeHeaders.getValue:(I)Lorg/apache/tomcat/util/buf/MessageBytes;
+       111: aload         5
+       113: invokevirtual #470                // Method org/apache/tomcat/util/buf/MessageBytes.setString:(Ljava/lang/String;)V
+       116: iconst_1
+       117: istore        6
+       119: iinc          9, 1
+       122: goto          60
+       125: iload         6
+       127: ifne          139
+       130: aload_0
+       131: ldc_w         #440                // String Set-Cookie
+       134: aload         5
+       136: invokevirtual #473                // Method addHeader:(Ljava/lang/String;Ljava/lang/String;)V
+       139: return
+
+  public java.lang.String generateCookieString(jakarta.servlet.http.Cookie);
+    Code:
+         0: aload_0
+         1: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+         4: astore_2
+         5: aload_2
+         6: ifnull        29
+         9: aload_2
+        10: invokeinterface #442,  1          // InterfaceMethod org/apache/catalina/Context.getCookieProcessor:()Lorg/apache/tomcat/util/http/CookieProcessor;
+        15: aload_1
+        16: aload_0
+        17: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        20: invokevirtual #476                // Method org/apache/catalina/connector/Request.getRequest:()Ljakarta/servlet/http/HttpServletRequest;
+        23: invokeinterface #479,  3          // InterfaceMethod org/apache/tomcat/util/http/CookieProcessor.generateHeader:(Ljakarta/servlet/http/Cookie;Ljakarta/servlet/http/HttpServletRequest;)Ljava/lang/String;
+        28: areturn
+        29: aconst_null
+        30: areturn
+
+  public void addDateHeader(java.lang.String, long);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          12
+        11: return
+        12: aload_0
+        13: invokevirtual #131                // Method isCommitted:()Z
+        16: ifeq          20
+        19: return
+        20: aload_0
+        21: getfield      #18                 // Field included:Z
+        24: ifeq          28
+        27: return
+        28: aload_0
+        29: aload_1
+        30: lload_2
+        31: invokestatic  #483                // Method org/apache/tomcat/util/http/FastHttpDateFormat.formatDate:(J)Ljava/lang/String;
+        34: invokevirtual #473                // Method addHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        37: return
+
+  public void addHeader(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aconst_null
+         4: invokevirtual #451                // Method addHeader:(Ljava/lang/String;Ljava/lang/String;Ljava/nio/charset/Charset;)V
+         7: return
+
+  private void addHeader(java.lang.String, java.lang.String, java.nio.charset.Charset);
+    Code:
+         0: aload_1
+         1: ifnull        15
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifne          15
+        11: aload_2
+        12: ifnonnull     16
+        15: return
+        16: aload_0
+        17: invokevirtual #131                // Method isCommitted:()Z
+        20: ifeq          24
+        23: return
+        24: aload_0
+        25: getfield      #18                 // Field included:Z
+        28: ifeq          32
+        31: return
+        32: aload_1
+        33: iconst_0
+        34: invokevirtual #353                // Method java/lang/String.charAt:(I)C
+        37: istore        4
+        39: iload         4
+        41: bipush        67
+        43: if_icmpeq     53
+        46: iload         4
+        48: bipush        99
+        50: if_icmpne     63
+        53: aload_0
+        54: aload_1
+        55: aload_2
+        56: invokevirtual #488                // Method checkSpecialHeader:(Ljava/lang/String;Ljava/lang/String;)Z
+        59: ifeq          63
+        62: return
+        63: aload_0
+        64: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        67: aload_1
+        68: aload_2
+        69: aload_3
+        70: invokevirtual #492                // Method org/apache/coyote/Response.addHeader:(Ljava/lang/String;Ljava/lang/String;Ljava/nio/charset/Charset;)V
+        73: return
+
+  private boolean checkSpecialHeader(java.lang.String, java.lang.String);
+    Code:
+         0: aload_1
+         1: ldc_w         #357                // String Content-Type
+         4: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+         7: ifeq          17
+        10: aload_0
+        11: aload_2
+        12: invokevirtual #493                // Method setContentType:(Ljava/lang/String;)V
+        15: iconst_1
+        16: ireturn
+        17: iconst_0
+        18: ireturn
+
+  public void addIntHeader(java.lang.String, int);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          12
+        11: return
+        12: aload_0
+        13: invokevirtual #131                // Method isCommitted:()Z
+        16: ifeq          20
+        19: return
+        20: aload_0
+        21: getfield      #18                 // Field included:Z
+        24: ifeq          28
+        27: return
+        28: aload_0
+        29: aload_1
+        30: iload_2
+        31: invokedynamic #494,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+        36: invokevirtual #473                // Method addHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        39: return
+
+  public boolean containsHeader(java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          13
+        11: iconst_0
+        12: ireturn
+        13: aload_1
+        14: iconst_0
+        15: invokevirtual #353                // Method java/lang/String.charAt:(I)C
+        18: istore_2
+        19: iload_2
+        20: bipush        67
+        22: if_icmpeq     31
+        25: iload_2
+        26: bipush        99
+        28: if_icmpne     87
+        31: aload_1
+        32: ldc_w         #357                // String Content-Type
+        35: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        38: ifeq          57
+        41: aload_0
+        42: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        45: invokevirtual #195                // Method org/apache/coyote/Response.getContentType:()Ljava/lang/String;
+        48: ifnull        55
+        51: iconst_1
+        52: goto          56
+        55: iconst_0
+        56: ireturn
+        57: aload_1
+        58: ldc_w         #363                // String Content-Length
+        61: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        64: ifeq          87
+        67: aload_0
+        68: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        71: invokevirtual #365                // Method org/apache/coyote/Response.getContentLengthLong:()J
+        74: ldc2_w        #368                // long -1l
+        77: lcmp
+        78: ifeq          85
+        81: iconst_1
+        82: goto          86
+        85: iconst_0
+        86: ireturn
+        87: aload_0
+        88: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        91: aload_1
+        92: invokevirtual #497                // Method org/apache/coyote/Response.containsHeader:(Ljava/lang/String;)Z
+        95: ireturn
+
+  public void setTrailerFields(java.util.function.Supplier<java.util.Map<java.lang.String, java.lang.String>>);
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: aload_1
+         5: invokevirtual #500                // Method org/apache/coyote/Response.setTrailerFields:(Ljava/util/function/Supplier;)V
+         8: return
+
+  public java.util.function.Supplier<java.util.Map<java.lang.String, java.lang.String>> getTrailerFields();
+    Code:
+         0: aload_0
+         1: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+         4: invokevirtual #504                // Method org/apache/coyote/Response.getTrailerFields:()Ljava/util/function/Supplier;
+         7: areturn
+
+  public java.lang.String encodeRedirectURL(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_0
+         2: aload_1
+         3: invokevirtual #508                // Method toAbsolute:(Ljava/lang/String;)Ljava/lang/String;
+         6: invokevirtual #511                // Method isEncodeable:(Ljava/lang/String;)Z
+         9: ifeq          36
+        12: aload_0
+        13: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        16: invokevirtual #514                // Method org/apache/catalina/connector/Request.getSessionInternal:()Lorg/apache/catalina/Session;
+        19: astore_2
+        20: aload_2
+        21: ifnull        36
+        24: aload_0
+        25: aload_1
+        26: aload_2
+        27: invokeinterface #518,  1          // InterfaceMethod org/apache/catalina/Session.getIdInternal:()Ljava/lang/String;
+        32: invokevirtual #523                // Method toEncoded:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        35: areturn
+        36: aload_1
+        37: areturn
+
+  public java.lang.String encodeURL(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #508                // Method toAbsolute:(Ljava/lang/String;)Ljava/lang/String;
+         5: astore_2
+         6: goto          12
+         9: astore_3
+        10: aload_1
+        11: areturn
+        12: aload_0
+        13: aload_2
+        14: invokevirtual #511                // Method isEncodeable:(Ljava/lang/String;)Z
+        17: ifeq          82
+        20: aload_0
+        21: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        24: invokevirtual #514                // Method org/apache/catalina/connector/Request.getSessionInternal:()Lorg/apache/catalina/Session;
+        27: astore_3
+        28: aload_3
+        29: ifnull        82
+        32: aload_1
+        33: ldc_w         #527                // String
+        36: invokevirtual #359                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+        39: ifeq          47
+        42: aload_2
+        43: astore_1
+        44: goto          70
+        47: aload_1
+        48: aload_2
+        49: invokevirtual #461                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        52: ifeq          70
+        55: aload_0
+        56: aload_1
+        57: invokevirtual #529                // Method hasPath:(Ljava/lang/String;)Z
+        60: ifne          70
+        63: aload_1
+        64: invokedynamic #532,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        69: astore_1
+        70: aload_0
+        71: aload_1
+        72: aload_3
+        73: invokeinterface #518,  1          // InterfaceMethod org/apache/catalina/Session.getIdInternal:()Ljava/lang/String;
+        78: invokevirtual #523                // Method toEncoded:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        81: areturn
+        82: aload_1
+        83: areturn
+      Exception table:
+         from    to  target type
+             0     6     9   Class java/lang/IllegalArgumentException
+
+  public void sendAcknowledgement(org.apache.coyote.ContinueResponseTiming);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        20: getstatic     #533                // Field org/apache/coyote/ActionCode.ACK:Lorg/apache/coyote/ActionCode;
+        23: aload_1
+        24: invokevirtual #539                // Method org/apache/coyote/Response.action:(Lorg/apache/coyote/ActionCode;Ljava/lang/Object;)V
+        27: return
+
+  public void sendEarlyHints();
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        20: getstatic     #543                // Field org/apache/coyote/ActionCode.EARLY_HINTS:Lorg/apache/coyote/ActionCode;
+        23: aconst_null
+        24: invokevirtual #539                // Method org/apache/coyote/Response.action:(Lorg/apache/coyote/ActionCode;Ljava/lang/Object;)V
+        27: return
+
+  public void sendError(int) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: iload_1
+         2: aconst_null
+         3: invokevirtual #546                // Method sendError:(ILjava/lang/String;)V
+         6: return
+
+  public void sendError(int, java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          24
+         7: new           #237                // class java/lang/IllegalStateException
+        10: dup
+        11: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        14: ldc_w         #550                // String coyoteResponse.sendError.ise
+        17: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        20: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        23: athrow
+        24: aload_0
+        25: getfield      #18                 // Field included:Z
+        28: ifeq          32
+        31: return
+        32: bipush        103
+        34: iload_1
+        35: if_icmpne     45
+        38: aload_0
+        39: invokevirtual #552                // Method sendEarlyHints:()V
+        42: goto          74
+        45: aload_0
+        46: invokevirtual #555                // Method setError:()V
+        49: aload_0
+        50: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        53: iload_1
+        54: invokevirtual #556                // Method org/apache/coyote/Response.setStatus:(I)V
+        57: aload_0
+        58: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        61: aload_2
+        62: invokevirtual #559                // Method org/apache/coyote/Response.setMessage:(Ljava/lang/String;)V
+        65: aload_0
+        66: invokevirtual #562                // Method resetBuffer:()V
+        69: aload_0
+        70: iconst_1
+        71: invokevirtual #564                // Method setSuspended:(Z)V
+        74: return
+
+  public void sendRedirect(java.lang.String, int, boolean) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          24
+         7: new           #237                // class java/lang/IllegalStateException
+        10: dup
+        11: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        14: ldc_w         #565                // String coyoteResponse.sendRedirect.ise
+        17: invokevirtual #159                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;)Ljava/lang/String;
+        20: invokespecial #241                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        23: athrow
+        24: aload_0
+        25: getfield      #18                 // Field included:Z
+        28: ifeq          32
+        31: return
+        32: iload_3
+        33: ifeq          41
+        36: aload_0
+        37: iconst_1
+        38: invokevirtual #269                // Method resetBuffer:(Z)V
+        41: aload_0
+        42: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+        45: astore        4
+        47: aload_0
+        48: invokevirtual #84                 // Method getRequest:()Lorg/apache/catalina/connector/Request;
+        51: invokevirtual #567                // Method org/apache/catalina/connector/Request.getCoyoteRequest:()Lorg/apache/coyote/Request;
+        54: invokevirtual #571                // Method org/apache/coyote/Request.getSupportsRelativeRedirects:()Z
+        57: ifeq          81
+        60: aload         4
+        62: ifnull        75
+        65: aload         4
+        67: invokeinterface #576,  1          // InterfaceMethod org/apache/catalina/Context.getUseRelativeRedirects:()Z
+        72: ifeq          81
+        75: aload_1
+        76: astore        5
+        78: goto          88
+        81: aload_0
+        82: aload_1
+        83: invokevirtual #508                // Method toAbsolute:(Ljava/lang/String;)Ljava/lang/String;
+        86: astore        5
+        88: aload_0
+        89: iload_2
+        90: invokevirtual #579                // Method setStatus:(I)V
+        93: aload_0
+        94: ldc_w         #580                // String Location
+        97: aload         5
+        99: invokevirtual #582                // Method setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+       102: iload_3
+       103: ifeq          157
+       106: aload         4
+       108: ifnull        157
+       111: aload         4
+       113: invokeinterface #585,  1          // InterfaceMethod org/apache/catalina/Context.getSendRedirectBody:()Z
+       118: ifeq          157
+       121: aload_0
+       122: invokevirtual #588                // Method getWriter:()Ljava/io/PrintWriter;
+       125: astore        6
+       127: aload         6
+       129: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+       132: ldc_w         #592                // String coyoteResponse.sendRedirect.note
+       135: iconst_1
+       136: anewarray     #10                 // class java/lang/Object
+       139: dup
+       140: iconst_0
+       141: aload         5
+       143: invokestatic  #594                // Method org/apache/tomcat/util/security/Escape.htmlElementContent:(Ljava/lang/String;)Ljava/lang/String;
+       146: aastore
+       147: invokevirtual #328                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       150: invokevirtual #599                // Method java/io/PrintWriter.print:(Ljava/lang/String;)V
+       153: aload_0
+       154: invokevirtual #604                // Method flushBuffer:()V
+       157: goto          196
+       160: astore        4
+       162: getstatic     #322                // Field log:Lorg/apache/juli/logging/Log;
+       165: getstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+       168: ldc_w         #607                // String response.sendRedirectFail
+       171: iconst_1
+       172: anewarray     #10                 // class java/lang/Object
+       175: dup
+       176: iconst_0
+       177: aload_1
+       178: aastore
+       179: invokevirtual #328                // Method org/apache/tomcat/util/res/StringManager.getString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+       182: aload         4
+       184: invokeinterface #331,  3          // InterfaceMethod org/apache/juli/logging/Log.warn:(Ljava/lang/Object;Ljava/lang/Throwable;)V
+       189: aload_0
+       190: sipush        404
+       193: invokevirtual #579                // Method setStatus:(I)V
+       196: aload_0
+       197: iconst_1
+       198: invokevirtual #564                // Method setSuspended:(Z)V
+       201: return
+      Exception table:
+         from    to  target type
+            41   157   160   Class java/lang/IllegalArgumentException
+
+  public void setDateHeader(java.lang.String, long);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          12
+        11: return
+        12: aload_0
+        13: invokevirtual #131                // Method isCommitted:()Z
+        16: ifeq          20
+        19: return
+        20: aload_0
+        21: getfield      #18                 // Field included:Z
+        24: ifeq          28
+        27: return
+        28: aload_0
+        29: aload_1
+        30: lload_2
+        31: invokestatic  #483                // Method org/apache/tomcat/util/http/FastHttpDateFormat.formatDate:(J)Ljava/lang/String;
+        34: invokevirtual #582                // Method setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        37: return
+
+  public void setHeader(java.lang.String, java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          12
+        11: return
+        12: aload_0
+        13: invokevirtual #131                // Method isCommitted:()Z
+        16: ifeq          20
+        19: return
+        20: aload_0
+        21: getfield      #18                 // Field included:Z
+        24: ifeq          28
+        27: return
+        28: aload_1
+        29: iconst_0
+        30: invokevirtual #353                // Method java/lang/String.charAt:(I)C
+        33: istore_3
+        34: iload_3
+        35: bipush        67
+        37: if_icmpeq     46
+        40: iload_3
+        41: bipush        99
+        43: if_icmpne     56
+        46: aload_0
+        47: aload_1
+        48: aload_2
+        49: invokevirtual #488                // Method checkSpecialHeader:(Ljava/lang/String;Ljava/lang/String;)Z
+        52: ifeq          56
+        55: return
+        56: aload_0
+        57: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        60: aload_1
+        61: aload_2
+        62: invokevirtual #611                // Method org/apache/coyote/Response.setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        65: return
+
+  public void setIntHeader(java.lang.String, int);
+    Code:
+         0: aload_1
+         1: ifnull        11
+         4: aload_1
+         5: invokevirtual #348                // Method java/lang/String.isEmpty:()Z
+         8: ifeq          12
+        11: return
+        12: aload_0
+        13: invokevirtual #131                // Method isCommitted:()Z
+        16: ifeq          20
+        19: return
+        20: aload_0
+        21: getfield      #18                 // Field included:Z
+        24: ifeq          28
+        27: return
+        28: aload_0
+        29: aload_1
+        30: iload_2
+        31: invokedynamic #494,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+        36: invokevirtual #582                // Method setHeader:(Ljava/lang/String;Ljava/lang/String;)V
+        39: return
+
+  public void setStatus(int);
+    Code:
+         0: aload_0
+         1: invokevirtual #131                // Method isCommitted:()Z
+         4: ifeq          8
+         7: return
+         8: aload_0
+         9: getfield      #18                 // Field included:Z
+        12: ifeq          16
+        15: return
+        16: aload_0
+        17: invokevirtual #121                // Method getCoyoteResponse:()Lorg/apache/coyote/Response;
+        20: iload_1
+        21: invokevirtual #556                // Method org/apache/coyote/Response.setStatus:(I)V
+        24: return
+
+  protected boolean isEncodeable(java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnonnull     6
+         4: iconst_0
+         5: ireturn
+         6: aload_1
+         7: ldc_w         #612                // String #
+        10: invokevirtual #467                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+        13: ifeq          18
+        16: iconst_0
+        17: ireturn
+        18: aload_0
+        19: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        22: astore_2
+        23: aload_2
+        24: iconst_0
+        25: invokevirtual #614                // Method org/apache/catalina/connector/Request.getSessionInternal:(Z)Lorg/apache/catalina/Session;
+        28: astore_3
+        29: aload_3
+        30: ifnonnull     35
+        33: iconst_0
+        34: ireturn
+        35: aload_2
+        36: invokevirtual #617                // Method org/apache/catalina/connector/Request.isRequestedSessionIdFromCookie:()Z
+        39: ifeq          44
+        42: iconst_0
+        43: ireturn
+        44: aload_2
+        45: invokevirtual #620                // Method org/apache/catalina/connector/Request.getServletContext:()Ljakarta/servlet/ServletContext;
+        48: invokeinterface #624,  1          // InterfaceMethod jakarta/servlet/ServletContext.getEffectiveSessionTrackingModes:()Ljava/util/Set;
+        53: getstatic     #629                // Field jakarta/servlet/SessionTrackingMode.URL:Ljakarta/servlet/SessionTrackingMode;
+        56: invokeinterface #635,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+        61: ifne          66
+        64: iconst_0
+        65: ireturn
+        66: aload_0
+        67: invokevirtual #220                // Method getContext:()Lorg/apache/catalina/Context;
+        70: aload_2
+        71: aload_3
+        72: aload_1
+        73: invokestatic  #638                // Method doIsEncodeable:(Lorg/apache/catalina/Context;Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/Session;Ljava/lang/String;)Z
+        76: ireturn
+
+  private static boolean doIsEncodeable(org.apache.catalina.Context, org.apache.catalina.connector.Request, org.apache.catalina.Session, java.lang.String);
+    Code:
+         0: new           #642                // class java/net/URI
+         3: dup
+         4: aload_3
+         5: invokespecial #644                // Method java/net/URI."<init>":(Ljava/lang/String;)V
+         8: astore        5
+        10: aload         5
+        12: invokevirtual #645                // Method java/net/URI.toURL:()Ljava/net/URL;
+        15: astore        4
+        17: goto          24
+        20: astore        5
+        22: iconst_0
+        23: ireturn
+        24: aload_1
+        25: aload         4
+        27: invokestatic  #653                // Method org/apache/catalina/util/RequestUtil.isSameWebApplication:(Ljakarta/servlet/http/HttpServletRequest;Ljava/net/URL;)Z
+        30: ifne          35
+        33: iconst_0
+        34: ireturn
+        35: aload_0
+        36: invokestatic  #659                // Method org/apache/catalina/util/SessionConfig.getSessionUriParamName:(Lorg/apache/catalina/Context;)Ljava/lang/String;
+        39: aload_2
+        40: invokeinterface #518,  1          // InterfaceMethod org/apache/catalina/Session.getIdInternal:()Ljava/lang/String;
+        45: invokedynamic #665,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        50: astore        5
+        52: aload_3
+        53: aload         5
+        55: invokevirtual #667                // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+        58: ifge          65
+        61: iconst_1
+        62: goto          66
+        65: iconst_0
+        66: ireturn
+      Exception table:
+         from    to  target type
+             0    17    20   Class java/net/MalformedURLException
+             0    17    20   Class java/net/URISyntaxException
+             0    17    20   Class java/lang/IllegalArgumentException
+
+  protected java.lang.String toAbsolute(java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnonnull     6
+         4: aconst_null
+         5: areturn
+         6: aload_1
+         7: ldc_w         #671                // String /
+        10: invokevirtual #467                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+        13: istore_2
+        14: aload_1
+        15: ldc_w         #673                // String //
+        18: invokevirtual #467                // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+        21: ifeq          95
+        24: aload_0
+        25: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        28: invokevirtual #675                // Method org/apache/tomcat/util/buf/CharChunk.recycle:()V
+        31: aload_0
+        32: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+        35: invokevirtual #676                // Method org/apache/catalina/connector/Request.getScheme:()Ljava/lang/String;
+        38: astore_3
+        39: aload_0
+        40: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        43: aload_3
+        44: iconst_0
+        45: aload_3
+        46: invokevirtual #679                // Method java/lang/String.length:()I
+        49: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+        52: aload_0
+        53: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        56: bipush        58
+        58: invokevirtual #686                // Method org/apache/tomcat/util/buf/CharChunk.append:(C)V
+        61: aload_0
+        62: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        65: aload_1
+        66: iconst_0
+        67: aload_1
+        68: invokevirtual #679                // Method java/lang/String.length:()I
+        71: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+        74: aload_0
+        75: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+        78: invokevirtual #689                // Method org/apache/tomcat/util/buf/CharChunk.toString:()Ljava/lang/String;
+        81: areturn
+        82: astore        4
+        84: new           #151                // class java/lang/IllegalArgumentException
+        87: dup
+        88: aload_1
+        89: aload         4
+        91: invokespecial #690                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        94: athrow
+        95: iload_2
+        96: ifne          106
+        99: aload_1
+       100: invokestatic  #693                // Method org/apache/tomcat/util/buf/UriUtil.hasScheme:(Ljava/lang/CharSequence;)Z
+       103: ifne          351
+       106: aload_0
+       107: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       110: invokevirtual #675                // Method org/apache/tomcat/util/buf/CharChunk.recycle:()V
+       113: aload_0
+       114: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+       117: invokevirtual #676                // Method org/apache/catalina/connector/Request.getScheme:()Ljava/lang/String;
+       120: astore_3
+       121: aload_0
+       122: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+       125: invokevirtual #699                // Method org/apache/catalina/connector/Request.getServerName:()Ljava/lang/String;
+       128: astore        4
+       130: aload_0
+       131: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+       134: invokevirtual #702                // Method org/apache/catalina/connector/Request.getServerPort:()I
+       137: istore        5
+       139: aload_0
+       140: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       143: aload_3
+       144: iconst_0
+       145: aload_3
+       146: invokevirtual #679                // Method java/lang/String.length:()I
+       149: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+       152: aload_0
+       153: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       156: ldc_w         #705                // String ://
+       159: iconst_0
+       160: iconst_3
+       161: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+       164: aload_0
+       165: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       168: aload         4
+       170: iconst_0
+       171: aload         4
+       173: invokevirtual #679                // Method java/lang/String.length:()I
+       176: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+       179: aload_3
+       180: ldc_w         #707                // String http
+       183: invokevirtual #461                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       186: ifeq          196
+       189: iload         5
+       191: bipush        80
+       193: if_icmpne     214
+       196: aload_3
+       197: ldc_w         #709                // String https
+       200: invokevirtual #461                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       203: ifeq          247
+       206: iload         5
+       208: sipush        443
+       211: if_icmpeq     247
+       214: aload_0
+       215: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       218: bipush        58
+       220: invokevirtual #686                // Method org/apache/tomcat/util/buf/CharChunk.append:(C)V
+       223: iload         5
+       225: invokedynamic #494,  0            // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+       230: astore        6
+       232: aload_0
+       233: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       236: aload         6
+       238: iconst_0
+       239: aload         6
+       241: invokevirtual #679                // Method java/lang/String.length:()I
+       244: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+       247: iload_2
+       248: ifne          306
+       251: aload_0
+       252: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+       255: invokevirtual #711                // Method org/apache/catalina/connector/Request.getDecodedRequestURI:()Ljava/lang/String;
+       258: astore        6
+       260: aload         6
+       262: bipush        47
+       264: invokevirtual #714                // Method java/lang/String.lastIndexOf:(I)I
+       267: istore        7
+       269: aload_0
+       270: getfield      #41                 // Field urlEncoder:Lorg/apache/tomcat/util/buf/UEncoder;
+       273: aload         6
+       275: iconst_0
+       276: iload         7
+       278: invokevirtual #718                // Method org/apache/tomcat/util/buf/UEncoder.encodeURL:(Ljava/lang/String;II)Lorg/apache/tomcat/util/buf/CharChunk;
+       281: astore        8
+       283: aload_0
+       284: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       287: aload         8
+       289: invokevirtual #722                // Method org/apache/tomcat/util/buf/CharChunk.append:(Lorg/apache/tomcat/util/buf/CharChunk;)V
+       292: aload         8
+       294: invokevirtual #675                // Method org/apache/tomcat/util/buf/CharChunk.recycle:()V
+       297: aload_0
+       298: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       301: bipush        47
+       303: invokevirtual #686                // Method org/apache/tomcat/util/buf/CharChunk.append:(C)V
+       306: aload_0
+       307: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       310: aload_1
+       311: iconst_0
+       312: aload_1
+       313: invokevirtual #679                // Method java/lang/String.length:()I
+       316: invokevirtual #682                // Method org/apache/tomcat/util/buf/CharChunk.append:(Ljava/lang/String;II)V
+       319: aload_0
+       320: aload_0
+       321: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       324: invokevirtual #725                // Method normalize:(Lorg/apache/tomcat/util/buf/CharChunk;)V
+       327: goto          343
+       330: astore        6
+       332: new           #151                // class java/lang/IllegalArgumentException
+       335: dup
+       336: aload_1
+       337: aload         6
+       339: invokespecial #690                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       342: athrow
+       343: aload_0
+       344: getfield      #48                 // Field redirectURLCC:Lorg/apache/tomcat/util/buf/CharChunk;
+       347: invokevirtual #689                // Method org/apache/tomcat/util/buf/CharChunk.toString:()Ljava/lang/String;
+       350: areturn
+       351: aload_1
+       352: areturn
+      Exception table:
+         from    to  target type
+            39    81    82   Class java/io/IOException
+           139   327   330   Class java/io/IOException
+
+  private void normalize(org.apache.tomcat.util.buf.CharChunk);
+    Code:
+         0: aload_1
+         1: bipush        63
+         3: invokevirtual #728                // Method org/apache/tomcat/util/buf/CharChunk.indexOf:(C)I
+         6: istore_2
+         7: iload_2
+         8: iconst_m1
+         9: if_icmpne     19
+        12: aload_1
+        13: bipush        35
+        15: invokevirtual #728                // Method org/apache/tomcat/util/buf/CharChunk.indexOf:(C)I
+        18: istore_2
+        19: aconst_null
+        20: astore_3
+        21: iload_2
+        22: iconst_m1
+        23: if_icmple     54
+        26: aload_1
+        27: invokevirtual #731                // Method org/apache/tomcat/util/buf/CharChunk.getBuffer:()[C
+        30: aload_1
+        31: invokevirtual #735                // Method org/apache/tomcat/util/buf/CharChunk.getStart:()I
+        34: iload_2
+        35: iadd
+        36: aload_1
+        37: invokevirtual #738                // Method org/apache/tomcat/util/buf/CharChunk.getEnd:()I
+        40: invokestatic  #741                // Method java/util/Arrays.copyOfRange:([CII)[C
+        43: astore_3
+        44: aload_1
+        45: aload_1
+        46: invokevirtual #735                // Method org/apache/tomcat/util/buf/CharChunk.getStart:()I
+        49: iload_2
+        50: iadd
+        51: invokevirtual #747                // Method org/apache/tomcat/util/buf/CharChunk.setEnd:(I)V
+        54: aload_1
+        55: ldc_w         #750                // String /.
+        58: invokevirtual #752                // Method org/apache/tomcat/util/buf/CharChunk.endsWith:(Ljava/lang/String;)Z
+        61: ifne          74
+        64: aload_1
+        65: ldc_w         #755                // String /..
+        68: invokevirtual #752                // Method org/apache/tomcat/util/buf/CharChunk.endsWith:(Ljava/lang/String;)Z
+        71: ifeq          99
+        74: aload_1
+        75: bipush        47
+        77: invokevirtual #686                // Method org/apache/tomcat/util/buf/CharChunk.append:(C)V
+        80: goto          99
+        83: astore        4
+        85: new           #151                // class java/lang/IllegalArgumentException
+        88: dup
+        89: aload_1
+        90: invokevirtual #689                // Method org/apache/tomcat/util/buf/CharChunk.toString:()Ljava/lang/String;
+        93: aload         4
+        95: invokespecial #690                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+        98: athrow
+        99: aload_1
+       100: invokevirtual #757                // Method org/apache/tomcat/util/buf/CharChunk.getChars:()[C
+       103: astore        4
+       105: aload_1
+       106: invokevirtual #735                // Method org/apache/tomcat/util/buf/CharChunk.getStart:()I
+       109: istore        5
+       111: aload_1
+       112: invokevirtual #738                // Method org/apache/tomcat/util/buf/CharChunk.getEnd:()I
+       115: istore        6
+       117: iconst_0
+       118: istore        7
+       120: iconst_0
+       121: istore        8
+       123: iload         8
+       125: iconst_3
+       126: if_icmpge     147
+       129: aload_1
+       130: bipush        47
+       132: iload         7
+       134: iconst_1
+       135: iadd
+       136: invokevirtual #760                // Method org/apache/tomcat/util/buf/CharChunk.indexOf:(CI)I
+       139: istore        7
+       141: iinc          8, 1
+       144: goto          123
+       147: iload         7
+       149: istore        8
+       151: aload_1
+       152: ldc_w         #763                // String /./
+       155: iconst_0
+       156: iconst_3
+       157: iload         8
+       159: invokevirtual #765                // Method org/apache/tomcat/util/buf/CharChunk.indexOf:(Ljava/lang/String;III)I
+       162: istore        8
+       164: iload         8
+       166: ifge          172
+       169: goto          215
+       172: aload_0
+       173: aload         4
+       175: iload         5
+       177: iload         8
+       179: iadd
+       180: iload         5
+       182: iload         8
+       184: iadd
+       185: iconst_2
+       186: iadd
+       187: iload         6
+       189: iload         5
+       191: isub
+       192: iload         8
+       194: isub
+       195: iconst_2
+       196: isub
+       197: invokevirtual #768                // Method copyChars:([CIII)V
+       200: iload         6
+       202: iconst_2
+       203: isub
+       204: istore        6
+       206: aload_1
+       207: iload         6
+       209: invokevirtual #747                // Method org/apache/tomcat/util/buf/CharChunk.setEnd:(I)V
+       212: goto          151
+       215: iload         7
+       217: istore        8
+       219: aload_1
+       220: ldc_w         #772                // String /../
+       223: iconst_0
+       224: iconst_4
+       225: iload         8
+       227: invokevirtual #765                // Method org/apache/tomcat/util/buf/CharChunk.indexOf:(Ljava/lang/String;III)I
+       230: istore        8
+       232: iload         8
+       234: ifge          240
+       237: goto          350
+       240: iload         8
+       242: iload         7
+       244: if_icmpne     255
+       247: new           #151                // class java/lang/IllegalArgumentException
+       250: dup
+       251: invokespecial #774                // Method java/lang/IllegalArgumentException."<init>":()V
+       254: athrow
+       255: iconst_m1
+       256: istore        10
+       258: iload         5
+       260: iload         8
+       262: iadd
+       263: iconst_1
+       264: isub
+       265: istore        9
+       267: iload         9
+       269: iflt          297
+       272: iload         10
+       274: ifge          297
+       277: aload         4
+       279: iload         9
+       281: caload
+       282: bipush        47
+       284: if_icmpne     291
+       287: iload         9
+       289: istore        10
+       291: iinc          9, -1
+       294: goto          267
+       297: aload_0
+       298: aload         4
+       300: iload         5
+       302: iload         10
+       304: iadd
+       305: iload         5
+       307: iload         8
+       309: iadd
+       310: iconst_3
+       311: iadd
+       312: iload         6
+       314: iload         5
+       316: isub
+       317: iload         8
+       319: isub
+       320: iconst_3
+       321: isub
+       322: invokevirtual #768                // Method copyChars:([CIII)V
+       325: iload         6
+       327: iload         10
+       329: iadd
+       330: iload         8
+       332: isub
+       333: iconst_3
+       334: isub
+       335: istore        6
+       337: aload_1
+       338: iload         6
+       340: invokevirtual #747                // Method org/apache/tomcat/util/buf/CharChunk.setEnd:(I)V
+       343: iload         10
+       345: istore        8
+       347: goto          219
+       350: aload_3
+       351: ifnull        377
+       354: aload_1
+       355: aload_3
+       356: iconst_0
+       357: aload_3
+       358: arraylength
+       359: invokevirtual #775                // Method org/apache/tomcat/util/buf/CharChunk.append:([CII)V
+       362: goto          377
+       365: astore        10
+       367: new           #151                // class java/lang/IllegalArgumentException
+       370: dup
+       371: aload         10
+       373: invokespecial #778                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/Throwable;)V
+       376: athrow
+       377: return
+      Exception table:
+         from    to  target type
+            74    80    83   Class java/io/IOException
+           354   362   365   Class java/io/IOException
+
+  private void copyChars(char[], int, int, int);
+    Code:
+         0: aload_1
+         1: iload_3
+         2: aload_1
+         3: iload_2
+         4: iload         4
+         6: invokestatic  #781                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+         9: return
+
+  private boolean hasPath(java.lang.String);
+    Code:
+         0: aload_1
+         1: ldc_w         #705                // String ://
+         4: invokevirtual #667                // Method java/lang/String.indexOf:(Ljava/lang/String;)I
+         7: istore_2
+         8: iload_2
+         9: ifge          14
+        12: iconst_0
+        13: ireturn
+        14: aload_1
+        15: bipush        47
+        17: iload_2
+        18: iconst_3
+        19: iadd
+        20: invokevirtual #787                // Method java/lang/String.indexOf:(II)I
+        23: istore_2
+        24: iload_2
+        25: iflt          32
+        28: iconst_1
+        29: goto          33
+        32: iconst_0
+        33: ireturn
+
+  protected java.lang.String toEncoded(java.lang.String, java.lang.String);
+    Code:
+         0: aload_1
+         1: ifnull        8
+         4: aload_2
+         5: ifnonnull     10
+         8: aload_1
+         9: areturn
+        10: aload_1
+        11: astore_3
+        12: ldc_w         #527                // String
+        15: astore        4
+        17: ldc_w         #527                // String
+        20: astore        5
+        22: aload_1
+        23: bipush        63
+        25: invokevirtual #790                // Method java/lang/String.indexOf:(I)I
+        28: istore        6
+        30: iload         6
+        32: iflt          51
+        35: aload_1
+        36: iconst_0
+        37: iload         6
+        39: invokevirtual #792                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        42: astore_3
+        43: aload_1
+        44: iload         6
+        46: invokevirtual #796                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        49: astore        4
+        51: aload_3
+        52: bipush        35
+        54: invokevirtual #790                // Method java/lang/String.indexOf:(I)I
+        57: istore        7
+        59: iload         7
+        61: iflt          80
+        64: aload_3
+        65: iload         7
+        67: invokevirtual #796                // Method java/lang/String.substring:(I)Ljava/lang/String;
+        70: astore        5
+        72: aload_3
+        73: iconst_0
+        74: iload         7
+        76: invokevirtual #792                // Method java/lang/String.substring:(II)Ljava/lang/String;
+        79: astore_3
+        80: new           #798                // class java/lang/StringBuilder
+        83: dup
+        84: aload_3
+        85: invokespecial #800                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+        88: astore        8
+        90: aload         8
+        92: invokevirtual #801                // Method java/lang/StringBuilder.isEmpty:()Z
+        95: ifne          137
+        98: aload         8
+       100: bipush        59
+       102: invokevirtual #802                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       105: pop
+       106: aload         8
+       108: aload_0
+       109: getfield      #56                 // Field request:Lorg/apache/catalina/connector/Request;
+       112: invokevirtual #75                 // Method org/apache/catalina/connector/Request.getContext:()Lorg/apache/catalina/Context;
+       115: invokestatic  #659                // Method org/apache/catalina/util/SessionConfig.getSessionUriParamName:(Lorg/apache/catalina/Context;)Ljava/lang/String;
+       118: invokevirtual #805                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       121: pop
+       122: aload         8
+       124: bipush        61
+       126: invokevirtual #802                // Method java/lang/StringBuilder.append:(C)Ljava/lang/StringBuilder;
+       129: pop
+       130: aload         8
+       132: aload_2
+       133: invokevirtual #805                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       136: pop
+       137: aload         8
+       139: aload         5
+       141: invokevirtual #805                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       144: pop
+       145: aload         8
+       147: aload         4
+       149: invokevirtual #805                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       152: pop
+       153: aload         8
+       155: invokevirtual #808                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       158: areturn
+
+  static {};
+    Code:
+         0: ldc           #4                  // class org/apache/catalina/connector/Response
+         2: invokestatic  #809                // Method org/apache/juli/logging/LogFactory.getLog:(Ljava/lang/Class;)Lorg/apache/juli/logging/Log;
+         5: putstatic     #322                // Field log:Lorg/apache/juli/logging/Log;
+         8: ldc           #4                  // class org/apache/catalina/connector/Response
+        10: invokestatic  #815                // Method org/apache/tomcat/util/res/StringManager.getManager:(Ljava/lang/Class;)Lorg/apache/tomcat/util/res/StringManager;
+        13: putstatic     #153                // Field sm:Lorg/apache/tomcat/util/res/StringManager;
+        16: new           #305                // class org/apache/tomcat/util/http/parser/MediaTypeCache
+        19: dup
+        20: bipush        100
+        22: invokespecial #819                // Method org/apache/tomcat/util/http/parser/MediaTypeCache."<init>":(I)V
+        25: putstatic     #300                // Field MEDIA_TYPE_CACHE:Lorg/apache/tomcat/util/http/parser/MediaTypeCache;
+        28: return
+}

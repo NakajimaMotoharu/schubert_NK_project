@@ -1,0 +1,95 @@
+Compiled from "ProtocolHandler.java"
+public interface org.apache.coyote.ProtocolHandler {
+  public abstract org.apache.coyote.Adapter getAdapter();
+
+  public abstract void setAdapter(org.apache.coyote.Adapter);
+
+  public abstract java.util.concurrent.Executor getExecutor();
+
+  public abstract void setExecutor(java.util.concurrent.Executor);
+
+  public abstract java.util.concurrent.ScheduledExecutorService getUtilityExecutor();
+
+  public abstract void setUtilityExecutor(java.util.concurrent.ScheduledExecutorService);
+
+  public abstract void init() throws java.lang.Exception;
+
+  public abstract void start() throws java.lang.Exception;
+
+  public abstract void pause() throws java.lang.Exception;
+
+  public abstract void resume() throws java.lang.Exception;
+
+  public abstract void stop() throws java.lang.Exception;
+
+  public abstract void destroy() throws java.lang.Exception;
+
+  public abstract void closeServerSocketGraceful();
+
+  public abstract long awaitConnectionsClose(long);
+
+  public abstract boolean isSendfileSupported();
+
+  public abstract void addSslHostConfig(org.apache.tomcat.util.net.SSLHostConfig);
+
+  public abstract void addSslHostConfig(org.apache.tomcat.util.net.SSLHostConfig, boolean);
+
+  public abstract org.apache.tomcat.util.net.SSLHostConfig[] findSslHostConfigs();
+
+  public abstract void addUpgradeProtocol(org.apache.coyote.UpgradeProtocol);
+
+  public abstract org.apache.coyote.UpgradeProtocol[] findUpgradeProtocols();
+
+  public default int getDesiredBufferSize();
+    Code:
+         0: iconst_m1
+         1: ireturn
+
+  public default java.lang.String getId();
+    Code:
+         0: aconst_null
+         1: areturn
+
+  public static org.apache.coyote.ProtocolHandler create(java.lang.String) throws java.lang.ClassNotFoundException, java.lang.InstantiationException, java.lang.IllegalAccessException, java.lang.IllegalArgumentException, java.lang.reflect.InvocationTargetException, java.lang.NoSuchMethodException, java.lang.SecurityException;
+    Code:
+         0: aload_0
+         1: ifnull        25
+         4: ldc           #1                  // String HTTP/1.1
+         6: aload_0
+         7: invokevirtual #3                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        10: ifne          25
+        13: ldc           #9                  // class org/apache/coyote/http11/Http11NioProtocol
+        15: invokevirtual #11                 // Method java/lang/Class.getName:()Ljava/lang/String;
+        18: aload_0
+        19: invokevirtual #3                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        22: ifeq          33
+        25: new           #9                  // class org/apache/coyote/http11/Http11NioProtocol
+        28: dup
+        29: invokespecial #17                 // Method org/apache/coyote/http11/Http11NioProtocol."<init>":()V
+        32: areturn
+        33: ldc           #21                 // String AJP/1.3
+        35: aload_0
+        36: invokevirtual #3                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        39: ifne          54
+        42: ldc           #23                 // class org/apache/coyote/ajp/AjpNioProtocol
+        44: invokevirtual #11                 // Method java/lang/Class.getName:()Ljava/lang/String;
+        47: aload_0
+        48: invokevirtual #3                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        51: ifeq          62
+        54: new           #23                 // class org/apache/coyote/ajp/AjpNioProtocol
+        57: dup
+        58: invokespecial #25                 // Method org/apache/coyote/ajp/AjpNioProtocol."<init>":()V
+        61: areturn
+        62: aload_0
+        63: invokestatic  #26                 // Method java/lang/Class.forName:(Ljava/lang/String;)Ljava/lang/Class;
+        66: astore_1
+        67: aload_1
+        68: iconst_0
+        69: anewarray     #12                 // class java/lang/Class
+        72: invokevirtual #30                 // Method java/lang/Class.getConstructor:([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+        75: iconst_0
+        76: anewarray     #34                 // class java/lang/Object
+        79: invokevirtual #36                 // Method java/lang/reflect/Constructor.newInstance:([Ljava/lang/Object;)Ljava/lang/Object;
+        82: checkcast     #42                 // class org/apache/coyote/ProtocolHandler
+        85: areturn
+}

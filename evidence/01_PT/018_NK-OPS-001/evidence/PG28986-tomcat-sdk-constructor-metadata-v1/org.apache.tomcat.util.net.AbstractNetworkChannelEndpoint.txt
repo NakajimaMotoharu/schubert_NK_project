@@ -1,0 +1,33 @@
+Compiled from "AbstractNetworkChannelEndpoint.java"
+public abstract class org.apache.tomcat.util.net.AbstractNetworkChannelEndpoint<S extends java.nio.channels.Channel, U extends java.nio.channels.NetworkChannel> extends org.apache.tomcat.util.net.AbstractEndpoint<S, U> {
+  public org.apache.tomcat.util.net.AbstractNetworkChannelEndpoint();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method org/apache/tomcat/util/net/AbstractEndpoint."<init>":()V
+         4: return
+
+  protected abstract java.nio.channels.NetworkChannel getServerSocket();
+
+  protected abstract S createChannel(org.apache.tomcat.util.net.SocketBufferHandler);
+
+  protected final java.net.InetSocketAddress getLocalAddress() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokevirtual #7                  // Method getServerSocket:()Ljava/nio/channels/NetworkChannel;
+         4: astore_1
+         5: aload_1
+         6: ifnonnull     11
+         9: aconst_null
+        10: areturn
+        11: aload_1
+        12: invokeinterface #13,  1           // InterfaceMethod java/nio/channels/NetworkChannel.getLocalAddress:()Ljava/net/SocketAddress;
+        17: astore_2
+        18: aload_2
+        19: instanceof    #19                 // class java/net/InetSocketAddress
+        22: ifeq          30
+        25: aload_2
+        26: checkcast     #19                 // class java/net/InetSocketAddress
+        29: areturn
+        30: aconst_null
+        31: areturn
+}

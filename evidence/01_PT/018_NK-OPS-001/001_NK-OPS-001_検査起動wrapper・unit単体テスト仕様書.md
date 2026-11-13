@@ -80,3 +80,6 @@ WBS-P018-02公開source契約/独立期待値/TestIDは[4243_P01802全五artifac
 
 
 WBS-P018-05公開source契約/独立期待値/TestIDは[4247_P01805全二十六artifact契約・独立期待値対応.md](4247_P01805全二十六artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-P018-06公開source契約/独立期待値/TestIDは[4249_P01806全二十二artifact契約・独立期待値対応.md](4249_P01806全二十二artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
