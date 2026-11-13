@@ -1,5 +1,20 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC347 script_entries十二列COPY行の型・nullable・文字検証（2026-11-14、PG詳細補足）
+
+SS343§10.1.4、SS331§2/V002、UI223/242§4.4/254の既条件をScenarioEntryCopyRowへ具体化する。入力Listは12列の送信文字列で、id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_atの順に固定し、generated body_searchを除く。新DDL/外部ID/本文変換を追加せず、実Current抽出・全件数/ID対応/FK/DB/pg_temp/transaction/driver/COPYの成功は別条件である。
+
+outer/List列数12とmandatory9列のnonnullを先に検査し、optionalはline_number/speaker_id/speaker_labelだけ。target entry/file/order/speakerのnonnull値はcanonical positive N12 decimal、game1/2、entry_indexはcanonical0..IntegerMAX、nonnull line_numberは1..IntegerMAX。内部送信用canonicalなのでsign/leadingzero/空白/小数を拒否し、黙ってtrim/変換しない。typeはdialogue/narration閉集合、dialogueはspeaker必須、narrationはspeaker null。
+
+bodyはNFC/strictUTF8・1..4096byte、nullable labelはNFC/strictUTF8・0..128byte、raw_blockはnonnull NFC/strictUTF8で既DDLにないbyte上限を加えない。ISO controlはinline labelでは不可、multiline body/rawでは既Current本文の改行を保持するTAB/LF/CRだけ許可し、NUL/その他control/孤立surrogateは拒否。NFCへの暗黙正規化はしない。実Currentdataに適合すると推定せず、実data不一致は所定feedback/障害管理で扱う。
+
+created_atはcallerがtransaction共通Instantから作ったcanonical UTC文字列（Instant.toStringとの完全一致）、年0001..9999/µs精度とし、parse不能/offset表記/非canonicalfraction/nsを固定安全例外で拒否する。rows間の共通Instant採取や実PostgreSQL受理をこの値classで証明しない。
+
+入力をprivate copy/変更不能wrapperとして保持し、fieldsとcolumnNamesは変更不可、copyBytesはnonnull既PostgresCopyTextEncoderへ渡すだけでbyte別所有。body/raw等を診断へ含めず、固定redaction/安全例外を用い、NPEをcatchして正常扱いしない。PT-MIG-ROW001..012は独立12列/COPY全byte、dialogue/narration/nullable、N12/game/int/role、body/labelのASCII・日本語byte境界/非制限raw、NFC/Unicode/control、必須null/列数、時刻境界、入力/返却所有、固定診断とfinite8worker64taskを検証する（Future各5秒/finallyshutdownNow-await10、非終端fail）。expectedはProduction methodではなく既DDL/手書きliteral/byte算術から作る。
+
+新Row1と支援Copy1の全2physicalを同sourceのwhole24（新Row12＋既Copy12）単一execで初検証し、旧exec合算/coverage除外/規則抑制なし。旧Copy12を新定義へ二重加算せず、新Row-to-encoder変更群に必要な閉scopeの静的/CRC-init/四counterと実JVMCodeを独立postで照合する。実DB/Current/RootVM/native/CHR/全451/ITST未完、aru新規利用禁止とharuka構築/個別条件待ちを局所成功で解除しない。
+
+
 ## SSC346 移行COPY text送信fieldの純byte encoding（2026-11-14、PG詳細補足）
 
 SS343§10.1.4のCOPYとSS331§2のUTF8型を、bootstrapのPostgresCopyTextEncoderへ具体化する。既存inventory/ID/file/entry対応部品とは別の送信用data変換で、DB/driver/SQL/FSの操作を持たない。[PostgreSQL18 COPY Text Format](https://www.postgresql.org/docs/18/sql-copy.html)のdefault text/TAB/NULL backslash-Nを固定する。Current generator copy_value/copy_rowは参照codeのみ、master/DBやそのgeneratorの実行をoracleにしない。RD/UI/DDL/電文/業務値を変更せず、新QA不要。
