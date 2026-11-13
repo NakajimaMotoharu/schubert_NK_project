@@ -1,0 +1,126 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T16:49:31.508015+09:00",
+  "source": "1e5f51cf98c3237c046f5d98ff130a8c22f1b604",
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "ownedSourceHashes": {
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java": "c45b65bd922548785f6798ab88e2cfde0b880e163864414be102bbe980eab299",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java": "2e8d728478abf69cff48ceaf63d465425adfd7fd46f4de6df22793cb517be043",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java": "2179121f50f31183b2b2d04e19ad489d9fc601dead1083291db882a7a050a6f9",
+    "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 2056,
+  "design": [
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P02001-ORACLE01",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "methods": "ArtifactComparator.compare/requiredArtifactFileName/artifactFiles/collectDifferences/ComparisonResult",
+      "testIds": [
+        "CHR-G05-003004/NK002"
+      ],
+      "expected": "SS3558/12: readonlynormalizedCurrent/NK artifacts; catalog24/NKallRUN, bothartifactsetsexact/caseID/statusPASS, noSymlink, escapedJSONpointerdiffrecursion. IndependentDIF16 onlyexactcase/field/mode/selector/no wildcard/missingpointer/expectedvalues/overlap, allrulesused andunclaimedrawdiffsFAIL. QA051 correlatedLogEvidence andactualCHR-L01artifactbindingrequired, metadataalone notlivecaptureproof. BUG2812 contractmode currentlymissesunchangedcheck andinvalidclaimcanmaskunregisteredcount; no baseline/oraclechange orrealcomparisonexecution."
+    },
+    {
+      "id": "P02001-ORACLE02",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "methods": "GateCli.main/verifySource/preflight/compareCurrent/compareNk/report/secretScan/containsAny/promoteCurrent/hash/writeJson",
+      "testIds": [
+        "CHR-G01..G06/NUM001..005"
+      ],
+      "expected": "SS355: explicitcommands/sourcehash+docsha/mastercounts+bytes+symlinks (counts alone notfullbyteimmutability; reviewseparate). Preflight fixedpermissions0600/loopback/20GiB metadata notRootauthority. Currentrepeat28files artifacts24/screenshots2/inventory+supp2 exacthashsame, NKcomparisondelegatesstrictDIF. GateG01..06 combinesdefinitions/run/repeat/source-baseline/review/DIF/secretconditions, no partialPASSaswhole. Secretcanary+JSESSIONID binarysearch allbaseline/reports required: BUG2811 size>10MiBskip silently violatesunscanned-notPASS. promoteonlyemptydestination withvalidgatecommitandnumericmetadata, originalnonemptybaselineimmutable. Atomicreporttemporary/newactivewriter guard; neverinvokeactualpromotion/master/credentials/sourcepreflight."
+    },
+    {
+      "id": "P02001-ORACLE03",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "methods": "GateContractValidator.validate/validateDefinitions/gateMetrics/metadata/baseline/run/supplemental/hash",
+      "testIds": [
+        "CHR-DEF001..011/METRIC001..006/META001..009/BMETA001..008"
+      ],
+      "expected": "SS355: schema/casecatalog24/order/unique/current23+N01NK_ONLY/NKallRUN; sixgateIDs/DIF16exactorder/modes/dedupselectors/nobroadwildcards. Browserpinnedbuild/viewport1366x768and390x844/scale1/fontready/jaJP/AsiaTokyo/light/reduce. Eachrunall24PASS includingN01metadata, rejectfailed/flaky/skipped/notrun, requirednonnullkeys/twoPNG+hash/supplementalnonempty. Baseline27files/fullaggregatebyteSHA/fixedsource+doccounts/legacy843de94anchor/envJDK25.0.4-browser1187; reviewAPPROVEDmetadata alone notactualapprovalauthority. Integerstrictness preventsfraction/overflow/coercion. Validationmetadata notCurrent/NKrun, realMasterbytes/Rootownership/sourceauthentication separate."
+    },
+    {
+      "id": "P02001-ORACLE04",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "methods": "TargetAdapter.create/target/baseUri/evidenceRoot/endpoint/caseArtifact/executableCaseIds/Target",
+      "testIds": [
+        "CHR-TARGET/NK001"
+      ],
+      "expected": "SS3554/12: Current/NKsame runner onlytarget/baseorigin/output differs. HTTPSorigin allowedhostcasefold/nouserinfo-query-fragment/nonrootbasepath, evidencerootstrictbelowreports/notexisting. Sameoriginabsolutepath andstrictCHR-Xnn artifactnames, allcatalog24unique; CurrentonlyN01NK_ONLY, NKallRUN. Adapterdata validatespath/metadata, neverpermission/startup/source-readiness orbaselinepromotion authority; noactualnetwork/filewrites inthisreview."
+    },
+    {
+      "id": "P02001-CHILD1",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "methods": "Contract WBS-P020-01.01",
+      "testIds": [
+        "CHR-TARGET/BASELINE/G06"
+      ],
+      "expected": "Currentbaseline retainedbytehash andcommonTargetAdapter contracts immutable; allrealCurrent/NK/Source-master/credential/nativecapture/serviceoperationsHOLD. PurepublictoolmetadataunitdoesnotgrantRootauthority. Filesystem/wholeTestclosure qualificationpending."
+    },
+    {
+      "id": "P02001-CHILD2",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "methods": "Contract WBS-P020-01.02",
+      "testIds": [
+        "CHR-G05/NK002/DIF001..016"
+      ],
+      "expected": "Independentnegative fixtures forwrongID/case/selector/pointer/value, missingcase/overlap/unusedDIF, isolatedcontract-change. AllapprovedDIFandbaselineexactbytes unchanged. BUG2812sourcefix/normalwholeToolPTpending, noactualNKcompatibilitypassed."
+    },
+    {
+      "id": "P02001-CHILD3",
+      "artifact": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "methods": "Contract WBS-P020-01.03",
+      "testIds": [
+        "CHR-G01..G06"
+      ],
+      "expected": "Gateworker toolmustbindsource/manifests/fullcounter/actualexit, completeallrequiredmetadatafailures andsecretallbytescan. Headers/begin/APPROVEDboolean orunitfixturePASS notactualgateororiginpermission. BUG2811pending/QA051finalHOLD, noexistingnativeprooftransferredtocurrentCore."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-F02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P020-01.01/1",
+    "WBS-P020-01.02/1",
+    "WBS-P020-01.03/1"
+  ],
+  "endingStatus": "P02001_ORIGINAL_PREPARATION_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2269_p02001_original_contract_config.json",
+    "sha256": "bafd5787187270e39daf4c72600e0f83ad13ffecdf24a9e7530ab819224153b5"
+  }
+}
