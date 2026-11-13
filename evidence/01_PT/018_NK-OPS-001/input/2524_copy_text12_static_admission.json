@@ -1,0 +1,64 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30516-COPY-TEXT-NEW12",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30510-copy-text12-prepare-v2/manifest.json",
+    "sha256": "41f86e4b8797d0c91ebcc455182dded7584a026efaf62bb21f859845401b41f6"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30512-copy-text12-static-v2/manifest.json",
+    "sha256": "16ec033d7d3197ddeebcdea07575f9945d8891dc2d6a0939990c6861ff361aba"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact locally owned8-worker executor is acquired before try. All exits execute finallyshutdownNow and boundedawaitTermination10s with failing assertion;64 Futures each join5s. No ignored resource owner; implicit executorclose can wait unbounded.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site is whole stateless pure-data JUnit Test, not a managed J2EE webapp.8 owned workers run64 fixed byte-vector assertions, eachFuture5s, finallyshutdownNow/await10s proves finite resource termination; no DB/driver/native/FS/Root/Unit/SQL execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.submit(",
+      "sourceLine": 169,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site is whole stateless pure-data JUnit Test, not a managed J2EE webapp.8 owned workers run64 fixed byte-vector assertions, eachFuture5s, finallyshutdownNow/await10s proves finite resource termination; no DB/driver/native/FS/Root/Unit/SQL execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.shutdownNow();",
+      "sourceLine": 178,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site is whole stateless pure-data JUnit Test, not a managed J2EE webapp.8 owned workers run64 fixed byte-vector assertions, eachFuture5s, finallyshutdownNow/await10s proves finite resource termination; no DB/driver/native/FS/Root/Unit/SQL execution.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), \"owned COPY workers terminate\");",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site is whole stateless pure-data JUnit Test, not a managed J2EE webapp.8 owned workers run64 fixed byte-vector assertions, eachFuture5s, finallyshutdownNow/await10s proves finite resource termination; no DB/driver/native/FS/Root/Unit/SQL execution.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
