@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.InspectorApplication;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
 import dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile;
@@ -101,11 +102,14 @@ public final class InspectorLauncher {
           Objects.requireNonNull(factory.create(configuration.settings()), "inspector operation");
       return Objects.requireNonNull(operation.execute(configuration.run()), "inspection result")
           .exitCode();
-    } catch (InspectorLaunchConfiguration.Invalid
-        | InspectorCredentialException
-        | NoSuchAlgorithmException failure) {
+    } catch (InspectorLaunchConfiguration.Invalid invalid) {
+      return 70;
+    } catch (InspectorCredentialException | NoSuchAlgorithmException failure) {
+      // BUG2827: callback/provider fatal graphs are not configuration catalog outcomes.
+      TemporaryInfrastructureException.preserveFatal(failure);
       return 70;
     } catch (IOException failure) {
+      TemporaryInfrastructureException.preserveFatal(failure);
       return 50;
     }
   }

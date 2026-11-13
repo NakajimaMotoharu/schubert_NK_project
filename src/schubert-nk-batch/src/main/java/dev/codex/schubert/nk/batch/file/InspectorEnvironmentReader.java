@@ -131,15 +131,24 @@ public final class InspectorEnvironmentReader {
         },
         SeekableByteChannel::close,
         channel -> {
-          require(channel.size() == expected);
+          // BUG2829: all byte progress must agree with both seek and buffer positions.
+          require(channel.size() == expected && channel.position() == 0);
           while (buffer.hasRemaining()) {
             int position = buffer.position();
+            long channelPosition = channel.position();
             int remaining = buffer.remaining();
             int count = channel.read(buffer);
-            if (count == -1) break;
-            require(count > 0 && count <= remaining && buffer.position() == position + count);
+            if (count == -1) {
+              require(buffer.position() == position && channel.position() == channelPosition);
+              break;
+            }
+            require(
+                count > 0
+                    && count <= remaining
+                    && buffer.position() == position + count
+                    && channel.position() == channelPosition + count);
           }
-          require(buffer.position() == expected);
+          require(buffer.position() == expected && channel.position() == expected);
           require(channel.size() == expected);
 
           return Boolean.TRUE;

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.file;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.maintenance.InspectionExecution;
 import dev.codex.schubert.nk.api.maintenance.InspectionRun;
 import dev.codex.schubert.nk.api.maintenance.InspectorDatabaseConnections;
@@ -150,6 +151,8 @@ public final class InspectorApplication {
         try {
           guard.orElseThrow().check();
         } catch (IOException unavailable) {
+          // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.
+          TemporaryInfrastructureException.preserveFatal(unavailable);
           throw new InspectorCredentialException();
         }
       try (var password = reader.loadDatabasePassword();

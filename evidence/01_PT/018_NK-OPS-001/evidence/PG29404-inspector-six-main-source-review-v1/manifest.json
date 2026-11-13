@@ -1,0 +1,98 @@
+{
+  "actualExit": 0,
+  "sourceCheck": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29402-inspector-six-main-source-check-v1/manifest.json",
+    "sha256": "3f7e50837e30e17fd4b07fbb389c7d23fe8cdee04c9163ad1082fbb2ebe3d9e2"
+  },
+  "pmdRawCount": 8,
+  "perSiteClassification": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+      "rule": "DoNotUseThreads",
+      "line": "145",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (Thread.currentThread().isInterrupted())",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+      "rule": "DoNotUseThreads",
+      "line": "64",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (Thread.currentThread().isInterrupted())",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+      "rule": "DoNotUseThreads",
+      "line": "77",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (Thread.currentThread().isInterrupted())",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+      "rule": "DoNotUseThreads",
+      "line": "37",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.currentThread().setUncaughtExceptionHandler(InspectorLauncher::fatal);",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Existing standalone private CLI entry uses a fixed redacted uncaught-exception handler. This is not a J2EE/Web-managed handler or new thread creation. Source check does not run the entry."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+      "rule": "DoNotUseThreads",
+      "line": "126",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "private static void fatal(Thread thread, Throwable failure) {",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Existing standalone private CLI entry uses a fixed redacted uncaught-exception handler. This is not a J2EE/Web-managed handler or new thread creation. Source check does not run the entry."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java",
+      "rule": "DoNotUseThreads",
+      "line": "100",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (Thread.currentThread().isInterrupted())",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+      "rule": "DoNotUseThreads",
+      "line": "94",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+      "rule": "DoNotUseThreads",
+      "line": "114",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "scope": "ROOT_SOURCE_ONLY_NO_COMPILER_BYTECODE_NULLAWAY_SPOTBUGS_PT_OR_COVERAGE_CREDIT",
+  "publicReview": [
+    "2825 only after existing wipe/finally before false",
+    "2826 three known parent IO boundaries preserve ordinary fixed outcomes; pure owner parser/closed keycopy/InboxCleanup catalog unchanged",
+    "2827 pure config.Invalid split unchanged70, provider/IO classification only; receipt/checkError/capture/closing unchanged",
+    "2829 initial0, count-positive delta, EOF position invariance and final expected; ResourceScope typed cleanup untouched"
+  ],
+  "productTestsExecuted": 0,
+  "bugsRemainOpenForRuntime": [
+    "BUG-2825",
+    "BUG-2826",
+    "BUG-2827",
+    "BUG-2829"
+  ]
+}

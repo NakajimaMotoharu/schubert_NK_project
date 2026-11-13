@@ -1,0 +1,11 @@
+"""Full-file PMD evidence classification, never rely on truncated display or guessed counts."""
+from pathlib import Path
+import json,hashlib
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';p=b/'evidence/PG29402-inspector-six-main-source-check-v1/manifest.json';m=json.loads(p.read_text());assert len(m['rootPmdRaw'])==8;rows=[]
+for x in m['rootPmdRaw']:
+ assert x['rule']=='DoNotUseThreads';q=Path(x['path']);line=q.read_text().splitlines()[int(x['line'])-1].strip()
+ if 'Thread.currentThread().isInterrupted()' in line:reason='Private synchronous batch/inspector worker interruption gate required by SS341/343, not J2EE-managed request code or creation of unmanaged threads.'
+ else:
+  assert q.name=='InspectorLauncher.java' and line in ['Thread.currentThread().setUncaughtExceptionHandler(InspectorLauncher::fatal);','private static void fatal(Thread thread, Throwable failure) {'];reason='Existing standalone private CLI entry uses a fixed redacted uncaught-exception handler. This is not a J2EE/Web-managed handler or new thread creation. Source check does not run the entry.'
+ rows.append(dict(**x,sourceAnchor=line,disposition='NOT_APPLICABLE',reason=reason))
+o=b/'evidence/PG29404-inspector-six-main-source-review-v1';assert not o.exists();o.mkdir();v=dict(actualExit=0,sourceCheck=dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest()),pmdRawCount=8,perSiteClassification=rows,staticApplicable=0,unclassified=0,scope='ROOT_SOURCE_ONLY_NO_COMPILER_BYTECODE_NULLAWAY_SPOTBUGS_PT_OR_COVERAGE_CREDIT',publicReview=['2825 only after existing wipe/finally before false','2826 three known parent IO boundaries preserve ordinary fixed outcomes; pure owner parser/closed keycopy/InboxCleanup catalog unchanged','2827 pure config.Invalid split unchanged70, provider/IO classification only; receipt/checkError/capture/closing unchanged','2829 initial0, count-positive delta, EOF position invariance and final expected; ResourceScope typed cleanup untouched'],productTestsExecuted=0,bugsRemainOpenForRuntime=['BUG-2825','BUG-2826','BUG-2827','BUG-2829']);(o/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print('8 source findings classified per-site; compiler/PT still not run')

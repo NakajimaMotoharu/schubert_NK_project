@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
 import java.util.Objects;
@@ -66,6 +67,8 @@ public final class InspectionRunExecutor {
       try {
         parentGuard.orElseThrow().check();
       } catch (IOException unavailable) {
+        // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.
+        TemporaryInfrastructureException.preserveFatal(unavailable);
         return Optional.of(InspectionExecution.Status.TIME_LIMIT);
       }
     // Signed subtraction tolerates nanoTime's natural wrap; a negative delta is fail-closed.

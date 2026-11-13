@@ -1,0 +1,82 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java",
+    "beforeSha256": "8c9786a24ed2f678e19553e1f5bc19114bd0b49f1714b43550e567349ba3a67f",
+    "pairs": [
+      [
+        "import dev.codex.schubert.nk.api.idempotency.InboxCompletion;",
+        "import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;\nimport dev.codex.schubert.nk.api.idempotency.InboxCompletion;"
+      ],
+      [
+        "        | IllegalStateException failure) {\n      return false;",
+        "        | IllegalStateException failure) {\n      // BUG2825: owned plaintext/wire wipes have finished before graph classification.\n      TemporaryInfrastructureException.preserveFatal(failure);\n      return false;"
+      ]
+    ]
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+    "beforeSha256": "f3fd81dfb634a0f86a492ec6bf0da1c2aaec3b67f24ed1f1bb53c8b57b387aef",
+    "pairs": [
+      [
+        "import dev.codex.schubert.nk.api.maintenance.InspectionExecution;",
+        "import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;\nimport dev.codex.schubert.nk.api.maintenance.InspectionExecution;"
+      ],
+      [
+        "        } catch (IOException unavailable) {\n          throw new InspectorCredentialException();",
+        "        } catch (IOException unavailable) {\n          // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.\n          TemporaryInfrastructureException.preserveFatal(unavailable);\n          throw new InspectorCredentialException();"
+      ]
+    ]
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java",
+    "beforeSha256": "73a31b3721e997fde1486a4dd0d76e074a5224420b52763c76a1dcc0b7618ff5",
+    "pairs": [
+      [
+        "import dev.codex.schubert.nk.api.file.AesCredentialFile;",
+        "import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;\nimport dev.codex.schubert.nk.api.file.AesCredentialFile;"
+      ],
+      [
+        "      } catch (IOException unavailable) {\n        throw new InspectorCredentialException();",
+        "      } catch (IOException unavailable) {\n        // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.\n        TemporaryInfrastructureException.preserveFatal(unavailable);\n        throw new InspectorCredentialException();"
+      ]
+    ]
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+    "beforeSha256": "3196dff45c7b012c37238df8dfeb83538d47bc5a6318385ac7cb9c57c5f50bc0",
+    "pairs": [
+      [
+        "import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;",
+        "import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;\nimport dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;"
+      ],
+      [
+        "      } catch (IOException unavailable) {\n        return Optional.of(InspectionExecution.Status.TIME_LIMIT);",
+        "      } catch (IOException unavailable) {\n        // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.\n        TemporaryInfrastructureException.preserveFatal(unavailable);\n        return Optional.of(InspectionExecution.Status.TIME_LIMIT);"
+      ]
+    ]
+  },
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+    "beforeSha256": "e9e96dd2d7d2c0ac51ff1569bddaa0910d91186965493b502ae962b3a5576016",
+    "pairs": [
+      [
+        "import dev.codex.schubert.nk.api.file.InspectorApplication;",
+        "import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;\nimport dev.codex.schubert.nk.api.file.InspectorApplication;"
+      ],
+      [
+        "    } catch (InspectorLaunchConfiguration.Invalid\n        | InspectorCredentialException\n        | NoSuchAlgorithmException failure) {\n      return 70;\n    } catch (IOException failure) {\n      return 50;",
+        "    } catch (InspectorLaunchConfiguration.Invalid invalid) {\n      return 70;\n    } catch (InspectorCredentialException | NoSuchAlgorithmException failure) {\n      // BUG2827: callback/provider fatal graphs are not configuration catalog outcomes.\n      TemporaryInfrastructureException.preserveFatal(failure);\n      return 70;\n    } catch (IOException failure) {\n      TemporaryInfrastructureException.preserveFatal(failure);\n      return 50;"
+      ]
+    ]
+  },
+  {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+    "beforeSha256": "2d0107ae2608b8174afca59a0c06e1f1919092c3845c368c11f38a8ca46d7b07",
+    "pairs": [
+      [
+        "          require(channel.size() == expected);\n          while (buffer.hasRemaining()) {\n            int position = buffer.position();\n            int remaining = buffer.remaining();\n            int count = channel.read(buffer);\n            if (count == -1) break;\n            require(count > 0 && count <= remaining && buffer.position() == position + count);\n          }\n          require(buffer.position() == expected);\n          require(channel.size() == expected);",
+        "          // BUG2829: all byte progress must agree with both seek and buffer positions.\n          require(channel.size() == expected && channel.position() == 0);\n          while (buffer.hasRemaining()) {\n            int position = buffer.position();\n            long channelPosition = channel.position();\n            int remaining = buffer.remaining();\n            int count = channel.read(buffer);\n            if (count == -1) {\n              require(buffer.position() == position && channel.position() == channelPosition);\n              break;\n            }\n            require(\n                count > 0\n                    && count <= remaining\n                    && buffer.position() == position + count\n                    && channel.position() == channelPosition + count);\n          }\n          require(buffer.position() == expected && channel.position() == expected);\n          require(channel.size() == expected);"
+      ]
+    ]
+  }
+]

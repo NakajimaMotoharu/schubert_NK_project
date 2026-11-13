@@ -5,6 +5,7 @@ import static dev.codex.schubert.nk.api.file.AesCredentialFile.CONTEXT_PREVIOUS;
 import static dev.codex.schubert.nk.api.file.AesCredentialFile.RESPONSE_CURRENT;
 import static dev.codex.schubert.nk.api.file.AesCredentialFile.RESPONSE_PREVIOUS;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.file.AesCredentialFile;
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoader;
@@ -135,6 +136,8 @@ public final class InspectorProcess {
       try {
         parentGuard.orElseThrow().check();
       } catch (IOException unavailable) {
+        // BUG2826: preserve fatal graph identity before the ordinary fixed outcome.
+        TemporaryInfrastructureException.preserveFatal(unavailable);
         throw new InspectorCredentialException();
       }
   }

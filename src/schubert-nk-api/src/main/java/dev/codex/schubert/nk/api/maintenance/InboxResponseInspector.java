@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.maintenance;
 
+import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
 import dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrame;
@@ -59,6 +60,8 @@ public final class InboxResponseInspector {
         | PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      // BUG2825: owned plaintext/wire wipes have finished before graph classification.
+      TemporaryInfrastructureException.preserveFatal(failure);
       return false;
     }
   }
