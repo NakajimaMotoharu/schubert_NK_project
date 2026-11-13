@@ -19,6 +19,7 @@ import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
 import dev.codex.schubert.nk.storage.ServiceCredentialLocation;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import edu.umd.cs.findbugs.annotations.SuppressMatchType;
 import java.io.IOException;
@@ -290,6 +291,7 @@ final class MorningBrokerExecution {
             return observed;
           }
         } catch (ActiveMQException | ArtemisManagementReadinessException actualNotReady) {
+          StorageIoException.preserveFatal(actualNotReady);
           parent.check();
           live.recheck();
           databaseProof.verify();

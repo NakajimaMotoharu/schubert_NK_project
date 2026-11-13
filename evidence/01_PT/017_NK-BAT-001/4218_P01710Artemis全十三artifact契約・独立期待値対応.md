@@ -1,0 +1,33 @@
+# P01710 Artemis全十三artifactと独立期待値
+
+NK-BAT-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG28494](../018_NK-OPS-001/evidence/PG28496-p01710-all13-contract-v1/manifest.json)。
+
+- P01710-ORACLE01 / MorningBrokerExecution.execute/Completion methods/readObservations/observeOps / BROKERSTART001..004,ISSBROKER001: SS341343SSC125128130: sameM-A/原本/INVALIDcurrent同boot-epoch-activation/元30min/DBreadback、真正BrokerfreshCycle/前世代再検証、actualOps六段＋freshjournal二snapshotの最後を保持。readiness再試行は真正宣言AMQのみbudget内/100ms/IRQ復元、criticalpressure停止。credentialowned一回close/passwordwipe、実Root/DB/Unit操作HOLD、knownretry一口BUG2766OPEN。
+
+- P01710-ORACLE02 / ArtemisAcceptorReadinessClient.constructors/inspect/verify/verifyResponse / MQ013..015,OPS-ACC-PORT001..013: SS3212/10/13: actualsingletoncore/factoryNetty/params tcp127.0.0.1:61616 CORE/extraProps空/正確keyset/started trueだけ。missing-null-type-duplicate-extra/unknown Runtime/Errorは非成功、borrowedsessionclose0、parser純portはnativeauthority0。JSONcatalog一口BUG2766。
+
+- P01710-ORACLE03 / ArtemisAddressSettingsReadinessClient.constructors/inspect/verify/verifyResponse/expect/capacities / MQ010..012: SS3215: 6address全actual返信でdeadLetter/expiry固定名、全autoCreateDeletefalse、PAGE-FAIL-BLOCK、page8MiB/read16MiB100/retry1-5-25/collision0/idmetrics。memory-page MiBは32/224,32/224,128/896,64/192,128/1920,64/960とmessages50/450又は1000/9000を独立表へ対応、missing型違いnull漂流拒否/borrowedclose0。JSONcatalog一口BUG2766。
+
+- P01710-ORACLE04 / ArtemisManagementReadinessClient.withParentDeadline/requestTimeoutMillis/checkParentDeadline/encodeOperation/managementFailure/inspectBroker/verifyValues/read/query andfixedoperationencoders / MQ005..007,ENC001..003: SS32110SSC075076125130: Ops借用session/two-second request限度と親remaining floor1ms/min2000ms/同期threadlocal ownernested拒否finallyremove、inspectはactualsamequery値immutableでdiskNumber一回snapshot/finite0<=disk<.9、NIO10MiB4/20/512MiB/cache20000/persistent/maxdisk90。只読namespace固定、Expiry count/remove+非空numericselectorのみ、temporaryreplyownedTWRcleanup/borrowedsessionclose0/null-reply・opfailed固定拒否、checkedIRQ復元/unknownRuntimeErroridentity、knownchecked2catalogBUG2766・IO自体既定不変更。
+
+- P01710-ORACLE05 / ArtemisManagementReadinessException.constructor / MQ005: SS312/352: fixedmessage Artemis effective broker configuration is unavailable、serial/原provider詳細/cause抑制0の既定catalog。例外型自体にauthorityなし。
+
+- P01710-ORACLE06 / ArtemisQueuePressureClient.constructors/inspect/inspectValues/nonNegative/fraction/limits/Value / MQ019..021: SS3215.2-3QA042: exact6queue actualcount/persistentbytes IntegerLong非負のみ、bytes ceil70warning/90critical、sync250450/async-web50009000/expiry10005000・DLQ1alertだがbytecritical優先。閾値同値included/unknown型null負不許可、Value非負/nonnullstate immutable、借用close0/起動許可ではない。
+
+- P01710-ORACLE07 / ArtemisReadinessClient.verifyTopology/inspectTopology/bit / MQ001..004: SS3214/13: actual6Address-Queue exactsingletonANYCAST/durable/nottemp/notauto/exists/addressnamequeue match、addressquery→queuequery readonly/borrowedclose0・無作成、unknown型identity、knownAMQcatalogBUG2766。元whole4に実embeddedBrokerありHOLD/部分抽出しない。
+
+- P01710-ORACLE08 / ArtemisReadinessException.constructor / MQ001..004: SS312/352: fixedmessage Artemis effective Queue topology is unavailable、未知provider details/cause外部漏洩0、型IllegalStateの既互換とserial固定。
+
+- P01710-ORACLE09 / ArtemisRoleReadinessClient.constructors/inspect/verify/verifyResponse/approved/fields / MQ016..018: SS32110SSC075076: 6business+management#mops#fixed expirycount/getcount/getbytes/remove matchのexactrole集合、name+12permissionfields/Boolean実identity/欠落過剰重複拒否。webapiは業務固定sendconsumeのみ、Opsnamespaceだけtemporarycreate/delete、maintenanceはexpiryselectorとread/purgeだけ・業務root権限付与0。actualmappingdeepimmutable、JSONknown一口BUG2766。
+
+- P01710-ORACLE10 / ArtemisStartupObservation.constructors/inspect/inspectEvidence/readEvidence/readPressure/Evidence / MQ029..031,ISSBROKER001: SS32113/SSC130: topology→broker→settings→acceptor→roles→pressureの実六段固定、先頭失敗後後続0、pressureexact6/nonnull/immutable、詳細Evidence nested全deepcopy/redactedtoString。legacyvoidcallbacksはinspectEvidence拒否でnative観測捏造不可、defaultはactual6query同値を使いjournal/credential/Expiryは別必須。Topology二固定化BUG2766。whole既proxy3全191行の通常資格は次別群、純logical結果をBrokerauthorityに転用0。
+
+- P01710-ORACLE11 / BrokerJournalEvidence.contentSha256/anchor/consumeClosedHistory/inspect/inspectStopped/consume/consumeStopped/decode/fields/records / BROKERSTART003,ISSSTOP001..007,ISSCOLD001..007: SS32113/341/343SSC125131132: fresh同boot-invocationUnit全rawbounded4MiB/LF/strictUTF8-Json全requiredstringsoptional2以外不可/duplicatecursor拒否/優先4..7/errorfatalAMQ224拒否/正単調began-ended境界、起動NIO-active-version2.56+schubertmarker又はactualstopmarker。anchor64KiB1row同latestcursor-content再読、canonical NKJOURNAL1+sortedkeysUTF8hex独立SHA・row順保持・member順不問。IO固定/原raw全wipe、Summary/Anchorredacted。実journalctlはRootnativeHOLD、parserdataだけでは実receiptを発行しない。
+
+- P01710-ORACLE12 / MorningBrokerUnitCycle.create/constructor/execute/check/pause/Live / BROKERSTART001..004: SS343SSC125: 元30min同parent/currentRoot/DB/previousfixedbaseline＋freshnativegenerationで一回start/client0≠readiness、同freshmanager-kernel/freshInvocation-before差/二actualreadiness beforeintentretire。stoppedbaselineはactualjournal必須、UNKNOWN送達後はretained indefinite・親資源unwindせず、legacyretainerreturnedはAssertionError非成功。thread同一/IRQ/budget/null検査、実合成Unit/Root/permitTestとして実行しない。
+
+- P01710-ORACLE13 / MorningPreviousBroker.capture/collectForStartup/collect/anchor/read/base/full/same/Closed/NoPrior / ISSSTOP001..007,ISSCOLD001..007: SS343SSC131132166: actualsameinitial親baseline/wholekernel観測。実NATIVETERMINAL始終とrawjournal全件又はcoldzero-nativeanchor同最新全履歴の二anchor前後同値/startedpresent/canonicalcontentを保持、未知終了をcoldsuccessにしない。NoPriorは当boot空二読かつcoldStoppedだけ、fresh後は同previousbaseline＋freshinvocation全journal再照合。Closed再読は旧同generationだけでfresh最新へずらさず、全source/rawwipe/同thread/parentremainingを保持、実queryはHOLD。
+
+Artemis親/6readiness/2例外/StartupObservation/Journal/前世代/Cycle全十三Main2498行を全review、origin/main SS3213-5/10-13・341/342/343/352/UI251の独立値/順序/null/例外/IRQ/資源後条件へ十三oracle対応。PG28497で485全13owner/costOwner一致・歴史hash差6/候補10wholeTest42canonicalmethodを記録しassertion/runtime資格へ転用0。6種client原Testは実embeddedBroker含みwholeHOLD/部分抽出0、既StartupObservationwhole3全191行は接続しないproxyと6callbacksだけで別資格候補、正規第三者SDK型依存の明示価格/出自/型/runtimeinit境界を先に整える必要がある。BUG2766七Main九knowncatalogを修正前起票し未修正OPEN、実Broker/Root/native/DB/Unit/credential/intent操作0。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py audit evidence/01_PT/018_NK-OPS-001/input/2140_p01710_original_contract_config.json` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。

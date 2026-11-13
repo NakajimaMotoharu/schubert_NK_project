@@ -1,0 +1,3 @@
+# Artemis七Main九catalogの製造仕様
+
+BUG2766/YKT2359。MQ001002009010/SYS004/UI231251253/SS32110・13/312/352/343。Acceptor/Address/RoleのknownJSON固定化3、Managementのchecked/IRQ固定化2、ReadinessのActiveMQ1、StartupのTopology固定化2、親Ops再試行1の九境界だけ元重大Errorを保持。IRQ復元を先に行い、IOExceptionは従来固定化を維持、unknown Runtime/Error/RootUNKNOWN保持・credential・借用SDK資源順は不変。PG28502元byte完全逆変換/GJF-CS0、Maincompile/NullAway/fullstatic/通常PT/coverageは未実施。実embeddedBroker/Root/native/VM/DB/cohort/intent/permitはHOLD、既Test部分抽出0。次に独立proxy/parserの既wholeTest全source/第三者SDK出自/副作用を確認して正常PT資格を得る。既成功の確認再演でなく当修正byteの必要資格であり、旧成功/代替静的/正式1964-53へ合算しない。

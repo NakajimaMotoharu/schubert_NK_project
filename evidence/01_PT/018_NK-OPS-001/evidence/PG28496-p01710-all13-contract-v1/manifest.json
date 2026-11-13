@@ -1,0 +1,192 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T09:20:32.691890+09:00",
+  "source": "08c2e62d9ae768a00dd1a308dcf1e2073977af88",
+  "productionCoreMain": "08c2e62d9ae768a00dd1a308dcf1e2073977af88",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java": "b5d27b117ee2c6fb9de12cf90018f8594821ef6618f552a4c17908c88eaa1e1e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java": "6b0a5c55e0fd08950c50a64292c8b28196869358d78e62a2cf6e3950674b437e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "3d2eb71dd8ef910acb5e18650c15d68cd5c438a9f4917fa970f0f5c91bcf50e4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java": "3eb82d01455cf8d2932baf0bc9ed57c2d843a5bd7e071cdc285958a370413f73",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java": "6b3e87f566e3901e1674a14d3dcad7d3cc60bbcb938ed505ddf6553d3bf6346d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java": "930b0bb1448eaa78c8fa2406a41a06f2b9d1c5cbf6c953b19ec570d1139d386f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java": "68ee0acf699951f5dc9915d0eb12d1605a5b77e3d724dad8c6b4715643053eb0",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.java": "d3d5c0ae5544fa06ebb00b0038bf49391a18729335a0d64d59a91e804023997e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": "0ffaf0718252a5853bde6b40fa7a604b42340898723eebb00ccf031e6b056647",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java": "6b92bf3c97bb72a6b0222f35842e251a19bbaf13808a709f2d9c5b2e54207f78",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java": "18f067e88b43658b276d06a0ef889adde32d039a50e2b1ba8dd654488d2d70bb",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java": "5c69b77ddb52446e8fc833222d8402da87e23ae589b8c0cdc90c6a8061c649c5",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java": "6d93d8d06aef73476b0cae74fd1edbeaf73c5bdd133ae05b872089044c996629"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 2498,
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01710-ORACLE01",
+      "methods": "MorningBrokerExecution.execute/Completion methods/readObservations/observeOps",
+      "testIds": [
+        "BROKERSTART001..004",
+        "ISSBROKER001"
+      ],
+      "expected": "SS341343SSC125128130: sameM-A/原本/INVALIDcurrent同boot-epoch-activation/元30min/DBreadback、真正BrokerfreshCycle/前世代再検証、actualOps六段＋freshjournal二snapshotの最後を保持。readiness再試行は真正宣言AMQのみbudget内/100ms/IRQ復元、criticalpressure停止。credentialowned一回close/passwordwipe、実Root/DB/Unit操作HOLD、knownretry一口BUG2766OPEN。"
+    },
+    {
+      "id": "P01710-ORACLE02",
+      "methods": "ArtemisAcceptorReadinessClient.constructors/inspect/verify/verifyResponse",
+      "testIds": [
+        "MQ013..015",
+        "OPS-ACC-PORT001..013"
+      ],
+      "expected": "SS3212/10/13: actualsingletoncore/factoryNetty/params tcp127.0.0.1:61616 CORE/extraProps空/正確keyset/started trueだけ。missing-null-type-duplicate-extra/unknown Runtime/Errorは非成功、borrowedsessionclose0、parser純portはnativeauthority0。JSONcatalog一口BUG2766。"
+    },
+    {
+      "id": "P01710-ORACLE03",
+      "methods": "ArtemisAddressSettingsReadinessClient.constructors/inspect/verify/verifyResponse/expect/capacities",
+      "testIds": [
+        "MQ010..012"
+      ],
+      "expected": "SS3215: 6address全actual返信でdeadLetter/expiry固定名、全autoCreateDeletefalse、PAGE-FAIL-BLOCK、page8MiB/read16MiB100/retry1-5-25/collision0/idmetrics。memory-page MiBは32/224,32/224,128/896,64/192,128/1920,64/960とmessages50/450又は1000/9000を独立表へ対応、missing型違いnull漂流拒否/borrowedclose0。JSONcatalog一口BUG2766。"
+    },
+    {
+      "id": "P01710-ORACLE04",
+      "methods": "ArtemisManagementReadinessClient.withParentDeadline/requestTimeoutMillis/checkParentDeadline/encodeOperation/managementFailure/inspectBroker/verifyValues/read/query andfixedoperationencoders",
+      "testIds": [
+        "MQ005..007",
+        "ENC001..003"
+      ],
+      "expected": "SS32110SSC075076125130: Ops借用session/two-second request限度と親remaining floor1ms/min2000ms/同期threadlocal ownernested拒否finallyremove、inspectはactualsamequery値immutableでdiskNumber一回snapshot/finite0<=disk<.9、NIO10MiB4/20/512MiB/cache20000/persistent/maxdisk90。只読namespace固定、Expiry count/remove+非空numericselectorのみ、temporaryreplyownedTWRcleanup/borrowedsessionclose0/null-reply・opfailed固定拒否、checkedIRQ復元/unknownRuntimeErroridentity、knownchecked2catalogBUG2766・IO自体既定不変更。"
+    },
+    {
+      "id": "P01710-ORACLE05",
+      "methods": "ArtemisManagementReadinessException.constructor",
+      "testIds": [
+        "MQ005"
+      ],
+      "expected": "SS312/352: fixedmessage Artemis effective broker configuration is unavailable、serial/原provider詳細/cause抑制0の既定catalog。例外型自体にauthorityなし。"
+    },
+    {
+      "id": "P01710-ORACLE06",
+      "methods": "ArtemisQueuePressureClient.constructors/inspect/inspectValues/nonNegative/fraction/limits/Value",
+      "testIds": [
+        "MQ019..021"
+      ],
+      "expected": "SS3215.2-3QA042: exact6queue actualcount/persistentbytes IntegerLong非負のみ、bytes ceil70warning/90critical、sync250450/async-web50009000/expiry10005000・DLQ1alertだがbytecritical優先。閾値同値included/unknown型null負不許可、Value非負/nonnullstate immutable、借用close0/起動許可ではない。"
+    },
+    {
+      "id": "P01710-ORACLE07",
+      "methods": "ArtemisReadinessClient.verifyTopology/inspectTopology/bit",
+      "testIds": [
+        "MQ001..004"
+      ],
+      "expected": "SS3214/13: actual6Address-Queue exactsingletonANYCAST/durable/nottemp/notauto/exists/addressnamequeue match、addressquery→queuequery readonly/borrowedclose0・無作成、unknown型identity、knownAMQcatalogBUG2766。元whole4に実embeddedBrokerありHOLD/部分抽出しない。"
+    },
+    {
+      "id": "P01710-ORACLE08",
+      "methods": "ArtemisReadinessException.constructor",
+      "testIds": [
+        "MQ001..004"
+      ],
+      "expected": "SS312/352: fixedmessage Artemis effective Queue topology is unavailable、未知provider details/cause外部漏洩0、型IllegalStateの既互換とserial固定。"
+    },
+    {
+      "id": "P01710-ORACLE09",
+      "methods": "ArtemisRoleReadinessClient.constructors/inspect/verify/verifyResponse/approved/fields",
+      "testIds": [
+        "MQ016..018"
+      ],
+      "expected": "SS32110SSC075076: 6business+management#mops#fixed expirycount/getcount/getbytes/remove matchのexactrole集合、name+12permissionfields/Boolean実identity/欠落過剰重複拒否。webapiは業務固定sendconsumeのみ、Opsnamespaceだけtemporarycreate/delete、maintenanceはexpiryselectorとread/purgeだけ・業務root権限付与0。actualmappingdeepimmutable、JSONknown一口BUG2766。"
+    },
+    {
+      "id": "P01710-ORACLE10",
+      "methods": "ArtemisStartupObservation.constructors/inspect/inspectEvidence/readEvidence/readPressure/Evidence",
+      "testIds": [
+        "MQ029..031",
+        "ISSBROKER001"
+      ],
+      "expected": "SS32113/SSC130: topology→broker→settings→acceptor→roles→pressureの実六段固定、先頭失敗後後続0、pressureexact6/nonnull/immutable、詳細Evidence nested全deepcopy/redactedtoString。legacyvoidcallbacksはinspectEvidence拒否でnative観測捏造不可、defaultはactual6query同値を使いjournal/credential/Expiryは別必須。Topology二固定化BUG2766。whole既proxy3全191行の通常資格は次別群、純logical結果をBrokerauthorityに転用0。"
+    },
+    {
+      "id": "P01710-ORACLE11",
+      "methods": "BrokerJournalEvidence.contentSha256/anchor/consumeClosedHistory/inspect/inspectStopped/consume/consumeStopped/decode/fields/records",
+      "testIds": [
+        "BROKERSTART003",
+        "ISSSTOP001..007",
+        "ISSCOLD001..007"
+      ],
+      "expected": "SS32113/341/343SSC125131132: fresh同boot-invocationUnit全rawbounded4MiB/LF/strictUTF8-Json全requiredstringsoptional2以外不可/duplicatecursor拒否/優先4..7/errorfatalAMQ224拒否/正単調began-ended境界、起動NIO-active-version2.56+schubertmarker又はactualstopmarker。anchor64KiB1row同latestcursor-content再読、canonical NKJOURNAL1+sortedkeysUTF8hex独立SHA・row順保持・member順不問。IO固定/原raw全wipe、Summary/Anchorredacted。実journalctlはRootnativeHOLD、parserdataだけでは実receiptを発行しない。"
+    },
+    {
+      "id": "P01710-ORACLE12",
+      "methods": "MorningBrokerUnitCycle.create/constructor/execute/check/pause/Live",
+      "testIds": [
+        "BROKERSTART001..004"
+      ],
+      "expected": "SS343SSC125: 元30min同parent/currentRoot/DB/previousfixedbaseline＋freshnativegenerationで一回start/client0≠readiness、同freshmanager-kernel/freshInvocation-before差/二actualreadiness beforeintentretire。stoppedbaselineはactualjournal必須、UNKNOWN送達後はretained indefinite・親資源unwindせず、legacyretainerreturnedはAssertionError非成功。thread同一/IRQ/budget/null検査、実合成Unit/Root/permitTestとして実行しない。"
+    },
+    {
+      "id": "P01710-ORACLE13",
+      "methods": "MorningPreviousBroker.capture/collectForStartup/collect/anchor/read/base/full/same/Closed/NoPrior",
+      "testIds": [
+        "ISSSTOP001..007",
+        "ISSCOLD001..007"
+      ],
+      "expected": "SS343SSC131132166: actualsameinitial親baseline/wholekernel観測。実NATIVETERMINAL始終とrawjournal全件又はcoldzero-nativeanchor同最新全履歴の二anchor前後同値/startedpresent/canonicalcontentを保持、未知終了をcoldsuccessにしない。NoPriorは当boot空二読かつcoldStoppedだけ、fresh後は同previousbaseline＋freshinvocation全journal再照合。Closed再読は旧同generationだけでfresh最新へずらさず、全source/rawwipe/同thread/parentremainingを保持、実queryはHOLD。"
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-10/1"
+  ],
+  "endingStatus": "P01710_WHOLE13_ORIGINAL_PREPARATION_ONLY_RUNTIME_UNACCEPTED",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py",
+    "sha256": "17330794cb6a36accb51b23ec9e053f293cda7cfa28d57b68200f564c4d7cf4b"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2140_p01710_original_contract_config.json",
+    "sha256": "2d3266296d5c0346cc38c45ff988e65efaba79646c829d380026f9669ae56ddb"
+  }
+}

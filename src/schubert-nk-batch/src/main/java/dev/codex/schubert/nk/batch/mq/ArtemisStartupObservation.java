@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -133,6 +134,7 @@ public final class ArtemisStartupObservation {
       try {
         topology.accept(session);
       } catch (ArtemisReadinessException declaredTopology) {
+        StorageIoException.preserveFatal(declaredTopology);
         throw new ArtemisManagementReadinessException();
       }
       broker.accept(session);
@@ -157,6 +159,7 @@ public final class ArtemisStartupObservation {
     try {
       topology = new ArtemisReadinessClient().inspectTopology(session);
     } catch (ArtemisReadinessException declared) {
+      StorageIoException.preserveFatal(declared);
       throw new ArtemisManagementReadinessException();
     }
     return new Evidence(

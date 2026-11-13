@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.mq;
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,7 @@ public final class ArtemisReadinessClient {
       }
       return Map.copyOf(actual);
     } catch (ActiveMQException failure) {
+      StorageIoException.preserveFatal(failure);
       throw new ArtemisReadinessException();
     }
   }
