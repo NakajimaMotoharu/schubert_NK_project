@@ -1,0 +1,74 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T21:03:34.022712+09:00",
+  "source": "2abd5ebfd455c6bf89e09fd457529b831f3e928b",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "ownedSourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 62,
+  "design": [
+    {
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b"
+    },
+    {
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00501-ORACLE01",
+      "artifact": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+      "methods": "BrokerTopology.closedenum/constructor/address/queue/fullyQualifiedQueue/maximumBodyLength/timeToLiveMillis/expirationRequired/values",
+      "testIds": [
+        "PT-JMS-002",
+        "PT-JMS-005"
+      ],
+      "expected": "SS3214/8: exactindependent6addresses indefinedorder; queue=address+.q andFQQN=address::queue, capacities1M/1M/1000/10000/1M/1M; requestTTL5000/reply10000/internalDLQExpiry0; onlyfirst2expirationrequired. NoJMSproviderclasses/network/temporaryqueue creation inthisimmutablecatalog. Physicaldurability/roles/consumerconfiguration remainseparateownerandgates, notinferredfromenum."
+    },
+    {
+      "id": "P00501-ORACLE02",
+      "artifact": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+      "methods": "BrokerTopology.requireAddress/null/unknown/immutability",
+      "testIds": [
+        "PT-JMS-002",
+        "PT-JMS-005"
+      ],
+      "expected": "Exactapprovedphysicaladdress only, nullcontractreject, queueName/nearspace/unknown rejectwithoutdynamiccreation. Enumprivateconstructorclosedconstants/finalfields/JVMinitializationimmutability, noexternalclock/IO/providerexception path. Whole2source/Test andqualifiedPG29478currentMainbyte match; targetI137/L25/M9/C1/B6 miss0 isexistingfresh155scope proof, no rerun/newacceptance orglobalF02F03credit."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P002-03",
+    "WBS-C04"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P005-01/1"
+  ],
+  "endingStatus": "ORIGINAL_BROKER_CATALOG_PUBLIC_CONTRACT_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2336_p00501_audit_contract.json",
+    "sha256": "c091010b2c63505f57407fa408a8c5b5d10a251b63515cc38854244cbf90f5c4"
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "inputs": [
+    {
+      "path": "pom.xml",
+      "sha256": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "plugins": [
+        {
+          "artifact": "maven-enforcer-plugin",
+          "version": "3.6.3",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-enforcer-plugin</ns0:artifactId>\n        <ns0:version>3.6.3</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>toolchain-and-dependency-contract</ns0:id>\n            <ns0:goals><ns0:goal>enforce</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:requireJavaVersion><ns0:version>[25,26)</ns0:version></ns0:requireJavaVersion>\n                <ns0:requireMavenVersion><ns0:version>[3.9.12,4)</ns0:version></ns0:requireMavenVersion>\n                <ns0:dependencyConvergence />\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotless-maven-plugin",
+          "version": "3.10.2",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.diffplug.spotless</ns0:groupId>\n        <ns0:artifactId>spotless-maven-plugin</ns0:artifactId>\n        <ns0:version>3.10.2</ns0:version>\n        <ns0:configuration>\n          <ns0:java>\n            <ns0:googleJavaFormat><ns0:version>1.36.1</ns0:version></ns0:googleJavaFormat>\n          </ns0:java>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>java-format-contract</ns0:id>\n            <ns0:phase>validate</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>default-compile</ns0:id>\n            <ns0:configuration>\n              <ns0:fork>true</ns0:fork>\n              <ns0:showWarnings>true</ns0:showWarnings>\n              <ns0:compilerArgs combine.self=\"override\">\n                <ns0:arg>-Xlint:all</ns0:arg>\n                <ns0:arg>-Werror</ns0:arg>\n                <ns0:arg>-XDcompilePolicy=simple</ns0:arg>\n                <ns0:arg>--should-stop=ifError=FLOW</ns0:arg>\n                <ns0:arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:NullAway:ERROR -XepOpt:NullAway:AnnotatedPackages=dev.codex.schubert.nk -XepOpt:NullAway:JSpecifyMode=true -XepOpt:NullAway:JSpecifyJDKModels=true</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</ns0:arg>\n                <ns0:arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</ns0:arg>\n              </ns0:compilerArgs>\n              <ns0:annotationProcessorPaths>\n                <ns0:path>\n                  <ns0:groupId>com.google.errorprone</ns0:groupId>\n                  <ns0:artifactId>error_prone_core</ns0:artifactId>\n                  <ns0:version>${error-prone.version}</ns0:version>\n                </ns0:path>\n                <ns0:path>\n                  <ns0:groupId>com.uber.nullaway</ns0:groupId>\n                  <ns0:artifactId>nullaway</ns0:artifactId>\n                  <ns0:version>${nullaway.version}</ns0:version>\n                </ns0:path>\n              </ns0:annotationProcessorPaths>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "plugins": [
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} -Dfile.encoding=UTF-8</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "plugins": [
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "plugins": [
+        {
+          "artifact": "maven-jar-plugin",
+          "version": "3.4.1",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\"><ns0:groupId>org.apache.maven.plugins</ns0:groupId><ns0:artifactId>maven-jar-plugin</ns0:artifactId><ns0:version>3.4.1</ns0:version><ns0:executions><ns0:execution><ns0:id>shared-test-fixtures</ns0:id><ns0:goals><ns0:goal>test-jar</ns0:goal></ns0:goals></ns0:execution></ns0:executions></ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:nk.pt.repository>${maven.multiModuleProjectDirectory}</ns0:nk.pt.repository>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+      "plugins": [
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} -Dfile.encoding=UTF-8 --enable-native-access=ALL-UNNAMED</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:nk.pt.repository>${maven.multiModuleProjectDirectory}</ns0:nk.pt.repository>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n            <ns0:broker.template>${maven.multiModuleProjectDirectory}/src/deployment/artemis/etc/broker.xml</ns0:broker.template>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "plugins": [
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:nk.pt.repository>${maven.multiModuleProjectDirectory}</ns0:nk.pt.repository>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n            <ns0:broker.template>${maven.multiModuleProjectDirectory}/src/deployment/artemis/etc/broker.xml</ns0:broker.template>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n    "
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "plugins": [
+        {
+          "artifact": "maven-compiler-plugin",
+          "version": "3.14.0",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>\n        <ns0:version>3.14.0</ns0:version>\n        <ns0:configuration>\n          <ns0:showWarnings>true</ns0:showWarnings>\n          <ns0:compilerArgs>\n            <ns0:arg>-Xlint:all</ns0:arg>\n            <ns0:arg>-Werror</ns0:arg>\n          </ns0:compilerArgs>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "maven-surefire-plugin",
+          "version": "3.5.4",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.apache.maven.plugins</ns0:groupId>\n        <ns0:artifactId>maven-surefire-plugin</ns0:artifactId>\n        <ns0:version>3.5.4</ns0:version>\n        <ns0:configuration>\n          <ns0:failIfNoTests>true</ns0:failIfNoTests>\n          <ns0:redirectTestOutputToFile>true</ns0:redirectTestOutputToFile>\n          <ns0:argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</ns0:argLine>\n          <ns0:systemPropertyVariables>\n            <ns0:nk.pt.repository>${maven.multiModuleProjectDirectory}</ns0:nk.pt.repository>\n            <ns0:broker.template>${maven.multiModuleProjectDirectory}/src/deployment/artemis/etc/broker.xml</ns0:broker.template>\n            <ns0:user.language>ja</ns0:user.language>\n            <ns0:user.country>JP</ns0:user.country>\n            <ns0:user.timezone>Asia/Tokyo</ns0:user.timezone>\n          </ns0:systemPropertyVariables>\n        </ns0:configuration>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "jacoco-maven-plugin",
+          "version": "${jacoco.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>org.jacoco</ns0:groupId>\n        <ns0:artifactId>jacoco-maven-plugin</ns0:artifactId>\n        <ns0:version>${jacoco.version}</ns0:version>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>prepare-coverage-agent</ns0:id>\n            <ns0:goals><ns0:goal>prepare-agent</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-report</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>report</ns0:goal></ns0:goals>\n          </ns0:execution>\n          <ns0:execution>\n            <ns0:id>coverage-check</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n            <ns0:configuration>\n              <ns0:rules>\n                <ns0:rule>\n                  <ns0:element>BUNDLE</ns0:element>\n                  <ns0:limits>\n                    <ns0:limit><ns0:counter>LINE</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>BRANCH</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>METHOD</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                    <ns0:limit><ns0:counter>CLASS</ns0:counter><ns0:value>COVEREDRATIO</ns0:value><ns0:minimum>1.0</ns0:minimum></ns0:limit>\n                  </ns0:limits>\n                </ns0:rule>\n              </ns0:rules>\n            </ns0:configuration>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n      "
+        },
+        {
+          "artifact": "spotbugs-maven-plugin",
+          "version": "${spotbugs.plugin.version}",
+          "configuration": "<ns0:plugin xmlns:ns0=\"http://maven.apache.org/POM/4.0.0\">\n        <ns0:groupId>com.github.spotbugs</ns0:groupId>\n        <ns0:artifactId>spotbugs-maven-plugin</ns0:artifactId>\n        <ns0:version>${spotbugs.plugin.version}</ns0:version>\n        <ns0:configuration>\n          <ns0:effort>Max</ns0:effort>\n          <ns0:threshold>Low</ns0:threshold>\n          <ns0:failOnError>true</ns0:failOnError>\n          <ns0:xmlOutput>true</ns0:xmlOutput>\n        </ns0:configuration>\n        <ns0:executions>\n          <ns0:execution>\n            <ns0:id>static-analysis</ns0:id>\n            <ns0:phase>verify</ns0:phase>\n            <ns0:goals><ns0:goal>check</ns0:goal></ns0:goals>\n          </ns0:execution>\n        </ns0:executions>\n      </ns0:plugin>\n    "
+        }
+      ]
+    }
+  ],
+  "productionModules": [
+    "src/schubert-nk-protocol",
+    "src/schubert-nk-storage",
+    "src/schubert-nk-bootstrap",
+    "src/schubert-nk-api",
+    "src/schubert-nk-web",
+    "src/schubert-nk-batch"
+  ],
+  "toolModuleSeparate": "program/characterization",
+  "rootProperties": {
+    "maven.compiler.release": "25",
+    "project.build.sourceEncoding": "UTF-8",
+    "error-prone.version": "2.50.0",
+    "nullaway.version": "0.14.1",
+    "jspecify.version": "1.0.1"
+  },
+  "rules": [
+    {
+      "path": "tools/quality/static/pmd.xml",
+      "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+    },
+    {
+      "path": "tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    }
+  ]
+}

@@ -64,3 +64,6 @@ WBS-P018-08.01,WBS-P018-08.02,WBS-P018-08.03公開source契約/独立期待値/T
 
 
 WBS-P018-09公開source契約/独立期待値/TestIDは[4260_P01809ログ主四認証関連四・独立期待値対応.md](4260_P01809ログ主四認証関連四・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+WBS-F03/1公開品質scope/不足条件: [PG29526](evidence/PG29526-f03-public-six-module-preparation-v1/manifest.json)、[対応表](../../../documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1541_F03六module規約・公開対象・残HOLD対応.md)。原/1のみ、新PT/coverage/全F03/正式認定0。

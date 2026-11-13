@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "qualifiedSource": "24507ea0797780b2e71beeb5cf9b8f6cbbe5a29b",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "originalRun": "PG29476-LOGIN-GRAPH-CONNECTED155",
+  "originalPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29478-login-independent-v1/manifest.json",
+    "sha256": "eeab9b2aee8667feca3734855e68b032f707c774a426d9029d7e19daafe4f751"
+  },
+  "originalTests": 155,
+  "wholeTopologyCases": [
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "nullUnknownAndNearMatchAddressesAreDenied()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.BrokerTopologyTest",
+      "name": "sixDestinationsMatchTheIndependentPhysicalAndLimitOracle()"
+    }
+  ],
+  "wholeTopologyTests": 2,
+  "inputHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630"
+  },
+  "physicalHash": "ffb26a6e704e399d6a190eff1d3a7ac6608b07ce6bf8eb33087894227724f675",
+  "allSourceCounters": {
+    "INSTRUCTION": {
+      "covered": 137,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 6,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 25,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 12,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 9,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "counterProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29478-login-independent-v1/all188-physical-per-class-counters.json",
+    "sha256": "d6994e5a202711d9a6d078ba3132dce6bcf83c739a1a0e9316bfa6b960cc1f48"
+  },
+  "independentLiteralVectors": [
+    {
+      "address": "nk.sync.request",
+      "queue": "nk.sync.request.q",
+      "fqqn": "nk.sync.request::nk.sync.request.q",
+      "maximumBodyLength": 1000000,
+      "ttlMillis": 5000,
+      "expirationRequired": true
+    },
+    {
+      "address": "nk.sync.reply.web",
+      "queue": "nk.sync.reply.web.q",
+      "fqqn": "nk.sync.reply.web::nk.sync.reply.web.q",
+      "maximumBodyLength": 1000000,
+      "ttlMillis": 10000,
+      "expirationRequired": true
+    },
+    {
+      "address": "nk.async.work",
+      "queue": "nk.async.work.q",
+      "fqqn": "nk.async.work::nk.async.work.q",
+      "maximumBodyLength": 1000,
+      "ttlMillis": 0,
+      "expirationRequired": false
+    },
+    {
+      "address": "nk.web.log",
+      "queue": "nk.web.log.q",
+      "fqqn": "nk.web.log::nk.web.log.q",
+      "maximumBodyLength": 10000,
+      "ttlMillis": 0,
+      "expirationRequired": false
+    },
+    {
+      "address": "nk.dead.letter",
+      "queue": "nk.dead.letter.q",
+      "fqqn": "nk.dead.letter::nk.dead.letter.q",
+      "maximumBodyLength": 1000000,
+      "ttlMillis": 0,
+      "expirationRequired": false
+    },
+    {
+      "address": "nk.expiry",
+      "queue": "nk.expiry.q",
+      "fqqn": "nk.expiry::nk.expiry.q",
+      "maximumBodyLength": 1000000,
+      "ttlMillis": 0,
+      "expirationRequired": false
+    }
+  ],
+  "readOnlyProofReuse": true,
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "actualBrokerRootDbNativeHeldOperations": 0
+}
