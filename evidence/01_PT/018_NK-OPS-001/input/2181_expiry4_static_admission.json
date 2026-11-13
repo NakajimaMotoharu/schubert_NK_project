@@ -1,0 +1,384 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG28710-EXPIRY-ORIGINAL3-NEW1-NORMAL",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28730-expiry4-prepare-v1/manifest.json",
+    "sha256": "da0a2e4d9ca08b6b9fe148a3fb37a67fcca0586037510a7cd949807e944d2209"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28732-expiry4-static-v1/manifest.json",
+    "sha256": "a1fb5f5ec46fc120643c70b44318705b296b319dc8fe9dfdfac5ea10fdd42886"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException failure) {",
+      "sourceLine": 186,
+      "occurrences": 1,
+      "reason": "SS332 SSC310 section9 explicitly retains existing stage/finish Runtime-to-fixed-failure conversion after TWR. This exact clause preserves a fatal graph before the approved failure catalog; no Runtime/NPE is caught and returned as success. Uncalled stage/finish stay uncovered and unqualified by this read-only Test, with all counter misses retained.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException failure) {",
+      "sourceLine": 246,
+      "occurrences": 1,
+      "reason": "SS332 SSC310 section9 explicitly retains existing stage/finish Runtime-to-fixed-failure conversion after TWR. This exact clause preserves a fatal graph before the approved failure catalog; no Runtime/NPE is caught and returned as success. Uncalled stage/finish stay uncovered and unqualified by this read-only Test, with all counter misses retained.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "var query = presentRead(statement);",
+      "sourceLine": 265,
+      "occurrences": 1,
+      "reason": "These are nonnull aliases of owned Statement/ResultSet already enclosed in explicit typed-close nested try/finally, not new resources requiring another close. JDBC connection is borrowed and must not be closed. Whole Test checks all acquired row/statement counters exactly once for normal, null, provider and compound failures.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "var values = presentRead(rows);",
+      "sourceLine": 271,
+      "occurrences": 1,
+      "reason": "These are nonnull aliases of owned Statement/ResultSet already enclosed in explicit typed-close nested try/finally, not new resources requiring another close. JDBC connection is borrowed and must not be closed. Whole Test checks all acquired row/statement counters exactly once for normal, null, provider and compound failures.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 296,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 296,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 299,
+      "occurrences": 1,
+      "reason": "SS332 typed read cleanup deliberately allows a stronger fatal/unknown secondary to escape after retaining/safely cataloging the lower-priority primary. Removing the cleanup throw changes approved failure priority. Both resources are attempted independently, and originalError identity/suppression and exact close counters are independently asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 303,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 303,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 307,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 307,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 310,
+      "occurrences": 1,
+      "reason": "SS332 typed read cleanup deliberately allows a stronger fatal/unknown secondary to escape after retaining/safely cataloging the lower-priority primary. Removing the cleanup throw changes approved failure priority. Both resources are attempted independently, and originalError identity/suppression and exact close counters are independently asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 314,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 314,
+      "occurrences": 1,
+      "reason": "The read-only resource contract must retain primary identity while attempting ResultSet then Statement cleanup. Exact typed catch clauses pass failure to JdbcResourceFailures and rethrow original or approved stronger fatal/unknown secondary, never normalizing NPE/Error to success. Independent whole Test68 compound vectors and new11x3 fatal graph vectors verify the read path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable primary) {",
+      "sourceLine": 453,
+      "occurrences": 1,
+      "reason": "SS332 SSC310 section9 requires usingJdbc in successful to retain the exact Java25 TWR primary/addSuppressed/self-suppression contract. Both exact Throwable clauses rethrow rather than normalize success. This read-only whole Test does not execute successful; all those method/branch misses remain explicit, with no claim of testing this other phase.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable secondary) {",
+      "sourceLine": 456,
+      "occurrences": 1,
+      "reason": "SS332 SSC310 section9 requires usingJdbc in successful to retain the exact Java25 TWR primary/addSuppressed/self-suppression contract. Both exact Throwable clauses rethrow rather than normalize success. This read-only whole Test does not execute successful; all those method/branch misses remain explicit, with no claim of testing this other phase.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 29,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "var checked = present(statement);",
+      "sourceLine": 40,
+      "occurrences": 1,
+      "reason": "SS331 resource ownership requires borrowed Connection unchanged and owned ResultSet then PreparedStatement closed exactly once. These acquired objects are enclosed by explicit nested try/finally with typed JdbcResourceFailures priority, rather than Java TWR self-suppression semantics. Whole Test independently checks every acquisition/body/close failure, null acquisition and exact close counts; this exact analyzer report does not model the explicit nullable resource close path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "var values = present(row);",
+      "sourceLine": 47,
+      "occurrences": 1,
+      "reason": "SS331 resource ownership requires borrowed Connection unchanged and owned ResultSet then PreparedStatement closed exactly once. These acquired objects are enclosed by explicit nested try/finally with typed JdbcResourceFailures priority, rather than Java TWR self-suppression semantics. Whole Test independently checks every acquisition/body/close failure, null acquisition and exact close counts; this exact analyzer report does not model the explicit nullable resource close path.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 62,
+      "occurrences": 1,
+      "reason": "SS331 explicit cleanup priority intentionally permits a fatal/unknown secondary to replace a weaker SQL catalog while preserving the primary/suppressed graph and attempting outer cleanup. Removing this throw changes the approved resource contract. Independent whole-Test vectors cover body/close combinations and same-object/self-suppressed cases; no exception becomes normal success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 70,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 70,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 73,
+      "occurrences": 1,
+      "reason": "SS331 explicit cleanup priority intentionally permits a fatal/unknown secondary to replace a weaker SQL catalog while preserving the primary/suppressed graph and attempting outer cleanup. Removing this throw changes the approved resource contract. Independent whole-Test vectors cover body/close combinations and same-object/self-suppressed cases; no exception becomes normal success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 77,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 77,
+      "occurrences": 1,
+      "reason": "These exact clauses retain the same primary Throwable while guaranteeing both owned cleanup attempts. They do not return normally for NPE/Error: unknown exceptions keep identity, fatal graphs propagate, and only the approved SQLException catalog is fixed after closure. The independent provider/body/compound-close vectors assert identity and resource postconditions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 81,
+      "occurrences": 1,
+      "reason": "This exact site handles the current interrupt flag or the independent JUnit-owned fixed pool. Production creates no worker: it checks caller interrupt before/after owned JDBC cleanup. Test workers have Future.get(5 seconds) and finally shutdownNow plus awaitTermination(5 seconds) assertions; they operate only isolated memory Proxies and never a J2EE managed service.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Throwable> faults = new HashMap<>();",
+      "sourceLine": 185,
+      "occurrences": 1,
+      "reason": "Each Probe is a new single-threaded in-memory fixture for one vector; this whole Test creates no worker or shared mutable global fixture. There is no concurrent map access or Production cache. Faults, observed calls and input values intentionally remain independent and are checked after synchronous read returns/throws.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Integer> calls = new HashMap<>();",
+      "sourceLine": 186,
+      "occurrences": 1,
+      "reason": "Each Probe is a new single-threaded in-memory fixture for one vector; this whole Test creates no worker or shared mutable global fixture. There is no concurrent map access or Production cache. Faults, observed calls and input values intentionally remain independent and are checked after synchronous read returns/throws.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Object> values =",
+      "sourceLine": 187,
+      "occurrences": 1,
+      "reason": "Each Probe is a new single-threaded in-memory fixture for one vector; this whole Test creates no worker or shared mutable global fixture. There is no concurrent map access or Production cache. Faults, observed calls and input values intentionally remain independent and are checked after synchronous read returns/throws.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "sourceLine": 215,
+      "occurrences": 1,
+      "reason": "Standalone JUnit JDK Proxy implements precisely the named JDBC interface using its defining loader. No DB, arbitrary application loading or J2EE context lookup occurs. Handler rejects unapproved borrowed-connection operations and owns no OS/backend resource.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "PreparedStatement.class.getClassLoader(),",
+      "sourceLine": 241,
+      "occurrences": 1,
+      "reason": "Standalone JUnit JDK Proxy implements precisely the named JDBC interface using its defining loader. No DB, arbitrary application loading or J2EE context lookup occurs. Handler rejects unapproved borrowed-connection operations and owns no OS/backend resource.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditResourceFailureTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "sourceLine": 265,
+      "occurrences": 1,
+      "reason": "Standalone JUnit JDK Proxy implements precisely the named JDBC interface using its defining loader. No DB, arbitrary application loading or J2EE context lookup occurs. Handler rejects unapproved borrowed-connection operations and owns no OS/backend resource.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceCases.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "message": "Avoid using literals such as 1 in if statements",
+      "sourceAnchor": "if (first >= 1) samples.add(sample(pair, first, first, true));",
+      "sourceLine": 42,
+      "occurrences": 1,
+      "reason": "This exact immutable independent oracle labels SQLException as0 and the four unknown/fatal Throwable kinds1..4. Same-identity secondary samples are deliberately added for unknown kinds only; literal1 is the documented table boundary, not an unexplained configurable business threshold. Complete independent matrix asserts68 and literal expected identities/suppression without calling Production to compute expected.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

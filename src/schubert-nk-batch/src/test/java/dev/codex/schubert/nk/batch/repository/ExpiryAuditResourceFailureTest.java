@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/DAT009/OPS009/UI251/SS331200/332063199; EXP310001; BUG1530/YKT1290. */
 final class ExpiryAuditResourceFailureTest {
+  private static final String ROW_CLOSE = "row.close";
+
   static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
@@ -32,7 +34,7 @@ final class ExpiryAuditResourceFailureTest {
     var probe = new Probe();
     var primary = new AssertionError("public primary fixture");
     probe.faults.put("row.next", primary);
-    probe.faults.put("row.close", new SQLException("public secondary fixture"));
+    probe.faults.put(ROW_CLOSE, new SQLException("public secondary fixture"));
     Throwable actual =
         assertThrows(
             Throwable.class, () -> new ExpiryAuditRepository(probe.connection()).read(HANDLE));
@@ -110,7 +112,7 @@ final class ExpiryAuditResourceFailureTest {
           "row.next",
           "row.getString",
           "row.getObject",
-          "row.close",
+          ROW_CLOSE,
           "statement.close"
         }) {
       for (Throwable primary :
@@ -129,6 +131,51 @@ final class ExpiryAuditResourceFailureTest {
                 Throwable.class, () -> new ExpiryAuditRepository(probe.connection()).read(HANDLE)),
             point);
         assertEquals(0, primary.getSuppressed().length);
+        probe.assertAuditClosed();
+      }
+    }
+  }
+
+  /** EXP310004/BUG2774: independently fixed provider points and fatal graph identity. */
+  @Test
+  void knownSqlFatalGraphsKeepOriginalErrorAndCloseEveryAcquiredResource() {
+    for (String point :
+        new String[] {
+          "audit.prepare",
+          "statement.setQueryTimeout",
+          "statement.setLong",
+          "statement.setObject",
+          "statement.setInt",
+          "statement.executeQuery",
+          "row.next",
+          "row.getString",
+          "row.getObject",
+          ROW_CLOSE,
+          "statement.close"
+        }) {
+      for (int graph = 0; graph < 3; graph++) {
+        var probe = new Probe();
+        probe.auditPresent = true;
+        var marker = new AssertionError("public fatal graph marker");
+        var failure = new SQLException("public declared provider fixture");
+        switch (graph) {
+          case 0 -> failure.initCause(marker);
+          case 1 -> failure.addSuppressed(marker);
+          default -> {
+            var cycle = new IllegalArgumentException("public cyclic provider fixture");
+            failure.initCause(cycle);
+            cycle.initCause(failure);
+            cycle.addSuppressed(marker);
+          }
+        }
+        probe.faults.put(point, failure);
+        assertSame(
+            marker,
+            assertThrows(
+                AssertionError.class,
+                () -> new ExpiryAuditRepository(probe.connection()).read(HANDLE)),
+            point);
+        assertEquals(0, marker.getSuppressed().length);
         probe.assertAuditClosed();
       }
     }
@@ -220,7 +267,12 @@ final class ExpiryAuditResourceFailureTest {
               (proxy, method, args) -> {
                 hit((reference ? "reference.row." : "row.") + method.getName());
                 return switch (method.getName()) {
-                  case "next" -> (reference || auditPresent) && position[0]++ == 0;
+                  case "next" -> {
+                    if (!reference && !auditPresent) yield false;
+                    int current = position[0];
+                    position[0]++;
+                    yield current == 0;
+                  }
                   case "getObject" -> {
                     if (reference) {
                       assertEquals(Boolean.class, args[1]);
@@ -240,7 +292,7 @@ final class ExpiryAuditResourceFailureTest {
 
     void assertAuditClosed() {
       assertEquals(statements, calls.getOrDefault("statement.close", 0));
-      assertEquals(rowsets, calls.getOrDefault("row.close", 0));
+      assertEquals(rowsets, calls.getOrDefault(ROW_CLOSE, 0));
     }
   }
 }
