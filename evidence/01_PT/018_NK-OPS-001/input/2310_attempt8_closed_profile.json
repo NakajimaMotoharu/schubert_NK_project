@@ -1,0 +1,84 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29432-INSPECTION-ATTEMPT-ORIGINAL-WHOLE8-FINITE-WORKER",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "WBS-P004-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "WBS-P017-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/004_NK-DAT-001/4235_InspectionAttempt原八件・有限worker単体仕様.md",
+      "sha256": "516fd893fddb654571c236b7783f3e5c75fefcafe508926594669e2dc52f389b"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29420-attempt8-finite-source-oracle-v1/manifest.json",
+      "sha256": "8985f469e37c41868519825dc9803d882bee6f82923b1d11171da37bcb822442"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "tests": 8
+    }
+  ],
+  "expectedTests": 8,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29424-attempt8-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29426-attempt8-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29430-attempt8-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29432-attempt8-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29426-attempt8-prepare-v1",
+    "unit": "pg29432-attempt8-unit-v1"
+  },
+  "newTestDefinitions": 0,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

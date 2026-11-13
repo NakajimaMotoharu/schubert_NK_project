@@ -1,0 +1,69 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG29432-INSPECTION-ATTEMPT-ORIGINAL-WHOLE8-FINITE-WORKER",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29426-attempt8-prepare-v1/manifest.json",
+    "sha256": "7037030aa41a9855fa62ede1db0a9c860f20007152de24a4b27a1cf2815f7dc3"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1/manifest.json",
+    "sha256": "df9f5928524e31d4c43ab4942a6aa2a55eaa90d3b15dc370f4f9c286e9f24484"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "rawMultiplicity": 1,
+      "reason": "The executor is released in unconditional finally shutdownNow plus asserted finite awaitTermination10SECONDS. TWR.close waits indefinitely and would reintroduce BUG2833. Failure/cancellation remains failed PT.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 196,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 214,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"fixture workers not stopped\");",
+      "sourceLine": 215,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

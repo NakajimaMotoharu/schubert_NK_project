@@ -1,0 +1,75 @@
+{
+  "actualExit": 0,
+  "productionCoreMain": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+  "source": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+  "sourceRef": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java",
+    "sha256": "f14d52b486f8e263ba67f8c08ddb0e37c2aa2772b28f8e4e61f2717f27d4ab74"
+  },
+  "designRefs": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    }
+  ],
+  "independentContractMatrix": [
+    {
+      "id": "HANDOFF-AUDIT-01",
+      "case": "known callback IOException, reacquire succeeds",
+      "expected": "fixed Failure without provider cause/suppressed",
+      "sourceDisposition": "MATCHES_EXPLICIT_SS341_TYPED_CATALOG"
+    },
+    {
+      "id": "HANDOFF-AUDIT-02",
+      "case": "pre-callback SQLException",
+      "expected": "fixed Failure, zero child, borrowed connection not closed",
+      "sourceDisposition": "MATCHES_EXPLICIT_SS341_TYPED_CATALOG"
+    },
+    {
+      "id": "HANDOFF-AUDIT-03",
+      "case": "unknown callback Runtime/NPE/Error, successful reacquire",
+      "expected": "same callback object, no value",
+      "sourceDisposition": "MATCHES_SS341_SSC063"
+    },
+    {
+      "id": "HANDOFF-AUDIT-04",
+      "case": "unknown callback plus known reacquire SQLException/Failure",
+      "expected": "same callback object plus new fixed secondary, no raw SQL graph",
+      "sourceDisposition": "MATCHES_SS341_SSC063"
+    },
+    {
+      "id": "HANDOFF-AUDIT-05",
+      "case": "known callback IOException plus reacquire SQL failure",
+      "expected": "fixed Failure, no borrowed transaction/connection ownership",
+      "sourceDisposition": "MATCHES_SS341_SSC063"
+    },
+    {
+      "id": "HANDOFF-AUDIT-06",
+      "case": "ordinary API/JDBC fatal graph rule copied blanket into batch handoff",
+      "expected": "not authorized; explicit batch typed priority first, SS332 excludes blanket batch changes",
+      "sourceDisposition": "INITIAL_BUG2828_GENERALIZED_FIX_HYPOTHESIS_WITHDRAWN"
+    },
+    {
+      "id": "HANDOFF-AUDIT-07",
+      "case": "unknown callback plus distinct unknown/fatal reacquire cleanup",
+      "expected": "SS341 explicitly requires separate independent PT determination; current source not certified",
+      "sourceDisposition": "EXISTING_UNQUALIFIED_MATRIX_HOLD_NOT_SUCCESS"
+    }
+  ],
+  "matrixIsSpecOnly": true,
+  "productTestsExecuted": 0,
+  "MainChanged": false,
+  "knownGraphBlanketChangeApplicable": false,
+  "unknownSecondaryMatrixAccepted": false,
+  "actualDBRootChildOperations": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false
+}

@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2310_attempt8_closed_profile.json",
+    "sha256": "ba859f049de48a5b9450fd095d4b05da5cdb66992215e4911f6314678bdb1656"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java": "87e838668d69c083eaf0b9e9420a59f47ec344629a492c8002edd7adbfc8a8a7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "3713fb2ce03a4ec926c4d193051373348da922c15d5f22e8f43cabd215b36dcd",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java": "e470927d66599488f16a7d9db8253372a728ad5e7579e8da52989d11b2e4606c",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29426-attempt8-prepare-v1/manifest.json",
+    "sha256": "7037030aa41a9855fa62ede1db0a9c860f20007152de24a4b27a1cf2815f7dc3"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29428-attempt8-static-v1/manifest.json",
+    "sha256": "df9f5928524e31d4c43ab4942a6aa2a55eaa90d3b15dc370f4f9c286e9f24484"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2311_attempt8_static_admission.json",
+    "sha256": "38b43df0c4c821640608fbe22f99409f25f94fb08d9152a2b35c7ae531420f32"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "CloseResource",
+      "line": "190",
+      "reason": "The executor is released in unconditional finally shutdownNow plus asserted finite awaitTermination10SECONDS. TWR.close waits indefinitely and would reintroduce BUG2833. Failure/cancellation remains failed PT.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "190",
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "196",
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "214",
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "215",
+      "reason": "Plain JUnit immutable-record 64-task fixture, not J2EE/Web thread creation. Original all Futures have get10SECONDS; unconditional finally shutdownNow with asserted awaitTermination10SECONDS owns worker termination. No Root/DB/child/authority operations.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

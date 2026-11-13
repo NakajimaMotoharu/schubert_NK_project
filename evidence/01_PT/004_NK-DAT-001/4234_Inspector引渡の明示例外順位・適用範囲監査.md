@@ -1,0 +1,5 @@
+# Inspector引渡の明示例外順位・適用範囲監査
+
+InspectorLockHandoff全104行とorigin/main SS3417.3/SSC063、SS312SSC329330、SS332の適用範囲を照合。batch既知IO/SQLのfixedFailure、未知callback同一性＋既知再取得SQLの固定secondary、unlock一回→同期子終端→finally再取得一回は明示設計と一致。ordinary APIのgraph規則をbatchへ一括適用するBUG2828初回修正仮説は採用しない。未知callback＋別未知/fatal再取得の一般順位はSS341で別独立PTを要求しており未認定HOLD、当source全runtime未受入。独立仕様行列7をSPEC_ONLYで保存、Main/compile/製品PT/実DB/Root/子/authorityfixture操作0。元190新0/正式1964-53/工数null。
+
+根拠 evidence/01_PT/018_NK-OPS-001/evidence/PG29414-handoff-explicit-priority-audit-v1/manifest.json SHA256 601e8cb731c4b7cca62a1ec5df02207a18153581a84a1f57774b5f46d7705be2。全7行は読取監査であり実行済PTに含めない。元設計と元障害仮説を両方保全し、既知型の仕様をコード都合で変更しない。未受入の一般cleanup行列・真正子/排他/借用DB/全scope品質は残条件。

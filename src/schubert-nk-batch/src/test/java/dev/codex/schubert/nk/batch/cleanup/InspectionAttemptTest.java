@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.CleanupCounts;
@@ -186,7 +187,8 @@ final class InspectionAttemptTest {
 
   @Test
   void independentConcurrentObservations() throws Exception {
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       List<Future<InspectionAttempt>> results = new ArrayList<>();
       for (int i = 0; i < 64; i++) {
         int index = i;
@@ -208,6 +210,9 @@ final class InspectionAttemptTest {
         assertEquals(new CleanupCounts(i + 9, i + 5, 4), result.cumulative());
         assertEquals(Outcome.WARNING, result.outcome());
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), "fixture workers not stopped");
     }
   }
 }
