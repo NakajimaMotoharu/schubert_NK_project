@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T16:55:52.933619+00:00",
+  "source": "cfd0a93baf2290ee15ebd14522f3a9fd8c4702aa",
+  "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29956-maintenance-records16-post-v2/manifest.json",
+    "sha256": "d85bb04921d0369d4ffa10e456a066f41ca5d05989dd91a535978612cc2b72b0"
+  },
+  "technical": {
+    "kind": "WHOLE_RECORDS8_FINITE_REWORK_NEW_PURE_RETIREMENT6_RUN2_SUPPORT_NORMAL16",
+    "source": "cfd0a93baf2290ee15ebd14522f3a9fd8c4702aa",
+    "productionCoreMain": "3f65cf67391b729feeca63f7b037e7c1f82db9e8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29956-maintenance-records16-post-v2/manifest.json",
+      "sha256": "d85bb04921d0369d4ffa10e456a066f41ca5d05989dd91a535978612cc2b72b0"
+    },
+    "actualExecutions": 16,
+    "newDefinitions": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 6,
+    "positiveMainCrc": 6,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 545,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 43,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 116,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 51,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 29,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 6,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "defaultAnalyzerMethodObservation": {
+      "actualJvmCodeMethods": 53,
+      "byClass": {
+        "dev/codex/schubert/nk/batch/file/MaintenanceRecords": 16,
+        "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome": 6,
+        "dev/codex/schubert/nk/batch/repository/BatchRun": 6,
+        "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": 8,
+        "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement": 10,
+        "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion": 7
+      },
+      "jacocoReportedMethods": {
+        "covered": 29,
+        "missed": 0
+      },
+      "manualExclusions": [],
+      "whole451ExceptionApproved": false
+    },
+    "syntheticIsolatedTraceFiles": 4,
+    "actualOriginalRootDbVmNativeBackupKeyActions": 0,
+    "formalAcceptanceAdded": 0,
+    "whole451Accepted": false,
+    "effortRate": null
+  },
+  "original8NormalizedInverse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29958-maintenance-records-original8-inverse-v2/manifest.json",
+    "sha256": "9eca2aef49ffda3b7b39531fbce3e32c3f884f6c789757ac2b5a22beb5d629b8"
+  },
+  "oracleCorrection": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29928-retirement-value-independent-oracle-before-fix-v1/manifest.json",
+    "sha256": "add7837433aa9dc4c1531de91a61387911e3ce60eeaec642547370b3b66eefb9"
+  },
+  "syntheticOutputs": [
+    {
+      "testId": "PT-BAT-038",
+      "filename": "PT-BAT-038-anchor.txt",
+      "size": 72,
+      "sha256": "8c4f9b67405754df66eccf8a111aed2770b8c1ba32437fcbcc5fd548eca9c639",
+      "expectedAscii": "NKRUN1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\n",
+      "actualAscii": "NKRUN1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\n",
+      "origin": "NewUnitprivatecwd/target synthetichandwrittengolden only; notexistingraworiginal"
+    },
+    {
+      "testId": "PT-BAT-038",
+      "filename": "PT-BAT-038-activation.txt",
+      "size": 109,
+      "sha256": "f13f9d68e35c5b4fc1a5f12555a612b559d1956f33d647da874c007efe7a2c13",
+      "expectedAscii": "NKACT1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n",
+      "actualAscii": "NKACT1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n",
+      "origin": "NewUnitprivatecwd/target synthetichandwrittengolden only; notexistingraworiginal"
+    },
+    {
+      "testId": "PT-BAT-038",
+      "filename": "PT-BAT-038-completion-0.txt",
+      "size": 140,
+      "sha256": "0e5b2051407651e487d77bb99b2e31a94a95e07dfe548e85b644f9b327eafe40",
+      "expectedAscii": "NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n0\n",
+      "actualAscii": "NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n0\n",
+      "origin": "NewUnitprivatecwd/target synthetichandwrittengolden only; notexistingraworiginal"
+    },
+    {
+      "testId": "PT-BAT-038",
+      "filename": "PT-BAT-038-completion-10.txt",
+      "size": 141,
+      "sha256": "21b74d8bdf8ddfceeb4cf3019ef87eb897e0eb3f06bbbaf72518e1fb3fda4651",
+      "expectedAscii": "NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n10\n",
+      "actualAscii": "NKDONE1\n12345678-9abc-def0-8123-456789abcdef\n2026-09-12T04:05:06.123456Z\nfedcba98-7654-3210-8fed-cba987654321\n2026-09-12T05:06:07.234567Z\n10\n",
+      "origin": "NewUnitprivatecwd/target synthetichandwrittengolden only; notexistingraworiginal"
+    }
+  ],
+  "syntheticFsDisclosure": "4 new isolatedUnitcwd synthetic trace files were created/read. No access to actual originalnamespace/DB/VM/native/key. post actualBackend...Fs... zero denotes actual backend facilities, not absence of all synthetic FS I/O.",
+  "publisherOriginalInvocationFailure": "PG29966 missing documented tools/quality PYTHONPATH, no scan/stage/commit. NewslotPG29968 with requiredPYTHONPATH committed0; no test/source/operation retry. Rawstderr/stdout preserved privately.",
+  "formalAcceptanceAdded": 0
+}
