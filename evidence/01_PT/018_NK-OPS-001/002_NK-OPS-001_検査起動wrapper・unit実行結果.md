@@ -52,3 +52,6 @@ HTTP所有原二新一通常単体結果：[4251_HTTP所有原二新一通常単
 
 
 Web稼働判定終端フラグ通常六結果：[4253_Web稼働判定終端フラグ通常六結果.md](4253_Web稼働判定終端フラグ通常六結果.md)。通常whole6成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
+
+
+Web停止原六新一通常七結果：[4255_Web停止原六新一通常七結果.md](4255_Web停止原六新一通常七結果.md)。通常whole7成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
