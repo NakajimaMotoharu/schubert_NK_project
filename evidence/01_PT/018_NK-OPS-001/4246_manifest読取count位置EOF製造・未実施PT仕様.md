@@ -17,3 +17,6 @@ NK-OPS-001/WBS-P018-02; SCM001..005/SYS002004/OPS009; UI251; SS3439.1/11.1・SS3
 
 
 借用Root/原本/実release/秘密/key/VM/サービスを操作0。BUG2794/16target YKT2399は修正sourceを保存しても再試験未完OPEN、原190/451/ITST/工数率不変。固定source/command/hashは後続sourcejoinへ追記。
+
+
+source固定commit ae1f2b2eb9205af679b8fad522dc8aabc4ecff6a、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28946-manifest-read-source-join-v1/manifest.json) SHA9bd6a3a13d9268c93fd3f67c022b8d31fa7324073977c95421ad6c74e63b94a9。BUG2794StartupReleaseManifest.manifestに初期位置0/countとbuffer位置一致/実残サイズ内の増分/channel位置==累計/EOF=-1と不進行のstrictguardを追加。既1MiBcheckedsize前提の増分前残量検査で旧totalMAXguardを置換し冗長到達不能比較を追加0。元全sourcebyte逆変換/GJF-CS0、normalNIO/全保持inode/selector/Root権限/ownedclose順/Hash正常結果不変更。独立故障port10例は仕様だけNOT-RUN、Maincompile/fullstatic/PTcoverage未、実release/Root/nativeFD/key/VM/service0。BUG2794/横展開16target YKT2399はOPEN。 製品PT0、runtime/coverage未受入。
