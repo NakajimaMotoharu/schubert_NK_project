@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
@@ -326,11 +327,15 @@ final class CorrelatedLogEvidenceValidatorTest {
     ObjectNode unchanged = healthy.deepCopy();
     ObjectNode faulty = fixture();
     object(faulty, "/observed/nk/after/1/payload").put(FIXTURE_REQUEST, "WRONG_REQUEST");
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var good = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(healthy));
       var bad = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(faulty));
-      assertEquals(List.of(), good.get());
-      assertTrue(bad.get().contains("LOG_PROJECTION_DB_UNEXPECTED"));
+      assertEquals(List.of(), good.get(5, TimeUnit.SECONDS));
+      assertTrue(bad.get(5, TimeUnit.SECONDS).contains("LOG_PROJECTION_DB_UNEXPECTED"));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(unchanged, healthy);
   }

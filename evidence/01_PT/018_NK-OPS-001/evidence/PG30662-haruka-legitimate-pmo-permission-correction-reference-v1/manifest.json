@@ -1,0 +1,59 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T23:07:20.451065+00:00",
+  "source": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+  "origin": "PMO explicit correction notice, same authorized haruka/mini, no PGPT permission changes",
+  "references": [
+    {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/haruka-public-tool-permissions-correction.json",
+      "sha256": "97ffc5d535a843b7f16e817ca186d5e10094ab8e246d1f8606471d2af9126a73"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/haruka-mini-access-readiness.json",
+      "sha256": "7a2db2de6b734320d160b5ad8b7108ac14f6dd94973babe0edf21285fe4f3fad"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/HARUKA_EXECUTION_ENVIRONMENT.json",
+      "sha256": "794d283c66cf05a2446403845eac80e97539efcdd0d17944f1140b516045bdf7"
+    }
+  ],
+  "pmoCorrection": {
+    "atUTC": "2026-11-13T22:58:14.342252+00:00",
+    "reason": "PMO-installed public vendor directories retained restrictive source modes after root ownership; normalize public runtime read/execute only",
+    "directories": [
+      "jdk-25.0.4",
+      "maven",
+      "apache-artemis-2.56.0"
+    ],
+    "changedModeCount": 682,
+    "verifiedRegularFiles": 555,
+    "allContentsUnchanged": true,
+    "regularFileContentDigest": "84a9153e4299d61f93ca7bceb4d0399fcfcf3d6256653b641493d9efaf75a77f",
+    "ownerRootRetained": true,
+    "secretOrProjectPathsChanged": false,
+    "productTestsExecuted": 0,
+    "aruConnections": 0
+  },
+  "pmoMiniReadiness": {
+    "atUTC": "2026-11-13T22:58:49.376339+00:00",
+    "uid": 1000,
+    "user": "mini",
+    "java": "openjdk version \"25.0.4\" 2026-07-21\nOpenJDK Runtime Environment (build 25.0.4+7-1-26.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 25.0.4+7-1-26.04-Ubuntu, mixed mode, sharing)\n",
+    "maven": "Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)\nMaven home: /opt/schubert-nk-test-tools/maven\nJava version: 25.0.4, vendor: Ubuntu, runtime: /opt/schubert-nk-test-tools/jdk-25.0.4\nDefault locale: en, platform encoding: UTF-8\nOS name: \"linux\", version: \"7.0.0-43-generic\", arch: \"amd64\", family: \"unix\"\n",
+    "caddy": "v2.11.4 h1:XKxkMTgNSizEvKG6QHue6cAsFOteU2qA61w2tKkCWi0=\n",
+    "artemisCliExit": 0,
+    "javaCompileExecute": "HARUKA_MINI_JAVA_OK",
+    "productTestsExecuted": 0,
+    "businessSchemasOrServicesChanged": false,
+    "aruConnections": 0
+  },
+  "oldPG30586UnknownPreserved": true,
+  "oldPG30588PermissionFailurePreserved": true,
+  "pmoSmokeNotProductPt": true,
+  "bug2874PgptRetestOpen": true,
+  "currentResourceOwnerSourceAdmissionNotYetProven": true,
+  "aruAllConnectionsQueriesProhibited": true,
+  "actualRemoteOperations": 0,
+  "newAcceptance": 0,
+  "allOtherSpecificHoldsRetained": true
+}

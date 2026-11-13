@@ -1,0 +1,8 @@
+{
+  "baseMain": "119f6b99ca192c241d7b1b052cf5b20f08fff6c4",
+  "paths": [
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+  ],
+  "patchUtf8Sha256": "51d80473d3e8b2373924512ff95755f26ad9329b304589f5b7f99fb68a7e2f10",
+  "patch": "--- a/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n+++ b/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n@@ -1728,4 +1728,6 @@\n \n ## SSC-348 Scenario Entry対応表とCOPY row batchの結合検証（2026-11-14、PG、設計確定）\n \n-SS34310.1.4/SS331V002/UI223242254・RD141161/WBS-P01903.02。純ScenarioEntryCopyBatchの件数/target一意・全対応/先頭五列一致/global表示順/共通時刻/immutableを具体化、既map/Row/encoderを接続。RD/UI/DDL/外部値/権限変更不要・QA不要。実source/DB/FK/全ETLの成功は別条件。状態: 設計確定、main公開待ち、PG/通常PT/実ETL未完。設計source/mainと限定実績は後記。\n+SS34310.1.4/SS331V002/UI223242254・RD141161/WBS-P01903.02。純ScenarioEntryCopyBatchの件数/target一意・全対応/先頭五列一致/global表示順/共通時刻/immutableを具体化、既map/Row/encoderを接続。RD/UI/DDL/外部値/権限変更不要・QA不要。実source/DB/FK/全ETLの成功は別条件。状態: 設計確定・main公開済み（PR218、119f6b99ca192c241d7b1b052cf5b20f08fff6c4）、純batch PG/必要通常PT限定完了、実ETL/全451/PGPT全体未完。設計source/mainと限定実績は後記。\n+\n+2026-11-14 SSC348限定実績: Core2ebbdf391873a5be6247ea59cb9addffb886c591、Unit53c2e62990a18fd91e8e35db1a658fcb4eb7b38c、PG30646新Batch12＋必要支援60のwhole72/FES0、PG30648単一exec全14CRC/初期化/I1488-L323-M66-C14-B167 miss0・既定四100。実JVMCode110対既定66の生成filter差は別/global451未承認。元PG30622条件literal1件を保持、BUG2875の上限1等価意味名化/全他Main-Test不変をPG30636、PG30642全6Main静的適用0/未分類0と当whole72/postで再試験。結果公開fcb733e578e5004de9a910fda5e31853b0b97947/evidence/01_PT/018_NK-OPS-001/evidence/PG30654-entry-copy-batch72-independent-source-trace-join-v1/manifest.json。実Current/DB/FK/全ETL/Rootnative/CHR/ITST及び正式1964PT/53scopeを更新しない。mainは本設計台帳一fileだけ、未受入code/config/tools/evidence混入0。\n"
+}

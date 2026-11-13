@@ -1,0 +1,7 @@
+# common whole class実物照合：58計画から60へ訂正
+
+元024・GROUP_START5239・当群見積り.85/2.55/5.1cap6を保存。PG30672は原Correlated9と仮定したassertでsource変更前に失敗、試験/外部起動0。現在classは55f4b3265bで承認済QA054の010/011が既追加され全11。既013仕様/PG29276・29284以後の証跡へ対応し、新発見/新定義2を計上しない。
+
+同じ選択6全classの現在件数はArtifactComparator9/Gate12/GateContract8/GateContractValidatorNegative17/TargetAdapter3/Correlated11=60。Main5全byte/必要wholehelperは旧029c35資格時から不変。変化は既QA054 Test二追加とGateBUG2873/CorrelatedBUG2876 worker是正で、要求/期待JSON/全class選択を減らさない。原46/別source11を新60へ合算せず、当source単一60/全10physicalの真正結果で確認する。
+
+同6全class・worker一caseで見積りは初回cap6内を維持、新費用/原額変更0。着手前件数照合失敗と計画訂正を別記し、旧群名COMMON58は識別子だけ保持、実行ID/expectedInvocationsは60へ明記する。Root/DB/native/Current等HOLD/品質/モデル変更0。新JUnit定義0。
