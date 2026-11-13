@@ -44,6 +44,7 @@ final class MqLoginClientTest {
   private static final String FIXTURE_0106_EF3D3B45 = "0106";
   private static final String FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA = "synthetic-sensitive";
   private static final String FIXTURE_MUST_NOT_SEND_71FCB2F2 = "must not send";
+  private static final int IDENTIFIER_CALLBACK_STAGE = 1;
   private static final UUID ID = new UUID(0, 1);
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
@@ -523,7 +524,8 @@ final class MqLoginClientTest {
       switch (family) {
         case 0 -> {
           JMSException jms = new JMSException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA);
-          jms.setLinkedException(new Exception(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA, fatal));
+          jms.setLinkedException(
+              new java.sql.SQLException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA, fatal));
           failure = jms;
         }
         case 1 ->
@@ -633,7 +635,7 @@ final class MqLoginClientTest {
                       new DateTimeException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA, fatal))
                   : CLOCK,
               () -> {
-                if (selected == 1)
+                if (selected == IDENTIFIER_CALLBACK_STAGE)
                   throw new IllegalStateException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA, fatal);
                 return ID;
               },

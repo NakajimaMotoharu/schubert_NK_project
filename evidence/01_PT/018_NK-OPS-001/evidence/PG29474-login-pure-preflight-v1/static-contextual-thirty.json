@@ -1,0 +1,272 @@
+[
+  {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+    "line": 80,
+    "sourceAnchor": "Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "SS312/321 requires restoring the interrupted caller flag after bounded wait; this does not create an unmanaged J2EE worker."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 133,
+    "sourceAnchor": "Thread waiting =",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 134,
+    "sourceAnchor": "new Thread(",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 143,
+    "sourceAnchor": "interrupted.set(Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 171,
+    "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(maximum);",
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Explicit unconditional finally shutdownNow/awaitTermination5 assertion owns this fixture executor; TWR.close would wait indefinitely. Whole Test success and process exit are required, not this source check alone."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 171,
+    "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(maximum);",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 177,
+    "sourceAnchor": "executor.submit(",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 209,
+    "sourceAnchor": "executor.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 210,
+    "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java",
+    "line": 413,
+    "sourceAnchor": "Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 111,
+    "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(16);",
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Explicit unconditional finally shutdownNow/awaitTermination5 assertion owns this fixture executor; TWR.close would wait indefinitely. Whole Test success and process exit are required, not this source check alone."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 111,
+    "sourceAnchor": "ExecutorService executor = Executors.newFixedThreadPool(16);",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 116,
+    "sourceAnchor": "executor.submit(",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 130,
+    "sourceAnchor": "executor.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java",
+    "line": 131,
+    "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 300,
+    "sourceAnchor": "Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 302,
+    "sourceAnchor": "assertTrue(Thread.currentThread().isInterrupted());",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 305,
+    "sourceAnchor": "Thread.interrupted();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 357,
+    "sourceAnchor": "var workers = Executors.newVirtualThreadPerTaskExecutor();",
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Explicit unconditional finally shutdownNow/awaitTermination5 assertion owns this fixture executor; TWR.close would wait indefinitely. Whole Test success and process exit are required, not this source check alone."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 357,
+    "sourceAnchor": "var workers = Executors.newVirtualThreadPerTaskExecutor();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 360,
+    "sourceAnchor": "workers.submit(",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 369,
+    "sourceAnchor": "Thread.currentThread().interrupt();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 397,
+    "sourceAnchor": "workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 398,
+    "sourceAnchor": "assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 422,
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+    "rule": "CloseResource",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Explicit unconditional finally shutdownNow/awaitTermination5 assertion owns this fixture executor; TWR.close would wait indefinitely. Whole Test success and process exit are required, not this source check alone."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 422,
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 425,
+    "sourceAnchor": "synchronized (service) {",
+    "rule": "AvoidSynchronizedStatement",
+    "message": "Use ReentrantLock rather than synchronization",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Original pure 100-request JUnit fixture monitor, not production locking. Worker bodies do not acquire this monitor; every Future has deadline and finally finite termination."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 429,
+    "sourceAnchor": "workers.submit(",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 445,
+    "sourceAnchor": "workers.shutdownNow();",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  },
+  {
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginClientTest.java",
+    "line": 446,
+    "sourceAnchor": "assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "rule": "DoNotUseThreads",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "classification": "CONTEXTUAL_NONAPPLICABLE",
+    "reason": "Standalone JUnit original finite latch/Future/interrupt fixture, not a J2EE application. Each executor has finally shutdownNow/await5 assertion, explicit waiting Thread has finally interrupt/join2000/isAlive assertion; unchanged helper Test bytes are separately pinned to original qualified proof."
+  }
+]
