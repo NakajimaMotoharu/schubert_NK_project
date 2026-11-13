@@ -12491,7 +12491,9 @@
       "exitCriteria": "対象：初期master照合・移行差分artifact。acceptanceChecks全IDを個別証跡で満たし、exit依存の同source受入とevidencePlan/485 traceを照合してから認定。共通品質条件だけの宣言/証跡path存在/旧counterのみでは認定しない。",
       "executionRole": "WORK",
       "inventoryRef": "485_WBS網羅性・受入対応.json",
-      "ownedArtifacts": [],
+      "ownedArtifacts": [
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java"
+      ],
       "requirementIds": [
         "SCP-005",
         "MIG-DAT-003",
@@ -12514,7 +12516,9 @@
       },
       "evidencePlan": {
         "specDirectory": "evidence/01_PT/019_NK-MIG-001",
-        "candidateTestFiles": [],
+        "candidateTestFiles": [
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java"
+        ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
         ],
@@ -12523,7 +12527,15 @@
           "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG495-completion-compound-full-v1/manifest.json"
         ],
         "evidencePresenceMeansAccepted": false,
-        "plannedDeliverable": "対象別TestID/独立期待値/command/exit/後条件/hashの受入matrix。既存PT仕様から不足を確認し本WBS内で補完する。"
+        "plannedDeliverable": "対象別TestID/独立期待値/command/exit/後条件/hashの受入matrix。既存PT仕様から不足を確認し本WBS内で補完する。",
+        "plannedSourceSSC342": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/007_素材inventory純値製造・独立十二通常PT仕様.md",
+            "sha256": "9e0ae920764b4d8d37516422379af799a133005f4ae29f53416c1e856a3311ca"
+          },
+          "actualRuntimeQualification": false
+        }
       },
       "acceptanceChecks": [
         {
@@ -12547,7 +12559,8 @@
         "WBS-P019-03.02",
         "WBS-P019-03.03"
       ],
-      "historicalAssessment": "NEEDS_CONTRACT_ORACLE_TRACE_AUDIT"
+      "historicalAssessment": "NEEDS_CONTRACT_ORACLE_TRACE_AUDIT",
+      "historicalOwnedArtifactsBeforeSSC342": []
     },
     {
       "id": "WBS-P019-04",

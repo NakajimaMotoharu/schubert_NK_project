@@ -1,0 +1,31 @@
+--- a/documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md
++++ b/documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md
+@@ -1,4 +1,17 @@
+ # 設定file・directory・初期data・migration・切戻し設計
++
++## SSC342 移行素材inventoryの純metadata値・canonical差分（2026-11-14、PG内詳細補足）
++
++P01903/SS343§10のcanonical manifestの内部単位を次で固定する。RD141/161・UI254の移行対象、全file件数/byte/SHA、表示順/ID対応、非移行log/account、現行原本保全、移行/切戻し判定は変更しない。これは未実装artifactの詳細化で、新しい業務仕様・操作権限・DIFを追加しない。
++
++`AssetMigrationManifest`は既に採取した非秘密metadataの不変値だけを扱うbootstrap moduleの内部部品とし、file/DB/原本/鍵/Unit/権限・移行処理を操作しない。Entryはkind（SCENARIO/AUDIO/VIDEO/MUSIC）、currentPath、targetPath、byteLength、sha256。二pathはNFCのroot-relative POSIX表記、空/先頭slash/backslash/空segment/`.`/`..`/NUL・ISO制御・未対応surrogateを拒否する。ここでsymlink/実inode/許可root/実SHAを検証済みとはしない。それらの実読取と移行ID/category/pair/display_order/DB参照は後続ETLの独立条件として残す。CurrentPath/targetPathは一つの物理fileにつき各一意、byteLengthは非負long、SHAはlowerhex64。これは列挙済みfileの全体manifestであり、同一素材を参照する複数DB行やlinkをEntryへ重複挿入しない。
++
++canonical UTF8/LFはheader `NKMIGASSET1`一行の後、currentPathのString自然順で、kind・currentPath・targetPath・byteLength正準decimal・sha256の五列をtabで区切り各行LFで終える。BOM/引用/escapeは出力しない。pathのtab/LF/CRは禁止済みで曖昧な列を作らない。入力Listと返却List/byte[]の所有を分離し、不変snapshotを保持する。空manifestは空inventory値として表現可だが、§10の本番件数基準を満たす証明ではない。総byteはchecked加算しlong overflowを拒否、原本の公表基準59,627file/19,240,707,190byteを実測又はこの部品の都合で変更しない。
++
++Observationは既採取のtargetPath/byteLength/sha256という同じ構文の宣言値。`compareClaims`はtargetPathの重複を拒否し、欠落file数・余剰file数・byte不一致数・SHA不一致数と観測file/byteを返す。長さとSHAが共に異なる場合は各不一致へ一件ずつ計上する。値・null・要素の契約をconstructor/factoryで確定し、返値のmetadataMatchesは宣言値間の一致だけ。実filehash、symlink不存在、DB整合、移行完了、起動/配備許可、Go/rollback合格と読み替えない。不一致のrawpath/provider textを例外へ埋めない。
++
++PT-MIG-ASSET001..012は固定synthetic二file（`abc`と空byteの既知SHA）による独立全byte golden、NFC/相対path/invalidscalar/null・重複、非負long/overflow、順序/alias/返却byte独立、完全一致/欠落/余剰/長さ・SHAの個別/同時不一致を検証する。sourceでexpectedを作らず、固定literalと算術を用いる。原master実体・DBdump/credentialをfixtureにしない。実採取/ETL/ID・表示順/transaction/COPY/途中失敗・再実行/実root・原本/DB/CHR/全451/ITSTは未完の別条件であり、当部品の通常PTだけで閉じない。
++
+ 
+ SSC327（2026-10-21）：WebNativeRuntimeの内部I/O portはRuntime組立時・最初の取得前にnonnullで確立する。default path bindingは既asset/transfer config二keyと固定/run/schubert-nk/webのみ、default port bindingは既HTTP/management二keyのみ、default directoryはLinuxDirectoryCalls.create、default検証は既StorageAttributeGuardと同一の保持root/StorageIdentityを使う。startはbroker→dependency→codecs→directories→transfer/verify→assets/verify→workers→HTTP/mappings→management/start/promoteの元順序と即時field captureを保つ。検証用Map.Entryの一時値はfieldへowner捕捉後にだけ作り、検証callback自体は取得前に準備済みとする。検証false/nullは固定IOExceptionで不成功、その他nullは境界拒否しNPEを正常化しない。Production既5引数からのみ固定native bindingを選び、実根拠不明Root/VM/current/cohort/permit/intentのHOLDを解除しない。volatile/ownerLock/逆順十phase・元deadline/UNKNOWN/borrowed DB/credentialsの寿命は変更しない。package内部fixtureによる別path/ephemeral port/自己所有検証は実Root許可/配備/署名/認証の証明ではなく、外部からのoverride機能ではない。
+ 
+--- a/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md
++++ b/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md
+@@ -1685,3 +1685,8 @@
+ | 2026-09-09 | SSC-049継続: 認証検査/削除40 PTを7200d8d6、正式830 PTをb87c3c17で証跡化。次のSS324 §12.4変更対象を先行登録する。既存の検索/Scenario/media/User/log計22応答の保存可能resultと参照を検査し、Userの後続version更新・Scenario生成fileの正当な期限削除を破損と混同しない。専用SQL/削除接続は別未完了として追跡する。 |
+ | 2026-09-09 | SSC-049継続: 次のSS331 §3.6を変更前登録。V010で全期限済完了Inboxの1候補取得、認証/User/Scenario参照lock、既実装24応答に限定した条件付き削除を追加する。専用roleの列SELECTをapp_users.id/versionとscript_files.id/game_idへ限定追加し、未知/未実装応答は削除不可。PG-D-124/PT049～056、既存V001～009は変更しない。 |
+ | 2026-09-09 | SSC-049継続: SS324 §12.5を変更前登録。認証用AuthenticationInboxCleanupを共通InboxCleanupへ改称・拡張し、V010候補→認証2/非認証22検査→限定削除を既存の単一所有transactionへ接続する。旧PT033～040は認証回帰として維持、候補に含めなかった非認証変造rowは新設計どおりPROTECTEDへ変更する（未期限/PROCESSINGはENDのまま）。PG-D-125/PT057～064、外部画面/電文/通常service順は不変更。 |
++
++
++## SSC-342 移行素材canonical inventory・宣言metadata差分の内部具体化（2026-11-14、PG、設計確定）
++
++関連SS343§10、RD141161/FIL003005/MIG003006・MIG-DAT003006、UI254、WBS-P01903。既存canonical manifestに値形式の詳細がなく、Production artifact/独立fixtureが未割当。RD/UI変更不要・QA不要。上位仕様を維持する内部実装具体化として起票後にSS343へ反映。Entry五列/NFCrootrelative/byteSHA/重複/checked総byte、固定UTF8LF・宣言比較counts/null/aliasを規定し、実inode/symlink/原本/DB/ID表示順/ETL/Go権限を付与しない。未実装なので新BUGを偽起票しない。状態: 設計確定・main公開待ち、code/PT/実移行未完。設計commit/main反映・製造/通常PT証拠は後記。
