@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 
 /** PT-CHR-LOG-COR-001..007, independently literal QA051/SS355 before/after/correlation oracle. */
 final class CorrelatedLogEvidenceValidatorTest {
+  private static final String FIXTURE_METHOD_NAME = "method";
+  private static final String FIXTURE_WITNESS_ARRAY = "/observed/nk/witnesses";
+  private static final String FIXTURE_STAGE_NAME = "stage";
   private static final String FIXTURE_EXTRA = "extra";
   private static final String FIXTURE_EXPECTED = "/expected";
   private static final String FIXTURE_ORACLESHA256 = "oracleSha256";
@@ -150,10 +153,11 @@ final class CorrelatedLogEvidenceValidatorTest {
                   .set("contentType", JSON.createObjectNode()),
           FIXTURE_EXPECTED_PAYLOAD);
       String http = FIXTURE_EXPECTED_2C89F398 + side + FIXTURE_0_HTTP;
-      for (String field : List.of("method", FIXTURE_PATH, FIXTURE_STATUS, FIXTURE_ELAPSEDMS)) {
+      for (String field :
+          List.of(FIXTURE_METHOD_NAME, FIXTURE_PATH, FIXTURE_STATUS, FIXTURE_ELAPSEDMS)) {
         reject(x -> object(x, http).remove(field), FIXTURE_EXPECTED_PAYLOAD);
       }
-      reject(x -> object(x, http).put("method", " "), FIXTURE_EXPECTED_PAYLOAD);
+      reject(x -> object(x, http).put(FIXTURE_METHOD_NAME, " "), FIXTURE_EXPECTED_PAYLOAD);
       for (String path : List.of("relative", "/search?q=raw", "/search#raw")) {
         reject(x -> object(x, http).put(FIXTURE_PATH, path), FIXTURE_EXPECTED_PAYLOAD);
       }
@@ -238,20 +242,19 @@ final class CorrelatedLogEvidenceValidatorTest {
   void requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields() {
     reject(x -> object(x, "/observed/nk").set("witnesses", JSON.createObjectNode()), "WITNESSES");
     for (int index : List.of(0, 1)) {
-      reject(x -> array(x, "/observed/nk/witnesses").remove(index), "WITNESS_MISSING");
+      reject(x -> array(x, FIXTURE_WITNESS_ARRAY).remove(index), "WITNESS_MISSING");
     }
     reject(
-        x ->
-            array(x, "/observed/nk/witnesses")
-                .add(x.at(FIXTURE_OBSERVED_NK_WITNESSES_0).deepCopy()),
+        x -> array(x, FIXTURE_WITNESS_ARRAY).add(x.at(FIXTURE_OBSERVED_NK_WITNESSES_0).deepCopy()),
         "WITNESS_DUPLICATE");
     reject(
         x -> object(x, FIXTURE_OBSERVED_NK_WITNESSES_0).put(FIXTURE_EXTRA, 1),
         FIXTURE_WITNESS_PAYLOAD);
     reject(
-        x -> object(x, FIXTURE_OBSERVED_NK_WITNESSES_0).putNull("stage"), FIXTURE_WITNESS_PAYLOAD);
+        x -> object(x, FIXTURE_OBSERVED_NK_WITNESSES_0).putNull(FIXTURE_STAGE_NAME),
+        FIXTURE_WITNESS_PAYLOAD);
     reject(
-        x -> object(x, FIXTURE_OBSERVED_NK_WITNESSES_0).put("stage", "DB"),
+        x -> object(x, FIXTURE_OBSERVED_NK_WITNESSES_0).put(FIXTURE_STAGE_NAME, "DB"),
         FIXTURE_WITNESS_PAYLOAD);
     reject(
         x -> object(x, "/observed/nk/witnesses/0/payload").put(FIXTURE_ACTION, "legacy"),
@@ -309,7 +312,7 @@ final class CorrelatedLogEvidenceValidatorTest {
               .set(FIXTURE_HTTP, http.deepCopy());
         }
         JsonNode nk = input.at("/expected/nk/0");
-        for (JsonNode witness : array(input, "/observed/nk/witnesses")) {
+        for (JsonNode witness : array(input, FIXTURE_WITNESS_ARRAY)) {
           ((ObjectNode) witness).set(FIXTURE_PAYLOAD, nk.deepCopy());
         }
         assertEquals(List.of(), CorrelatedLogEvidenceValidator.validate(input));
@@ -351,10 +354,112 @@ final class CorrelatedLogEvidenceValidatorTest {
             JSON.getNodeFactory().numberNode(BigInteger.ONE)));
   }
 
+  /** PT-CHR-LOG-COR-010: approved literal pairs, one initial event per operation. */
+  @Test
+  void qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses() {
+    ObjectNode healthy = actionFixture();
+    assertEquals(List.of(), CorrelatedLogEvidenceValidator.validate(healthy));
+    assertEquals("MENU_VIEWED", healthy.at("/expected/nk/2/action").asText());
+    assertEquals("LOG_SEARCHED", healthy.at("/expected/nk/3/action").asText());
+    assertEquals(6, healthy.at("/expected/nk").size());
+    assertEquals(6, healthy.at(FIXTURE_WITNESS_ARRAY).size());
+
+    ObjectNode missing = actionFixture();
+    array(missing, "/expected/nk").remove(2);
+    assertTrue(
+        CorrelatedLogEvidenceValidator.validate(missing)
+            .contains("LOG_PROJECTION_APPROVED_ACTION_PAIR"));
+    ObjectNode duplicate = actionFixture();
+    for (String side : List.of(FIXTURE_CURRENT, "nk")) {
+      ObjectNode extra = object(duplicate, FIXTURE_EXPECTED_2C89F398 + side + "/2").deepCopy();
+      extra.put(FIXTURE_EVENT, "EV_DUPLICATE_INITIAL");
+      array(duplicate, FIXTURE_EXPECTED_2C89F398 + side).add(extra);
+    }
+    assertTrue(
+        CorrelatedLogEvidenceValidator.validate(duplicate)
+            .contains("LOG_PROJECTION_APPROVED_ACTION_PAIR"));
+    for (String variant : List.of(FIXTURE_METHOD_NAME, FIXTURE_PATH, FIXTURE_STATUS)) {
+      ObjectNode invalid = actionFixture();
+      ObjectNode http = object(invalid, "/expected/nk/2/http");
+      switch (variant) {
+        case FIXTURE_METHOD_NAME -> http.put(FIXTURE_METHOD_NAME, "POST");
+        case "path" -> http.put(FIXTURE_PATH, "/different");
+        case "status" -> http.put(FIXTURE_STATUS, 201);
+        default -> throw new AssertionError("closed independent case list");
+      }
+      assertTrue(
+          CorrelatedLogEvidenceValidator.validate(invalid)
+              .contains("LOG_PROJECTION_EXPECTED_PAYLOAD"),
+          variant);
+    }
+  }
+
+  /** PT-CHR-LOG-COR-011: optional N12 and equal-size field-set negatives. */
+  @Test
+  void optionalResponseBytesAndSameSizeFieldReplacementStayStrict() {
+    for (JsonNode value :
+        List.of(
+            JSON.getNodeFactory().textNode("1"),
+            JSON.getNodeFactory().numberNode(-1),
+            JSON.getNodeFactory().numberNode(1_000_000_000_000L),
+            JSON.getNodeFactory().numberNode(new BigInteger("9223372036854775808")))) {
+      ObjectNode invalid = fixture();
+      object(invalid, "/expected/nk/0/http").set("responseBytes", value);
+      assertTrue(
+          CorrelatedLogEvidenceValidator.validate(invalid)
+              .contains("LOG_PROJECTION_EXPECTED_PAYLOAD"));
+    }
+    ObjectNode swapped = fixture();
+    ObjectNode expected = object(swapped, "/expected/nk/0");
+    JsonNode event = expected.remove(FIXTURE_EVENT);
+    expected.set("unexpectedEventField", event);
+    assertEquals(7, expected.size());
+    assertTrue(
+        CorrelatedLogEvidenceValidator.validate(swapped)
+            .contains("LOG_PROJECTION_EXPECTED_PAYLOAD"));
+  }
+
+  private static ObjectNode actionFixture() {
+    ObjectNode input = fixture();
+    for (String side : List.of(FIXTURE_CURRENT, "nk")) {
+      boolean nk = "nk".equals(side);
+      for (String operation : List.of("OP_LOGIN", "OP_SECOND")) {
+        for (boolean menu : List.of(true, false)) {
+          String action =
+              menu ? (nk ? "MENU_VIEWED" : "menu") : (nk ? "LOG_SEARCHED" : "log_search");
+          String event = (menu ? "EV_MENU_" : "EV_SEARCH_") + operation;
+          ObjectNode http = JSON.createObjectNode();
+          if (nk && menu) {
+            http.put(FIXTURE_METHOD_NAME, "GET")
+                .put(FIXTURE_PATH, "/")
+                .put(FIXTURE_STATUS, 200)
+                .put(FIXTURE_ELAPSEDMS, 0)
+                .put("responseBytes", 0);
+          }
+          ObjectNode value = payload("ACTION", action, event, http);
+          value.put(FIXTURE_OPERATION, operation).put(FIXTURE_REQUEST, "REQ_" + operation);
+          array(input, FIXTURE_EXPECTED_2C89F398 + side).add(value.deepCopy());
+          array(input, "/observed/" + side + "/after")
+              .add(row(side + "_" + event, value.deepCopy()));
+          if (nk && menu) {
+            for (String stage : List.of("LOCAL", "OUTBOX")) {
+              array(input, FIXTURE_WITNESS_ARRAY)
+                  .add(
+                      JSON.createObjectNode()
+                          .put(FIXTURE_STAGE_NAME, stage)
+                          .set(FIXTURE_PAYLOAD, value.deepCopy()));
+            }
+          }
+        }
+      }
+    }
+    return input;
+  }
+
   static ObjectNode fixture() {
     ObjectNode http =
         JSON.createObjectNode()
-            .put("method", "POST")
+            .put(FIXTURE_METHOD_NAME, "POST")
             .put(FIXTURE_PATH, "/login")
             .put(FIXTURE_STATUS, 200)
             .put(FIXTURE_ELAPSEDMS, 1);
@@ -376,7 +481,7 @@ final class CorrelatedLogEvidenceValidatorTest {
           .withArray("witnesses")
           .add(
               JSON.createObjectNode()
-                  .put("stage", stage)
+                  .put(FIXTURE_STAGE_NAME, stage)
                   .set(FIXTURE_PAYLOAD, nkRequest.deepCopy()));
     }
     return input;

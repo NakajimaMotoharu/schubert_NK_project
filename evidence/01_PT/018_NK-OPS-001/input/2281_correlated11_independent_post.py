@@ -1,0 +1,27 @@
+"""Independent Tool whole11, unchanged Main physical identity and Root static reuse audit."""
+from pathlib import Path
+import datetime as dt,hashlib,json,subprocess,sys,xml.etree.ElementTree as ET
+R=Path.cwd();B=R/'evidence/01_PT/018_NK-OPS-001';E=B/'evidence';S=R.parent/'pgpt-runs/PG379/pg29286-correlated-whole11-normal-v1';O=E/'PG29288-correlated11-independent-post-v1'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
+load=lambda p:json.loads(p.read_text())
+def inv(p):return {str(f.relative_to(p)):sha(f) for f in sorted(p.rglob('*')) if f.is_file()}
+def main():
+ source=sys.argv[1];begin=load(S/'begin.safe.json');term=load(S/'exit.safe.json');assert term['actualExitCode']==0 and not term['timedOut'] and begin['source']==term['source']==source and term['logSha256']==sha(S/'maven.log');assert not O.exists();snap=S/'snapshot';t=snap/'program/characterization/target';assert all(sha(snap/p)==v for p,v in begin['inputHashes'].items());assert inv(R/'program/characterization/baseline/current')==begin['originalBaselineHashes'];assert subprocess.check_output(['git','diff','--name-only',source,'--','program/characterization','pom.xml'],cwd=R)==b''
+ basepath=E/'PG29258-chr-tool-independent-post-v1/manifest.json';base=load(basepath);physical=inv(t/'classes');assert physical==base['physicalClassHashes'] and len(physical)==10
+ change=subprocess.check_output(['git','diff','--name-only','029c35c032291a2f93894713de37ef0387071ea9',source,'--','program/characterization','pom.xml','.mvn','mvnw','tools/quality/static'],cwd=R,text=True).splitlines();assert change==['program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java']
+ xmls=list((t/'surefire-reports').glob('TEST-*.xml'));assert len(xmls)==1;tree=ET.parse(xmls[0]);x=tree.getroot();assert x.get('name')=='dev.codex.schubert.characterization.CorrelatedLogEvidenceValidatorTest' and int(x.get('tests'))==11 and all(int(x.get(k))==0 for k in ('failures','errors','skipped'));cases=x.findall('testcase');assert len(cases)==11 and all(not list(c) for c in cases) and len({c.get('name') for c in cases})==11
+ ct=ET.parse(t/'site/jacoco/jacoco.xml');cr=ct.getroot();cs={x.get('name')+'.class':x for x in cr.findall('.//class')};assert set(cs)==set(physical);target=cs['dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class'];count=lambda n:[dict(c.attrib) for c in n.findall('counter')];four=all(int(c['missed'])==0 for c in count(target) if c['type'] in ('LINE','METHOD','CLASS','BRANCH'))
+ stpath=E/'PG29280-correlated11-test-static-v1/manifest.json';st=load(stpath);assert st['testSourceSha256']==sha(R/change[0]) and st['checkstyleErrors']==0 and not st['processingErrors'] and st['stages']['pmd']['actualExit']==4 and st['stages']['gjf']['actualExit']==st['stages']['checkstyle']['actualExit']==0
+ raw=st['rawFindings'];assert len(raw)==3;anchors=['try (var workers = Executors.newFixedThreadPool(2)) {','var good = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(healthy));','var bad = workers.submit(() -> CorrelatedLogEvidenceValidator.validate(faulty));'];lines=(R/change[0]).read_text().splitlines();classified=[]
+ for row,anchor in zip(raw,anchors):
+  assert row['rule']=='DoNotUseThreads' and lines[int(row['beginline'])-1].strip()==anchor
+  classified.append(dict(**row,sourceAnchor=anchor,disposition='NOT_APPLICABLE',reason='Same unchanged original pure-JUnit two finite JSON tasks, not a J2EE Web application or container lifecycle. Independent snapshots; owned executor; no transport/DB/service operation.'))
+ O.mkdir();props=x.find('properties')
+ if props is not None:x.remove(props)
+ tree.write(O/xmls[0].name,encoding='utf-8',xml_declaration=True)
+ for node in list(cr.findall('sessioninfo')):cr.remove(node)
+ ct.write(O/'jacoco.xml',encoding='utf-8',xml_declaration=True)
+ m=dict(actualExitCode=0,source=source,productionCoreMain='eeba9dd506a3d221e447b3031fa4497e21f948c4',run='PG29286',atUTC=dt.datetime.now(dt.timezone.utc).isoformat(),tests=11,newDefinitions=2,failures=0,errors=0,skipped=0,wholeClass=True,originalWhole9InverseProof=ref(E/'PG29276-correlated11-source-oracles-v1/manifest.json'),sourceInputsUnchanged=True,originalBaseline27Unchanged=True,physicalClassHashes=physical,exactMainPhysicalIdentityReuse=ref(basepath),sameSourceMainStaticReused=ref(E/'PG29260-chr-static-exact-applicability-v1/manifest.json'),newTestStatic=ref(stpath),newTestRawClassified=classified,newTestStaticApplicable=0,newTestStaticUnclassified=0,spotbugsMain10Reuse='Exact SHA256 physical identity, Root compiler/pom/rules unchanged; not another source acceptance or rerun',targetFour100=four,targetCounters=count(target),allCounters=count(cr),allPhysicalCounters={k:count(v) for k,v in cs.items()},fullScopePhysicalClasses=10,coverageExclusions=[],fullBundleAccepted=False,formalAcceptanceAdded=0,appRosterDelta=0,effortCompletionRate=None,privateXmlSha256=sha(xmls[0]),privateJacocoXmlSha256=sha(t/'site/jacoco/jacoco.xml'),privateExecSha256=sha(t/'jacoco.exec'),terminal=term,verifierSha256=sha(Path(__file__)))
+ (O/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExitCode=0,tests=11,newDefinitions=2,targetFour100=four,targetCounters=m['targetCounters'],baselineUnchanged=True,MainPhysicalUnchanged=True,fullBundleAccepted=False)))
+if __name__=='__main__':main()
