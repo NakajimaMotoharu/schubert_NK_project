@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC342 移行素材inventoryの純metadata値・canonical差分（2026-11-14、PG内詳細補足）
+
+P01903/SS343§10のcanonical manifestの内部単位を次で固定する。RD141/161・UI254の移行対象、全file件数/byte/SHA、表示順/ID対応、非移行log/account、現行原本保全、移行/切戻し判定は変更しない。これは未実装artifactの詳細化で、新しい業務仕様・操作権限・DIFを追加しない。
+
+`AssetMigrationManifest`は既に採取した非秘密metadataの不変値だけを扱うbootstrap moduleの内部部品とし、file/DB/原本/鍵/Unit/権限・移行処理を操作しない。Entryはkind（SCENARIO/AUDIO/VIDEO/MUSIC）、currentPath、targetPath、byteLength、sha256。二pathはNFCのroot-relative POSIX表記、空/先頭slash/backslash/空segment/`.`/`..`/NUL・ISO制御・未対応surrogateを拒否する。ここでsymlink/実inode/許可root/実SHAを検証済みとはしない。それらの実読取と移行ID/category/pair/display_order/DB参照は後続ETLの独立条件として残す。CurrentPath/targetPathは一つの物理fileにつき各一意、byteLengthは非負long、SHAはlowerhex64。これは列挙済みfileの全体manifestであり、同一素材を参照する複数DB行やlinkをEntryへ重複挿入しない。
+
+canonical UTF8/LFはheader `NKMIGASSET1`一行の後、currentPathのString自然順で、kind・currentPath・targetPath・byteLength正準decimal・sha256の五列をtabで区切り各行LFで終える。BOM/引用/escapeは出力しない。pathのtab/LF/CRは禁止済みで曖昧な列を作らない。入力Listと返却List/byte[]の所有を分離し、不変snapshotを保持する。空manifestは空inventory値として表現可だが、§10の本番件数基準を満たす証明ではない。総byteはchecked加算しlong overflowを拒否、原本の公表基準59,627file/19,240,707,190byteを実測又はこの部品の都合で変更しない。
+
+Observationは既採取のtargetPath/byteLength/sha256という同じ構文の宣言値。`compareClaims`はtargetPathの重複を拒否し、欠落file数・余剰file数・byte不一致数・SHA不一致数と観測file/byteを返す。長さとSHAが共に異なる場合は各不一致へ一件ずつ計上する。値・null・要素の契約をconstructor/factoryで確定し、返値のmetadataMatchesは宣言値間の一致だけ。実filehash、symlink不存在、DB整合、移行完了、起動/配備許可、Go/rollback合格と読み替えない。不一致のrawpath/provider textを例外へ埋めない。
+
+PT-MIG-ASSET001..012は固定synthetic二file（`abc`と空byteの既知SHA）による独立全byte golden、NFC/相対path/invalidscalar/null・重複、非負long/overflow、順序/alias/返却byte独立、完全一致/欠落/余剰/長さ・SHAの個別/同時不一致を検証する。sourceでexpectedを作らず、固定literalと算術を用いる。原master実体・DBdump/credentialをfixtureにしない。実採取/ETL/ID・表示順/transaction/COPY/途中失敗・再実行/実root・原本/DB/CHR/全451/ITSTは未完の別条件であり、当部品の通常PTだけで閉じない。
+
+
 SSC327（2026-10-21）：WebNativeRuntimeの内部I/O portはRuntime組立時・最初の取得前にnonnullで確立する。default path bindingは既asset/transfer config二keyと固定/run/schubert-nk/webのみ、default port bindingは既HTTP/management二keyのみ、default directoryはLinuxDirectoryCalls.create、default検証は既StorageAttributeGuardと同一の保持root/StorageIdentityを使う。startはbroker→dependency→codecs→directories→transfer/verify→assets/verify→workers→HTTP/mappings→management/start/promoteの元順序と即時field captureを保つ。検証用Map.Entryの一時値はfieldへowner捕捉後にだけ作り、検証callback自体は取得前に準備済みとする。検証false/nullは固定IOExceptionで不成功、その他nullは境界拒否しNPEを正常化しない。Production既5引数からのみ固定native bindingを選び、実根拠不明Root/VM/current/cohort/permit/intentのHOLDを解除しない。volatile/ownerLock/逆順十phase・元deadline/UNKNOWN/borrowed DB/credentialsの寿命は変更しない。package内部fixtureによる別path/ephemeral port/自己所有検証は実Root許可/配備/署名/認証の証明ではなく、外部からのoverride機能ではない。
 
 SSC326（2026-10-21、BUG1581/YKT1320）：MorningStartupLaunchOwnerの完了UNKNOWN後に呼ぶCompletionProgress.failureは、nonnull主障害の固定IO/FATAL/RUNTIME分類を維持し、emit内の時計/sink/文字列生成のRuntimeException/Errorを封じて元completion catchのretainへ戻す。診断不能は成功通知/正常解放ではない。通常phase通知・constructor/null境界は既どおり失敗を伝播し、固定literal/phase/elapsed計算/retirement順序/親30分/元Unit期限/DB/権限を変更しない。当局所診断保護で実親保持/真正DONE/nativeを証明せず、元依存と実環境HOLDを維持する。
