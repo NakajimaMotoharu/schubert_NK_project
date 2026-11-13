@@ -1,0 +1,630 @@
+Compiled from "LinuxSealedProof.java"
+public final class dev.codex.schubert.nk.storage.LinuxSealedProof {
+  private static final int REQUIRED_SEALS;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$CreateCall retainedCreate;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$WriteCall write;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$ReadCall retainedRead;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$FcntlCall fcntl;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$ModeCall mode;
+
+  private final dev.codex.schubert.nk.storage.LinuxSealedProof$CloseCall close;
+
+  public static dev.codex.schubert.nk.storage.LinuxSealedProof create();
+    Code:
+         0: ldc           #1                  // String os.name
+         2: invokestatic  #3                  // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+         5: ldc           #1                  // String os.name
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: checkcast     #15                 // class java/lang/String
+        13: ldc           #17                 // String os.arch
+        15: invokestatic  #3                  // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+        18: ldc           #17                 // String os.arch
+        20: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        23: checkcast     #15                 // class java/lang/String
+        26: invokestatic  #19                 // InterfaceMethod java/lang/foreign/Linker.nativeLinker:()Ljava/lang/foreign/Linker;
+        29: invokeinterface #25,  1           // InterfaceMethod java/lang/foreign/Linker.defaultLookup:()Ljava/lang/foreign/SymbolLookup;
+        34: invokestatic  #29                 // Method create:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxSealedProof;
+        37: areturn
+
+  static dev.codex.schubert.nk.storage.LinuxSealedProof create(java.lang.String, java.lang.String, java.lang.foreign.SymbolLookup);
+    Code:
+         0: aload_0
+         1: ldc           #35                 // String os
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #37                 // String architecture
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #39                 // String symbols
+        17: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_0
+        22: ldc           #41                 // String Linux
+        24: invokevirtual #43                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        27: ifeq          48
+        30: ldc           #47                 // String amd64
+        32: ldc           #49                 // String x86_64
+        34: ldc           #51                 // String aarch64
+        36: invokestatic  #53                 // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        39: aload_1
+        40: invokeinterface #59,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+        45: ifne          58
+        48: new           #62                 // class java/lang/IllegalStateException
+        51: dup
+        52: ldc           #64                 // String native sealed proof is unavailable
+        54: invokespecial #66                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        57: athrow
+        58: new           #30                 // class dev/codex/schubert/nk/storage/LinuxSealedProof
+        61: dup
+        62: aload_2
+        63: ldc           #70                 // String memfd_create
+        65: ldc           #72                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall
+        67: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+        70: iconst_2
+        71: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+        74: dup
+        75: iconst_0
+        76: getstatic     #82                 // Field java/lang/foreign/ValueLayout.ADDRESS:Ljava/lang/foreign/AddressLayout;
+        79: aastore
+        80: dup
+        81: iconst_1
+        82: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+        85: aastore
+        86: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+        89: iconst_0
+        90: anewarray     #91                 // class java/lang/foreign/Linker$Option
+        93: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+        96: checkcast     #72                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall
+        99: aload_2
+       100: ldc           #97                 // String write
+       102: ldc           #99                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall
+       104: getstatic     #101                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+       107: iconst_3
+       108: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+       111: dup
+       112: iconst_0
+       113: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       116: aastore
+       117: dup
+       118: iconst_1
+       119: getstatic     #82                 // Field java/lang/foreign/ValueLayout.ADDRESS:Ljava/lang/foreign/AddressLayout;
+       122: aastore
+       123: dup
+       124: iconst_2
+       125: getstatic     #101                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+       128: aastore
+       129: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       132: iconst_0
+       133: anewarray     #91                 // class java/lang/foreign/Linker$Option
+       136: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+       139: checkcast     #99                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall
+       142: aload_2
+       143: ldc           #105                // String pread
+       145: ldc           #107                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall
+       147: getstatic     #101                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+       150: iconst_4
+       151: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+       154: dup
+       155: iconst_0
+       156: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       159: aastore
+       160: dup
+       161: iconst_1
+       162: getstatic     #82                 // Field java/lang/foreign/ValueLayout.ADDRESS:Ljava/lang/foreign/AddressLayout;
+       165: aastore
+       166: dup
+       167: iconst_2
+       168: getstatic     #101                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+       171: aastore
+       172: dup
+       173: iconst_3
+       174: getstatic     #101                // Field java/lang/foreign/ValueLayout.JAVA_LONG:Ljava/lang/foreign/ValueLayout$OfLong;
+       177: aastore
+       178: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       181: iconst_0
+       182: anewarray     #91                 // class java/lang/foreign/Linker$Option
+       185: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+       188: checkcast     #107                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall
+       191: aload_2
+       192: ldc           #109                // String fcntl
+       194: ldc           #111                // class dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall
+       196: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       199: iconst_3
+       200: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+       203: dup
+       204: iconst_0
+       205: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       208: aastore
+       209: dup
+       210: iconst_1
+       211: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       214: aastore
+       215: dup
+       216: iconst_2
+       217: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       220: aastore
+       221: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       224: iconst_1
+       225: anewarray     #91                 // class java/lang/foreign/Linker$Option
+       228: dup
+       229: iconst_0
+       230: iconst_2
+       231: invokestatic  #113                // InterfaceMethod java/lang/foreign/Linker$Option.firstVariadicArg:(I)Ljava/lang/foreign/Linker$Option;
+       234: aastore
+       235: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+       238: checkcast     #111                // class dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall
+       241: aload_2
+       242: ldc           #117                // String fchmod
+       244: ldc           #119                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall
+       246: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       249: iconst_2
+       250: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+       253: dup
+       254: iconst_0
+       255: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       258: aastore
+       259: dup
+       260: iconst_1
+       261: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       264: aastore
+       265: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       268: iconst_0
+       269: anewarray     #91                 // class java/lang/foreign/Linker$Option
+       272: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+       275: checkcast     #119                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall
+       278: aload_2
+       279: ldc           #121                // String close
+       281: ldc           #123                // class dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall
+       283: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       286: iconst_1
+       287: anewarray     #80                 // class java/lang/foreign/MemoryLayout
+       290: dup
+       291: iconst_0
+       292: getstatic     #74                 // Field java/lang/foreign/ValueLayout.JAVA_INT:Ljava/lang/foreign/ValueLayout$OfInt;
+       295: aastore
+       296: invokestatic  #86                 // InterfaceMethod java/lang/foreign/FunctionDescriptor.of:(Ljava/lang/foreign/MemoryLayout;[Ljava/lang/foreign/MemoryLayout;)Ljava/lang/foreign/FunctionDescriptor;
+       299: iconst_0
+       300: anewarray     #91                 // class java/lang/foreign/Linker$Option
+       303: invokestatic  #93                 // Method bind:(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;
+       306: checkcast     #123                // class dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall
+       309: invokespecial #125                // Method "<init>":(Ldev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall;)V
+       312: areturn
+
+  dev.codex.schubert.nk.storage.LinuxSealedProof(dev.codex.schubert.nk.storage.LinuxSealedProof$CreateCall, dev.codex.schubert.nk.storage.LinuxSealedProof$WriteCall, dev.codex.schubert.nk.storage.LinuxSealedProof$ReadCall, dev.codex.schubert.nk.storage.LinuxSealedProof$FcntlCall, dev.codex.schubert.nk.storage.LinuxSealedProof$ModeCall, dev.codex.schubert.nk.storage.LinuxSealedProof$CloseCall);
+    Code:
+         0: aload_0
+         1: invokespecial #128                // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #133                // String create
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #72                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall
+        14: putfield      #134                // Field retainedCreate:Ldev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall;
+        17: aload_0
+        18: aload_2
+        19: ldc           #97                 // String write
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #99                 // class dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall
+        27: putfield      #138                // Field write:Ldev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall;
+        30: aload_0
+        31: aload_3
+        32: ldc           #141                // String read
+        34: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        37: checkcast     #107                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall
+        40: putfield      #143                // Field retainedRead:Ldev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall;
+        43: aload_0
+        44: aload         4
+        46: ldc           #109                // String fcntl
+        48: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        51: checkcast     #111                // class dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall
+        54: putfield      #147                // Field fcntl:Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;
+        57: aload_0
+        58: aload         5
+        60: ldc           #150                // String mode
+        62: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        65: checkcast     #119                // class dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall
+        68: putfield      #152                // Field mode:Ldev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall;
+        71: aload_0
+        72: aload         6
+        74: ldc           #121                // String close
+        76: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        79: checkcast     #123                // class dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall
+        82: putfield      #155                // Field close:Ldev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall;
+        85: return
+
+  public <T> T withProof(byte[], dev.codex.schubert.nk.storage.LinuxSealedProof$Operation<T>) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: aload_1
+         1: ldc           #158                // String public proof
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_2
+         8: ldc           #160                // String operation
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_1
+        15: arraylength
+        16: ifeq          27
+        19: aload_1
+        20: arraylength
+        21: sipush        8192
+        24: if_icmple     31
+        27: invokestatic  #162                // Method invalid:()Ljava/lang/IllegalArgumentException;
+        30: athrow
+        31: aload_1
+        32: invokevirtual #166                // Method "[B".clone:()Ljava/lang/Object;
+        35: checkcast     #167                // class "[B"
+        38: astore_3
+        39: invokestatic  #172                // InterfaceMethod java/lang/foreign/Arena.ofConfined:()Ljava/lang/foreign/Arena;
+        42: astore        4
+        44: aload_0
+        45: aload         4
+        47: invokedynamic #178,  0            // InvokeDynamic #0:open:(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/lang/foreign/Arena;)Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+        52: invokedynamic #182,  0            // InvokeDynamic #1:close:()Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+        57: aload_0
+        58: aload         4
+        60: aload_3
+        61: aload_2
+        62: invokedynamic #185,  0            // InvokeDynamic #2:run:(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/lang/foreign/Arena;[BLdev/codex/schubert/nk/storage/LinuxSealedProof$Operation;)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+        67: invokestatic  #189                // Method dev/codex/schubert/nk/storage/ResourceScope.acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+        70: astore        5
+        72: aload         4
+        74: ifnull        84
+        77: aload         4
+        79: invokeinterface #195,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+        84: aload_3
+        85: iconst_0
+        86: invokestatic  #197                // Method java/util/Arrays.fill:([BB)V
+        89: aload         5
+        91: areturn
+        92: astore        5
+        94: aload         4
+        96: ifnull        118
+        99: aload         4
+       101: invokeinterface #195,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+       106: goto          118
+       109: astore        6
+       111: aload         5
+       113: aload         6
+       115: invokevirtual #205                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       118: aload         5
+       120: athrow
+       121: astore        7
+       123: aload_3
+       124: iconst_0
+       125: invokestatic  #197                // Method java/util/Arrays.fill:([BB)V
+       128: aload         7
+       130: athrow
+      Exception table:
+         from    to  target type
+            44    72    92   Class java/lang/Throwable
+            99   106   109   Class java/lang/Throwable
+            39    84   121   any
+            92   123   121   any
+
+  private <T> T prepare(java.lang.foreign.Arena, int, byte[], dev.codex.schubert.nk.storage.LinuxSealedProof$Operation<T>) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #152                // Field mode:Ldev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall;
+         4: iload_2
+         5: sipush        384
+         8: invokeinterface #209,  3          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall.call:(II)I
+        13: ifeq          20
+        16: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        19: athrow
+        20: aload_1
+        21: getstatic     #217                // Field java/lang/foreign/ValueLayout.JAVA_BYTE:Ljava/lang/foreign/ValueLayout$OfByte;
+        24: aload_3
+        25: invokeinterface #221,  3          // InterfaceMethod java/lang/foreign/Arena.allocateFrom:(Ljava/lang/foreign/ValueLayout$OfByte;[B)Ljava/lang/foreign/MemorySegment;
+        30: astore        5
+        32: iconst_0
+        33: istore        6
+        35: iload         6
+        37: aload_3
+        38: arraylength
+        39: if_icmpge     104
+        42: aload_0
+        43: getfield      #138                // Field write:Ldev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall;
+        46: iload_2
+        47: aload         5
+        49: iload         6
+        51: i2l
+        52: invokeinterface #225,  3          // InterfaceMethod java/lang/foreign/MemorySegment.asSlice:(J)Ljava/lang/foreign/MemorySegment;
+        57: aload_3
+        58: arraylength
+        59: iload         6
+        61: isub
+        62: i2l
+        63: invokeinterface #231,  5          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall.call:(ILjava/lang/foreign/MemorySegment;J)J
+        68: lstore        7
+        70: lload         7
+        72: lconst_0
+        73: lcmp
+        74: ifle          89
+        77: lload         7
+        79: aload_3
+        80: arraylength
+        81: iload         6
+        83: isub
+        84: i2l
+        85: lcmp
+        86: ifle          93
+        89: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        92: athrow
+        93: iload         6
+        95: lload         7
+        97: l2i
+        98: iadd
+        99: istore        6
+       101: goto          35
+       104: aload_0
+       105: getfield      #147                // Field fcntl:Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;
+       108: iload_2
+       109: sipush        1033
+       112: bipush        15
+       114: invokeinterface #234,  4          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall.call:(III)I
+       119: ifeq          126
+       122: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+       125: athrow
+       126: aload_0
+       127: iload_2
+       128: invokedynamic #237,  0            // InvokeDynamic #3:open:(Ldev/codex/schubert/nk/storage/LinuxSealedProof;I)Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+       133: invokedynamic #182,  0            // InvokeDynamic #1:close:()Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+       138: aload         4
+       140: invokedynamic #240,  0            // InvokeDynamic #4:run:(Ldev/codex/schubert/nk/storage/LinuxSealedProof$Operation;)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+       145: invokestatic  #189                // Method dev/codex/schubert/nk/storage/ResourceScope.acquire:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+       148: areturn
+
+  private int duplicateReserved(int);
+    Code:
+         0: aload_0
+         1: getfield      #147                // Field fcntl:Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;
+         4: iload_1
+         5: sipush        1030
+         8: sipush        128
+        11: invokeinterface #234,  4          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall.call:(III)I
+        16: istore_2
+        17: iload_2
+        18: iload_1
+        19: if_icmpne     26
+        22: iconst_m1
+        23: goto          27
+        26: iload_2
+        27: ireturn
+
+  public byte[] read(int) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: iload_1
+         1: sipush        128
+         4: if_icmplt     13
+         7: iload_1
+         8: ldc           #243                // int 65535
+        10: if_icmple     17
+        13: invokestatic  #162                // Method invalid:()Ljava/lang/IllegalArgumentException;
+        16: athrow
+        17: aload_0
+        18: getfield      #147                // Field fcntl:Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;
+        21: iload_1
+        22: sipush        1034
+        25: iconst_0
+        26: invokeinterface #234,  4          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall.call:(III)I
+        31: bipush        15
+        33: if_icmpeq     40
+        36: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        39: athrow
+        40: invokestatic  #172                // InterfaceMethod java/lang/foreign/Arena.ofConfined:()Ljava/lang/foreign/Arena;
+        43: astore_2
+        44: aload_2
+        45: ldc2_w        #244                // long 8193l
+        48: invokeinterface #246,  3          // InterfaceMethod java/lang/foreign/Arena.allocate:(J)Ljava/lang/foreign/MemorySegment;
+        53: astore_3
+        54: iconst_0
+        55: istore        4
+        57: iload         4
+        59: sipush        8193
+        62: if_icmpge     180
+        65: aload_0
+        66: getfield      #143                // Field retainedRead:Ldev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall;
+        69: iload_1
+        70: aload_3
+        71: iload         4
+        73: i2l
+        74: invokeinterface #225,  3          // InterfaceMethod java/lang/foreign/MemorySegment.asSlice:(J)Ljava/lang/foreign/MemorySegment;
+        79: sipush        8193
+        82: iload         4
+        84: isub
+        85: i2l
+        86: iload         4
+        88: i2l
+        89: invokeinterface #249,  7          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall.call:(ILjava/lang/foreign/MemorySegment;JJ)J
+        94: lstore        5
+        96: lload         5
+        98: lconst_0
+        99: lcmp
+       100: iflt          116
+       103: lload         5
+       105: sipush        8193
+       108: iload         4
+       110: isub
+       111: i2l
+       112: lcmp
+       113: ifle          120
+       116: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+       119: athrow
+       120: lload         5
+       122: lconst_0
+       123: lcmp
+       124: ifne          169
+       127: iload         4
+       129: ifne          136
+       132: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+       135: athrow
+       136: aload_3
+       137: lconst_0
+       138: iload         4
+       140: i2l
+       141: invokeinterface #252,  5          // InterfaceMethod java/lang/foreign/MemorySegment.asSlice:(JJ)Ljava/lang/foreign/MemorySegment;
+       146: getstatic     #217                // Field java/lang/foreign/ValueLayout.JAVA_BYTE:Ljava/lang/foreign/ValueLayout$OfByte;
+       149: invokeinterface #255,  2          // InterfaceMethod java/lang/foreign/MemorySegment.toArray:(Ljava/lang/foreign/ValueLayout$OfByte;)[B
+       154: astore        7
+       156: aload_2
+       157: ifnull        166
+       160: aload_2
+       161: invokeinterface #195,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+       166: aload         7
+       168: areturn
+       169: iload         4
+       171: lload         5
+       173: l2i
+       174: iadd
+       175: istore        4
+       177: goto          57
+       180: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+       183: athrow
+       184: astore_3
+       185: aload_2
+       186: ifnull        206
+       189: aload_2
+       190: invokeinterface #195,  1          // InterfaceMethod java/lang/foreign/Arena.close:()V
+       195: goto          206
+       198: astore        4
+       200: aload_3
+       201: aload         4
+       203: invokevirtual #205                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       206: aload_3
+       207: athrow
+      Exception table:
+         from    to  target type
+            44   156   184   Class java/lang/Throwable
+           169   184   184   Class java/lang/Throwable
+           189   195   198   Class java/lang/Throwable
+
+  private void closeOwned(int) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: aload_0
+         1: getfield      #155                // Field close:Ldev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall;
+         4: iload_1
+         5: invokeinterface #259,  2          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall.call:(I)I
+        10: ifeq          17
+        13: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        16: athrow
+        17: return
+
+  private static <T> T bind(java.lang.foreign.SymbolLookup, java.lang.String, java.lang.Class<T>, java.lang.foreign.FunctionDescriptor, java.lang.foreign.Linker$Option...);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #262,  2          // InterfaceMethod java/lang/foreign/SymbolLookup.find:(Ljava/lang/String;)Ljava/util/Optional;
+         7: invokedynamic #268,  0            // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+        12: invokevirtual #272                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+        15: checkcast     #226                // class java/lang/foreign/MemorySegment
+        18: astore        5
+        20: aload_2
+        21: invokestatic  #19                 // InterfaceMethod java/lang/foreign/Linker.nativeLinker:()Ljava/lang/foreign/Linker;
+        24: aload         5
+        26: aload_3
+        27: aload         4
+        29: invokeinterface #278,  4          // InterfaceMethod java/lang/foreign/Linker.downcallHandle:(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/invoke/MethodHandle;
+        34: invokestatic  #282                // Method java/lang/invoke/MethodHandleProxies.asInterfaceInstance:(Ljava/lang/Class;Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+        37: areturn
+
+  private static java.lang.IllegalArgumentException invalid();
+    Code:
+         0: new           #288                // class java/lang/IllegalArgumentException
+         3: dup
+         4: ldc_w         #290                // String invalid sealed proof input
+         7: invokespecial #292                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        10: areturn
+
+  private static dev.codex.schubert.nk.storage.StorageIoException unavailable();
+    Code:
+         0: new           #293                // class dev/codex/schubert/nk/storage/StorageIoException
+         3: dup
+         4: getstatic     #295                // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.UNAVAILABLE:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+         7: invokespecial #301                // Method dev/codex/schubert/nk/storage/StorageIoException."<init>":(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V
+        10: areturn
+
+  private static java.lang.IllegalStateException lambda$bind$0();
+    Code:
+         0: new           #62                 // class java/lang/IllegalStateException
+         3: dup
+         4: ldc           #64                 // String native sealed proof is unavailable
+         6: invokespecial #66                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  private static java.lang.Object lambda$prepare$2(dev.codex.schubert.nk.storage.LinuxSealedProof$Operation, dev.codex.schubert.nk.storage.LinuxSealedProof$Descriptor) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: getfield      #304                // Field dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor.fd:I
+         4: istore_2
+         5: iload_2
+         6: sipush        128
+         9: if_icmplt     18
+        12: iload_2
+        13: ldc           #243                // int 65535
+        15: if_icmple     22
+        18: invokestatic  #213                // Method unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        21: athrow
+        22: aload_0
+        23: iload_2
+        24: invokeinterface #310,  2          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$Operation.execute:(I)Ljava/lang/Object;
+        29: areturn
+
+  private dev.codex.schubert.nk.storage.LinuxSealedProof$Descriptor lambda$prepare$0(int) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: new           #305                // class dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor
+         3: dup
+         4: aload_0
+         5: aload_0
+         6: iload_1
+         7: invokedynamic #316,  0            // InvokeDynamic #6:getAsInt:(Ldev/codex/schubert/nk/storage/LinuxSealedProof;I)Ljava/util/function/IntSupplier;
+        12: invokespecial #320                // Method dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor."<init>":(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/util/function/IntSupplier;)V
+        15: areturn
+
+  private int lambda$prepare$1(int);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: invokevirtual #323                // Method duplicateReserved:(I)I
+         5: ireturn
+
+  private java.lang.Object lambda$withProof$2(java.lang.foreign.Arena, byte[], dev.codex.schubert.nk.storage.LinuxSealedProof$Operation, dev.codex.schubert.nk.storage.LinuxSealedProof$Descriptor) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload         4
+         4: getfield      #304                // Field dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor.fd:I
+         7: aload_2
+         8: aload_3
+         9: invokevirtual #326                // Method prepare:(Ljava/lang/foreign/Arena;I[BLdev/codex/schubert/nk/storage/LinuxSealedProof$Operation;)Ljava/lang/Object;
+        12: areturn
+
+  private dev.codex.schubert.nk.storage.LinuxSealedProof$Descriptor lambda$withProof$0(java.lang.foreign.Arena) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: new           #305                // class dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor
+         3: dup
+         4: aload_0
+         5: aload_0
+         6: aload_1
+         7: invokedynamic #330,  0            // InvokeDynamic #7:getAsInt:(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/lang/foreign/Arena;)Ljava/util/function/IntSupplier;
+        12: invokespecial #320                // Method dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor."<init>":(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/util/function/IntSupplier;)V
+        15: areturn
+
+  private int lambda$withProof$1(java.lang.foreign.Arena);
+    Code:
+         0: aload_0
+         1: getfield      #134                // Field retainedCreate:Ldev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall;
+         4: aload_1
+         5: ldc_w         #333                // String schubert-startup-proof
+         8: invokeinterface #335,  2          // InterfaceMethod java/lang/foreign/Arena.allocateFrom:(Ljava/lang/String;)Ljava/lang/foreign/MemorySegment;
+        13: iconst_3
+        14: invokeinterface #338,  3          // InterfaceMethod dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall.call:(Ljava/lang/foreign/MemorySegment;I)I
+        19: ireturn
+}

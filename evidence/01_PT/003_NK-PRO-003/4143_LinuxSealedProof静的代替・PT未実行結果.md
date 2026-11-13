@@ -1,0 +1,5 @@
+# LinuxSealedProof 静的代替・PT未実行結果
+
+BUG2840 source5330のSealed/ResourceScope/StorageIo/package4sourceをRootCompiler/Java25lintWerror/NullAwayで非初期化compileし全17物理MainをSB MaxLowで照合、Bug/MissingClass/Error0/ClassStats17一致。wholeTest9はcompile/実行0・coverage null。PG29590の工具POM子property不足をBUG2842へ先行起票/原保全し新PG29600で固定Storage pin4.10.4.0を正しく継承、版/guard変更なし。初回PMD22中新Testのclose:四literalだけ適用BUG2843を先行起票、一固定定数へ是正し元9全oracle逆変換、変更TestだけPG29606再解析、Mainbyte不変のcompile/SBは再演0。残PMD21はResourceScope18のSS333複合優先規則とTest3のJ2EE非該当/null反例を全site/多重度/sourcehashで分類し適用/未分類/処理error0。PG29608 bytecode同FD→-1分岐/dup一呼出を独立review、PG29610で2sourceだけのF03公開inventory差分と横展開5sourceを記録。静的代替をPTPASS/実coverageへ加算0、BUG2840/YKT2404はnative再試験未完OPEN、Root2/actual4/実Root/VM/DB/鍵/FD操作0。元190新0/正式1964-53/工数null・正本154/625記録を維持。
+
+[PG29610独立join](../018_NK-OPS-001/evidence/PG29610-sealed-static-independent-source-join-v1/manifest.json)で原失敗・是正・Root静的・source/byte・未確認条件を対応。静的解析command/OS/JDK/tool/version/hashは各manifestとstage begin/exit、製品PTは未実行。新TestはPT-OPS-SEAL-009、再発防止入力128/129/65535とclose1/callback0の期待のみ。元whole001～008の実native/並行/資源後条件はHOLD、source品質限定の完了であってPT完了/全F03/451/IT/STではない。

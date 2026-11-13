@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T13:02:23.150342+00:00",
+  "source": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "productionCoreMain": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "compile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29600-sealed-public-compile-v1/manifest.json",
+    "sha256": "14b58498e53d85a7ed07d1297c6b90e1d23f549538769447652dd4d054c0ee58"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29606-sealed-changed-test-static-v1/manifest.json",
+    "sha256": "cd06b1bd198a1c7be005b45bf3534635d3fc4169e2150f64b31436014f82eb98"
+  },
+  "byteReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29608-sealed-public-byte-review-v1/manifest.json",
+    "sha256": "bf39eca0a25f81ffe589061f9bff436c977c684c7607b25f8d96f14e990aede0"
+  },
+  "sourceInventoryDelta": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29610-sealed-static-independent-source-join-v1/public-source-inventory-delta.json",
+    "sha256": "24627e7972d10dea892ff4d04255804d7155689e60dad40b1e5a17d6293e90fd"
+  },
+  "unchangedMainPhysical": 17,
+  "SBugs": 0,
+  "SBMissing": 0,
+  "SBErrors": 0,
+  "rawPmd": 21,
+  "classifiedNotApplicable": 21,
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "sourceByteHelperReview": "ONE_FCNTL1030_MIN128; IF_SAME_ORIGINAL_RETURN_MINUS1_BEFORE_DUPLICATE_OWNERSHIP",
+  "sameFdExpectedCases": [
+    {
+      "original": 128,
+      "returnedDup": 128,
+      "expectedCallbackCount": 0,
+      "expectedOriginalCloseCount": 1,
+      "actual": "NOT_RUN_HOLD"
+    },
+    {
+      "original": 129,
+      "returnedDup": 129,
+      "expectedCallbackCount": 0,
+      "expectedOriginalCloseCount": 1,
+      "actual": "NOT_RUN_HOLD"
+    },
+    {
+      "original": 65535,
+      "returnedDup": 65535,
+      "expectedCallbackCount": 0,
+      "expectedOriginalCloseCount": 1,
+      "actual": "NOT_RUN_HOLD"
+    }
+  ],
+  "horizontalSourceApplicability": [
+    {
+      "program": "LinuxSealedProof",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+      "sha256": "009b87f24bdcb9c2c592992d150f869afa51a3844c04fb4ba378dbe68e4f251b",
+      "disposition": "FIXED_SOURCE_STATIC_PT_HOLD",
+      "reason": "sameFD→negative beforeDescriptorownership; sourcehelper compiledbyte condition matches; original8 preserved/new1 NOT_RUN"
+    },
+    {
+      "program": "LinuxFileLock",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java",
+      "sha256": "0d89d9a2cd78560731882bff49d38a1d48515a4739b25e04cbca0fcd0655d3ed",
+      "disposition": "NON_AFFECTED_SOURCE_CONFIRMED",
+      "reason": "duplicateStartup returns-1 forreserved==original beforeowner; no sourcechange/runtime reexecution"
+    },
+    {
+      "program": "LinuxExecDescriptors",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java",
+      "sha256": "353029ce353dde7628d64c7b9fb20e541f2387f1912391838d8835b571f7e8e6",
+      "disposition": "NON_AFFECTED_SOURCE_CONFIRMED",
+      "reason": "borrowsalreadyownedFDs andrequiresdistinctinput; no dup/newFD ownership"
+    },
+    {
+      "program": "LinuxStartupAdmission",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java",
+      "sha256": "bec3eda194f903fff992c1b6301ee128a878e35b883d19beb2b3b17b71871a6b",
+      "disposition": "NON_AFFECTED_SOURCE_CONFIRMED",
+      "reason": "distinctinheritedFDinput andatomiconce owner; no dup acquisition"
+    },
+    {
+      "program": "LinuxProcessExec",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java",
+      "sha256": "73b35bb21ae6d801563680541c5b3984faa23f33434f8ca8cfca078abd71f3a0",
+      "disposition": "NON_AFFECTED_SOURCE_CONFIRMED",
+      "reason": "borrowedELFinode/samePID replacement, no newFD acquisition; actualexecHOLD"
+    }
+  ],
+  "wholeTestDefinitions": 9,
+  "newDefinitions": 1,
+  "newQualifiedDefinitions": 0,
+  "wholeTestRuntime": "HOLD_NOT_RUN",
+  "productTestsExecuted": 0,
+  "testCompile": false,
+  "coverage": null,
+  "bug2840State": "SOURCE_FIXED_STATIC_ALTERNATIVE_VERIFIED_RUNTIME_PENDING_OPEN",
+  "ykt2404State": "ALL5_SOURCE_DISPOSITIONS_SAVED_PREVENTION_TEST_DEFINED_NOT_RUN_OPEN",
+  "allF03Accepted": false,
+  "all451Accepted": false,
+  "formalUpdated": false,
+  "effortCompletionRate": null,
+  "actualNativeRootVmDbKeyActions": 0,
+  "actual4BinaryOrRoot2BodyOperations": 0
+}

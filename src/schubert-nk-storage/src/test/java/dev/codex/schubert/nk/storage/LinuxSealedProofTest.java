@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SEAL-001..008; independent public byte vectors and actual immutable Linux memfd. */
 final class LinuxSealedProofTest {
+  private static final String FIXTURE_CLOSE_PREFIX = "close:";
   private static final String FIXTURE_BODY_BFD4D039 = "body";
   private static final String FIXTURE_CREATE_5498A731 = "create";
   private static final String FIXTURE_CLOSE_17_F1422F88 = "close:17";
@@ -114,7 +115,7 @@ final class LinuxSealedProofTest {
       unavailable(
           assertThrows(StorageIoException.class, () -> f.calls().withProof(VECTOR, fd -> fail())));
       assertEquals(
-          List.of("close:" + reserved, FIXTURE_CLOSE_17_F1422F88),
+          List.of(FIXTURE_CLOSE_PREFIX + reserved, FIXTURE_CLOSE_17_F1422F88),
           f.events.subList(f.events.size() - 2, f.events.size()));
     }
   }
@@ -130,7 +131,7 @@ final class LinuxSealedProofTest {
     for (byte[] bytes : List.of(new byte[0], new byte[8193])) {
       var f = new Fixture(bytes);
       unavailable(assertThrows(StorageIoException.class, () -> f.calls().read(129)));
-      assertFalse(f.events.stream().anyMatch(event -> event.startsWith("close:")));
+      assertFalse(f.events.stream().anyMatch(event -> event.startsWith(FIXTURE_CLOSE_PREFIX)));
     }
     for (long result : List.of(-1L, 8194L)) {
       var f = new Fixture(VECTOR);
@@ -334,7 +335,7 @@ final class LinuxSealedProofTest {
               "write:" + original,
               "fcntl:" + original + ":1033:15",
               "fcntl:" + original + ":1030:128",
-              "close:" + original),
+              FIXTURE_CLOSE_PREFIX + original),
           fixture.events);
     }
   }
@@ -400,7 +401,7 @@ final class LinuxSealedProofTest {
             return failed.equals("mode") ? -1 : 0;
           },
           fd -> {
-            events.add("close:" + fd);
+            events.add(FIXTURE_CLOSE_PREFIX + fd);
             if (fd == 129 && cleanupUnknown != null) {
               if (cleanupUnknown instanceof RuntimeException failure) throw failure;
               throw (Error) cleanupUnknown;
