@@ -1,0 +1,84 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29748-RUNSTATE-COMPLETION8",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java": "WBS-P017-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4235_RunStateCompletion純値六件・独立通常PT仕様.md",
+      "sha256": "bc183de2585f71e665f6a52813c80aa20c5bd032ee784b0b10bdca23fbe7f2ff"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29738-runstate-four-source-closed-dependency-v1/manifest.json",
+      "sha256": "ca4efcd11533a6e769342ddcc2f8e5ec0af14631cb7199bb99c03d23a7f54388"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+      "tests": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.java",
+      "tests": 6
+    }
+  ],
+  "expectedTests": 8,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunState.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunState"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29740-runstate-completion8-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29742-runstate-completion8-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29744-runstate-completion8-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29746-runstate-completion8-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29748-runstate-completion8-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29750-runstate-completion8-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29742-runstate-completion8-prepare-v1",
+    "unit": "pg29748-runstate-completion8-unit-v1"
+  },
+  "newTestDefinitions": 6
+}

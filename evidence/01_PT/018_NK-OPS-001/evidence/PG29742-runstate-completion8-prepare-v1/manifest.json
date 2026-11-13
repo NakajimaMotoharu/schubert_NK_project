@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2391_runstate_normal_profile.json",
+    "sha256": "f000f3649178be0002efacca37d2e75692135a2de96500d7a7ad969df5b811a5"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "3713fb2ce03a4ec926c4d193051373348da922c15d5f22e8f43cabd215b36dcd",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java": "d5b3b9e2cd40ba30304a6f69a065c63c2ada73af49781b644e1274f3419c4d24",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.java": "8bbcd7351185c6c777245b92d166bdb9ca8bcdbca5ade71be286a78118d8ca72",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunState.class": "f6725e7a0f3f2a0b7221dfc9461b9cda79157431260922f8744edcea67f04659",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class": "a5e9c7c1005bb63c72d4d950f6f628fcb0831f3dcd0881c3be002736189b8c13",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class": "876b2a03fc51c860acf7efe94b6287e9e5c87218d42e24bee995b0aee69444ba"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.class": "6f2fd30d0a63e4f593fc99565486f063a27af7f5c5b4816dd02f65a12c8d04c5",
+    "dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.class": "dc48f2ecf29e570c24a9da4079fcc91f3dccfccc597cd80eb2b51a9c25aafa77"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest",
+      "name": "cutoffBoundsNullsAndFixedRunDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest",
+      "name": "activationNullsValueAccessorsAndFixedDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "pendingStateHasNoCompletionOrAuthority()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "equivalentActivationAcceptsItsExactCompletion()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "differentRunCutoffOrActivationCannotSupplyCompletion()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "constructorsRejectMissingInvariantValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "completionUsesLiteralTimestampAndMicrosecondBounds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest",
+      "name": "closedOutcomesHaveFixedCodesAndRedactedCompletion()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.batch.repository.BatchRunValueBoundaryTest",
+    "dev.codex.schubert.nk.batch.repository.MaintenanceRunStateValuesTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T14:47:25.304362+00:00",
+      "endUTC": "2026-11-13T14:47:27.725433+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29742-runstate-completion8-prepare-v1",
+      "stdoutSha256": "c9bfd711fcac29d15e56637bf6ebab98be883680718681ecbe9228b1112b7fa6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T14:47:27.725782+00:00",
+      "endUTC": "2026-11-13T14:47:28.341728+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29742-runstate-completion8-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29742-runstate-completion8-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29740-runstate-completion8-prestyle-v1/manifest.json",
+    "sha256": "93500d75d37280b6c97a9856e944dde870b2f7ae45007815ecaa5796d1380141"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "475d846fe949a876e820505ecd0a204ac082643f06c1da7de4ee1bc842dc32b2",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 4,
+  "reusedRuntimeSignatureClassCount": 0
+}
