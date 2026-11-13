@@ -321,15 +321,23 @@ public final class StartupReleaseManifest {
                   () -> io.open(held),
                   java.nio.channels.SeekableByteChannel::close,
                   channel -> {
-                    require(channel.size() == before.size());
+                    require(channel.size() == before.size() && channel.position() == 0);
                     ByteBuffer buffer = ByteBuffer.allocate(8192);
                     long total = 0;
                     while (true) {
                       int count = channel.read(buffer);
-                      if (count < 0) break;
-                      require(count > 0);
+                      if (count < 0) {
+                        require(
+                            count == -1 && buffer.position() == 0 && channel.position() == total);
+                        break;
+                      }
+                      // The retained file size is already admitted to MAX_BYTES.
+                      require(
+                          count > 0
+                              && count == buffer.position()
+                              && count <= before.size() - total);
                       total += count;
-                      require(total <= MAX_BYTES);
+                      require(channel.position() == total);
                       buffer.flip();
                       material.write(buffer.array(), 0, count);
                       hash.update(buffer);

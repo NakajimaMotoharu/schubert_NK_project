@@ -1,0 +1,135 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T13:47:28.799222+09:00",
+  "sourceBefore": "8a92cd9823918294a79842a854b3f0789f8d77b5",
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": "54bb4bf244047c02ab70cf9c55faf916897127817c1d4e15d65fb3ab284def62"
+  },
+  "originalSourceInverseExact": true,
+  "stages": {
+    "format": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T04:47:26.898944+00:00",
+      "endUTC": "2026-11-13T04:47:27.414873+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--replace",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "format-after": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T04:47:27.415296+00:00",
+      "endUTC": "2026-11-13T04:47:27.931335+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checkstyle": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T04:47:27.931808+00:00",
+      "endUTC": "2026-11-13T04:47:28.798773+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28942-manifest-read-one-source-static-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalNormalIoAndOwnedCloseRootSelectorAuthorityUnchanged": true,
+  "declaredSizePrecheckedByExistingCheckedMax1MiB": true,
+  "oldTotalMaxAssertionReplacedByStrongerPreincrementRemainingSize": true,
+  "independentLiteralPendingVectors": [
+    {
+      "id": "MANREAD001",
+      "scenario": "size2, initialpos0, read2/bufferpos2/channelpos2, thenEOF-1/bufferpos0/channelpos2",
+      "expected": "continuehashandunchangedexistingallclose/inoderecheck"
+    },
+    {
+      "id": "MANREAD002",
+      "scenario": "initialposition1",
+      "expected": "rejectbeforefirstread/ownedchannelclose"
+    },
+    {
+      "id": "MANREAD003",
+      "scenario": "size2, read2/bufferpos1/channelpos2",
+      "expected": "rejectcount-versus-bufferbeforehash"
+    },
+    {
+      "id": "MANREAD004",
+      "scenario": "size2, read1/bufferpos1/channelpos2",
+      "expected": "rejectchannelpositionbeforedigestupdate"
+    },
+    {
+      "id": "MANREAD005",
+      "scenario": "size2, read3/bufferpos3/channelpos3",
+      "expected": "rejectdeclaredsizeoverrunbeforehash"
+    },
+    {
+      "id": "MANREAD006",
+      "scenario": "size2, read0/bufferpos0/channelpos0",
+      "expected": "rejectzeroprogressnoinfiniteretry"
+    },
+    {
+      "id": "MANREAD007",
+      "scenario": "size2 fullyread thenEOF-2/bufferpos0/channelpos2",
+      "expected": "rejectnoncanonicalEOF"
+    },
+    {
+      "id": "MANREAD008",
+      "scenario": "size2 fullyread thenEOF-1/bufferpos1/channelpos2",
+      "expected": "rejectEOFwithbufferadvance"
+    },
+    {
+      "id": "MANREAD009",
+      "scenario": "size2 fullyread thenEOF-1/bufferpos0/channelpos3",
+      "expected": "rejectEOFwithchanneldrift"
+    },
+    {
+      "id": "MANREAD010",
+      "scenario": "size2 read1thenEOF-1 withconsistentpositions",
+      "expected": "existingexactsizepostconditionrejects; no publishedhash"
+    }
+  ],
+  "vectorExecutionStatus": "SPEC_ONLY_NOT_PRODUCT_TEST_OR_EXECUTED_PASS",
+  "productTestsExecuted": 0,
+  "MainCompiled": false,
+  "MainInitializedOrInvoked": false,
+  "coverage": null,
+  "ptStatus": "NOT_RUN_NOT_PASS",
+  "bug": "BUG2794",
+  "ykt": "YKT2399",
+  "actualRootNativeVmKeyOrReleaseActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2224_manifest_read_source_static.py",
+    "sha256": "0841efde1b5fb62c634fcb1cbc202a05123920348b058fac5bc1633fcd0faa91"
+  }
+}
