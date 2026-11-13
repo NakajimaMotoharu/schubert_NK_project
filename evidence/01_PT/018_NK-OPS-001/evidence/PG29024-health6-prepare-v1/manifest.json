@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2240_health6_closed_profile.json",
+    "sha256": "7e8b562fe95360d33c9a76145d435ec0e494c0d1deb969fe7bb3c62936cb3766"
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.java": "5afec3b52675a18c3d34b676b0d3313dc42b58e7b7377b0658524530b675f5a9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.java": "9a90ff25dd5bd987b3524da8cff9e37511d82cef6901256e948afa5609822269",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java": "7a57dc9d43c8fa167cd971fa846ae25d4ee7c45d33472faca7c2e2be9ccbedd1",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignalTest.java": "f8356988662996f3fc39f854d856dca84d3f9550bceca6b5d38a3d2a07aaf3ef",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.class": "9de5507c7fcf4de07d9a6e111b3dacba4944c2ad7e3ef4ae2d316306974616ad",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.class": "9861f4e2abddd43a3969287b6479c3dccf5d2a34d6677867481450afe692e6c1"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignalTest.class": "2c0781194c3c1220ceac8b411f232aba5c2b988dd385537af9dc477407ab65d9",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.class": "57701f5d89be13ce1d7b68cf0ec4eca6f84411fe09d3302d62827ca864be9d75"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+      "name": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+      "name": "health002AllPresentAndLiveCallsEachProviderOnceInOriginalOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+      "name": "health003ProviderFailureIsNotSwallowedOrConvertedToUp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+      "name": "health004OwnerNotificationFailureKeepsIdentityAndDoesNotProbeResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+      "name": "health005ManagementReadyRequiresCapturedObjectAndPropagatesProbeFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeFailureSignalTest",
+      "name": "signal001BothCallbacksMarkOnlyCapturedFlagAndRemainIdempotent()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.web.bootstrap.WebRuntimeFailureSignalTest",
+    "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T05:53:36.759205+00:00",
+      "endUTC": "2026-11-13T05:53:39.179875+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29024-health6-prepare-v1",
+      "stdoutSha256": "dff356550efe9f8eb903a596b4aeca71a70ded3e9f5f9dff184766b11dd9fcf1",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T05:53:39.180228+00:00",
+      "endUTC": "2026-11-13T05:53:39.896407+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29024-health6-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29024-health6-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignalTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29022-health6-prestyle-v1/manifest.json",
+    "sha256": "e2df2dc4da0ac6eca96fe5d814dd646dbe6b3b7ad2aa69e30e04f0acf23b245d"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "3a60ee6843f78498705f8b1765d6a8ee2bd7b453f2127f5f4bc5e51ca0d9058e",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 2,
+  "reusedRuntimeSignatureClassCount": 0
+}

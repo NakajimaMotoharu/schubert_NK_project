@@ -1,0 +1,76 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29034-WEB-HEALTH-SIGNAL-ORIGINAL4-NEW2-NORMAL6",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.java": "WBS-P018-06",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.java": "WBS-P018-06"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4252_Web稼働判定終端フラグ通常六仕様.md",
+      "sha256": "999e6fbc89901ad91fd54a0f0462a7fd06995b1ff6a882fd84a7fc6939fa3e1c"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29020-health-signal-whole6-source-closure-v1/manifest.json",
+      "sha256": "707aebe031331a3c008a1503e36a59592da59b37d03fb1e869b409ee4c6c19f1"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "a769422d3bdb936daadccc974ccecbe7c32b3086",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+      "tests": 5
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignalTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 6,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.class",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth",
+    "dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-web/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29022-health6-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29024-health6-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29026-health6-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29028-health6-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29034-health6-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29036-health6-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29024-health6-prepare-v1",
+    "unit": "pg29034-health6-unit-v1"
+  },
+  "newTestDefinitions": 2,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

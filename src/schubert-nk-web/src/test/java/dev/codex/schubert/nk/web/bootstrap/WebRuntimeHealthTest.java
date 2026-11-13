@@ -185,4 +185,46 @@ final class WebRuntimeHealthTest {
                     unusedProbe,
                     unusedProbe)));
   }
+
+  @Test
+  void health005ManagementReadyRequiresCapturedObjectAndPropagatesProbeFailure() {
+    var calls = new ArrayList<String>();
+    var captured = new Object();
+    assertFalse(
+        WebRuntimeHealth.ready(
+            null,
+            value -> {
+              throw new AssertionError("absent management must not be probed");
+            }));
+    assertFalse(
+        WebRuntimeHealth.ready(
+            captured,
+            value -> {
+              assertSame(captured, value);
+              calls.add("not-ready");
+              return false;
+            }));
+    assertTrue(
+        WebRuntimeHealth.ready(
+            captured,
+            value -> {
+              assertSame(captured, value);
+              calls.add("ready");
+              return true;
+            }));
+    var primary = new LinkageError("synthetic management failure");
+    assertSame(
+        primary,
+        assertThrows(
+            LinkageError.class,
+            () ->
+                WebRuntimeHealth.ready(
+                    captured,
+                    value -> {
+                      assertSame(captured, value);
+                      calls.add("failed");
+                      throw primary;
+                    })));
+    assertEquals(List.of("not-ready", "ready", "failed"), calls);
+  }
 }
