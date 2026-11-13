@@ -1,0 +1,80 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29340-RESOURCE-SCOPE-ORIGINAL-WHOLE26-CURRENT-DEPENDENCY",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "WBS-P003-08",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/003_NK-PRO-003/4138_ResourceScope原二十六・依存差再資格仕様.md",
+      "sha256": "1b713ac3624b3f1e51c73d317f314ea0c7259a3750de535d36be3b4fbf40e7fb"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29330-resource26-closed-source-qualification-v1/manifest.json",
+      "sha256": "5048fa7f555d9a851cdf74bc55e57d019913e793a908454da13ffa500c47007c"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "mainSources": [
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "tests": 18
+    }
+  ],
+  "expectedTests": 26,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-storage/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29332-resource26-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29334-resource26-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29336-resource26-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29338-resource26-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29340-resource26-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29342-resource26-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29334-resource26-prepare-v1",
+    "unit": "pg29340-resource26-unit-v1"
+  },
+  "newTestDefinitions": 0,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

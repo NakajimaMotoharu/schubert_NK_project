@@ -1,0 +1,245 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG29340-RESOURCE-SCOPE-ORIGINAL-WHOLE26-CURRENT-DEPENDENCY",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29334-resource26-prepare-v1/manifest.json",
+    "sha256": "8ef6e409c89563d0a6bdcbb6577756620fb57061f350dcb1b63edd6a3fc146ef"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29336-resource26-static-v1/manifest.json",
+    "sha256": "1ea8c3c73c17a16b8a41ed9b75ae8f49c01cf227a691180d214c4f0f21825448"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "sourceLine": 82,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "sourceLine": 82,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "sourceLine": 86,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "sourceLine": 86,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceAnchor": "if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "sourceLine": 87,
+      "occurrences": 1,
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "rawMultiplicity": 4,
+      "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceAnchor": "failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "sourceLine": 98,
+      "occurrences": 1,
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "rawMultiplicity": 1,
+      "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "sourceLine": 112,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "sourceLine": 112,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "rawMultiplicity": 1,
+      "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceAnchor": "if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "sourceLine": 116,
+      "occurrences": 1,
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "rawMultiplicity": 4,
+      "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceAnchor": "failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "sourceLine": 126,
+      "occurrences": 1,
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "rawMultiplicity": 1,
+      "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "sourceLine": 318,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var first = executor.submit(() -> a.run(null, null));",
+      "sourceLine": 321,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var second = executor.submit(() -> b.run(null, null));",
+      "sourceLine": 322,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "sourceLine": 563,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "try (var executor = Executors.newFixedThreadPool(2)) {",
+      "sourceLine": 569,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 571,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 582,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {",
+      "sourceLine": 247,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.submit(() -> ResourceScope.use(closed::incrementAndGet, () -> value + 42)));",
+      "sourceLine": 252,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "rawMultiplicity": 1,
+      "reason": "Plain JUnit finite token-scope concurrency fixture, not a J2EE Web application. Owned executors, five bounded Future.get10SECONDS and barrier10SECONDS; independent opaque data tokens, no actual native/Root/backend lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
