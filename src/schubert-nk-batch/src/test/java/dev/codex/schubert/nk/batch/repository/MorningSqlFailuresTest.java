@@ -58,7 +58,8 @@ final class MorningSqlFailuresTest {
           List.of(
               new SQLException(DIAGNOSTIC), new IllegalStateException(), new AssertionError())) {
         assertFalse(MorningSqlFailures.closeReplace(primary, cleanup));
-        assertEquals(++expectedCount, primary.getSuppressed().length);
+        expectedCount++;
+        assertEquals(expectedCount, primary.getSuppressed().length);
         Throwable secondary = primary.getSuppressed()[expectedCount - 1];
         assertInstanceOf(BatchRepositoryException.class, secondary);
         assertEquals(FIXED, secondary.getMessage());
@@ -201,6 +202,18 @@ final class MorningSqlFailuresTest {
     assertSame(
         suppressed,
         assertThrows(AssertionError.class, () -> MorningSqlFailures.preserveCatalogFatal(batch)));
+    // Distinct but equals-equal nodes must both be visited by identity.
+    var equalFirst = new EqualSql();
+    var equalSecond = new EqualSql();
+    var identityFatal = new AssertionError();
+    equalFirst.addSuppressed(equalSecond);
+    equalSecond.initCause(identityFatal);
+    assertEquals(equalFirst, equalSecond);
+    assertNotSame(equalFirst, equalSecond);
+    assertSame(
+        identityFatal,
+        assertThrows(
+            AssertionError.class, () -> MorningSqlFailures.preserveCatalogFatal(equalFirst)));
   }
 
   @Test
@@ -212,6 +225,20 @@ final class MorningSqlFailuresTest {
     assertEquals(0, primary.getSuppressed().length);
     assertFalse(MorningSqlFailures.closeReplace(primary, primary));
     assertEquals(0, primary.getSuppressed().length);
+  }
+
+  private static final class EqualSql extends SQLException {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object other) {
+      return other instanceof EqualSql;
+    }
+
+    @Override
+    public int hashCode() {
+      return 1;
+    }
   }
 
   private static final class SqlCycle extends SQLException {
