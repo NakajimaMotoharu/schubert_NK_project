@@ -1,0 +1,7 @@
+# 通常Artemis client SDK限定工具の仕様
+
+PG28512で公式既MavenCentral保存SHA1/POM/remote receipt・各Jar SHA256を照合したArtemis core-client/commons2.56.0、Netty common/buffer/transport4.1.137.Final、SLF4J API2.0.18の六つだけ。server/embedded/native/別version/追加依存/appJar/Productcachedclassへの一般fallbackは許さない。全9MQMain1189行と既Storage byte、既whole6Test1090行26定義のpublicsourceを確認済み。新fatalTest一つのpathは明示許可だが内容・期待値・試験数・source固定は次PG/PT群で独立照合する。
+
+pgpt_artemis_sdk optinなしは従来通りbackendJar拒否。ある場合もwitness/十Main現在hash/六Jar hash/正規namespace/wholeTest名/無接続sourcefenceが必須。ClientRequestor/ActiveMQClient/ServerLocatorImpl/EmbeddedActiveMQ/NettyConnector/EventLoopGroupのJUnit実初期化を独立postで拒否し、全Main/Guard/解析専用symbolの既class-init/CRC/coverage漏れ検査は維持する。Rootcompiler・Unitcommand・全counterアルゴリズム/除外0・新sourceと旧exec合算0は不変。
+
+PG28520 metadata43（正6/負37）・既legacy syntax2とAST非変更境界を記録。Product class load/compile/PT0、正式1964-53/190/coverageへ算入0。BUG2767finiteworkerを修正するまでは当Testをrunnerへ渡さない。BUG2768category guard原誤値はPG28517に保全、正規category IMPLEMENTATION/kind TOOL_FIXへ限定訂正しevent5024一回だけstartを確認した。新SDKの使用は既承認の独立通常PG/PTであり実Broker/Root/native/DB/VM/鍵/intent/permit/HOLDを解除しない。

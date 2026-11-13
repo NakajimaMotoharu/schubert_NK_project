@@ -158,7 +158,10 @@ def verify(c, config, source):
     if signature is not None:
         require(guard_name in observed, 'fresh real Guard execution required')
     require(observed <= analyzed | set(maps) and all(probes[n][0] == ids[n] and probes[n][1] > 0 for n in observed), 'positive same-Main CRC only')
-    init = {n for n in re.findall(r"Initializing '([^']+)'", (unit / 'class-init.log').read_text()) if n.startswith('dev/codex/schubert/nk/') and not any(n == t or n.startswith(t + '$') for t in test_names)}
+    import pgpt_artemis_sdk
+    initialized_all = set(re.findall(r"Initializing '([^']+)'", (unit / 'class-init.log').read_text()))
+    sdk_runtime = pgpt_artemis_sdk.check_runtime(c, initialized_all)
+    init = {n for n in initialized_all if n.startswith('dev/codex/schubert/nk/') and not any(n == t or n.startswith(t + '$') for t in test_names)}
     require(not any(n.rpartition('/')[2].split('$')[0] in policy.DENIED for n in init), 'held class initialized')
     require(not set(c.get('forbiddenInitializedClasses', [])) & init, 'source-reviewed compile-only JDBC parent initialized')
     real = init & set(ids)
@@ -195,6 +198,7 @@ def verify(c, config, source):
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
     result['guardSignature'] = signature
     result['analysisOnlyContext'] = analysis_context
+    result['reviewedArtemisSdk'] = sdk_runtime
     policy.write_json(out / 'manifest.json', result)
     return result
 

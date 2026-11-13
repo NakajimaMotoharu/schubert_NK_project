@@ -1,0 +1,206 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T09:29:12.133325+09:00",
+  "source": "a81ffb6bcb3850f109021e743df40d915fdd7c4b",
+  "productionCoreMain": "a81ffb6bcb3850f109021e743df40d915fdd7c4b",
+  "mainInputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java": "d2a1c2d5528b4278a4fcea5d7504961fc1fb84d909d242ae48818f768aba200b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java": "8733ed7e17c9b6b1a6dddb29cec099615196d80440355f84c53172f7b5d2b539",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java": "7bdbce47508198ee6c55beff67728d07c837b7c629fc3748c91ea3a41060d118",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java": "6b3e87f566e3901e1674a14d3dcad7d3cc60bbcb938ed505ddf6553d3bf6346d",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java": "930b0bb1448eaa78c8fa2406a41a06f2b9d1c5cbf6c953b19ec570d1139d386f",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java": "cea38af6f564bbd77a56ec813e6aea92c6744a7f0f8c3e3ed10dd92deb83d5d8",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.java": "d3d5c0ae5544fa06ebb00b0038bf49391a18729335a0d64d59a91e804023997e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java": "97451e64315eb5c783e85f580f0cb03b27f02feb43e7b4a9c7ee811b161a281b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java": "3422dd26caa2efa2a7fd44682ef3d87f877254f0144f3cc0dd28332949085aac",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0"
+  },
+  "wholeMqMainLinesReviewed": 1189,
+  "storagePriorWholeQualification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28380-jdbc-knownpair8-post-v1/manifest.json",
+    "sha256": "37e45fe0d305442d1dcf805305dd4fee41ccf0bae5d147af5b55e3d2d97ac79d"
+  },
+  "wholeTests": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservationTest.java",
+      "sha256": "15f71ae921877c0974a07017f6e2607dc30b61d43426eed49e873e3241537fc9",
+      "wholeLinesReviewed": 191,
+      "tests": 3,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest#opsMq029OrderedReadOnlyObservation",
+        "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest#opsMq030FailClosedAndNoLaterChecks",
+        "dev.codex.schubert.nk.batch.mq.ArtemisStartupObservationTest#opsMq031MalformedPressureAndFatalContracts"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "NO_WORKERS"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+      "sha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107",
+      "wholeLinesReviewed": 171,
+      "tests": 3,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest#detailedNestedDataHasNoMutableInputOrOutputAliases",
+        "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest#brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce",
+        "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest#queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "NO_WORKERS"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisParentDeadlineTest.java",
+      "sha256": "824d9ebd325286b76120488d7ef6a54d941a94eeb8939b493c5575d2d0d5eaad",
+      "wholeLinesReviewed": 110,
+      "tests": 2,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest#eachExchangeBorrowsActualRemainingAndNeverRoundsUp",
+        "dev.codex.schubert.nk.batch.mq.ArtemisParentDeadlineTest#exceptionExpiryNestedAndOtherThreadNeverEscapeOwnerLifetime"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "BUG2767_OPEN_MUST_FIX_BEFORE_RUN"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementEncoderBoundaryTest.java",
+      "sha256": "ee3da610da96cae066ee32e1ee49a4999605291cfd5ab4d5b6d65e2a775a64ee",
+      "wholeLinesReviewed": 146,
+      "tests": 3,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest#encoderForwardsExactInputsAndRejectsMissingPort",
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest#encoderPreservesUnknownAndRedactsDeclaredFailures",
+        "dev.codex.schubert.nk.batch.mq.ArtemisManagementEncoderBoundaryTest#parentGuardIsCheckedBeforeBorrowedStartAndRemovedAfterFailure"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "NO_WORKERS"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorPolicyPortTest.java",
+      "sha256": "939b60c7aa351a123682b5e2542f707ba26b104cefd5eaa2baffbc828e0f2774",
+      "wholeLinesReviewed": 370,
+      "tests": 13,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#exactSingletonReturnsSevenLiteralFieldsAndImmutableIndependentResults",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#nullBoundariesRejectBeforeAnyReaderAndDefaultWiringHasNoQuery",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#nonStringManagementValuesRejectBeforeStartedRead",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#arrayCardinalityAndEveryNonObjectElementReject",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#exactAcceptorFieldsNameAndFactoryRejectOneIndependentDifference",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#extraPropertiesMustBeAnEmptyObject",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#everyParameterKeyValueAndObjectTypeIsCheckedBeforeStarted",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#startedMustBeTheBooleanTrueAndBothReadersAreCalledOnce",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#malformedJsonAndWrongStringTypesHaveFixedDiagnostics",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#readerRuntimeAndErrorsKeepIdentityAndSuccessfulCallsAreNotCached",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#eachDeclaredParserExceptionIsRedactedBeforeStartedAndNeverRetried",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#parserNullContractIsCheckedAtConstructorAndResultBoundary",
+        "dev.codex.schubert.nk.batch.mq.AcceptorPolicyPortTest#undeclaredParserRuntimeAndFatalKeepIdentityWithoutStartedRead"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "NO_WORKERS"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/AcceptorObjectBoundaryTest.java",
+      "sha256": "0b69334562a3d1e8d0ef7c1dc0729b40384689d4e71918e79c939eaf988713c5",
+      "wholeLinesReviewed": 102,
+      "tests": 2,
+      "canonicalMethodIds": [
+        "dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest#opsMqObj001RejectsEachNonObjectExtraPropsBeforeStartedRead",
+        "dev.codex.schubert.nk.batch.mq.AcceptorObjectBoundaryTest#opsMqObj002RejectsEachNonObjectParamsBeforeStartedRead"
+      ],
+      "noBrokerOrNativeOrAuthorityOperations": true,
+      "finiteWorkerStatus": "NO_WORKERS"
+    }
+  ],
+  "wholeTestLinesReviewed": 1090,
+  "originalTests": 26,
+  "sdkJars": [
+    {
+      "path": "org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "sha256": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "af81899a082e68e83e8571f0f57268d979d4bd7e3bbbcf0c38a1e8fca4eb53a1",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "c9f26197b5fadb9b088f8cdead241dc372d78ac8a704e01b6ba9b309ad214968",
+      "jarEntries": 457,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    },
+    {
+      "path": "org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "sha256": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "bb748123cb3e22d60fe06d92f6ca34370e57ea707c7be3ea9f542459c61c7a9f",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "d9a9dd58132b18b0f58530a22de512a3f94e7683f91102cfb355f807a563555e",
+      "jarEntries": 516,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    },
+    {
+      "path": "io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar",
+      "sha256": "d31926b01adcc07af86f5e27b81b6d6c115df17d366e835d1fc3f5a1924e7e52",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "143b18644fb2e533b661f97113d58e1810dc5aff8549f867f85643f267e964cc",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "149a6851c3b5d8e4893cb3af22f1e215f8615b0f1d31af07f3ecb3c35b038277",
+      "jarEntries": 584,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    },
+    {
+      "path": "io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar",
+      "sha256": "f474b14c7734f15e0540394cb6f39d67777b7581a42919e4ac89d253d4efd929",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "5ea302272928331a37743c30f166bfbbe6c1f27e268d2c8b3e73c1e06702abf3",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "6968e1f272de3bf821bdc625282d014a846e62303965269fbdcae918797463f2",
+      "jarEntries": 186,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    },
+    {
+      "path": "io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar",
+      "sha256": "6251adc2a2921572382732a2db188d4f4f2251fd6ebb49c5d44bbf33d6bfb1a7",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "d78debcdc4e5de346f8ea6ccae493c6fc0a95608b902b0a20d0f5860d864cc1c",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "ad820eeb187121891ac811f544ff69a8d61c29cb3bc2762f29af4e8c275be48b",
+      "jarEntries": 416,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    },
+    {
+      "path": "org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55",
+      "savedCentralSha1Matched": true,
+      "pomSha256": "6c2c7f2c02774cc2b7b619fbd2df7873cdad29718926e44754b87f70d1eb43cb",
+      "savedCentralPomSha1Matched": true,
+      "centralRepositoryReceiptSha256": "19fc65d8480aef0abe2bd33d028ee8023d538e688e0104745737c8d60872ebb3",
+      "jarEntries": 71,
+      "productClassesOrNativeLibraries": 0,
+      "origin": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "purpose": "COMPILE_AND_PURE_PROXY_JSON_API_ONLY_NO_BROKER_NETWORK_NATIVE"
+    }
+  ],
+  "artifactDataInspectionOnly": true,
+  "productClassesLoadedOrInitialized": false,
+  "productTestsExecuted": 0,
+  "realBrokerRootNativeDbCredentialOperations": 0,
+  "productCachedClassesOrApplicationJarReads": 0,
+  "independentExpectedBasis": [
+    "SS321 literal acceptor JSON all keys/values and12permissions, no expected generated byproduction",
+    "Six stage order literal0..5/earlystop counts/immutable nesteddata",
+    "Parent ns-ms floor/1ms lower/2s upper/nestedthreadlocal/cleanup literal",
+    "Exactencoder borrowedmessage/resource/operation/argumentidentity, checkedIRQrestore/unknownidentity/fixedredaction"
+  ],
+  "holdsUnchanged": true,
+  "normalEligibility": "CONDITIONAL_ON_BUG2767_FIX_AND_EXPLICIT_QUALIFIED_SDK_PROFILE_FEATURE_AND_WHOLE_SOURCE_PIN",
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2146_artemis_sdk_whole_source_provenance_audit.py",
+    "sha256": "f27bc163c10092b320a8a5a0a32a3e84c9e6fb4c2a25d2fa5a5d6c233feff099"
+  }
+}

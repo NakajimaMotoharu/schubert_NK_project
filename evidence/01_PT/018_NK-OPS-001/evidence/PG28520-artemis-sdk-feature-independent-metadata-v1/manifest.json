@@ -1,0 +1,350 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T09:34:25.774362+09:00",
+  "metadataCases": [
+    {
+      "id": "SDKMETA001",
+      "case": "exact optional whole profile syntax",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "id": "SDKMETA002",
+      "case": "data-only six-JAR witness and current ten-source metadata",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "id": "SDKMETA003",
+      "case": "empty optional feature preserves default behavior",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "id": "SDKMETA004",
+      "case": "legacy syntax no SDK 2126_log_whole21_qualified_profile.json",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "id": "SDKMETA005",
+      "case": "Artemis without explicit feature remains forbidden",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "prepared SDK only, no app/backend/native JAR"
+    },
+    {
+      "id": "SDKMETA006",
+      "case": "extra official SDK is not implicit fallback",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "prepared SDK only, no app/backend/native JAR"
+    },
+    {
+      "id": "SDKMETA007",
+      "case": "native jar rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "explicit complete approved SDK hash set"
+    },
+    {
+      "id": "SDKMETA008",
+      "case": "server jar rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "prepared SDK only, no app/backend/native JAR"
+    },
+    {
+      "id": "SDKMETA009",
+      "case": "other version rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "explicit complete approved SDK hash set"
+    },
+    {
+      "id": "SDKMETA010",
+      "case": "duplicate dependency rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "explicit complete approved SDK hash set"
+    },
+    {
+      "id": "SDKMETA011",
+      "case": "unknown Main forbidden before file access",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "explicit artifact owner, no cloned business label"
+    },
+    {
+      "id": "SDKMETA012",
+      "case": "held native Main forbidden before file access",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "explicit artifact owner, no cloned business label"
+    },
+    {
+      "id": "SDKMETA013",
+      "case": "embedded whole Test outside explicit independent set",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK only reviewed whole pure tests; no embedded or extracted tests"
+    },
+    {
+      "id": "SDKMETA014",
+      "case": "selected-method artifact outside whole set",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK only reviewed whole pure tests; no embedded or extracted tests"
+    },
+    {
+      "id": "SDKMETA015",
+      "case": "implicit Guard replacement rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK real bounded Guard required"
+    },
+    {
+      "id": "SDKMETA016",
+      "case": "provenance pin path drift rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK exact provenance pin"
+    },
+    {
+      "id": "SDKMETA017",
+      "case": "provenance not in closure rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK witness explicit closure"
+    },
+    {
+      "id": "SDKMETA018",
+      "case": "witness rejection actualExit",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA019",
+      "case": "witness rejection productClassesLoadedOrInitialized",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA020",
+      "case": "witness rejection productTestsExecuted",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA021",
+      "case": "witness rejection realBrokerRootNativeDbCredentialOperations",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA022",
+      "case": "witness rejection productCachedClassesOrApplicationJarReads",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA023",
+      "case": "witness rejection holdsUnchanged",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK data-only independent provenance"
+    },
+    {
+      "id": "SDKMETA024",
+      "case": "dependency hash drift",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK exact frozen dependency hash"
+    },
+    {
+      "id": "SDKMETA025",
+      "case": "current Main drift",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK unchanged whole reviewed Main"
+    },
+    {
+      "id": "SDKMETA026",
+      "case": "whole Test source rejects new EmbeddedActiveMQ()",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA027",
+      "case": "whole Test source rejects ActiveMQClient.createServerLocator(\"vm://0\")",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA028",
+      "case": "whole Test source rejects new ClientRequestor(session,\"activemq.management\")",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA029",
+      "case": "whole Test source rejects new RootStartupContext()",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA030",
+      "case": "whole Test source rejects ProcessBuilder x",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA031",
+      "case": "whole Test source rejects DriverManager.getConnection(x)",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA032",
+      "case": "whole Test source rejects Class.forName(x)",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK test must remain whole, pure and nonconnecting"
+    },
+    {
+      "id": "SDKMETA033",
+      "case": "whole Test source rejects thread.join()",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK worker wait must be finite"
+    },
+    {
+      "id": "SDKMETA034",
+      "case": "pure reader with finite independent worker",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    },
+    {
+      "id": "SDKMETA035",
+      "case": "runtime init blocks org/apache/activemq/artemis/core/server/embedded/EmbeddedActiveMQ",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA036",
+      "case": "runtime init blocks org/apache/activemq/artemis/api/core/client/ActiveMQClient",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA037",
+      "case": "runtime init blocks io/netty/channel/nio/NioEventLoopGroup",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA038",
+      "case": "runtime init blocks io/netty/channel/kqueue/KQueueEventLoopGroup",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA039",
+      "case": "runtime init blocks org/apache/activemq/artemis/core/remoting/impl/netty/NettyConnector",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA040",
+      "case": "runtime init blocks io/netty/channel/epoll/EpollEventLoopGroup",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA041",
+      "case": "runtime init blocks org/apache/activemq/artemis/api/core/client/ClientRequestor",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA042",
+      "case": "runtime init blocks org/apache/activemq/artemis/core/client/impl/ServerLocatorImpl",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "reason": "SDK backend factory, requestor or event-loop initialized"
+    },
+    {
+      "id": "SDKMETA043",
+      "case": "SDK data parser plus real Guard initialization allowed",
+      "expected": "ACCEPT",
+      "actual": "ACCEPT"
+    }
+  ],
+  "caseCount": 43,
+  "positive": 6,
+  "negative": 37,
+  "astBoundary": {
+    "tools/quality/pgpt_closed_host_profile.py": {
+      "changedDefinitions": [
+        "checked_inputs",
+        "tool_hashes",
+        "validate_syntax"
+      ],
+      "allOtherDefinitionsIdentical": true,
+      "oldSha256": "e4a25b341c831f52ff527ea6746f9e8a4a05100f1ce1d0743f8a739af82b1a24",
+      "newSha256": "f875645eaab34f7dfeecf0bf140dd2ad5a64b859ffe5c776c47db958be802911"
+    },
+    "tools/quality/pgpt_closed_host_post.py": {
+      "changedDefinitions": [
+        "verify"
+      ],
+      "allOtherDefinitionsIdentical": true,
+      "oldSha256": "dad460efdf3db70118c11da6f81eaa6fa244227329b0eb6a2ad8c8947a85ae20",
+      "newSha256": "8d2e7d3cf443e67095b65fb2f3f8496764c20d83e3679ff26eeacb1ff5c6bdb3"
+    },
+    "tools/quality/pgpt_closed_host_stages.py": {
+      "changedDefinitions": [],
+      "allOtherDefinitionsIdentical": true,
+      "oldSha256": "f6ef6aef9baffbd324e8a0f3d1e762548e8e22a5814a075f87730441df4bb167",
+      "newSha256": "f6ef6aef9baffbd324e8a0f3d1e762548e8e22a5814a075f87730441df4bb167"
+    }
+  },
+  "exampleProfile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2148_artemis_sdk_syntax_example_not_execution_profile.json",
+    "sha256": "d4a5b7908580d7107bc5902f81cd9b44a44bd2b9a4cf84c429d5e17d0730baa3"
+  },
+  "officialSdkWitness": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28512-artemis-sdk-pure-whole-source-provenance-v1/manifest.json",
+    "sha256": "07539130111f14e150f5895f8d8acc080f60cdb0517fc012376aa4d39485fcb7"
+  },
+  "ProductCompileOrExecution": 0,
+  "sourceOrTestChanged": false,
+  "legacyDenialUnchanged": true,
+  "rootCompilerAndUnitCommandAndCoverageAlgorithmUnchanged": true,
+  "newProductTestDefinitions": 0,
+  "normal31": "NOT_RUN_REQUIRES_BUG2767_FINITE_WORKER_AND_NEW5_SOURCE_PIN",
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2148_artemis_sdk_feature_metadata.py",
+    "sha256": "2ed3a663c32681172119fa5f4f6eaae94f197d67f9ff5ec8d7ce5dc80b418cb2"
+  }
+}

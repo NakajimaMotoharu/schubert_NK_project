@@ -96,7 +96,9 @@ def validate_syntax(c):
         require(('/src/test/resources/' in path and path.startswith('src/')) if item['placement'] == 'TEST_CLASSPATH' else (path.startswith('src/deployment/config/') and path.endswith('.template')), 'public literal resource boundary')
     for p in c.get('sdkJars', []):
         relative_name(p)
-        require(p.endswith('.jar') and 'schubert' not in p.lower() and not any(x in p.lower() for x in ['postgres', 'artemis', 'hikari', 'jna', 'jnr']), 'prepared SDK only, no app/backend/native JAR')
+        import pgpt_artemis_sdk as mq_sdk
+        reviewed_sdk = c.get('reviewedArtemisSdk') is not None and p in mq_sdk.SDK_PATHS
+        require(reviewed_sdk or p.endswith('.jar') and 'schubert' not in p.lower() and not any(x in p.lower() for x in ['postgres', 'artemis', 'hikari', 'jna', 'jnr']), 'prepared SDK only, no app/backend/native JAR')
     dependencies = c.get('preparedDependencyHashes')
     expected_dependencies = {str(p) for p in [ANN, CONSOLE, *[TC / 'm2/repository' / x for x in c.get('sdkJars', [])]]}
     require(isinstance(dependencies, dict) and set(dependencies) == expected_dependencies and all(isinstance(v, str) and re.fullmatch(r'[0-9a-f]{64}', v) for v in dependencies.values()), 'explicit complete approved SDK hash set')
@@ -117,6 +119,8 @@ def validate_syntax(c):
         require(set(item) == {'path', 'sha256'} and re.fullmatch(r'[0-9a-f]{64}', item['sha256']), 'proof hash schema')
         path = relative_name(item['path'])
         require(path.startswith('evidence/') and Path(path).suffix in ['.md', '.json'] and '/private' not in path.lower(), 'public proof only')
+    import pgpt_artemis_sdk
+    pgpt_artemis_sdk.syntax(c)
     validate_optional_capabilities(c)
     import pgpt_guard_signature
     pgpt_guard_signature.syntax(c)
@@ -179,7 +183,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk']]
     return {p: digest(R / p) for p in paths}
 
 
@@ -215,6 +219,8 @@ def checked_inputs(c):
     pgpt_guard_signature.checked(c)
     import pgpt_analysis_symbols
     pgpt_analysis_symbols.checked(c)
+    import pgpt_artemis_sdk
+    pgpt_artemis_sdk.checked(c)
     return hashes
 
 
