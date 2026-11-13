@@ -1,0 +1,186 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5236",
+  "groupId": "PGPT-WBS65-SSC348-ENTRY-COPY-BATCH-NEEDED-CLOSED72-NORMAL-20261114",
+  "startEvent": "PGPT-20261008-5235",
+  "sourceAtGroupStart": "16baff4e6222bbeff2d4743c57aead1913a716a7",
+  "productionCoreMain": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 1.8
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-13T23:03:38.602769+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 47,
+      "remainingPercent": 53,
+      "resetsAt": 1795012174,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30654-entry-copy-batch72-independent-source-trace-join-v1/manifest.json",
+    "sha256": "f12b423ee69d11785581897f4e7fabd8e580712e88ccebb8af9ba6384ce7850d"
+  },
+  "outcome": "NEW_ENTRY_COPY_BATCH12_AND_NEEDED_CLOSED72_SINGLE_EXEC_FOUR100_NOT_DB_ETL_OR_GLOBAL_ACCEPTANCE",
+  "technical": {
+    "kind": "NEW_ENTRY_COPY_BATCH12_AND_NEEDED_CLOSED72",
+    "source": "53c2e62990a18fd91e8e35db1a658fcb4eb7b38c",
+    "productionCoreMain": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30648-entry-copy-batch72-fixed-post-v1/manifest.json",
+      "sha256": "3fc0f0e1ba71cb41095d292caa933d7e95253908346a8e68694282b11932d32e"
+    },
+    "actualExecutions": 72,
+    "newUniqueTestDefinitions": 12,
+    "existingSupportDefinitions": 60,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 115,
+    "physicalClasses": 14,
+    "positiveMainCrc": 14,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 1488,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 167,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 323,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 153,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 66,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 14,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 110,
+    "jacocoDefaultMethods": 66,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 31,
+    "applicable": 0,
+    "unclassified": 0,
+    "originalApplicableMainFinding1Retained": true,
+    "bug": "BUG-2875",
+    "bugFixSource": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+    "retestSource": "53c2e62990a18fd91e8e35db1a658fcb4eb7b38c",
+    "actualDbCopyCurrentRootVmNativeKeyUnitHarukaAruOperations": 0,
+    "allIndividualHoldsRetained": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "reworkWithinGroup": {
+      "low": 0.01,
+      "base": 0.03,
+      "high": 0.06
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualCost": null
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "PublishBatch72proof andSSC348ledger-onlylimitedstatus to main. ThenPMOlegitimateharuka publictoolmode correction evidence: preserveold30586UNKNOWN/30588fail, reuseoriginaleligibilityremaining.15/.45/.9 notnewbudget; freshspecificstrictpin/mini owner/resources/source read-only group. Noaruconnectionqueryorhostkeyfollowing; old18474OSUNKNOWNnotPASS. Ifnewhosteligible separatelyprice commonGate12+support46needed58 fixedsource fullstatic/normal/post, noVM/DBRoot/native/HOLDrelease. Continuepastordinarygroup/report/commit, freshquota/hourly08:40:44JST.",
+  "remainingEstimatePp": {
+    "low": 397.074,
+    "base": 836.636,
+    "high": 1641.015
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1724_WBS65予実・EntryCOPYbatch新十二と必要七十二通常後版451.json",
+    "sha256": "8406b5c4ebdf5bed11299415ee963fb6f07e6fbcbd5b844f1d5237b565316cef"
+  },
+  "forecastNotActualCost": true,
+  "canonical625Progress": {
+    "canonicalRowCount": 625,
+    "uniqueCompletedRows": 184,
+    "completedStage1Rows": 156,
+    "completedStage2Rows": 10,
+    "completedStandaloneRows": 18,
+    "unknownCompletedIds": [],
+    "duplicateCompletedIds": [],
+    "legacyPreparationEntryCount": 157,
+    "legacyPreparationDistinctEntryCount": 155,
+    "legacyPreparationCanonicalStage1References": 142,
+    "legacyPreparationCanonicalCompletedStage1Rows": 142,
+    "legacyPreparationDuplicateEntries": [
+      "WBS-P005-01/1",
+      "WBS-P020-01.01/1"
+    ],
+    "legacyPreparationNoncanonicalLabels": [
+      "C01 current resource/old limited proof binding",
+      "C02 Inspector required exclusive-current-CP requalification",
+      "C02-R1",
+      "C02-R2",
+      "C03 32/16/20 static configuration expectations",
+      "C05 eight source tuples",
+      "C06 public seven config and ID/profile declarations",
+      "C07 eight distribution configs/current-byte historical offline parser scope",
+      "C08 wrapper/receipt/runbook scope correspondence",
+      "F04 host tool/version/retention preparation",
+      "G13.02 source-owner-SQL-requirement candidate trace",
+      "G13.03 bootstrap source/owner/requirement/structural-method index",
+      "WBS-C04 static preparation"
+    ],
+    "preparationRowsNotCompleted": [],
+    "coherent": true,
+    "coherenceScope": "PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+    "legacyPreparationMatchesPrimary": true,
+    "effortCompletionRate": null,
+    "rowsAreNotEffortWeights": true,
+    "legacyEntriesAreNotCanonicalRowCounts": true,
+    "masterTable": {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv",
+      "sha256": "b7bf00dbea8ab47d3820db70335342e543f6f7bcd595e2ffc43e6e1086054579"
+    },
+    "completedCanonicalOriginalPricePp": {
+      "low": 21.726,
+      "base": 55.664,
+      "high": 112.285
+    },
+    "pricesAreForecastNotActualCost": true,
+    "formalAcceptanceDerivedFromRowCount": false
+  }
+}

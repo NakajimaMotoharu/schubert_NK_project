@@ -1,0 +1,106 @@
+{
+  "groupId": "PGPT-WBS65-SSC348-ENTRY-COPY-BATCH-NEEDED-CLOSED72-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1725_WBS65EntryCOPYbatch必要七十二通常結果.json",
+  "sourceAfter": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG30654-entry-copy-batch72-independent-source-trace-join-v1/manifest.json",
+  "manifestSha256": "f12b423ee69d11785581897f4e7fabd8e580712e88ccebb8af9ba6384ce7850d",
+  "terminalAtUTC": "2026-11-13T23:03:14.818796+00:00",
+  "run": "PG30654",
+  "workIds": [
+    "P01903_SSC348_ENTRY_COPY_BATCH12_AND_NEEDED_CLOSED72_NORMAL"
+  ],
+  "outcome": "NEW_ENTRY_COPY_BATCH12_AND_NEEDED_CLOSED72_SINGLE_EXEC_FOUR100_NOT_DB_ETL_OR_GLOBAL_ACCEPTANCE",
+  "technical": {
+    "kind": "NEW_ENTRY_COPY_BATCH12_AND_NEEDED_CLOSED72",
+    "source": "53c2e62990a18fd91e8e35db1a658fcb4eb7b38c",
+    "productionCoreMain": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30648-entry-copy-batch72-fixed-post-v1/manifest.json",
+      "sha256": "3fc0f0e1ba71cb41095d292caa933d7e95253908346a8e68694282b11932d32e"
+    },
+    "actualExecutions": 72,
+    "newUniqueTestDefinitions": 12,
+    "existingSupportDefinitions": 60,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 115,
+    "physicalClasses": 14,
+    "positiveMainCrc": 14,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 1488,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 167,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 323,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 153,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 66,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 14,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 110,
+    "jacocoDefaultMethods": 66,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 31,
+    "applicable": 0,
+    "unclassified": 0,
+    "originalApplicableMainFinding1Retained": true,
+    "bug": "BUG-2875",
+    "bugFixSource": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+    "retestSource": "53c2e62990a18fd91e8e35db1a658fcb4eb7b38c",
+    "actualDbCopyCurrentRootVmNativeKeyUnitHarukaAruOperations": 0,
+    "allIndividualHoldsRetained": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "reworkWithinGroup": {
+      "low": 0.01,
+      "base": 0.03,
+      "high": 0.06
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualCost": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1724_WBS65予実・EntryCOPYbatch新十二と必要七十二通常後版451.json",
+    "sha256": "8406b5c4ebdf5bed11299415ee963fb6f07e6fbcbd5b844f1d5237b565316cef"
+  },
+  "checkpointText": "SSC348新ScenarioEntryCopyBatchをCore2ebbdf3918/実行53c2e62990で初検証、PG30646 Batch12+必要支援60のwhole72/FES0、新定義12のみ。PG30648単一exec全14CRC/初期化/XML、I1488/L323/M66/C14/B167 miss0・既定全scope四100、実JVMCode110対既定66の生成filter差は分離/global451未承認。RootNullAway/lintWerror/PMD適用0/CS-SB-error0、raw31は全6Testのfiniteworker等をexactsourceで個別対応/未分類0。元PG30622条件literal1件を保持、BUG2875を意味名上限1へ等価修正2ebb/PG30636全他Main/Test逆一致、PG30642再static0と当whole72/postで当障害再試験。件数・一意target/全対応・五参照列/global順/共通時刻/immutable・byte所有を独立literalで確認。App107/4337/4308/歴史29・正本184/625・元190新0/正式1964-53/工数null、normal.3/.9/1.8のみ完了/手戻り.01/.03/.06同群内/専有費token null。実DB/ETL/Rootnative等未完、haruka権限はPMO是正証拠あり次の専用資格残.15/.45/.9で再認証・aru接続照会全面禁止維持。",
+  "nextCommand": "PublishBatch72proof andSSC348ledger-onlylimitedstatus to main. ThenPMOlegitimateharuka publictoolmode correction evidence: preserveold30586UNKNOWN/30588fail, reuseoriginaleligibilityremaining.15/.45/.9 notnewbudget; freshspecificstrictpin/mini owner/resources/source read-only group. Noaruconnectionqueryorhostkeyfollowing; old18474OSUNKNOWNnotPASS. Ifnewhosteligible separatelyprice commonGate12+support46needed58 fixedsource fullstatic/normal/post, noVM/DBRoot/native/HOLDrelease. Continuepastordinarygroup/report/commit, freshquota/hourly08:40:44JST."
+}
