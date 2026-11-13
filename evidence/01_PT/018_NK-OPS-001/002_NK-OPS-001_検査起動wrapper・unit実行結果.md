@@ -49,3 +49,6 @@ WBS-P018-06公開source契約/独立期待値/TestIDは[4249_P01806全二十二a
 
 
 HTTP所有原二新一通常単体結果：[4251_HTTP所有原二新一通常単体結果.md](4251_HTTP所有原二新一通常単体結果.md)。通常whole3成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
+
+
+Web稼働判定終端フラグ通常六結果：[4253_Web稼働判定終端フラグ通常六結果.md](4253_Web稼働判定終端フラグ通常六結果.md)。通常whole6成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。
