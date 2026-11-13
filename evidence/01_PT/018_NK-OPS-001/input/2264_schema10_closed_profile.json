@@ -1,0 +1,82 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG29168-JDBC-SQL-FATAL-ORIGINAL9-NEW1-SCHEMA10",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "WBS-P019-01",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "WBS-P019-01",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/004_NK-MIG-001_SQL重大例外・原九新一通常十仕様.md",
+      "sha256": "348146a26115b2f49cfe301483883a392837ab17e4e4015e69ce3052c803246b"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29148-jdbc-four-main-schema10-source-closure-v1/manifest.json",
+      "sha256": "98d101f6cd0a01efe8357347f5f78cfaca93581cf0b48f7d343939f7766b39bd"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29153-schema10-fixed-source-closure-v1/manifest.json",
+      "sha256": "ff37c38d4641f024ccc79a2140228f441f92edbe16e340e9fae99a21b40a75f2"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "tests": 10
+    }
+  ],
+  "expectedTests": 10,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG29154-schema10-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG29156-schema10-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG29158-schema10-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG29160-schema10-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG29168-schema10-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG29170-schema10-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg29156-schema10-prepare-v1",
+    "unit": "pg29168-schema10-unit-v1"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

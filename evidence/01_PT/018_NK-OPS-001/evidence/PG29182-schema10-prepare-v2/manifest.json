@@ -1,0 +1,150 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2264v2_schema10_closed_profile.json",
+    "sha256": "e261dcd625427bd7708795c706eb633e0016aa4ac0a696c2e78b1d9b636d1fd9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "571478ad292c963718e8476af06e96f5e3d27d39e8f99b45f8b6ec79eaf4e05e",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java": "c9c1faa880664473a310cfe374856aaee7d74d342f0903caa058caf8f95daf74",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class": "a1de6a580a1046942570b20d297789235ca4fc1ec1acb46315dc5f2dc7cace06",
+    "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class": "507101236272c5bd4524a4994fe3dc90bebd55622ba77ad877da6ba75744d3ac",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class": "36bc8c1356aab4934aade21fc69d3ea77329d7b1afd73469abc7b0d8e090f613"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest$Probe.class": "14ab67a61c88134b5ca8a459db1a7cc172eb3001c218c471080e678b8a75f2e4",
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.class": "60a8ab6be27d9d81f9e52eeb878e7a12b18ec1b50e6926b39aa0df5a6e0bf093",
+    "dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest$RowInput.class": "05eb7f233e7d3bd599a4e1c5a0d01967167975cfaa1fd2ebb38edfc6cf0b4896"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema009ActualRowsAreIndependentlyReadAndImmutableAfterBothOwnersClose()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema001ExactFixedQueryAndBorrowedOwner()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema002EveryColumnMissingExtraAndFailedRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema003ExpectedRowInvariantBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema004ExpectedProfileOrderingAndDefensiveCopy()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema005NullProviderSqlExceptionsAndAllOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema006KnownUnknownCloseMatrixAndSameThrowable()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema007InterruptBeforeAndAfterNeverAccepts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema008IndependentConcurrentOwners()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest",
+      "name": "opsSchema010KnownSqlFatalGraphsCloseOwnersAndPreserveOriginalIdentity()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.api.maintenance.SchemaHistoryAdmissionTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T07:01:10.204821+00:00",
+      "endUTC": "2026-11-13T07:01:12.976486+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29182-schema10-prepare-v2",
+      "stdoutSha256": "671492fc65d3bc4cb3e1b4156a0d4a5e6a7ee8ff937c562150bdfbd0c10da033",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-13T07:01:12.976935+00:00",
+      "endUTC": "2026-11-13T07:01:13.844160+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29182-schema10-prepare-v2/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29182-schema10-prepare-v2/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29180-schema10-prestyle-v2/manifest.json",
+    "sha256": "f65d336efbde9ee0e74c61a79840740e8dc199193f471317b5abc7dfa9138527"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "ac643b89f05d6bddfa29d2123601e0c986ea0127c1818cbee6371ef8d95b0deb",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 3,
+  "reusedRuntimeSignatureClassCount": 0
+}

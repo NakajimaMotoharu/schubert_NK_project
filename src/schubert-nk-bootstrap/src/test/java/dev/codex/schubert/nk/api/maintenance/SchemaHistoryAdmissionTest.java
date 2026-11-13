@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Test;
 /** SSC095/PG312/PT-OPS-SCHEMA001..008. Literal six-column oracle, no observed DB expected. */
 final class SchemaHistoryAdmissionTest {
   private static final String SCHEMA_SCRIPT = "\"schubert_meta\"";
+  private static final String FIXTURE_SET_QUERY_TIMEOUT = "setQueryTimeout";
+  private static final String FIXTURE_EXECUTE_QUERY = "executeQuery";
   private static final String FIXTURE_SCHEMA_E38F1889 = "SCHEMA";
   private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final String FIXTURE_SQL_5B7E398D = "SQL";
@@ -258,8 +260,8 @@ final class SchemaHistoryAdmissionTest {
             FIXTURE_NULLSTATEMENT_5A17BE38,
             "nullRows",
             FIXTURE_PREPARESTATEMENT_CB987D1F,
-            "setQueryTimeout",
-            "executeQuery",
+            FIXTURE_SET_QUERY_TIMEOUT,
+            FIXTURE_EXECUTE_QUERY,
             FIXTURE_NEXT_CA1733B5,
             "getObject",
             "getString",
@@ -283,8 +285,8 @@ final class SchemaHistoryAdmissionTest {
                       FIXTURE_NULLSTATEMENT_5A17BE38,
                       "nullRows",
                       FIXTURE_PREPARESTATEMENT_CB987D1F,
-                      "setQueryTimeout",
-                      "executeQuery")
+                      FIXTURE_SET_QUERY_TIMEOUT,
+                      FIXTURE_EXECUTE_QUERY)
                   .contains(kind)
               ? 0
               : 1,
@@ -492,11 +494,11 @@ final class SchemaHistoryAdmissionTest {
                 }
                 throwIf(name);
                 return switch (name) {
-                  case "setQueryTimeout" -> {
+                  case FIXTURE_SET_QUERY_TIMEOUT -> {
                     timeout = (Integer) args[0];
                     yield null;
                   }
-                  case "executeQuery" -> nullRows ? null : values;
+                  case FIXTURE_EXECUTE_QUERY -> nullRows ? null : values;
                   default -> throw new AssertionError(name);
                 };
               });
@@ -535,8 +537,8 @@ final class SchemaHistoryAdmissionTest {
     for (String site :
         List.of(
             FIXTURE_PREPARESTATEMENT_CB987D1F,
-            "setQueryTimeout",
-            "executeQuery",
+            FIXTURE_SET_QUERY_TIMEOUT,
+            FIXTURE_EXECUTE_QUERY,
             FIXTURE_NEXT_CA1733B5,
             FIXTURE_ROWCLOSE_4440E762,
             FIXTURE_STATEMENTCLOSE_D5A13A63)) {
@@ -558,7 +560,10 @@ final class SchemaHistoryAdmissionTest {
                 LinkageError.class,
                 () -> new SchemaHistoryAdmission(RELEASE).inspect(probe.connection())));
         int rows =
-            List.of(FIXTURE_PREPARESTATEMENT_CB987D1F, "setQueryTimeout", "executeQuery")
+            List.of(
+                        FIXTURE_PREPARESTATEMENT_CB987D1F,
+                        FIXTURE_SET_QUERY_TIMEOUT,
+                        FIXTURE_EXECUTE_QUERY)
                     .contains(site)
                 ? 0
                 : 1;

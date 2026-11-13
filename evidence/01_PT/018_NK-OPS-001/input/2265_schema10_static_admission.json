@@ -1,0 +1,304 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG29192-JDBC-SQL-FATAL-ORIGINAL9-NEW1-SCHEMA10",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29182-schema10-prepare-v2/manifest.json",
+    "sha256": "4a10e8d69eb1503dbfb9370ba7fddcd5d415a690bc1718f824e7312c68bd8313"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29184-schema10-static-v2/manifest.json",
+    "sha256": "1bffdf160598539d695f6c36e2d73d1092cebc6e509f62075ae69d6507cc7507"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 84,
+      "occurrences": 1,
+      "reason": "This is the existing Thread.currentThread().isInterrupted observation at the pre-query boundary. It creates or starts no thread; the borrowed JDBC statement/rows are still closed by finally and the IRQ flag remains set on failure. SS343SSC095 requires these interruption checks; standalone startup admission is not a J2EE-managed webapp.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "var query = required(statement);",
+      "sourceLine": 88,
+      "occurrences": 1,
+      "reason": "The statement is captured before the nested resultset scope and every nonnull statement is closed in the outer finally. A null provider return is rejected without manufacturing a resource. JdbcAdmissionFailures applies the independently specified64-case ordinary primary/secondary matrix, with knownSQL fatal graph classification before discard. The borrowed Connection is intentionally never closed by this method.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "var values = required(rows);",
+      "sourceLine": 93,
+      "occurrences": 1,
+      "reason": "Every nonnull ResultSet is closed in the inner finally on successful rows, mismatch, null data, SQL/Runtime/Error and IRQ paths. The outer finally then closes the statement. Null rows are rejected and have no owner to close. This explicit two-scope cleanup preserves the fixed close-priority contract that generic TWR priority would change; original64 matrix plus new fatal graphs check literal closecounts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+      "sourceLine": 112,
+      "occurrences": 1,
+      "reason": "This is the existing Thread.currentThread().isInterrupted observation at the post-row-loop boundary. It creates or starts no thread; the borrowed JDBC statement/rows are still closed by finally and the IRQ flag remains set on failure. SS343SSC095 requires these interruption checks; standalone startup admission is not a J2EE-managed webapp.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 113,
+      "occurrences": 1,
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 113,
+      "occurrences": 1,
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 116,
+      "occurrences": 1,
+      "reason": "An owned JDBC close failure may replace an absent/ordinarySQL primary only under the fixed SSC084095 priority, with knownSQL fatal graph preserved. The explicit finally is needed to close rows before statement on every path while leaving the borrowed connection caller-owned. The independent64 matrix does not call the production helper, and SCHEMA010 checks originalError identity and both closecounts. Removing this throw would falsely report uncertain cleanup as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 120,
+      "occurrences": 1,
+      "reason": "The catch encloses only the owned ResultSet close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 120,
+      "occurrences": 1,
+      "reason": "The catch encloses only the owned ResultSet close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 124,
+      "occurrences": 1,
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 124,
+      "occurrences": 1,
+      "reason": "This closed JDBC boundary records the exact primary SQLException/RuntimeException/Error and immediately rethrows it; it does not normalize unknown Runtime/Error or mark admission successful. Recording primary is required by the following finally to preserve ordinary64-type identity/priority and close both owned JDBC children. Only the outer knownSQL catch performs fixed redaction after all close attempts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceAnchor": "} finally {",
+      "sourceLine": 127,
+      "occurrences": 1,
+      "reason": "An owned JDBC close failure may replace an absent/ordinarySQL primary only under the fixed SSC084095 priority, with knownSQL fatal graph preserved. The explicit finally is needed to close the statement after rows on every path while leaving the borrowed connection caller-owned. The independent64 matrix does not call the production helper, and SCHEMA010 checks originalError identity and both closecounts. Removing this throw would falsely report uncertain cleanup as success.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 131,
+      "occurrences": 1,
+      "reason": "The catch encloses only the owned PreparedStatement close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "sourceLine": 131,
+      "occurrences": 1,
+      "reason": "The catch encloses only the owned PreparedStatement close call and handles the declared SQL plus unmodeled Runtime/Error categories through the explicit JdbcAdmissionFailures contract. It never suppresses success uncertainty: absent primary or SQL-to-unknown follows specified replacement, unknown primary retains identity with a fixed safe diagnostic. KnownSQL nestedfatal is classified before any discard; original64 and newSCHEMA010 independently cover these cases.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "sourceLine": 344,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(Thread.currentThread().isInterrupted());",
+      "sourceLine": 347,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 350,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(Thread.currentThread().isInterrupted());",
+      "sourceLine": 356,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "Thread.interrupted();",
+      "sourceLine": 359,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 366,
+      "occurrences": 1,
+      "reason": "The executor at SCHEMA008 is explicitly owned by the test and released in finally using shutdownNow plus a finite10s awaitTermination assertion. ExecutorService.close would wait without a declared bound (BUG2807), so it is intentionally replaced. All8 workers have private memory probes and5s barrier/future bounds; failure or unknown termination is a failed test, never PASS.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 366,
+      "occurrences": 1,
+      "reason": "SCHEMA008 intentionally tests exactly eight independent logical JDBC owners. A fixed8-party barrier and Future.get each have5s bounds, and finally shutdownNow followed by assert awaitTermination10s confirms final executor ownership. Each worker constructs its own Probe/maps/closecounts and shares only immutable expected records. No real DB/network/Root or container-managed thread is used.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 372,
+      "occurrences": 1,
+      "reason": "SCHEMA008 intentionally tests exactly eight independent logical JDBC owners. A fixed8-party barrier and Future.get each have5s bounds, and finally shutdownNow followed by assert awaitTermination10s confirms final executor ownership. Each worker constructs its own Probe/maps/closecounts and shares only immutable expected records. No real DB/network/Root or container-managed thread is used.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 382,
+      "occurrences": 1,
+      "reason": "SCHEMA008 intentionally tests exactly eight independent logical JDBC owners. A fixed8-party barrier and Future.get each have5s bounds, and finally shutdownNow followed by assert awaitTermination10s confirms final executor ownership. Each worker constructs its own Probe/maps/closecounts and shares only immutable expected records. No real DB/network/Root or container-managed thread is used.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "sourceLine": 383,
+      "occurrences": 1,
+      "reason": "SCHEMA008 intentionally tests exactly eight independent logical JDBC owners. A fixed8-party barrier and Future.get each have5s bounds, and finally shutdownNow followed by assert awaitTermination10s confirms final executor ownership. Each worker constructs its own Probe/maps/closecounts and shares only immutable expected records. No real DB/network/Root or container-managed thread is used.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Throwable> faults = new HashMap<>();",
+      "sourceLine": 445,
+      "occurrences": 1,
+      "reason": "Probe.faults is a private per-Probe HashMap of fixed injected failures. SCHEMA008 constructs a separate Probe inside each worker and never shares it with another worker; the shared SchemaHistoryAdmission contains only an immutable copied list of immutable Row values. Other tests mutate and consume their probe only synchronously. A concurrent map is not required and would not test the intended independent-owner isolation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "if (!next && interruptAtEnd) Thread.currentThread().interrupt();",
+      "sourceLine": 478,
+      "occurrences": 1,
+      "reason": "SCHEMA007/Probe deliberately injects or observes the current test thread interruption before/after the row boundary, then clears it in finally to isolate later tests. It starts no background worker at this site and never treats interruption as successful admission; fixed SQL failure and owner closecounts are independent literal assertions. This is a standalone fault fixture, not production J2EE thread creation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));",
+      "sourceLine": 531,
+      "occurrences": 1,
+      "reason": "The fixture Proxy implements exactly the supplied java.sql interface. type.getClassLoader provides the defining loader with visibility of that exact interface; no arbitrary class/plugin/path or production owner is loaded. Using the thread context loader would introduce an unrelated mutable loader into this deterministic standalone JUnit fixture. Root and runtime admission authority are never represented by these logical JDBC proxies.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "message": "Avoid using literals such as 1 in if statements",
+      "sourceAnchor": "else if (graph == 1) failure.addSuppressed(marker);",
+      "sourceLine": 549,
+      "occurrences": 1,
+      "reason": "SCHEMA010 independently enumerates four Throwable graph shapes:0 cause,1 suppressed,2 cyclic cause+suppressed fatal,3 SQLnext. Literal1 selects that explicit fixture row, not a business threshold or configurable credential policy. Fixed Error identity and owner counts are asserted across all6 failure sites, with no Production expected-value generation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryAdmissionTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "message": "Avoid using literals such as 2 in if statements",
+      "sourceAnchor": "else if (graph == 2) {",
+      "sourceLine": 550,
+      "occurrences": 1,
+      "reason": "SCHEMA010 independently enumerates four Throwable graph shapes:0 cause,1 suppressed,2 cyclic cause+suppressed fatal,3 SQLnext. Literal2 selects that explicit fixture row, not a business threshold or configurable credential policy. Fixed Error identity and owner counts are asserted across all6 failure sites, with no Production expected-value generation.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
