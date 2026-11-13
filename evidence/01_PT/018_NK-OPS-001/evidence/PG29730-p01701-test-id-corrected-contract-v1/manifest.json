@@ -1,0 +1,260 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T14:38:06.654158+00:00",
+  "source": "56af00a92b000c14a020bcb5a25e52bb920228d1",
+  "productionCoreMain": "5330eb303026206a87af466d0ffebb884b8e04b8",
+  "ownedSourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningControlScope.java": "d975ab94753e38beee423d0c523d183d9fc948cfce509b8730bcbfb87ea1f55c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningRootScope.java": "e7794a891a0b0ccc75e2ff88bc46a910415ab32db7ead600f69c60db0497e91e",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "7c27a7242683353432f056c224e44ad7b1fc269f5cee7bfd6f143230d21001ce",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 2457,
+  "design": [
+    {
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "commit": "983c34856297cbe1fadaa3d18898a9e7a4691d75",
+      "sha256": "b152dcd886d1ca67293a3ea7207cd24f2d6904fccddcd15d614d278446987340"
+    },
+    {
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "commit": "983c34856297cbe1fadaa3d18898a9e7a4691d75",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "commit": "983c34856297cbe1fadaa3d18898a9e7a4691d75",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5"
+    },
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "983c34856297cbe1fadaa3d18898a9e7a4691d75",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "983c34856297cbe1fadaa3d18898a9e7a4691d75",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P01701-PREP-001",
+      "artifact": "MorningRootScope",
+      "methods": "execute native/injected",
+      "testIds": [
+        "PT-OPS-MROOT001-006"
+      ],
+      "expected": "root→M→policy→trusted→postroot, all eight deployable policies before any stop; M retained through callback; missing owner empty refuses callback; no A/DB/Backup/permit authority",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-002",
+      "artifact": "MorningControlScope",
+      "methods": "executeVerifiedEpoch/executeCompletedEpoch",
+      "testIds": [
+        "PT-OPS-MCTRL001-019"
+      ],
+      "expected": "same M→clear all intent/residue→same dedicated DB/original→stop8→A→fresh8→durable INVALID exact activation→trustedwork; budget/root/original/DB rechecks before publication, completion inside original lifetime",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-003",
+      "artifact": "MorningControlScope",
+      "methods": "protectGraph/protectPublication",
+      "testIds": [
+        "PT-OPS-MCTRL001-019"
+      ],
+      "expected": "failure invokes existing graph observation and publication abort before outer M release, no success on uncertain stop; outer completed owner retained only when actual captured graph exists; no inferred native proof",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-004",
+      "artifact": "MorningControlScope",
+      "methods": "executeOwned/executeOwnedEpoch/executeResumeOwned/executeResumeOwnedEpoch",
+      "testIds": [
+        "PT-OPS-MCTRL001-019"
+      ],
+      "expected": "explicit resume UUID NN, null cannot select new run; callbacks no connection/original/borrowed A fd export; INVALID epoch exact identity and absent permitdigest; gate before/after each owned boundary",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-005",
+      "artifact": "MorningControlScope",
+      "methods": "requireNoExpiryRequest/withClearIntent/executeStopAndStartup/afterOriginal",
+      "testIds": [
+        "PT-OPS-MCTRL001-019"
+      ],
+      "expected": "no start intent/residue under M before original/DB/stop; stop before A, terminals after A, borrowed FD not exported, empty M/A no trustedwork, all results NN; synthetic gate overload is not production entry",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-006",
+      "artifact": "MorningDatabaseSession",
+      "methods": "constructors/rootGate/releaseGate",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "only MORNING snapshot and exact loopback jdbc:postgresql://127.0.0.1:<1..65535>/schubert_nk; no URL extension, pool/fallback or SQL export; legacy schema callback cannot mint issuer inspection",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-007",
+      "artifact": "MorningDatabaseSession",
+      "methods": "execute/admitObservation/scalar",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "consume owned credential even preconnect refusal; password copy zeroed and Properties cleared on all exits; fixed schubert_batch login/effective/database/RW/readcommitted/notrecovery, one advisory71419602 before callback; callback sync NN result; Session invalid after callback and one owned connection close before return",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-008",
+      "artifact": "MorningDatabaseSession",
+      "methods": "Session.guard/Access defaults/currentRunReference",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "active same-thread/no handoff/interruption/root guard before JDBC; capability expires after callback, defaults refuse and data-only records not authority; same-run lookup rejects otherUUID but is not retained-original proof",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-009",
+      "artifact": "MorningDatabaseSession",
+      "methods": "DatabaseObservation/BackupBegins/BackupObservation/ExpiryBegins/ExpiryObservation",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "constructors establish NN, exactly2 ordered backup rows same run/start/end/status distinctID, prior pair only skipped/ALREADY_SUCCESSFUL/earlier attempts; expiry skipped zero/current-start/prior-audit/receipt0 vs actual terminal count/time/status; toString redacted",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-010",
+      "artifact": "MorningDatabaseSession",
+      "methods": "beginBackup/beginResumeBackup/successfulBackup/completionGuard",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "release/schema before both begins; atomic pair commit confirmed before autocommit/handoff/handle export; success lookup exactlytwo genuine matching rows all14columns/N12/microseconds/original businessdate; resume checks old manifest and genuine pair, new both skipped; no fabricated bundle",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-011",
+      "artifact": "MorningDatabaseSession",
+      "methods": "completeReusedBackup/completeBackup/failBackup/observeBackup/retainedBackupSuccessful",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "exact expected current pair, dedicated active owner+advisory, confirmed complete before finished; failed pair commit/readback and matching commandfailure timestamp; observe read-only rollback/restore, prior values separate from current, no missing row interpreted successful",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-012",
+      "artifact": "MorningDatabaseSession",
+      "methods": "recheckConsistent/requireAbandonedRequest",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "postbegin same run/cutoff/advisory, server READ ONLY actual TX, source readonly flags honest; old same-run request must predate current pair and match2 FAILED/ABANDONED lower attempts+JSTdate/time, not delete/repair or infer original from DB",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-013",
+      "artifact": "MorningDatabaseSession",
+      "methods": "handoffCleanup/handoffExpiry/beginExpiry",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "one synchronous InspectorLockHandoff, no DB operation while inHandoff and guard afterward; cleanup verification before expirybegin, existing backup/run binding, confirmed commit then independent readback and exact prior/initial audit; no retry minting",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-014",
+      "artifact": "MorningDatabaseSession",
+      "methods": "failedBackupSnapshot/observeExpiry/observeCleanup/observeCleanupRejected/cleanupReferences",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "whole actual fourteen-column audit/receipt0-10 or narrow30 profile, former original lookups separately bound, borrowed guard/deadline before/after and readback rollback; rejected partial30 is not completion, unknown/null/foreign rows refuse",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-015",
+      "artifact": "MorningDatabaseSession",
+      "methods": "query/present/require/closeReplace/known-catalog catches",
+      "testIds": [
+        "PT-OPS-MDB001-008"
+      ],
+      "expected": "nonnull provider Statement/ResultSet, querytimeout5 and boundSQL, reverse direct close1, SQL vs unknown primary precedence and no self-suppression; wrapped Error before known catalog discard remains open BUG2852, no assumption of actualDB post success",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    },
+    {
+      "id": "P01701-PREP-016",
+      "artifact": "JdbcResourceFailures",
+      "methods": "replace",
+      "testIds": [
+        "JDBC2757001..008"
+      ],
+      "expected": "pure priority only, no close/TX: null primary or SQL primary+nonSQL cleanup replaces; unknown primary identity plus fresh fixed secondary, SQL pair finite graph before discard; actual oldwhole8 original currentbytes and ownCRC proof only, no caller/DB/global transfer",
+      "refusalOrMissing": "Actual Root/DB/original/permit/Unit/native owner and all /2/451 dependencies unaccepted; no synthetic capability authority"
+    }
+  ],
+  "existingProofs": [
+    {
+      "manifest": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28380-jdbc-knownpair8-post-v1/manifest.json",
+        "sha256": "37e45fe0d305442d1dcf805305dd4fee41ccf0bae5d147af5b55e3d2d97ac79d"
+      },
+      "oldSource": "f5d3ab45b67ab2308eef005042352c394ab06f4c",
+      "oldScopeOnly": "Only exact JdbcResourceFailures whole8/component bytes; no new tests, no Morning ownership/DB/Root/global credit",
+      "unchangedInputPaths": [
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+        "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java",
+        "pom.xml",
+        "src/schubert-nk-batch/pom.xml",
+        "tools/quality/static/pmd.xml",
+        "tools/quality/static/checkstyle.xml"
+      ],
+      "reexecuted": 0,
+      "currentWholeScopeTransferred": false
+    }
+  ],
+  "internalDependencies": [
+    "WBS-P004-01",
+    "WBS-P004-03"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P017-01.01/1",
+    "WBS-P017-01.02/1",
+    "WBS-P017-01.03/1"
+  ],
+  "endingStatus": "ORIGINAL_THREE_OWNER_RESOURCE_PUBLIC_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2387_p01701_audit_contract.json",
+    "sha256": "21b79c6e11b09b053f184a88b15bc2f05ca4213cfeb278491e22461739baa6ce"
+  },
+  "traceCorrection": {
+    "bug": "BUG-2853",
+    "originalManifest": "evidence/01_PT/018_NK-OPS-001/evidence/PG29724-p01701-four-owned-source-contract-v1/manifest.json",
+    "originalSha256": "e36935487ce11435f392b0110c1a188d866a68775587c1a2a73d9f438bab2244",
+    "previousAtJST": "2026-11-13T23:37:09.893154+09:00",
+    "originalTestDocId": "JDBC2757001..008",
+    "originalIncorrectExplanationId": "PT-BAT-JDBC-KNOWNPAIR001-008",
+    "allOtherFieldsPreserved": true,
+    "noProductRerun": true
+  }
+}
