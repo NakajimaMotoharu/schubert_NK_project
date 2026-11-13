@@ -3,3 +3,6 @@
 BUG2774/YKT2359、MQ009/OPS009/DAT009/UI251/SS32112・331・332SSC310§9・3419・352。ArtemisExpiryPurgeClient既ARME二口とExpiryAuditRepository既SQL/Runtime四口の固定化直前に重大Errorを保持する六callだけ。全元body逆変換一致・SQL/bind/queryTimeout/7dayselector/計数/nullableafter/owner-TX-Resource順は不変。特にsuccessful直下usingJdbcは既Java25TWR/self-suppression・同secondaryを維持し、stage/finishのTWR及び既Runtime変換tierを変更しない。readのみの既SS332typedclose/unknown型優先も不変。
 
 PG28620はGJF-CS0とsource製造差の確認だけ、RootMaincompile/NullAway-PMD-SB/実Broker-DB-parent wholePT/coverageは未受入。BUG2774OPEN、metadata準備を実purge/DBcommit/真正親終了としない。次に既wholeResourceFailure3と68独立合成期待値のMain閉包・型だけのGuard依存を別価格で確認し、不必要なGuard呼出によるprobe/coverage作成を禁止する。
+
+
+source固定commit 300d520712f5710e7d8cc29e8ba2851082c2d602、独立sourcejoin [manifest](../018_NK-OPS-001/evidence/PG28624-expiry-two-source-join-v1/manifest.json) SHAdbe3317f5cd27e28d8b04503ad1e246c3a4abd559241e47f7ede9cc7150e4ca8。BUG2774SDKknownARME2＋ExpiryRepo既SQL/Runtime4の計六固定化前にfatalgraph保持。SS332SSC310§9の異なるresource契約（successful usingJdbcはJava25TWR/同secondary/selfsupp、stage-finishは既TWR/Runtime固定tier、readはtypedclose）を元byte逆変換で全保持、SQL/bind/5秒/7dayselector/借用TX/resource順序不変更、GJF-CS0のみ。Maincompile/fullstatic/PT/coverageは未実施、実Broker/DB/Root/nativeHOLD・BUG2774OPEN。 製品PT0、runtime/coverage未受入。

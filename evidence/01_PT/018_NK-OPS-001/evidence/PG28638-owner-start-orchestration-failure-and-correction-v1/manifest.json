@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T11:01:59.181910+09:00",
+  "oldStartConfigSha256": "9fb311f6ccc0f272d10bc12edfa3e7c0a5b71cb1979e2eec55949631f8639c46",
+  "actualSourceProducer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28636-runref-one-source-static-v1/manifest.json",
+    "sha256": "4c3a74a92f090a78299d191e24d21ecb8ce8cc0c542f1e141907d65b7fe5c0f1"
+  },
+  "sourceWorkAlreadyDoneBeforeRegisteredStart": true,
+  "priceWasFixedBeforeSourceWork": true,
+  "oldOwnerWrong": "WBS-P017-01.03",
+  "actualOwner": "WBS-P004-03",
+  "program": "NK-DAT-001",
+  "originalEstimate": {
+    "low": 0.075,
+    "base": 0.225,
+    "high": 0.45
+  },
+  "priceChanged": false,
+  "rollbackOrSourceReplay": false,
+  "metadataCases": [
+    {
+      "case": "no active group",
+      "actual": "REJECT",
+      "expected": "REJECT"
+    },
+    {
+      "case": "other active group",
+      "actual": "REJECT",
+      "expected": "REJECT"
+    },
+    {
+      "case": "closed group",
+      "actual": "REJECT",
+      "expected": "REJECT"
+    },
+    {
+      "case": "different source",
+      "actual": "REJECT",
+      "expected": "REJECT"
+    },
+    {
+      "case": "terminal producer never repeated",
+      "actual": "REJECT",
+      "expected": "REJECT"
+    },
+    {
+      "case": "registered new-only producer precondition",
+      "actual": "ACCEPT",
+      "expected": "ACCEPT"
+    },
+    {
+      "case": "registered existing-output verification",
+      "actual": "ACCEPT",
+      "expected": "ACCEPT"
+    }
+  ],
+  "wrapper": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2167b_registered_source_stage_guard.py",
+    "sha256": "ec7ec9ee64e274377ae8693dffa2f1c4deae0f808d30b01fbbd00fa6e8f4bd81"
+  },
+  "productTestsExecuted": 0,
+  "newAcceptance": 0
+}

@@ -1,0 +1,5 @@
+# RunReference既知SQL一境界の製造仕様
+
+NK-DAT-001/WBS-P004-03、Batch共通参照。DAT009/OPS009/UI251/SS3313.12・332063199・352、BUG2775/YKT2359。read最外SQLException固定化直前のStorageIoException.preserveFatal一call/importだけ。全元bodyはbyte逆変換一致、query5/UTC二bind/Booleanprojection/null-SQLDataException/ownedrow-statement逆順closeと未知primary/固定secondary/同一Throwable/borrowedConnection操作0/IRQ前後の契約は不変更。PG28636 GJF-CS0のみ、Maincompile/PT/coverage未実施OPEN。
+
+BUG2776により当sourcePGは誤ownerのstart拒否後に先行完了していた事実をPG28638へ保存。価格.075/.225/.45は事前固定済み、正規owner P00403のevent5034は実際の後付け時刻であり遡及しない。source破棄/再製造/元証拠上書き0、登録guard metadata7と既成果hash照合だけを実施した。次は既wholeRunReferencePort9全448行・二worker有限と新fatal1を同source通常PTで資格化し、JDBC proxyを実DB/親所有の代用にしない。

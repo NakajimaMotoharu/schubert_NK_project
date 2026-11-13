@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.batch.repository;
 
 // PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -80,6 +81,7 @@ public final class RunReferenceRepository {
       require(!Thread.currentThread().isInterrupted());
       return result;
     } catch (SQLException failure) {
+      StorageIoException.preserveFatal(failure);
       // All owned resources have closed. No raw/suppressed provider diagnostics escape.
       throw new BatchRepositoryException();
     }
