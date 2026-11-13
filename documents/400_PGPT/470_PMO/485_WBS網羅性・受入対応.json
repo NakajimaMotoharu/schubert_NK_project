@@ -550364,11 +550364,89 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "58273077b667bcfedaa31a59c9705410f747c39ec36379a7078b4e49ee7771be",
-      "acceptance": "NOT_RUN",
-      "state": "SOURCE_CREATED_WHOLE12_TEST_DEFINITIONS_NOT_RUN",
+      "acceptance": "UNASSESSED",
+      "state": "PURE_COMPONENT_NORMAL12_FOUR100_FULL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-344",
       "testIds": "PT-MIG-FILEORDER001..012",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "NEW_PURE_SCENARIO_FILE_GAME_ORDER_WHOLE12",
+        "source": "4f41a9e74efbd64724d353d2e5b1ad0e485a62dc",
+        "productionCoreMain": "e65e5e8bb546457e1a90e8ff7520cb4ca9e36eab",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30364-scenario-file-order12-post-v2/manifest.json",
+          "sha256": "48793404b3e9f5a67ffc87e276d54d0b1a8e445176885af527486edf3bc7a390"
+        },
+        "actualExecutions": 12,
+        "newTestDefinitions": 12,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 111,
+        "physicalClasses": 4,
+        "positiveMainCrc": 4,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 295,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 22,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 65,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 27,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 16,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 4,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6
+        },
+        "actualJvmCodeMethods": 32,
+        "jacocoDefaultMethods": 16,
+        "generatedFilterPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 5,
+        "applicable": 0,
+        "unclassified": 0,
+        "newSourceDefects": 1,
+        "relatedBug": "BUG-2869",
+        "relatedYkt": "YKT-2055",
+        "actualOriginalMasterRootVmDbNativeKeyFileIntentPermitUnitDeployActions": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.4,
+          "base": 1.2,
+          "high": 2.4
+        },
+        "reworkWithinOriginalGroupEstimate": {
+          "low": 0.04,
+          "base": 0.12,
+          "high": 0.24
+        },
+        "verificationWithinOriginalGroupEstimate": {
+          "low": 0.36,
+          "base": 1.08,
+          "high": 2.16
+        },
+        "actualCost": null
+      }
     }
   ],
   "layouts": [
@@ -554968,6 +555046,84 @@
       "low": 0.3,
       "base": 0.9,
       "high": 1.8
+    },
+    "actualCost": null
+  },
+  "currentScenarioFileOrderWhole12PG30362": {
+    "kind": "NEW_PURE_SCENARIO_FILE_GAME_ORDER_WHOLE12",
+    "source": "4f41a9e74efbd64724d353d2e5b1ad0e485a62dc",
+    "productionCoreMain": "e65e5e8bb546457e1a90e8ff7520cb4ca9e36eab",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30364-scenario-file-order12-post-v2/manifest.json",
+      "sha256": "48793404b3e9f5a67ffc87e276d54d0b1a8e445176885af527486edf3bc7a390"
+    },
+    "actualExecutions": 12,
+    "newTestDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 111,
+    "physicalClasses": 4,
+    "positiveMainCrc": 4,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 295,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 22,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 65,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 27,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 16,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6
+    },
+    "actualJvmCodeMethods": 32,
+    "jacocoDefaultMethods": 16,
+    "generatedFilterPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 5,
+    "applicable": 0,
+    "unclassified": 0,
+    "newSourceDefects": 1,
+    "relatedBug": "BUG-2869",
+    "relatedYkt": "YKT-2055",
+    "actualOriginalMasterRootVmDbNativeKeyFileIntentPermitUnitDeployActions": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
+    },
+    "reworkWithinOriginalGroupEstimate": {
+      "low": 0.04,
+      "base": 0.12,
+      "high": 0.24
+    },
+    "verificationWithinOriginalGroupEstimate": {
+      "low": 0.36,
+      "base": 1.08,
+      "high": 2.16
     },
     "actualCost": null
   }
