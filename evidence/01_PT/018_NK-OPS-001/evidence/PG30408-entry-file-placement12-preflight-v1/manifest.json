@@ -1,0 +1,84 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2504_entry_placement12_profile.json",
+    "sha256": "3e321ddb7457935d5351707475cc514c6a1623ccb96bf54d2b17335fde082212"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "07b6aad37890a06fba146618481c9c9eb898ed7498e738c4a3fdc592e22524e5",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "58273077b667bcfedaa31a59c9705410f747c39ec36379a7078b4e49ee7771be",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java": "9ef8e166c4c6e3bbeed6accbbd6c1a832be907b332f7d282d3c622a87b02fb9c",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30404-entry-file-placement12-prepare-v1/manifest.json",
+    "sha256": "ed78fde48ddc99ff5ecda19cb177de940d243c37fdc55def4f97bfeb7e2f8056"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30406-entry-file-placement12-static-v1/manifest.json",
+    "sha256": "4812c942d155fb0c077944c590f98186a8ad75cc364cd929a030d3a6e5b1483d"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2506_entry_placement_static_admission.json",
+    "sha256": "70331ebe4618d0d82c67cb33844dad05bd3ebacbcc18c64e2c4dbcb24ab0139c"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "CloseResource",
+      "line": "252",
+      "reason": "This exact executor is acquired before try and every exit executes finally shutdownNow plus awaitTermination10s with failing postcondition assertion. Each of64 Futures joins5s. Ownership remains local to whole JUnit Test; implicit close may wait unbounded and is not substituted for termination evidence.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "257",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "268",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "269",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

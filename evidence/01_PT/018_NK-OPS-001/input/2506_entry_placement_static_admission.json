@@ -1,0 +1,64 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30410-ENTRY-FILE-PLACEMENT-NEW12",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30404-entry-file-placement12-prepare-v1/manifest.json",
+    "sha256": "ed78fde48ddc99ff5ecda19cb177de940d243c37fdc55def4f97bfeb7e2f8056"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30406-entry-file-placement12-static-v1/manifest.json",
+    "sha256": "4812c942d155fb0c077944c590f98186a8ad75cc364cd929a030d3a6e5b1483d"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 252,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact executor is acquired before try and every exit executes finally shutdownNow plus awaitTermination10s with failing postcondition assertion. Each of64 Futures joins5s. Ownership remains local to whole JUnit Test; implicit close may wait unbounded and is not substituted for termination evidence.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 252,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 257,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 268,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"owned worker termination\");",
+      "sourceLine": 269,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
