@@ -1,0 +1,79 @@
+{
+  "groupId": "PGPT-WBS65-BUG2799-HTTP-LEASE-OWNER-WHOLE2-NEW1-NORMAL3-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1429_WBS65HTTP所有通常三結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29008-valve3-current-source-scope-join-v1/manifest.json",
+  "manifestSha256": "82863ca5cd50121901bec4117fe3b84e5fa96623d79bac2f3d31c739464d8179",
+  "terminalAtUTC": "2026-11-13T14:49:41.091715+09:00",
+  "run": "PG29008",
+  "workIds": [
+    "WBS-F03-BUG2799_HTTP_LEASE_OWNER_NORMAL3"
+  ],
+  "outcome": "HTTP_LEASE_OWNER_SOURCE_PG_WHOLE3_SUCCESS_ONE_SOURCE_FOUR100_FULL_GATE_MISSES_RETAINED",
+  "technical": {
+    "kind": "HTTP_LEASE_OWNER_ONE_SOURCE_PG_WHOLE3_SUCCESS_FOUR100",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29006-valve3-post-v1/manifest.json",
+      "sha256": "0cf61ddcc21025bdbdaa08eea8c7a97baef5d90bbaae96a84c78925844ce153a"
+    },
+    "tests": 3,
+    "newDefinitions": 1,
+    "newAcceptance": 0,
+    "physicalClasses": 3,
+    "positiveMainCrc": 3,
+    "completeTargetSources": 1,
+    "targetClasses": 2,
+    "targetCounters": {
+      "COMPLEXITY": {
+        "covered": 20,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 30,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 22,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 141,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": false,
+    "uncoveredFullSourceClasses": {
+      "dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission": {
+        "INSTRUCTION": 68,
+        "BRANCH": 12,
+        "LINE": 16,
+        "COMPLEXITY": 12,
+        "METHOD": 2
+      }
+    },
+    "MainChanged": 1,
+    "TestChanged": true,
+    "roster": {
+      "runs": 84,
+      "actualExecutions": 3846,
+      "success": 3817,
+      "failed": 29,
+      "scope": "EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL"
+    },
+    "uniqueMainSourceCount": 90
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1428_WBS65予実・HTTP所有通常三後版339.json",
+    "sha256": "9a865078f0cf6545f0b4357540f25c64e979aee4ac37b60682d8efb89dbdd17e"
+  },
+  "sourceAfter": "a769422d3bdb936daadccc974ccecbe7c32b3086",
+  "checkpointText": "BUG2799 Valve一Mainにgate identity確認を追加。ProductionMain a769422d3b/原sourceと旧whole2のbyte逆変換PG28988完全一致。Testsource071767902aで原2+新HTTPLEASE003全3成功、PG29006独立post0。新試験は異gate invoke拒否・nextB0・attribute同一性・異gate terminalでA未完了・同gate別adapter許容・実terminal後のdrain成功・重複callbackでunderflow無しを検証。RootJava25/NullAway Main2/physical3 compile0、SBbugs-missing-errors0/GJF-CS0/PMD生8を全message/行ごと適用分類し未分類0。Valve同一source全体L30/M9/C2/B22/I141 miss0で四100。依存gate L16/M2/B12/I68未網羅を除外せず保持。実HTTP/Root/VM/DB/JMS/actual4/native0、原190新0/正式1964-53/工数null。既WebHttpAdmissionTest全体は実HTTPを含むため未実行HOLD、部分抽出しない。 Testsource071767902ad573af4ae3e2af0c6beee9b3af3ec7/Maina769422d3bdb936daadccc974ccecbe7c32b3086。原190新0/正式1964-53/工数null、残{'low': 400.989, 'base': 846.186, 'high': 1659.65}未較正。",
+  "nextCommand": "Review already-read WebRuntimeHealth purewhole4 and missing management ready predicate, plus WebRuntimeFailureSignal captured flag constructor/run/accept source. Check no prior samebyte success; price independent eligible wholePT and test missing meaningful management/null/exception/ownership cases, no backend/Root/actual4. Other Web catalog/management/source-only findings remain OPEN, no same success replay."
+}

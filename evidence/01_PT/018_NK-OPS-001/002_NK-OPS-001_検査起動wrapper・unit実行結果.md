@@ -46,3 +46,6 @@ WBS-P018-05公開source契約/独立期待値/TestIDは[4247_P01805全二十六a
 
 
 WBS-P018-06公開source契約/独立期待値/TestIDは[4249_P01806全二十二artifact契約・独立期待値対応.md](4249_P01806全二十二artifact契約・独立期待値対応.md)。metadataのみ、新PT/coverage/正式受入0。
+
+
+HTTP所有原二新一通常単体結果：[4251_HTTP所有原二新一通常単体結果.md](4251_HTTP所有原二新一通常単体結果.md)。通常whole3成功・target計測値/fullscope未網羅保持、実DB/Root/Backup資格とは別。

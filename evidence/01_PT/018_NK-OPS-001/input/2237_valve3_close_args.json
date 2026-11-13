@@ -1,0 +1,34 @@
+{
+  "startConfig": "evidence/01_PT/018_NK-OPS-001/input/2233_valve3_pgpt_start.json",
+  "profile": "evidence/01_PT/018_NK-OPS-001/input/2235_valve3_closed_profile.json",
+  "expectedTests": 3,
+  "expectedBeforeRoster": {
+    "runs": 83,
+    "actualExecutions": 3843,
+    "success": 3814,
+    "failed": 29
+  },
+  "revision": "339-HTTP_LEASE_OWNER_SOURCE_PG_WHOLE2_NEW1_NORMAL3_FOUR100",
+  "forecastName": "1428_WBS65予実・HTTP所有通常三後版339.json",
+  "joinDirectory": "PG29008-valve3-current-source-scope-join-v1",
+  "joinRun": "PG29008",
+  "rosterScope": "HTTP_LEASE_GATE_IDENTITY_ONE_MAIN_PG_ORIGINAL2_NEW1_WHOLE3_MEMORY_TOMCAT_NO_SERVER",
+  "technicalKind": "HTTP_LEASE_OWNER_ONE_SOURCE_PG_WHOLE3_SUCCESS_FOUR100",
+  "targetSourceCount": 1,
+  "resultSpec": "evidence/01_PT/018_NK-OPS-001/4251_HTTP所有原二新一通常単体結果.md",
+  "oracleSpec": "evidence/01_PT/018_NK-OPS-001/4250_HTTP同gate所有・原二新一通常PT仕様.md",
+  "title": "HTTP所有原二新一通常単体結果",
+  "programDirectory": "evidence/01_PT/018_NK-OPS-001",
+  "primaryDocumentNames": [
+    "001_NK-OPS-001_検査起動wrapper・unit単体テスト仕様書.md",
+    "002_NK-OPS-001_検査起動wrapper・unit実行結果.md"
+  ],
+  "endConfigName": "2237_valve3_close.json",
+  "resultName": "1429_WBS65HTTP所有通常三結果.json",
+  "outcome": "HTTP_LEASE_OWNER_SOURCE_PG_WHOLE3_SUCCESS_ONE_SOURCE_FOUR100_FULL_GATE_MISSES_RETAINED",
+  "independentGolden": "HTTPLEASE003 literal same-gate identity/foreign rejection message/next counts0-1-2/zero-budget before-after true terminal. Expected not produced by Production method.",
+  "description": "BUG2799 Valve一Mainにgate identity確認を追加。ProductionMain a769422d3b/原sourceと旧whole2のbyte逆変換PG28988完全一致。Testsource071767902aで原2+新HTTPLEASE003全3成功、PG29006独立post0。新試験は異gate invoke拒否・nextB0・attribute同一性・異gate terminalでA未完了・同gate別adapter許容・実terminal後のdrain成功・重複callbackでunderflow無しを検証。RootJava25/NullAway Main2/physical3 compile0、SBbugs-missing-errors0/GJF-CS0/PMD生8を全message/行ごと適用分類し未分類0。Valve同一source全体L30/M9/C2/B22/I141 miss0で四100。依存gate L16/M2/B12/I68未網羅を除外せず保持。実HTTP/Root/VM/DB/JMS/actual4/native0、原190新0/正式1964-53/工数null。既WebHttpAdmissionTest全体は実HTTPを含むため未実行HOLD、部分抽出しない。",
+  "nextCommand": "Review already-read WebRuntimeHealth purewhole4 and missing management ready predicate, plus WebRuntimeFailureSignal captured flag constructor/run/accept source. Check no prior samebyte success; price independent eligible wholePT and test missing meaningful management/null/exception/ownership cases, no backend/Root/actual4. Other Web catalog/management/source-only findings remain OPEN, no same success replay.",
+  "newDefinitions": 1,
+  "expectedTargetFour100": true
+}
