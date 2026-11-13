@@ -1,0 +1,233 @@
+package dev.codex.schubert.nk.batch.repository;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+/**
+ * NK-BAT-001/OPS009/DAT009/UI251/SS332/354 SSC341; PT-MDB-PURE341-001..012. Independent Throwable
+ * identity/type tables only; no DB proxy or Morning ownership is simulated.
+ */
+final class MorningSqlFailuresTest {
+  private static final String DIAGNOSTIC = "SYNTHETIC_PROVIDER_DIAGNOSTIC";
+  private static final String FIXED = "batch repository operation failed";
+
+  @Test
+  void absentPrimarySelectsTheNonnullCleanup() {
+    for (Throwable cleanup :
+        List.of(new SQLException(DIAGNOSTIC), new IllegalStateException(), new AssertionError())) {
+      assertTrue(MorningSqlFailures.closeReplace(null, cleanup));
+      assertEquals(0, cleanup.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void knownPrimarySelectsNonSqlCleanupBeforeCatalogClassification() {
+    for (Throwable primary :
+        List.of(
+            new SQLException(DIAGNOSTIC),
+            new IOException(DIAGNOSTIC),
+            new BatchRepositoryException())) {
+      for (Throwable cleanup : List.of(new IllegalStateException(), new AssertionError())) {
+        assertTrue(MorningSqlFailures.closeReplace(primary, cleanup));
+        assertEquals(0, primary.getSuppressed().length);
+      }
+    }
+  }
+
+  @Test
+  void unknownPrimaryReceivesFreshFixedSecondaryWithoutProviderGraph() {
+    for (Throwable primary :
+        List.of(new IllegalArgumentException(DIAGNOSTIC), new AssertionError())) {
+      Throwable previous = null;
+      int expectedCount = 0;
+      for (Throwable cleanup :
+          List.of(
+              new SQLException(DIAGNOSTIC), new IllegalStateException(), new AssertionError())) {
+        assertFalse(MorningSqlFailures.closeReplace(primary, cleanup));
+        assertEquals(++expectedCount, primary.getSuppressed().length);
+        Throwable secondary = primary.getSuppressed()[expectedCount - 1];
+        assertInstanceOf(BatchRepositoryException.class, secondary);
+        assertEquals(FIXED, secondary.getMessage());
+        assertNull(secondary.getCause());
+        assertEquals(0, secondary.getSuppressed().length);
+        assertNotSame(cleanup, secondary);
+        assertNotSame(previous, secondary);
+        previous = secondary;
+      }
+      assertFalse(MorningSqlFailures.closeReplace(primary, primary));
+      assertEquals(expectedCount + 1, primary.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void checkedIoPrimaryKeepsTheExistingSqlCleanupPolicy() {
+    var primary = new IOException(DIAGNOSTIC);
+    var fatal = new AssertionError();
+    var cleanup = new SQLException(DIAGNOSTIC);
+    cleanup.initCause(fatal);
+    assertFalse(MorningSqlFailures.closeReplace(primary, cleanup));
+    assertNull(primary.getCause());
+    assertEquals(0, primary.getSuppressed().length);
+    assertSame(fatal, cleanup.getCause());
+  }
+
+  @Test
+  void sqlPairClassifiesThePrimaryGraphFirst() {
+    for (Throwable primary :
+        List.of(new SQLException(DIAGNOSTIC), new BatchRepositoryException())) {
+      var first = new AssertionError();
+      var second = new AssertionError();
+      primary.initCause(first);
+      var cleanup = new SQLException(DIAGNOSTIC);
+      cleanup.initCause(second);
+      assertSame(
+          first,
+          assertThrows(
+              AssertionError.class, () -> MorningSqlFailures.closeReplace(primary, cleanup)));
+    }
+  }
+
+  @Test
+  void sqlPairClassifiesSecondaryAfterNonfatalPrimary() {
+    for (Throwable primary :
+        List.of(new SQLException(DIAGNOSTIC), new BatchRepositoryException())) {
+      var fatal = new AssertionError();
+      var cleanup = new SQLException(DIAGNOSTIC);
+      cleanup.setNextException(new SQLException(DIAGNOSTIC, fatal));
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class, () -> MorningSqlFailures.closeReplace(primary, cleanup)));
+    }
+    assertFalse(
+        MorningSqlFailures.closeReplace(
+            new SQLException(DIAGNOSTIC), new SQLException(DIAGNOSTIC)));
+    assertFalse(
+        MorningSqlFailures.closeReplace(
+            new BatchRepositoryException(), new SQLException(DIAGNOSTIC)));
+  }
+
+  @Test
+  void nonfatalSqlAndBatchCyclesReturnFinitely() {
+    var first = new SQLException(DIAGNOSTIC);
+    var second = new SQLException(DIAGNOSTIC);
+    first.initCause(second);
+    second.initCause(first);
+    first.addSuppressed(second);
+    first.addSuppressed(second);
+    assertDoesNotThrow(() -> MorningSqlFailures.preserveCatalogFatal(first));
+    assertDoesNotThrow(() -> MorningSqlFailures.preserveCatalogFatal(new SqlCycle()));
+    var wrapped = new BatchRepositoryException();
+    wrapped.initCause(first);
+    assertDoesNotThrow(() -> MorningSqlFailures.preserveCatalogFatal(wrapped));
+    assertFalse(MorningSqlFailures.closeReplace(first, new SqlCycle()));
+  }
+
+  @Test
+  void catalogGuardDoesNotGeneralizeTheCheckedIoOrUnknownPolicy() {
+    for (Throwable unknown :
+        List.of(new IOException(DIAGNOSTIC), new IllegalStateException(), new AssertionError())) {
+      unknown.addSuppressed(new AssertionError());
+      assertDoesNotThrow(() -> MorningSqlFailures.preserveCatalogFatal(unknown));
+      assertEquals(1, unknown.getSuppressed().length);
+    }
+    var fatal = new AssertionError();
+    var sql = new SQLException(DIAGNOSTIC, fatal);
+    assertTrue(MorningSqlFailures.closeReplace(null, sql));
+    assertSame(
+        fatal,
+        assertThrows(AssertionError.class, () -> MorningSqlFailures.preserveCatalogFatal(sql)));
+  }
+
+  @Test
+  void internalNonnullBoundariesRejectMissingFailureValues() {
+    assertThrows(NullPointerException.class, () -> MorningSqlFailures.preserveCatalogFatal(null));
+    assertThrows(NullPointerException.class, () -> MorningSqlFailures.closeReplace(null, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> MorningSqlFailures.closeReplace(new SQLException(), null));
+  }
+
+  @Test
+  void sharedStorageFailureReasonsAndDiagnosticAreFixed() {
+    assertEquals(
+        List.of("COLLISION", "MISSING", "UNAVAILABLE"),
+        Arrays.stream(StorageIoException.Reason.values()).map(Enum::name).toList());
+    for (var reason : StorageIoException.Reason.values()) {
+      var failure = new StorageIoException(reason);
+      assertSame(reason, failure.reason());
+      assertEquals("transfer storage operation failed", failure.getMessage());
+      assertNull(failure.getCause());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+    assertThrows(NullPointerException.class, () -> new StorageIoException(null));
+    assertThrows(
+        IllegalArgumentException.class, () -> StorageIoException.Reason.valueOf("UNKNOWN"));
+  }
+
+  @Test
+  void sharedFiniteGraphsPreserveIndependentErrorIdentity() {
+    var direct = new AssertionError();
+    assertSame(
+        direct, assertThrows(AssertionError.class, () -> StorageIoException.preserveFatal(direct)));
+    var cause = new AssertionError();
+    assertSame(
+        cause,
+        assertThrows(
+            AssertionError.class,
+            () -> StorageIoException.preserveFatal(new IllegalStateException(cause))));
+    var suppressed = new AssertionError();
+    var sql = new SQLException(DIAGNOSTIC);
+    sql.addSuppressed(suppressed);
+    assertSame(
+        suppressed,
+        assertThrows(AssertionError.class, () -> MorningSqlFailures.preserveCatalogFatal(sql)));
+    var batch = new BatchRepositoryException();
+    batch.addSuppressed(suppressed);
+    assertSame(
+        suppressed,
+        assertThrows(AssertionError.class, () -> MorningSqlFailures.preserveCatalogFatal(batch)));
+  }
+
+  @Test
+  void disabledSuppressionRetainsUnknownPolicyWithoutRawCleanup() {
+    var primary = new NoSupp();
+    var cleanup = new SQLException(DIAGNOSTIC, new AssertionError());
+    assertFalse(MorningSqlFailures.closeReplace(primary, cleanup));
+    assertNull(primary.getCause());
+    assertEquals(0, primary.getSuppressed().length);
+    assertFalse(MorningSqlFailures.closeReplace(primary, primary));
+    assertEquals(0, primary.getSuppressed().length);
+  }
+
+  private static final class SqlCycle extends SQLException {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public SQLException getNextException() {
+      return this;
+    }
+  }
+
+  private static final class NoSupp extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
+    NoSupp() {
+      super(DIAGNOSTIC, null, false, true);
+    }
+  }
+}

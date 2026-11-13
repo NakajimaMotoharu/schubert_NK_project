@@ -546,24 +546,11 @@ public final class MorningDatabaseSession {
 
   // SSC341: preserve typed IO/unknown policy; classify only known SQL catalog discards.
   private static void preserveCatalogFatal(Throwable failure) {
-    if (failure instanceof SQLException || failure instanceof BatchRepositoryException) {
-      dev.codex.schubert.nk.storage.StorageIoException.preserveFatal(failure);
-    }
+    MorningSqlFailures.preserveCatalogFatal(failure);
   }
 
   private static boolean closeReplace(@Nullable Throwable primary, Throwable secondary) {
-    boolean known =
-        primary instanceof SQLException
-            || primary instanceof IOException
-            || primary instanceof BatchRepositoryException;
-    if (primary == null || (known && !(secondary instanceof SQLException))) return true;
-    if (!known) primary.addSuppressed(new BatchRepositoryException());
-    else if ((primary instanceof SQLException || primary instanceof BatchRepositoryException)
-        && secondary instanceof SQLException) {
-      preserveCatalogFatal(primary);
-      preserveCatalogFatal(secondary);
-    }
-    return false;
+    return MorningSqlFailures.closeReplace(primary, secondary);
   }
 
   private record RoleObservation(

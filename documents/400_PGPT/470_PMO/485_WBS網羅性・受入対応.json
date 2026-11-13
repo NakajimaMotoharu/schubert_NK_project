@@ -532782,6 +532782,20 @@
           "PT-DB-NULL340-014",
           "PT-DB-NULL340-015"
         ]
+      },
+      {
+        "kind": "JAVA",
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+        "owner": "WBS-P017-01",
+        "costOwner": "WBS-P017-01",
+        "sha256": "16e6c332e4c34093787f5a281cfa27085a0fa21c9219bd21abeed4e8264fd5f0",
+        "acceptance": "NOT_RUN",
+        "state": "SOURCE_CREATED_PURE12_TEST_DEFINITIONS_NOT_RUN",
+        "relatedSsc": "SSC-341",
+        "relatedBug": "BUG-2852",
+        "relatedYkt": "YKT-2359",
+        "testIds": "PT-MDB-PURE341-001..012",
+        "historicalPath": null
       }
     ],
     "acceptedLeafDelta": 0,
@@ -550147,6 +550161,20 @@
         "PT-DB-NULL340-014",
         "PT-DB-NULL340-015"
       ]
+    },
+    {
+      "kind": "JAVA",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+      "owner": "WBS-P017-01",
+      "costOwner": "WBS-P017-01",
+      "sha256": "16e6c332e4c34093787f5a281cfa27085a0fa21c9219bd21abeed4e8264fd5f0",
+      "acceptance": "NOT_RUN",
+      "state": "SOURCE_CREATED_PURE12_TEST_DEFINITIONS_NOT_RUN",
+      "relatedSsc": "SSC-341",
+      "relatedBug": "BUG-2852",
+      "relatedYkt": "YKT-2359",
+      "testIds": "PT-MDB-PURE341-001..012",
+      "historicalPath": null
     }
   ],
   "layouts": [
@@ -551163,6 +551191,17 @@
       "acceptedDelta": 0,
       "budgetAlreadyPriced": true,
       "reason": "Five existing named conditional-NN CHECKs; same tables/columns/grants/indexes, old28 immutable; no DB execution"
+    },
+    {
+      "id": "SCOPE-SSC341-MORNING-PURE-HELPER",
+      "type": "INTERNAL_TESTABILITY_DEPENDENCY",
+      "owner": "WBS-P017-01",
+      "addedArtifacts": 1,
+      "addedJavaOuterClasses": 1,
+      "acceptedDelta": 0,
+      "logicalBusinessScopeChanged": false,
+      "budgetAlreadyPriced": true,
+      "reason": "Package-private pure exception policy, existing20catalog/ownedclose behavior retained behind private Morning wrappers; realDB/Root/ownership PT unaccepted"
     }
   ],
   "measurementBindings": {
@@ -554238,5 +554277,14 @@
     "state": "SOURCE_FIXED_GJF_CS_ONLY_ROOT_DB_PT_NOT_RUN",
     "formalAccepted": false,
     "coverage": null
+  },
+  "currentMorningPureHelperPreparationSupplement": {
+    "previousPreparation": "PG29724/PG29730 original4 source contracts",
+    "newOwnedArtifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+    "sourcePlanned": true,
+    "independentSpec": "evidence/01_PT/017_NK-BAT-001/4238_Morning純SQL例外helper十二件単体仕様.md",
+    "originalCompletedRowsRecounted": 0,
+    "newFormalAcceptance": 0,
+    "reason": "Same existing method policy moved to internal helper; new artifact mapped before manufacture, not new original business requirement"
   }
 }
