@@ -1,0 +1,34 @@
+{
+  "groupId": "PGPT-WBS65-BUG2839-GIT-MAIN-DELTA-GUARD-FIX-20261113",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1551_WBS65Main差分guard是正結果.json",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG29560-main-delta-guard-source-join-v1/manifest.json",
+  "manifestSha256": "fc18adadfe0aab4cb314d7a55ed746235c52d96ae27b447502c8c548fa786664",
+  "terminalAtUTC": "2026-11-13T12:40:27.042499+00:00",
+  "run": "PG29560",
+  "workIds": [
+    "K03_BUG2839_GIT_MAIN_DIFFERENCE_GUARD"
+  ],
+  "outcome": "PUBLIC_MAIN_DELTA_GUARD_METADATA_FIXED_NOT_PRODUCT_PT",
+  "technical": {
+    "kind": "BUG2839_PUBLIC_MAIN_DELTA_METADATA_GUARD_FIX",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29556-main-delta-guard-public-metadata-v1/manifest.json",
+      "sha256": "957c7095fd659a39805eea3aeb0d451891f3ae6868e0877d3bb9752e19d6e75c"
+    },
+    "metadataControls": 8,
+    "knownHistoricalMainChanges": 105,
+    "currentTrackedAndUntrackedMainChanges": 0,
+    "wholeSourceInverseEqual": true,
+    "MainOrTestChanged": false,
+    "productTestsExecuted": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null
+  },
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1550_WBS65予実・Main差分guard是正後版385.json",
+    "sha256": "61e1d06ff181da999af7b721c3ec36df5016914c283967b84ad6333de4f083d3"
+  },
+  "checkpointText": "BUG2839の2339公開inventory差分guardを是正。旧src/*/src/main/javaは既知7aed→8bのMain105変化すら0になる反例を保全し、git diff -z name-only srcの厳密MainJava判定と未追跡Main拒否へ変更。独立glob集合105一致/8metadata反例・正常/全source逆変換/ASTを確認、現8b→tracked/untrackedMainは0。従って既PG29526対象source/hashは一致するが原v1guardの検出能力は未成立だったと追補し原証拠不変更、inventory再実行0。新ModuleMainも拒否しTest/resource/tool差分だけは非該当。製品Main/Test/PT/coverage/全F03/正式受入0、actual4.class/Root2本文/実Root/VM/DB/FD/鍵操作0、元190新0/正式1964-53/工数null。原計画行の追加完了0、追加ToolFix価格.05/.15/.3だけ完了、実専有費null。",
+  "nextCommand": "ContinueP00306sealedproof fivepublicMain thenP00307private/config fourpublicMain sourcecontracts only. NextchoosegenuineoriginalwholeTestnormalPT viaactualpublicinputlineage andclosedbyte/scope; donotreplayoldsuccess, substituteauthorityorcompileactual4/Root2. currentMain8b539105 withcorrectedpublicidentityguard/current0; canonical153/625 noteffort/190acceptance. NeedfullF03/451/nativeHOLD separate. Freshquota andusage due21:40:08JST; no ordinarygroup stop."
+}

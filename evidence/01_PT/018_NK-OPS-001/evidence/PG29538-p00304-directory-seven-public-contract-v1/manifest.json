@@ -1,0 +1,139 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T21:33:20.152084+09:00",
+  "source": "69b4a1421846063b667f4c0c5003bd086b663077",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "ownedSourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java": "5e3bfa74453c1f250adefbad4c97ea3670933b3ddcd01c12bea63ead58d388a0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java": "7e7854e40a04437d262a102518e9e41a2dedc8ff06f9919b758b8dbda8cd3178",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 1141,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/237_大容量結果・メディア配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "e94d2f76c5238e6c70f962c8e019f80b511a95220d8958744d9b0325b7aa96b0"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00304-DirectoryCalls",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+      "methods": "openRoot/openDirectory/openEntry/createFile/privateFile/privateDirectory/publish/unlink/removeEmptyDirectory/sync/close",
+      "testIds": [
+        "PT-SCN-008-F01",
+        "PT-SCN-008-F03",
+        "PT-OPS-PFILE-001",
+        "PT-OPS-PDIR-001"
+      ],
+      "expected": "SS3337.3/7.5/7.6: single-segment retainedFD port, readonly O_PATH entry separate fromopenread; ordinary0640/private0600, unsupportedprivateFile/privateDirectory/emptyDirectory removal throwfixedUNAVAILABLE withoutmutation. EachcloseconsumesFD once evenfailure, no retry or recursive/rootremove; doesnotattestroot orpermission."
+    },
+    {
+      "id": "P00304-ExistingFileAccess",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java",
+      "methods": "constructor/read/walk/requireSize/NioIo/readOperation",
+      "testIds": [
+        "PT-MED-021",
+        "PT-MED-022",
+        "PT-MED-023",
+        "PT-MED-024",
+        "PT-MED-025"
+      ],
+      "expected": "SS3337.2: nonnullroot/identity/io/operation/segments, immutable1..256names andsize>=1; caller priorNFC/path/media gate, directoryattributes eachlevel beforefinalinode attr; sameheldinode positiveexpectedsize before/afterread pluspostattrs, closechannel andchildonce withResourceScope. Media size>48MB remainspermittedbypositive-long sharedguard, notTransferlimit. Callbackmustnotexportlivecapability; IO/unsupported integrityfixedUNAVAILABLE, nodynamicrepair. ExistingSS333 IO/unknown typedcleanup rule retained, notblanketAPI graphrewrite."
+    },
+    {
+      "id": "P00304-LinuxDirectoryCalls",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+      "methods": "create/bind/openRoot/openDirectory/openEntry/createFile/privateFile/createDirectory/privateDirectory/publish/unlink/removeEmptyDirectory/sync/close/check/segment",
+      "testIds": [
+        "PT-SCN-008-F01",
+        "PT-SCN-008-F03",
+        "PT-OPS-PFILE-001",
+        "PT-OPS-PDIR-001"
+      ],
+      "expected": "SS333 UAPIindependentliteral: Linuxamd64/x86_64/aarch64 only; openatflags O_DIRECTORY0x10000|NOFOLLOW0x20000|CLOEXEC0x80000; O_PATH0x200000; CREATE WRITE1|CREAT0x40|EXCL0x80|NOFOLLOW|CLOEXEC; modes0640/0600, mkdir0750/private0700. renameat2flag1sameparent (neverfallbackrename), unlinkflags0/emptydirectoryAT_REMOVEDIR0x200, errno17COLLISION/2MISSING/othersUNAVAILABLE no rawmessage. Null/empty/dot/dotdot/slash/NUL rejects beforeFFM. ActualABI/native qualificationHOLD; sourceconstantproof notkernelproof."
+    },
+    {
+      "id": "P00304-LinuxHostDirectoryCalls",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java",
+      "methods": "create/openRoot/openDirectory/openEntry/close/write-denials",
+      "testIds": [
+        "PT-OPS-HOST-001",
+        "PT-OPS-HOST-008"
+      ],
+      "expected": "SS342343 fixedread-onlyhostSPI: sameLinuxarchallowlist, effectiveUID0required andsolefixed /proc/1/root kernelmagiclink openedDIRECTORY|CLOEXEC only, negativeFD unavailable. Caller separatelyauthenticatesPID1/systemmanager/boot/procprovenance, neverinferauthority fromUID/path. Childopens delegatedNOFOLLOW; create/publish/unlink/sync failclosed; private/empty defaultsnonmutation. AllhostFDclosebeforeexec, no setns/fallback/processquery here."
+    },
+    {
+      "id": "P00304-OwnedTransferDirectory",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "methods": "open/openRoot/openDate/openExistingDate/openExistingChild/atDirectory/atFile/atHandle/createPart/privatePart/privateEntry/publish/publishAs/publishChild/createPrivateChild/unlinkEntry/removeEmptyChild/sync/close",
+      "testIds": [
+        "PT-SCN-008-F02",
+        "PT-SCN-008-LIB01",
+        "PT-OPS-PDIR-001",
+        "PT-OPS-PDIR-008",
+        "PT-OPS-PFILE-001",
+        "PT-OPS-PFILE-008"
+      ],
+      "expected": "SS3337.2-7.6/SSC308: absolutecanonicalnonrootpath, allsegmentsNOFOLLOW; wrappersandprivateReentrantLock allocatedbeforeFD ownership; heldparentnotre-resolved. Datecanonicalyear1..9999; EEXIST onlyallowsNOFOLLOWreopen and noinitializerepair; newdate childsync thenparent alreadycreation sync. segmentvalidation beforemutation, closedUNAVAILABLE. Existingentry inodeheldwithoneclose, execute fixedcatalog afterfinitefatal classification. Noreplacepublish→parentsync; childpublish openssource andcloseschildonce, noautomaticundo onrename/syncfailure. privatechild mkdir0700→open→childsync→parentsync beforetransfer; failedpartsdirectorypreserved. closemarksdescriptor-1 BEFORE nativeclose, onceevenfailure. Root admission/namespace exclusion/Backupcompletion belongscaller, capability alone notproof."
+    },
+    {
+      "id": "P00304-StorageIoException",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "methods": "constructor/reason/preserveFatal",
+      "testIds": [
+        "PT-SCN-008-F01",
+        "PT-SCN-008-F02"
+      ],
+      "expected": "SS333 fixedpath-free transfer storage operation failed, reasonnonnull closed COLLISION/MISSING/UNAVAILABLE enum; cause/rawdiagnostic notcopied. ExistingBUG2718/YKT2359 JDK-only identityqueue cause/suppressed/SQLnext finitecycleclassification beforecatalog discardsgraph, sameError thrown; graphsyntax notauthentication and noJUnit/nativequalificationforwholeowner inferred."
+    },
+    {
+      "id": "P00304-package-info",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+      "methods": "NullMarked package boundary",
+      "testIds": [
+        "PT-SCN-008-LIB01"
+      ],
+      "expected": "JSpecify NullMarked storagepackage defaultnonnull with explicitnullableboundaries inownedhelpers; annotationonlynotNullAwayproof. Main/Test compiler/static/fullphysicalscope and Root/native/HOLD conditions separate."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P002-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P003-04/1"
+  ],
+  "endingStatus": "ORIGINAL_DIRECTORY_PUBLIC_SEVEN_SOURCE_CONTRACT_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2342_p00304_audit_contract.json",
+    "sha256": "f7a7da9a4a2f5f597576499da49b62b4674a455adec4384a9d1a4289c4c0c723"
+  }
+}

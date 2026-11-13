@@ -1,0 +1,123 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-13T21:37:26.787407+09:00",
+  "source": "69b4a1421846063b667f4c0c5003bd086b663077",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "ownedSourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java": "c29504c77d98c9b287cdc1b2e6cd4ffc5e5869af43634da0a8459cef94d46f06",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java": "717fc4f3c2afd1019cbc0912b56f7288a8cfdedfa87e747df2d396000da21057",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java": "d4752c82283b4ab0fc11b5ba738b32b5ce43045bab4576bc210fe4c4d50c635b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java": "92d522c3789d511cd908cf184856840b3b366b071545fe857bc6ddf8826df4ba",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08"
+  },
+  "wholeOwnSourceReviewed": true,
+  "ownedLines": 494,
+  "design": [
+    {
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03"
+    },
+    {
+      "path": "documents/200_UI/230_インターフェース/237_大容量結果・メディア配信設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "e94d2f76c5238e6c70f962c8e019f80b511a95220d8958744d9b0325b7aa96b0"
+    },
+    {
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "commit": "ba94f093a03f439423f2a8e4c94716c0358ee7d9",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d"
+    }
+  ],
+  "checks": [
+    {
+      "id": "P00305-InodeSecurityCalls",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java",
+      "methods": "accessAcl/readOnlyFilesystem/effectiveUid",
+      "testIds": [
+        "PT-DB-INBOX-121",
+        "PT-DB-INBOX-128"
+      ],
+      "expected": "SS3436.3 metadataSPI onalreadyheldinode, nocontentread/permissionrepair/authority. EmptyACL meansnotretrieved; callerpolicy mustdistinguishabsencefromunsupported, noauthorizationfromemptybytes."
+    },
+    {
+      "id": "P00305-LinuxInodeSecurity",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java",
+      "methods": "create/bind/capability/accessAcl/readAcl/requireNoFileCapabilities/readOnlyFilesystem/effectiveUid",
+      "testIds": [
+        "PT-DB-INBOX-121",
+        "PT-DB-INBOX-125",
+        "PT-DB-INBOX-128"
+      ],
+      "expected": "SS333/343 LinuxglibcLP64 onallowedamd64/x86_64/aarch64 withgnu_get_libc_version required. Onlycanonical /proc/self/fd/(0|nonzero1..10digits)<=INTMAX, noarbitrarypath. ACLlimit1..65536, xattrsystem.posix_acl_access; -1errno61or95 returns0bytes notproof; others1..maxcopiedbeforeoneArena close. FilecapabilityabsenceONLY -1errno61, unsupported95denied; statvfs layout11long+6int=112bytes /flags offset72/ST_RDONLYbit1, result0required. geteuidunsigned32 tolong. PublicABIconstants notcurrentkernelqualification; noactualFD/filesystemprobehere."
+    },
+    {
+      "id": "P00305-StorageAttributeGuard",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java",
+      "methods": "directory/file/existingFile/transferSize/requireOwnership/requireRegularFile/integer",
+      "testIds": [
+        "PT-SCN-008-A02",
+        "PT-SCN-008-A03",
+        "PT-MED-020"
+      ],
+      "expected": "SS333 exactmaptypes: UserPrincipal/GroupPrincipal namesmatchconfiguredOSidentity, modeInteger dir0x41e8/nlink>=1, file0x81a0/nlink1; sizeLongexact notcoercion. Transferfile1..48000000, sharedAssetpositive-long noTransfercap, accountingparts0..48000000 while ready>0andmultiple4800. NullboundaryNPEcontract notcaught; missing/null/wrongtypes/unknownvalues fixedUNAVAILABLE, noexternalIOfromguard, mapalone notroot/hash/manifest/authproof."
+    },
+    {
+      "id": "P00305-StorageIdentity",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java",
+      "methods": "constructor/validate/toString",
+      "testIds": [
+        "PT-SCN-008-A01"
+      ],
+      "expected": "SS3332 configuredowner/group notbusinessuser; bothnonnull strictASCII[a-z_][a-z0-9_-]{0,31}, noempty/uppercase/space/separator/Unicode. toStringfixedStorageIdentity[REDACTED], inputidentitiesnotprinted."
+    },
+    {
+      "id": "P00305-StorageRootLayout",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java",
+      "methods": "constructor/accessors/toString",
+      "testIds": [
+        "PT-SCN-008-A05"
+      ],
+      "expected": "SS3332 sixnonnullpaths asset/transfer/backup/log/artemis/staging, absolute/nonnormalized reject, /rootitselfreject, all15pairs neitherancestor/equal inbothdirections. Lexicalonly; noexists/create/chmod/realpath/mount/permissiongrant. toStringfixedREDACTED. Relative/parentpath/null/overlapnegativeoracles do notrequireactualroot."
+    },
+    {
+      "id": "P00305-StorageRootInspection",
+      "artifact": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java",
+      "methods": "inspect/inspectOne/inode/requireDistinct/requireBackup/requireDirectory/requireSecureStream",
+      "testIds": [
+        "PT-SCN-008-A07",
+        "PT-SCN-008-A08"
+      ],
+      "expected": "SS3332 read-onlysixexistingroots viaNOFOLLOWownedDirectory andResourceScope; asset/transferstrict0750configuredidentity, backup0700configuredidentity, other3directorytype/nlink>=1. RequireSecureDirectoryStream, devLong>=0/inoLong>=1 anddistinctsixinodepairs torejectaliases. Allresourceclosebeforeinspectionreturn, IOfailurefixedunavailable. DoesNOT itselfcertifyext4/ACL/localRW/OSsingleton/credential/admission; thoseexistingstartupcaller gatesremainrequiredandHOLD. Noautomaticrootrepair orpermissionchanges."
+    }
+  ],
+  "existingProofs": [],
+  "internalDependencies": [
+    "WBS-P002-02"
+  ],
+  "completedOriginalPreparationWorkIds": [
+    "WBS-P003-05/1"
+  ],
+  "endingStatus": "ORIGINAL_INODE_ATTRIBUTE_SIX_PUBLIC_CONTRACT_PREPARATION_ONLY",
+  "productTestsExecuted": 0,
+  "newDefinitions": 0,
+  "MainOrTestChanged": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortRate": null,
+  "actualHeldClassBinaryActions": 0,
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/1941b_original_subdivided_artifact_contract_stage.py",
+    "sha256": "351105732f9df1d5b7346cbdb06062d870767e3fe282716ae38e495fb1db8e6a"
+  },
+  "explicitReviewConfig": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2345_p00305_audit_contract.json",
+    "sha256": "e8da8576fc8537149eacfb885ab8a94c899b0ec554f8d29aba891d4c4f5c2546"
+  }
+}

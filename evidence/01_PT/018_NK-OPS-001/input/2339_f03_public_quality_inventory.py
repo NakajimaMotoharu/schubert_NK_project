@@ -7,8 +7,17 @@ ref=lambda p:dict(path=str(p.relative_to(R)),sha256=sha(p))
 load=lambda p:json.loads(p.read_text())
 write=lambda p,x:p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
 start=load(B/'input/2338_f03_stage1_start.json'); source=start['source']; head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-assert subprocess.run(['git','diff','--quiet',source,'--','src/*/src/main/java']).returncode==0
-assert subprocess.run(['git','diff','--quiet','--','src/*/src/main/java']).returncode==0
+def production_main_paths(names):
+ result=[]
+ for name in names:
+  parts=Path(name).parts
+  if len(parts)>=6 and parts[0]=='src' and parts[2:5]==('src','main','java') and name.endswith('.java'):
+   result.append(name)
+ return sorted(result)
+def git_names(args):
+ return [n for n in subprocess.check_output(['git',*args],text=True).split('\0') if n]
+assert production_main_paths(git_names(['diff','--name-only','-z',source,'--','src']))==[]
+assert production_main_paths(git_names(['ls-files','--others','--exclude-standard','-z','--','src']))==[]
 for x in start['oracleRefs']+start['configurationInputRefs']:assert sha(R/x['path'])==x['sha256']
 ns={'m':'http://maven.apache.org/POM/4.0.0'}; root=X.parse(R/'pom.xml').getroot()
 modules=[x.text for x in root.findall('m:modules/m:module',ns)]

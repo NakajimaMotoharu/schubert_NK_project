@@ -1,0 +1,219 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-13T12:39:25.077516+00:00",
+  "source": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "productionCoreMain": "8b539471183a640ad4a2541ee06a1eb1717199fc",
+  "head": "69b4a1421846063b667f4c0c5003bd086b663077",
+  "bug": "BUG-2839",
+  "metadataControls": [
+    {
+      "id": "empty",
+      "input": [],
+      "expected": [],
+      "actual": []
+    },
+    {
+      "id": "existingMain",
+      "input": [
+        "src/schubert-nk-api/src/main/java/a/Example.java"
+      ],
+      "expected": [
+        "src/schubert-nk-api/src/main/java/a/Example.java"
+      ],
+      "actual": [
+        "src/schubert-nk-api/src/main/java/a/Example.java"
+      ]
+    },
+    {
+      "id": "testOnly",
+      "input": [
+        "src/schubert-nk-api/src/test/java/a/ExampleTest.java"
+      ],
+      "expected": [],
+      "actual": []
+    },
+    {
+      "id": "resourceOnly",
+      "input": [
+        "src/schubert-nk-api/src/main/resources/schema.json"
+      ],
+      "expected": [],
+      "actual": []
+    },
+    {
+      "id": "toolOnly",
+      "input": [
+        "tools/quality/Else.java"
+      ],
+      "expected": [],
+      "actual": []
+    },
+    {
+      "id": "newModule",
+      "input": [
+        "src/new-module/src/main/java/New.java"
+      ],
+      "expected": [
+        "src/new-module/src/main/java/New.java"
+      ],
+      "actual": [
+        "src/new-module/src/main/java/New.java"
+      ]
+    },
+    {
+      "id": "mixed",
+      "input": [
+        "src/schubert-nk-api/src/test/java/a/ExampleTest.java",
+        "src/new-module/src/main/java/New.java",
+        "src/schubert-nk-api/src/main/resources/schema.json",
+        "src/schubert-nk-api/src/main/java/a/Example.java",
+        "tools/quality/Else.java"
+      ],
+      "expected": [
+        "src/new-module/src/main/java/New.java",
+        "src/schubert-nk-api/src/main/java/a/Example.java"
+      ],
+      "actual": [
+        "src/new-module/src/main/java/New.java",
+        "src/schubert-nk-api/src/main/java/a/Example.java"
+      ]
+    },
+    {
+      "id": "lookalike",
+      "input": [
+        "prefix/src/schubert-nk-api/src/main/java/Fake.java",
+        "src/m/src/main/javax/Fake.java",
+        "src/m/src/main/java/Fake.class"
+      ],
+      "expected": [],
+      "actual": []
+    }
+  ],
+  "controlCount": 8,
+  "historicalMain105": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioFileRegenerator.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/BootstrapAdminMain.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/file/InspectorApplication.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutor.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorLauncher.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorProcess.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ApiApplicationPreparation.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestReader.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupProcessMain.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningProcessMain.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningStartupRoots.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootStartupPending.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessMain.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfToken.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionAttributeCodec.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadCodec.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/LargeResultReader.java"
+  ],
+  "independentGitGlobEqual": true,
+  "oldVacuousDirectoryPatternResult": [],
+  "currentTrackedMainDelta": [],
+  "currentUntrackedMainDelta": [],
+  "changedCaller": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2339_f03_public_quality_inventory.py",
+    "beforeSha256": "ec1e1092577a1bf8989a43e94867891e82d2063a69e9c1ba18795ca710cf2672",
+    "afterSha256": "77fcac36912266e1d9b84769022d4be7cf1511dca447386ce2f81d37556bed7f",
+    "wholeSourceInverseEqual": true,
+    "astParse": true
+  },
+  "f03OriginalInventoryRerun": false,
+  "publishedV1Preserved": true,
+  "productionMainOrTestChanged": false,
+  "productTestsExecuted": 0,
+  "actual4BinaryOrRoot2BodyOrProtected2Operations": 0,
+  "actualEnvironmentOperations": 0,
+  "allSixCurrentStaticQualified": false,
+  "formalUpdated": false
+}
