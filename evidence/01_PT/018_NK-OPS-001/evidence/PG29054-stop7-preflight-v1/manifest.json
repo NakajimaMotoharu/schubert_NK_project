@@ -1,0 +1,60 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2245_stop7_closed_profile.json",
+    "sha256": "7ef2a6f8b56b5e29e2b6e7707c2d29f2fe9c68c47dacb29f4dd9edb6aff6fcbf"
+  },
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java": "f050814abef82cd0d2b02b4767b827348f3d111b8cfb02756e8f77f7db09d0be",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java": "06e38f57d53eb1097086761d06bb62a2e33d632f902bcdc89a4c3daa55297223",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29050-stop7-prepare-v1/manifest.json",
+    "sha256": "3e2fbef918415e42b7b923f396837b26df0f38816adc532b1016eabceb751e71"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29052-stop7-static-v1/manifest.json",
+    "sha256": "6604a2a45f450a4bdc883d47b04b22cc131d6f5ed36386f1a47b7eb17df02a5e"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2246_stop7_static_admission.json",
+    "sha256": "570a9248049d6aef7665a3ecee095cb4b34acdfb1aedfa6fef27e6374f7fad80"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "35",
+      "reason": "The owner phase contract requires every unconfirmed RuntimeException to remain a failed stop, with no confirmed-index advance and no release of later owners. The catch covers exactly IOException/LifecycleException/RuntimeException; Error is never caught and nested fatal graphs are rethrown before fixed redacted IOException. Original6 and newSTOP007 independently cover ordinary and fatal graph/phase behavior. This native lifetime boundary needs the stated closed category, not arbitrary exception swallowing.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "212",
+      "reason": "The independent STOP007 fixture enumerates three graph forms:0 direct cause,1 suppressed through a cause cycle,2 SQL next. Literal1 selects the specific cyclic graph oracle, not a business threshold or externally configurable policy. Both Runtime and Lifecycle catalog forms retain Error identity and the same phase; original expectations unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

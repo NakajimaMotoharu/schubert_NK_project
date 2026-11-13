@@ -198,4 +198,63 @@ final class WebRuntimeStopTest {
                       })));
     }
   }
+
+  @Test
+  void stop007KnownCatalogFatalGraphsKeepIdentityAndDoNotAdvancePhase() throws Exception {
+    for (boolean lifecycle : new boolean[] {false, true}) {
+      for (int graph = 0; graph < 3; graph++) {
+        var marker = new LinkageError("synthetic fatal graph");
+        Throwable catalog =
+            lifecycle
+                ? new org.apache.catalina.LifecycleException("synthetic lifecycle")
+                : new IllegalStateException("synthetic runtime");
+        if (graph == 0) catalog.initCause(marker);
+        else if (graph == 1) {
+          var cycle = new IllegalStateException("synthetic cycle", catalog);
+          catalog.initCause(cycle);
+          cycle.addSuppressed(marker);
+        } else {
+          var sql = new java.sql.SQLException("synthetic SQL graph");
+          sql.setNextException(new java.sql.SQLException("synthetic SQL next", marker));
+          catalog.initCause(sql);
+        }
+        var owner = new WebRuntimeStop(() -> 0);
+        owner.begin();
+        var calls = new ArrayList<String>();
+        assertSame(
+            marker,
+            assertThrows(
+                LinkageError.class,
+                () ->
+                    owner.close(
+                        new WebRuntimeStop.Step[] {
+                          left -> {
+                            assertEquals(Duration.ofSeconds(30), left);
+                            calls.add("failed");
+                            if (catalog instanceof org.apache.catalina.LifecycleException failure)
+                              throw failure;
+                            throw (RuntimeException) catalog;
+                          },
+                          left -> {
+                            throw new AssertionError("fatal retains later phase");
+                          }
+                        })));
+        assertEquals(List.of("failed"), calls);
+        assertNull(marker.getCause());
+        assertEquals(0, marker.getSuppressed().length);
+        owner.close(
+            new WebRuntimeStop.Step[] {
+              left -> {
+                assertEquals(Duration.ofSeconds(30), left);
+                calls.add("retry");
+              },
+              left -> {
+                assertEquals(Duration.ofSeconds(30), left);
+                calls.add("later");
+              }
+            });
+        assertEquals(List.of("failed", "retry", "later"), calls);
+      }
+    }
+  }
 }
