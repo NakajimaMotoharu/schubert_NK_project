@@ -7,6 +7,7 @@ import dev.codex.schubert.nk.batch.repository.BatchStepResult;
 import dev.codex.schubert.nk.storage.InodeSecurityCalls;
 import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import dev.codex.schubert.nk.storage.ResourceScope;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -281,6 +282,7 @@ final class TransferCleanup {
               result.add(name.toString());
             }
           } catch (DirectoryIteratorException failure) {
+            StorageIoException.preserveFatal(failure);
             throw new IOException("transfer enumeration unavailable");
           }
           result.sort(String::compareTo);

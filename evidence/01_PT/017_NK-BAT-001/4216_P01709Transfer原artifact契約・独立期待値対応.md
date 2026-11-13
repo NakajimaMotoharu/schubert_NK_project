@@ -1,0 +1,9 @@
+# P01709 Transfer原artifact・保持rootと削除境界の契約
+
+NK-BAT-001。対象source/hash、承認設計commit/hash、独立期待値/TestIDは [PG28478](../018_NK-OPS-001/evidence/PG28480-p01709-transfer-contract-v1/manifest.json)。
+
+- P01709-ORACLE01 / TransferCleanup.constructors/execute/checkRoot/inspect/sameDirectory/absent/names/Outcome/Counts/NioIo / TRANSFER001..003,TRANSFER3046001,TRANSFER3048001..002,TRANSFER-IO001..008: SS33312/3417/MSGF07-09:UI237固定retainedrealRoot-M/A-advisory/停止APIWeb-元budgetguard前後、NOFOLLOW二段だけ厳密Gregorian8桁(year1..9999)/小文字UUID.part-readyかつmtime<固定cutoff対象。同値未来/unknown/symlink/hardlink/mode-device-ACL-owner不正は保持warning、root変更やguard失敗は全体非成功。各前後inode/fullmetadata/実unlink後absence確認、空の正規dateだけ親FDremove/fsync、root削除0/borrowedRootclose0/再帰0。countertarget=success+failure/bytes実数、retained別警告/IO_FAILURE優先/固定redactedtoString、負数・overflow・null/UIDGID1..4294967294以外拒否、unknownfalse-empty補完0。DateTimeExceptionはpureparse、checkedIOException既契約不変更。既iterator固定化一口BUG2765修正前OPEN。wholeTransferCleanupTest6全259行review、全件LinuxDirectoryCalls/OwnedTransferDirectoryの実FDを開きcloseするためruntimeHOLD・Test部分抽出/代替fixture0、source-onlycontractを実削除・DBdurable完了へ転用0。
+
+TransferCleanup全317行と既whole6Test全259行をorigin/main SS33312/341・UI251/MSGF07-09の独立input-date-UUID-mtime-inode-ACL-device-owner-null-exception-count-resource後条件へ対応。PG28481で485 owner/costOwner/current歴史hash・原canonical Test6を照合。cutoff同値未来保全/深さ2・実FD-NOFOLLOW/同ownerguard/空dateのみ削除/根root保持/実unlink後absenceとcounterを独立期待値へ確定。BUG2765 iterator固定化一口を修正前起票、未実装OPEN。既whole6全件real Linux FD・IO8関連fixtureもnativeのためHOLD、部分抽出/代替なし、metadata準備をruntime/DBdurable完了へ転用0。
+
+実行: `python3 -B evidence/01_PT/018_NK-OPS-001/input/1941_original_artifact_contract_stage.py audit evidence/01_PT/018_NK-OPS-001/input/2135_p01709_original_contract_config.json` metadata終了0。新規製品PT/coverageなし。原/1の準備だけ、原/2・451・元190未受入。独立期待値は公開設計の固定境界・順序・後条件に基づき、production methodで生成しない。正式1964PT/53scope・工数null。
