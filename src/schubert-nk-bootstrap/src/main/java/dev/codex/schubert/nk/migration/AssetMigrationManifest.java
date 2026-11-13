@@ -76,7 +76,7 @@ public final class AssetMigrationManifest {
     }
   }
 
-  private final List<Entry> entries;
+  private final List<Entry> retainedEntries;
   private final long byteLength;
 
   public AssetMigrationManifest(List<Entry> input) {
@@ -89,12 +89,12 @@ public final class AssetMigrationManifest {
         throw invalid();
       bytes = sum(bytes, entry.byteLength());
     }
-    entries = snapshot.stream().sorted(Comparator.comparing(Entry::currentPath)).toList();
+    retainedEntries = snapshot.stream().sorted(Comparator.comparing(Entry::currentPath)).toList();
     byteLength = bytes;
   }
 
   public List<Entry> entries() {
-    return entries;
+    return retainedEntries;
   }
 
   public long totalBytes() {
@@ -103,7 +103,7 @@ public final class AssetMigrationManifest {
 
   public byte[] canonicalBytes() {
     var text = new StringBuilder("NKMIGASSET1\n");
-    for (Entry entry : entries) {
+    for (Entry entry : retainedEntries) {
       text.append(entry.kind().name())
           .append('\t')
           .append(entry.currentPath())
@@ -129,7 +129,7 @@ public final class AssetMigrationManifest {
     long missing = 0;
     long size = 0;
     long hash = 0;
-    for (Entry entry : entries) {
+    for (Entry entry : retainedEntries) {
       @Nullable Observation observation = byPath.remove(entry.targetPath());
       if (observation == null) {
         missing++;
