@@ -1,0 +1,30 @@
+{
+  "ssc": 374,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java",
+  "source": "0252e95a88adecdc365f6f2886169030e8a2fad2",
+  "title": "六表COPY streaming件数byte・hash・差分artifact",
+  "detail": "NK-MIG-001、WBS-P01903.02合成master件数/hash/差分、RD MIG-DAT005/MIG003005006/FUN004/DAT004/TST、UI223242254、SS311/331/V002/343。MigrationMasterCopyFingerprintは宣言六表のCOPY bytesだけから各tableのrows/byteCount/SHA-256を作る内部artifact。原本Current/DB/file/認証/署名原本を読まず、実master・全移行・Go・復旧・互換受入を発行しない。\n\nfingerprint(Nullable MigrationMasterCopyDataset)はnullを固定IAEで副作用前拒否。固定順speakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksの六つのprivate DigestSinkを新しく所有し、既PostgresCopyTextWriter/EncoderとMaster.writeAllへ渡す。各sinkはMessageDigest SHA-256とlong byte counterだけを保持、write(int)でbyte更新＋Math.incrementExact、全COPY byte配列を保持しない（既writerの一行bufferだけ）。各rowCountは不変宣言のrows.size()、byte数は実stream byte数、hashはlowercase64hex。結果は不変List<TableFingerprint>、public static final TableFingerprintはprivate constructorで固定table/非負counts/JDK算出hexを保持しtable()/rows()/bytes()/sha256()だけを返す。byteやMessageDigest/sink/Connectionを返さず、toStringは両classとも固定REDACTED。\n\ndifference(Nullable expectedMaster, Nullable actualMaster)は両nullを最初に固定IAEで拒否し、同methodの二つの独立fingerprintを計算する。固定六table順にrows差→byte数差→SHA差を確認し、異なるtable名だけの不変Listを返す。順序/文字/値を再正規化や修復せず、同byte metadataは差0。row順変更もCOPY順のhash差として残す。\n\nJava25標準MessageDigest必須SHA-256を使い、getInstance失敗は既MusicLogicalIdと同様NoSuchAlgorithmExceptionを伝播しfallback0。公式 https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/MessageDigest.html を根拠とし、provider登録削除・差替やreflectionで失敗を捏造しない。private sinkはFD/外部I/Oを取得しない。writer宣言のIOException/未捕捉runtime/Errorも透過し、正常化/catch/NPE成功0。own Production Codeのcoverage除外/filter変更0、JDK provider実装の全分岐をProduction coverageへ含めない。\n\nPT-MIG-FINGER001..020: 001六table固定rows/byte/hashを独立Python UTF8+SHA256固定vectorで確認、002全空e3b0固定/rows bytes0、003nullfingerprint、004不変listとmetadata/全getter、005日本語名UTF8 byte/hash、006NULLとliteral\\N notes、007copy text tab-LF-CR-backslash等escapeの固定vector、008Speaker二row順違いを保持、009Speaker追加のrowCount/bytes/hash、010link空だけ、011audio/link空、012media空、013entry/link空、014file/entry/link空、015fresh反復と固定redaction/sink state非共有、016有限8workers64/Future5/finallyshutdownNow-await10、017同一master差0/immutable結果、018row数差、019同row数byte差と同row-byteでSHAだけ差、020difference両null各組合せと全六timestamp差の固定table順。expectedはproductionfingerprint/encode methodを呼ばずV002列順と既独立wire literalからPython hashlibで作り固定する。empty/nullable/Unicode/順/境界/差分条件の全分岐を満たす。\n\n新20＋必要pure383=whole403、全23Main38physical（新outer/TableFingerprint/DigestSinkの三class）を一source/一exec/Root全静的・NullAway-lintWerror/全CRC-init/default＋無filter全Code四100で検証。旧28 migrationMain/既543Test source不変。543 target/JDBCは当hashのcaller/calleeではないため再演せず証拠参照。追加1.65/4.95/9.9pp cap10はPG/独立20と必要403を含み、元費用/SV/群開始保持、実専有費/token null。内部hashartifact具体化で外部仕様/DDL/grant変更・QA不要、実COPY/DB/全catalog/hash実体/Rootnative/CHR/global451/ITST/全HOLD未受入。",
+  "testIds": "PT-MIG-FINGER001..020",
+  "estimate": {
+    "low": 1.65,
+    "base": 4.95,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "072_六表COPY件数byte・hash・差分artifact・独立二十仕様.md",
+  "previousForecastName": "1906_WBS65予実・六表target接続通常五百四十三後版524.json",
+  "forecastName": "1909_WBS65予実・六表hash差分不足追加版525.json",
+  "revision": "525-MISSING_SIX_TABLE_STREAM_COPY_FINGERPRINT_DIFFERENCE",
+  "findingReason": "P01903.02 requires synthetic master count/hash/difference artifacts; qualified six-table declared data and target orchestration do not produce per-table COPY byte/SHA receipts without retaining raw data. Add owned streaming digest and ordered metadata differences; actual master/DB/Go remains unaccepted.",
+  "workId": "P01903_SSC374_FINGERPRINT20_NORMAL403",
+  "planKey": "plannedMasterFingerprintSSC374",
+  "startRecordName": "1910_WBS65六表hash差分製造通常開始.json",
+  "startInputName": "2830_master_finger403_start.json",
+  "designSlot": "PG31880-ssc374-master-finger-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343、WBS-P01903.02合成master件数/hash/差分。六private owned memory sinksでCOPYの行数/実byte/SHA256をstream計測、不変metadataと固定table順の差分だけ返す。既Java25必須SHA256/例外透過、全byte保持/外部I/O/署名/Go0。RD/UI/DDL/grant変更・QA不要、実master/DB/HOLD未受入。",
+  "moduleSummary": "bootstrap.migration.MigrationMasterCopyFingerprintはfingerprint/differenceと不変TableFingerprint、private DigestSinkを持つ。既六表writerをstream SHA/long countへ接続、PT-MIG-FINGER001..020/全403/full23Main38physical。実master/DB/署名/全移行/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC374-MASTER-FINGERPRINT20-NEEDED403-20261114",
+  "run": "PG31894-MASTER-FINGER-CLOSED403",
+  "scope": "MissingMasterCopyFingerprint PG20+neededpure383whole403/full23Main38physical 1.65/4.95/9.9cap10. OwnedstreamSHA/count/immutablemetadata/orderedindependentdiff. NoactualmasterCOPYDBRootnativeSDKActual4aruHOLDactions; old28Main543Testsunchanged",
+  "nextCommand": "PublishSSC374SS311343914onlymainbeforePG. ImplementstreamCOPYfingerprint/diff20+independentPythonwirehashvectors/needed403/Rootstatic/CRC-init/default-raw38allCode. NoJDBC543confirmationreplay/noactualmasterDBRootnativeHOLDchanges. Ordinarygroupnotstop."
+}

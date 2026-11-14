@@ -1,0 +1,723 @@
+{
+  "actualExit": 0,
+  "origin": "Independent literal V002 row fields, independent COPY escape map and Python hashlib.sha256; no Production methods",
+  "algorithm": "SHA-256",
+  "fields": [
+    [
+      "42",
+      "1",
+      "Alice",
+      "alice",
+      "true",
+      null,
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "700",
+      "1",
+      "1",
+      "script/file.txt",
+      "file.txt",
+      "file.txt",
+      null,
+      "chapter",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "3",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "900",
+      "1",
+      "700",
+      "1",
+      "0",
+      null,
+      "dialogue",
+      "42",
+      null,
+      "hello",
+      "raw",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "500",
+      "1",
+      "voice/a.ogg",
+      "表示",
+      "a.ogg",
+      "a",
+      "voice",
+      "ogg",
+      "1200",
+      "3",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "600",
+      "video-a",
+      "VIDEO",
+      "A",
+      "MAIN",
+      null,
+      "video/a.mp4",
+      "current/a.mp4",
+      "a.mp4",
+      "3",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "video/mp4",
+      null,
+      null,
+      null,
+      "1",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "900",
+      "500",
+      "1",
+      "voice",
+      "1",
+      "2026-01-02T03:04:05Z"
+    ]
+  ],
+  "normalWire": [
+    "42\t1\tAlice\talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n",
+    "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+    "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+    "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+    "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+    "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+  ],
+  "variantWire": {
+    "japanese": [
+      "42\t1\tアリス\talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n",
+      "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+      "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+      "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+      "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+      "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+    ],
+    "literal_null": [
+      "42\t1\tAlice\talice\ttrue\t\\\\N\t2026-01-02T03:04:05Z\n",
+      "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+      "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+      "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+      "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+      "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+    ],
+    "controls": [
+      "42\t1\tAlice\talice\ttrue\t\\t\\n\\r\\\\\\b\\f\t2026-01-02T03:04:05Z\n",
+      "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+      "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+      "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+      "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+      "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+    ],
+    "longer": [
+      "42\t1\tAlicee\talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n",
+      "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+      "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+      "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+      "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+      "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+    ],
+    "same_bytes": [
+      "42\t1\tALICE\talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n",
+      "700\t1\t1\tscript/file.txt\tfile.txt\tfile.txt\t\\N\tchapter\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t3\t2026-01-02T03:04:05Z\n",
+      "900\t1\t700\t1\t0\t\\N\tdialogue\t42\t\\N\thello\traw\t2026-01-02T03:04:05Z\n",
+      "500\t1\tvoice/a.ogg\t表示\ta.ogg\ta\tvoice\togg\t1200\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\t2026-01-02T03:04:05Z\n",
+      "600\tvideo-a\tVIDEO\tA\tMAIN\t\\N\tvideo/a.mp4\tcurrent/a.mp4\ta.mp4\t3\tba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\tvideo/mp4\t\\N\t\\N\t\\N\t1\t2026-01-02T03:04:05Z\n",
+      "900\t500\t1\tvoice\t1\t2026-01-02T03:04:05Z\n"
+    ]
+  },
+  "metadata": {
+    "normal": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "empty": [
+      {
+        "table": "speakers",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "script_files",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "script_entries",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "audio_files",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "media_assets",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "japanese": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 50,
+        "sha256": "1bbf8f3149c430700c3373ac0ac8318c20c00c84b5568a643642a564360baebb"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "literal_null": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 47,
+        "sha256": "68b504fc7b5b7921e46c90967fe5b15021ace2f3c26e8d6a3a438bb58f5911b0"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "controls": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 56,
+        "sha256": "e2d31eac53fba2811b0e58148a95f91275a523f7c176a47a36854c203441285e"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "longer": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 47,
+        "sha256": "ddee4e52583b07416cba8457453f3d3c2c66e71e8a4039001554665006928287"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "same_bytes": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "9897abf9dcc3be43398cfd77f98f68fac21455d8a82bf801cf63fb0e502f5f6e"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "two_speakers": [
+      {
+        "table": "speakers",
+        "rows": 2,
+        "bytes": 89,
+        "sha256": "ce3a31c727b0451ad10b61a19392f063f0f63c070831425bae39477fca958abf"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "reverse_speakers": [
+      {
+        "table": "speakers",
+        "rows": 2,
+        "bytes": 89,
+        "sha256": "08a6641f22d33129a26e5780b2669a1db979fc3255f38701222e3d78712ae41e"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "no_links": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "no_audio_links": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "no_media": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef"
+      }
+    ],
+    "no_entries_links": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101"
+      },
+      {
+        "table": "script_entries",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "no_files_entries_links": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac"
+      },
+      {
+        "table": "script_files",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "script_entries",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 0,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "changed_time": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "bytes": 46,
+        "sha256": "c92a61b48cce1b9d80241699d0f2dcec9092a595f3de7a962c163644d0071d89"
+      },
+      {
+        "table": "script_files",
+        "rows": 1,
+        "bytes": 141,
+        "sha256": "f7b0c369356844eb541c8b5011c12d262e244ae4247ba406608d5d26184ce233"
+      },
+      {
+        "table": "script_entries",
+        "rows": 1,
+        "bytes": 63,
+        "sha256": "5add116c0fc49d1459741fa4613635dea5668cd90d2acb3d4a2c7b2de7c2c54e"
+      },
+      {
+        "table": "audio_files",
+        "rows": 1,
+        "bytes": 136,
+        "sha256": "f22fcc6ab7ed7fb9447735e226a1d6c4ff09b5e17ae1ba2c66a0e77c1fb1ab5b"
+      },
+      {
+        "table": "media_assets",
+        "rows": 1,
+        "bytes": 169,
+        "sha256": "497c5851bfae0280f2883d3401c6bd61c6637f721ad840bc976146a271baad91"
+      },
+      {
+        "table": "entry_audio_links",
+        "rows": 1,
+        "bytes": 39,
+        "sha256": "61373bdf3db56554603cf93197cc4c65dbe7cd0ba45a99577ff2a564b1bae4b8"
+      }
+    ]
+  },
+  "expectedSameDifference": [],
+  "expectedAddedSpeakerDifference": [
+    "speakers"
+  ],
+  "expectedByteAndHashSpeakerDifference": [
+    "speakers"
+  ],
+  "expectedTimeDifference": [
+    "speakers",
+    "script_files",
+    "script_entries",
+    "audio_files",
+    "media_assets",
+    "entry_audio_links"
+  ],
+  "applicationTestsExecuted": 0,
+  "actualMasterDbRootOperations": 0
+}

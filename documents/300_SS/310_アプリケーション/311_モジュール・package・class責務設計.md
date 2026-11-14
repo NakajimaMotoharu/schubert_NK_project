@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC374: bootstrap.migration.MigrationMasterCopyFingerprintはfingerprint/differenceと不変TableFingerprint、private DigestSinkを持つ。既六表writerをstream SHA/long countへ接続、PT-MIG-FINGER001..020/全403/full23Main38physical。実master/DB/署名/全移行/HOLD未受入。
+
 SSC373: bootstrap.migration.MigrationMasterTargetPublisherは既三staging/transferと参照/最終化を同じ借用Connectionへ固定順接続、元障害伝播/後続0/自動retry0。PT-MIG-TARGET001..016/全543/full28Main42physical、実COPY/DB/Go/Root/HOLD未受入。
 
 SSC372: bootstrap.migration.MigrationMasterReferenceVerifierは六count/九orphan-game/link order違反groupを固定read-only16SQLで照合、借用Connection/nonnull終了/元primary維持。PT-MIG-REF001..020/全403/full23Main36physical、全DB/hash/catalog/移行/HOLD未受入。
