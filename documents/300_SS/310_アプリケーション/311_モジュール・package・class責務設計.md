@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC370: bootstrap.migration.MigrationMasterCopyDatasetはSpeaker batchと既五表datasetを不変保持、六表時刻/Entry FKと六借用stream前検証・順序を持つ。PT-MIG-MASTER001..020/必要383/full22Main35physical。実master/DB/全移行/HOLD未受入。
+
 SSC369: bootstrap.migration.SpeakerStagingTableはspeakers七列のCTAS/3count/large INSERT/nonnull資源終了を標準JDBCで持つ。Speaker先行→Scenario二表→Asset三表を同一借用Connectionで独立Proxy検証。実DB/Current175/driver COPY/全移行/Root/HOLD未受入。PT-MIG-SPEAKERSTAGE001..024/whole96/full3Main4physical。
 
 SSC368: bootstrap.migration.SpeakerCopyBatchは解決済みSpeakerRow集合のPK/ゲーム別normalizedUK/時刻とEntryのspeaker/game参照を検査し、宣言順の不変rowを借用writerへ渡す。名前を変換せずCurrent抽出/実175/DBを代行しない。PT-MIG-SPEAKERBATCH001..016/必要whole132/full9Main15physical、全HOLD不変更。
