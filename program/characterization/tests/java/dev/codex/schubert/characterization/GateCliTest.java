@@ -64,6 +64,13 @@ class GateCliTest {
   @TempDir Path temporaryDirectory;
 
   @Test
+  void hashRejectsNullSourceBeforeIoWithFixedDiagnostic() {
+    IllegalArgumentException failure =
+        assertThrows(IllegalArgumentException.class, () -> GateCli.sha256(null));
+    assertEquals("hash source is required", failure.getMessage());
+  }
+
+  @Test
   void mainRejectsMissingUnknownAndIncompleteCommands() throws Exception {
     assertThrows(IllegalArgumentException.class, () -> GateCli.main(new String[0]));
     assertThrows(IllegalArgumentException.class, () -> GateCli.main(new String[] {"unknown"}));

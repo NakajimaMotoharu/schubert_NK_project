@@ -22,6 +22,24 @@ class GateContractTest {
   private static final ObjectMapper JSON = new ObjectMapper();
 
   @Test
+  void baselineMetadataAndHashRejectNullBeforeIoWithFixedDiagnostics() {
+    IllegalArgumentException hashFailure =
+        assertThrows(IllegalArgumentException.class, () -> GateContractValidator.sha256(null));
+    assertEquals("hash source is required", hashFailure.getMessage());
+    for (JsonNode[] input :
+        List.of(
+            new JsonNode[] {null, JSON.createObjectNode()},
+            new JsonNode[] {JSON.createObjectNode(), null},
+            new JsonNode[] {null, null})) {
+      IllegalArgumentException failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> GateContractValidator.validateBaselineMetadata(input[0], input[1]));
+      assertEquals("baseline metadata document is required", failure.getMessage());
+    }
+  }
+
+  @Test
   void catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly() throws Exception {
     JsonNode catalog = resource("cases/catalog.json");
     List<String> ids = new ArrayList<>();

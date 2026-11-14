@@ -42,6 +42,20 @@ final class GateDefinitionDocumentsTest {
           "cases/case-requirements.json");
 
   @Test
+  void expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow() throws Exception {
+    for (JsonNode invalid :
+        List.of(
+            JSON.nullNode(),
+            JSON.getNodeFactory().textNode("1187"),
+            JSON.getNodeFactory().numberNode(new BigInteger("2147483648")))) {
+      List<JsonNode> input = fixture();
+      ObjectNode expectedBrowser = (ObjectNode) object(input, CONTRACT).path("browser");
+      expectedBrowser.set("browserRevision", invalid);
+      assertContains(input, "BROWSER_REVISION");
+    }
+  }
+
+  @Test
   void acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()
       throws Exception {
     List<JsonNode> input = fixture();
