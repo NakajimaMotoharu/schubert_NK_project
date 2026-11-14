@@ -20,7 +20,13 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-CLEANID001..010; original-primary and suppressed identity are independent oracles. */
 final class MigrationCleanupIdentityTest {
+  private static final String FLUSH_SQL =
+      "SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATE";
+  private static final String CALL_FLUSH = "flush";
+  private static final String CALL_WARNINGS = "warnings";
   private static final int SUBJECTS = 5;
+  private static final int FINALIZER_SUBJECT = 3;
+  private static final int PREFIX_CALLS = 3;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
@@ -180,8 +186,14 @@ final class MigrationCleanupIdentityTest {
     assertEquals(suppressed.size(), primary.getSuppressed().length);
     for (int index = 0; index < suppressed.size(); index++)
       assertSame(suppressed.get(index), primary.getSuppressed()[index]);
-    assertEquals(List.of(FIRST_SQL.get(subject)), f.sql);
-    assertEquals(f.closeOrigin ? CLOSE_FAILURE_CALLS : READ_FAILURE_CALLS, f.calls);
+    var expectedSql = new ArrayList<String>();
+    if (subject == FINALIZER_SUBJECT) expectedSql.add(FLUSH_SQL);
+    expectedSql.add(FIRST_SQL.get(subject));
+    var expectedCalls = new ArrayList<>(f.closeOrigin ? CLOSE_FAILURE_CALLS : READ_FAILURE_CALLS);
+    if (subject == FINALIZER_SUBJECT)
+      expectedCalls.addAll(PREFIX_CALLS, List.of(CALL_FLUSH, CALL_WARNINGS));
+    assertEquals(expectedSql, f.sql);
+    assertEquals(expectedCalls, f.calls);
     assertEquals(1, f.resultCloses);
     assertEquals(1, f.statementCloses);
   }
@@ -295,6 +307,17 @@ final class MigrationCleanupIdentityTest {
                     calls.add(CALL_QUERY);
                     sql.add((String) args[0]);
                     return result();
+                  }
+                  case "executeUpdate" -> {
+                    assertEquals(FLUSH_SQL, args[0]);
+                    calls.add(CALL_FLUSH);
+                    sql.add(FLUSH_SQL);
+                    return 0;
+                  }
+                  case "getWarnings" -> {
+                    assertEquals(CALL_FLUSH, calls.getLast());
+                    calls.add(CALL_WARNINGS);
+                    return null;
                   }
                   case "close" -> {
                     statementCloses++;

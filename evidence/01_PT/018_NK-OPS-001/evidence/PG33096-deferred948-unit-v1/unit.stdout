@@ -1,0 +1,168 @@
+
+Failures (8):
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup(MigrationCleanupIdentityTest.java:110)
+         [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall', methodParameterTypes = '']
+    => java.util.concurrent.ExecutionException: org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124)
+       java.base/java.util.concurrent.FutureTask.get(FutureTask.java:207)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall(MigrationCleanupIdentityTest.java:161)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       [...]
+     Caused by: org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic primary
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall$0(MigrationCleanupIdentityTest.java:155)
+         [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure(MigrationCleanupIdentityTest.java:138)
+         [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId004FinalizerKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId004FinalizerKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId006EqualValuedDifferentObjectsStillBecomeSuppressed()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId006EqualValuedDifferentObjectsStillBecomeSuppressed', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.EqualFailure> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$EqualFailure: synthetic equal-valued failures
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId006EqualValuedDifferentObjectsStillBecomeSuppressed(MigrationCleanupIdentityTest.java:96)
+         [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId008SameCleanupFromTwoResourcesRetainsBothAttemptsInOrder()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId008SameCleanupFromTwoResourcesRetainsBothAttemptsInOrder', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.AssertionError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.AssertionError: unexpected statement operation executeUpdate
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest$Fixture.lambda$statement$0(MigrationCleanupIdentityTest.java:307)
+       jdk.proxy3/jdk.proxy3.$Proxy19.executeUpdate(Unknown Source)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:41)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId008SameCleanupFromTwoResourcesRetainsBothAttemptsInOrder(MigrationCleanupIdentityTest.java:127)
+         [...]
+  JUnit Jupiter:MigrationMasterFinalizerTest:final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest', methodName = 'final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <16> but was: <17>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest.final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner(MigrationMasterFinalizerTest.java:342)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+  JUnit Jupiter:MigrationMasterFinalizerTest:final024EachAnalyzeWrongCountWarningAndOriginalFailures()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest', methodName = 'final024EachAnalyzeWrongCountWarningAndOriginalFailures', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <0> but was: <1>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:531)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest.final024EachAnalyzeWrongCountWarningAndOriginalFailures(MigrationMasterFinalizerTest.java:323)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+Test run finished after 6048 ms
+[        50 containers found      ]
+[         0 containers skipped    ]
+[        50 containers started    ]
+[         0 containers aborted    ]
+[        50 containers successful ]
+[         0 containers failed     ]
+[       948 tests found           ]
+[         0 tests skipped         ]
+[       948 tests started         ]
+[         0 tests aborted         ]
+[       940 tests successful      ]
+[         8 tests failed          ]
+

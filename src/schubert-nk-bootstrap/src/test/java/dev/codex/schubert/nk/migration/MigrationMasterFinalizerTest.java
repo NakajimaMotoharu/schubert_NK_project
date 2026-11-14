@@ -320,7 +320,7 @@ final class MigrationMasterFinalizerTest {
       wrong.badAnalyze = slot;
       assertThrows(SQLException.class, () -> finish(wrong, normal()));
       assertEquals(slot + 1, wrong.analyzes);
-      assertEquals(slot, wrong.warningReads);
+      assertEquals(slot + 1, wrong.warningReads);
       var warning = new Fixture();
       warning.badWarning = slot;
       assertEquals(
@@ -339,7 +339,7 @@ final class MigrationMasterFinalizerTest {
     assertThrows(SQLException.class, () -> finish(rejected, normal()));
     var next = new Fixture();
     finish(next, normal());
-    assertEquals(16, next.sql.size());
+    assertEquals(17, next.sql.size());
     assertEquals(0, rejected.prepares);
   }
 

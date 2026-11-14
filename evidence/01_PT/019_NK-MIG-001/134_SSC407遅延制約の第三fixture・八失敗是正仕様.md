@@ -1,0 +1,3 @@
+# SSC407/BUG2969/YKT2498 通常PT補足
+
+旧132を変更せず、PG33096全948の7F1E/exit1を不合格保存。Cleanup001..010本文/期待faultはbyte同一、assertPrimaryだけsubject3のSQL先頭固定SETとwarningsを明示し他四subjectは同じ単一SQL/call列。strict Proxyは固定SET0とその直後warnings nullだけ追加し未知operationは拒否。元primary/同instance/EqualFailure/両cleanup/順suppressed/有限64を維持。Final024はwrong.warningReads=slot+1、025のfresh SQL17を独立算出。Main6556bad9/Target38はbyte不変更、他43Main44Test/870定義同byte。新定義0、全948の是正後source一exec・Root静的/65CRC/既定と無filter四100で再試験。原失敗の940成功は全体合格へ算入0。失敗工程と手戻りは同群3.3/9.9/9.9内、追加予算0/専有実費不明。実DBtrigger/COMMIT/正式/ITST/HOLD未受入。commandと実環境/branch/source/入力期待実値/hashはPG33110/33120/33122/33124/33126へ束縛予定。

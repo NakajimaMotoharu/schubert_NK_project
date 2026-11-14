@@ -1,0 +1,68 @@
+{
+  "atJST": "2026-11-15T07:49:32.758605+09:00",
+  "state": "ACTIVE_NOT_STOPPED_NOT_ACCEPTED",
+  "group": "PGPT-WBS65-SSC406-DEFERRED-FINAL30-TARGET38-948-20261115",
+  "startEvent": "PGPT-20261008-5381",
+  "head": "bb0dcb40fad7f755d8c339d59ae0f5aed5fefe5c",
+  "expectedCoreMain": "6556bad9e811850ea49b320ea6a1119f89ff4425",
+  "latestQualifiedMigration": {
+    "core": "f0e845f421f342d196e311e5dd78e97c01116ee8",
+    "unit": "dfa344cd7d2a387c4a2084aaa9cfdacf63243558",
+    "run": "PG33072",
+    "tests": 944
+  },
+  "originalFailedRun": {
+    "run": "PG33096",
+    "unit": "bb0dcb40fad7f755d8c339d59ae0f5aed5fefe5c",
+    "tests": 948,
+    "failures": 7,
+    "errors": 1,
+    "skipped": 0,
+    "actualExit": 1,
+    "qualified": false
+  },
+  "currentDirtyTests": [
+    "MigrationMasterFinalizerTest.java",
+    "MigrationCleanupIdentityTest.java"
+  ],
+  "mainAndTarget38UnchangedFromFailedUnit": true,
+  "profile": "evidence/01_PT/018_NK-OPS-001/input/3199_deferred948_constant_profile.json",
+  "sourceProof": "evidence/01_PT/018_NK-OPS-001/evidence/PG33110-deferred948-fixture-correction-v1/constant-corrected-manifest.json",
+  "lastObservedLocalToolSession": 15408,
+  "toolSessionState": "RUNNING_AT_LAST_TOOL_RETURN_REAUTHENTICATE_BEFORE_REUSE",
+  "command": "prestyle -> prepare -> static ->3200 admission -> preflight; no Unit started by this chain",
+  "next": "Reattach15408 once; inspect saved PG33132/334/336/338 actualExit. Do not start duplicates. If successful freeze authorized changes as new full Unit commit/push then run3199 once with that SHA; post/sameexec3201/raw3202close. Preserve PG33096 failure. 3203 endconfig not yet created. Do not run old3187/3195close.",
+  "budgetStartFixed": {
+    "low": 3.3,
+    "base": 9.9,
+    "high": 9.9
+  },
+  "additionalReworkBudget": 0,
+  "dedicatedActualCost": null,
+  "quotaLastObserved": {
+    "used": 63,
+    "remaining": 37,
+    "atJST": "2026-11-15T07:44:58+09:00",
+    "secondary": null
+  },
+  "nextQuota": "fresh tool before next meaningful implementation boundary; <=10 or unavailable preserve-stop",
+  "formal": {
+    "tests": 1964,
+    "scopes": 53,
+    "wbsCompleted": 184,
+    "wbsTotal": 625,
+    "newLegacyAcceptance": 0,
+    "effortRate": null
+  },
+  "mainDesign": {
+    "ssc406": "PR330/c3295bd5",
+    "ssc407": "PR331/485e556e"
+  },
+  "hold": "All existing holds preserved; no actualDB/driver/trigger/native/VM/aru/RootActual4 or protected untracked access. No pre-COPY indexgate because SS343step5.",
+  "usage": {
+    "lastPollJST": "2026-11-15T07:27:25+09:00",
+    "nextNotBefore": "2026-11-15T08:27:25+09:00",
+    "N": null,
+    "T": null
+  }
+}
