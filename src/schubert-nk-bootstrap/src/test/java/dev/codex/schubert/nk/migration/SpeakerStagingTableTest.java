@@ -201,9 +201,8 @@ final class SpeakerStagingTableTest {
     same.statementCloseFailure = same.primary;
     var rejected =
         assertThrows(
-            IllegalArgumentException.class,
-            () -> new SpeakerStagingTable().prepare(same.connection()));
-    assertSame(same.primary, rejected.getCause());
+            same.primary.getClass(), () -> new SpeakerStagingTable().prepare(same.connection()));
+    assertSame(same.primary, rejected);
     assertEquals(0, same.primary.getSuppressed().length);
     assertEquals(1, same.statementCloses);
   }

@@ -1,0 +1,30 @@
+
+Failures (1):
+  JUnit Jupiter:SpeakerStagingTableTest:speakerStage010PrimaryAndCleanupTypesKeepJavaSuppression()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.SpeakerStagingTableTest', methodName = 'speakerStage010PrimaryAndCleanupTypesKeepJavaSuppression', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalArgumentException> but was: <java.sql.SQLException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.SpeakerStagingTableTest.speakerStage010PrimaryAndCleanupTypesKeepJavaSuppression(SpeakerStagingTableTest.java:203)
+       [...]
+     Caused by: java.sql.SQLException: synthetic primary
+       dev.codex.schubert.nk.migration.SpeakerStagingTableTest$Fixture.<init>(SpeakerStagingTableTest.java:538)
+       dev.codex.schubert.nk.migration.SpeakerStagingTableTest.speakerStage010PrimaryAndCleanupTypesKeepJavaSuppression(SpeakerStagingTableTest.java:199)
+       [...]
+
+Test run finished after 1807 ms
+[        33 containers found      ]
+[         0 containers skipped    ]
+[        33 containers started    ]
+[         0 containers aborted    ]
+[        33 containers successful ]
+[         0 containers failed     ]
+[       553 tests found           ]
+[         0 tests skipped         ]
+[       553 tests started         ]
+[         0 tests aborted         ]
+[       552 tests successful      ]
+[         1 tests failed          ]
+
