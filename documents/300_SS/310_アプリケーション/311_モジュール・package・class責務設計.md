@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC405: 既Column第十一metadataでV002 false/lower(body)と他64 default不存在/atthasdef整合を検査。Column026/Target036新2と全944/45Main65physical予定。DDL/DB設定変更0・実DB/HOLD未受入。
+
 SSC404: 既MigrationMasterColumnVerifier全66行へSS331 nk_owner絶対照合第十field。Column新025/親Target新035と全942/45Main65physical同source再認証。権限操作/DDL/実DB/HOLD変更0。
 
 SSC403: MigrationGamesVerifier.verify/rows/row/cleanupと既Target.prepare一接続でV004二行を一致確認。new22/全45Main65physical940予定、データ修復や権限発行なし。

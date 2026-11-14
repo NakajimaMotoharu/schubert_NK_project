@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC405 六master table defaultと生成式を既column照合へ追加（2026-11-15）
+
+NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331343/V002。BUG2965/YKT2494: 既Column十属性はbody_searchのgenerated stored flagだけを比較し、生成式lower(body)やspeakers.is_protagonist DEFAULT false/他列default不存在の変異を識別しない。内部DDL前条件補足でRD/UI/DDL/QA変更なし。
+
+六固定SELECTへ第十一boolean projectionを追加する。speakers.is_protagonistとscript_entries.body_searchはa.atthasdef=true、同adrelid/adnumのpg_attrdefが厳密一件、pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)がそれぞれ固定false/lower(body)に等しいことを要求する。他64属性はNOT a.atthasdefかつ該当pg_attrdef不存在を要求する。五identity定義は第九sequence検査を保持し通常defaultとして補完しない。生成/通常defaultの違いは既第七flagが検査する。NULLをtrueへ補完しない。SQLの関数/schemaはpg_catalogを修飾し、deparser非pretty出力は承認migration search_pathのもとで実DB確認する別HOLDを残す。等価式を無制限normalize/実行/修復せず違いはfail-closed。sequence state/default/設定/roleを変更しない。
+
+Javaは各行getBoolean(11)直後wasNull、false/SQLNULLなら固定SQLException。旧十projectionを同byte保存し第十一だけ追加。Column/Target独立手書き66行へtrue第十一field追加、既generic異値/null/三型JDBC faultに含め、PT-MIG-COLUMN026は全66false/NULLとquery prefix/逆順cleanup後条件、PT-MIG-TARGET036は全66false/NULLでstaging0を確認。独立text oracleはV002の二式/他defaultなしと固定SQLの全分岐・正誤boolean modelを別に計算し、Proxy booleanを実PGcatalog式の実行成功と呼ばない。旧column getter10/owner/NN/identityは不変更、catalog1251=66x11+75x7、SQL94/Result76/close17/auto12/fetch4/scalar56/Game10を維持する。旧942本文の期待値を削除せず新2を加え全944/45Main47Test65physicalを一source一execでRootNullAway-lint-CS-SB-PMD個別適用/CRC-init/既定・無filter全Code四100により資格。
+
+他44Main/他45Test同byte、DDL30byte同一、実Current/DB/Backup/key/native/VM/server/HOLD変更0。追加不足2.4/7.2/9.9pp cap10、元費用/SV/各群開始保持、原残と未較正397.324/837.386/1643.415を別保存、当不足だけ一回追加し限定完成時同額減算。専有token実費null。旧942は再認証で新成果0、625/190正式受入・1964/53/工数nullを増やさない。生成式正規化/locale実挙動/実DBmetadata/index-trigger/grant/全移行/global451/CHR/ITST/HOLDは別未受入。
+
 ## SSC404 六master table絶対ownerを既column照合へ追加（2026-11-15）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331343。BUG2961/YKT2490: SS331 3.2 nk_ownerはSchema/object ownerであり、既九属性/NN/sequence検査が相対owner一致だけでは別role所有tableを拒否できない。内部catalog前条件補足でRD/UI/DDL/role/grant/承認済DIF/QA変更なし。実DB資格は未実行のまま。
