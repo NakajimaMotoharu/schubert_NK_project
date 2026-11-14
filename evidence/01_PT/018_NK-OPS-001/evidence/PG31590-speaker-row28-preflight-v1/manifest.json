@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2767_speaker_row28_profile.json",
+    "sha256": "52be6108402006bbc253a72b6325b7095ff165181978e4efa971008b35e7b3ab"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java": "44f19d3afa8f4feb2f8e388d152d4518ae0a211d82c96cd7139e3c57bf3d785d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31586-speaker-row28-prepare-v1/manifest.json",
+    "sha256": "3e0eed79153736086bf2dd37949820ff73fff7b072f0341ed49a45306a2a829e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31588-speaker-row28-static-v1/manifest.json",
+    "sha256": "66766309b2fc47286560c0a9b6f6f0a964d91816dc7102915c8ce88570d1a4ed"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2768_speaker_row28_static_admission.json",
+    "sha256": "2240f4fa465bef23a0b2b4f6892a77bfe63ac331c111eb21c05d3ff4e05e269a"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "line": "164",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "164",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "169",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "178",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "179",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "CloseResource",
+      "line": "202",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "202",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "206",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "211",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "212",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG31592-SPEAKER-ROW-CLOSED28",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31586-speaker-row28-prepare-v1/manifest.json",
+    "sha256": "3e0eed79153736086bf2dd37949820ff73fff7b072f0341ed49a45306a2a829e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31588-speaker-row28-static-v1/manifest.json",
+    "sha256": "66766309b2fc47286560c0a9b6f6f0a964d91816dc7102915c8ce88570d1a4ed"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 164,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 164,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 169,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 178,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 179,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), \"owned COPY workers terminate\");",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 202,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 202,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "futures.add(executor.submit(() -> row.copyBytes(encoder())));",
+      "sourceLine": 206,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 211,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "sourceLine": 212,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

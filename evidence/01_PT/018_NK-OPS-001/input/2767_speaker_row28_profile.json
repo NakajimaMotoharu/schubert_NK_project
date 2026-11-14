@@ -1,0 +1,85 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG31592-SPEAKER-ROW-CLOSED28",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/058_Speaker七列COPY値・独立十六仕様.md",
+      "sha256": "61c0bc7bb1c79f6ebf84704bde2e0373775e8530dc367c385bc4b5da9ba01826"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31582-speaker-seven-row-sixteen-source-v1/independent-oracle.json",
+      "sha256": "ddc0c66599db57b04b7e13ea10d3e42d9c80bd53dfc1f893030668a8d4c48abc"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/017_COPYtext製造・独立十二byte仕様.md",
+      "sha256": "3c0b4be326f0f4dea66f29ee6ddd33fbd806097a87e0d93d3f863f8fc91ca5f1"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31582-speaker-seven-row-sixteen-source-v1/manifest.json",
+      "sha256": "dee24681a2e365d8181f972e2332166815777be88d9a1014bae42157cdc459c9"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "c2bc511b54725bcfb0af1f1d9109ae21557fcb91",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "tests": 16
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "tests": 12
+    }
+  ],
+  "expectedTests": 28,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG31584-speaker-row28-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG31586-speaker-row28-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG31588-speaker-row28-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG31590-speaker-row28-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG31592-speaker-row28-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG31594-speaker-row28-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg31586-speaker-row28-prepare-v1",
+    "unit": "pg31592-speaker-row28-unit-v1"
+  },
+  "newTestDefinitions": 16
+}
