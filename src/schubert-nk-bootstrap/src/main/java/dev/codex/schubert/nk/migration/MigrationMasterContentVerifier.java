@@ -15,8 +15,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Compare all declared COPY payload columns through borrowed migration-transaction SELECTs.
- * NK-MIG-001; MIG003005006/MIG-DAT005/FUN004/DAT004/TST; UI223242254; SS311/331/V002/343 SSC378;
- * PT-MIG-CONTENT001..028. No transaction, actor, catalog, generated-column or DB qualification.
+ * NK-MIG-001; MIG003005006/MIG-DAT005/FUN004/DAT004/TST; UI223242254; SS311/331/V002/343
+ * SSC378/384; PT-MIG-CONTENT001..029. No transaction, actor, catalog, generated-column or DB
+ * qualification.
  */
 @NullMarked
 @Immutable
@@ -35,10 +36,17 @@ public final class MigrationMasterContentVerifier {
           "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
           "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
           "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
   private static final List<String> KINDS =
       List.of(
-          "LISSBST", "LILSSSSSSLT", "LILLIISLSSST", "LISSSSSSLLST", "LSSSSSSSSLSSSSSIT", "LLISIT");
+          "LISSBST",
+          "LILSSSSSSLT",
+          "LILLIISLSSST",
+          "LISSSSSSLLST",
+          "LSSSSSSSSLSSSSSIT",
+          "LLISIT",
+          "L");
 
   public void verify(@Nullable Connection connection, @Nullable MigrationMasterCopyDataset declared)
       throws SQLException {
@@ -71,13 +79,14 @@ public final class MigrationMasterContentVerifier {
         content.scenario().entries().rows().stream().map(ScenarioEntryCopyRow::fields).toList(),
         content.audio().audioRows().stream().map(AudioFileCopyRow::fields).toList(),
         content.media().rows().stream().map(MediaAssetCopyRow::fields).toList(),
-        content.audio().linkRows());
+        content.audio().linkRows(),
+        List.of(List.of("0")));
   }
 
   private static List<List<@Nullable String>> orderedRows(
       List<List<@Nullable String>> declaredRows, int table) {
     var ordered = new ArrayList<List<@Nullable String>>(declaredRows);
-    // Final Row/Batch constructors have established nonnull positive numeric primary keys.
+    // Row/Batch constructors establish positive numeric keys; the private aggregate row is zero.
     Comparator<List<@Nullable String>> order =
         Comparator.comparingLong(row -> Long.parseLong(Objects.requireNonNull(row.get(0))));
     if (table == LINK_TABLE) {
