@@ -25,8 +25,8 @@ final class MediaAssetCopyRowTest {
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
   private static final String MAX_N12 = "999999999999";
-  private static final String VIDEO = "VIDEO";
-  private static final String MUSIC = "MUSIC";
+  private static final String VIDEO_TYPE = "VIDEO";
+  private static final String MUSIC_TYPE = "MUSIC";
   private static final String VIDEO_PATH = "video/a.mp4";
   private static final String MUSIC_PATH = "music/a.ogg";
   private static final String VIDEO_MIME = "video/mp4";
@@ -410,7 +410,7 @@ final class MediaAssetCopyRowTest {
         Arrays.asList(
             "700",
             "video-a",
-            VIDEO,
+            VIDEO_TYPE,
             "Video",
             "MAIN",
             null,
@@ -432,7 +432,7 @@ final class MediaAssetCopyRowTest {
         Arrays.asList(
             "600",
             MUSIC_ID,
-            MUSIC,
+            MUSIC_TYPE,
             "Track",
             "BGM",
             null,
