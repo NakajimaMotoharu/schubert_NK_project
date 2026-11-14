@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "0783a65c5648d6aa9216c03bd6459688e0b873e0b57ad8a88fe3fa2197b944ac",
+  "inventorySha256": "2e17cfff542fedc06792add96628adfadb172fc4b7a925d984d1fe14d3e554eb",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -36736,5 +36736,210 @@
     "actualDbExecuted": false,
     "coverage": null,
     "newAcceptance": 0
+  },
+  "role11AllExistingMigration818": {
+    "state": "ALL_EXISTING_JAVA_QUALIFIED_DB_RETEST_HOLD_NOT_FULL_MANUFACTURE",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32642-audio-role818-post-v1/manifest.json",
+      "sha256": "b7f15ad360781c173d424581fa1052bd510cb6a667f177126c7a72475c7cbfff"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32644-audio-role818-unfiltered-measurement-v1/manifest.json",
+      "sha256": "0572e1698d0ed67319f2393775c91847e0e5c5faff6e7121cd89627ae2989b8d"
+    },
+    "javaCore": "0bed68f16b8e373ee5d06d89934695832b4d8731",
+    "javaUnit": "006de1ae3f7e9621a4536ee9a2b00b51594fe8b3",
+    "currentSqlArtifactSource": "67d1c94abbc5be46c49e7247a47361d474d5a1ea",
+    "primaryDefectClosed": false,
+    "global451Accepted": false
+  },
+  "plannedAudioRole11SSC396": {
+    "state": "JAVA818_AND_DDL_STATIC_COMPLETE_DB_HOLD",
+    "actualDbQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32642-audio-role818-post-v1/manifest.json",
+      "sha256": "b7f15ad360781c173d424581fa1052bd510cb6a667f177126c7a72475c7cbfff"
+    },
+    "ddlStatic": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32654-current-ddl-programtrace-review-v1/manifest.json",
+      "sha256": "2f4081031900a2999278d63bba769c40f0bb670b3a7d577e4050c0c81ff8cefd"
+    },
+    "followup": {
+      "workId": "P00401_V030_AUDIO_ROLE_DB_RUNTIME_HOLD",
+      "state": "HOLD_NOT_STARTED",
+      "estimatePp": {
+        "low": 0.6,
+        "base": 1.8,
+        "high": 4.5
+      },
+      "uncalibrated": true,
+      "actualDedicatedCost": null,
+      "tokenTotals": null,
+      "category": "NEWLY_DISCOVERED_REWORK_VALIDATION",
+      "scope": "Only eight new V030/rollback role cases beyond old29 baseline; original fullDB setup/regression budget retained, no double charge.",
+      "owner": "WBS-P004-01",
+      "source": "67d1c94abbc5be46c49e7247a47361d474d5a1ea",
+      "testIds": "PT-DB-AUDIOROLE030-001..008",
+      "spec": "evidence/01_PT/004_NK-DAT-001/4238_V030音声role互換・DDL単体仕様とHOLD.md",
+      "dependencies": [
+        "ACTUAL_DB_HOLD_REMOVAL_BY_EXISTING_CONTRACT",
+        "FRESH_SOURCE_BOM_AUTH_OWNER_AND_ISOLATED_SCRATCH_DB"
+      ],
+      "noApprovalOrRuntimeAuthorityIssued": true
+    }
+  },
+  "currentRole11Java818PG32640": {
+    "kind": "SSC396_397_CURRENT_AUDIO_ROLE11_ALL_EXISTING_MIGRATION_JAVA818",
+    "source": "006de1ae3f7e9621a4536ee9a2b00b51594fe8b3",
+    "productionCoreMain": "0bed68f16b8e373ee5d06d89934695832b4d8731",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32642-audio-role818-post-v1/manifest.json",
+      "sha256": "b7f15ad360781c173d424581fa1052bd510cb6a667f177126c7a72475c7cbfff"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32644-audio-role818-unfiltered-measurement-v1/manifest.json",
+      "sha256": "0572e1698d0ed67319f2393775c91847e0e5c5faff6e7121cd89627ae2989b8d"
+    },
+    "tests": 818,
+    "newUniqueTestDefinitions": 1,
+    "requalifiedExistingDefinitions": 817,
+    "newMainSources": 0,
+    "changedMainSources": 3,
+    "changedMigrationTests": 4,
+    "allExistingMigrationMain": 39,
+    "allExistingMigrationTestSources": 41,
+    "allMigrationDefinitions": 818,
+    "physicalClasses": 56,
+    "positiveMainCrc": 56,
+    "uniqueMainJavaDeltaFromInitial": 147,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 11882,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1585,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2391,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1224,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 428,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 56,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 12293
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1585
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2429
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1288
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 492
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 56
+      }
+    },
+    "actualJvmCodeMethods": 492,
+    "jacocoDefaultMethods": 428,
+    "all64DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 466,
+    "sameByteSites": 399,
+    "freshRoleWidthSitesReviewed": 67,
+    "applicable": 0,
+    "unclassified": 0,
+    "spotbugs": 0,
+    "all39ScopeNullAwayLintCs": true,
+    "allSixModulesRequalified": false,
+    "audioRoleCurrentMoviePreserved": "movie_audio",
+    "audioRoleUtf8Maximum": 11,
+    "old29SqlByteIdentical": true,
+    "newForwardMigration": "V030__preserve_current_audio_role.sql",
+    "rollbackDataBeyond8BytesRaisesWithoutTruncation": "SOURCE_REVIEW_ONLY_NOT_RUNTIME_PROVEN",
+    "ddlStatic": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/3046_audio_role818_independent_oracle.json",
+      "sha256": "85ecefec6601508eb14cee68461890900beb075b2bd523ddd943ccc09e23de5d"
+    },
+    "currentSqlTrace": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32654-current-ddl-programtrace-review-v1/manifest.json",
+      "sha256": "2f4081031900a2999278d63bba769c40f0bb670b3a7d577e4050c0c81ff8cefd"
+    },
+    "currentSqlArtifactSource": "67d1c94abbc5be46c49e7247a47361d474d5a1ea",
+    "javaRunNotRelabelledToNewSqlCommentCommit": true,
+    "dbTestSourcesUpdatedButNotCompiledOrRun": [
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/DatabaseMigrationTest.java",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java"
+    ],
+    "ddlRuntimePt": "HOLD_NOT_RUN_NOT_PASS",
+    "ddlRuntimeCoverage": null,
+    "primaryBug": "BUG2943",
+    "primaryYkt": "YKT2472",
+    "primaryDefectState": "JAVA_PT_AND_DDL_STATIC_DONE_DB_RETEST_HOLD",
+    "limitedBugsClosed": [
+      2944,
+      2945
+    ],
+    "limitedYktsClosed": [
+      2473,
+      2474
+    ],
+    "old54PrepareRejectedProducts0": true,
+    "actualDatabaseOriginalDataBackupKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "followupDbHoldEstimate": {
+      "workId": "P00401_V030_AUDIO_ROLE_DB_RUNTIME_HOLD",
+      "state": "HOLD_NOT_STARTED",
+      "estimatePp": {
+        "low": 0.6,
+        "base": 1.8,
+        "high": 4.5
+      },
+      "uncalibrated": true,
+      "actualDedicatedCost": null,
+      "tokenTotals": null,
+      "category": "NEWLY_DISCOVERED_REWORK_VALIDATION",
+      "scope": "Only eight new V030/rollback role cases beyond old29 baseline; original fullDB setup/regression budget retained, no double charge.",
+      "owner": "WBS-P004-01",
+      "source": "67d1c94abbc5be46c49e7247a47361d474d5a1ea",
+      "testIds": "PT-DB-AUDIOROLE030-001..008",
+      "spec": "evidence/01_PT/004_NK-DAT-001/4238_V030音声role互換・DDL単体仕様とHOLD.md",
+      "dependencies": [
+        "ACTUAL_DB_HOLD_REMOVAL_BY_EXISTING_CONTRACT",
+        "FRESH_SOURCE_BOM_AUTH_OWNER_AND_ISOLATED_SCRATCH_DB"
+      ],
+      "noApprovalOrRuntimeAuthorityIssued": true
+    }
   }
 }

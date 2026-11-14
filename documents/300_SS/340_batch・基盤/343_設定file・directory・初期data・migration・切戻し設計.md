@@ -6,7 +6,7 @@ SSC396の全migration Java受入は39Main/41Test source/818件に対応する全
 
 ## SSC396 Current音声role十一byte保持と前進・非切捨て切戻し（2026-11-15）
 
-NK-MIG-001/NK-DDL-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI223227242254、SS311331/V002/343。BUG2943/YKT2472: Current source schemaのaudio_role textとgeneratorはmovie_audio（UTF8 11byte）を有効に保存するが、NKのSS331/343とRow/DDLが8byteで拒否する。RD/UI/wireのsource検索ではこの内部幅8指定やaudio_role公開fieldは無く、Current保存値を改名/切捨てず保持するためのSS範囲補正である。新しい業務role enumや表示・電文・既baseline/DIFを変更しない。実Current該当件数/実DB再現は不明・未実行、source根拠による不整合として記録しQA不要。
+NK-MIG-001/NK-DAT-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI223227242254、SS311331/V002/343。BUG2943/YKT2472: Current source schemaのaudio_role textとgeneratorはmovie_audio（UTF8 11byte）を有効に保存するが、NKのSS331/343とRow/DDLが8byteで拒否する。RD/UI/wireのsource検索ではこの内部幅8指定やaudio_role公開fieldは無く、Current保存値を改名/切捨てず保持するためのSS範囲補正である。新しい業務role enumや表示・電文・既baseline/DIFを変更しない。実Current該当件数/実DB再現は不明・未実行、source根拠による不整合として記録しQA不要。
 
 既適用V001..V029の全SQLはbyte同一を保持し、API migration V030__preserve_current_audio_role.sqlを新規追加する。Flywayの既owner/transaction契約内でaudio_files.audio_roleをvarchar(11)へ拡張し、同名ck_audio_files_audio_role_bytesをoctet_length BETWEEN1 AND11へ置換する。schema/table/他列/PK/UK/FK/index/role/grantを変えず、table数24/明示table制約75/固定66columnも維持。V002は歴史varchar8のまま、V030後の実効型がvarchar11/byte1..11でありColumnVerifierはこの実効schemaを検査する。実DB適用/配備/署名/native資格は別HOLDで、本hostはSQL textの独立review・hash・後条件だけを確認し実DB PT PASSへ混ぜない。
 
@@ -2278,3 +2278,5 @@ BUG1332/YKT1098・QA047既承認内の内部診断補足。対象はsource7bb25a
 新管理profileはM→AをProductionの固定inode/host-private契約で保持し、実batch専用RO transaction/71419602 advisory/本人backend・TCP両端・heartbeatを認証する。独立observerは十Unitのmetadata Ref、全状態/32設定/Unitfile bytes、署名187/current、全24表/原本Backup/credential/旧proof/nativeを前後二読する。普通API app二接続/Web web一接続は同ordinary PID/start/argv/Unit世代とclient/server各socket inodeへfresh再結合し、DB総client0や古いbackend番号を要求しない。未知/余剰peer、原値不一致、lock競合、期限/close不明では測定を受入れない。
 
 当固定Javaはcaller入力を取らず、保持M/A・RODB内のMaintenanceRunFiles.Session.observeStartup二回（全graph同値・固定activationとWARNING10）とverifyRetainedの費用・実metadata呼出数のみ計測する。設定/原本/DBの書込、permit/epoch/intent操作、サービスsignal/Root再start/reload/配備は0。所有返却はDB rollback/close→M/A正常返却、observerによる本人DB/advisory/flock消失・同四actor/全原値不変→十Ref正常返却を確認する。UNKNOWNをnormalへ補わず、実close不明は隔離する。数値は診断だけで、親正常完了・業務受入・native coverage・回収許可ではない。30分budget/全fresh proof/451/RD/UIは変更しない。実装/PT・新停止profileは別の未完事項である。
+
+2026-11-15 SSC396/BUG2945 Program識別訂正: DDL owner WBS-P004-01の正規ProgramはNK-DAT-001。先行NK-DDL-001表記は仮称誤記、実効幅11/DDL statement/Java期待値/DBHOLDは不変更。113元仕様は既818入力hashとして保持し、115結果のtrace訂正を参照する。
