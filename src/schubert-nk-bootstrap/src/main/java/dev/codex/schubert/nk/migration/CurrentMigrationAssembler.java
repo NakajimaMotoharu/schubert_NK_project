@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.migration;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,13 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Five declared Current projections to six-table COPY values, never actual DB or asset admission.
- * NK-MIG-001; MIG003005006/MIG-DAT001002005/DAT004/TST; UI227242254; SS311331343 SSC402;
- * PT-MIG-CURRENTASSEMBLY001..020. Retains stored text, explicit source order and shared bindings.
+ * NK-MIG-001; MIG003005006/MIG-DAT001002005/DAT004/TST; UI227242254; SS311331343 SSC402/408;
+ * PT-MIG-CURRENTASSEMBLY001..022. Retains stored text, explicit source order and shared bindings.
  */
 @NullMarked
 public final class CurrentMigrationAssembler {
+  private final ScenarioFileMigrationMap retainedFileIds;
+  private final ScenarioEntryPlacementMap retainedEntryIds;
   private final SpeakerMigrationMap retainedSpeakers;
   private final CurrentScenarioFileMapper retainedFiles;
   private final CurrentScenarioEntryMapper retainedEntries;
@@ -35,6 +38,8 @@ public final class CurrentMigrationAssembler {
         || audioMappings == null
         || linkOrders == null
         || assets == null) throw invalid();
+    retainedFileIds = files;
+    retainedEntryIds = placement;
     retainedSpeakers = speakers;
     retainedFiles = new CurrentScenarioFileMapper(files, assets, gameOneRoot, gameTwoRoot);
     retainedEntries = new CurrentScenarioEntryMapper(files, placement, speakers);
@@ -63,6 +68,11 @@ public final class CurrentMigrationAssembler {
     var scenario = new ScenarioCopyDataset(files, entries);
     var content = new MigrationCopyDataset(scenario, links.audioRows(), links.linkRows(), media);
     return new MigrationMasterCopyDataset(speakers, content);
+  }
+
+  public CurrentMigrationMappingManifest mappingManifest() throws NoSuchAlgorithmException {
+    return new CurrentMigrationMappingManifest(
+        retainedFileIds, retainedEntryIds, retainedSpeakers, retainedAudio);
   }
 
   @Override

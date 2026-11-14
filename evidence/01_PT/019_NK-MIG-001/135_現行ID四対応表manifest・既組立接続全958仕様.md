@@ -1,0 +1,13 @@
+# 現行ID四対応表を同じ組立のcanonical manifestへ接続・独立仕様
+
+NK-MIG-001、RD MIG003005006/MIG-DAT005/MIG006/TST、UI223242254、SS311331343 ETL10.1 step3とID対応表条項。既File/EntryPlacement/Speaker/Audio各mappingはcanonical bytesを持つが、同じ六table組立に対応する集約artifactが無い。未実装の内部artifactを製造する追加不足であり新業務仕様や実Current ID/順の承認を発行しない。RD/UI/DDL/QA/DIF変更0、実DB/原本/asset/Backup/key/native/VM/server/HOLD不変更。
+
+CurrentMigrationMappingManifestはNullable FileMap/PlacementMap/SpeakerMap/AudioMap四つを受け、nullを固定IAEで拒否。FileMapのtargetFileId→gameを作り、Placement全entryのtargetFileIdが存在しgame一致することを要求し、未知/異gameを拒否・補完/再採番0。既typed modelのsigned Current ID、game別file順/global entry順、疎N12 target IDを保持する。他table間に同じtarget数値IDがあっても別ID空間として許容する。四部品のcanonicalBytesを既実装とbyte同一で束ね、外部fileやDBへアクセスしない。
+
+形式はASCII NKMIGMAPPING1\n に続け、FILES/ENTRIES/SPEAKERS/AUDIOの固定順で KIND\t行数\tbyte長\tSHA256lowerhex64\n と当partの既canonical bytes全体を連結する。行数はfiles.files/placement.entries/speakers.mappings/audio.mappingsのsize、byte長は実part配列長、各part hashと全体hashはJDK SHA256を用いる。SDK NoSuchAlgorithmExceptionは同じchecked例外として呼出元へ透過し自前catch/正常化/再試行0、本toolchainの既知SHA256 vectorでアルゴリズム提供を検証する。空4partも各既headerを保持、暗黙省略/時刻/OS改行/default charset/Map iteration順をhashへ混入しない。rowCountsは固定四keyのimmutable Map、canonicalBytesは防御clone、sha256は保存String、toStringとinvalid diagnosticは固定redacted。bytesとcountsはconstructorでsnapshot、不変/threadsafe。メモリByteArrayOutputStreamはFDやborrowed outputを取得しない。
+
+既CurrentMigrationAssemblerへ元FileMap/PlacementMapのimmutable参照二fieldを追加し、既retainedSpeakers/AudioMapと同じ四模型から public mappingManifest() throws NoSuchAlgorithmException で新artifactを作る。assemble処理/六COPY値/時刻/source五reader/SQLは不変更。artifactはdeclared correspondenceだけを証明し、実Current抽出全量/ID/order/DB内容/六COPY/asset/hash/署名/authority/永続化/切替の成功証跡ではない。実保存とactualID照合は後続HOLDとして残す。
+
+PT-MIG-MAPMAN001既知二game/signed/sparse四part byte/hash/count、002四null、003空四header/rootgolden、004防御clone/immutable counts/元list破壊隔離、005entry未知targetFile/異game拒否と非修復、006入力shuffled正準順/別table数値ID重複許容、007不変共有8worker64/Future5/finallyshutdownNow-await10、008固定redaction/繰返しfresh snapshot・独立boundary vector。既Assembler021空mapと022既設定file mapのfactory出力をPython手計算goldenへ照合、期待をproduction factoryから生成しない。Golden frame/hashはSSのbyte式と各独立手書きpartからPython hashlibで作り、製品出力と比較する。新8＋既Assembler新2＋旧948=全958/46Main48Test66physicalを同一source/一exec/RootNullAway-lint-CS-SB-PMD各site/CRC-init/既定と無filter全Code四100で確認する。既他44Main46Testはbyte同一、旧948は再認証で新成果0。
+
+追加不足2.7/8.1/9.9pp cap10、元費用/SV/各群開始と原残904.85等・未較正残397.324/837.386/1643.415を保持、当不足だけ追加して限定完了時同額減算。専有実費token null、正本625/元190受入・正式1964/53・工数nullを増やさない。失敗履歴7F1E/PG33096は保存、現在の948成功を確認目的で再実行せず本接続変更に必要な新958だけ資格する。

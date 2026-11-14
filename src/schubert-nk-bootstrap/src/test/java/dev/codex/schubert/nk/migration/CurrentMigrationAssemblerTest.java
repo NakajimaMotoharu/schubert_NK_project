@@ -20,10 +20,19 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-CURRENTASSEMBLY001..020; real projection input, independently literal target rows and
+ * PT-MIG-CURRENTASSEMBLY001..022; real projection input, independently literal target rows and
  * wire.
  */
 final class CurrentMigrationAssemblerTest {
+  private static final String EMPTY_VECTOR =
+      "NKMIGMAPPING1\nFILES\t0\t16\tfee61b49e4c39e9062c2c6e845fefe03ca5160ce7b8881791b8338085d7e473a\nNKMIGFILEORDER1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+  private static final String EMPTY_VECTOR_HASH =
+      "83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9";
+  private static final String ONE_FILE_VECTOR =
+      "NKMIGMAPPING1\nFILES\t1\t25\t4f704e2edf473a1a5c2cc3cb29a168f3acac78f61fc276ce87c9f9c5b1c8db6f\nNKMIGFILEORDER1\n1\t9\t90\t1\nENTRIES\t0\t21\t5946c60b76d7bd7a3efa92a5bcc5d773d9e558a3b6260baea98e9e104ede6f30\nNKMIGENTRYPLACEMENT1\nSPEAKERS\t0\t45\t6ba2aea78407a77e5467625c22e68382bd06a746d097af921057a0f89a3acc13\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\nAUDIO\t0\t41\t6a09be7493407eb5d1d18db65c2de8d7898eef78648b626ab8d0c81005cdede5\ngame_id\tcurrent_audio_id\ttarget_audio_id\n";
+  private static final String ONE_FILE_VECTOR_HASH =
+      "ac411723896848964fb14c8fac3945bc758ffa1bdc1ffc83ac9a872775df07f5";
+
   private static final String TARGET_SPEAKER_ONE = "1001";
   private static final int MEDIA_STORAGE_INDEX = 6;
   private static final int MEDIA_BYTES_INDEX = 9;
@@ -619,6 +628,52 @@ final class CurrentMigrationAssemblerTest {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void assembly021EmptyDeclaredMappingsHaveIndependentManifest() throws Exception {
+    var files = new ScenarioFileMigrationMap(List.of());
+    var entries =
+        new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
+    var configured =
+        new CurrentMigrationAssembler(
+            files,
+            entries,
+            new SpeakerMigrationMap(List.of()),
+            List.of(),
+            List.of(),
+            new AssetMigrationManifest(List.of()),
+            "g1",
+            "g2");
+    var result = configured.mappingManifest();
+    assertArrayEquals(EMPTY_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
+    assertEquals(EMPTY_VECTOR_HASH, result.sha256());
+  }
+
+  @Test
+  void assembly022ConfiguredFileIdsAreBoundAndFreshManifestIsDefensive() throws Exception {
+    var files =
+        new ScenarioFileMigrationMap(List.of(new ScenarioFileMigrationMap.FilePair(1, 9, 90)));
+    var entries =
+        new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
+    var configured =
+        new CurrentMigrationAssembler(
+            files,
+            entries,
+            new SpeakerMigrationMap(List.of()),
+            List.of(),
+            List.of(),
+            new AssetMigrationManifest(List.of()),
+            "g1",
+            "g2");
+    var first = configured.mappingManifest();
+    byte[] bytes = first.canonicalBytes();
+    bytes[0] = 0;
+    var second = configured.mappingManifest();
+    assertArrayEquals(ONE_FILE_VECTOR.getBytes(StandardCharsets.US_ASCII), second.canonicalBytes());
+    assertEquals(ONE_FILE_VECTOR_HASH, second.sha256());
+    assertEquals(1, second.rowCounts().get("FILES"));
+    assertEquals(0, second.rowCounts().get("ENTRIES"));
   }
 
   private static CurrentMigrationProjectionTest.Fixture fixture() {
