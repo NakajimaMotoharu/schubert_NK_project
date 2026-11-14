@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC376: bootstrap.migration.CurrentSpeakerProjectionReader read/open/row/cleanupはCurrent六列のborrowed readonly snapshotを不変六列rowsへ接続し、既Mapへ渡す。SQL NULL/semantic boolean/件数/逆順cleanupをJDKProxy独立20/whole176で確認。実CurrentDB/認証/HOLD未受入。
+
 SSC375: bootstrap.migration.SpeakerMigrationMapとSpeakerMappingはCurrent ID→NK ID canonical対応とCurrent六選択列→SpeakerCopyBatch変換を持つ。固定redaction/全単射/null/時刻・Row invariant。PT-MIG-SPEAKERMAP001..024/全156/full10Main17physical、実Current/DB/HOLD未受入。
 
 SSC374: bootstrap.migration.MigrationMasterCopyFingerprintはfingerprint/differenceと不変TableFingerprint、private DigestSinkを持つ。既六表writerをstream SHA/long countへ接続、PT-MIG-FINGER001..020/全403/full23Main38physical。実master/DB/署名/全移行/HOLD未受入。
