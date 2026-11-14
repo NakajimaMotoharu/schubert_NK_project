@@ -12,7 +12,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed V002 physical constraint structure, never full catalog or actual DB qualification.
- * NK-MIG-001; MIG003005006/MIG-DAT005/DAT004/TST; UI242254; SS311/331/V002/343 SSC382;
+ * NK-MIG-001; MIG003005006/MIG-DAT005/DAT004/TST; UI242254; SS311/331/V002/343 SSC382/383;
  * PT-MIG-CONSTRAINT001..022. The caller owns authentication, exclusivity and the transaction.
  */
 @NullMarked
@@ -23,7 +23,7 @@ public final class MigrationMasterConstraintVerifier {
   private static final String QUERY_PREFIX =
       "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='";
   private static final String QUERY_SUFFIX =
-      "' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"";
+      "' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"";
   private static final List<String> QUERIES =
       List.of(
           QUERY_PREFIX + "speakers" + QUERY_SUFFIX,
