@@ -828,3 +828,6 @@ SSC398/NK-MIG-001/WBS-P01903 AudioMigrationMap/AudioMapping constructor-mappings
 
 
 SSC399/NK-MIG-001/WBS-P01903 CurrentAudioLinkProjectionReader.read/rows/row/cleanup→RD MIG003005006/MIG-DAT001002005/FUN005/DAT004/TST→UI227242254→SS311331343/V002→PT-AUDIOLINKREAD001..020/019118119。Corebda326b5/Unit14343ab0 PG32734/736/738/740新20/一CRC/実9両四100。抽出順非業務順/実DB/link変換/全移行/HOLD未受入。
+
+
+SSC400/NK-MIG-001/WBS-P01903 CurrentAudioLinkMapper/LinkOrder constructor-links-canonical-copyRowsはCurrent triplesと明示orderを既entry/audio対応・AudioCopyDatasetへ結合→RD MIG003005006/MIG-DAT001002005/FUN005/DAT004/TST→UI227242254→SS311331343/V002→PT-AUDIOLINKMAP001..024/019120121。Core2db594c2/Unitcd99a02b全886/61CRC/既定463実538両四100。実Current候補順/DB/全移行/HOLD未受入。
