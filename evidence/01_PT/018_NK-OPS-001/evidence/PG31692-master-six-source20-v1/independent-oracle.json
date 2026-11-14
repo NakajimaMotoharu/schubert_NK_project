@@ -1,0 +1,36 @@
+{
+  "actualExit": 0,
+  "primaryDdlOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31646-speaker-staging-source24-v1/independent-ddl-sql-oracle.json",
+    "sha256": "f19779f49a6a9ee20fee579d51375d89a04108dacb0b33f7b09c14bd41d6d929"
+  },
+  "tableColumnCounts": {
+    "speakers": 7,
+    "script_files": 11,
+    "script_entries": 12,
+    "audio_files": 12,
+    "media_assets": 17,
+    "entry_audio_links": 6
+  },
+  "order": [
+    "speakers",
+    "script_files",
+    "script_entries",
+    "audio_files",
+    "media_assets",
+    "entry_audio_links"
+  ],
+  "expectedByteSource": "MigrationMasterCopyDatasetTest independent GOLDEN six literal strings, not production encoding",
+  "expectedFaultSource": "fresh synthetic IOException/runtime/Error per six position, independent UTF8 golden byte prefix and no-later-write matrix",
+  "constraints": [
+    "cross-six-timestamp-even-no-entry",
+    "speaker-id-and-game-FK",
+    "seven-null-arguments-before-first-write",
+    "borrowed-no-close-no-flush",
+    "immutable-component-snapshots",
+    "finite64"
+  ],
+  "goldenExpectedUnchanged": true,
+  "fixtureBug": "BUG2912",
+  "testsExecuted": 0
+}
