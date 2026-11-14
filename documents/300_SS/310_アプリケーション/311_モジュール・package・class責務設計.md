@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC373: bootstrap.migration.MigrationMasterTargetPublisherは既三staging/transferと参照/最終化を同じ借用Connectionへ固定順接続、元障害伝播/後続0/自動retry0。PT-MIG-TARGET001..016/全543/full28Main42physical、実COPY/DB/Go/Root/HOLD未受入。
+
 SSC372: bootstrap.migration.MigrationMasterReferenceVerifierは六count/九orphan-game/link order違反groupを固定read-only16SQLで照合、借用Connection/nonnull終了/元primary維持。PT-MIG-REF001..020/全403/full23Main36physical、全DB/hash/catalog/移行/HOLD未受入。
 
 SSC371: bootstrap.migration.MigrationMasterFinalizerは借用正規Connection上の五MAX照合→五Prepared setval→六限定ANALYZEを行う。nonnull cleanup/固定診断/自動再試行0。PT-MIG-FINAL001..028/全411/full23Main36physical。実DB/原本/復旧/HOLD未受入。
