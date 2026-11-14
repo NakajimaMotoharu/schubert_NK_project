@@ -1,5 +1,11 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC377 移行五部品primary自己identity保持（2026-11-14）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/TST/UI223242254/SS311331343。既SSの元primary保持・逆順一回closeを具体化する。SpeakerStagingTable、ScenarioStagingTables、AssetStagingTables、MigrationMasterFinalizer、MigrationMasterReferenceVerifierのResultとStatement cleanup計10箇所で、cleanupとprimaryが同一Throwable実体ならaddSuppressedを呼ばず元primaryを保持する。異なる実体はequalsの値が同じでもResult→Statement順にsuppressedへ保存し、同じcleanup実体が二資源から返れば二回保持する。primary無しclose失敗は元失敗、Result.closeが初めてのprimaryとなった場合もStatement.closeの同一実体で覆わない。Connectionは借用・close/commit/rollback/再接続/再試行0、DB/driver/Rootnative等HOLDは不変更。
+
+PT-MIG-CLEANID001..010: 001Speaker自己同一3型、002Scenario同、003Asset同、004Finalizer同、005Reference同、006値equals別実体を誤同一扱いしない、007inner自己/outer別と逆の順保持全型、008primaryと別の同cleanup二回を保持、009Result.close起点primaryとStatement同実体、010有限8workers64/Future5/finallyshutdownNow-await10。期待は元例外のidentity、suppressedのidentity/順/個数、各Result/Statement一回closeとConnection借用、固定firstSQL/getter prefixから独立定義する。既REF/FinalizerのIAE期待二箇所は上位primary保持条件へ戻すoracle障害是正であり、実装都合の期待変更ではない。新10の元source限定再現を保存し、是正後は旧543＋新10=whole553、全28Main42physicalを同source/一exec/RootNullAway-lint-CS-SB・PMD個別適用/全CRC-init/既定と無filter四100で検証。失敗baselineは合格へ加算しない。新Main0、既五Mainを是正、その他26Mainと既Testは二oracle以外同byte。REWORK追加2.5/7.5/9.9pp cap10で元費用/SV/群開始保持、新規業務scope0/実費token null、実DB/全移行/global451/ITST未受入。
+
 ## SSC376 Current話者六列の借用readonly snapshot読取り（2026-11-14）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311331/V002/343 SSC375。CurrentSpeakerProjectionReaderはcaller所有・認証済みCurrent readonly transaction snapshotから、既SpeakerMigrationMap.copyRowsへ渡す六列を読む標準java.sql部品。接続取得・資格発行・権限変更・setReadOnly/setAutoCommit/commit/rollback/connection.close・実master抽出・Current generator実行は行わない。実DB/SDK/Rootnative等HOLDを解除せず、本PTは明示JDK Proxyのみ。
