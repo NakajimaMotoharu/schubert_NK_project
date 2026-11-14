@@ -21,8 +21,12 @@ import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** PT-MIG-FINAL001..028; memory-only JDBC faults and independent V002/PG18 expectations. */
+/** PT-MIG-FINAL001..030; memory-only JDBC faults and independent V002/PG18 expectations. */
 final class MigrationMasterFinalizerTest {
+  private static final String FLUSH_SQL =
+      "SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATE";
+  private static final String CALL_CONSTRAINT = "constraint";
+  private static final String CALL_CONSTRAINT_WARNINGS = "constraintWarnings";
   private static final String CALL_AUTO = "auto";
   private static final String CALL_CREATE = "create";
   private static final String CALL_QUERY = "query";
@@ -86,6 +90,7 @@ final class MigrationMasterFinalizerTest {
     var f = new Fixture();
     finish(f, normal());
     var expected = new ArrayList<String>();
+    expected.add(FLUSH_SQL);
     expected.addAll(MAX_SQL);
     expected.addAll(SET_SQL);
     expected.addAll(ANALYZE_SQL);
@@ -96,7 +101,7 @@ final class MigrationMasterFinalizerTest {
     assertEquals(10, f.resultCloses);
     assertEquals(5, f.preparedCloses);
     assertEquals(1, f.outerCloses);
-    assertEquals(6, f.warningReads);
+    assertEquals(7, f.warningReads);
   }
 
   @Test
@@ -106,7 +111,7 @@ final class MigrationMasterFinalizerTest {
     finish(f, new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent()));
     assertEquals(List.of(1L, 1L, 1L, 1L, 1L), f.boundLong);
     assertEquals(List.of(false, false, false, false, false), f.boundBoolean);
-    assertEquals(16, f.sql.size());
+    assertEquals(17, f.sql.size());
   }
 
   @Test
@@ -213,12 +218,13 @@ final class MigrationMasterFinalizerTest {
   }
 
   @Test
-  void final012LastMaxMismatchCannotIssueAnyMutation() throws Exception {
+  void final012LastMaxMismatchCannotIssueSequenceOrAnalyze() throws Exception {
     var f = new Fixture();
     f.faultQuery = IDENTITIES - 1;
     f.shape = Shape.WRONG;
     assertThrows(SQLException.class, () -> finish(f, normal()));
-    assertEquals(MAX_SQL, f.sql);
+    assertEquals(FLUSH_SQL, f.sql.get(0));
+    assertEquals(MAX_SQL, f.sql.subList(1, f.sql.size()));
     assertEquals(0, f.prepares);
     assertEquals(0, f.analyzes);
   }
@@ -388,6 +394,55 @@ final class MigrationMasterFinalizerTest {
     }
   }
 
+  @Test
+  void final029DeferredConstraintMustSucceedBeforeAnyMaxOrSequence() throws Exception {
+    for (boolean warning : List.of(false, true)) {
+      var f = new Fixture();
+      f.badConstraintUpdate = !warning;
+      f.badConstraintWarning = warning;
+      assertEquals(
+          DIAGNOSTIC, assertThrows(SQLException.class, () -> finish(f, normal())).getMessage());
+      assertEquals(List.of(FLUSH_SQL), f.sql);
+      assertEquals(0, f.reads);
+      assertEquals(0, f.prepares);
+      assertEquals(0, f.analyzes);
+      assertEquals(0, f.resultCloses);
+      assertEquals(0, f.preparedCloses);
+      assertEquals(1, f.outerCloses);
+      assertEquals(warning ? 1 : 0, f.warningReads);
+    }
+  }
+
+  @Test
+  void final030BothDeferredPhasesPreservePrimaryAndOuterCleanupIdentity() throws Exception {
+    failuresAt(CALL_CONSTRAINT, 0, 1);
+    failuresAt(CALL_CONSTRAINT_WARNINGS, 0, 1);
+    var declared = normal();
+    for (String phase : List.of(CALL_CONSTRAINT, CALL_CONSTRAINT_WARNINGS)) {
+      for (int kind = 0; kind < failures().size(); kind++) {
+        for (int cleanup = 0; cleanup <= failures().size(); cleanup++) {
+          Throwable primary = failures().get(kind);
+          Throwable secondary = cleanup == failures().size() ? primary : failures().get(cleanup);
+          var f = new Fixture();
+          f.failCall = phase;
+          f.failSlot = 0;
+          f.failure = primary;
+          f.extraOuter = secondary;
+          assertSame(primary, assertThrows(primary.getClass(), () -> finish(f, declared)));
+          assertEquals(secondary == primary ? 0 : 1, primary.getSuppressed().length);
+          if (secondary != primary) assertSame(secondary, primary.getSuppressed()[0]);
+          assertEquals(List.of(FLUSH_SQL), f.sql);
+          assertEquals(0, f.reads);
+          assertEquals(0, f.prepares);
+          assertEquals(0, f.analyzes);
+          assertEquals(1, f.outerCloses);
+          assertEquals(0, f.resultCloses);
+          assertEquals(0, f.preparedCloses);
+        }
+      }
+    }
+  }
+
   private static void finish(Fixture f, MigrationMasterCopyDataset declared) throws SQLException {
     new MigrationMasterFinalizer().finish(f.connection(), declared);
   }
@@ -412,7 +467,8 @@ final class MigrationMasterFinalizerTest {
         List<Integer> expectedClose =
             switch (call) {
               case CALL_AUTO, CALL_CREATE -> List.of(0, 0, 0);
-              case CALL_OUTER_TIMEOUT -> List.of(0, 0, 1);
+              case CALL_OUTER_TIMEOUT, CALL_CONSTRAINT, CALL_CONSTRAINT_WARNINGS ->
+                  List.of(0, 0, 1);
               case CALL_QUERY -> List.of(slot, 0, 1);
               case CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2, CALL_RESULT_CLOSE ->
                   List.of(slot + 1, Math.max(0, slot - IDENTITIES + 1), 1);
@@ -471,6 +527,9 @@ final class MigrationMasterFinalizerTest {
     private @Nullable Throwable extraResult;
     private @Nullable Throwable extraPrepared;
     private @Nullable Throwable extraOuter;
+    private boolean badConstraintUpdate;
+    private boolean badConstraintWarning;
+    private boolean constraintWarningPending;
     private int badAnalyze = -1;
     private int badWarning = -1;
     private int autoReads;
@@ -540,6 +599,12 @@ final class MigrationMasterFinalizerTest {
                     hit(CALL_QUERY, query);
                     return result(query);
                   case "executeUpdate":
+                    if (FLUSH_SQL.equals(args[0])) {
+                      sql.add(FLUSH_SQL);
+                      constraintWarningPending = true;
+                      hit(CALL_CONSTRAINT, 0);
+                      return badConstraintUpdate ? 1 : 0;
+                    }
                     int position = analyzes;
                     analyzes++;
                     sql.add((String) args[0]);
@@ -548,6 +613,13 @@ final class MigrationMasterFinalizerTest {
                     return badAnalyze == position ? 1 : 0;
                   case "getWarnings":
                     warningReads++;
+                    if (constraintWarningPending) {
+                      constraintWarningPending = false;
+                      hit(CALL_CONSTRAINT_WARNINGS, 0);
+                      return badConstraintWarning
+                          ? new SQLWarning("synthetic deferred constraint")
+                          : null;
+                    }
                     int warning = analyzes - 1;
                     hit(CALL_WARNINGS, warning);
                     return badWarning == warning ? new SQLWarning("synthetic skipped table") : null;

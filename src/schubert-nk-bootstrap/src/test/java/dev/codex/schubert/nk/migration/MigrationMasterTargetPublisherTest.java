@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-TARGET001..036; independent94 SQL/56 scalar, content7 and catalog12 result vectors,
+ * PT-MIG-TARGET001..038; independent95 SQL/56 scalar, content7 and catalog12 result vectors,
  * memory-only borrowed JDBC.
  */
 final class MigrationMasterTargetPublisherTest {
@@ -47,6 +47,8 @@ final class MigrationMasterTargetPublisherTest {
   private static final String TARGET_VIDEO = "video/a.mp4";
   private static final String VIDEO = "VIDEO";
   private static final String SPEAKER_ID = "42";
+  private static final String FLUSH_SQL =
+      "SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATE";
   private static final int PREPARE_END = 19;
   private static final int TRANSFER_END = 43;
   private static final int REFERENCE_END = 71;
@@ -70,9 +72,9 @@ final class MigrationMasterTargetPublisherTest {
   private static final String GET_BOOLEAN = "getBoolean";
   private static final String GET_TIMESTAMP = "getTimestamp";
   private static final String GET_STRING = "getString";
-  private static final int SETVAL_FIRST = 83;
-  private static final int ANALYZE_FIRST = 88;
-  private static final int SQL_COUNT = 94;
+  private static final int SETVAL_FIRST = 84;
+  private static final int ANALYZE_FIRST = 89;
+  private static final int SQL_COUNT = 95;
   private static final int SCALARS = 56;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
@@ -87,7 +89,7 @@ final class MigrationMasterTargetPublisherTest {
   private static final List<Integer> OWNER_START =
       List.of(0, 6, 12, 13, 14, 16, 19, 23, 31, 43, 71, 78);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(6, 12, 13, 14, 16, 19, 23, 31, 43, 71, 78, 84, 85, 86, 87, 88, 94);
+      List.of(6, 12, 13, 14, 16, 19, 23, 31, 43, 71, 78, 85, 86, 87, 88, 89, 95);
   private static final List<Integer> CLOSE_RESULTS =
       List.of(6, 12, 13, 13, 13, 13, 16, 22, 31, 59, 66, 72, 73, 74, 75, 76, 76);
   private static final String CATALOG_IDENTITY_COLUMN =
@@ -374,6 +376,7 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
           "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
           "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)",
+          FLUSH_SQL,
           "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_files",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_entries",
@@ -1045,6 +1048,55 @@ final class MigrationMasterTargetPublisherTest {
     }
   }
 
+  @Test
+  void target037DeferredConstraintRejectionStopsBeforeSequence() throws Exception {
+    var publisher = new MigrationMasterTargetPublisher();
+    var declared = normal();
+    for (boolean warning : List.of(false, true)) {
+      var f = new Fixture();
+      f.badConstraintUpdate = !warning;
+      f.badConstraintWarning = warning;
+      assertThrows(SQLException.class, () -> workflow(publisher, f, declared));
+      assertEquals(SQL.subList(0, CONTENT_END + 1), f.sql);
+      assertEquals(REFERENCE_SCALARS_END, f.scalarReads);
+      assertEquals(0, f.preparedCreates);
+      assertEquals(0, f.preparedExecutions);
+      assertEquals(0, f.analyzes);
+      assertEquals(CLOSE_RESULTS.get(CONTENT_CLOSE), f.resultCloses);
+      assertEquals(PREPARED_FIRST_CLOSE + 1, f.closeAttempts);
+    }
+  }
+
+  @Test
+  void target038DeferredPhaseFailureKeepsPrimaryAndCleanupIdentity() throws Exception {
+    var publisher = new MigrationMasterTargetPublisher();
+    var declared = normal();
+    for (boolean warningPhase : List.of(false, true)) {
+      for (int kind = 0; kind < failures().size(); kind++) {
+        for (int cleanup = 0; cleanup <= failures().size(); cleanup++) {
+          Throwable primary = failures().get(kind);
+          Throwable secondary = cleanup == failures().size() ? primary : failures().get(cleanup);
+          var f = new Fixture();
+          f.badSql = warningPhase ? -1 : CONTENT_END;
+          f.failConstraintWarning = warningPhase;
+          f.failure = primary;
+          f.badClose = PREPARED_FIRST_CLOSE;
+          f.closeFailure = secondary;
+          assertSame(
+              primary, assertThrows(primary.getClass(), () -> workflow(publisher, f, declared)));
+          assertEquals(secondary == primary ? 0 : 1, primary.getSuppressed().length);
+          if (secondary != primary) assertSame(secondary, primary.getSuppressed()[0]);
+          assertEquals(SQL.subList(0, CONTENT_END + 1), f.sql);
+          assertEquals(0, f.preparedCreates);
+          assertEquals(0, f.preparedExecutions);
+          assertEquals(0, f.analyzes);
+          assertEquals(CLOSE_RESULTS.get(CONTENT_CLOSE), f.resultCloses);
+          assertEquals(PREPARED_FIRST_CLOSE + 1, f.closeAttempts);
+        }
+      }
+    }
+  }
+
   private static int catalogFieldCount(int table) {
     return table < COLUMN_CATALOG_TABLES ? COLUMN_CATALOG_FIELDS : CATALOG_FIELDS;
   }
@@ -1274,6 +1326,10 @@ final class MigrationMasterTargetPublisherTest {
     private int statementCreates;
     private int preparedCreates;
     private int preparedExecutions;
+    private boolean badConstraintUpdate;
+    private boolean badConstraintWarning;
+    private boolean failConstraintWarning;
+    private boolean constraintWarningPending;
     private int analyzes;
     private int scalarReads;
     private int resultCloses;
@@ -1333,9 +1389,14 @@ final class MigrationMasterTargetPublisherTest {
                     int operation = sql.size();
                     assertTrue(
                         operation < PREPARE_END
+                            || operation == CONTENT_END
                             || List.of(27, 28).contains(operation)
                             || operation >= ANALYZE_FIRST);
                     recordSql(update);
+                    if (FLUSH_SQL.equals(update)) {
+                      constraintWarningPending = true;
+                      return badConstraintUpdate ? 1 : 0;
+                    }
                     if (update.startsWith("ANALYZE ")) analyzes++;
                     return update.startsWith("INSERT INTO ") ? (empty ? 0 : 1) : 0;
                   case "executeLargeUpdate":
@@ -1358,6 +1419,13 @@ final class MigrationMasterTargetPublisherTest {
                       return contentTable == nullContentResult ? null : contentResult(contentTable);
                     return result();
                   case "getWarnings":
+                    if (constraintWarningPending) {
+                      constraintWarningPending = false;
+                      if (failConstraintWarning) throw failure;
+                      return badConstraintWarning
+                          ? new SQLWarning("synthetic deferred constraint")
+                          : null;
+                    }
                     return badWarning == analyzes - 1
                         ? new SQLWarning("synthetic skipped analyze")
                         : null;

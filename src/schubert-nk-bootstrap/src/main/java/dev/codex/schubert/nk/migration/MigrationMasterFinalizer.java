@@ -12,9 +12,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Borrowed-owner identity/statistics finalization, never authorization or a DB migration receipt.
- * NK-MIG-001; MIG003005006/MIG-DAT005/FUN004/DAT004/TST; UI223242254; SS311/331/V002/343 SSC371;
- * PT-MIG-FINAL001..028. setval is not rolled back: partial failure requires caller recovery, no
- * retry.
+ * NK-MIG-001; MIG003005006/MIG-DAT005/FUN004/DAT004/TST; UI223242254; SS311/331/V002/343
+ * SSC371/406; PT-MIG-FINAL001..030. setval is not rolled back: partial failure requires caller
+ * recovery, no retry.
  */
 @NullMarked
 public final class MigrationMasterFinalizer {
@@ -38,6 +38,10 @@ public final class MigrationMasterFinalizer {
     @Nullable Throwable primary = null;
     try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
+      if (statement.executeUpdate(
+                  "SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATE")
+              != 0
+          || statement.getWarnings() != null) throw invalid();
       // All five checks precede the first nontransactional setval or ANALYZE call.
       for (int index = 0; index < IDENTITY_TABLES.size(); index++)
         requireResult(
