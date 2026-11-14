@@ -1,5 +1,21 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC396 Current音声role十一byte保持と前進・非切捨て切戻し（2026-11-15）
+
+NK-MIG-001/NK-DDL-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI223227242254、SS311331/V002/343。BUG2943/YKT2472: Current source schemaのaudio_role textとgeneratorはmovie_audio（UTF8 11byte）を有効に保存するが、NKのSS331/343とRow/DDLが8byteで拒否する。RD/UI/wireのsource検索ではこの内部幅8指定やaudio_role公開fieldは無く、Current保存値を改名/切捨てず保持するためのSS範囲補正である。新しい業務role enumや表示・電文・既baseline/DIFを変更しない。実Current該当件数/実DB再現は不明・未実行、source根拠による不整合として記録しQA不要。
+
+既適用V001..V029の全SQLはbyte同一を保持し、API migration V030__preserve_current_audio_role.sqlを新規追加する。Flywayの既owner/transaction契約内でaudio_files.audio_roleをvarchar(11)へ拡張し、同名ck_audio_files_audio_role_bytesをoctet_length BETWEEN1 AND11へ置換する。schema/table/他列/PK/UK/FK/index/role/grantを変えず、table数24/明示table制約75/固定66columnも維持。V002は歴史varchar8のまま、V030後の実効型がvarchar11/byte1..11でありColumnVerifierはこの実効schemaを検査する。実DB適用/配備/署名/native資格は別HOLDで、本hostはSQL textの独立review・hash・後条件だけを確認し実DB PT PASSへ混ぜない。
+
+切戻しartifact src/deployment/migration/030_audio_role_rollback.sql.templateは明示transactionとACCESS EXCLUSIVE lockを保持し、octet_length(audio_role)>8の行があれば固定エラーで全体拒否する。その場合切捨て/改名/削除を行わず、既Backup/別切戻し契約へ利用者判断を引き継ぐ。許可された対象・credential/DB認証の下でON_ERROR_STOP=1を必須とし、検査後だけ旧byte1..8制約/varchar8へ戻す。未認証DBや本hostから実行しない。新authority/権限/自動復旧を発行しない。
+
+AudioFileCopyRowのaudio_role byte上限は名前付き定数11へ変更、他列/null/NFC/control/時刻/不変契約は不変更。ColumnVerifierと独立Column/Target各fixtureのaudio_role二type属性だけvarchar8→11へ、ReferenceVerifierの固定47CHECK中audio_role bytes条件だけ8→11へ変更し独立SQL期待値を対応させる。他65descriptor/75制約key-status/元順・JDBC所有/primary/93SQL56scalar/75Result16close-timeoutは保持。ContentVerifierはString値を比較し幅非依存、ConstraintVerifierはname/type/key/statusだけ、AssetStagingTablesは実効table型をCTASで継承するため非該当。既CurrentAudioReaderはmetadataを保持し実asset/role/ms変換を受入れない。
+
+PT-AUDIOROW017を一件追加しmovie_audioと同byte11 ASCII/Unicode境界を独立literalで受入、12byte/空/control/非NFCを拒否、既16定義のrole境界だけ11へ更新。他既818予測をsourceで確認し、全migration39Main/全42Testではなく現41Test source/54physicalの817＋新1=whole818を同一source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter全Code四100で資格。全Mainに専用Testと生成Testを含め、歴史645/818以外の別execを合算しない。未関連36Main/他Testはhash保持し、変更TestはRow/Column/Target/Referenceに限定する。
+
+DatabaseMigrationTestのresource inventoryにV030を追加し最新migration数30へsource更新、実DB TestはHOLDのままnot-runでありJava818のPASSへ算入しない。DDL/rollbackは独立text golden/拘束条件/旧29hash同一・forward/rollback後条件とsource reviewを記録し、実DBの型/constraint/index/FK/role/grant/rollback guard/transaction再試験は後続未受入として残す。BUG/YKTはJava対策・818PTとDDL静的完了だけで総合CLOSEDへせず、実DB再試験HOLDを明示する。
+
+追加設計手戻り3/9/9.9pp cap10、元費用/SV/各群開始保持、元計画/追加発見/手戻り/再認証/toolを区分し追加scope予算で進捗率を作らない。DDL owner WBS-P004-01、関連migration Java WBS-P019-03、今回の共通原因是正費はWBS-P01903へ一回だけ帰属させ重複課金しない。専有実費token null、新Main0/新JUnit1、正本625/元190の受入・正式1964/53・工数率をJava件数から増やさない。実DB/原本・Backup/key/native/VM/server/RootActual4等HOLDは全維持、RD/UI/QA変更なし。
+
 ## SSC395 Current音声十列とdecimalのborrowed snapshot読取り（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT002005/FUN004/DAT004/TST/UI227242254/SS311331/V002/343。CurrentAudioProjectionReaderはcaller認証済みCurrent readonly/nonauto snapshotのaudio_files十列を読むJDK JDBC部品。固定SQL SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id 。Current DDL型/null契約のみsource-only確認、created_atは別共通migration時刻のため選択しない。実DB/master/filepayload/Current generator/資格/権限操作0。
@@ -510,7 +526,7 @@ Entry必要whole72＋AudioRow16＋Writer12＋新Dataset20=whole120、全9Main17p
 
 SS34310.1.4・SS331/V002・UI242のaudio_files十二列の宣言COPY行をbootstrap.migration.AudioFileCopyRowに具体化する。RD MIG-DAT-002/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004、UI227/242/254、WBS-P01903.02。実Current抽出/素材採取/全件数/対応ID/link/game/FK・DB/COPY SDK/全migrationは別でHOLD解除しない。非秘密synthetic metadataだけを受ける純値であり、実素材やDB/鍵/Root/FS/permitを操作しない。
 
-列順はid,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at。id/byte_sizeはcanonical正N12 1..999999999999、game1/2、duration nullable canonical0..999999999999。必須textはNFC/正UTF8/ISO control無しでstorage/display1..512byte、file_name1..256、basename1..255、audio_role1..8byte。audio_roleにDDL未指定のenumを追加しない。storageは相対POSIXで先頭/末尾slash/backslash/空segment/dot/dotdotを拒否する。containerはnullable、空保持、varchar16 Unicode codepoint以内（byte上限へ変更しない）、他text同様NFC/正UTF8/control無し。sha256はlowerhex64、時刻はUTC canonical Instant.toString・0001..9999/µs精度・全共通transaction時刻の合意は上位batch責務。値をtrim/正規化/再採番/欠落補完しない。
+列順はid,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at。id/byte_sizeはcanonical正N12 1..999999999999、game1/2、duration nullable canonical0..999999999999。必須textはNFC/正UTF8/ISO control無しでstorage/display1..512byte、file_name1..256、basename1..255、audio_role1..11byte（SSC396/V030後。V002履歴8byteは不変）。audio_roleにDDL未指定のenumを追加しない。storageは相対POSIXで先頭/末尾slash/backslash/空segment/dot/dotdotを拒否する。containerはnullable、空保持、varchar16 Unicode codepoint以内（byte上限へ変更しない）、他text同様NFC/正UTF8/control無し。sha256はlowerhex64、時刻はUTC canonical Instant.toString・0001..9999/µs精度・全共通transaction時刻の合意は上位batch責務。値をtrim/正規化/再採番/欠落補完しない。
 
 constructorはNullable List/nullable要素を受け、null入力/12列以外/必須null/不正値を固定IAEで拒否。private deep list snapshotと変更不能返却、columnNames固定immutable。copyBytesはnonnull既PostgresCopyTextEncoder.encodeRowへ委譲し毎回byte別所有、nullencoder固定IAE。診断/toStringにpath/本文/生値を入れない。既codec/Scenario各Main/Testの全byte・外部値を変えない。
 
