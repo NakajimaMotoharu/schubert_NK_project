@@ -1,0 +1,30 @@
+{
+  "ssc": 371,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+  "source": "73d7d23fdb17c7dad4d722bcd692968b52c8b665",
+  "title": "移行identity最大値整合と六表ANALYZE",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311/331/V002/343370。MigrationMasterFinalizerは正規callerが既に保有する停止/排他/初期DB移行transaction/owner権限のConnectionと不変六表宣言datasetを借用する内部部品。callerの認証/許可/排他/原本Backup/実DBはこの部品から作成・認定しない。null引数は副作用前の固定IAE、autoCommit=true/nullvendor Statementは固定SQLException。Connectionにcommit/rollback/setAutoCommit/setRole/close/再接続/自動再試行0。新Statementをnonnull所有しtimeout30秒。\n\n五identity対象は固定speakers/script_files/script_entries/audio_files/media_assets、ID最大値は既constructor検証済み宣言rowsから算出、空は0。最初に五つ全てのSELECT COALESCE(MAX(id),0) FROM schubert.<固定表>を一行/getLong(1)/wasNull=false/期待最大と完全一致/余分行無しで照合し、五つ全成立前にsetval又はANALYZEを発行しない。識別子は固定列挙、ユーザSQL入力0。続いて各表のSELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.<固定表>', 'id'), ?, ?)を新PreparedStatement/timeout30で順に実行し、value=max又は空の1をsetLong(1)、is_called=max>0をsetBoolean(2)へ束縛する。返却scalarは束縛valueと完全一致を要求。N12最大999999999999自体は許容し+1 overflowや新上限を導入しない。空1/falseは次nextval=1、非空max/trueは既設定INCREMENT1/MAX/no-cycleの次値規則を保持する。nextvalを検証名目で消費しない。\n\n最後に固定六表speakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksへ各ANALYZE schubert.<固定表>をexecuteUpdateで発行、updatecount0とgetWarnings()==nullを要求する。VERBOSE/SKIP_LOCKED/無限定database ANALYZE/権限変更を行わない。warningがあれば固定SQLExceptionで停止しskipped表を成功化しない。権限はSS343既migration actorの限定SET ROLE nk_ownerをcallerが正規確立し、当部品は権限昇格しない。最終index/FK-CK-UK/orphan/game/link順・asset公開/実移行受入は別の未完条件。\n\nPostgreSQL18公式 https://www.postgresql.org/docs/18/functions-sequence.html と https://www.postgresql.org/docs/18/sql-analyze.html を根拠とする。setvalは他transactionへ直ちに可視でrollbackで取り消せず、クラッシュ時の永続結果はUNKNOWNになり得る。したがって当部品の失敗は全操作未実施とは扱わず、正規callerが停止/排他・原本を保持して実状態を再認証/復旧するまで自動再実行しない。一transactionでinsertする承認SSを、sequenceにもtransaction rollback性があるという意味へ変更しない。実運用でこの条件が未確立なら呼出HOLD。JDBC Proxy資格は実DB・sequence状態・統計更新/復旧を証明しない。\n\n資源はSSC366/369のnonnull所有・元SQL/runtime/Error同instance再throw・private型別closeStatement/closeResultとprimary.addSuppressedを維持。PreparedStatementもStatementとして一回close、nested readResult/PreparedResult/PreparedStatement/外側Statementのclose障害をその順で元primaryへ保持し、close単独は伝播、selfsuppressionはJDKfailureのまま。全診断/toString固定redacted・SQL/生値/例外をloggerへ渡さない。\n\nPT-MIG-FINAL001..028: 001独立SQL五read→五setval→六ANALYZE/束縛/timeout/closeと借用所有、002全空MAX0→1false、003二引数null、004autoCommit拒否、005auto/create元三型failureとnullStatement、006outertimeout、007五preflight位置のnull/missing/SQLNULL/wrong/extra、008preflight query元三型、009各next/getLong/wasNull/next2 failure、010readResult close単独、011readprimary+resultclose+outerclose、012最後のmax不一致でsetval/ANALYZE0、013五prepare null/元failure、014五setLong failure、015五setBoolean failure、016五preparedtimeout failure、017五setval scalar各異常、018五executeQuery failure、019五prepared result read各phase failure、020preparedResult close、021三段primary/Result/Prepared/outer close順、022preparedclose単独、023outerclose単独、024六ANALYZE update異常/warning/SQL-runtime-Error/警告取得failure、025拒否後fresh正常、026N12最大/宣言順/空以外is_called、027固定redaction/例外無正常化、028finite8workers64/Future5/finallyshutdownNow-await10。SQL/列順/param/max/close期待はV002・公式仕様と独立memory fault fixtureで作りproductionmethodからexpected生成0。\n\n新28＋必要pure383=whole411、全23Main36physicalを一source/一exec/Root静的・NullAway-lintWerror/全CRC-init/default＋無filter全Code四100で確認。旧25 migrationMain/既479Test定義は不変、既JDBC96は証拠参照のみ。実Current/原本/全DB/権限/復旧/Rootnative/CHR/global451/ITST/全HOLD未受入。追加1.65/4.95/9.9pp cap10は製造・独立28と必要全411を含み、元費用/SV/群開始値保持、実専有費/token null。既SS内部具体化でRD/UI/DDL/grant変更・新QA不要。",
+  "testIds": "PT-MIG-FINAL001..028",
+  "estimate": {
+    "low": 1.65,
+    "base": 4.95,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "066_移行identity最大値整合と六表ANALYZE・独立二十八仕様.md",
+  "previousForecastName": "1894_WBS65予実・六表master通常三百八十三後版518.json",
+  "forecastName": "1896_WBS65予実・移行最終化不足追加版519.json",
+  "revision": "519-MISSING_DECLARED_MASTER_SEQUENCE_ANALYZE_FINALIZATION",
+  "findingReason": "Six-table COPY/staging accepts explicit identity IDs, but sequence synchronization and required bounded six-table ANALYZE are absent. Preflight all declared maxima before any mutation and preserve nontransactional setval uncertainty, actor ownership and actual DB HOLD.",
+  "workId": "P01903_SSC371_FINAL28_NORMAL411",
+  "planKey": "plannedMasterFinalizerSSC371",
+  "startRecordName": "1897_WBS65移行最終化製造通常開始.json",
+  "startInputName": "2801_master_final411_start.json",
+  "designSlot": "PG31748-ssc371-master-final-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343 ETL4-5/SSC370、WBS-P01903.02。五MAX全preflight/param setval/六限定ANALYZEと元例外・nonnull終了。setval非rollback/UNKNOWNと正規caller所有を明示、実DB/権限/復旧/HOLD未受入。RD/UI/DDL/grant変更・QA不要。",
+  "moduleSummary": "bootstrap.migration.MigrationMasterFinalizerは借用正規Connection上の五MAX照合→五Prepared setval→六限定ANALYZEを行う。nonnull cleanup/固定診断/自動再試行0。PT-MIG-FINAL001..028/全411/full23Main36physical。実DB/原本/復旧/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC371-MASTER-FINALIZATION28-NEEDED411-20261114",
+  "run": "PG31762-MASTER-FINAL-CLOSED411",
+  "scope": "MissingMasterFinalizer PG28+neededpure383whole411/full23Main36physical 1.65/4.95/9.9cap10. AllfiveMAXpreflight/Preparedsetval/ANALYZEsix/noownerchange/nontransactionalunknown/noretry. NoactualDBRootnativeSDKActual4aruHOLDactions; old25Main479Testsunchanged",
+  "nextCommand": "PublishSSC371SS311343914onlymainbeforePG. ImplementfixedtableMAX/Preparedsetval/sixANALYZE28+independentJDBCProxy/faults/needed411/Rootstatic/CRC-init/default-raw36allCode. PreserveactualDBRootnativeHOLD/nopermissionchanges/nooldsuccessconfirmationreplay. Ordinarygroupnotstop."
+}

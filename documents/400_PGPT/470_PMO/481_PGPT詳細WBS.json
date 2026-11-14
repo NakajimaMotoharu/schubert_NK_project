@@ -12516,7 +12516,8 @@
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
-        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java"
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java"
       ],
       "requirementIds": [
         "SCP-005",
@@ -12565,7 +12566,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -12962,6 +12964,14 @@
             "sha256": "62d86615866422d8163ecb7fb05dbc81515746deef9691acf15aa0faece2d51e"
           },
           "global451Accepted": false
+        },
+        "plannedMasterFinalizerSSC371": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/066_移行identity最大値整合と六表ANALYZE・独立二十八仕様.md",
+            "sha256": "0aa7123c17bdf62e9fbb24336acabc1685cb82404ed3c7089c95aaf7935ef428"
+          },
+          "actualRuntimeQualification": false
         }
       },
       "acceptanceChecks": [
