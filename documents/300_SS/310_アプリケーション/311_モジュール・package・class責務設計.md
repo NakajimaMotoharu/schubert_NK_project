@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC407: MigrationCleanupIdentityTest10もFinalizerの呼出元として全948再認証、他44Test同byte。Main不変更・SSC406同群手戻り。
+
 SSC406: Finalizer.finishへ固定link constraint即時評価をMAX/setval前一回追加、親Target同経路へ接続。既Main1＋Target doc追跡更新、新Final2/Target2=全948/45Main65physical予定。caller TX commit/rollback・実DB/HOLD操作0。
 
 SSC405: 既Column第十一metadataでV002 false/lower(body)と他64 default不存在/atthasdef整合を検査。Column026/Target036新2と全944/45Main65physical予定。DDL/DB設定変更0・実DB/HOLD未受入。
