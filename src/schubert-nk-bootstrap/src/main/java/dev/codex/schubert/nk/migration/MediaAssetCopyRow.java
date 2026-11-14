@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -87,6 +88,42 @@ public final class MediaAssetCopyRow {
     if (type.equals("MUSIC") && !logicalId.equals(new MusicLogicalId().fromDisplayPath(display)))
       throw invalid();
     retainedFields = Collections.unmodifiableList(fields);
+  }
+
+  public String id() {
+    return required(retainedFields, 0);
+  }
+
+  public String logicalId() {
+    return required(retainedFields, 1);
+  }
+
+  public String mediaType() {
+    return required(retainedFields, 2);
+  }
+
+  public String storageRelativePath() {
+    return required(retainedFields, 6);
+  }
+
+  public String displayPath() {
+    return required(retainedFields, 7);
+  }
+
+  public String byteSize() {
+    return required(retainedFields, 9);
+  }
+
+  public String sha256() {
+    return required(retainedFields, 10);
+  }
+
+  public String createdAt() {
+    return required(retainedFields, 16);
+  }
+
+  public Optional<String> parentLogicalId() {
+    return Optional.ofNullable(retainedFields.get(12));
   }
 
   public List<String> columnNames() {

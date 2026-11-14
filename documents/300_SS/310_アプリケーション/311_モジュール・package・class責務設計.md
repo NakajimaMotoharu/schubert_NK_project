@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC359: bootstrap.migration.MediaAssetCopyBatchはMediaAssetCopyRow九typed getterを使用し、宣言集合のPK/UK/親FK/同時刻とAssetManifest一致をCOPY前に検査する。writer借用終了責務を保持、API/Web/vendor依存0、実素材/DB/全ETLは上位。PT-MIG-MEDIABATCH001..020。
+
 SSC358: bootstrap.migration.VideoMigrationCatalogue/手書きnested VideoはUI223全20固定metadataを所有し、宣言AssetManifestとtarget IDsをMediaAssetCopyRowへ結合する。既bootstrap部品だけに依存、API/Web/vendor依存0、実素材/DB/全ETLは上位。PT-MIG-VIDEO001..024。
 
 SSC357: bootstrap.migration.MediaAssetCopyRowはSS34310.1.4/SS331/V002+V029/SS333のmedia_assets十七列値とpair/type-MIME/MusicIDを検証し既encoderへ渡す。既MusicLogicalIdと同module、業務API/Web/PG vendor SDK依存0、実DB/全ETLは上位。PT-MIG-MEDIAROW001..020。

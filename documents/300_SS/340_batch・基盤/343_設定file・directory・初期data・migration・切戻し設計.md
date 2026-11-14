@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC359 MediaAsset集合制約とmanifest結合（2026-11-14）
+
+SS34310.1.4とSS331/V002のmedia_assets PK/UK/親FKを、bootstrap.migration.MediaAssetCopyBatchの宣言metadata集合へ具体化する。RD MIG-DAT-003/MIG-DAT-004/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004、UI223/242/243/254。実file/DB/Current129+20件の完全性・Musicpair算出/Video固定表の受入は当batchで代用しない。任意の宣言media subsetを検査する純関数部品であり、全移行の149件を成立済みとしない。
+
+constructorはNullable AssetMigrationManifestとNullable List<Nullable MediaAssetCopyRow>を受けてsnapshotする。manifestはVIDEO/MUSICだけ、行数とmanifest件数を一致させる。行の個別制約は既immutable final MediaAssetCopyRowで成立しており再解釈しない。各rowのid一意、logical_id一意、(media_type,storage_relative_path)一意、全行同created_atを検証する。storage一意はDDLのtype scopeを維持し、全type同一pathを新規禁止しない。ただし現在AssetManifestの全target一意契約は別途成立している。display_pathでmanifest Entryを一回consumeし、kind、targetPath、byteLength、sha256が全値一致を要求する。同件数と一回consumeによりunknown/missing/重複sourceを拒否する。正規化/修復/再採番/再試行/IO無し。全行のlogical_idを構築してからnonnull parent_logical_idの実在だけを確認する。DDLが許容する後方参照・自己参照・cycleを新たに禁止せず、VIDEO/MUSIC間を勝手に制限しない。実catalogueの四parent正否は別受入。空manifest/空Listは空batch。
+
+MediaAssetCopyRowへid/logicalId/mediaType/storageRelativePath/displayPath/byteSize/sha256/createdAt/Optional parentLogicalIdの九typed getterを追加する。既private requiredでconstructor invariantを再利用し、新しい入力/validation branch/DDL/値を変更しない。Batchはimmutable List<MediaAssetCopyRow>と同じ十七列Listを返し宣言入力順を保存する。columnNamesは既Rowの共通immutable列をstatic定義として再利用できるよう公開static methodへ変更せず、Batchは空も扱う固定17列定義と全列goldenを持つ。copyBytes(nullable encoder)はnull固定IAE、既encoderで十七列rowsを生成。writeTo(nullable writer, nullable borrowed OutputStream)はnull固定IAE、既writerへ委譲、借用sinkをclose/flushしない。IOException同一instance/partial bytesを維持し、後続transactionのrollback責務を奪わない。固定redacted診断/toString。
+
+PT-MIG-MEDIABATCH001..020: 独立二VIDEO一MUSICの全十七列COPY golden、空batch、ID重複、logical重複、type/storage重複、同時刻不一致、後方親/欠落親/自己cycleのDDLどおり、manifest件数大小/未知同件数/宣言重複source、kind不一致/非media各kind、target/size/hash不一致、nullmanifest/list/要素、row snapshot/immutable/宣言順、九getter型/Optionalと全値、byte返却所有、借用stream正常/closeflush0、IO同一例外/partial/再呼出、null encoder/writer/sink、異常入力後独立正常、finite8worker64/Future5/finallyshutdownNow-await10、redaction。synthetic tiny metadataだけ、music stableIDは独立Python SHA固定vector。Mainでexpectedを生成しない。
+
+新Batch20＋Row20＋Manifest12＋MusicID12＋codec12＋writer12=whole88、全6Main10physicalを同source/一exec/通常Root静的/NullAway/lintWerror/独立CRC-init/XML/四100/実Code差で検証する。既Manifest record/enum既定生成差は別/global451未承認。九getter追加でRowの全20も必要回帰、旧成功確認だけの再演0。追加不足1.55/4.65/9.3未較正を詳細+PG20とRow九getter .95/2.85/5.7cap6、normal88 .6/1.8/3.6cap4へ分離。元費用/SV上限保持、実token/専有費null。実DB/全ETL/149素材/Root/native/CHR/451全体/ITSTと全HOLDは未受入。
+
+
 ## SSC358 Video固定20catalogueとCOPY生成（2026-11-14）
 
 UI223§6の固定動画20件とSS34310.1.3/4をbootstrap.migration.VideoMigrationCatalogueへ具体化する。RD MIG-DAT-003/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004/FIL-003/FIL-005、UI223/242/243/254、SS311/331/333/343。main/SUBTRACK15（Main11＋Sub4）、OVA4、opening1のlogical ID/title/category/Current相対display path/parent/表示順1..20を承認表どおり固定、静的closedデータ以外を登録する公開APIを作らない。全Main/SQLに既承認20catalogueが存在しないことをsource監査済み。実asset/root/実hash/Currentinventory/全migration/DB/HOLDは別未完。
