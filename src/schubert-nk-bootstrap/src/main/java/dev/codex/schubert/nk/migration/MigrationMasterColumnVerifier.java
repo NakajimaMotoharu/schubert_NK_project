@@ -12,8 +12,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Fixed V002 physical column attributes, never full catalog or actual DB qualification. NK-MIG-001;
- * MIG003005006/MIG-DAT005/DAT004/TST; UI242254; SS311/331/V002/343 SSC380; PT-MIG-COLUMN001..022.
- * The caller owns authentication, exclusivity and the transaction.
+ * MIG003005006/MIG-DAT005/DAT004/TST; UI242254; SS311/331/V002/343 SSC380/387;
+ * PT-MIG-COLUMN001..023. The caller owns authentication, exclusivity and the transaction.
  */
 @NullMarked
 @Immutable
@@ -21,7 +21,7 @@ public final class MigrationMasterColumnVerifier {
   private static final int QUERY_TIMEOUT_SECONDS = 30;
   private static final int FETCH_ROWS = 1000;
   private static final String QUERY_PREFIX =
-      "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='";
+      "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='";
   private static final String QUERY_SUFFIX =
       "' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum";
   private static final List<String> QUERIES =
@@ -158,6 +158,8 @@ public final class MigrationMasterColumnVerifier {
         fields.add(result.getString(7));
         // Private fixed descriptors have exactly six nonnull attributes, including empty flags.
         if (!fields.equals(List.of(descriptor.split("\t", -1)))) throw invalid();
+        boolean notNullConstraintValid = result.getBoolean(8);
+        if (result.wasNull() || !notNullConstraintValid) throw invalid();
       }
       if (result.next()) throw invalid();
     } catch (SQLException | RuntimeException | Error failure) {
