@@ -338,7 +338,7 @@ final class CurrentMigrationProjectionTest {
         new AssertionError("synthetic error"));
   }
 
-  private static Fixture normal() {
+  static Fixture normal() {
     var f = new Fixture();
     f.tables.add(
         new ArrayList<>(List.<Object[]>of(new Object[] {-2L, 1, NAME, NORMALIZED, false, null})));
@@ -359,7 +359,7 @@ final class CurrentMigrationProjectionTest {
     return f;
   }
 
-  private static final class Fixture {
+  static final class Fixture {
     final List<List<Object[]>> tables = new ArrayList<>();
     final List<String> calls = new ArrayList<>();
     final List<String> sql = new ArrayList<>();

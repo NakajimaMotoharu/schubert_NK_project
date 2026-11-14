@@ -1,0 +1,21 @@
+"""Independent Python COPY/hash literals; explicit prior Main/Test and two-token fixture seam proof."""
+from pathlib import Path
+import json,hashlib,datetime,subprocess,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG32876-current-assembly918-source-v1';assert not (e/'manifest.json').exists();e.mkdir(exist_ok=True);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();main=r/'src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java';test=r/'src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java';changed='src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java';old={};tokens=lambda t:re.findall(r'"(?:[^"\\]|\\.)*"|\w+|[^\s]',t)
+for folder,source in [('main','d0e647059b8374362c31aa63f9d6ea714c635730'),('test','930691b1c65618eaa8b521017f330a0e0f15378b')]:
+ for p in (r/('src/schubert-nk-bootstrap/src/'+folder+'/java/dev/codex/schubert/nk/migration')).glob('*.java'):
+  if p in [main,test]:continue
+  path=str(p.relative_to(r));previous=subprocess.check_output(['git','show',source+':'+path],text=True)
+  if path==changed:
+   inverse=p.read_text().replace('  static Fixture normal() {','  private static Fixture normal() {').replace('  static final class Fixture {','  private static final class Fixture {');assert tokens(inverse)==tokens(previous);seam=dict(path=path,priorUnit=source,priorSha256=hashlib.sha256(previous.encode()).hexdigest(),currentSha256=sha(p),onlyTwoVisibilityTokensChanged=True,oldTwelveTestsAndFixtureBodiesUnchanged=True)
+  else:assert sha(p)==hashlib.sha256(previous.encode()).hexdigest(),path;old[path]=sha(p)
+assert len(old)==87 and len(re.findall(r'@Test\b',test.read_text()))==20
+H='ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad';M='6f71a62541ab381ee0186f4f946bb6af57b0824509fc4ab61fd99b3bcac5105c';T='2026-01-02T03:04:05Z';assert hashlib.sha256(b'abc').hexdigest()==H and hashlib.sha256(b'SCHUBERT-NK:MUSIC:music/c.ogg').hexdigest()==M
+rows=[[['1001','1',' Namé ','stored_norm','false',None,T]],[['501','1','1','scenario/f.txt','p/f','f',None,None,H,'3',T]],[['601','1','501','1','0','1','narration',None,None,' Body ',' saved raw ',T]],[['701','1','audio/a.ogg','p/a','a','a_KEPT','movie_audio',None,'1234','3',H,T]],[['2','video-b','VIDEO','B','MAIN',None,'video/b.mp4','current/b.mp4','b.mp4','3',H,'video/mp4',None,None,None,'2',T],['3',M,'MUSIC','C','BGM',None,'music/c.ogg','music/c.ogg','c.ogg','3',H,'audio/ogg',None,None,'N','1',T]],[['601','701','1','voice','7',T]]]
+def field(s):return r'\N' if s is None else s.replace('\\','\\\\').replace('\t',r'\t').replace('\n',r'\n').replace('\r',r'\r')
+wire=[]
+for name,table in zip(['speakers','files','entries','audio','media','links'],rows):
+ value=''.join('\t'.join(field(s) for s in row)+'\n' for row in table).encode();wire.append(dict(table=name,rows=len(table),columns=len(table[0]),bytes=len(value),sha256=hashlib.sha256(value).hexdigest(),hex=value.hex()))
+generator=Path('/home/mini/codex/project1/schubert_project/program/database/generate_scenario_sql.py');text=generator.read_text();anchor='rel = path.relative_to(game_dir).as_posix()';assert text.count(anchor)==2
+v=dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),previousProductionCoreMain='d0e647059b8374362c31aa63f9d6ea714c635730',previousUnitSource='930691b1c65618eaa8b521017f330a0e0f15378b',oldUnchangedSourceHashes=old,fixtureVisibilitySeam=seam,newMain=dict(path=str(main.relative_to(r)),sha256=sha(main)),newTest=dict(path=str(test.relative_to(r)),sha256=sha(test)),independentRows=rows,independentSixWire=wire,currentRootSourceOnly=dict(path='schubert_project/program/database/generate_scenario_sql.py',sha256=sha(generator),anchor=anchor,occurrences=2,generatorImportedOrExecuted=False,masterDataRead=False),wholeExpected=918,newDefinitions=20,oldDefinitions=898,allMain=44,physicalClasses=64,expectedFromProduction=False,privateRootOrHeldClassActions=0,actualDbOrMasterBackupKeyFileVmAuthorityActions=0,newAcceptance=0)
+(e/'manifest.json').open('x').write(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,new=20,old=898,whole=918,wire=[{k:x[k] for k in ['table','rows','bytes','sha256']} for x in wire]))

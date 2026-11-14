@@ -1,0 +1,31 @@
+{
+  "ssc": 402,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java",
+  "source": "d0e647059b8374362c31aa63f9d6ea714c635730",
+  "title": "Current五snapshotから宣言六table Masterを組立",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT001002005/DAT004/TST、UI227242254、SS311331343。CurrentMigrationProjection.SourceSnapshotの五projectionを既mapping/asset/明示linkorderへ通して六table MigrationMasterCopyDatasetへ結合するCurrentMigrationAssemblerを追加する。現行generate_scenario_sql.pyのscript/audio両relがgame_dir相対であることをsource-only確認（generator import/実行0/素材read0）。従ってcallerの二game root-relative prefixをFile/Audioへ同じ明示値で渡し、pathを推測・補完しない。\n\nconstructorはNullable files:ScenarioFileMigrationMap、placement:ScenarioEntryPlacementMap、speakers:SpeakerMigrationMap、audioMappings:List<nullable AudioMapping>、linkOrders:List<nullable LinkOrder>、assets:AssetMigrationManifest、gameOneRoot/String・gameTwoRoot/Stringの八引数。先頭六nullは固定IAE、roots/各list要素と対応は既mapperの固定エラーへ委譲。内部で同files/placement/speakersからCurrentScenarioFileMapper/CurrentScenarioEntryMapperを作り、同assets/rootsからAudioMigrationMap、同placement/audioからCurrentAudioLinkMapperを生成して独立mapper間のidentity漂流を避ける。いずれも不変値を保持しraw入力Listは既constructorがsnapshot。assetsのVIDEO/MUSIC Entryだけを新AssetMigrationManifestへ分離しMedia用claimsとして保持、他kindはFile/Audioへ使い素材を捨てない。filtered claimsは純metadataで実file/hash資格でない。\n\nassemble(Nullable SourceSnapshot snapshot,Nullable List<nullable MediaAssetCopyRow> mediaRows,Nullable Instant migratedAt)は全nullを最初に固定IAE。Speakers.copyRows→FileMapper.copyRows→EntryMapper.copyRows→AudioMap.copyRows→LinkMapper.copyRowsの順で同共通時刻とsnapshotの対応listを渡す。linksは実entry/audio batchに再束縛される。MediaRowsを新ArrayList<Nullable MediaAssetCopyRow>でsnapshotし、保持mediaClaimsとMediaAssetCopyBatchを作って同artifactのkind/target/size/hash/件数/親参照/時刻を再照合する。ScenarioCopyDataset(files,entries)、MigrationCopyDataset(scenario,qualifiedAudio.audioRows(),qualifiedAudio.linkRows(),media)、MigrationMasterCopyDataset(speakers,content)を既constructorで順次組み、file-entry/audio/link/speaker/game/FK/PK-UK/全六table共通時刻を通した不変Masterを返す。既バリデーションの再利用で新たな重複枝や例外正常化を作らない。source保存raw_block NULL・不正duration等をtarget値に補完せず拒否する。Exception/Runtime/Errorは同instance伝播、成功prefixを公開しない。toString/自前message固定REDACTED。実IO/DB/transaction/鍵/原本/VM/authority/Root/native0、書出しは返した既Masterの借用stream APIが後続で扱う。\n\n通常PT入力のprivate SourceSnapshotはnew factory/反射で偽造せず既CurrentMigrationProjectionを独立JDK Proxy fixtureへ実行して作る。既CurrentMigrationProjectionTest.normal/Fixtureの二visibilityだけをpackage-privateへ変更して非秘密source fixtureを共有する。旧12Testメソッド/期待値/実装本文は同token保持、他既886 Main/Testは同byte。fixture生成にProduction readerを使うことと期待値生成は分離し、expected六table rows/wire/hashはV002列順・固定ID/game/明示order・独立Python SHA literalから作る。\n\nPT-MIG-CURRENTASSEMBLY001..020: 001一game六table全field literal、002六COPY stream固定wire/hash、003constructor各null/roots/要素null、004assemble全null、005全空、006source rawNULLを補完拒否、007speaker保存値/同game照合、008file exactpath/hash-size claims、009entry file/index/参照/保存body、010audio duration正確ms/role11/負値等target拒否、011link unknown/kind/明示疎order不変、012media kind/target/hash-size/件数/parent claim、013全共通時刻/µs/境界・media異stamp拒否、014四assetkind分離・保持、015file-placement/audio/link mapping不整合拒否、016独立UTF8/NULL/六wire、017constructor list/source snapshot不変・後破壊隔離、018media input iterable Runtime/Error同instance・部分成功非公開、019二gameID/FK/候補宣言保持、020有限8worker64/Future5/finallyshutdownNow-await10。許可通常PG/PTだけ、新driver/実DB/Current実snapshot・候補順witnessを取得しない。\n\n新Main1/new20、既43Main/45Test898のうちfixture visibility二tokenだけ変更、他は同byte保持。全44Main46Test64physical918をsame source一exec/RootNullAway-lint-CS-SB-PMD各site/全CRC-init/既定と無filter四100で検証し旧898を新成果に加算0。追加不足3/9/9.9pp cap10、旧残397.324/837.386/1643.415へ当不足だけ追加、元費用/SV/各群開始保持、専有実費token null。BUG2943/YKT2472/V030実DBHOLD維持。宣言target Master組立を実CurrentDB/候補順/素材認証・六table COPY実行・正式global451/CHR/ITST/全移行受入へ読み替えない。RD/UI/DDL/grant/QA変更不要。",
+  "testIds": "PT-MIG-CURRENTASSEMBLY001..020",
+  "estimate": {
+    "low": 3,
+    "base": 9,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "124_Current五snapshot六table組立・独立二十仕様.md",
+  "previousForecastName": "2015_WBS65予実・Current五読取全898後版572.json",
+  "forecastName": "2017_WBS65予実・Current六table組立不足追加版573.json",
+  "revision": "573-MISSING_CURRENT_SOURCE_SNAPSHOT_TO_TARGET_MASTER_AGGREGATE",
+  "findingReason": "Qualified source snapshots and mappers lack one production assembly into six-table Master with shared identity/asset bindings. Add internal deterministic aggregate; do not invent realCurrent ordering or DB/asset authority.",
+  "workId": "P01903_SSC402_CURRENT_ASSEMBLY20_WHOLE918",
+  "planKey": "plannedCurrentMigrationAssemblerSSC402",
+  "startRecordName": "2018_WBS65Current六table組立開始.json",
+  "startInputName": "3117_current_assembly918_start.json",
+  "designSlot": "PG32872-ssc402-current-assembly-design-only-v1",
+  "ledgerSummary": "五Current snapshot→共通identity/asset/linkorder→六table Master、保存値非修復/全FK-game-時刻・独立20＋既898=918。旧fixture二visibilityだけtestability共有、実Current/DB/全移行/HOLD未受入。",
+  "moduleSummary": "CurrentMigrationAssembler constructor/assembleは同map/asset/rootから既mappersを構成しSourceSnapshot＋media宣言から六table Masterを生成。new20/全44Main64physical918予定、実Current資格/DB/原本操作なし。",
+  "groupId": "PGPT-WBS65-SSC402-CURRENT-ASSEMBLY20-918-20261115",
+  "run": "PG32886-CURRENT-ASSEMBLY-CLOSED918",
+  "scope": "MissingCurrentMigrationAssembler/full44Main64physical918. FiveSourceSnapshot lists through sharedrawmaps/assets/explicitlinkorder to six-table Master. Testfixture two visibilitytokens only. Additional3/9/9.9cap10 allHOLDunchanged.",
+  "nextCommand": "PublishSSC402SS311343914onlymain beforePG. ImplementCurrentMigrationAssembler20 and shared JDK testfixture visibility only; independent sixrow/wire/hash oracle; all44Main/64CRC/918/Rootstatic/default-raw. Keep actualCurrent snapshot/order/asset/DB/COPY/whole migration/HOLD gaps. No actualDB/master/filepayload/driver/VM/RootnativeActual4aru/HOLD operations or confirmation replay. Freshquota/hourly; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
