@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC400: CurrentAudioLinkMapper/LinkOrderは宣言source triple/orderとplacement/audio対応を検証し既AudioCopyDatasetへ接続。新24/全42Main61physical886予定、実DB/Current順oracle資格なし。
+
 SSC399: CurrentAudioLinkProjectionReader.read/rows/row/cleanupはCurrent二signedIDと保存typeを三列snapshotへ接続。新20/一Main四100予定、実DB資格・target displayorder決定なし。
 
 SSC398: AudioMigrationMap record/constructor/lookup/canonical/copyRowsはCurrent音声のdeclared ID/asset/正確msを既AudioRowへ結合。Asset純pathをpackage共有しFileMapperは同契約保持、new24/全40Main58class842予定、実DB/asset認証なし。

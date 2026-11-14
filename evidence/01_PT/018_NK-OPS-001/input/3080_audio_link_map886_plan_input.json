@@ -1,0 +1,31 @@
+{
+  "ssc": 400,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java",
+  "source": "bda326b59f6220cc6e7419eff2c88c36a2088867",
+  "title": "Current音声linkの宣言ID・orderを既COPYへ接続",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT001002005/FUN005/DAT004/TST、UI227242254、SS311331/V002/343。Current三列audio linksを既ScenarioEntryPlacementMap/AudioMigrationMapのtarget IDsと明示orderへ対応しAudioCopyDatasetへ渡すCurrentAudioLinkMapperを追加する。現行source抽出順を業務display_orderと同一視せず、callerが別に照合した宣言LinkOrderをそのまま使う。当部品はその宣言とsource行・参照・game・PK/UK・時刻の整合だけを検証する。実Current候補順oracle/実DB/全件素材の資格は別未完のまま、推測したorder・新業務仕様を発行しない。\n\npublic record LinkOrder(long currentEntryId,long currentAudioId,String linkType,int displayOrder)は二Current IDに全signedlongを許容、linkType nullを固定IAE・voice/se/bgm/otherのみ、order1..999。明示canonical constructorでNullable String受取り・nonnull field invariantを確立、toString固定redaction。constructor(Nullable ScenarioEntryPlacementMap placement,Nullable AudioMigrationMap audio,Nullable List<nullable LinkOrder> links)は全null/要素nullを副作用前固定IAE、snapshot。各宣言entryをplacement.lookupし、そのgameでaudio.targetAudioIdを照合する。triple(entry,audio,type)一意、(entry,type,order)一意、既order domainで999上限を保証し重複count枝を作らない。順序はsigned Currententry→ASCII type→明示orderで不変に保持、宣言orderをdenseへ再採番しない。links()不変、canonicalBytes() UTF8 header current_entry_id<TAB>current_audio_id<TAB>link_type<TAB>display_order<LF>と保持順四列LF、byte[]fresh。\n\ncopyRows(Nullable three-column Currentrows with nullable row,Nullable ScenarioEntryCopyBatch entries,Nullable List<nullable AudioFileCopyRow> audioRows,Nullable Instant migratedAt)は全null/時刻UTC0001..9999/µs・件数完全一致を検査。Current二IDは正準signed decimal/Long範囲、type必須保存値一致、未知宣言/duplicate三列は固定IAEで拒否し空・未知kindを補正しない。全known uniqueと同件数で宣言との全単射、保持LinkOrder順のtarget六列entryId/audioId/game/type/明示order/共通時刻を作る。entriesは既ScenarioEntryCopyBatch(retainedPlacement,entries.rows())へ再束縛し別配置への通過を防ぐ。audioRowsはAudioMigrationMapの全target ID/gameと同件数・knownで照合し、nullとunknown/game不一致は拒否、重複IDは既AudioCopyDatasetが拒否する。全sourceが揃ってから既AudioCopyDatasetへ渡し、全entry/audio参照/game/PK-UK/時刻の既契約で検証する。元input/map/Row/batchは変更しない。宣言とのmetadata整合を実file/DB/Current候補順の証明としない。自前message/toString固定redaction、IO/driver/FS/接続/権限/Root/native/VM/鍵0。\n\nPT-MIG-AUDIOLINKMAP001..024: 001二game三→六列literal、002empty、003全constructor/record null・要素null、004enum/order1/999境界、005triple/UK重複、006unknown-entry/audio・異game、007signedsource順/type/疎order保持、008links/canonical深不変/freshbyte、009record全field/equals/hash独立int31/衝突/NULL-other/redaction、010copy全null/row-null/幅、011件数不足余剰、012二ID正準/両long境界/未知/重複、013kind完全一致/非NFC等無修復、014entry別配置・欠落拒否、015audio数/unknown/game/null/重複拒否、016型別同entryaudio許容・UK独立、017order999/1000・999links境界、018固定六列COPY bytes、019共通timestamp/年µs境界・異stamp拒否、020元rows/map/audio破壊隔離・失敗後fresh、021独立record signedlonghash衝突、022宣言はsubset-linksで未linkentry/audio保持、023全slotの保存値/既Row約束と固定診断、024有限8worker64/Future5/finallyshutdownNow-await10。期待値は本番mapper/encoderから作らず明示target IDs/game/order/固定wire・Python独立hashで作る。既全41Main43Test862定義は同byte保持、新Main1＋record1/新24、全42Main44Test61physical886を同source一exec/Root静的/全CRC-init/既定と無filter四100で確認する。旧862は新規成果に数えない。\n\n追加不足3/9/9.9pp cap10、元費用/SV/各群開始保持、専有実費token null。既残397.324/837.386/1643.415へ当不足だけ追加、BUG2943/V030実DBHOLD維持、実Current候補順宣言の採取と実source組立/全移行/global451/CHR/ITST/HOLD未受入。RD/UI/DDL/grant/QA変更不要。",
+  "testIds": "PT-MIG-AUDIOLINKMAP001..024",
+  "estimate": {
+    "low": 3,
+    "base": 9,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "120_Current音声link宣言対応・独立二十四仕様.md",
+  "previousForecastName": "2007_WBS65予実・Current音声link二十後版568.json",
+  "forecastName": "2009_WBS65予実・Current音声link接続不足追加版569.json",
+  "revision": "569-MISSING_CURRENT_AUDIO_LINK_DECLARED_ID_ORDER_TO_DATASET",
+  "findingReason": "Typed Current link projection exists but no production adapter validates declared link orders against source triples and existing entry/audio identity mappings. Add pure metadata bijection/dataset assembly; realCurrent order witness remains separate and no inferred business change.",
+  "workId": "P01903_SSC400_AUDIOLINKMAP24_WHOLE886",
+  "planKey": "plannedCurrentAudioLinkMapperSSC400",
+  "startRecordName": "2010_WBS65Current音声link対応開始.json",
+  "startInputName": "3081_audio_link_map886_start.json",
+  "designSlot": "PG32744-ssc400-audio-link-map-design-only-v1",
+  "ledgerSummary": "Current三列linkと明示LinkOrderをentry/audio IDs/game/PK-UK/時刻へ結合、order再採番なし、独立24＋既862=886。実候補順宣言の採取/実DB/全移行/HOLD未受入、RD/UI変更不要。",
+  "moduleSummary": "CurrentAudioLinkMapper/LinkOrderは宣言source triple/orderとplacement/audio対応を検証し既AudioCopyDatasetへ接続。新24/全42Main61physical886予定、実DB/Current順oracle資格なし。",
+  "groupId": "PGPT-WBS65-SSC400-CURRENT-AUDIO-LINK-MAP24-886-20261115",
+  "run": "PG32758-AUDIO-LINK-MAP-CLOSED886",
+  "scope": "MissingCurrentAudioLinkMapper+LinkOrder record/full42Main61physical886. Declared3to6columns/bijection/reference-game/explicit sparseorder/metadata timestamp, no realCurrentorder witness. Additional3/9/9.9cap10 allHOLDunchanged.",
+  "nextCommand": "PublishSSC400SS311343914onlymain beforePG. ImplementCurrentAudioLinkMapper24 and independentID-order-wire-recordhash; full42Main/61CRC/886/Rootstatic/default-raw. Retain actualCurrent link-order witness and actualDB/whole migration gaps. No actualDB/master/filepayload/driver/VM/RootnativeActual4aru/HOLD operations or confirmation replay. Freshquota/hourly; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
