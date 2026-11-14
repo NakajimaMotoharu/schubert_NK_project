@@ -30,6 +30,8 @@ final class ScenarioStagingTablesTest {
           + " speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO DATA";
   private static final String DIAGNOSTIC = "migration staging preparation is invalid";
   private static final String SYNTHETIC_FAILURE = "synthetic";
+  private static final String CALL_AUTO = "auto";
+  private static final String CALL_CLOSE = "close";
   private static final int TASKS = 64;
   private static final int WORKERS = 8;
   private static final int WAIT_SECONDS = 5;
@@ -40,7 +42,8 @@ final class ScenarioStagingTablesTest {
     var fixture = new Fixture();
     new ScenarioStagingTables().prepare(fixture.connection());
     assertEquals(List.of(ORACLE_FILES, ORACLE_ENTRIES), fixture.sql);
-    assertEquals(List.of("auto", "create", "timeout:30", "sql", "sql", "close"), fixture.calls);
+    assertEquals(
+        List.of(CALL_AUTO, "create", "timeout:30", "sql", "sql", CALL_CLOSE), fixture.calls);
   }
 
   @Test
@@ -66,7 +69,7 @@ final class ScenarioStagingTablesTest {
     var fixture = new Fixture();
     fixture.autoCommit = true;
     assertEquals(DIAGNOSTIC, failure(fixture).getMessage());
-    assertEquals(List.of("auto"), fixture.calls);
+    assertEquals(List.of(CALL_AUTO), fixture.calls);
     assertEquals(0, fixture.createCalls);
   }
 
@@ -261,6 +264,7 @@ final class ScenarioStagingTablesTest {
           + " created_at) SELECT id, game_id, script_file_id, display_order, entry_index,"
           + " line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at FROM"
           + " pg_temp.nk_mig_script_entries ORDER BY display_order";
+  private static final int FIRST_POSITION = 1;
   private static final int SCALAR_QUERIES = 6;
 
   @Test
@@ -329,7 +333,7 @@ final class ScenarioStagingTablesTest {
                 SQLException.class,
                 () -> new ScenarioStagingTables().transfer(fixture.connection(), 1, 1))
             .getMessage());
-    assertEquals(List.of("auto"), fixture.calls);
+    assertEquals(List.of(CALL_AUTO), fixture.calls);
     var other = new Fixture();
     other.nullStatement = true;
     assertEquals(
@@ -409,7 +413,7 @@ final class ScenarioStagingTablesTest {
     for (int at : List.of(1, 2)) {
       for (int count : List.of(-1, 0, 2)) {
         var fixture = new TransferFixture();
-        if (at == 1) fixture.filesInserted = count;
+        if (at == FIRST_POSITION) fixture.filesInserted = count;
         else fixture.entriesInserted = count;
         assertEquals(DIAGNOSTIC, transferFailure(fixture).getMessage());
         assertEquals(at, fixture.updateCalls);
@@ -437,7 +441,7 @@ final class ScenarioStagingTablesTest {
       var fixture = new Fixture();
       var expected = new SQLException(SYNTHETIC_FAILURE);
       if (at == 0) fixture.autoFailure = expected;
-      else if (at == 1) fixture.createFailure = expected;
+      else if (at == FIRST_POSITION) fixture.createFailure = expected;
       else fixture.timeoutFailure = expected;
       assertSame(
           expected,
@@ -592,7 +596,8 @@ final class ScenarioStagingTablesTest {
                     return null;
                   case "executeQuery":
                     operations.add((String) args[0]);
-                    int position = queryIndex++;
+                    int position = queryIndex;
+                    queryIndex++;
                     if (position == badAt && fault == Fault.QUERY_FAILURE) {
                       if (queryFailure != null) throw queryFailure;
                       throw original;
@@ -604,7 +609,7 @@ final class ScenarioStagingTablesTest {
                     updateCalls++;
                     if (updateCalls == insertFailureAt) throw original;
                     return updateCalls == 1 ? filesInserted : entriesInserted;
-                  case "close":
+                  case CALL_CLOSE:
                     statementsClosed++;
                     if (statementCloseFailure != null) throw statementCloseFailure;
                     return null;
@@ -636,7 +641,7 @@ final class ScenarioStagingTablesTest {
                     return counts.get(position) + (broken && fault == Fault.WRONG_COUNT ? 1 : 0);
                   case "wasNull":
                     return broken && fault == Fault.NULL_VALUE;
-                  case "close":
+                  case CALL_CLOSE:
                     resultsClosed++;
                     if (broken
                         && (fault == Fault.RESULT_CLOSE_FAILURE || fault == Fault.COMBINED_FAILURE))
@@ -679,7 +684,7 @@ final class ScenarioStagingTablesTest {
               (proxy, method, args) -> {
                 switch (method.getName()) {
                   case "getAutoCommit":
-                    calls.add("auto");
+                    calls.add(CALL_AUTO);
                     if (autoFailure != null) throw autoFailure;
                     return autoCommit;
                   case "createStatement":
@@ -710,8 +715,8 @@ final class ScenarioStagingTablesTest {
                     sql.add((String) args[0]);
                     if (sql.size() == failAt && sqlFailure != null) throw sqlFailure;
                     return sql.size() == 1 ? firstCount : secondCount;
-                  case "close":
-                    calls.add("close");
+                  case CALL_CLOSE:
+                    calls.add(CALL_CLOSE);
                     closeCalls++;
                     if (closeFailure != null) throw closeFailure;
                     return null;

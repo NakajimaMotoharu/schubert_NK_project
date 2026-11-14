@@ -91,7 +91,12 @@ public final class ScenarioStagingTables {
 
   private static void requireCount(Statement statement, String sql, int expected)
       throws SQLException {
-    @Nullable ResultSet created = statement.executeQuery(sql);
+    requireResult(statement.executeQuery(sql), expected);
+  }
+
+  // SSC353/BUG2889: preserve the nullable vendor boundary independently of JDBC's declared
+  // contract.
+  private static void requireResult(@Nullable ResultSet created, int expected) throws SQLException {
     if (created == null) throw invalid();
     try (ResultSet result = created) {
       if (!result.next()) throw invalid();
