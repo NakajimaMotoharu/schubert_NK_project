@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC403: MigrationGamesVerifier.verify/rows/row/cleanupと既Target.prepare一接続でV004二行を一致確認。new22/全45Main65physical940予定、データ修復や権限発行なし。
+
 SSC402: CurrentMigrationAssembler constructor/assembleは同map/asset/rootから既mappersを構成しSourceSnapshot＋media宣言から六table Masterを生成。new20/全44Main64physical918予定、実Current資格/DB/原本操作なし。
 
 SSC401: CurrentMigrationProjection.read/snapshotMode/SourceSnapshot五getterは既Current五readerを同caller Connectionへ順次束縛。new12/全43Main63physical898予定、実DB/Current順資格なし。
