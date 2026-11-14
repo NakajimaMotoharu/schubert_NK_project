@@ -6,11 +6,11 @@ R = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(R/'tools/quality'))
 from pmo_quota_binding import window
 I = R/'evidence/01_PT/018_NK-OPS-001/input'
-W = R.parent/'pgpt-runs/PG379/pg30684-haruka-common60-v1'
+W = R.parent/'pgpt-runs/PG379/pg30684-haruka-common60-v2'
 PUBLIC = R/'evidence/01_PT/018_NK-OPS-001/evidence'
 PMO = R.parent/'PMO/hourly-monitor'
-REMOTE = '/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v1'
-TMP = '/dev/shm/pgpt-pg30684-common60-v1'
+REMOTE = '/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v2'
+TMP = '/dev/shm/pgpt-pg30684-common60-v2'
 TC = R.parent/'toolchain'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 now = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -135,7 +135,7 @@ def source_payload(source):
         require(path.is_file() and not path.is_symlink(), 'regular public static tool only')
         values['static/'+name] = path.read_bytes()
     config = dict(sourceCommit=source, productionCoreMain='2ebbdf391873a5be6247ea59cb9addffb886c591',
-                  run='PG30684-HARUKA-COMMON60-V1', expectedTests=60,
+                  run='PG30684-HARUKA-COMMON60-V2', expectedTests=60,
                   payloadHashes={n:hashlib.sha256(v).hexdigest() for n,v in values.items()},
                   originalBaselineHashes={str(p.relative_to(R)):sha(p) for p in
                     sorted((R/'program/characterization/baseline/current').rglob('*')) if p.is_file()},
@@ -155,7 +155,7 @@ def stage(source, quota):
     observed = fresh(quota)
     require(not W.exists(), 'new-only controller plan; existing run must be observed')
     W.mkdir(mode=0o700)
-    write(W/'plan.json', dict(sourceCommit=source, run='PG30684-HARUKA-COMMON60-V1',
+    write(W/'plan.json', dict(sourceCommit=source, run='PG30684-HARUKA-COMMON60-V2',
           atUTC=now(), quotaBefore=observed, remote=REMOTE, temp=TMP,
           globalUnknownProcessCwds=3, globalIdleClaim=False, actualRootDbVmNativeServiceActions=0))
     archive, config = source_payload(source)
@@ -166,7 +166,7 @@ run=Path(REMOTE);tmp=Path(TMP);os.umask(0o077)
 assert Path('/etc/hostname').read_text().strip()=='haruka' and os.getuid()==1000
 parent=run.parent;assert parent.is_dir() and parent.resolve()==parent and parent.stat().st_uid==1000 and stat.S_IMODE(parent.stat().st_mode)==0o700
 assert tmp.parent.resolve()==tmp.parent
-run.mkdir(mode=0o700);tmp.mkdir(mode=0o700)
+run.mkdir(mode=0o700)
 boot=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
 owner=dict(uid=os.getuid(),gid=os.getgid(),pid=os.getpid(),startTicks=int(Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19]),bootId=boot,createdUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),deadlineMonotonic=time.monotonic()+1800,sourceCommit=SOURCE,newNamespaceOnly=True,runDevice=run.stat().st_dev,runInode=run.stat().st_ino)
 with (run/'owner.json').open('x') as f:json.dump(owner,f)
@@ -195,7 +195,7 @@ print('PGPT_JSON_BEGIN');print(json.dumps(stage));print('PGPT_JSON_END')
     prefix = 'REMOTE='+repr(REMOTE)+'\nTMP='+repr(TMP)+'\nSOURCE='+repr(source)+'\nARCHIVE='+repr(digest)+'\n'
     result = ssh('stage', prefix+bootstrap, input_file=archive)
     write(W/'stage-receipt.json', result)
-    publish('PG30684-haruka-common60-stage-v1', result)
+    publish('PG30706-haruka-common60-stage-v2', result)
     print(json.dumps(dict(actualExit=0,phase='stage',source=source,archiveSha256=digest,newNamespace=True,testsExecuted=0)))
 
 def publish(name, result):
@@ -236,12 +236,12 @@ def main():
     if phase=='collect':
         print(json.dumps(dict(actualExit=0,phase=phase,privateArchive=str(result),sha256=sha(result)))); return
     if phase=='status':
-        out = PUBLIC/'PG30690-haruka-common60-same-run-status-v1'
+        out = PUBLIC/'PG30712-haruka-common60-same-run-status-v2'
         out.mkdir(exist_ok=True)
         write(out/(label+'.json'),result)
     else:
-        publish({'prepare':'PG30686-haruka-common60-full-static-raw-v1',
-                 'run':'PG30688-haruka-common60-unit-raw-terminal-v1'}[phase],result)
+        publish({'prepare':'PG30708-haruka-common60-full-static-raw-v2',
+                 'run':'PG30710-haruka-common60-unit-raw-terminal-v2'}[phase],result)
     print(json.dumps(dict(actualExit=0,phase=phase,source=json.loads((W/'plan.json').read_text())['sourceCommit'],
                          rawReceiptOnly=True,productPtAccepted=False)))
 

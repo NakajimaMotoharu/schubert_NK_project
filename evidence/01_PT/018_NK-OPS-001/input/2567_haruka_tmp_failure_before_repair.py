@@ -1,0 +1,21 @@
+"""BUG2877 before repair: retain original stage, failed prepare and same-run status; no job replay."""
+from pathlib import Path
+import json,hashlib,datetime,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';l=r/'documents/900_OTHER/910_台帳';w=r.parent/'pgpt-runs/PG379/pg30684-haruka-common60-v1';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+term=json.loads((w/'prepare-local-terminal.json').read_text());assert term['actualExit']==1
+failure=[x for x in (w/'prepare.private.stderr').read_text().splitlines() if x.startswith('FileNotFoundError:')];assert len(failure)==1 and '/dev/shm/pgpt-pg30684-common60-v1' in failure[0]
+status_path=b/'evidence/PG30690-haruka-common60-same-run-status-v1/status-001.json';status=json.loads(status_path.read_text());assert set(status)=={'owner.json','stage.json','prepare-claim.json'}
+p=l/'915_障害表.md';assert max(map(int,re.findall(r'^## BUG-(\d+)\b',p.read_text(),re.M)))==2876
+p.write_text(p.read_text()+'''\n\n## BUG-2877 PT 2026-11-14 haruka common controller stage→prepare / low-tmp ownership admission
+
+重要度中・優先高。期待: 当run正常静的準備は実低容量filesystem上の自己所有tmpを同phaseで確立し、真の容量を検査してMavenへ渡す。実際: Source9ad380e413のPG30684 stage SSH0でtmp mkdirを通過した後、prepare SSH1は当 /dev/shm/pgpt-pg30684-common60-v1 のFileNotFoundError。PG30690同source/boot/inode/hashのstatusはowner/stage/prepare-claimだけ、cachecopy/Java/Maven/Unitのbegin・process・terminalなし。再現の追加probe0/同prepare再発行0。原因: ツールが別SSH phaseで作ったtmpの存続を前提にした設計不備、消失のOS側機序は未確定で推測しない。影響: 当helperのprepare/run容量とJAVA_TOOL_OPTIONS、実Main5/原60の期待値・業務仕様は不変更。BUG2873/2874/2876/YKT2411、SS355/451/F03/F04。修正前起票、phase内でnew-only tmpを作りnamespace/owner/inode/mode/容量を記録、元run/payloadを上書きせず新v2 source/runへ。権限・OS設定/daemon/旧job変更なし。修正commit/再試験/完了日未、状態OPEN、PG30692参照。\n''')
+p=l/'916_横展開管理台帳.md';assert max(map(int,re.findall(r'^## YKT-(\d+)\b',p.read_text(),re.M)))==2410
+p.write_text(p.read_text()+'''\n\n## YKT-2411 BUG2877 cross-phase low-tmp lifecycle
+
+共通原因=別SSH phaseで作成済みtmpの存続を仮定。検索=当新controller/bootstrap/remote helper全体のTMP/mkdir/capacity/JAVA_TOOL_OPTIONS、対象stage mkdir・prepare初capacity・prepare compiler/Pmd/CS・run capacity/Unitの五箇所。status/collectはtmp不要で対象外根拠、元runは失敗保存して再発行しない。新v2各phase内new-only0700/uid/inode/namespace/capacityとchild寿命を結合、existing/symlink拒否のlocal工具check・正規haruka再static/全60/postが未。原Main5/期待Test60/データを変えず、OScleanup/PAM/権限を勝手変更しない。全対象の是正/非該当と再発防止確認が未で状態OPEN、関連commit未/証跡PG30692。\n''')
+e=b/'evidence/PG30692-haruka-v1-prepare-tmp-missing-before-maven-failure-v1';assert not e.exists();e.mkdir()
+for name in ['2564_haruka_common60_remote.py','2565_haruka_common60_controller.py']:(e/(name+'.before.txt')).write_bytes((i/name).read_bytes())
+m=dict(actualExit=1,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),bug='BUG-2877',horizontal='YKT-2411',source='9ad380e413f89e14f95a80344be1cd95fb845e18',productionCoreMain='2ebbdf391873a5be6247ea59cb9addffb886c591',stageExit=0,prepareSshExit=1,ownToolError=failure[0],sameRunStatus=dict(path=str(status_path.relative_to(r)),sha256=sha(status_path)),cacheCopyBegun=False,compilerBegun=False,javaOrMavenVersionCommandBegun=False,unitRequested=False,testsExecuted=0,oldRunReplayed=False,sourceAndArchiveUnmodified=True,cause='CROSS_SSH_TMP_PERSISTENCE_ASSUMPTION; OS_MECHANISM_UNKNOWN',oldGlobalUnknownJobsInspected=False,actualDbVmRootNativeServicePermissionAruActions=0,reworkWithinCurrentGroupEstimate=dict(low=.02,base=.06,high=.12),grossBudgetAdded=0)
+(e/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n')
+s=r.parent/'PMO/pgpt-completion-stage-20261102';p=s/'checkpoint.json';v=json.loads(p.read_text());v['currentHarukaCommon60'].update(state='V1_PREPARE_FAILED_BEFORE_CACHE_COMPILER_UNIT_TRUE_SSH1',currentToolSession=None,failure=dict(path=str((e/'manifest.json').relative_to(r)),sha256=sha(e/'manifest.json')),noRemoteRuntimeJobStarted=True,nextCommand='Do not replayv1 stage/prepare/run ormodifyimmutablepayload. RepairBUG2877 inlocaltools, newfixedGit/newv2namespace only aftersource/no-startproof andfreshquota; per-phase tmp createdwithin sameSSH phase. Main5/Test60oraclesunchanged/allHOLD/aruNoAccess. Oldv1 owner/source/archive/failure/statuspreserved.');p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,bug='BUG-2877',horizontal='YKT-2411',failedPhasePreserved=True,compileAndUnitNeverStarted=True)))

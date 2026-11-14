@@ -3,8 +3,9 @@ from pathlib import Path
 import datetime, fcntl, hashlib, json, os, shutil, signal, stat, subprocess, sys, tarfile, time
 import xml.etree.ElementTree as ET
 
-RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v1')
-TMP = Path('/dev/shm/pgpt-pg30684-common60-v1')
+RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v2')
+BASE_TMP = Path('/dev/shm/pgpt-pg30684-common60-v2')
+TMP = BASE_TMP
 JAVA = Path('/opt/schubert-nk-test-tools/jdk-25.0.4')
 MVN = Path('/opt/schubert-nk-test-tools/maven/bin/mvn')
 OLD_CACHE = Path('/home/mini/schubert-nk-pgpt/m2/repository')
@@ -63,10 +64,24 @@ def capacity():
     return dict(highAvailableBytes=disk.f_bavail*disk.f_frsize,
                 lowAvailableBytes=low.f_bavail*low.f_frsize, memoryAvailableKiB=mem)
 
+def establish_phase_tmp(phase):
+    require(phase in ('prepare','run'), 'fixed phase tmp only')
+    directory = Path(str(BASE_TMP)+'-'+phase)
+    require(directory.parent.resolve()==directory.parent, 'fixed real tmpfs parent')
+    directory.mkdir(mode=0o700)
+    info = directory.lstat()
+    require(stat.S_ISDIR(info.st_mode) and info.st_uid==os.getuid()
+            and stat.S_IMODE(info.st_mode)==0o700, 'new exclusively owned phase tmp')
+    write(RUN/(phase+'-tmp.json'), dict(atUTC=now(), path=str(directory),
+          device=info.st_dev, inode=info.st_ino, uid=info.st_uid, mode=oct(stat.S_IMODE(info.st_mode)),
+          mountNamespace=os.readlink('/proc/self/ns/mnt'), owner=proc(os.getpid()),
+          noCrossSshPersistenceRequired=True))
+    return directory
+
 def step(label, command, env, timeout):
     require(not (RUN/(label+'-begin.json')).exists(), 'existing phase must be observed, no replay')
     write(RUN/(label+'-begin.json'), dict(atUTC=now(), owner=proc(os.getpid()),
-          command=command, cwd=str(RUN/'payload/source'), timeoutSeconds=timeout))
+          command=command, environment=env, cwd=str(RUN/'payload/source'), timeoutSeconds=timeout))
     remaining = json.loads((RUN/'owner.json').read_text())['deadlineMonotonic']-time.monotonic()
     require(remaining > 30, 'original budget cannot start another process')
     timeout = min(timeout, remaining-30)
@@ -221,6 +236,7 @@ def collect():
     require((RUN/'unit-result.json').is_file(), 'only true saved terminal artifacts may be collected')
     module = RUN/'payload/source/program/characterization/target'
     names = ['owner.json', 'stage.json', 'payload/config.json', 'prepare-result.json',
+             'prepare-tmp.json', 'run-tmp.json', 'unit-verify-begin.json',
              'unit-verify-process.json', 'unit-verify-exit.json', 'unit-result.json',
              'admission.json', 'pmd.xml', 'checkstyle.xml']
     required_classes = {
@@ -242,19 +258,24 @@ def collect():
             archive.add(path, arcname=str(path.relative_to(RUN)), recursive=False)
 
 def main():
+    global TMP
     os.umask(0o077)
     config = json.loads((RUN/'payload/config.json').read_text())
     verify_inputs(config)
     phase = sys.argv[1]
     if phase=='status':
         result = {n:json.loads((RUN/n).read_text()) for n in
-                  ['owner.json','stage.json','prepare-claim.json','prepare-result.json',
+                  ['owner.json','stage.json','prepare-tmp.json','run-tmp.json','prepare-claim.json','prepare-result.json',
                    'compile-static-process.json','compile-static-exit.json',
                    'unit-verify-process.json','unit-verify-exit.json','unit-result.json'] if (RUN/n).exists()}
         print('PGPT_JSON_BEGIN'); print(json.dumps(result)); print('PGPT_JSON_END')
         return
     with (RUN/'phase.lock').open('a+b') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX|fcntl.LOCK_NB)
+        if phase in ('prepare','run'):
+            require(not (RUN/('prepare-claim.json' if phase=='prepare' else 'unit-verify-begin.json')).exists(),
+                    'no phase restart after any prior claim')
+            TMP = establish_phase_tmp(phase)
         if phase=='prepare': result = prepare(config)
         elif phase=='run': result = run_tests(config)
         elif phase=='collect':
