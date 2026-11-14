@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-14T13:06:37.870">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java">
+<violation beginline="54" endline="54" begincolumn="25" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTables" method="prepare" variable="created" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Statement object are closed after use
+</violation>
+<violation beginline="77" endline="77" begincolumn="25" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTables" method="transfer" variable="created" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Statement object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java">
+<violation beginline="203" endline="203" begincolumn="9" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="repeatedCallsCreateFreshStatementsWithoutRetainingAConnection" variable="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="214" endline="214" begincolumn="9" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="finiteParallelIndependentBorrowedTransactionsDoNotShareState" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="214" endline="214" begincolumn="20" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="finiteParallelIndependentBorrowedTransactionsDoNotShareState" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="219" endline="225" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="finiteParallelIndependentBorrowedTransactionsDoNotShareState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="231" endline="231" begincolumn="7" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="finiteParallelIndependentBorrowedTransactionsDoNotShareState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="232" endline="232" begincolumn="18" endcolumn="82" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="finiteParallelIndependentBorrowedTransactionsDoNotShareState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="482" endline="482" begincolumn="9" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="transferFiniteWorkersHaveIndependentSqlCountsAndTermination" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="482" endline="482" begincolumn="20" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="transferFiniteWorkersHaveIndependentSqlCountsAndTermination" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="487" endline="493" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="transferFiniteWorkersHaveIndependentSqlCountsAndTermination" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="498" endline="498" begincolumn="7" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="transferFiniteWorkersHaveIndependentSqlCountsAndTermination" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="499" endline="499" begincolumn="18" endcolumn="82" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest" method="transferFiniteWorkersHaveIndependentSqlCountsAndTermination" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="575" endline="575" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest.TransferFixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="590" endline="590" begincolumn="15" endcolumn="47" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest.TransferFixture" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="628" endline="628" begincolumn="15" endcolumn="47" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest.TransferFixture" method="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="682" endline="682" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest.Fixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="705" endline="705" begincolumn="15" endcolumn="47" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.migration" class="ScenarioStagingTablesTest.Fixture" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>

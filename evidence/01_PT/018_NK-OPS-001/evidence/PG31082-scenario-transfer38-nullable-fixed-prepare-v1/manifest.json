@@ -1,0 +1,257 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2634_scenario_transfer38_nullable_fixed_profile.json",
+    "sha256": "81cb13adaac72529f546613113c07e782d9b3b8655aeed5d7b99382c6230b9d9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "8a2ca44cf03b1ea49acb4d09bb1aa6677925eb80c0d1629098d8efe48cb6d2e9",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java": "3f5a6c5edded5fe6bdc22389281b96cd6a4f82d310d277cce34a037372f762e5",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class": "bb198cdaafacab02b9f575b08fc3bdd58b622f03d31614ed72d9ec024ad885f6"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$TransferFixture.class": "6be6d4dc5d3c4046a6df3713e0add944ef2dd894e6727813d34406ee09b64b7c",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$Fixture.class": "eb1f0fea97a42910d15eb2cff1cd38d31d62f01e18b4b2d43d67fbfe0399f6e8",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$Fault.class": "d836bd5774c3ca3235608f564a48ef0a1c4ee31236439871fa9160b7846909c1",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.class": "64db05927a8886e4a879a1b8294aae16ce63575df3e90231bdd1304d90eb90ed"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "literalTwoQueriesAreOrderedAndCopyNoGeneratedColumnOrRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "statementIsClosedExactlyOnceAndConnectionRemainsBorrowed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "nullConnectionFailsWithFixedInputDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "autoCommitCannotDropTheTablesBeforeCopy()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "originalAutoCommitFailureHasNoCreatedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "originalCreationFailureIsNotAStatementToClose()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "nullVendorStatementIsAnExplicitFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "timeoutFailureStillClosesWithoutAnyDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "firstDdlFailureDoesNotAttemptSecondOrRepair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "firstUnexpectedUpdateCountsStopBeforeSecondDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "secondUnexpectedUpdateCountsNeverSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "closeFailureAfterBothQueriesIsNotSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "primarySqlAndCloseFailureRetainJavaSuppressionOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "runtimeAndErrorFailuresRemainFailuresWithStatementClosed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "repeatedCallsCreateFreshStatementsWithoutRetainingAConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "finiteParallelIndependentBorrowedTransactionsDoNotShareState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "fixedRedactionAndIndependentSuccessAfterFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferChecksEveryCountAndUsesOnlyTheIndependentEightSqlLiterals()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferEmptyAndMaximumIntManifestCountsAreExact()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferNullNegativeAndEntryOnlyManifestCountsAreRejectedBeforeUse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferAutoCommitAndNullStatementNeverReachAnyQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferMissingRowAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferSqlNullAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferEveryCountMismatchIncludesNegativeDatabaseResults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferExtraRowAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferNullResultAtEveryScalarPositionIsAnExplicitFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalQuerySqlFailureAtEveryPositionIsRetained()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalGetLongFailureAtEveryPositionStillClosesResult()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalNextFailureAtEveryPositionStillClosesResult()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferResultCloseFailureAtEveryPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferPrimaryAndResultCloseFailureKeepJavaSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferBothInsertCountsMustMatchTheIndependentManifest()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferBothOriginalInsertFailuresStopWithoutPostOrRetries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferAcquisitionTimeoutAndStatementCloseFailuresRemainFailures()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferRuntimeAndErrorStillCloseTheOwnedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferFiniteWorkersHaveIndependentSqlCountsAndTermination()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferFailureDoesNotAuthorizeCommitOrPoisonIndependentInput()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T04:06:33.892398+00:00",
+      "endUTC": "2026-11-14T04:06:36.162837+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31082-scenario-transfer38-nullable-fixed-prepare-v1",
+      "stdoutSha256": "15780e90875cd1bf873ba53d00a499c96b069328d8ba02936db4e38e78b7536d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T04:06:36.163172+00:00",
+      "endUTC": "2026-11-14T04:06:37.030048+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31082-scenario-transfer38-nullable-fixed-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31082-scenario-transfer38-nullable-fixed-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31080-scenario-transfer38-nullable-fixed-prestyle-v1/manifest.json",
+    "sha256": "104e628740630bb4749c09ff8dcd90cc2638fb3c6ba426ee98923486544c8718"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "8d2fd575720f7b50ebdb44867c0270f977c8f6b9d27e029b114b7c232be51b0c",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 1,
+  "reusedRuntimeSignatureClassCount": 0
+}

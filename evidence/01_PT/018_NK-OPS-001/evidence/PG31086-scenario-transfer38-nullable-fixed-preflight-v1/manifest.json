@@ -1,0 +1,186 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2634_scenario_transfer38_nullable_fixed_profile.json",
+    "sha256": "81cb13adaac72529f546613113c07e782d9b3b8655aeed5d7b99382c6230b9d9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "8a2ca44cf03b1ea49acb4d09bb1aa6677925eb80c0d1629098d8efe48cb6d2e9",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java": "3f5a6c5edded5fe6bdc22389281b96cd6a4f82d310d277cce34a037372f762e5",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31082-scenario-transfer38-nullable-fixed-prepare-v1/manifest.json",
+    "sha256": "83e12391c332f72c39bbb248409d42dd24466d18727eb7102d2df1fb781f8234"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31084-scenario-transfer38-nullable-fixed-static-v1/manifest.json",
+    "sha256": "7f515965c1ad379f81b9e92dd3b8365ef88c6dabb87e10adc649a050dd37a460"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2635_scenario_transfer38_static_admission.json",
+    "sha256": "d90f3ce09c45623ed4b488310b32f90d8009ea9b09baf998f6cb666caac1c9af"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "CloseResource",
+      "line": "54",
+      "reason": "The exact nullable factory result is rejected before use or assigned as the sole try-with-resources Statement. All success/SQL/Runtime/Error exits close it once; primary-plus-close failure is suppressed by Java, close failure cannot succeed. Borrowed Connection is not owned. Whole38 explicitly verifies these resource paths; no suppression or ignored resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Statement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "CloseResource",
+      "line": "77",
+      "reason": "The exact nullable factory result is rejected before use or assigned as the sole try-with-resources Statement. All success/SQL/Runtime/Error exits close it once; primary-plus-close failure is suppressed by Java, close failure cannot succeed. Borrowed Connection is not owned. Whole38 explicitly verifies these resource paths; no suppression or ignored resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Statement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "CloseResource",
+      "line": "203",
+      "reason": "This exact fixture Connection is a Java Proxy with no JDBC driver, database, native stream, socket or file. It owns no closeable OS resource and deliberately rejects close/commit/rollback/setAutoCommit to prove borrowed-connection ownership in both invocations. Statement.close is a separate asserted memory counter, not delegated to any backend.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Connection object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "CloseResource",
+      "line": "214",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "214",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "219",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "231",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "232",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "CloseResource",
+      "line": "482",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "482",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "487",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "498",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "499",
+      "reason": "This exact standalone JUnit concurrency fixture is outside managed J2EE. Eight owned workers execute64 memory-only JDBC-proxy assertions; every Future joins within5s, finally always shutdownNow and asserts awaitTermination within10s. No driver/DB/network/file/native/service action. Bounded explicit shutdown avoids unbounded implicit ExecutorService.close and is not a blanket Test exclusion.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "575",
+      "reason": "This exact standalone JUnit memory fixture creates only a Proxy for fixed JDK java.sql.Connection/Statement interfaces, using their defining platform loader. No J2EE/web container, untrusted class name, plugin/context loader or actual JDBC implementation is used. Every non-whitelisted connection/statement call fails an assertion; no acquired handle exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "590",
+      "reason": "This exact standalone JUnit memory fixture creates only a Proxy for fixed JDK java.sql.Connection/Statement interfaces, using their defining platform loader. No J2EE/web container, untrusted class name, plugin/context loader or actual JDBC implementation is used. Every non-whitelisted connection/statement call fails an assertion; no acquired handle exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "628",
+      "reason": "This exact standalone JUnit memory fixture creates only a Proxy for fixed JDK java.sql.Connection/Statement interfaces, using their defining platform loader. No J2EE/web container, untrusted class name, plugin/context loader or actual JDBC implementation is used. Every non-whitelisted connection/statement call fails an assertion; no acquired handle exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "682",
+      "reason": "This exact standalone JUnit memory fixture creates only a Proxy for fixed JDK java.sql.Connection/Statement interfaces, using their defining platform loader. No J2EE/web container, untrusted class name, plugin/context loader or actual JDBC implementation is used. Every non-whitelisted connection/statement call fails an assertion; no acquired handle exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "705",
+      "reason": "This exact standalone JUnit memory fixture creates only a Proxy for fixed JDK java.sql.Connection/Statement interfaces, using their defining platform loader. No J2EE/web container, untrusted class name, plugin/context loader or actual JDBC implementation is used. Every non-whitelisted connection/statement call fails an assertion; no acquired handle exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
