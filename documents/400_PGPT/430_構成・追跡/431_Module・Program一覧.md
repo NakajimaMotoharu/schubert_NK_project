@@ -741,3 +741,6 @@ NK-OPS-001/NK-DAT-001、SchemaHistoryAdmission/Row/JdbcAdmissionFailures、DAT00
 
 
 SSC364/365/366、NK-MIG-001/WBS-P01903: MigrationCopyDataset constructor/scenario/audio/media/writeAll/toString→RD MIG-DAT001..005/MIG003005006/DAT004/FUN004→UI223227242254→SS311331343→PT-MIG-FIVE001..020/019055057。ScenarioStagingTablesとAssetStagingTablesのprepare/transfer/requireResult/closeStatement/closeResult→PT-MIG-CLEANUP001..004/既STAGE-TRANSFER-ASSETSTAGE全体→019056057。Core558312a2/Unit443b9df7・PG31568/570/572全21Main35class403同source/default244-raw303両四100。実DB/全ETL/global451は未受入。
+
+
+SSC367/NK-MIG-001/WBS-P01903: SpeakerCopyRow constructor/columnNames/fields/copyBytes/toString/required/name/text/timestamp/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223233242254→SS311331343/V002→PT-MIG-SPEAKERROW001..016/019058059。Corec2bc511b/Unitfcd24a09・PG31592/594/596全28/2class/actual17四100。Current175/UK-FK集合/DB/全移行/HOLD未受入。

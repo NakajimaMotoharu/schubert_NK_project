@@ -1,0 +1,5 @@
+# Speaker七列COPY・通常28独立結果
+
+SSC367 SpeakerCopyRowをPR254/main6c683a3b設計反映後に製造、Corec2bc511b/Unitfcd24a09・PG31592新16＋必要codec12 whole28/FES0/真正0、PG31594全2CRC-init/default I390-L89-M17-C2-B71 miss0、PG31596同singleexec無filterも全同値・実Code17/default17差0。七列全UTF8golden/NULL空literal-backslashN/名前128byteと日文126-129/ID-game-bool-date全境界/Unicode-NFC-NUL/notes無独自上限/宣言normalized名無変換/immutablebyte/有限64を独立検証。RootNullAway-lint-CS-SB-Missing-error0、PMD10は旧codec5同byte＋新finiteworker5各非該当/適用未分類0、新BUG0。旧21Mainと全403Test source不変/成功再演0。App126/6399/6370/歴史29・Main130/正本184-625/元190新0/正式1964-53/工数null。PG/PT1.05/3.15/6.3のみ完了、実175抽出/normalized導出/IDmap/UK-FK集合/staging/DB/全ETL/Rootnative/global451/ITST/HOLD未受入。
+
+058のPT-MIG-SPEAKERROW001..016はSpeakerCopyRowTest全16へ対応。PG31582独立七列/UTF8wireとbyte境界数、PG31592 JUnit全28のexpected/actual assertion/終了0、PG31594全physical/CRC-init/XML、PG31596同source/同exec/実17Code、PG31598全source/input/hash join。OS/JDK/ツール/branch/commit/全command/日時/終了code/入力/expected/actual/counter/BUG0は各manifestに保存。Input rowに名前からnormalized_nameを導出する契約や全175の成功は無く、Rowの単体結果を外側移行/UK-FK/実DB成功へ読み替えない。
