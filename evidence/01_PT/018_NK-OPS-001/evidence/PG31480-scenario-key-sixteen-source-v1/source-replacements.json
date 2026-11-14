@@ -1,0 +1,46 @@
+{
+  "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": {
+    "beforeSha256": "58273077b667bcfedaa31a59c9705410f747c39ec36379a7078b4e49ee7771be",
+    "afterSha256": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "replacements": [
+      [
+        "  private record SourceKey(int gameId, long currentFileId) {}\n",
+        ""
+      ],
+      [
+        "HashMap<SourceKey, Integer>",
+        "HashMap<List<Long>, Integer>"
+      ],
+      [
+        "Map<SourceKey, Integer>",
+        "Map<List<Long>, Integer>"
+      ],
+      [
+        "new SourceKey(pair.gameId(), pair.currentFileId())",
+        "List.of((long) pair.gameId(), pair.currentFileId())"
+      ],
+      [
+        "new SourceKey(gameId, currentFileId)",
+        "List.of((long) gameId, currentFileId)"
+      ]
+    ]
+  },
+  "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": {
+    "beforeSha256": "07b6aad37890a06fba146618481c9c9eb898ed7498e738c4a3fdc592e22524e5",
+    "afterSha256": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "replacements": [
+      [
+        "  private record FilePosition(long targetFileId, int entryIndex) {}\n",
+        ""
+      ],
+      [
+        "HashSet<FilePosition>",
+        "HashSet<List<Long>>"
+      ],
+      [
+        "new FilePosition(file.targetFileId(), placement.entryIndex())",
+        "List.of(file.targetFileId(), (long) placement.entryIndex())"
+      ]
+    ]
+  }
+}

@@ -45,11 +45,10 @@ public final class ScenarioFileMigrationMap {
     }
   }
 
-  // Internal map key only; never exposed, logged or included in diagnostics.
-  private record SourceKey(int gameId, long currentFileId) {}
+  // SSC363: JDK immutable (game, source ID) key; never exposed or logged.
 
   private final List<MappedFile> retainedFiles;
-  private final Map<SourceKey, Integer> retainedPositions;
+  private final Map<List<Long>, Integer> retainedPositions;
 
   public ScenarioFileMigrationMap(List<FilePair> input) {
     var sorted =
@@ -58,12 +57,12 @@ public final class ScenarioFileMigrationMap {
                 Comparator.comparingInt(FilePair::gameId)
                     .thenComparingLong(FilePair::currentFileId))
             .toList();
-    var positions = new HashMap<SourceKey, Integer>();
+    var positions = new HashMap<List<Long>, Integer>();
     var targetIds = new HashSet<Long>();
     var files = new ArrayList<MappedFile>();
     var ranks = new long[2];
     for (FilePair pair : sorted) {
-      var key = new SourceKey(pair.gameId(), pair.currentFileId());
+      var key = List.of((long) pair.gameId(), pair.currentFileId());
       if (positions.containsKey(key) || !targetIds.add(pair.targetFileId())) throw invalid();
       positions.put(key, files.size());
       // Validated game index is 0/1; List's int count bounds each dense ordinal within N12.
@@ -119,7 +118,7 @@ public final class ScenarioFileMigrationMap {
 
   private int position(int gameId, long currentFileId) {
     game(gameId);
-    @Nullable Integer index = retainedPositions.get(new SourceKey(gameId, currentFileId));
+    @Nullable Integer index = retainedPositions.get(List.of((long) gameId, currentFileId));
     if (index == null) throw invalid();
     return index;
   }

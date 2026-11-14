@@ -54,8 +54,7 @@ public final class ScenarioEntryPlacementMap {
     }
   }
 
-  // Internal uniqueness key; never returned, logged or included in diagnostics.
-  private record FilePosition(long targetFileId, int entryIndex) {}
+  // SSC363: JDK immutable (file ID, index) uniqueness key; never exposed or logged.
 
   private final ScenarioFileMigrationMap retainedFileMap;
   private final List<PlacedEntry> retainedEntries;
@@ -68,14 +67,14 @@ public final class ScenarioEntryPlacementMap {
     var snapshot = List.copyOf(input);
     if (snapshot.size() != entries.mappings().size()) throw invalid();
     var sourceIds = new HashSet<Long>();
-    var filePositions = new HashSet<FilePosition>();
+    var filePositions = new HashSet<List<Long>>();
     var result = new ArrayList<PlacedEntry>();
     var bySource = new HashMap<Long, PlacedEntry>();
     for (Placement placement : snapshot) {
       var file = files.lookup(placement.gameId(), placement.currentFileId());
       var entry = entries.lookup(placement.currentEntryId());
       if (!sourceIds.add(placement.currentEntryId())
-          || !filePositions.add(new FilePosition(file.targetFileId(), placement.entryIndex())))
+          || !filePositions.add(List.of(file.targetFileId(), (long) placement.entryIndex())))
         throw invalid();
       var placed =
           new PlacedEntry(

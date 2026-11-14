@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC363: ScenarioFileMigrationMap/ScenarioEntryPlacementMap内部二要素キーをJDK不変List<Long>へ簡素化。公開六record/永続化/順序/重複拒否/redactionは保持。PT-MIG-SCENARIOGEN001..016と必要whole129で同source全9Main15physical/default+無filterCodeを確認、実DB/Root/native/HOLD未完。
+
 SSC362: bootstrap.migration.AssetStagingTablesはaudio_files/media_assets/entry_audio_links三表の固定CTAS/count/large INSERTを標準JDBCで所有し、connection/transactionはcaller借用。既Scenario二表を先行、全5表の順/資源をProxyで検証。実DB/素材/認証/全ETLは上位、vendor/native依存0。PT-MIG-ASSETSTAGE001..030。
 
 SSC361: bootstrap.migration.MusicMigrationCatalogueはMusic129宣言Entryとtarget IDsをCurrent title/group・既Pairing・MusicID・MediaRowへ結合し保存role/key/orderを固定。Video20と既MediaBatch149接続は独立メモリPT、実素材/DB/全ETLは上位、API/Web/vendor依存0。PT-MIG-MUSICCAT001..024。
