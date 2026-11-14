@@ -1,0 +1,29 @@
+{
+  "ssc": 405,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+  "source": "fa836fdf5036c79f2ea12eae78788bd23d910ad8",
+  "estimate": {
+    "low": 2.4,
+    "base": 7.2,
+    "high": 9.9
+  },
+  "title": "六master table defaultと生成式を既column照合へ追加",
+  "spec": "130_六table default・生成式とColumn026親036全944仕様.md",
+  "designSlot": "PG33038-ssc405-default-design-only-v1",
+  "previousForecast": "2028_WBS65予実・絶対owner全942後版578.json",
+  "forecast": "2030_WBS65予実・default生成式不足追加版579.json",
+  "revision": "579-MISSING_DEFAULT_AND_GENERATED_EXPRESSION_GATE",
+  "findingReason": "BUG2965 existing metadata generated flag cannot detect wrong lower(body), protagonist DEFAULT true or extra/missing defaults. Explicit eleventh catalog predicate validates two V002 definitions and other64 absence without DB mutation.",
+  "workId": "P01903_SSC405_DEFAULT_COLUMN26_TARGET36_WHOLE944",
+  "planKey": "plannedDefaultExpressionSSC405",
+  "startInput": "3167_default944_start.json",
+  "startRecord": "2031_WBS65default生成式開始.json",
+  "groupId": "PGPT-WBS65-SSC405-DEFAULT-COLUMN26-TARGET36-944-20261115",
+  "run": "PG33054-DEFAULT-CLOSED944",
+  "newDefinitions": 2,
+  "whole": 944,
+  "moduleSummary": "既Column第十一metadataでV002 false/lower(body)と他64 default不存在/atthasdef整合を検査。Column026/Target036新2と全944/45Main65physical予定。DDL/DB設定変更0・実DB/HOLD未受入。",
+  "scope": "BUG2965 missingV002 defaults/generated-expression in existingColumn/Target. Main1changed/new0; newColumn026/Target036/all944/45Main65class. Additional2.4/7.2/9.9cap10, noactualDB/authority/HOLDchange.",
+  "nextCommand": "PublishSSC405SS311343914onlymain beforePG. Add eleventh false/lowerbody/defaultabsence predicate with independentDDL/tree model and all66 false/NULL negatives, parentCTAS0. Compile/static/all944/default-raw same-source; actualDB/deparser/searchpath/indextrigger/grant/HOLD remainunaccepted. Ordinarygroupnotstop.",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331343/V002。BUG2965/YKT2494: 既Column十属性はbody_searchのgenerated stored flagだけを比較し、生成式lower(body)やspeakers.is_protagonist DEFAULT false/他列default不存在の変異を識別しない。内部DDL前条件補足でRD/UI/DDL/QA変更なし。\n\n六固定SELECTへ第十一boolean projectionを追加する。speakers.is_protagonistとscript_entries.body_searchはa.atthasdef=true、同adrelid/adnumのpg_attrdefが厳密一件、pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)がそれぞれ固定false/lower(body)に等しいことを要求する。他64属性はNOT a.atthasdefかつ該当pg_attrdef不存在を要求する。五identity定義は第九sequence検査を保持し通常defaultとして補完しない。生成/通常defaultの違いは既第七flagが検査する。NULLをtrueへ補完しない。SQLの関数/schemaはpg_catalogを修飾し、deparser非pretty出力は承認migration search_pathのもとで実DB確認する別HOLDを残す。等価式を無制限normalize/実行/修復せず違いはfail-closed。sequence state/default/設定/roleを変更しない。\n\nJavaは各行getBoolean(11)直後wasNull、false/SQLNULLなら固定SQLException。旧十projectionを同byte保存し第十一だけ追加。Column/Target独立手書き66行へtrue第十一field追加、既generic異値/null/三型JDBC faultに含め、PT-MIG-COLUMN026は全66false/NULLとquery prefix/逆順cleanup後条件、PT-MIG-TARGET036は全66false/NULLでstaging0を確認。独立text oracleはV002の二式/他defaultなしと固定SQLの全分岐・正誤boolean modelを別に計算し、Proxy booleanを実PGcatalog式の実行成功と呼ばない。旧column getter10/owner/NN/identityは不変更、catalog1251=66x11+75x7、SQL94/Result76/close17/auto12/fetch4/scalar56/Game10を維持する。旧942本文の期待値を削除せず新2を加え全944/45Main47Test65physicalを一source一execでRootNullAway-lint-CS-SB-PMD個別適用/CRC-init/既定・無filter全Code四100により資格。\n\n他44Main/他45Test同byte、DDL30byte同一、実Current/DB/Backup/key/native/VM/server/HOLD変更0。追加不足2.4/7.2/9.9pp cap10、元費用/SV/各群開始保持、原残と未較正397.324/837.386/1643.415を別保存、当不足だけ一回追加し限定完成時同額減算。専有token実費null。旧942は再認証で新成果0、625/190正式受入・1964/53/工数nullを増やさない。生成式正規化/locale実挙動/実DBmetadata/index-trigger/grant/全移行/global451/CHR/ITST/HOLDは別未受入。"
+}

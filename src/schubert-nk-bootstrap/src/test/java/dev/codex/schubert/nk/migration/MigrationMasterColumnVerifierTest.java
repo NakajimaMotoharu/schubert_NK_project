@@ -34,6 +34,7 @@ final class MigrationMasterColumnVerifierTest {
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
+  private static final String SQL_FALSE = "false";
   private static final String DIAGNOSTIC = "migration column attributes are invalid";
   private static final String GET_INT = "getInt";
   private static final String GET_BOOLEAN = "getBoolean";
@@ -271,7 +272,7 @@ final class MigrationMasterColumnVerifierTest {
     }
     var normal = new Fixture();
     verify(normal);
-    assertEquals("false", normal.rows.get(2).get(10).get(4));
+    assertEquals(SQL_FALSE, normal.rows.get(2).get(10).get(4));
   }
 
   @Test
@@ -450,7 +451,7 @@ final class MigrationMasterColumnVerifierTest {
   void column023NotNullCatalogValidityFalseOrSqlNullNeverPassesAnyColumn() throws Exception {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
-        for (String status : java.util.Arrays.asList("false", null)) {
+        for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
           var f = new Fixture();
           f.rows.get(table).get(row).set(7, status);
           reject(f);
@@ -470,7 +471,7 @@ final class MigrationMasterColumnVerifierTest {
   void column024IdentitySequenceDefinitionFalseOrSqlNullNeverPassesAnyColumn() throws Exception {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
-        for (String status : java.util.Arrays.asList("false", null)) {
+        for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
           var f = new Fixture();
           f.rows.get(table).get(row).set(8, status);
           reject(f);
@@ -511,7 +512,7 @@ final class MigrationMasterColumnVerifierTest {
   void column026DefaultAndGeneratedValidityFalseOrSqlNullFailsEachColumn() throws Exception {
     for (int table = 0; table < TABLES; table++) {
       for (int row = 0; row < DATA.get(table).size(); row++) {
-        for (String status : java.util.Arrays.asList("false", null)) {
+        for (String status : java.util.Arrays.asList(SQL_FALSE, null)) {
           var f = new Fixture();
           f.rows.get(table).get(row).set(DEFAULT_FIELD, status);
           reject(f);
