@@ -28,6 +28,7 @@ final class ScenarioStagingTablesTest {
           + " script_file_id, display_order, entry_index, line_number, entry_type, speaker_id,"
           + " speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO DATA";
   private static final String DIAGNOSTIC = "migration staging preparation is invalid";
+  private static final String SYNTHETIC_FAILURE = "synthetic";
   private static final int TASKS = 64;
   private static final int WORKERS = 8;
   private static final int WAIT_SECONDS = 5;
@@ -71,7 +72,7 @@ final class ScenarioStagingTablesTest {
   @Test
   void originalAutoCommitFailureHasNoCreatedStatement() {
     var fixture = new Fixture();
-    var expected = new SQLException("synthetic");
+    var expected = new SQLException(SYNTHETIC_FAILURE);
     fixture.autoFailure = expected;
     assertSame(expected, failure(fixture));
     assertEquals(0, fixture.closeCalls);
@@ -80,7 +81,7 @@ final class ScenarioStagingTablesTest {
   @Test
   void originalCreationFailureIsNotAStatementToClose() {
     var fixture = new Fixture();
-    var expected = new SQLException("synthetic");
+    var expected = new SQLException(SYNTHETIC_FAILURE);
     fixture.createFailure = expected;
     assertSame(expected, failure(fixture));
     assertEquals(0, fixture.closeCalls);
@@ -98,7 +99,7 @@ final class ScenarioStagingTablesTest {
   @Test
   void timeoutFailureStillClosesWithoutAnyDdl() {
     var fixture = new Fixture();
-    var expected = new SQLException("synthetic");
+    var expected = new SQLException(SYNTHETIC_FAILURE);
     fixture.timeoutFailure = expected;
     assertSame(expected, failure(fixture));
     assertEquals(1, fixture.closeCalls);
@@ -119,7 +120,7 @@ final class ScenarioStagingTablesTest {
   @Test
   void secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection() {
     var fixture = new Fixture();
-    var expected = new SQLException("synthetic");
+    var expected = new SQLException(SYNTHETIC_FAILURE);
     fixture.sqlFailure = expected;
     fixture.failAt = 2;
     assertSame(expected, failure(fixture));
@@ -176,7 +177,8 @@ final class ScenarioStagingTablesTest {
   @Test
   void runtimeAndErrorFailuresRemainFailuresWithStatementClosed() {
     for (Throwable expected :
-        List.of(new IllegalStateException("synthetic"), new AssertionError("synthetic"))) {
+        List.of(
+            new IllegalStateException(SYNTHETIC_FAILURE), new AssertionError(SYNTHETIC_FAILURE))) {
       var fixture = new Fixture();
       fixture.sqlFailure = expected;
       fixture.failAt = 1;
