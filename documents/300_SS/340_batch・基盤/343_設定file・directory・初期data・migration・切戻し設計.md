@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC397 全migration物理56の宣言閉鎖（2026-11-15）
+
+SSC396の全migration Java受入は39Main/41Test source/818件に対応する全56physicalとする。既54計画はMigrationMasterCopyFingerprintの通常nested TableFingerprint/DigestSink二件を省き、PG32610は両compile0でも集合guard終了1/製品PT0で未受入。全Sourceとpolicy nameguard後の実56をPG32611で照合した。MainCore0bed68f1/新Role017/818Test/DDL内容・DBHOLD・BUG2943未閉鎖方針は不変更。source同一のfresh56宣言・全CRC-init/既定と無filter四100/Root静的を確認するまで旧54を合格へ反転しない。BUG2944/YKT2473、scope除外/Actual4拡張/旧exec union0、同群内手戻り追加予算0/元3-9-9.9保持、RD/UI/QA変更不要。
+
 ## SSC396 Current音声role十一byte保持と前進・非切捨て切戻し（2026-11-15）
 
 NK-MIG-001/NK-DDL-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI223227242254、SS311331/V002/343。BUG2943/YKT2472: Current source schemaのaudio_role textとgeneratorはmovie_audio（UTF8 11byte）を有効に保存するが、NKのSS331/343とRow/DDLが8byteで拒否する。RD/UI/wireのsource検索ではこの内部幅8指定やaudio_role公開fieldは無く、Current保存値を改名/切捨てず保持するためのSS範囲補正である。新しい業務role enumや表示・電文・既baseline/DIFを変更しない。実Current該当件数/実DB再現は不明・未実行、source根拠による不整合として記録しQA不要。
@@ -10,7 +14,7 @@ NK-MIG-001/NK-DDL-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI22322724225
 
 AudioFileCopyRowのaudio_role byte上限は名前付き定数11へ変更、他列/null/NFC/control/時刻/不変契約は不変更。ColumnVerifierと独立Column/Target各fixtureのaudio_role二type属性だけvarchar8→11へ、ReferenceVerifierの固定47CHECK中audio_role bytes条件だけ8→11へ変更し独立SQL期待値を対応させる。他65descriptor/75制約key-status/元順・JDBC所有/primary/93SQL56scalar/75Result16close-timeoutは保持。ContentVerifierはString値を比較し幅非依存、ConstraintVerifierはname/type/key/statusだけ、AssetStagingTablesは実効table型をCTASで継承するため非該当。既CurrentAudioReaderはmetadataを保持し実asset/role/ms変換を受入れない。
 
-PT-AUDIOROW017を一件追加しmovie_audioと同byte11 ASCII/Unicode境界を独立literalで受入、12byte/空/control/非NFCを拒否、既16定義のrole境界だけ11へ更新。他既818予測をsourceで確認し、全migration39Main/全42Testではなく現41Test source/54physicalの817＋新1=whole818を同一source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter全Code四100で資格。全Mainに専用Testと生成Testを含め、歴史645/818以外の別execを合算しない。未関連36Main/他Testはhash保持し、変更TestはRow/Column/Target/Referenceに限定する。
+PT-AUDIOROW017を一件追加しmovie_audioと同byte11 ASCII/Unicode境界を独立literalで受入、12byte/空/control/非NFCを拒否、既16定義のrole境界だけ11へ更新。他既818予測をsourceで確認し、全migration39Main/現41Test source/56physicalの817＋新1=whole818を同一source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter全Code四100で資格。全Mainに専用Testと生成Testを含め、歴史645/818以外の別execを合算しない。未関連36Main/他Testはhash保持し、変更TestはRow/Column/Target/Referenceに限定する。
 
 DatabaseMigrationTestのresource inventoryにV030を追加し最新migration数30へsource更新、実DB TestはHOLDのままnot-runでありJava818のPASSへ算入しない。DDL/rollbackは独立text golden/拘束条件/旧29hash同一・forward/rollback後条件とsource reviewを記録し、実DBの型/constraint/index/FK/role/grant/rollback guard/transaction再試験は後続未受入として残す。BUG/YKTはJava対策・818PTとDDL静的完了だけで総合CLOSEDへせず、実DB再試験HOLDを明示する。
 
