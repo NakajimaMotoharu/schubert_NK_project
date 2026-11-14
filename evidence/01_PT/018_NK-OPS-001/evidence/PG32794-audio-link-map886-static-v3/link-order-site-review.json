@@ -1,0 +1,39 @@
+{
+  "actualExit": 0,
+  "sameByteSites": 492,
+  "freshSites": [
+    {
+      "rule": "EqualsNull",
+      "line": 163,
+      "anchor": "assertFalse(item.equals(null));"
+    },
+    {
+      "rule": "CloseResource",
+      "line": 455,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 455,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 460,
+      "anchor": "executor.submit("
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 469,
+      "anchor": "executor.shutdownNow();"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 470,
+      "anchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "scope": "FULL42_MIGRATION_MAIN_ROOT_RULES_NO_SUPPRESSION"
+}
