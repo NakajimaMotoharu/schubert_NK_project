@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class CurrentScenarioFileMapper {
+  private static final String GAME_ONE_TEXT = "1";
+  private static final String GAME_TWO_TEXT = "2";
   private static final int CURRENT_COLUMNS = 8;
   private static final int NANOSECONDS_PER_MICROSECOND = 1000;
   private static final String CURRENT_ID_PATTERN = "0|-?[1-9][0-9]{0,18}";
@@ -96,8 +98,8 @@ public final class CurrentScenarioFileMapper {
   }
 
   private static int game(@Nullable String value) {
-    if ("1".equals(value)) return 1;
-    if ("2".equals(value)) return 2;
+    if (GAME_ONE_TEXT.equals(value)) return 1;
+    if (GAME_TWO_TEXT.equals(value)) return 2;
     throw invalid();
   }
 
