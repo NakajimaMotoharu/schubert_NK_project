@@ -1,0 +1,52 @@
+{
+  "actualExit": 0,
+  "origin": "Independent literal SQL, typed getter/wasNull sequence and selected six-column to seven-column COPY. No Production method supplies expected.",
+  "sql": "SELECT id,game_id,name,normalized_name,is_protagonist,notes FROM scenario.speakers ORDER BY id",
+  "queryTimeout": 30,
+  "fetchSize": 1000,
+  "selectedColumns": [
+    "id",
+    "game_id",
+    "name",
+    "normalized_name",
+    "is_protagonist",
+    "notes"
+  ],
+  "rowCalls": [
+    "getLong:1",
+    "wasNull",
+    "getInt:2",
+    "wasNull",
+    "getString:3",
+    "getString:4",
+    "getBoolean:5",
+    "wasNull",
+    "getString:6"
+  ],
+  "normalRows": [
+    [
+      -20,
+      1,
+      " Alice / label ",
+      "alice",
+      true,
+      null
+    ],
+    [
+      10,
+      2,
+      "Bob",
+      "b o b",
+      false,
+      ""
+    ]
+  ],
+  "expectedCopy": "700\t1\t Alice / label \talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n900\t2\tBob\tb o b\tfalse\t\t2026-01-02T03:04:05Z\n",
+  "nullIdRejected": true,
+  "currentGameNullablePreserved": true,
+  "requiredNameNormalizedBooleanSqlNullRejected": true,
+  "allRowGetterOccurrencesFaulted": true,
+  "borrowedConnectionMutationAllowed": false,
+  "actualCurrentMasterOrDbRead": false,
+  "applicationTestsExecuted": 0
+}
