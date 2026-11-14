@@ -1,0 +1,59 @@
+{
+  "actualExit": 0,
+  "sameByteSites": 498,
+  "freshSites": [
+    {
+      "rule": "CloseResource",
+      "line": 295,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 295,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 300,
+      "anchor": "executor.submit("
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 310,
+      "anchor": "executor.shutdownNow();"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 311,
+      "anchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));"
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 371,
+      "anchor": "final Map<Integer, Throwable> resultFailures = new HashMap<>();"
+    },
+    {
+      "rule": "UseConcurrentHashMap",
+      "line": 372,
+      "anchor": "final Map<Integer, Throwable> statementFailures = new HashMap<>();"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 395,
+      "anchor": "Connection.class.getClassLoader(),"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 426,
+      "anchor": "Statement.class.getClassLoader(),"
+    },
+    {
+      "rule": "UseProperClassLoader",
+      "line": 460,
+      "anchor": "ResultSet.class.getClassLoader(),"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "scope": "FULL43_MIGRATION_MAIN_ROOT_RULES_NO_SUPPRESSION"
+}

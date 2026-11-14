@@ -39,6 +39,8 @@ final class CurrentMigrationProjectionTest {
   private static final String ROLE = "movie_audio";
   private static final String INPUT_ERROR = "migration source snapshot input is invalid";
   private static final String ATTRIBUTE_ERROR = "migration source snapshot attributes are invalid";
+  private static final String PHASE_END = "end";
+  private static final String GET_LONG = "getLong";
   private static final String AUTO = "auto";
   private static final String READONLY = "readonly";
   private static final String ISOLATION = "isolation";
@@ -170,14 +172,14 @@ final class CurrentMigrationProjectionTest {
   @Test
   void snapshot006EveryAttributePhasePropagatesAllThreeFaultKinds() {
     for (String phase : List.of(AUTO, READONLY, ISOLATION))
-      for (String when : List.of("begin", "end"))
+      for (String when : List.of("begin", PHASE_END))
         for (Throwable expected : failures()) {
           var f = normal();
           f.failurePhase = phase + ":" + when;
           f.failure = expected;
           assertSame(expected, assertThrows(expected.getClass(), () -> read(f, ones())));
-          assertEquals(when.equals("end") ? TABLES : 0, f.sql.size());
-          assertEquals(when.equals("end") ? 10 : 0, f.closes.size());
+          assertEquals(when.equals(PHASE_END) ? TABLES : 0, f.sql.size());
+          assertEquals(when.equals(PHASE_END) ? 10 : 0, f.closes.size());
           assertEquals(0, expected.getSuppressed().length);
         }
   }
@@ -185,19 +187,19 @@ final class CurrentMigrationProjectionTest {
   @Test
   void snapshot007EveryChildMainPhasePropagatesAndStopsLaterReaders() {
     for (int table = 0; table < TABLES; table++)
-      for (String phase : List.of(CREATE, TIMEOUT, FETCH, QUERY, NEXT, "getLong"))
+      for (String phase : List.of(CREATE, TIMEOUT, FETCH, QUERY, NEXT, GET_LONG))
         for (Throwable expected : failures()) {
           var f = normal();
-          f.failurePhase = phase + ":" + table + (phase.equals("getLong") ? ":1" : "");
+          f.failurePhase = phase + ":" + table + (phase.equals(GET_LONG) ? ":1" : "");
           f.failure = expected;
           assertSame(expected, assertThrows(expected.getClass(), () -> read(f, ones())));
           assertEquals(
-              table + (List.of(QUERY, NEXT, "getLong").contains(phase) ? 1 : 0), f.sql.size());
+              table + (List.of(QUERY, NEXT, GET_LONG).contains(phase) ? 1 : 0), f.sql.size());
           assertEquals(table + (phase.equals(CREATE) ? 0 : 1), f.statementsCreated);
           assertEquals(0, expected.getSuppressed().length);
           assertEquals(
               2 * table
-                  + (phase.equals(CREATE) ? 0 : List.of(NEXT, "getLong").contains(phase) ? 2 : 1),
+                  + (phase.equals(CREATE) ? 0 : List.of(NEXT, GET_LONG).contains(phase) ? 2 : 1),
               f.closes.size());
         }
   }
@@ -394,7 +396,7 @@ final class CurrentMigrationProjectionTest {
               new Class<?>[] {Connection.class},
               (proxy, method, args) -> {
                 String name = method.getName();
-                String when = sql.size() == TABLES ? "end" : "begin";
+                String when = sql.size() == TABLES ? PHASE_END : "begin";
                 if (name.equals("getAutoCommit")) {
                   hit(AUTO + ":" + when);
                   return auto || (autoAfter && sql.size() == TABLES);
@@ -475,7 +477,7 @@ final class CurrentMigrationProjectionTest {
                   wasNullCounts[table]++;
                   return cursor.lastNull;
                 }
-                if (List.of("getLong", "getInt", "getBoolean", "getString", "getBigDecimal")
+                if (List.of(GET_LONG, "getInt", "getBoolean", "getString", "getBigDecimal")
                     .contains(name)) {
                   int column = (Integer) args[0];
                   hit(name + ":" + table + ":" + column);
@@ -484,7 +486,7 @@ final class CurrentMigrationProjectionTest {
                   typed
                       .get(table)
                       .add(
-                          (name.equals("getLong")
+                          (name.equals(GET_LONG)
                                   ? "L"
                                   : name.equals("getInt")
                                       ? "I"
@@ -493,7 +495,7 @@ final class CurrentMigrationProjectionTest {
                                           : name.equals("getBigDecimal") ? "D" : "S")
                               + column);
                   return switch (name) {
-                    case "getLong" -> value == null ? 0L : (Long) value;
+                    case GET_LONG -> value == null ? 0L : (Long) value;
                     case "getInt" -> value == null ? 0 : (Integer) value;
                     case "getBoolean" -> value == null ? false : (Boolean) value;
                     default -> value;
