@@ -17,10 +17,11 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-AUDIOROW001..016: DDL limits, independent literals and bounded immutable-value
+ * PT-MIG-AUDIOROW001..017: DDL limits, independent literals and bounded immutable-value
  * concurrency.
  */
 final class AudioFileCopyRowTest {
+  private static final String CURRENT_MOVIE_AUDIO_ROLE = "movie_audio";
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
@@ -104,7 +105,7 @@ final class AudioFileCopyRowTest {
 
   @Test
   void mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum() {
-    var limits = List.of(List.of(3, 512), List.of(4, 256), List.of(5, 255), List.of(6, 8));
+    var limits = List.of(List.of(3, 512), List.of(4, 256), List.of(5, 255), List.of(6, 11));
     for (var limit : limits) {
       int index = limit.get(0);
       int size = limit.get(1);
@@ -262,6 +263,23 @@ final class AudioFileCopyRowTest {
     var row = new AudioFileCopyRow(fields());
     assertEquals("AudioFileCopyRow[REDACTED]", row.toString());
     assertArrayEquals(GOLDEN.getBytes(StandardCharsets.UTF_8), row.copyBytes(encoder()));
+  }
+
+  @Test
+  void currentMovieAudioElevenBytesArePreservedWithoutRenamingOrTruncating() {
+    assertEquals(11, CURRENT_MOVIE_AUDIO_ROLE.getBytes(StandardCharsets.UTF_8).length);
+    var actual = rowWith(6, CURRENT_MOVIE_AUDIO_ROLE);
+    assertEquals(CURRENT_MOVIE_AUDIO_ROLE, actual.fields().get(6));
+    assertArrayEquals(
+        GOLDEN
+            .replace("\tvoice\t", "\t" + CURRENT_MOVIE_AUDIO_ROLE + "\t")
+            .getBytes(StandardCharsets.UTF_8),
+        actual.copyBytes(encoder()));
+    String unicodeBoundary = JAPANESE_A.repeat(3) + "ab";
+    assertEquals(11, unicodeBoundary.getBytes(StandardCharsets.UTF_8).length);
+    assertEquals(unicodeBoundary, rowWith(6, unicodeBoundary).fields().get(6));
+    reject(6, ASCII_X.repeat(12));
+    reject(6, JAPANESE_A.repeat(4));
   }
 
   private static AudioFileCopyRow rowWith(int index, @Nullable String value) {

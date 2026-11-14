@@ -1,0 +1,114 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T19:23:54.185703+00:00",
+  "metadataOnly": true,
+  "sourceTextReviewOnly": true,
+  "forward": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+    "sha256": "70514f22c23c1e2dc864bc1a77e72242e393b6512c2b13a5853aeac4ef8d8f82"
+  },
+  "rollback": {
+    "path": "src/deployment/migration/030_audio_role_rollback.sql.template",
+    "sha256": "f7afa5f20d895cdff0cec6db255f9af4ca67d642fab59aea8e3189edc7ebb908"
+  },
+  "forwardGoldenStatements": [
+    "ALTER TABLE schubert.audio_files ALTER COLUMN audio_role TYPE varchar(11)",
+    "ALTER TABLE schubert.audio_files DROP CONSTRAINT ck_audio_files_audio_role_bytes",
+    "ALTER TABLE schubert.audio_files ADD CONSTRAINT ck_audio_files_audio_role_bytes CHECK (octet_length(audio_role) BETWEEN 1 AND 11)"
+  ],
+  "rollbackGoldenStatements": [
+    "BEGIN",
+    "LOCK TABLE schubert.audio_files IN ACCESS EXCLUSIVE MODE",
+    "DO $audio_role_guard$ BEGIN IF EXISTS (SELECT 1 FROM schubert.audio_files WHERE octet_length(audio_role) > 8) THEN RAISE EXCEPTION 'audio role rollback blocked by values beyond original byte limit'; END IF; END $audio_role_guard$",
+    "ALTER TABLE schubert.audio_files DROP CONSTRAINT ck_audio_files_audio_role_bytes",
+    "ALTER TABLE schubert.audio_files ALTER COLUMN audio_role TYPE varchar(8)",
+    "ALTER TABLE schubert.audio_files ADD CONSTRAINT ck_audio_files_audio_role_bytes CHECK (octet_length(audio_role) BETWEEN 1 AND 8)",
+    "COMMIT"
+  ],
+  "old29AppliedSqlUnchanged": true,
+  "sourceMigrationArtifactCount": 30,
+  "roleByteVectors": [
+    [
+      "voice",
+      true
+    ],
+    [
+      "movie_audio",
+      true
+    ],
+    [
+      "12345678901",
+      true
+    ],
+    [
+      "123456789012",
+      false
+    ],
+    [
+      "あああab",
+      true
+    ],
+    [
+      "ああああ",
+      false
+    ],
+    [
+      "",
+      false
+    ]
+  ],
+  "rollbackGuardLogicalVectors": [
+    [
+      [],
+      true
+    ],
+    [
+      [
+        "voice"
+      ],
+      true
+    ],
+    [
+      [
+        "12345678"
+      ],
+      true
+    ],
+    [
+      [
+        "movie_audio"
+      ],
+      false
+    ],
+    [
+      [
+        "voice",
+        "123456789"
+      ],
+      false
+    ],
+    [
+      [
+        "あああab"
+      ],
+      false
+    ]
+  ],
+  "actualDatabaseOrTransactionOrIndexFkGrantCheckExecuted": false,
+  "ddlRuntimePt": "HOLD_NOT_RUN_NOT_PASS_NOT_MEASURED_COVERAGE",
+  "javaWholeExpected": 818,
+  "newJavaDefinitions": 1,
+  "independentGoldenFromSS396": true,
+  "productionMethodUsedForExpected": false,
+  "externalReviewSources": [
+    {
+      "url": "https://www.postgresql.org/docs/18/plpgsql-structure.html",
+      "supports": "Final outer END may omit semicolon; grouping BEGIN/END is separate from SQL transaction control."
+    },
+    {
+      "url": "https://www.postgresql.org/docs/18/sql-do.html",
+      "supports": "Dollar-quoted anonymous body form; execution is not performed here."
+    }
+  ],
+  "defectState": "JAVA_AND_DDL_STATIC_TARGETS_ONLY_DB_RETEST_HOLD"
+}

@@ -1,0 +1,5 @@
+# 全migration物理五十六の閉鎖
+
+SSC396の全migration Java受入は39Main/41Test source/818件に対応する全56physicalとする。既54計画はMigrationMasterCopyFingerprintの通常nested TableFingerprint/DigestSink二件を省き、PG32610は両compile0でも集合guard終了1/製品PT0で未受入。全Sourceとpolicy nameguard後の実56をPG32611で照合した。MainCore0bed68f1/新Role017/818Test/DDL内容・DBHOLD・BUG2943未閉鎖方針は不変更。source同一のfresh56宣言・全CRC-init/既定と無filter四100/Root静的を確認するまで旧54を合格へ反転しない。BUG2944/YKT2473、scope除外/Actual4拡張/旧exec union0、同群内手戻り追加予算0/元3-9-9.9保持、RD/UI/QA変更不要。
+
+113の全ケース/独立Role11・旧29SQL/DDL静的期待値は保持。通常nested二型もTableFingerprintのcount/digest比較・DigestSinkのUTF8 streaming/error/closeという既Fingerprint20で検証し、metadata型だから除外しない。全56入力namesをclassfile stat/read/hash前に既policyへ通し、Source/Core/Unit/exec/各CRCと実Codeを一意照合する。

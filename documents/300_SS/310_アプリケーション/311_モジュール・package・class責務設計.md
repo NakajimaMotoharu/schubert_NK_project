@@ -1,5 +1,9 @@
 # モジュール・package・class責務設計
 
+SSC397: 全migrationの通常nested Fingerprint二型を含む物理56/39Main/818件を宣言、原54集合guard失敗を保全。Main/DDL/実DBHOLDは不変更、BUG2944/YKT2473。
+
+SSC396: SS331実効audio_roleをV030後varchar11/byte11へ補正、Row/Column/Referenceと独立fixtureを横断。全39Main/56physical/新1含818JavaPTとDDL静的は実DB未実行を分け、BUG2943/YKT2472はDB再試験HOLDを残す。
+
 SSC395: CurrentAudioProjectionReader.read/rows/row/duration/cleanupはCurrent十列をreadonly snapshotから不変rowsへ接続。signedID-size/nullablemetadata/有界decimalを保持、独立20/四100計画、実audio/DB未資格。
 
 SSC394: CurrentScenarioFileMapperの全7Main17physicalに対しEntryMap/Placement通常各12を加え全122へ依存閉鎖。原98FES0はcoverage不足で未資格。Main不変更、BUG2940/YKT2469。

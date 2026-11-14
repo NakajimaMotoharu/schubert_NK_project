@@ -2312,7 +2312,9 @@
         "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql",
         "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql",
         "src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql",
-        "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql"
+        "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+        "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+        "src/deployment/migration/030_audio_role_rollback.sql.template"
       ],
       "requirementIds": [
         "DAT-001",
@@ -2351,7 +2353,16 @@
           "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG495-completion-compound-full-v1/manifest.json"
         ],
         "evidencePresenceMeansAccepted": false,
-        "plannedDeliverable": "対象別TestID/独立期待値/command/exit/後条件/hashの受入matrix。既存PT仕様から不足を確認し本WBS内で補完する。"
+        "plannedDeliverable": "対象別TestID/独立期待値/command/exit/後条件/hashの受入matrix。既存PT仕様から不足を確認し本WBS内で補完する。",
+        "plannedAudioRoleV030SSC396": {
+          "state": "PLANNED_NOT_EXECUTED_DB_HOLD",
+          "paths": [
+            "src/schubert-nk-api/src/main/resources/db/migration/V030__preserve_current_audio_role.sql",
+            "src/deployment/migration/030_audio_role_rollback.sql.template"
+          ],
+          "sharedCause": "BUG2943",
+          "costCountedOnceUnder": "WBS-P019-03"
+        }
       },
       "acceptanceChecks": [
         {
@@ -13532,6 +13543,16 @@
             "sha256": "09a5b072f9b8c2942a8929560814ef8638b2ed62f477327a6fec4c70d43f7fd0"
           },
           "global451Accepted": false
+        },
+        "plannedAudioRole11SSC396": {
+          "state": "REGISTERED_NOT_CONNECTED",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/113_Current音声role十一byte・Java全体818・DDL静的仕様.md",
+            "sha256": "bfd29a14da5c0686d80813e042940c091de9cc04f779aa2eeec24ce4b1629ce6"
+          },
+          "source": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
+          "newDefinitions": 1,
+          "whole": 818
         }
       },
       "acceptanceChecks": [

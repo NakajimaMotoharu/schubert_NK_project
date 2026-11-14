@@ -95,7 +95,7 @@ final class MigrationMasterColumnVerifierTest {
               "4\tdisplay_path\ttext\ttext\ttrue\t\t\ttrue\ttrue",
               "5\tfile_name\ttext\ttext\ttrue\t\t\ttrue\ttrue",
               "6\tbasename\ttext\ttext\ttrue\t\t\ttrue\ttrue",
-              "7\taudio_role\tvarchar\tcharacter varying(8)\ttrue\t\t\ttrue\ttrue",
+              "7\taudio_role\tvarchar\tcharacter varying(11)\ttrue\t\t\ttrue\ttrue",
               "8\tcontainer\tvarchar\tcharacter varying(16)\tfalse\t\t\ttrue\ttrue",
               "9\tduration_ms\tint8\tbigint\tfalse\t\t\ttrue\ttrue",
               "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue\ttrue",

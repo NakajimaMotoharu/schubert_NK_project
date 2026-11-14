@@ -1150,6 +1150,7 @@ final class DatabaseMigrationTest {
             "migration/V027__pending_revocation_unknown_expiry.sql",
             "migration/V028__retained_success_progress_seals.sql",
             "migration/V029__strict_nullable_compound_checks.sql",
+            "migration/V030__preserve_current_audio_role.sql",
             "provisioning/001_roles.sql"),
         resources.stream()
             .map(path -> MODULE.resolve("src/main/resources/db").relativize(path).toString())
@@ -1942,7 +1943,7 @@ final class DatabaseMigrationTest {
   @Order(33)
   @DisplayName("PT-DB-NULL340-014 V029 validates and all five checks remain validated")
   void strictMigrationIsAppliedValidatedAndIdempotent() throws SQLException {
-    assertEquals(29, firstMigration.migrationsExecuted);
+    assertEquals(30, firstMigration.migrationsExecuted);
     assertTrue(flyway.validateWithResult().validationSuccessful);
     assertEquals(0, flyway.migrate().migrationsExecuted);
     assertEquals(

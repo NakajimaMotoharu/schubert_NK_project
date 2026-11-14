@@ -1,0 +1,29 @@
+{
+  "ssc": 396,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
+  "source": "eb673e945472ecc613e5b839b1db01f0ca8351ca",
+  "estimate": {
+    "low": 3,
+    "base": 9,
+    "high": 9.9
+  },
+  "title": "Current音声role十一byte保持と前進・非切捨て切戻し",
+  "spec": "113_Current音声role十一byte・Java全体818・DDL静的仕様.md",
+  "designSlot": "PG32602-ssc396-audio-role11-design-only-v1",
+  "previousForecast": "1993_WBS65予実・Current audio二十後版562.json",
+  "forecast": "1995_WBS65予実・音声role互換手戻り追加版563.json",
+  "revision": "563-BUG2943_CURRENT_AUDIO_ROLE_WIDTH_REWORK",
+  "findingReason": "SS internal8byte role rejects validCurrent movie_audio11. SS-only data compatibility correction: newV030 preserves appliedSQL, Row/catalog/check/PT effective11 and guarded nontruncating rollback. ActualDB remainsHOLD; Java all818 qualified separately fromDDLstatic.",
+  "workId": "P01903_BUG2943_AUDIO_ROLE11_818",
+  "planKey": "plannedAudioRole11SSC396",
+  "startInput": "3044_audio_role818_start.json",
+  "startRecord": "1996_WBS65音声role互換手戻り開始.json",
+  "groupId": "PGPT-WBS65-SSC396-AUDIO-ROLE11-818-20261115",
+  "run": "PG32616-AUDIO-ROLE-CLOSED818",
+  "newDefinitions": 1,
+  "whole": 818,
+  "moduleSummary": "SS331実効audio_roleをV030後varchar11/byte11へ補正、Row/Column/Referenceと独立fixtureを横断。全39Main/54physical/新1含818JavaPTとDDL静的は実DB未実行を分け、BUG2943/YKT2472はDB再試験HOLDを残す。",
+  "scope": "BUG2943 SS-only internal audio_role11 compatibility rework. NewV030/guarded rollback, Main3changed/new0, independentRow017+whole818/39Main54physical; appliedSQL29 immutable. DDLstatic and DBnotrun separate. Additional3/9/9.9cap10; noActualDB/assets/RootnativeActual4aruHOLD.",
+  "nextCommand": "PublishSSC396SS311331343914onlymain beforePG. Preserve29migration hashes; implement V030+nontruncating rollback, AudioRow11/Column/Reference/fixtures and newRow017. Freshall39Main/41Test/818/54CRC/default-raw. DBTest sourceonly/notrun, BUG/YKT remainDBHOLD. Ordinarygroupnotstop.",
+  "detail": "NK-MIG-001/NK-DDL-001、RD MIG003005006/MIG-DAT002005/DAT004/TST、UI223227242254、SS311331/V002/343。BUG2943/YKT2472: Current source schemaのaudio_role textとgeneratorはmovie_audio（UTF8 11byte）を有効に保存するが、NKのSS331/343とRow/DDLが8byteで拒否する。RD/UI/wireのsource検索ではこの内部幅8指定やaudio_role公開fieldは無く、Current保存値を改名/切捨てず保持するためのSS範囲補正である。新しい業務role enumや表示・電文・既baseline/DIFを変更しない。実Current該当件数/実DB再現は不明・未実行、source根拠による不整合として記録しQA不要。\n\n既適用V001..V029の全SQLはbyte同一を保持し、API migration V030__preserve_current_audio_role.sqlを新規追加する。Flywayの既owner/transaction契約内でaudio_files.audio_roleをvarchar(11)へ拡張し、同名ck_audio_files_audio_role_bytesをoctet_length BETWEEN1 AND11へ置換する。schema/table/他列/PK/UK/FK/index/role/grantを変えず、table数24/明示table制約75/固定66columnも維持。V002は歴史varchar8のまま、V030後の実効型がvarchar11/byte1..11でありColumnVerifierはこの実効schemaを検査する。実DB適用/配備/署名/native資格は別HOLDで、本hostはSQL textの独立review・hash・後条件だけを確認し実DB PT PASSへ混ぜない。\n\n切戻しartifact src/deployment/migration/030_audio_role_rollback.sql.templateは明示transactionとACCESS EXCLUSIVE lockを保持し、octet_length(audio_role)>8の行があれば固定エラーで全体拒否する。その場合切捨て/改名/削除を行わず、既Backup/別切戻し契約へ利用者判断を引き継ぐ。許可された対象・credential/DB認証の下でON_ERROR_STOP=1を必須とし、検査後だけ旧byte1..8制約/varchar8へ戻す。未認証DBや本hostから実行しない。新authority/権限/自動復旧を発行しない。\n\nAudioFileCopyRowのaudio_role byte上限は名前付き定数11へ変更、他列/null/NFC/control/時刻/不変契約は不変更。ColumnVerifierと独立Column/Target各fixtureのaudio_role二type属性だけvarchar8→11へ、ReferenceVerifierの固定47CHECK中audio_role bytes条件だけ8→11へ変更し独立SQL期待値を対応させる。他65descriptor/75制約key-status/元順・JDBC所有/primary/93SQL56scalar/75Result16close-timeoutは保持。ContentVerifierはString値を比較し幅非依存、ConstraintVerifierはname/type/key/statusだけ、AssetStagingTablesは実効table型をCTASで継承するため非該当。既CurrentAudioReaderはmetadataを保持し実asset/role/ms変換を受入れない。\n\nPT-AUDIOROW017を一件追加しmovie_audioと同byte11 ASCII/Unicode境界を独立literalで受入、12byte/空/control/非NFCを拒否、既16定義のrole境界だけ11へ更新。他既818予測をsourceで確認し、全migration39Main/全42Testではなく現41Test source/54physicalの817＋新1=whole818を同一source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter全Code四100で資格。全Mainに専用Testと生成Testを含め、歴史645/818以外の別execを合算しない。未関連36Main/他Testはhash保持し、変更TestはRow/Column/Target/Referenceに限定する。\n\nDatabaseMigrationTestのresource inventoryにV030を追加し最新migration数30へsource更新、実DB TestはHOLDのままnot-runでありJava818のPASSへ算入しない。DDL/rollbackは独立text golden/拘束条件/旧29hash同一・forward/rollback後条件とsource reviewを記録し、実DBの型/constraint/index/FK/role/grant/rollback guard/transaction再試験は後続未受入として残す。BUG/YKTはJava対策・818PTとDDL静的完了だけで総合CLOSEDへせず、実DB再試験HOLDを明示する。\n\n追加設計手戻り3/9/9.9pp cap10、元費用/SV/各群開始保持、元計画/追加発見/手戻り/再認証/toolを区分し追加scope予算で進捗率を作らない。DDL owner WBS-P004-01、関連migration Java WBS-P019-03、今回の共通原因是正費はWBS-P01903へ一回だけ帰属させ重複課金しない。専有実費token null、新Main0/新JUnit1、正本625/元190の受入・正式1964/53・工数率をJava件数から増やさない。実DB/原本・Backup/key/native/VM/server/RootActual4等HOLDは全維持、RD/UI/QA変更なし。"
+}
