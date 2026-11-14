@@ -1,0 +1,164 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG30838-FILE-COPY-BATCH-CLOSED38-FIXED",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30832-file-copy-batch38-fixed-prepare-v1/manifest.json",
+    "sha256": "a416fb3140c26e6940513d2c25f8d13f66da548dacce2673f49576a2e6c58675"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30834-file-copy-batch38-fixed-static-v1/manifest.json",
+    "sha256": "76c84aa38ea2f33b7fcce0fc851c217224fb71c6387d6727c87060452aa7deaa"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 291,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "The exact JUnit-owned executor is acquired before try and every exit executes finally shutdownNow and asserted awaitTermination10; all64 Future joins are bounded5. Implicit ExecutorService.close would not express this finite postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 291,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "futures.add(pool.submit(() -> batch.copyBytes(encoder())));",
+      "sourceLine": 295,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "sourceLine": 299,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "sourceLine": 300,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "The exact JUnit-owned executor is acquired before try and every exit executes finally shutdownNow and asserted awaitTermination10; all64 Future joins are bounded5. Implicit ExecutorService.close would not express this finite postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 190,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 195,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 207,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS), \"owned worker termination\");",
+      "sourceLine": 208,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "The exact JUnit-owned executor is acquired before try and every exit executes finally shutdownNow and asserted awaitTermination10; all64 Future joins are bounded5. Implicit ExecutorService.close would not express this finite postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.submit(",
+      "sourceLine": 169,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.shutdownNow();",
+      "sourceLine": 178,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), \"owned COPY workers terminate\");",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone pure-data JUnit site is not a J2EE managed webapp. Eight locally owned workers validate64 independent literal mapping/COPY results, each Future5 and finallyshutdownNow/await10 checked. No actual DB, filesystem, process, native or Root operation participates.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
