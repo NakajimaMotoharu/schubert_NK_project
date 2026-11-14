@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC380: bootstrap.migration.MigrationMasterColumnVerifierは借用TXの六表66物理カラム属性を固定catalog queryで厳密照合する。PT-MIG-COLUMN001..022/一physical・Root静的/default-raw全Code、実DB/全catalog/constraint/index/role/全移行/HOLD未受入。
+
 SSC379: MigrationMasterTargetPublisherは既Reference後→Content65列後→Finalizerの同借用Connection経路を持つ。独立Target017..024/全589、実DB/全移行/HOLD未受入。
 
 SSC378: bootstrap.migration.MigrationMasterContentVerifier verify/expectedRows/orderedRows/typedValue/resource cleanupは借用migration TXに対する六表65COPY列の固定SELECT型付きpost確認を担う。独立28/whole411、実DB/catalog/全移行/公開/Rootnative/HOLD未受入。
