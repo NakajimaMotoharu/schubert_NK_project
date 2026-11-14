@@ -1,0 +1,5 @@
+# 制約triggerを七十五テーブル制約照合から分離・訂正仕様
+
+BUG2934/YKT2463、SSC382の75明示テーブル制約subsetのquery条件を是正する。V002にはテーブル定義外にCREATE CONSTRAINT TRIGGER ck_entry_audio_links_entry_type_limitが一件あり、pg_constraint.contype=tとして存在する。六固定queryのWHEREをk.contype NOT IN ('n','t')へ統一する。PK/UK/FK/CHECK75行の期待name/keys/status/ref/actionsは不変、未知type x等は除外せず余剰又は型相違として拒否する。NOTNULL nとconstraint trigger tは当75構造資格の範囲外として明示し、trigger定義/関数/DEFERRABLE INITIALLY DEFERRED/有効状態/上限999の実動作とNOTNULL constraint statusは依然別の未完条件である。これらを全catalog合格へ読み替えない。DDL/実DB/既triggerを変更又は無効化しない。
+
+PG32218/Unit0cb9d3fdの全641FES0はscope期待漏れを含む旧sourceのraw実績として保持、当是正sourceの合格へ合算せずpostも流用しない。独立75matrixのtable内parserに加えV002全文のCREATE CONSTRAINT TRIGGER/ALTER TABLE ADD CONSTRAINT/CREATE TRIGGERをsource監査し、一件の既承認triggerと六queryのn,t明示分離を記録する。PT-CONSTRAINT015は固定述語と既FK列順/未知type否定を是正条件へ対応、既22/Target32定義数は増やさず同source641/全31Main45physical/Root静的/全CRC-init/既定と無filter四100で再資格する。新規業務scope/QA/RD/UI変更0、追加予算0・既SSC382群3.3/9.9/9.9cap10内の手戻りとして元見積り保持。HOLD/451/正式1964-53/工数nullは不変更。根拠:PostgreSQL18公式pg_constraintはuser-defined constraint triggerもcatalogへ含むと明記 https://www.postgresql.org/docs/18/catalog-pg-constraint.html 。
