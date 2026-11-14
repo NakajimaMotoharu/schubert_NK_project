@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC398: AudioMigrationMap record/constructor/lookup/canonical/copyRowsはCurrent音声のdeclared ID/asset/正確msを既AudioRowへ結合。Asset純pathをpackage共有しFileMapperは同契約保持、new24/全40Main58class842予定、実DB/asset認証なし。
+
 SSC397: 全migrationの通常nested Fingerprint二型を含む物理56/39Main/818件を宣言、原54集合guard失敗を保全。Main/DDL/実DBHOLDは不変更、BUG2944/YKT2473。
 
 SSC396: SS331実効audio_roleをV030後varchar11/byte11へ補正、Row/Column/Referenceと独立fixtureを横断。全39Main/56physical/新1含818JavaPTとDDL静的は実DB未実行を分け、BUG2943/YKT2472はDB再試験HOLDを残す。

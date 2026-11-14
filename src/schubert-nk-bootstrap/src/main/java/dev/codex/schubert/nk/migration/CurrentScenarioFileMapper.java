@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.migration;
 
-import java.text.Normalizer;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -118,21 +117,13 @@ public final class CurrentScenarioFileMapper {
   }
 
   private static String root(@Nullable String value) {
-    if (value == null
-        || value.isEmpty()
-        || value.startsWith("/")
-        || value.endsWith("/")
-        || value.contains("\\")
-        || !Normalizer.isNormalized(value, Normalizer.Form.NFC)
-        || value.codePoints().anyMatch(CurrentScenarioFileMapper::invalidScalar)) throw invalid();
-    for (String segment : value.split("/", -1))
-      if (segment.isEmpty() || segment.equals(".") || segment.equals("..")) throw invalid();
+    if (value == null) throw invalid();
+    try {
+      AssetMigrationManifest.path(value);
+    } catch (IllegalArgumentException failure) {
+      throw invalid();
+    }
     return value;
-  }
-
-  private static boolean invalidScalar(int point) {
-    return Character.isISOControl(point)
-        || (point >= Character.MIN_SURROGATE && point <= Character.MAX_SURROGATE);
   }
 
   private static void validTime(Instant value) {

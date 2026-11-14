@@ -1,5 +1,23 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC398 Current音声ID対応・宣言asset・durationをCOPYへ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT002005/FUN005/DAT004/TST/UI227242254/SS311331/V002/V030/343。AudioMigrationMapはCurrentAudioProjectionReader十列を既AssetManifest/AudioFileCopyRowへ結合し、後続AudioCopyDatasetのaudio rowsとentry-link ID変換へ渡すpure部品。Source Current findAudioはglobal idで参照し、game rootはCurrent設定から明示される。File/DB/rootの実同一性や権限を宣言する部品でなく、実IO/Current generator/URL発行はしない。
+
+public record AudioMapping(int gameId,long currentAudioId,long targetAudioId)はgame1/2とtarget positiveN12だけを検証、Currentは全signedlong許容。toString固定REDACTED。constructor(nullable mapping List with nullable elements,nullable AssetManifest,nullable gameOneRoot,nullable gameTwoRoot)はnullを固定IAEで拒否しsnapshot、Current IDはgame跨ぎglobal一意、source signed IDでsortした後target IDのstrict増加を要求する。これによりN12空targetへのdeclared対応の既ID比較順を保持し、再採番やsource値の補完を行わない。target重複/下降は拒否、任意positive疎IDは可。targetAudioId(game,current)は既知/同gameだけ返す。mappings()不変、canonicalBytes()はUTF8 header game_id<TAB>current_audio_id<TAB>target_audio_id<LF>と上記順のdecimal三列LF、新byte[]を毎回返す。実対応は私有運用artifactへ保管しGitへ実masterを入れない。
+
+AUDIO kindだけのEntryをcurrentPath indexへ保持し件数=mapping、otherkindはmanifestに保持して当scopeでは資格を与えない。二game rootは既CurrentFileMapperと同じroot-relative POSIX/NFC/control/surrogate/dot制約、二root同値拒否。重複実装を避けAssetMigrationManifestの既path(String)をpackage-private pure validatorとして同packageだけへ共有し、CurrentScenarioFileMapper.rootもnullを事前拒否してこのvalidatorへ委譲する。既FileMapの固定diagnosticはknown IAE変換で保持し、NPE catchなし。FileMapperの重複invalidScalarは削除し、source/domain挙動は既122試験で再認証する。path validatorは文字検査のみでPath解決/実root許可/IOをしない。
+
+copyRows(nullable ten-column rows with nullable row,nullable migratedAt)はnull/UTC0001..9999年・µs以下、件数完全一致、nullrow/幅10以外を拒否しsnapshot。source idはLong.toString正準signeddecimal、known mappingとgame文字完全一致、一度だけconsume/global重複拒否。relative_pathは保存値に選択game rootをprefixしてAUDIO Entryへ一回結合、未知/別game/pathや改名・normalization補完なし。source hashがnonnullならEntry.sha256と一致、source sizeがnonnullなら正準signedlongとしてEntry.byteLengthと一致、NULLは宣言claimをtargetへ渡す。これはmetadata同士の一致で実file検証ではない。
+
+target12列はmapped audioId/game、asset.targetPath、source relative_path/file_name/basename_upper/audio_role/container、変換duration_ms、asset byteLength/sha、共通migration時刻。file_name/basename/roleは必須を事前確認し、保存値を再導出しない。movie_audio11はSSC396のRowでそのまま保持、container nullable/codepoint上限も既Rowへ委譲。duration NULLはNULL、非NULLはCurrent readerのplain decimalを独立境界で検証する。ASCII signed decimal/整数0又は非zero最大9桁/小数最大3桁だけ、BigDecimal.toPlainStringとの一致で+・zero埋め・指数・-0を拒否、負値はtarget非負契約により拒否する。小数三桁までなのでmovePointRight(3).longValueExactで丸めなく0..999999999999msへ変換できる。勝手なclamp/四捨五入/field欠落補完0。空/不正source text/byte/timeは既Rowが拒否、例外を正常扱いしない。
+
+known global IDs/一意/同件数、AUDIO一回consume/同件数で対応を全単射にし、mappingのsigned Current順で不変List<AudioFileCopyRow>を返す。Row/manifest/map/root/Inputの状態を変更しない。mapper/recordのtoStringと自前例外は固定redaction。実DB/実asset/role-grant/鍵/native/Root/VM操作0。
+
+PT-MIG-AUDIOMAP001..024: 001declared ID/二game/十→12列独立literal、002empty、003constructor null/nullable element、004game/N12 mapping境界、005global Current重複/target重複下降、006source signed順/target疎増加/不変、007known/samegame lookup、008canonical bytes/fresh array、009record全field/equals/hash独立primitive31vector/衝突/NULL/otherType、010root不正/同値と共有File/Asset挙動、011rows/time/cardinality/null/幅、012source id/gameの正準/未知/重複、013exact二game root/path/同名relative分離、014source optional hash-size比較/NULLclaim、015保存name/basename/movie_audio11/containerとtarget境界、016duration NULL/0/1.234→1234/9digit3decimalmax、017duration負/不正/zero埋め/指数/scale超過拒否、018固定COPY bytes、019時刻年/µs/全stamp、020deep immutable失敗後freshredaction、021signedlong両端/Longhash衝突/等値record、022AUDIO件数/otherkind/asset二重consume、023各必須NULL/NFC/control/byte/未知target値、024有限8worker64/Future5/finallyshutdownNow-await10。expected rows/COPY/decimal-ms/recordhashは独立手書き又は独立計算でProduction methodから生成しない。
+
+新Main1/新record1/newJUnit24、変更既Main2（Asset path visibility/File root共有）・既Test818不変更、全40Main/42Test/58physical/全842をsame source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認する。new24以外818は再認証で新成果へ数えない。追加不足3/9/9.9pp cap10、元費用/SV/各群開始保持・実専有費token null、元397.324/837.386/1643.415残予測とV030 DB_HOLD0.6/1.8/4.5は保持。BUG2943/YKT2472/実DB/全移行/global451/CHR/ITST/HOLD未受入、RD/UI/DDL/grant/QA変更不要。
+
 ## SSC397 全migration物理56の宣言閉鎖（2026-11-15）
 
 SSC396の全migration Java受入は39Main/41Test source/818件に対応する全56physicalとする。既54計画はMigrationMasterCopyFingerprintの通常nested TableFingerprint/DigestSink二件を省き、PG32610は両compile0でも集合guard終了1/製品PT0で未受入。全Sourceとpolicy nameguard後の実56をPG32611で照合した。MainCore0bed68f1/新Role017/818Test/DDL内容・DBHOLD・BUG2943未閉鎖方針は不変更。source同一のfresh56宣言・全CRC-init/既定と無filter四100/Root静的を確認するまで旧54を合格へ反転しない。BUG2944/YKT2473、scope除外/Actual4拡張/旧exec union0、同群内手戻り追加予算0/元3-9-9.9保持、RD/UI/QA変更不要。

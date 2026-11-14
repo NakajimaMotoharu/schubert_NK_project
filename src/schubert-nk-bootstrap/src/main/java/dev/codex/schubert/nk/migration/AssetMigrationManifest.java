@@ -147,7 +147,7 @@ public final class AssetMigrationManifest {
     return "AssetMigrationManifest[REDACTED]";
   }
 
-  private static void path(String value) {
+  static void path(String value) {
     Objects.requireNonNull(value, "relative asset path");
     if (value.isEmpty()
         || value.startsWith("/")
