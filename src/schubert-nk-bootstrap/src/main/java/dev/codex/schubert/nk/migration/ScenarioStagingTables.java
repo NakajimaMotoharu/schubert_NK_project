@@ -53,10 +53,17 @@ public final class ScenarioStagingTables {
     if (connection.getAutoCommit()) throw invalid();
     @Nullable Statement created = connection.createStatement();
     if (created == null) throw invalid();
-    try (Statement statement = created) {
+    Statement statement = created;
+    @Nullable Throwable primary = null;
+    try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       if (statement.executeUpdate(FILES_SQL) != 0) throw invalid();
       if (statement.executeUpdate(ENTRIES_SQL) != 0) throw invalid();
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, primary);
     }
   }
 
@@ -76,7 +83,9 @@ public final class ScenarioStagingTables {
     if (connection.getAutoCommit()) throw invalid();
     @Nullable Statement created = connection.createStatement();
     if (created == null) throw invalid();
-    try (Statement statement = created) {
+    Statement statement = created;
+    @Nullable Throwable primary = null;
+    try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       requireCount(statement, TARGET_FILES_COUNT, 0);
       requireCount(statement, TARGET_ENTRIES_COUNT, 0);
@@ -86,6 +95,11 @@ public final class ScenarioStagingTables {
       if (statement.executeUpdate(INSERT_ENTRIES) != expectedEntries) throw invalid();
       requireCount(statement, TARGET_FILES_COUNT, expectedFiles);
       requireCount(statement, TARGET_ENTRIES_COUNT, expectedEntries);
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, primary);
     }
   }
 
@@ -98,10 +112,17 @@ public final class ScenarioStagingTables {
   // contract.
   private static void requireResult(@Nullable ResultSet created, int expected) throws SQLException {
     if (created == null) throw invalid();
-    try (ResultSet result = created) {
+    ResultSet result = created;
+    @Nullable Throwable primary = null;
+    try {
       if (!result.next()) throw invalid();
       long actual = result.getLong(1);
       if (result.wasNull() || actual != expected || result.next()) throw invalid();
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeResult(result, primary);
     }
   }
 
@@ -112,5 +133,33 @@ public final class ScenarioStagingTables {
 
   private static SQLException invalid() {
     return new SQLException("migration staging preparation is invalid");
+  }
+
+  // SSC366: nonnull ownership established before try; preserve Java primary/suppressed order.
+  private static void closeStatement(Statement resource, @Nullable Throwable primary)
+      throws SQLException {
+    if (primary == null) {
+      resource.close();
+      return;
+    }
+    try {
+      resource.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      primary.addSuppressed(cleanup);
+    }
+  }
+
+  // SSC366: nonnull ownership established before try; preserve Java primary/suppressed order.
+  private static void closeResult(ResultSet resource, @Nullable Throwable primary)
+      throws SQLException {
+    if (primary == null) {
+      resource.close();
+      return;
+    }
+    try {
+      resource.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      primary.addSuppressed(cleanup);
+    }
   }
 }

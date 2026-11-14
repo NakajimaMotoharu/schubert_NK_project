@@ -33,7 +33,9 @@ public final class AssetStagingTables {
 
   public void prepare(@Nullable Connection connection) throws SQLException {
     if (connection == null) throw invalidInput();
-    try (Statement statement = open(connection)) {
+    Statement statement = open(connection);
+    @Nullable Throwable primary = null;
+    try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       for (var table : TABLES) {
         String sql =
@@ -46,6 +48,11 @@ public final class AssetStagingTables {
                 + " WITH NO DATA";
         if (statement.executeUpdate(sql) != 0) throw invalid();
       }
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, primary);
     }
   }
 
@@ -61,7 +68,9 @@ public final class AssetStagingTables {
         || expectedLinks < 0
         || expectedAudio == 0 && expectedLinks != 0) throw invalidInput();
     long[] expected = {expectedAudio, expectedMedia, expectedLinks};
-    try (Statement statement = open(connection)) {
+    Statement statement = open(connection);
+    @Nullable Throwable primary = null;
+    try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       for (var table : TABLES) requireCount(statement, "schubert." + table.name, 0);
       for (int index = 0; index < TABLES.size(); index++)
@@ -83,6 +92,11 @@ public final class AssetStagingTables {
       }
       for (int index = 0; index < TABLES.size(); index++)
         requireCount(statement, "schubert." + TABLES.get(index).name, expected[index]);
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, primary);
     }
   }
 
@@ -109,10 +123,17 @@ public final class AssetStagingTables {
   private static void requireResult(@Nullable ResultSet created, long expected)
       throws SQLException {
     if (created == null) throw invalid();
-    try (ResultSet result = created) {
+    ResultSet result = created;
+    @Nullable Throwable primary = null;
+    try {
       if (!result.next()) throw invalid();
       long actual = result.getLong(1);
       if (result.wasNull() || actual != expected || result.next()) throw invalid();
+    } catch (SQLException | RuntimeException | Error failure) {
+      primary = failure;
+      throw failure;
+    } finally {
+      closeResult(result, primary);
     }
   }
 
@@ -134,6 +155,34 @@ public final class AssetStagingTables {
       this.name = name;
       this.columns = columns;
       this.order = order;
+    }
+  }
+
+  // SSC366: nonnull ownership established before try; preserve Java primary/suppressed order.
+  private static void closeStatement(Statement resource, @Nullable Throwable primary)
+      throws SQLException {
+    if (primary == null) {
+      resource.close();
+      return;
+    }
+    try {
+      resource.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      primary.addSuppressed(cleanup);
+    }
+  }
+
+  // SSC366: nonnull ownership established before try; preserve Java primary/suppressed order.
+  private static void closeResult(ResultSet resource, @Nullable Throwable primary)
+      throws SQLException {
+    if (primary == null) {
+      resource.close();
+      return;
+    }
+    try {
+      resource.close();
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      primary.addSuppressed(cleanup);
     }
   }
 }

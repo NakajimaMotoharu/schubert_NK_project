@@ -718,4 +718,36 @@ final class AssetStagingTablesTest {
           Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler));
     }
   }
+
+  /** SSC366/PT-MIG-CLEANUP003: query primary and outer cleanup, no following SQL. */
+  @Test
+  void transferPrimaryAndOuterCleanupHaveOneIndependentSuppressedInstance() {
+    var fixture = new Fixture();
+    fixture.fault = Fault.QUERY_FAILURE;
+    fixture.badQuery = 0;
+    fixture.statementCloseFailure = fixture.cleanup;
+    assertSame(fixture.original, transferFailure(fixture));
+    assertEquals(1, fixture.original.getSuppressed().length);
+    assertSame(fixture.cleanup, fixture.original.getSuppressed()[0]);
+    assertEquals(List.of(TARGET_COUNTS.getFirst()), fixture.sql);
+    assertEquals(0, fixture.resultsClosed);
+    assertEquals(1, fixture.statementsClosed);
+  }
+
+  /** SSC366/PT-MIG-CLEANUP004: two cleanup failures retain their exact order. */
+  @Test
+  void transferInnerAndOuterCleanupKeepBothFailuresOnOriginalPrimary() {
+    var fixture = new Fixture();
+    fixture.fault = Fault.COMBINED;
+    fixture.badQuery = 0;
+    var outer = new SQLException("synthetic outer close");
+    fixture.statementCloseFailure = outer;
+    assertSame(fixture.original, transferFailure(fixture));
+    assertEquals(2, fixture.original.getSuppressed().length);
+    assertSame(fixture.cleanup, fixture.original.getSuppressed()[0]);
+    assertSame(outer, fixture.original.getSuppressed()[1]);
+    assertEquals(List.of(TARGET_COUNTS.getFirst()), fixture.sql);
+    assertEquals(1, fixture.resultsClosed);
+    assertEquals(1, fixture.statementsClosed);
+  }
 }

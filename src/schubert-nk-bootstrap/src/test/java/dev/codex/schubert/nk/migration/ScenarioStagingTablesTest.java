@@ -727,4 +727,36 @@ final class ScenarioStagingTablesTest {
               });
     }
   }
+
+  /** SSC366/PT-MIG-CLEANUP001: primary query plus outer Statement cleanup. */
+  @Test
+  void transferPrimaryAndStatementCloseFailureKeepIndependentSuppression() {
+    var fixture = new TransferFixture();
+    fixture.fault = Fault.QUERY_FAILURE;
+    fixture.badAt = 0;
+    fixture.statementCloseFailure = fixture.cleanup;
+    assertSame(fixture.original, transferFailure(fixture));
+    assertEquals(1, fixture.original.getSuppressed().length);
+    assertSame(fixture.cleanup, fixture.original.getSuppressed()[0]);
+    assertEquals(List.of(ORACLE_TARGET_FILES), fixture.operations);
+    assertEquals(0, fixture.resultsClosed);
+    assertEquals(1, fixture.statementsClosed);
+  }
+
+  /** SSC366/PT-MIG-CLEANUP002: nested ResultSet then Statement cleanup order. */
+  @Test
+  void transferBothResourceCloseFailuresKeepInnerThenOuterOrder() {
+    var fixture = new TransferFixture();
+    fixture.fault = Fault.COMBINED_FAILURE;
+    fixture.badAt = 0;
+    var outer = new SQLException("synthetic outer close");
+    fixture.statementCloseFailure = outer;
+    assertSame(fixture.original, transferFailure(fixture));
+    assertEquals(2, fixture.original.getSuppressed().length);
+    assertSame(fixture.cleanup, fixture.original.getSuppressed()[0]);
+    assertSame(outer, fixture.original.getSuppressed()[1]);
+    assertEquals(List.of(ORACLE_TARGET_FILES), fixture.operations);
+    assertEquals(1, fixture.resultsClosed);
+    assertEquals(1, fixture.statementsClosed);
+  }
 }
