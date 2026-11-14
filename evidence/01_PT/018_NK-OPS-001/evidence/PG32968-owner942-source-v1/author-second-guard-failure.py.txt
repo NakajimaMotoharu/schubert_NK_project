@@ -1,0 +1,66 @@
+from pathlib import Path
+import re,json,hashlib
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG32968-owner942-source-v1';assert e.is_dir();d=r/'src/schubert-nk-bootstrap/src';m=d/'main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java';ct=d/'test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java';tt=ct.with_name('MigrationMasterTargetPublisherTest.java')
+paths=[m,ct,tt]
+for p in paths:assert (e/('original-'+p.name+'.txt')).is_file()
+needle=" END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a"
+replacement=" END,pg_catalog.pg_get_userbyid(c.relowner) FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a"
+s=m.read_text();assert s.count(replacement)==1 and s.count('if (!"nk_owner".equals(result.getString(10))) throw invalid();')==1
+
+for p,expected in [(ct,6),(tt,6)]:
+ s=p.read_text();assert s.count(needle)==expected;s=s.replace(needle,replacement)
+ count=[0]
+ def app(match):
+  raw=match.group();inner=raw[1:-1]
+  if len(inner.split('\\t'))==9:count[0]+=1;return raw[:-1]+'\\tnk_owner"'
+  return raw
+ s=re.sub(r'"(?:[^"\\]|\\.)*"',app,s);assert count[0]==59,(p.name,count)
+ if p==ct:
+  s=s.replace('PT-MIG-COLUMN001..024','PT-MIG-COLUMN001..025').replace('private static final int FIELDS = 9;','private static final int FIELDS = 10;\n  private static final int OWNER_FIELD = 9;').replace('List.of(1, 2, 3, 5, 6)','List.of(1, 2, 3, 5, 6, OWNER_FIELD)')
+  key='        result.add(key + ":getBoolean:9");\n        result.add(key + WAS_NULL);';assert s.count(key)==1;s=s.replace(key,key+'\n        result.add(key + ":getString:10");')
+  anchor='  private static void verify(Fixture f) throws SQLException {'
+  new='''  @Test
+  void column025EveryOwnerMustMatchAbsoluteDeclaredRole() throws Exception {
+    for (int table = 0; table < TABLES; table++) {
+      for (int row = 0; row < DATA.get(table).size(); row++) {
+        for (String owner : java.util.Arrays.asList(null, "", "NK_OWNER", "nk_owner ", " nk_owner", "other_role")) {
+          var f = new Fixture();
+          f.rows.get(table).get(row).set(OWNER_FIELD, owner);
+          reject(f);
+          assertEquals(SQL.subList(0, table + 1), f.sql);
+          assertEquals(table + 1, f.resultCloses);
+          assertEquals(1, f.statementCloses);
+        }
+      }
+    }
+    var normal = new Fixture();
+    verify(normal);
+    assertEquals(COLUMNS, normal.calls.stream().filter(call -> call.endsWith(":getString:10")).count());
+  }
+
+'''
+ else:
+  s=s.replace('PT-MIG-TARGET001..034','PT-MIG-TARGET001..035').replace('private static final int COLUMN_CATALOG_FIELDS = 9;','private static final int COLUMN_CATALOG_FIELDS = 10;\n  private static final int OWNER_FIELD = 9;').replace('private static final int MIXED_CATALOG_GETTERS = 1119;','private static final int MIXED_CATALOG_GETTERS = 1185;')
+  anchor='  private static int catalogFields(int table) {';assert s.count(anchor)==1
+  new='''  @Test
+  void target035EveryColumnOwnerMismatchStopsBeforeAnyStaging() {
+    var publisher = new MigrationMasterTargetPublisher();
+    var declared = normal();
+    for (int table = 0; table < COLUMN_CATALOG_TABLES; table++) {
+      for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
+        for (boolean sqlNull : List.of(false, true)) {
+          var f = new Fixture();
+          f.badCatalogTable = table;
+          f.badCatalogRow = row;
+          f.badCatalogField = OWNER_FIELD;
+          f.nullCatalogValue = sqlNull;
+          assertThrows(SQLException.class, () -> workflow(publisher, f, declared));
+          catalogFailurePost(f, table, true);
+        }
+      }
+    }
+  }
+
+'''
+ assert s.count(anchor)==1;s=s.replace(anchor,new+anchor);p.write_text(s)
+(e/'author-receipt.json').open('x').write(json.dumps({'actualExit':0,'newDefinitions':2,'wholeExpected':942,'sourceOnly':True,'oldFiles':[str(p.relative_to(r)) for p in paths],'fixedProjection':'pg_catalog.pg_get_userbyid(c.relowner)','ownerExpected':'nk_owner','columnRows':66,'fieldsBefore':9,'fieldsAfter':10,'catalogGetterAfter':66*10+75*7,'oldQueries':94,'authorityActions':0,'actualDB':False},indent=2)+'\n')

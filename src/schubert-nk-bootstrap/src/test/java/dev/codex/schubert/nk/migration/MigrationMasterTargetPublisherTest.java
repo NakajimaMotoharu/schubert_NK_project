@@ -1007,7 +1007,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target035EveryColumnOwnerMismatchStopsBeforeAnyStaging() {
+  void target035EveryColumnOwnerMismatchStopsBeforeAnyStaging() throws Exception {
     var publisher = new MigrationMasterTargetPublisher();
     var declared = normal();
     for (int table = 0; table < COLUMN_CATALOG_TABLES; table++) {
