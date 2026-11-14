@@ -1,0 +1,120 @@
+{
+  "groupId": "PGPT-WBS65-SSC352-SCENARIO-STAGING18-NORMAL-20261114",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1770_WBS65Scenario一時表準備通常十八終了.json",
+  "category": "SELECTED_TEST",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "Alreadypricednormal18 .25/.75/1.5cap2,1Main/1physical,whole18/fullRootstatic/singleexec/CRC-init/fullfour100. MemoryonlyJDBCProxy; noSDK/actualDBRootnative/HOLDchange.",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/029_Scenario一時表準備・独立十八仕様.md",
+      "sha256": "38b1f428c7760409f0ed5a1c0da7f3c7470594e78d30e5049d906faa747652a2"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P019-03.02"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java"
+  ],
+  "implementationOwnerLeafBindings": {
+    "WBS-P019-03": [
+      "WBS-P019-03.02"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "2c562a3fb58bc7285e3b66e1e3e60bf0bc761d193d93de8c71da3a630a3384f1"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "bbce93d0ce104e12e55c8e628b0f075709e2e980",
+  "run": "PG31020-SCENARIO-STAGING-CLOSED18-LITERAL-FIXED",
+  "estimate": {
+    "low": 0.25,
+    "base": 0.75,
+    "high": 1.5
+  },
+  "capPp": 2,
+  "workIds": [
+    "P01903_SSC352_STAGING18_NORMAL"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1769_WBS65予実・Scenario一時表準備十八通常後版467.json",
+    "sha256": "d438841019d99cdad24f30746c924951bc39600f42b349bf3e52257c888c980b"
+  },
+  "nextCommand": "Publishstaging18proof/sourceandSSC352limitedledger-onlymain; thencontinueapprovedremainingPG/PT, firstauditnextrequiredstaging→targettransfertransactioncontractsagainstSS343/DDL. Nohelperduplication/oldsuccessreplay/PGSDKguardchange/DBRootnative/HOLDrelease. Pricebeforecode/onegroup10ppmax; freshquota/hourlynextfromcheckpoint; ordinaryreport/commitnotstop.",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG31024-scenario-staging18-independent-source-trace-join-v1/manifest.json",
+  "manifestSha256": "515c1c6d2018d3e39f4b8e49fcf61cf9a3051ea67d3d04511c5b48dedd6a274d",
+  "terminalAtUTC": "2026-11-14T03:54:36.660811+00:00",
+  "outcome": "STAGING18_MEMORY_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+  "technical": {
+    "kind": "SSC352_STANDARD_JDBC_STAGING18_NORMAL",
+    "source": "02aa4e0c121b2575e9ddb35ce0787d5311b56038",
+    "productionCoreMain": "bbce93d0ce104e12e55c8e628b0f075709e2e980",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31022-scenario-staging18-literal-fixed-post-v1/manifest.json",
+      "sha256": "107239e6cb7caeed29a582e5dc73b957bf56a4e468af2dd6e4eebb563feb6a20"
+    },
+    "tests": 18,
+    "newUniqueTestDefinitions": 18,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 119,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 47,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 13,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 9,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 4,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioStagingTables": 4
+    },
+    "actualJvmCodeMethods": 4,
+    "jacocoDefaultMethods": 4,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 9,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 1.5
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "checkpointText": "SSC352の固定二CTAS staging準備をCorebbce93/Unit02aa4eで初検証、PG31020 whole18/FES0・真正0。PG31022単一exec全1CRC/init/XML、I47/L13/M4/C1/B10 miss0・実Code4=既定4。RootNullAway/lintWerror/PMD9各所有alias/メモリJDBC/有限worker/JDKloaderの非該当を個別照合、適用未分類error0/CS-SB0。独立SQL全literal/列順/timeout先行・autoCommit/null・二DDL異常/非zero・close失敗/主例外suppressed・Runtime/Error/借用Connection非所有・finite64を確認。元prestyle文字列重複1はBUG2886/YKT2418へ先行起票、Testのみliteral逆一致修正/全Main不変/当18で再試験。App111/4604/4575/歴史29・Main119/正本184/625/元190新0/正式1964-53/工数null、normal.25/.75/1.5のみ完了/専有費token null。実DB/COPY SDK/全ETL/Rootnative/CHR/global451/ITST/HOLDは未完。"
+}
