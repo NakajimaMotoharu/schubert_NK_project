@@ -1,0 +1,153 @@
+CLASS	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	0da948a1b82920ca	true	97	49	INSTRUCTION:0:500	BRANCH:0:54	LINE:0:76	COMPLEXITY:0:38	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	copyRows	(Ljava/util/Map;Ldev/codex/schubert/nk/migration/AssetMigrationManifest;Ljava/lang/String;)Ljava/util/List;	1	INSTRUCTION:0:289	BRANCH:0:40	LINE:0:49	COMPLEXITY:0:21	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	row	(Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Entry;Ljava/util/Map;Ljava/util/HashSet;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)Ldev/codex/schubert/nk/migration/MediaAssetCopyRow;	10	INSTRUCTION:0:143	BRANCH:0:12	LINE:0:17	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	title	(Ljava/lang/String;)Ljava/lang/String;	10	INSTRUCTION:0:21	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	comparePaths	(Ljava/lang/String;Ljava/lang/String;)I	10	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	lambda$copyRows$2	(Ldev/codex/schubert/nk/migration/MediaAssetCopyRow;Ldev/codex/schubert/nk/migration/MediaAssetCopyRow;)I	4106	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	lambda$copyRows$1	(Ljava/lang/String;)Ljava/util/List;	4106	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	lambda$copyRows$0	(Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Entry;Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Entry;)I	4106	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationCatalogue	<clinit>	()V	8	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	327e305daa3721bc	true	59	49	INSTRUCTION:0:307	BRANCH:0:46	LINE:0:48	COMPLEXITY:0:31	METHOD:0:8	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	<init>	(Ldev/codex/schubert/nk/migration/AssetMigrationManifest;Ljava/util/List;)V	1	INSTRUCTION:0:201	BRANCH:0:40	LINE:0:37	COMPLEXITY:0:21	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	columnNames	()Ljava/util/List;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	rows	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	copyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	writeTo	(Ldev/codex/schubert/nk/migration/PostgresCopyTextWriter;Ljava/io/OutputStream;)V	1	INSTRUCTION:0:12	BRANCH:0:4	LINE:0:3	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyBatch	<clinit>	()V	8	INSTRUCTION:0:73	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	bcaffef1341e07c6	true	19	49	INSTRUCTION:0:69	BRANCH:0:16	LINE:0:17	COMPLEXITY:0:12	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	<init>	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)V	1	INSTRUCTION:0:10	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	writeRows	(Ljava/lang/Iterable;Ljava/io/OutputStream;)V	1	INSTRUCTION:0:52	BRANCH:0:14	LINE:0:11	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/AssetMigrationManifest	a1859d025038fce8	true	80	49	INSTRUCTION:0:311	BRANCH:0:48	LINE:0:66	COMPLEXITY:0:35	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	<init>	(Ljava/util/List;)V	1	INSTRUCTION:0:56	BRANCH:0:6	LINE:0:14	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	entries	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	totalBytes	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	canonicalBytes	()[B	1	INSTRUCTION:0:50	BRANCH:0:2	LINE:0:14	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	compareClaims	(Ljava/util/List;)Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison;	1	INSTRUCTION:0:98	BRANCH:0:12	LINE:0:18	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	path	(Ljava/lang/String;)V	10	INSTRUCTION:0:59	BRANCH:0:18	LINE:0:9	COMPLEXITY:0:10	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	invalidScalar	(I)Z	10	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:1	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	metadata	(JLjava/lang/String;)V	10	INSTRUCTION:0:15	BRANCH:0:4	LINE:0:3	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	sum	(JJ)J	10	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	e6c6bdc61330aece	true	9	16433	INSTRUCTION:0:60	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	values	()[Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Kind;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Kind;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	$values	()[Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Kind;	4106	INSTRUCTION:0:19	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind	<clinit>	()V	8	INSTRUCTION:0:27	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	d233bdd06fc71632	true	13	65585	INSTRUCTION:0:53	BRANCH:0:0	LINE:0:8	COMPLEXITY:0:9	METHOD:0:9	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	<init>	(Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Kind;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;)V	1	INSTRUCTION:0:29	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	kind	()Ldev/codex/schubert/nk/migration/AssetMigrationManifest$Kind;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	currentPath	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	targetPath	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	byteLength	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry	sha256	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	26d3c5985043f6d2	true	9	65585	INSTRUCTION:0:35	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:7	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	<init>	(Ljava/lang/String;JLjava/lang/String;)V	1	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	targetPath	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	byteLength	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation	sha256	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	7421783cd4cedc8a	true	24	65585	INSTRUCTION:0:99	BRANCH:0:20	LINE:0:6	COMPLEXITY:0:21	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	<init>	(JJJJJJ)V	1	INSTRUCTION:0:47	BRANCH:0:12	LINE:0:4	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	metadataMatches	()Z	1	INSTRUCTION:0:24	BRANCH:0:8	LINE:0:1	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	toString	()Ljava/lang/String;	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	missingFiles	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	unexpectedFiles	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	sizeMismatches	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	hashMismatches	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	observedFiles	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison	observedBytes	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MediaAssetCopyRow	b4ea72113694ecde	true	124	49	INSTRUCTION:0:536	BRANCH:0:92	LINE:0:95	COMPLEXITY:0:70	METHOD:0:24	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	<init>	(Ljava/util/List;)V	1	INSTRUCTION:0:158	BRANCH:0:22	LINE:0:32	COMPLEXITY:0:12	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	id	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	logicalId	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	mediaType	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	storageRelativePath	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	displayPath	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	byteSize	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	sha256	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	createdAt	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	parentLogicalId	()Ljava/util/Optional;	1	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	columnNames	()Ljava/util/List;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	fields	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	copyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	required	(Ljava/util/List;I)Ljava/lang/String;	10	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	positiveN12	(Ljava/lang/String;)V	10	INSTRUCTION:0:7	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	boundedText	(Ljava/lang/String;I)V	10	INSTRUCTION:0:12	BRANCH:0:4	LINE:0:3	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	textBytes	(Ljava/lang/String;)I	10	INSTRUCTION:0:33	BRANCH:0:8	LINE:0:5	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	storagePath	(Ljava/lang/String;)V	10	INSTRUCTION:0:47	BRANCH:0:14	LINE:0:4	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	mime	(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V	10	INSTRUCTION:0:38	BRANCH:0:12	LINE:0:7	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	pair	(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V	10	INSTRUCTION:0:41	BRANCH:0:18	LINE:0:10	COMPLEXITY:0:10	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	timestamp	(Ljava/lang/String;)V	10	INSTRUCTION:0:30	BRANCH:0:8	LINE:0:8	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MediaAssetCopyRow	<clinit>	()V	8	INSTRUCTION:0:91	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MusicLogicalId	51e59859afe500ee	true	17	49	INSTRUCTION:0:68	BRANCH:0:12	LINE:0:13	COMPLEXITY:0:10	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MusicLogicalId	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicLogicalId	fromDisplayPath	(Ljava/lang/String;)Ljava/lang/String;	1	INSTRUCTION:0:58	BRANCH:0:12	LINE:0:10	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicLogicalId	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicLogicalId	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	df9bfcb3651c3c28	true	45	49	INSTRUCTION:0:200	BRANCH:0:33	LINE:0:44	COMPLEXITY:0:26	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	encodeRow	(Ljava/util/List;)[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	encodeRows	(Ljava/util/List;)[B	1	INSTRUCTION:0:73	BRANCH:0:12	LINE:0:16	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	appendField	(Ljava/lang/StringBuilder;Ljava/lang/String;)V	10	INSTRUCTION:0:112	BRANCH:0:21	LINE:0:24	COMPLEXITY:0:15	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	6eeb84a79636809d	true	52	49	INSTRUCTION:0:498	BRANCH:0:32	LINE:0:44	COMPLEXITY:0:23	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	videos	()Ljava/util/List;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	find	(Ljava/lang/String;)Ljava/util/Optional;	1	INSTRUCTION:0:25	BRANCH:0:6	LINE:0:5	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	copyRows	(Ljava/util/Map;Ldev/codex/schubert/nk/migration/AssetMigrationManifest;Ljava/lang/String;)Ljava/util/List;	1	INSTRUCTION:0:216	BRANCH:0:26	LINE:0:33	COMPLEXITY:0:14	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue	<clinit>	()V	8	INSTRUCTION:0:245	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	ba85f8b238330233	true	8	49	INSTRUCTION:0:42	BRANCH:0:0	LINE:0:15	COMPLEXITY:0:8	METHOD:0:8	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	<init>	(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V	2	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:8	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	displayOrder	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	logicalId	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	title	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	category	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	sourceRelativePath	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	parentLogicalId	()Ljava/util/Optional;	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MusicMigrationPairing	4804a7b5fe32ea95	true	109	49	INSTRUCTION:0:462	BRANCH:0:62	LINE:0:85	COMPLEXITY:0:43	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	plan	(Ljava/util/Map;)Ldev/codex/schubert/nk/migration/MusicMigrationPairing$Result;	1	INSTRUCTION:0:194	BRANCH:0:22	LINE:0:35	COMPLEXITY:0:12	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	instrumental	(Ljava/lang/String;)Z	10	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	displayTitle	(Ljava/lang/String;)Ljava/lang/String;	10	INSTRUCTION:0:12	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	key	(Ljava/lang/String;)Ljava/lang/String;	10	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	closest	(Ljava/lang/String;Ljava/util/LinkedHashMap;)Ljava/util/Map$Entry;	10	INSTRUCTION:0:36	BRANCH:0:6	LINE:0:9	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	distance	(Ljava/lang/String;Ljava/lang/String;)I	10	INSTRUCTION:0:94	BRANCH:0:8	LINE:0:14	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	text	(Ljava/lang/String;I)V	10	INSTRUCTION:0:41	BRANCH:0:12	LINE:0:7	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	path	(Ljava/lang/String;)V	10	INSTRUCTION:0:47	BRANCH:0:14	LINE:0:4	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing	lambda$plan$0	(Ljava/util/Map$Entry;Ljava/util/Map$Entry;)I	4106	INSTRUCTION:0:12	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	904af4d48effad8b	true	6	49	INSTRUCTION:0:31	BRANCH:0:0	LINE:0:11	COMPLEXITY:0:6	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	<init>	(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V	2	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	title	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	key	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	mainDisplayPath	()Ljava/util/Optional;	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	instrumentalDisplayPath	()Ljava/util/Optional;	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/MusicMigrationPairing$Result	0cf070fed4c7fc34	true	6	49	INSTRUCTION:0:19	BRANCH:0:0	LINE:0:7	COMPLEXITY:0:4	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Result	<init>	(Ljava/util/List;Ljava/util/List;)V	2	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Result	pairs	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Result	shadowedPaths	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/MusicMigrationPairing$Result	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0

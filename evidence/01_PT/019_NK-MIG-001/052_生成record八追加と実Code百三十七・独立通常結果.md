@@ -1,0 +1,5 @@
+# 生成record8追加・通常170/実Code137独立結果
+
+BUG2899のManifest生成7methodをMain不変の独立8Testで是正、Corea2b15e1/Unit86c0d17・PG31456全170/FES0。PG31458全16CRC/init/既定I3191-L543-M112-C16-B415 miss0、PG31460同じ新単一exec/16classの無filter I3290-L546-M137-C16-B415 miss0。既定から隠れた25methodも全実行、旧7miss/25instructionmiss→0、default/実Codeの両四100を確認し例外/除外/filter変更0。期待hashは独立Python UTF16-long-32bit31とJDKEnum identityprimitive、equals/null/全component差・toString literal/finite64、旧12全body完全一致。RootNullAway/lintWerror/CS-SB0、PMD64は旧56同byte＋5ownedworker＋3equals(null)契約oracleを個別非該当・適用未分類0。App122/5440/5411/歴史29・Main128/正本184/625/元190新0/正式1964-53/工数null。Test8＋必要normal170 1.3/3.9/7.8のみ完了。YKT2431他候補383file/539宣言はregex候補/AST未確認でOPEN、全体451/実経路/HOLD未完。
+
+051のPT-MIG-ASSETGEN001..008→PG31456のAssetMigrationManifestTest新8method、旧12を含む20と他必要138の全170を同source照合。日時/OS/JDK/tool/branch/source/command/exit/fixture/expected/actual/default+raw counter/BUG/hashはPG31446/456/458/460/462。Subjectごとに元160等の算術補完をせず、同一exec/classCRCで実測。新たな生成code例外承認やglobal451/正式scope認定を行っていない。
