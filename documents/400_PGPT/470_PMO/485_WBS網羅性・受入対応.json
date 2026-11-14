@@ -550952,12 +550952,12 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "e096aa9e248c7f9032b5cc588010c039f915e87a74463831d3d7790d00a79aca",
-      "acceptance": "NOT_RUN",
-      "state": "STREAMING_SOURCE_ONLY_NORMAL113_PENDING",
+      "acceptance": "UNASSESSED",
+      "state": "STREAM15_NEEDED_WHOLE113_SINGLE_EXEC_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-350",
       "testIds": "PT-MIG-DATASET001..012",
       "historicalPath": null,
-      "pendingStreamingExtensionSSC351": true,
+      "pendingStreamingExtensionSSC351": false,
       "qualificationHistory": [
         {
           "kind": "SSC350_SCENARIO_COPY_DATASET12_NECESSARY_CLOSED98",
@@ -551042,7 +551042,94 @@
           "actualAllocatedCost": null,
           "tokenTotals": null
         }
-      ]
+      ],
+      "componentNormalQualification": {
+        "kind": "SSC351_COPY_STREAM15_NECESSARY_CLOSED113",
+        "source": "efb592e0c5a16234865ccb100f98f1dd76669e65",
+        "productionCoreMain": "cb723c30e0dc6ff8ca75a4d7049ffdf689d991f1",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30966-copy-stream113-state-fixed-post-v1/manifest.json",
+          "sha256": "88cdd1693172a0038adf836615684f3a7b12e441a1c6e31892e76d03ad481ca3"
+        },
+        "tests": 113,
+        "newUniqueTestDefinitions": 15,
+        "existingSupportDefinitions": 98,
+        "newMainSources": 1,
+        "changedExistingMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 118,
+        "physicalClasses": 17,
+        "positiveMainCrc": 17,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 2187,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 283,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 453,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 235,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 90,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 17,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+          "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": 11,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+          "dev/codex/schubert/nk/migration/ScenarioCopyDataset": 9,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+          "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+        },
+        "actualJvmCodeMethods": 134,
+        "jacocoDefaultMethods": 90,
+        "newWriterActualCodeMethods": 4,
+        "newWriterDefaultMethods": 4,
+        "extendedDatasetActualCodeMethods": 9,
+        "extendedDatasetDefaultMethods": 9,
+        "newAndChangedMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 57,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.45,
+          "base": 1.35,
+          "high": 2.7
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      }
     },
     {
       "kind": "JAVA",
@@ -551050,11 +551137,98 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
-      "acceptance": "NOT_RUN",
-      "state": "STREAMING_SOURCE_ONLY_NORMAL113_PENDING",
+      "acceptance": "UNASSESSED",
+      "state": "STREAM15_NEEDED_WHOLE113_SINGLE_EXEC_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-351",
       "testIds": "PT-MIG-STREAM001..012",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC351_COPY_STREAM15_NECESSARY_CLOSED113",
+        "source": "efb592e0c5a16234865ccb100f98f1dd76669e65",
+        "productionCoreMain": "cb723c30e0dc6ff8ca75a4d7049ffdf689d991f1",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30966-copy-stream113-state-fixed-post-v1/manifest.json",
+          "sha256": "88cdd1693172a0038adf836615684f3a7b12e441a1c6e31892e76d03ad481ca3"
+        },
+        "tests": 113,
+        "newUniqueTestDefinitions": 15,
+        "existingSupportDefinitions": 98,
+        "newMainSources": 1,
+        "changedExistingMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 118,
+        "physicalClasses": 17,
+        "positiveMainCrc": 17,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 2187,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 283,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 453,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 235,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 90,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 17,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+          "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": 11,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+          "dev/codex/schubert/nk/migration/ScenarioCopyDataset": 9,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+          "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+          "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+          "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+          "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+        },
+        "actualJvmCodeMethods": 134,
+        "jacocoDefaultMethods": 90,
+        "newWriterActualCodeMethods": 4,
+        "newWriterDefaultMethods": 4,
+        "extendedDatasetActualCodeMethods": 9,
+        "extendedDatasetDefaultMethods": 9,
+        "newAndChangedMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 57,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.45,
+          "base": 1.35,
+          "high": 2.7
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      }
     }
   ],
   "layouts": [
@@ -556295,6 +556469,93 @@
     "generatedPolicyGloballyAccepted": false,
     "manualCoverageExclusions": [],
     "rawPmdFindings": 41,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.45,
+      "base": 1.35,
+      "high": 2.7
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentCopyStreaming113PG30964": {
+    "kind": "SSC351_COPY_STREAM15_NECESSARY_CLOSED113",
+    "source": "efb592e0c5a16234865ccb100f98f1dd76669e65",
+    "productionCoreMain": "cb723c30e0dc6ff8ca75a4d7049ffdf689d991f1",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30966-copy-stream113-state-fixed-post-v1/manifest.json",
+      "sha256": "88cdd1693172a0038adf836615684f3a7b12e441a1c6e31892e76d03ad481ca3"
+    },
+    "tests": 113,
+    "newUniqueTestDefinitions": 15,
+    "existingSupportDefinitions": 98,
+    "newMainSources": 1,
+    "changedExistingMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 118,
+    "physicalClasses": 17,
+    "positiveMainCrc": 17,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 2187,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 283,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 453,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 235,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 90,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 17,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+      "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+      "dev/codex/schubert/nk/migration/ScenarioCopyDataset": 9,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 134,
+    "jacocoDefaultMethods": 90,
+    "newWriterActualCodeMethods": 4,
+    "newWriterDefaultMethods": 4,
+    "extendedDatasetActualCodeMethods": 9,
+    "extendedDatasetDefaultMethods": 9,
+    "newAndChangedMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 57,
     "applicable": 0,
     "unclassified": 0,
     "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
