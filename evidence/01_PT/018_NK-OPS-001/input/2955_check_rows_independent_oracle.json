@@ -1,0 +1,156 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T16:28:03.183962+00:00",
+  "sourceDdl": [
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V029__strict_nullable_compound_checks.sql",
+      "sha256": "bb3a2be973f5a8ad6a84868f5c1c15bc44de71d37130f9cf7c56b1bb546eb878"
+    }
+  ],
+  "tables": {
+    "speakers": {
+      "checks": {
+        "ck_speakers_id_n12": "id BETWEEN 1 AND 999999999999",
+        "ck_speakers_name_bytes": "octet_length(name) BETWEEN 1 AND 128",
+        "ck_speakers_normalized_name_bytes": "octet_length(normalized_name) BETWEEN 1 AND 128"
+      },
+      "query": "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE"
+    },
+    "script_files": {
+      "checks": {
+        "ck_script_files_id_n12": "id BETWEEN 1 AND 999999999999",
+        "ck_script_files_display_order_n12": "display_order BETWEEN 1 AND 999999999999",
+        "ck_script_files_storage_path_bytes": "octet_length(storage_relative_path) BETWEEN 1 AND 512",
+        "ck_script_files_storage_path_safe": "\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)'",
+        "ck_script_files_display_path_bytes": "octet_length(display_path) BETWEEN 1 AND 512",
+        "ck_script_files_file_name_bytes": "octet_length(file_name) BETWEEN 1 AND 256",
+        "ck_script_files_chapter_title_bytes": "\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256",
+        "ck_script_files_sha256": "sha256 ~ '^[0-9a-f]{64}$'",
+        "ck_script_files_byte_size": "byte_size BETWEEN 0 AND 999999999999"
+      },
+      "query": "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE"
+    },
+    "script_entries": {
+      "checks": {
+        "ck_script_entries_id_n12": "id BETWEEN 1 AND 999999999999",
+        "ck_script_entries_display_order_n12": "display_order BETWEEN 1 AND 999999999999",
+        "ck_script_entries_entry_index": "entry_index >= 0",
+        "ck_script_entries_line_number": "line_number IS NULL OR line_number >= 1",
+        "ck_script_entries_entry_type": "entry_type IN ('dialogue', 'narration')",
+        "ck_script_entries_speaker_by_type": "\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)",
+        "ck_script_entries_speaker_label_bytes": "\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128",
+        "ck_script_entries_body_bytes": "octet_length(body) BETWEEN 1 AND 4096"
+      },
+      "query": "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE"
+    },
+    "audio_files": {
+      "checks": {
+        "ck_audio_files_id_n12": "id BETWEEN 1 AND 999999999999",
+        "ck_audio_files_storage_path_bytes": "octet_length(storage_relative_path) BETWEEN 1 AND 512",
+        "ck_audio_files_storage_path_safe": "\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)'",
+        "ck_audio_files_display_path_bytes": "octet_length(display_path) BETWEEN 1 AND 512",
+        "ck_audio_files_file_name_bytes": "octet_length(file_name) BETWEEN 1 AND 256",
+        "ck_audio_files_basename_bytes": "octet_length(basename) BETWEEN 1 AND 255",
+        "ck_audio_files_audio_role_bytes": "octet_length(audio_role) BETWEEN 1 AND 8",
+        "ck_audio_files_duration_ms": "duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999",
+        "ck_audio_files_byte_size": "byte_size BETWEEN 1 AND 999999999999",
+        "ck_audio_files_sha256": "sha256 ~ '^[0-9a-f]{64}$'"
+      },
+      "query": "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 8) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE"
+    },
+    "media_assets": {
+      "checks": {
+        "ck_media_assets_id_n12": "id BETWEEN 1 AND 999999999999",
+        "ck_media_assets_logical_id_bytes": "octet_length(logical_id) BETWEEN 1 AND 64",
+        "ck_media_assets_media_type": "media_type IN ('VIDEO', 'MUSIC')",
+        "ck_media_assets_title_bytes": "octet_length(title) BETWEEN 1 AND 256",
+        "ck_media_assets_category_bytes": "octet_length(category) BETWEEN 1 AND 64",
+        "ck_media_assets_section_bytes": "section IS NULL OR octet_length(section) <= 128",
+        "ck_media_assets_storage_path_bytes": "octet_length(storage_relative_path) BETWEEN 1 AND 512",
+        "ck_media_assets_storage_path_safe": "\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)'",
+        "ck_media_assets_display_path_bytes": "octet_length(display_path) BETWEEN 1 AND 512",
+        "ck_media_assets_file_name_bytes": "octet_length(file_name) BETWEEN 1 AND 256",
+        "ck_media_assets_byte_size": "byte_size BETWEEN 1 AND 999999999999",
+        "ck_media_assets_sha256": "sha256 ~ '^[0-9a-f]{64}$'",
+        "ck_media_assets_mime_type": "\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')",
+        "ck_media_assets_pair": "(\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE",
+        "ck_media_assets_display_order": "display_order BETWEEN 1 AND 9999"
+      },
+      "query": "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE"
+    },
+    "entry_audio_links": {
+      "checks": {
+        "ck_entry_audio_links_link_type": "link_type IN ('voice', 'se', 'bgm', 'other')",
+        "ck_entry_audio_links_display_order": "display_order BETWEEN 1 AND 999"
+      },
+      "query": "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE"
+    }
+  },
+  "queries": [
+    "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE",
+    "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+    "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE",
+    "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 8) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+    "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE",
+    "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE"
+  ],
+  "namedChecks": 47,
+  "expectedCounts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "negativeReturnedCountVectors": [
+    -1,
+    1,
+    9223372036854775807,
+    null
+  ],
+  "sqlCheckUnknownRemainsAllowed": true,
+  "threeValuedIndependentTruthVectors": [
+    {
+      "inputs": [
+        true,
+        null
+      ],
+      "conjunction": null,
+      "violations": 0
+    },
+    {
+      "inputs": [
+        false,
+        null
+      ],
+      "conjunction": false,
+      "violations": 1
+    },
+    {
+      "inputs": [
+        true,
+        true
+      ],
+      "conjunction": true,
+      "violations": 0
+    },
+    {
+      "inputs": [
+        null
+      ],
+      "conjunction": null,
+      "violations": 0
+    }
+  ],
+  "authoringParserGuardExamples": 5,
+  "manual47NamesMatchSourceDdl": true,
+  "productionMethodsCalled": 0,
+  "actualSqlEvaluatorOrDatabaseOperations": 0,
+  "checkExpressionCatalogNotQualified": true,
+  "technicalSource": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+}

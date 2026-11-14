@@ -1,0 +1,29 @@
+{
+  "ssc": 385,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+  "source": "e8a079e74a11656062a733b31d18ac6bf6e501ae",
+  "estimate": {
+    "low": 2.0,
+    "base": 6.0,
+    "high": 9.0
+  },
+  "title": "六表四十七CHECK保存行後条件を既参照検査へ接続",
+  "spec": "093_六表四十七CHECK保存行後条件・独立一追加仕様.md",
+  "designSlot": "PG32276-ssc385-check-row-design-only-v1",
+  "previousForecast": "1953_WBS65予実・生成search保存値六百四十二後版544.json",
+  "forecast": "1956_WBS65予実・四十七CHECK保存行不足追加版545.json",
+  "revision": "545-MISSING_47_CHECK_ROW_POSTCONDITIONS",
+  "findingReason": "ExistingReference16 covers six counts/orphans/link-order but no explicit47CHECK stored-row inspection. Append six fixed SQL zero-violation counters using V002 and current V029 expression without changing SQL NULL semantics; actualDB/schema-expression/trigger remain unqualified.",
+  "workId": "P01903_SSC385_CHECK47_643",
+  "planKey": "plannedCheck47ReferenceSSC385",
+  "startInput": "2953_check643_start.json",
+  "startRecord": "1957_WBS65四十七CHECK保存行製造開始.json",
+  "groupId": "PGPT-WBS65-SSC385-CHECK47-CLOSED643-20261115",
+  "run": "PG32290-CHECK-ROWS-CLOSED643",
+  "newDefinitions": 1,
+  "whole": 643,
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/V029/343。既MigrationMasterReferenceVerifierの件数六＋参照orphan/link順十照会後へ、六表47個のCHECK条件に違反する保存行の件数0を固定六SELECTとして追加する。新class/別経路/実SQL生成器は作らず、既INSPECTIONS末尾へcompile-time SQL literalを置く。既Targetの同ConnectionでReference22→Content7→Finalizerの順に一回検査、不成立なら後続Content/MAX/setval/ANALYZE0。既47CHECK式をProduction Java条件に翻訳せず、V002の原式を使いmedia_assets.ck_media_assets_pairのみV029の現行IS TRUE付き式を用いる。DDL/式自体/既nullable契約は変更しない。\n\n表別CHECK数はspeakers3/script_files9/script_entries8/audio_files10/media_assets15/entry_audio_links2=47。各固定queryはSELECT count(*) FROM schubert.<固定table> WHERE ((expr1) AND ... AND (exprN)) IS FALSE。PostgreSQL CHECKはtrue又はunknown/NULLで成立するので、IS NOT TRUEへ強化したりNULLを一律違反にしない。V029自身のIS TRUEはその式のまま保持する。独立三値oracleはtrue+NULL→NULL/違反0、false+NULL→false/違反1、全true→違反0、単独NULL→違反0。NOTNULL/actual row一致は既Column66/Content65と別に維持する。根拠 https://www.postgresql.org/docs/18/ddl-constraints.html 、pin18.6維持。\n\n独立期待はV002/V029原式と既手書き75制約matrixの47CHECK名を照合して固定し、既のProduction method/実DB観測から生成しない。quoted SQL token/regex/UTF8/NULL条件を原DDLと同byteに保持し、authoring時の括弧・quote-aware parserだけを使う。Java期待値は全六count=0というDDL後条件、null/missing/extra/nonzero/負/LongMAXを既requireResultのgetLong直後wasNull/二回next/一回closeで拒否する。DDL内CHECK式が存在するというsource確認と、JDBC contract PTを、実PostgreSQLで47式を評価したとの合格へ読み替えない。schema catalogのCHECK expression drift/有効性/実constraint/trigger/index-role/globalDBは別の未完条件である。\n\n既Reference001..020を22SQL/22Resultへ適応し、新PT-MIG-REF021はempty declared datasetでも新六CHECK位置のnullResult/missing/SQLNULL/extra/非0/負/LongMAXが拒否、正しい一行0だけ通ることを独立空vectorで確認する。既各全query/getLong/wasNull/nextのSQL-Runtime-Error、Result/Statement close、元primary/順suppressed/自己identityと値equals別実体、借用mutation0、finite8workers64/Future5/finallyshutdownNow-await10を全22へ拡張する。\n\nTargetの独立時系列はColumn6→Constraint6→prepare6→transfer24→Reference22→Content7→Finalizer16=87SQL。旧81SQLに新六queryをindex58へ挿入するだけ、旧scalar44値はindex34へ六zeroを挿入した50scalarで完全保持。TRANSFER_SCALARS18/ORPHAN_FIRST24不変、REFERENCE_SCALARS_END40/SETVAL_SCALAR_FIRST45、RESULTS69（catalog12/content7/scalar50）。普通Statement11+Prepared5=16close-timeout、auto11/fetch1000三回不変。ownerStart=[0,6,12,13,15,18,22,30,42,64,71]、closeSQLPrefix=[6,12,13,15,18,22,30,42,64,71,77,78,79,80,81,87]、closeResultCount=[6,12,12,12,12,15,21,30,52,59,65,66,67,68,69,69]、setval76/ANALYZE81、prepared最初close10/outer15。既Target32を全87SQL/50scalar fault-prefix/不一致短絡/所有・部分setval-warning/有限64へ適応、catalog141/Content66フィールド期待とpayload65は不変。\n\n変更は既Reference一Main/既Ref20更新＋新1/既Target32適応、旧642＋新1=必要643/31Main45physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用/全CRC-init/既定と無filter全四100で確認。全migrationMain34/定義706→707中643scopeのみ、新Main0/uniqueMain増分0。追加不足2/6/9pp cap10、元費用/SV/群開始見積り保持、実専有費token null、新業務scope/RD/UI/DDL/QA変更不要。実DB/SQL evaluator/原本Current/全CHECK式catalog/NOTNULLcatalog/trigger/index-role/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。",
+  "moduleSummary": "既ReferenceVerifierへ47CHECK原式違反件数0の六固定SELECTを追加、Target同TX Reference22→Content7→Finalizer、Ref021/必要643。式catalog/実SQL evaluator/DB/全移行/HOLD未受入。",
+  "scope": "ExistingReferenceVerifier adds six fixed47CHECK violation counters after16 count/ref inspections, preserving SQL CHECK unknown semantics and V029 compound guard. Main1changed/new0, Ref20updated+new1/Target32adapted, whole643/31Main45physical/87SQL69Result16close. Additional2/6/9cap10; noactualDB/COPY/RootnativeActual4aruHOLDactions.",
+  "nextCommand": "PublishSSC385SS311343914onlymain beforePG. Append six compile-time CHECK violation queries from independentV002V02947oracle, adapt Reference21/Target32 and87SQL/50scalar fixture, necessary643/Rootstatic/45CRC-init/default-raw. No generated production expected, SQL semantic tightening or actualDB/HOLD operations; ordinarygroupnotstop."
+}

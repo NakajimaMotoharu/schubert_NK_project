@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-REF001..020; independent DDL relationships, SQL literals and exact resource
+ * PT-MIG-REF001..021; independent DDL relationships, SQL literals and exact resource
  * postconditions.
  */
 final class MigrationMasterReferenceVerifierTest {
@@ -45,7 +45,7 @@ final class MigrationMasterReferenceVerifierTest {
   private static final String CALL_RESULT_CLOSE = "resultClose";
   private static final String CALL_OUTER_CLOSE = "outerClose";
   private static final int COUNT_QUERIES = 6;
-  private static final int QUERIES = 16;
+  private static final int QUERIES = 22;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
@@ -67,7 +67,13 @@ final class MigrationMasterReferenceVerifierTest {
           "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.script_entries p ON p.id=c.entry_id AND p.game_id=c.game_id WHERE p.id IS NULL",
           "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
           "SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND p.logical_id IS NULL",
-          "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations");
+          "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations",
+          "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 8) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE",
+          "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE");
 
   @Test
   void reference001ExactSixCountsNineForeignKeysAndOrderQuery() throws Exception {
@@ -349,6 +355,42 @@ final class MigrationMasterReferenceVerifierTest {
     }
   }
 
+  @Test
+  void reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount() throws Exception {
+    var declared = new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), emptyContent());
+    for (int slot = 16; slot < QUERIES; slot++) {
+      for (var shape :
+          List.of(Shape.NULL_RESULT, Shape.MISSING, Shape.SQL_NULL, Shape.WRONG, Shape.EXTRA)) {
+        var f = new Fixture();
+        f.expected = new long[QUERIES];
+        f.faultQuery = slot;
+        f.shape = shape;
+        f.delta = 1;
+        assertThrows(SQLException.class, () -> verify(f, declared));
+        assertEquals(QUERY_SQL.subList(0, slot + 1), f.sql);
+        assertEquals(slot + 1, f.resultCloses);
+        assertEquals(1, f.outerCloses);
+      }
+      for (long count : List.of(-1L, Long.MAX_VALUE)) {
+        var f = new Fixture();
+        f.expected = new long[QUERIES];
+        f.faultQuery = slot;
+        f.shape = Shape.WRONG;
+        f.delta = count;
+        assertThrows(SQLException.class, () -> verify(f, declared));
+        assertEquals(QUERY_SQL.subList(0, slot + 1), f.sql);
+        assertEquals(slot + 1, f.resultCloses);
+        assertEquals(1, f.outerCloses);
+      }
+    }
+    var zero = new Fixture();
+    zero.expected = new long[QUERIES];
+    verify(zero, declared);
+    assertEquals(QUERY_SQL, zero.sql);
+    assertEquals(QUERIES, zero.resultCloses);
+    assertEquals(1, zero.outerCloses);
+  }
+
   private static void counts(MigrationMasterCopyDataset declared, long[] six) throws SQLException {
     var f = new Fixture();
     f.expected = Arrays.copyOf(six, QUERIES);
@@ -403,7 +445,7 @@ final class MigrationMasterReferenceVerifierTest {
   }
 
   private static final class Fixture {
-    private long[] expected = {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private long[] expected = {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private final List<String> sql = new ArrayList<>();
     private final List<Integer> timeouts = new ArrayList<>();
     private boolean autoCommit;

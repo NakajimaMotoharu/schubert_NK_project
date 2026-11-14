@@ -1,0 +1,34 @@
+"""Same-byte317 prior anchors plus fresh Constraint18 and Target25 exact sites; no suppression."""
+from pathlib import Path
+import json,hashlib,collections
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));pf=load(i/'2956_check_rows643_profile.json');sp=r/pf['slots']['static']/'manifest.json';s=load(sp);assert s['actualExit']==0 and not s['processingErrors'] and s['checkstyleFindings']==0 and all(s['spotbugs'][k]==0 for k in ['bugs','missing','errors'])
+main='src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java';test=main.replace('/main/','/test/').replace('.java','Test.java');target=test.replace('MigrationMasterReferenceVerifierTest.java','MigrationMasterTargetPublisherTest.java');prior={};a=load(i/'2948_generated_search642_static_admission.json');old=load(r/a['static']['path'])
+for x in a['sourceAnchors']:
+ if x['path'] in [main,test,target]:continue
+ assert sha(r/x['path'])==old['inputHashes'][x['path']];key=(x['path'],x['rule'],x['sourceLine'],x['sourceAnchor'],x['message']);assert key not in prior;prior[key]=x
+assert len(prior)==316
+for path,count in [(test,1),(target,3)]:
+ text=(r/path).read_text();assert all(x in text for x in ['WORKERS = 8','TASKS = 64','WAIT_SECONDS = 5','TERMINATION_SECONDS = 10']);assert all(text.count(x)==count for x in ['future.get(WAIT_SECONDS, TimeUnit.SECONDS)','executor.shutdownNow();','assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));'])
+rows=[];seen=set();counts=collections.Counter()
+for raw in s['rawFindings']:
+ path=str(Path(raw['path']).relative_to(r));line=int(raw['line']);source=(r/path).read_text().splitlines();anchor=source[line-1].strip();key=(path,raw['rule'],line,anchor,raw['message'])
+ if path not in [main,test,target]:
+  assert key in prior and key not in seen;seen.add(key);rows.append(prior[key]);continue
+ if path==main:
+  if raw['rule']=='AvoidCatchingGenericException':
+   assert anchor in ['} catch (SQLException | RuntimeException | Error failure) {','} catch (SQLException | RuntimeException | Error cleanup) {'];counts['primaryCleanup']+=1;reason='Exact owned JDBC boundary rethrows original SQL/runtime/Error identity and closes Result before Statement. Cleanup failures retain ordered suppression without retry, success or metadata logging. Independent fault protocol at every75-row getter/wasNull/next and both close phases verifies primary identity, ownership and finite termination for all three fault kinds.'
+  else:
+   assert raw['rule']=='CompareObjectsWithEquals' and anchor=='if (cleanup != primary) primary.addSuppressed(cleanup);';counts['selfIdentity']+=1;reason='Throwable.addSuppressed rejects the identical primary instance, so this explicit identity guard preserves original failures when cleanup returns that same object. Equal-valued different objects and duplicate cleanup identities are still suppressed in order. Whole independent identity tests cover these cases; equals would violate the exception contract.'
+ elif raw['rule']=='UseProperClassLoader':
+  assert anchor in ['Connection.class.getClassLoader(),','Statement.class.getClassLoader(),','PreparedStatement.class.getClassLoader(),','ResultSet.class.getClassLoader(),'];counts['newLoader' if path==test else 'targetLoader']+=1;reason='Exact standalone memory-only JDBC Proxy uses the explicit loader of the same JDK interface. It has no application-server loader lookup, external driver, held product class, physical DB or network. Independent fixed catalog/content/scalar method-column contracts fail unexpected operations, so no ambient context-loader dependency or resource is acquired.'
+ elif path==test and raw['rule']=='CloseResource' and anchor=='var conn = f.connection();':
+  counts['newBorrowed']+=1;reason='Exact standalone memory-only JDK Proxy Connection is borrowed by the reference verifier null-boundary tests. It owns no DB/pool/FD and any close/commit/rollback or unexpected method fails the fixture. The verifier owns only its Statements and Results; auto-closing this borrowed proxy would break caller-ownership assertions rather than repair a physical resource leak.'
+ elif path==target and raw['rule']=='CloseResource' and anchor in ['var conn = f.connection();','var connection = f.connection();']:
+  counts['targetBorrowed']+=1;reason='Exact memory-only Proxy Connection is borrowed by the same-transaction publisher, with no real DB/pool/FD. The fixture rejects close/commit/rollback or any unlisted mutation; production children independently own their Statements and Results. Automatic close of this fixture would contradict caller-owned transaction assertions rather than repair a leak.'
+ elif path==target and raw['rule']=='NullAssignment':
+  assert 'nullCatalogValue' in '\n'.join(source[max(0,line-4):line+3]) or 'nullContentValue' in '\n'.join(source[max(0,line-4):line+3]);counts['targetSqlNull']+=1;reason='Exact synthetic ResultSet assigns SQL NULL only under explicit catalog or content negative flags, with independent wasNull. Production must reject selected metadata or payload before CTAS or finalization, retaining zero/false/empty distinctions. Removing this assignment erases required boundary coverage and no actual database resource is involved.'
+ else:
+  assert raw['rule'] in ['CloseResource','DoNotUseThreads'] and anchor in ['var executor = Executors.newFixedThreadPool(WORKERS);','executor.submit(','executor.shutdownNow();','assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));'];counts['newWorker' if path==test else 'targetWorker']+=1;reason='Exact standalone JUnit executor owns eight workers/64 independent memory-only transactions with a stateless verifier or publisher. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No DB/native/process resource is acquired; implicit executor close omits the finite termination postcondition.'
+ rows.append(dict(path=path,rule=raw['rule'],sourceAnchor=anchor,sourceLine=line,occurrences=1,message=raw['message'],reason=reason,disposition='NOT_APPLICABLE'))
+assert seen==set(prior) and counts==dict(primaryCleanup=8,selfIdentity=2,newLoader=3,newWorker=5,targetBorrowed=2,targetWorker=15,targetLoader=6,targetSqlNull=2,newBorrowed=1) and len(rows)==360
+(i/'2957_check_rows643_static_admission.json').open('x').write(json.dumps(dict(schema='PGPT_STATIC_ADMISSION_V1',profile=pf['id'],prepare=ref(r/pf['slots']['prepare']/'manifest.json'),static=ref(sp),sourceAnchors=rows),ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,oldSameByte=316,newRevalidated=dict(counts),applicable=0,unclassified=0))

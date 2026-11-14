@@ -1,5 +1,19 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC385 六表四十七CHECK保存行後条件を既参照検査へ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/V029/343。既MigrationMasterReferenceVerifierの件数六＋参照orphan/link順十照会後へ、六表47個のCHECK条件に違反する保存行の件数0を固定六SELECTとして追加する。新class/別経路/実SQL生成器は作らず、既INSPECTIONS末尾へcompile-time SQL literalを置く。既Targetの同ConnectionでReference22→Content7→Finalizerの順に一回検査、不成立なら後続Content/MAX/setval/ANALYZE0。既47CHECK式をProduction Java条件に翻訳せず、V002の原式を使いmedia_assets.ck_media_assets_pairのみV029の現行IS TRUE付き式を用いる。DDL/式自体/既nullable契約は変更しない。
+
+表別CHECK数はspeakers3/script_files9/script_entries8/audio_files10/media_assets15/entry_audio_links2=47。各固定queryはSELECT count(*) FROM schubert.<固定table> WHERE ((expr1) AND ... AND (exprN)) IS FALSE。PostgreSQL CHECKはtrue又はunknown/NULLで成立するので、IS NOT TRUEへ強化したりNULLを一律違反にしない。V029自身のIS TRUEはその式のまま保持する。独立三値oracleはtrue+NULL→NULL/違反0、false+NULL→false/違反1、全true→違反0、単独NULL→違反0。NOTNULL/actual row一致は既Column66/Content65と別に維持する。根拠 https://www.postgresql.org/docs/18/ddl-constraints.html 、pin18.6維持。
+
+独立期待はV002/V029原式と既手書き75制約matrixの47CHECK名を照合して固定し、既のProduction method/実DB観測から生成しない。quoted SQL token/regex/UTF8/NULL条件を原DDLと同byteに保持し、authoring時の括弧・quote-aware parserだけを使う。Java期待値は全六count=0というDDL後条件、null/missing/extra/nonzero/負/LongMAXを既requireResultのgetLong直後wasNull/二回next/一回closeで拒否する。DDL内CHECK式が存在するというsource確認と、JDBC contract PTを、実PostgreSQLで47式を評価したとの合格へ読み替えない。schema catalogのCHECK expression drift/有効性/実constraint/trigger/index-role/globalDBは別の未完条件である。
+
+既Reference001..020を22SQL/22Resultへ適応し、新PT-MIG-REF021はempty declared datasetでも新六CHECK位置のnullResult/missing/SQLNULL/extra/非0/負/LongMAXが拒否、正しい一行0だけ通ることを独立空vectorで確認する。既各全query/getLong/wasNull/nextのSQL-Runtime-Error、Result/Statement close、元primary/順suppressed/自己identityと値equals別実体、借用mutation0、finite8workers64/Future5/finallyshutdownNow-await10を全22へ拡張する。
+
+Targetの独立時系列はColumn6→Constraint6→prepare6→transfer24→Reference22→Content7→Finalizer16=87SQL。旧81SQLに新六queryをindex58へ挿入するだけ、旧scalar44値はindex34へ六zeroを挿入した50scalarで完全保持。TRANSFER_SCALARS18/ORPHAN_FIRST24不変、REFERENCE_SCALARS_END40/SETVAL_SCALAR_FIRST45、RESULTS69（catalog12/content7/scalar50）。普通Statement11+Prepared5=16close-timeout、auto11/fetch1000三回不変。ownerStart=[0,6,12,13,15,18,22,30,42,64,71]、closeSQLPrefix=[6,12,13,15,18,22,30,42,64,71,77,78,79,80,81,87]、closeResultCount=[6,12,12,12,12,15,21,30,52,59,65,66,67,68,69,69]、setval76/ANALYZE81、prepared最初close10/outer15。既Target32を全87SQL/50scalar fault-prefix/不一致短絡/所有・部分setval-warning/有限64へ適応、catalog141/Content66フィールド期待とpayload65は不変。
+
+変更は既Reference一Main/既Ref20更新＋新1/既Target32適応、旧642＋新1=必要643/31Main45physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用/全CRC-init/既定と無filter全四100で確認。全migrationMain34/定義706→707中643scopeのみ、新Main0/uniqueMain増分0。追加不足2/6/9pp cap10、元費用/SV/群開始見積り保持、実専有費token null、新業務scope/RD/UI/DDL/QA変更不要。実DB/SQL evaluator/原本Current/全CHECK式catalog/NOTNULLcatalog/trigger/index-role/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
 ## SSC384 生成search保存値後条件を既全列照合へ接続（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/FUN004/TST/UI242254/SS311331/V002/343。既MigrationMasterContentVerifierの六表65COPY列照合後・Finalizer前に、固定七番目SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)を同一借用TX/同Statementで実行する。期待は独立DDL後条件の不一致件数0という一行一列、BIGINT getLong1直後wasNullを必須とし、NULL/欠落/余剰・非0（負数/LongMAXを含む）は固定SQLException。空の宣言datasetでもcountは一行0を必須とし、宣言が空だから生成値検査を省略しない。既Column66 stored属性・Content65実値・Constraint75構造と同一接続経路で組合せるが、生成式自体のcatalog定義/default/実locale構成・actualDB/全移行の認定へ代用しない。

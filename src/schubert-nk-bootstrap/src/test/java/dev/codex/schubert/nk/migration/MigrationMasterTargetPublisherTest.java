@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-TARGET001..032; independent81 SQL/44 scalar, content7 and catalog12 result vectors,
+ * PT-MIG-TARGET001..032; independent87 SQL/50 scalar, content7 and catalog12 result vectors,
  * memory-only borrowed JDBC.
  */
 final class MigrationMasterTargetPublisherTest {
@@ -47,15 +47,15 @@ final class MigrationMasterTargetPublisherTest {
   private static final String SPEAKER_ID = "42";
   private static final int PREPARE_END = 18;
   private static final int TRANSFER_END = 42;
-  private static final int REFERENCE_END = 58;
-  private static final int CONTENT_END = 65;
+  private static final int REFERENCE_END = 64;
+  private static final int CONTENT_END = 71;
   private static final int CONTENT_TABLES = 7;
   private static final int CATALOG_TABLES = 12;
   private static final int CATALOG_END = 12;
   private static final int CATALOG_COLUMNS = 141;
   private static final int CATALOG_FIELDS = 7;
   private static final int CONTENT_COLUMNS = 66;
-  private static final int RESULTS = 63;
+  private static final int RESULTS = 69;
   private static final int CLOSES = 16;
   private static final int CONTENT_CLOSE = 9;
   private static final String GET_LONG = "getLong";
@@ -63,14 +63,14 @@ final class MigrationMasterTargetPublisherTest {
   private static final String GET_BOOLEAN = "getBoolean";
   private static final String GET_TIMESTAMP = "getTimestamp";
   private static final String GET_STRING = "getString";
-  private static final int SETVAL_FIRST = 70;
-  private static final int ANALYZE_FIRST = 75;
-  private static final int SQL_COUNT = 81;
-  private static final int SCALARS = 44;
+  private static final int SETVAL_FIRST = 76;
+  private static final int ANALYZE_FIRST = 81;
+  private static final int SQL_COUNT = 87;
+  private static final int SCALARS = 50;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
-  private static final int REFERENCE_SCALARS_END = 34;
-  private static final int SETVAL_SCALAR_FIRST = 39;
+  private static final int REFERENCE_SCALARS_END = 40;
+  private static final int SETVAL_SCALAR_FIRST = 45;
   private static final int PREPARED_FIRST_CLOSE = 10;
   private static final int OUTER_FINAL_CLOSE = 15;
   private static final int WORKERS = 8;
@@ -78,11 +78,11 @@ final class MigrationMasterTargetPublisherTest {
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
   private static final List<Integer> OWNER_START =
-      List.of(0, 6, 12, 13, 15, 18, 22, 30, 42, 58, 65);
+      List.of(0, 6, 12, 13, 15, 18, 22, 30, 42, 64, 71);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(6, 12, 13, 15, 18, 22, 30, 42, 58, 65, 71, 72, 73, 74, 75, 81);
+      List.of(6, 12, 13, 15, 18, 22, 30, 42, 64, 71, 77, 78, 79, 80, 81, 87);
   private static final List<Integer> CLOSE_RESULTS =
-      List.of(6, 12, 12, 12, 12, 15, 21, 30, 46, 53, 59, 60, 61, 62, 63, 63);
+      List.of(6, 12, 12, 12, 12, 15, 21, 30, 52, 59, 65, 66, 67, 68, 69, 69);
   private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t";
   private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t";
   private static final List<String> CATALOG_SQL =
@@ -332,6 +332,12 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
           "SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND p.logical_id IS NULL",
           "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations",
+          "SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE",
+          "SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 8) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)')) IS FALSE",
+          "SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\n        OR (media_type = 'MUSIC' AND (\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\n            OR (pair_role = 'N' AND pair_key IS NULL)))\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\n        storage_relative_path !~ '(^/|\\\\|(^|/)\\.\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE",
+          "SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE",
           "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
           "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
           "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
@@ -358,11 +364,12 @@ final class MigrationMasterTargetPublisherTest {
 
   private static final long[] NORMAL_SCALARS = {
     0L, 1L, 1L, 0L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
-    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 42L, 700L, 900L, 500L, 600L, 42L, 700L, 900L, 500L, 600L
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 42L, 700L, 900L, 500L, 600L,
+    42L, 700L, 900L, 500L, 600L
   };
 
   @Test
-  void target001OneConnectionFixedEightyOneSqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedEightySevenSqlAndExactResources() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
