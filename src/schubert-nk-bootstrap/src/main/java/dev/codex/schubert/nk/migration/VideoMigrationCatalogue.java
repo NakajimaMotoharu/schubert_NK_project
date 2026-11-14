@@ -137,7 +137,7 @@ public final class VideoMigrationCatalogue {
       @Nullable Long id = ids.get(video.logicalId());
       if (id == null || id < MINIMUM_TARGET_ID || id > MAXIMUM_TARGET_ID || !usedIds.add(id))
         throw invalid();
-      @Nullable AssetMigrationManifest.Entry claim = assets.get(video.sourceRelativePath());
+      AssetMigrationManifest.@Nullable Entry claim = assets.get(video.sourceRelativePath());
       if (claim == null) throw invalid();
       String source = video.sourceRelativePath();
       var fields =
