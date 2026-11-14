@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC391: CurrentScenarioFileProjectionReader.read/rows/row/cleanupはCurrent八列をreadonly snapshotから不変rowsへ読む。signedID/nullable sizeと保存path/hashを非修復、独立20/四100計画、実asset/DB未資格。
+
 SSC390: CurrentScenarioEntryMapper.copyRows/parseCurrent/validTimeは十列を既三ID対応と12列Row/Batchへ結合。Current保存値と順/nullable speaker保持、独立24/必要180/四100計画、実DB/HOLD未受入。
 
 SSC389: CurrentScenarioEntryProjectionReader.read/rows/rowはCurrent十列をborrowed snapshotから不変rowsへ接続。旧IDsignedlong/nullable speaker-label-raw保存、独立20/四coverage100を計画、実DB未実施。
