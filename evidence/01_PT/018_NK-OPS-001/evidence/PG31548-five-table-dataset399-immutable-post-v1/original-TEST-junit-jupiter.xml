@@ -1,0 +1,2454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="399" skipped="0" failures="0" errors="0" time="1.318" hostname="npc1" timestamp="2026-11-14T18:13:56">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg31546-five-table-dataset399-immutable-unit-v1/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="junit.jupiter.execution.parallel.enabled" value="false"/>
+<property name="junit.jupiter.extensions.autodetection.enabled" value="false"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar execute --disable-banner --class-path /home/mini/codex/project1/work/pgpt-runs/PG379/pg31540-five-table-dataset399-immutable-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg31540-five-table-dataset399-immutable-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar --select-class dev.codex.schubert.nk.migration.AssetMigrationManifestTest --select-class dev.codex.schubert.nk.migration.AssetStagingTablesTest --select-class dev.codex.schubert.nk.migration.AudioCopyDatasetTest --select-class dev.codex.schubert.nk.migration.AudioFileCopyRowTest --select-class dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest --select-class dev.codex.schubert.nk.migration.MediaAssetCopyRowTest --select-class dev.codex.schubert.nk.migration.MigrationCopyDatasetTest --select-class dev.codex.schubert.nk.migration.MusicLogicalIdTest --select-class dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest --select-class dev.codex.schubert.nk.migration.MusicMigrationPairingTest --select-class dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest --select-class dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest --select-class dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest --select-class dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest --select-class dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest --select-class dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest --select-class dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest --select-class dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest --select-class dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest --select-class dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest --select-class dev.codex.schubert.nk.migration.ScenarioStagingTablesTest --select-class dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest --reports-dir /home/mini/codex/project1/work/pgpt-runs/PG379/pg31546-five-table-dataset399-immutable-unit-v1/xml --fail-if-no-tests --details summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg31546-five-table-dataset399-immutable-unit-v1"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="place006ExactCardinalityAndKnownEmptyFile()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place006ExactCardinalityAndKnownEmptyFile()]
+display-name: place006ExactCardinalityAndKnownEmptyFile()
+]]></system-out>
+</testcase>
+<testcase name="linkColumnGrammarIsIndependentOfAnyAvailableReference()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:linkColumnGrammarIsIndependentOfAnyAvailableReference()]
+display-name: linkColumnGrammarIsIndependentOfAnyAvailableReference()
+]]></system-out>
+</testcase>
+<testcase name="independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows()]
+display-name: independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows()
+]]></system-out>
+</testcase>
+<testcase name="eachDdlMustReturnExactlyZero()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:eachDdlMustReturnExactlyZero()]
+display-name: eachDdlMustReturnExactlyZero()
+]]></system-out>
+</testcase>
+<testcase name="datasetRetainsOnlyImmutableBatchValuesIndependentOfMutableInput()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:datasetRetainsOnlyImmutableBatchValuesIndependentOfMutableInput()]
+display-name: datasetRetainsOnlyImmutableBatchValuesIndependentOfMutableInput()
+]]></system-out>
+</testcase>
+<testcase name="bothUnknownReferenceDirectionsAreRejected()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:bothUnknownReferenceDirectionsAreRejected()]
+display-name: bothUnknownReferenceDirectionsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()]
+display-name: timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()
+]]></system-out>
+</testcase>
+<testcase name="callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed()]
+display-name: callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed()
+]]></system-out>
+</testcase>
+<testcase name="byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired()]
+display-name: byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired()
+]]></system-out>
+</testcase>
+<testcase name="emptyIterableMakesNoSinkCallsAndDoesNotOwnIt()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:emptyIterableMakesNoSinkCallsAndDoesNotOwnIt()]
+display-name: emptyIterableMakesNoSinkCallsAndDoesNotOwnIt()
+]]></system-out>
+</testcase>
+<testcase name="nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()]
+display-name: nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="claimByteSizeIsForwardedToTheCurrentMediaRowContract()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:claimByteSizeIsForwardedToTheCurrentMediaRowContract()]
+display-name: claimByteSizeIsForwardedToTheCurrentMediaRowContract()
+]]></system-out>
+</testcase>
+<testcase name="eachDdlOriginalFailureStopsTheRemainingPrefix()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:eachDdlOriginalFailureStopsTheRemainingPrefix()]
+display-name: eachDdlOriginalFailureStopsTheRemainingPrefix()
+]]></system-out>
+</testcase>
+<testcase name="duplicatePrimaryIdIsRejected()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:duplicatePrimaryIdIsRejected()]
+display-name: duplicatePrimaryIdIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="copy012ConcurrentCallsHaveSeparateOutputOwnership()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy012ConcurrentCallsHaveSeparateOutputOwnership()]
+display-name: copy012ConcurrentCallsHaveSeparateOutputOwnership()
+]]></system-out>
+</testcase>
+<testcase name="bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush()]
+display-name: bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush()
+]]></system-out>
+</testcase>
+<testcase name="place008IndexAndIndependentN12Fields()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place008IndexAndIndependentN12Fields()]
+display-name: place008IndexAndIndependentN12Fields()
+]]></system-out>
+</testcase>
+<testcase name="nullableInputsAndElementsFailExplicitlyWithoutBorrowingAnything()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:nullableInputsAndElementsFailExplicitlyWithoutBorrowingAnything()]
+display-name: nullableInputsAndElementsFailExplicitlyWithoutBorrowingAnything()
+]]></system-out>
+</testcase>
+<testcase name="exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders()]
+display-name: exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders()
+]]></system-out>
+</testcase>
+<testcase name="place010SnapshotAndReturnOwnership()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place010SnapshotAndReturnOwnership()]
+display-name: place010SnapshotAndReturnOwnership()
+]]></system-out>
+</testcase>
+<testcase name="transferNullNegativeAndEntryOnlyManifestCountsAreRejectedBeforeUse()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferNullNegativeAndEntryOnlyManifestCountsAreRejectedBeforeUse()]
+display-name: transferNullNegativeAndEntryOnlyManifestCountsAreRejectedBeforeUse()
+]]></system-out>
+</testcase>
+<testcase name="asset001CanonicalGolden()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset001CanonicalGolden()]
+display-name: asset001CanonicalGolden()
+]]></system-out>
+</testcase>
+<testcase name="inputAndReturnedCollectionsHaveDeepIndependentOwnership()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:inputAndReturnedCollectionsHaveDeepIndependentOwnership()]
+display-name: inputAndReturnedCollectionsHaveDeepIndependentOwnership()
+]]></system-out>
+</testcase>
+<testcase name="asset006DuplicatePaths()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset006DuplicatePaths()]
+display-name: asset006DuplicatePaths()
+]]></system-out>
+</testcase>
+<testcase name="uniqueOrderDomainHasExactly999PossibleLinksPerEntryType()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.155">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:uniqueOrderDomainHasExactly999PossibleLinksPerEntryType()]
+display-name: uniqueOrderDomainHasExactly999PossibleLinksPerEntryType()
+]]></system-out>
+</testcase>
+<testcase name="transactionTimestampsMustAgree()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:transactionTimestampsMustAgree()]
+display-name: transactionTimestampsMustAgree()
+]]></system-out>
+</testcase>
+<testcase name="row011NoTrimSafeDiagnosticAndEncoderContract()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row011NoTrimSafeDiagnosticAndEncoderContract()]
+display-name: row011NoTrimSafeDiagnosticAndEncoderContract()
+]]></system-out>
+</testcase>
+<testcase name="storageUniquenessIsPerGameAndNeverChangesDeclaredNames()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:storageUniquenessIsPerGameAndNeverChangesDeclaredNames()]
+display-name: storageUniquenessIsPerGameAndNeverChangesDeclaredNames()
+]]></system-out>
+</testcase>
+<testcase name="transferAutoCommitAndNullVendorStatementAreRejected()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:transferAutoCommitAndNullVendorStatementAreRejected()]
+display-name: transferAutoCommitAndNullVendorStatementAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="allNineExtraScalarRowsAreRejected()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:allNineExtraScalarRowsAreRejected()]
+display-name: allNineExtraScalarRowsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="file001LiteralGoldenIndependentOfRenumbering()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file001LiteralGoldenIndependentOfRenumbering()]
+display-name: file001LiteralGoldenIndependentOfRenumbering()
+]]></system-out>
+</testcase>
+<testcase name="scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()]
+display-name: scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()
+]]></system-out>
+</testcase>
+<testcase name="allOtherManifestKindsAreRejected()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:allOtherManifestKindsAreRejected()]
+display-name: allOtherManifestKindsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="nullableInputMapAndItsKeysAndValuesUseFixedDiagnostics()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:nullableInputMapAndItsKeysAndValuesUseFixedDiagnostics()]
+display-name: nullableInputMapAndItsKeysAndValuesUseFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()]
+display-name: finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()
+]]></system-out>
+</testcase>
+<testcase name="batch010SnapshotListAndByteOwnership()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch010SnapshotListAndByteOwnership()]
+display-name: batch010SnapshotListAndByteOwnership()
+]]></system-out>
+</testcase>
+<testcase name="independentTwelveColumnGoldenHasExactOrderAndUtf8()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:independentTwelveColumnGoldenHasExactOrderAndUtf8()]
+display-name: independentTwelveColumnGoldenHasExactOrderAndUtf8()
+]]></system-out>
+</testcase>
+<testcase name="prepareOriginalFailureRetainsSuppressedCleanup()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareOriginalFailureRetainsSuppressedCleanup()]
+display-name: prepareOriginalFailureRetainsSuppressedCleanup()
+]]></system-out>
+</testcase>
+<testcase name="pairedMusicKeyHasOneTo256Utf8Bytes()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:pairedMusicKeyHasOneTo256Utf8Bytes()]
+display-name: pairedMusicKeyHasOneTo256Utf8Bytes()
+]]></system-out>
+</testcase>
+<testcase name="isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()]
+display-name: isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()
+]]></system-out>
+</testcase>
+<testcase name="storageRejectsAbsoluteBackslashEmptyAndDotSegments()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:storageRejectsAbsoluteBackslashEmptyAndDotSegments()]
+display-name: storageRejectsAbsoluteBackslashEmptyAndDotSegments()
+]]></system-out>
+</testcase>
+<testcase name="batch012FiniteOwnedWorkersCompareIndependentGolden()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch012FiniteOwnedWorkersCompareIndependentGolden()]
+display-name: batch012FiniteOwnedWorkersCompareIndependentGolden()
+]]></system-out>
+</testcase>
+<testcase name="finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()]
+display-name: finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()
+]]></system-out>
+</testcase>
+<testcase name="musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()]
+display-name: musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts()]
+display-name: assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts()
+]]></system-out>
+</testcase>
+<testcase name="snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder()]
+display-name: snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated004ObservationEqualityHasExactFieldsAndType()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated004ObservationEqualityHasExactFieldsAndType()]
+display-name: assetGenerated004ObservationEqualityHasExactFieldsAndType()
+]]></system-out>
+</testcase>
+<testcase name="asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()]
+display-name: asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()
+]]></system-out>
+</testcase>
+<testcase name="order012ConcurrentIndependentReturnOwnership()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order012ConcurrentIndependentReturnOwnership()]
+display-name: order012ConcurrentIndependentReturnOwnership()
+]]></system-out>
+</testcase>
+<testcase name="targetExtensionCannotMisrepresentTheDeclaredSourceFormat()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:targetExtensionCannotMisrepresentTheDeclaredSourceFormat()]
+display-name: targetExtensionCannotMisrepresentTheDeclaredSourceFormat()
+]]></system-out>
+</testcase>
+<testcase name="sqlLikeLiteralIsOnlyCopyDataWithIndependentBackslashEscape()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:sqlLikeLiteralIsOnlyCopyDataWithIndependentBackslashEscape()]
+display-name: sqlLikeLiteralIsOnlyCopyDataWithIndependentBackslashEscape()
+]]></system-out>
+</testcase>
+<testcase name="allFourSubtracksReferToTheFixedMainIdsAndOtherParentsAreAbsent()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:allFourSubtracksReferToTheFixedMainIdsAndOtherParentsAreAbsent()]
+display-name: allFourSubtracksReferToTheFixedMainIdsAndOtherParentsAreAbsent()
+]]></system-out>
+</testcase>
+<testcase name="bothEndpointLookupsRetainTheApprovedNumbersAndPaths()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:bothEndpointLookupsRetainTheApprovedNumbersAndPaths()]
+display-name: bothEndpointLookupsRetainTheApprovedNumbersAndPaths()
+]]></system-out>
+</testcase>
+<testcase name="order006MappedEntryOrderDomains()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order006MappedEntryOrderDomains()]
+display-name: order006MappedEntryOrderDomains()
+]]></system-out>
+</testcase>
+<testcase name="row008AllMandatoryNullAndRowWidthBoundaries()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row008AllMandatoryNullAndRowWidthBoundaries()]
+display-name: row008AllMandatoryNullAndRowWidthBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="transferMissingRowAtEveryScalarPositionCannotSucceed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferMissingRowAtEveryScalarPositionCannotSucceed()]
+display-name: transferMissingRowAtEveryScalarPositionCannotSucceed()
+]]></system-out>
+</testcase>
+<testcase name="row010SnapshotListColumnAndByteOwnership()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row010SnapshotListColumnAndByteOwnership()]
+display-name: row010SnapshotListColumnAndByteOwnership()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()]
+display-name: finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()
+]]></system-out>
+</testcase>
+<testcase name="unmatchedInstrumentalKeepsTheMainPlaceholder()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:unmatchedInstrumentalKeepsTheMainPlaceholder()]
+display-name: unmatchedInstrumentalKeepsTheMainPlaceholder()
+]]></system-out>
+</testcase>
+<testcase name="declarationOrderAndPositiveTargetExtremesAreNotRenumbered()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:declarationOrderAndPositiveTargetExtremesAreNotRenumbered()]
+display-name: declarationOrderAndPositiveTargetExtremesAreNotRenumbered()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()]
+display-name: assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()
+]]></system-out>
+</testcase>
+<testcase name="storageAndDisplayHave512ByteBoundsWithoutPathResolution()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:storageAndDisplayHave512ByteBoundsWithoutPathResolution()]
+display-name: storageAndDisplayHave512ByteBoundsWithoutPathResolution()
+]]></system-out>
+</testcase>
+<testcase name="manifestMustDeclareExactlyTwentyFiles()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:manifestMustDeclareExactlyTwentyFiles()]
+display-name: manifestMustDeclareExactlyTwentyFiles()
+]]></system-out>
+</testcase>
+<testcase name="firstDdlFailureDoesNotAttemptSecondOrRepair()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:firstDdlFailureDoesNotAttemptSecondOrRepair()]
+display-name: firstDdlFailureDoesNotAttemptSecondOrRepair()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen013DistinctGameSourcePairHashCollision()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen013DistinctGameSourcePairHashCollision()]
+display-name: scenarioGen013DistinctGameSourcePairHashCollision()
+]]></system-out>
+</testcase>
+<testcase name="transferOriginalNextFailureAtEveryPositionStillClosesResult()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferOriginalNextFailureAtEveryPositionStillClosesResult()]
+display-name: transferOriginalNextFailureAtEveryPositionStillClosesResult()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersProduceTheSameIndependent129RowGolden()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.193">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:finiteWorkersProduceTheSameIndependent129RowGolden()]
+display-name: finiteWorkersProduceTheSameIndependent129RowGolden()
+]]></system-out>
+</testcase>
+<testcase name="timestampInvalidFormsAreRejectedByTheExistingRowContract()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:timestampInvalidFormsAreRejectedByTheExistingRowContract()]
+display-name: timestampInvalidFormsAreRejectedByTheExistingRowContract()
+]]></system-out>
+</testcase>
+<testcase name="prepareNullConnectionHasFixedInputDiagnostic()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareNullConnectionHasFixedInputDiagnostic()]
+display-name: prepareNullConnectionHasFixedInputDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="transferPrimaryAndResultCloseFailureKeepJavaSuppression()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferPrimaryAndResultCloseFailureKeepJavaSuppression()]
+display-name: transferPrimaryAndResultCloseFailureKeepJavaSuppression()
+]]></system-out>
+</testcase>
+<testcase name="copy001LiteralRowsAndBothEntryPoints()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy001LiteralRowsAndBothEntryPoints()]
+display-name: copy001LiteralRowsAndBothEntryPoints()
+]]></system-out>
+</testcase>
+<testcase name="japaneseMusicLogicalIdComesFromTheIndependentFixedVector()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:japaneseMusicLogicalIdComesFromTheIndependentFixedVector()]
+display-name: japaneseMusicLogicalIdComesFromTheIndependentFixedVector()
+]]></system-out>
+</testcase>
+<testcase name="runtimeAndErrorFailuresRemainFailuresWithStatementClosed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:runtimeAndErrorFailuresRemainFailuresWithStatementClosed()]
+display-name: runtimeAndErrorFailuresRemainFailuresWithStatementClosed()
+]]></system-out>
+</testcase>
+<testcase name="emptyGroupHasNoPairsOrShadowedPaths()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:emptyGroupHasNoPairsOrShadowedPaths()]
+display-name: emptyGroupHasNoPairsOrShadowedPaths()
+]]></system-out>
+</testcase>
+<testcase name="primarySqlAndCloseFailureRetainJavaSuppressionOrder()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:primarySqlAndCloseFailureRetainJavaSuppressionOrder()]
+display-name: primarySqlAndCloseFailureRetainJavaSuppressionOrder()
+]]></system-out>
+</testcase>
+<testcase name="five007UnreferencedAudioDoesNotInventLink()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five007UnreferencedAudioDoesNotInventLink()]
+display-name: five007UnreferencedAudioDoesNotInventLink()
+]]></system-out>
+</testcase>
+<testcase name="emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks()]
+display-name: emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks()
+]]></system-out>
+</testcase>
+<testcase name="positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()]
+display-name: positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen003MappedEntryEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen003MappedEntryEqualityEveryComponent()]
+display-name: scenarioGen003MappedEntryEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()]
+display-name: everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()
+]]></system-out>
+</testcase>
+<testcase name="relativeStorageHasByteBoundariesAndRejectsAllDangerousSegments()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:relativeStorageHasByteBoundariesAndRejectsAllDangerousSegments()]
+display-name: relativeStorageHasByteBoundariesAndRejectsAllDangerousSegments()
+]]></system-out>
+</testcase>
+<testcase name="constructorRejectsNullEncoderWithFixedDiagnostic()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:constructorRejectsNullEncoderWithFixedDiagnostic()]
+display-name: constructorRejectsNullEncoderWithFixedDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="unknownEmptyCaseAndWhitespaceIdsNeverSelectAnotherEntry()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:unknownEmptyCaseAndWhitespaceIdsNeverSelectAnotherEntry()]
+display-name: unknownEmptyCaseAndWhitespaceIdsNeverSelectAnotherEntry()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen015FileIndexPairCollisionAndExactDuplicate()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen015FileIndexPairCollisionAndExactDuplicate()]
+display-name: scenarioGen015FileIndexPairCollisionAndExactDuplicate()
+]]></system-out>
+</testcase>
+<testcase name="transferOriginalGetLongFailureAtEveryPositionStillClosesResult()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferOriginalGetLongFailureAtEveryPositionStillClosesResult()]
+display-name: transferOriginalGetLongFailureAtEveryPositionStillClosesResult()
+]]></system-out>
+</testcase>
+<testcase name="encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow()]
+display-name: encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow()
+]]></system-out>
+</testcase>
+<testcase name="allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden()]
+display-name: allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden()
+]]></system-out>
+</testcase>
+<testcase name="allSixMimeExtensionPairsAreExactAndNeverGuessed()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:allSixMimeExtensionPairsAreExactAndNeverGuessed()]
+display-name: allSixMimeExtensionPairsAreExactAndNeverGuessed()
+]]></system-out>
+</testcase>
+<testcase name="allNineMissingScalarRowsAreRejected()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:allNineMissingScalarRowsAreRejected()]
+display-name: allNineMissingScalarRowsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="eachByteResultHasSeparateOwnershipAndIndependentCallOrder()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:eachByteResultHasSeparateOwnershipAndIndependentCallOrder()]
+display-name: eachByteResultHasSeparateOwnershipAndIndependentCallOrder()
+]]></system-out>
+</testcase>
+<testcase name="row009CanonicalUtcFiniteYearAndMicroseconds()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row009CanonicalUtcFiniteYearAndMicroseconds()]
+display-name: row009CanonicalUtcFiniteYearAndMicroseconds()
+]]></system-out>
+</testcase>
+<testcase name="onlyTheExactCurrentPunctuationSetIsRemovedFromKeys()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:onlyTheExactCurrentPunctuationSetIsRemovedFromKeys()]
+display-name: onlyTheExactCurrentPunctuationSetIsRemovedFromKeys()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersUseOneImmutableBatchWithIndependentSinks()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:finiteWorkersUseOneImmutableBatchWithIndependentSinks()]
+display-name: finiteWorkersUseOneImmutableBatchWithIndependentSinks()
+]]></system-out>
+</testcase>
+<testcase name="originalAutoCommitFailureHasNoCreatedStatement()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:originalAutoCommitFailureHasNoCreatedStatement()]
+display-name: originalAutoCommitFailureHasNoCreatedStatement()
+]]></system-out>
+</testcase>
+<testcase name="fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()]
+display-name: fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()
+]]></system-out>
+</testcase>
+<testcase name="mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum()]
+display-name: mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum()
+]]></system-out>
+</testcase>
+<testcase name="asset011UnexpectedClaim()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset011UnexpectedClaim()]
+display-name: asset011UnexpectedClaim()
+]]></system-out>
+</testcase>
+<testcase name="prepareNullVendorStatementIsAnExplicitSqlFailure()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareNullVendorStatementIsAnExplicitSqlFailure()]
+display-name: prepareNullVendorStatementIsAnExplicitSqlFailure()
+]]></system-out>
+</testcase>
+<testcase name="caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()]
+display-name: caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()
+]]></system-out>
+</testcase>
+<testcase name="order005InvalidTargetDomains()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order005InvalidTargetDomains()]
+display-name: order005InvalidTargetDomains()
+]]></system-out>
+</testcase>
+<testcase name="five006LinkMustBelongToThisScenario()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five006LinkMustBelongToThisScenario()]
+display-name: five006LinkMustBelongToThisScenario()
+]]></system-out>
+</testcase>
+<testcase name="allThreeSourcesHaveOneCommonTransactionTimestamp()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:allThreeSourcesHaveOneCommonTransactionTimestamp()]
+display-name: allThreeSourcesHaveOneCommonTransactionTimestamp()
+]]></system-out>
+</testcase>
+<testcase name="transferBothInsertCountsMustMatchTheIndependentManifest()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferBothInsertCountsMustMatchTheIndependentManifest()]
+display-name: transferBothInsertCountsMustMatchTheIndependentManifest()
+]]></system-out>
+</testcase>
+<testcase name="mapInsertionOrderDoesNotReplaceUnicodeCodepointPathOrder()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:mapInsertionOrderDoesNotReplaceUnicodeCodepointPathOrder()]
+display-name: mapInsertionOrderDoesNotReplaceUnicodeCodepointPathOrder()
+]]></system-out>
+</testcase>
+<testcase name="transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity()]
+display-name: transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersReturnIndependentExactGoldenBytes()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:finiteWorkersReturnIndependentExactGoldenBytes()]
+display-name: finiteWorkersReturnIndependentExactGoldenBytes()
+]]></system-out>
+</testcase>
+<testcase name="sqlLikeDisplayTextIsOnlyEscapedCopyData()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:sqlLikeDisplayTextIsOnlyEscapedCopyData()]
+display-name: sqlLikeDisplayTextIsOnlyEscapedCopyData()
+]]></system-out>
+</testcase>
+<testcase name="place004UnknownEntryCannotAcquireAPlacement()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place004UnknownEntryCannotAcquireAPlacement()]
+display-name: place004UnknownEntryCannotAcquireAPlacement()
+]]></system-out>
+</testcase>
+<testcase name="originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent()]
+display-name: originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent()
+]]></system-out>
+</testcase>
+<testcase name="order008ImmutableInputListAndReturnedBytes()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order008ImmutableInputListAndReturnedBytes()]
+display-name: order008ImmutableInputListAndReturnedBytes()
+]]></system-out>
+</testcase>
+<testcase name="allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden()]
+display-name: allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden()
+]]></system-out>
+</testcase>
+<testcase name="file005InvalidGameDomainsAtEveryBoundary()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file005InvalidGameDomainsAtEveryBoundary()]
+display-name: file005InvalidGameDomainsAtEveryBoundary()
+]]></system-out>
+</testcase>
+<testcase name="snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()]
+display-name: snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()
+]]></system-out>
+</testcase>
+<testcase name="row012ConcurrentCopyAndValueOwnership()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row012ConcurrentCopyAndValueOwnership()]
+display-name: row012ConcurrentCopyAndValueOwnership()
+]]></system-out>
+</testcase>
+<testcase name="joinsTwoIndependentLiteralCopyStreamsWithoutHeadersOrTerminators()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:joinsTwoIndependentLiteralCopyStreamsWithoutHeadersOrTerminators()]
+display-name: joinsTwoIndependentLiteralCopyStreamsWithoutHeadersOrTerminators()
+]]></system-out>
+</testcase>
+<testcase name="exactMainAndInstrumentalHaveOnePair()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:exactMainAndInstrumentalHaveOnePair()]
+display-name: exactMainAndInstrumentalHaveOnePair()
+]]></system-out>
+</testcase>
+<testcase name="prepareRuntimeAndErrorStillCloseTheStatement()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareRuntimeAndErrorStillCloseTheStatement()]
+display-name: prepareRuntimeAndErrorStillCloseTheStatement()
+]]></system-out>
+</testcase>
+<testcase name="five017CallerCollectionMutationsDoNotChangeSnapshot()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five017CallerCollectionMutationsDoNotChangeSnapshot()]
+display-name: five017CallerCollectionMutationsDoNotChangeSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="five018ImmutableValuesCanWriteToSeparateIndependentSinks()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five018ImmutableValuesCanWriteToSeparateIndependentSinks()]
+display-name: five018ImmutableValuesCanWriteToSeparateIndependentSinks()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen004MappedEntryIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen004MappedEntryIndependentHashes()]
+display-name: scenarioGen004MappedEntryIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen012PlacedEntryIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen012PlacedEntryIndependentHashes()]
+display-name: scenarioGen012PlacedEntryIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="matchingFileIdCannotHideDifferentGameMapping()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:matchingFileIdCannotHideDifferentGameMapping()]
+display-name: matchingFileIdCannotHideDifferentGameMapping()
+]]></system-out>
+</testcase>
+<testcase name="batch007GlobalDisplayOrderMustMatchTheMapping()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch007GlobalDisplayOrderMustMatchTheMapping()]
+display-name: batch007GlobalDisplayOrderMustMatchTheMapping()
+]]></system-out>
+</testcase>
+<testcase name="distanceTwoRemainsAnAcceptedFuzzyPair()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:distanceTwoRemainsAnAcceptedFuzzyPair()]
+display-name: distanceTwoRemainsAnAcceptedFuzzyPair()
+]]></system-out>
+</testcase>
+<testcase name="five012GettersRetainImmutableValidatedValues()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five012GettersRetainImmutableValidatedValues()]
+display-name: five012GettersRetainImmutableValidatedValues()
+]]></system-out>
+</testcase>
+<testcase name="statementIsClosedExactlyOnceAndConnectionRemainsBorrowed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:statementIsClosedExactlyOnceAndConnectionRemainsBorrowed()]
+display-name: statementIsClosedExactlyOnceAndConnectionRemainsBorrowed()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen008MappedFileIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen008MappedFileIndependentHashes()]
+display-name: scenarioGen008MappedFileIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()]
+display-name: byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput()]
+display-name: finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput()
+]]></system-out>
+</testcase>
+<testcase name="relativePathGrammarDoesNotRepairUnsafeInputs()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:relativePathGrammarDoesNotRepairUnsafeInputs()]
+display-name: relativePathGrammarDoesNotRepairUnsafeInputs()
+]]></system-out>
+</testcase>
+<testcase name="nullableContainerDurationAndEmptyContainerRemainDistinct()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:nullableContainerDurationAndEmptyContainerRemainDistinct()]
+display-name: nullableContainerDurationAndEmptyContainerRemainDistinct()
+]]></system-out>
+</testcase>
+<testcase name="order007NullBoundaryContracts()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order007NullBoundaryContracts()]
+display-name: order007NullBoundaryContracts()
+]]></system-out>
+</testcase>
+<testcase name="fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues()]
+display-name: fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues()
+]]></system-out>
+</testcase>
+<testcase name="file012ConcurrentReturnsRemainIndependentlyOwned()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file012ConcurrentReturnsRemainIndependentlyOwned()]
+display-name: file012ConcurrentReturnsRemainIndependentlyOwned()
+]]></system-out>
+</testcase>
+<testcase name="order004DuplicateTargetRejectedIndependently()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order004DuplicateTargetRejectedIndependently()]
+display-name: order004DuplicateTargetRejectedIndependently()
+]]></system-out>
+</testcase>
+<testcase name="nullLookupIsAnExplicitFixedInputFailure()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:nullLookupIsAnExplicitFixedInputFailure()]
+display-name: nullLookupIsAnExplicitFixedInputFailure()
+]]></system-out>
+</testcase>
+<testcase name="entryCompositeForeignKeyIncludesTheDeclaredGame()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:entryCompositeForeignKeyIncludesTheDeclaredGame()]
+display-name: entryCompositeForeignKeyIncludesTheDeclaredGame()
+]]></system-out>
+</testcase>
+<testcase name="transferSqlNullAtEveryScalarPositionCannotSucceed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferSqlNullAtEveryScalarPositionCannotSucceed()]
+display-name: transferSqlNullAtEveryScalarPositionCannotSucceed()
+]]></system-out>
+</testcase>
+<testcase name="canonicalUtcYearAndMicrosecondBoundariesAreIndependent()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:canonicalUtcYearAndMicrosecondBoundariesAreIndependent()]
+display-name: canonicalUtcYearAndMicrosecondBoundariesAreIndependent()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated001EnumNamesAreLiteralAndAliasesAreRejected()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated001EnumNamesAreLiteralAndAliasesAreRejected()]
+display-name: assetGenerated001EnumNamesAreLiteralAndAliasesAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="five015RuntimeAndErrorAreNotWrapped()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five015RuntimeAndErrorAreNotWrapped()]
+display-name: five015RuntimeAndErrorAreNotWrapped()
+]]></system-out>
+</testcase>
+<testcase name="malformedUnicodeNonNfcControlsAndEmptyTextAreRejectedAtBothBoundaries()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:malformedUnicodeNonNfcControlsAndEmptyTextAreRejectedAtBothBoundaries()]
+display-name: malformedUnicodeNonNfcControlsAndEmptyTextAreRejectedAtBothBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen002IdPairIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen002IdPairIndependentHashes()]
+display-name: scenarioGen002IdPairIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="entryOnlyAndUnknownTargetFileAreRejected()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:entryOnlyAndUnknownTargetFileAreRejected()]
+display-name: entryOnlyAndUnknownTargetFileAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="sourceMetadataBoundsDoNotTruncateFilenameTitles()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:sourceMetadataBoundsDoNotTruncateFilenameTitles()]
+display-name: sourceMetadataBoundsDoNotTruncateFilenameTitles()
+]]></system-out>
+</testcase>
+<testcase name="transferEveryCountMismatchIncludesNegativeDatabaseResults()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferEveryCountMismatchIncludesNegativeDatabaseResults()]
+display-name: transferEveryCountMismatchIncludesNegativeDatabaseResults()
+]]></system-out>
+</testcase>
+<testcase name="linkTimestampsHaveIndependentCanonicalUtcMicrosecondBoundaries()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:linkTimestampsHaveIndependentCanonicalUtcMicrosecondBoundaries()]
+display-name: linkTimestampsHaveIndependentCanonicalUtcMicrosecondBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved()]
+display-name: currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved()
+]]></system-out>
+</testcase>
+<testcase name="videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()]
+display-name: videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()
+]]></system-out>
+</testcase>
+<testcase name="nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder()]
+display-name: nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder()
+]]></system-out>
+</testcase>
+<testcase name="firstUnexpectedUpdateCountsStopBeforeSecondDdl()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:firstUnexpectedUpdateCountsStopBeforeSecondDdl()]
+display-name: firstUnexpectedUpdateCountsStopBeforeSecondDdl()
+]]></system-out>
+</testcase>
+<testcase name="asset008ImmutableOwnership()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset008ImmutableOwnership()]
+display-name: asset008ImmutableOwnership()
+]]></system-out>
+</testcase>
+<testcase name="file004DuplicateTargetIsGlobal()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file004DuplicateTargetIsGlobal()]
+display-name: file004DuplicateTargetIsGlobal()
+]]></system-out>
+</testcase>
+<testcase name="targetValuesAreNonNullPositiveN12AndGloballyUnique()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:targetValuesAreNonNullPositiveN12AndGloballyUnique()]
+display-name: targetValuesAreNonNullPositiveN12AndGloballyUnique()
+]]></system-out>
+</testcase>
+<testcase name="row005ClosedTypeAndSpeakerPair()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row005ClosedTypeAndSpeakerPair()]
+display-name: row005ClosedTypeAndSpeakerPair()
+]]></system-out>
+</testcase>
+<testcase name="resultsDoNotAliasInputAndAllViewsAndDiagnosticsAreClosed()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:resultsDoNotAliasInputAndAllViewsAndDiagnosticsAreClosed()]
+display-name: resultsDoNotAliasInputAndAllViewsAndDiagnosticsAreClosed()
+]]></system-out>
+</testcase>
+<testcase name="fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()]
+display-name: fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()
+]]></system-out>
+</testcase>
+<testcase name="video20AndMusic129JoinAll149RowsAndBorrowedStream()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:video20AndMusic129JoinAll149RowsAndBorrowedStream()]
+display-name: video20AndMusic129JoinAll149RowsAndBorrowedStream()
+]]></system-out>
+</testcase>
+<testcase name="nullConnectionFailsWithFixedInputDiagnostic()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:nullConnectionFailsWithFixedInputDiagnostic()]
+display-name: nullConnectionFailsWithFixedInputDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile()]
+display-name: unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile()
+]]></system-out>
+</testcase>
+<testcase name="transferEmptyAndMaximumIntManifestCountsAreExact()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferEmptyAndMaximumIntManifestCountsAreExact()]
+display-name: transferEmptyAndMaximumIntManifestCountsAreExact()
+]]></system-out>
+</testcase>
+<testcase name="categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart()]
+display-name: categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart()
+]]></system-out>
+</testcase>
+<testcase name="equalDistanceUsesTheFirstDisplayPath()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:equalDistanceUsesTheFirstDisplayPath()]
+display-name: equalDistanceUsesTheFirstDisplayPath()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen006FilePairIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen006FilePairIndependentHashes()]
+display-name: scenarioGen006FilePairIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="mutableInputsAndReturnedListsAndRowsDoNotShareOwnership()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:mutableInputsAndReturnedListsAndRowsDoNotShareOwnership()]
+display-name: mutableInputsAndReturnedListsAndRowsDoNotShareOwnership()
+]]></system-out>
+</testcase>
+<testcase name="emptyAndCountAndFieldShapeBoundariesAreExplicit()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:emptyAndCountAndFieldShapeBoundariesAreExplicit()]
+display-name: emptyAndCountAndFieldShapeBoundariesAreExplicit()
+]]></system-out>
+</testcase>
+<testcase name="five009MediaAndScenarioTimestampMustAgree()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five009MediaAndScenarioTimestampMustAgree()]
+display-name: five009MediaAndScenarioTimestampMustAgree()
+]]></system-out>
+</testcase>
+<testcase name="eachLargeInsertRequiresTheExactNonnegativeLongCount()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:eachLargeInsertRequiresTheExactNonnegativeLongCount()]
+display-name: eachLargeInsertRequiresTheExactNonnegativeLongCount()
+]]></system-out>
+</testcase>
+<testcase name="transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc()]
+display-name: transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc()
+]]></system-out>
+</testcase>
+<testcase name="place005DuplicateEntryAndFileIndexAreIndependent()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place005DuplicateEntryAndFileIndexAreIndependent()]
+display-name: place005DuplicateEntryAndFileIndexAreIndependent()
+]]></system-out>
+</testcase>
+<testcase name="asset010MissingClaim()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset010MissingClaim()]
+display-name: asset010MissingClaim()
+]]></system-out>
+</testcase>
+<testcase name="nullableBoundariesHaveFixedDiagnostics()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:nullableBoundariesHaveFixedDiagnostics()]
+display-name: nullableBoundariesHaveFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush()]
+display-name: originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush()
+]]></system-out>
+</testcase>
+<testcase name="place011SignedSourcesAndInputReordering()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place011SignedSourcesAndInputReordering()]
+display-name: place011SignedSourcesAndInputReordering()
+]]></system-out>
+</testcase>
+<testcase name="bothEmptyBatchesAreOnlyAnEmptyDeclaredValue()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:bothEmptyBatchesAreOnlyAnEmptyDeclaredValue()]
+display-name: bothEmptyBatchesAreOnlyAnEmptyDeclaredValue()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen009PlacementEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen009PlacementEqualityEveryComponent()]
+display-name: scenarioGen009PlacementEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="catalogueListCannotBeMutatedOrPoisonAnotherInstance()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:catalogueListCannotBeMutatedOrPoisonAnotherInstance()]
+display-name: catalogueListCannotBeMutatedOrPoisonAnotherInstance()
+]]></system-out>
+</testcase>
+<testcase name="prepareMatchesAllThreeIndependentColumnListsAndExactSql()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareMatchesAllThreeIndependentColumnListsAndExactSql()]
+display-name: prepareMatchesAllThreeIndependentColumnListsAndExactSql()
+]]></system-out>
+</testcase>
+<testcase name="five016PartialBytesRemainAndNoAutomaticReplay()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five016PartialBytesRemainAndNoAutomaticReplay()]
+display-name: five016PartialBytesRemainAndNoAutomaticReplay()
+]]></system-out>
+</testcase>
+<testcase name="byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()]
+display-name: byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()
+]]></system-out>
+</testcase>
+<testcase name="independentMixedSeventeenColumnGoldenAndColumnOrder()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:independentMixedSeventeenColumnGoldenAndColumnOrder()]
+display-name: independentMixedSeventeenColumnGoldenAndColumnOrder()
+]]></system-out>
+</testcase>
+<testcase name="assetShaIsExactlyLowercaseHex64()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:assetShaIsExactlyLowercaseHex64()]
+display-name: assetShaIsExactlyLowercaseHex64()
+]]></system-out>
+</testcase>
+<testcase name="five020FiniteParallelReadersHaveIndependentMemorySinks()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five020FiniteParallelReadersHaveIndependentMemorySinks()]
+display-name: five020FiniteParallelReadersHaveIndependentMemorySinks()
+]]></system-out>
+</testcase>
+<testcase name="rejectedDeclarationDoesNotPoisonAnIndependentNormalCall()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:rejectedDeclarationDoesNotPoisonAnIndependentNormalCall()]
+display-name: rejectedDeclarationDoesNotPoisonAnIndependentNormalCall()
+]]></system-out>
+</testcase>
+<testcase name="autoCommitCannotDropTheTablesBeforeCopy()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:autoCommitCannotDropTheTablesBeforeCopy()]
+display-name: autoCommitCannotDropTheTablesBeforeCopy()
+]]></system-out>
+</testcase>
+<testcase name="asset002ValidPathsAndKinds()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset002ValidPathsAndKinds()]
+display-name: asset002ValidPathsAndKinds()
+]]></system-out>
+</testcase>
+<testcase name="logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()]
+display-name: logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()
+]]></system-out>
+</testcase>
+<testcase name="manifestCardinalityCannotBeSmallerOrLarger()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:manifestCardinalityCannotBeSmallerOrLarger()]
+display-name: manifestCardinalityCannotBeSmallerOrLarger()
+]]></system-out>
+</testcase>
+<testcase name="mainRowsPrecedeUnmatchedInstrumentalsInTheirOwnPathOrders()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:mainRowsPrecedeUnmatchedInstrumentalsInTheirOwnPathOrders()]
+display-name: mainRowsPrecedeUnmatchedInstrumentalsInTheirOwnPathOrders()
+]]></system-out>
+</testcase>
+<testcase name="timestampHasIndependentYearMicrosecondAndCanonicalBoundaries()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:timestampHasIndependentYearMicrosecondAndCanonicalBoundaries()]
+display-name: timestampHasIndependentYearMicrosecondAndCanonicalBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="returnedBytesAreOwnedAndNullEncoderIsRejected()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:returnedBytesAreOwnedAndNullEncoderIsRejected()]
+display-name: returnedBytesAreOwnedAndNullEncoderIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection()]
+display-name: secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection()
+]]></system-out>
+</testcase>
+<testcase name="copy010InputAndReturnOwnershipAreIndependent()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy010InputAndReturnOwnershipAreIndependent()]
+display-name: copy010InputAndReturnOwnershipAreIndependent()
+]]></system-out>
+</testcase>
+<testcase name="transferAutoCommitAndNullStatementNeverReachAnyQuery()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferAutoCommitAndNullStatementNeverReachAnyQuery()]
+display-name: transferAutoCommitAndNullStatementNeverReachAnyQuery()
+]]></system-out>
+</testcase>
+<testcase name="currentHalfFullWidthAndUnclosedAnnotationsAndSuffixAreRetained()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:currentHalfFullWidthAndUnclosedAnnotationsAndSuffixAreRetained()]
+display-name: currentHalfFullWidthAndUnclosedAnnotationsAndSuffixAreRetained()
+]]></system-out>
+</testcase>
+<testcase name="file010WithinGameAndCrossGameNeighbors()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file010WithinGameAndCrossGameNeighbors()]
+display-name: file010WithinGameAndCrossGameNeighbors()
+]]></system-out>
+</testcase>
+<testcase name="allFiveMimeMappingsAndUnknownExtensionsAreExplicit()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:allFiveMimeMappingsAndUnknownExtensionsAreExplicit()]
+display-name: allFiveMimeMappingsAndUnknownExtensionsAreExplicit()
+]]></system-out>
+</testcase>
+<testcase name="durationAllowsCanonicalZeroAndMaximumWithoutNumericNormalization()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:durationAllowsCanonicalZeroAndMaximumWithoutNumericNormalization()]
+display-name: durationAllowsCanonicalZeroAndMaximumWithoutNumericNormalization()
+]]></system-out>
+</testcase>
+<testcase name="audioPrimaryIdsAreGloballyUniqueAcrossGamesAndPaths()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:audioPrimaryIdsAreGloballyUniqueAcrossGamesAndPaths()]
+display-name: audioPrimaryIdsAreGloballyUniqueAcrossGamesAndPaths()
+]]></system-out>
+</testcase>
+<testcase name="everyFixedLogicalIdLooksUpTheSameImmutableValue()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:everyFixedLogicalIdLooksUpTheSameImmutableValue()]
+display-name: everyFixedLogicalIdLooksUpTheSameImmutableValue()
+]]></system-out>
+</testcase>
+<testcase name="five004NullAudioOrLinkCollections()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five004NullAudioOrLinkCollections()]
+display-name: five004NullAudioOrLinkCollections()
+]]></system-out>
+</testcase>
+<testcase name="actualFileByteSizeRequiresPositiveCanonicalN12()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:actualFileByteSizeRequiresPositiveCanonicalN12()]
+display-name: actualFileByteSizeRequiresPositiveCanonicalN12()
+]]></system-out>
+</testcase>
+<testcase name="immutableSnapshotAndFreshBytesHaveSeparateOwnership()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:immutableSnapshotAndFreshBytesHaveSeparateOwnership()]
+display-name: immutableSnapshotAndFreshBytesHaveSeparateOwnership()
+]]></system-out>
+</testcase>
+<testcase name="batch008FileLocalIndexMustMatchTheMapping()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch008FileLocalIndexMustMatchTheMapping()]
+display-name: batch008FileLocalIndexMustMatchTheMapping()
+]]></system-out>
+</testcase>
+<testcase name="targetSizeAndHashEachMatchTheExactDeclaration()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:targetSizeAndHashEachMatchTheExactDeclaration()]
+display-name: targetSizeAndHashEachMatchTheExactDeclaration()
+]]></system-out>
+</testcase>
+<testcase name="audioCompositeForeignKeyIncludesTheDeclaredGame()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:audioCompositeForeignKeyIncludesTheDeclaredGame()]
+display-name: audioCompositeForeignKeyIncludesTheDeclaredGame()
+]]></system-out>
+</testcase>
+<testcase name="immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()]
+display-name: immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()
+]]></system-out>
+</testcase>
+<testcase name="copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()]
+display-name: copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()
+]]></system-out>
+</testcase>
+<testcase name="copy005FixedUnicodeHexAndNoImplicitNormalization()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy005FixedUnicodeHexAndNoImplicitNormalization()]
+display-name: copy005FixedUnicodeHexAndNoImplicitNormalization()
+]]></system-out>
+</testcase>
+<testcase name="order001LiteralRenumberedGolden()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order001LiteralRenumberedGolden()]
+display-name: order001LiteralRenumberedGolden()
+]]></system-out>
+</testcase>
+<testcase name="five008FileAndAudioTimestampMustAgreeWithoutEntries()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five008FileAndAudioTimestampMustAgreeWithoutEntries()]
+display-name: five008FileAndAudioTimestampMustAgreeWithoutEntries()
+]]></system-out>
+</testcase>
+<testcase name="kindsMustBeMediaAndMatchTheRow()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:kindsMustBeMediaAndMatchTheRow()]
+display-name: kindsMustBeMediaAndMatchTheRow()
+]]></system-out>
+</testcase>
+<testcase name="order003DuplicateSourceRejectedWithoutInputChange()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order003DuplicateSourceRejectedWithoutInputChange()]
+display-name: order003DuplicateSourceRejectedWithoutInputChange()
+]]></system-out>
+</testcase>
+<testcase name="separatelyValidBatchesMustHaveTheSameTransactionTimestamp()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:separatelyValidBatchesMustHaveTheSameTransactionTimestamp()]
+display-name: separatelyValidBatchesMustHaveTheSameTransactionTimestamp()
+]]></system-out>
+</testcase>
+<testcase name="japanesePathUsesUtf8AndLowercase64Hex()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:japanesePathUsesUtf8AndLowercase64Hex()]
+display-name: japanesePathUsesUtf8AndLowercase64Hex()
+]]></system-out>
+</testcase>
+<testcase name="copy003MandatoryDelimiterAndLineEscapes()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy003MandatoryDelimiterAndLineEscapes()]
+display-name: copy003MandatoryDelimiterAndLineEscapes()
+]]></system-out>
+</testcase>
+<testcase name="allTextColumnsRejectNonNfcUnpairedSurrogatesAndIsoControls()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:allTextColumnsRejectNonNfcUnpairedSurrogatesAndIsoControls()]
+display-name: allTextColumnsRejectNonNfcUnpairedSurrogatesAndIsoControls()
+]]></system-out>
+</testcase>
+<testcase name="typedAccessorsExposeValidatedValuesAndOptionalParents()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:typedAccessorsExposeValidatedValuesAndOptionalParents()]
+display-name: typedAccessorsExposeValidatedValuesAndOptionalParents()
+]]></system-out>
+</testcase>
+<testcase name="file007NullContractsEstablishConstructorInvariant()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file007NullContractsEstablishConstructorInvariant()]
+display-name: file007NullContractsEstablishConstructorInvariant()
+]]></system-out>
+</testcase>
+<testcase name="prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement()]
+display-name: prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement()
+]]></system-out>
+</testcase>
+<testcase name="currentCaseInsensitiveSubstringRoleIncludesInstinct()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:currentCaseInsensitiveSubstringRoleIncludesInstinct()]
+display-name: currentCaseInsensitiveSubstringRoleIncludesInstinct()
+]]></system-out>
+</testcase>
+<testcase name="duplicateTypedStorageIsRejected()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:duplicateTypedStorageIsRejected()]
+display-name: duplicateTypedStorageIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="nullableAndNonPositiveOrOversizedTargetValuesAreRejected()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:nullableAndNonPositiveOrOversizedTargetValuesAreRejected()]
+display-name: nullableAndNonPositiveOrOversizedTargetValuesAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="transferExtraRowAtEveryScalarPositionCannotSucceed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferExtraRowAtEveryScalarPositionCannotSucceed()]
+display-name: transferExtraRowAtEveryScalarPositionCannotSucceed()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()]
+display-name: finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()
+]]></system-out>
+</testcase>
+<testcase name="five005MissingCollectionElementsRemainInvalid()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five005MissingCollectionElementsRemainInvalid()]
+display-name: five005MissingCollectionElementsRemainInvalid()
+]]></system-out>
+</testcase>
+<testcase name="nullBatchBoundariesFailWithFixedNonSecretDiagnostic()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:nullBatchBoundariesFailWithFixedNonSecretDiagnostic()]
+display-name: nullBatchBoundariesFailWithFixedNonSecretDiagnostic()
+]]></system-out>
+</testcase>
+<testcase name="asset005InvalidSizesAndHashes()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset005InvalidSizesAndHashes()]
+display-name: asset005InvalidSizesAndHashes()
+]]></system-out>
+</testcase>
+<testcase name="file011EmptyAndGapsAreExplicitValues()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file011EmptyAndGapsAreExplicitValues()]
+display-name: file011EmptyAndGapsAreExplicitValues()
+]]></system-out>
+</testcase>
+<testcase name="asset009IdenticalClaims()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset009IdenticalClaims()]
+display-name: asset009IdenticalClaims()
+]]></system-out>
+</testcase>
+<testcase name="row007NfcScalarAndEveryControlDomain()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row007NfcScalarAndEveryControlDomain()]
+display-name: row007NfcScalarAndEveryControlDomain()
+]]></system-out>
+</testcase>
+<testcase name="duplicateLogicalIdIsRejected()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:duplicateLogicalIdIsRejected()]
+display-name: duplicateLogicalIdIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="five011MediaOnlyHasItsOwnSingleStamp()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five011MediaOnlyHasItsOwnSingleStamp()]
+display-name: five011MediaOnlyHasItsOwnSingleStamp()
+]]></system-out>
+</testcase>
+<testcase name="row001IndependentTwelveColumnsAndFullCopyBytes()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row001IndependentTwelveColumnsAndFullCopyBytes()]
+display-name: row001IndependentTwelveColumnsAndFullCopyBytes()
+]]></system-out>
+</testcase>
+<testcase name="returnedRowsAndBytesDoNotAliasMutableInputCollections()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:returnedRowsAndBytesDoNotAliasMutableInputCollections()]
+display-name: returnedRowsAndBytesDoNotAliasMutableInputCollections()
+]]></system-out>
+</testcase>
+<testcase name="containerVarcharLimitCountsCodePointsAndPreservesEmpty()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:containerVarcharLimitCountsCodePointsAndPreservesEmpty()]
+display-name: containerVarcharLimitCountsCodePointsAndPreservesEmpty()
+]]></system-out>
+</testcase>
+<testcase name="collisionsOverwriteValuesKeepFirstKeyPositionAndReportBothShadowedPaths()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:collisionsOverwriteValuesKeepFirstKeyPositionAndReportBothShadowedPaths()]
+display-name: collisionsOverwriteValuesKeepFirstKeyPositionAndReportBothShadowedPaths()
+]]></system-out>
+</testcase>
+<testcase name="transferFiniteWorkersHaveIndependentSqlCountsAndTermination()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferFiniteWorkersHaveIndependentSqlCountsAndTermination()]
+display-name: transferFiniteWorkersHaveIndependentSqlCountsAndTermination()
+]]></system-out>
+</testcase>
+<testcase name="fixedRedactionAndIndependentValueSurviveRejectedInput()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:fixedRedactionAndIndependentValueSurviveRejectedInput()]
+display-name: fixedRedactionAndIndependentValueSurviveRejectedInput()
+]]></system-out>
+</testcase>
+<testcase name="shaRequiresExactlyLowercaseSixtyFourHexCharacters()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:shaRequiresExactlyLowercaseSixtyFourHexCharacters()]
+display-name: shaRequiresExactlyLowercaseSixtyFourHexCharacters()
+]]></system-out>
+</testcase>
+<testcase name="utf8ByteBoundsIncludeSupplementaryCharactersWithoutTruncation()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:utf8ByteBoundsIncludeSupplementaryCharactersWithoutTruncation()]
+display-name: utf8ByteBoundsIncludeSupplementaryCharactersWithoutTruncation()
+]]></system-out>
+</testcase>
+<testcase name="batch006FileMustMatchTheDeclaredReference()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch006FileMustMatchTheDeclaredReference()]
+display-name: batch006FileMustMatchTheDeclaredReference()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen001IdPairEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen001IdPairEqualityEveryComponent()]
+display-name: scenarioGen001IdPairEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="categoryCountsAreExactlyFifteenFourAndOne()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:categoryCountsAreExactlyFifteenFourAndOne()]
+display-name: categoryCountsAreExactlyFifteenFourAndOne()
+]]></system-out>
+</testcase>
+<testcase name="everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal()]
+display-name: everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal()
+]]></system-out>
+</testcase>
+<testcase name="insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix()]
+display-name: insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen010PlacementIndependentHashes()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen010PlacementIndependentHashes()]
+display-name: scenarioGen010PlacementIndependentHashes()
+]]></system-out>
+</testcase>
+<testcase name="batch002ExactCardinalityAndEmptyDeclaredBatch()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch002ExactCardinalityAndEmptyDeclaredBatch()]
+display-name: batch002ExactCardinalityAndEmptyDeclaredBatch()
+]]></system-out>
+</testcase>
+<testcase name="unknownParentIsRejectedAfterBuildingTheWholeSet()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:unknownParentIsRejectedAfterBuildingTheWholeSet()]
+display-name: unknownParentIsRejectedAfterBuildingTheWholeSet()
+]]></system-out>
+</testcase>
+<testcase name="unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount()]
+display-name: unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount()
+]]></system-out>
+</testcase>
+<testcase name="five001IndependentFiveStreamsOrderAndBorrowedOwnership()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five001IndependentFiveStreamsOrderAndBorrowedOwnership()]
+display-name: five001IndependentFiveStreamsOrderAndBorrowedOwnership()
+]]></system-out>
+</testcase>
+<testcase name="nullableSectionPreservesEmptyAndIts128ByteLimit()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:nullableSectionPreservesEmptyAndIts128ByteLimit()]
+display-name: nullableSectionPreservesEmptyAndIts128ByteLimit()
+]]></system-out>
+</testcase>
+<testcase name="prepareAutoCommitCannotPublishOrDropStagingEarly()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareAutoCommitCannotPublishOrDropStagingEarly()]
+display-name: prepareAutoCommitCannotPublishOrDropStagingEarly()
+]]></system-out>
+</testcase>
+<testcase name="five014EachIoFailureStopsLaterStreamsAndPreservesInstance()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five014EachIoFailureStopsLaterStreamsAndPreservesInstance()]
+display-name: five014EachIoFailureStopsLaterStreamsAndPreservesInstance()
+]]></system-out>
+</testcase>
+<testcase name="everyResultCloseAndCombinedFailureRetainsTwrSuppression()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:everyResultCloseAndCombinedFailureRetainsTwrSuppression()]
+display-name: everyResultCloseAndCombinedFailureRetainsTwrSuppression()
+]]></system-out>
+</testcase>
+<testcase name="idPositiveN12AndTwoGamesHaveIndependentBoundaries()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:idPositiveN12AndTwoGamesHaveIndependentBoundaries()]
+display-name: idPositiveN12AndTwoGamesHaveIndependentBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="allNineSqlNullCountsAreRejected()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:allNineSqlNullCountsAreRejected()]
+display-name: allNineSqlNullCountsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="batch009SingleCanonicalTransactionTimestamp()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch009SingleCanonicalTransactionTimestamp()]
+display-name: batch009SingleCanonicalTransactionTimestamp()
+]]></system-out>
+</testcase>
+<testcase name="timestampValidationAndOneCommonMicrosecondValueArePreserved()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:timestampValidationAndOneCommonMicrosecondValueArePreserved()]
+display-name: timestampValidationAndOneCommonMicrosecondValueArePreserved()
+]]></system-out>
+</testcase>
+<testcase name="transferNullResultAtEveryScalarPositionIsAnExplicitFailure()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferNullResultAtEveryScalarPositionIsAnExplicitFailure()]
+display-name: transferNullResultAtEveryScalarPositionIsAnExplicitFailure()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()]
+display-name: finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()
+]]></system-out>
+</testcase>
+<testcase name="fixedIdsPathsAndDenseDisplayOrdersHaveNoDuplicates()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:fixedIdsPathsAndDenseDisplayOrdersHaveNoDuplicates()]
+display-name: fixedIdsPathsAndDenseDisplayOrdersHaveNoDuplicates()
+]]></system-out>
+</testcase>
+<testcase name="row004IndexAndOptionalLineIntDomains()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row004IndexAndOptionalLineIntDomains()]
+display-name: row004IndexAndOptionalLineIntDomains()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen016LargeIndexPairAndFiniteIsolation()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen016LargeIndexPairAndFiniteIsolation()]
+display-name: scenarioGen016LargeIndexPairAndFiniteIsolation()
+]]></system-out>
+</testcase>
+<testcase name="allNineWrongCountsAreRejected()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:allNineWrongCountsAreRejected()]
+display-name: allNineWrongCountsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="transferChecksEveryCountAndUsesOnlyTheIndependentEightSqlLiterals()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferChecksEveryCountAndUsesOnlyTheIndependentEightSqlLiterals()]
+display-name: transferChecksEveryCountAndUsesOnlyTheIndependentEightSqlLiterals()
+]]></system-out>
+</testcase>
+<testcase name="prepareTimeoutFailureStillClosesBeforeAnyDdl()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareTimeoutFailureStillClosesBeforeAnyDdl()]
+display-name: prepareTimeoutFailureStillClosesBeforeAnyDdl()
+]]></system-out>
+</testcase>
+<testcase name="oneEditInsertDeleteSubstituteAndEmptySidesHaveIndependentOracles()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:oneEditInsertDeleteSubstituteAndEmptySidesHaveIndependentOracles()]
+display-name: oneEditInsertDeleteSubstituteAndEmptySidesHaveIndependentOracles()
+]]></system-out>
+</testcase>
+<testcase name="asset007CheckedAggregateOverflow()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset007CheckedAggregateOverflow()]
+display-name: asset007CheckedAggregateOverflow()
+]]></system-out>
+</testcase>
+<testcase name="rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted()]
+display-name: rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted()
+]]></system-out>
+</testcase>
+<testcase name="unmatchedMainKeepsTheInstrumentalPlaceholder()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:unmatchedMainKeepsTheInstrumentalPlaceholder()]
+display-name: unmatchedMainKeepsTheInstrumentalPlaceholder()
+]]></system-out>
+</testcase>
+<testcase name="order010EmptyIsAValueNotMigrationCompletion()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order010EmptyIsAValueNotMigrationCompletion()]
+display-name: order010EmptyIsAValueNotMigrationCompletion()
+]]></system-out>
+</testcase>
+<testcase name="five013EveryNullWriteArgumentFailsBeforeAnyByte()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five013EveryNullWriteArgumentFailsBeforeAnyByte()]
+display-name: five013EveryNullWriteArgumentFailsBeforeAnyByte()
+]]></system-out>
+</testcase>
+<testcase name="timeoutFailureStillClosesWithoutAnyDdl()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:timeoutFailureStillClosesWithoutAnyDdl()]
+display-name: timeoutFailureStillClosesWithoutAnyDdl()
+]]></system-out>
+</testcase>
+<testcase name="nullSourceAndSinkAreRejectedBeforeRequestingAnIterator()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:nullSourceAndSinkAreRejectedBeforeRequestingAnIterator()]
+display-name: nullSourceAndSinkAreRejectedBeforeRequestingAnIterator()
+]]></system-out>
+</testcase>
+<testcase name="streamingBothPathsRetainsIndependentFullGoldenBytes()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:streamingBothPathsRetainsIndependentFullGoldenBytes()]
+display-name: streamingBothPathsRetainsIndependentFullGoldenBytes()
+]]></system-out>
+</testcase>
+<testcase name="batch001IndependentFullBytesAndCurrentGlobalOrder()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch001IndependentFullBytesAndCurrentGlobalOrder()]
+display-name: batch001IndependentFullBytesAndCurrentGlobalOrder()
+]]></system-out>
+</testcase>
+<testcase name="numericPrefixRequiresTheOriginalFollowingWhitespace()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:numericPrefixRequiresTheOriginalFollowingWhitespace()]
+display-name: numericPrefixRequiresTheOriginalFollowingWhitespace()
+]]></system-out>
+</testcase>
+<testcase name="fileWithoutEntriesIsAllowedWithoutInventingAnEntry()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:fileWithoutEntriesIsAllowedWithoutInventingAnEntry()]
+display-name: fileWithoutEntriesIsAllowedWithoutInventingAnEntry()
+]]></system-out>
+</testcase>
+<testcase name="byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()]
+display-name: byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()
+]]></system-out>
+</testcase>
+<testcase name="literalTwoQueriesAreOrderedAndCopyNoGeneratedColumnOrRows()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:literalTwoQueriesAreOrderedAndCopyNoGeneratedColumnOrRows()]
+display-name: literalTwoQueriesAreOrderedAndCopyNoGeneratedColumnOrRows()
+]]></system-out>
+</testcase>
+<testcase name="currentV029PairTruthRequiresEveryConditionalNonNullValue()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:currentV029PairTruthRequiresEveryConditionalNonNullValue()]
+display-name: currentV029PairTruthRequiresEveryConditionalNonNullValue()
+]]></system-out>
+</testcase>
+<testcase name="bothPublicValueStringsAreFixedAndRedacted()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:bothPublicValueStringsAreFixedAndRedacted()]
+display-name: bothPublicValueStringsAreFixedAndRedacted()
+]]></system-out>
+</testcase>
+<testcase name="mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()]
+display-name: mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()
+]]></system-out>
+</testcase>
+<testcase name="aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput()]
+display-name: aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput()
+]]></system-out>
+</testcase>
+<testcase name="asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()]
+display-name: asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()
+]]></system-out>
+</testcase>
+<testcase name="streamingNullWriterAndSinkContractsStayFixed()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:streamingNullWriterAndSinkContractsStayFixed()]
+display-name: streamingNullWriterAndSinkContractsStayFixed()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated007ComparisonHashesKeepIndependent32BitOverflowSemantics()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated007ComparisonHashesKeepIndependent32BitOverflowSemantics()]
+display-name: assetGenerated007ComparisonHashesKeepIndependent32BitOverflowSemantics()
+]]></system-out>
+</testcase>
+<testcase name="canonicalAndDecomposedFormsUseTheSameFixedNfcVector()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:canonicalAndDecomposedFormsUseTheSameFixedNfcVector()]
+display-name: canonicalAndDecomposedFormsUseTheSameFixedNfcVector()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated002EntryEqualityUsesEveryDeclaredComponent()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated002EntryEqualityUsesEveryDeclaredComponent()]
+display-name: assetGenerated002EntryEqualityUsesEveryDeclaredComponent()
+]]></system-out>
+</testcase>
+<testcase name="closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction()]
+display-name: closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction()
+]]></system-out>
+</testcase>
+<testcase name="five010FileAndAudioOnlyCommonStampIsValid()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five010FileAndAudioOnlyCommonStampIsValid()]
+display-name: five010FileAndAudioOnlyCommonStampIsValid()
+]]></system-out>
+</testcase>
+<testcase name="batch003DuplicateTargetIdCannotReplaceMissingRow()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch003DuplicateTargetIdCannotReplaceMissingRow()]
+display-name: batch003DuplicateTargetIdCannotReplaceMissingRow()
+]]></system-out>
+</testcase>
+<testcase name="consumedInstrumentalCannotBeReusedByTheNextMain()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:consumedInstrumentalCannotBeReusedByTheNextMain()]
+display-name: consumedInstrumentalCannotBeReusedByTheNextMain()
+]]></system-out>
+</testcase>
+<testcase name="unknownOrRepeatedSourceCannotConsumeOneClaimTwice()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:unknownOrRepeatedSourceCannotConsumeOneClaimTwice()]
+display-name: unknownOrRepeatedSourceCannotConsumeOneClaimTwice()
+]]></system-out>
+</testcase>
+<testcase name="asset003InvalidPaths()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset003InvalidPaths()]
+display-name: asset003InvalidPaths()
+]]></system-out>
+</testcase>
+<testcase name="unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()]
+display-name: unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()
+]]></system-out>
+</testcase>
+<testcase name="place003UnknownFileAndCrossGameMismatchRefuse()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place003UnknownFileAndCrossGameMismatchRefuse()]
+display-name: place003UnknownFileAndCrossGameMismatchRefuse()
+]]></system-out>
+</testcase>
+<testcase name="ownedFiniteConcurrentCopiesAllMatchIndependentGolden()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:ownedFiniteConcurrentCopiesAllMatchIndependentGolden()]
+display-name: ownedFiniteConcurrentCopiesAllMatchIndependentGolden()
+]]></system-out>
+</testcase>
+<testcase name="distanceThreeLeavesBothUnmatched()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:distanceThreeLeavesBothUnmatched()]
+display-name: distanceThreeLeavesBothUnmatched()
+]]></system-out>
+</testcase>
+<testcase name="transferRuntimeAndErrorStillCloseTheOwnedStatement()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferRuntimeAndErrorStillCloseTheOwnedStatement()]
+display-name: transferRuntimeAndErrorStillCloseTheOwnedStatement()
+]]></system-out>
+</testcase>
+<testcase name="invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow()]
+display-name: invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow()
+]]></system-out>
+</testcase>
+<testcase name="file002SignedSourcesAndMaximumTarget()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file002SignedSourcesAndMaximumTarget()]
+display-name: file002SignedSourcesAndMaximumTarget()
+]]></system-out>
+</testcase>
+<testcase name="nullAndEmptyAreExplicitFixedInputFailures()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:nullAndEmptyAreExplicitFixedInputFailures()]
+display-name: nullAndEmptyAreExplicitFixedInputFailures()
+]]></system-out>
+</testcase>
+<testcase name="place009NullUnknownAndFixedDiagnosticContracts()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place009NullUnknownAndFixedDiagnosticContracts()]
+display-name: place009NullUnknownAndFixedDiagnosticContracts()
+]]></system-out>
+</testcase>
+<testcase name="obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext()]
+display-name: obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext()
+]]></system-out>
+</testcase>
+<testcase name="five019FixedRedactionAndSuccessAfterRejection()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five019FixedRedactionAndSuccessAfterRejection()]
+display-name: five019FixedRedactionAndSuccessAfterRejection()
+]]></system-out>
+</testcase>
+<testcase name="order011DenseRanksIgnoreSourceGapsAndInputOrder()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order011DenseRanksIgnoreSourceGapsAndInputOrder()]
+display-name: order011DenseRanksIgnoreSourceGapsAndInputOrder()
+]]></system-out>
+</testcase>
+<testcase name="file008InputListAndReturnedBytesCannotMutateSnapshot()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file008InputListAndReturnedBytesCannotMutateSnapshot()]
+display-name: file008InputListAndReturnedBytesCannotMutateSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="emptyDerivedPairKeysAreNotInventedOrChangedToNone()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:emptyDerivedPairKeysAreNotInventedOrChangedToNone()]
+display-name: emptyDerivedPairKeysAreNotInventedOrChangedToNone()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen005FilePairEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen005FilePairEqualityEveryComponent()]
+display-name: scenarioGen005FilePairEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="originalCreationFailureIsNotAStatementToClose()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:originalCreationFailureIsNotAStatementToClose()]
+display-name: originalCreationFailureIsNotAStatementToClose()
+]]></system-out>
+</testcase>
+<testcase name="secondUnexpectedUpdateCountsNeverSucceed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:secondUnexpectedUpdateCountsNeverSucceed()]
+display-name: secondUnexpectedUpdateCountsNeverSucceed()
+]]></system-out>
+</testcase>
+<testcase name="largeUpdateAndCountUseLongWithoutIntegerTruncation()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:largeUpdateAndCountUseLongWithoutIntegerTruncation()]
+display-name: largeUpdateAndCountUseLongWithoutIntegerTruncation()
+]]></system-out>
+</testcase>
+<testcase name="five003NullScenarioAndMedia()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five003NullScenarioAndMedia()]
+display-name: five003NullScenarioAndMedia()
+]]></system-out>
+</testcase>
+<testcase name="row006IndependentUtf8ByteLimitsAndUnboundedRawBlock()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row006IndependentUtf8ByteLimitsAndUnboundedRawBlock()]
+display-name: row006IndependentUtf8ByteLimitsAndUnboundedRawBlock()
+]]></system-out>
+</testcase>
+<testcase name="order009ExactLookupAndUnknownRefusal()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order009ExactLookupAndUnknownRefusal()]
+display-name: order009ExactLookupAndUnknownRefusal()
+]]></system-out>
+</testcase>
+<testcase name="transferFailureDoesNotAuthorizeCommitOrPoisonIndependentInput()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferFailureDoesNotAuthorizeCommitOrPoisonIndependentInput()]
+display-name: transferFailureDoesNotAuthorizeCommitOrPoisonIndependentInput()
+]]></system-out>
+</testcase>
+<testcase name="allThreeNullableFactoryInputsHaveFixedDiagnostics()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:allThreeNullableFactoryInputsHaveFixedDiagnostics()]
+display-name: allThreeNullableFactoryInputsHaveFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset()]
+display-name: bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset()
+]]></system-out>
+</testcase>
+<testcase name="targetIdCannotBeReusedAcrossDifferentGroups()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:targetIdCannotBeReusedAcrossDifferentGroups()]
+display-name: targetIdCannotBeReusedAcrossDifferentGroups()
+]]></system-out>
+</testcase>
+<testcase name="unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()]
+display-name: unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersShareNoMutablePairOrShadowState()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:finiteWorkersShareNoMutablePairOrShadowState()]
+display-name: finiteWorkersShareNoMutablePairOrShadowState()
+]]></system-out>
+</testcase>
+<testcase name="backwardAndForwardParentReferencesUseTheWholeSet()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:backwardAndForwardParentReferencesUseTheWholeSet()]
+display-name: backwardAndForwardParentReferencesUseTheWholeSet()
+]]></system-out>
+</testcase>
+<testcase name="independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()]
+display-name: independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()
+]]></system-out>
+</testcase>
+<testcase name="row003N12AndGameBoundariesAtEachColumn()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row003N12AndGameBoundariesAtEachColumn()]
+display-name: row003N12AndGameBoundariesAtEachColumn()
+]]></system-out>
+</testcase>
+<testcase name="mediaTypeAndMusicRoleUseTheirExistingClosedSets()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:mediaTypeAndMusicRoleUseTheirExistingClosedSets()]
+display-name: mediaTypeAndMusicRoleUseTheirExistingClosedSets()
+]]></system-out>
+</testcase>
+<testcase name="repeatedCallsCreateFreshStatementsWithoutRetainingAConnection()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:repeatedCallsCreateFreshStatementsWithoutRetainingAConnection()]
+display-name: repeatedCallsCreateFreshStatementsWithoutRetainingAConnection()
+]]></system-out>
+</testcase>
+<testcase name="order002SignedSourcesAndN12TargetBoundaries()" classname="dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest]/[method:order002SignedSourcesAndN12TargetBoundaries()]
+display-name: order002SignedSourcesAndN12TargetBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="file006N12TargetAndOrderBoundaries()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file006N12TargetAndOrderBoundaries()]
+display-name: file006N12TargetAndOrderBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="copy004OtherControlEscapesAndOrdinaryQuotes()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy004OtherControlEscapesAndOrdinaryQuotes()]
+display-name: copy004OtherControlEscapesAndOrdinaryQuotes()
+]]></system-out>
+</testcase>
+<testcase name="place002FileIndexOrderIsIndependentOfGlobalOrder()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place002FileIndexOrderIsIndependentOfGlobalOrder()]
+display-name: place002FileIndexOrderIsIndependentOfGlobalOrder()
+]]></system-out>
+</testcase>
+<testcase name="selfAndCyclesRemainAllowedByTheDeclaredForeignKey()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:selfAndCyclesRemainAllowedByTheDeclaredForeignKey()]
+display-name: selfAndCyclesRemainAllowedByTheDeclaredForeignKey()
+]]></system-out>
+</testcase>
+<testcase name="everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()]
+display-name: everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()
+]]></system-out>
+</testcase>
+<testcase name="fixedRedactionAndIndependentSuccessAfterFailure()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:fixedRedactionAndIndependentSuccessAfterFailure()]
+display-name: fixedRedactionAndIndependentSuccessAfterFailure()
+]]></system-out>
+</testcase>
+<testcase name="mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder()]
+display-name: mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder()
+]]></system-out>
+</testcase>
+<testcase name="prepareClosesOnlyItsStatementAndBindsOneTimeout()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareClosesOnlyItsStatementAndBindsOneTimeout()]
+display-name: prepareClosesOnlyItsStatementAndBindsOneTimeout()
+]]></system-out>
+</testcase>
+<testcase name="ioFailureIdentityPartialOutputAndIndependentRetryArePreserved()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:ioFailureIdentityPartialOutputAndIndependentRetryArePreserved()]
+display-name: ioFailureIdentityPartialOutputAndIndependentRetryArePreserved()
+]]></system-out>
+</testcase>
+<testcase name="five002AllEmptyNoInventedRows()" classname="dev.codex.schubert.nk.migration.MigrationCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MigrationCopyDatasetTest]/[method:five002AllEmptyNoInventedRows()]
+display-name: five002AllEmptyNoInventedRows()
+]]></system-out>
+</testcase>
+<testcase name="batch005GameMustMatchTheDeclaredReference()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch005GameMustMatchTheDeclaredReference()]
+display-name: batch005GameMustMatchTheDeclaredReference()
+]]></system-out>
+</testcase>
+<testcase name="asset012IndependentSizeAndHashDifferences()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset012IndependentSizeAndHashDifferences()]
+display-name: asset012IndependentSizeAndHashDifferences()
+]]></system-out>
+</testcase>
+<testcase name="file003DuplicateSourceIsPerGame()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file003DuplicateSourceIsPerGame()]
+display-name: file003DuplicateSourceIsPerGame()
+]]></system-out>
+</testcase>
+<testcase name="streamingBothPathsPropagateOriginalSinkFailureWithoutChangingDataset()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:streamingBothPathsPropagateOriginalSinkFailureWithoutChangingDataset()]
+display-name: streamingBothPathsPropagateOriginalSinkFailureWithoutChangingDataset()
+]]></system-out>
+</testcase>
+<testcase name="duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()" classname="dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest]/[method:duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()]
+display-name: duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()
+]]></system-out>
+</testcase>
+<testcase name="place007GameDomainsAtEveryPublicBoundary()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place007GameDomainsAtEveryPublicBoundary()]
+display-name: place007GameDomainsAtEveryPublicBoundary()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen007MappedFileEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen007MappedFileEqualityEveryComponent()]
+display-name: scenarioGen007MappedFileEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="row002NarrationNullableFieldsAndEmptyValues()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest]/[method:row002NarrationNullableFieldsAndEmptyValues()]
+display-name: row002NarrationNullableFieldsAndEmptyValues()
+]]></system-out>
+</testcase>
+<testcase name="nullOrEmptyRowsFailWithoutWritingThatRow()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:nullOrEmptyRowsFailWithoutWritingThatRow()]
+display-name: nullOrEmptyRowsFailWithoutWritingThatRow()
+]]></system-out>
+</testcase>
+<testcase name="copy011SafeDiagnosticAndUninterpretedNumericText()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy011SafeDiagnosticAndUninterpretedNumericText()]
+display-name: copy011SafeDiagnosticAndUninterpretedNumericText()
+]]></system-out>
+</testcase>
+<testcase name="emptyDerivedKeyIsPreservedWithoutClaimingDatabaseRepresentability()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:emptyDerivedKeyIsPreservedWithoutClaimingDatabaseRepresentability()]
+display-name: emptyDerivedKeyIsPreservedWithoutClaimingDatabaseRepresentability()
+]]></system-out>
+</testcase>
+<testcase name="exactKeyWinsOverAnEarlierCloseInstrumental()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:exactKeyWinsOverAnEarlierCloseInstrumental()]
+display-name: exactKeyWinsOverAnEarlierCloseInstrumental()
+]]></system-out>
+</testcase>
+<testcase name="finiteParallelIndependentBorrowedTransactionsDoNotShareState()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:finiteParallelIndependentBorrowedTransactionsDoNotShareState()]
+display-name: finiteParallelIndependentBorrowedTransactionsDoNotShareState()
+]]></system-out>
+</testcase>
+<testcase name="duplicateNormalizedKeysCannotSilentlyDropEitherRole()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:duplicateNormalizedKeysCannotSilentlyDropEitherRole()]
+display-name: duplicateNormalizedKeysCannotSilentlyDropEitherRole()
+]]></system-out>
+</testcase>
+<testcase name="transferMatchesAllTwelveIndependentSqlOperationsAndCounts()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:transferMatchesAllTwelveIndependentSqlOperationsAndCounts()]
+display-name: transferMatchesAllTwelveIndependentSqlOperationsAndCounts()
+]]></system-out>
+</testcase>
+<testcase name="bothOutputBoundariesRejectNullEncoder()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:bothOutputBoundariesRejectNullEncoder()]
+display-name: bothOutputBoundariesRejectNullEncoder()
+]]></system-out>
+</testcase>
+<testcase name="uniqueDisplayOrderIncludesEntryAndType()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:uniqueDisplayOrderIncludesEntryAndType()]
+display-name: uniqueDisplayOrderIncludesEntryAndType()
+]]></system-out>
+</testcase>
+<testcase name="borrowedWriterAndSinkKeepOwnershipAndNullContract()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:borrowedWriterAndSinkKeepOwnershipAndNullContract()]
+display-name: borrowedWriterAndSinkKeepOwnershipAndNullContract()
+]]></system-out>
+</testcase>
+<testcase name="allThreeNullableArgumentsHaveFixedDiagnostics()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:allThreeNullableArgumentsHaveFixedDiagnostics()]
+display-name: allThreeNullableArgumentsHaveFixedDiagnostics()
+]]></system-out>
+</testcase>
+<testcase name="targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds()]
+display-name: targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds()
+]]></system-out>
+</testcase>
+<testcase name="batch011NullContractsFixedDiagnosticsAndFailureIsolation()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch011NullContractsFixedDiagnosticsAndFailureIsolation()]
+display-name: batch011NullContractsFixedDiagnosticsAndFailureIsolation()
+]]></system-out>
+</testcase>
+<testcase name="emptyCountsAndAudioZeroWithNoLinksRemainValid()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:emptyCountsAndAudioZeroWithNoLinksRemainValid()]
+display-name: emptyCountsAndAudioZeroWithNoLinksRemainValid()
+]]></system-out>
+</testcase>
+<testcase name="copy002NullEmptyAndLiteralNullMarkerAreDistinct()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy002NullEmptyAndLiteralNullMarkerAreDistinct()]
+display-name: copy002NullEmptyAndLiteralNullMarkerAreDistinct()
+]]></system-out>
+</testcase>
+<testcase name="asset004NullContracts()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:asset004NullContracts()]
+display-name: asset004NullContracts()
+]]></system-out>
+</testcase>
+<testcase name="copy006LiteralTerminatorAndSqlLikeDataStayFields()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy006LiteralTerminatorAndSqlLikeDataStayFields()]
+display-name: copy006LiteralTerminatorAndSqlLikeDataStayFields()
+]]></system-out>
+</testcase>
+<testcase name="primaryKeyIncludesTypeButRejectsSameEntryAudioTypeTwice()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:primaryKeyIncludesTypeButRejectsSameEntryAudioTypeTwice()]
+display-name: primaryKeyIncludesTypeButRejectsSameEntryAudioTypeTwice()
+]]></system-out>
+</testcase>
+<testcase name="closeFailureAfterBothQueriesIsNotSuccess()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:closeFailureAfterBothQueriesIsNotSuccess()]
+display-name: closeFailureAfterBothQueriesIsNotSuccess()
+]]></system-out>
+</testcase>
+<testcase name="supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()" classname="dev.codex.schubert.nk.migration.MusicLogicalIdTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicLogicalIdTest]/[method:supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()]
+display-name: supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()
+]]></system-out>
+</testcase>
+<testcase name="nullMissingAndExtraColumnsNeverBecomeNpeOrDefaultValues()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:nullMissingAndExtraColumnsNeverBecomeNpeOrDefaultValues()]
+display-name: nullMissingAndExtraColumnsNeverBecomeNpeOrDefaultValues()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated006ComparisonEqualityIncludesAllSixCounts()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated006ComparisonEqualityIncludesAllSixCounts()]
+display-name: assetGenerated006ComparisonEqualityIncludesAllSixCounts()
+]]></system-out>
+</testcase>
+<testcase name="file009UnknownIsSafeRefusalNotBoundary()" classname="dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest]/[method:file009UnknownIsSafeRefusalNotBoundary()]
+display-name: file009UnknownIsSafeRefusalNotBoundary()
+]]></system-out>
+</testcase>
+<testcase name="everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered()]
+display-name: everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered()
+]]></system-out>
+</testcase>
+<testcase name="prepareCloseOnlyFailureCannotBeSuccessful()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:prepareCloseOnlyFailureCannotBeSuccessful()]
+display-name: prepareCloseOnlyFailureCannotBeSuccessful()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen011PlacedEntryEqualityEveryComponent()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen011PlacedEntryEqualityEveryComponent()]
+display-name: scenarioGen011PlacedEntryEqualityEveryComponent()
+]]></system-out>
+</testcase>
+<testcase name="assetGenerated005ObservationHashesUseIndependentUtf16AndLongVectors()" classname="dev.codex.schubert.nk.migration.AssetMigrationManifestTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetMigrationManifestTest]/[method:assetGenerated005ObservationHashesUseIndependentUtf16AndLongVectors()]
+display-name: assetGenerated005ObservationHashesUseIndependentUtf16AndLongVectors()
+]]></system-out>
+</testcase>
+<testcase name="redactionAndRejectedDatasetNeverPolluteIndependentValidCopies()" classname="dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest]/[method:redactionAndRejectedDatasetNeverPolluteIndependentValidCopies()]
+display-name: redactionAndRejectedDatasetNeverPolluteIndependentValidCopies()
+]]></system-out>
+</testcase>
+<testcase name="nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyRowTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyRowTest]/[method:nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()]
+display-name: nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()
+]]></system-out>
+</testcase>
+<testcase name="mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest]/[method:mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix()]
+display-name: mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix()
+]]></system-out>
+</testcase>
+<testcase name="copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()]
+display-name: copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()
+]]></system-out>
+</testcase>
+<testcase name="transferAcquisitionTimeoutAndStatementCloseFailuresRemainFailures()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferAcquisitionTimeoutAndStatementCloseFailuresRemainFailures()]
+display-name: transferAcquisitionTimeoutAndStatementCloseFailuresRemainFailures()
+]]></system-out>
+</testcase>
+<testcase name="inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder()]
+display-name: inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder()
+]]></system-out>
+</testcase>
+<testcase name="transferOriginalQuerySqlFailureAtEveryPositionIsRetained()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferOriginalQuerySqlFailureAtEveryPositionIsRetained()]
+display-name: transferOriginalQuerySqlFailureAtEveryPositionIsRetained()
+]]></system-out>
+</testcase>
+<testcase name="closestDistanceWinsOverAnEarlierDistanceTwo()" classname="dev.codex.schubert.nk.migration.MusicMigrationPairingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationPairingTest]/[method:closestDistanceWinsOverAnEarlierDistanceTwo()]
+display-name: closestDistanceWinsOverAnEarlierDistanceTwo()
+]]></system-out>
+</testcase>
+<testcase name="shaIsExactlyLowerHexWithoutHashingProductionInputAsOracle()" classname="dev.codex.schubert.nk.migration.AudioFileCopyRowTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioFileCopyRowTest]/[method:shaIsExactlyLowerHexWithoutHashingProductionInputAsOracle()]
+display-name: shaIsExactlyLowerHexWithoutHashingProductionInputAsOracle()
+]]></system-out>
+</testcase>
+<testcase name="batch004UnknownTargetEvenWithEqualCount()" classname="dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest]/[method:batch004UnknownTargetEvenWithEqualCount()]
+display-name: batch004UnknownTargetEvenWithEqualCount()
+]]></system-out>
+</testcase>
+<testcase name="emptyDeclarationRemainsEmpty()" classname="dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest]/[method:emptyDeclarationRemainsEmpty()]
+display-name: emptyDeclarationRemainsEmpty()
+]]></system-out>
+</testcase>
+<testcase name="place001IndependentGlobalGoldenAndFileReferences()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place001IndependentGlobalGoldenAndFileReferences()]
+display-name: place001IndependentGlobalGoldenAndFileReferences()
+]]></system-out>
+</testcase>
+<testcase name="place012ConcurrentOwnershipAndLookup()" classname="dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest]/[method:place012ConcurrentOwnershipAndLookup()]
+display-name: place012ConcurrentOwnershipAndLookup()
+]]></system-out>
+</testcase>
+<testcase name="missingOrExtraTargetMapEntriesAreRejected()" classname="dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest]/[method:missingOrExtraTargetMapEntriesAreRejected()]
+display-name: missingOrExtraTargetMapEntriesAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="nullVendorStatementIsAnExplicitFailure()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:nullVendorStatementIsAnExplicitFailure()]
+display-name: nullVendorStatementIsAnExplicitFailure()
+]]></system-out>
+</testcase>
+<testcase name="allNineNullResultsAreRejectedWithoutInventedOwnership()" classname="dev.codex.schubert.nk.migration.AssetStagingTablesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AssetStagingTablesTest]/[method:allNineNullResultsAreRejectedWithoutInventedOwnership()]
+display-name: allNineNullResultsAreRejectedWithoutInventedOwnership()
+]]></system-out>
+</testcase>
+<testcase name="transferResultCloseFailureAtEveryPositionCannotSucceed()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferResultCloseFailureAtEveryPositionCannotSucceed()]
+display-name: transferResultCloseFailureAtEveryPositionCannotSucceed()
+]]></system-out>
+</testcase>
+<testcase name="transferBothOriginalInsertFailuresStopWithoutPostOrRetries()" classname="dev.codex.schubert.nk.migration.ScenarioStagingTablesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioStagingTablesTest]/[method:transferBothOriginalInsertFailuresStopWithoutPostOrRetries()]
+display-name: transferBothOriginalInsertFailuresStopWithoutPostOrRetries()
+]]></system-out>
+</testcase>
+<testcase name="onlyTheApproved129DeclarationCountCanEnterTheFactory()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:onlyTheApproved129DeclarationCountCanEnterTheFactory()]
+display-name: onlyTheApproved129DeclarationCountCanEnterTheFactory()
+]]></system-out>
+</testcase>
+<testcase name="scenarioGen014SignedSourcePairBoundaryAndDuplicate()" classname="dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest]/[method:scenarioGen014SignedSourcePairBoundaryAndDuplicate()]
+display-name: scenarioGen014SignedSourcePairBoundaryAndDuplicate()
+]]></system-out>
+</testcase>
+<testcase name="full129RowsMatchEveryIndependentGoldenByte()" classname="dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest]/[method:full129RowsMatchEveryIndependentGoldenByte()]
+display-name: full129RowsMatchEveryIndependentGoldenByte()
+]]></system-out>
+</testcase>
+<testcase name="copy008EmptyInputAndWidthContracts()" classname="dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest]/[method:copy008EmptyInputAndWidthContracts()]
+display-name: copy008EmptyInputAndWidthContracts()
+]]></system-out>
+</testcase>
+<testcase name="storagePathUniquenessIncludesGameRatherThanChangingPaths()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:storagePathUniquenessIncludesGameRatherThanChangingPaths()]
+display-name: storagePathUniquenessIncludesGameRatherThanChangingPaths()
+]]></system-out>
+</testcase>
+<testcase name="independentAudioAndLinkGoldenHaveExactSeparateStreams()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:independentAudioAndLinkGoldenHaveExactSeparateStreams()]
+display-name: independentAudioAndLinkGoldenHaveExactSeparateStreams()
+]]></system-out>
+</testcase>
+<testcase name="finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()" classname="dev.codex.schubert.nk.migration.AudioCopyDatasetTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.migration.AudioCopyDatasetTest]/[method:finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()]
+display-name: finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
