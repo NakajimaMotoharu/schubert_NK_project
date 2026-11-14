@@ -1,0 +1,5 @@
+# MediaAsset行44・独立通常結果
+
+SSC357 MediaAsset十七列値をCored842cbe/Unit8304133で初検証、PG31212新20＋必要MusicID12/codec12のwhole44/FES0・真正0。PG31214単一exec全3CRC/init/XML・I757/L143/M25/C3/B137 miss0・実Code25=既定25（新MediaRow15/支援4+6）/四100。独立VIDEO/MUSIC全golden、strictV029 pair全null/役割/byte、MusicID固定vector、六type-MIME/拡張子、N12/order/全textUTF8/NFC/path/SHA/UTCµs/immutable/byte所有/finite64を確認。RootNullAway/lintWerror/PMD15finiteworker各非該当・適用未分類error0/CS-SB0。元prestyle命名2はBUG2890/YKT2422先行起票、Test二identifierのみrename・全literal/control逆一致/全Main不変・命名規約補足と当44で再試験。App116/4846/4817/歴史29・Main123/正本184/625/元190新0/正式1964-53/工数null。normal.6/1.8/3.6のみ完了/手戻り同群内・専有費token null。V002/V029全byte不変、実VIDEO20catalogue/parent・Musicpair/order/全件数/DB/素材/ETL/Rootnative/CHR/global451/ITST/HOLD未完。
+
+仕様039のPT-MIG-MEDIAROW001..020と必要MusicID12/codec12→PG31212元XML各methodへ一意対応。日時/OS/JDK/tool/branch/source/command/exit/input/独立SQL expected/実結果/coverage/hashはPG31212/14/16に保存。型・文字長・nullableはV002/SS331のDDLを独立oracleとし、期待COPYは手書きliteral/UTF8算術。合成metadataだけで実素材/DB/原本/Root操作0、実移行は未検証。

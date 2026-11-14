@@ -1,0 +1,669 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "8304133c3c1bd6bb7f471e1d83544432cde400fa",
+    "productionCoreMain": "d842cbee79c8405ca81c723911cf5a1d92a50c68",
+    "config": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/2671_media_asset_row44_naming_fixed_profile.json",
+      "sha256": "65d45b956e0342f254e549197a80c388f1d904f780c2db4e1192a48fa96a1f21"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31206-media-asset-row44-naming-fixed-prepare-v1/manifest.json",
+      "sha256": "488e23f6213151f06f02778b47526bec10cb5b8188d5ce7ffc98e65f1b57d794"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31210-media-asset-row44-naming-fixed-preflight-v1/manifest.json",
+      "sha256": "653c7a3a97ed9a07793e6c442d9ec584c586267e3ffc898cd898a40d6c2d5bf6"
+    },
+    "inputHashes": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "73adc26518c1d1445d1de2dd11fd18a24d570b9dead56b209687741c901934fe",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java": "72e2c5fc9a7c4b43bda7f27793f735a3e6070b146538d81ca56330917e166725",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java": "90f96962f121fde5175c9f52fc942d7304b189dca9a3af2eb6405302b131eeb4",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    "metadataPins": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "73adc26518c1d1445d1de2dd11fd18a24d570b9dead56b209687741c901934fe",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java": "72e2c5fc9a7c4b43bda7f27793f735a3e6070b146538d81ca56330917e166725",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java": "90f96962f121fde5175c9f52fc942d7304b189dca9a3af2eb6405302b131eeb4",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75",
+      "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+      "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+      "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+      "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+      "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+      "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+      "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173",
+      "evidence/01_PT/018_NK-OPS-001/input/2671_media_asset_row44_naming_fixed_profile.json": "65d45b956e0342f254e549197a80c388f1d904f780c2db4e1192a48fa96a1f21",
+      "evidence/01_PT/018_NK-OPS-001/input/2672_media_asset_row44_static_admission.json": "b260edc80452c7b4fa50e143675d93c627c85c89bc75ad5984e934df07f2b594",
+      "evidence/01_PT/019_NK-MIG-001/039_MediaAsset十七列・独立二十仕様.md": "5cc61a18832cc835a989b0e1fac185ec75e2df2f1a9ad23357479ebb84d057c0",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG31180-media-asset-row-source-twenty-v1/independent-music-id-vectors.json": "883a980a7253a27a1c68c9e972dd34006e2238ab3f21f4c8e6bef11e735cd0b1",
+      "evidence/01_PT/019_NK-MIG-001/037_Music安定logicalID・独立十二仕様.md": "8f431998358f228fe118b1dfe730824a3959e2d8bf427b120243cbc06a08a185",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG31154-music-logical-id-source-twelve-v1/independent-golden-vectors.json": "2b66454901e20bb21bb306cc5ee9067125c83a6b53f431fd091944194dcfb8f4",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG31182-media-asset-row-source-identity-v1/manifest.json": "32c431a7b59eeea4a09fe06a1bb6322a8c01dc3bfa0ec63ca8f435b31751419a",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG31180-media-asset-row-source-twenty-v1/manifest.json": "4b161b8daa2a3cf46e28182d59d3fa48fd4a8058c1f459b4dcfacfcdff322184"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow.class": "03471fd206ebe28752b080c370352883d6030f75bf7f0888bcd39054c0195081",
+      "dev/codex/schubert/nk/migration/MusicLogicalId.class": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b",
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+    },
+    "testClassHashes": {
+      "dev/codex/schubert/nk/migration/MusicLogicalIdTest.class": "91568bfa5cb350ab3fa4523ba3b6a6927d0955275352153a77ed5cea875d1ab7",
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.class": "5f629ca4368d7a9fb550e78727987830943178ee773b2a1b97ac204bdbf82fb8",
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.class": "9d50f36e4c5736d383af3f8bd2c7c90f95f833660c80e7eda7138f371f7c382e"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "mediaTypeAndMusicRoleUseTheirExistingClosedSets()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "nullableSectionPreservesEmptyAndIts128ByteLimit()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "storageAndDisplayHave512ByteBoundsWithoutPathResolution()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "allSixMimeExtensionPairsAreExactAndNeverGuessed()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "currentV029PairTruthRequiresEveryConditionalNonNullValue()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "assetShaIsExactlyLowercaseHex64()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "canonicalUtcYearAndMicrosecondBoundariesAreIndependent()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "japaneseMusicLogicalIdComesFromTheIndependentFixedVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "pairedMusicKeyHasOneTo256Utf8Bytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "sqlLikeDisplayTextIsOnlyEscapedCopyData()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "finiteWorkersReturnIndependentExactGoldenBytes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "name": "fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "japanesePathUsesUtf8AndLowercase64Hex()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "canonicalAndDecomposedFormsUseTheSameFixedNfcVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "nullAndEmptyAreExplicitFixedInputFailures()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "name": "finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy001LiteralRowsAndBothEntryPoints()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy002NullEmptyAndLiteralNullMarkerAreDistinct()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy003MandatoryDelimiterAndLineEscapes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy004OtherControlEscapesAndOrdinaryQuotes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy005FixedUnicodeHexAndNoImplicitNormalization()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy006LiteralTerminatorAndSqlLikeDataStayFields()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy008EmptyInputAndWidthContracts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy010InputAndReturnOwnershipAreIndependent()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy011SafeDiagnosticAndUninterpretedNumericText()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy012ConcurrentCallsHaveSeparateOutputOwnership()"
+      }
+    ],
+    "selectedClasses": [
+      "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest"
+    ],
+    "session": "PG31212-MEDIA-ASSET-ROW-CLOSED44-NAMING-FIXED",
+    "expectedTests": 44,
+    "oldExecUnion": false,
+    "coverageExclusions": [],
+    "backendOrHeldClassActions": 0,
+    "guardSignature": null,
+    "unstartedProcess": null
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T05:20:02.814163+00:00",
+      "endUTC": "2026-11-14T05:20:03.931852+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/jacoco.exec,sessionid=PG31212-MEDIA-ASSET-ROW-CLOSED44-NAMING-FIXED,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31206-media-asset-row44-naming-fixed-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg31206-media-asset-row44-naming-fixed-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1",
+      "stdoutSha256": "9cbcee6f529698986519fa37f7de8a4fe39b1b50cc4655e8ed046b6eb5b718ba",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T05:20:03.932263+00:00",
+      "endUTC": "2026-11-14T05:20:04.097469+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31206-media-asset-row44-naming-fixed-prepare-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1ff8921c086032970224c4b6774656c8e0f7dc7927d1c01ab7f73504672635a4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T05:20:04.097916+00:00",
+      "endUTC": "2026-11-14T05:20:04.212318+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31206-media-asset-row44-naming-fixed-prepare-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "1796e9ba89d0f335a51b8b61af0b8df605760fad1ff5266c80881a7be7fd6bd5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T05:20:04.212620+00:00",
+      "endUTC": "2026-11-14T05:20:04.327157+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31212-media-asset-row44-naming-fixed-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "7c7bf77dd265649de0dc2177a5c93c1b4a53e07e24af7a786633da4acd91c5d4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 44,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "nullAndEmptyAreExplicitFixedInputFailures()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "mediaTypeAndMusicRoleUseTheirExistingClosedSets()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "finiteWorkersReturnIndependentExactGoldenBytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "allSixMimeExtensionPairsAreExactAndNeverGuessed()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "sqlLikeDisplayTextIsOnlyEscapedCopyData()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "japanesePathUsesUtf8AndLowercase64Hex()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy003MandatoryDelimiterAndLineEscapes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "canonicalAndDecomposedFormsUseTheSameFixedNfcVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy004OtherControlEscapesAndOrdinaryQuotes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "storageAndDisplayHave512ByteBoundsWithoutPathResolution()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "canonicalUtcYearAndMicrosecondBoundariesAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy010InputAndReturnOwnershipAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "pairedMusicKeyHasOneTo256Utf8Bytes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy002NullEmptyAndLiteralNullMarkerAreDistinct()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy006LiteralTerminatorAndSqlLikeDataStayFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy012ConcurrentCallsHaveSeparateOutputOwnership()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy001LiteralRowsAndBothEntryPoints()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "japaneseMusicLogicalIdComesFromTheIndependentFixedVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "nullableSectionPreservesEmptyAndIts128ByteLimit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy011SafeDiagnosticAndUninterpretedNumericText()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy008EmptyInputAndWidthContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy005FixedUnicodeHexAndNoImplicitNormalization()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "assetShaIsExactlyLowercaseHex64()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "currentV029PairTruthRequiresEveryConditionalNonNullValue()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "productTestsExecuted": 44,
+  "formalUpdated": false,
+  "whole451Accepted": false
+}
