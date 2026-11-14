@@ -368,7 +368,7 @@ final class MigrationMasterReferenceVerifierTest {
         f.delta = 1;
         assertThrows(SQLException.class, () -> verify(f, declared));
         assertEquals(QUERY_SQL.subList(0, slot + 1), f.sql);
-        assertEquals(slot + 1, f.resultCloses);
+        assertEquals(slot + (shape == Shape.NULL_RESULT ? 0 : 1), f.resultCloses);
         assertEquals(1, f.outerCloses);
       }
       for (long count : List.of(-1L, Long.MAX_VALUE)) {

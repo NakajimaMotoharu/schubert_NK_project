@@ -1,0 +1,2921 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2961_check_rows643_null_result_profile.json",
+    "sha256": "f7c5a72ced60ca5e88c8b2c861f57673bf8ec52386348c174cdcc6e5243881ff"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": "8c3545bc49bf241158057d27c046117f239ba219e431cea94a3912a89180664a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": "c113e3543a7f5a3bb8f0825607a8a166d77862fef507278821dd335a9c7682f0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": "087c49bbb56bb77b0ae2c509bc648f4161e3e7c977a242323616d3dfc6e83d89",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "cdc1c81d7e0ce93601e71e25a6058c1850f34f725fc80c1de5a34d9a180614b6",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "451c5a97d09b5eacb2e33e2b4c931906663252bb916e3acf3fe30127ec86fa8c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "c5469c0088d9b8effe2b22f26c2159942f32b127ad9c0a40f93e736be3038520",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "beeee4b2d767dc1e0e870b19a0cc6ceaf92ff8497d537dd8e2f68828b5357d3d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java": "bd669d713e21fd504ba8e5959b315b91de4724280564b436c259261f3fc24bfe",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "7acc61e96dc0138ee68dc3ac8a1058a8efc26841aa05ffa5113f0154665ae893",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "09f607357cdb3b8228d74a2b6f8f06ad2e405aceeaf124e7cce76329daa3ea9d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "235372dec6e7edfac1cffd293df2ebbc02076ed6c9bbdb93b8a77c304c3faf7d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java": "48357e8d92a245361933a34d43e0e705f430554000b2afaff36fb36fd98ab24b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java": "13d6b049c885fc4a6c201b83899e7fba330ec8982256d9e107b78b9b53bd4306",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java": "11d12471658e2a97b75cad70ea8b96b90590acec3d3f16b8db7a8a540063ead0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java": "9ef8e166c4c6e3bbeed6accbbd6c1a832be907b332f7d282d3c622a87b02fb9c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java": "3049e810bd7b34071cd585c1295c444e7d4b1829800e49d2162a53f94a974815",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java": "d5ab182d366e21f0f169697ad5606a483ad36fa883ec1887e343a683dca67f3d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java": "7f95ecc98b41b34daa5c7ed4acde8f0ae6705ba0364cbfb57b235c84324034d4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java": "c429571193e26ddba8726df4e5ce74238361030e806f12f75abb25c081b37089",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java": "6c609a9e7d259ca7672496eb81e068606f4816b42fa94d824313f347971067ac",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java": "f84d1e7b223da5de2725bb40ef711f1c3574973d6c57bcad476b0da28bc25bc4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java": "94a466d3bf99bbd6ab2fbb69ff49d5525ef8193a36c9f3fcde1b151d752c303b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java": "c1e1d0a2d65d0c72f185618b50321fa0534e0ffa41f5afc293e6f425a96071c1",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java": "72e2c5fc9a7c4b43bda7f27793f735a3e6070b146538d81ca56330917e166725",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java": "90f96962f121fde5175c9f52fc942d7304b189dca9a3af2eb6405302b131eeb4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java": "2c22001d8962ef28ce02fcaad0da600b29ef23c18c271058f7e896ee88c1ec7a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java": "9bfdc29e8d92cd0830d27cd66e01c2037bf7758b5fb7d9c14b2065086abc28f0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java": "a9e7b3790668501934134496adebab5a9a45bbb58dc4d5498020b1c4c8b8dbda",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java": "c9dd996380b5be21b6d71f63a86655ef61460e9cb85911f0f64e1b6d8ca34355",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java": "4d46fdb216630c2aa42cb20c39266cb21e2518dd2b87f6e5d44fec461eb7063b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java": "44f19d3afa8f4feb2f8e388d152d4518ae0a211d82c96cd7139e3c57bf3d785d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java": "2d47fd03b673e296d9cec4282542c7e62bf3c9fe13777490c133a941cd087538",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java": "f62951c441cfd00f763a3351f52b880c74f332ae2188dc9a35939bf01af232cc",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.java": "072716bbc634f6ef97aedcacdfce4ca5728558b861649383f699d720bf3c9b03",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java": "c249f5414fb3d229b86ba6e2b977fd3683b435e624398cbf1e07968eb9e90d3f",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java": "03547a65ca12998d154256db410b3fc422f3eda6ffc4f4fac9fc03f10e571765",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java": "300346ef98cd3eb1185be9a816e3915ab3c2017026704fbc04ee40a4ab336b70",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java": "26f8292285cf63ede76f14282dce005877ec502d8bf9e0deac4b0e2ec15fbd21",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java": "1278ae1d46f10e387873f9e9e001dad14be05adb52ba25269d014958a6ccb6fb",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java": "51ce4c502b661a09123f61a3d156c1240a90e0dfdadbd4010eaba36fc90009a0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java": "c2304d089f33c998a511899fdc566750f02488ec5294048c6d692bfec83b636a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java": "566fb752ecd127308bf484b0507b03f8023244f5e1a9e1f9fb5cecff10a2e967",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java": "d090b2fb603a00ce5dbf7051471a431e46cae846db6e42542ce338596f49e056",
+    "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-catalogue-20.tsv": "14866542997faf06cff53d4d1792455183eca9e4f7494bed788f027768cef53c",
+    "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-copy-20.wire": "8e5f015e191c68488ef03cfe022143ef64e30b9c2ad831098c217f9bea79b7a0",
+    "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-catalogue-129.tsv": "b76b08743169996935379d3116280419b85055b5f44af08d004b11b353b71aaf",
+    "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-copy-129.wire": "6fdc83ef26afac1a4dac7348e0e6096dc5a75a906902d1658712967ba8586ab2",
+    "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-extra-id-vectors.tsv": "f475606af5cec7e7ead2780d898e6fbcd959494969090834fa587d8e7a998821",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind.class": "052609ecd805be4d271934f36f4202ab6018a177f3ab81b0469dc07c0fc39ed1",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow.class": "b5f8d2ea806070830ea9d929534feadfd3bcecbdb433523ac99b06e610d7dc2d",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.class": "85e1e2dfee1d13b7c45c3e0f4813b9f90ab335e2bbe182f51f89a99a297b2fbf",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "e396c01d1b8c4697dce412f04195006365142d762a7f3d35cea31652850d9258",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+    "dev/codex/schubert/nk/migration/AudioCopyDataset.class": "d09917c25977312f611df8b7a5234ae3a800633132ac97747260e90cf66111f3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.class": "cf6890389883a8d6dc7a4033ca35a124a4796b9a4bcd239e586ab5fa5f2dd0f1",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch.class": "1b54712d173109ac3f84cc6746d4e0256e89d240ec55ad9e9f97c61373548643",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow.class": "6c5adc60b233b941b9d509dfdae40bbf8f2b0218a41b25776d31c23a99459555",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry.class": "0decb1b7b350b7d023ec0e6da08587bcfcd24c46ae109c2ad8fcce56fce760b3",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class": "62013aa1df711baa5719c7c8e86f15493b46aa79b50134b0e948e8f81d44a2e3",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry.class": "07a4cc7ce7c32e6f16e5df45b85c10401eb5bce9fc8947c3a935dba5b919c9f7",
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class": "bf9a7988f31712111d9e42652fa79754dffac2a78f02657373c50c5d0e346408",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset.class": "11ba4b4b475b205cd69d21c87211d507e1eec4e13c066c2053791194aabb59fa",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class": "a92d5ff8b6118fb2e22c4c340199eb9c56c278ac64955905e5dde44d428dd87c",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer.class": "054202ed6c893cacb27c7a5904d68f0e57fe248ae24967eab57affacf86792ac",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow.class": "ff7c6bf1584c9882a999bd2687197aa4d877d5a08e667afda002d165f9dc9289",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter.class": "e498970c4ef48d9af38f4de7f0e292f32188a9da38e153d9d235c4f1c4e697f2",
+    "dev/codex/schubert/nk/migration/MusicMigrationCatalogue.class": "34eb5ddf2163c6795a32de4dda56d46161f64d28d295d1d900c9e464266f0797",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result.class": "f3d5a86b7d60ae7cf3712a46b0589e3abd09569308b28f5304283cf86639d4bb",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogue.class": "3a8a646fb71fccd99de24723a44ebc2b2fc0a81f8b9bbe59e706f1ca28e0de3f",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.class": "ba356e187e9aac96123da65cd9181b8799d3c7e5853ac38f7b0d0c7d3bf882fd",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.class": "ca16026d985c464470c266e887056a88b671c3c455c7eb6a33b5a8d0ab5b62c1",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement.class": "0e768edb60604b9829a724c52487391ed24c897b0625ae41414da089aea1b054",
+    "dev/codex/schubert/nk/migration/SpeakerStagingTable.class": "5eb2110a72d0f207103e5c997aa091e58f1b34b2c8d2b1863d351aceaae01e19",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.class": "92fda203b0da0c92c702b5355c4ce0715b07c4350203524952685440a781e44f",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.class": "f3054c1d75307a205041513d8bfaced40b74d39fbf5670170b689c8ba1c700be",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation.class": "52976a0c5d5c14c935479d9a22533cd96af48ae7805233d96b1debe89d8efdaa",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair.class": "53e54e1f27334878352ffd5e0e222f439c01e03653de0e668e2ed7485d4dca28",
+    "dev/codex/schubert/nk/migration/MusicLogicalId.class": "24079b291b751577369f256ef32a31d9dd86b0e83885a5d79b51d761a04dd59b",
+    "dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.class": "50cf40c8e2778058a7d16dac0081f405f452967a99d94c0be203160d8a19e445",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing.class": "159b664a335849db4b32cec979fcf55db4029934d2fe25c6df8e7dc41eb2d232",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch.class": "edd73340517260eba115de2113124133be11b45db9079caa45484c070b6962e4",
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset.class": "cd86b847f1aeb03d1e5affce0ab51edf9fa63b64c7c3227d4642832900ce495f",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class": "4d8172e42644b6a0913f92972aae692a5b7d98b17275942c3f8105500032657d",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison.class": "463c12753ee773c6ced01b61d1b44577fd5c8ac930703d0b8492114739893252",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.class": "87b72472c930657ea35eba6ce6e2089d56faf0174b59f869207d9815802a6476",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair.class": "b694e38b9096c2cb043521e4e9cd532a2c7d965125a21aeb2d8d4a7e78a8505e",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest.class": "54601a05e7b5b90fb33198a77137f79f2e725cb278f99428aefdff9f8aa5d75c",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.class": "369d40e90619f69d4747f9e4d8fa821637153d1a442dd5de80736277ca1f0109",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video.class": "533c662155df1e89826c55fef6248969ae724b1c54b2b6ae20be71409793cf45",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry.class": "c142c95aa8207e4f61ccb38e6e161731d0f3b3f9d7e0b7667bc0c497819a9b8a",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.class": "74eee850f0c9d9eed291404aac166ae7010d741b4eded8599a6da5790d939501"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$3.class": "2c615827b4129b58154139bf2da509730f9ee94f43c281300d3b06f77805a934",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifestTest.class": "7452272c28063d19e34408b7a607d3ffa73820ccc1deb70458cbd7b224cc93b9",
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fixture.class": "39e93660fa4218d07a5f4628551b09bd2c592636aabb90bb0a785b8fd5fea13b",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$1.class": "ab3c01019510913abf54070eca827bb08dd8e47b2062c5522d072c4a9ac01cb1",
+    "dev/codex/schubert/nk/migration/MusicLogicalIdTest.class": "91568bfa5cb350ab3fa4523ba3b6a6927d0955275352153a77ed5cea875d1ab7",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Shape.class": "7257ba758865e379afbed98420914ce002674e73ded725d4d94ac2d9752b6216",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.class": "cbc4527b94775f5dd6854f5297a2a10e4ed79201871cc2c921b9ef9d4a73a182",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.class": "bc4a9792a4bf77c02e28d17ad6e30448f4fb8622546260907f9aa02190b286d5",
+    "dev/codex/schubert/nk/migration/SpeakerStagingTableTest$Fault.class": "8e1c699b65755e900da4a768a75908a52785604f4e7697437efd951c58737b95",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.class": "d67c51383f1e770fe0b1339d90754729ce9b71acca21e9777b3bb5840f8c0cd3",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$4.class": "ace69e8e79db5ce0444d272ebaa8ff839a0e2306c191b1dd0e5a78357fd3f68b",
+    "dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.class": "73e9eec561f3609e1e3ac5ef33812c68d59939751a4f07acbb32ce8d155ce5d3",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Shape.class": "343742d0360fbc6c9d49ef9de70b3a50fc97d728fda4137a6fdd541d920799df",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest$Fixture.class": "a531893dcb912fe88bf1a513a5dd36f7c343ad0095a4f62519e0fc8e1ad881a0",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest$Fixture.class": "82f24b720e228aa04c71c4b4f1042323a6c76aa4697e1ae6a21c260e2d3604cc",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$2.class": "b3fa09d8a6419cba9e496df2cc01960ea81f0bbfddc383baf4a79255117f3e02",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$MemorySink.class": "fa2450218ccd4aa9066835cefd4a1b24bb6f3314bb724322e5837078f038be8a",
+    "dev/codex/schubert/nk/migration/MigrationCopyDatasetTest$1.class": "356e758c7c4d7ea0529bdcdeee5697c970547ee352cda1571a6b591b13d79ee7",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.class": "26d1acbca510b21f7a574769cede444abb18648d19afc69cd66acb85eb7c8264",
+    "dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest$Inputs.class": "0771b4e068dbbadd7cf930aea88c9a0972e1fcde734debcc76cd04e8943f913d",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.class": "5f629ca4368d7a9fb550e78727987830943178ee773b2a1b97ac204bdbf82fb8",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest$FailingSink.class": "fe3679dace7642115897495c455412256f5914009892c6399f00003bb91e8330",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest$Fixture.class": "912441c3e401bf75ba37fe10fe505d49993202d5a4e1c17261e991317a700524",
+    "dev/codex/schubert/nk/migration/SpeakerStagingTableTest.class": "81b40a7c66df5691e589731bd1cf0c5406adc0a15b67c9de23925caf9d4e5031",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.class": "7bb67cebb35c10cafc3c97097da239a39ca753baf13e3aea816dc3d9562d902f",
+    "dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest$TrackingSink.class": "303c6161b4df1a7c46f8bf83942eddee327754ad6262c29832c5e4b75406a400",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest$FailingSink.class": "e373aebc2e0a4c36f0d9e3e150c95aace298ab2d3cbdca8a025874b443e73c81",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.class": "4b6f3a3af04117f6f29a5eb9a8e2d80a9f94d39c40dbe56dae3282b1d37c824c",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest$EqualFailure.class": "61c3e2236f539195077dd6eab03b2f5f58de6df624eeb2ae22f8476fbb28cf21",
+    "dev/codex/schubert/nk/migration/AudioCopyDatasetTest.class": "6ecf775c8bea902da38742aa793eb9149d6f2f627baa1d3f024de0c5e55b8971",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest$TrackingSink.class": "35782eec488a6a1f69f2902db964c68fc42af935a63ea438dfeb81dff27b0c70",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.class": "9d50f36e4c5736d383af3f8bd2c7c90f95f833660c80e7eda7138f371f7c382e",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.class": "d64e3a85e2ae0808e24dd0b588980e626c429fe4481123b10ee446df2f53a815",
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest.class": "4019ca6962855f39d7a4caaf4cc4cda75d682818bded9120893401661c10e3b1",
+    "dev/codex/schubert/nk/migration/AssetStagingTablesTest$Fault.class": "4bde87e88173f0646b0a8afd37daa8cb6f7e4c0239028a619e535d49cf10e1a5",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$1.class": "4ed7fd3d50479414fe33c0dd5a03da59a3fa1d33b54c6a97fabffa6e1d8ebbe5",
+    "dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.class": "f071a15fa328543320045b9eb88c55b6568cfda08286a6acbe1e331e82fe9290",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.class": "5df80c3748500147df340107413f09c570eda5fa051a27764581a8d9798045e9",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.class": "77f8dabacfad623ce17829bcb49b8040aa41adfb5bc66382d2533ae8f7ef16f6",
+    "dev/codex/schubert/nk/migration/MusicMigrationPairingTest.class": "95b97fb4b52aa72543ce94e1695e09cd5c54c00523b4a13473f3f26aaf6f7279",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$TransferFixture.class": "6be6d4dc5d3c4046a6df3713e0add944ef2dd894e6727813d34406ee09b64b7c",
+    "dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest$Fixture.class": "d9093305428573a3e07c5a73d52aafe1cb0ba962dc5b2706439e357e60e075d2",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$MemorySink.class": "dc9783d9aeef1e9ca94d0b4051a20869c32703f30c1957449caa6ca5f34ea880",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.class": "4bf6063b67a5ab35596ac7e8ff6ddc0ff9bcd8a5a97dbbf09123fe76069a8614",
+    "dev/codex/schubert/nk/migration/SpeakerStagingTableTest$Fixture.class": "0896b373d2fd26b0d9c7ae1a7566b3f3bf422567fb93e4c77455298357e61f2d",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.class": "62d81f4298823fd962c5aca73db36776a94d8f4f31ef4609cb1de0d9f74f1241",
+    "dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.class": "d658f4f530f73be6cf82220c6fbbba5208e2411c74e3a3b3be93dcbb17055e58",
+    "dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest$EqualFailure.class": "e230bafbf25aa46faeb956aaeb6e82a951c85e0c00fb29129ba7fa1f09c9d604",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest$1.class": "5f832c126a5a9c039cc68203d6a079c231308a118e5902de8e1508ef3cd2cd10",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.class": "ce9f792b54810d862523247c7489f1499ba57ce71225d07917b49293e002dcfd",
+    "dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.class": "034a1dd4f43198cb3aceb5653bfe2489f91d8d5f36128359a0c16187f30fb336",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest$EqualFailure.class": "99cb0d288726c76249c0428536c8a16fdd43a2dad4efa06881ac16acaf5c64ec",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest$MemorySink.class": "0a341a7b28552e8bc147c74b801cb5da63d63aa49bc37cc20ea54a54df08e6f2",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRowTest.class": "065a1724f9e418105110810936d4292c0591e8bb942f701b6e0aed949377498a",
+    "dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.class": "08eb64cd1a7fb52695a23771643c2743ddf6fef4290acf7d9572dce9aafd7e57",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$EqualFailure.class": "e7ce4ccfbe195a0dff6cec0ccce7347c0b1f8e188f15a9d765e04dea74c43ae5",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$Fixture.class": "eb1f0fea97a42910d15eb2cff1cd38d31d62f01e18b4b2d43d67fbfe0399f6e8",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.class": "c2b9392d0537d267816ebc773b1bdfca7e4aa640876a0ab705e0623135fb351a",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest$Fault.class": "d836bd5774c3ca3235608f564a48ef0a1c4ee31236439871fa9160b7846909c1",
+    "dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest$FixtureInputs.class": "3686269d705df987874f2c69fa87b234fc460d6a2d515912088932429eb82769",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRowTest.class": "38ba115658e6341029882f1d2c90eabd608550b40e4c25e3cf968d0c3145878f",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.class": "d43e7b05abe7af8b30d00475f66bd4ea2ec796d626d955158ef797ca4ab8a712",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatchTest$FailingSink.class": "2c5806edb1f5a1131865af68e84f16e9cd2f53f303b7f6c985b641c24824a69e",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.class": "03348b252e9bcbd17251d2b3c1d356b60b24ce86c710cf60fa2ce46a3be6fa3d",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.class": "35993b9e45a7b241ef7d739c2214dc25763042a240f370313ff7fcbaded54ae4",
+    "dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest$Fixture.class": "7b51d43779a0cbb75648e7d5f1a02ecf4f96da7d7032f227fb060c03faf89d6e",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest$Fixture.class": "789173ee9e2a385376ea18e4ff09bef5f0430046dd9c80451e4ee832c9dd9930",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.class": "6f739130fd457032871897153377f9a06680e9a640bef0da2f5c94dbb2066f76",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.class": "13ad08200cb51541782c485f9445bf3a554b0e17d9d6c4cd3f1186ffb8c80925",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest$TrackingSink.class": "e5d90ebd9b8f344d9f406142a13c7fe20089d63d4fe82a4336ef0d5f85a4e8a8",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest$Fixture.class": "3cb728a7c5e392624ddb554159935e2ca685a8c0407bb2f0e0425d0e4e002f72",
+    "dev/codex/schubert/nk/migration/MigrationCopyDatasetTest$MemorySink.class": "15763007ff6a250dc9ffd2b3ff15b06e432217c64bddb753630938f443e4ad36"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "emptyIterableMakesNoSinkCallsAndDoesNotOwnIt()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "constructorRejectsNullEncoderWithFixedDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "nullSourceAndSinkAreRejectedBeforeRequestingAnIterator()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "nullOrEmptyRowsFailWithoutWritingThatRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+      "name": "finiteOwnedConcurrentWritesUseIndependentSinksAndLiteralGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "joinsTwoIndependentLiteralCopyStreamsWithoutHeadersOrTerminators()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "bothEmptyBatchesAreOnlyAnEmptyDeclaredValue()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "fileWithoutEntriesIsAllowedWithoutInventingAnEntry()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "entryOnlyAndUnknownTargetFileAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "matchingFileIdCannotHideDifferentGameMapping()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "separatelyValidBatchesMustHaveTheSameTransactionTimestamp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "nullBatchBoundariesFailWithFixedNonSecretDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "bothOutputBoundariesRejectNullEncoder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "datasetRetainsOnlyImmutableBatchValuesIndependentOfMutableInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "eachByteResultHasSeparateOwnershipAndIndependentCallOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "redactionAndRejectedDatasetNeverPolluteIndependentValidCopies()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "finiteOwnedConcurrentCopiesKeepBothIndependentGoldenStreams()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "streamingBothPathsRetainsIndependentFullGoldenBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "streamingNullWriterAndSinkContractsStayFixed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+      "name": "streamingBothPathsPropagateOriginalSinkFailureWithoutChangingDataset()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch001IndependentFullBytesAndCurrentGlobalOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch002ExactCardinalityAndEmptyDeclaredBatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch003DuplicateTargetIdCannotReplaceMissingRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch004UnknownTargetEvenWithEqualCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch005GameMustMatchTheDeclaredReference()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch006FileMustMatchTheDeclaredReference()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch007GlobalDisplayOrderMustMatchTheMapping()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch008FileLocalIndexMustMatchTheMapping()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch009SingleCanonicalTransactionTimestamp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch010SnapshotListAndByteOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch011NullContractsFixedDiagnosticsAndFailureIsolation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+      "name": "batch012FiniteOwnedWorkersCompareIndependentGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place001IndependentGlobalGoldenAndFileReferences()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place002FileIndexOrderIsIndependentOfGlobalOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place003UnknownFileAndCrossGameMismatchRefuse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place004UnknownEntryCannotAcquireAPlacement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place005DuplicateEntryAndFileIndexAreIndependent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place006ExactCardinalityAndKnownEmptyFile()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place007GameDomainsAtEveryPublicBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place008IndexAndIndependentN12Fields()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place009NullUnknownAndFixedDiagnosticContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place010SnapshotAndReturnOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place011SignedSourcesAndInputReordering()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+      "name": "place012ConcurrentOwnershipAndLookup()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order001LiteralRenumberedGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order002SignedSourcesAndN12TargetBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order003DuplicateSourceRejectedWithoutInputChange()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order004DuplicateTargetRejectedIndependently()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order005InvalidTargetDomains()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order006MappedEntryOrderDomains()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order007NullBoundaryContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order008ImmutableInputListAndReturnedBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order009ExactLookupAndUnknownRefusal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order010EmptyIsAValueNotMigrationCompletion()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order011DenseRanksIgnoreSourceGapsAndInputOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+      "name": "order012ConcurrentIndependentReturnOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file001LiteralGoldenIndependentOfRenumbering()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file002SignedSourcesAndMaximumTarget()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file003DuplicateSourceIsPerGame()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file004DuplicateTargetIsGlobal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file005InvalidGameDomainsAtEveryBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file006N12TargetAndOrderBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file007NullContractsEstablishConstructorInvariant()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file008InputListAndReturnedBytesCannotMutateSnapshot()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file009UnknownIsSafeRefusalNotBoundary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file010WithinGameAndCrossGameNeighbors()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file011EmptyAndGapsAreExplicitValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file012ConcurrentReturnsRemainIndependentlyOwned()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row001IndependentTwelveColumnsAndFullCopyBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row002NarrationNullableFieldsAndEmptyValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row003N12AndGameBoundariesAtEachColumn()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row004IndexAndOptionalLineIntDomains()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row005ClosedTypeAndSpeakerPair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row006IndependentUtf8ByteLimitsAndUnboundedRawBlock()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row007NfcScalarAndEveryControlDomain()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row008AllMandatoryNullAndRowWidthBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row009CanonicalUtcFiniteYearAndMicroseconds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row010SnapshotListColumnAndByteOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row011NoTrimSafeDiagnosticAndEncoderContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+      "name": "row012ConcurrentCopyAndValueOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy001LiteralRowsAndBothEntryPoints()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy002NullEmptyAndLiteralNullMarkerAreDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy003MandatoryDelimiterAndLineEscapes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy004OtherControlEscapesAndOrdinaryQuotes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy005FixedUnicodeHexAndNoImplicitNormalization()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy006LiteralTerminatorAndSqlLikeDataStayFields()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy008EmptyInputAndWidthContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy010InputAndReturnOwnershipAreIndependent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy011SafeDiagnosticAndUninterpretedNumericText()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy012ConcurrentCallsHaveSeparateOutputOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "emptyAndCountAndFieldShapeBoundariesAreExplicit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "storageUniquenessIsPerGameAndNeverChangesDeclaredNames()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "storageRejectsAbsoluteBackslashEmptyAndDotSegments()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "shaRequiresExactlyLowercaseSixtyFourHexCharacters()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "ownedFiniteConcurrentCopiesAllMatchIndependentGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen001IdPairEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen002IdPairIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen003MappedEntryEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen004MappedEntryIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen005FilePairEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen006FilePairIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen007MappedFileEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen008MappedFileIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen009PlacementEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen010PlacementIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen011PlacedEntryEqualityEveryComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen012PlacedEntryIndependentHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen013DistinctGameSourcePairHashCollision()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen014SignedSourcePairBoundaryAndDuplicate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen015FileIndexPairCollisionAndExactDuplicate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+      "name": "scenarioGen016LargeIndexPairAndFiniteIsolation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "full129RowsMatchEveryIndependentGoldenByte()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "video20AndMusic129JoinAll149RowsAndBorrowedStream()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "onlyTheApproved129DeclarationCountCanEnterTheFactory()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "allOtherManifestKindsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "targetMapCardinalityAndUnknownKeysCannotReplaceTheKnownLogicalIds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "nullableAndNonPositiveOrOversizedTargetValuesAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "targetIdCannotBeReusedAcrossDifferentGroups()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "inputMapAndManifestOrderDoNotChangeCanonicalSourceOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "categoriesAndSectionsRemainSeparatedAndLocalOrdersRestart()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "exactFuzzyAndBothMissingSidesFreezeApprovedKeysRolesAndOrders()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "nonSongTracksHaveNoKeyAndUnicodeCodepointLocalPathOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "currentOneAndTwoComponentPathsAndLeadingDotTitleArePreserved()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "allFiveMimeMappingsAndUnknownExtensionsAreExplicit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "targetExtensionCannotMisrepresentTheDeclaredSourceFormat()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "byteSizeBoundariesAndDeclaredHashAreNotReobservedOrRepaired()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "timestampInvalidFormsAreRejectedByTheExistingRowContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "duplicateNormalizedKeysCannotSilentlyDropEitherRole()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "emptyDerivedPairKeysAreNotInventedOrChangedToNone()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "allThreeNullableArgumentsHaveFixedDiagnostics()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "sourceMetadataBoundsDoNotTruncateFilenameTitles()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "mutableInputsAndReturnedListsAndRowsDoNotShareOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "encodedBytesAreIndependentAndMatchTheSeparateFirstGoldenRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "rejectionDoesNotPoisonNormalCatalogueAndDiagnosticsStayRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+      "name": "finiteWorkersProduceTheSameIndependent129RowGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "independentMixedSeventeenColumnGoldenAndColumnOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "emptyDeclarationRemainsEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "duplicatePrimaryIdIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "duplicateLogicalIdIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "duplicateTypedStorageIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "transactionTimestampsMustAgree()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "backwardAndForwardParentReferencesUseTheWholeSet()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "unknownParentIsRejectedAfterBuildingTheWholeSet()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "selfAndCyclesRemainAllowedByTheDeclaredForeignKey()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "manifestCardinalityCannotBeSmallerOrLarger()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "unknownOrRepeatedSourceCannotConsumeOneClaimTwice()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "kindsMustBeMediaAndMatchTheRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "targetSizeAndHashEachMatchTheExactDeclaration()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "nullableBoundariesHaveFixedDiagnostics()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "snapshotAndReturnedViewsAreImmutableAndKeepDeclaredOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "typedAccessorsExposeValidatedValuesAndOptionalParents()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "returnedBytesAreOwnedAndNullEncoderIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "borrowedWriterAndSinkKeepOwnershipAndNullContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "ioFailureIdentityPartialOutputAndIndependentRetryArePreserved()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+      "name": "finiteWorkersUseOneImmutableBatchWithIndependentSinks()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset001CanonicalGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset002ValidPathsAndKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset003InvalidPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset004NullContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset005InvalidSizesAndHashes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset006DuplicatePaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset007CheckedAggregateOverflow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset008ImmutableOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset009IdenticalClaims()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset010MissingClaim()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset011UnexpectedClaim()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "asset012IndependentSizeAndHashDifferences()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated001EnumNamesAreLiteralAndAliasesAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated002EntryEqualityUsesEveryDeclaredComponent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated004ObservationEqualityHasExactFieldsAndType()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated005ObservationHashesUseIndependentUtf16AndLongVectors()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated006ComparisonEqualityIncludesAllSixCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated007ComparisonHashesKeepIndependent32BitOverflowSemantics()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+      "name": "assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "videoSeventeenColumnGoldenIsIndependentAndHasAllNullPairFields()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "musicSeventeenColumnGoldenUsesTheIndependentFixedLogicalId()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "positiveIdsSizeAndDisplayOrderHaveIndependentNumericBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "logicalAndParentByteLimitsAreSeparateFromActualReferenceExistence()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "mediaTypeAndMusicRoleUseTheirExistingClosedSets()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "mandatoryTitleCategoryAndNameLimitsCountUtf8Bytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "nullableSectionPreservesEmptyAndIts128ByteLimit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "storageAndDisplayHave512ByteBoundsWithoutPathResolution()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "allSixMimeExtensionPairsAreExactAndNeverGuessed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "currentV029PairTruthRequiresEveryConditionalNonNullValue()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "assetShaIsExactlyLowercaseHex64()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "canonicalUtcYearAndMicrosecondBoundariesAreIndependent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "everyTextBoundaryRejectsMalformedUnicodeNonNfcAndControls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "nullInputsColumnCountsRequiredElementsAndEncoderFailExplicitly()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "immutableDeepSnapshotAndFreshCopyBytesHaveIndependentOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "japaneseMusicLogicalIdComesFromTheIndependentFixedVector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "pairedMusicKeyHasOneTo256Utf8Bytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "sqlLikeDisplayTextIsOnlyEscapedCopyData()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "finiteWorkersReturnIndependentExactGoldenBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+      "name": "fixedRedactionAndIndependentNormalValueSurviveRejectedMetadata()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "asciiPrefixAndUtf8MatchTheFixedIndependentSha256Vector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "japanesePathUsesUtf8AndLowercase64Hex()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "canonicalAndDecomposedFormsUseTheSameFixedNfcVector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "nullAndEmptyAreExplicitFixedInputFailures()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "unpairedSurrogatesFailBeforeEncodingAndPairedScalarHasFixedVector()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "isoControlsCannotEnterTheHashedCanonicalDisplayMetadata()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "asciiOneAnd512BytesHaveFixedVectorsWhile513IsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "byteCeilingAppliesAfterNfcRatherThanToThe768ByteSource()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "supplementary128ScalarsAre512Utf8BytesRatherThan256Characters()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "caseWhitespaceSeparatorsAndPunctuationAreNotTrimmedOrRewritten()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "fixedRedactionAndIndependentSuccessDoNotRetainRejectedMetadata()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+      "name": "finiteWorkersUseFreshDigestsForTheSameStatelessIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "allTwentyMetadataValuesEqualTheIndependentPrimaryDocumentGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "everyFixedLogicalIdLooksUpTheSameImmutableValue()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "bothEndpointLookupsRetainTheApprovedNumbersAndPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "unknownEmptyCaseAndWhitespaceIdsNeverSelectAnotherEntry()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "nullLookupIsAnExplicitFixedInputFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "categoryCountsAreExactlyFifteenFourAndOne()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "allFourSubtracksReferToTheFixedMainIdsAndOtherParentsAreAbsent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "fixedIdsPathsAndDenseDisplayOrdersHaveNoDuplicates()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "catalogueListCannotBeMutatedOrPoisonAnotherInstance()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "bothPublicValueStringsAreFixedAndRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "allTwentySeventeenColumnRowsEqualTheIndependentCopyWireGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "mapAndManifestOrderingNeverReplaceTheApprovedDisplayOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "missingOrExtraTargetMapEntriesAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "unknownOrNullKeyCannotReplaceAKnownTargetAtTheSameCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "targetValuesAreNonNullPositiveN12AndGloballyUnique()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "manifestMustDeclareExactlyTwentyFiles()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "unknownAndCaseChangedCurrentPathsCannotReplaceAnApprovedFile()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "everyOtherAssetKindIsRejectedRatherThanSilentlyFiltered()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "claimByteSizeIsForwardedToTheCurrentMediaRowContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "timestampValidationAndOneCommonMicrosecondValueArePreserved()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "allThreeNullableFactoryInputsHaveFixedDiagnostics()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "returnedRowsAndBytesDoNotAliasMutableInputCollections()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "aRejectedClaimDoesNotRepairOrPoisonIndependentNormalInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest",
+      "name": "finiteWorkersBindTheSameImmutableClaimsWithoutSharedOutput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "emptyGroupHasNoPairsOrShadowedPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "exactMainAndInstrumentalHaveOnePair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "unmatchedMainKeepsTheInstrumentalPlaceholder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "unmatchedInstrumentalKeepsTheMainPlaceholder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "currentCaseInsensitiveSubstringRoleIncludesInstinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "numericPrefixRequiresTheOriginalFollowingWhitespace()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "currentHalfFullWidthAndUnclosedAnnotationsAndSuffixAreRetained()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "onlyTheExactCurrentPunctuationSetIsRemovedFromKeys()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "oneEditInsertDeleteSubstituteAndEmptySidesHaveIndependentOracles()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "distanceTwoRemainsAnAcceptedFuzzyPair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "distanceThreeLeavesBothUnmatched()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "exactKeyWinsOverAnEarlierCloseInstrumental()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "closestDistanceWinsOverAnEarlierDistanceTwo()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "equalDistanceUsesTheFirstDisplayPath()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "consumedInstrumentalCannotBeReusedByTheNextMain()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "mainRowsPrecedeUnmatchedInstrumentalsInTheirOwnPathOrders()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "mapInsertionOrderDoesNotReplaceUnicodeCodepointPathOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "collisionsOverwriteValuesKeepFirstKeyPositionAndReportBothShadowedPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "emptyDerivedKeyIsPreservedWithoutClaimingDatabaseRepresentability()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "nullableInputMapAndItsKeysAndValuesUseFixedDiagnostics()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "relativePathGrammarDoesNotRepairUnsafeInputs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "malformedUnicodeNonNfcControlsAndEmptyTextAreRejectedAtBothBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "utf8ByteBoundsIncludeSupplementaryCharactersWithoutTruncation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "resultsDoNotAliasInputAndAllViewsAndDiagnosticsAreClosed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "rejectedDeclarationDoesNotPoisonAnIndependentNormalCall()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+      "name": "finiteWorkersShareNoMutablePairOrShadowState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "independentAudioAndLinkGoldenHaveExactSeparateStreams()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "emptyAudioOnlyAndEntryOnlyDeclareNoImaginaryLinks()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "audioPrimaryIdsAreGloballyUniqueAcrossGamesAndPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "storagePathUniquenessIncludesGameRatherThanChangingPaths()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "bothUnknownReferenceDirectionsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "entryCompositeForeignKeyIncludesTheDeclaredGame()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "audioCompositeForeignKeyIncludesTheDeclaredGame()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "linkColumnGrammarIsIndependentOfAnyAvailableReference()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "primaryKeyIncludesTypeButRejectsSameEntryAudioTypeTwice()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "uniqueDisplayOrderIncludesEntryAndType()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "allThreeSourcesHaveOneCommonTransactionTimestamp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "linkTimestampsHaveIndependentCanonicalUtcMicrosecondBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "nullableInputsAndElementsFailExplicitlyWithoutBorrowingAnything()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "inputAndReturnedCollectionsHaveDeepIndependentOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "bothOutputBoundariesRejectNullWriterOrSinkAndNeverCloseOrFlush()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "bothOriginalIoFailuresAreRetainedWithoutClosingOrMutatingDataset()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "uniqueOrderDomainHasExactly999PossibleLinksPerEntryType()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "declarationOrderAndPositiveTargetExtremesAreNotRenumbered()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "finiteWorkersObserveIndependentGoldenStreamsFromTheImmutableDataset()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+      "name": "fixedRedactionAndIndependentSuccessDoNotRetainRejectedValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "independentTwelveColumnGoldenHasExactOrderAndUtf8()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "nullableContainerDurationAndEmptyContainerRemainDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "idPositiveN12AndTwoGamesHaveIndependentBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "relativeStorageHasByteBoundariesAndRejectsAllDangerousSegments()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "mandatoryTextLimitsAreByteCountsWithoutInventedRoleEnum()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "containerVarcharLimitCountsCodePointsAndPreservesEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "durationAllowsCanonicalZeroAndMaximumWithoutNumericNormalization()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "actualFileByteSizeRequiresPositiveCanonicalN12()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "shaIsExactlyLowerHexWithoutHashingProductionInputAsOracle()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "timestampHasIndependentYearMicrosecondAndCanonicalBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "allTextColumnsRejectNonNfcUnpairedSurrogatesAndIsoControls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "nullMissingAndExtraColumnsNeverBecomeNpeOrDefaultValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "immutableSnapshotAndFreshBytesHaveSeparateOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "sqlLikeLiteralIsOnlyCopyDataWithIndependentBackslashEscape()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "finiteWorkersObserveTheSameImmutableGoldenWithoutSharedByteArrays()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+      "name": "fixedRedactionAndIndependentValueSurviveRejectedInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five001IndependentFiveStreamsOrderAndBorrowedOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five002AllEmptyNoInventedRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five003NullScenarioAndMedia()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five004NullAudioOrLinkCollections()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five005MissingCollectionElementsRemainInvalid()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five006LinkMustBelongToThisScenario()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five007UnreferencedAudioDoesNotInventLink()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five008FileAndAudioTimestampMustAgreeWithoutEntries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five009MediaAndScenarioTimestampMustAgree()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five010FileAndAudioOnlyCommonStampIsValid()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five011MediaOnlyHasItsOwnSingleStamp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five012GettersRetainImmutableValidatedValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five013EveryNullWriteArgumentFailsBeforeAnyByte()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five014EachIoFailureStopsLaterStreamsAndPreservesInstance()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five015RuntimeAndErrorAreNotWrapped()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five016PartialBytesRemainAndNoAutomaticReplay()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five017CallerCollectionMutationsDoNotChangeSnapshot()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five018ImmutableValuesCanWriteToSeparateIndependentSinks()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five019FixedRedactionAndSuccessAfterRejection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+      "name": "five020FiniteParallelReadersHaveIndependentMemorySinks()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow001SevenLiteralColumnsAndIndependentGolden()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow002NullEmptyAndLiteralCopyNullAreDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow003NameByteBoundariesAreUtf8NotCharacters()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow004NormalizedNameIsRetainedWithoutInventingDerivation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow005CanonicalPositiveN12Boundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow006OnlyTwoGameValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow007CanonicalBooleanTextWithoutImplicitDefault()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow008UtcYearAndMicrosecondBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow009InvalidNoncanonicalOrExcessPrecisionTimes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow010MissingBoundaryAndEveryRequiredElement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow011WrongColumnCountsDoNotInventDefaults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow012MalformedNamesAreRejectedWithoutNormalization()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow013NotesKeepPostgresTextAndRejectNulOrMalformedUnicode()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow014InputCollectionAndOutputBytesAreIndependent()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow015NullEncoderFixedDiagnosticAndSuccessAfterRejection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+      "name": "speakerRow016FiniteParallelCopiesHaveIndependentBuffers()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch001TwoLiteralRowsKeepDeclaredOrderAndBorrowedSink()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch002EmptyBatchAndEmptyReferencesStayEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch003NullOuterAndElementsHaveFixedDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch004PrimaryIdsAreUniqueAcrossBothGames()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch005GameNormalizedKeyUsesExactTupleValues()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch006MixedTimestampCannotPassAsOneTransaction()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch007CallerListAndOutputBuffersHaveSeparateOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch008EveryNullableWriteBoundaryFailsBeforeBytes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch009PartialIoHasOneFailureAndNoAutomaticReplay()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch010RuntimeAndErrorPropagateIdenticalInstances()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch011MissingReferencesAndNarrationWithoutSpeakers()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch012KnownDialogueSpeakersMustBelongToSameGame()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch013UnknownAndCrossGameSpeakersAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch014EvenNarrationSharesOneTimestampAcrossSets()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch015FixedRedactionAndIndependentSuccessAfterRejection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+      "name": "speakerBatch016FiniteSharedReadersKeepIndependentCopies()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master001SixGoldenStreamsParentOrderAndBorrowedOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master002AllEmptyDoesNotInventRowsOrWrites()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master003BothConstructorNullBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master004UnknownSpeakerCannotReachAssembly()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master005SpeakerGameMustMatchEntryGame()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master006SpeakerAndEntryHaveOneTimestamp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master007NoEntryStillChecksSpeakerAgainstFile()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master008NoScenarioStillChecksSpeakerAgainstAudio()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master009NoScenarioOrAudioStillChecksSpeakerAgainstMedia()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master010EmptySpeakersAllowsNarrationAndRejectsDialogue()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master011EveryNullArgumentFailsBeforeFirstByte()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master012EachIoFailureKeepsIdentityAndStopsLaterOutputs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master013EachRuntimeFailureKeepsIdentityAndStopsLaterOutputs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master014EachErrorKeepsIdentityAndStopsLaterOutputs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master015EveryPartialPrefixIsRetainedWithoutRetryOrClose()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master016ImmutableComponentsRetainOnlySnapshots()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master017DiagnosticsRemainFixedAndRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master018FreshSuccessAfterFailureHasIndependentOutputs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master019GameTwoBoundaryIdsMicrosecondsAndDeclaredOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+      "name": "master020FiniteReadersUseIndependentMemoryAndTerminate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference001ExactSixCountsNineForeignKeysAndOrderQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference002EmptyStillChecksAllSixTablesAndAllReferences()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference003BothNullArgumentsFailBeforeConnectionCalls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference004AutoCommitHasNoStatementOrQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference005AutoAndCreateFailuresPreserveEveryOriginalType()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference006NullVendorStatementCannotBecomeNpe()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference007TimeoutFailureClosesOwnedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference008EveryScalarRejectsNullMissingSqlNullWrongAndExtra()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference009EveryQueryFailureStopsAtTheOriginalFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference010EveryScalarReadPhasePreservesOriginalFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference011EveryResultCloseFailureCannotBeSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference012OriginalPrimaryKeepsInnerOuterCloseOrderAndSelfSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference013StatementCloseFailureIsNotNormalCompletion()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference014EachOrphanOrOrderNonzeroRejectsWithNoLaterQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference015EachDeclaredCountMismatchRejectsBeforeReferenceChecks()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference016OnlyReadOnlyBorrowedCallsAndExactResourcesExist()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference017DiagnosticsAndToStringRemainFixedRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference018IndependentFreshSuccessAfterFailedPriorQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference019EachCountUsesItsOwnDeclaredTableWithoutInventingRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference020FiniteWorkersHaveIndependentSqlResultsAndTerminate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+      "name": "reference021EmptyDeclaredRowsCannotHideAnyCheckViolationOrUnknownCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage001ExactSevenColumnDdlAndBorrowedConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage002NullConnectionHasSafeInputDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage003AutoCommitCannotDropStagingPrematurely()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage004AcquisitionFailuresHaveNoOwnedResource()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage005NullVendorStatementCreatesNoOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage006TimeoutFailureStillClosesOneStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage007DdlFailureNeverRetriesOrRepairs()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage008DdlMustReturnExactlyZero()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage009CloseOnlyFailuresCannotBecomeSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage010PrimaryAndCleanupTypesKeepJavaSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage011UncheckedBodyFailuresStillClose()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage012TransferUsesFourExactSqlStepsAndCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage013EmptyAndLongMaximumCountsAreNotTruncated()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage014BadTransferArgumentsFailBeforeConnectionUse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage015TransferAutoCommitNullAndAcquisitionTimeoutFailures()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage016EveryScalarRejectsNullMissingWrongAndExtra()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage017EveryScalarOperationKeepsOriginalThrowable()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage018EveryResultCloseFailureRemainsFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage019ReadAndBothCloseFailuresPreserveOrderedSuppressed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage020InsertMustReturnExactNonnegativeLongCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage021InsertFailureHasNoPostCountOrRetry()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage022SixTablesShareBorrowedConnectionAndParentOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage023CloseFailureAndRejectedInputDoNotPoisonFreshBorrowing()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+      "name": "speakerStage024FiniteWorkersHaveIndependentBorrowedResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "literalTwoQueriesAreOrderedAndCopyNoGeneratedColumnOrRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "statementIsClosedExactlyOnceAndConnectionRemainsBorrowed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "nullConnectionFailsWithFixedInputDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "autoCommitCannotDropTheTablesBeforeCopy()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "originalAutoCommitFailureHasNoCreatedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "originalCreationFailureIsNotAStatementToClose()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "nullVendorStatementIsAnExplicitFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "timeoutFailureStillClosesWithoutAnyDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "firstDdlFailureDoesNotAttemptSecondOrRepair()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "secondDdlFailureClosesAndNeverRollsBackTheBorrowedConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "firstUnexpectedUpdateCountsStopBeforeSecondDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "secondUnexpectedUpdateCountsNeverSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "closeFailureAfterBothQueriesIsNotSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "primarySqlAndCloseFailureRetainJavaSuppressionOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "runtimeAndErrorFailuresRemainFailuresWithStatementClosed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "repeatedCallsCreateFreshStatementsWithoutRetainingAConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "finiteParallelIndependentBorrowedTransactionsDoNotShareState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "fixedRedactionAndIndependentSuccessAfterFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferChecksEveryCountAndUsesOnlyTheIndependentEightSqlLiterals()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferEmptyAndMaximumIntManifestCountsAreExact()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferNullNegativeAndEntryOnlyManifestCountsAreRejectedBeforeUse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferAutoCommitAndNullStatementNeverReachAnyQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferMissingRowAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferSqlNullAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferEveryCountMismatchIncludesNegativeDatabaseResults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferExtraRowAtEveryScalarPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferNullResultAtEveryScalarPositionIsAnExplicitFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalQuerySqlFailureAtEveryPositionIsRetained()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalGetLongFailureAtEveryPositionStillClosesResult()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferOriginalNextFailureAtEveryPositionStillClosesResult()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferResultCloseFailureAtEveryPositionCannotSucceed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferPrimaryAndResultCloseFailureKeepJavaSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferBothInsertCountsMustMatchTheIndependentManifest()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferBothOriginalInsertFailuresStopWithoutPostOrRetries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferAcquisitionTimeoutAndStatementCloseFailuresRemainFailures()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferRuntimeAndErrorStillCloseTheOwnedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferFiniteWorkersHaveIndependentSqlCountsAndTermination()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferFailureDoesNotAuthorizeCommitOrPoisonIndependentInput()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferPrimaryAndStatementCloseFailureKeepIndependentSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+      "name": "transferBothResourceCloseFailuresKeepInnerThenOuterOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareMatchesAllThreeIndependentColumnListsAndExactSql()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareClosesOnlyItsStatementAndBindsOneTimeout()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareNullConnectionHasFixedInputDiagnostic()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareAutoCommitCannotPublishOrDropStagingEarly()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareAcquisitionExceptionsKeepIdentityWithoutOwnedStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareNullVendorStatementIsAnExplicitSqlFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareTimeoutFailureStillClosesBeforeAnyDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "eachDdlOriginalFailureStopsTheRemainingPrefix()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "eachDdlMustReturnExactlyZero()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareCloseOnlyFailureCannotBeSuccessful()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareOriginalFailureRetainsSuppressedCleanup()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "prepareRuntimeAndErrorStillCloseTheStatement()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferMatchesAllTwelveIndependentSqlOperationsAndCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "emptyCountsAndAudioZeroWithNoLinksRemainValid()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "largeUpdateAndCountUseLongWithoutIntegerTruncation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferNullNegativeAndImpossibleAudioLinkInputsFailBeforeJdbc()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferAutoCommitAndNullVendorStatementAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferAcquisitionAndTimeoutFailuresKeepOriginalIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "allNineNullResultsAreRejectedWithoutInventedOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "allNineMissingScalarRowsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "allNineSqlNullCountsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "allNineWrongCountsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "allNineExtraScalarRowsAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "everyScalarQueryReadWasNullAndNextFailureKeepsTheOriginal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "everyResultCloseAndCombinedFailureRetainsTwrSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "eachLargeInsertRequiresTheExactNonnegativeLongCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "insertAndRuntimeFailuresCannotRetryOrCommitThePartialPrefix()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "scenarioTwoThenAssetThreeShareTheSameBorrowedTransactionInRequiredOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "closeFailuresAndRejectedCallsDoNotPoisonAnIndependentTransaction()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "finiteWorkersOwnIndependentStatementsAndAllResultsTerminate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferPrimaryAndOuterCleanupHaveOneIndependentSuppressedInstance()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+      "name": "transferInnerAndOuterCleanupKeepBothFailuresOnOriginalPrimary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final001ExactPreflightBoundSetvalAnalyzeOrderAndOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final002EmptyUsesOneFalseWithoutConsumingNextval()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final003NullArgumentsBeforeConnectionCalls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final004AutoCommitFailsBeforeStatementCreation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final005AutoCreateOriginalFailuresAndNullVendor()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final006OuterTimeoutPreservesFailureAndCloses()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final007EveryPreflightResultShapeIsStrict()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final008EveryPreflightQueryFailureIsOriginal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final009EveryReadPhaseOriginalFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final010PreflightResultCloseIsNotSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final011ReadPrimaryKeepsResultAndOuterSuppressedOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final012LastMaxMismatchCannotIssueAnyMutation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final013EachPrepareNullOrOriginalFailureStopsFollowingCalls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final014EachLongBindingFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final015EachBooleanBindingFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final016EachPreparedTimeoutFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final017EverySetvalResultShapeIsStrict()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final018EveryPreparedQueryFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final019EveryPreparedResultReadPhaseFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final020EveryPreparedResultCloseFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final022EachPreparedCloseFailureIsPropagated()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final023OuterCloseFailureCannotBeSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final024EachAnalyzeWrongCountWarningAndOriginalFailures()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final025FreshSuccessAfterRejectedFixtureDoesNotReuseOwner()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final026MaximumN12IsRetainedWithoutAddingOneOrReorderingRows()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final027DiagnosticsFixedAndNoFailureNormalized()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+      "name": "final028FiniteReadersOwnIndependentProxiesAndTerminate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target001OneConnectionFixedEightySevenSqlAndExactResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target002EmptyHasNoInventedRowsAndOneFalseSetval()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target003NullPrepareIsRejectedBeforeDelegation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target004AllNullTransferCombinationsHaveNoConnectionCalls()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target005AutoCommitDelegationNeverMutatesConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target006EveryPrepareSqlOriginalFailureStopsThePath()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target007EveryTransferSqlOriginalFailureStopsThePath()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target008EveryReferenceSqlFailurePreventsSetvalAndAnalyze()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target009EveryFinalizationSqlAndPreparedExecuteOriginalFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target010EveryTransferScalarMismatchCannotReachLaterStage()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target011EveryReferenceOrphanAndOrderViolationPreventsSequenceMutation()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target012PartialSetvalAndAnalyzeWarningAreNotRetriedOrSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target013EveryOwnedStatementCloseFailureKeepsExactPrefixAndOuterOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target014OriginalReadFailureKeepsResultThenStatementSuppressedOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target015FixedRedactionAndSamePublisherFreshConnectionAfterFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target016SharedPublisherFiniteIndependentConnectionsAndTermination()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target017AllSixContentQueryFaultsStopBeforeFinalization()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target018AllSixtyFiveValueChangesStopBeforeMaxSetvalAnalyze()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target019NullContentResultsDoNotCreateResultOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target020MissingAndExtraRowsHaveNoExtraColumnReads()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target021RequiredSqlNullNeverBecomesZeroFalseOrEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target022EveryContentGetterKeepsPrimaryThenBothCleanupIdentities()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target023ScalarAndTypedResultsRemainSeparateOnOneBorrowedConnection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target024FiniteFailedContentCallsCannotReachFinalizerOrRetainResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target025AllCatalogSqlFaultsPreventAnyStagingDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target026All141CatalogRowAttributesMismatchBeforeDdl()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target027NullCatalogResultHasOnlyPreviousResultOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target028MissingExtraCatalogColumnsHaveNoExtraFieldRead()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target030EveryCatalogGetterKeepsPrimaryThenBothCleanupIdentities()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target031CatalogContentScalarResultsKeepSeparateOwnershipAndCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+      "name": "target032FiniteCatalogFailureCannotReachDdlOrRetainResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId001SpeakerKeepsSamePrimaryForAllThreeFaultKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId002ScenarioKeepsSamePrimaryForAllThreeFaultKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId003AssetKeepsSamePrimaryForAllThreeFaultKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId004FinalizerKeepsSamePrimaryForAllThreeFaultKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId005ReferenceKeepsSamePrimaryForAllThreeFaultKinds()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId006EqualValuedDifferentObjectsStillBecomeSuppressed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId008SameCleanupFromTwoResourcesRetainsBothAttemptsInOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+      "name": "cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content001SixFixedQueriesAndEveryPayloadColumnMatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content002EmptyAllTablesStillChecksEveryTerminalRow()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content003BothNullBoundariesHaveNoIo()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content004AutoCommitIsRejectedWithoutStatementAcquisition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content005NullStatementNeverCreatesOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content006NullResultAtEachTableClosesOnlyPriorResults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content007AcquisitionTimeoutAndFetchFailuresPreserveOriginal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content008MissingRowAtEveryTableRejectsWithNoLaterQuery()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content009ExtraRowsIncludingEmptyExpectationAreNeverRead()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content010AllSixtyFiveColumnPositionsDetectIndividualValueChanges()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content011SqlNullIsComparedWithoutInventingZeroFalseOrEmpty()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content012TypedGettersAndImmediateWasNullMatchIndependentEventSequence()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content013NullEmptyLiteralBackslashNAndUtf8NotesStayDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content014DeclaredCurrentOrderIsNotReplacedByTargetPkOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content015LinksSortByBothNumericIdsThenFixedAsciiType()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content016TargetN12AndTimestampMicrosecondYearExtremes()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content017TypedTimestamptzUsesInstantAndCanonicalUtc()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content018EachQueryFailsWithoutAcquiringItsResult()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content019EveryGetterWasNullAndNextOccurrenceKeepsResourcePostconditions()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content020EachResultCloseFailureIsNotSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content021StatementCloseFailureIsNotSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content022AllThreeFaultKindsPreserveInnerThenOuterSuppressedOrder()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content024EqualValuedDistinctCleanupIsKeptTwice()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content025BorrowedConnectionHasOnlyAutoReadAndStatementAcquisition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content026FixedRedactionAndFreshSuccessAfterRejection()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content027CallerLiteralRowsAndDeclaredOrderStayUnchanged()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content028FiniteWorkersKeepIndependentBorrowedResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+      "name": "content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column001SixQueriesSixtySixColumnsAndExactResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column002NullConnectionFailsBeforeIo()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column003AutoCommitIsNotChangedOrUsed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column004NullVendorStatementHasNoOwnedHandle()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column005EachNullResultClosesOnlyPreviousResults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column006AnyMissingPhysicalColumnIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column007ExtraMetadataRowsAreNotReadAsAnotherColumn()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column008NullZeroNegativeDuplicateAndWrongOrdinalsFail()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column009EveryColumnAttributeMismatchIsDetected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column010AllStringMetadataSqlNullsDifferFromEmptyFlags()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column011SqlNullBooleanCannotMasqueradeAsFalse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column012NotNullFlagsAreCheckedIndividuallyIncludingImplicitPk()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column013IdentityAlwaysDefaultMissingAndUnknownAreDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column014StoredVirtualMissingAndUnknownGenerationAreDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column015BuiltinWidthsAndNamespaceTablekindPredicatesAreFixed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column017EveryResultCloseFailureStopsLaterQueries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column018StatementCloseFailureCannotBecomeSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column019AllFaultKindsPreserveResultThenStatementSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column020SamePrimaryAndEqualValuedDistinctCleanupIdentities()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column021RedactionFreshSuccessAndBorrowedConnectionContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+      "name": "column022FiniteSharedVerifierHasOnlyPerCallOwnedResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint001SixQueriesSeventyFiveConstraintsAndExactResources()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint002NullConnectionFailsBeforeIo()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint003AutoCommitIsNotChangedOrUsed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint004NullVendorStatementHasNoOwnedHandle()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint005EachNullResultClosesOnlyPreviousResults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint006AnyMissingDeclaredConstraintIsRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint007ExtraMetadataRowsAreNotReadAsAnotherConstraint()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint008NullZeroNegativeDuplicateAndWrongOrdinalsFail()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint009EveryConstraintAttributeMismatchIsDetected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint010AllStringMetadataSqlNullsDifferFromEmptyFlags()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint011SqlNullBooleanCannotMasqueradeAsFalse()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint012EveryConstraintValidatedEnforcedLocalStatusIsRequired()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint013ReferencedSchemaTableKeysAndNonForeignMarkerAreDistinct()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint014UpdateDeleteMatchActionsNeverCoerceOrDefault()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint015FixedStatusNamespaceAndColumnOrderPredicatesAreLiteral()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint016EveryJdbcEventSqlRuntimeAndErrorKeepsOwnership()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint017EveryResultCloseFailureStopsLaterQueries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint018StatementCloseFailureCannotBecomeSuccess()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint019AllFaultKindsPreserveResultThenStatementSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint020SamePrimaryAndEqualValuedDistinctCleanupIdentities()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint021RedactionFreshSuccessAndBorrowedConnectionContract()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+      "name": "constraint022FiniteSharedVerifierHasOnlyPerCallOwnedResources()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.migration.AssetMigrationManifestTest",
+    "dev.codex.schubert.nk.migration.AssetStagingTablesTest",
+    "dev.codex.schubert.nk.migration.AudioCopyDatasetTest",
+    "dev.codex.schubert.nk.migration.AudioFileCopyRowTest",
+    "dev.codex.schubert.nk.migration.MediaAssetCopyBatchTest",
+    "dev.codex.schubert.nk.migration.MediaAssetCopyRowTest",
+    "dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest",
+    "dev.codex.schubert.nk.migration.MigrationCopyDatasetTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterColumnVerifierTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterConstraintVerifierTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterContentVerifierTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterCopyDatasetTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterFinalizerTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifierTest",
+    "dev.codex.schubert.nk.migration.MigrationMasterTargetPublisherTest",
+    "dev.codex.schubert.nk.migration.MusicLogicalIdTest",
+    "dev.codex.schubert.nk.migration.MusicMigrationCatalogueTest",
+    "dev.codex.schubert.nk.migration.MusicMigrationPairingTest",
+    "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+    "dev.codex.schubert.nk.migration.PostgresCopyTextWriterTest",
+    "dev.codex.schubert.nk.migration.ScenarioCopyDatasetTest",
+    "dev.codex.schubert.nk.migration.ScenarioEntryCopyBatchTest",
+    "dev.codex.schubert.nk.migration.ScenarioEntryCopyRowTest",
+    "dev.codex.schubert.nk.migration.ScenarioEntryMigrationMapTest",
+    "dev.codex.schubert.nk.migration.ScenarioEntryPlacementMapTest",
+    "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+    "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+    "dev.codex.schubert.nk.migration.ScenarioGeneratedValueTest",
+    "dev.codex.schubert.nk.migration.ScenarioStagingTablesTest",
+    "dev.codex.schubert.nk.migration.SpeakerCopyBatchTest",
+    "dev.codex.schubert.nk.migration.SpeakerCopyRowTest",
+    "dev.codex.schubert.nk.migration.SpeakerStagingTableTest",
+    "dev.codex.schubert.nk.migration.VideoMigrationCatalogueTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T16:35:58.348003+00:00",
+      "endUTC": "2026-11-14T16:36:02.021977+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg32302-check-rows643-prepare-v1",
+      "stdoutSha256": "98e2d3c573a2eb9511922a68942722e3328de46448820bde52463448dc9f7ebe",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T16:36:02.022520+00:00",
+      "endUTC": "2026-11-14T16:36:04.744051+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg32302-check-rows643-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg32302-check-rows643-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32300-check-rows643-prestyle-v1/manifest.json",
+    "sha256": "d7dee96c80bb9f24e5e346bc256ae0ff454eca839697cf53a7fbac9bdb88dedc"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "0f3195bbf353b6e50421f83c785239e3ebb6c63501d6f5962b9ba6c60243d44a",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 31,
+  "reusedRuntimeSignatureClassCount": 0
+}
