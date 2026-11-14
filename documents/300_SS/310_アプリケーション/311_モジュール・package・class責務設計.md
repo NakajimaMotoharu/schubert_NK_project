@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC401: CurrentMigrationProjection.read/snapshotMode/SourceSnapshot五getterは既Current五readerを同caller Connectionへ順次束縛。new12/全43Main63physical898予定、実DB/Current順資格なし。
+
 SSC400: CurrentAudioLinkMapper/LinkOrderは宣言source triple/orderとplacement/audio対応を検証し既AudioCopyDatasetへ接続。新24/全42Main61physical886予定、実DB/Current順oracle資格なし。
 
 SSC399: CurrentAudioLinkProjectionReader.read/rows/row/cleanupはCurrent二signedIDと保存typeを三列snapshotへ接続。新20/一Main四100予定、実DB資格・target displayorder決定なし。
