@@ -1,0 +1,49 @@
+{
+  "actualExit": 0,
+  "sameByteSites": 498,
+  "visibilityOnlyFixtureSites": 10,
+  "fixtureProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32876-current-assembly918-source-v1/manifest.json",
+    "sha256": "ec75e8d92b3bbbb8adb2a09ff2ee3aeff66f0c1c03d8727fe662e94c10c553ab"
+  },
+  "freshSites": [
+    {
+      "rule": "CloseResource",
+      "line": 273,
+      "anchor": "for (var sink : output) assertEquals(0, sink.size());"
+    },
+    {
+      "rule": "NullAssignment",
+      "line": 279,
+      "anchor": "f.tables.get(2).get(0)[9] = null;"
+    },
+    {
+      "rule": "CloseResource",
+      "line": 604,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 604,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 609,
+      "anchor": "executor.submit("
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 619,
+      "anchor": "executor.shutdownNow();"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 620,
+      "anchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));"
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "scope": "FULL44_MIGRATION_MAIN_ROOT_RULES_NO_SUPPRESSION"
+}

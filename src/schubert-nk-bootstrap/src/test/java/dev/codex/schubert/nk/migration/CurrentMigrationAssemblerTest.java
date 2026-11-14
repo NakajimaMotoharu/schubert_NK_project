@@ -24,6 +24,11 @@ import org.junit.jupiter.api.Test;
  * wire.
  */
 final class CurrentMigrationAssemblerTest {
+  private static final String TARGET_SPEAKER_ONE = "1001";
+  private static final int MEDIA_STORAGE_INDEX = 6;
+  private static final int MEDIA_BYTES_INDEX = 9;
+  private static final int MEDIA_HASH_INDEX = 10;
+  private static final int MEDIA_PARENT_INDEX = 12;
   private static final String STAMP = "2026-01-02T03:04:05Z";
   private static final String HASH =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
@@ -47,7 +52,8 @@ final class CurrentMigrationAssemblerTest {
   void assembly001AllSixTablesHaveIndependentLiteralValues() throws Exception {
     var master = normal();
     assertEquals(
-        List.of(Arrays.asList("1001", "1", " Namé ", "stored_norm", "false", null, STAMP)),
+        List.of(
+            Arrays.asList(TARGET_SPEAKER_ONE, "1", " Namé ", "stored_norm", "false", null, STAMP)),
         master.speakers().rows().stream().map(SpeakerCopyRow::fields).toList());
     assertEquals(
         List.of(
@@ -284,7 +290,8 @@ final class CurrentMigrationAssemblerTest {
     f.tables.get(0).get(0)[5] = "saved-note";
     var result = assembler().assemble(snapshot(f), media(STAMP), at());
     assertEquals(
-        List.of("1001", "1", "Preserved 名", "saved-normal", "false", "saved-note", STAMP),
+        List.of(
+            TARGET_SPEAKER_ONE, "1", "Preserved 名", "saved-normal", "false", "saved-note", STAMP),
         result.speakers().rows().get(0).fields());
     var bad = fixture();
     bad.tables.get(0).get(0)[1] = 2;
@@ -332,7 +339,7 @@ final class CurrentMigrationAssemblerTest {
     dialogue.tables.get(2).get(0)[5] = "dialogue";
     dialogue.tables.get(2).get(0)[6] = -2L;
     assertEquals(
-        "1001",
+        TARGET_SPEAKER_ONE,
         assembler()
             .assemble(snapshot(dialogue), media(STAMP), at())
             .content()
@@ -389,14 +396,17 @@ final class CurrentMigrationAssemblerTest {
   @Test
   void assembly012MediaRebindsExactKindTargetSizeHashAndCount() throws Exception {
     var source = snapshot(fixture());
-    for (int index : List.of(6, 9, 10, 12)) {
+    for (int index :
+        List.of(MEDIA_STORAGE_INDEX, MEDIA_BYTES_INDEX, MEDIA_HASH_INDEX, MEDIA_PARENT_INDEX)) {
       var rows = media(STAMP);
       var fields = new ArrayList<@Nullable String>(rows.get(0).fields());
       fields.set(
           index,
-          index == 6
+          index == MEDIA_STORAGE_INDEX
               ? "video/other.mp4"
-              : index == 9 ? "4" : index == 10 ? "0".repeat(64) : "absent-parent");
+              : index == MEDIA_BYTES_INDEX
+                  ? "4"
+                  : index == MEDIA_HASH_INDEX ? "0".repeat(64) : "absent-parent");
       rows.set(0, new MediaAssetCopyRow(fields));
       assertThrows(IllegalArgumentException.class, () -> assembler().assemble(source, rows, at()));
     }
@@ -584,7 +594,7 @@ final class CurrentMigrationAssemblerTest {
             List.of("602", "702", "2", VOICE, "1", STAMP)),
         result.content().audio().linkRows());
     assertEquals(
-        List.of("1001", "1002"),
+        List.of(TARGET_SPEAKER_ONE, "1002"),
         result.speakers().rows().stream().map(row -> row.fields().get(0)).toList());
   }
 
