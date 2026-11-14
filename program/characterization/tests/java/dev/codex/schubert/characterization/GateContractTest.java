@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class GateContractTest {
+  private static final String ORACLE_NK_ONLY = "NK_ONLY";
   private static final ObjectMapper JSON = new ObjectMapper();
 
   @Test
@@ -27,7 +28,8 @@ class GateContractTest {
     List<String> nkOnly = new ArrayList<>();
     for (JsonNode item : catalog.path("cases")) {
       ids.add(item.path("id").asText());
-      if ("NK_ONLY".equals(item.path("current").asText())) nkOnly.add(item.path("id").asText());
+      if (ORACLE_NK_ONLY.equals(item.path("current").asText()))
+        nkOnly.add(item.path("id").asText());
       assertEquals("RUN", item.path("nk").asText());
     }
     assertEquals(24, ids.size());

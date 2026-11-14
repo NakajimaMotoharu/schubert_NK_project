@@ -15,6 +15,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-CHR-DEF-001..011. Pure definition checks, never capture/baseline/preflight/run validation. */
@@ -298,11 +299,15 @@ final class GateDefinitionDocumentsTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, CONTRACT).put(VERSION, 2);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> validate(valid));
       var second = workers.submit(() -> validate(invalid));
-      assertEquals(List.of(), first.get());
-      assertTrue(second.get().contains("CONTRACT_VERSION"));
+      assertEquals(List.of(), first.get(5, TimeUnit.SECONDS));
+      assertTrue(second.get(5, TimeUnit.SECONDS).contains("CONTRACT_VERSION"));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(List.of(), validate(valid));
   }

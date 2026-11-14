@@ -40,6 +40,22 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Contract tests for BUG-001/YKT-001 gate orchestration. Program: NK-CHR-001. */
 class GateCliTest {
+  private static final String ORACLE_PROJECT_ROOT_PROPERTY = "chr.projectRoot";
+  private static final String ORACLE_VERIFY_COMMAND = "verify-source";
+  private static final String ORACLE_COMPARE_COMMAND = "compare-current";
+  private static final String ORACLE_PASS = "PASS";
+  private static final String ORACLE_STATUS = "status";
+  private static final String ORACLE_FAIL = "FAIL";
+  private static final String ORACLE_FAILURES = "failures";
+  private static final String ORACLE_CURRENT_REPORTS = "program/characterization/reports/current";
+  private static final String ORACLE_FIRST_RUN = "pgpt-gate-20260901-05";
+  private static final String ORACLE_SECOND_RUN = "pgpt-gate-20260901-06";
+  private static final String ORACLE_REPEAT_REPORT =
+      "program/characterization/reports/current-repeat-comparison.json";
+  private static final String ORACLE_USERS_PROPERTY = "chr.usersFile";
+  private static final String ORACLE_GATES = "gates";
+  private static final String ORACLE_COMMIT_PROPERTY = "chr.gateCommit";
+  private static final String ORACLE_COMMIT = "abcdef1";
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final HexFormat HEX = HexFormat.of();
   private static final Path SOURCE_ROOT =
@@ -53,28 +69,30 @@ class GateCliTest {
     assertThrows(IllegalArgumentException.class, () -> GateCli.main(new String[] {"unknown"}));
 
     Map<String, String> missingProjectRoot = new LinkedHashMap<>();
-    missingProjectRoot.put("chr.projectRoot", null);
+    missingProjectRoot.put(ORACLE_PROJECT_ROOT_PROPERTY, null);
     withProperties(
         missingProjectRoot,
         () ->
             assertThrows(
                 IllegalArgumentException.class,
-                () -> GateCli.main(new String[] {"verify-source", "unused.json"})));
+                () -> GateCli.main(new String[] {ORACLE_VERIFY_COMMAND, "unused.json"})));
     withProperties(
-        Map.of("chr.projectRoot", "  "),
+        Map.of(ORACLE_PROJECT_ROOT_PROPERTY, "  "),
         () ->
             assertThrows(
                 IllegalArgumentException.class,
-                () -> GateCli.main(new String[] {"verify-source", "unused.json"})));
+                () -> GateCli.main(new String[] {ORACLE_VERIFY_COMMAND, "unused.json"})));
     assertThrows(
         IllegalArgumentException.class,
-        () -> GateCli.main(new String[] {"compare-current", temporaryDirectory.toString()}));
+        () -> GateCli.main(new String[] {ORACLE_COMPARE_COMMAND, temporaryDirectory.toString()}));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             GateCli.main(
                 new String[] {
-                  "compare-current", temporaryDirectory.toString(), temporaryDirectory.toString()
+                  ORACLE_COMPARE_COMMAND,
+                  temporaryDirectory.toString(),
+                  temporaryDirectory.toString()
                 }));
   }
 
@@ -108,10 +126,14 @@ class GateCliTest {
 
     Path passOutput = temporaryDirectory.resolve("source-pass.json");
     withProperties(
-        Map.of("chr.projectRoot", project.toString(), "chr.currentRoot", current.toString()),
-        () -> GateCli.main(new String[] {"verify-source", passOutput.toString()}));
+        Map.of(
+            ORACLE_PROJECT_ROOT_PROPERTY,
+            project.toString(),
+            "chr.currentRoot",
+            current.toString()),
+        () -> GateCli.main(new String[] {ORACLE_VERIFY_COMMAND, passOutput.toString()}));
     JsonNode pass = JSON.readTree(passOutput.toFile());
-    assertEquals("PASS", pass.path("status").asText());
+    assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
     assertEquals(5, pass.path("sourceFileCount").asInt());
     assertEquals(2, pass.path("masterFileCount").asInt());
 
@@ -123,17 +145,21 @@ class GateCliTest {
         expected);
     Path failOutput = temporaryDirectory.resolve("source-fail.json");
     withProperties(
-        Map.of("chr.projectRoot", project.toString(), "chr.currentRoot", current.toString()),
+        Map.of(
+            ORACLE_PROJECT_ROOT_PROPERTY,
+            project.toString(),
+            "chr.currentRoot",
+            current.toString()),
         () ->
             assertThrows(
                 IllegalStateException.class,
-                () -> GateCli.main(new String[] {"verify-source", failOutput.toString()})));
+                () -> GateCli.main(new String[] {ORACLE_VERIFY_COMMAND, failOutput.toString()})));
     JsonNode fail = JSON.readTree(failOutput.toFile());
-    assertEquals("FAIL", fail.path("status").asText());
+    assertEquals(ORACLE_FAIL, fail.path(ORACLE_STATUS).asText());
     assertTrue(
-        strings(fail.path("failures")).stream()
+        strings(fail.path(ORACLE_FAILURES)).stream()
             .anyMatch(value -> value.startsWith("sourceFileCount expected=")));
-    assertTrue(strings(fail.path("failures")).contains("masterSymlinks must be empty"));
+    assertTrue(strings(fail.path(ORACLE_FAILURES)).contains("masterSymlinks must be empty"));
   }
 
   @Test
@@ -149,7 +175,7 @@ class GateCliTest {
           valid.properties(),
           () -> GateCli.main(new String[] {"preflight", passOutput.toString()}));
       JsonNode pass = JSON.readTree(passOutput.toFile());
-      assertEquals("PASS", pass.path("status").asText());
+      assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
       assertEquals("0600", pass.path("credentialPermission").asText());
 
       PreflightFixture invalid =
@@ -187,7 +213,7 @@ class GateCliTest {
               assertThrows(
                   IllegalStateException.class,
                   () -> GateCli.main(new String[] {"preflight", invalidOutput.toString()})));
-      List<String> failures = strings(JSON.readTree(invalidOutput.toFile()).path("failures"));
+      List<String> failures = strings(JSON.readTree(invalidOutput.toFile()).path(ORACLE_FAILURES));
       assertTrue(failures.contains("currentJar is not a regular file"));
       assertTrue(failures.contains("assetRoot is not a directory"));
       assertTrue(failures.contains("current source root escapes currentRoot"));
@@ -204,16 +230,16 @@ class GateCliTest {
 
   @Test
   void repeatComparisonRequiresTwentyEightIdenticalArtifacts() throws Exception {
-    Path reports = SOURCE_ROOT.resolve("program/characterization/reports/current");
-    Path first = reports.resolve("pgpt-gate-20260901-05");
-    Path second = reports.resolve("pgpt-gate-20260901-06");
+    Path reports = SOURCE_ROOT.resolve(ORACLE_CURRENT_REPORTS);
+    Path first = reports.resolve(ORACLE_FIRST_RUN);
+    Path second = reports.resolve(ORACLE_SECOND_RUN);
     Path passOutput = temporaryDirectory.resolve("repeat-pass.json");
     GateCli.main(
         new String[] {
-          "compare-current", first.toString(), second.toString(), passOutput.toString()
+          ORACLE_COMPARE_COMMAND, first.toString(), second.toString(), passOutput.toString()
         });
     JsonNode pass = JSON.readTree(passOutput.toFile());
-    assertEquals("PASS", pass.path("status").asText());
+    assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
     assertEquals(28, pass.path("expectedFileCount").asInt());
     assertEquals(28, pass.path("firstFileCount").asInt());
 
@@ -233,13 +259,13 @@ class GateCliTest {
         () ->
             GateCli.main(
                 new String[] {
-                  "compare-current",
+                  ORACLE_COMPARE_COMMAND,
                   alteredFirst.toString(),
                   alteredSecond.toString(),
                   failOutput.toString()
                 }));
     JsonNode fail = JSON.readTree(failOutput.toFile());
-    assertEquals("FAIL", fail.path("status").asText());
+    assertEquals(ORACLE_FAIL, fail.path(ORACLE_STATUS).asText());
     assertTrue(strings(fail.path("missing")).contains("first-only.json"));
     assertTrue(strings(fail.path("extra")).contains("second-only.json"));
     assertTrue(strings(fail.path("changed")).contains("common.json"));
@@ -252,7 +278,7 @@ class GateCliTest {
                 temporaryDirectory.resolve("absent-one"),
                 temporaryDirectory.resolve("absent-two"),
                 emptyOutput));
-    assertEquals("FAIL", JSON.readTree(emptyOutput.toFile()).path("status").asText());
+    assertEquals(ORACLE_FAIL, JSON.readTree(emptyOutput.toFile()).path(ORACLE_STATUS).asText());
   }
 
   @Test
@@ -289,26 +315,29 @@ class GateCliTest {
         ownerOnlyFile(
             temporaryDirectory.resolve("report-users.txt"),
             "user=unit-user-not-present\npass=unit-pass-not-present\n");
-    Path reports = SOURCE_ROOT.resolve("program/characterization/reports/current");
-    Path comparison =
-        SOURCE_ROOT.resolve("program/characterization/reports/current-repeat-comparison.json");
+    Path reports = SOURCE_ROOT.resolve(ORACLE_CURRENT_REPORTS);
+    Path comparison = SOURCE_ROOT.resolve(ORACLE_REPEAT_REPORT);
     Path passOutput = temporaryDirectory.resolve("gate-pass.json");
     withProperties(
-        Map.of("chr.projectRoot", SOURCE_ROOT.toString(), "chr.usersFile", users.toString()),
+        Map.of(
+            ORACLE_PROJECT_ROOT_PROPERTY,
+            SOURCE_ROOT.toString(),
+            ORACLE_USERS_PROPERTY,
+            users.toString()),
         () ->
             GateCli.main(
                 new String[] {
                   "report",
-                  reports.resolve("pgpt-gate-20260901-05").toString(),
-                  reports.resolve("pgpt-gate-20260901-06").toString(),
+                  reports.resolve(ORACLE_FIRST_RUN).toString(),
+                  reports.resolve(ORACLE_SECOND_RUN).toString(),
                   comparison.toString(),
                   passOutput.toString()
                 }));
     JsonNode pass = JSON.readTree(passOutput.toFile());
-    assertEquals("PASS", pass.path("status").asText());
+    assertEquals(ORACLE_PASS, pass.path(ORACLE_STATUS).asText());
     assertTrue(
-        pass.path("gates").properties().stream()
-            .allMatch(entry -> "PASS".equals(entry.getValue().asText())));
+        pass.path(ORACLE_GATES).properties().stream()
+            .allMatch(entry -> ORACLE_PASS.equals(entry.getValue().asText())));
 
     Path failureProject = reportFixture("gate-failures");
     mutate(
@@ -319,20 +348,19 @@ class GateCliTest {
         root -> root.put("version", 0));
     mutate(
         failureProject.resolve("program/characterization/reports/source-verification.json"),
-        root -> root.put("status", "FAIL"));
+        root -> root.put(ORACLE_STATUS, ORACLE_FAIL));
     mutate(
-        failureProject.resolve("program/characterization/reports/current-repeat-comparison.json"),
-        root -> root.put("status", "FAIL"));
-    Path first = run(failureProject, "pgpt-gate-20260901-05");
-    Path second = run(failureProject, "pgpt-gate-20260901-06");
+        failureProject.resolve(ORACLE_REPEAT_REPORT), root -> root.put(ORACLE_STATUS, ORACLE_FAIL));
+    Path first = run(failureProject, ORACLE_FIRST_RUN);
+    Path second = run(failureProject, ORACLE_SECOND_RUN);
     Files.delete(first.resolve("artifacts/CHR-A01.json"));
     Path failUsers =
         ownerOnlyFile(temporaryDirectory.resolve("fail-users.txt"), "pass=not-in-fixture\n");
     Path failOutput = temporaryDirectory.resolve("gate-fail.json");
     withProperties(
         Map.of(
-            "chr.projectRoot", failureProject.toString(),
-            "chr.usersFile", failUsers.toString()),
+            ORACLE_PROJECT_ROOT_PROPERTY, failureProject.toString(),
+            ORACLE_USERS_PROPERTY, failUsers.toString()),
         () ->
             assertThrows(
                 IllegalStateException.class,
@@ -342,17 +370,14 @@ class GateCliTest {
                           "report",
                           first.toString(),
                           second.toString(),
-                          failureProject
-                              .resolve(
-                                  "program/characterization/reports/current-repeat-comparison.json")
-                              .toString(),
+                          failureProject.resolve(ORACLE_REPEAT_REPORT).toString(),
                           failOutput.toString()
                         })));
     JsonNode fail = JSON.readTree(failOutput.toFile());
-    assertEquals("FAIL", fail.path("status").asText());
+    assertEquals(ORACLE_FAIL, fail.path(ORACLE_STATUS).asText());
     assertTrue(
-        fail.path("gates").properties().stream()
-            .allMatch(entry -> "FAIL".equals(entry.getValue().asText())));
+        fail.path(ORACLE_GATES).properties().stream()
+            .allMatch(entry -> ORACLE_FAIL.equals(entry.getValue().asText())));
 
     Path secretProject = reportFixture("gate-secret");
     String canary = "unit-secret-canary-7d9a";
@@ -364,23 +389,22 @@ class GateCliTest {
     Path secretOutput = temporaryDirectory.resolve("gate-secret.json");
     withProperties(
         Map.of(
-            "chr.projectRoot", secretProject.toString(),
-            "chr.usersFile", secretUsers.toString()),
+            ORACLE_PROJECT_ROOT_PROPERTY, secretProject.toString(),
+            ORACLE_USERS_PROPERTY, secretUsers.toString()),
         () ->
             assertThrows(
                 IllegalStateException.class,
                 () ->
                     GateCli.report(
                         secretProject,
-                        run(secretProject, "pgpt-gate-20260901-05"),
-                        run(secretProject, "pgpt-gate-20260901-06"),
-                        secretProject.resolve(
-                            "program/characterization/reports/current-repeat-comparison.json"),
+                        run(secretProject, ORACLE_FIRST_RUN),
+                        run(secretProject, ORACLE_SECOND_RUN),
+                        secretProject.resolve(ORACLE_REPEAT_REPORT),
                         secretOutput)));
     JsonNode secretFailure = JSON.readTree(secretOutput.toFile());
     assertEquals(1, secretFailure.path("secretScanHits").asInt());
-    assertEquals("FAIL", secretFailure.path("gates").path("CHR-G06").asText());
-    assertEquals("PASS", secretFailure.path("gates").path("CHR-G05").asText());
+    assertEquals(ORACLE_FAIL, secretFailure.path(ORACLE_GATES).path("CHR-G06").asText());
+    assertEquals(ORACLE_PASS, secretFailure.path(ORACLE_GATES).path("CHR-G05").asText());
   }
 
   @Test
@@ -388,7 +412,7 @@ class GateCliTest {
   void promotionRejectsNullAndUnnamedSourceBeforeAnyIo() throws Exception {
     Path baseline = temporaryDirectory.resolve("not-created-baseline");
     withProperties(
-        Map.of("chr.gateCommit", "abcdef1"),
+        Map.of(ORACLE_COMMIT_PROPERTY, ORACLE_COMMIT),
         () -> {
           for (Path invalid : new Path[] {null, Path.of("/")}) {
             IllegalArgumentException error =
@@ -403,24 +427,25 @@ class GateCliTest {
 
   @Test
   void baselinePromotionIsImmutableCommitBoundAndSymlinkSafe() throws Exception {
-    Path sourceRun =
-        SOURCE_ROOT
-            .resolve("program/characterization/reports/current")
-            .resolve("pgpt-gate-20260901-05");
+    Path sourceRun = SOURCE_ROOT.resolve(ORACLE_CURRENT_REPORTS).resolve(ORACLE_FIRST_RUN);
     Path baseline = temporaryDirectory.resolve("promoted-baseline");
     withProperties(
-        Map.of("chr.projectRoot", SOURCE_ROOT.toString(), "chr.gateCommit", "abcdef1"),
+        Map.of(
+            ORACLE_PROJECT_ROOT_PROPERTY,
+            SOURCE_ROOT.toString(),
+            ORACLE_COMMIT_PROPERTY,
+            ORACLE_COMMIT),
         () ->
             GateCli.main(
                 new String[] {"promote-current", sourceRun.toString(), baseline.toString()}));
     JsonNode manifest = JSON.readTree(baseline.resolve("manifest.json").toFile());
-    assertEquals("abcdef1", manifest.path("gateCommit").asText());
+    assertEquals(ORACLE_COMMIT, manifest.path("gateCommit").asText());
     assertEquals(24, manifest.path("caseCount").asInt());
     assertEquals(2, manifest.path("screenshotFileCount").asInt());
     assertTrue(Files.isRegularFile(baseline.resolve("artifacts/CHR-A01.json")));
 
     withProperties(
-        Map.of("chr.gateCommit", "abcdef1"),
+        Map.of(ORACLE_COMMIT_PROPERTY, ORACLE_COMMIT),
         () ->
             assertThrows(
                 IllegalStateException.class,
@@ -429,14 +454,14 @@ class GateCliTest {
     Path existingEmpty = temporaryDirectory.resolve("existing-empty-baseline");
     Files.createDirectories(existingEmpty);
     withProperties(
-        Map.of("chr.gateCommit", "0123456789abcdef0123456789abcdef01234567"),
+        Map.of(ORACLE_COMMIT_PROPERTY, "0123456789abcdef0123456789abcdef01234567"),
         () -> GateCli.promoteCurrent(SOURCE_ROOT, sourceRun, existingEmpty));
     assertEquals(
         "0123456789abcdef0123456789abcdef01234567",
         JSON.readTree(existingEmpty.resolve("manifest.json").toFile()).path("gateCommit").asText());
 
     withProperties(
-        Map.of("chr.gateCommit", "INVALID"),
+        Map.of(ORACLE_COMMIT_PROPERTY, "INVALID"),
         () ->
             assertThrows(
                 IllegalArgumentException.class,
@@ -449,7 +474,7 @@ class GateCliTest {
     Files.createSymbolicLink(
         linkedRun.resolve("artifacts/link.json"), linkedRun.resolve("artifacts/CHR-A01.json"));
     withProperties(
-        Map.of("chr.gateCommit", "abcdef1"),
+        Map.of(ORACLE_COMMIT_PROPERTY, ORACLE_COMMIT),
         () ->
             assertThrows(
                 IOException.class,
@@ -565,7 +590,7 @@ class GateCliTest {
                 IllegalStateException.class,
                 () -> GateCli.preflight(fixture.projectRoot(), output)));
     assertTrue(
-        strings(JSON.readTree(output.toFile()).path("failures"))
+        strings(JSON.readTree(output.toFile()).path(ORACLE_FAILURES))
             .contains("app/proxy ports must be distinct non-privileged ports"));
   }
 
@@ -583,11 +608,11 @@ class GateCliTest {
     Path pgLog = current.resolve("logs/postgresql.log");
     Path pgSocket = current.resolve("pgsocket");
     Map<String, String> properties = new LinkedHashMap<>();
-    properties.put("chr.projectRoot", project.toString());
+    properties.put(ORACLE_PROJECT_ROOT_PROPERTY, project.toString());
     properties.put("chr.currentRoot", current.toString());
     properties.put("chr.currentJar", currentJar.toString());
     properties.put("chr.assetRoot", assetRoot.toString());
-    properties.put("chr.usersFile", users.toString());
+    properties.put(ORACLE_USERS_PROPERTY, users.toString());
     properties.put("chr.javaExecutable", java.toString());
     properties.put("chr.caddyExecutable", caddy.toString());
     properties.put("chr.runtimeRoot", runtimeRoot.toString());
@@ -633,7 +658,7 @@ class GateCliTest {
   }
 
   private static Path run(Path project, String runId) {
-    return project.resolve("program/characterization/reports/current").resolve(runId);
+    return project.resolve(ORACLE_CURRENT_REPORTS).resolve(runId);
   }
 
   private static void mutate(Path file, Consumer<ObjectNode> mutation) throws Exception {

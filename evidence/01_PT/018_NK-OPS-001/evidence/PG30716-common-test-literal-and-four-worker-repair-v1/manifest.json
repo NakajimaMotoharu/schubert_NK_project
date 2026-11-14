@@ -1,0 +1,101 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T00:24:17.006826+00:00",
+  "bugs": [
+    "BUG-2878",
+    "BUG-2879"
+  ],
+  "testOnlyRepairs": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "beforeSha256": "d6972cfed749f503da34b08d2498af9b8f61709b1174759779d3cfc93198697e",
+      "afterSha256": "f7c945ffd99d2a62d60b97d9588cfda1d7d22c64309a39520d064926b2449d07",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+      "beforeSha256": "23feaae2ed0ba93f5f28fc2c9e5c6b5eed996887d561d68dac8ebe248282d965",
+      "afterSha256": "3e65068779b11e13cca4a39b6e6c7a965609c241ec8f98fc40f9d15675274f97",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+      "beforeSha256": "6cab5896c3d70131a09b8f7d4ba058138f1907ac9a47e99b23dec97c908ecde8",
+      "afterSha256": "cbebd96b4e3bdfcae8c17d31d951c60e6bc97d76b0ecc779bedd9e8c7951197b",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+      "beforeSha256": "383b88a7ba3a8ea06d08d8188e413d292adf43896ce37be33ebff3abdc6d6173",
+      "afterSha256": "99e4bf2733255ac01bf673f9d1363831a534bc7ab4125fbc073430c239044bbe",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "beforeSha256": "385f42c97c30755435b7ad5c956a9183aadfb4a406456fcbe4f7f87185b836ce",
+      "afterSha256": "1fde5280604f6eef4b708b803c2a1892aa9e646c0f84025dff9ff60e2eaa3f5d",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+      "beforeSha256": "d8d49a86e4e20c9ee50df74f3bbe75524d474ed94eed9f52918d0d679ecb4f7c",
+      "afterSha256": "832da3b92ca67ed157981b140300fb72cc8cfd0364969ea3145475592f24af2f",
+      "allOtherJavaTokensAndLiteralBytesInverseEqual": true,
+      "testDefinitionsUnchanged": true
+    }
+  ],
+  "constantValuesFromOriginalTestsOnly": true,
+  "productionMethodOrConstantUsedToGenerateExpected": false,
+  "metadataFourWorkerSitesFixed": true,
+  "newTestDefinitions": 0,
+  "allOriginalTestsAndOraclesRetained": true,
+  "commands": [
+    {
+      "label": "format-source-only",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java"
+      ],
+      "actualExit": 0
+    },
+    {
+      "label": "checkstyle-source-only",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG30716-common-test-literal-and-four-worker-repair-v1/checkstyle.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java"
+      ],
+      "actualExit": 0
+    }
+  ],
+  "productTestsExecuted": 0,
+  "actualRemoteOperations": 0,
+  "ordinaryNinetyOneAndPostPending": true
+}

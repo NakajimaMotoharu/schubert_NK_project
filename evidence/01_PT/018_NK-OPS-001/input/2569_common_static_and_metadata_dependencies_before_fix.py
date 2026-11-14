@@ -1,0 +1,38 @@
+"""Register actual static defects and required pure metadata dependencies before any repair or unit start."""
+from pathlib import Path
+import datetime,hashlib,json,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';d=r/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106';l=r/'documents/900_OTHER/910_台帳';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+def wr(p,v):assert not p.exists();p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+s=ld(b/'evidence/PG30708-haruka-common60-full-static-raw-v2/manifest.json');assert s['compileStatic']['actualExit']==0 and not s['processingErrors'] and s['checkstyleErrors']==0 and all(v==0 for v in s['spotbugs'].values()) and s['testsExecuted']==0
+p=l/'915_障害表.md';assert max(map(int,re.findall(r'^## BUG-(\d+)\b',p.read_text(),re.M)))==2877
+p.write_text(p.read_text()+'''\n\n## BUG-2878 PT 2026-11-14 GateCliTest原12 / GateContractTest原8 fullRoot PMD
+
+重要度低・優先高。期待411/451適用PMD0、独立oracleはTest自身のliteralから保持。実際PG30708 raw52中GateCliTest duplicate literal15件、GateContractTest if NK_ONLY literal1件が適用。compile/enforcer/format/CS/SB0、Test未実行。原因: 旧Gate12が容量前提で通常静的未実行だったこととTest内独立literalの未整理。Main仕様/値/全case/独立性は不変更、Test独自constantへ元literalのまま集約し全他token/文字値を独立逆照合する。UseConcurrentHashMap24は局所map、finiteworkers等11と固定resource loader1は別の個別適用性検討で抑制しない。修正前起票、YKT2412/SS355/451/F03、QA不要。修正commit/再試験/完了日未、状態OPEN。原PG30708保存、新source normal全scope/static/Unit/post未。\n\n## BUG-2879 PT 2026-11-14 pure metadata原31の四concurrent method
+
+重要度中・優先高。対象BaselineNumericMetadataTest(5)/GateMetricsCountTest(6)/GateDefinitionDocumentsTest(11)/GateEvidenceDocumentsTest(9)の各末尾concurrent case。全四はFuture.get無期限及び2worker TWRimplicit closeで、411/451/YKT2387の有限所有後条件を満たさない。Source inspectionで発見、hang probe0。Mainや各独立JSON/数値golden不変、get5/finallyshutdownNow-await10へ局所是正し全旧token/literal逆照合後、同source全31含む必要closureで確認予定。原60には入っていなかったが、Main5のbaseline numeric constructor/strict metrics/definitions/evidenceの既知未網羅public境界があり、既存31が必要依存と判明。知った不足を含む60のverifyを先行失敗させず、普通全91を初実行予定。MIG/Root/DB等scope追加0、upper変更/QA不要。修正前起票、修正commit/再試験/完了日未、状態OPEN、YKT2387・PG30714。\n''')
+p=l/'916_横展開管理台帳.md';assert max(map(int,re.findall(r'^## YKT-(\d+)\b',p.read_text(),re.M)))==2411
+p.write_text(p.read_text()+'''\n\n## YKT-2412 BUG2878 independent Test literals and full-static admission
+
+共通原因=旧未実行Gate12のfullRoot静的を含むTest定数化不足。検索=PG30708全5Main/6Test raw52をrule/source別照合、対象GateCliTest15duplicateとGateContractTest1condition。Main/他四Testに同rule該当0、properClassLoader/局所Map/finiteexecutorは各source用途で別判定し blanket suppressionしない。元Test literalをTestだけのconstantへ、Productionの定数/methodへ依存させず、全literal/他token逆照合と全source再static/必要ordinary91/postを計画。既追加metadata四Testの同styleも次の全Root静的で確認。実修正/再試験未、状態OPEN、原PG30708・PG30714、関連commit未。\n\n2026-11-14 YKT2387 BUG2879追加四対象: BaselineNumericMetadataTest5・GateMetricsCountTest6・GateDefinitionDocumentsTest11・GateEvidenceDocumentsTest9の各2worker無期限Futureget/TWR。全SourceはJSON/BigInteger/publicresource値だけ、liveCapture/DB/permission/Root/nativeなし。四caseをFuture5/finallyshutdownNow-await10へ、元全31/oracleとMain5不変・同source必要全91のpostまでOPEN。現Gate/Correlatedも未再試験、global横展開完了へしない。\n''')
+pkg=r/'program/characterization/tests/java/dev/codex/schubert/characterization';names=['BaselineNumericMetadataTest','GateMetricsCountTest','GateDefinitionDocumentsTest','GateEvidenceDocumentsTest'];expected=[5,6,11,9]
+for n,count in zip(names,expected):
+ text=(pkg/(n+'.java')).read_text();assert len(re.findall(r'@Test\b',text))==count and 'try (var workers = Executors.newFixedThreadPool(2))' in text
+ assert not any(x in text for x in ['ProcessBuilder','DriverManager','Socket(','promoteCurrent('])
+spec=r/'evidence/01_PT/020_NK-CHR-001/026_共通Main五の既知境界と既存metadata三十一・必要全九十一仕様.md';assert not spec.exists();spec.write_text('''# 共通Main5の必要metadata31・初whole91
+
+元024/025・初回group見積り.85/2.55/5.1cap6を保存。PG30708のv2正常compile/staticのraw52を受領、Unit0。Gate12のTest重複literal15とGateContractのcondition1をBUG2878/YKT2412へ先行起票、Test自身の元literalだけを定数化しProduction依存のexpectedにしない。局所Map24・有限worker11・classloader1はexactsource/用途ごとに適用性を記録し抑制しない。
+
+当Main5にはbaselineNumericMetadata/record負値、gateMetricsのnull/負provided count/strict field、validateDefinitions/validateEvidenceDocumentsの公開pure境界がある。原60はこれらの正常callerしか持たず、old46の物理missと現source境界から不足を既知にできる。既存BaselineNumericMetadata5/GateMetricsCount6/GateDefinitionDocuments11/GateEvidenceDocuments9の全31を必要依存として初ordinary91へ組み込む。元60を既知不足のままverify失敗させて繰返さない。新JUnit定義0/Main5不変、要求/外部仕様/品質/model/製品scope追加なし。原class31の四workerはBUG2879/YKT2387へ、get5/finallyshutdownNow-await10・全旧literal/他token逆一致の後だけ実行する。
+
+四class全1031行はJSON/BigInteger・immutable/explicit null・typed numbers/shape/hash/review boolean・classpathの承認済6 publicresourceだけ。fixtureを運用証拠/実preflight容量/利用枠/承認/権限へ転用しない。Actual Gate12のhigh/low filesystemは実測のまま、fake freeBytes入力はpure metadataの型検証だけ。Root/DB/VM/native/Current capture/旧unknownjob/aru操作0を維持。fullclassを実sourceのまま選び、method抽出/替玉なし。
+
+RootFull静的+必要10全Testclass91=9+12+8+17+3+11+5+6+11+9。Main5/10physicalとwholehelperは維持。静的のraw/適用/未分類/処理errorと全counter/CRC-init/JVMCode/単一execを独立post、旧exec合算/除外/規則抑制0。formal1964/53と元190受入/工数nullを更新しない。
+
+追加不足.15/.45/.9（uncalibrated）=既知境界source再資格.03/.09/.18＋四同型worker是正.08/.24/.48＋既存31を同一normalへ接続.04/.12/.24。原群との合計見直し1/3/6で、元cap6を引上げず一群10以内。Main/既source・tool再利用、同型変更量/既publicfixture量に基づく内部暫定見積りで、共有差や実tokenから専有費を推定した額ではない。追加発見と元額は別版保存、初回見積りを上書きせず、この全scopeの受入条件を満たした分だけ閉鎖する。
+''')
+old=d/'1730_WBS65予実・haruka専用common五十八製造試験追加版453.json';f=ld(old);extra=dict(low=.15,base=.45,high=.9)
+for k,val in extra.items():
+ for fld in ['additionalRequiredWorkGrossPp','additionalDiscoveredRemainingPp','revisedRemainingPp']:f[fld][k]=round(f[fld][k]+val,3)
+f.update(previousForecast=ref(old),revision='454-REQUIRED_PURE_METADATA31_AND_FOUR_WORKER_REPAIRS_WITHIN_ORIGINAL_CAP6',atJST=datetime.datetime.now().astimezone().isoformat(),latestAdditionalFinding=dict(workId='F03_REQUIRED_METADATA31_FOR_SAME_FIVE_MAIN',estimate=extra,groupOriginalEstimate=dict(low=.85,base=2.55,high=5.1),revisedGroupEstimate=dict(low=1,base=3,high=6),originalCapUnchanged=6,sourceQualification=dict(low=.03,base=.09,high=.18),workerRework=dict(low=.08,base=.24,high=.48),normalDependencyConnection=dict(low=.04,base=.12,high=.24),newTestDefinitions=0,knownInsufficientSixtyNotExecuted=True,reason='Required pure metadata boundary coverage of same5Main. Existing31 whole tests have4 unboundedworker sites; repair before execution. No new external behavior or product scope.'));br=f['currentFullForecastBudgetBridge'];br.update(asOfRevision=f['revision'],remainingCanonicalOriginalPricePp=f['remainingOriginalPlanPricePp'],additionalRemainingPp=f['additionalDiscoveredRemainingPp'],currentRevisedRemainingPp=f['revisedRemainingPp']);fp=d/'1734_WBS65予実・共通五Main必要metadata三十一追加版454.json';wr(fp,f)
+e=b/'evidence/PG30714-common-static-defects-and-required-metadata-before-repair-v1';e.mkdir();wr(e/'manifest.json',dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),source='269f668c7c2fea8085e768ee3aa93a018681f5cc',productionCoreMain='2ebbdf391873a5be6247ea59cb9addffb886c591',bugs=['BUG-2878','BUG-2879'],horizontal=['YKT-2412','YKT-2387'],originalStatic=ref(b/'evidence/PG30708-haruka-common60-full-static-raw-v2/manifest.json'),requiredSpecification=ref(spec),existingWholeTestsAdded=31,newTestDefinitions=0,newExpectedWholeTests=91,selectedMainScopeUnchanged5=True,oldV2InputWillNotBeModified=True,unitTestsExecuted=0,actualNewGroupEstimate=dict(low=1,base=3,high=6),originalCapUnchanged=6,forecast=ref(fp)))
+print(json.dumps(dict(actualExit=0,bugs=['BUG-2878','BUG-2879'],existingRequired31=True,newDefinitions=0,requiredWhole=91,groupEstimate=dict(low=1,base=3,high=6),remaining=f['revisedRemainingPp'])))

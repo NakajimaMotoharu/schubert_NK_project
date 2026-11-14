@@ -6,11 +6,11 @@ R = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(R/'tools/quality'))
 from pmo_quota_binding import window
 I = R/'evidence/01_PT/018_NK-OPS-001/input'
-W = R.parent/'pgpt-runs/PG379/pg30684-haruka-common60-v2'
+W = R.parent/'pgpt-runs/PG379/pg30726-haruka-common91-v3'
 PUBLIC = R/'evidence/01_PT/018_NK-OPS-001/evidence'
 PMO = R.parent/'PMO/hourly-monitor'
-REMOTE = '/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v2'
-TMP = '/dev/shm/pgpt-pg30684-common60-v2'
+REMOTE = '/home/mini/schubert-nk-pgpt/runs/pg30726-common91-v3'
+TMP = '/dev/shm/pgpt-pg30726-common91-v3'
 TC = R.parent/'toolchain'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 now = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -99,7 +99,7 @@ def ssh(label, code, input_file=None, input_bytes=None, binary=False):
 
 def source_payload(source):
     require(re.fullmatch('[0-9a-f]{40}',source), 'explicit fixed Git source')
-    review = json.loads((PUBLIC/'PG30676-common60-worker-and-exact-source-closure-v2/manifest.json').read_text())
+    review = json.loads((PUBLIC/'PG30718-common91-whole-source-closure-and-independent-inverses-v1/manifest.json').read_text())
     paths = review['allSelectedMainPaths']+review['allSelectedTestPaths']+[review['fullTestHelperPath']]
     paths += ['pom.xml','mvnw','program/characterization/pom.xml',
               'tools/quality/static/pmd.xml','tools/quality/static/checkstyle.xml']
@@ -135,7 +135,7 @@ def source_payload(source):
         require(path.is_file() and not path.is_symlink(), 'regular public static tool only')
         values['static/'+name] = path.read_bytes()
     config = dict(sourceCommit=source, productionCoreMain='2ebbdf391873a5be6247ea59cb9addffb886c591',
-                  run='PG30684-HARUKA-COMMON60-V2', expectedTests=60,
+                  run='PG30726-HARUKA-COMMON91-V3', expectedTests=91,
                   payloadHashes={n:hashlib.sha256(v).hexdigest() for n,v in values.items()},
                   originalBaselineHashes={str(p.relative_to(R)):sha(p) for p in
                     sorted((R/'program/characterization/baseline/current').rglob('*')) if p.is_file()},
@@ -155,7 +155,7 @@ def stage(source, quota):
     observed = fresh(quota)
     require(not W.exists(), 'new-only controller plan; existing run must be observed')
     W.mkdir(mode=0o700)
-    write(W/'plan.json', dict(sourceCommit=source, run='PG30684-HARUKA-COMMON60-V2',
+    write(W/'plan.json', dict(sourceCommit=source, run='PG30726-HARUKA-COMMON91-V3',
           atUTC=now(), quotaBefore=observed, remote=REMOTE, temp=TMP,
           globalUnknownProcessCwds=3, globalIdleClaim=False, actualRootDbVmNativeServiceActions=0))
     archive, config = source_payload(source)
@@ -184,10 +184,10 @@ with (run/'phase.lock').open('x+b') as lock:
   for e in entries:
    p=Path(e.name);assert e.isfile() and not p.is_absolute() and '..' not in p.parts
   t.extractall(payload,filter='data')
- c=json.loads((payload/'config.json').read_text());assert c['sourceCommit']==SOURCE and c['expectedTests']==60
+ c=json.loads((payload/'config.json').read_text());assert c['sourceCommit']==SOURCE and c['expectedTests']==91
  assert {e.name for e in entries}==set(c['payloadHashes'])|{'config.json'}
  for n,h in c['payloadHashes'].items():assert hashlib.sha256((payload/n).read_bytes()).hexdigest()==h
- stage=dict(actualExit=0,sourceCommit=SOURCE,archiveSha256=ARCHIVE,configSha256=hashlib.sha256((payload/'config.json').read_bytes()).hexdigest(),owner=owner,expectedTests=60,oldJobActions=0,aruConnections=0,testsExecuted=0)
+ stage=dict(actualExit=0,sourceCommit=SOURCE,archiveSha256=ARCHIVE,configSha256=hashlib.sha256((payload/'config.json').read_bytes()).hexdigest(),owner=owner,expectedTests=91,oldJobActions=0,aruConnections=0,testsExecuted=0)
  with (run/'stage.json').open('x') as f:json.dump(stage,f)
  stage['stageReceiptSha256']=hashlib.sha256((run/'stage.json').read_bytes()).hexdigest()
 print('PGPT_JSON_BEGIN');print(json.dumps(stage));print('PGPT_JSON_END')
@@ -195,7 +195,7 @@ print('PGPT_JSON_BEGIN');print(json.dumps(stage));print('PGPT_JSON_END')
     prefix = 'REMOTE='+repr(REMOTE)+'\nTMP='+repr(TMP)+'\nSOURCE='+repr(source)+'\nARCHIVE='+repr(digest)+'\n'
     result = ssh('stage', prefix+bootstrap, input_file=archive)
     write(W/'stage-receipt.json', result)
-    publish('PG30706-haruka-common60-stage-v2', result)
+    publish('PG30726-haruka-common91-stage-v3', result)
     print(json.dumps(dict(actualExit=0,phase='stage',source=source,archiveSha256=digest,newNamespace=True,testsExecuted=0)))
 
 def publish(name, result):
@@ -236,12 +236,12 @@ def main():
     if phase=='collect':
         print(json.dumps(dict(actualExit=0,phase=phase,privateArchive=str(result),sha256=sha(result)))); return
     if phase=='status':
-        out = PUBLIC/'PG30712-haruka-common60-same-run-status-v2'
+        out = PUBLIC/'PG30732-haruka-common91-same-run-status-v3'
         out.mkdir(exist_ok=True)
         write(out/(label+'.json'),result)
     else:
-        publish({'prepare':'PG30708-haruka-common60-full-static-raw-v2',
-                 'run':'PG30710-haruka-common60-unit-raw-terminal-v2'}[phase],result)
+        publish({'prepare':'PG30728-haruka-common91-full-static-raw-v3',
+                 'run':'PG30730-haruka-common91-unit-raw-terminal-v3'}[phase],result)
     print(json.dumps(dict(actualExit=0,phase=phase,source=json.loads((W/'plan.json').read_text())['sourceCommit'],
                          rawReceiptOnly=True,productPtAccepted=False)))
 

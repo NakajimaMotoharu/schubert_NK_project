@@ -3,15 +3,17 @@ from pathlib import Path
 import datetime, fcntl, hashlib, json, os, shutil, signal, stat, subprocess, sys, tarfile, time
 import xml.etree.ElementTree as ET
 
-RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30684-common60-v2')
-BASE_TMP = Path('/dev/shm/pgpt-pg30684-common60-v2')
+RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30726-common91-v3')
+BASE_TMP = Path('/dev/shm/pgpt-pg30726-common91-v3')
 TMP = BASE_TMP
 JAVA = Path('/opt/schubert-nk-test-tools/jdk-25.0.4')
 MVN = Path('/opt/schubert-nk-test-tools/maven/bin/mvn')
 OLD_CACHE = Path('/home/mini/schubert-nk-pgpt/m2/repository')
 SELECTED = dict(ArtifactComparatorTest=9, GateCliTest=12, GateContractTest=8,
                 GateContractValidatorNegativeTest=17, TargetAdapterTest=3,
-                CorrelatedLogEvidenceValidatorTest=11)
+                CorrelatedLogEvidenceValidatorTest=11, BaselineNumericMetadataTest=5,
+                GateMetricsCountTest=6, GateDefinitionDocumentsTest=11,
+                GateEvidenceDocumentsTest=9)
 MAIN = ('ArtifactComparator', 'GateCli', 'GateContractValidator', 'TargetAdapter',
         'CorrelatedLogEvidenceValidator')
 now = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -108,7 +110,16 @@ def step(label, command, env, timeout):
         log.flush(); os.fsync(log.fileno())
     result = dict(actualExit=code, timedOut=timed_out, atUTC=now(), process=owned,
                   logSha256=sha(RUN/(label+'.private.log')))
+    # A missing process group is an actual owned-child postcondition, never global host idle.
+    try:
+        os.killpg(child.pid, 0)
+        result['ownedProcessGroupAbsent'] = False
+    except ProcessLookupError:
+        result['ownedProcessGroupAbsent'] = True
+    except PermissionError:
+        result['ownedProcessGroupAbsent'] = None
     write(RUN/(label+'-exit.json'), result)
+    require(result['ownedProcessGroupAbsent'] is True, 'owned child group postcondition unknown/nonempty')
     return result
 
 def copy_public_cache():
@@ -149,7 +160,7 @@ def commands(config):
     base = [str(MVN), '-o', '--no-transfer-progress', '-s', str(RUN/'settings.xml'),
             '-gs', str(RUN/'settings.xml'), '-Dmaven.repo.local='+str(RUN/'repository'),
             '-pl', 'program/characterization', '-Dtest='+','.join(SELECTED),
-            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30684-COMMON60',
+            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30726-COMMON91',
             '-Dspotbugs.xmlOutput=true']
     env = dict(PATH=str(JAVA/'bin')+':/usr/bin:/bin', JAVA_HOME=str(JAVA),
                MAVEN_USER_HOME=str(RUN/'maven-home'), MAVEN_SKIP_RC='true', LANG='C.UTF-8',
@@ -228,7 +239,7 @@ def run_tests(config):
     terminal = step('unit-verify', base+['verify'], env, 480)
     verify_inputs(config)
     write(RUN/'unit-result.json', dict(**terminal, sourceCommit=config['sourceCommit'],
-          selectedWholeClasses=SELECTED, expectedTests=60, coverageExclusions=[], qualitySkips=[],
+          selectedWholeClasses=SELECTED, expectedTests=91, coverageExclusions=[], qualitySkips=[],
           rawTerminalOnly=True, oldExecCombined=False, formalAcceptanceAdded=0))
     return json.loads((RUN/'unit-result.json').read_text())
 

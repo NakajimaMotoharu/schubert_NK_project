@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -289,11 +290,15 @@ final class GateEvidenceDocumentsTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, COMPARISON).put(STATUS, "unit-invalid");
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> validate(valid));
       var second = workers.submit(() -> validate(invalid));
-      assertEquals(List.of(), first.get());
-      assertTrue(second.get().contains("COMPARE_STATUS"));
+      assertEquals(List.of(), first.get(5, TimeUnit.SECONDS));
+      assertTrue(second.get(5, TimeUnit.SECONDS).contains("COMPARE_STATUS"));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(List.of(), validate(valid));
   }

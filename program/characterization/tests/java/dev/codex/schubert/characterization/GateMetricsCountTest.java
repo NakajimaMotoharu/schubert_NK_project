@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -146,11 +147,15 @@ final class GateMetricsCountTest {
     List<JsonNode> valid = fixture();
     List<JsonNode> invalid = fixture();
     object(invalid, 0).put(CURRENT_COUNT, "23");
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var good = workers.submit(() -> metrics(valid));
       var bad = workers.submit(() -> metrics(invalid));
-      assertEquals(23, good.get().get(CURRENT_COUNT));
-      assertFalse(bad.get().containsKey(CURRENT_COUNT));
+      assertEquals(23, good.get(5, TimeUnit.SECONDS).get(CURRENT_COUNT));
+      assertFalse(bad.get(5, TimeUnit.SECONDS).containsKey(CURRENT_COUNT));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(23, metrics(valid).get(CURRENT_COUNT));
   }

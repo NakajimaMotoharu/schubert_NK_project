@@ -3,6 +3,7 @@ package dev.codex.schubert.characterization;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -119,12 +121,17 @@ final class BaselineNumericMetadataTest {
     List<JsonNode> good = fixture();
     List<JsonNode> bad = fixture();
     object(bad, 0).put(MASTER_COUNT, -1);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var valid = workers.submit(() -> numbers(good));
       var invalid =
           workers.submit(() -> assertThrows(IllegalArgumentException.class, () -> numbers(bad)));
-      assertEquals(59627L, valid.get().masterFileCount());
-      assertEquals("invalid baseline numeric metadata", invalid.get().getMessage());
+      assertEquals(59627L, valid.get(5, TimeUnit.SECONDS).masterFileCount());
+      assertEquals(
+          "invalid baseline numeric metadata", invalid.get(5, TimeUnit.SECONDS).getMessage());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(59627L, numbers(good).masterFileCount());
   }
