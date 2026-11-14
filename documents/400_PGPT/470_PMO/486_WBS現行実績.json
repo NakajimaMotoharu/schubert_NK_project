@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "3350afe734dd74362a7dedfdde6f0c8b11dd212469baf2b0a821b55aa9b747b6",
+  "inventorySha256": "7e2fb474cd354d3da9bb5a85df8520291da713e2e7af298e7c534a504012166b",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -32383,7 +32383,89 @@
   },
   "plannedVideoCatalogueSSC358": {
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "sourceCreated": true,
+    "newAcceptance": 0,
+    "state": "VIDEO_CATALOGUE80_NORMAL_QUALIFIED_ACTUAL_ETL_UNACCEPTED",
+    "actualRuntimeQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31294-video-catalogue80-nullable-factory-fixed-post-v1/manifest.json",
+      "sha256": "edbf32f17e83ce5dd5a8de9e2ef7b4e00b8b3e515477163de8f999a03502e59b"
+    }
+  },
+  "currentVideoCatalogue80PG31292": {
+    "kind": "SSC358_VIDEO_CATALOGUE80_NORMAL",
+    "source": "d1cdf034f0d471d3a984d612a23b5cd1a565d0f1",
+    "productionCoreMain": "8b053e072c4a350ee534a7ba419cdfb71a3a11c8",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31294-video-catalogue80-nullable-factory-fixed-post-v1/manifest.json",
+      "sha256": "edbf32f17e83ce5dd5a8de9e2ef7b4e00b8b3e515477163de8f999a03502e59b"
+    },
+    "tests": 80,
+    "newUniqueTestDefinitions": 24,
+    "existingSupportDefinitions": 56,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 124,
+    "physicalClasses": 10,
+    "positiveMainCrc": 10,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 1756,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 237,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 290,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 180,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 58,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 10,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 15,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue": 7,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+      "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+    },
+    "actualJvmCodeMethods": 83,
+    "jacocoDefaultMethods": 58,
+    "newVideoCodeMethods": 15,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 21,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.7,
+      "base": 2.1,
+      "high": 4.2
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
