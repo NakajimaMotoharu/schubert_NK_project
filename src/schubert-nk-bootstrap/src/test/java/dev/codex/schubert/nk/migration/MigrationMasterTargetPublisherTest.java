@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-TARGET001..032; independent80 SQL/44 scalar, content6 and catalog12 result vectors,
+ * PT-MIG-TARGET001..032; independent81 SQL/44 scalar, content7 and catalog12 result vectors,
  * memory-only borrowed JDBC.
  */
 final class MigrationMasterTargetPublisherTest {
@@ -48,14 +48,14 @@ final class MigrationMasterTargetPublisherTest {
   private static final int PREPARE_END = 18;
   private static final int TRANSFER_END = 42;
   private static final int REFERENCE_END = 58;
-  private static final int CONTENT_END = 64;
-  private static final int CONTENT_TABLES = 6;
+  private static final int CONTENT_END = 65;
+  private static final int CONTENT_TABLES = 7;
   private static final int CATALOG_TABLES = 12;
   private static final int CATALOG_END = 12;
   private static final int CATALOG_COLUMNS = 141;
   private static final int CATALOG_FIELDS = 7;
-  private static final int CONTENT_COLUMNS = 65;
-  private static final int RESULTS = 62;
+  private static final int CONTENT_COLUMNS = 66;
+  private static final int RESULTS = 63;
   private static final int CLOSES = 16;
   private static final int CONTENT_CLOSE = 9;
   private static final String GET_LONG = "getLong";
@@ -63,9 +63,9 @@ final class MigrationMasterTargetPublisherTest {
   private static final String GET_BOOLEAN = "getBoolean";
   private static final String GET_TIMESTAMP = "getTimestamp";
   private static final String GET_STRING = "getString";
-  private static final int SETVAL_FIRST = 69;
-  private static final int ANALYZE_FIRST = 74;
-  private static final int SQL_COUNT = 80;
+  private static final int SETVAL_FIRST = 70;
+  private static final int ANALYZE_FIRST = 75;
+  private static final int SQL_COUNT = 81;
   private static final int SCALARS = 44;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
@@ -78,11 +78,11 @@ final class MigrationMasterTargetPublisherTest {
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
   private static final List<Integer> OWNER_START =
-      List.of(0, 6, 12, 13, 15, 18, 22, 30, 42, 58, 64);
+      List.of(0, 6, 12, 13, 15, 18, 22, 30, 42, 58, 65);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(6, 12, 13, 15, 18, 22, 30, 42, 58, 64, 70, 71, 72, 73, 74, 80);
+      List.of(6, 12, 13, 15, 18, 22, 30, 42, 58, 65, 71, 72, 73, 74, 75, 81);
   private static final List<Integer> CLOSE_RESULTS =
-      List.of(6, 12, 12, 12, 12, 15, 21, 30, 46, 52, 58, 59, 60, 61, 62, 62);
+      List.of(6, 12, 12, 12, 12, 15, 21, 30, 46, 53, 59, 60, 61, 62, 63, 63);
   private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t";
   private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t";
   private static final List<String> CATALOG_SQL =
@@ -261,10 +261,17 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
           "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
           "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
   private static final List<String> CONTENT_TYPES =
       List.of(
-          "LISSBST", "LILSSSSSSLT", "LILLIISLSSST", "LISSSSSSLLST", "LSSSSSSSSLSSSSSIT", "LLISIT");
+          "LISSBST",
+          "LILSSSSSSLT",
+          "LILLIISLSSST",
+          "LISSSSSSLLST",
+          "LSSSSSSSSLSSSSSIT",
+          "LLISIT",
+          "L");
   private static final List<String> SQL =
       List.of(
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
@@ -331,6 +338,7 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
           "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
           "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)",
           "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_files",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_entries",
@@ -354,7 +362,7 @@ final class MigrationMasterTargetPublisherTest {
   };
 
   @Test
-  void target001OneConnectionFixedEightySqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedEightyOneSqlAndExactResources() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
@@ -1009,9 +1017,10 @@ final class MigrationMasterTargetPublisherTest {
               null,
               ONE,
               STAMP);
-      default ->
+      case 5 ->
           Arrays.<@Nullable String>asList(
               ENTRY_ID_TEXT, AUDIO_ID_TEXT, ONE, VOICE_TEXT, ONE, STAMP);
+      default -> List.of("0");
     };
   }
 
@@ -1306,7 +1315,7 @@ final class MigrationMasterTargetPublisherTest {
                 String name = method.getName();
                 if (name.equals("next")) {
                   position[0]++;
-                  if (empty || table == missingContent) return false;
+                  if ((empty && table < 6) || table == missingContent) return false;
                   return position[0] == 0 || table == extraContent && position[0] == 1;
                 }
                 if (name.equals("wasNull")) return wasNull[0];

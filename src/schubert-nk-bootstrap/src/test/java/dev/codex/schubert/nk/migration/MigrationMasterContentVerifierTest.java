@@ -23,11 +23,12 @@ import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** PT-MIG-CONTENT001..028; independent V002 SQL, literal values and JDBC resource-event model. */
+/** PT-MIG-CONTENT001..029; independent V002 SQL, literal values and JDBC resource-event model. */
 final class MigrationMasterContentVerifierTest {
   private static final String SPEAKER_B = "200";
   private static final String VOICE_ROLE = "voice";
-  private static final int TABLES = 6;
+  private static final int TABLES = 7;
+  private static final int SEARCH_CHECK = 6;
   private static final int COPY_COLUMNS = 65;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
@@ -66,11 +67,18 @@ final class MigrationMasterContentVerifierTest {
           "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
           "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
           "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
+          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
   // Independent V002 getter contract, never obtained from the Production descriptor.
   private static final List<String> TYPES =
       List.of(
-          "LISSBST", "LILSSSSSSLT", "LILLIISLSSST", "LISSSSSSLLST", "LSSSSSSSSLSSSSSIT", "LLISIT");
+          "LISSBST",
+          "LILSSSSSSLT",
+          "LILLIISLSSST",
+          "LISSSSSSLLST",
+          "LSSSSSSSSLSSSSSIT",
+          "LLISIT",
+          "L");
 
   @Test
   void content001SixFixedQueriesAndEveryPayloadColumnMatch() throws Exception {
@@ -80,7 +88,8 @@ final class MigrationMasterContentVerifierTest {
     assertEquals(List.of(30), f.timeouts);
     assertEquals(List.of(1000), f.fetchSizes);
     assertEquals(List.of(1, TABLES), List.of(f.statementCloses, f.resultCloses));
-    assertEquals(COPY_COLUMNS, TYPES.stream().mapToInt(String::length).sum());
+    assertEquals(
+        COPY_COLUMNS, TYPES.subList(0, SEARCH_CHECK).stream().mapToInt(String::length).sum());
     assertEquals(expectedCalls(literals(TIME, null)), f.calls);
   }
 
@@ -166,7 +175,7 @@ final class MigrationMasterContentVerifierTest {
         var f = new Fixture(data);
         f.rows.get(slot).add(new ArrayList<>(literals(TIME, null).get(slot).getFirst()));
         reject(f, empty ? emptyMaster() : declared(TIME, null));
-        int expectedReads = empty ? 0 : data.get(slot).size() * TYPES.get(slot).length();
+        int expectedReads = data.get(slot).size() * TYPES.get(slot).length();
         assertEquals(
             expectedReads,
             f.calls.stream().filter(c -> c.startsWith(slotKey(f.failedTable()) + ":get")).count());
@@ -213,7 +222,7 @@ final class MigrationMasterContentVerifierTest {
     verify(f, declared(TIME, null));
     var expected = expectedCalls(literals(TIME, null));
     assertEquals(expected, f.calls);
-    assertEquals(142, f.calls.stream().filter(x -> x.contains(":get")).count());
+    assertEquals(143, f.calls.stream().filter(x -> x.contains(":get")).count());
   }
 
   @Test
@@ -248,7 +257,7 @@ final class MigrationMasterContentVerifierTest {
     var swapped = new Fixture();
     java.util.Collections.swap(swapped.rows.get(5), 0, 1);
     reject(swapped, declared(TIME, null));
-    assertEquals(TABLES, swapped.resultCloses);
+    assertEquals(SEARCH_CHECK, swapped.resultCloses);
   }
 
   @Test
@@ -346,7 +355,7 @@ final class MigrationMasterContentVerifierTest {
   @Test
   void content023SamePrimaryNeverCreatesSelfSuppressionIncludingCloseOrigin() throws Exception {
     var calls = expectedCalls(literals(TIME, null));
-    for (int slot : List.of(0, 5)) {
+    for (int slot : List.of(0, 5, SEARCH_CHECK)) {
       for (boolean closeOrigin : List.of(true, false)) {
         for (Throwable primary : failures()) {
           var f = new Fixture();
@@ -437,6 +446,24 @@ final class MigrationMasterContentVerifierTest {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void content029EmptyDeclaredRowsCannotHideGeneratedSearchMismatchCount() throws Exception {
+    for (String count : Arrays.asList("1", "-1", "9223372036854775807", null)) {
+      var f = new Fixture(emptyTables());
+      f.rows.get(SEARCH_CHECK).getFirst().set(0, count);
+      reject(f, emptyMaster());
+      assertEquals(SQL, f.sql);
+      assertEquals(TABLES, f.resultCloses);
+      assertEquals(1, f.statementCloses);
+      assertEquals(1, f.calls.stream().filter(call -> call.equals("q6:getLong:1")).count());
+    }
+    var zero = new Fixture(emptyTables());
+    verify(zero, emptyMaster());
+    assertEquals(SQL, zero.sql);
+    assertEquals(TABLES, zero.resultCloses);
+    assertEquals(List.of(CALL_AUTO, CALL_CREATE), zero.connectionCalls);
   }
 
   private static void verify(Fixture f, MigrationMasterCopyDataset expected) throws SQLException {
@@ -539,6 +566,7 @@ final class MigrationMasterContentVerifierTest {
   private static List<List<List<@Nullable String>>> emptyTables() {
     var result = new ArrayList<List<List<@Nullable String>>>();
     for (int slot = 0; slot < TABLES; slot++) result.add(new ArrayList<>());
+    result.get(SEARCH_CHECK).add(row("0"));
     return result;
   }
 
@@ -782,6 +810,7 @@ final class MigrationMasterContentVerifierTest {
 
     Fixture(List<List<List<@Nullable String>>> input) {
       rows = emptyTables();
+      rows.get(SEARCH_CHECK).clear();
       for (int slot = 0; slot < TABLES; slot++)
         for (var value : input.get(slot)) rows.get(slot).add(new ArrayList<>(value));
     }

@@ -1,0 +1,47 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T16:09:33.869977+00:00",
+  "sourceDdl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "query": "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)",
+  "kind": "L",
+  "expectedSingleResult": "0",
+  "emptyDatasetStillOneAggregateRow": true,
+  "independentAsciiAndNullTruthVectors": [
+    {
+      "body": "ABC",
+      "stored": "abc",
+      "distinct": false
+    },
+    {
+      "body": "ABC",
+      "stored": "ABC",
+      "distinct": true
+    },
+    {
+      "body": "",
+      "stored": "",
+      "distinct": false
+    },
+    {
+      "body": "",
+      "stored": null,
+      "distinct": true
+    }
+  ],
+  "negativeReturnedCountVectors": [
+    "1",
+    "-1",
+    "9223372036854775807",
+    null
+  ],
+  "javaLowerUsedForExpected": false,
+  "actualDatabaseOrSqlEvaluatorExecuted": false,
+  "dbLocaleAndGeneratedExpressionNotQualified": true,
+  "technicalSources": [
+    "https://www.postgresql.org/docs/18/functions-comparison.html",
+    "https://www.postgresql.org/docs/18/functions-string.html"
+  ]
+}
