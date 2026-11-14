@@ -13,10 +13,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * Declared audio_files COPY row, never an actual asset, FK, DB or full migration witness.
  * NK-MIG-001; MIG-DAT-002/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004; UI227/242/254;
- * SS311/331/V002/343 section10 SSC354; PT-MIG-AUDIOROW001..016.
+ * SS311/331/V002/343 section10 SSC354/396; PT-MIG-AUDIOROW001..017.
  */
 @NullMarked
 public final class AudioFileCopyRow {
+  private static final int MAXIMUM_AUDIO_ROLE_BYTES = 11;
   private static final int MINIMUM_TEXT_BYTES = 1;
   private static final int MAXIMUM_CONTAINER_CHARACTERS = 16;
   private static final int NANOSECONDS_PER_MICROSECOND = 1000;
@@ -51,7 +52,7 @@ public final class AudioFileCopyRow {
     boundedText(required(fields, 3), 512);
     boundedText(required(fields, 4), 256);
     boundedText(required(fields, 5), 255);
-    boundedText(required(fields, 6), 8);
+    boundedText(required(fields, 6), MAXIMUM_AUDIO_ROLE_BYTES);
     @Nullable String container = fields.get(7);
     if (container != null) {
       textBytes(container);

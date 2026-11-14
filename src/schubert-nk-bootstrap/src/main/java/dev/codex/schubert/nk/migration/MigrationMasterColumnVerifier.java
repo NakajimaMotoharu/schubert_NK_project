@@ -79,7 +79,7 @@ public final class MigrationMasterColumnVerifier {
               "display_path\ttext\ttext\ttrue\t\t",
               "file_name\ttext\ttext\ttrue\t\t",
               "basename\ttext\ttext\ttrue\t\t",
-              "audio_role\tvarchar\tcharacter varying(8)\ttrue\t\t",
+              "audio_role\tvarchar\tcharacter varying(11)\ttrue\t\t",
               "container\tvarchar\tcharacter varying(16)\tfalse\t\t",
               "duration_ms\tint8\tbigint\tfalse\t\t",
               "byte_size\tint8\tbigint\ttrue\t\t",

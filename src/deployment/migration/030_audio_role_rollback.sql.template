@@ -1,0 +1,17 @@
+-- NK-DDL-001 / MIG003005006 / DAT004 / TST / UI223242254 / SS331343 SSC396
+-- BUG2943 / YKT2472. Apply ONLY in the authenticated approved cutback scope.
+-- Required client setting: ON_ERROR_STOP=1. No truncation, role changes or data repair.
+BEGIN;
+LOCK TABLE schubert.audio_files IN ACCESS EXCLUSIVE MODE;
+DO $audio_role_guard$
+BEGIN
+    IF EXISTS (SELECT 1 FROM schubert.audio_files WHERE octet_length(audio_role) > 8) THEN
+        RAISE EXCEPTION 'audio role rollback blocked by values beyond original byte limit';
+    END IF;
+END
+$audio_role_guard$;
+ALTER TABLE schubert.audio_files DROP CONSTRAINT ck_audio_files_audio_role_bytes;
+ALTER TABLE schubert.audio_files ALTER COLUMN audio_role TYPE varchar(8);
+ALTER TABLE schubert.audio_files ADD CONSTRAINT ck_audio_files_audio_role_bytes
+    CHECK (octet_length(audio_role) BETWEEN 1 AND 8);
+COMMIT;
