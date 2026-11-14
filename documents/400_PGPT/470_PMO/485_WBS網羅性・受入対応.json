@@ -550392,15 +550392,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -550905,6 +550905,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -551095,15 +551210,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -551886,6 +552001,121 @@
         "independentSqlGetterSequenceAndCopyLiteral": true,
         "finiteConcurrentCalls": 64,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -552094,15 +552324,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -552885,6 +553115,121 @@
         "independentSqlGetterSequenceAndCopyLiteral": true,
         "finiteConcurrentCalls": 64,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -553137,15 +553482,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -553933,6 +554278,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -554137,15 +554597,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerRow28ComponentQualification": {
         "kind": "SSC367_SPEAKER_SEVEN_COLUMN_ROW16_NORMAL28",
@@ -555025,6 +555485,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -555220,15 +555795,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -556011,6 +556586,121 @@
         "independentSqlGetterSequenceAndCopyLiteral": true,
         "finiteConcurrentCalls": 64,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -556229,15 +556919,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -557020,6 +557710,121 @@
         "independentSqlGetterSequenceAndCopyLiteral": true,
         "finiteConcurrentCalls": 64,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -557229,15 +558034,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -557737,6 +558542,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -557931,15 +558851,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -558553,6 +559473,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -558656,15 +559691,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -559561,6 +560596,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -559568,7 +560718,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "eb4c1ed3a9df94ca25bd268d7c811d100d58a5fe084de000c4c2a357a3c7c448",
+      "sha256": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
       "acceptance": "UNASSESSED",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-352",
@@ -559645,15 +560795,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -559968,6 +561118,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -560051,15 +561316,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -560668,6 +561933,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -560775,15 +562155,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -561392,6 +562772,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -561478,15 +562973,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -562095,6 +563590,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -562192,15 +563802,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -562809,6 +564419,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -562906,15 +564631,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -563523,6 +565248,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -563620,15 +565460,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -564237,6 +566077,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -564327,15 +566282,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -564944,6 +566899,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -565047,15 +567117,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -565669,6 +567739,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -565676,7 +567861,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "01fec6542b13ceb9afed9382e76803003604c22c59a90341a9557db93aaee3d9",
+      "sha256": "c5469c0088d9b8effe2b22f26c2159942f32b127ad9c0a40f93e736be3038520",
       "acceptance": "UNASSESSED",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-362",
@@ -565754,15 +567939,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -566072,6 +568257,121 @@
         "independentAllSqlPositionsOriginalThreeFailuresAndCloseMatrix": true,
         "actualDbOrCopyOrRootNativeKeyVmAruOperations": 0,
         "allConstraintCatalogueHashAcceptance": false,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -566202,15 +568502,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -566710,6 +569010,121 @@
         "allRowsBytesAndShaDifferenceConditionsCovered": true,
         "java25MandatorySha256NoFallback": true,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -566823,15 +569238,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -567614,6 +570029,121 @@
         "independentSqlGetterSequenceAndCopyLiteral": true,
         "finiteConcurrentCalls": 64,
         "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -567727,15 +570257,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31986-speaker-read176-post-v1/manifest.json",
-          "sha256": "b34f6f7fa0a04b0b15305a44beaa6fe55ffab621c56acd0cf2e291104104bf28"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31988-speaker-read176-unfiltered-measurement-v1/manifest.json",
-          "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "8ce04bd1ed579a789eca4b7679c2d5ac970304a5",
-        "productionCoreMain": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -568431,6 +570961,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -568438,7 +571083,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "cf43df935853e043297d77697467c9e93c391d9ec95278240971f87b4957b094",
+      "sha256": "451c5a97d09b5eacb2e33e2b4c931906663252bb916e3acf3fe30127ec86fa8c",
       "acceptance": "NOT_RUN",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-369",
@@ -568543,15 +571188,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -568656,6 +571301,121 @@
         "independentAllSqlPositionsOriginalThreeFailuresAndCloseMatrix": true,
         "actualDbOrCopyOrRootNativeKeyVmAruOperations": 0,
         "allConstraintCatalogueHashAcceptance": false,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -568781,15 +571541,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31916-master-finger403-post-v1/manifest.json",
-          "sha256": "b46056573fe302d2584d3cafcc08d83e3649ce3b4510934f887abde0ba3b7034"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31918-master-finger403-unfiltered-measurement-v1/manifest.json",
-          "sha256": "02d8fa78ef037c105256ecfc630580d43e191a3f17140174e9aac28d15a7b6f0"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "e4461ebb70a91c2e3717de12cd1a62ad608f14dc",
-        "productionCoreMain": "4759dabb66e38eadf051c7423482c74b9591e1fc"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterFinal411ComponentQualification": {
         "kind": "SSC371_MASTER_FINALIZATION28_NORMAL411",
@@ -569190,6 +571950,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -569197,7 +572072,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "799b0f59621cdcb7791a61ef97e0c723e5f3f28dc2b05e20384fd582b19e7358",
+      "sha256": "beeee4b2d767dc1e0e870b19a0cc6ceaf92ff8497d537dd8e2f68828b5357d3d",
       "acceptance": "NOT_RUN",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-371",
@@ -569305,15 +572180,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -569423,6 +572298,121 @@
         "effortRate": null,
         "actualAllocatedCost": null,
         "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -569430,7 +572420,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "b6beb7830601882d76bb15f991512b9f185fb0ed47446c52723a34d339a62f84",
+      "sha256": "52ceabdd5be9d5d06471328b9cd2ee54c2da7b5a4a309d9699e848310592c5f6",
       "acceptance": "NOT_RUN",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-372",
@@ -569536,15 +572526,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -569649,6 +572639,121 @@
         "independentAllSqlPositionsOriginalThreeFailuresAndCloseMatrix": true,
         "actualDbOrCopyOrRootNativeKeyVmAruOperations": 0,
         "allConstraintCatalogueHashAcceptance": false,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -569779,15 +572884,130 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31872-master-target543-post-v1/manifest.json",
-          "sha256": "38d4abd72e4059abda4b7baf98cbaa6fa67944fbd8641baf1327b10bb133b07d"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31874-master-target543-unfiltered-measurement-v1/manifest.json",
-          "sha256": "3cbd7cf14b90c7cc3100c93efbacb0c26baa3e2c0f6b49a3371f3e911f08bbfc"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
         },
-        "actualUnitSource": "3d9fb2c0a430a42e159aafa1de73926aaffae6e9",
-        "productionCoreMain": "0252e95a88adecdc365f6f2886169030e8a2fad2"
+        "actualUnitSource": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60"
+      },
+      "migrationCleanupIdentity553Qualification": {
+        "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+        "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+        "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+          "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+          "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+        },
+        "tests": 553,
+        "newSourceQualifiedTestDefinitions": 10,
+        "existingSupportDefinitions": 543,
+        "newMainSources": 0,
+        "existingChangedMainSources": 5,
+        "identityGuardsAdded": 10,
+        "legacyOracleCorrections": 3,
+        "uniqueMainJavaDeltaFromInitial": 139,
+        "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+        "independentNew10UnchangedFromFailedReproduction": true,
+        "physicalClasses": 42,
+        "positiveMainCrc": 42,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 8032,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1103,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1594,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 865,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 310,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 42,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 8337
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1103
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1617
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 924
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 369
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 42
+          }
+        },
+        "actualJvmCodeMethods": 369,
+        "jacocoDefaultMethods": 310,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 291,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bug": "BUG2925",
+        "ykt": "YKT2455",
+        "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+        "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+        "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+        "finiteConcurrentCalls": 64,
+        "reproduction": {
+          "tests": 10,
+          "success": 2,
+          "failures": 7,
+          "errors": 1,
+          "scopeQualified": false
+        },
+        "firstFixedRun": {
+          "tests": 553,
+          "success": 552,
+          "failures": 1,
+          "errors": 0,
+          "scopeQualified": false,
+          "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+        },
+        "originalAndFailedExecsCombined": false,
+        "actualDbRootNativeVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -577653,6 +580873,121 @@
     "independentSqlGetterSequenceAndCopyLiteral": true,
     "finiteConcurrentCalls": 64,
     "actualMasterDbOrCopyOrRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentMigrationCleanupIdentity553PG32046": {
+    "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
+    "source": "7fbdce9f1004cf09a2899d39b04ffa467ab5e50c",
+    "productionCoreMain": "d0c5cc78a27ca4123af2101937fa1a50d7d9cd60",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32048-cleanup-identity553-third-post-v1/manifest.json",
+      "sha256": "571e95fc1b5c52175bf5e2a75c125cc2c0a5d8a5cba11205da6ad0c926353ff6"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32050-cleanup-identity553-third-unfiltered-measurement-v1/manifest.json",
+      "sha256": "3d7512a246660bb4c7d8c0b90732943b346022ad33436e1bbc6cee888819008b"
+    },
+    "tests": 553,
+    "newSourceQualifiedTestDefinitions": 10,
+    "existingSupportDefinitions": 543,
+    "newMainSources": 0,
+    "existingChangedMainSources": 5,
+    "identityGuardsAdded": 10,
+    "legacyOracleCorrections": 3,
+    "uniqueMainJavaDeltaFromInitial": 139,
+    "allOther26MigrationMainAndOtherLegacyTestsUnchanged": true,
+    "independentNew10UnchangedFromFailedReproduction": true,
+    "physicalClasses": 42,
+    "positiveMainCrc": 42,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 8032,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1103,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1594,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 865,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 310,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 42,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 8337
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1103
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1617
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 924
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 369
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 42
+      }
+    },
+    "actualJvmCodeMethods": 369,
+    "jacocoDefaultMethods": 310,
+    "all59DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 291,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "bug": "BUG2925",
+    "ykt": "YKT2455",
+    "state": "FIVE_CLASS_TEN_SITES_AND_THREE_ORACLES_LIMITED_CLOSED",
+    "allFiveSqlRuntimeErrorSelfAliasesAndValueEqualDifferentPeersVerified": true,
+    "resultCloseOriginAndDuplicateCleanupIdentityVerified": true,
+    "finiteConcurrentCalls": 64,
+    "reproduction": {
+      "tests": 10,
+      "success": 2,
+      "failures": 7,
+      "errors": 1,
+      "scopeQualified": false
+    },
+    "firstFixedRun": {
+      "tests": 553,
+      "success": 552,
+      "failures": 1,
+      "errors": 0,
+      "scopeQualified": false,
+      "cause": "Third legacy SpeakerStage010 oracle omitted by initial horizontal search"
+    },
+    "originalAndFailedExecsCombined": false,
+    "actualDbRootNativeVmAruOperations": 0,
     "newAcceptance": 0,
     "whole451Accepted": false,
     "effortRate": null,

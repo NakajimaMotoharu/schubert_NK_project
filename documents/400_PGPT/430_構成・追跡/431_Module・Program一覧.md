@@ -771,3 +771,6 @@ SSC375/NK-MIG-001/WBS-P01903 SpeakerMigrationMap constructor/mappings/targetSpea
 
 
 SSC376/NK-MIG-001/WBS-P01903 CurrentSpeakerProjectionReader constructor/read/requireStatement/rows/row/closeStatement/closeResult/invalid/toString→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-SPEAKERREAD001..020/019076077。Core9de4208d/Unit8ce04bd1、PG31984/986/988全176/18class/実146両四100。実Current/DB/全移行/HOLD未受入。
+
+
+SSC377/BUG2925/YKT2455/NK-MIG-001/WBS-P01903: SpeakerStagingTable/ScenarioStagingTables/AssetStagingTables/MigrationMasterFinalizer/MigrationMasterReferenceVerifier closeResult/closeStatement（Prepared同interface含む）10guard→RD MIG003005006/MIG-DAT005/TST→UI223242254→SS311331343→PT-MIG-CLEANID001..010/REF012/Finalizer自己block/SpeakerStage010/019078079。Core d0c5cc78/Unit7fbdce9f PG32046/048/050全553/42class/実369両四100。原失敗保持、実DB/全移行/HOLD未受入。
