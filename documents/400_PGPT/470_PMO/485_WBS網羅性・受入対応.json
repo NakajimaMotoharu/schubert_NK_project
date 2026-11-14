@@ -551623,66 +551623,73 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "73adc26518c1d1445d1de2dd11fd18a24d570b9dead56b209687741c901934fe",
+      "sha256": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
       "acceptance": "UNASSESSED",
-      "state": "MEDIA_ASSET_ROW44_NORMAL_IMMUTABLE_VALUE_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "MEDIA_ROW_NINE_GETTERS_NEEDED_BATCH88_FOUR100_GLOBAL_UNACCEPTED",
       "relatedSsc": "SSC-357",
       "testIds": "PT-MIG-MEDIAROW001..020",
       "historicalPath": null,
       "componentNormalQualification": {
-        "kind": "SSC357_MEDIA_ASSET_ROW44_NORMAL",
-        "source": "8304133c3c1bd6bb7f471e1d83544432cde400fa",
-        "productionCoreMain": "d842cbee79c8405ca81c723911cf5a1d92a50c68",
+        "kind": "SSC359_MEDIA_BATCH88_NORMAL",
+        "source": "3dd0000de9657b473b0098f263930d8a4447a1be",
+        "productionCoreMain": "760509914ab33fb5e63d40a5b78a927bafad2dbc",
         "evidence": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31214-media-asset-row44-naming-fixed-post-v1/manifest.json",
-          "sha256": "8a5dbde7ff48fa955932d8b1cdfeed01256402140e9c2d34f1df8fadad332116"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31318-media-batch88-post-v1/manifest.json",
+          "sha256": "11b1275b315732743908adce4fe0c2bae044a12781b7aa8fbfd7aca19afec22e"
         },
-        "tests": 44,
+        "tests": 88,
         "newUniqueTestDefinitions": 20,
-        "existingSupportDefinitions": 24,
+        "existingSupportDefinitions": 68,
         "newMainSources": 1,
-        "uniqueMainJavaDeltaFromInitial": 123,
-        "physicalClasses": 3,
-        "positiveMainCrc": 3,
+        "uniqueMainJavaDeltaFromInitial": 125,
+        "physicalClasses": 10,
+        "positiveMainCrc": 10,
         "coverage": {
           "INSTRUCTION": {
-            "covered": 757,
+            "covered": 1639,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 137,
+            "covered": 267,
             "missed": 0
           },
           "LINE": {
-            "covered": 143,
+            "covered": 305,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 97,
+            "covered": 201,
             "missed": 0
           },
           "METHOD": {
-            "covered": 25,
+            "covered": 64,
             "missed": 0
           },
           "CLASS": {
-            "covered": 3,
+            "covered": 10,
             "missed": 0
           }
         },
         "wholeScopeFour100": true,
         "actualJvmCodeMethodCounts": {
-          "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 15,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+          "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
           "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
-          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+          "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
         },
-        "actualJvmCodeMethods": 25,
-        "jacocoDefaultMethods": 25,
-        "newMediaRowCodeMethods": 15,
+        "actualJvmCodeMethods": 89,
+        "jacocoDefaultMethods": 64,
+        "newBatchCodeMethods": 8,
         "newMainHasNoDefaultFilteredMethods": true,
         "generatedPolicyGloballyAccepted": false,
         "manualCoverageExclusions": [],
-        "rawPmdFindings": 15,
+        "rawPmdFindings": 39,
         "applicable": 0,
         "unclassified": 0,
         "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
@@ -551701,11 +551708,11 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31214-media-asset-row44-naming-fixed-post-v1/manifest.json",
-          "sha256": "8a5dbde7ff48fa955932d8b1cdfeed01256402140e9c2d34f1df8fadad332116"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31318-media-batch88-post-v1/manifest.json",
+          "sha256": "11b1275b315732743908adce4fe0c2bae044a12781b7aa8fbfd7aca19afec22e"
         },
-        "actualUnitSource": "8304133c3c1bd6bb7f471e1d83544432cde400fa",
-        "productionCoreMain": "d842cbee79c8405ca81c723911cf5a1d92a50c68"
+        "actualUnitSource": "3dd0000de9657b473b0098f263930d8a4447a1be",
+        "productionCoreMain": "760509914ab33fb5e63d40a5b78a927bafad2dbc"
       }
     },
     {
@@ -551810,12 +551817,97 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
-      "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "sha256": "53e1e0d10707853229ad0f776c5d06d57e6a2b1e987d3e6dd9fa3dcf7f3315b7",
+      "acceptance": "UNASSESSED",
+      "state": "MEDIA_BATCH88_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-359",
       "testIds": "PT-MIG-MEDIABATCH001..020",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC359_MEDIA_BATCH88_NORMAL",
+        "source": "3dd0000de9657b473b0098f263930d8a4447a1be",
+        "productionCoreMain": "760509914ab33fb5e63d40a5b78a927bafad2dbc",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31318-media-batch88-post-v1/manifest.json",
+          "sha256": "11b1275b315732743908adce4fe0c2bae044a12781b7aa8fbfd7aca19afec22e"
+        },
+        "tests": 88,
+        "newUniqueTestDefinitions": 20,
+        "existingSupportDefinitions": 68,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 125,
+        "physicalClasses": 10,
+        "positiveMainCrc": 10,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 1639,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 267,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 305,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 201,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 64,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 10,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+          "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+          "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+          "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+        },
+        "actualJvmCodeMethods": 89,
+        "jacocoDefaultMethods": 64,
+        "newBatchCodeMethods": 8,
+        "newMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 39,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.6,
+          "base": 1.8,
+          "high": 3.6
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31318-media-batch88-post-v1/manifest.json",
+          "sha256": "11b1275b315732743908adce4fe0c2bae044a12781b7aa8fbfd7aca19afec22e"
+        },
+        "actualUnitSource": "3dd0000de9657b473b0098f263930d8a4447a1be",
+        "productionCoreMain": "760509914ab33fb5e63d40a5b78a927bafad2dbc"
+      }
     }
   ],
   "layouts": [
@@ -557648,6 +557740,82 @@
       "low": 0.7,
       "base": 2.1,
       "high": 4.2
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentMediaBatch88PG31316": {
+    "kind": "SSC359_MEDIA_BATCH88_NORMAL",
+    "source": "3dd0000de9657b473b0098f263930d8a4447a1be",
+    "productionCoreMain": "760509914ab33fb5e63d40a5b78a927bafad2dbc",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31318-media-batch88-post-v1/manifest.json",
+      "sha256": "11b1275b315732743908adce4fe0c2bae044a12781b7aa8fbfd7aca19afec22e"
+    },
+    "tests": 88,
+    "newUniqueTestDefinitions": 20,
+    "existingSupportDefinitions": 68,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 125,
+    "physicalClasses": 10,
+    "positiveMainCrc": 10,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 1639,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 267,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 305,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 201,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 64,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 10,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+      "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+    },
+    "actualJvmCodeMethods": 89,
+    "jacocoDefaultMethods": 64,
+    "newBatchCodeMethods": 8,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 39,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.6,
+      "base": 1.8,
+      "high": 3.6
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,
