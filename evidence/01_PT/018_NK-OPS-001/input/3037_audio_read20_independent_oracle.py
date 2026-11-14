@@ -1,0 +1,14 @@
+"""Explicit Current audio DDL and independent bounded Decimal vectors; no production import or DB."""
+from pathlib import Path
+from decimal import Decimal
+import re,json,hashlib,datetime
+r=Path.cwd();i=r/'evidence/01_PT/018_NK-OPS-001/input';raw=Path('/home/mini/codex/project1/schubert_project/program/database/schema.sql').read_text();m=re.search(r'CREATE TABLE scenario.audio_files \((.*?)\n\);',raw,re.S);assert m
+fields=[('id','bigint','required','getLong'),('game_id','smallint','required','getInt'),('relative_path','text','required','getString'),('file_name','text','required','getString'),('basename_upper','text','required','getString'),('audio_role','text','required','getString'),('container','text','nullable','getString'),('duration_seconds','numeric(12,3)','nullable','getBigDecimal'),('byte_size','bigint','nullable','getLong'),('sha256','text','nullable','getString')]
+for name,kind,nul,getter in fields:
+ line=re.search(r'^    '+name+' '+re.escape(kind)+r'([^\n]*)$',m.group(1),re.M);assert line,name;assert ('NOT NULL' in line.group(1))==(nul=='required')
+vectors=[('999999999.999','999999999.999'),('-999999999.999','-999999999.999'),('1E+8','100000000'),('-1E+8','-100000000'),('0E+3','0'),('0.000','0.000'),('9999999999.999',None),('1.0000',None),('1E+9',None),('10E+8',None),('-10E+8',None),('1E+2147483647',None),('1E-2147483647',None)]
+for source,expected in vectors:
+ value=Decimal(source);t=value.as_tuple();scale=-t.exponent;valid=len(t.digits)<=12 and -8<=scale<=3 and abs(value)<=Decimal('999999999.999');assert valid==(expected is not None)
+ if valid:assert format(value,'f')==expected
+sql='SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id';rows=[['-9223372036854775808','1','音声/a.ogg','a.ogg','A.OGG','voice','ogg','1.234','3','a'*64],['9223372036854775807','2','Other/b.ogg','b.ogg','B.OGG','unknown',None,None,None,None]]
+p=i/'3037_audio_read20_independent_oracle.json';assert not p.exists();p.write_text(json.dumps(dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),metadataOnly=True,sourceSchemaDdlBlockSha256=hashlib.sha256(m.group(0).encode()).hexdigest(),fields=fields,sql=sql,typedCalls=[x[3]+':'+str(n+1) for n,x in enumerate(fields)],immediateWasNullColumns=[1,2,9],normalLiteralRows=rows,numericSourceVectors=vectors,requiredNumericNullPositions=[1,2],requiredTextNullPositions=[3,4,5,6],nullablePositions=[7,8,9,10],sourceMetadataNotPhysicalAudioOrTargetMs=True,wholeTestsPlanned=20,productTestsExecuted=0,actualDatabaseOrGeneratorExecution=False,productionExpectedMethodUsed=False),ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,metadataOnly=True,fields=10,wasNull=3,decimalVectors=len(vectors),productTestsExecuted=0))

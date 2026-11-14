@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC395: CurrentAudioProjectionReader.read/rows/row/duration/cleanupはCurrent十列をreadonly snapshotから不変rowsへ接続。signedID-size/nullablemetadata/有界decimalを保持、独立20/四100計画、実audio/DB未資格。
+
 SSC394: CurrentScenarioFileMapperの全7Main17physicalに対しEntryMap/Placement通常各12を加え全122へ依存閉鎖。原98FES0はcoverage不足で未資格。Main不変更、BUG2940/YKT2469。
 
 SSC393: CurrentScenarioFileMapperの現依存Asset20を含む新24＋必要74=98/7Main17physicalへ訂正。Main/業務期待値不変、原90未実行保持、BUG2938/YKT2467。

@@ -1,0 +1,187 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T18:52:02.778233+00:00",
+  "metadataOnly": true,
+  "sourceSchemaDdlBlockSha256": "077f8d1850d3a449ef0f387af820c89a840d1a67ea5d4b60e69b95c6dd65022b",
+  "fields": [
+    [
+      "id",
+      "bigint",
+      "required",
+      "getLong"
+    ],
+    [
+      "game_id",
+      "smallint",
+      "required",
+      "getInt"
+    ],
+    [
+      "relative_path",
+      "text",
+      "required",
+      "getString"
+    ],
+    [
+      "file_name",
+      "text",
+      "required",
+      "getString"
+    ],
+    [
+      "basename_upper",
+      "text",
+      "required",
+      "getString"
+    ],
+    [
+      "audio_role",
+      "text",
+      "required",
+      "getString"
+    ],
+    [
+      "container",
+      "text",
+      "nullable",
+      "getString"
+    ],
+    [
+      "duration_seconds",
+      "numeric(12,3)",
+      "nullable",
+      "getBigDecimal"
+    ],
+    [
+      "byte_size",
+      "bigint",
+      "nullable",
+      "getLong"
+    ],
+    [
+      "sha256",
+      "text",
+      "nullable",
+      "getString"
+    ]
+  ],
+  "sql": "SELECT id,game_id,relative_path,file_name,basename_upper,audio_role,container,duration_seconds,byte_size,sha256 FROM scenario.audio_files ORDER BY id",
+  "typedCalls": [
+    "getLong:1",
+    "getInt:2",
+    "getString:3",
+    "getString:4",
+    "getString:5",
+    "getString:6",
+    "getString:7",
+    "getBigDecimal:8",
+    "getLong:9",
+    "getString:10"
+  ],
+  "immediateWasNullColumns": [
+    1,
+    2,
+    9
+  ],
+  "normalLiteralRows": [
+    [
+      "-9223372036854775808",
+      "1",
+      "音声/a.ogg",
+      "a.ogg",
+      "A.OGG",
+      "voice",
+      "ogg",
+      "1.234",
+      "3",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    [
+      "9223372036854775807",
+      "2",
+      "Other/b.ogg",
+      "b.ogg",
+      "B.OGG",
+      "unknown",
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "numericSourceVectors": [
+    [
+      "999999999.999",
+      "999999999.999"
+    ],
+    [
+      "-999999999.999",
+      "-999999999.999"
+    ],
+    [
+      "1E+8",
+      "100000000"
+    ],
+    [
+      "-1E+8",
+      "-100000000"
+    ],
+    [
+      "0E+3",
+      "0"
+    ],
+    [
+      "0.000",
+      "0.000"
+    ],
+    [
+      "9999999999.999",
+      null
+    ],
+    [
+      "1.0000",
+      null
+    ],
+    [
+      "1E+9",
+      null
+    ],
+    [
+      "10E+8",
+      null
+    ],
+    [
+      "-10E+8",
+      null
+    ],
+    [
+      "1E+2147483647",
+      null
+    ],
+    [
+      "1E-2147483647",
+      null
+    ]
+  ],
+  "requiredNumericNullPositions": [
+    1,
+    2
+  ],
+  "requiredTextNullPositions": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "nullablePositions": [
+    7,
+    8,
+    9,
+    10
+  ],
+  "sourceMetadataNotPhysicalAudioOrTargetMs": true,
+  "wholeTestsPlanned": 20,
+  "productTestsExecuted": 0,
+  "actualDatabaseOrGeneratorExecution": false,
+  "productionExpectedMethodUsed": false
+}
