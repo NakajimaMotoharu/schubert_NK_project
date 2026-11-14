@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC407 遅延制約の第三共有fixtureと既件数後条件（2026-11-15）
+
+SSC406/BUG2969/YKT2498同群の試験fixture補足。PG33096全948は7F1E/940成功/exit1で未資格。Finalizer.finishの通常呼出元は専用30/親Target38に加えMigrationCleanupIdentityTest10も対象とし、第三fixtureは固定SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATE一つのexecuteUpdate0と、その直後getWarnings nullを厳密に受け付ける。subject3=Finalizerのみ旧最初MAXの前に当SQLと二callを明示追加し、他四subject/元read-close fault/primary同instance/順suppressed/自己identity/EqualFailure/有限64を維持する。未知operationや余剰SQLは拒否を保持。Final024のwarning読は先行1+既slot、Final025のfresh SQLは17へ。新Test定義は増やさず全948のまま、他44Test/他43Main同byteへscope訂正。Main Core6556bad9/Target38 sourceは不変更、再試験は是正後Unitのfresh同一source一exec/全45Main65CRC/Root静的/既定と無filter四100で行う。旧失敗948を合格/正式へ合算しない。新群・追加予算0、元SSC406群3.3/9.9/9.9内の手戻り・実費token不明として分離。実DB/trigger/Root/native/全移行/正式1964-53/工数null/HOLD不変更、RD/UI/QA変更0。
+
 ## SSC406 遅延link制約を非transactional sequence同期前に評価（2026-11-15）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331343/V002。BUG2967/YKT2496: V002 ck_entry_audio_links_entry_type_limitはDEFERRABLE INITIALLY DEFERREDで、既Finalizerの五MAX→setval→ANALYZEだけでは実trigger違反が非transactional sequence変更後のCOMMITで判明し得る。既Referenceの宣言件数検査は実DB遅延trigger発火を代替しない。終了依存の内部補足でRD/UI/DDL/承認済DIF/QA変更なし。
