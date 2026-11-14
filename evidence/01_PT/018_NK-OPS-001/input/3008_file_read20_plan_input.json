@@ -1,0 +1,31 @@
+{
+  "ssc": 391,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java",
+  "source": "67e0ee2d63e834dbb17e0744ac4f60aa9a7d9c79",
+  "title": "Currentシナリオfile八列のborrowed snapshot読取り",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioFileProjectionReaderはcaller認証済みCurrent readonly/nonauto snapshotから八列を読むJDK JDBC部品。固定SQLは SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM scenario.script_files ORDER BY id 。Current DDLの八列型/null契約だけを確認し、created_atは別migration共通時刻のため選択しない。DB接続取得・認証/資格/role変更・Current generator/原本master/実DB操作は実施しない。\n\nread(Nullable Connection,int expectedRows)はnull/負件数を固定IAE、getAutoCommit=false/isReadOnly=trueの既接続を要求。新Statement一つ/queryTimeout30/fetch1000/固定SQL一回、新ResultSet一つ。件数完全一致、不足拒否、余剰はfieldread前に拒否する。expectedRowsに独自業務上限を設けず、setAutoCommit/setReadOnly/commit/rollback/Connection.closeなし。\n\n列1 id=getLong/直後wasNull必須、2 game=getInt/直後wasNull必須、3 relative_path=getString必須、4 file_name=getString必須、5 section_code/6 chapter_title/7 sha256=getString nullable、8 byte_size=getLong/直後wasNull nullable。signed Current ID/size、全int gameを正準decimalとしてそのまま保持し、負値や未知gameをtarget都合で補完しない。section/chapter/hash/size NULL、保存文字の空白/slash/case/Unicode/controlを変換しない。Current hash/sizeは未信頼source値であり、実fileのdigest/byte証明やtargetのstorage/display/ID対応を代替しない。callerは後続で実asset資格と既target Row/Batchへ結合する。外/内Listはnullを保持するdeep immutable snapshot、呼出間状態共有0。\n\nSQL/RuntimeException/Errorの元primary再throw、Result→Statement各一回close、clean close失敗は失敗、primary有りは順suppressed、同一Throwable自己suppressionなし。vendor null Statement/Resultは固定SQLException、例外/toStringは固定redaction。callerのConnectionは返却しない。\n\nPT-MIG-FILEREAD001..020: 001八列正常とsignedid両端、002empty0、003null/負入力、004readonly/nonauto、005nullStatement、006nullResult、007不足余剰zero、008必須二数値NULL、009nullable size/未知game負size保存、010必須path/name NULL、011全保存文字/nullable section-chapter-hash保持、012deep immutable、013固定SQL/型getter/三wasNull/timeout-fetch-close exact順、014全JDBC phase全occurrence×SQL-Runtime-Errorと所有後条件、015clean close失敗三型、016primary/二cleanup全三型組合せと順suppressed、017自己identity、018intgame/longsize両端とnullable文字literal、019失敗後fresh/固定redaction、020有限8worker64/Future5/finallyshutdownNow-await10。期待SQL/八列typed fixture/固定literalはProduction methodから生成しない。新Main1/new20だけwhole20/一physical、旧36migrationMain753定義を同byte保持。同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。追加不足1.8/5.4/9.9pp cap10、元費用/SV/各群開始保持・実専有費token null。RD/UI/DDL/grant/QA変更不要。実Current DB/asset/hash認証/target file mapping/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。",
+  "testIds": "PT-MIG-FILEREAD001..020",
+  "estimate": {
+    "low": 1.8,
+    "base": 5.4,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "105_Currentシナリオfile八列projection・独立二十仕様.md",
+  "previousForecastName": "1980_WBS65予実・Current entry対応百八十後版556.json",
+  "forecastName": "1982_WBS65予実・Current file読取り不足追加版557.json",
+  "revision": "557-MISSING_CURRENT_FILE_TYPED_PROJECTION",
+  "findingReason": "Current entry conversion is connected but script_files source eight selected columns have no production snapshot reader. Add explicit typed readonly projection preserving nullable hash/size and stored paths without trusting them as physical asset evidence.",
+  "workId": "P01903_SSC391_FILEREAD20",
+  "planKey": "plannedCurrentFileProjectionReaderSSC391",
+  "startRecordName": "1983_WBS65Current file読取り開始.json",
+  "startInputName": "3009_file_read20_start.json",
+  "designSlot": "PG32438-ssc391-file-read-design-only-v1",
+  "ledgerSummary": "Current script_files八列のborrowed readonly JDBC projection、nullable section/chapter/hash/size保存、必須NULL/件数/逆順cleanup、独立20。source metadataを実asset/hash資格へ変換しない。実DB/target対応/全移行/HOLD未受入。RD/UI変更不要。",
+  "moduleSummary": "CurrentScenarioFileProjectionReader.read/rows/row/cleanupはCurrent八列をreadonly snapshotから不変rowsへ読む。signedID/nullable sizeと保存path/hashを非修復、独立20/四100計画、実asset/DB未資格。",
+  "groupId": "PGPT-WBS65-SSC391-CURRENT-FILE-READ20-20261115",
+  "run": "PG32452-FILE-READ-CLOSED20",
+  "scope": "MissingCurrentScenarioFileProjectionReader20/full1Main1physical. Borrowedreadonlynonauto/eight typed fields/three wasNull/cardinality/nullable size and text/cleanup. Additional1.8/5.4/9.9cap10 noActualDB/assets/RootnativeActual4aruHOLD.",
+  "nextCommand": "PublishSSC391SS311343914onlymain beforePG. Implement independent8columnreader20/Rootstatic/1CRC-init/default-raw. Continue Currentfile mapping after asset contract audit. No actualDB/master/filepayload/driver/VM/HOLD operations; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
