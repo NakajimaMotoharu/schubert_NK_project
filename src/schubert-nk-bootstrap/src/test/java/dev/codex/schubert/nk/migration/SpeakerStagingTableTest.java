@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-SPEAKERSTAGE001..024; independent V002 SQL and memory-only JDBC fault matrix. */
 final class SpeakerStagingTableTest {
+  private static final int ACQUISITION_STEP = 1;
   private static final String SPEAKER_COLUMNS =
       "id, game_id, name, normalized_name, is_protagonist, notes, created_at";
   private static final String FILE_COLUMNS =
@@ -276,7 +277,7 @@ final class SpeakerStagingTableTest {
       for (Throwable expected : failures()) {
         var f = new Fixture();
         if (step == 0) f.autoFailure = expected;
-        else if (step == 1) f.createFailure = expected;
+        else if (step == ACQUISITION_STEP) f.createFailure = expected;
         else f.timeoutFailure = expected;
         assertSame(expected, assertThrows(expected.getClass(), () -> transfer(f)));
         assertTrue(f.sql.isEmpty());
@@ -602,12 +603,14 @@ final class SpeakerStagingTableTest {
                     return ddl.startsWith(CREATE_PREFIX) ? ddlCount : 1;
                   case "executeLargeUpdate":
                     sql.add((String) args[0]);
-                    int update = largeUpdates++;
+                    int update = largeUpdates;
+                    largeUpdates++;
                     if (insertFailure != null) throw insertFailure;
                     return fullFlow && update > 0 ? 1L : inserted;
                   case "executeQuery":
                     sql.add((String) args[0]);
-                    int position = queryIndex++;
+                    int position = queryIndex;
+                    queryIndex++;
                     if (position == badQuery && fault == Fault.QUERY)
                       throw phaseFailure == null ? primary : phaseFailure;
                     if (position == badQuery && fault == Fault.NULL_RESULT) return null;

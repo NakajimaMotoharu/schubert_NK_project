@@ -1,0 +1,107 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG31656-SPEAKER-STAGING-CLOSED96",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31646-speaker-staging-source24-v1/independent-ddl-sql-oracle.json",
+      "sha256": "f19779f49a6a9ee20fee579d51375d89a04108dacb0b33f7b09c14bd41d6d929"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/029_Scenario一時表準備・独立十八仕様.md",
+      "sha256": "38b1f428c7760409f0ed5a1c0da7f3c7470594e78d30e5049d906faa747652a2"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/031_Scenario二表転記・独立二十仕様.md",
+      "sha256": "25c06c2bb818a1e825af40cb55dc3f3767af8ecec6b54bd51c7ea29fedadd9ce"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/049_Asset三表stagingと転送・独立三十仕様.md",
+      "sha256": "082ee708bf8c184a08d0c860a8fc17164de8156135f04ca70ded8116414567a2"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/056_JDBC非null終了と二段suppression・独立四追加仕様.md",
+      "sha256": "1f1e5793b059a96f469fec0dde37967454bfb5b84bb554091a06f9645af154e4"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/062_Speaker先行stagingと借用六表接続・独立二十四仕様.md",
+      "sha256": "f000649b00309dfc6220517317c7b41425729056fc927e5fbff6d6d2e5189291"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31646-speaker-staging-source24-v1/manifest.json",
+      "sha256": "04a313950f43e673709b743082c5c4db33760eb43b68bd9cddd3e0456f59233d"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "826521ee1760bbf5526ae87c61937ae4c17e1624",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java",
+      "tests": 24
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "tests": 40
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+      "tests": 32
+    }
+  ],
+  "expectedTests": 96,
+  "resources": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/SpeakerStagingTable.class",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/SpeakerStagingTable",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables",
+    "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG31648-speaker-staging96-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG31650-speaker-staging96-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG31652-speaker-staging96-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG31654-speaker-staging96-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG31656-speaker-staging96-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG31658-speaker-staging96-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg31650-speaker-staging96-prepare-v1",
+    "unit": "pg31656-speaker-staging96-unit-v1"
+  },
+  "newTestDefinitions": 24
+}
