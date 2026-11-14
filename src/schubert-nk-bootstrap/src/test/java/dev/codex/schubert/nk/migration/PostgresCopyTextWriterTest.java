@@ -65,7 +65,9 @@ final class PostgresCopyTextWriterTest {
 
             @Override
             public List<@Nullable String> next() {
-              if (position++ == 0) return first();
+              int previousPosition = position;
+              position++;
+              if (previousPosition == 0) return first();
               assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), sink.bytes());
               return second();
             }
@@ -215,7 +217,9 @@ final class PostgresCopyTextWriterTest {
 
               @Override
               public List<@Nullable String> next() {
-                if (position++ == 0) return first();
+                int previousPosition = position;
+                position++;
+                if (previousPosition == 0) return first();
                 throw failure;
               }
             };
