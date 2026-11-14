@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< dev.codex.schubert.quality:pg31528-five-table-dataset-closed399 >---
+[INFO] Building pg31528-five-table-dataset-closed399 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spotbugs:4.10.4.0:check (default-cli) > :spotbugs @ pg31528-five-table-dataset-closed399 >>>
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ pg31528-five-table-dataset-closed399 ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO] 
+[INFO] <<< spotbugs:4.10.4.0:check (default-cli) < :spotbugs @ pg31528-five-table-dataset-closed399 <<<
+[INFO] 
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:check (default-cli) @ pg31528-five-table-dataset-closed399 ---
+[INFO] BugInstance size is 5
+[INFO] Error size is 0
+[INFO] Total bugs: 5
+[ERROR] Medium: dev.codex.schubert.nk.migration.MigrationCopyDataset.audio() may expose internal representation by returning MigrationCopyDataset.retainedAudio [dev.codex.schubert.nk.migration.MigrationCopyDataset] At MigrationCopyDataset.java:[line 49] EI_EXPOSE_REP
+[ERROR] Medium: dev.codex.schubert.nk.migration.MigrationCopyDataset.media() may expose internal representation by returning MigrationCopyDataset.retainedMedia [dev.codex.schubert.nk.migration.MigrationCopyDataset] At MigrationCopyDataset.java:[line 53] EI_EXPOSE_REP
+[ERROR] Medium: dev.codex.schubert.nk.migration.MigrationCopyDataset.scenario() may expose internal representation by returning MigrationCopyDataset.retainedScenario [dev.codex.schubert.nk.migration.MigrationCopyDataset] At MigrationCopyDataset.java:[line 45] EI_EXPOSE_REP
+[ERROR] Medium: new dev.codex.schubert.nk.migration.MigrationCopyDataset(ScenarioCopyDataset, List, List, MediaAssetCopyBatch) may expose internal representation by storing an externally mutable object into MigrationCopyDataset.retainedMedia [dev.codex.schubert.nk.migration.MigrationCopyDataset] At MigrationCopyDataset.java:[line 41] EI_EXPOSE_REP2
+[ERROR] Medium: new dev.codex.schubert.nk.migration.MigrationCopyDataset(ScenarioCopyDataset, List, List, MediaAssetCopyBatch) may expose internal representation by storing an externally mutable object into MigrationCopyDataset.retainedScenario [dev.codex.schubert.nk.migration.MigrationCopyDataset] At MigrationCopyDataset.java:[line 39] EI_EXPOSE_REP2
+[INFO] 
+
+
+To see bug detail using the Spotbugs GUI, use the following command "mvn spotbugs:gui"
+
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.015 s
+[INFO] Finished at: 2026-11-14T18:06:17+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check (default-cli) on project pg31528-five-table-dataset-closed399: failed with 5 bugs and 0 errors -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
