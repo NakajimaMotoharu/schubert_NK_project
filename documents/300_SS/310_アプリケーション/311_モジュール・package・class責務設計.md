@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC383: ConstraintVerifier75明示テーブル制約だけをn,t分離queryで照合する。承認済み遅延constraint trigger自体とNOTNULL catalogは別未完、無効化・全catalog資格の主張0。
+
 SSC382: MigrationMasterConstraintVerifierの75制約構造を既TargetPublisher.prepareのColumn後staging前へ同Connection接続、PT-CONSTRAINT22＋既Target32/必要641、全31Main45physical。実DB/全constraint意味/全移行/HOLD未受入。
 
 SSC381: 既MigrationMasterTargetPublisher.prepareは同ConnectionでColumn66属性を全成立させてから六CTASへ進む。Target025..032/必要619、実DB/catalog全体/Rootnative/HOLD未受入。
