@@ -1,0 +1,42 @@
+{
+  "ssc": 382,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java",
+  "source": "0126c0ef4c26cfe4fd4b9c6d772bbafe6f200ae9",
+  "title": "六表七十五制約の構造・有効性とstaging前接続",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/343。新MigrationMasterConstraintVerifierは六表のV002明示75制約（speakers7/script_files14/script_entries15/audio_files14/media_assets19/entry_audio_links6）の構造と有効性を借用非auto TXの固定六SELECTで照合する。同一群で既MigrationMasterTargetPublisher.prepareのColumnVerifier後・六CTAS前へ接続する。通常PTはJDK JDBC Proxyだけ、実DB/catalog/権限操作やHOLD解除はしない。\n\npg_constraint kとpg_class c/pg_namespace n、LEFT JOIN参照先class rc/namespace rnを使用する。WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relnameは六compile-time literal、c.relkind='r'/relpersistence='p'、k.contype<>'n'。PG18の自動命名NOTNULLはColumn66属性と別の未完catalog条件として明示除外する。他の未知type/余分constraintは隠さず全行比較で拒否する。ORDER BY k.conname COLLATE \"C\"、先頭row_numberの同順intとname/type/conkey（array_to_stringの宣言列番号順）、status、参照先、actionsの七projectionを読む。statusはconvalidated AND conenforced AND NOT condeferrable AND NOT condeferred AND conislocal AND coninhcount=0 AND conparentid=0 AND contypid=0 AND NOT conperiodの全成立boolean。一条件のfalse/SQLNULLでも拒否、SQLを修復しない。connoinheritは制約種別依存のため今回の資格へ含めない。\n\nFKの参照先はrn.nspname||'.'||rc.relname||'('||array_to_string(confkey,',')||')'、actionsはconfupdtype/confdeltype/confmatchtypeをslash区切りで保持。現DDLはupdate a、delete RESTRICT r又はCASCADE c、match SIMPLE s。非FKは固定'-'、conkeyの空/NULL/順序/重複/unknownは明示期待と不一致にする。CHECKは名前・conkey・有効性だけの限定構造確認で、conbin/pg_get_constraintdefの式同値、実際のチェック挙動・index健全性・equality operator/collation・NOTNULL制約status・trigger・role/grant/default/identitysequence/生成式lower(body)と実値は別の未完条件である。75構造を全constraint互換や実DB受入れと呼ばない。\n\nverify(null)固定IAE、autoCommit=true/nullStatement/Result/欠落余剰・metadataSQLNULL/未知値は固定SQLException。queryTimeout30/fetch1000、ordinal getInt1直後wasNull、getString2/3/4、status getBoolean5直後wasNull、getString6/7、全75行終端nextfalse。期待はV002宣言と手作り独立75構造matrixで二重照合してprivate不変listへ固定。Production methodや実DB観測からexpectedを生成しない。SQL/Runtime/Error元primaryとResult→Statement一回close・順suppressed/selfidentity guardは既Columnと同契約、Connection close/commit/rollback/role/設定変更/再接続/再試行0、message/toString固定redaction。PostgreSQL18公式 https://www.postgresql.org/docs/18/catalog-pg-constraint.html （conenforced/convalidated/conkey/confkey/actions/conperiod）を根拠にし、pin18.6はupgradeしない。\n\n接続時系列Column6→Constraint6→prepare6→transfer24→reference16→content6→finalizer16、全80SQL/catalog12+typed6+scalar44=62Result、ordinary11+Prepared5=16close/timeout、auto11、fetch1000三回。ownerStart=[0,6,12,13,15,18,22,30,42,58,64]、closeSQLPrefix=[6,12,13,15,18,22,30,42,58,64,70,71,72,73,74,80]、closeResultCount=[6,12,12,12,12,15,21,30,46,52,58,59,60,61,62,62]。setval最初69/ANALYZE74、prepared最初close10/outer15。catalog失敗はtable0..5のowner一/6..11のowner二、CTAS/後続0。旧68業務SQL/44scalar/typed65値を不変、旧Column66属性と新Constraint75で141行987getter。既Target001..032の独立時系列・全属性/NULL/fault/有限64を12catalogへ拡張し、追加のTarget定義は0。\n\nPT-MIG-CONSTRAINT001..022: 001正常全75/六SQL/資源tuple、002nullConn、003autoCommit、004nullStatement、005六nullResult、006全75欠落、007余剰fieldread0、008ordinalNULL/0/負/重複/不正順、009全75×六属性個別不一致、010全文字NULL/空/unknown区別、011statusNULL/false拒否、012全75status反転、013全FK参照schema/table/key/複合順と非FK'-'、014update/delete/match action違い、015全固定status/namespace/tablekind/除外NOTNULL条件とtype/key順、016全JDBC位置三fault型と独立eventprefix、017全Resultclose三型、018Statementclose三型、019primaryと二cleanup順、020自己identity/値equals別実体/同cleanup二回、021redaction/fresh正常/借用mutation0、022finite8workers64/Future5/finallyshutdownNow-await10。既Target32適応とColumn22/他565を含む全641/全31Main45physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用/全CRC-init/既定と無filter全四100で確認。新Main1/新22定義、既Publisher一変更、元683→705定義中scope641のみ。\n\n追加不足3.3/9.9/9.9pp cap10、製造と接続を一群にまとめ、独立部品だけを先に再演しない。元費用/SV/群開始見積り保持、専有費token null、新業務仕様/RD/UI/DDL/grant/QA変更不要。正式1964/53/元190/WBS625受入れは個別終了依存未成立のため更新しない。実DB/原本Current/全移行/Rootnative/CHR/global451/ITST/HOLD未受入。",
+  "testIds": "PT-MIG-CONSTRAINT001..022/PT-MIG-TARGET001..032",
+  "estimate": {
+    "low": 3.3,
+    "base": 9.9,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "088_六表七十五制約の構造・有効性とstaging前接続・独立二十二仕様.md",
+  "previousForecastName": "1944_WBS65予実・staging前カラム六百十九後版540.json",
+  "forecastName": "1946_WBS65予実・七十五制約構造接続不足追加版541.json",
+  "revision": "541-MISSING_CONSTRAINT_STRUCTURE_VALIDITY_SAME_PATH",
+  "findingReason": "Column66 confirms physical flags but not the75 declared PK/UK/FK/CHECK names, keys, FK references/actions or validated/enforced/nondeferred local ordinary constraints. Manufacture a fixed SELECT verifier and integrate before any staging in the same group. CHECK expression semantics, NOTNULL pg_constraint status, index/trigger/role/default/generated expression and actualDB remain separate.",
+  "workId": "P01903_SSC382_CONSTRAINT75_TARGET641",
+  "planKey": "plannedConstraint75ConnectionSSC382",
+  "startRecordName": "1947_WBS65七十五制約構造接続製造開始.json",
+  "startInputName": "2926_constraint641_start.json",
+  "designSlot": "PG32204-ssc382-constraint-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343 六表75明示PK/UK/FK/CHECK構造とstatusを固定catalog SELECTで確認し同ConnectionのColumn後staging前へ接続。新Main1/22独立PT＋既Publisher/Target32適応を同群全641で確認。式/NOTNULLcatalog/index-trigger-role/実DB/HOLDは別条件、RD/UI/DDL/QA変更不要。",
+  "moduleSummary": "MigrationMasterConstraintVerifierの75制約構造を既TargetPublisher.prepareのColumn後staging前へ同Connection接続、PT-CONSTRAINT22＋既Target32/必要641、全31Main45physical。実DB/全constraint意味/全移行/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC382-CONSTRAINT75-TARGET641-20261115",
+  "run": "PG32218-CONSTRAINT-TARGET-CLOSED641",
+  "scope": "Missing75constraint structural-validity verifier and same-path pre-staging connection in one group. New1Main22defs/changedPublisher1/Target32adapted, whole641/31Main45physical,80SQL62Result16close. Additional3.3/9.9/9.9cap10; noactualDB/COPY/RootnativeActual4aruHOLDactions.",
+  "nextCommand": "PublishSSC382SS311343914onlymain beforePG. Implement Constraint75 verifier22 with independentDDL name/type/key/FK/actions/status oracle, integrate afterColumn and beforeCTAS, adapt Target32 catalog12/141rows/987getter, necessary641/Rootstatic/45CRC-init/default-raw. No standalone22 confirmation replay or actualDB/COPY/native/aru/HOLD actions; ordinarygroupnotstop.",
+  "currentSourceAudit": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e",
+      "sourceOnly": true,
+      "executed": false
+    }
+  ],
+  "documentDate": "2026-11-15",
+  "technicalSources": [
+    "https://www.postgresql.org/docs/18/catalog-pg-constraint.html"
+  ]
+}

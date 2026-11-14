@@ -1,0 +1,2 @@
+
+2026-11-15 BUG2933/YKT2462読取り訂正（原記録保持）: Test015の元Java sourceはbackslash二文字のregex指定で、Java→regex解釈後はtabに一致する正しい表現だった。表示層を混同した当初の過剰escape所見を撤回し、当該一行を原byteへ戻す。regex障害/修正/成果として計上0、実対象は固定diagnostic二箇所の不一致だけ。元Test/未実行状態とこの訂正を保持し、FK列順負試験は原regexのまま通常641で確認する。

@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-TARGET001..032; independent74 SQL/44 scalar, content6 and catalog6 result vectors,
+ * PT-MIG-TARGET001..032; independent80 SQL/44 scalar, content6 and catalog12 result vectors,
  * memory-only borrowed JDBC.
  */
 final class MigrationMasterTargetPublisherTest {
@@ -45,43 +45,44 @@ final class MigrationMasterTargetPublisherTest {
   private static final String TARGET_VIDEO = "video/a.mp4";
   private static final String VIDEO = "VIDEO";
   private static final String SPEAKER_ID = "42";
-  private static final int PREPARE_END = 12;
-  private static final int TRANSFER_END = 36;
-  private static final int REFERENCE_END = 52;
-  private static final int CONTENT_END = 58;
+  private static final int PREPARE_END = 18;
+  private static final int TRANSFER_END = 42;
+  private static final int REFERENCE_END = 58;
+  private static final int CONTENT_END = 64;
   private static final int CONTENT_TABLES = 6;
-  private static final int CATALOG_TABLES = 6;
-  private static final int CATALOG_END = 6;
-  private static final int CATALOG_COLUMNS = 66;
+  private static final int CATALOG_TABLES = 12;
+  private static final int CATALOG_END = 12;
+  private static final int CATALOG_COLUMNS = 141;
   private static final int CATALOG_FIELDS = 7;
   private static final int CONTENT_COLUMNS = 65;
-  private static final int RESULTS = 56;
-  private static final int CLOSES = 15;
-  private static final int CONTENT_CLOSE = 8;
+  private static final int RESULTS = 62;
+  private static final int CLOSES = 16;
+  private static final int CONTENT_CLOSE = 9;
   private static final String GET_LONG = "getLong";
   private static final String GET_INT = "getInt";
   private static final String GET_BOOLEAN = "getBoolean";
   private static final String GET_TIMESTAMP = "getTimestamp";
   private static final String GET_STRING = "getString";
-  private static final int SETVAL_FIRST = 63;
-  private static final int ANALYZE_FIRST = 68;
-  private static final int SQL_COUNT = 74;
+  private static final int SETVAL_FIRST = 69;
+  private static final int ANALYZE_FIRST = 74;
+  private static final int SQL_COUNT = 80;
   private static final int SCALARS = 44;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
   private static final int REFERENCE_SCALARS_END = 34;
   private static final int SETVAL_SCALAR_FIRST = 39;
-  private static final int PREPARED_FIRST_CLOSE = 9;
-  private static final int OUTER_FINAL_CLOSE = 14;
+  private static final int PREPARED_FIRST_CLOSE = 10;
+  private static final int OUTER_FINAL_CLOSE = 15;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
-  private static final List<Integer> OWNER_START = List.of(0, 6, 7, 9, 12, 16, 24, 36, 52, 58);
+  private static final List<Integer> OWNER_START =
+      List.of(0, 6, 12, 13, 15, 18, 22, 30, 42, 58, 64);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(6, 7, 9, 12, 16, 24, 36, 52, 58, 64, 65, 66, 67, 68, 74);
+      List.of(6, 12, 13, 15, 18, 22, 30, 42, 58, 64, 70, 71, 72, 73, 74, 80);
   private static final List<Integer> CLOSE_RESULTS =
-      List.of(6, 6, 6, 6, 9, 15, 24, 40, 46, 52, 53, 54, 55, 56, 56);
+      List.of(6, 12, 12, 12, 12, 15, 21, 30, 46, 52, 58, 59, 60, 61, 62, 62);
   private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t";
   private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t";
   private static final List<String> CATALOG_SQL =
@@ -91,7 +92,13 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum");
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"");
   private static final List<List<String>> CATALOG_ROWS =
       List.of(
           List.of(
@@ -165,7 +172,88 @@ final class MigrationMasterTargetPublisherTest {
               "3\tgame_id\tint2\tsmallint\ttrue\t\t",
               "4\tlink_type\tvarchar\tcharacter varying(5)\ttrue\t\t",
               "5\tdisplay_order\tint2\tsmallint\ttrue\t\t",
-              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"));
+              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              "1\tck_speakers_id_n12\tc\t1\ttrue\t-\t-",
+              "2\tck_speakers_name_bytes\tc\t3\ttrue\t-\t-",
+              "3\tck_speakers_normalized_name_bytes\tc\t4\ttrue\t-\t-",
+              "4\tfk_speakers_games_game_id\tf\t2\ttrue\tschubert.games(1)\ta/r/s",
+              "5\tpk_speakers\tp\t1\ttrue\t-\t-",
+              "6\tuq_speakers_game_normalized_name\tu\t2,4\ttrue\t-\t-",
+              "7\tuq_speakers_id_game\tu\t1,2\ttrue\t-\t-"),
+          List.of(
+              "1\tck_script_files_byte_size\tc\t10\ttrue\t-\t-",
+              "2\tck_script_files_chapter_title_bytes\tc\t8\ttrue\t-\t-",
+              "3\tck_script_files_display_order_n12\tc\t3\ttrue\t-\t-",
+              "4\tck_script_files_display_path_bytes\tc\t5\ttrue\t-\t-",
+              "5\tck_script_files_file_name_bytes\tc\t6\ttrue\t-\t-",
+              "6\tck_script_files_id_n12\tc\t1\ttrue\t-\t-",
+              "7\tck_script_files_sha256\tc\t9\ttrue\t-\t-",
+              "8\tck_script_files_storage_path_bytes\tc\t4\ttrue\t-\t-",
+              "9\tck_script_files_storage_path_safe\tc\t4\ttrue\t-\t-",
+              "10\tfk_script_files_games_game_id\tf\t2\ttrue\tschubert.games(1)\ta/r/s",
+              "11\tpk_script_files\tp\t1\ttrue\t-\t-",
+              "12\tuq_script_files_game_display_order\tu\t2,3\ttrue\t-\t-",
+              "13\tuq_script_files_game_storage_path\tu\t2,4\ttrue\t-\t-",
+              "14\tuq_script_files_id_game\tu\t1,2\ttrue\t-\t-"),
+          List.of(
+              "1\tck_script_entries_body_bytes\tc\t10\ttrue\t-\t-",
+              "2\tck_script_entries_display_order_n12\tc\t4\ttrue\t-\t-",
+              "3\tck_script_entries_entry_index\tc\t5\ttrue\t-\t-",
+              "4\tck_script_entries_entry_type\tc\t7\ttrue\t-\t-",
+              "5\tck_script_entries_id_n12\tc\t1\ttrue\t-\t-",
+              "6\tck_script_entries_line_number\tc\t6\ttrue\t-\t-",
+              "7\tck_script_entries_speaker_by_type\tc\t7,8\ttrue\t-\t-",
+              "8\tck_script_entries_speaker_label_bytes\tc\t9\ttrue\t-\t-",
+              "9\tfk_script_entries_games_game_id\tf\t2\ttrue\tschubert.games(1)\ta/r/s",
+              "10\tfk_script_entries_script_files_file_game\tf\t3,2\ttrue\tschubert.script_files(1,2)\ta/c/s",
+              "11\tfk_script_entries_speakers_speaker_game\tf\t8,2\ttrue\tschubert.speakers(1,2)\ta/r/s",
+              "12\tpk_script_entries\tp\t1\ttrue\t-\t-",
+              "13\tuq_script_entries_display_order\tu\t4\ttrue\t-\t-",
+              "14\tuq_script_entries_file_entry_index\tu\t3,5\ttrue\t-\t-",
+              "15\tuq_script_entries_id_game\tu\t1,2\ttrue\t-\t-"),
+          List.of(
+              "1\tck_audio_files_audio_role_bytes\tc\t7\ttrue\t-\t-",
+              "2\tck_audio_files_basename_bytes\tc\t6\ttrue\t-\t-",
+              "3\tck_audio_files_byte_size\tc\t10\ttrue\t-\t-",
+              "4\tck_audio_files_display_path_bytes\tc\t4\ttrue\t-\t-",
+              "5\tck_audio_files_duration_ms\tc\t9\ttrue\t-\t-",
+              "6\tck_audio_files_file_name_bytes\tc\t5\ttrue\t-\t-",
+              "7\tck_audio_files_id_n12\tc\t1\ttrue\t-\t-",
+              "8\tck_audio_files_sha256\tc\t11\ttrue\t-\t-",
+              "9\tck_audio_files_storage_path_bytes\tc\t3\ttrue\t-\t-",
+              "10\tck_audio_files_storage_path_safe\tc\t3\ttrue\t-\t-",
+              "11\tfk_audio_files_games_game_id\tf\t2\ttrue\tschubert.games(1)\ta/r/s",
+              "12\tpk_audio_files\tp\t1\ttrue\t-\t-",
+              "13\tuq_audio_files_game_storage_path\tu\t2,3\ttrue\t-\t-",
+              "14\tuq_audio_files_id_game\tu\t1,2\ttrue\t-\t-"),
+          List.of(
+              "1\tck_media_assets_byte_size\tc\t10\ttrue\t-\t-",
+              "2\tck_media_assets_category_bytes\tc\t5\ttrue\t-\t-",
+              "3\tck_media_assets_display_order\tc\t16\ttrue\t-\t-",
+              "4\tck_media_assets_display_path_bytes\tc\t8\ttrue\t-\t-",
+              "5\tck_media_assets_file_name_bytes\tc\t9\ttrue\t-\t-",
+              "6\tck_media_assets_id_n12\tc\t1\ttrue\t-\t-",
+              "7\tck_media_assets_logical_id_bytes\tc\t2\ttrue\t-\t-",
+              "8\tck_media_assets_media_type\tc\t3\ttrue\t-\t-",
+              "9\tck_media_assets_mime_type\tc\t12\ttrue\t-\t-",
+              "10\tck_media_assets_pair\tc\t3,14,15\ttrue\t-\t-",
+              "11\tck_media_assets_section_bytes\tc\t6\ttrue\t-\t-",
+              "12\tck_media_assets_sha256\tc\t11\ttrue\t-\t-",
+              "13\tck_media_assets_storage_path_bytes\tc\t7\ttrue\t-\t-",
+              "14\tck_media_assets_storage_path_safe\tc\t7\ttrue\t-\t-",
+              "15\tck_media_assets_title_bytes\tc\t4\ttrue\t-\t-",
+              "16\tfk_media_assets_media_assets_parent_logical_id\tf\t13\ttrue\tschubert.media_assets(2)\ta/r/s",
+              "17\tpk_media_assets\tp\t1\ttrue\t-\t-",
+              "18\tuq_media_assets_logical_id\tu\t2\ttrue\t-\t-",
+              "19\tuq_media_assets_type_storage_path\tu\t3,7\ttrue\t-\t-"),
+          List.of(
+              "1\tck_entry_audio_links_display_order\tc\t5\ttrue\t-\t-",
+              "2\tck_entry_audio_links_link_type\tc\t4\ttrue\t-\t-",
+              "3\tfk_entry_audio_links_audio_files_audio_game\tf\t2,3\ttrue\tschubert.audio_files(1,2)\ta/r/s",
+              "4\tfk_entry_audio_links_script_entries_entry_game\tf\t1,3\ttrue\tschubert.script_entries(1,2)\ta/c/s",
+              "5\tpk_entry_audio_links\tp\t1,2,4\ttrue\t-\t-",
+              "6\tuq_entry_audio_links_entry_type_order\tu\t1,4,5\ttrue\t-\t-"));
   private static final List<String> CONTENT_SQL =
       List.of(
           "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
@@ -185,6 +273,12 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
+          "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND k.contype<>'n' ORDER BY k.conname COLLATE \"C\"",
           "CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO DATA",
           "CREATE TEMP TABLE nk_mig_script_files ON COMMIT DROP AS SELECT id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at FROM schubert.script_files WITH NO DATA",
           "CREATE TEMP TABLE nk_mig_script_entries ON COMMIT DROP AS SELECT id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO DATA",
@@ -253,20 +347,21 @@ final class MigrationMasterTargetPublisherTest {
           "ANALYZE schubert.audio_files",
           "ANALYZE schubert.media_assets",
           "ANALYZE schubert.entry_audio_links");
+
   private static final long[] NORMAL_SCALARS = {
     0L, 1L, 1L, 0L, 0L, 1L, 1L, 1L, 1L, 0L, 0L, 0L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
     0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 42L, 700L, 900L, 500L, 600L, 42L, 700L, 900L, 500L, 600L
   };
 
   @Test
-  void target001OneConnectionFixedSeventyFourSqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedEightySqlAndExactResources() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
     assertEquals(RESULTS, f.resultCloses);
     assertEquals(CLOSES, f.closeAttempts);
-    assertEquals(10, f.autoReads);
-    assertEquals(10, f.statementCreates);
+    assertEquals(11, f.autoReads);
+    assertEquals(11, f.statementCreates);
     assertEquals(5, f.preparedCreates);
     assertEquals(5, f.preparedExecutions);
     assertEquals(6, f.analyzes);
@@ -371,7 +466,7 @@ final class MigrationMasterTargetPublisherTest {
                 () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
         assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
         assertEquals(SETVAL_SCALAR_FIRST + CONTENT_TABLES + CATALOG_TABLES + slot, f.resultCloses);
-        assertEquals(11 + slot, f.closeAttempts);
+        assertEquals(12 + slot, f.closeAttempts);
         assertEquals(slot + 1, f.preparedExecutions);
         assertEquals(0, f.analyzes);
       }
@@ -401,7 +496,7 @@ final class MigrationMasterTargetPublisherTest {
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       assertEquals(SQL.subList(0, scalarSqlIndex(query) + 1), f.sql);
       assertEquals(CATALOG_TABLES + query + 1, f.resultCloses);
-      assertEquals(8, f.closeAttempts);
+      assertEquals(9, f.closeAttempts);
       assertEquals(0, f.preparedExecutions);
       assertEquals(0, f.analyzes);
     }
@@ -416,7 +511,7 @@ final class MigrationMasterTargetPublisherTest {
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
       assertEquals(slot + 1, f.preparedExecutions);
-      assertEquals(11 + slot, f.closeAttempts);
+      assertEquals(12 + slot, f.closeAttempts);
       assertEquals(0, f.analyzes);
     }
     for (int slot = 0; slot < 6; slot++) {
@@ -463,7 +558,7 @@ final class MigrationMasterTargetPublisherTest {
       var result = new SQLException("synthetic inner close");
       var outer = new IllegalStateException("synthetic statement close");
       f.extraResult = result;
-      f.badClose = 4;
+      f.badClose = 5;
       f.closeFailure = outer;
       assertSame(
           primary,
@@ -471,9 +566,9 @@ final class MigrationMasterTargetPublisherTest {
               primary.getClass(),
               () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
       assertEquals(List.of(result, outer), List.of(primary.getSuppressed()));
-      assertEquals(SQL.subList(0, 13), f.sql);
+      assertEquals(SQL.subList(0, 19), f.sql);
       assertEquals(CATALOG_TABLES + 1, f.resultCloses);
-      assertEquals(5, f.closeAttempts);
+      assertEquals(6, f.closeAttempts);
       assertEquals(0, f.preparedExecutions);
     }
   }
@@ -617,7 +712,7 @@ final class MigrationMasterTargetPublisherTest {
     assertEquals(SCALARS, f.scalarReads);
     assertEquals(RESULTS, f.resultCloses);
     assertEquals(CLOSES, f.closeAttempts);
-    assertEquals(List.of(1000, 1000), f.fetchSizes);
+    assertEquals(List.of(1000, 1000, 1000), f.fetchSizes);
     assertEquals(SQL, f.sql);
     assertEquals(SPEAKER_ID, declared.speakers().rows().getFirst().fields().getFirst());
   }
@@ -642,7 +737,7 @@ final class MigrationMasterTargetPublisherTest {
                   return f.closeAttempts;
                 }));
       }
-      for (var future : futures) assertEquals(9, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      for (var future : futures) assertEquals(10, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
@@ -666,7 +761,7 @@ final class MigrationMasterTargetPublisherTest {
   }
 
   @Test
-  void target026AllSixtySixColumnAttributesMismatchBeforeDdl() throws Exception {
+  void target026All141CatalogRowAttributesMismatchBeforeDdl() throws Exception {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
         for (int field = 0; field < CATALOG_FIELDS; field++) {
@@ -745,7 +840,7 @@ final class MigrationMasterTargetPublisherTest {
             var inner = new SQLException("synthetic catalog close");
             var outer = new IllegalStateException("synthetic catalog statement close");
             f.extraResult = inner;
-            f.badClose = 0;
+            f.badClose = table / 6;
             f.closeFailure = outer;
             assertSame(
                 primary,
@@ -771,7 +866,7 @@ final class MigrationMasterTargetPublisherTest {
     assertEquals(SCALARS, f.scalarReads);
     assertEquals(RESULTS, f.resultCloses);
     assertEquals(CLOSES, f.closeAttempts);
-    assertEquals(List.of(1000, 1000), f.fetchSizes);
+    assertEquals(List.of(1000, 1000, 1000), f.fetchSizes);
     assertEquals(SQL, f.sql);
   }
 
@@ -793,10 +888,10 @@ final class MigrationMasterTargetPublisherTest {
                   f.badCatalogField = 1;
                   assertThrows(SQLException.class, () -> workflow(publisher, f, declared));
                   catalogFailurePost(f, table, true);
-                  return f.closeAttempts;
+                  return f.preparedCreates;
                 }));
       }
-      for (var future : futures) assertEquals(1, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      for (var future : futures) assertEquals(0, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
@@ -806,7 +901,7 @@ final class MigrationMasterTargetPublisherTest {
   private static void catalogFailurePost(Fixture f, int table, boolean ownedResult) {
     assertEquals(CATALOG_SQL.subList(0, table + 1), f.sql);
     assertEquals(table + (ownedResult ? 1 : 0), f.resultCloses);
-    assertEquals(1, f.closeAttempts);
+    assertEquals(table / 6 + 1, f.closeAttempts);
     assertEquals(0, f.preparedCreates);
     assertEquals(0, f.preparedExecutions);
     assertEquals(0, f.analyzes);
@@ -823,7 +918,7 @@ final class MigrationMasterTargetPublisherTest {
     assertEquals(SQL.subList(0, REFERENCE_END + table + 1), f.sql);
     assertEquals(
         REFERENCE_SCALARS_END + CATALOG_TABLES + table + (ownedResult ? 1 : 0), f.resultCloses);
-    assertEquals(9, f.closeAttempts);
+    assertEquals(10, f.closeAttempts);
     assertEquals(0, f.preparedCreates);
     assertEquals(0, f.preparedExecutions);
     assertEquals(0, f.analyzes);
@@ -1078,13 +1173,13 @@ final class MigrationMasterTargetPublisherTest {
                     int operation = sql.size();
                     assertTrue(
                         operation < PREPARE_END
-                            || List.of(20, 21).contains(operation)
+                            || List.of(26, 27).contains(operation)
                             || operation >= ANALYZE_FIRST);
                     recordSql(update);
                     if (update.startsWith("ANALYZE ")) analyzes++;
                     return update.startsWith("INSERT INTO ") ? (empty ? 0 : 1) : 0;
                   case "executeLargeUpdate":
-                    assertTrue(List.of(14, 30, 31, 32).contains(sql.size()));
+                    assertTrue(List.of(20, 36, 37, 38).contains(sql.size()));
                     recordSql((String) args[0]);
                     return empty ? 0L : 1L;
                   case "setFetchSize":
