@@ -1,0 +1,5 @@
+# Music現行pair26・独立通常結果
+
+SSC360 Music宣言pairをCore0f0b530/Unit188167aで初検証、PG31372新26 whole26/FES0・真正0、PG31374全3CRC/init/XML・I512/L103/M22/C3/B62 miss0・既定四100、実Code22=既定22（Main12/Pair6/Result4）・新生成filterなし。Current完全一致regex/既定locale/UTF16 matrix独立表、exact/距離1-2-3/空両側/同距離path先頭/一回consume/Unicodecodepoint順/duplicate overwrite位置とshadowed/空key/入力全境界/immutable/finite64を確認。RootNullAway/lintWerror/CS-SB0/PMD5finiteworker個別非該当・適用未分類error0。他17Main不変。BUG2895Test同literal4は等価定数化・全旧token逆一致、BUG2896再format漏れは全quoted/nonspace token一致の空白修正、元fail保持/同26再試験。App119/5040/5011/歴史29・Main126/正本184/625/元190新0/正式1964-53/工数null。normal.5/1.5/3のみ完了/手戻り同群内・専有費token null。実129/分類group assembly/DB保存表現/Currentmanifest/全ETL/Rootnative/CHR/global451/ITST/HOLD未完。
+
+仕様045のPT-MIG-MUSICPAIR001..026→PG31372元XML全method。日時/OS/JDK/tool/branch/source/command/exit/input/独立expected/actual/coverage/hashはPG31372/74/76。公開Current sourcehash/regex一致とPython独立UTF16 full-matrix距離はPG31328/independent-current-and-distance.json。handwritten pair/shadow oracleはTest literals、Production methodでexpected生成0。実129file/DB/Root操作0、保存表現・全移行は未検証。

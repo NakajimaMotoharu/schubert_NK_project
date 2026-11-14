@@ -551914,12 +551914,90 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
-      "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "sha256": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
+      "acceptance": "UNASSESSED",
+      "state": "MUSIC_PAIRING26_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-360",
       "testIds": "PT-MIG-MUSICPAIR001..026",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC360_MUSIC_PAIRING26_NORMAL",
+        "source": "188167afa6194fb60f07205bfe354f83026a0898",
+        "productionCoreMain": "0f0b5309bef0ed30891920fd6721a376a8713e9d",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        },
+        "tests": 26,
+        "newUniqueTestDefinitions": 26,
+        "existingSupportDefinitions": 0,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 126,
+        "physicalClasses": 3,
+        "positiveMainCrc": 3,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 512,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 62,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 103,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 53,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 22,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 3,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6
+        },
+        "actualJvmCodeMethods": 22,
+        "jacocoDefaultMethods": 22,
+        "newPairingCodeMethods": 22,
+        "newMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 5,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        },
+        "actualUnitSource": "188167afa6194fb60f07205bfe354f83026a0898",
+        "productionCoreMain": "0f0b5309bef0ed30891920fd6721a376a8713e9d"
+      }
     }
   ],
   "layouts": [
@@ -557828,6 +557906,75 @@
       "low": 0.6,
       "base": 1.8,
       "high": 3.6
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentMusicPairing26PG31372": {
+    "kind": "SSC360_MUSIC_PAIRING26_NORMAL",
+    "source": "188167afa6194fb60f07205bfe354f83026a0898",
+    "productionCoreMain": "0f0b5309bef0ed30891920fd6721a376a8713e9d",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+      "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+    },
+    "tests": 26,
+    "newUniqueTestDefinitions": 26,
+    "existingSupportDefinitions": 0,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 126,
+    "physicalClasses": 3,
+    "positiveMainCrc": 3,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 512,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 62,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 103,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 53,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 22,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6
+    },
+    "actualJvmCodeMethods": 22,
+    "jacocoDefaultMethods": 22,
+    "newPairingCodeMethods": 22,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 5,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,

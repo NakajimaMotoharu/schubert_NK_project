@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "2bc3a95905151659ec9e727020917e22a6055b1a25240a5c90a3b753e2f98fd2",
+  "inventorySha256": "0a3ace388b3636709d8e41719401212a651cc61c2f50a50a14880562823c7986",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -32557,7 +32557,82 @@
   },
   "plannedMusicPairingSSC360": {
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "sourceCreated": true,
+    "newAcceptance": 0,
+    "state": "MUSIC_PAIRING26_NORMAL_QUALIFIED_ACTUAL_ETL_UNACCEPTED",
+    "actualRuntimeQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+      "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+    }
+  },
+  "currentMusicPairing26PG31372": {
+    "kind": "SSC360_MUSIC_PAIRING26_NORMAL",
+    "source": "188167afa6194fb60f07205bfe354f83026a0898",
+    "productionCoreMain": "0f0b5309bef0ed30891920fd6721a376a8713e9d",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+      "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+    },
+    "tests": 26,
+    "newUniqueTestDefinitions": 26,
+    "existingSupportDefinitions": 0,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 126,
+    "physicalClasses": 3,
+    "positiveMainCrc": 3,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 512,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 62,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 103,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 53,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 22,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6
+    },
+    "actualJvmCodeMethods": 22,
+    "jacocoDefaultMethods": 22,
+    "newPairingCodeMethods": 22,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 5,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
