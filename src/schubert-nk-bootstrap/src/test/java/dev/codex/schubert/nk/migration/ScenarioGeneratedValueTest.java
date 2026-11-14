@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-SCENARIOGEN001..016; BUG2901/SSC363: independent primitive value/key contracts. */
 final class ScenarioGeneratedValueTest {
+  private static final String DIFFERENT_TYPE = "different-type";
   private static final long N12_MAXIMUM = 999_999_999_999L;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
@@ -32,7 +33,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new IdPair(1, 2));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new IdPair(2, 2)));
     assertFalse(value.equals(new IdPair(1, 3)));
   }
@@ -49,7 +50,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new MappedEntry(1, 2, 3));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new MappedEntry(2, 2, 3)));
     assertFalse(value.equals(new MappedEntry(1, 3, 3)));
     assertFalse(value.equals(new MappedEntry(1, 2, 4)));
@@ -68,7 +69,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new FilePair(1, 2, 3));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new FilePair(2, 2, 3)));
     assertFalse(value.equals(new FilePair(1, 3, 3)));
     assertFalse(value.equals(new FilePair(1, 2, 4)));
@@ -86,7 +87,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new MappedFile(1, 2, 3, 4));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new MappedFile(2, 2, 3, 4)));
     assertFalse(value.equals(new MappedFile(1, 3, 3, 4)));
     assertFalse(value.equals(new MappedFile(1, 2, 4, 4)));
@@ -107,7 +108,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new Placement(1, 2, 3, 4));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new Placement(2, 2, 3, 4)));
     assertFalse(value.equals(new Placement(1, 3, 3, 4)));
     assertFalse(value.equals(new Placement(1, 2, 4, 4)));
@@ -128,7 +129,7 @@ final class ScenarioGeneratedValueTest {
     assertTrue(value.equals(value));
     assertEquals(value, new PlacedEntry(1, 2, 3, 1, 4, 5));
     assertFalse(value.equals(null));
-    assertFalse(value.equals("different-type"));
+    assertFalse(value.equals(DIFFERENT_TYPE));
     assertFalse(value.equals(new PlacedEntry(2, 2, 3, 1, 4, 5)));
     assertFalse(value.equals(new PlacedEntry(1, 3, 3, 1, 4, 5)));
     assertFalse(value.equals(new PlacedEntry(1, 2, 4, 1, 4, 5)));
