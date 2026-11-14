@@ -837,3 +837,6 @@ SSC401/NK-MIG-001/WBS-P01903 CurrentMigrationProjection.read/snapshotMode/Source
 
 
 SSC402/NK-MIG-001/WBS-P01903 CurrentMigrationAssembler constructor/assembleは共通identity/asset/root/明示linkorderから既mapperを生成し五SourceSnapshot→六Masterを組立→RD MIG003005006/MIG-DAT001002005/DAT004/TST→UI227242254→SS311331343→PT-CURRENTASSEMBLY001..020/019124125。Coreec035600/Unite0e41186全918/64CRC/既定479実554両四100。実Current資格/DB-COPY/素材/全移行/HOLD未受入。
+
+
+SSC403/NK-MIG-001/WBS-P01903 MigrationGamesVerifier.verify/rows/row/cleanup＋Target.prepareは固定V004二行の同Connection検査をcatalog後CTAS前へ接続→RD MIG003005006/MIG-DAT005/DAT006/TST→UI242254→SS311331343/V004→PT-GAMES001..020/TARGET033034/019126127。Core63c660b3/Unit045cceab全940/65CRC/既定489実564両四100。旧93SQL保存＋1=94、Game不成立CTAS0、実DB/全移行/HOLD未受入。
