@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC365: COPY四final aggregateのconstructor防御copy/deep immutable/借用streamだけの契約を標準Immutable annotationで明示する。全method/test body不変、Root品質/全物理/static0/通常399の条件は維持。
+
 SSC364: bootstrap.migration.MigrationCopyDatasetは同じScenarioCopyDatasetからAudioCopyDatasetを構築しMediaAssetCopyBatchと五表共通created_at/借用五stream順を保持する。不変宣言値のみ、SQL/SDK/実DB/transaction/原本操作0。PT-MIG-FIVE001..020、必要whole399、全移行/Root/native/HOLD未受入。
 
 SSC363: ScenarioFileMigrationMap/ScenarioEntryPlacementMap内部二要素キーをJDK不変List<Long>へ簡素化。公開六record/永続化/順序/重複拒否/redactionは保持。PT-MIG-SCENARIOGEN001..016と必要whole129で同source全9Main15physical/default+無filterCodeを確認、実DB/Root/native/HOLD未完。
