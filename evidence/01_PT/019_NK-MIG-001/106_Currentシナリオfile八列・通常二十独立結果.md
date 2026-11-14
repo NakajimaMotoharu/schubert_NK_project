@@ -1,0 +1,5 @@
+# Currentシナリオfile八列・通常二十独立結果
+
+SSC391 CurrentScenarioFileProjectionReaderをPR302/main3793462a設計公開後製造。Core82454cec/Unitd6470537/PG32452新20FES0真正0、PG32454一Main一CRC-init/既定I237-L68-M9-C1-B36miss0、PG32456同singleexec無filterI249-L70-M9-C1-B36miss0。Current八列/三wasNull、必須二数値/二文字NULL拒否とnullable section-chapter-hash-size保持、signedlongID-size/intgame両端/未知負値・保存文字非修復、readonly/nonauto/件数完全一致/余剰fieldread0、全JDBC呼出occurrence三型fault/逆順close/順suppressed/自己identity/有限64を独立20で確認。RootNullAway-lint-CS-SB0、PMD21各非該当/適用未分類0。旧36Main753定義同byte、新Main1/新JUnit20/全37Main773定義中20scopeのみ資格、uniqueMain145。App154/17764/17715/歴史49は混合raw集計、正本184/625・元190新0・正式1964/53・工数null。追加不足1.8/5.4/9.9だけ完了、新BUG0。source hash-sizeは未信頼metadataのままで実file証拠へ変換しない。実Current DB/asset認証/target file対応/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
+FILEREAD001..020は105仕様と3011手書きtyped oracleに対応。PG32442旧source保持、PG32452日時/環境/branch/source/command/exit/JUnit20、PG32454単一exec/XML/CRC-init/静的、PG32456無filter全Code、PG32458独立source/trace joinにpath/hashを保持。source nullable hash-sizeを実asset検査済みにせず、旧reader20/entry180/whole645を当20へ合算しない。

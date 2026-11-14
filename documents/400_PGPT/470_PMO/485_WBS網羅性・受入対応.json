@@ -608553,12 +608553,140 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
+      "sha256": "9bf74db29e26b5ead8a7dfc0e9b996fd01d09df5bf695ac6aa7bf2b0e3995ca1",
       "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-391",
       "testIds": "PT-MIG-FILEREAD001..020",
-      "historicalPath": null
+      "historicalPath": null,
+      "currentFileRead20ComponentQualification": {
+        "kind": "SSC391_CURRENT_FILE_EIGHT_COLUMN_JDBC20",
+        "source": "d64705373d9db8b8093e2056b859fd143187c7b4",
+        "productionCoreMain": "82454cec19ad67f871ce34d16e0b1757807bac69",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32454-file-read20-post-v1/manifest.json",
+          "sha256": "907163d49c44442322abaa888cc76985c2fc592c401c548007c9afad13d6d21a"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32456-file-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "d28515425f8755be4d986b2e30f63a258ffa2059b757561c11d9157f4da73fe1"
+        },
+        "tests": 20,
+        "newUniqueTestDefinitions": 20,
+        "newMainSources": 1,
+        "old36Main753DefinitionsUnchanged": true,
+        "uniqueMainJavaDeltaFromInitial": 145,
+        "allMigrationDefinitions": 773,
+        "allMigrationMain": 37,
+        "wholeSelectedMain": 1,
+        "physicalClasses": 1,
+        "positiveMainCrc": 1,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 237,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 36,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 68,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 27,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 9,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 249
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 36
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 70
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 27
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 9
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "actualJvmCodeMethods": 9,
+        "jacocoDefaultMethods": 9,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 21,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "readOnlyBorrowedConnection": true,
+        "transactionMutationOrConnectionClose": false,
+        "fixedQueries": 1,
+        "timeoutSeconds": 30,
+        "fetchSize": 1000,
+        "projectionFields": 8,
+        "typedGettersPerRow": 8,
+        "immediateWasNullPerRow": 3,
+        "nullableSourcePositions": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "signedCurrentIdsAndSizePreserved": true,
+        "storedPathAndMetadataRepaired": false,
+        "sourceHashAndSizeNotQualifiedPhysicalAsset": true,
+        "resourceCloseOrder": [
+          "ResultSet",
+          "Statement"
+        ],
+        "allGetterOccurrencesSqlRuntimeError": true,
+        "orderedSuppressionAndSelfIdentity": true,
+        "finiteConcurrentCalls": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32454-file-read20-post-v1/manifest.json",
+          "sha256": "907163d49c44442322abaa888cc76985c2fc592c401c548007c9afad13d6d21a"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32456-file-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "d28515425f8755be4d986b2e30f63a258ffa2059b757561c11d9157f4da73fe1"
+        },
+        "actualUnitSource": "d64705373d9db8b8093e2056b859fd143187c7b4",
+        "productionCoreMain": "82454cec19ad67f871ce34d16e0b1757807bac69"
+      }
     }
   ],
   "layouts": [
@@ -617559,6 +617687,121 @@
     "sharedMicrosecondMigrationTimestamp": true,
     "fixedIndependentCopyBytes": 155,
     "sourceOrderSeparateFromTargetNumericOrder": true,
+    "finiteConcurrentCalls": 64,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "newBugs": 0
+  },
+  "currentFileRead20PG32452": {
+    "kind": "SSC391_CURRENT_FILE_EIGHT_COLUMN_JDBC20",
+    "source": "d64705373d9db8b8093e2056b859fd143187c7b4",
+    "productionCoreMain": "82454cec19ad67f871ce34d16e0b1757807bac69",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32454-file-read20-post-v1/manifest.json",
+      "sha256": "907163d49c44442322abaa888cc76985c2fc592c401c548007c9afad13d6d21a"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32456-file-read20-unfiltered-measurement-v1/manifest.json",
+      "sha256": "d28515425f8755be4d986b2e30f63a258ffa2059b757561c11d9157f4da73fe1"
+    },
+    "tests": 20,
+    "newUniqueTestDefinitions": 20,
+    "newMainSources": 1,
+    "old36Main753DefinitionsUnchanged": true,
+    "uniqueMainJavaDeltaFromInitial": 145,
+    "allMigrationDefinitions": 773,
+    "allMigrationMain": 37,
+    "wholeSelectedMain": 1,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 237,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 36,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 68,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 27,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 249
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 70
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 27
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "actualJvmCodeMethods": 9,
+    "jacocoDefaultMethods": 9,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 21,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "readOnlyBorrowedConnection": true,
+    "transactionMutationOrConnectionClose": false,
+    "fixedQueries": 1,
+    "timeoutSeconds": 30,
+    "fetchSize": 1000,
+    "projectionFields": 8,
+    "typedGettersPerRow": 8,
+    "immediateWasNullPerRow": 3,
+    "nullableSourcePositions": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "signedCurrentIdsAndSizePreserved": true,
+    "storedPathAndMetadataRepaired": false,
+    "sourceHashAndSizeNotQualifiedPhysicalAsset": true,
+    "resourceCloseOrder": [
+      "ResultSet",
+      "Statement"
+    ],
+    "allGetterOccurrencesSqlRuntimeError": true,
+    "orderedSuppressionAndSelfIdentity": true,
     "finiteConcurrentCalls": 64,
     "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
     "newAcceptance": 0,

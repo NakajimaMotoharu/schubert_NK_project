@@ -810,3 +810,6 @@ SSC389/NK-MIG-001/WBS-P01903 CurrentScenarioEntryProjectionReader.read/rows/row/
 
 
 SSC390/NK-MIG-001/WBS-P01903 CurrentScenarioEntryMapper.copyRows/parseCurrent/required/validTimeと既File/Placement/SpeakerMap/Row/Batch→RD MIG003005006/DAT004/TST→UI223242254→SS311331343/V002→PT-ENTRYMAP001..024/019103104。Core67e0ee2d/Unitb256b88d PG32428/430/432必要180/18CRC/実145両四100、実DB/全移行/HOLD未受入。
+
+
+SSC391/NK-MIG-001/WBS-P01903 CurrentScenarioFileProjectionReader.read/rows/row/cleanup→RD MIG003005006/DAT004/TST→UI223242254→SS311331343/V002→PT-FILEREAD001..020/019105106。Core82454cec/Unitd6470537 PG32452/454/456必要20/一CRC/実9両四100、実DB/asset資格/target file対応/HOLD未受入。
