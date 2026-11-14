@@ -1,0 +1,5 @@
+# 移行六表件数と参照・link順・通常403独立結果
+
+SSC372移行参照検査をPR264/mainfcfd1039へ設計反映後製造。Core495bbf16/Unit7aa390ed・PG31826新20＋必要pure383 whole403/FES0/真正0、PG31828全23Main36CRC-init/既定I6877-L1276-M256-C36-B921 miss0、PG31830同singleexec無filterI7098-L1287-M315-C36-B921 miss0/生成差59全実行。六件数/九FK orphan-game/link order違反group固定16SQL、各null-missing-SQLNULL-wrong-extra/元三型故障/正確closeと後続0、異なる各table件数/空/負とLongMAX異常・suppressed/self/finite64を確認。RootNullAway-lint-CS-SB0、PMD176は旧159同byte＋primary8/loader3/borrowed1/worker5各非該当・適用未分類0。BUG2920 Test COUNTS/counts衝突を実行前field rename逆一致/整形後全品質で限定閉鎖。旧26Main/507定義不変、Finalizer411/JDBC96確認再演0。App131/7824/7795/歴史29・Main135/正本184-625/元190新0/正式1964-53/工数null。当不足1.55/4.65/9.3のみ完了。実DB/全constraint-catalog/hash/原本Current/全移行/Rootnative/global451/ITST/HOLD未受入。
+
+068のPT-MIG-REF001..020→MigrationMasterReferenceVerifierTest全20。PG31816 V002独立16SQL/六count/九relationship/link orderとphase終了oracle、PG31826全403 JUnit、PG31828単一exec全36 CRC-init/XML、PG31830無filter実315Code、PG31832全入力join。日時/OS/JDK/tool/branch/source/command/終了code/入力・独立期待・assert actual/coverage/BUG/hashはmanifestへ保持。SQL実DB意味と全catalog/constraint/hash一致は当Proxyでは認定しない。

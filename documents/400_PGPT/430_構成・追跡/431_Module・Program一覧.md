@@ -756,3 +756,6 @@ SSC370/NK-MIG-001/WBS-P01903 MigrationMasterCopyDataset constructor/speakers/con
 
 
 SSC371/NK-MIG-001/WBS-P01903 MigrationMasterFinalizer finish/maxima/maximum/open/synchronize/requirePrepared/requireResult/closeStatement/closeResult/toString/invalidInput/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002/V005→PT-MIG-FINAL001..028/019066067。Core96d34208/Unit3547449c、PG31802/804/806全411/36class/実318両四100。実DB/全移行/HOLD未受入。
+
+
+SSC372/NK-MIG-001/WBS-P01903 MigrationMasterReferenceVerifier verify/open/requireStatement/requireResult/closeStatement/closeResult/toString/invalidInput/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-REF001..020/019068069。Core495bbf16/Unit7aa390ed、PG31826/828/830全403/36class/実315両四100。実DB/全catalog/hash/全移行/HOLD未受入。
