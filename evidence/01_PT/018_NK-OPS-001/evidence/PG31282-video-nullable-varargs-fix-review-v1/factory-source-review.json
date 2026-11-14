@@ -1,0 +1,524 @@
+[
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java",
+    "factorySites": [
+      {
+        "line": 27,
+        "text": "List.of("
+      },
+      {
+        "line": 145,
+        "text": "Arrays.<@Nullable String>asList("
+      }
+    ],
+    "sha256": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java",
+    "factorySites": [],
+    "sha256": "8c3545bc49bf241158057d27c046117f239ba219e431cea94a3912a89180664a"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java",
+    "factorySites": [
+      {
+        "line": 25,
+        "text": "List.of("
+      }
+    ],
+    "sha256": "73adc26518c1d1445d1de2dd11fd18a24d570b9dead56b209687741c901934fe"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java",
+    "factorySites": [],
+    "sha256": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+    "factorySites": [
+      {
+        "line": 17,
+        "text": "return encodeRows(List.of(fields));"
+      }
+    ],
+    "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+    "factorySites": [
+      {
+        "line": 85,
+        "text": "for (String id : List.of(UNKNOWN_ID, \"\", \"MAIN-01\", FIRST_ID + \" \", \" \" + FIRST_ID, \"未登録\"))"
+      },
+      {
+        "line": 213,
+        "text": "for (long id : List.of(-1L, 0L, MAX_N12 + 1, Long.MAX_VALUE)) {"
+      },
+      {
+        "line": 221,
+        "text": "for (long id : List.of(1L, MAX_N12)) {"
+      },
+      {
+        "line": 246,
+        "text": "for (String path : List.of(UNKNOWN_PATH, \"MAIN_PART/NUKITASHI_THE_ANIMATION_01.mp4\")) {"
+      },
+      {
+        "line": 260,
+        "text": "List.of("
+      },
+      {
+        "line": 276,
+        "text": "for (long size : List.of(0L, MAX_N12 + 1)) {"
+      },
+      {
+        "line": 302,
+        "text": "for (String stamp : List.of(\"\", \"2026-01-02T03:04:05.000Z\", \"2026-01-02T03:04:05+00:00\")) {"
+      },
+      {
+        "line": 427,
+        "text": ".map(line -> List.of(line.split(\"\\t\", -1)))"
+      }
+    ],
+    "sha256": "2c22001d8962ef28ce02fcaad0da600b29ef23c18c271058f7e896ee88c1ec7a"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+    "factorySites": [
+      {
+        "line": 43,
+        "text": "return new AssetMigrationManifest(List.of(second(), first()));"
+      },
+      {
+        "line": 75,
+        "text": "assertEquals(List.of(first(), second()), value.entries());"
+      },
+      {
+        "line": 84,
+        "text": "List.of(Kind.SCENARIO, Kind.AUDIO, Kind.VIDEO, Kind.MUSIC), List.of(Kind.values()));"
+      },
+      {
+        "line": 86,
+        "text": "for (String path : List.of(\"a\", \"é/名前.txt\", \"\\ud7ff/\\ue000/😀\", \"a:b/with space\")) {"
+      },
+      {
+        "line": 88,
+        "text": "var value = new AssetMigrationManifest(List.of(entry));"
+      },
+      {
+        "line": 94,
+        "text": "var empty = new AssetMigrationManifest(List.of());"
+      },
+      {
+        "line": 97,
+        "text": "comparison(empty.compareClaims(List.of()), 0, 0, 0, 0, 0, 0, true);"
+      },
+      {
+        "line": 104,
+        "text": "List.of("
+      },
+      {
+        "line": 107,
+        "text": "for (int point : List.of(0, 9, 10, 13, 31, 127, 128, 159))"
+      },
+      {
+        "line": 120,
+        "text": "NullPointerException.class, () -> new AssetMigrationManifest(Arrays.asList(first(), null)));"
+      },
+      {
+        "line": 130,
+        "text": "() -> manifest().compareClaims(Arrays.asList((Observation) null)));"
+      },
+      {
+        "line": 138,
+        "text": "List.of(\"\", \"a\".repeat(63), \"a\".repeat(65), \"A\".repeat(64), \"g\".repeat(64))) {"
+      },
+      {
+        "line": 147,
+        "text": "var original = new ArrayList<>(List.of(first(), first()));"
+      },
+      {
+        "line": 149,
+        "text": "assertEquals(List.of(first(), first()), original);"
+      },
+      {
+        "line": 153,
+        "text": "List.of(first(), new Entry(Kind.AUDIO, \"different\", TARGET, 0, EMPTY))));"
+      },
+      {
+        "line": 158,
+        "text": "List.of(new Observation(TARGET, 0, EMPTY), new Observation(TARGET, 3, ABC))));"
+      },
+      {
+        "line": 165,
+        "text": "invalid(() -> new AssetMigrationManifest(List.of(huge, one)));"
+      },
+      {
+        "line": 166,
+        "text": "var maximum = new AssetMigrationManifest(List.of(huge, second()));"
+      },
+      {
+        "line": 171,
+        "text": "List.of("
+      },
+      {
+        "line": 176,
+        "text": "List.of("
+      },
+      {
+        "line": 189,
+        "text": "var input = new ArrayList<>(List.of(second(), first()));"
+      },
+      {
+        "line": 195,
+        "text": "Arrays.fill(bytes, (byte) 0);"
+      },
+      {
+        "line": 202,
+        "text": "new ArrayList<>(List.of(new Observation(OTHER, 0, EMPTY), new Observation(TARGET, 3, ABC)));"
+      },
+      {
+        "line": 219,
+        "text": "manifest().compareClaims(List.of(new Observation(OTHER, 0, EMPTY))),"
+      },
+      {
+        "line": 234,
+        "text": "List.of("
+      },
+      {
+        "line": 249,
+        "text": "var value = new AssetMigrationManifest(List.of(first()));"
+      },
+      {
+        "line": 251,
+        "text": "value.compareClaims(List.of(new Observation(TARGET, 4, ABC))), 0, 0, 1, 0, 1, 4, false);"
+      },
+      {
+        "line": 253,
+        "text": "value.compareClaims(List.of(new Observation(TARGET, 3, EMPTY))), 0, 0, 0, 1, 1, 3, false);"
+      },
+      {
+        "line": 255,
+        "text": "value.compareClaims(List.of(new Observation(TARGET, 4, EMPTY))), 0, 0, 1, 1, 1, 4, false);"
+      }
+    ],
+    "sha256": "983cf1e03cc668c4a8cb5fff8e09b757375f19088434aa6bd1b64e6cc13e6404"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+    "factorySites": [
+      {
+        "line": 72,
+        "text": "List.of("
+      },
+      {
+        "line": 103,
+        "text": "for (int index : List.of(0, 9)) {"
+      },
+      {
+        "line": 104,
+        "text": "for (String value : List.of(ONE, MAX_N12))"
+      },
+      {
+        "line": 106,
+        "text": "for (String value : List.of(ZERO, \"-1\", \"+1\", LEADING_ZERO_ONE, \"1000000000000\", \"\"))"
+      },
+      {
+        "line": 109,
+        "text": "for (String value : List.of(ONE, \"9999\"))"
+      },
+      {
+        "line": 111,
+        "text": "for (String value : List.of(ZERO, \"-1\", \"+1\", LEADING_ZERO_ONE, \"10000\", \"\"))"
+      },
+      {
+        "line": 117,
+        "text": "for (int index : List.of(1, 12)) {"
+      },
+      {
+        "line": 118,
+        "text": "for (String value : List.of(ASCII_A, ASCII_X.repeat(64), exactUtf8(64)))"
+      },
+      {
+        "line": 129,
+        "text": "for (String value : List.of(\"video\", \"music\", \"AUDIO\", \"\")) rejectField(video(), 2, value);"
+      },
+      {
+        "line": 130,
+        "text": "for (String role : List.of(ROLE_MAIN, ROLE_INSTRUMENTAL, ROLE_NONE)) {"
+      },
+      {
+        "line": 139,
+        "text": "for (String value : List.of(\"X\", \"m\", \"\")) rejectField(music(), 14, value);"
+      },
+      {
+        "line": 144,
+        "text": "for (var pair : List.of(List.of(3, 256), List.of(4, 64), List.of(8, 256))) {"
+      },
+      {
+        "line": 176,
+        "text": "List.of("
+      },
+      {
+        "line": 184,
+        "text": "List.of("
+      },
+      {
+        "line": 185,
+        "text": "List.of("
+      },
+      {
+        "line": 189,
+        "text": "List.of("
+      },
+      {
+        "line": 193,
+        "text": "List.of(MUSIC_PATH, MUSIC_MIME, MUSIC_ID),"
+      },
+      {
+        "line": 194,
+        "text": "List.of("
+      },
+      {
+        "line": 198,
+        "text": "List.of("
+      },
+      {
+        "line": 212,
+        "text": "for (String path : List.of(\"music/x\", \"music/a.OGG\", \"music/a.unknown\", \"music.dir/x\"))"
+      },
+      {
+        "line": 214,
+        "text": "for (String mime : List.of(\"audio/wav\", \"audio/OGG\", \"application/octet-stream\", \"\"))"
+      },
+      {
+        "line": 228,
+        "text": "for (String role : List.of(ROLE_MAIN, ROLE_INSTRUMENTAL)) {"
+      },
+      {
+        "line": 242,
+        "text": "List.of("
+      },
+      {
+        "line": 254,
+        "text": "List.of("
+      },
+      {
+        "line": 261,
+        "text": "List.of("
+      },
+      {
+        "line": 272,
+        "text": "for (int index : List.of(1, 3, 4, 5, 6, 7, 8, 12)) {"
+      },
+      {
+        "line": 274,
+        "text": "List.of(\"e\\u0301\", \"\\ud800\", \"\\udc00\", \"private\\u0000\", \"x\\t\", \"x\\n\", \"x\\r\", \"x\\u007f\"))"
+      },
+      {
+        "line": 279,
+        "text": "for (String value : List.of(\"e\\u0301\", \"\\ud800\", \"x\\u0000\", \"x\\n\"))"
+      },
+      {
+        "line": 292,
+        "text": "for (int index : List.of(0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 15, 16))"
+      },
+      {
+        "line": 331,
+        "text": "for (String role : List.of(ROLE_MAIN, ROLE_INSTRUMENTAL)) {"
+      },
+      {
+        "line": 410,
+        "text": "Arrays.asList("
+      },
+      {
+        "line": 432,
+        "text": "Arrays.asList("
+      }
+    ],
+    "sha256": "72e2c5fc9a7c4b43bda7f27793f735a3e6070b146538d81ca56330917e166725"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+    "factorySites": [
+      {
+        "line": 82,
+        "text": "for (String value : List.of(\"\\u0000\", \"\\t\", \"\\n\", \"\\r\", \"\\b\", \"\\f\", \"\\u007f\", \"\\u0085\"))"
+      },
+      {
+        "line": 116,
+        "text": "List.of("
+      },
+      {
+        "line": 117,
+        "text": "List.of(\"a\", \"22a27e0afc7c8a6ea339deacf3269de47cd71e59447b1714226cd990a5b5d971\"),"
+      },
+      {
+        "line": 118,
+        "text": "List.of(\"A\", \"0b5e0a998c8fb9958381cc9044d561d915cf8300a10b8e535dd64966b4dda823\"),"
+      },
+      {
+        "line": 119,
+        "text": "List.of(\" a\", \"72bd7c9b5ebe10f2b43814f97ca5ae476dc5768364c16eebeafbaa322e4b8d7a\"),"
+      },
+      {
+        "line": 120,
+        "text": "List.of(\"a \", \"6d13a580ae9c243044dc2c9479d5288c84d1b54a805a184df62a68ed149d9ae0\"),"
+      },
+      {
+        "line": 121,
+        "text": "List.of(\"a/b\", \"bd15593951c05abc4932d39ef3c41e6a6edf9ccb0673363653a6df9372104897\"),"
+      },
+      {
+        "line": 122,
+        "text": "List.of(\"a\\\\b\", \"c3e2a9eb9caa35f960e2afd92ca111935063e1da031617b67ca3766058bad814\"),"
+      },
+      {
+        "line": 123,
+        "text": "List.of(\"a.b\", \"63d09ddc5c61a3fdb0bc6ea9edfdb58811ee620479d998c3b75618e628006371\"),"
+      },
+      {
+        "line": 124,
+        "text": "List.of(\"a_b\", \"a349cf8547e71f758a2942e195669f7c550688b2b9150d245a3b3cb404df33ce\"),"
+      },
+      {
+        "line": 125,
+        "text": "List.of(\" \", \"2a8909b3d18256c82d8a0134097b9d8a6b29d49753f33fecdf5d76029c934126\"));"
+      }
+    ],
+    "sha256": "90f96962f121fde5175c9f52fc942d7304b189dca9a3af2eb6405302b131eeb4"
+  },
+  {
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+    "factorySites": [
+      {
+        "line": 29,
+        "text": "encoder.encodeRows(List.of(List.of(\"1\", \"A\"), List.of(\"2\", \"B\"))));"
+      },
+      {
+        "line": 30,
+        "text": "assertArrayEquals(new byte[] {0x31, 9, 0x41, 10}, encoder.encodeRow(List.of(\"1\", \"A\")));"
+      },
+      {
+        "line": 37,
+        "text": "encoder.encodeRow(Arrays.asList(null, \"\", \"\\\\N\")));"
+      },
+      {
+        "line": 38,
+        "text": "assertArrayEquals(new byte[] {10}, encoder.encodeRow(List.of(\"\")));"
+      },
+      {
+        "line": 39,
+        "text": "assertArrayEquals(new byte[] {0x5c, 0x4e, 10}, encoder.encodeRow(Arrays.asList((String) null)));"
+      },
+      {
+        "line": 46,
+        "text": "encoder.encodeRow(List.of(\"\\\\\\t\\n\\r\")));"
+      },
+      {
+        "line": 53,
+        "text": "encoder.encodeRow(List.of(\"\\b\\f\" + (char) 11)));"
+      },
+      {
+        "line": 56,
+        "text": "encoder.encodeRow(List.of(\"'\\\", A\" + (char) 127)));"
+      },
+      {
+        "line": 74,
+        "text": "encoder.encodeRow(List.of(\"あé🎵\")));"
+      },
+      {
+        "line": 77,
+        "text": "encoder.encodeRow(List.of(new String(new char[] {(char) 0x0065, (char) 0x0301}))));"
+      },
+      {
+        "line": 82,
+        "text": "assertArrayEquals(new byte[] {0x5c, 0x5c, 0x2e, 10}, encoder.encodeRow(List.of(\"\\\\.\")));"
+      },
+      {
+        "line": 85,
+        "text": "encoder.encodeRow(List.of(\"';SELECT 1;--\\n\\\\.\")));"
+      },
+      {
+        "line": 86,
+        "text": "assertArrayEquals(new byte[] {0x2e, 10}, encoder.encodeRow(List.of(\".\")));"
+      },
+      {
+        "line": 94,
+        "text": "NullPointerException.class, () -> encoder.encodeRows(Arrays.asList(List.of(\"a\"), null)));"
+      },
+      {
+        "line": 95,
+        "text": "assertArrayEquals(new byte[] {0x5c, 0x4e, 10}, encoder.encodeRow(Arrays.asList((String) null)));"
+      },
+      {
+        "line": 100,
+        "text": "assertArrayEquals(new byte[0], encoder.encodeRows(List.of()));"
+      },
+      {
+        "line": 101,
+        "text": "assertThrows(IllegalArgumentException.class, () -> encoder.encodeRow(List.of()));"
+      },
+      {
+        "line": 103,
+        "text": "IllegalArgumentException.class, () -> encoder.encodeRows(List.of(List.of(\"A\"), List.of())));"
+      },
+      {
+        "line": 106,
+        "text": "() -> encoder.encodeRows(List.of(List.of(\"A\"), List.of(\"B\", \"C\"))));"
+      },
+      {
+        "line": 108,
+        "text": "new byte[] {0x41, 10, 0x42, 10}, encoder.encodeRows(List.of(List.of(\"A\"), List.of(\"B\"))));"
+      },
+      {
+        "line": 114,
+        "text": "List.of("
+      },
+      {
+        "line": 123,
+        "text": "assertThrows(IllegalArgumentException.class, () -> encoder.encodeRow(List.of(invalid)));"
+      },
+      {
+        "line": 128,
+        "text": "List.of("
+      },
+      {
+        "line": 133,
+        "text": "encoder.encodeRow(List.of(new String(new char[] {(char) 0xdbff, (char) 0xdfff}))));"
+      },
+      {
+        "line": 138,
+        "text": "var row = new ArrayList<@Nullable String>(List.of(\"A\", \"B\"));"
+      },
+      {
+        "line": 145,
+        "text": "Arrays.fill(first, (byte) 0);"
+      },
+      {
+        "line": 146,
+        "text": "assertArrayEquals(new byte[] {0x41, 9, 0x42, 10}, encoder.encodeRow(List.of(\"A\", \"B\")));"
+      },
+      {
+        "line": 152,
+        "text": "assertThrows(IllegalArgumentException.class, () -> encoder.encodeRow(List.of(\"PRIVATE\\0\")));"
+      },
+      {
+        "line": 159,
+        "text": "encoder.encodeRow(List.of(\"001\", \"+0\", \" 1 \")));"
+      },
+      {
+        "line": 171,
+        "text": "byte[] actual = encoder.encodeRow(Arrays.asList(\"A\\tB\", null));"
+      },
+      {
+        "line": 173,
+        "text": "Arrays.fill(actual, (byte) 0);"
+      },
+      {
+        "line": 183,
+        "text": "encoder.encodeRow(Arrays.asList(\"A\\tB\", null)));"
+      }
+    ],
+    "sha256": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8"
+  }
+]

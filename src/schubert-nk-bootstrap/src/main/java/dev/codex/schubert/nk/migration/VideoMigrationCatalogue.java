@@ -142,7 +142,7 @@ public final class VideoMigrationCatalogue {
       String source = video.sourceRelativePath();
       var fields =
           new ArrayList<@Nullable String>(
-              Arrays.asList(
+              Arrays.<@Nullable String>asList(
                   Long.toString(id),
                   video.logicalId(),
                   "VIDEO",
