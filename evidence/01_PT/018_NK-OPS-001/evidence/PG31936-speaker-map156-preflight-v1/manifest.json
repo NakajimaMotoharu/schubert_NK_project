@@ -1,0 +1,685 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2841_speaker_map156_profile.json",
+    "sha256": "282b4e131a801844c6e4595688f3187a4c7cf9910f32aeaf1c8a5e72650badda"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java": "52922f18ff3969243cceb6d8599645321f087fd4a1aea7d170164546934c6e21",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java": "2d47fd03b673e296d9cec4282542c7e62bf3c9fe13777490c133a941cd087538",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java": "44f19d3afa8f4feb2f8e388d152d4518ae0a211d82c96cd7139e3c57bf3d785d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java": "11d12471658e2a97b75cad70ea8b96b90590acec3d3f16b8db7a8a540063ead0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java": "7f95ecc98b41b34daa5c7ed4acde8f0ae6705ba0364cbfb57b235c84324034d4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java": "9ef8e166c4c6e3bbeed6accbbd6c1a832be907b332f7d282d3c622a87b02fb9c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java": "3049e810bd7b34071cd585c1295c444e7d4b1829800e49d2162a53f94a974815",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java": "d5ab182d366e21f0f169697ad5606a483ad36fa883ec1887e343a683dca67f3d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java": "48357e8d92a245361933a34d43e0e705f430554000b2afaff36fb36fd98ab24b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java": "6c609a9e7d259ca7672496eb81e068606f4816b42fa94d824313f347971067ac",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java": "3f5f05d5e68204fb5977c260a9e6ffb18c5c02fcbe6a69164ae6f3fe2faeab24",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31932-speaker-map156-prepare-v1/manifest.json",
+    "sha256": "079bfac2f866ed71013a4b1294985885aa19843fc7ecb52162667af40d4c8f94"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31934-speaker-map156-static-v1/manifest.json",
+    "sha256": "53f625f652b4ffd2097378b1d175df604ba476e532a28d45af55372fbb6f1aaa"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2842_speaker_map156_static_admission.json",
+    "sha256": "c2a7ef1eea2fba76d0d32f9d8342fd8bd5e7a499a9a10e5248f91f8ef533a857"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "line": "164",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "164",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "169",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "178",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "179",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "33",
+      "reason": "Exact void independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "43",
+      "reason": "Exact void emptyIterableMakesNoSinkCallsAndDoesNotOwnIt() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "53",
+      "reason": "Exact void obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "115",
+      "reason": "Exact void nullOrEmptyRowsFailWithoutWritingThatRow() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "130",
+      "reason": "Exact void mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "147",
+      "reason": "Exact void invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "178",
+      "reason": "Exact void originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this OutputStream object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "207",
+      "reason": "Exact void originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "237",
+      "reason": "Exact void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "245",
+      "reason": "Exact void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this TrackingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "line": "254",
+      "reason": "Exact JUnit-owned executor is acquired before try, every exit reaches finally shutdownNow and asserted awaitTermination10, and all64 Futures join5. Implicit close does not state the finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "254",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "259",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "270",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "271",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "182",
+      "reason": "This exact private executor is acquired before try and every exit executes finally shutdownNow/awaitTermination10 with failing assertion. All64 Futures join5; implicitclose has no explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "182",
+      "reason": "This exact pure immutable mapping-row JUnit site is not a J2EE-managed webapp. Eight owned workers execute64 fixed independent golden byte assertions; each Future5 and finallyshutdownNow/await10 is checked. No DB/FS/process/native/Root/service use.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "186",
+      "reason": "This exact pure immutable mapping-row JUnit site is not a J2EE-managed webapp. Eight owned workers execute64 fixed independent golden byte assertions; each Future5 and finallyshutdownNow/await10 is checked. No DB/FS/process/native/Root/service use.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "191",
+      "reason": "This exact pure immutable mapping-row JUnit site is not a J2EE-managed webapp. Eight owned workers execute64 fixed independent golden byte assertions; each Future5 and finallyshutdownNow/await10 is checked. No DB/FS/process/native/Root/service use.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "192",
+      "reason": "This exact pure immutable mapping-row JUnit site is not a J2EE-managed webapp. Eight owned workers execute64 fixed independent golden byte assertions; each Future5 and finallyshutdownNow/await10 is checked. No DB/FS/process/native/Root/service use.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+      "rule": "CloseResource",
+      "line": "256",
+      "reason": "This exact executor is locally acquired before try and every exit executes finallyshutdownNow plus awaitTermination10s with a failing resource postcondition;64 Futures each join5s. Implicitclose could wait unbounded; no returned/ignored owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "256",
+      "reason": "This exact whole immutable-row JUnit site is not a managed J2EE webapp.8 owned workers run64 independent COPY-byte/field assertions, Futures5s and finallyshutdownNow/await10s establish finite ownership. No DB/driver/native/process/Root/Unit/COPY execution or external host action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "261",
+      "reason": "This exact whole immutable-row JUnit site is not a managed J2EE webapp.8 owned workers run64 independent COPY-byte/field assertions, Futures5s and finallyshutdownNow/await10s establish finite ownership. No DB/driver/native/process/Root/Unit/COPY execution or external host action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "271",
+      "reason": "This exact whole immutable-row JUnit site is not a managed J2EE webapp.8 owned workers run64 independent COPY-byte/field assertions, Futures5s and finallyshutdownNow/await10s establish finite ownership. No DB/driver/native/process/Root/Unit/COPY execution or external host action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "272",
+      "reason": "This exact whole immutable-row JUnit site is not a managed J2EE webapp.8 owned workers run64 independent COPY-byte/field assertions, Futures5s and finallyshutdownNow/await10s establish finite ownership. No DB/driver/native/process/Root/Unit/COPY execution or external host action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "CloseResource",
+      "line": "163",
+      "reason": "The exact executor is acquired before try; every exit executes finally shutdownNow and bounded awaitTermination10s with failing nontermination assertion. Implicit ExecutorService.close would wait without a bound. No returned or ignored resource owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "163",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "168",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "179",
+      "reason": "This exact Test cleanup must fail on an unclosed worker or interrupt. It cannot return PASS after uncertain termination. This is a test resource postcondition, not a production exception priority exemption.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "180",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "181",
+      "reason": "This exact site belongs to a whole pure value JUnit Test, not a managed J2EE web application. Eight owned workers run64 literal byte tasks, each Future joins within5s, and finally shutdownNow/await10s verifies resource termination; no runtime authority or native action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "CloseResource",
+      "line": "252",
+      "reason": "This exact executor is acquired before try and every exit executes finally shutdownNow plus awaitTermination10s with failing postcondition assertion. Each of64 Futures joins5s. Ownership remains local to whole JUnit Test; implicit close may wait unbounded and is not substituted for termination evidence.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "257",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "268",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "269",
+      "reason": "This exact site belongs to whole pure JUnit Test, not managed J2EE webapp. Eight locally owned workers run64 fixed byte/globallookup/file-order assertions, Futures5s and finallyshutdownNow/await10s bound cleanup. No process/native/DB/Root/service or authorization operation.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "CloseResource",
+      "line": "190",
+      "reason": "This exact executor is acquired before try, retained by this JUnit test, and every exit executes finally shutdownNow plus awaitTermination10s with a failing resource-postcondition assertion. Each of64 Future joins has5s bound. Implicit close can wait unbounded; no leaked or ignored owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "190",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "195",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "207",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "208",
+      "reason": "This exact site belongs to whole pure value JUnit Test, not managed J2EE webapp. Eight owned workers run64 fixed literal byte/lookup/navigation tasks, each Future joins5s, every exit finally shutdownNow/await10s verifies termination. No process/native/service/authorization action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "35",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "52",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "71",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "89",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "110",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "EqualsNull",
+      "line": "131",
+      "reason": "This exact assertion deliberately tests Object.equals(null)==false for a generated immutable primitive record. Replacing equals with == would test reference identity instead and destroy the independent null-contract oracle. No production null dereference, catch, suppression or nullable public acceptance is introduced.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "CloseResource",
+      "line": "217",
+      "reason": "Exact JUnit-owned finite executor reaches finally shutdownNow and checked awaitTermination10 on every path; all64 Futures join5, eight locally owned workers operate immutable synthetic value mappings only. No J2EE managed thread or external resource; implicit close omits the tested finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "217",
+      "reason": "Exact standalone host JUnit site belongs to eight locally owned workers/64 synthetic immutable mapping tasks with Future5 and finally shutdownNow/await10. This is outside J2EE and invokes no filesystem, database, Root, native, service, permission or remote action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "222",
+      "reason": "Exact standalone host JUnit site belongs to eight locally owned workers/64 synthetic immutable mapping tasks with Future5 and finally shutdownNow/await10. This is outside J2EE and invokes no filesystem, database, Root, native, service, permission or remote action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "reason": "Exact standalone host JUnit site belongs to eight locally owned workers/64 synthetic immutable mapping tasks with Future5 and finally shutdownNow/await10. This is outside J2EE and invokes no filesystem, database, Root, native, service, permission or remote action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "226",
+      "reason": "Exact standalone host JUnit site belongs to eight locally owned workers/64 synthetic immutable mapping tasks with Future5 and finally shutdownNow/await10. This is outside J2EE and invokes no filesystem, database, Root, native, service, permission or remote action.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "45",
+      "reason": "Exact sink is a final ByteArrayOutputStream memory double with close/flush counters, a final FailingSink containing only an in-memory buffer and retained synthetic IOException, or an anonymous OutputStream whose write throws a synthetic runtime/Error. No file/socket/FD/DB/process/native resource is acquired. Closing or flushing the borrowed sink would invalidate the deliberately checked ownership and partial-output postconditions; memory-only doubles require no external cleanup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this MemorySink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "60",
+      "reason": "Exact sink is a final ByteArrayOutputStream memory double with close/flush counters, a final FailingSink containing only an in-memory buffer and retained synthetic IOException, or an anonymous OutputStream whose write throws a synthetic runtime/Error. No file/socket/FD/DB/process/native resource is acquired. Closing or flushing the borrowed sink would invalidate the deliberately checked ownership and partial-output postconditions; memory-only doubles require no external cleanup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this MemorySink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "138",
+      "reason": "Exact sink is a final ByteArrayOutputStream memory double with close/flush counters, a final FailingSink containing only an in-memory buffer and retained synthetic IOException, or an anonymous OutputStream whose write throws a synthetic runtime/Error. No file/socket/FD/DB/process/native resource is acquired. Closing or flushing the borrowed sink would invalidate the deliberately checked ownership and partial-output postconditions; memory-only doubles require no external cleanup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this MemorySink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "156",
+      "reason": "Exact sink is a final ByteArrayOutputStream memory double with close/flush counters, a final FailingSink containing only an in-memory buffer and retained synthetic IOException, or an anonymous OutputStream whose write throws a synthetic runtime/Error. No file/socket/FD/DB/process/native resource is acquired. Closing or flushing the borrowed sink would invalidate the deliberately checked ownership and partial-output postconditions; memory-only doubles require no external cleanup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this FailingSink object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "171",
+      "reason": "Exact sink is a final ByteArrayOutputStream memory double with close/flush counters, a final FailingSink containing only an in-memory buffer and retained synthetic IOException, or an anonymous OutputStream whose write throws a synthetic runtime/Error. No file/socket/FD/DB/process/native resource is acquired. Closing or flushing the borrowed sink would invalidate the deliberately checked ownership and partial-output postconditions; memory-only doubles require no external cleanup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this OutputStream object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "CloseResource",
+      "line": "242",
+      "reason": "Exact standalone host JUnit-owned executor runs eight workers/64 immutable speaker-copy and entry-reference tasks, all Futures join5 and finally shutdownNow plus checked awaitTermination10 on every path. This is outside J2EE and acquires no external IO/database/native/Root resource. Implicit executor close omits the required finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "242",
+      "reason": "Exact standalone host JUnit-owned executor runs eight workers/64 immutable speaker-copy and entry-reference tasks, all Futures join5 and finally shutdownNow plus checked awaitTermination10 on every path. This is outside J2EE and acquires no external IO/database/native/Root resource. Implicit executor close omits the required finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "247",
+      "reason": "Exact standalone host JUnit-owned executor runs eight workers/64 immutable speaker-copy and entry-reference tasks, all Futures join5 and finally shutdownNow plus checked awaitTermination10 on every path. This is outside J2EE and acquires no external IO/database/native/Root resource. Implicit executor close omits the required finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "256",
+      "reason": "Exact standalone host JUnit-owned executor runs eight workers/64 immutable speaker-copy and entry-reference tasks, all Futures join5 and finally shutdownNow plus checked awaitTermination10 on every path. This is outside J2EE and acquires no external IO/database/native/Root resource. Implicit executor close omits the required finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "257",
+      "reason": "Exact standalone host JUnit-owned executor runs eight workers/64 immutable speaker-copy and entry-reference tasks, all Futures join5 and finally shutdownNow plus checked awaitTermination10 on every path. This is outside J2EE and acquires no external IO/database/native/Root resource. Implicit executor close omits the required finite postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "CloseResource",
+      "line": "202",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "202",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "206",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "211",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "212",
+      "reason": "Exact standalone host JUnit-owned eight-worker/64-task executor uses immutable synthetic speaker metadata and independent literal bytes only, with Future5 and finally shutdownNow plus checked awaitTermination10 on every path. No J2EE executor or DB/FS/socket/native/Root operation. Implicit close would omit the finite cleanup postcondition required by this test.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "EqualsNull",
+      "line": "319",
+      "reason": "Exact JUnit assertion independently verifies the public generated SpeakerMapping.equals(Object) contract returns false for a null peer. This is the method under test, not an application null check or a substitute for identity/nullness validation. Replacing it by first==null would stop testing the required generated-record null behavior and invalidate the independent oracle.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "CloseResource",
+      "line": "364",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 shared immutable speaker-map lookups and independent selected-row COPY batches. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No external database/native FD/process is acquired; this is outside J2EE. Implicit executor close omits the mandatory bounded termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "364",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 shared immutable speaker-map lookups and independent selected-row COPY batches. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No external database/native FD/process is acquired; this is outside J2EE. Implicit executor close omits the mandatory bounded termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "369",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 shared immutable speaker-map lookups and independent selected-row COPY batches. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No external database/native FD/process is acquired; this is outside J2EE. Implicit executor close omits the mandatory bounded termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "379",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 shared immutable speaker-map lookups and independent selected-row COPY batches. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No external database/native FD/process is acquired; this is outside J2EE. Implicit executor close omits the mandatory bounded termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "380",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 shared immutable speaker-map lookups and independent selected-row COPY batches. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. No external database/native FD/process is acquired; this is outside J2EE. Implicit executor close omits the mandatory bounded termination postcondition.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
