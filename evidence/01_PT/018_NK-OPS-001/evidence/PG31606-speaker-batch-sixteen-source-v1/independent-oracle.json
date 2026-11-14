@@ -1,0 +1,30 @@
+{
+  "origin": "Independent V002 seven-column two-row UTF8/COPY literals and composite-key/reference cases, no Production expected generator",
+  "expectedWire": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31606-speaker-batch-sixteen-source-v1/independent-two-speaker-rows.wire",
+    "sha256": "09ead6d2d808abf5fe3550ab6c01cb1c10bc5978b0d8437b664e5d33e9129d81"
+  },
+  "declaredIdsInOrder": [
+    "700",
+    "600"
+  ],
+  "sameNormalizedDifferentGamesValid": true,
+  "sameGameDuplicateNormalizedInvalid": true,
+  "globalPrimaryKeyAcrossGames": true,
+  "knownReferences": [
+    {
+      "speakerId": "700",
+      "gameId": "1"
+    },
+    {
+      "speakerId": "600",
+      "gameId": "2"
+    }
+  ],
+  "unknownSpeaker": "999",
+  "knownSpeakerWrongGame": {
+    "speakerId": "700",
+    "gameId": "2"
+  },
+  "normalizationDerivationNotAssumed": true
+}

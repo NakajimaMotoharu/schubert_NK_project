@@ -1,5 +1,18 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC368 Speaker集合とEntry複合参照（2026-11-14）
+
+NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223233242254、SS311/331/V002/343 SSC367。SpeakerCopyBatchは既SpeakerCopyRowを受ける宣言集合とScenario entry参照検証であり、Current175の抽出・normalized_name生成/ID採番/実DB成功を代行しない。Nullable outer List/nullable要素を固定IAEで拒否、全rowは既final Row constructorのnonnull必須値/NFC/byte/date/bool invariantを使用。idはgameを跨ぎ全体一意、(game_id,normalized_name)の二要素不変String keyを一意とし、文字列連結・trim/case変換/自動改名をしない。同normalized値は別gameで許容し、同gameでcaseの違う宣言normalized値の比較はDDLのexact値どおり、正規化導出の正しさはcallerの別契約に残す。created_atはdistinct<=1、emptyは0で許容する。宣言row順を保持し、target ID大小/名前で勝手にsortしない。
+
+constructor防御copy/List.copyOfとid→game Map.copyOf/Set.copyOf時刻をprivate-finalへ保持、標準Immutableとfinal型を宣言する。rows()は不変List、copyBytes(Nullable Encoder)はnullを固定IAEで拒否しrow.fieldsの不変参照から既encoderへ渡す（expected生成には使わない）。writeTo(Nullable Writer,Nullable OutputStream)は両nullを先行拒否し既writerでrow順に一回出力、borrowed streamをopen/flush/close/再送しない。IO/runtime/Error元instanceとpartial prefixを維持。validateEntries(Nullable ScenarioEntryCopyBatch)はnullを固定IAE、各Entry時刻を集合へ加え、speaker_id NULLのnarrationはFK不要、nonnullspeaker_idのdialogueは保持id→gameとEntrygame完全一致を必須とする。未知speaker/他game参照を拒否し、speaker＋entry全体の時刻distinct<=1を最後に検査、空speaker+narrationのみは許容する。Entry rowの種別/null型自体は既Row/Batchのinvariantを利用し新列を推測/補正しない。toString/invalid messageは固定redacted。SQL/原本/DB/COPY session/driver/Root/native/権限/VM操作0。
+
+PT-MIG-SPEAKERBATCH001..016: 二行七列の独立UTF8golden/宣言順とborrowed streamcloseflush0、全空と空entry、outer/要素null、同game/別gameの重複PK、同game normalizedUKと別game同名/大小文字宣言値保持、timestamp混在/同一、入力/List/byte snapshot、nullencoder/writer/sink先行0byte、partial IOException元instance/一fail/後続未書込、runtime/Error元instance、entries nullと空speaker+narration、dialogue同game既知speaker正常、未知ID/他game拒否、narration含むcross timestamp不一致/entries空正常、固定redaction/拒否後独立正常、finite8workers64/Future5/finallyshutdownNow-await10で検証する。metadata Rowのnormal/byte/date/null契約は必要旧SpeakerRow16を再利用し、参照fixtureは独立literalのEntry target700/900/game1/2とspeaker宣言ID、lookup/対応表のexpectedをproduction methodから作らない。
+
+新16＋必要Row16/EntryBatch12/EntryRow12/3Map各12/Encoder12/Writer12/ScenarioGenerated16=whole132、全9Main15physicalを新source一exec/Root静的/NullAway/lintWerror/CRC-init/default+無filter全Code四100で検証。共有Mapのrecord生成契約16も丸ごと含み、必要物理を縮めない。既whole403/28は成功確認目的で再演せず、新集合→EntryFK/借用writerに必要なcaller/calleeだけを固定する。実175/Current分類導出/IDmap/speaker staging・六表assembly/DB/全ETL/sequence/ANALYZE/Rootnative/CHR/global451/ITST/全HOLD未受入。
+
+当不足追加1.55/4.65/9.3pp cap10はPG/独立16の並行製造.8/2.4/4.8＋必要normal132.75/2.25/4.5。元費用/SV上限/群開始値保持、旧22Main/全既試験byte不変、実専有費/token null。既SQL/UIの内部具体化のみ、RD/UI変更・QA不要。
+
+
 ## SSC367 Speaker七列COPY宣言値（2026-11-14）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223/233116（speaker現175は実受入別）/2424.3/254、SS311/331/V002/343。script_entriesのdialogueは(speaker_id,game_id)→speakersが必須だがV004はgames二件だけをseedし、既migration21Mainにはspeaker row/staging/参照解決が無い。先行内部部品SpeakerCopyRowを製造する。これは実speaker抽出/ID採番/名前正規化規則/UK全体/FK実DB成功ではなく、callerが解決済みの宣言七列を既DDLどおり送るpure値。順はid,game_id,name,normalized_name,is_protagonist,notes,created_at。idはcanonical positiveN12 string、game1/2、nameとnormalized_name各nonnullUTF8 1..128byte。normalized_nameをnameから再導出/trim/case変更せずcaller値を保持、並び/IDを補正しない。notesだけnullable/空可/DDLに無い上限を追加しない。全nonnull textはwellformedUnicode/UTF8・NFC・NUL無し、names含めその他のPostgreSQL許容制御文字を勝手に除去/拒否せず既COPY codecでescapeする。bool送信用表記は内部canonical true/falseの二値（SQLboolean値は同じ）、未知/空/case違いは拒否。created_atは他COPY rowと同じ0001..9999年UTCのInstant正準String/µs以下、NULL不可。
