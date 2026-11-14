@@ -1,0 +1,1949 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T17:30:57.293132+00:00",
+  "previousOracle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2975_notnull_binding_independent_oracle.json",
+    "sha256": "eab0705830e923365c872ad3c7fad64f5be31a48da0227b769d8b418435cfce6"
+  },
+  "sourceDdl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "identities": [
+    {
+      "table": "speakers",
+      "column": "id",
+      "ordinal": 1
+    },
+    {
+      "table": "script_files",
+      "column": "id",
+      "ordinal": 1
+    },
+    {
+      "table": "script_entries",
+      "column": "id",
+      "ordinal": 1
+    },
+    {
+      "table": "audio_files",
+      "column": "id",
+      "ordinal": 1
+    },
+    {
+      "table": "media_assets",
+      "column": "id",
+      "ordinal": 1
+    }
+  ],
+  "originalColumnAttributes": {
+    "speakers": [
+      [
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        ""
+      ],
+      [
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "name",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "normalized_name",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "is_protagonist",
+        "bool",
+        "boolean",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "notes",
+        "text",
+        "text",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ],
+    "script_files": [
+      [
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        ""
+      ],
+      [
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_order",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "section_code",
+        "varchar",
+        "character varying(64)",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "chapter_title",
+        "text",
+        "text",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ],
+    "script_entries": [
+      [
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        ""
+      ],
+      [
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "script_file_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_order",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "entry_index",
+        "int4",
+        "integer",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "line_number",
+        "int4",
+        "integer",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "entry_type",
+        "varchar",
+        "character varying(9)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "speaker_id",
+        "int8",
+        "bigint",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "speaker_label",
+        "text",
+        "text",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "body",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "body_search",
+        "text",
+        "text",
+        "false",
+        "",
+        "s"
+      ],
+      [
+        "raw_block",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ],
+    "audio_files": [
+      [
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        ""
+      ],
+      [
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "basename",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "audio_role",
+        "varchar",
+        "character varying(8)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "container",
+        "varchar",
+        "character varying(16)",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "duration_ms",
+        "int8",
+        "bigint",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ],
+    "media_assets": [
+      [
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        ""
+      ],
+      [
+        "logical_id",
+        "varchar",
+        "character varying(64)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "media_type",
+        "varchar",
+        "character varying(8)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "title",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "category",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "section",
+        "text",
+        "text",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "mime_type",
+        "varchar",
+        "character varying(64)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "parent_logical_id",
+        "varchar",
+        "character varying(64)",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "pair_key",
+        "text",
+        "text",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "pair_role",
+        "bpchar",
+        "character(1)",
+        "false",
+        "",
+        ""
+      ],
+      [
+        "display_order",
+        "int4",
+        "integer",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ],
+    "entry_audio_links": [
+      [
+        "entry_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "audio_file_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "link_type",
+        "varchar",
+        "character varying(5)",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "display_order",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        ""
+      ],
+      [
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        ""
+      ]
+    ]
+  },
+  "nineFieldRows": {
+    "speakers": [
+      [
+        "1",
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "name",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "normalized_name",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "is_protagonist",
+        "bool",
+        "boolean",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "notes",
+        "text",
+        "text",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "7",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ],
+    "script_files": [
+      [
+        "1",
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "display_order",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "7",
+        "section_code",
+        "varchar",
+        "character varying(64)",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "8",
+        "chapter_title",
+        "text",
+        "text",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "9",
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "10",
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "11",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ],
+    "script_entries": [
+      [
+        "1",
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "script_file_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "display_order",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "entry_index",
+        "int4",
+        "integer",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "line_number",
+        "int4",
+        "integer",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "7",
+        "entry_type",
+        "varchar",
+        "character varying(9)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "8",
+        "speaker_id",
+        "int8",
+        "bigint",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "9",
+        "speaker_label",
+        "text",
+        "text",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "10",
+        "body",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "11",
+        "body_search",
+        "text",
+        "text",
+        "false",
+        "",
+        "s",
+        "true",
+        "true"
+      ],
+      [
+        "12",
+        "raw_block",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "13",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ],
+    "audio_files": [
+      [
+        "1",
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "basename",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "7",
+        "audio_role",
+        "varchar",
+        "character varying(8)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "8",
+        "container",
+        "varchar",
+        "character varying(16)",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "9",
+        "duration_ms",
+        "int8",
+        "bigint",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "10",
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "11",
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "12",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ],
+    "media_assets": [
+      [
+        "1",
+        "id",
+        "int8",
+        "bigint",
+        "true",
+        "d",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "logical_id",
+        "varchar",
+        "character varying(64)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "media_type",
+        "varchar",
+        "character varying(8)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "title",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "category",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "section",
+        "text",
+        "text",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "7",
+        "storage_relative_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "8",
+        "display_path",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "9",
+        "file_name",
+        "text",
+        "text",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "10",
+        "byte_size",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "11",
+        "sha256",
+        "bpchar",
+        "character(64)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "12",
+        "mime_type",
+        "varchar",
+        "character varying(64)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "13",
+        "parent_logical_id",
+        "varchar",
+        "character varying(64)",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "14",
+        "pair_key",
+        "text",
+        "text",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "15",
+        "pair_role",
+        "bpchar",
+        "character(1)",
+        "false",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "16",
+        "display_order",
+        "int4",
+        "integer",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "17",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ],
+    "entry_audio_links": [
+      [
+        "1",
+        "entry_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "2",
+        "audio_file_id",
+        "int8",
+        "bigint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "3",
+        "game_id",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "4",
+        "link_type",
+        "varchar",
+        "character varying(5)",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "5",
+        "display_order",
+        "int2",
+        "smallint",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ],
+      [
+        "6",
+        "created_at",
+        "timestamptz",
+        "timestamp with time zone",
+        "true",
+        "",
+        "",
+        "true",
+        "true"
+      ]
+    ]
+  },
+  "queries": [
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+    "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum"
+  ],
+  "sequenceValidityProjection": "CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END",
+  "sequenceBindingPredicate": "dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')",
+  "sequenceValidPredicate": "dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle",
+  "normalMetadata": {
+    "dependency": "i",
+    "sameSchema": true,
+    "sameOwner": true,
+    "persistent": true,
+    "typeSchema": "pg_catalog",
+    "typeName": "int8",
+    "start": 1,
+    "increment": 1,
+    "minimum": 1,
+    "maximum": 999999999999,
+    "cache": 1,
+    "cycle": false
+  },
+  "independentTruthVectors": [
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "expected": true
+    },
+    {
+      "identity": true,
+      "candidates": [],
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        },
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "expected": false
+    },
+    {
+      "identity": false,
+      "candidates": [],
+      "expected": true
+    },
+    {
+      "identity": false,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "a",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "dependency",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": null,
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "dependency",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": false,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "sameSchema",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": null,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "sameSchema",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": false,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "sameOwner",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": null,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "sameOwner",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": false,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "persistent",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": null,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "persistent",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "public",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "typeSchema",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": null,
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "typeSchema",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int4",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "typeName",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": null,
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "typeName",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 2,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "start",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": null,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "start",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": -1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "increment",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": null,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "increment",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 0,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "minimum",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": null,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "minimum",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 1000000000000,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "maximum",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": null,
+          "cache": 1,
+          "cycle": false
+        }
+      ],
+      "mutated": "maximum",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 2,
+          "cycle": false
+        }
+      ],
+      "mutated": "cache",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": null,
+          "cycle": false
+        }
+      ],
+      "mutated": "cache",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": true
+        }
+      ],
+      "mutated": "cycle",
+      "expected": false
+    },
+    {
+      "identity": true,
+      "candidates": [
+        {
+          "dependency": "i",
+          "sameSchema": true,
+          "sameOwner": true,
+          "persistent": true,
+          "typeSchema": "pg_catalog",
+          "typeName": "int8",
+          "start": 1,
+          "increment": 1,
+          "minimum": 1,
+          "maximum": 999999999999,
+          "cache": 1,
+          "cycle": null
+        }
+      ],
+      "mutated": "cycle",
+      "expected": false
+    }
+  ],
+  "normalColumnGetters": 594,
+  "targetMixedCatalogGetters": 1119,
+  "oldNNProjectionVerbatim": "CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END",
+  "allPreviousEightFieldsRetained": true,
+  "sequenceCurrentStateRead": false,
+  "sequenceStateMutation": false,
+  "actualDatabaseOrSqlEvaluatorOperations": 0,
+  "absoluteRoleAndOrphanSequenceNotQualified": true,
+  "productionMethodsCalled": 0,
+  "technicalSources": [
+    "https://www.postgresql.org/docs/18/sql-createsequence.html",
+    "https://raw.githubusercontent.com/postgres/postgres/REL_18_6/src/backend/commands/sequence.c"
+  ]
+}
