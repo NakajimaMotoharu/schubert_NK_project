@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC378: bootstrap.migration.MigrationMasterContentVerifier verify/expectedRows/orderedRows/typedValue/resource cleanupは借用migration TXに対する六表65COPY列の固定SELECT型付きpost確認を担う。独立28/whole411、実DB/catalog/全移行/公開/Rootnative/HOLD未受入。
+
 SSC377: 五既JDBC移行部品cleanupのprimary自己identity保持、BUG2925/YKT2455/独立10/必要553。認証/接続/DB/全移行を代行しない。
 
 SSC376: bootstrap.migration.CurrentSpeakerProjectionReader read/open/row/cleanupはCurrent六列のborrowed readonly snapshotを不変六列rowsへ接続し、既Mapへ渡す。SQL NULL/semantic boolean/件数/逆順cleanupをJDKProxy独立20/whole176で確認。実CurrentDB/認証/HOLD未受入。

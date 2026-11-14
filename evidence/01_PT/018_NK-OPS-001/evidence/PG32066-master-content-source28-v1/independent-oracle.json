@@ -1,0 +1,556 @@
+{
+  "actualExit": 0,
+  "origin": "Independent selected-column literal contract and V002 source DDL types; no Production method generates expected",
+  "sourceDdl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "selected65Columns": [
+    {
+      "table": "speakers",
+      "ordinal": 1,
+      "column": "id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 2,
+      "column": "game_id",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 3,
+      "column": "name",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 4,
+      "column": "normalized_name",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 5,
+      "column": "is_protagonist",
+      "ddlType": "boolean",
+      "kind": "B",
+      "getter": "getBoolean+immediate wasNull"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 6,
+      "column": "notes",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "speakers",
+      "ordinal": 7,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 1,
+      "column": "id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 2,
+      "column": "game_id",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 3,
+      "column": "display_order",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 4,
+      "column": "storage_relative_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 5,
+      "column": "display_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 6,
+      "column": "file_name",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 7,
+      "column": "section_code",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 8,
+      "column": "chapter_title",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 9,
+      "column": "sha256",
+      "ddlType": "char",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 10,
+      "column": "byte_size",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_files",
+      "ordinal": 11,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 1,
+      "column": "id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 2,
+      "column": "game_id",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 3,
+      "column": "script_file_id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 4,
+      "column": "display_order",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 5,
+      "column": "entry_index",
+      "ddlType": "integer",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 6,
+      "column": "line_number",
+      "ddlType": "integer",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 7,
+      "column": "entry_type",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 8,
+      "column": "speaker_id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 9,
+      "column": "speaker_label",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 10,
+      "column": "body",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 11,
+      "column": "raw_block",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "script_entries",
+      "ordinal": 12,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 1,
+      "column": "id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 2,
+      "column": "game_id",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 3,
+      "column": "storage_relative_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 4,
+      "column": "display_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 5,
+      "column": "file_name",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 6,
+      "column": "basename",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 7,
+      "column": "audio_role",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 8,
+      "column": "container",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 9,
+      "column": "duration_ms",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 10,
+      "column": "byte_size",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 11,
+      "column": "sha256",
+      "ddlType": "char",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "audio_files",
+      "ordinal": 12,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 1,
+      "column": "id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 2,
+      "column": "logical_id",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 3,
+      "column": "media_type",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 4,
+      "column": "title",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 5,
+      "column": "category",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 6,
+      "column": "section",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 7,
+      "column": "storage_relative_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 8,
+      "column": "display_path",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 9,
+      "column": "file_name",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 10,
+      "column": "byte_size",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 11,
+      "column": "sha256",
+      "ddlType": "char",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 12,
+      "column": "mime_type",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 13,
+      "column": "parent_logical_id",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 14,
+      "column": "pair_key",
+      "ddlType": "text",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 15,
+      "column": "pair_role",
+      "ddlType": "char",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 16,
+      "column": "display_order",
+      "ddlType": "integer",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "media_assets",
+      "ordinal": 17,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 1,
+      "column": "entry_id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 2,
+      "column": "audio_file_id",
+      "ddlType": "bigint",
+      "kind": "L",
+      "getter": "getLong+immediate wasNull"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 3,
+      "column": "game_id",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 4,
+      "column": "link_type",
+      "ddlType": "varchar",
+      "kind": "S",
+      "getter": "getString nullable"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 5,
+      "column": "display_order",
+      "ddlType": "smallint",
+      "kind": "I",
+      "getter": "getInt+immediate wasNull"
+    },
+    {
+      "table": "entry_audio_links",
+      "ordinal": 6,
+      "column": "created_at",
+      "ddlType": "timestamptz",
+      "kind": "T",
+      "getter": "getTimestamp nullable then Instant canonical UTC"
+    }
+  ],
+  "queries": [
+    "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
+    "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
+    "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
+    "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
+    "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
+    "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\""
+  ],
+  "normalRowCounts": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    4
+  ],
+  "normalTypedColumnReads": 142,
+  "queryTimeoutSeconds": 30,
+  "fetchRows": 1000,
+  "normalStatementCloses": 1,
+  "normalResultCloses": 6,
+  "sourceOrderPreserved": true,
+  "targetOrder": "five numeric PKs; link numeric entry/audio and fixed ASCII type",
+  "generatedBodySearchAccepted": false,
+  "actualMasterOrDbRead": false,
+  "applicationTestsExecuted": 0
+}
