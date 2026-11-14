@@ -1,0 +1,3 @@
+# BUG2974/YKT2503・SSC408 通常PT補足
+
+原PG33164全958は0F8E/950成功/exit1で不合格保持。既AudioMigrationMapはmappingとAUDIO宣言件数一致を、CurrentScenarioFileMapperはfile mappingとSCENARIO宣言件数一致をconstructorで要求する。新MAPMAN二mapping用へ二AUDIO宣言、ASSEMBLY022一fileへ一SCENARIO宣言を追加。公開abc SHA256/byte3/synthetic root/pathの未認証claimだけで実fileを作成/読取0。Main/Assembler/hash/count/golden全五vector/既948本文は同byte、期待を製品へ合わせる変更0。新10/全958のまま、是正後sourceの一exec/46Main66CRC/Root静的/既定と無filter四100で再試験する。過去950成功をwhole合格へ算入0。同群2.7/8.1/9.9内の手戻り、追加予算0/専有実費不明。実Current/asset/DB/署名/全移行/HOLD未受入。

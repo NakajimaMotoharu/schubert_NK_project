@@ -1,0 +1,17 @@
+"""Complete declared-asset fixture prerequisites without changing mapped IDs, canonical golden or production."""
+from pathlib import Path
+import json,re,hashlib,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG33174-mapping958-fixture-asset-correction-v1';load=lambda p:json.loads(p.read_text());ref=lambda p:dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest());sp=load(b/'evidence/PG33154-mapping958-source-v1/manifest.json');oldProof=ref(b/'evidence/PG33154-mapping958-source-v1/manifest.json');main=r/sp['newMain']['path'];assembly=r/sp['changedAssembler']['path'];test=r/sp['newTest']['path'];at=r/sp['changedAssemblerTest']['path']
+for p in [main,assembly]:assert p.read_bytes()==subprocess.check_output(['git','show','0b06092595a3ad65e2e3ab99ac3754f3b1dab4a1:'+str(p.relative_to(r))])
+for p,h in sp['oldUnchangedSourceHashes'].items():assert ref(r/p)['sha256']==h,p
+assert len(sp['oldUnchangedSourceHashes'])==90
+s=test.read_text();assert s.count('AssetMigrationManifest.Kind.AUDIO')==2
+oldat=(b/'evidence/PG33154-mapping958-source-v1/original-CurrentMigrationAssemblerTest.java.txt').read_text()
+def methods(t):return {m.group(1):m.group(0).strip() for m in re.finditer(r'  @Test\n  void (\w+)\([^\n]*\)[\s\S]*?(?=\n  @Test|\n  private static)',t)}
+a=methods(oldat);z=methods(at.read_text());assert len(a)==20 and len(z)==22 and all(z[k]==v for k,v in a.items());assert z['assembly022ConfiguredFileIdsAreBoundAndFreshManifestIsDefensive'].count('AssetMigrationManifest.Kind.SCENARIO')==1
+assert len(re.findall(r'@Test\b',s))==8 and sp['golden']==ref(b/'evidence/PG33154-mapping958-source-v1/independent-golden-vectors.json');g=load(r/sp['golden']['path'])
+for key in ['normal','empty','boundary']:assert json.dumps(g[key]['canonical']) in s and json.dumps(g[key]['sha256']) in s
+for key in ['empty','oneFile']:assert json.dumps(g[key]['canonical']) in at.read_text() and json.dumps(g[key]['sha256']) in at.read_text()
+f=load(b/'evidence/PG33164-mapping958-unit-v1/manifest.json');assert (f['actualExit'],f['tests'],f['failures'],f['errors'],f['skipped'])==(1,958,0,8,0)
+sp.update(originalSourceProof=oldProof,newTest=ref(test),changedAssemblerTest=ref(at),productionAndAssemblerByteUnchangedFromFailedSource=True,declaredAudioClaimsAdded=2,declaredScenarioClaimsAdded=1,actualPayloadsCreatedOrRead=0,goldenAllFiveUnchanged=True,oldFailure=ref(b/'evidence/PG33164-mapping958-unit-v1/manifest.json'),originalFailedRun=dict(unitSource='0b06092595a3ad65e2e3ab99ac3754f3b1dab4a1',tests=958,success=950,failures=0,errors=8,skipped=0,actualExit=1,qualified=False),reworkAdditionalBudgetPp=0,dedicatedActualCost=None)
+(e/'manifest.json').open('x').write(json.dumps(sp,ensure_ascii=False,indent=2)+'\n');spec=r/'evidence/01_PT/019_NK-MIG-001/137_BUG2974対応表fixtureのasset宣言前提補足.md';spec.open('x').write('# BUG2974/YKT2503・SSC408 通常PT補足\n\n原PG33164全958は0F8E/950成功/exit1で不合格保持。既AudioMigrationMapはmappingとAUDIO宣言件数一致を、CurrentScenarioFileMapperはfile mappingとSCENARIO宣言件数一致をconstructorで要求する。新MAPMAN二mapping用へ二AUDIO宣言、ASSEMBLY022一fileへ一SCENARIO宣言を追加。公開abc SHA256/byte3/synthetic root/pathの未認証claimだけで実fileを作成/読取0。Main/Assembler/hash/count/golden全五vector/既948本文は同byte、期待を製品へ合わせる変更0。新10/全958のまま、是正後sourceの一exec/46Main66CRC/Root静的/既定と無filter四100で再試験する。過去950成功をwhole合格へ算入0。同群2.7/8.1/9.9内の手戻り、追加予算0/専有実費不明。実Current/asset/DB/署名/全移行/HOLD未受入。\n');print(dict(actualExit=0,whole=958,mainChanged=False,audioClaims=2,scenarioClaims=1,goldenChanged=False))

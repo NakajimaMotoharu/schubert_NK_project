@@ -663,7 +663,14 @@ final class CurrentMigrationAssemblerTest {
             new SpeakerMigrationMap(List.of()),
             List.of(),
             List.of(),
-            new AssetMigrationManifest(List.of()),
+            new AssetMigrationManifest(
+                List.of(
+                    new AssetMigrationManifest.Entry(
+                        AssetMigrationManifest.Kind.SCENARIO,
+                        "g1/a.nsc",
+                        "scenario/a.nsc",
+                        3,
+                        HASH))),
             "g1",
             "g2");
     var first = configured.mappingManifest();

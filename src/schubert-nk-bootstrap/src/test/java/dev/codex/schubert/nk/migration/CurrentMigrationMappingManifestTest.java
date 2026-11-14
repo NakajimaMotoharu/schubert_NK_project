@@ -25,6 +25,8 @@ final class CurrentMigrationMappingManifestTest {
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
   private static final String PART_FILES = "FILES";
+  private static final String CLAIM_HASH =
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String DIAGNOSTIC = "migration mapping manifest input is invalid";
   private static final String NORMAL =
       "NKMIGMAPPING1\nFILES\t2\t37\t9c5820c79b521c94a56a2b07bf070756a1e7fe84f64b090740e1338483ee867a\nNKMIGFILEORDER1\n1\t-5\t101\t1\n2\t5\t401\t1\nENTRIES\t2\t56\t412afc944908b31f37ee180a3c3043262ebed7643c2d240f8b23e683ca6657cf\nNKMIGENTRYPLACEMENT1\n-10\t201\t1\t1\t101\t0\n20\t901\t2\t2\t401\t0\nSPEAKERS\t2\t58\tf07376a3f3c4c9c13d3b20eab12b5626091eeee779babebb68d74d8e1fcf6dc6\ngame_id\tcurrent_speaker_id\ttarget_speaker_id\n1\t-3\t1\n2\t4\t6\nAUDIO\t2\t56\t80b919a39739429d9c905d3a1730aba0faa88a340155c2bb0a50889b41720cb3\ngame_id\tcurrent_audio_id\ttarget_audio_id\n1\t-5\t21\n2\t8\t32\n";
@@ -260,6 +262,23 @@ final class CurrentMigrationMappingManifestTest {
         files,
         new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(ids), placements),
         new SpeakerMigrationMap(speakers),
-        new AudioMigrationMap(audio, new AssetMigrationManifest(List.of()), "g1", "g2"));
+        new AudioMigrationMap(
+            audio,
+            new AssetMigrationManifest(
+                List.of(
+                    new AssetMigrationManifest.Entry(
+                        AssetMigrationManifest.Kind.AUDIO,
+                        "g1/a.ogg",
+                        "audio/a.ogg",
+                        3,
+                        CLAIM_HASH),
+                    new AssetMigrationManifest.Entry(
+                        AssetMigrationManifest.Kind.AUDIO,
+                        "g2/b.ogg",
+                        "audio/b.ogg",
+                        3,
+                        CLAIM_HASH))),
+            "g1",
+            "g2"));
   }
 }
