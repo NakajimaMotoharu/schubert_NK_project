@@ -1,0 +1,16 @@
+package measurementfixture;
+public final class RunFixture {
+  private RunFixture() {}
+  private static void require(boolean value) { if (!value) throw new AssertionError("tool fixture"); }
+  public static void main(String[] args) {
+    Point point=new Point(7,11); require(point.x()==7); require(Tone.ONE!=null);
+    if (args[0].equals("full")) {
+      require(point.y()==11); require(point.hashCode()==228);
+      require(point.toString().equals("Point[x=7, y=11]"));
+      require(point.equals(point));require(point.equals(new Point(7,11)));
+      require(!point.equals(new Point(8,11)));require(!point.equals(null));require(!point.equals("other"));
+      require(Tone.values().length==2);require(Tone.values()[0]==Tone.ONE);require(Tone.values()[1]==Tone.TWO);
+      require(Tone.valueOf("ONE")==Tone.ONE);require(Tone.valueOf("TWO")==Tone.TWO);
+    }
+  }
+}
