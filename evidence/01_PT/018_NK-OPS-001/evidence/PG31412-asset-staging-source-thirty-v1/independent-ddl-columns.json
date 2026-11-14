@@ -1,0 +1,18 @@
+{
+  "ddl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "columns": {
+    "audio_files": "id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at",
+    "media_assets": "id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at",
+    "entry_audio_links": "entry_id, audio_file_id, game_id, link_type, display_order, created_at"
+  },
+  "counts": {
+    "audio_files": 12,
+    "media_assets": 17,
+    "entry_audio_links": 6
+  },
+  "sha256ColumnIncludedInBothAssetTables": true,
+  "actualDatabaseConnections": 0
+}
