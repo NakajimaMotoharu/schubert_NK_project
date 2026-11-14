@@ -521,7 +521,8 @@ final class CurrentSpeakerProjectionReaderTest {
                 }
                 if (name.equals(CALL_NEXT)) {
                   call(name);
-                  return ++position < data.size();
+                  position++;
+                  return position < data.size();
                 }
                 if (name.equals(CALL_NULL)) {
                   call(name);
