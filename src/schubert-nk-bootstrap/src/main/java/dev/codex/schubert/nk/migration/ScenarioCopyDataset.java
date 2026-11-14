@@ -1,7 +1,11 @@
 package dev.codex.schubert.nk.migration;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -53,6 +57,22 @@ public final class ScenarioCopyDataset {
   public byte[] entryCopyBytes(@Nullable PostgresCopyTextEncoder encoder) {
     if (encoder == null) throw invalid();
     return retainedEntries.copyBytes(encoder);
+  }
+
+  /** SSC351 / PT-MIG-DATASET013..015: borrowed output, no flush, close or commit. */
+  public void writeFiles(@Nullable PostgresCopyTextWriter writer, @Nullable OutputStream sink)
+      throws IOException {
+    if (writer == null) throw invalid();
+    writer.writeRows(retainedFiles.rows(), sink);
+  }
+
+  /** SSC351 / PT-MIG-DATASET013..015: only row references are collected, never all COPY bytes. */
+  public void writeEntries(@Nullable PostgresCopyTextWriter writer, @Nullable OutputStream sink)
+      throws IOException {
+    if (writer == null) throw invalid();
+    var fields = new ArrayList<List<@Nullable String>>();
+    for (var row : retainedEntries.rows()) fields.add(row.fields());
+    writer.writeRows(fields, sink);
   }
 
   @Override

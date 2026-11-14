@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,6 +166,67 @@ final class ScenarioCopyDatasetTest {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  /** SSC351 / PT-MIG-DATASET013. */
+  @Test
+  void streamingBothPathsRetainsIndependentFullGoldenBytes() throws Exception {
+    var dataset = normal();
+    var writer = new PostgresCopyTextWriter(encoder());
+    var files = new ByteArrayOutputStream();
+    var entries = new ByteArrayOutputStream();
+    dataset.writeFiles(writer, files);
+    dataset.writeEntries(writer, entries);
+    assertArrayEquals(FILE_GOLDEN.getBytes(StandardCharsets.UTF_8), files.toByteArray());
+    assertArrayEquals(ENTRY_GOLDEN.getBytes(StandardCharsets.UTF_8), entries.toByteArray());
+  }
+
+  /** SSC351 / PT-MIG-DATASET014. */
+  @Test
+  void streamingNullWriterAndSinkContractsStayFixed() {
+    var dataset = normal();
+    var writer = new PostgresCopyTextWriter(encoder());
+    assertEquals(
+        DIAGNOSTIC,
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> dataset.writeFiles(null, new ByteArrayOutputStream()))
+            .getMessage());
+    assertEquals(
+        DIAGNOSTIC,
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> dataset.writeEntries(null, new ByteArrayOutputStream()))
+            .getMessage());
+    assertEquals(
+        "migration COPY stream input is invalid",
+        assertThrows(IllegalArgumentException.class, () -> dataset.writeFiles(writer, null))
+            .getMessage());
+    assertEquals(
+        "migration COPY stream input is invalid",
+        assertThrows(IllegalArgumentException.class, () -> dataset.writeEntries(writer, null))
+            .getMessage());
+  }
+
+  /** SSC351 / PT-MIG-DATASET015. */
+  @Test
+  void streamingBothPathsPropagateOriginalSinkFailureWithoutChangingDataset() {
+    var dataset = normal();
+    var writer = new PostgresCopyTextWriter(encoder());
+    var failure = new IOException("synthetic dataset sink failure");
+    var sink =
+        new OutputStream() {
+          @Override
+          public void write(int value) throws IOException {
+            throw failure;
+          }
+        };
+    assertSame(failure, assertThrows(IOException.class, () -> dataset.writeFiles(writer, sink)));
+    assertSame(failure, assertThrows(IOException.class, () -> dataset.writeEntries(writer, sink)));
+    assertArrayEquals(
+        FILE_GOLDEN.getBytes(StandardCharsets.UTF_8), dataset.fileCopyBytes(encoder()));
+    assertArrayEquals(
+        ENTRY_GOLDEN.getBytes(StandardCharsets.UTF_8), dataset.entryCopyBytes(encoder()));
   }
 
   private static void reject(
