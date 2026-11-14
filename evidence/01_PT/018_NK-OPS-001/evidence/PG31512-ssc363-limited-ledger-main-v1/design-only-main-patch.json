@@ -1,0 +1,8 @@
+{
+  "baseMain": "6edbcdf5b8c7bca5a689d86205d36ecdce0588fa",
+  "paths": [
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+  ],
+  "patchUtf8Sha256": "8f625286e73fcc2863c714da04bfe60ea98315326a6c9bf602774d9b5843e4c1",
+  "patch": "--- a/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n+++ b/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n@@ -1832,4 +1832,6 @@\n \n ## SSC-363 Scenario内部複合キーと生成値契約（2026-11-14、PG/PT）\n \n-BUG2901/YKT2431、SS311/343 SSC344345/451・RD MIG-DAT005/FUN004/TST・UI223254。内部SourceKey/FilePosition recordをJDK不変Long二要素keyへ簡素化、公開六recordのequals/hashを独立16Testと必要whole129で確認。外部値/永続化/並び/制約/redaction/権限変更不要・QA不要。状態: 設計確定・main公開待ち、実装/通常PT/実DB/全移行未完。\n+BUG2901/YKT2431、SS311/343 SSC344345/451・RD MIG-DAT005/FUN004/TST・UI223254。内部SourceKey/FilePosition recordをJDK不変Long二要素keyへ簡素化、公開六recordのequals/hashを独立16Testと必要whole129で確認。外部値/永続化/並び/制約/redaction/権限変更不要・QA不要。状態: 設計確定・main公開済み（https://github.com/NakajimaMotoharu/schubert_NK_project/pull/248、6edbcdf5b8c7bca5a689d86205d36ecdce0588fa）、実装/通常PT/実DB/全移行未完。\n+\n+2026-11-14 SSC363限定製造/PT完了: Core1692e5cc/Unita7cd3daf、PG31502全129/FES0・PG31504全15CRC-init/既定I2172-L451-M88-C15-B283 miss0・PG31508同一execの無filterI2280-L457-M122-C15-B283 miss0。内部二keyをJDK不変List二要素へ/公開六record・既113Test不変、新16独立hash/全成分/組collision/境界/finite64、Root全品質適用未分類0。BUG2901当18gap・2902literal・2903parser限定閉鎖、原失敗/予測保全。実DB/全ETL/Rootnative/CHR/global451/ITST/HOLD未受入。mainへ当台帳限定反映。\n"
+}
