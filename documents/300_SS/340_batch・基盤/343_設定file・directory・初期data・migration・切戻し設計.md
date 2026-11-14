@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC386 十九PK・UK保存行後条件を既参照検査へ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/343。既ReferenceVerifierの六件数＋十参照/link順＋六CHECK（計22）後へ、V002の六PKと十三UKの保存行違反を固定六SELECTで検査する。既INSPECTIONS末尾へ追加し新Main/別実行経路を作らない。表別key数はspeakers3/script_files4/script_entries4/audio_files3/media_assets3/entry_audio_links2=19。手書き75制約matrixのp/u key番号を独立66column名表とV002宣言に二重照合して固定SQLへ展開、Production method又は実DBからexpectedを生成しない。
+
+各tableの一固定SELECT count(*) FROM (<各PK/UK違反group SELECT1をUNION ALL>) violationsを使う。PKはGROUP BY宣言key列 HAVING count(*)>1 OR key列のいずれかIS NULL、UKはNULLS DISTINCTの既DDLどおり全key IS NOT NULLの行だけをGROUP BY宣言key列 HAVING count(*)>1。正規DDLは全key NOTNULLだが、counter自身でもPK nullを拒否しUK NULLS DISTINCTを強化しない。casefold/NFC/trim/COALESCE/独自collationを追加せずDBの列型・collationに従う。重複rowがPK/UKの双方へ該当すればgroup数は重複計上し得るが受入条件は常に0なので隠さず失敗させる。期待は各一行BIGINT0、既requireResultによるgetLong直後wasNull/欠落余剰/null/nonzero/負/LongMAX/資源・primary保持を適用する。index/constraint実効性・collation定義やSQL evaluator/実DBは別未完条件であり、当subsetを全UK/index合格と呼ばない。PostgreSQL18公式 https://www.postgresql.org/docs/18/ddl-constraints.html を根拠、pin18.6維持。
+
+既PT-REF001..021のquery/shape/三型fault/close-primary/自己identity/finite64 matrixを28queryへ拡張する。REF021のempty宣言matrixは六CHECKと新六key位置を全て検査し、NULL_RESULT未取得Resultはslotだけclose、取得済み他shapeはslot+1という是正済み期待を保持する。新logical matrix ID PT-MIG-REF021-U01..U06をquery22..27へ対応付けるが新JUnit method/定義数は0、旧成功の算術加算や新試験数の水増し0。期待key集合19とSQL NULL/PKnull/重複groupの論理vectorは独立goldenで保持する。
+
+Targetの時系列はColumn6→Constraint6→prepare6→transfer24→Reference28→Content7→Finalizer16=93SQL、旧87にindex64へ新六SQLを挿入。scalar56は旧50のindex40へ六zeroを挿入し旧44原値も保持。TRANSFER_SCALARS18/ORPHAN_FIRST24不変、REFERENCE_SCALARS_END46/SETVAL_SCALAR_FIRST51、Results75（catalog12/content7/scalar56）、普通Statement11+Prepared5=16close-timeout/auto11/fetch三回不変。ownerStart=[0,6,12,13,15,18,22,30,42,70,77]、closeSQLPrefix=[6,12,13,15,18,22,30,42,70,77,83,84,85,86,87,93]、closeResultCount=[6,12,12,12,12,15,21,30,58,65,71,72,73,74,75,75]、setval82/ANALYZE87/Prepared最初close10/outer15。既Target32を全93SQL/56scalarのprefix/resource/不一致短絡・有限64へ対応、catalog141行/Content66getter/payload65を保持する。失敗時は後続Content/MAX/setval/ANALYZE0。
+
+既Main一変更/Ref21とTarget32適応、新Main0/新JUnit0、全migration34Main707定義の必要whole643/31Main45physicalだけを同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用/全CRC-init/既定と無filter四100で再資格する。uniqueMain142不変、元190/WBS625/正式1964-53/工数nullは終了依存未成立のまま。追加不足1.8/5.4/9pp cap10、既matrix再利用で前群より小さく見積るが実費や完成率にしない。元費用/SV/群開始保持・実専有費token null、RD/UI/DDL/QA変更0。実DB/COPY/SQL evaluator/constraint式/NOTNULLcatalog/trigger/index-role/原本Current・全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
 ## SSC385 六表四十七CHECK保存行後条件を既参照検査へ接続（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/V029/343。既MigrationMasterReferenceVerifierの件数六＋参照orphan/link順十照会後へ、六表47個のCHECK条件に違反する保存行の件数0を固定六SELECTとして追加する。新class/別経路/実SQL生成器は作らず、既INSPECTIONS末尾へcompile-time SQL literalを置く。既Targetの同ConnectionでReference22→Content7→Finalizerの順に一回検査、不成立なら後続Content/MAX/setval/ANALYZE0。既47CHECK式をProduction Java条件に翻訳せず、V002の原式を使いmedia_assets.ck_media_assets_pairのみV029の現行IS TRUE付き式を用いる。DDL/式自体/既nullable契約は変更しない。

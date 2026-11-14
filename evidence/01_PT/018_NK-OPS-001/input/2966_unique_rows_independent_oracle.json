@@ -1,0 +1,358 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T16:49:29.561910+00:00",
+  "sourceDdl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "tables": {
+    "speakers": {
+      "keys": [
+        {
+          "name": "pk_speakers",
+          "kind": "p",
+          "columns": [
+            "id"
+          ],
+          "declaredColumnOrdinals": "1",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR (id IS NULL)"
+        },
+        {
+          "name": "uq_speakers_game_normalized_name",
+          "kind": "u",
+          "columns": [
+            "game_id",
+            "normalized_name"
+          ],
+          "declaredColumnOrdinals": "2,4",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING count(*)>1"
+        },
+        {
+          "name": "uq_speakers_id_game",
+          "kind": "u",
+          "columns": [
+            "id",
+            "game_id"
+          ],
+          "declaredColumnOrdinals": "1,2",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations"
+    },
+    "script_files": {
+      "keys": [
+        {
+          "name": "pk_script_files",
+          "kind": "p",
+          "columns": [
+            "id"
+          ],
+          "declaredColumnOrdinals": "1",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1 OR (id IS NULL)"
+        },
+        {
+          "name": "uq_script_files_game_display_order",
+          "kind": "u",
+          "columns": [
+            "game_id",
+            "display_order"
+          ],
+          "declaredColumnOrdinals": "2,3",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING count(*)>1"
+        },
+        {
+          "name": "uq_script_files_game_storage_path",
+          "kind": "u",
+          "columns": [
+            "game_id",
+            "storage_relative_path"
+          ],
+          "declaredColumnOrdinals": "2,4",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1"
+        },
+        {
+          "name": "uq_script_files_id_game",
+          "kind": "u",
+          "columns": [
+            "id",
+            "game_id"
+          ],
+          "declaredColumnOrdinals": "1,2",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations"
+    },
+    "script_entries": {
+      "keys": [
+        {
+          "name": "pk_script_entries",
+          "kind": "p",
+          "columns": [
+            "id"
+          ],
+          "declaredColumnOrdinals": "1",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_entries GROUP BY id HAVING count(*)>1 OR (id IS NULL)"
+        },
+        {
+          "name": "uq_script_entries_display_order",
+          "kind": "u",
+          "columns": [
+            "display_order"
+          ],
+          "declaredColumnOrdinals": "4",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_entries WHERE display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1"
+        },
+        {
+          "name": "uq_script_entries_file_entry_index",
+          "kind": "u",
+          "columns": [
+            "script_file_id",
+            "entry_index"
+          ],
+          "declaredColumnOrdinals": "3,5",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1"
+        },
+        {
+          "name": "uq_script_entries_id_game",
+          "kind": "u",
+          "columns": [
+            "id",
+            "game_id"
+          ],
+          "declaredColumnOrdinals": "1,2",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.script_entries GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_entries WHERE display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations"
+    },
+    "audio_files": {
+      "keys": [
+        {
+          "name": "pk_audio_files",
+          "kind": "p",
+          "columns": [
+            "id"
+          ],
+          "declaredColumnOrdinals": "1",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1 OR (id IS NULL)"
+        },
+        {
+          "name": "uq_audio_files_game_storage_path",
+          "kind": "u",
+          "columns": [
+            "game_id",
+            "storage_relative_path"
+          ],
+          "declaredColumnOrdinals": "2,3",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1"
+        },
+        {
+          "name": "uq_audio_files_id_game",
+          "kind": "u",
+          "columns": [
+            "id",
+            "game_id"
+          ],
+          "declaredColumnOrdinals": "1,2",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.audio_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.audio_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations"
+    },
+    "media_assets": {
+      "keys": [
+        {
+          "name": "pk_media_assets",
+          "kind": "p",
+          "columns": [
+            "id"
+          ],
+          "declaredColumnOrdinals": "1",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1 OR (id IS NULL)"
+        },
+        {
+          "name": "uq_media_assets_logical_id",
+          "kind": "u",
+          "columns": [
+            "logical_id"
+          ],
+          "declaredColumnOrdinals": "2",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.media_assets WHERE logical_id IS NOT NULL GROUP BY logical_id HAVING count(*)>1"
+        },
+        {
+          "name": "uq_media_assets_type_storage_path",
+          "kind": "u",
+          "columns": [
+            "media_type",
+            "storage_relative_path"
+          ],
+          "declaredColumnOrdinals": "3,7",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.media_assets WHERE logical_id IS NOT NULL GROUP BY logical_id HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1) violations"
+    },
+    "entry_audio_links": {
+      "keys": [
+        {
+          "name": "pk_entry_audio_links",
+          "kind": "p",
+          "columns": [
+            "entry_id",
+            "audio_file_id",
+            "link_type"
+          ],
+          "declaredColumnOrdinals": "1,2,4",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL)"
+        },
+        {
+          "name": "uq_entry_audio_links_entry_type_order",
+          "kind": "u",
+          "columns": [
+            "entry_id",
+            "link_type",
+            "display_order"
+          ],
+          "declaredColumnOrdinals": "1,4,5",
+          "allDeclaredNotNull": true,
+          "violationGroupSql": "SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1"
+        }
+      ],
+      "query": "SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1) violations"
+    }
+  },
+  "queries": [
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.script_entries GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_entries WHERE display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.audio_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations",
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.media_assets WHERE logical_id IS NOT NULL GROUP BY logical_id HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1) violations",
+    "SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1) violations"
+  ],
+  "primaryKeys": 6,
+  "uniqueKeys": 13,
+  "expectedCounts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "nullAndDuplicateGoldenVectors": [
+    {
+      "kind": "p",
+      "rows": [
+        [
+          null
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "kind": "p",
+      "rows": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "kind": "p",
+      "rows": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "kind": "u",
+      "rows": [
+        [
+          null
+        ],
+        [
+          null
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "kind": "u",
+      "rows": [
+        [
+          null,
+          1
+        ],
+        [
+          null,
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "kind": "u",
+      "rows": [
+        [
+          1,
+          "A"
+        ],
+        [
+          1,
+          "A"
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "kind": "u",
+      "rows": [
+        [
+          1,
+          "A"
+        ],
+        [
+          2,
+          "A"
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "all19KeysMatchManualMatrixAndDdl": true,
+  "nullsDistinctForUniquePreserved": true,
+  "primaryNullRejected": true,
+  "productionMethodsCalled": 0,
+  "actualDatabaseOrSqlEvaluatorExecuted": false,
+  "indexAndCollationNotQualified": true,
+  "technicalSource": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+}
