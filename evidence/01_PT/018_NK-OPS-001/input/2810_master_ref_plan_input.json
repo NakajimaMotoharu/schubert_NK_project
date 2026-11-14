@@ -1,0 +1,30 @@
+{
+  "ssc": 372,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+  "source": "96d34208e5b23147ca3d0ec8707ba5e280da078f",
+  "title": "移行六表件数と参照・link順の独立検査",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311/331/V002/343 ETL5。MigrationMasterReferenceVerifierは借用正規Connectionと不変六表宣言を受け、六表件数・固定FK orphan/game不一致・link order条件をread-only SQLで検査する。null引数は副作用前固定IAE、autoCommit=true/nullvendor Statementは固定SQLException。Connectionの所有/認証/停止/排他/Backup/DB/schema資格はcallerが正規確立し、当部品はclose/commit/rollback/setRole/setAutoCommit/修復/再送をしない。新nonnullStatementを一回所有しtimeout30秒、全16 SELECTを固定順で実行する。各結果はnonnull一行/getLong(1)/wasNull=false/期待完全一致/余分行無し、元SQL-runtime-Error/Result-close/Statement-closeのprimary-suppressedと一回close試行を保持する。\n\n最初の六queryはspeakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksのcount(*)を宣言各rows.size()と一致検査。続く九queryはfile→game、speaker→game、entry→game、audio→game、entry→file/game、nullable entry→speaker/game、link→entry/game、link→audio/game、nullable media→parent logical_idの固定LEFT JOIN orphan count=0を要求する。nullを許す参照は明示IS NOT NULLで非参照を許容し、gameは複合参照へ含める。最後はlink(entry_id,link_type)ごとのcount>999/order min<1/max>999/count(DISTINCTorder)<>count(*)の違反group count=0。既承認orderは1..999の一意値であり、新たなdense/連続番号要件を追加しない。全識別子・SQLは固定literalで入力値を連結しない。失敗時は最初のqueryで停止し、修復や後続mutationを発行しない。\n\nこの部品の結果は件数/FK参照/link orderだけであり、全列byte/hash一致、全PK/UK/CK/catalog/index/role有効性、原本Current/実DB・復旧/全移行/Rootnative/CHR/global451/ITSTを認定しない。既SS331/343の全constraint等は別の未完条件として保持する。DB実行HOLDは解除せず、通常PTはMemory Proxyだけ。\n\nPT-MIG-REF001..020: 001独立16SQL/宣言件数/資源終了、002全空、003両null前検証、004autoCommit拒否、005auto/create三型failure、006nullStatement、007timeout三型failure、008全16位置nullResult/missing/SQLNULL/wrong/extra、009全query三型failure、010全16位置next1/getLong/wasNull/next2三型failure、011全Resultclose三型failure、012readprimary+Resultclose+Statementclose同identity/順/selfsuppression、013Statementclose単独、014各orphan/link違反非0と後続0、015六件数不一致と後続0、016全failure/shapeの正確close tuple/Connection借用呼出のみ、017固定redaction、018拒否後fresh正常、019宣言の別件数と同rows.size（上限や順変更0）、020finite8workers64/Future5/finallyshutdownNow-await10。期待16SQL/件数/0orphan/orderとphase close tupleはV002/SS331343から独立literal/model、Production methodをexpected生成に使わない。\n\n新20＋必要pure383=whole403、全23Main36physicalを一source/一exec/Root静的・NullAway-lintWerror/全CRC-init/default＋無filter全Code四100で確認。Finalizer/三JDBC stagingは依存しないため元411/96証拠参照だけで成功再演しない。旧26 migrationMain/既507Test source不変。追加1.55/4.65/9.3pp cap10は製造/独立20と必要全403を含み、元費用/SV/群開始保持、実専有費/token null、外部/HOLD操作0。SS内部具体化でRD/UI/DDL/grant変更・QA不要。",
+  "testIds": "PT-MIG-REF001..020",
+  "estimate": {
+    "low": 1.55,
+    "base": 4.65,
+    "high": 9.3
+  },
+  "capPp": 10,
+  "specName": "068_移行六表件数と参照・link順・独立二十仕様.md",
+  "previousForecastName": "1898_WBS65予実・移行最終化通常四百十一後版520.json",
+  "forecastName": "1900_WBS65予実・移行参照検査不足追加版521.json",
+  "revision": "521-MISSING_SIX_TABLE_COUNTS_ORPHAN_GAME_LINK_ORDER",
+  "findingReason": "SS343 ETL5 requires independent orphan/game/link-order checks after loading; immutable row checks and sequence finalization do not query these postconditions. Add fixed read-only sixteen-query component without claiming all catalog/constraints or actual DB.",
+  "workId": "P01903_SSC372_REFERENCE20_NORMAL403",
+  "planKey": "plannedMasterReferenceSSC372",
+  "startRecordName": "1901_WBS65移行参照検査製造通常開始.json",
+  "startInputName": "2811_master_ref403_start.json",
+  "designSlot": "PG31812-ssc372-master-ref-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343 ETL5、WBS-P01903.02。宣言六件数＋九FK orphan/game＋link order違反groupの計16固定SELECT、nonnull cleanup/正確phase終了。全constraint/catalog/hash/実DB/HOLD未受入、既order一意1..999へdense要件を追加しない。上位/DDL/grant変更・QA不要。",
+  "moduleSummary": "bootstrap.migration.MigrationMasterReferenceVerifierは六count/九orphan-game/link order違反groupを固定read-only16SQLで照合、借用Connection/nonnull終了/元primary維持。PT-MIG-REF001..020/全403/full23Main36physical、全DB/hash/catalog/移行/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC372-MASTER-REFERENCE20-NEEDED403-20261114",
+  "run": "PG31826-MASTER-REF-CLOSED403",
+  "scope": "MissingMasterReferenceVerifier PG20+neededpure383whole403/full23Main36physical 1.55/4.65/9.3cap10. Sixcount/nineFKgame/linkorder16readonlySQL/strictscalar/exactclose. NoactualDBRootnativeSDKActual4aruHOLDactions; old26Main507Testsunchanged",
+  "nextCommand": "PublishSSC372SS311343914onlymainbeforePG. Implementfixedread-only16SQL+independent20/faults/exactphaseclose/needed403/fullRootstatic/CRC-init-default-raw. NoFinalizer411/staging96confirmationreplay/noactualDBRootnativeHOLDchanges. Ordinarygroupnotstop."
+}

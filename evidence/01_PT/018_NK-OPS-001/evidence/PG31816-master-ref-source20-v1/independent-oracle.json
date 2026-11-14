@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T11:37:05.296851+00:00",
+  "primaryDDL": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "normalCounts": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "normalViolations": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "emptyCounts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "queries": 16,
+  "orphanRelations": [
+    "file-game",
+    "speaker-game",
+    "entry-game",
+    "audio-game",
+    "entry-file+game",
+    "entry-optional-speaker+game",
+    "link-entry+game",
+    "link-audio+game",
+    "media-optional-parent-logicalId"
+  ],
+  "linkOrder": {
+    "group": [
+      "entry_id",
+      "link_type"
+    ],
+    "maximumCount": 999,
+    "minimumOrder": 1,
+    "maximumOrder": 999,
+    "distinctOrderMustMatchCount": true,
+    "denseOrderRequired": false
+  },
+  "expectedSQLSource": "Test QUERY_SQL sixteen independently specified complete literals from DDL relationships/SS343, never production generation",
+  "expectedFailureSource": "Every query position/shape/SQL-runtime-Error phase: original instance, exact prefix length and Result/Statement close tuple; independent fresh memory Proxy only",
+  "normalResultCloses": 16,
+  "normalStatementCloses": 1,
+  "actualDbExecution": 0,
+  "allCatalogConstraintHashAcceptance": false,
+  "applicationTestsExecuted": 0
+}
