@@ -768,3 +768,6 @@ SSC374/NK-MIG-001/WBS-P01903 MigrationMasterCopyFingerprint fingerprint/differen
 
 
 SSC375/NK-MIG-001/WBS-P01903 SpeakerMigrationMap constructor/mappings/targetSpeakerId/canonicalBytes/copyRows/invalid/toString、SpeakerMapping constructor/equals/hashCode/gameId/currentSpeakerId/targetSpeakerId/toString→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-SPEAKERMAP001..024/019074075。Core37d20ba6/Unit6abbb4ec、PG31938/940/942全156/17class/実137両四100。実Current/DB/全移行/HOLD未受入。
+
+
+SSC376/NK-MIG-001/WBS-P01903 CurrentSpeakerProjectionReader constructor/read/requireStatement/rows/row/closeStatement/closeResult/invalid/toString→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-SPEAKERREAD001..020/019076077。Core9de4208d/Unit8ce04bd1、PG31984/986/988全176/18class/実146両四100。実Current/DB/全移行/HOLD未受入。
