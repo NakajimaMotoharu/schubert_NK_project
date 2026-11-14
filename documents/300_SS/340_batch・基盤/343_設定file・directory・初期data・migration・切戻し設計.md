@@ -1,5 +1,21 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC380 六表六十六カラムの型・属性catalog照合（2026-11-15）
+
+NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331/V002/343。MigrationMasterColumnVerifierはcallerが既に正規認証・停止排他・TXを所有する借用Connectionに対する固定六SELECTで、speakers7/script_files11/script_entries13/audio_files12/media_assets17/entry_audio_links6の全66物理カラム属性を照合する。既COPY65列にgenerated body_search一列を加える。実DB接続・driver・catalog/role変更・Rootnative等HOLDは解除せず、通常PTは明示JDK Proxyだけ。
+
+verify(Nullable Connection)はnull固定IAE、getAutoCommit=true/null Statement固定SQLException。write migration TXのpost検査を許容し、readOnly=true設定やrequireを追加しない。新nonnullStatementを一回所有、queryTimeout30秒/fetchSize1000。テーブル名はprivate固定六要素からだけ選び、固定pg_catalog.pg_class/pg_namespace/pg_attribute/pg_type joinを実行する。n.nspname='schubert'、c.relkind='r'、c.relpersistence='p'、type namespace='pg_catalog'、a.attnum>0 AND NOT a.attisdroppedを必須にし、ORDER BY a.attnumとする。view/foreign/temp/unlogged/他schema/domain・user型へfallbackしない。関係/型を見つけられない場合も欠落として失敗する。
+
+projectionはa.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::textの七列。ordinal=getInt(1)/即時wasNull=false、V002のphysical1..Nと完全一致。name/type/SQL表記（varchar/char宣言長含む）を固定期待と一致検査し、attnotnull=getBoolean(5)/即時wasNullでSQL NULLを拒否する。identity/generatedはgetString(6/7)でNULLを空へ変換せず、未指定は空文字、五idはBY DEFAULT=d、entry.body_searchはstored=sと一致検査。順序/NULL/欠落/余分列/型長/NN flag/identity always a/virtual v/未知flagは最初の相違で固定SQLException。PKが定めるidのNNはV002 PKから期待へ反映する。body_searchは生成列だからNNとは推測せずV002のnullable属性を保持する。
+
+PostgreSQL18公式 pg_attribute https://www.postgresql.org/docs/18/catalog-pg-attribute.html と pg_type https://www.postgresql.org/docs/18/catalog-pg-type.html 、format_type https://www.postgresql.org/docs/18/functions-info.html#FUNCTIONS-INFO-CATALOG-TABLE を参照。attnotnull flag単独はconstraint有効性を保証せず、PK/FK/UK/CK/triggerの定義・validated状態、identity sequenceのN12属性/default・生成式lower(body)の定義/実値、index/role/grantの実効性は別の未完条件とする。この部分資格を全catalogやDB互換の受入れにしない。実環境は既pin PostgreSQL18.6を維持し、参照先現行patchに合わせたupgradeは行わない。
+
+66行の期待はV002と明示独立column matrixからProduction private不変listへ固定し、利用者入力や実DB観測から期待を生成しない。nullable SQL文字列は期待nonnull文字列と完全比較、metadataへtrim/case補正を行わない。Resultごとの全期待行とterminal next=falseを要求し、余分行の列は読まない。SQL/RuntimeException/Errorの元primaryとResult→Statement各一回close/順suppressedを保持し、同一primary実体に自己suppressionしない。Connection close/commit/rollback/setRole/設定変更・修復・再試行0、自前message/toString固定redaction、実metadata内容を例外へ出さない。
+
+PT-MIG-COLUMN001..022: 001全六SQL/66属性正常と資源tuple、002null conn、003autoCommit、004null Statement、005六nullResult、006全66位置欠落、007六余剰とfieldread0、008ordinal欠落/0/負/順序/重複/SQLNULL、009全66×六属性の個別変更検出、010全文字metadata SQL NULL/空の区別、011boolean SQL NULLとfalse保持、012全66 NOTNULL反転、013identity空/d/a/未知flag、014stored s/virtual v/空/未知flag、015builtin名/SQL幅表記と固定namespace/tablekind条件、016全JDBC call/全getter-wasNull-next位置三型faultとprefix/資源後条件、017各Resultclose三型、018Statementclose三型、019primary＋Result/Statement全三型順、020自己identity/値equals別実体/同cleanup二回、021redaction/失敗後fresh正常・caller mutation0、022finite8workers64/Future5/finallyshutdownNow-await10。source DDLと手作り独立SQL/column matrixをexpectedとし、Production methodをexpected生成に呼ばない。
+
+依存はJDK/JSpecify/既provided jsr305だけ、新Main1/新22Test/physical一classを一source/一exec/RootNullAway-lint-CS-SB-PMD個別適用性/CRC-init/既定と無filter四100で検証。新部品に依存しない既589の成功確認再演0。旧32Main/653定義不変。追加2/6/9pp cap10、元費用/SV/群開始保持・専有費token null。内部schema照合具体化のためRD/UI/DDL/grant/QA変更不要、全PGPT/ITST/HOLD未受入。
+
 ## SSC379 全列照合をidentity調整前の同Connection経路へ接続（2026-11-14）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311331/V002/343 SSC373377378。既MigrationMasterTargetPublisher.transferAndFinalizeへ既資格MigrationMasterContentVerifier.verifyを一回接続する。Speaker→Scenario→Asset transferとReferenceVerifierの既順の後、同一借用Connection/同一不変宣言をContentVerifierへ渡し、全65COPY列が一致した場合だけ既Finalizerの五MAX→五setval→六ANALYZEへ進む。新しい別publisher/role/permit/起動経路やDataSourceを作らず、Connection取得・close/commit/rollback/設定変更/自己再試行0。prepareの六CTASとcallerが別途正規に行うCOPY/認証/排他は変更しない。
