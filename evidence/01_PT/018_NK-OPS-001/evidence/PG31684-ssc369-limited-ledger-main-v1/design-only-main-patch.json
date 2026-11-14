@@ -1,0 +1,8 @@
+{
+  "baseMain": "2486efef0b476e81792d8a0cd54e4c433937e74d",
+  "paths": [
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+  ],
+  "patchUtf8Sha256": "6c86120f66b4fc3e525915e2ca6c261f69400f6e88ff5dd0bd483c2d44d404de",
+  "patch": "--- a/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n+++ b/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n@@ -1864,4 +1864,6 @@\n \n ## SSC-369 Speaker先行stagingと借用六表接続（2026-11-14、PG/PT）\n \n-SS311331/V002/343367368・UI223242254・RD MIG-DAT005/FUN004/TST/WBS-P01903.02。Speaker一表を先行し既二表＋三表と同じ借用transactionで順に処理する標準JDBC部品。固定七列/3count/large INSERT/nonnull cleanupと六表独立Proxyを具体化。RD/UI/DDL/権限変更・QA不要、実DB/Current/Root/HOLD未受入。 状態: 設計確定・main公開待ち、PG/通常PT/全PGPT/HOLD未完。\n+SS311331/V002/343367368・UI223242254・RD MIG-DAT005/FUN004/TST/WBS-P01903.02。Speaker一表を先行し既二表＋三表と同じ借用transactionで順に処理する標準JDBC部品。固定七列/3count/large INSERT/nonnull cleanupと六表独立Proxyを具体化。RD/UI/DDL/権限変更・QA不要、実DB/Current/Root/HOLD未受入。 状態: 設計確定・main公開済み（https://github.com/NakajimaMotoharu/schubert_NK_project/pull/258、2486efef0b476e81792d8a0cd54e4c433937e74d）、PG/通常PT/全PGPT/HOLD未完。\n+\n+2026-11-14 SSC369限定製造/PT完了: Core826521ee/Unitf40046a42b1c2c5d59472e2a9f2a1d3b0752bc20、PG31676全96FES0/PG31678全4CRC-init/PG31680実35Code I770-L214-M35-C4-B116 miss0。Speaker親先行の六表同借用Connection SQL30/Statement6/Result18・正確count/null/例外primary-suppressed・finite64。Root品質適用未分類0、BUG2908/2909/2910限定閉鎖。旧23Main/435定義不変、実175/六表master assembly/DB/全移行/Rootnative/CHR/global451/ITST/HOLD未受入。mainへ当台帳限定反映。\n"
+}

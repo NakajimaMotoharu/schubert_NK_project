@@ -1,0 +1,5 @@
+# Speaker先行stagingと借用六表接続・通常96独立結果
+
+SSC369 Speaker親stagingをPR258/main2486efefへ設計反映後製造。Core826521ee/Unitf40046a4・PG31676新24＋必要72 whole96/FES0/真正0、PG31678全3Main4CRC-init/既定I707-L205-M35-C4-B116 miss0、PG31680同singleexec無filterI770-L214-M35-C4-B116 miss0。V002独立七列CTAS/三scalar/large INSERT、各null-missing-extra-count/元SQL-RTE-Error/timeout/close-primary-suppressed/selfsuppression/LongMAX/有限64。六表同借用Connection・SQL30/Statementclose6/Resultclose18/connection mutation0。RootNullAway-lint-CS-SB0、PMD66は旧47同byte＋primary保持10/loader3/borrowed1/finiteworker5各非該当・適用未分類0。BUG2908 metadata相対path/2909 Throwable共有/2910 Test静的3を原証拠保持し限定閉鎖。旧23Main/既435定義source不変。App128/6627/6598/歴史29・Main132/正本184-625/元190新0/正式1964-53/工数null。現群1.65/4.95/9.9のみ完了。実175/Current名前導出/六表master assembly/DB/全移行/Rootnative/global451/ITST/HOLD未受入。
+
+062のPT-MIG-SPEAKERSTAGE001..024→SpeakerStagingTableTest全24。必要Scenario40/Asset32は同source内の親子順・cleanup契約検証。PG31646独立DDL七列と六表各列literal oracle/PG31666等価修正/PG31676 JUnit全96/PG31678単一exec全4 CRC-init/XML/PG31680無filter実35Code/PG31682全入力join。各manifestへ日時・OS/JDK/tool/branch/commit/command/exit/入力・独立expected・assert actual/coverage/関連BUG/path/hashを保持。実DB・実トランザクション結果や全ETLの受入ではない。
