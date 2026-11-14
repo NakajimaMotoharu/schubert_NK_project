@@ -1,0 +1,27 @@
+"""Independent length-framed ID maps; source bindings and unchanged old948 are separate from actual data."""
+from pathlib import Path
+import json,re,hashlib,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG33154-mapping958-source-v1';load=lambda p:json.loads(p.read_text());ref=lambda p:dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest());base='src/schubert-nk-bootstrap/src/';main=base+'main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java';test=main.replace('/main/','/test/').replace('.java','Test.java');assembly=main.replace('CurrentMigrationMappingManifest','CurrentMigrationAssembler');at=test.replace('CurrentMigrationMappingManifestTest','CurrentMigrationAssemblerTest');changed={main,test,assembly,at};old={}
+for folder,source in [('main','6556bad9e811850ea49b320ea6a1119f89ff4425'),('test','c0f1053a38d795b65e69d15b674e754d3d5829ee')]:
+ for p in (r/(base+folder+'/java/dev/codex/schubert/nk/migration')).glob('*.java'):
+  path=str(p.relative_to(r))
+  if path in changed:continue
+  h=hashlib.sha256(subprocess.check_output(['git','show',source+':'+path])).hexdigest();assert ref(p)['sha256']==h,path;old[path]=h
+assert len(old)==90 and sum(len(re.findall(r'@Test\b',(r/p).read_text())) for p in old if '/test/' in p)==928
+before=(e/'original-CurrentMigrationAssembler.java.txt').read_text();current=(r/assembly).read_text();remove=['import java.security.NoSuchAlgorithmException;\n','  private final ScenarioFileMigrationMap retainedFileIds;\n','  private final ScenarioEntryPlacementMap retainedEntryIds;\n','    retainedFileIds = files;\n','    retainedEntryIds = placement;\n','  public CurrentMigrationMappingManifest mappingManifest() throws NoSuchAlgorithmException {\n    return new CurrentMigrationMappingManifest(\n        retainedFileIds, retainedEntryIds, retainedSpeakers, retainedAudio);\n  }\n']
+for x in remove:assert current.count(x)==1,x;current=current.replace(x,'')
+def tokens(s):return [x for x in re.findall(r'//[^\n]*|/\*[\s\S]*?\*/|"(?:[^"\\]|\\.)*"|\w+|[^\s]',s) if not x.startswith(('//','/*'))]
+assert tokens(current)==tokens(before)
+def methods(s):return {m.group(1):m.group(0).strip() for m in re.finditer(r'  @Test\n  void (\w+)\([^\n]*\)[\s\S]*?(?=\n  @Test|\n  private static)',s)}
+a=methods((e/'original-CurrentMigrationAssemblerTest.java.txt').read_text());z=methods((r/at).read_text());assert len(a)==20 and len(z)==22 and all(z[k]==v for k,v in a.items());assert len(re.findall(r'@Test\b',(r/test).read_text()))==8
+g=load(e/'independent-golden-vectors.json');names=['FILES','ENTRIES','SPEAKERS','AUDIO'];lengths={}
+for key in ['normal','empty','oneFile','boundary','overlap']:
+ v=g[key];blob=b'NKMIGMAPPING1\n'
+ for name,text,count in zip(names,v['parts'],v['counts']):
+  data=text.encode('ascii');blob+=(name+'\t'+str(count)+'\t'+str(len(data))+'\t'+hashlib.sha256(data).hexdigest()+'\n').encode('ascii')+data
+ assert blob.decode()==v['canonical'] and len(blob)==v['length'] and hashlib.sha256(blob).hexdigest()==v['sha256'];lengths[key]=len(blob)
+ if key in ['normal','empty','boundary']:assert json.dumps(v['canonical']) in (r/test).read_text() and json.dumps(v['sha256']) in (r/test).read_text()
+ if key in ['empty','oneFile']:assert json.dumps(v['canonical']) in (r/at).read_text() and json.dumps(v['sha256']) in (r/at).read_text()
+assert lengths==dict(normal=530,empty=446,oneFile=455,boundary=716,overlap=536)
+v=dict(actualExit=0,oldUnchangedSourceHashes=old,newMain=ref(r/main),newTest=ref(r/test),changedAssembler=ref(r/assembly),changedAssemblerTest=ref(r/at),originalAssembler=ref(e/'original-CurrentMigrationAssembler.java.txt'),originalAssemblerTest=ref(e/'original-CurrentMigrationAssemblerTest.java.txt'),assemblerOnlyFieldsAndFactoryChanged=True,allOld20AssemblerTestsByteUnchanged=True,golden=ref(e/'independent-golden-vectors.json'),goldenLengths=lengths,goldenExpectedFromProduction=False,newDefinitions=10,oldDefinitions=948,wholeExpected=958,allMain=46,allTestSources=48,physicalClasses=66,actualMappingIdQualified=False,actualDbExecuted=False,actualFileReadOrPersisted=False,authorityOrSignatureIssued=False,formalAccepted=False,newAcceptance=0)
+(e/'manifest.json').open('x').write(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,new=10,whole=958,oldUnchangedSource=90,goldenLengths=lengths))

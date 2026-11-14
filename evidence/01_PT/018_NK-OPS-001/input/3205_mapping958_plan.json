@@ -1,0 +1,31 @@
+{
+  "ssc": 408,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java",
+  "source": "c279c1898aa8453476fbca2ca5adeb1a00f4980e",
+  "title": "現行ID四対応表を同じ組立のcanonical manifestへ接続",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/MIG006/TST、UI223242254、SS311331343 ETL10.1 step3とID対応表条項。既File/EntryPlacement/Speaker/Audio各mappingはcanonical bytesを持つが、同じ六table組立に対応する集約artifactが無い。未実装の内部artifactを製造する追加不足であり新業務仕様や実Current ID/順の承認を発行しない。RD/UI/DDL/QA/DIF変更0、実DB/原本/asset/Backup/key/native/VM/server/HOLD不変更。\n\nCurrentMigrationMappingManifestはNullable FileMap/PlacementMap/SpeakerMap/AudioMap四つを受け、nullを固定IAEで拒否。FileMapのtargetFileId→gameを作り、Placement全entryのtargetFileIdが存在しgame一致することを要求し、未知/異gameを拒否・補完/再採番0。既typed modelのsigned Current ID、game別file順/global entry順、疎N12 target IDを保持する。他table間に同じtarget数値IDがあっても別ID空間として許容する。四部品のcanonicalBytesを既実装とbyte同一で束ね、外部fileやDBへアクセスしない。\n\n形式はASCII NKMIGMAPPING1\\n に続け、FILES/ENTRIES/SPEAKERS/AUDIOの固定順で KIND\\t行数\\tbyte長\\tSHA256lowerhex64\\n と当partの既canonical bytes全体を連結する。行数はfiles.files/placement.entries/speakers.mappings/audio.mappingsのsize、byte長は実part配列長、各part hashと全体hashはJDK SHA256を用いる。SDK NoSuchAlgorithmExceptionは同じchecked例外として呼出元へ透過し自前catch/正常化/再試行0、本toolchainの既知SHA256 vectorでアルゴリズム提供を検証する。空4partも各既headerを保持、暗黙省略/時刻/OS改行/default charset/Map iteration順をhashへ混入しない。rowCountsは固定四keyのimmutable Map、canonicalBytesは防御clone、sha256は保存String、toStringとinvalid diagnosticは固定redacted。bytesとcountsはconstructorでsnapshot、不変/threadsafe。メモリByteArrayOutputStreamはFDやborrowed outputを取得しない。\n\n既CurrentMigrationAssemblerへ元FileMap/PlacementMapのimmutable参照二fieldを追加し、既retainedSpeakers/AudioMapと同じ四模型から public mappingManifest() throws NoSuchAlgorithmException で新artifactを作る。assemble処理/六COPY値/時刻/source五reader/SQLは不変更。artifactはdeclared correspondenceだけを証明し、実Current抽出全量/ID/order/DB内容/六COPY/asset/hash/署名/authority/永続化/切替の成功証跡ではない。実保存とactualID照合は後続HOLDとして残す。\n\nPT-MIG-MAPMAN001既知二game/signed/sparse四part byte/hash/count、002四null、003空四header/rootgolden、004防御clone/immutable counts/元list破壊隔離、005entry未知targetFile/異game拒否と非修復、006入力shuffled正準順/別table数値ID重複許容、007不変共有8worker64/Future5/finallyshutdownNow-await10、008固定redaction/繰返しfresh snapshot・独立boundary vector。既Assembler021空mapと022既設定file mapのfactory出力をPython手計算goldenへ照合、期待をproduction factoryから生成しない。Golden frame/hashはSSのbyte式と各独立手書きpartからPython hashlibで作り、製品出力と比較する。新8＋既Assembler新2＋旧948=全958/46Main48Test66physicalを同一source/一exec/RootNullAway-lint-CS-SB-PMD各site/CRC-init/既定と無filter全Code四100で確認する。既他44Main46Testはbyte同一、旧948は再認証で新成果0。\n\n追加不足2.7/8.1/9.9pp cap10、元費用/SV/各群開始と原残904.85等・未較正残397.324/837.386/1643.415を保持、当不足だけ追加して限定完了時同額減算。専有実費token null、正本625/元190受入・正式1964/53・工数nullを増やさない。失敗履歴7F1E/PG33096は保存、現在の948成功を確認目的で再実行せず本接続変更に必要な新958だけ資格する。",
+  "testIds": "PT-MIG-MAPMAN001..008; PT-MIG-CURRENTASSEMBLY021022",
+  "estimate": {
+    "low": 2.7,
+    "base": 8.1,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "135_現行ID四対応表manifest・既組立接続全958仕様.md",
+  "previousForecastName": "2037_WBS65予実・遅延制約全948後版582.json",
+  "forecastName": "2040_WBS65予実・現行ID対応表集約不足追加版583.json",
+  "revision": "583-MISSING_AGGREGATE_CURRENT_TO_NK_ID_MAPPING_ARTIFACT",
+  "findingReason": "SS343step3/IDmapping paragraph requires canonical source-to-target correspondence manifest. Four qualified mapping components emit separate bytes but CurrentMigrationAssembler does not expose one bound artifact. Aggregate exact existing bytes with typed length/hash/count frames; no inventory/DB/authority attestation.",
+  "workId": "P01903_SSC408_MAPPING8_ASSEMBLY22_WHOLE958",
+  "planKey": "plannedCurrentMappingManifestSSC408",
+  "startRecordName": "2041_WBS65現行ID対応表集約開始.json",
+  "startInputName": "3206_mapping958_start.json",
+  "designSlot": "PG33150-ssc408-mapping-design-only-v1",
+  "ledgerSummary": "四既canonical対応表をcount/length/SHA256付き固定順frameへ集約、既Assembler同raw mapから出力。新8/既Assembler新2=全958/46Main66physical予定、実ID資格/署名/DB/資産/HOLD未受入。",
+  "moduleSummary": "CurrentMigrationMappingManifest ctor/canonicalBytes/sha256/rowCounts/toString/append/invalidとCurrentMigrationAssembler.mappingManifestを接続。型・既mapping bytes/orderは不変更、新10/全958・46Main66class予定。",
+  "groupId": "PGPT-WBS65-SSC408-MAPPING8-ASSEMBLY22-958-20261115",
+  "run": "PG33164-MAPPING-CLOSED958",
+  "scope": "Missing aggregateCurrentID mapping artifact and existing assembler connection. NewMain1+existing1/newTest8+assembly2/all958/46Main66physical. Fixed4parts/independent golden/defensiveimmutable/binding/finite64. Additional2.7/8.1/9.9cap10 no actualDB/files/master/auth/HOLD actions.",
+  "nextCommand": "PublishSSC408SS311343914onlymain beforePG. Aggregate files/placement/speakers/audio exact canonical bytes/counts/lengths/SHA256 and source-bound assembler factory. Independent Python golden empty/two/oneFile/minmax; all46Main66CRC/958/static/default-raw. ActualSourceID/order/files/DB/native/global451/HOLD remainunaccepted; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
