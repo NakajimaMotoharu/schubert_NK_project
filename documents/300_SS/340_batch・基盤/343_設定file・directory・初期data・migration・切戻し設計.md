@@ -1,5 +1,9 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC393 Current file依存定義の実物九十八への訂正（2026-11-15）
+
+SSC392の依存Test数を現sourceへ訂正する。AssetMigrationManifestTestは歴史12でなくSSC365追加済み20、FileCopy14/FileMap12/Encoder12/Asset20/ScenarioGenerated16/新FileMap24=whole98、必要既74＋新24。全7Main17physical/MainCoree1fc79a2と業務・独立literal期待値・新24定義は不変更、原90 profile/prestyle/prepare前guard exit1/実PT0をPG32471へ保全する。旧37Main773定義を保持し、同sourceのfresh98全体/Root静的/CRC-init/既定と無filter四100を受入条件とする。歴史Asset12や90を確認目的で再実行せず、新98成功へ算術加算しない。BUG2938/YKT2467、現SSC392群内手戻り追加予算0/元2.5-7.5-9.9保持、元費用/SV/実費token null、RD/UI/DDL/QA変更不要。実DB/assetpayload/Rootnative/global451/HOLD未受入。
+
 ## SSC392 Current file八列と宣言assetをID対応・COPYへ接続（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioFileMapperはSSC391の八列projectionを既ScenarioFileMigrationMap/AssetMigrationManifest/ScenarioFileCopyBatchへ接続するpure変換。Current generatorのsource-only確認ではrelative_path=path.relative_to(game_dir).as_posix()であり、game内相対pathはgame間で重複しうる。global AssetManifest.currentPathへ無条件で直接lookup/別game推測をしない。
@@ -12,7 +16,7 @@ Current shaがnonnullならEntry.sha256と完全一致、Current sizeがnonnull�
 
 global Current ID一意/既知mapping/同件数・Entry一回consume/SCENARIO同件数で全mapping/assetの全単射を確立。mapped.filesのgame→Current ID順で出力し、target数値順や入力順へ変更しない。input/retained manifestは不変、fresh呼出の消費mapだけを持つ。固定redaction/IAE、NPE catch正常扱い0。ActualDB/原本/assetpayload/OS/network/資格/権限/IO操作0。
 
-PT-MIG-FILEMAP001..024: 001二game八列→11列独立literal、002emptyと非SCENARIO維持、003四constructor null、004prefix path/NFC/control/surrogate/同値、005rows/time null・µs境界、006不足余剰nullrow幅7-9、007Current id正準/overflow/未知、008game/二rootの分離、009sameCurrentid crossgame重複、010未知/別game/path case/バックslash拒否、011nonnull hash相違とNULLから宣言metadata、012nonnull size正準/不一致/負値/overflowとNULL、013SCENARIO件数一致/otherkind非受入、014同asset二重参照拒否、015Current filename/section/chapter/display保存とtarget NFC-byte-control拒否、016target sizeN12上限/空file、017deep snapshot/immutable、018固定COPY bytes、019時刻両端/共通stamp、020signedCurrent ID両端、021target数値順とgame内Current順分離、022失敗後fresh/固定redaction、023prefixがUnicodeの場合と同名relativeのgame分離、024有限8workers64/Future5/finallyshutdownNow-await10。入力・metadata/hash・COPY期待値は手書きfixture/独立計算でProduction method生成0。新24＋必要File38/Asset12/ScenarioGenerated16=whole90、全7Main17physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。旧37migrationMain773定義同byte、新Main1。追加不足2.5/7.5/9.9pp cap10、元費用/SV/群開始保持・実専有費token null。RD/UI/DDL/grant/QA変更不要。実CurrentDB/実rootの配備値・file認証/hash/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+PT-MIG-FILEMAP001..024: 001二game八列→11列独立literal、002emptyと非SCENARIO維持、003四constructor null、004prefix path/NFC/control/surrogate/同値、005rows/time null・µs境界、006不足余剰nullrow幅7-9、007Current id正準/overflow/未知、008game/二rootの分離、009sameCurrentid crossgame重複、010未知/別game/path case/バックslash拒否、011nonnull hash相違とNULLから宣言metadata、012nonnull size正準/不一致/負値/overflowとNULL、013SCENARIO件数一致/otherkind非受入、014同asset二重参照拒否、015Current filename/section/chapter/display保存とtarget NFC-byte-control拒否、016target sizeN12上限/空file、017deep snapshot/immutable、018固定COPY bytes、019時刻両端/共通stamp、020signedCurrent ID両端、021target数値順とgame内Current順分離、022失敗後fresh/固定redaction、023prefixがUnicodeの場合と同名relativeのgame分離、024有限8workers64/Future5/finallyshutdownNow-await10。入力・metadata/hash・COPY期待値は手書きfixture/独立計算でProduction method生成0。新24＋必要File38/Asset20/ScenarioGenerated16=whole98、全7Main17physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。旧37migrationMain773定義同byte、新Main1。追加不足2.5/7.5/9.9pp cap10、元費用/SV/群開始保持・実専有費token null。RD/UI/DDL/grant/QA変更不要。実CurrentDB/実rootの配備値・file認証/hash/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
 
 ## SSC391 Currentシナリオfile八列のborrowed snapshot読取り（2026-11-15）
 
