@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC387 六十六columnのNOTNULL制約有効性・結合確認（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/343。PostgreSQL18はNOTNULLをpg_constraint.contype=nに保持するので、既attnotnull属性だけの確認を補完する。既MigrationMasterColumnVerifierの固定六queryへ八番目booleanを追加し、元ordinal/name/type/width/attnotnull/identity/generatedの七projection・private66 descriptorは不変にする。新projectionはa.attnotnull=trueならそのcolumnへ結合された有効nが存在し、同columnへ結合された無効nが存在しないこと、falseなら同columnのnが存在しないこと。結合はnn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]。有効条件はnn.connamespace=c.relnamespace、conenforced/convalidated、非deferrable/非deferred、conislocal、coninhcount=0、conparentid=0、contypid=0。条件IS TRUEをvalid、IS NOT TRUEをinvalidに使いmetadata SQL NULLでもfail closed。有効な重複nの名前/個数は今回の資格に含めず、全NN catalogの名前/孤立conkey/全体cardinalityや実DBを保証しない。
+
+既verifyRowsの六属性一致後にgetBoolean(8)と直後wasNullを読み、NULL又はfalseなら既固定SQLException、trueだけ次行へ進む。空masterでもschema66全columnで必須、null/unknownをtrueへ補正しない。既Connection借用/非auto TX、queryTimeout30/fetch1000、Result→Statement一回close/元SQL-Runtime-Error保持/順suppressed/自己identity guard、message/toString固定redactionは維持する。Caller/role/transaction/DDLや制約状態を変更する処理・再試行0、既Column→Constraint→stagingの同Connection位置を不変更。PostgreSQL18公式 https://www.postgresql.org/docs/18/catalog-pg-constraint.html のn/conkey/conenforced/convalidatedを根拠、pin18.6維持。
+
+独立oracleは既V002手書き66属性matrixを保持して八番目の正常trueを追加する。NN真の正常有効rowあり→true、無し→false、invalid/NULL状態あり→false、validとinvalid混在→false、複数valid→true（名前個数未資格）、NN偽でn無し→true/有り→falseという個別論理vectorを保持する。Production method/実DB値からexpectedを作らない。新PT-MIG-COLUMN023は全66位置の八番目falseとSQLNULLが必ず拒否・資源prefix正確で、normal trueは成功することを確認。既Column001..022の全metadata変更/ordinal/NULL/各getBoolean8-wasNull位置三型fault/close-primary/finite64 matrixを八列へ適応する。既attribute期待とCOPY payload65の期待を変更しない。
+
+TargetのcatalogはColumn六resultだけ八field、Constraint六resultは七fieldのまま。CATALOG_ROWS141不変、getter=66x8+75x7=1053。各table別field数で全変更/NULL/fault/欠落余剰・余剰fieldread0を検査し、八番目はColumnに限るgetBoolean/wasNull。93SQL/56scalar/75Result/16close-timeout/auto11/fetch三回、全phase/index/資源tupleはSSC386のまま。正常true以外は六CTAS前に拒否、後続transfer/Content/Finalizer0。constraint75 descriptor/旧93SQLのColumn六query以外/旧56scalarを完全保持する。
+
+既Main一変更/既Column22更新＋新1/Target32適応、旧643＋新1=必要644/31Main45physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用/全CRC-init/既定と無filter四100で再資格する。全migration34Main707→708定義の644scopeのみ、新Main0/uniqueMain142不変。追加不足2.4/7.2/9.9pp cap10、元費用/SV/群開始保持・専有費token null、新業務scope/RD/UI/DDL/QA変更0。実DB/NN名前・孤立・全cardinality/生成式default/trigger/index-role/原本Current・全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
 ## SSC386 十九PK・UK保存行後条件を既参照検査へ接続（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/343。既ReferenceVerifierの六件数＋十参照/link順＋六CHECK（計22）後へ、V002の六PKと十三UKの保存行違反を固定六SELECTで検査する。既INSPECTIONS末尾へ追加し新Main/別実行経路を作らない。表別key数はspeakers3/script_files4/script_entries4/audio_files3/media_assets3/entry_audio_links2=19。手書き75制約matrixのp/u key番号を独立66column名表とV002宣言に二重照合して固定SQLへ展開、Production method又は実DBからexpectedを生成しない。
