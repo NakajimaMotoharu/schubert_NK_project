@@ -795,3 +795,6 @@ SSC384/NK-MIG-001/WBS-P01903 MigrationMasterContentVerifier.verify/expectedRows/
 
 
 SSC385/NK-MIG-001/WBS-P01903 MigrationMasterReferenceVerifier.verify/open/requireStatement/requireResult/closeResult/closeStatement/invalid/constructor/toString→Target同Connection→RD MIG003005006/DAT004/TST→UI242254→SS311331343/V002V029→PT-REF001..021/TARGET001..032/019093094。Core4ae3b090/Unit2aac39f9 PG32308/310/312必要643/45CRC/実403両四100。実DB/SQL評価/全移行/HOLD未受入。
+
+
+SSC386/NK-MIG-001/WBS-P01903 MigrationMasterReferenceVerifier.verify/INSPECTIONS/requireResultと既Target同TX→RD MIG003005006/DAT004/TST→UI242254→SS311331343/V002→PT-REF001..021/REF021-U01..U06/TARGET001..032/019095096。Cored221de0a/Unit801d51ea PG32334/336/338必要643/45CRC/実403両四100、新JUnit0。実DB/index-collation/全移行/HOLD未受入。
