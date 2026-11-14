@@ -515,10 +515,16 @@ final class MigrationMasterTargetPublisherTest {
                     return null;
                   case "executeUpdate":
                     String update = (String) args[0];
+                    int operation = sql.size();
+                    assertTrue(
+                        operation < PREPARE_END
+                            || List.of(14, 15).contains(operation)
+                            || operation >= ANALYZE_FIRST);
                     recordSql(update);
                     if (update.startsWith("ANALYZE ")) analyzes++;
-                    return 0;
+                    return update.startsWith("INSERT INTO ") ? (empty ? 0 : 1) : 0;
                   case "executeLargeUpdate":
+                    assertTrue(List.of(8, 24, 25, 26).contains(sql.size()));
                     recordSql((String) args[0]);
                     return empty ? 0L : 1L;
                   case "executeQuery":
