@@ -12577,7 +12577,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprintTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReaderTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReaderTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -13106,6 +13107,21 @@
             "sha256": "7dca87abadac5c24f1abe75547c6cda6cd3f373112f19a6a4563f06b1e1c2866"
           },
           "global451Accepted": false
+        },
+        "pendingPrimaryIdentityCorrectionSSC377": {
+          "bug": "BUG2925",
+          "state": "REGISTERED_NOT_CORRECTED",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/078_移行五部品primary自己identity保持・独立十仕様.md",
+            "sha256": "dc17915df62e6a01e21b69aa48a4cf8a96bce3597bd867d7639365835d3742e8"
+          },
+          "mains": [
+            "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+            "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+            "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+            "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+            "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java"
+          ]
         }
       },
       "acceptanceChecks": [

@@ -1,0 +1,26 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T13:33:15.730212+00:00",
+  "bug": "BUG2925",
+  "sourceBefore": "9de4208d67a3ca9b1d2112961ea4c9315b22baee",
+  "fiveSourceHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "cf43df935853e043297d77697467c9e93c391d9ec95278240971f87b4957b094",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "eb4c1ed3a9df94ca25bd268d7c811d100d58a5fe084de000c4c2a357a3c7c448",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "01fec6542b13ceb9afed9382e76803003604c22c59a90341a9557db93aaee3d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "799b0f59621cdcb7791a61ef97e0c723e5f3f28dc2b05e20384fd582b19e7358",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "b6beb7830601882d76bb15f991512b9f185fb0ed47446c52723a34d339a62f84"
+  },
+  "unconditionalSites": 10,
+  "alreadyGuardedReaderSites": 2,
+  "expectedPrimaryIdentityPreserved": true,
+  "applicationTestsExecuted": 0,
+  "newMainSources": 0,
+  "newDefinitions": 10,
+  "independentFirstSql": [
+    "SELECT count(*) FROM schubert.speakers",
+    "SELECT count(*) FROM schubert.script_files",
+    "SELECT count(*) FROM schubert.audio_files",
+    "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
+    "SELECT count(*) FROM schubert.speakers"
+  ]
+}

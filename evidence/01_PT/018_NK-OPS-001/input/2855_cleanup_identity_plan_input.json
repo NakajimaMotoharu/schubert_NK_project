@@ -1,0 +1,27 @@
+{
+  "ssc": 377,
+  "mains": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java"
+  ],
+  "test": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+  "estimate": {
+    "low": 2.5,
+    "base": 7.5,
+    "high": 9.9
+  },
+  "kind": "REWORK",
+  "newMainSources": 0,
+  "firstSql": [
+    "SELECT count(*) FROM schubert.speakers",
+    "SELECT count(*) FROM schubert.script_files",
+    "SELECT count(*) FROM schubert.audio_files",
+    "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
+    "SELECT count(*) FROM schubert.speakers"
+  ],
+  "newTestDefinitions": 10,
+  "sourceBefore": "9de4208d67a3ca9b1d2112961ea4c9315b22baee"
+}

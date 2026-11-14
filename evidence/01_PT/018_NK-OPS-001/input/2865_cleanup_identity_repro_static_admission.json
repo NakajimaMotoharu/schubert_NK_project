@@ -1,0 +1,594 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG32008-CLEANUP-IDENTITY-REPRO10",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32002-cleanup-identity-repro10-prepare-v1/manifest.json",
+    "sha256": "6bd3949e882800c6102da3d4e9bbbdbbbe1e4f54029eb6ccc71334d3ff83823c"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32004-cleanup-identity-repro10-static-v1/manifest.json",
+    "sha256": "67fddcd278eebef971178f81ac0d91cc06ccec59996019987f756e568464fad9"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 51,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 51,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 95,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 95,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 132,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 132,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 170,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 170,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 184,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 184,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 53,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 53,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 103,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 103,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 126,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 126,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 142,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 142,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 155,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 155,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/Prepared/result/outer dual and three-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 86,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 86,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 102,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 102,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull JDBC owned-resource scope records and immediately rethrows the identical SQL/runtime/Error primary only to preserve finally cleanup suppression. It never catches NPE as success or logs/normalizes/retries/commits a failed operation. Independent read/result/outer dual-close failure matrices verify primary identity, ordering and exact close attempts, including JDK self-suppression failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "@Nullable Statement created = connection.createStatement();",
+      "sourceLine": 54,
+      "occurrences": 1,
+      "message": "Ensure that resources like this Statement object are closed after use",
+      "reason": "Exact nullable JDBC acquisition is checked immediately: null creates no ownership and fails; nonnull is aliased once to statement and enclosed by a finally calling closeStatement(statement, primary). Both normal and all SQL/runtime/Error body exits close that same Statement exactly once with primary/suppressed preservation; connection is borrowed and never closed. The intraprocedural rule does not follow this private typed close helper; whole SQL/fault fixtures and four added dual-fault cases verify the resource postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 62,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 62,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "@Nullable Statement created = connection.createStatement();",
+      "sourceLine": 84,
+      "occurrences": 1,
+      "message": "Ensure that resources like this Statement object are closed after use",
+      "reason": "Exact nullable JDBC acquisition is checked immediately: null creates no ownership and fails; nonnull is aliased once to statement and enclosed by a finally calling closeStatement(statement, primary). Both normal and all SQL/runtime/Error body exits close that same Statement exactly once with primary/suppressed preservation; connection is borrowed and never closed. The intraprocedural rule does not follow this private typed close helper; whole SQL/fault fixtures and four added dual-fault cases verify the resource postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 98,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 98,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 121,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 121,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact SSC366 resource-ownership catch preserves the same SQL/runtime/Error instance only to record the primary before its finally cleanup; it immediately rethrows and never logs, normalizes, retries, commits or returns success. This explicitly implements the Java TWR primary/suppressed contract for a nonnull owned JDBC Statement/ResultSet. All legal unchecked failures, including NPE, remain failures; independent body/cleanup dual-fault tests and whole scope verify identity and one close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 147,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 147,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 161,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 161,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact private typed cleanup helper is reached only from one of the six owned-resource finally blocks with a nonnull original primary already being rethrown. It catches cleanup SQL/runtime/Error only to attach the identical instance as suppressed, preserving Java TWR order and the original failure; standalone cleanup failures propagate directly. It does not swallow application errors into normal execution, and independent Result-then-Statement dual-fault assertions verify both instances and close counts.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 35,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 35,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 53,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 53,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 85,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 85,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 102,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 102,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact nonnull owned JDBC cleanup records the original SQL/runtime/Error primary and immediately rethrows the identical instance; finally closes exactly once and attaches the actual cleanup failure only when there is an original primary. It never catches NPE as success, normalizes failures, logs, retries or commits. Independent SQL/runtime/Error body+cleanup matrices and nested result/statement identity-order assertions verify Java primary/suppressed/self-suppression behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 147,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent synthetic JDBC fixtures. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies even on assertion failure. No external database/native/process resource is acquired. Implicit executor close does not establish the explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 147,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent synthetic JDBC fixtures. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies even on assertion failure. No external database/native/process resource is acquired. Implicit executor close does not establish the explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 153,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent synthetic JDBC fixtures. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies even on assertion failure. No external database/native/process resource is acquired. Implicit executor close does not establish the explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent synthetic JDBC fixtures. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies even on assertion failure. No external database/native/process resource is acquired. Implicit executor close does not establish the explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "sourceLine": 164,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent synthetic JDBC fixtures. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies even on assertion failure. No external database/native/process resource is acquired. Implicit executor close does not establish the explicit finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "sourceLine": 263,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit fixture creates a memory-only Proxy for the same JDK java.sql interface using its explicit interface loader. It loads no external driver or held application class, opens no network/DB and fails unexpected methods. This tests original exception identity at approved standard JDBC boundaries, outside an application-server context-loader contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Statement.class.getClassLoader(),",
+      "sourceLine": 285,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit fixture creates a memory-only Proxy for the same JDK java.sql interface using its explicit interface loader. It loads no external driver or held application class, opens no network/DB and fails unexpected methods. This tests original exception identity at approved standard JDBC boundaries, outside an application-server context-loader contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "sourceLine": 315,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit fixture creates a memory-only Proxy for the same JDK java.sql interface using its explicit interface loader. It loads no external driver or held application class, opens no network/DB and fails unexpected methods. This tests original exception identity at approved standard JDBC boundaries, outside an application-server context-loader contract.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
