@@ -1,0 +1,120 @@
+{
+  "origin": "Independent V002 column parsing and manually frozen SQL count/order contract; no Production method used",
+  "ddl": {
+    "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+    "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e"
+  },
+  "columns": {
+    "speakers": [
+      "id",
+      "game_id",
+      "name",
+      "normalized_name",
+      "is_protagonist",
+      "notes",
+      "created_at"
+    ],
+    "script_files": [
+      "id",
+      "game_id",
+      "display_order",
+      "storage_relative_path",
+      "display_path",
+      "file_name",
+      "section_code",
+      "chapter_title",
+      "sha256",
+      "byte_size",
+      "created_at"
+    ],
+    "script_entries": [
+      "id",
+      "game_id",
+      "script_file_id",
+      "display_order",
+      "entry_index",
+      "line_number",
+      "entry_type",
+      "speaker_id",
+      "speaker_label",
+      "body",
+      "raw_block",
+      "created_at"
+    ],
+    "audio_files": [
+      "id",
+      "game_id",
+      "storage_relative_path",
+      "display_path",
+      "file_name",
+      "basename",
+      "audio_role",
+      "container",
+      "duration_ms",
+      "byte_size",
+      "sha256",
+      "created_at"
+    ],
+    "media_assets": [
+      "id",
+      "logical_id",
+      "media_type",
+      "title",
+      "category",
+      "section",
+      "storage_relative_path",
+      "display_path",
+      "file_name",
+      "byte_size",
+      "sha256",
+      "mime_type",
+      "parent_logical_id",
+      "pair_key",
+      "pair_role",
+      "display_order",
+      "created_at"
+    ],
+    "entry_audio_links": [
+      "entry_id",
+      "audio_file_id",
+      "game_id",
+      "link_type",
+      "display_order",
+      "created_at"
+    ]
+  },
+  "columnCounts": {
+    "speakers": 7,
+    "script_files": 11,
+    "script_entries": 12,
+    "audio_files": 12,
+    "media_assets": 17,
+    "entry_audio_links": 6
+  },
+  "speakerCountSql": [
+    "SELECT count(*) FROM schubert.speakers",
+    "SELECT count(*) FROM pg_temp.nk_mig_speakers"
+  ],
+  "sixTablePrepareOrder": [
+    "speakers",
+    "script_files",
+    "script_entries",
+    "audio_files",
+    "media_assets",
+    "entry_audio_links"
+  ],
+  "sixTableTransferOrder": [
+    "speakers",
+    "script_files",
+    "script_entries",
+    "audio_files",
+    "media_assets",
+    "entry_audio_links"
+  ],
+  "fullExpectedSqlCalls": 30,
+  "fullExpectedStatementCloseAttempts": 6,
+  "fullExpectedResultCloseAttempts": 18,
+  "countsAreMemoryFixtureOnly": true,
+  "actualDbNotRun": true,
+  "draftParenthesizedTypeAndDigitIdentifierParserIssuesRejectedBeforeOracleWasWritten": true
+}

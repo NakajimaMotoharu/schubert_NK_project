@@ -1,0 +1,30 @@
+{
+  "ssc": 369,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+  "source": "07c7fedc36ff56c926fe9bd5c6bf6d903387b5b2",
+  "title": "Speaker先行stagingと借用六表接続",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311/331/V002/343 SSC367368。SpeakerStagingTableは既宣言speakerをEntryより先行してロードする標準JDBCの一表部品。実Current175/名前導出/driver COPY/認証/実DB/全移行を代行しない。prepare(Nullable Connection)はnullを固定input IAE、getAutoCommit=true/null vendor Statementを固定SQLException。timeout30秒の新nonnullStatementを一回所有し、CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO DATA を一回executeUpdate、返却0必須。identity/default/index/constraint/既rowはCTASへコピーしない。IF NOT EXISTS/DROP/既staging再利用/自己再試行0。\n\ntransfer(Nullable Connection,long expectedSpeakers)はnull/負件数を固定IAE、件数に独自N12上限を追加せずnonnegative long。autoCommit=false/新nonnullStatement/timeout30を要求する。SELECT count(*) FROM schubert.speakers=0、SELECT count(*) FROM pg_temp.nk_mig_speakers=expected、INSERT INTO schubert.speakers (id, game_id, name, normalized_name, is_protagonist, notes, created_at) SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM pg_temp.nk_mig_speakers ORDER BY id をexecuteLargeUpdateでexpectedと完全一致、最後にtarget count=expectedを順に確認する。物理insertのid順を画面の候補表示順へ使用せず、宣言ID/値を保持する。空0でも通常の空INSERTを実行、negative/unknown更新件数は失敗。null ResultSet/行無し/SQL NULL/不一致/余分な二行目を拒否し、scalar一行/一列をgetLongで照合する。\n\n資源はSSC366と同じnullable vendor入口分離とnonnull所有、primary SQL/runtime/Errorの同instance再throw、finallyの型別private closeStatement/closeResult、一回close試行とprimary.addSuppressed(cleanup)の順で保持する。close単独は元failureを伝播し、read primary＋Result close＋Statement closeはinner→outer二suppressedを保持。self-suppression等JDKのfailureを正常化しない。Connection/transaction/roleはcaller借用、close/commit/rollback/setAutoCommit/再接続/権限付与0。全master対応/原本Backup/停止・DB排他/target空/他表/全FKはcallerの正規条件で、この部品のcount成功から認証やGoを推定しない。partial prefixはcaller rollback/discard待ちであり、自動修復しない。SQL識別子は固定でcaller値を埋め込まず、診断/toStringは固定redacted、provider例外は保持してもloggerへ流さない。\n\nPT-MIG-SPEAKERSTAGE001..024: 独立V002七列と正確CTAS/timeout/一close/Connection非所有、null/autoCommit、auto/create SQL-runtime-Error元failure/未所有0close、nullvendor、timeout、DDLfailure/1回のみ、DDL返却0以外、close単独、primaryとclose三型の組合せsuppression、runtime/Error body、transfer四SQL/count/long更新と順、空0/Long.MAX件数、null/negative先行、transferautoCommit/nullvendor、三count位置それぞれnullresult/missing/SQLNULL/wrong/extra、query/getLong/wasNull/next1/next2の元三型failure、Resultclose単独、read＋Resultclose＋Statementclose二段suppression、insert不一致/unknown負値、insert元三型failureと後続0、Speaker→Scenario二表→Asset三表の同一借用Connection全6表prepare/transfer（SQL30/Statement6/Result18の試行数と固定全順）、固定redaction/拒否後別独立fixture正常、finite8workers64/Future5/finallyshutdownNow-await10を確認する。SQL/例外instance/件数・所有後条件のexpectedはProduction SQL helperを呼ばずliteralとV002列順から独立作成する。memory Proxyだけを使いdriver/network/実DB0。close試行数を記録し、close失敗を実kernel資源解放成功に読み替えない。\n\n新24＋必要Scenario40/Asset32=whole96、全3Main4physical（Speaker1/Scenario1/AssetとTable2）を同source/一exec/Root通常static/NullAway/lintWerror/全CRC-init/default＋無filter全Code四100で確認する。既72は成功確認再演でなく六表の新先行speaker接続に必要なfull suite。旧23 migrationMain/既435定義のsourceは変更しない。Current175/正規化導出/六表declared assembly/実DB/driver COPY/sequence/ANALYZE/全移行/Rootnative/CHR/global451/ITST/全HOLDは未受入。\n\n当不足追加1.65/4.95/9.9pp cap10はPG/独立24の並行製造＋必要全96/補完全Codeを含む。元費用/SV上限/群開始値保持、実専有費/token null、空き5.2GiBを確認し小規模host試験のみ。V002既speakersの内部具体化でRD/UI/DDL/role変更・QA不要。",
+  "testIds": "PT-MIG-SPEAKERSTAGE001..024",
+  "estimate": {
+    "low": 1.65,
+    "base": 4.95,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "062_Speaker先行stagingと借用六表接続・独立二十四仕様.md",
+  "previousForecastName": "1885_WBS65予実・Speaker集合通常百三十二後版514.json",
+  "forecastName": "1887_WBS65予実・Speaker先行staging不足追加版515.json",
+  "revision": "515-MISSING_SPEAKER_PARENT_STAGING_SIX_TABLE_CONNECTION",
+  "findingReason": "Declared SpeakerRow/Batch are qualified, but parent table staging/transfer before script_entries is absent. Add fixed seven-column standard-JDBC component and one borrowed connection six-table integration; actual DB and COPY remain unaccepted.",
+  "workId": "P01903_SSC369_SPEAKER_STAGING24_NORMAL96",
+  "planKey": "plannedSpeakerStagingSSC369",
+  "startRecordName": "1888_WBS65Speaker先行staging製造通常開始.json",
+  "startInputName": "2782_speaker_staging96_start.json",
+  "designSlot": "PG31642-ssc369-speaker-staging-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343367368・UI223242254・RD MIG-DAT005/FUN004/TST/WBS-P01903.02。Speaker一表を先行し既二表＋三表と同じ借用transactionで順に処理する標準JDBC部品。固定七列/3count/large INSERT/nonnull cleanupと六表独立Proxyを具体化。RD/UI/DDL/権限変更・QA不要、実DB/Current/Root/HOLD未受入。",
+  "moduleSummary": "bootstrap.migration.SpeakerStagingTableはspeakers七列のCTAS/3count/large INSERT/nonnull資源終了を標準JDBCで持つ。Speaker先行→Scenario二表→Asset三表を同一借用Connectionで独立Proxy検証。実DB/Current175/driver COPY/全移行/Root/HOLD未受入。PT-MIG-SPEAKERSTAGE001..024/whole96/full3Main4physical。",
+  "groupId": "PGPT-WBS65-SSC369-SPEAKER-STAGING24-NEEDED-SIX-TABLE96-20261114",
+  "run": "PG31656-SPEAKER-STAGING-CLOSED96",
+  "scope": "MissingSpeakerParentStaging PG24+neededScenario40Asset32whole96/full3Main4physical 1.65/4.95/9.9cap10. FixedJDBCseven-column/count/largeINSERT/nonnullcleanup/oneconnection-six-tables. NoactualDBdriverRootnativeActual4aru/HOLDactions; nooldsuccessconfirmationreplay",
+  "nextCommand": "PublishSSC369SS311343914onlymainbeforecode. ImplementSpeakerStagingTable24+independentliteralJDBCProxy/faults/six-tableordering; old23Mainand435definitionsunchanged. Full96/3Main4physicalRootstatic/CRC-init/default+rawallCode. NoCurrent175/actualDB/driverCOPY/Rootnative/Actual4aruHOLDchange; ordinarygroupnotstop."
+}
