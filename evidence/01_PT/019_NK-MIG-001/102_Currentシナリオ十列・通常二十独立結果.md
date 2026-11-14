@@ -1,0 +1,5 @@
+# Currentシナリオ十列・通常二十独立結果
+
+SSC389 CurrentScenarioEntryProjectionReaderをPR298/maine39a29ac設計公開後に製造。Coreffd93de1/Unit2b03efeb/PG32404新20FES0真正0、PG32406一Main一CRC-init/既定I273-L76-M9-C1-B42miss0、PG32408同singleexec無filterI285-L78-M9-C1-B42miss0。Current十列/六wasNull、必須数値五・文字二NULL拒否とnullable speaker-label-raw保持、signedlong/整数両端・保存文字非修復、readonly/nonauto/件数完全一致/余剰fieldread0、全JDBC呼出occurrence三型fault/逆順close/順suppressed/自己identity/有限64を独立期待値で確認。RootNullAway-lint-CS-SB0、PMD21各非該当/適用未分類0。旧34Main709定義は同byte、新Main1/新JUnit20/全35Main729定義中当20のみ資格、uniqueMain143。App152/17564/17515/歴史49は混合raw集計、正本184/625・元190新0・正式1964/53・工数null。追加不足2/6/9.9だけ完了、新BUG0。実Current DB/master/接続/資格/target ID対応assembly/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
+Test ENTRYREAD001..020は101仕様と2993手書きtyped oracleに対応。PG32396旧source保持、PG32404日時・環境・branch/source/command/exit/JUnit全20、PG32406単一exec/XML/CRC-init/静的、PG32408無filter全Code、PG32410独立source/trace joinにpath/hashを保持。既speaker20や旧645を当20・実DB受入へ加算しない。raw NULLはそのまま保持し、target必須rawの判断・変換は後続未完。

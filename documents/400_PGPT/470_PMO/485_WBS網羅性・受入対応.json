@@ -608296,12 +608296,138 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
+      "sha256": "652bf8c557d37c57ddaddb1fa1690d0c7f80a184ae8770b28c88c4edc607c74e",
       "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-389",
       "testIds": "PT-MIG-ENTRYREAD001..020",
-      "historicalPath": null
+      "historicalPath": null,
+      "currentEntryRead20ComponentQualification": {
+        "kind": "SSC389_CURRENT_ENTRY_TEN_COLUMN_JDBC20",
+        "source": "2b03efeb4933424f3b52b56c81ffdaeb834ab1c3",
+        "productionCoreMain": "ffd93de1ebb4587f450a3f2f58a0609d2e661563",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32406-entry-read20-post-v1/manifest.json",
+          "sha256": "ae53bb6c220597bd24fabd678299a171f1dd0eb3765116ae4708ed0de3a702c6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32408-entry-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "e5c294dc1b3f629990796366fdd8080acdc7448ac32415808906d7bd83e95fcc"
+        },
+        "tests": 20,
+        "newUniqueTestDefinitions": 20,
+        "newMainSources": 1,
+        "old34Main709DefinitionsUnchanged": true,
+        "uniqueMainJavaDeltaFromInitial": 143,
+        "allMigrationDefinitions": 729,
+        "allMigrationMain": 35,
+        "wholeSelectedMain": 1,
+        "physicalClasses": 1,
+        "positiveMainCrc": 1,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 273,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 42,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 76,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 30,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 9,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 285
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 42
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 78
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 30
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 9
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "actualJvmCodeMethods": 9,
+        "jacocoDefaultMethods": 9,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 21,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "readOnlyBorrowedConnection": true,
+        "transactionMutationOrConnectionClose": false,
+        "fixedQueries": 1,
+        "timeoutSeconds": 30,
+        "fetchSize": 1000,
+        "projectionFields": 10,
+        "typedGettersPerRow": 10,
+        "immediateWasNullPerRow": 6,
+        "nullableSourcePositions": [
+          7,
+          8,
+          10
+        ],
+        "signedCurrentIdsPreserved": true,
+        "rawNullOrStoredTextRepair": false,
+        "resourceCloseOrder": [
+          "ResultSet",
+          "Statement"
+        ],
+        "allGetterOccurrencesSqlRuntimeError": true,
+        "orderedSuppressionAndSelfIdentity": true,
+        "finiteConcurrentCalls": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32406-entry-read20-post-v1/manifest.json",
+          "sha256": "ae53bb6c220597bd24fabd678299a171f1dd0eb3765116ae4708ed0de3a702c6"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32408-entry-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "e5c294dc1b3f629990796366fdd8080acdc7448ac32415808906d7bd83e95fcc"
+        },
+        "actualUnitSource": "2b03efeb4933424f3b52b56c81ffdaeb834ab1c3",
+        "productionCoreMain": "ffd93de1ebb4587f450a3f2f58a0609d2e661563"
+      }
     }
   ],
   "layouts": [
@@ -617083,6 +617209,119 @@
     "sequenceStateMutation": false,
     "absoluteRoleAndOrphanSequenceNotQualified": true,
     "finiteConcurrentCallsPerMatrix": 64,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "newBugs": 0
+  },
+  "currentEntryRead20PG32404": {
+    "kind": "SSC389_CURRENT_ENTRY_TEN_COLUMN_JDBC20",
+    "source": "2b03efeb4933424f3b52b56c81ffdaeb834ab1c3",
+    "productionCoreMain": "ffd93de1ebb4587f450a3f2f58a0609d2e661563",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32406-entry-read20-post-v1/manifest.json",
+      "sha256": "ae53bb6c220597bd24fabd678299a171f1dd0eb3765116ae4708ed0de3a702c6"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32408-entry-read20-unfiltered-measurement-v1/manifest.json",
+      "sha256": "e5c294dc1b3f629990796366fdd8080acdc7448ac32415808906d7bd83e95fcc"
+    },
+    "tests": 20,
+    "newUniqueTestDefinitions": 20,
+    "newMainSources": 1,
+    "old34Main709DefinitionsUnchanged": true,
+    "uniqueMainJavaDeltaFromInitial": 143,
+    "allMigrationDefinitions": 729,
+    "allMigrationMain": 35,
+    "wholeSelectedMain": 1,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 273,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 42,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 76,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 30,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 9,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 285
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 42
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 78
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "actualJvmCodeMethods": 9,
+    "jacocoDefaultMethods": 9,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 21,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "readOnlyBorrowedConnection": true,
+    "transactionMutationOrConnectionClose": false,
+    "fixedQueries": 1,
+    "timeoutSeconds": 30,
+    "fetchSize": 1000,
+    "projectionFields": 10,
+    "typedGettersPerRow": 10,
+    "immediateWasNullPerRow": 6,
+    "nullableSourcePositions": [
+      7,
+      8,
+      10
+    ],
+    "signedCurrentIdsPreserved": true,
+    "rawNullOrStoredTextRepair": false,
+    "resourceCloseOrder": [
+      "ResultSet",
+      "Statement"
+    ],
+    "allGetterOccurrencesSqlRuntimeError": true,
+    "orderedSuppressionAndSelfIdentity": true,
+    "finiteConcurrentCalls": 64,
     "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
     "newAcceptance": 0,
     "whole451Accepted": false,
