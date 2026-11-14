@@ -1,0 +1,31 @@
+{
+  "actualExit": 1,
+  "atUTC": "2026-11-14T18:22:29.810725+00:00",
+  "bug": "BUG2937",
+  "ykt": "YKT2466",
+  "phase": "FORMAT_BEFORE_CORE_COMMIT_OR_PRODUCT_TEST",
+  "command": [
+    "jdk25/java",
+    "-jar",
+    "google-java-format-1.36.1-all-deps.jar",
+    "--skip-reflowing-long-strings",
+    "--replace",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapperTest.java"
+  ],
+  "failure": "nullable var local parse error",
+  "originalSourceHashes": {
+    "CurrentScenarioFileMapper.java": "f2b12756b7f58553c168497df9385416aa0b315d1f25dd5c2cfd027928f195b1",
+    "CurrentScenarioFileMapperTest.java": "209b5e0ed546bf9ebf0376fc037c8e9fa3aac5e298c90fa62f460dc95e1c7195"
+  },
+  "allowedSourceFindings": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java:70:      @Nullable var asset = assets.remove(prefix + \"/\" + relativePath);"
+  ],
+  "heldTestBodiesExcluded": [
+    "RootFailedStartRecoveryTest.java",
+    "RootFailedStartPairRecoveryTest.java"
+  ],
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "actualAllocatedPp": null
+}

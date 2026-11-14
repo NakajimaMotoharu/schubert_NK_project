@@ -1,5 +1,9 @@
 # モジュール・package・class責務設計
 
+SSC393: CurrentScenarioFileMapperの現依存Asset20を含む新24＋必要74=98/7Main17physicalへ訂正。Main/業務期待値不変、原90未実行保持、BUG2938/YKT2467。
+
+SSC392: CurrentScenarioFileMapper.copyRows/root/parseCurrentは八列と宣言game root/asset claimを既ID-order/11列Batchへ結合。metadata一致は実file資格でなく、独立24/必要98/四100を計画、実DB/HOLD未受入。
+
 SSC391: CurrentScenarioFileProjectionReader.read/rows/row/cleanupはCurrent八列をreadonly snapshotから不変rowsへ読む。signedID/nullable sizeと保存path/hashを非修復、独立20/四100計画、実asset/DB未資格。
 
 SSC390: CurrentScenarioEntryMapper.copyRows/parseCurrent/validTimeは十列を既三ID対応と12列Row/Batchへ結合。Current保存値と順/nullable speaker保持、独立24/必要180/四100計画、実DB/HOLD未受入。
