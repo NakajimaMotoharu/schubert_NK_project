@@ -4,7 +4,7 @@ import json,hashlib,subprocess,datetime
 from decimal import Decimal
 r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';e=b/'evidence/PG32660-audio-map842-source-v1';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));assert not (e/'manifest.json').exists()
 old=json.loads((i/'3049_audio_role818_physical56_profile.json').read_text());m='src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java';t=m.replace('/main/','/test/').replace('.java','Test.java');changed=[m.replace('AudioMigrationMap','AssetMigrationManifest'),m.replace('AudioMigrationMap','CurrentScenarioFileMapper')];newpaths=[m,t];paths=old['mainSources']+[x['path'] for x in old['testSources']];unchanged={p:sha(r/p) for p in paths if p not in changed}
-for p,h in unchanged.items():assert hashlib.sha256(subprocess.check_output(['git','show',old['productionCoreMain']+':'+p])).hexdigest()==h
+for p,h in unchanged.items():assert hashlib.sha256(subprocess.check_output(['git','show',(old['productionCoreMain'] if p in old['mainSources'] else '006de1ae3f7e9621a4536ee9a2b00b51594fe8b3')+':'+p])).hexdigest()==h
 vec=[('0','0'),('0.000','0'),('0.001','1'),('1','1000'),('1.234','1234'),('1.200','1200'),('999999999.999','999999999999'),('999999999','999999999000')]
 for seconds,ms in vec:assert Decimal(seconds)*1000==int(ms)
 def i32(v):return (v+(1<<31))%(1<<32)-(1<<31)
