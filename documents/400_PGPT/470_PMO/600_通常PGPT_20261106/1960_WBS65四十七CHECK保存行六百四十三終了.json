@@ -1,0 +1,241 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5346",
+  "groupId": "PGPT-WBS65-SSC385-CHECK47-CLOSED643-20261115",
+  "startEvent": "PGPT-20261008-5345",
+  "sourceAtGroupStart": "e8a079e74a11656062a733b31d18ac6bf6e501ae",
+  "productionCoreMain": "4ae3b090c8b02a724b9f80adc0f18b150122767a",
+  "estimate": {
+    "low": 2.0,
+    "base": 6.0,
+    "high": 9.0
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-14T16:43:13+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 58,
+      "remainingPercent": 42,
+      "resetsAt": 1795012175,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "observedSharedPp": null,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32314-check-rows643-independent-source-trace-join-v1/manifest.json",
+    "sha256": "8c74e50b8904505e1b9c10591681774ae50138c2062ab1a8c7ca9ecd06cd2030"
+  },
+  "outcome": "CHECK_ROWS643_DEFAULT344_RAW403_ALL_FOUR100",
+  "technical": {
+    "kind": "SSC385_CHECK47_STORED_ROW_POSTCONDITIONS643",
+    "source": "2aac39f90a3d2e24aca785fc98b58b0c23f29373",
+    "productionCoreMain": "4ae3b090c8b02a724b9f80adc0f18b150122767a",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32310-check-rows643-post-v1/manifest.json",
+      "sha256": "0d3fc5e11d0d490eea71d561d814d68913a461921595d6eb82042bcca1a1405b"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32312-check-rows643-unfiltered-measurement-v1/manifest.json",
+      "sha256": "f7c916ce5aaee7c0918ca28d3229600ee89ceff663259a0281f5a64e0da11fb2"
+    },
+    "tests": 643,
+    "newUniqueTestDefinitions": 1,
+    "existingRefDefinitionsUpdated": 20,
+    "existingTargetDefinitionsUpdated": 32,
+    "newMainSources": 0,
+    "existingMainSourcesChanged": 1,
+    "uniqueMainJavaDeltaFromInitial": 142,
+    "allMigrationDefinitions": 707,
+    "allMigrationMain": 34,
+    "wholeSelectedMain": 31,
+    "physicalClasses": 45,
+    "positiveMainCrc": 45,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 9413,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1215,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1825,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 955,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 344,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 45,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9760
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1215
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1854
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1014
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 403
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 45
+      }
+    },
+    "actualJvmCodeMethods": 403,
+    "jacocoDefaultMethods": 344,
+    "all59DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 360,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "sameBorrowedConnection": true,
+    "totalSql": 87,
+    "old81SqlPreservedWithSixAt58": true,
+    "scalarResults": 50,
+    "old44ScalarsPreservedWithSixZeroAt34": true,
+    "contentAndGeneratedResults": 7,
+    "catalogResults": 12,
+    "totalResultCloses": 69,
+    "ordinaryStatementOwners": 11,
+    "preparedOwners": 5,
+    "totalCloseAttempts": 16,
+    "timeoutCalls": 16,
+    "autoReads": 11,
+    "fetchSizes": [
+      1000,
+      1000,
+      1000
+    ],
+    "namedChecks": 47,
+    "checkCounts": [
+      3,
+      9,
+      8,
+      10,
+      15,
+      2
+    ],
+    "v029CurrentPairExpressionApplied": true,
+    "sqlCheckUnknownRemainsAllowed": true,
+    "violationExpectedCountPerTable": 0,
+    "emptyDeclaredCannotHideNullOrNonzeroCheckCount": true,
+    "finiteConcurrentCallsPerMatrix": 64,
+    "original643F1NotQualified": true,
+    "originalFailedRun": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32290-check-rows643-unit-v1/manifest.json",
+      "sha256": "7bfb033c09ceb56857eb27f5246afc002a6bc6d49325e677ad5e5e8d6af845c7"
+    },
+    "oneOracleChangeOnlyInRework": true,
+    "all45MainPhysicalHashesEqualBeforeAfterRework": true,
+    "limitedBugsClosed": [
+      "BUG2935",
+      "BUG2936"
+    ],
+    "limitedYktsClosed": [
+      "YKT2464",
+      "YKT2465"
+    ],
+    "sameGroupReworkAddedPp": 0,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+    "checkExpressionCatalogOrActualCheckBehaviorNotQualified": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "PublishSSC385limitedledgeronlymain and commit643 proof. Continue same-path missing PK/UK stored duplicate counters or NOTNULL catalog, then generated/default/index-trigger-role or Current assembly per latest sourceDDL; price only missing permittedPG beforecode. No actualDB/COPY/RootnativeActual4aru/HOLD actions or confirmation replay. Freshquota/hourly; ordinarygroupnotstop.",
+  "remainingEstimatePp": {
+    "low": 396.724,
+    "base": 835.586,
+    "high": 1638.915
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1959_WBS65予実・四十七CHECK保存行六百四十三後版546.json",
+    "sha256": "6484db9a145c28473ea034a7d8a2151b21a9aacfac823d7a1722d554223c1464"
+  },
+  "forecastNotActualCost": true,
+  "canonical625Progress": {
+    "canonicalRowCount": 625,
+    "uniqueCompletedRows": 184,
+    "completedStage1Rows": 156,
+    "completedStage2Rows": 10,
+    "completedStandaloneRows": 18,
+    "unknownCompletedIds": [],
+    "duplicateCompletedIds": [],
+    "legacyPreparationEntryCount": 157,
+    "legacyPreparationDistinctEntryCount": 155,
+    "legacyPreparationCanonicalStage1References": 142,
+    "legacyPreparationCanonicalCompletedStage1Rows": 142,
+    "legacyPreparationDuplicateEntries": [
+      "WBS-P005-01/1",
+      "WBS-P020-01.01/1"
+    ],
+    "legacyPreparationNoncanonicalLabels": [
+      "C01 current resource/old limited proof binding",
+      "C02 Inspector required exclusive-current-CP requalification",
+      "C02-R1",
+      "C02-R2",
+      "C03 32/16/20 static configuration expectations",
+      "C05 eight source tuples",
+      "C06 public seven config and ID/profile declarations",
+      "C07 eight distribution configs/current-byte historical offline parser scope",
+      "C08 wrapper/receipt/runbook scope correspondence",
+      "F04 host tool/version/retention preparation",
+      "G13.02 source-owner-SQL-requirement candidate trace",
+      "G13.03 bootstrap source/owner/requirement/structural-method index",
+      "WBS-C04 static preparation"
+    ],
+    "preparationRowsNotCompleted": [],
+    "coherent": true,
+    "coherenceScope": "PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+    "legacyPreparationMatchesPrimary": true,
+    "effortCompletionRate": null,
+    "rowsAreNotEffortWeights": true,
+    "legacyEntriesAreNotCanonicalRowCounts": true,
+    "masterTable": {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv",
+      "sha256": "b7bf00dbea8ab47d3820db70335342e543f6f7bcd595e2ffc43e6e1086054579"
+    },
+    "completedCanonicalOriginalPricePp": {
+      "low": 21.726,
+      "base": 55.664,
+      "high": 112.285
+    },
+    "pricesAreForecastNotActualCost": true,
+    "formalAcceptanceDerivedFromRowCount": false
+  }
+}
