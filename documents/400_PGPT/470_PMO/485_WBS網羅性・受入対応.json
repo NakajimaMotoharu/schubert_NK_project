@@ -550392,15 +550392,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -551915,6 +551915,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -552105,15 +552230,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -553905,6 +554030,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -554114,15 +554364,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -555914,6 +556164,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -556167,15 +556542,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -557973,6 +558348,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -558177,15 +558677,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerRow28ComponentQualification": {
         "kind": "SSC367_SPEAKER_SEVEN_COLUMN_ROW16_NORMAL28",
@@ -560075,6 +560575,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -560270,15 +560895,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -562070,6 +562695,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -562289,15 +563039,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -564089,6 +564839,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -564299,15 +565174,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -565816,6 +566691,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -566011,15 +567011,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -567643,6 +568643,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -567746,15 +568871,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -569661,6 +570786,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -569745,15 +570995,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -570962,6 +572212,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -571045,15 +572420,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -572671,6 +574046,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -572779,15 +574279,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -574405,6 +575905,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -574492,15 +576117,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -576118,6 +577743,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -576216,15 +577966,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -577842,6 +579592,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -577940,15 +579815,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -579566,6 +581441,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -579664,15 +581664,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -581290,6 +583290,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -581381,15 +583506,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -583007,6 +585132,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -583111,15 +585361,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -584743,6 +586993,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -584828,15 +587203,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "componentGeneratedFullCodeQualification": {
         "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
@@ -586039,6 +588414,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -586170,15 +588670,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -587687,6 +590187,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -587801,15 +590426,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "speakerBatch132ComponentQualification": {
         "kind": "SSC368_SPEAKER_BATCH16_REFERENCE_NORMAL132",
@@ -589601,6 +592226,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -589715,15 +592465,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterSix383ComponentQualification": {
         "kind": "SSC370_MASTER_SIX_IMMUTABLE20_NORMAL383",
@@ -591423,6 +594173,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -591541,15 +594416,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -592547,6 +595422,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -592673,15 +595673,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterFinal411ComponentQualification": {
         "kind": "SSC371_MASTER_FINALIZATION28_NORMAL411",
@@ -594092,6 +597092,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -594207,15 +597332,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -595213,6 +598338,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -595332,15 +598582,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "masterTarget543ComponentQualification": {
         "kind": "SSC373_MASTER_TARGET16_NORMAL543",
@@ -596338,6 +599588,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -596469,15 +599844,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "migrationCleanupIdentity553Qualification": {
         "kind": "SSC377_REWORK_FIVE_MIGRATION_MAIN_PRIMARY_IDENTITY553",
@@ -597366,6 +600741,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -597962,15 +601462,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "targetContent589ComponentQualification": {
         "kind": "SSC379_SAME_CONNECTION_TARGET_CONTENT589",
@@ -598750,6 +602250,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -598757,7 +602382,7 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "09f607357cdb3b8228d74a2b6f8f06ad2e405aceeaf124e7cce76329daa3ea9d",
+      "sha256": "de3d866dfce91fbc417f046f956140529552a51bc8484a9fb635e64779a8ff35",
       "acceptance": "NOT_RUN",
       "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-380",
@@ -598869,15 +602494,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "targetColumn619ComponentQualification": {
         "kind": "SSC381_SAME_CONNECTION_TARGET_COLUMN619",
@@ -599542,6 +603167,131 @@
         "actualAllocatedCost": null,
         "tokenTotals": null,
         "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
       }
     },
     {
@@ -599702,15 +603452,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32336-unique-rows643-post-v1/manifest.json",
-          "sha256": "d345db4e9a11aefda94a68f43cea20db7ee9f6de2eda59d5c7b9ea1075f7844c"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32338-unique-rows643-unfiltered-measurement-v1/manifest.json",
-          "sha256": "94ba452f0608ae66c88295e722b29e771cdda69aebff0127e2725805af033dde"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
         },
-        "actualUnitSource": "801d51ea4f4ced86691313052d34250c91ea9761",
-        "productionCoreMain": "d221de0ad9ad6620e74f0f7574c2bbdb1b20f06d"
+        "actualUnitSource": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf"
       },
       "generatedSearch642ComponentQualification": {
         "kind": "SSC384_GENERATED_SEARCH_STORED_VALUE_POSTCONDITION642",
@@ -600099,6 +603849,131 @@
         "finiteConcurrentCallsPerMatrix": 64,
         "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "indexCollationAndActualConstraintNotQualified": true,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "notNullCatalog644ComponentQualification": {
+        "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+        "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+        "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+          "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+          "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+        },
+        "tests": 644,
+        "newUniqueTestDefinitions": 1,
+        "existingColumnDefinitionsExpanded": 22,
+        "existingTargetDefinitionsExpanded": 32,
+        "newMainSources": 0,
+        "existingMainSourcesChanged": 1,
+        "uniqueMainJavaDeltaFromInitial": 142,
+        "allMigrationDefinitions": 708,
+        "allMigrationMain": 34,
+        "wholeSelectedMain": 31,
+        "physicalClasses": 45,
+        "positiveMainCrc": 45,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 9448,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 1219,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1827,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 957,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 344,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 45,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9795
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 1219
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1856
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1016
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 403
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 45
+          }
+        },
+        "actualJvmCodeMethods": 403,
+        "jacocoDefaultMethods": 344,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 360,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "sameBorrowedConnection": true,
+        "totalSql": 93,
+        "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+        "scalarResults": 56,
+        "old56ScalarLiteralUnchanged": true,
+        "contentAndGeneratedResults": 7,
+        "catalogResults": 12,
+        "totalResultCloses": 75,
+        "ordinaryStatementOwners": 11,
+        "preparedOwners": 5,
+        "totalCloseAttempts": 16,
+        "timeoutCalls": 16,
+        "autoReads": 11,
+        "fetchSizes": [
+          1000,
+          1000,
+          1000
+        ],
+        "original66DescriptorsVerbatimUnchanged": true,
+        "columnFieldCount": 8,
+        "constraintFieldCount": 7,
+        "columnGetters": 528,
+        "mixedCatalogGetters": 1053,
+        "nnValidityField": 8,
+        "nnValidityImmediateWasNullAndTrue": true,
+        "all66FalseAndSqlNullFlagPositionsRejected": true,
+        "independentTruthVectors": 9,
+        "nnNullableNoConstraintAndRequiredValidConstraint": true,
+        "metadataSqlUnknownFailsClosed": true,
+        "nnNameCardinalityAndOrphansNotQualified": true,
+        "finiteConcurrentCallsPerMatrix": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
         "effortRate": null,
@@ -608624,6 +612499,131 @@
     "finiteConcurrentCallsPerMatrix": 64,
     "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
     "indexCollationAndActualConstraintNotQualified": true,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "newBugs": 0
+  },
+  "currentNotNullCatalog644PG32358": {
+    "kind": "SSC387_NOTNULL_CONSTRAINT_VALIDITY_BINDING644",
+    "source": "9088ba0ea80c710dcf32bdd9036c53e3ee1473fa",
+    "productionCoreMain": "696a832a0b751c3ded2355673b83a566b21da8cf",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32360-notnull-catalog644-post-v1/manifest.json",
+      "sha256": "d6a16f537f3401cd2a9686a2ebb0706dd1e5cf93bff68753dd2533cc65592cbe"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32362-notnull-catalog644-unfiltered-measurement-v1/manifest.json",
+      "sha256": "2ace5122cb1d58f86582bd22291245be3d0919701e24ffaadf4fbd13e79cc119"
+    },
+    "tests": 644,
+    "newUniqueTestDefinitions": 1,
+    "existingColumnDefinitionsExpanded": 22,
+    "existingTargetDefinitionsExpanded": 32,
+    "newMainSources": 0,
+    "existingMainSourcesChanged": 1,
+    "uniqueMainJavaDeltaFromInitial": 142,
+    "allMigrationDefinitions": 708,
+    "allMigrationMain": 34,
+    "wholeSelectedMain": 31,
+    "physicalClasses": 45,
+    "positiveMainCrc": 45,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 9448,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1219,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1827,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 957,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 344,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 45,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 9795
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1219
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1856
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1016
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 403
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 45
+      }
+    },
+    "actualJvmCodeMethods": 403,
+    "jacocoDefaultMethods": 344,
+    "all59DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 360,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "sameBorrowedConnection": true,
+    "totalSql": 93,
+    "old93SqlUnchangedExceptFirstSixColumnProjections": true,
+    "scalarResults": 56,
+    "old56ScalarLiteralUnchanged": true,
+    "contentAndGeneratedResults": 7,
+    "catalogResults": 12,
+    "totalResultCloses": 75,
+    "ordinaryStatementOwners": 11,
+    "preparedOwners": 5,
+    "totalCloseAttempts": 16,
+    "timeoutCalls": 16,
+    "autoReads": 11,
+    "fetchSizes": [
+      1000,
+      1000,
+      1000
+    ],
+    "original66DescriptorsVerbatimUnchanged": true,
+    "columnFieldCount": 8,
+    "constraintFieldCount": 7,
+    "columnGetters": 528,
+    "mixedCatalogGetters": 1053,
+    "nnValidityField": 8,
+    "nnValidityImmediateWasNullAndTrue": true,
+    "all66FalseAndSqlNullFlagPositionsRejected": true,
+    "independentTruthVectors": 9,
+    "nnNullableNoConstraintAndRequiredValidConstraint": true,
+    "metadataSqlUnknownFailsClosed": true,
+    "nnNameCardinalityAndOrphansNotQualified": true,
+    "finiteConcurrentCallsPerMatrix": 64,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
     "newAcceptance": 0,
     "whole451Accepted": false,
     "effortRate": null,
