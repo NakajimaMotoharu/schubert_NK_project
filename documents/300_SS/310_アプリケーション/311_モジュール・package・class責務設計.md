@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC390: CurrentScenarioEntryMapper.copyRows/parseCurrent/validTimeは十列を既三ID対応と12列Row/Batchへ結合。Current保存値と順/nullable speaker保持、独立24/必要180/四100計画、実DB/HOLD未受入。
+
 SSC389: CurrentScenarioEntryProjectionReader.read/rows/rowはCurrent十列をborrowed snapshotから不変rowsへ接続。旧IDsignedlong/nullable speaker-label-raw保存、独立20/四coverage100を計画、実DB未実施。
 
 SSC388: 既ColumnVerifierへ九番目identity sequence結合・N12定義booleanを追加、既NN8/66属性保持。Column024/Target mixed9-7/必要645、sequence状態値・実DB・絶対owner/全移行/HOLD未受入。
