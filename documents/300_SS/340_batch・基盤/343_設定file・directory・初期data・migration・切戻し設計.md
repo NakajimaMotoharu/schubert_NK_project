@@ -1,5 +1,14 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC363 Scenario内部複合キーと値契約（2026-11-14）
+
+BUG2901/YKT2431、NK-MIG-001、RD MIG-DAT005/FUN004/TST、UI223254、SS343 SSC344345/451。公開FilePair/MappedFile、IdPair/MappedEntry、Placement/PlacedEntryの全component同値/単一差/同一/null/別型をboolean literalで、hashを独立Pythonのlong xor32と31多項式による固定値で検証する。公開record/toString/redaction/constructor/例外/永続化値は変更しない。内部SourceKey/FilePositionだけはprivate recordの不要accessor/toString生成を避け、JDK List.ofの不変二要素Long keyへ置き換える。key1=(long gameId,currentFileId)、key2=(targetFileId,long entryIndex)、順固定・null無し・文字列連結無し。各domainの組識別/重複拒否/lookup/並び/不変性/資源操作0を保持し、外部へ内部keyを公開/診断しない。reflection/guard拡張/人工除外/coverage専用公開APIは追加しない。Listは実装内部の比較値でありpersisted hash/移行canonical IDへ利用しない。JDK boxed key allocationの性能実測は未、IT/ST合格へ変換しない。
+
+PT-MIG-SCENARIOGEN001..012は各六recordのequals全成分差とhash各2固定vectorを二Testずつ。013はgame1/source32とgame2/source1の同hash別キーを含むlookup/previous-next/別game同source、014はfile source Long.MIN/MAXとunknown/duplicate拒否、015はtargetFile1/index31とtargetFile2/index0の同hash別組を正常保持し同一組の異entry拒否、016はtarget long上限/index int上限・異file同indexの正常とcanonical保持、全入力は合成値だけ。既whole113と新16=whole129、必要同一source full9Main15physical・Root compiler/NullAway/lintWerror/全静的/一exec/CRC-init/defaultと無filter四100で確認。元public API/既113method body/5等fixtureを変更しない。private2keyの12generatedCodeはMainから実際に削除されるので旧134から新122Code（予測、実測で確定）、物理17→15・既定90→84も予測として扱う。旧classは保全/新buildへ混入0、旧成功の合算0。
+
+normal/static実行command/source/OS-JDK/fixtures/expected-actual/exit/XML/counter/pathhash/BUGは新profile/manifestへ保存。型不正/nullcontract/境界/同値/全成分差/整列/immutable/有限並行は既113のwhole契約も含む。失敗skipped未実行を合格へ加算しない。公的受入/全PGPT/実DB/native/Root/CHR/ITST/QA051/全HOLDは未完。今回追加reworkは詳細・PG/Test16・独立oracle・通常129・raw122照合合計1.8/5.4/9.8pp、cap10（元費用/SV各上限と開始値は保持、専有費token null）。
+
+
 ## SSC362 Asset三表stagingと転送（2026-11-14）
 
 SS34310.1.4/5・SS331/V002のaudio_files、media_assets、entry_audio_links三表について、標準JDBCのAssetStagingTablesを具体化する。RD MIG-DAT-002/MIG-DAT-003/MIG-DAT-004/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004、UI242/254、SS311/331/343。既ScenarioStagingTablesのscript_files/script_entries二表を複製・変更せず、callerが同じ独占済みtransactionで二表を先行転送する。実素材/全DB/SDK COPY/認証/role/grant/Root/HOLDは別条件のまま。標準java.sql以外のvendor/native/driverに依存しない。
@@ -239,7 +248,7 @@ SS343§10、SS331/V002/V004・UI223§3.2/4/5・UI254の既存ID/表示順/FK条�
 
 入力はScenarioFileMigrationMap、ScenarioEntryMigrationMap及びPlacement(gameId,currentFileId,currentEntryId,entryIndex)のList。gameは解決済NK1/2、source両IDはsigned値を保持、entryIndexは既DDL通り0..IntegerMAX。null両map/List/要素を拒否、List件数はEntry対応件数と完全一致、各source entryは一回だけ、既知file/game及びentryだけを許容する。targetFileIdとentryIndexの組も一意で、別fileの同indexは許容する。未知を新ID/0/先頭へ補完しない。空Entryと空Placementは値として許容するが、必要全量の移行成功ではない。
 
-PlacedEntryはcurrentEntryId,targetEntryId,displayOrder,gameId,targetFileId,entryIndex。target entry/file/order各1..999999999999、game1/2、index>=0をconstructorで検査する。global entriesはEntry対応displayOrder昇順、lookupはcurrentEntryIdだけ、entriesForFile(game,sourceFile)は既知fileの行をentryIndex昇順で返す。既知の空fileは空List、未知fileは固定安全例外で拒否し空と混同しない。List/Mapを明示不変copy、byte[]は毎回別所有。公開record/aggregate診断は固定redaction、内部FilePositionは公開/診断/ログへ出さない。
+PlacedEntryはcurrentEntryId,targetEntryId,displayOrder,gameId,targetFileId,entryIndex。target entry/file/order各1..999999999999、game1/2、index>=0をconstructorで検査する。global entriesはEntry対応displayOrder昇順、lookupはcurrentEntryIdだけ、entriesForFile(game,sourceFile)は既知fileの行をentryIndex昇順で返す。既知の空fileは空List、未知fileは固定安全例外で拒否し空と混同しない。List/Mapを明示不変copy、byte[]は毎回別所有。公開record/aggregate診断は固定redaction、内部file/index複合キー（SSC363ではJDK不変二要素Long List）は公開/診断/ログへ出さない。
 
 canonical ASCII/LFはheader NKMIGENTRYPLACEMENT1 LFに続きcurrentEntryId TAB targetEntryId TAB displayOrder TAB gameId TAB targetFileId TAB entryIndex LF、global表示順、正準signed/非負decimal、BOM/escape/余剰列なし。realCurrent/DB・game/FK/全99661entry・body/speaker/audio/ロード/Goの証拠へ読み替えない。
 
@@ -256,7 +265,7 @@ FilePairはgameId/currentFileId/targetFileId。gameIdはNK固定game1/2へ解決
 
 canonical ASCII/LFはheader `NKMIGFILEORDER1`の後にgameId TAB currentFileId TAB targetFileId TAB displayOrder LF。数値正準decimal、source signedを保持、game/source数値順でBOM/escape/余剰列なし。返却byte[]は毎回別所有、record/aggregate診断は固定redaction。空mapはheaderのみ、lookup/navigationは未知拒否で、移行完了を意味しない。
 
-PT-MIG-FILEORDER001..012はgame1(2→900/order1,10→100/order2)・game2(1→50/order1)の手書き全byte、signed source両端/0・game別同source、source/target重複、game1/2・N12上下境界/null、不変入力/List/byte、既存/未知lookup、game内及び跨ぎ前後/両端、空/gap/入力再順序、所有8worker64taskを独立literalで検証する。Future各5秒・finallyshutdownNow/await10秒で未終端fail。Main/FilePair/MappedFile/privateSourceKey全4physicalの通常static/PT/CRC初期化/全四counterと独立postを確認し、actualMaster/DB/ETL/Root/native/CHR/全451/ITST未完は当局所結果で閉じない。
+PT-MIG-FILEORDER001..012はgame1(2→900/order1,10→100/order2)・game2(1→50/order1)の手書き全byte、signed source両端/0・game別同source、source/target重複、game1/2・N12上下境界/null、不変入力/List/byte、既存/未知lookup、game内及び跨ぎ前後/両端、空/gap/入力再順序、所有8worker64taskを独立literalで検証する。Future各5秒・finallyshutdownNow/await10秒で未終端fail。Main/FilePair/MappedFile全3physical（SSC363で内部SourceKeyをJDK不変二要素Long Listへ置換）の通常static/PT/CRC初期化/全四counterと独立postを確認し、actualMaster/DB/ETL/Root/native/CHR/全451/ITST未完は当局所結果で閉じない。
 
 
 ## SSC343 Scenario entry移行ID対応と現行ID順の不変値（2026-11-14、PG詳細補足）
