@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import javax.annotation.concurrent.Immutable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -15,6 +16,7 @@ import org.jspecify.annotations.Nullable;
  * UI223/242/243/254; SS311/331/343 SSC359; PT-MIG-MEDIABATCH001..020.
  */
 @NullMarked
+@Immutable
 public final class MediaAssetCopyBatch {
   private static final int ONE_TRANSACTION_TIMESTAMP = 1;
   private static final List<String> COLUMN_ORDER =

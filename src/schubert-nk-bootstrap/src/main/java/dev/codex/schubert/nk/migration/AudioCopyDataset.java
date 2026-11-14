@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.concurrent.Immutable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -19,6 +20,7 @@ import org.jspecify.annotations.Nullable;
  * SS311/331/V002/343 section10 SSC355; PT-MIG-AUDIODATA001..020.
  */
 @NullMarked
+@Immutable
 public final class AudioCopyDataset {
   private static final int LINK_COLUMNS = 6;
   private static final int MAXIMUM_TRANSACTION_TIMESTAMPS = 1;

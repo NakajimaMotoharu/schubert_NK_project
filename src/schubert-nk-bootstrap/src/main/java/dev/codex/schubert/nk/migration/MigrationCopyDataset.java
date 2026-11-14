@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.concurrent.Immutable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -14,6 +15,7 @@ import org.jspecify.annotations.Nullable;
  * SSC364; PT-MIG-FIVE001..020.
  */
 @NullMarked
+@Immutable
 public final class MigrationCopyDataset {
   private static final int ONE_TRANSACTION_TIMESTAMP = 1;
   private final ScenarioCopyDataset retainedScenario;

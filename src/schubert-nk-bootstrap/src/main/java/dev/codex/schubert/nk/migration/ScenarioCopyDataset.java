@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.concurrent.Immutable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -16,6 +17,7 @@ import org.jspecify.annotations.Nullable;
  * PT-MIG-DATASET001..012.
  */
 @NullMarked
+@Immutable
 public final class ScenarioCopyDataset {
   private static final int MAXIMUM_TRANSACTION_TIMESTAMPS = 1;
   private final ScenarioFileCopyBatch retainedFiles;

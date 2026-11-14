@@ -1,5 +1,10 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC365 COPY四不変型契約（2026-11-14）
+
+BUG2904/YKT2435、451品質は維持。ScenarioCopyDataset、AudioCopyDataset、MediaAssetCopyBatch、MigrationCopyDatasetの四final型はprivate-final参照、constructor防御snapshot、不変List/Rowとbyte配列毎回別所有、内部stateを変更しないborrowed writeだけで構成する。標準javax.annotation.concurrent.Immutableを当四型に宣言し、その不変性を既同sourceのList/入力mutation隔離/新byte所有/有限並行/borrowed資源/IO負試験で実証する。注釈はfilterやwarning suppressionではなく型契約、未検証型へ一括付与しない。SpotBugs raw BugInstance/MissingClass/Error0とClassStats全physical一致を引き続き要求し、未達なら実PT開始しない。既bootstrap provided spotbugs-annotations4.10.4のcompile推移jsr3053.0.2をclosed scopeで明示SHApin（既ローカル公開artifact、Production POM/GAV/version変更不要）。これ以外のSDK/解析aux/ルールを拡張しない。公開getterの値・同一性/constructor/永続化値/stream順/例外はそのまま。annotation以外の全Main/Testトークン不変を確認し、新immutable profileの全399と無filterを同sourceで検証、元PG31524 raw5は保持。RD/UI/外部仕様変更・QA不要、実環境/Root/native/全HOLD未受入。原normal1/3/6cap7へ内包し新規費用0、内部手戻り参考.2/.6/1.2とその他作業を区別し元開始/残見積りを変えない。
+
+
 ## SSC364 五表COPY宣言結合（2026-11-14）
 
 NK-MIG-001・RD MIG003005006/MIG-DAT001002003004005/DAT004/FUN004、UI223227242254、SS311/331/V002/34310.1.4/5/451。五表の宣言COPY部品はあるが、一つのScenarioにaudio/linkを束縛し五表共通created_atと全五stream順を保持するProduction aggregateが未実装。MigrationCopyDatasetを内部補足し、constructor(Nullable ScenarioCopyDataset scenario, Nullable List<nullable AudioFileCopyRow> audioRows, Nullable List<nullable List<nullable String>> links, Nullable MediaAssetCopyBatch media)を設ける。scenario/media nullは固定IAE、audioRows/linksのnull/要素null/参照・game・UK・時刻は既AudioCopyDataset(scenario.entries(),audioRows,links)で検査し、別Scenario entriesへのlink通過を防ぐ。scenario/audio/mediaは既constructorの不変snapshotを保持しgetterで同じ値を返す。各五表created_at（files10/entries11/audio11/media.createdAt/links5）のdistinct数<=1を要求し、0表は制約なし。各下位でrow型/時刻は確立済みなのでObjects.requireNonNullはconstructor-established invariantの確認でありNPEを正常扱いしない。行の並び/ID/値を補正せず、時刻を再採番しない。
