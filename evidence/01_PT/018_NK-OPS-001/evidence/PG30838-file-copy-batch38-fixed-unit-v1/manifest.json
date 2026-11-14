@@ -1,0 +1,606 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "2e32a79fdb8b72d6c264d8630ff21adb0f4daf3a",
+    "productionCoreMain": "84a9fce233952bd7ec4d60bb1eb8f685d7d17383",
+    "config": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/2593_file_copy_batch38_fixed_profile.json",
+      "sha256": "889f75a9f3f9bc2b4e21c6b15844a58ca595b40c5aa1e4d29d0cfa73df453c02"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30832-file-copy-batch38-fixed-prepare-v1/manifest.json",
+      "sha256": "a416fb3140c26e6940513d2c25f8d13f66da548dacce2673f49576a2e6c58675"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30836-file-copy-batch38-fixed-preflight-v1/manifest.json",
+      "sha256": "c3a860f7dbc8031c4df34c8cbbe599aa591c97468e04ad2357becc03c10b4f57"
+    },
+    "inputHashes": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "58273077b667bcfedaa31a59c9705410f747c39ec36379a7078b4e49ee7771be",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java": "c429571193e26ddba8726df4e5ce74238361030e806f12f75abb25c081b37089",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java": "d5ab182d366e21f0f169697ad5606a483ad36fa883ec1887e343a683dca67f3d",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    "metadataPins": {
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "58273077b667bcfedaa31a59c9705410f747c39ec36379a7078b4e49ee7771be",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java": "c429571193e26ddba8726df4e5ce74238361030e806f12f75abb25c081b37089",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java": "d5ab182d366e21f0f169697ad5606a483ad36fa883ec1887e343a683dca67f3d",
+      "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-bootstrap/pom.xml": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75",
+      "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+      "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+      "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+      "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+      "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+      "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+      "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173",
+      "evidence/01_PT/018_NK-OPS-001/input/2593_file_copy_batch38_fixed_profile.json": "889f75a9f3f9bc2b4e21c6b15844a58ca595b40c5aa1e4d29d0cfa73df453c02",
+      "evidence/01_PT/018_NK-OPS-001/input/2594_file_copy_batch38_static_admission.json": "b68e4b2ef48eb5a9d3a136b166e49bda98ae0743a63cfe359bc78c3055863882",
+      "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f",
+      "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe",
+      "evidence/01_PT/019_NK-MIG-001/017_COPYtext製造・独立十二byte仕様.md": "3c0b4be326f0f4dea66f29ee6ddd33fbd806097a87e0d93d3f863f8fc91ca5f1",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG30806-file-copy-batch-manufacture-source-identity-v1/manifest.json": "da1719157146f02125b902371efb0586748ec61802279ff47d5b9725409d2a51",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG30802-file-copy-batch-source-and-fourteen-definitions-v1/manifest.json": "a9ca1fc56b1aeb2a340400518dccf904b5817d331730f649c93d08d17ae3ac2b",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG30824-file-copy-batch-test-max-literal-repair-v1/manifest.json": "51b7c9a0ee41ff607da9bbaef808779a8f6aba9af0f694c4a8cc27e4052bf5c6"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class": "1e50ea08f00135df177eb1903736b60cca88966095c443a2bfee9fad5a54a2ff",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class": "d487add339f71bd42ca456dc838be7a15f2d2569f6f08b38572f8aa30212ea52",
+      "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class": "62013aa1df711baa5719c7c8e86f15493b46aa79b50134b0e948e8f81d44a2e3",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class": "447b030258eb82c86fbad715d2618b51601e7f6a5952786d812d86d04f287b6f",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey.class": "d06c8d64a270cd0fdc110b3e53b73f7ade62234d4bf1640db27df28d1356de68",
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class": "d92993e0256be418b35ffd962f68d96ad6457020a1c8f547694c068b5e46f83d"
+    },
+    "testClassHashes": {
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.class": "9d50f36e4c5736d383af3f8bd2c7c90f95f833660c80e7eda7138f371f7c382e",
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.class": "d64e3a85e2ae0808e24dd0b588980e626c429fe4481123b10ee446df2f53a815",
+      "dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.class": "77f8dabacfad623ce17829bcb49b8040aa41adfb5bc66382d2533ae8f7ef16f6"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "emptyAndCountAndFieldShapeBoundariesAreExplicit()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "storageUniquenessIsPerGameAndNeverChangesDeclaredNames()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "storageRejectsAbsoluteBackslashEmptyAndDotSegments()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "shaRequiresExactlyLowercaseSixtyFourHexCharacters()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "name": "ownedFiniteConcurrentCopiesAllMatchIndependentGolden()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file001LiteralGoldenIndependentOfRenumbering()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file002SignedSourcesAndMaximumTarget()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file003DuplicateSourceIsPerGame()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file004DuplicateTargetIsGlobal()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file005InvalidGameDomainsAtEveryBoundary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file006N12TargetAndOrderBoundaries()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file007NullContractsEstablishConstructorInvariant()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file008InputListAndReturnedBytesCannotMutateSnapshot()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file009UnknownIsSafeRefusalNotBoundary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file010WithinGameAndCrossGameNeighbors()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file011EmptyAndGapsAreExplicitValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "name": "file012ConcurrentReturnsRemainIndependentlyOwned()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy001LiteralRowsAndBothEntryPoints()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy002NullEmptyAndLiteralNullMarkerAreDistinct()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy003MandatoryDelimiterAndLineEscapes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy004OtherControlEscapesAndOrdinaryQuotes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy005FixedUnicodeHexAndNoImplicitNormalization()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy006LiteralTerminatorAndSqlLikeDataStayFields()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy008EmptyInputAndWidthContracts()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy010InputAndReturnOwnershipAreIndependent()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy011SafeDiagnosticAndUninterpretedNumericText()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "name": "copy012ConcurrentCallsHaveSeparateOutputOwnership()"
+      }
+    ],
+    "selectedClasses": [
+      "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest"
+    ],
+    "session": "PG30838-FILE-COPY-BATCH-CLOSED38-FIXED",
+    "expectedTests": 38,
+    "oldExecUnion": false,
+    "coverageExclusions": [],
+    "backendOrHeldClassActions": 0,
+    "guardSignature": null,
+    "unstartedProcess": null
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T01:46:55.530775+00:00",
+      "endUTC": "2026-11-14T01:46:56.697905+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/jacoco.exec,sessionid=PG30838-FILE-COPY-BATCH-CLOSED38-FIXED,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30832-file-copy-batch38-fixed-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg30832-file-copy-batch38-fixed-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+        "--select-class",
+        "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1",
+      "stdoutSha256": "7ef59b116908a8459d148e7de6841f7019337cd429ab055aa6b1df004b8b3bd4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T01:46:56.698263+00:00",
+      "endUTC": "2026-11-14T01:46:56.863529+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30832-file-copy-batch38-fixed-prepare-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "a8c606a55020d34fa09a7cc95c7ae445b7341138e8b56aacb89b50aced709d23",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T01:46:56.863938+00:00",
+      "endUTC": "2026-11-14T01:46:57.029041+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30832-file-copy-batch38-fixed-prepare-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "93f9ffac10daa14fc86e321aaba2c534b225b601a60e09c07dbeb822c017b214",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-14T01:46:57.029334+00:00",
+      "endUTC": "2026-11-14T01:46:57.143887+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg30838-file-copy-batch38-fixed-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "387cf6d25beb58fda81843023e873fb478e090b777d8015338c3eb0e5516c561",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 38,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "independentThreeRowGoldenUsesMappingOrderAndExplicitElevenColumns()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file001LiteralGoldenIndependentOfRenumbering()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file012ConcurrentReturnsRemainIndependentlyOwned()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file006N12TargetAndOrderBoundaries()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "shaRequiresExactlyLowercaseSixtyFourHexCharacters()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy003MandatoryDelimiterAndLineEscapes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy004OtherControlEscapesAndOrdinaryQuotes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "emptyAndCountAndFieldShapeBoundariesAreExplicit()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file008InputListAndReturnedBytesCannotMutateSnapshot()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "everyTextColumnRejectsNonNfcMalformedSurrogateAndControl()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy010InputAndReturnOwnershipAreIndependent()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "timestampRequiresSharedCanonicalUtcMicrosecondsWithinDeclaredYears()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "storageRejectsAbsoluteBackslashEmptyAndDotSegments()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file005InvalidGameDomainsAtEveryBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy002NullEmptyAndLiteralNullMarkerAreDistinct()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "snapshotsAreDeepAndReturnedRowsColumnsAndBytesCannotMutateState()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "nullBoundariesAndRedactionUseOneFixedNonSecretDiagnostic()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file007NullContractsEstablishConstructorInvariant()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy006LiteralTerminatorAndSqlLikeDataStayFields()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file010WithinGameAndCrossGameNeighbors()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy012ConcurrentCallsHaveSeparateOutputOwnership()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file003DuplicateSourceIsPerGame()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "duplicateTargetIsRejectedEvenWhenOtherFieldsDiffer()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy001LiteralRowsAndBothEntryPoints()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file009UnknownIsSafeRefusalNotBoundary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "unknownTargetAndEachDeclaredMappingColumnMustMatchExactly()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "ownedFiniteConcurrentCopiesAllMatchIndependentGolden()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "byteCeilingsAndSectionUnicodeCodepointsUseDdlUnits()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file004DuplicateTargetIsGlobal()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy011SafeDiagnosticAndUninterpretedNumericText()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy008EmptyInputAndWidthContracts()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "byteSizeRejectsSignsLeadingZeroAndOverflowWhileZeroAndMaximumRemainExact()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileCopyBatchTest",
+      "name": "storageUniquenessIsPerGameAndNeverChangesDeclaredNames()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy009NulAndUnpairedSurrogateRefusedAtEveryPosition()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file002SignedSourcesAndMaximumTarget()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy005FixedUnicodeHexAndNoImplicitNormalization()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.ScenarioFileMigrationMapTest",
+      "name": "file011EmptyAndGapsAreExplicitValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.migration.PostgresCopyTextEncoderTest",
+      "name": "copy007NullOuterAndRowsRefusedButNullableFieldsAllowed()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "productTestsExecuted": 38,
+  "formalUpdated": false,
+  "whole451Accepted": false
+}
