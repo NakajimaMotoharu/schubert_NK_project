@@ -12505,7 +12505,8 @@
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java",
-        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java"
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java"
       ],
       "requirementIds": [
         "SCP-005",
@@ -12543,7 +12544,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -12725,6 +12727,14 @@
             "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31168-music-logical-id12-post-v1/manifest.json",
             "sha256": "2f9297ea6f13795738eafdcd863c18cbf418406ade5e12deab37a85364213ca2"
           }
+        },
+        "plannedMediaAssetRowSSC357": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/039_MediaAsset十七列・独立二十仕様.md",
+            "sha256": "5cc61a18832cc835a989b0e1fac185ec75e2df2f1a9ad23357479ebb84d057c0"
+          },
+          "actualRuntimeQualification": false
         }
       },
       "acceptanceChecks": [
