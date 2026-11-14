@@ -1,0 +1,27 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T20:42:09.458858+00:00",
+  "bug": "BUG2950",
+  "ykt": "YKT2479",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32788-audio-link-map-nullable-carrier-correction-v1/original-CurrentAudioLinkMapper.java.txt",
+    "sha256": "56b1424c88bee2275c93497e28876e4bc295d451fce73e058ec6c57acd31471c"
+  },
+  "corrected": {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java",
+    "sha256": "e1f9f8ff3160bf5f5ba13bbfdff0ac63e91753d9d647b82ae36b0c889e625ffd"
+  },
+  "exactSixValuesInOriginalOrder": [
+    "Long.toString(entry.targetEntryId())",
+    "Long.toString(retainedAudio.targetAudioId(entry.gameId(), item.currentAudioId()))",
+    "Integer.toString(entry.gameId())",
+    "item.linkType()",
+    "Integer.toString(item.displayOrder())",
+    "migratedAt.toString()"
+  ],
+  "carrier": "NULLABLE_COLUMN_ARRAYLIST_SNAPSHOT_BY_EXISTING_DATASET",
+  "oldMainCompileExit": 1,
+  "oldProductTests": 0,
+  "noSuppression": true,
+  "privateRootOrHeldClassActions": 0
+}

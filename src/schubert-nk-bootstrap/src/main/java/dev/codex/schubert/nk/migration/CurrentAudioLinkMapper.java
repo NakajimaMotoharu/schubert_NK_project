@@ -141,14 +141,14 @@ public final class CurrentAudioLinkMapper {
     // Known, unique, equal-cardinality source triples prove every declared link is present.
     for (var item : retainedLinks) {
       var entry = retainedPlacement.lookup(item.currentEntryId());
-      output.add(
-          List.<@Nullable String>of(
-              Long.toString(entry.targetEntryId()),
-              Long.toString(retainedAudio.targetAudioId(entry.gameId(), item.currentAudioId())),
-              Integer.toString(entry.gameId()),
-              item.linkType(),
-              Integer.toString(item.displayOrder()),
-              migratedAt.toString()));
+      var target = new ArrayList<@Nullable String>();
+      target.add(Long.toString(entry.targetEntryId()));
+      target.add(Long.toString(retainedAudio.targetAudioId(entry.gameId(), item.currentAudioId())));
+      target.add(Integer.toString(entry.gameId()));
+      target.add(item.linkType());
+      target.add(Integer.toString(item.displayOrder()));
+      target.add(migratedAt.toString());
+      output.add(target);
     }
     return new AudioCopyDataset(boundEntries, audioCopy, output);
   }
