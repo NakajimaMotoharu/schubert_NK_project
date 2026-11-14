@@ -1,5 +1,21 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC378 移行六表の全COPY列型付き照合（2026-11-14）
+
+NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311331/V002/343。MigrationMasterContentVerifierはcallerが既に認証・排他・owner/TXを確立しINSERTした同Connectionと不変MigrationMasterCopyDatasetを借用し、六表の全65 COPY列を固定SELECTで一行ずつ型付き照合する。既count/reference/identity/ANALYZE、宣言hash/differenceに対する不足部品であり、実DB/全catalog/index/role・generated body_search・全移行・原本Current/公開/Rootnative/global451/ITST資格は代行しない。実DB/driver/COPY等HOLDを解除せず、通常PTは明示JDK Proxyだけ。
+
+verify(Nullable Connection,Nullable MigrationMasterCopyDataset)は両nullを副作用前固定IAE、autoCommit=true/null Statementを固定SQLExceptionとする。caller-owned migration write TXでのpost読取を許すためreadOnly=trueは要求せず、Connectionのclose/commit/rollback/setRole/setReadOnly/setAutoCommit/再試行0。新nonnullStatementを一回所有しqueryTimeout30秒/fetchSize1000。新ResultSetを各query一回だけ所有し、六表speakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksを固定順に読む。
+
+SELECTは各既COPY columnNamesと同じ明示列順: speakers7列、script_files11列、script_entries12列（generated body_searchを含めない）、audio_files12列、media_assets17列、entry_audio_links6列。先頭五表はORDER BY id、linksはORDER BY entry_id,audio_file_id,link_type COLLATE "C"。識別子・型descriptor・SQLはProduction固定literalからだけ選び、利用者SQL連結やSELECT *をしない。期待側は既不変各rowsの参照を新Listへ集め、先頭五表は検証済みidのnumeric順、linksはentry/audio numeric→link_typeの固定ASCII順へ別copyでsortする。元宣言/COPY出力順と画面候補順は変更しない。
+
+型はV002に従い bigint=getLong、smallint/integer=getInt、boolean=getBooleanをそれぞれ直後のwasNullでnullable正準文字へ、timestamptz=getTimestampのnullable値をtoInstant().toString()へ、text/char/varchar=getStringのnullable値へ変換する。特にPostgreSQL boolのgetString t/fに依存せず、numericの符号/0/long範囲を型のまま扱う。name/body/path/shaなどのtrim/case/NFC変換やNULL/空の置換0、raw内容をlog/例外へ出さない。型descriptorはspeaker LISSBST、file LILSSSSSSLT、entry LILLIISLSSST、audio LISSSSSSLLST、media LSSSSSSSSLSSSSSIT、links LLISITの固定列対応とする。
+
+Result.nextで各期待row一つを要求し、各65列をnullable Objects.equalsで完全比較、期待row後の余剰nextも拒否する。NULL値が宣言NULLと一致する場合だけ許容、required値のSQL NULL/余剰/欠落/値不一致は固定SQLException。余剰行の列は読まない。失敗した表の後続SELECTを発行せず、SQL/RuntimeException/Errorの元primaryを保持する。Result→Statement各一回closeを試行し、異なるcleanupを順にsuppressed、同一primary実体は自己suppressionを追加しない（SSC377）。primary無しclose失敗を成功化しない。全処理はread-only SELECTのみであってもcallerのtransaction/許可を認定せず、setval/ANALYZE/修復/commitを発行しない。toStringと自前messageは固定redaction。
+
+PT-MIG-CONTENT001..028: 001六SQL/65列正常と6Result1Statement close、002全空、003両null、004autoCommit、005null Statement、006各表null Result、007timeout/fetch fault、008各表欠落、009各表余剰と列読取0、010全65列の個別改変を検出、011SQL NULLのrequired拒否と既nullable一致、012全型getter/即時wasNull/column ordinalの独立順、013NULL対空/制御escape/Unicode/文字caseの保持、014宣言順とnumericPK orderの分離、015linkの三段PK tie、016N12/0nullable numeric/日時µs・0001/9999境界、017Timestamp instantと正準UTC文字、018全六query三fault型とprefix停止、019全row getter/wasNull/next発生位置の三fault型、020全Resultclose三型、021Statementclose三型、022primary＋両cleanupの全三型順、023同一primary自己alias、024値equals別実体/同cleanup二回、025借用Connection mutation0と固定資源tuple、026redaction/拒否後fresh正常、027宣言/input不変、028finite8workers64/Future5/finallyshutdownNow-await10。正常DB rows/SQL/型/期待値はV002と明示literalから独立作成し、Production methodでexpectedを生成しない。
+
+新28＋必要pure383=whole411、全23Main36physical（既pure22Main35＋新一class）を一source/一exec/RootNullAway-lint-CS-SB-PMD個別適用性/全CRC-init/既定と無filter四100で確認。既31migrationMain/617Test定義は不変、SSC377 JDBC553等は成功確認再演0。追加2.8/8.4/9.9pp cap10で元費用/SV/群開始保持、実専有費/token null。内部post確認具体化のためRD/UI/DDL/grant/QA変更不要、全体受入や実DB接続許可を推定しない。
+
 ## SSC377 移行五部品primary自己identity保持（2026-11-14）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/TST/UI223242254/SS311331343。既SSの元primary保持・逆順一回closeを具体化する。SpeakerStagingTable、ScenarioStagingTables、AssetStagingTables、MigrationMasterFinalizer、MigrationMasterReferenceVerifierのResultとStatement cleanup計10箇所で、cleanupとprimaryが同一Throwable実体ならaddSuppressedを呼ばず元primaryを保持する。異なる実体はequalsの値が同じでもResult→Statement順にsuppressedへ保存し、同じcleanup実体が二資源から返れば二回保持する。primary無しclose失敗は元失敗、Result.closeが初めてのprimaryとなった場合もStatement.closeの同一実体で覆わない。Connectionは借用・close/commit/rollback/再接続/再試行0、DB/driver/Rootnative等HOLDは不変更。
