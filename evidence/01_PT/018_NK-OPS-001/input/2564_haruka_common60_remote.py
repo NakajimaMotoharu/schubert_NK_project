@@ -3,8 +3,8 @@ from pathlib import Path
 import datetime, fcntl, hashlib, io, json, os, shutil, signal, stat, subprocess, sys, tarfile, time
 import xml.etree.ElementTree as ET
 
-RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30764-common94-v5')
-BASE_TMP = Path('/dev/shm/pgpt-pg30764-common94-v5')
+RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30780-common94-v6')
+BASE_TMP = Path('/dev/shm/pgpt-pg30780-common94-v6')
 TMP = BASE_TMP
 JAVA = Path('/opt/schubert-nk-test-tools/jdk-25.0.4')
 MVN = Path('/opt/schubert-nk-test-tools/maven/bin/mvn')
@@ -161,7 +161,7 @@ def commands(config):
     base = [str(MVN), '-o', '--no-transfer-progress', '-s', str(RUN/'settings.xml'),
             '-gs', str(RUN/'settings.xml'), '-Dmaven.repo.local='+str(RUN/'repository'),
             '-pl', 'program/characterization', '-Dtest='+','.join(SELECTED),
-            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30764-COMMON94',
+            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30780-COMMON94',
             '-Dspotbugs.xmlOutput=true']
     env = dict(PATH=str(JAVA/'bin')+':/usr/bin:/bin', JAVA_HOME=str(JAVA),
                MAVEN_USER_HOME=str(RUN/'maven-home'), MAVEN_SKIP_RC='true', LANG='C.UTF-8',

@@ -47,7 +47,9 @@ final class GateDefinitionDocumentsTest {
         List.of(
             JSON.nullNode(),
             JSON.getNodeFactory().textNode("1187"),
-            JSON.getNodeFactory().numberNode(new BigInteger("2147483648")))) {
+            JSON.getNodeFactory().numberNode(new BigInteger("2147483648")),
+            JSON.getNodeFactory().numberNode(0),
+            JSON.getNodeFactory().numberNode(-1))) {
       List<JsonNode> input = fixture();
       ObjectNode expectedBrowser = (ObjectNode) object(input, CONTRACT).path("browser");
       expectedBrowser.set("browserRevision", invalid);
