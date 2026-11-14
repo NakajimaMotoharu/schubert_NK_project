@@ -777,3 +777,6 @@ SSC377/BUG2925/YKT2455/NK-MIG-001/WBS-P01903: SpeakerStagingTable/ScenarioStagin
 
 
 SSC378/NK-MIG-001/WBS-P01903 MigrationMasterContentVerifier constructor/verify/expectedRows/orderedRows/requireStatement/verifyRows/value/closeStatement/closeResult/invalid/invalidInput/toStringおよびnumeric/link comparator lambdas→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-CONTENT001..028/019080081。Core3df62050/Unit5ab03a64 PG32096/098/32100全411/36class/実320両四100。実DB/catalog/generated列/全移行/HOLD未受入。
+
+
+SSC379/NK-MIG-001/WBS-P01903 MigrationMasterTargetPublisher.transferAndFinalize→Speaker/Scenario/Asset→Reference→Content→Finalizer、prepare/constructor/toString/invalidは維持→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-TARGET001..024/CONTENT001..028/019082083。Core0c6e02c0/Unit93a34748 PG32122/124/126全589/43class/実385両四100。実DB/catalog/generated列/全移行/HOLD未受入。
