@@ -1,0 +1,31 @@
+{
+  "ssc": 401,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java",
+  "source": "2db594c27f654977d74b09e5c2cad679c7c208cd",
+  "title": "Current五projectionの借用snapshot属性・順次束縛",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT001002005/DAT004/TST、UI242254、SS311331343。個別Current projection五部品を同じcaller-owned JDBC transaction属性のもとに一回ずつ順に束ねるCurrentMigrationProjectionを追加する。対象speakers6/script_files8/script_entries10/audio_files10/entry_audio_links3列。新SQL/driver/実DB接続/認証やtransaction開始・設定変更を行わず、既五readerへ同じConnectionを渡す。実snapshot ID/実DB同一性/Current候補順・全件資格はこのhost通常PTで証明しない。\n\nread(Nullable Connection,int expectedSpeakers,int expectedFiles,int expectedEntries,int expectedAudio,int expectedLinks)はnull/各負件数を接続読取前固定IAE、五countを各readerへそのまま渡す。前後のsnapshotMode(Connection)はautoCommit=false/readOnly=trueと、JDBC隔離属性REPEATABLE_READ又はSERIALIZABLEを要求し、前後mode完全一致を検査。READ_COMMITTED等で別statement間snapshotが変化し得る構成を受け入れない。callerが既に正規snapshotを確立しConnectionを専有して他threadから変更しないことが前提。当部品はその属性を読むだけで実transaction ID/権限証拠を発行しない。Connectionのclose/commit/rollback/set*0。\n\n正常時はSpeaker→File→Entry→Audio→Linkの固定順に既readerを新しく一つずつ作り、各完全件数・nullable保存値/型/getter/timeout30/fetch1000/owned Result-Statement逆順close契約をそのまま使う。一readerのSQL/Runtime/Error・件数/cleanup失敗でその同instanceを伝播し後続readerを開始しない。catchして正常化/再送0。全五成功・終端属性同一だけpublic static final SourceSnapshotをprivate constructorで生成する。SourceSnapshotは既readerのdeep immutable listsをそのまま保持しspeakers()/files()/entries()/audio()/links()各getterで返す。外部constructor/任意入力/追加state/equals-hash生成/補正/再採番なし。両class toString固定REDACTED、source値/SQL例外をlog0。projectionをtarget aggregateへ変換する次接続と実snapshot・候補順witnessは別未完。\n\nPT-MIG-CURRENTSNAPSHOT001..012: 001独立五固定SQL/型/列・五つの手書きrowsと正常getters/close順、002全空、003nullと五count各負/読取0、004前後auto-readOnly契約、005隔離4/8許容・他拒否/前後mode差拒否、006全属性phaseのSQL-Runtime-Error同instance、007五child全query/主要phaseの三型と後続開始0、008各child不足余剰とfieldread抑止、009五child cleanclose/primary-cleanup順と自己identity、010外内deep immutable/元fixture破壊隔離・nullable保存、011失敗後freshと固定redaction/partial結果非公開、012有限8worker64/Future5/finallyshutdownNow-await10。同一Connectionを受けた証拠はfixture identity/禁止method即時失敗で検証、actualdriver/network/DB0。期待五SQL/typed matrix/rows/callsをProduction reader生成0で独立作成する。\n\n新Main1＋通常nested SourceSnapshot1/new12、旧42Main44Test886同byte保持、全43Main45Test63physical898を同source一exec/RootNullAway-lint-CS-SB-PMD全site/全CRC-init/既定と無filter四100で検証。旧886は新規成果に加算しない。追加不足2.7/8.1/9.9pp cap10、旧残397.324/837.386/1643.415へ当不足だけ追加、元費用/SV/各群開始保持、専有実費token null。DB BUG2943/YKT2472/V030HOLD維持、実Current snapshot/実候補順/target全組立/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。RD/UI/DDL/grant/QA変更不要、snapshot属性の内部前提補足だけで外部業務挙動を変更しない。",
+  "testIds": "PT-MIG-CURRENTSNAPSHOT001..012",
+  "estimate": {
+    "low": 2.7,
+    "base": 8.1,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "122_Current五projection借用接続・独立十二仕様.md",
+  "previousForecastName": "2011_WBS65予実・音声link対応全886後版570.json",
+  "forecastName": "2013_WBS65予実・Current五読取接続不足追加版571.json",
+  "revision": "571-MISSING_CURRENT_FIVE_READER_BORROWED_SNAPSHOT_ASSEMBLY",
+  "findingReason": "Five independent Current readers lack one production coordinator with same caller connection and stable readonly/nonauto repeatable/serializable attributes. Add pure JDK JDBC attribute/read sequence, no actual snapshot or Current ordering authority.",
+  "workId": "P01903_SSC401_CURRENT_SNAPSHOT12_WHOLE898",
+  "planKey": "plannedCurrentMigrationProjectionSSC401",
+  "startRecordName": "2014_WBS65Current五読取接続開始.json",
+  "startInputName": "3098_current_snapshot898_start.json",
+  "designSlot": "PG32808-ssc401-current-snapshot-design-only-v1",
+  "ledgerSummary": "同borrowed Connection五projection固定順、前後readonly/nonauto/隔離4又は8同一、private SourceSnapshot保持、独立12＋既886=898。実snapshot同一性/Current順/全移行/HOLD未受入、RD/UI変更不要。",
+  "moduleSummary": "CurrentMigrationProjection.read/snapshotMode/SourceSnapshot五getterは既Current五readerを同caller Connectionへ順次束縛。new12/全43Main63physical898予定、実DB/Current順資格なし。",
+  "groupId": "PGPT-WBS65-SSC401-CURRENT-SNAPSHOT12-898-20261115",
+  "run": "PG32822-CURRENT-SNAPSHOT-CLOSED898",
+  "scope": "MissingCurrentMigrationProjection+SourceSnapshot/full43Main63physical898. SameborrowedConnection/fivefixedreaders/readonlynonauto/isolation4or8samebeforeafter, no actualsnapshot qualification. Additional2.7/8.1/9.9cap10 allHOLDunchanged.",
+  "nextCommand": "PublishSSC401SS311343914onlymain beforePG. ImplementCurrentMigrationProjection12 and independent5SQL/type/row/fault/cleanup oracle; full43Main/63CRC/898/Rootstatic/default-raw. Keep actualsnapshot/currentorder/targetassembly/DB gaps. No actualDB/master/filepayload/driver/VM/RootnativeActual4aru/HOLD operations or confirmation replay. Freshquota/hourly; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
