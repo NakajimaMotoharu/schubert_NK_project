@@ -1,0 +1,11 @@
+"""Explicit Current schema fields and typed rows, metadata-only; never an actual DB or PT PASS."""
+from pathlib import Path
+import json,re,hashlib,datetime
+r=Path.cwd();i=r/'evidence/01_PT/018_NK-OPS-001/input';raw=Path('/home/mini/codex/project1/schubert_project/program/database/schema.sql').read_text();section=re.search(r'CREATE TABLE scenario.script_entries \((.*?)\n\);',raw,re.S);assert section
+expected=[('id','bigint','required','getLong'),('game_id','smallint','required','getInt'),('script_file_id','bigint','required','getLong'),('entry_index','integer','required','getInt'),('line_number','integer','required','getInt'),('entry_type','text','required','getString'),('speaker_id','bigint','nullable','getLong'),('speaker_label','text','nullable','getString'),('body','text','required','getString'),('raw_block','text','nullable','getString')]
+for name,kind,nullability,getter in expected:
+ m=re.search(r'^    '+name+r' '+re.escape(kind)+r'([^\n]*),?$',section.group(1),re.M);assert m,name;assert ('NOT NULL' in m.group(1))==(nullability=='required')
+sql='SELECT id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block FROM scenario.script_entries ORDER BY id'
+normal=[['-9223372036854775808','1','-5','0','1','dialogue','-30',' Alice / label ','日本語 body','line\nraw'],['9223372036854775807','2','5','2','3','narration',None,None,'other',None]]
+typed=[x[3]+':'+str(n+1) for n,x in enumerate(expected)];assert len(typed)==10;wasnull=[n+1 for n,x in enumerate(expected) if x[3] in ['getLong','getInt']];assert wasnull==[1,2,3,4,5,7]
+p=i/'2993_entry_read20_independent_oracle.json';assert not p.exists();p.write_text(json.dumps(dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),metadataOnly=True,sourceSchemaDdlBlockSha256=hashlib.sha256(section.group(0).encode()).hexdigest(),fields=expected,sql=sql,typedCalls=typed,immediateWasNullColumns=wasnull,normalLiteralRows=normal,requiredNumericNullPositions=[1,2,3,4,5],requiredTextNullPositions=[6,9],nullablePositions=[7,8,10],wholeTestsPlanned=20,productTestsExecuted=0,actualDatabaseOrGeneratorExecution=False,productionExpectedMethodUsed=False),ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,metadataOnly=True,fields=10,wasNull=6,productTestsExecuted=0))

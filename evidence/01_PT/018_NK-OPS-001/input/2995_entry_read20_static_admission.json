@@ -1,0 +1,224 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG32404-ENTRY-READ-CLOSED20",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32400-entry-read20-prepare-v1/manifest.json",
+    "sha256": "308e9ea04fb6b29dbfeddec78b37906999d9d64f13e55687f19ff6a55956d7f7"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32402-entry-read20-static-v1/manifest.json",
+    "sha256": "f14b4b08b0be6c9f3efc58f91dbce8328bc60d281bae31e7f21361d41e3a5c90"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 40,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 40,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 66,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (cleanup != primary) primary.addSuppressed(cleanup);",
+      "sourceLine": 116,
+      "occurrences": 1,
+      "message": "Use equals() to compare object references.",
+      "reason": "Throwable.addSuppressed forbids the identical primary object as its own suppression. This exact reference identity guard is required even when different exception instances compare equal through a subclass equals implementation. It does not compare value objects. SQL/runtime/Error same-instance faults independently verify original-primary preservation and termination.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 128,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 128,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC resource boundary preserves the original SQL/runtime/Error instance and rethrows it. The result is closed before the statement and cleanup failures remain suppressed in order. No exception is converted to success, retried or logged with raw values. Independent every-getter occurrence and all primary/cleanup fault-kind matrices verify this resource contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (cleanup != primary) primary.addSuppressed(cleanup);",
+      "sourceLine": 129,
+      "occurrences": 1,
+      "message": "Use equals() to compare object references.",
+      "reason": "Throwable.addSuppressed forbids the identical primary object as its own suppression. This exact reference identity guard is required even when different exception instances compare equal through a subclass equals implementation. It does not compare value objects. SQL/runtime/Error same-instance faults independently verify original-primary preservation and termination.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "f.data.get(0)[column] = null;",
+      "sourceLine": 151,
+      "occurrences": 1,
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "reason": "Exact synthetic JDBC row fixture assigns SQL NULL for the required numeric and text positions plus nullable raw negative/control cases. Production input is not mutated and no null is treated as an allowed required value. The getter/wasNull assertions and owned resource postconditions prove rejection; removing this assignment would omit mandatory null-boundary tests.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "f.data.get(0)[column] = null;",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "reason": "Exact synthetic JDBC row fixture assigns SQL NULL for the required numeric and text positions plus nullable raw negative/control cases. Production input is not mutated and no null is treated as an allowed required value. The getter/wasNull assertions and owned resource postconditions prove rejection; removing this assignment would omit mandatory null-boundary tests.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "f.data.get(0)[9] = null;",
+      "sourceLine": 198,
+      "occurrences": 1,
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "reason": "Exact synthetic JDBC row fixture assigns SQL NULL for the required numeric and text positions plus nullable raw negative/control cases. Production input is not mutated and no null is treated as an allowed required value. The getter/wasNull assertions and owned resource postconditions prove rejection; removing this assignment would omit mandatory null-boundary tests.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 431,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent memory-only JDBC fixtures on one stateless reader. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No database/native/process resource is acquired. Implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 431,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent memory-only JDBC fixtures on one stateless reader. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No database/native/process resource is acquired. Implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 436,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent memory-only JDBC fixtures on one stateless reader. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No database/native/process resource is acquired. Implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 447,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent memory-only JDBC fixtures on one stateless reader. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No database/native/process resource is acquired. Implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "sourceLine": 448,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone host JUnit executor owns eight workers/64 independent memory-only JDBC fixtures on one stateless reader. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No database/native/process resource is acquired. Implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "sourceLine": 499,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact JDK java.sql interface loader is used by a standalone in-memory Proxy for that same interface, with no application server, ambient context-loader discovery, actual driver or network operation. Unexpected methods fail the test. This explicit loader cannot materialize held product classes and the fixture exercises only the qualified projection contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Statement.class.getClassLoader(),",
+      "sourceLine": 522,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact JDK java.sql interface loader is used by a standalone in-memory Proxy for that same interface, with no application server, ambient context-loader discovery, actual driver or network operation. Unexpected methods fail the test. This explicit loader cannot materialize held product classes and the fixture exercises only the qualified projection contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "sourceLine": 554,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact JDK java.sql interface loader is used by a standalone in-memory Proxy for that same interface, with no application server, ambient context-loader discovery, actual driver or network operation. Unexpected methods fail the test. This explicit loader cannot materialize held product classes and the fixture exercises only the qualified projection contract.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
