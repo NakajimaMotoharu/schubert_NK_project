@@ -552004,12 +552004,103 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
-      "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "sha256": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
+      "acceptance": "UNASSESSED",
+      "state": "MUSIC_CATALOGUE162_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-361",
       "testIds": "PT-MIG-MUSICCAT001..024",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC361_MUSIC_CATALOGUE162_NORMAL",
+        "source": "b40695a6e15e823795fea802a1bae6af0562bc67",
+        "productionCoreMain": "c3381634c2c17bf3b7564c6c3fdc089d1a046580",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+          "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+        },
+        "tests": 162,
+        "newUniqueTestDefinitions": 24,
+        "existingSupportDefinitions": 138,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 127,
+        "physicalClasses": 16,
+        "positiveMainCrc": 16,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 3191,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 415,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 543,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 323,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 112,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 16,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+          "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+          "dev/codex/schubert/nk/migration/MusicMigrationCatalogue": 11,
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+          "dev/codex/schubert/nk/migration/VideoMigrationCatalogue": 7,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+          "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+          "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+          "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+          "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video": 8,
+          "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+        },
+        "actualJvmCodeMethods": 137,
+        "jacocoDefaultMethods": 112,
+        "newCatalogueCodeMethods": 11,
+        "newMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 56,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+          "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+        },
+        "actualUnitSource": "b40695a6e15e823795fea802a1bae6af0562bc67",
+        "productionCoreMain": "c3381634c2c17bf3b7564c6c3fdc089d1a046580"
+      }
     }
   ],
   "layouts": [
@@ -557987,6 +558078,88 @@
       "low": 0.5,
       "base": 1.5,
       "high": 3
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentMusicCatalogue162PG31400": {
+    "kind": "SSC361_MUSIC_CATALOGUE162_NORMAL",
+    "source": "b40695a6e15e823795fea802a1bae6af0562bc67",
+    "productionCoreMain": "c3381634c2c17bf3b7564c6c3fdc089d1a046580",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+      "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+    },
+    "tests": 162,
+    "newUniqueTestDefinitions": 24,
+    "existingSupportDefinitions": 138,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 127,
+    "physicalClasses": 16,
+    "positiveMainCrc": 16,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 3191,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 415,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 543,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 323,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 112,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 16,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationCatalogue": 11,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue": 7,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+      "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+    },
+    "actualJvmCodeMethods": 137,
+    "jacocoDefaultMethods": 112,
+    "newCatalogueCodeMethods": 11,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 56,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 1,
+      "base": 3,
+      "high": 6
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,

@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "09f8425a8813e6b13d98a1cf12a48a6b16bd87a0e3ae503b69e228e7fb3bc919",
+  "inventorySha256": "dfd84467fb60d4d2fc59ff07b9cd98916282d3ff5bcadc423997b8051d504e25",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -32637,7 +32637,95 @@
   },
   "plannedMusicCatalogueSSC361": {
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "sourceCreated": true,
+    "newAcceptance": 0,
+    "state": "MUSIC_CATALOGUE162_NORMAL_QUALIFIED_ACTUAL_ETL_UNACCEPTED",
+    "actualRuntimeQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+      "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+    }
+  },
+  "currentMusicCatalogue162PG31400": {
+    "kind": "SSC361_MUSIC_CATALOGUE162_NORMAL",
+    "source": "b40695a6e15e823795fea802a1bae6af0562bc67",
+    "productionCoreMain": "c3381634c2c17bf3b7564c6c3fdc089d1a046580",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+      "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+    },
+    "tests": 162,
+    "newUniqueTestDefinitions": 24,
+    "existingSupportDefinitions": 138,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 127,
+    "physicalClasses": 16,
+    "positiveMainCrc": 16,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 3191,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 415,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 543,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 323,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 112,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 16,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationCatalogue": 11,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Result": 4,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue": 7,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+      "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing": 12,
+      "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+      "dev/codex/schubert/nk/migration/MusicMigrationPairing$Pair": 6,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+      "dev/codex/schubert/nk/migration/VideoMigrationCatalogue$Video": 8,
+      "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9
+    },
+    "actualJvmCodeMethods": 137,
+    "jacocoDefaultMethods": 112,
+    "newCatalogueCodeMethods": 11,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 56,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 1,
+      "base": 3,
+      "high": 6
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
