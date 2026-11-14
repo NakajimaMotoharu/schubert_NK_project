@@ -1,0 +1,104 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG30838-FILE-COPY-BATCH-CLOSED38-FIXED",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/023_ScenarioFile十一列COPYbatch・独立十四仕様.md",
+      "sha256": "cd643e708501f44c5345ffea890d5ced05eaae8aa61c22cb9f2632b31c6d337f"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/013_Scenariofileゲーム内順と前後対応・独立十二仕様.md",
+      "sha256": "1210c7019eda6e9b776b73ad3f9534f4921e2cabcc94138e359b13b79c26dbfe"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/017_COPYtext製造・独立十二byte仕様.md",
+      "sha256": "3c0b4be326f0f4dea66f29ee6ddd33fbd806097a87e0d93d3f863f8fc91ca5f1"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30806-file-copy-batch-manufacture-source-identity-v1/manifest.json",
+      "sha256": "da1719157146f02125b902371efb0586748ec61802279ff47d5b9725409d2a51"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30802-file-copy-batch-source-and-fourteen-definitions-v1/manifest.json",
+      "sha256": "a9ca1fc56b1aeb2a340400518dccf904b5817d331730f649c93d08d17ae3ac2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30824-file-copy-batch-test-max-literal-repair-v1/manifest.json",
+      "sha256": "51b7c9a0ee41ff607da9bbaef808779a8f6aba9af0f694c4a8cc27e4052bf5c6"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "84a9fce233952bd7ec4d60bb1eb8f685d7d17383",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
+      "tests": 14
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java",
+      "tests": 12
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "tests": 12
+    }
+  ],
+  "expectedTests": 38,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile.class",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey.class",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG30830-file-copy-batch38-fixed-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG30832-file-copy-batch38-fixed-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG30834-file-copy-batch38-fixed-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG30836-file-copy-batch38-fixed-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG30838-file-copy-batch38-fixed-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG30840-file-copy-batch38-fixed-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg30832-file-copy-batch38-fixed-prepare-v1",
+    "unit": "pg30838-file-copy-batch38-fixed-unit-v1"
+  },
+  "newTestDefinitions": 14
+}

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-FCOPY001..014; independent DDL/literal expectations, no DB or actual assets. */
 final class ScenarioFileCopyBatchTest {
+  private static final String ORACLE_MAXIMUM_N12 = "999999999999";
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
@@ -113,12 +114,12 @@ final class ScenarioFileCopyBatchTest {
       }
     }
     var maximum = new ArrayList<@Nullable String>(fixture().get(0));
-    maximum.set(0, "999999999999");
+    maximum.set(0, ORACLE_MAXIMUM_N12);
     var maximumMap =
         new ScenarioFileMigrationMap(
             List.of(new ScenarioFileMigrationMap.FilePair(1, 0, 999999999999L)));
     assertEquals(
-        "999999999999",
+        ORACLE_MAXIMUM_N12,
         new ScenarioFileCopyBatch(maximumMap, List.of(maximum)).rows().get(0).get(0));
   }
 
@@ -213,7 +214,7 @@ final class ScenarioFileCopyBatchTest {
     }
     var batch = new ScenarioFileCopyBatch(mapping(), fixture());
     assertEquals("0", batch.rows().get(1).get(9));
-    assertEquals("999999999999", batch.rows().get(2).get(9));
+    assertEquals(ORACLE_MAXIMUM_N12, batch.rows().get(2).get(9));
   }
 
   @Test
@@ -348,7 +349,7 @@ final class ScenarioFileCopyBatchTest {
                 "s",
                 "章",
                 SHA,
-                "999999999999",
+                ORACLE_MAXIMUM_N12,
                 STAMP)));
     return rows;
   }
