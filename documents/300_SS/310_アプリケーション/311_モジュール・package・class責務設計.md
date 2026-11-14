@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC364: bootstrap.migration.MigrationCopyDatasetは同じScenarioCopyDatasetからAudioCopyDatasetを構築しMediaAssetCopyBatchと五表共通created_at/借用五stream順を保持する。不変宣言値のみ、SQL/SDK/実DB/transaction/原本操作0。PT-MIG-FIVE001..020、必要whole399、全移行/Root/native/HOLD未受入。
+
 SSC363: ScenarioFileMigrationMap/ScenarioEntryPlacementMap内部二要素キーをJDK不変List<Long>へ簡素化。公開六record/永続化/順序/重複拒否/redactionは保持。PT-MIG-SCENARIOGEN001..016と必要whole129で同source全9Main15physical/default+無filterCodeを確認、実DB/Root/native/HOLD未完。
 
 SSC362: bootstrap.migration.AssetStagingTablesはaudio_files/media_assets/entry_audio_links三表の固定CTAS/count/large INSERTを標準JDBCで所有し、connection/transactionはcaller借用。既Scenario二表を先行、全5表の順/資源をProxyで検証。実DB/素材/認証/全ETLは上位、vendor/native依存0。PT-MIG-ASSETSTAGE001..030。

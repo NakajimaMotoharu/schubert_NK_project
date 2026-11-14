@@ -1,5 +1,16 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC364 五表COPY宣言結合（2026-11-14）
+
+NK-MIG-001・RD MIG003005006/MIG-DAT001002003004005/DAT004/FUN004、UI223227242254、SS311/331/V002/34310.1.4/5/451。五表の宣言COPY部品はあるが、一つのScenarioにaudio/linkを束縛し五表共通created_atと全五stream順を保持するProduction aggregateが未実装。MigrationCopyDatasetを内部補足し、constructor(Nullable ScenarioCopyDataset scenario, Nullable List<nullable AudioFileCopyRow> audioRows, Nullable List<nullable List<nullable String>> links, Nullable MediaAssetCopyBatch media)を設ける。scenario/media nullは固定IAE、audioRows/linksのnull/要素null/参照・game・UK・時刻は既AudioCopyDataset(scenario.entries(),audioRows,links)で検査し、別Scenario entriesへのlink通過を防ぐ。scenario/audio/mediaは既constructorの不変snapshotを保持しgetterで同じ値を返す。各五表created_at（files10/entries11/audio11/media.createdAt/links5）のdistinct数<=1を要求し、0表は制約なし。各下位でrow型/時刻は確立済みなのでObjects.requireNonNullはconstructor-established invariantの確認でありNPEを正常扱いしない。行の並び/ID/値を補正せず、時刻を再採番しない。
+
+writeAll(Nullable PostgresCopyTextWriter, Nullable OutputStream files,entries,audio,media,links)はwriterと全五sinkのnullを一括先行検査し、nullならどのsinkにも書かない。固定順script_files→script_entries→audio_files→media_assets→entry_audio_linksで既writeメソッドへ一回ずつ委譲する。借用streamをopen/flush/close/巻戻し/再送せず、IOException/runtime/Errorは元instanceのままprefixを保持して停止、後続sinkへ書かない。呼出元のrollback/discard判断を代行せず、DB/PG SDK/ネットワーク/原本/asset公開/権限/transaction開始commitは0。sinkの別物所有やDB COPY開始/終了は上位callerの契約で、当aggregateが新しい所有証明を作らない。診断はMigrationCopyDataset[REDACTED]固定。
+
+PT-MIG-FIVE001..020: 五stream独立全byte・順序/借用closeflush0、全空、scenario/media null、audio/links null、要素null、別Scenarioのentry参照拒否、audio-only未関連row、files対audio共通時刻不一致、media対Scenario不一致、entry空時のfiles/audio同一・不一致、media-only/他空、getter同一値と不変、writer/全五sink null各先行0byte、五位置別元IOと処理prefix/後続未実行、runtime/Error元instance、partial書込元IOとprefix保持、入力snapshot変更隔離、独立sinkへの二度の値再利用（同じ外部処理の再送ではない）、固定redaction/拒否後正常、finite8worker64/Future5/finallyshutdownNow-await10。whole20新定義と既部品の必要union379=whole399を同sourceで閉じ、旧113/170等を成功確認だけで再演せず新aggregateの全caller/callee/class/sourceを一つのscopeに照合する。古いAudio profileのremoved SourceKey/FilePosition二classはSSC363の実source削除を根拠に新physicalへ混入せず、外部Code除外ではない。予想full21Main/35physicalはprepare実物と独立Code数で確定する。全Root静的/NullAway/lintWerror/CRC-init/単一exec/defaultと無filter四100・独立oracle・traceを維持。実DB/全ETL/Rootnative/CHR/全451/ITST/全HOLD未完。
+
+不足追加2.5/7.5/15ppは詳細＋PG/Test20 1.5/4.5/9cap10と必要normal399 1/3/6cap7の別群。元費用/SV上限保持・専有費token null、標準残904.85は原見積りとして保持。当global timestamp新aggregateは既一transaction設計の内部具体化でRD/UI変更/新QA不要。
+
+
 ## SSC363 Scenario内部複合キーと値契約（2026-11-14）
 
 BUG2901/YKT2431、NK-MIG-001、RD MIG-DAT005/FUN004/TST、UI223254、SS343 SSC344345/451。公開FilePair/MappedFile、IdPair/MappedEntry、Placement/PlacedEntryの全component同値/単一差/同一/null/別型をboolean literalで、hashを独立Pythonのlong xor32と31多項式による固定値で検証する。公開record/toString/redaction/constructor/例外/永続化値は変更しない。内部SourceKey/FilePositionだけはprivate recordの不要accessor/toString生成を避け、JDK List.ofの不変二要素Long keyへ置き換える。key1=(long gameId,currentFileId)、key2=(targetFileId,long entryIndex)、順固定・null無し・文字列連結無し。各domainの組識別/重複拒否/lookup/並び/不変性/資源操作0を保持し、外部へ内部keyを公開/診断しない。reflection/guard拡張/人工除外/coverage専用公開APIは追加しない。Listは実装内部の比較値でありpersisted hash/移行canonical IDへ利用しない。JDK boxed key allocationの性能実測は未、IT/ST合格へ変換しない。
