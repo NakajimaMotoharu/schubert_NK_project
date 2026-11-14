@@ -550183,7 +550183,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "8c3545bc49bf241158057d27c046117f239ba219e431cea94a3912a89180664a",
       "acceptance": "UNASSESSED",
-      "state": "PURE_COMPONENT_NORMAL12_FOUR100_FULL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-342",
       "testIds": "PT-MIG-ASSET001..012",
       "historicalPath": null,
@@ -550281,94 +550281,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -550379,15 +550392,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -550397,7 +550410,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
       "acceptance": "UNASSESSED",
-      "state": "PURE_COMPONENT_NORMAL12_FOUR100_FULL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-343",
       "testIds": "PT-MIG-ORDER001..012",
       "historicalPath": null,
@@ -550467,97 +550480,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -550568,15 +550591,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -550586,7 +550609,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
       "acceptance": "UNASSESSED",
-      "state": "PURE_COMPONENT_NORMAL12_FOUR100_FULL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-344",
       "testIds": "PT-MIG-FILEORDER001..012",
       "historicalPath": null,
@@ -550669,97 +550692,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -550770,15 +550803,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -550788,7 +550821,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
       "acceptance": "UNASSESSED",
-      "state": "NEW_COMPONENT12_AND_REQUIRED_CLOSED36_SINGLE_EXEC_FOUR100_FULL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-345",
       "testIds": "PT-MIG-PLACE001..012",
       "historicalPath": null,
@@ -550915,97 +550948,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -551016,15 +551059,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -551034,7 +551077,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
       "acceptance": "UNASSESSED",
-      "state": "PURE_COPY_TEXT_COMPONENT_NORMAL12_FOUR100_ACTUAL_DB_COPY_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-346",
       "testIds": "PT-MIG-COPY001..012",
       "historicalPath": null,
@@ -551118,97 +551161,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -551219,15 +551272,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -551237,7 +551290,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
       "acceptance": "UNASSESSED",
-      "state": "ROW12_AND_REQUIRED_ENCODER12_SINGLE_EXEC_FOUR100_ACTUAL_DB_COPY_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-347",
       "testIds": "PT-MIG-ROW001..012",
       "historicalPath": null,
@@ -551312,97 +551365,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -551413,15 +551476,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -551431,7 +551494,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
       "acceptance": "UNASSESSED",
-      "state": "BATCH12_AND_NEEDED_SUPPORT60_SINGLE_EXEC_FOUR100_ACTUAL_DB_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-348",
       "testIds": "PT-MIG-BATCH001..012",
       "historicalPath": null,
@@ -551524,97 +551587,107 @@
         "actualCost": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -551625,15 +551698,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -551643,7 +551716,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
       "acceptance": "UNASSESSED",
-      "state": "FILE_COPY_BATCH14_NEEDED_WHOLE38_SINGLE_EXEC_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-349",
       "testIds": "PT-MIG-FCOPY001..014",
       "historicalPath": null,
@@ -551727,97 +551800,107 @@
         "tokenTotals": null
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -551828,15 +551911,15 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       }
     },
     {
@@ -551844,9 +551927,9 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "e096aa9e248c7f9032b5cc588010c039f915e87a74463831d3d7790d00a79aca",
+      "sha256": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
       "acceptance": "UNASSESSED",
-      "state": "STREAM15_NEEDED_WHOLE113_SINGLE_EXEC_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-350",
       "testIds": "PT-MIG-DATASET001..012",
       "historicalPath": null,
@@ -552026,108 +552109,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -552143,7 +552236,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
       "acceptance": "UNASSESSED",
-      "state": "STREAM15_NEEDED_WHOLE113_SINGLE_EXEC_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-351",
       "testIds": "PT-MIG-STREAM001..012",
       "historicalPath": null,
@@ -552237,108 +552330,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2901_SSC363_SCENARIO16_NORMAL129_RAW122",
-        "source": "a7cd3daf395c07536e2dd10421b0173e703a265b",
-        "productionCoreMain": "1692e5cc019f9986a0a516bee2f45eb566dc77ca",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31504-scenario-generated129-fixed-post-v1/manifest.json",
-          "sha256": "ea59a34cddb604261fbb885ee3dff21b1eebb00f6230743def226c88429bcd96"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31508-scenario-generated129-unfiltered-recovered-parser-v1/manifest.json",
-          "sha256": "ad5c13334ecbf7d790869315a43bd5ea106a043d3f17dd2ec86eb3acfd7fb619"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 129,
-        "newUniqueTestDefinitions": 16,
-        "existingSupportDefinitions": 113,
-        "changedMainSources": 2,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allOther986MainBytesUnchanged": true,
-        "allOld113TestSourcesUnchanged": true,
-        "physicalClasses": 15,
-        "positiveMainCrc": 15,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 2172,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 283,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 451,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 233,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 88,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 15,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 2280
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 283
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 457
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 267
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 122
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 15
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 122,
-        "jacocoDefaultMethods": 88,
-        "all34DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
-        "privateRecordClassesRemoved": 2,
-        "privateGeneratedMethodsRemoved": 12,
-        "publicGeneratedGapMethodsExercised": 12,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "reflectionAdded": false,
-        "rawPmdFindings": 68,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
         "bugs": [
-          "BUG2901_SCENARIO18_CLOSED",
-          "BUG2902_LITERAL_CLOSED",
-          "BUG2903_SAVED_PARSER_CLOSED"
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
         ],
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -552352,9 +552455,9 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "8a2ca44cf03b1ea49acb4d09bb1aa6677925eb80c0d1629098d8efe48cb6d2e9",
+      "sha256": "eb4c1ed3a9df94ca25bd268d7c811d100d58a5fe084de000c4c2a357a3c7c448",
       "acceptance": "UNASSESSED",
-      "state": "TRANSFER38_NORMAL_MEMORY_JDBC_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-352",
       "testIds": "PT-MIG-STAGE001..018",
       "historicalPath": null,
@@ -552427,13 +552530,126 @@
       },
       "pendingTransferExtensionSSC353": false,
       "sha256Evidence": {
-        "scope": "CURRENT_SOURCE_HASH_MATCHES_QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31090-scenario-transfer38-nullable-fixed-post-v1/manifest.json",
-          "sha256": "bdaba9414746e67aa62017d96d7a59b3e2d44a69cfe48221f85fd95ce69dc7e4"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
-        "actualUnitSource": "b202a98a653a701395bc5aeca5cbbb616af2a96d",
-        "productionCoreMain": "d1f8a68ab2d7d98920d5d012cb4681dc2d3beb1f"
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
+      },
+      "componentGeneratedFullCodeQualification": {
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 6553,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 881,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1246,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 688,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 244,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 35,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6802
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 881
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1261
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 747
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 303
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 35
+          }
+        },
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "actualDbRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -552443,7 +552659,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "c113e3543a7f5a3bb8f0825607a8a166d77862fef507278821dd335a9c7682f0",
       "acceptance": "UNASSESSED",
-      "state": "AUDIO_ROW28_NORMAL_IMMUTABLE_VALUE_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-354",
       "testIds": "PT-MIG-AUDIOROW001..016",
       "historicalPath": null,
@@ -552515,13 +552731,126 @@
         "tokenTotals": null
       },
       "sha256Evidence": {
-        "scope": "CURRENT_SOURCE_HASH_MATCHES_QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31116-audio-copy-row28-post-v1/manifest.json",
-          "sha256": "6cae0cae4cafad7e958a5bb6d486b74540cf11c41ab1c53b974e93207f5b4d36"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
-        "actualUnitSource": "a07a02c8bc9aca20d4f0c5ac681955818925e8be",
-        "productionCoreMain": "8d59160afb99d71ecd3161d267f5a886134f7496"
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
+      },
+      "componentGeneratedFullCodeQualification": {
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 6553,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 881,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1246,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 688,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 244,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 35,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6802
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 881
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1261
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 747
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 303
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 35
+          }
+        },
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "actualDbRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -552529,9 +552858,9 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "8fe5de39c5b43d2756102afc19f1081bea880bb3a6e51ebe758c54bcc7f3165e",
+      "sha256": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
       "acceptance": "UNASSESSED",
-      "state": "AUDIO_DATASET120_NORMAL_IMMUTABLE_BORROWED_STREAMS_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-355",
       "testIds": "PT-MIG-AUDIODATA001..020",
       "historicalPath": null,
@@ -552622,13 +552951,126 @@
         "tokenTotals": null
       },
       "sha256Evidence": {
-        "scope": "CURRENT_SOURCE_HASH_MATCHES_QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31142-audio-dataset120-post-v1/manifest.json",
-          "sha256": "351e72754e4d6f8f301558941050f64aeff758dc0951e4a74ea92c349a8b4569"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
-        "actualUnitSource": "715c2d08dcc02806cf19e883d8bd0b7caaf40f2b",
-        "productionCoreMain": "095297607eb88fdb5ac8d1589b847ad46dbe4468"
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
+      },
+      "componentGeneratedFullCodeQualification": {
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 6553,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 881,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1246,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 688,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 244,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 35,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6802
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 881
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1261
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 747
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 303
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 35
+          }
+        },
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "actualDbRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -552638,7 +553080,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
       "acceptance": "UNASSESSED",
-      "state": "MUSIC_ID12_NORMAL_PURE_JAVA_FIXED_VECTORS_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-356",
       "testIds": "PT-MIG-MUSICID001..012",
       "historicalPath": null,
@@ -552710,105 +553152,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -552824,7 +553279,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
       "acceptance": "UNASSESSED",
-      "state": "MEDIA_ROW_NINE_GETTERS_NEEDED_BATCH88_FOUR100_GLOBAL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-357",
       "testIds": "PT-MIG-MEDIAROW001..020",
       "historicalPath": null,
@@ -552907,105 +553362,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -553021,7 +553489,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2",
       "acceptance": "UNASSESSED",
-      "state": "VIDEO_CATALOGUE80_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-358",
       "testIds": "PT-MIG-VIDEO001..024",
       "historicalPath": null,
@@ -553104,105 +553572,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -553216,9 +553697,9 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "53e1e0d10707853229ad0f776c5d06d57e6a2b1e987d3e6dd9fa3dcf7f3315b7",
+      "sha256": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
       "acceptance": "UNASSESSED",
-      "state": "MEDIA_BATCH88_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-359",
       "testIds": "PT-MIG-MEDIABATCH001..020",
       "historicalPath": null,
@@ -553301,105 +553782,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -553415,7 +553909,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
       "acceptance": "UNASSESSED",
-      "state": "MUSIC_PAIRING26_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-360",
       "testIds": "PT-MIG-MUSICPAIR001..026",
       "historicalPath": null,
@@ -553491,105 +553985,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -553605,7 +554112,7 @@
       "costOwner": "WBS-P019-03",
       "sha256": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
       "acceptance": "UNASSESSED",
-      "state": "MUSIC_CATALOGUE162_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-361",
       "testIds": "PT-MIG-MUSICCAT001..024",
       "historicalPath": null,
@@ -553694,105 +554201,118 @@
       "sha256Evidence": {
         "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "actualUnitSource": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
       },
       "componentGeneratedFullCodeQualification": {
-        "kind": "BUG2899_GENERATED_EIGHT_NORMAL170_RAW137",
-        "source": "86c0d1761da948650bfd1155def9e138d01cacb5",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31458-generated-contract170-post-v1/manifest.json",
-          "sha256": "20f4e2b9d559643bb626fb04f65330bfb011f9bc8593fb057f8e1843ca09c906"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
         "unfiltered": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31460-generated-contract170-unfiltered-measurement-v1/manifest.json",
-          "sha256": "6c302f708d7e6502d14d81576b9e1e303bdfa29879a61ea0b8948eef56f61d5b"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
         },
-        "tests": 170,
-        "newUniqueTestDefinitions": 8,
-        "existingSupportDefinitions": 162,
-        "newMainSources": 0,
-        "uniqueMainJavaDeltaFromInitial": 128,
-        "allMainBytesUnchanged": true,
-        "physicalClasses": 16,
-        "positiveMainCrc": 16,
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
         "defaultCoverage": {
           "INSTRUCTION": {
-            "covered": 3191,
+            "covered": 6553,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 415,
+            "covered": 881,
             "missed": 0
           },
           "LINE": {
-            "covered": 543,
+            "covered": 1246,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 323,
+            "covered": 688,
             "missed": 0
           },
           "METHOD": {
-            "covered": 112,
+            "covered": 244,
             "missed": 0
           },
           "CLASS": {
-            "covered": 16,
+            "covered": 35,
             "missed": 0
           }
         },
         "unfilteredCoverage": {
           "INSTRUCTION": {
             "missed": 0,
-            "covered": 3290
+            "covered": 6802
           },
           "BRANCH": {
             "missed": 0,
-            "covered": 415
+            "covered": 881
           },
           "LINE": {
             "missed": 0,
-            "covered": 546
+            "covered": 1261
           },
           "COMPLEXITY": {
             "missed": 0,
-            "covered": 348
+            "covered": 747
           },
           "METHOD": {
             "missed": 0,
-            "covered": 137
+            "covered": 303
           },
           "CLASS": {
             "missed": 0,
-            "covered": 16
+            "covered": 35
           }
         },
-        "actualJvmCodeMethods": 137,
-        "jacocoDefaultMethods": 112,
-        "all25DefaultFilteredMethodsExecuted": true,
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
         "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
         "manualCoverageExclusions": [],
         "rootFiltersChanged": false,
-        "generatedPolicyGloballyAccepted": false,
-        "rawPmdFindings": 64,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
         "applicable": 0,
         "unclassified": 0,
-        "productionNpeCatchAdded": false,
-        "standardEnumNonnullNegativeContractRetained": true,
-        "bug": "BUG2899_MANIFEST_SEVEN_METHODS_CLOSED",
-        "rollout": "YKT2431_OTHER_TARGETS_OPEN",
-        "otherSourceInventoryNature": "REGEX_CANDIDATES_PENDING_AST_NOT_CONFIRMED_BINARY_TARGET_COUNTS",
-        "otherSourceInventoryCandidateFiles": 383,
-        "otherSourceInventoryCandidateDeclarations": 539,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
         "actualDbRootNativeKeyVmAruOperations": 0,
         "newAcceptance": 0,
         "whole451Accepted": false,
@@ -553806,9 +554326,9 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "9ec4388aa677fda237fe370734505a9b1dc55b9618e72b0e91c6fde17772090d",
+      "sha256": "01fec6542b13ceb9afed9382e76803003604c22c59a90341a9557db93aaee3d9",
       "acceptance": "UNASSESSED",
-      "state": "ASSET_STAGING68_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-362",
       "testIds": "PT-MIG-ASSETSTAGE001..030",
       "historicalPath": null,
@@ -553882,13 +554402,126 @@
         "tokenTotals": null
       },
       "sha256Evidence": {
-        "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
         "post": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31426-asset-staging68-post-v1/manifest.json",
-          "sha256": "6b86c6ab7d97781c238b05e480fdbee2077c1c09459bf9ab032f91daa95d6dc5"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
         },
-        "actualUnitSource": "a13b227fda5ab99d81d18d2227a09d7129631c01",
-        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
+      },
+      "componentGeneratedFullCodeQualification": {
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 6553,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 881,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1246,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 688,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 244,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 35,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6802
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 881
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1261
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 747
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 303
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 35
+          }
+        },
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "actualDbRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
       }
     },
     {
@@ -553896,12 +554529,134 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": "82a1a0c871e059768ef391242988215742ff93c177482e39ac2022b5f023eb5f",
+      "sha256": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
       "acceptance": "NOT_RUN",
-      "state": "IMPLEMENTED_SOURCE_ONLY_NOT_QUALIFIED",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-364",
       "testIds": "PT-MIG-FIVE001..020",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentGeneratedFullCodeQualification": {
+        "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+        "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "tests": 403,
+        "newUniqueTestDefinitions": 4,
+        "aggregateDefinitionsPreviouslyNew20": 20,
+        "existingSupportDefinitions": 399,
+        "wholeMainFiles": 21,
+        "uniqueMainJavaDeltaFromInitial": 129,
+        "physicalClasses": 35,
+        "positiveMainCrc": 35,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 6553,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 881,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 1246,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 688,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 244,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 35,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 6802
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 881
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1261
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 747
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 303
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 35
+          }
+        },
+        "actualJvmCodeMethods": 303,
+        "jacocoDefaultMethods": 244,
+        "all59DefaultFilteredMethodsExecuted": true,
+        "defaultAndUnfilteredFour100": true,
+        "sourceCleanupScopesChanged": 6,
+        "productionSqlAndDiagnosticLiteralsUnchanged": true,
+        "allOld399TestBodiesUnchanged": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "privateReflectionAdded": false,
+        "rawPmdFindings": 185,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "bugs": [
+          "BUG2904_IMMUTABLE_FOUR_CLOSED",
+          "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+          "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+        ],
+        "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+        "pendingOriginalNormalEstimateCompletedOnce": {
+          "low": 1,
+          "base": 3,
+          "high": 6
+        },
+        "newCleanupReworkEstimateCompleted": {
+          "low": 0.5,
+          "base": 1.5,
+          "high": 3
+        },
+        "actualDbRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+          "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+          "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+        },
+        "actualUnitSource": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+        "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d"
+      }
     }
   ],
   "layouts": [
@@ -560223,6 +560978,115 @@
       "BUG2903_SAVED_PARSER_CLOSED"
     ],
     "rollout": "YKT2431_OTHER_TARGETS_OPEN",
+    "actualDbRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentMigration21Full403PG31568": {
+    "kind": "SSC364_365_366_FULL21_MIGRATION_COMPONENT_NORMAL403_RAW303",
+    "source": "443b9df7ec17ca2aaf0e8c025221279b905a19cf",
+    "productionCoreMain": "558312a2ed0226ea2fb76b46c13c2e6967791a4d",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31570-staging-cleanup403-post-v1/manifest.json",
+      "sha256": "0525035cd543e069e483c233d112e4606634fb9c530473ec8c62bfc8da2d2b44"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31572-staging-cleanup403-unfiltered-measurement-v1/manifest.json",
+      "sha256": "81038248c053cf8192eb4eabe307684043965c062fec5a38aa8e4eda1cb4614b"
+    },
+    "tests": 403,
+    "newUniqueTestDefinitions": 4,
+    "aggregateDefinitionsPreviouslyNew20": 20,
+    "existingSupportDefinitions": 399,
+    "wholeMainFiles": 21,
+    "uniqueMainJavaDeltaFromInitial": 129,
+    "physicalClasses": 35,
+    "positiveMainCrc": 35,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 6553,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 881,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 1246,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 688,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 244,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 35,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 6802
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 881
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1261
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 747
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 303
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 35
+      }
+    },
+    "actualJvmCodeMethods": 303,
+    "jacocoDefaultMethods": 244,
+    "all59DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "sourceCleanupScopesChanged": 6,
+    "productionSqlAndDiagnosticLiteralsUnchanged": true,
+    "allOld399TestBodiesUnchanged": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "privateReflectionAdded": false,
+    "rawPmdFindings": 185,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "bugs": [
+      "BUG2904_IMMUTABLE_FOUR_CLOSED",
+      "BUG2905_SIX_CLEANUP_SCOPES_CLOSED",
+      "BUG2906_SINGLE_PROOF_LABEL_CLOSED"
+    ],
+    "rollout": "YKT2431_OTHER_TARGETS_OPEN_YKT2436_SIX_CLEANUP_CLOSED",
+    "pendingOriginalNormalEstimateCompletedOnce": {
+      "low": 1,
+      "base": 3,
+      "high": 6
+    },
+    "newCleanupReworkEstimateCompleted": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3
+    },
     "actualDbRootNativeKeyVmAruOperations": 0,
     "newAcceptance": 0,
     "whole451Accepted": false,

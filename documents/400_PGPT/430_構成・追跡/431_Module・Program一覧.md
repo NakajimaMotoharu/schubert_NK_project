@@ -738,3 +738,6 @@ NK-OPS-001/StartupReleaseManifest.Contents、SYS002004/OPS009/UI251/SS342343/SSC
 ## 2026-11-07 Schema履歴九既PTの両待ち期限是正
 
 NK-OPS-001/NK-DAT-001、SchemaHistoryAdmission/Row/JdbcAdmissionFailures、DAT009/SYS002/UI212253/SS331343/SSC095129/PG-D1153、opsSchema001..009/0183680-3681、22664/22670/22680。全九再資格/新unique0、canonical ownerP01901・今回品質是正費F03、実DB/actual startup admission/全451未受入。
+
+
+SSC364/365/366、NK-MIG-001/WBS-P01903: MigrationCopyDataset constructor/scenario/audio/media/writeAll/toString→RD MIG-DAT001..005/MIG003005006/DAT004/FUN004→UI223227242254→SS311331343→PT-MIG-FIVE001..020/019055057。ScenarioStagingTablesとAssetStagingTablesのprepare/transfer/requireResult/closeStatement/closeResult→PT-MIG-CLEANUP001..004/既STAGE-TRANSFER-ASSETSTAGE全体→019056057。Core558312a2/Unit443b9df7・PG31568/570/572全21Main35class403同source/default244-raw303両四100。実DB/全ETL/global451は未受入。

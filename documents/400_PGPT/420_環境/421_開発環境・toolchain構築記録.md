@@ -511,3 +511,6 @@ Python host3.14、専用directory `/home/mini/codex/project1/work/toolchain/css-
 PG22826/22828/22834はhost既設`linux-libc-dev 7.0.0-42.42`、`libc6-dev 2.43-2ubuntu2.4`の公開`/usr/include/linux/stat.h`と`/usr/include/x86_64-linux-gnu/bits/stat.h`をread-onlyで使用した。入手元は当hostの既installed distro SDK packageで、今回download/installはしていない。Versionは`dpkg-query -W -f='${Package} ${Version}\n' linux-libc-dev libc6-dev`、原headerのhash・各site/値の独立式はOPS018 PG22826 manifest/PG22828 integerValueWitnessesに固定する。
 
 再確認は同commandとheaderのS_IFMT/S_IFREG/S_IFDIR/S_IFLNK/S_IRWXU等の定義をread-onlyで照合する。これはtarget guest/kernelやnative syscallの実測ではない。元Test compile/run/Root/VM/権限操作はHOLDのままで、再現の名目で実行しない。JDK25.0.4/既PMD7.28 patch/Checkstyle14.3/GJFとルールのversion・設定は不変、元source/失敗/成功manifestを上書きしない。
+
+
+2026-11-14 SSC365: JSR3053.0.2の既ローカル公開artifact（com.google.code.findbugs:jsr305:3.0.2、既provided spotbugs-annotations4.10.4のcompile推移依存）を閉鎖scopeのannotation classpathへ明示SHApin。新download/install/Production POM/GAV変更無し。四final COPY型の既deep-immutable契約をjavax.annotation.concurrent.Immutableで宣言し、method/Test body/解析rule/filterを変えずPG31564 rawSpotBugs-Missing-error0と全403で検証。artifact/POM path/version/hash・再現commandはPG31536/562manifest及びI2760profile。class注釈だけを不変性実証やPT合格へ読み替えない。

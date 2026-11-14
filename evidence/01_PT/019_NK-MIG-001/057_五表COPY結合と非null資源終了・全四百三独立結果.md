@@ -1,0 +1,7 @@
+# 五表COPY結合と非null資源終了・全403独立結果
+
+SSC364/365/366五表宣言結合＋staging全21MainをCore558312a2/Unit443b9df7で初閉鎖。PG31568新4＋必要399 whole403/FES0/真正0、PG31570全35CRC-init/既定I6553-L1246-M244-C35-B881 miss0、PG31572同singleexec無filterI6802-L1261-M303-C35-B881 miss0、生成差59methodも全実行。旧raw4I/12Bmissは六TWRを同じ非null資源/primary-suppressed順の明示型別closeへして解消、全SQL/診断literal・旧399Test本体不変、四二重故障Testで元primary/Result→Statementの二suppressed/close各一回/後続0。RootNullAway-lintWerror/CS-SB-Missing-error0、PMD185は旧Test163同byteprefix＋primarycatch12/cleanupcatch8/直接vendorStatement2のprivatefinally各根拠・適用未分類0、除外/抑制/filter/private反射0。BUG2905/YKT2436当六scope閉鎖、365不変注釈四型の既全Test実証/JSR305providedpin保持、2906単一proof label正数20へ訂正原記録保全。App125/6371/6342/歴史29・Main129/正本184-625/元190新0/正式1964-53/工数null。原normal1/3/6＋追加手戻り.5/1.5/3を一度だけ完了、実DB/全ETL/原本/Rootnative/CHR/global451/ITST/全HOLD未完。
+
+055のPT-MIG-FIVE001..020→MigrationCopyDatasetTest20、056のPT-MIG-CLEANUP001..004→ScenarioStagingTablesTest末尾2とAssetStagingTablesTest末尾2、元379＋集約20の399は旧body不変で必要全403。PG31546の399成功は歴史として保全し、未解決raw12B/4Iのまま原source全合格へ昇格しない。新Core558312a2の全35class/同execだけをPG31570/572で照合、過去Source/Core/execをunion0。
+
+実行日時/OS-JDK/tool/branch/fixedsource/command/終了code/fixture入力・独立literal expected・実JUnit actual・静的全raw/分類とdefault+raw全counter/BUG・SHAはPG31558/560..574manifest。五出力の正常/null前検査/例外prefix/borrowed資源/有限64、全二重closeのordered suppressed、Video20-Music129の全149literal等は各wholeTestの独立oracleを維持。正式1964/53・IT/STを更新しない。
