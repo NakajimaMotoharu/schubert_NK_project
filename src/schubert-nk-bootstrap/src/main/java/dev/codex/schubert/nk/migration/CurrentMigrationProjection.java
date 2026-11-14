@@ -30,11 +30,11 @@ public final class CurrentMigrationProjection {
         List<List<@Nullable String>> audio,
         List<List<@Nullable String>> links) {
       // Only the five final readers produce these already deep-immutable values. No public factory.
-      retainedSpeakers = speakers;
-      retainedFiles = files;
-      retainedEntries = entries;
-      retainedAudio = audio;
-      retainedLinks = links;
+      retainedSpeakers = List.copyOf(speakers);
+      retainedFiles = List.copyOf(files);
+      retainedEntries = List.copyOf(entries);
+      retainedAudio = List.copyOf(audio);
+      retainedLinks = List.copyOf(links);
     }
 
     public List<List<@Nullable String>> speakers() {
