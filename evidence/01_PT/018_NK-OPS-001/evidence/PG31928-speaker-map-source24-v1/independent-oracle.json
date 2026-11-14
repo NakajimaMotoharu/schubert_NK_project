@@ -1,0 +1,73 @@
+{
+  "actualExit": 0,
+  "origin": "Independent signed-long/primitive-32bit record hash, explicit canonical header and selected six-column to seven-column COPY literals",
+  "currentSelectedColumns": [
+    "id",
+    "game_id",
+    "name",
+    "normalized_name",
+    "is_protagonist",
+    "notes"
+  ],
+  "currentIdDomain": "full signed PostgreSQL bigint; no target N12 restriction on old ID",
+  "targetIdDomain": "1..999999999999",
+  "normalCurrentRows": [
+    [
+      "10",
+      "2",
+      "Bob",
+      "b o b",
+      "false",
+      ""
+    ],
+    [
+      "-20",
+      "1",
+      " Alice / label ",
+      "alice",
+      "true",
+      null
+    ]
+  ],
+  "expectedCanonical": "game_id\tcurrent_speaker_id\ttarget_speaker_id\n1\t-20\t700\n2\t10\t900\n",
+  "expectedCopy": "700\t1\t Alice / label \talice\ttrue\t\\N\t2026-01-02T03:04:05Z\n900\t2\tBob\tb o b\tfalse\t\t2026-01-02T03:04:05Z\n",
+  "expectedCopySha256": "5954362b9c855e5afbfe1d04917b3efa26fe14155896ea26f77629f02e653bce",
+  "recordHashVectors": [
+    {
+      "game": 1,
+      "current": -20,
+      "target": 700,
+      "hash": 2250
+    },
+    {
+      "game": 2,
+      "current": 10,
+      "target": 900,
+      "hash": 3132
+    },
+    {
+      "game": 1,
+      "current": -9223372036854775808,
+      "target": 999999999999,
+      "hash": 1420104408
+    },
+    {
+      "game": 2,
+      "current": 9223372036854775807,
+      "target": 1,
+      "hash": -2147481725
+    }
+  ],
+  "longHashCollision": [
+    {
+      "value": 1,
+      "hash": 1
+    },
+    {
+      "value": 4294967296,
+      "hash": 1
+    }
+  ],
+  "applicationTestsExecuted": 0,
+  "actualCurrentMasterOrDbRead": false
+}

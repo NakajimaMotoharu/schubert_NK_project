@@ -1,0 +1,50 @@
+{
+  "ssc": 375,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java",
+  "source": "4759dabb66e38eadf051c7423482c74b9591e1fc",
+  "title": "Current話者ID対応と既存列保持COPY変換",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311331/V002/343。SpeakerMigrationMapはCurrentの全体PK id→NK positiveN12 id対応と選択済み六列の変換を持つpure artifact。Current schema.speakersはid bigint PK（正値制約無し）、game/name/normalized_name/is_protagonist/notesと既created_atを持つ。generatorはname清掃/lower/主人公flagを既に保存し、検索候補は名前とentry件数で並ぶ。NKではname/normalized_name/flag/notesを既存列値から保持し、再split/strip/lower/主人公推測をしない。Current created_atは本六列projectionに含めず、既SSの他COPY rowと同じ移行transaction時刻をcallerが明示する。Current codeの実行、DB/master実体・dumpの読取り0。\n\npublic record SpeakerMapping(int gameId,long currentSpeakerId,long targetSpeakerId)はgame1/2とtarget1..999999999999だけを検証し、Current bigintは全signedlongをそのまま許す。global PKなのでCurrent IDはgameを跨ぎ一意、target IDも全体一意。Map constructorのnullable外List/nullable要素を固定IAEで拒否しsnapshot、重複二種を拒否、currentSpeakerIdのsigned比較昇順に固定した不変Listと不変lookup Mapを保持する。mappings()は不変値、targetSpeakerId(game,current)は既知IDかつ同gameだけを返し、未知/他gameは固定IAE。record toStringとMap toStringは固定REDACTED。generated equals/hashは独立primitive hash vector/全component差/null/otherType/selfで検証する。Currentidの正値制約やtarget大小順を候補表示へ追加しない。\n\ncanonicalBytes()はUTF8のheader game_id<TAB>current_speaker_id<TAB>target_speaker_id<LF>と、上記順のsigned decimal Current/positive targetの三列LFを毎回新byte[]で返す。空はheaderだけ。copyRows(nullable List of nullable six-column rows, nullable Instant migratedAt)は両null/時刻0001..9999年UTC・µs以下を最初に検証する。sourceの六列はid/game_id/name/normalized_name/is_protagonist/notes、bool文字は内部true/false。行数はmapping数と一致、row null/幅5-7/Current ID欠落・非正準signeddecimal・long overflow/未知/重複/game NULL不一致を拒否する。canonical Current数値は0又は負号付き非zero数字を含むLong.toStringの正準形とし、+・leadingzero・-0・空白を勝手に直さない。\n\n各source rowのidだけを対応targetへ、created_atだけを共通Instant.toStringへ置換し、他五列を既SpeakerCopyRowへそのまま渡す。Rowのnonnull/NFC/UTF8byte/boolean/notes/date拒否は元固定例外のまま保持、Map側でcatchして正常化しない。全known/unique/件数一致でmappingと行は全単射となるinvariantを確立し、mapping順に並べたSpeakerCopyBatchを返す。これによりPK/normalizedUK/sharedtimeとEntry参照の既契約を再利用する。欠落や衝突を推定修復/自動再採番/trim/case変換しない。\n\nPT-MIG-SPEAKERMAP001..024: 001 signed Current順canonical固定byte/任意target順、002空headerと空rows、003null list、004null element、005Current重複跨game、006target重複跨game、007record game/target境界とsigned Current両端、008lookup既知/未知/他game、009input snapshot/list immutable、010逆順六列をcanonical target batchへ変換・name空白/slash/norm/flag/NULLnotes保持・Entry FK接続、011raw list/row/Instant null、012row数/幅、013未知/重複Current、014canonical signed文字/0/MIN/MAX/overflow等、015game NULL/未知/不一致、016Row name/norm/bool/null/NFC/byte等元拒否、017Instant全時刻境界/µs超過、018normalized UK同game衝突と別game許容、019source row/input変更のsnapshot・deep immutable、020canonical返却byte所有、021record equals/hash全分岐の独立Python32bit固定vector、022Long hash衝突でもCurrent keyを混同しない、023redaction/失敗後fresh正常、024有限8workers64/Future5/finallyshutdownNow-await10。期待のmapping/header/COPY/primitive hashはProduction methodで生成しない。実Current175件/DB reader/Unicode実測は未受入。\n\n新24＋必要Speaker batch/reference132=whole156、全10Main17physical（新Map/record二class）を一source/一exec/Root全静的・NullAway-lintWerror/全CRC-init/default＋無filter全Code四100で検証する。旧29 migrationMain/既563Test source不変、既全543/hash403は成功確認再演しない。追加2.2/6.6/9.9pp cap10はPG/独立24と必要156/record契約を含み、元費用/SV/群開始保持、実専有費/token null。SS内のID対応具体化でRD/UI/DDL/grant変更・QA不要、ActualDB/master/SDK/Rootnative/CHR/global451/ITST/HOLD不変更。",
+  "testIds": "PT-MIG-SPEAKERMAP001..024",
+  "estimate": {
+    "low": 2.2,
+    "base": 6.6,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "074_Current話者ID対応と既存列保持COPY変換・独立二十四仕様.md",
+  "previousForecastName": "1911_WBS65予実・六表hash差分通常四百三後版526.json",
+  "forecastName": "1913_WBS65予実・話者ID対応不足追加版527.json",
+  "revision": "527-MISSING_SPEAKER_CURRENT_TARGET_MAP_AND_SIX_COLUMN_COPY",
+  "findingReason": "Qualified Speaker rows/batch preserve declared values but no Current-to-target speaker ID map or selected-current-column converter exists. Preserve already stored normalized/protagonist/notes values instead of re-deriving Python semantics; signed Current bigint versus positiveN12 target and global uniqueness follow source schema.",
+  "workId": "P01903_SSC375_SPEAKERMAP24_NORMAL156",
+  "planKey": "plannedSpeakerMigrationMapSSC375",
+  "startRecordName": "1914_WBS65話者ID対応製造通常開始.json",
+  "startInputName": "2839_speaker_map156_start.json",
+  "designSlot": "PG31924-ssc375-speaker-map-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343、Current code/schema source-only確認。global signed CurrentID→positiveN12 target/gameを一意対応、六選択列の既name/norm/flag/notes保持・共通Instantだけ付与。再lower/清掃0、public record独立hash/equalsと必要156。RD/UI/DDL/grant/QA変更不要、実175/DB/master/HOLD未受入。",
+  "moduleSummary": "bootstrap.migration.SpeakerMigrationMapとSpeakerMappingはCurrent ID→NK ID canonical対応とCurrent六選択列→SpeakerCopyBatch変換を持つ。固定redaction/全単射/null/時刻・Row invariant。PT-MIG-SPEAKERMAP001..024/全156/full10Main17physical、実Current/DB/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC375-SPEAKER-MAP24-NEEDED156-20261114",
+  "run": "PG31938-SPEAKER-MAP-CLOSED156",
+  "scope": "MissingSpeakerMigrationMap PG24+needed132whole156/full10Main17physical 2.2/6.6/9.9cap10. SignedglobalCurrentID/targetN12/immutablemap/canonical/sixselectedcolumnpreservation/Instant/recordvectors. NoactualCurrentmasterDBSDKRootnativeActual4aruHOLDactions; old29Main563Testsunchanged",
+  "nextCommand": "PublishSSC375SS311343914onlymainbeforePG. ImplementimmutableSpeakerMap24+independentcanonical/COPY/recordhashvectors/necessary156/Rootstatic/CRC-init/default-raw17allCode. PreserveCurrentstoredvalues; do not re-run source generator/readDB/master/HOLD. Ordinarygroupnotstop.",
+  "currentSourceAudit": [
+    {
+      "path": "/home/mini/codex/project1/schubert_project/program/database/generate_scenario_sql.py",
+      "sha256": "7d9a548cda6792340d960492351829589a3409e6edb775b10b26eac1a85f4686",
+      "sourceOnly": true,
+      "executed": false
+    },
+    {
+      "path": "/home/mini/codex/project1/schubert_project/program/database/schema.sql",
+      "sha256": "0b09b93a6fc5b07ccea762223c0236d7398dbf59ccca368a5f7e34b1c39b903d",
+      "sourceOnly": true,
+      "executed": false
+    },
+    {
+      "path": "/home/mini/codex/project1/schubert_project/program/app/src/main/java/dev/codex/schubert/repository/ScenarioRepository.java",
+      "sha256": "492c92b1c36549d38dda695efb5ad5881d6ccd1751197c734129fc0bfd609b3c",
+      "sourceOnly": true,
+      "executed": false
+    }
+  ]
+}
