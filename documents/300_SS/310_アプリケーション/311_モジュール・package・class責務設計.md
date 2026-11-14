@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC371: bootstrap.migration.MigrationMasterFinalizerは借用正規Connection上の五MAX照合→五Prepared setval→六限定ANALYZEを行う。nonnull cleanup/固定診断/自動再試行0。PT-MIG-FINAL001..028/全411/full23Main36physical。実DB/原本/復旧/HOLD未受入。
+
 SSC370: bootstrap.migration.MigrationMasterCopyDatasetはSpeaker batchと既五表datasetを不変保持、六表時刻/Entry FKと六借用stream前検証・順序を持つ。PT-MIG-MASTER001..020/必要383/full22Main35physical。実master/DB/全移行/HOLD未受入。
 
 SSC369: bootstrap.migration.SpeakerStagingTableはspeakers七列のCTAS/3count/large INSERT/nonnull資源終了を標準JDBCで持つ。Speaker先行→Scenario二表→Asset三表を同一借用Connectionで独立Proxy検証。実DB/Current175/driver COPY/全移行/Root/HOLD未受入。PT-MIG-SPEAKERSTAGE001..024/whole96/full3Main4physical。
