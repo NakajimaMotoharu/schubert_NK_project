@@ -1,0 +1,92 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG31424-ASSET-STAGING-FIVE-TABLE-CLOSED68",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/049_Asset三表stagingと転送・独立三十仕様.md",
+      "sha256": "082ee708bf8c184a08d0c860a8fc17164de8156135f04ca70ded8116414567a2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31412-asset-staging-source-thirty-v1/independent-ddl-columns.json",
+      "sha256": "5ef7ab334be7b48a3026cc71c1811afe63d9c7832f89fb762e2fbf48106170d9"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/031_Scenario二表転記・独立二十仕様.md",
+      "sha256": "25c06c2bb818a1e825af40cb55dc3f3767af8ecec6b54bd51c7ea29fedadd9ce"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31414-asset-staging-source-identity-v1/manifest.json",
+      "sha256": "37d72a54491debeebcad29b52fa3791de9bbbf852124724b96e61600955436dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31412-asset-staging-source-thirty-v1/manifest.json",
+      "sha256": "5535192ca66fa64ff55f6a6d94563bbf78a13bab6dde890d390db367df083d19"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31090-scenario-transfer38-nullable-fixed-post-v1/manifest.json",
+      "sha256": "bdaba9414746e67aa62017d96d7a59b3e2d44a69cfe48221f85fd95ce69dc7e4"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+      "tests": 30
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+      "tests": 38
+    }
+  ],
+  "expectedTests": 68,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG31416-asset-staging68-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG31418-asset-staging68-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG31420-asset-staging68-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG31422-asset-staging68-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG31424-asset-staging68-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG31426-asset-staging68-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg31418-asset-staging68-prepare-v1",
+    "unit": "pg31424-asset-staging68-unit-v1"
+  },
+  "newTestDefinitions": 30
+}
