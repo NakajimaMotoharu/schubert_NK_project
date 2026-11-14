@@ -1,5 +1,22 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC361 Music129宣言COPYと全media149結合（2026-11-14）
+
+UI223§7のCurrent129 Music metadataとSS34310.1.3/4をbootstrap.migration.MusicMigrationCatalogueへ結合する。RD MIG-DAT-004/MIG-DAT-005/MIG-003/MIG-005/MIG-006/DAT-004、UI223/242/243/254、SS311/331/333/343、WBS-P01903.02。129は承認済み移行基準件数であり、factoryへ入力した宣言metadataの件数条件。実Currentの129file採取・hash/size一致・原本/DB/公開を検証済みとはしない。
+
+copyRows(Nullable Map<Nullable String,Nullable Long> targetIds,Nullable AssetMigrationManifest declaredMusic,Nullable String createdAt)は三nullを固定IAE、manifestは全129件かつMUSICのみ、targetIdsも129entryで全生成MusicLogicalIdにnonnull正N12・target重複無しを要求する。map余分/未知/nullkey/欠落は129件数＋全129既知ID値検査で拒否する。SHA collisionも異なる宣言sourceから同じtarget IDを再使用できないため拒否される。実SHA衝突を合成/隠し依存で作らず重複IDの条件を試験する。NFC displayPathのSHA256安定IDとRow不変条件を再利用し、checked NoSuchAlgorithmExceptionは伝播、provider設定変更/fallback無し。
+
+pathは既Manifestの相対POSIX/NFC/scalar/control不変値。Current公開MusicService.track/titleForと同じくcategory=path先頭component、section=二component以上なら第2component（filename自体となる二component pathも現行どおり）、一componentなら空String。file_nameは最後component、titleはその最後dot位置が正なら拡張子を除いた値、dotが0ならfile_name全体。titleをpair表示用文字列へ書き換えず元track titleを保持し、既Web MusicTrackViewModel.displayTitleで現行表示になる契約を維持する。
+
+正UTF8のunsigned byte辞書順（Unicode codepoint順）に宣言sourceを並べ、category＋制御文字区切り＋sectionでgroupを分ける。非「曲」はそのgroupのpath順にrole N/key null/display_order1..を固定する。「曲」は同groupだけを既MusicMigrationCatalogueへ渡し、各pair順1..をMain M/Instrumental I双方に同じ値で保存、同じpairの両側へMain側優先の同じpair.keyを保存する。片側だけでもM又はIと同じkeyを保持する。別groupを混ぜず再推測しない。pair結果を元pathと照合するgroup走査で行を作り、nullable map lookupを正当な値と推定しない。Current duplicatekey上書きでshadowedPathsが非空、または空導出pair.keyなら、DB/M-Iの既制約と全129保持を同時に満たせないため当宣言candidateを固定IAEで拒否する。Nへの自動変更・削除・別key補完/新DIFは禁止。実Currentでその条件が発見された場合は保存/互換設計分類に従って当範囲を先行起票し、当unit成功で解決としない。
+
+各rowの十七列はtarget ID、安定logical ID、MUSIC、元title、derived category/section、Entry.targetPath、Entry.currentPath、元file_name、宣言size/sha、Current filename拡張子とSS333の閉MIME対応、parent null、上記key/role/order、共通createdAt。.m4a audio/mp4、.mp3 audio/mpeg、.ogg audio/ogg、.wav audio/wav、.flac audio/flac、他/大文字/拡張子無しを推測しない。target側の拡張子整合は既MediaRowでも検査、別形式へのrenameを通さない。size/全text/time/NFC/byte/strictV029はRowが検査する。全rowsはsource path Unicode codepoint順のimmutable Listで返す。これはCOPYの決定的順で、画面は保存display_orderと既SQLのcategory/section順を使う。toString/IAEは固定redacted。実FS/DB/Root/鍵/権限操作0。
+
+PT-MIG-MUSICCAT001..024は独立129metadata TSVと全17列wireをPython literal固定で用意する。全129行golden、既Video固定20＋Music129→MediaAssetCopyBatch全149行/借用writer全golden一往復、0/128/130件、三wrong kind、IDmap件数/未知/nullkey/nullvalue/非正/MAX/超過/重複、map/manifest順入替、category/section分離、exact/fuzzy/両missing側role/key/orderと元title維持、非曲roleN/path Unicode順、一/二component pathとdot0title、全五MIME/unknown/target不一致、size0/MAX/超過/宣言hash保持、time canonical年/µs/不正/null、shadowed両role、空導出key、三null境界、mutable入力/返却list深いimmutable/再呼出、返却byte所有、redaction/拒否後独立正常、finite8worker64/Future5/finallyshutdownNow-await10。path変更に必要な安定IDは別Python固定vectorを使いproduction expected呼出0。曲のgolden pairingは固定fixtureの手書きkey/role/order表、非曲順は独立Python codepoint sortで算出、既VideogoldenはUI223独立抽出の既fixtureを同byteで参照する。素材は全てsynthetic abc/既知sha/3byteの宣言だけ。
+
+新Catalogue24＋必要Pair26/Row20/Manifest12/MusicID12/codec12/Batch20/Writer12/Video24=whole162、全9Main16physicalを同source/一exec/通常Root静的/NullAway/lintWerror/独立CRC-init/XML/四100/実Codeで確認する。新24定義だけ、旧成功の確認再演や別source合算0。既Manifest生成差25は別/global451未承認、新Catalogueは手書きMainで新生成filter無し。追加不足2.5/7.5/15未較正を詳細+PG24 1.5/4.5/9cap10とnormal162 1/3/6cap7へ分離。元費用/SV上限保持、token/専有費null。実149素材/CurrentID対照/DB/全ETL/Rootnative/CHR/451全体/ITST/HOLDは未受入。
+
+
 ## SSC360 Music現行pair算出（2026-11-14）
 
 UI223§7の「曲」一group内の現行pair規則とCurrent公開MusicService.java trackPairs/displayTitle/pairKey/isInstrumental/removeClosestInstrumental/levenshteinDistanceを、純値bootstrap.migration.MusicMigrationPairingへ具体化する。RD MIG-DAT-004/MIG-DAT-005/MIG-003/MIG-005/MIG-006/FUN-008/DAT-004、UI223/242/243/254、SS311/331/34310.1.3/4。実129file/カテゴリsection分割/Current inventory/hash/安定ID/DB保存/全移行の受入は別。これは一つの「曲」groupの宣言displayPath→title mapだけを受ける算出部品で、別groupを混ぜず呼ぶのは上位assembly責務。
