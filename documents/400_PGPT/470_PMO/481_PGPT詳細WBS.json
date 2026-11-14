@@ -12504,7 +12504,8 @@
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
-        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java"
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java"
       ],
       "requirementIds": [
         "SCP-005",
@@ -12541,7 +12542,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -12710,6 +12712,14 @@
             "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31142-audio-dataset120-post-v1/manifest.json",
             "sha256": "351e72754e4d6f8f301558941050f64aeff758dc0951e4a74ea92c349a8b4569"
           }
+        },
+        "plannedMusicLogicalIdSSC356": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/037_Music安定logicalID・独立十二仕様.md",
+            "sha256": "8f431998358f228fe118b1dfe730824a3959e2d8bf427b120243cbc06a08a185"
+          },
+          "actualRuntimeQualification": false
         }
       },
       "acceptanceChecks": [

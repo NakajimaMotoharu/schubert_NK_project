@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC356: bootstrap.migration.MusicLogicalIdはUI242/SS34310.1.3のNFC display path UTF8と固定prefixによるSHA256 logical ID生成だけを所有。Java標準以外の業務API/Web/PG vendor依存を追加せず、Current対応/実DB/全ETLは上位。PT-MIG-MUSICID001..012。
+
 SSC355: bootstrap.migration.AudioCopyDatasetはSS34310.1.4/SS331/V002のaudio_files/entry_audio_linksを既EntryBatch・AudioRowへ結合しPK/UK/二FK/時刻を検証、既Writerへ二streamを渡す。業務API/Web/PG vendor SDK依存を追加せず、実DB/全ETLは上位。PT-MIG-AUDIODATA001..020。
 
 SSC354: bootstrap.migration.AudioFileCopyRowはSS34310.1.4/SS331/V002のaudio_files十二列値を検証し既PostgresCopyTextEncoderへ渡す。既存Scenario値/業務API/Web/PG vendor SDKへの依存を追加せず、実DB/全ETLは上位。PT-MIG-AUDIOROW001..016。

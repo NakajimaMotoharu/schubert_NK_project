@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T04:49:21.641946+00:00",
+  "generator": "Independent Python standard hashlib.sha256(prefixASCII + hand-authored canonicalInputUTF8), no production/Current method",
+  "python": "3.14.4",
+  "prefix": "SCHUBERT-NK:MUSIC:",
+  "prefixUtf8Bytes": 18,
+  "vectors": {
+    "ASCII": {
+      "canonicalInput": "music/a.ogg",
+      "inputUtf8Bytes": 11,
+      "expectedLowerHex": "0b9886db518de3252c15cefbe0e67016379c5fea7ee12a6d9c8c7f906efd3dcf"
+    },
+    "JAPANESE": {
+      "canonicalInput": "音楽/曲.flac",
+      "inputUtf8Bytes": 15,
+      "expectedLowerHex": "ae90358a4e9bfb4593d592f221bd62411bffc9d85f997245c117dce405c47edc"
+    },
+    "NFC": {
+      "canonicalInput": "é",
+      "inputUtf8Bytes": 2,
+      "expectedLowerHex": "a0e3ed7e4a5620e8d9050923635dba549756eb7575ad75dcefbe520bcb31ff33"
+    },
+    "PAIRED": {
+      "canonicalInput": "𝄞",
+      "inputUtf8Bytes": 4,
+      "expectedLowerHex": "0a5202230b75b53ae88582d923d197d17cabe1c3a993bfadd7f47da3f6964f1f"
+    },
+    "ASCII_ONE": {
+      "canonicalInput": "a",
+      "inputUtf8Bytes": 1,
+      "expectedLowerHex": "22a27e0afc7c8a6ea339deacf3269de47cd71e59447b1714226cd990a5b5d971"
+    },
+    "ASCII_MAX": {
+      "canonicalInput": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "inputUtf8Bytes": 512,
+      "expectedLowerHex": "5e97c9e1d45f44b9658ec35dc52fe8a58cd6b3963ff09b0fe947d6aecf0c43a8"
+    },
+    "NFC_MAX": {
+      "canonicalInput": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+      "inputUtf8Bytes": 512,
+      "expectedLowerHex": "f602e736c9998298f44a0ffb312ab098a712cb00448b5614eb8bd052f38e677d"
+    },
+    "SUPPLEMENTARY_MAX": {
+      "canonicalInput": "𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞𝄞",
+      "inputUtf8Bytes": 512,
+      "expectedLowerHex": "0564ecbbe255b5a8becc224a22b077fd71ac41592f1ffa5dd4f789e9ec0c4392"
+    }
+  },
+  "preservation": [
+    {
+      "canonicalInput": "a",
+      "expectedLowerHex": "22a27e0afc7c8a6ea339deacf3269de47cd71e59447b1714226cd990a5b5d971"
+    },
+    {
+      "canonicalInput": "A",
+      "expectedLowerHex": "0b5e0a998c8fb9958381cc9044d561d915cf8300a10b8e535dd64966b4dda823"
+    },
+    {
+      "canonicalInput": " a",
+      "expectedLowerHex": "72bd7c9b5ebe10f2b43814f97ca5ae476dc5768364c16eebeafbaa322e4b8d7a"
+    },
+    {
+      "canonicalInput": "a ",
+      "expectedLowerHex": "6d13a580ae9c243044dc2c9479d5288c84d1b54a805a184df62a68ed149d9ae0"
+    },
+    {
+      "canonicalInput": "a/b",
+      "expectedLowerHex": "bd15593951c05abc4932d39ef3c41e6a6edf9ccb0673363653a6df9372104897"
+    },
+    {
+      "canonicalInput": "a\\b",
+      "expectedLowerHex": "c3e2a9eb9caa35f960e2afd92ca111935063e1da031617b67ca3766058bad814"
+    },
+    {
+      "canonicalInput": "a.b",
+      "expectedLowerHex": "63d09ddc5c61a3fdb0bc6ea9edfdb58811ee620479d998c3b75618e628006371"
+    },
+    {
+      "canonicalInput": "a_b",
+      "expectedLowerHex": "a349cf8547e71f758a2942e195669f7c550688b2b9150d245a3b3cb404df33ce"
+    },
+    {
+      "canonicalInput": " ",
+      "expectedLowerHex": "2a8909b3d18256c82d8a0134097b9d8a6b29d49753f33fecdf5d76029c934126"
+    }
+  ],
+  "productionTestsExecuted": 0,
+  "realMasterOrSecretsUsed": false
+}
