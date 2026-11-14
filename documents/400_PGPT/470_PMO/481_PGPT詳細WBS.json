@@ -12502,7 +12502,8 @@
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
-        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java"
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java"
       ],
       "requirementIds": [
         "SCP-005",
@@ -12537,7 +12538,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -12680,6 +12682,14 @@
             "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31090-scenario-transfer38-nullable-fixed-post-v1/manifest.json",
             "sha256": "bdaba9414746e67aa62017d96d7a59b3e2d44a69cfe48221f85fd95ce69dc7e4"
           }
+        },
+        "plannedAudioRowSSC354": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/033_音声COPY行・独立十六仕様.md",
+            "sha256": "c88acd5645fe1191acc25c8a89a14a06560994434596240d03f4808103a70ddd"
+          },
+          "actualRuntimeQualification": false
         }
       },
       "acceptanceChecks": [

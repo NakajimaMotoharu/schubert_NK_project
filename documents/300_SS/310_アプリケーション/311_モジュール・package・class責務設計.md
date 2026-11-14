@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC354: bootstrap.migration.AudioFileCopyRowはSS34310.1.4/SS331/V002のaudio_files十二列値を検証し既PostgresCopyTextEncoderへ渡す。既存Scenario値/業務API/Web/PG vendor SDKへの依存を追加せず、実DB/全ETLは上位。PT-MIG-AUDIOROW001..016。
+
 SSC353: bootstrap.migration.ScenarioStagingTablesはSS34310.1.4の固定二temporary CTASとtarget空/六scalar・固定二INSERT/後条件だけを借用JDBC transactionへ発行。標準java.sql、業務API/Web/PG vendor SDK依存を追加せず、接続/transaction所有・全ETLは上位。PT-MIG-STAGE001..018/TRANSFER001..020。
 
 SSC352: bootstrap.migration.ScenarioStagingTablesはSS34310.1.4の固定二temporary CTASだけを借用JDBC transactionへ発行。標準java.sql、業務API/Web/PG vendor SDK依存を追加せず、接続/transaction所有・全ETLは上位。PT-MIG-STAGE001..018。
