@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC353: bootstrap.migration.ScenarioStagingTablesはSS34310.1.4の固定二temporary CTASとtarget空/六scalar・固定二INSERT/後条件だけを借用JDBC transactionへ発行。標準java.sql、業務API/Web/PG vendor SDK依存を追加せず、接続/transaction所有・全ETLは上位。PT-MIG-STAGE001..018/TRANSFER001..020。
+
 SSC352: bootstrap.migration.ScenarioStagingTablesはSS34310.1.4の固定二temporary CTASだけを借用JDBC transactionへ発行。標準java.sql、業務API/Web/PG vendor SDK依存を追加せず、接続/transaction所有・全ETLは上位。PT-MIG-STAGE001..018。
 
 SSC142（PG406、BUG402/YKT322）：SSC137のAPI/Web Rootは、SSC084で既に共用Bootstrapへ置いた固定role `api.bootstrap.ServiceDatabaseSource` をown roleの単独物理JDBC sourceとして再利用する。互換binary名はAPI artifact依存を意味しない。Batchの閉鎖import検査はこの一型と既存ApiNonSecretConfigを明示参照し、実Bootstrap source所属と既定POM依存集合を独立照合する。wildcard・API業務class・任意Source/role・BootstrapへのHTTP/JMS追加は許可しない。普通API/Web private credential reader・role契約は不変更、RootのDB/秘密/resource寿命はSS342/343・PT297で別検証する。
