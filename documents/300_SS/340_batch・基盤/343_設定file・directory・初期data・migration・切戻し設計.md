@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC381 カラム属性照合をstaging前の同Connection経路へ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT004/TST/UI242254/SS311331/V002/343 SSC379380。既MigrationMasterTargetPublisher.prepareのnull前検証後、同一借用Connectionで既MigrationMasterColumnVerifier.verifyを一回実行してからSpeaker→Scenario→Assetの六CTASへ進む。六表66カラム属性が不成立なら一時table作成0、後続transfer/Reference/Content/Finalizerを発行しない。callerが正規に行うCOPY/認証/停止排他と、transferAndFinalizeのReference→Content→Finalizerは不変更。接続取得/close/commit/rollback/setRole/設定変更/再試行0、新しい別publisher/実起動経路は作らない。
+
+固定経路はcatalog6→prepare6→transfer24→reference16→content6→finalizer16の全74SQL。scalar44＋typed content6＋catalog6=56Result、ordinary Statement10＋Prepared5=15close/timeout、autoCommit読取10、catalog/contentのfetch1000各一回。空masterでもschema66属性は必須で、contentは空next=false六件/五setval1falseを維持する。列属性資格はconstraint validated/生成式実値/index/roleを保証せず、これらと実DB/COPY/原本Current/全移行/Rootnative/CHR/global451/ITST/HOLDは未受入のまま。
+
+独立時系列はOWNER_START=[0,6,7,9,12,16,24,36,52,58]、closeSQLPrefix=[6,7,9,12,16,24,36,52,58,64,65,66,67,68,74]、closeResultCount=[6,6,6,6,9,15,24,40,46,52,53,54,55,56,56]、Prepared最初close9/outer最後14、setval先頭SQL63/ANALYZE68。scalar array44値/順は不変、scalarSqlIndexはcatalog/typedContent SELECTを除外する。既PT-MIG-TARGET001..024をこの新phase位置へ対応し、旧各入力/期待値とSource primary自己identity是正を保持する。既68SQL/50Result/14closeは歴史component資格であり新sourceへ合算しない。
+
+追加PT-MIG-TARGET025..032: 025全六catalog SQL三fault型とDDL0、026全66属性の型/名前/NN/identity/generated/ordinal等各不一致がCTAS前拒否、027六nullResultと正確資源tuple、028各table列欠落/余剰と余剰fieldread0、029全66×metadata SQLNULL/int/bool即時wasNull/空flag区別、030各catalog getter三fault型とResult→Statement suppressed/一回close、031正常66×7=462 metadataとcontent65/scalar44の分離・56Result/15close/同Connection/借用mutation0、032finite8workers64のcatalog不一致がDDL0・後続0で有限終了/Future5/finallyshutdownNow-await10。新fixtureはV002＋2901独立66属性matrixの明示値/SQLから作成し、Production methodからexpectedを生成しない。
+
+変更は既publisher一Main/既Target Test24のphase model更新＋新8。旧589＋既Column22＋新8=whole619、全30Main44physical（旧29Main43＋既Column一class）を同source/一exec/RootNullAway-lint-CS-SB-PMD個別適用性/全CRC-init/既定と無filter四100で検証。他32Main/他旧Test675定義はTarget Test以外同byte、新Main0。追加接続不足3.2/9.6/9.9pp cap10、元費用/SV/群開始保持・実専有費token null、新業務scope0。SS内部具体化でRD/UI/DDL/grant/QA変更不要、実DB/driver/Rootnative等HOLDを解除せず成功確認目的の旧589/22再演ではなく変更経路の必要再資格とする。
+
 ## SSC380 六表六十六カラムの型・属性catalog照合（2026-11-15）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331/V002/343。MigrationMasterColumnVerifierはcallerが既に正規認証・停止排他・TXを所有する借用Connectionに対する固定六SELECTで、speakers7/script_files11/script_entries13/audio_files12/media_assets17/entry_audio_links6の全66物理カラム属性を照合する。既COPY65列にgenerated body_search一列を加える。実DB接続・driver・catalog/role変更・Rootnative等HOLDは解除せず、通常PTは明示JDK Proxyだけ。

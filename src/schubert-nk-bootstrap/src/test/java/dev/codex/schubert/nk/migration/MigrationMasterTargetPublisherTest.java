@@ -25,8 +25,8 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * PT-MIG-TARGET001..024; independent 68 SQL/44 scalar plus six typed result vectors, memory-only
- * borrowed JDBC.
+ * PT-MIG-TARGET001..032; independent74 SQL/44 scalar, content6 and catalog6 result vectors,
+ * memory-only borrowed JDBC.
  */
 final class MigrationMasterTargetPublisherTest {
   private static final String TRUE_TEXT = "true";
@@ -45,39 +45,127 @@ final class MigrationMasterTargetPublisherTest {
   private static final String TARGET_VIDEO = "video/a.mp4";
   private static final String VIDEO = "VIDEO";
   private static final String SPEAKER_ID = "42";
-  private static final int PREPARE_END = 6;
-  private static final int TRANSFER_END = 30;
-  private static final int REFERENCE_END = 46;
-  private static final int CONTENT_END = 52;
+  private static final int PREPARE_END = 12;
+  private static final int TRANSFER_END = 36;
+  private static final int REFERENCE_END = 52;
+  private static final int CONTENT_END = 58;
   private static final int CONTENT_TABLES = 6;
+  private static final int CATALOG_TABLES = 6;
+  private static final int CATALOG_END = 6;
+  private static final int CATALOG_COLUMNS = 66;
+  private static final int CATALOG_FIELDS = 7;
   private static final int CONTENT_COLUMNS = 65;
-  private static final int RESULTS = 50;
-  private static final int CLOSES = 14;
-  private static final int CONTENT_CLOSE = 7;
+  private static final int RESULTS = 56;
+  private static final int CLOSES = 15;
+  private static final int CONTENT_CLOSE = 8;
   private static final String GET_LONG = "getLong";
   private static final String GET_INT = "getInt";
   private static final String GET_BOOLEAN = "getBoolean";
   private static final String GET_TIMESTAMP = "getTimestamp";
   private static final String GET_STRING = "getString";
-  private static final int SETVAL_FIRST = 57;
-  private static final int ANALYZE_FIRST = 62;
-  private static final int SQL_COUNT = 68;
+  private static final int SETVAL_FIRST = 63;
+  private static final int ANALYZE_FIRST = 68;
+  private static final int SQL_COUNT = 74;
   private static final int SCALARS = 44;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
   private static final int REFERENCE_SCALARS_END = 34;
   private static final int SETVAL_SCALAR_FIRST = 39;
-  private static final int PREPARED_FIRST_CLOSE = 8;
-  private static final int OUTER_FINAL_CLOSE = 13;
+  private static final int PREPARED_FIRST_CLOSE = 9;
+  private static final int OUTER_FINAL_CLOSE = 14;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
-  private static final List<Integer> OWNER_START = List.of(0, 1, 3, 6, 10, 18, 30, 46, 52);
+  private static final List<Integer> OWNER_START = List.of(0, 6, 7, 9, 12, 16, 24, 36, 52, 58);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(1, 3, 6, 10, 18, 30, 46, 52, 58, 59, 60, 61, 62, 68);
+      List.of(6, 7, 9, 12, 16, 24, 36, 52, 58, 64, 65, 66, 67, 68, 74);
   private static final List<Integer> CLOSE_RESULTS =
-      List.of(0, 0, 0, 3, 9, 18, 34, 40, 46, 47, 48, 49, 50, 50);
+      List.of(6, 6, 6, 6, 9, 15, 24, 40, 46, 52, 53, 54, 55, 56, 56);
+  private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t";
+  private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t";
+  private static final List<String> CATALOG_SQL =
+      List.of(
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum");
+  private static final List<List<String>> CATALOG_ROWS =
+      List.of(
+          List.of(
+              CATALOG_IDENTITY_COLUMN,
+              CATALOG_GAME_COLUMN,
+              "3\tname\ttext\ttext\ttrue\t\t",
+              "4\tnormalized_name\ttext\ttext\ttrue\t\t",
+              "5\tis_protagonist\tbool\tboolean\ttrue\t\t",
+              "6\tnotes\ttext\ttext\tfalse\t\t",
+              "7\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              CATALOG_IDENTITY_COLUMN,
+              CATALOG_GAME_COLUMN,
+              "3\tdisplay_order\tint8\tbigint\ttrue\t\t",
+              "4\tstorage_relative_path\ttext\ttext\ttrue\t\t",
+              "5\tdisplay_path\ttext\ttext\ttrue\t\t",
+              "6\tfile_name\ttext\ttext\ttrue\t\t",
+              "7\tsection_code\tvarchar\tcharacter varying(64)\tfalse\t\t",
+              "8\tchapter_title\ttext\ttext\tfalse\t\t",
+              "9\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
+              "11\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              CATALOG_IDENTITY_COLUMN,
+              CATALOG_GAME_COLUMN,
+              "3\tscript_file_id\tint8\tbigint\ttrue\t\t",
+              "4\tdisplay_order\tint8\tbigint\ttrue\t\t",
+              "5\tentry_index\tint4\tinteger\ttrue\t\t",
+              "6\tline_number\tint4\tinteger\tfalse\t\t",
+              "7\tentry_type\tvarchar\tcharacter varying(9)\ttrue\t\t",
+              "8\tspeaker_id\tint8\tbigint\tfalse\t\t",
+              "9\tspeaker_label\ttext\ttext\tfalse\t\t",
+              "10\tbody\ttext\ttext\ttrue\t\t",
+              "11\tbody_search\ttext\ttext\tfalse\t\ts",
+              "12\traw_block\ttext\ttext\ttrue\t\t",
+              "13\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              CATALOG_IDENTITY_COLUMN,
+              CATALOG_GAME_COLUMN,
+              "3\tstorage_relative_path\ttext\ttext\ttrue\t\t",
+              "4\tdisplay_path\ttext\ttext\ttrue\t\t",
+              "5\tfile_name\ttext\ttext\ttrue\t\t",
+              "6\tbasename\ttext\ttext\ttrue\t\t",
+              "7\taudio_role\tvarchar\tcharacter varying(8)\ttrue\t\t",
+              "8\tcontainer\tvarchar\tcharacter varying(16)\tfalse\t\t",
+              "9\tduration_ms\tint8\tbigint\tfalse\t\t",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
+              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
+              "12\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              CATALOG_IDENTITY_COLUMN,
+              "2\tlogical_id\tvarchar\tcharacter varying(64)\ttrue\t\t",
+              "3\tmedia_type\tvarchar\tcharacter varying(8)\ttrue\t\t",
+              "4\ttitle\ttext\ttext\ttrue\t\t",
+              "5\tcategory\ttext\ttext\ttrue\t\t",
+              "6\tsection\ttext\ttext\tfalse\t\t",
+              "7\tstorage_relative_path\ttext\ttext\ttrue\t\t",
+              "8\tdisplay_path\ttext\ttext\ttrue\t\t",
+              "9\tfile_name\ttext\ttext\ttrue\t\t",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
+              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
+              "12\tmime_type\tvarchar\tcharacter varying(64)\ttrue\t\t",
+              "13\tparent_logical_id\tvarchar\tcharacter varying(64)\tfalse\t\t",
+              "14\tpair_key\ttext\ttext\tfalse\t\t",
+              "15\tpair_role\tbpchar\tcharacter(1)\tfalse\t\t",
+              "16\tdisplay_order\tint4\tinteger\ttrue\t\t",
+              "17\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+          List.of(
+              "1\tentry_id\tint8\tbigint\ttrue\t\t",
+              "2\taudio_file_id\tint8\tbigint\ttrue\t\t",
+              "3\tgame_id\tint2\tsmallint\ttrue\t\t",
+              "4\tlink_type\tvarchar\tcharacter varying(5)\ttrue\t\t",
+              "5\tdisplay_order\tint2\tsmallint\ttrue\t\t",
+              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"));
   private static final List<String> CONTENT_SQL =
       List.of(
           "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
@@ -91,6 +179,12 @@ final class MigrationMasterTargetPublisherTest {
           "LISSBST", "LILSSSSSSLT", "LILLIISLSSST", "LISSSSSSLLST", "LSSSSSSSSLSSSSSIT", "LLISIT");
   private static final List<String> SQL =
       List.of(
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO DATA",
           "CREATE TEMP TABLE nk_mig_script_files ON COMMIT DROP AS SELECT id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at FROM schubert.script_files WITH NO DATA",
           "CREATE TEMP TABLE nk_mig_script_entries ON COMMIT DROP AS SELECT id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at FROM schubert.script_entries WITH NO DATA",
@@ -165,14 +259,14 @@ final class MigrationMasterTargetPublisherTest {
   };
 
   @Test
-  void target001OneConnectionFixedSixtyEightSqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedSeventyFourSqlAndExactResources() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
     assertEquals(RESULTS, f.resultCloses);
     assertEquals(CLOSES, f.closeAttempts);
-    assertEquals(9, f.autoReads);
-    assertEquals(9, f.statementCreates);
+    assertEquals(10, f.autoReads);
+    assertEquals(10, f.statementCreates);
     assertEquals(5, f.preparedCreates);
     assertEquals(5, f.preparedExecutions);
     assertEquals(6, f.analyzes);
@@ -276,8 +370,8 @@ final class MigrationMasterTargetPublisherTest {
                 failure.getClass(),
                 () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
         assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
-        assertEquals(SETVAL_SCALAR_FIRST + CONTENT_TABLES + slot, f.resultCloses);
-        assertEquals(10 + slot, f.closeAttempts);
+        assertEquals(SETVAL_SCALAR_FIRST + CONTENT_TABLES + CATALOG_TABLES + slot, f.resultCloses);
+        assertEquals(11 + slot, f.closeAttempts);
         assertEquals(slot + 1, f.preparedExecutions);
         assertEquals(0, f.analyzes);
       }
@@ -292,7 +386,7 @@ final class MigrationMasterTargetPublisherTest {
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       int sqlIndex = scalarSqlIndex(query);
       assertEquals(SQL.subList(0, sqlIndex + 1), f.sql);
-      assertEquals(query + 1, f.resultCloses);
+      assertEquals(CATALOG_TABLES + query + 1, f.resultCloses);
       assertEquals(ordinaryOwnersThrough(sqlIndex), f.closeAttempts);
       assertEquals(0, f.preparedExecutions);
     }
@@ -306,8 +400,8 @@ final class MigrationMasterTargetPublisherTest {
       assertThrows(
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       assertEquals(SQL.subList(0, scalarSqlIndex(query) + 1), f.sql);
-      assertEquals(query + 1, f.resultCloses);
-      assertEquals(7, f.closeAttempts);
+      assertEquals(CATALOG_TABLES + query + 1, f.resultCloses);
+      assertEquals(8, f.closeAttempts);
       assertEquals(0, f.preparedExecutions);
       assertEquals(0, f.analyzes);
     }
@@ -322,7 +416,7 @@ final class MigrationMasterTargetPublisherTest {
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
       assertEquals(slot + 1, f.preparedExecutions);
-      assertEquals(10 + slot, f.closeAttempts);
+      assertEquals(11 + slot, f.closeAttempts);
       assertEquals(0, f.analyzes);
     }
     for (int slot = 0; slot < 6; slot++) {
@@ -369,7 +463,7 @@ final class MigrationMasterTargetPublisherTest {
       var result = new SQLException("synthetic inner close");
       var outer = new IllegalStateException("synthetic statement close");
       f.extraResult = result;
-      f.badClose = 3;
+      f.badClose = 4;
       f.closeFailure = outer;
       assertSame(
           primary,
@@ -377,9 +471,9 @@ final class MigrationMasterTargetPublisherTest {
               primary.getClass(),
               () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
       assertEquals(List.of(result, outer), List.of(primary.getSuppressed()));
-      assertEquals(SQL.subList(0, 7), f.sql);
-      assertEquals(1, f.resultCloses);
-      assertEquals(4, f.closeAttempts);
+      assertEquals(SQL.subList(0, 13), f.sql);
+      assertEquals(CATALOG_TABLES + 1, f.resultCloses);
+      assertEquals(5, f.closeAttempts);
       assertEquals(0, f.preparedExecutions);
     }
   }
@@ -523,7 +617,7 @@ final class MigrationMasterTargetPublisherTest {
     assertEquals(SCALARS, f.scalarReads);
     assertEquals(RESULTS, f.resultCloses);
     assertEquals(CLOSES, f.closeAttempts);
-    assertEquals(List.of(1000), f.fetchSizes);
+    assertEquals(List.of(1000, 1000), f.fetchSizes);
     assertEquals(SQL, f.sql);
     assertEquals(SPEAKER_ID, declared.speakers().rows().getFirst().fields().getFirst());
   }
@@ -548,17 +642,188 @@ final class MigrationMasterTargetPublisherTest {
                   return f.closeAttempts;
                 }));
       }
-      for (var future : futures) assertEquals(8, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      for (var future : futures) assertEquals(9, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
   }
 
+  @Test
+  void target025AllCatalogSqlFaultsPreventAnyStagingDdl() throws Exception {
+    sqlFailures(0, CATALOG_END);
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      var f = new Fixture();
+      f.badSql = table;
+      Throwable primary = f.failure;
+      assertSame(
+          primary,
+          assertThrows(
+              primary.getClass(),
+              () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
+      catalogFailurePost(f, table, false);
+    }
+  }
+
+  @Test
+  void target026AllSixtySixColumnAttributesMismatchBeforeDdl() throws Exception {
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
+        for (int field = 0; field < CATALOG_FIELDS; field++) {
+          var f = new Fixture();
+          f.badCatalogTable = table;
+          f.badCatalogRow = row;
+          f.badCatalogField = field;
+          assertThrows(
+              SQLException.class,
+              () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+          catalogFailurePost(f, table, true);
+        }
+      }
+    }
+  }
+
+  @Test
+  void target027NullCatalogResultHasOnlyPreviousResultOwnership() throws Exception {
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      var f = new Fixture();
+      f.nullCatalogResult = table;
+      assertThrows(
+          SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+      catalogFailurePost(f, table, false);
+    }
+  }
+
+  @Test
+  void target028MissingExtraCatalogColumnsHaveNoExtraFieldRead() throws Exception {
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      for (boolean missing : List.of(true, false)) {
+        var f = new Fixture();
+        if (missing) f.missingCatalog = table;
+        else f.extraCatalog = table;
+        assertThrows(
+            SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+        int expected =
+            CATALOG_ROWS.subList(0, table + 1).stream().mapToInt(List::size).sum() * CATALOG_FIELDS;
+        assertEquals(expected - (missing ? CATALOG_FIELDS : 0), f.catalogFieldReads);
+        catalogFailurePost(f, table, true);
+      }
+    }
+  }
+
+  @Test
+  void target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty() throws Exception {
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
+        for (int field = 0; field < CATALOG_FIELDS; field++) {
+          var f = new Fixture();
+          f.badCatalogTable = table;
+          f.badCatalogRow = row;
+          f.badCatalogField = field;
+          f.nullCatalogValue = true;
+          assertThrows(
+              SQLException.class,
+              () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+          catalogFailurePost(f, table, true);
+        }
+      }
+    }
+  }
+
+  @Test
+  void target030EveryCatalogGetterKeepsPrimaryThenBothCleanupIdentities() throws Exception {
+    for (int table = 0; table < CATALOG_TABLES; table++) {
+      for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
+        for (int field = 0; field < CATALOG_FIELDS; field++) {
+          for (Throwable primary : failures()) {
+            var f = new Fixture();
+            f.badCatalogTable = table;
+            f.badCatalogRow = row;
+            f.badCatalogField = field;
+            f.failCatalogRead = true;
+            f.failure = primary;
+            var inner = new SQLException("synthetic catalog close");
+            var outer = new IllegalStateException("synthetic catalog statement close");
+            f.extraResult = inner;
+            f.badClose = 0;
+            f.closeFailure = outer;
+            assertSame(
+                primary,
+                assertThrows(
+                    primary.getClass(),
+                    () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
+            assertEquals(2, primary.getSuppressed().length);
+            assertSame(inner, primary.getSuppressed()[0]);
+            assertSame(outer, primary.getSuppressed()[1]);
+            catalogFailurePost(f, table, true);
+          }
+        }
+      }
+    }
+  }
+
+  @Test
+  void target031CatalogContentScalarResultsKeepSeparateOwnershipAndCounts() throws Exception {
+    var f = new Fixture();
+    workflow(new MigrationMasterTargetPublisher(), f, normal());
+    assertEquals(CATALOG_COLUMNS * CATALOG_FIELDS, f.catalogFieldReads);
+    assertEquals(CONTENT_COLUMNS, f.contentFieldReads);
+    assertEquals(SCALARS, f.scalarReads);
+    assertEquals(RESULTS, f.resultCloses);
+    assertEquals(CLOSES, f.closeAttempts);
+    assertEquals(List.of(1000, 1000), f.fetchSizes);
+    assertEquals(SQL, f.sql);
+  }
+
+  @Test
+  void target032FiniteCatalogFailureCannotReachDdlOrRetainResources() throws Exception {
+    var publisher = new MigrationMasterTargetPublisher();
+    var declared = normal();
+    var executor = Executors.newFixedThreadPool(WORKERS);
+    try {
+      var futures = new ArrayList<Future<Integer>>();
+      for (int index = 0; index < TASKS; index++) {
+        int table = index % CATALOG_TABLES;
+        futures.add(
+            executor.submit(
+                () -> {
+                  var f = new Fixture();
+                  f.badCatalogTable = table;
+                  f.badCatalogRow = 0;
+                  f.badCatalogField = 1;
+                  assertThrows(SQLException.class, () -> workflow(publisher, f, declared));
+                  catalogFailurePost(f, table, true);
+                  return f.closeAttempts;
+                }));
+      }
+      for (var future : futures) assertEquals(1, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  private static void catalogFailurePost(Fixture f, int table, boolean ownedResult) {
+    assertEquals(CATALOG_SQL.subList(0, table + 1), f.sql);
+    assertEquals(table + (ownedResult ? 1 : 0), f.resultCloses);
+    assertEquals(1, f.closeAttempts);
+    assertEquals(0, f.preparedCreates);
+    assertEquals(0, f.preparedExecutions);
+    assertEquals(0, f.analyzes);
+    assertTrue(
+        f.sql.stream()
+            .noneMatch(
+                query ->
+                    query.startsWith("CREATE ")
+                        || query.startsWith("INSERT ")
+                        || query.startsWith("ANALYZE ")));
+  }
+
   private static void contentFailurePost(Fixture f, int table, boolean ownedResult) {
     assertEquals(SQL.subList(0, REFERENCE_END + table + 1), f.sql);
-    assertEquals(REFERENCE_SCALARS_END + table + (ownedResult ? 1 : 0), f.resultCloses);
-    assertEquals(8, f.closeAttempts);
+    assertEquals(
+        REFERENCE_SCALARS_END + CATALOG_TABLES + table + (ownedResult ? 1 : 0), f.resultCloses);
+    assertEquals(9, f.closeAttempts);
     assertEquals(0, f.preparedCreates);
     assertEquals(0, f.preparedExecutions);
     assertEquals(0, f.analyzes);
@@ -677,7 +942,10 @@ final class MigrationMasterTargetPublisherTest {
   private static int scalarSqlIndex(int query) {
     return IntStream.range(0, SQL_COUNT)
         .filter(
-            index -> SQL.get(index).startsWith("SELECT ") && !CONTENT_SQL.contains(SQL.get(index)))
+            index ->
+                SQL.get(index).startsWith("SELECT ")
+                    && !CONTENT_SQL.contains(SQL.get(index))
+                    && !CATALOG_SQL.contains(SQL.get(index)))
         .skip(query)
         .findFirst()
         .orElseThrow();
@@ -720,6 +988,15 @@ final class MigrationMasterTargetPublisherTest {
     private boolean empty;
     private boolean autoCommit;
     private int badContentTable = -1;
+    private int badCatalogTable = -1;
+    private int badCatalogRow = -1;
+    private int badCatalogField = -1;
+    private int nullCatalogResult = -1;
+    private int missingCatalog = -1;
+    private int extraCatalog = -1;
+    private boolean nullCatalogValue;
+    private boolean failCatalogRead;
+    private int catalogFieldReads;
     private int badContentColumn = -1;
     private int nullContentResult = -1;
     private int missingContent = -1;
@@ -801,13 +1078,13 @@ final class MigrationMasterTargetPublisherTest {
                     int operation = sql.size();
                     assertTrue(
                         operation < PREPARE_END
-                            || List.of(14, 15).contains(operation)
+                            || List.of(20, 21).contains(operation)
                             || operation >= ANALYZE_FIRST);
                     recordSql(update);
                     if (update.startsWith("ANALYZE ")) analyzes++;
                     return update.startsWith("INSERT INTO ") ? (empty ? 0 : 1) : 0;
                   case "executeLargeUpdate":
-                    assertTrue(List.of(8, 24, 25, 26).contains(sql.size()));
+                    assertTrue(List.of(14, 30, 31, 32).contains(sql.size()));
                     recordSql((String) args[0]);
                     return empty ? 0L : 1L;
                   case "setFetchSize":
@@ -817,6 +1094,9 @@ final class MigrationMasterTargetPublisherTest {
                   case "executeQuery":
                     String query = (String) args[0];
                     recordSql(query);
+                    int catalogTable = CATALOG_SQL.indexOf(query);
+                    if (catalogTable >= 0)
+                      return catalogTable == nullCatalogResult ? null : catalogResult(catalogTable);
                     int contentTable = CONTENT_SQL.indexOf(query);
                     if (contentTable >= 0)
                       return contentTable == nullContentResult ? null : contentResult(contentTable);
@@ -864,6 +1144,59 @@ final class MigrationMasterTargetPublisherTest {
                     throw new AssertionError(
                         "Unexpected PreparedStatement operation: " + method.getName());
                 }
+              });
+    }
+
+    private ResultSet catalogResult(int table) {
+      int[] position = {-1};
+      boolean[] wasNull = {false};
+      return (ResultSet)
+          Proxy.newProxyInstance(
+              ResultSet.class.getClassLoader(),
+              new Class<?>[] {ResultSet.class},
+              (proxy, method, args) -> {
+                String name = method.getName();
+                if (name.equals("next")) {
+                  position[0]++;
+                  int count =
+                      CATALOG_ROWS.get(table).size()
+                          + (table == extraCatalog ? 1 : 0)
+                          - (table == missingCatalog ? 1 : 0);
+                  return position[0] < count;
+                }
+                if (name.equals("wasNull")) return wasNull[0];
+                if (name.equals(CLOSE_METHOD)) {
+                  resultCloses++;
+                  if (table == badCatalogTable && extraResult != null) throw extraResult;
+                  return null;
+                }
+                if (List.of(GET_INT, GET_BOOLEAN, GET_STRING).contains(name)) {
+                  int field = (Integer) args[0] - 1;
+                  assertEquals(field == 0 ? GET_INT : field == 4 ? GET_BOOLEAN : GET_STRING, name);
+                  catalogFieldReads++;
+                  boolean bad =
+                      table == badCatalogTable
+                          && position[0] == badCatalogRow
+                          && field == badCatalogField;
+                  if (bad && failCatalogRead) throw failure;
+                  String value = CATALOG_ROWS.get(table).get(position[0]).split("\t", -1)[field];
+                  if (bad)
+                    value =
+                        nullCatalogValue
+                            ? null
+                            : field == 0
+                                ? Integer.toString(Integer.parseInt(value) + 1)
+                                : field == 4
+                                    ? Boolean.toString(!Boolean.parseBoolean(value))
+                                    : value + "X";
+                  wasNull[0] = value == null;
+                  return switch (name) {
+                    case GET_INT -> value == null ? 0 : Integer.parseInt(value);
+                    case GET_BOOLEAN -> value != null && Boolean.parseBoolean(value);
+                    default -> value;
+                  };
+                }
+                throw new AssertionError("Unexpected catalog ResultSet operation " + name);
               });
     }
 
