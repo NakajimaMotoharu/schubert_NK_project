@@ -1,0 +1,69 @@
+{
+  "currentPublicSource": {
+    "path": "/home/mini/codex/project1/schubert_project/program/app/src/main/java/dev/codex/schubert/service/MusicService.java",
+    "sha256": "92c750e05cb549db4be5d92e6d254bdf929aabc9fd88d81f261f3d62a74fb144"
+  },
+  "currentRegexLiteralsExact": [
+    "\"^\\\\d+-\\\\d+\\\\s+\"",
+    "\"(?i)\\\\s*[\\\\(（][^\\\\)）]*(?:inst|instrument)[^\\\\)）]*[\\\\)）]?.*$\"",
+    "\"(?i)\\\\s+(?:inst|instrument).*$\"",
+    "\"[\\\\s　_＿!！+＋^\\\\[\\\\]【】()（）.,.．・'’`´-]+\""
+  ],
+  "defaultLocalePreserved": true,
+  "redundantInstrumentPredicateRemovedBecauseInstrumentContainsInst": true,
+  "duplicateOverwriteAndFirstKeyPositionPreserved": true,
+  "utf16FullMatrixVectors": [
+    {
+      "left": "abc",
+      "right": "abx",
+      "expected": 1
+    },
+    {
+      "left": "abc",
+      "right": "ab",
+      "expected": 1
+    },
+    {
+      "left": "ab",
+      "right": "abc",
+      "expected": 1
+    },
+    {
+      "left": "",
+      "right": "a",
+      "expected": 1
+    },
+    {
+      "left": "a",
+      "right": "",
+      "expected": 1
+    },
+    {
+      "left": "abcd",
+      "right": "abxy",
+      "expected": 2
+    },
+    {
+      "left": "abc",
+      "right": "xyz",
+      "expected": 3
+    },
+    {
+      "left": "cat",
+      "right": "batx",
+      "expected": 2
+    },
+    {
+      "left": "cat",
+      "right": "cut",
+      "expected": 1
+    },
+    {
+      "left": "😀a",
+      "right": "xb",
+      "expected": 3
+    }
+  ],
+  "productionOracleCalls": 0,
+  "actualFilesObserved": 0
+}
