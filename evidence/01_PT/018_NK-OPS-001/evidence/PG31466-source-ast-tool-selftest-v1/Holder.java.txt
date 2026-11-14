@@ -1,0 +1,14 @@
+package auditfixture;
+import no.such.Dependency;
+public class Holder {
+  String text = """
+      public record Phantom(int x) {}
+      public enum PhantomEnum { BAD }
+      """;
+  // public record Commented(int x) {}
+  record Member(int x) {}
+  enum Tone { A, B }
+  void f() { record Local(int y) {} }
+  Object value = new Object() { record Inner(int z) {} };
+  Dependency unresolved;
+}

@@ -1,0 +1,151 @@
+CLASS	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	bcaffef1341e07c6	true	19	49	INSTRUCTION:0:69	BRANCH:0:16	LINE:0:17	COMPLEXITY:0:12	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	<init>	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)V	1	INSTRUCTION:0:10	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	writeRows	(Ljava/lang/Iterable;Ljava/io/OutputStream;)V	1	INSTRUCTION:0:52	BRANCH:0:14	LINE:0:11	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextWriter	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioCopyDataset	c6885d8dba90dbc0	true	34	49	INSTRUCTION:0:179	BRANCH:0:24	LINE:0:33	COMPLEXITY:0:21	METHOD:0:9	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	<init>	(Ldev/codex/schubert/nk/migration/ScenarioFileCopyBatch;Ldev/codex/schubert/nk/migration/ScenarioEntryCopyBatch;)V	1	INSTRUCTION:0:106	BRANCH:0:14	LINE:0:17	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	files	()Ldev/codex/schubert/nk/migration/ScenarioFileCopyBatch;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	entries	()Ldev/codex/schubert/nk/migration/ScenarioEntryCopyBatch;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	fileCopyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	entryCopyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	writeFiles	(Ldev/codex/schubert/nk/migration/PostgresCopyTextWriter;Ljava/io/OutputStream;)V	1	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	writeEntries	(Ldev/codex/schubert/nk/migration/PostgresCopyTextWriter;Ljava/io/OutputStream;)V	1	INSTRUCTION:0:31	BRANCH:0:4	LINE:0:5	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioCopyDataset	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	b2ce25844344a757	true	99	49	INSTRUCTION:0:451	BRANCH:0:76	LINE:0:80	COMPLEXITY:0:49	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	<init>	(Ldev/codex/schubert/nk/migration/ScenarioFileMigrationMap;Ljava/util/List;)V	1	INSTRUCTION:0:144	BRANCH:0:22	LINE:0:30	COMPLEXITY:0:12	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	columnNames	()Ljava/util/List;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	rows	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	copyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	validateRow	(Ljava/util/List;)V	10	INSTRUCTION:0:165	BRANCH:0:32	LINE:0:28	COMPLEXITY:0:17	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	required	(Ljava/util/List;I)Ljava/lang/String;	10	INSTRUCTION:0:11	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	n12	(Ljava/lang/String;Z)V	10	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:2	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	text	(Ljava/lang/String;II)V	10	INSTRUCTION:0:42	BRANCH:0:12	LINE:0:7	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileCopyBatch	<clinit>	()V	8	INSTRUCTION:0:55	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	3d602a3afa548783	true	35	49	INSTRUCTION:0:171	BRANCH:0:16	LINE:0:35	COMPLEXITY:0:13	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	<init>	(Ldev/codex/schubert/nk/migration/ScenarioEntryPlacementMap;Ljava/util/List;)V	1	INSTRUCTION:0:132	BRANCH:0:14	LINE:0:28	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	rows	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	copyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:29	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	eff46201bb4d404e	true	70	49	INSTRUCTION:0:250	BRANCH:0:24	LINE:0:64	COMPLEXITY:0:23	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	<init>	(Ldev/codex/schubert/nk/migration/ScenarioFileMigrationMap;Ldev/codex/schubert/nk/migration/ScenarioEntryMigrationMap;Ljava/util/List;)V	1	INSTRUCTION:0:121	BRANCH:0:8	LINE:0:30	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	entries	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	lookup	(J)Ldev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry;	1	INSTRUCTION:0:13	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	entriesForFile	(IJ)Ljava/util/List;	1	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	canonicalBytes	()[B	1	INSTRUCTION:0:54	BRANCH:0:2	LINE:0:17	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	game	(I)V	10	INSTRUCTION:0:9	BRANCH:0:4	LINE:0:2	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	index	(I)V	10	INSTRUCTION:0:5	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	n12	(J)V	10	INSTRUCTION:0:11	BRANCH:0:4	LINE:0:2	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap	lambda$entriesForFile$0	(Ldev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile;Ldev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry;)Z	4106	INSTRUCTION:0:10	BRANCH:0:2	LINE:0:1	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	9ecb7cff24c58230	true	10	65585	INSTRUCTION:7:33	BRANCH:0:0	LINE:0:6	COMPLEXITY:2:6	METHOD:2:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	<init>	(IJJI)V	1	INSTRUCTION:0:19	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	gameId	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	currentFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	currentEntryId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement	entryIndex	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	bf2246fe939020e1	true	15	65585	INSTRUCTION:7:51	BRANCH:0:0	LINE:0:9	COMPLEXITY:2:8	METHOD:2:8	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	<init>	(JJJIJI)V	1	INSTRUCTION:0:31	BRANCH:0:0	LINE:0:7	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	currentEntryId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	targetEntryId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	displayOrder	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	gameId	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	targetFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry	entryIndex	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	d524f97af6420774	true	6	65584	INSTRUCTION:9:16	BRANCH:0:0	LINE:0:1	COMPLEXITY:3:3	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	<init>	(JI)V	2	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	targetFileId	()J	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition	entryIndex	()I	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	c3a752180ca44b6c	true	37	49	INSTRUCTION:0:158	BRANCH:0:14	LINE:0:35	COMPLEXITY:0:14	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	<init>	(Ljava/util/List;)V	1	INSTRUCTION:0:85	BRANCH:0:6	LINE:0:16	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	mappings	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	lookup	(J)Ldev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry;	1	INSTRUCTION:0:13	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	canonicalBytes	()[B	1	INSTRUCTION:0:39	BRANCH:0:2	LINE:0:11	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	n12	(J)V	10	INSTRUCTION:0:11	BRANCH:0:4	LINE:0:2	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	66b8b470b88420d8	true	7	65585	INSTRUCTION:7:19	BRANCH:0:0	LINE:0:5	COMPLEXITY:2:4	METHOD:2:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	<init>	(JJ)V	1	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	currentId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair	targetId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	9be7d6fda6a33be6	true	9	65585	INSTRUCTION:7:27	BRANCH:0:0	LINE:0:6	COMPLEXITY:2:5	METHOD:2:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	<init>	(JJJ)V	1	INSTRUCTION:0:16	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	currentId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	targetId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry	displayOrder	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	6788932a16cf0ff4	true	58	49	INSTRUCTION:0:245	BRANCH:0:22	LINE:0:53	COMPLEXITY:0:22	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	<init>	(Ljava/util/List;)V	1	INSTRUCTION:0:102	BRANCH:0:6	LINE:0:22	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	files	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	lookup	(IJ)Ldev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile;	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	previous	(IJ)Ljava/util/Optional;	1	INSTRUCTION:0:18	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	next	(IJ)Ljava/util/Optional;	1	INSTRUCTION:0:23	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	canonicalBytes	()[B	1	INSTRUCTION:0:44	BRANCH:0:2	LINE:0:13	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	position	(IJ)I	2	INSTRUCTION:0:19	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	game	(I)V	10	INSTRUCTION:0:9	BRANCH:0:4	LINE:0:2	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	n12	(J)V	10	INSTRUCTION:0:11	BRANCH:0:4	LINE:0:2	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	324542181cb09b16	true	9	65585	INSTRUCTION:7:27	BRANCH:0:0	LINE:0:6	COMPLEXITY:2:5	METHOD:2:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	<init>	(IJJ)V	1	INSTRUCTION:0:16	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	gameId	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	currentFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair	targetFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	1fbf1800a19b9cc3	true	11	65585	INSTRUCTION:7:35	BRANCH:0:0	LINE:0:7	COMPLEXITY:2:6	METHOD:2:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	<init>	(IJJJ)V	1	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	gameId	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	currentFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	targetFileId	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile	displayOrder	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	a78dc0d797cc82ab	true	6	65584	INSTRUCTION:9:16	BRANCH:0:0	LINE:0:1	COMPLEXITY:3:3	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	<init>	(IJ)V	2	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	gameId	()I	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey	currentFileId	()J	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	1dc7a6f19cf719e7	true	77	49	INSTRUCTION:0:320	BRANCH:0:58	LINE:0:57	COMPLEXITY:0:41	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	<init>	(Ljava/util/List;)V	1	INSTRUCTION:0:128	BRANCH:0:24	LINE:0:27	COMPLEXITY:0:13	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	columnNames	()Ljava/util/List;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	fields	()Ljava/util/List;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	copyBytes	(Ldev/codex/schubert/nk/migration/PostgresCopyTextEncoder;)[B	1	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	required	(Ljava/util/List;I)Ljava/lang/String;	10	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	n12	(Ljava/lang/String;)V	10	INSTRUCTION:0:7	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	integer	(Ljava/lang/String;Z)V	10	INSTRUCTION:0:22	BRANCH:0:8	LINE:0:4	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	textBytes	(Ljava/lang/String;Z)I	10	INSTRUCTION:0:46	BRANCH:0:16	LINE:0:7	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	timestamp	(Ljava/lang/String;)V	10	INSTRUCTION:0:30	BRANCH:0:8	LINE:0:7	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/ScenarioEntryCopyRow	<clinit>	()V	8	INSTRUCTION:0:59	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	df9bfcb3651c3c28	true	45	49	INSTRUCTION:0:200	BRANCH:0:33	LINE:0:44	COMPLEXITY:0:26	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	encodeRow	(Ljava/util/List;)[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	encodeRows	(Ljava/util/List;)[B	1	INSTRUCTION:0:73	BRANCH:0:12	LINE:0:16	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	appendField	(Ljava/lang/StringBuilder;Ljava/lang/String;)V	10	INSTRUCTION:0:112	BRANCH:0:21	LINE:0:24	COMPLEXITY:0:15	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/migration/PostgresCopyTextEncoder	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0

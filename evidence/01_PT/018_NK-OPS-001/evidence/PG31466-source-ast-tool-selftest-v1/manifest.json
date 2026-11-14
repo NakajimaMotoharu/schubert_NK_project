@@ -1,0 +1,284 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T08:34:56.068019+00:00",
+  "toolSelfchecks": 8,
+  "checks": [
+    {
+      "testId": "TOOL-SOURCEAST001",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "expectedRecords": 3,
+        "expectedEnums": 1,
+        "actual": [
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "9",
+            "RECORD",
+            "auditfixture.Holder.Member",
+            "auditfixture.Holder$Member",
+            "MEMBER"
+          ],
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "10",
+            "ENUM",
+            "auditfixture.Holder.Tone",
+            "auditfixture.Holder$Tone",
+            "MEMBER"
+          ],
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "11",
+            "RECORD",
+            "auditfixture.Holder.Local",
+            "-",
+            "LOCAL_OR_ANONYMOUS_UNBOUND"
+          ],
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "12",
+            "RECORD",
+            "auditfixture.Holder.anonymous@12.Inner",
+            "-",
+            "LOCAL_OR_ANONYMOUS_UNBOUND"
+          ]
+        ]
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST002",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "memberBinaryCandidatesFixed": true
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST003",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "textBlockAndCommentNotDeclarations": true
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST004",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "localAndAnonymousBinaryNamesNotInvented": [
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "11",
+            "RECORD",
+            "auditfixture.Holder.Local",
+            "-",
+            "LOCAL_OR_ANONYMOUS_UNBOUND"
+          ],
+          [
+            "TYPE",
+            "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java",
+            "12",
+            "RECORD",
+            "auditfixture.Holder.anonymous@12.Inner",
+            "-",
+            "LOCAL_OR_ANONYMOUS_UNBOUND"
+          ]
+        ]
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST005",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "unresolvedImportAndFieldParsedWithoutAttribution": true,
+        "generatedClasses": 0
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST006",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "expectedNonzero": "syntax error, no acceptance"
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST007",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "nonemptyClasspathAndMissingOrNonJavaArgumentsRejected": true
+      }
+    },
+    {
+      "testId": "TOOL-SOURCEAST008",
+      "result": "PASS_TOOL_ONLY",
+      "detail": {
+        "allInputBytesUnchanged": true,
+        "allAnalysisClassEmission": 0,
+        "emptyClassSourceProcessorPaths": true,
+        "parseOnlyNoAnalyzeOrGenerate": true
+      }
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toolclasses",
+        "dev.codex.schubert.quality.DeclaredTypeInventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/empty",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1",
+      "environment": {
+        "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+        "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+      },
+      "actualExit": 0,
+      "expectedZero": true,
+      "startUTC": "2026-11-14T08:34:55.406160+00:00",
+      "endUTC": "2026-11-14T08:34:55.686625+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/parse-owned-fixture.stdout",
+        "sha256": "fd530dd754ea399c90ad139afa6a4ea780b22ebc84353f4d23c0fa146a1ea168"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/parse-owned-fixture.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toolclasses",
+        "dev.codex.schubert.quality.DeclaredTypeInventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/empty",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Bad.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1",
+      "environment": {
+        "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+        "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+      },
+      "actualExit": 1,
+      "expectedZero": false,
+      "startUTC": "2026-11-14T08:34:55.687313+00:00",
+      "endUTC": "2026-11-14T08:34:55.962993+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-syntax.stdout",
+        "sha256": "8dad9178d5dd1a691543a26998174e529c03b79e6135ab1deb50436d5212d76f"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-syntax.stderr",
+        "sha256": "4f1ea5ee9380d6fda022aaa5963de4ee0ea4d1d492c7e204021fd83a5d6d199e"
+      }
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toolclasses",
+        "dev.codex.schubert.quality.DeclaredTypeInventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/notempty",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/Holder.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1",
+      "environment": {
+        "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+        "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+      },
+      "actualExit": 1,
+      "expectedZero": false,
+      "startUTC": "2026-11-14T08:34:55.963221+00:00",
+      "endUTC": "2026-11-14T08:34:56.002496+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-nonempty-classpath.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-nonempty-classpath.stderr",
+        "sha256": "49f182ed7e4003c54b672a4ca1ff704271ce6079da9245601212da0eb3ecd4a8"
+      }
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toolclasses",
+        "dev.codex.schubert.quality.DeclaredTypeInventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/empty"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1",
+      "environment": {
+        "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+        "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+      },
+      "actualExit": 1,
+      "expectedZero": false,
+      "startUTC": "2026-11-14T08:34:56.002823+00:00",
+      "endUTC": "2026-11-14T08:34:56.027848+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-missing-arguments.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-missing-arguments.stderr",
+        "sha256": "6425783f0b08960d1fdfbdc6036279d7c775b5d5925448b6d5014e83baf23934"
+      }
+    },
+    {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toolclasses",
+        "dev.codex.schubert.quality.DeclaredTypeInventory",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/empty",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1/toysrc/not-source.txt"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31464-source-ast-tool-v1",
+      "environment": {
+        "JAVA_HOME": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4",
+        "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "TZ": "Asia/Tokyo"
+      },
+      "actualExit": 1,
+      "expectedZero": false,
+      "startUTC": "2026-11-14T08:34:56.028044+00:00",
+      "endUTC": "2026-11-14T08:34:56.067609+00:00",
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-nonjava-source.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31466-source-ast-tool-selftest-v1/reject-nonjava-source.stderr",
+        "sha256": "5b4884dab3d30269209ec40a367583699678aa2d581b353c12b9e3d266b77022"
+      }
+    }
+  ],
+  "tool": {
+    "path": "tools/quality/source/DeclaredTypeInventory.java",
+    "sha256": "98d5f0b52847de14c9175b5e34092641b75cbe0b7b10f6cdb89fc87486e041ee"
+  },
+  "compiler": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31464-source-ast-tool-v1/manifest.json",
+    "sha256": "33bab43d0dfbd768ed0c8da4994f4de38db412835b85b4d1e3a5e8470e3b7950"
+  },
+  "applicationTestsExecuted": 0,
+  "applicationClassesCompiledOrInitialized": 0,
+  "noClassfileOutputFromParsing": true,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
