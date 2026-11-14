@@ -750,3 +750,6 @@ SSC368/NK-MIG-001/WBS-P01903: SpeakerCopyBatch constructor/rows/copyBytes/writeT
 
 
 SSC369/NK-MIG-001/WBS-P01903 SpeakerStagingTable prepare/transfer/open/requireStatement/scalar/verifyCount/closeStatement/closeResult/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223233242254→SS311331343/V002→PT-MIG-SPEAKERSTAGE001..024/019062063。Core826521ee/Unitf40046a4、PG31676/678/680全96/4class/35Code両四100。実DB/全移行/HOLD未受入。
+
+
+SSC370/NK-MIG-001/WBS-P01903 MigrationMasterCopyDataset constructor/speakers/content/writeAll/toString/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-MASTER001..020/019064065。Core73d7d23f/Unit2c7bf442、PG31736/738/740全383/35class/実304両四100。実DB/全移行/HOLD未受入。
