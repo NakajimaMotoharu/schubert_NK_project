@@ -1,0 +1,5 @@
+# Current file全scope百二十二・依存閉鎖
+
+SSC392/393の現行受入scopeは新FILEMAP24＋既FileCopy14/FileMap12/Encoder12/Asset20/ScenarioGenerated16/EntryMap12/Placement12=whole122とする。SSC393のwhole98計画はPG32544で98FES0だがPG32546に二Entry Mainの本体method/branch未網羅を確認し未資格。ScenarioGenerated16が参照する二Mainを測定classに含めた以上、その通常Test各12を含め全scopeの100%を満たす。全7Main17physical/MainCore3cf4217c/新24/業務期待値/元797定義は不変更、原90未実行・原98compile失敗/98coverage不足を区別保持する。新fresh122単一exec/全CRC-init/Root静的/既定と無filter四100で検証し、scope縮小/除外/旧exec unionはしない。BUG2940/YKT2469、測定scriptのfield指定訂正BUG2941/YKT2470、現群内手戻り追加予算0/元2.5-7.5-9.9保持。元費用/SV/実専有費token null、RD/UI/DDL/QA変更不要。実DB/assetpayload/Rootnative/global451/HOLD未受入。
+
+107/108の新FILEMAP001..024と固定期待値は保持。既ORDER001..012/PLACE001..012を不変更で追加し、canonicalBytes/lookup/invalid/N12/game/index/全constructorとresource-free値不変条件を網羅する。全七Mainに専用Test七classと生成Test一classの計八source、122固有IDとFES0、17CRC-init、singleexec/全Code/四counter/source/Root静的を照合する。新定義へ追加0、追加scopeの既Testも再認証で新規成果にしない。

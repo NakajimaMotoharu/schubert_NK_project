@@ -17,3 +17,9 @@ PT-MIG-FILEMAP001..024: 001二game八列→11列独立literal、002emptyと非SC
 
 SSC392の依存Test数を現sourceへ訂正する。AssetMigrationManifestTestは歴史12でなくSSC365追加済み20、FileCopy14/FileMap12/Encoder12/Asset20/ScenarioGenerated16/新FileMap24=whole98、必要既74＋新24。全7Main17physical/MainCoree1fc79a2と業務・独立literal期待値・新24定義は不変更、原90 profile/prestyle/prepare前guard exit1/実PT0をPG32471へ保全する。旧37Main773定義を保持し、同sourceのfresh98全体/Root静的/CRC-init/既定と無filter四100を受入条件とする。歴史Asset12や90を確認目的で再実行せず、新98成功へ算術加算しない。BUG2938/YKT2467、現SSC392群内手戻り追加予算0/元2.5-7.5-9.9保持、元費用/SV/実費token null、RD/UI/DDL/QA変更不要。実DB/assetpayload/Rootnative/global451/HOLD未受入。
 詳細[108](108_Current%20file依存九十八への訂正・独立追加仕様.md)。上の90/必要66は先行計画誤記として履歴保持し、実行・合格数にしない。
+
+
+## SSC394 / BUG2940 最終依存閉鎖条件
+
+SSC392/393の現行受入scopeは新FILEMAP24＋既FileCopy14/FileMap12/Encoder12/Asset20/ScenarioGenerated16/EntryMap12/Placement12=whole122とする。SSC393のwhole98計画はPG32544で98FES0だがPG32546に二Entry Mainの本体method/branch未網羅を確認し未資格。ScenarioGenerated16が参照する二Mainを測定classに含めた以上、その通常Test各12を含め全scopeの100%を満たす。全7Main17physical/MainCore3cf4217c/新24/業務期待値/元797定義は不変更、原90未実行・原98compile失敗/98coverage不足を区別保持する。新fresh122単一exec/全CRC-init/Root静的/既定と無filter四100で検証し、scope縮小/除外/旧exec unionはしない。BUG2940/YKT2469、測定scriptのfield指定訂正BUG2941/YKT2470、現群内手戻り追加予算0/元2.5-7.5-9.9保持。元費用/SV/実専有費token null、RD/UI/DDL/QA変更不要。実DB/assetpayload/Rootnative/global451/HOLD未受入。
+詳細[109](109_Current%20file全scope百二十二・依存閉鎖仕様.md)。90/98は歴史条件として保持し、合格scopeへ算術加算しない。
