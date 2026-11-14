@@ -789,3 +789,6 @@ SSC381/NK-MIG-001/WBS-P01903 MigrationMasterTargetPublisher.prepare→ColumnVeri
 
 
 SSC382/383/NK-MIG-001/WBS-P01903 MigrationMasterConstraintVerifier.verify/requireStatement/verifyRows/closeStatement/closeResult/invalid/toString/constructorと既Target.prepare→Column→Constraint→staging→RD MIG003005006/DAT004/TST→UI242254→SS311331343/V002/V029→PT-CONSTRAINT001..022/TARGET001..032/019088089090。Core73e983a3/Unit83ba8f8e PG32242/244/246全641/45CRC/実403両四100。実DB/全constraint意味/trigger/全移行/HOLD未受入。
+
+
+SSC384/NK-MIG-001/WBS-P01903 MigrationMasterContentVerifier.verify/expectedRows/orderedRows/verifyRows/value/closeResult/closeStatement/invalid/constructor/toString、Target同Connection→RD MIG003005006/DAT004/FUN004/TST→UI242254→SS311331343/V002→PT-CONTENT001..029/TARGET001..032/019091092。Coree8a079e7/Unita1177a70 PG32266/268/270必要642/45CRC/実403両四100。実DB/生成式/locale/全移行/HOLD未受入。
