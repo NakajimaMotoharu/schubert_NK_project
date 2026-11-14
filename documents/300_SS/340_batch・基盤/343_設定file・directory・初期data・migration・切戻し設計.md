@@ -1,5 +1,19 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC403 固定games二行の照合を既target prepareへ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/DAT006/TST、UI242254、SS311331343/V004。既MigrationMasterTargetPublisher.prepareは六table属性/75制約を照合するが、固定games初期二行のcode/title/order/created_atがV004と一致する検査を未実装。orphanが0でもid1/2の誤code/titleは識別できないためMigrationGamesVerifierを追加し、既prepareのColumn→Constraint後・最初のCTAS前へ同Connectionで一回接続する。新業務仕様ではなく既V004静的初期値の内部検証補足、RD/UI/DDL/grant/QA変更0。実DB/Current原本/Root/native等HOLDを解除しない。
+
+verify(Nullable Connection)はnullを固定IAE、autoCommit=true/null新Statement/nullResultを固定SQLException。caller所有write TXを許すためisReadOnly=trueを要求せず、Connection close/commit/rollback/set*0。新Statement一つ/queryTimeout30/fetch1000、固定SQL SELECT id,code,title,display_order,created_at FROM schubert.games ORDER BY id を一回。V004原文を独立正本とする二行(1,NUKITASHI1,NUKITASHI,1,2026-09-01T00:00:00Z)、(2,NUKITASHI2,NUKITASHI2,2,同時刻)の全五値/順/件数に完全一致要求。id/getInt直後wasNull、code-title/getString nullable、order/getInt直後wasNull、created_at/getTimestamp nullableはnonnull時だけtoInstant().toStringへ、全五正準値を固定expected Listとequals照合する。NULLを0/空/nowへ補完しない。欠落/余剰/順交換/別値/trim-case-NFC差/異時刻/precision差は固定SQLException、余剰行はfieldread前に拒否。games INSERT/UPDATE/修復/再試行/SQL生成/役割変更0。
+
+resourceは他verifierと同じ新Statement/Result各一回所有、Result→Statement逆順close、元SQL-Runtime-Errorを同instanceで伝播し両cleanupは順suppressed・同一Throwable自己suppression回避。cleanclose失敗は失敗、toString/自前diagnostic固定redacted、入力・元例外をlog0。通常PTはJDK Proxy/Timestampだけ、driver/実DBは使用しない。
+
+既Target.prepareの固定順Column6query→Constraint6query→Games1query→CTAS6statementとする。旧93SQLを順序・文字列同一のまま保ちGames一つだけindex12へ追加し全94。旧56scalar/75catalog/66column等の意味は不変、Result75→76/ownerclose16→17/auto11→12/fetch3→4、Games専用typed10getterをcatalog1119/content143/scalar56と分離する。全既Target32ケースは新slotを含む所有・SQL前後条件へ更新、旧業務期待値/93SQLは削除変更しない。新Target033は二行全field変異/NULL時にCTAS0、034は全十getter SQL-Runtime-Errorとprimary/両cleanup/自己identityを同parent経路で検査し、Games成功だけで全prepare完了やDB移行完了としない。
+
+PT-MIG-GAMES001..020: 001固定二行/五値・SQL/typed順、002null input、003auto/null Statement/nullResult、004不足0/1と余剰3/余剰getter0、005全十値NULL、006id/order正準数値・境界・順違い、007code/title保存文字・空/未知/大小文字/非NFC差、008created_at固定instant/前後差/precision差/NULL、009全phase/各getter occurrence×SQL-Runtime-Error、010cleanclose三型、011primary/両cleanup全三型組合せ順、012自己identity、013nullablevendor handle後条件、014readonly属性に触れずcaller TX保持、015失敗後fresh不変stateless、016fixedredaction、017独立V004 literal/matrix、018固定二行不変fixture破壊隔離、019元SQLExceptionを保存する他runtime/Error負境界、020有限8worker64/Future5/finallyshutdownNow-await10。期待はV004 INSERT行と独立手書き五fieldから算出し本番SQL/expected methodから生成0。新20＋既Target32へ新2=全34、既全918＋新22=全940。全45Main47Test65physicalをsame source一exec/RootNullAway-lint-CS-SB-PMD各site/全CRC-init/既定と無filter四100で確認する。旧918は再認証で新成果に加算しない。
+
+追加不足3.3/9.9/9.9pp cap10、旧残397.324/837.386/1643.415へ当不足だけ追加、元費用/SV/各群開始保持・専有実費token null。既43otherMain/既Target外Test同byte保持、V004含む適用済DDL不変更。BUG2943/YKT2472/V030実DBHOLD維持。Game固定値通常PTは実DB/catalog/trigger/index/grant・実六COPY/Current資格/全移行/Rootnative/global451/CHR/ITST受入でない。
+
 ## SSC402 Current五snapshotから宣言六table Masterを組立（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT001002005/DAT004/TST、UI227242254、SS311331343。CurrentMigrationProjection.SourceSnapshotの五projectionを既mapping/asset/明示linkorderへ通して六table MigrationMasterCopyDatasetへ結合するCurrentMigrationAssemblerを追加する。現行generate_scenario_sql.pyのscript/audio両relがgame_dir相対であることをsource-only確認（generator import/実行0/素材read0）。従ってcallerの二game root-relative prefixをFile/Audioへ同じ明示値で渡し、pathを推測・補完しない。
