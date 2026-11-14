@@ -816,3 +816,6 @@ SSC391/NK-MIG-001/WBS-P01903 CurrentScenarioFileProjectionReader.read/rows/row/c
 
 
 SSC392/393/394/NK-MIG-001/WBS-P01903 CurrentScenarioFileMapper.constructor/copyRows/game/root/invalidScalar/parseCurrent/validTimeと既FileMap/AssetManifest/FileBatch→RD MIG003005006/DAT004/TST→UI223242254→SS311331343/V002→PT-FILEMAP001..024/019107..110。Core3cf4217c/Unit589ed25e PG32566/568/570必要122/17CRC/実146両四100、実root/file/DB/全移行/HOLD未受入。
+
+
+SSC395/NK-MIG-001/WBS-P01903 CurrentAudioProjectionReader.read/rows/row/duration/cleanup→RD MIG003005006/MIG-DAT002005/DAT004/TST→UI227242254→SS311331343/V002→PT-AUDIOREAD001..020/019111112。Coreeb673e94/Unitc531e8da PG32590/592/594必要20/一CRC/実11両四100、実DB/audio資格/targetID-ms変換/HOLD未受入。

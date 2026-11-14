@@ -1,0 +1,223 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5362",
+  "groupId": "PGPT-WBS65-SSC395-CURRENT-AUDIO-READ20-20261115",
+  "startEvent": "PGPT-20261008-5361",
+  "sourceAtGroupStart": "3cf4217cce469ee391192cb7bb9173a6380f7146",
+  "productionCoreMain": "eb673e945472ecc613e5b839b1db01f0ca8351ca",
+  "estimate": {
+    "low": 2,
+    "base": 6,
+    "high": 9.9
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-14T18:57:04+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 60,
+      "remainingPercent": 40,
+      "resetsAt": 1795012174,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32596-audio-read20-independent-source-trace-join-v1/manifest.json",
+    "sha256": "2a89c4b980a4cbf7f54f811eec01b52b098649c891ff65ffb4f3540e8236be03"
+  },
+  "outcome": "CURRENT_AUDIO_READ20_DEFAULT_RAW11_ALL_FOUR100",
+  "technical": {
+    "kind": "SSC395_CURRENT_AUDIO_TEN_COLUMN_JDBC20",
+    "source": "c531e8da93cc66d8be6677e3d3168a87cb8461f7",
+    "productionCoreMain": "eb673e945472ecc613e5b839b1db01f0ca8351ca",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32592-audio-read20-post-v1/manifest.json",
+      "sha256": "42815a77d95f84a2d6e280e80e0c420cdb9a6a42550b8edafc32254ddea2bcdb"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32594-audio-read20-unfiltered-measurement-v1/manifest.json",
+      "sha256": "09a5b072f9b8c2942a8929560814ef8638b2ed62f477327a6fec4c70d43f7fd0"
+    },
+    "tests": 20,
+    "newUniqueTestDefinitions": 20,
+    "newMainSources": 1,
+    "old38Main797DefinitionsUnchanged": true,
+    "uniqueMainJavaDeltaFromInitial": 147,
+    "allMigrationDefinitions": 817,
+    "allMigrationMain": 39,
+    "wholeSelectedMain": 1,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 290,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 50,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 79,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 36,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 11,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 302
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 50
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 81
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "actualJvmCodeMethods": 11,
+    "jacocoDefaultMethods": 11,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 22,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "readOnlyBorrowedConnection": true,
+    "transactionMutationOrConnectionClose": false,
+    "fixedQueries": 1,
+    "timeoutSeconds": 30,
+    "fetchSize": 1000,
+    "projectionFields": 10,
+    "typedGettersPerRow": 10,
+    "immediateWasNullPerRow": 3,
+    "nullableSourcePositions": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "signedCurrentIdsAndSizeAndDecimalPreserved": true,
+    "storedNamesBasenameRoleNotRecomputed": true,
+    "numericPrecisionMaximum": 12,
+    "numericScaleRange": [
+      -8,
+      3
+    ],
+    "numericAbsoluteMaximum": "999999999.999",
+    "independentDecimalVectors": 13,
+    "exponentExpansionBoundedBeforePlainRendering": true,
+    "roundingOrTargetMillisecondConversion": false,
+    "sourceMetadataNotQualifiedPhysicalAudio": true,
+    "resourceCloseOrder": [
+      "ResultSet",
+      "Statement"
+    ],
+    "allGetterOccurrencesSqlRuntimeError": true,
+    "orderedSuppressionAndSelfIdentity": true,
+    "finiteConcurrentCalls": 64,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "newBugs": 0
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "PublishSSC395limitedledgeronlymain and commit20 proof; audit Current audio IDs/roles/duration and approved V002/SS343, then price/design audio ID mapping and declared asset-to-COPY assembly without inferred business changes. No actualDB/master/filepayload/driver/VM/RootnativeActual4aru/HOLD operations or confirmation replay. Freshquota/hourly; ordinarygroupnotstop.",
+  "remainingEstimatePp": {
+    "low": 396.724,
+    "base": 835.586,
+    "high": 1638.915
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/1993_WBS65予実・Current audio二十後版562.json",
+    "sha256": "2c6df7b3f699f1da1fb262ba60597ccd873757930fcad5745621321c851538bf"
+  },
+  "forecastNotActualCost": true,
+  "canonical625Progress": {
+    "canonicalRowCount": 625,
+    "uniqueCompletedRows": 184,
+    "completedStage1Rows": 156,
+    "completedStage2Rows": 10,
+    "completedStandaloneRows": 18,
+    "unknownCompletedIds": [],
+    "duplicateCompletedIds": [],
+    "legacyPreparationEntryCount": 157,
+    "legacyPreparationDistinctEntryCount": 155,
+    "legacyPreparationCanonicalStage1References": 142,
+    "legacyPreparationCanonicalCompletedStage1Rows": 142,
+    "legacyPreparationDuplicateEntries": [
+      "WBS-P005-01/1",
+      "WBS-P020-01.01/1"
+    ],
+    "legacyPreparationNoncanonicalLabels": [
+      "C01 current resource/old limited proof binding",
+      "C02 Inspector required exclusive-current-CP requalification",
+      "C02-R1",
+      "C02-R2",
+      "C03 32/16/20 static configuration expectations",
+      "C05 eight source tuples",
+      "C06 public seven config and ID/profile declarations",
+      "C07 eight distribution configs/current-byte historical offline parser scope",
+      "C08 wrapper/receipt/runbook scope correspondence",
+      "F04 host tool/version/retention preparation",
+      "G13.02 source-owner-SQL-requirement candidate trace",
+      "G13.03 bootstrap source/owner/requirement/structural-method index",
+      "WBS-C04 static preparation"
+    ],
+    "preparationRowsNotCompleted": [],
+    "coherent": true,
+    "coherenceScope": "PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+    "legacyPreparationMatchesPrimary": true,
+    "effortCompletionRate": null,
+    "rowsAreNotEffortWeights": true,
+    "legacyEntriesAreNotCanonicalRowCounts": true,
+    "masterTable": {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv",
+      "sha256": "b7bf00dbea8ab47d3820db70335342e543f6f7bcd595e2ffc43e6e1086054579"
+    },
+    "completedCanonicalOriginalPricePp": {
+      "low": 21.726,
+      "base": 55.664,
+      "high": 112.285
+    },
+    "pricesAreForecastNotActualCost": true,
+    "formalAcceptanceDerivedFromRowCount": false
+  }
+}

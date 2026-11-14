@@ -609817,12 +609817,149 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
+      "sha256": "fbd5388c58212b11d1492e42624130f019ff4ea4d1b332bd95596e96764f4f2c",
       "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "state": "SOURCE_COMPONENT_QUALIFIED_NOT_FULL_WBS_ACCEPTED",
       "relatedSsc": "SSC-395",
       "testIds": "PT-MIG-AUDIOREAD001..020",
-      "historicalPath": null
+      "historicalPath": null,
+      "currentAudioRead20ComponentQualification": {
+        "kind": "SSC395_CURRENT_AUDIO_TEN_COLUMN_JDBC20",
+        "source": "c531e8da93cc66d8be6677e3d3168a87cb8461f7",
+        "productionCoreMain": "eb673e945472ecc613e5b839b1db01f0ca8351ca",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32592-audio-read20-post-v1/manifest.json",
+          "sha256": "42815a77d95f84a2d6e280e80e0c420cdb9a6a42550b8edafc32254ddea2bcdb"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32594-audio-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "09a5b072f9b8c2942a8929560814ef8638b2ed62f477327a6fec4c70d43f7fd0"
+        },
+        "tests": 20,
+        "newUniqueTestDefinitions": 20,
+        "newMainSources": 1,
+        "old38Main797DefinitionsUnchanged": true,
+        "uniqueMainJavaDeltaFromInitial": 147,
+        "allMigrationDefinitions": 817,
+        "allMigrationMain": 39,
+        "wholeSelectedMain": 1,
+        "physicalClasses": 1,
+        "positiveMainCrc": 1,
+        "defaultCoverage": {
+          "INSTRUCTION": {
+            "covered": 290,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 50,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 79,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 36,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 11,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "unfilteredCoverage": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 302
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 50
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 81
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 36
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 11
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "actualJvmCodeMethods": 11,
+        "jacocoDefaultMethods": 11,
+        "defaultAndUnfilteredFour100": true,
+        "manualCoverageExclusions": [],
+        "rootFiltersChanged": false,
+        "rawPmdFindings": 22,
+        "rawSpotbugsFindings": 0,
+        "applicable": 0,
+        "unclassified": 0,
+        "readOnlyBorrowedConnection": true,
+        "transactionMutationOrConnectionClose": false,
+        "fixedQueries": 1,
+        "timeoutSeconds": 30,
+        "fetchSize": 1000,
+        "projectionFields": 10,
+        "typedGettersPerRow": 10,
+        "immediateWasNullPerRow": 3,
+        "nullableSourcePositions": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "signedCurrentIdsAndSizeAndDecimalPreserved": true,
+        "storedNamesBasenameRoleNotRecomputed": true,
+        "numericPrecisionMaximum": 12,
+        "numericScaleRange": [
+          -8,
+          3
+        ],
+        "numericAbsoluteMaximum": "999999999.999",
+        "independentDecimalVectors": 13,
+        "exponentExpansionBoundedBeforePlainRendering": true,
+        "roundingOrTargetMillisecondConversion": false,
+        "sourceMetadataNotQualifiedPhysicalAudio": true,
+        "resourceCloseOrder": [
+          "ResultSet",
+          "Statement"
+        ],
+        "allGetterOccurrencesSqlRuntimeError": true,
+        "orderedSuppressionAndSelfIdentity": true,
+        "finiteConcurrentCalls": 64,
+        "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "actualAllocatedCost": null,
+        "tokenTotals": null,
+        "newBugs": 0
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_DEFAULT_AND_UNFILTERED_NOT_GLOBAL",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32592-audio-read20-post-v1/manifest.json",
+          "sha256": "42815a77d95f84a2d6e280e80e0c420cdb9a6a42550b8edafc32254ddea2bcdb"
+        },
+        "unfiltered": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32594-audio-read20-unfiltered-measurement-v1/manifest.json",
+          "sha256": "09a5b072f9b8c2942a8929560814ef8638b2ed62f477327a6fec4c70d43f7fd0"
+        },
+        "actualUnitSource": "c531e8da93cc66d8be6677e3d3168a87cb8461f7",
+        "productionCoreMain": "eb673e945472ecc613e5b839b1db01f0ca8351ca"
+      }
     }
   ],
   "layouts": [
@@ -619103,5 +619240,129 @@
     "effortRate": null,
     "actualAllocatedCost": null,
     "tokenTotals": null
+  },
+  "currentAudioRead20PG32590": {
+    "kind": "SSC395_CURRENT_AUDIO_TEN_COLUMN_JDBC20",
+    "source": "c531e8da93cc66d8be6677e3d3168a87cb8461f7",
+    "productionCoreMain": "eb673e945472ecc613e5b839b1db01f0ca8351ca",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32592-audio-read20-post-v1/manifest.json",
+      "sha256": "42815a77d95f84a2d6e280e80e0c420cdb9a6a42550b8edafc32254ddea2bcdb"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32594-audio-read20-unfiltered-measurement-v1/manifest.json",
+      "sha256": "09a5b072f9b8c2942a8929560814ef8638b2ed62f477327a6fec4c70d43f7fd0"
+    },
+    "tests": 20,
+    "newUniqueTestDefinitions": 20,
+    "newMainSources": 1,
+    "old38Main797DefinitionsUnchanged": true,
+    "uniqueMainJavaDeltaFromInitial": 147,
+    "allMigrationDefinitions": 817,
+    "allMigrationMain": 39,
+    "wholeSelectedMain": 1,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 290,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 50,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 79,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 36,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 11,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 302
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 50
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 81
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 36
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 11
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "actualJvmCodeMethods": 11,
+    "jacocoDefaultMethods": 11,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 22,
+    "rawSpotbugsFindings": 0,
+    "applicable": 0,
+    "unclassified": 0,
+    "readOnlyBorrowedConnection": true,
+    "transactionMutationOrConnectionClose": false,
+    "fixedQueries": 1,
+    "timeoutSeconds": 30,
+    "fetchSize": 1000,
+    "projectionFields": 10,
+    "typedGettersPerRow": 10,
+    "immediateWasNullPerRow": 3,
+    "nullableSourcePositions": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "signedCurrentIdsAndSizeAndDecimalPreserved": true,
+    "storedNamesBasenameRoleNotRecomputed": true,
+    "numericPrecisionMaximum": 12,
+    "numericScaleRange": [
+      -8,
+      3
+    ],
+    "numericAbsoluteMaximum": "999999999.999",
+    "independentDecimalVectors": 13,
+    "exponentExpansionBoundedBeforePlainRendering": true,
+    "roundingOrTargetMillisecondConversion": false,
+    "sourceMetadataNotQualifiedPhysicalAudio": true,
+    "resourceCloseOrder": [
+      "ResultSet",
+      "Statement"
+    ],
+    "allGetterOccurrencesSqlRuntimeError": true,
+    "orderedSuppressionAndSelfIdentity": true,
+    "finiteConcurrentCalls": 64,
+    "actualDatabaseOrSqlEvaluatorOrRootNativeKeyVmAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null,
+    "newBugs": 0
   }
 }
