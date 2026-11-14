@@ -24,6 +24,10 @@ public final class MigrationMasterContentVerifier {
   private static final int QUERY_TIMEOUT_SECONDS = 30;
   private static final int FETCH_ROWS = 1000;
   private static final int LINK_TABLE = 5;
+  private static final char TYPE_LONG = 'L';
+  private static final char TYPE_INTEGER = 'I';
+  private static final char TYPE_BOOLEAN = 'B';
+  private static final char TYPE_TIMESTAMP = 'T';
   private static final List<String> QUERIES =
       List.of(
           "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
@@ -116,19 +120,19 @@ public final class MigrationMasterContentVerifier {
 
   private static @Nullable String value(ResultSet result, int column, char kind)
       throws SQLException {
-    if (kind == 'L') {
+    if (kind == TYPE_LONG) {
       long actual = result.getLong(column);
       return result.wasNull() ? null : Long.toString(actual);
     }
-    if (kind == 'I') {
+    if (kind == TYPE_INTEGER) {
       int actual = result.getInt(column);
       return result.wasNull() ? null : Integer.toString(actual);
     }
-    if (kind == 'B') {
+    if (kind == TYPE_BOOLEAN) {
       boolean actual = result.getBoolean(column);
       return result.wasNull() ? null : Boolean.toString(actual);
     }
-    if (kind == 'T') {
+    if (kind == TYPE_TIMESTAMP) {
       @Nullable Timestamp actual = result.getTimestamp(column);
       return actual == null ? null : actual.toInstant().toString();
     }
