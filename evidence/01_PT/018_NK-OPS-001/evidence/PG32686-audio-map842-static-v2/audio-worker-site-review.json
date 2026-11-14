@@ -1,0 +1,43 @@
+{
+  "actualExit": 0,
+  "sameByteSites": 466,
+  "freshSites": [
+    {
+      "rule": "EqualsNull",
+      "line": 181,
+      "anchor": "assertFalse(first.equals(null));"
+    },
+    {
+      "rule": "CloseResource",
+      "line": 454,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 454,
+      "anchor": "var executor = Executors.newFixedThreadPool(WORKERS);"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 459,
+      "anchor": "executor.submit("
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 471,
+      "anchor": "executor.shutdownNow();"
+    },
+    {
+      "rule": "DoNotUseThreads",
+      "line": 472,
+      "anchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));"
+    }
+  ],
+  "changedMainWithNoPmdFindings": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java"
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "scope": "FULL40_MIGRATION_MAIN_ROOT_RULES_NO_SUPPRESSION"
+}

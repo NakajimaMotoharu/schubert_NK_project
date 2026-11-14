@@ -137,7 +137,7 @@ final class AudioMigrationMapTest {
 
   @Test
   void audioMap006SignedOrderSparseTargetAndSnapshot() {
-    var input = new ArrayList<@Nullable AudioMigrationMap.AudioMapping>(pairs());
+    var input = new ArrayList<AudioMigrationMap.@Nullable AudioMapping>(pairs());
     Collections.reverse(input);
     var map = new AudioMigrationMap(input, assets(), ROOT_ONE, ROOT_TWO);
     input.clear();
@@ -477,7 +477,7 @@ final class AudioMigrationMapTest {
     return new AudioMigrationMap.AudioMapping(game, current, target);
   }
 
-  private static List<@Nullable AudioMigrationMap.AudioMapping> pairs() {
+  private static List<AudioMigrationMap.@Nullable AudioMapping> pairs() {
     return List.of(pair(2, 4, 900), pair(1, -20, 700));
   }
 
