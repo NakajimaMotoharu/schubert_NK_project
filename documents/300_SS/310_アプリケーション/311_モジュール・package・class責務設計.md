@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC387: 既ColumnVerifierへ八番目NOTNULL n制約結合・有効性booleanを追加しgetBoolean8直後wasNull/trueを要求。66既属性不変、Column023/Target mixed8-7 metadata/必要644、実DB/NN名全体・全移行/HOLD未受入。
+
 SSC386: 既ReferenceVerifierの22query後へ六PK/13UKの保存行重複/PKnull違反件数0を六固定SELECT追加、Reference28→Content7→Finalizerの同Connection。既Ref21/Target32 matrix拡張・新JUnit定義0/必要643、index/collation/実SQL/全移行/HOLD未受入。
 
 SSC385: 既ReferenceVerifierへ47CHECK原式違反件数0の六固定SELECTを追加、Target同TX Reference22→Content7→Finalizer、Ref021/必要643。式catalog/実SQL evaluator/DB/全移行/HOLD未受入。
