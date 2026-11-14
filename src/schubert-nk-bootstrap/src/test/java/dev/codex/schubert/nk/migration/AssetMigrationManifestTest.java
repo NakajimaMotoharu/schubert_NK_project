@@ -2,8 +2,11 @@ package dev.codex.schubert.nk.migration;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.migration.AssetMigrationManifest.Comparison;
 import dev.codex.schubert.nk.migration.AssetMigrationManifest.Entry;
@@ -13,10 +16,20 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-MIG-ASSET001..012, SS343 SSC342: only synthetic metadata, no file/DB/authority. */
 final class AssetMigrationManifestTest {
+  private static final long GENERATED_ENUM_COEFFICIENT = 923521L;
+  private static final int GENERATED_ENTRY_REMAINDER = -1801724788;
+  private static final int GENERATED_UNICODE_ENTRY_REMAINDER = -1354574406;
+  private static final int GENERATED_WORKERS = 8;
+  private static final int GENERATED_TASKS = 64;
+  private static final int GENERATED_WAIT_SECONDS = 5;
+  private static final int GENERATED_TERMINATION_SECONDS = 10;
   private static final String ABC =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String EMPTY =
@@ -253,5 +266,132 @@ final class AssetMigrationManifestTest {
         value.compareClaims(List.of(new Observation(TARGET, 3, EMPTY))), 0, 0, 0, 1, 1, 3, false);
     comparison(
         value.compareClaims(List.of(new Observation(TARGET, 4, EMPTY))), 0, 0, 1, 1, 1, 4, false);
+  }
+
+  @Test
+  void assetGenerated001EnumNamesAreLiteralAndAliasesAreRejected() {
+    assertSame(Kind.SCENARIO, Kind.valueOf("SCENARIO"));
+    assertSame(Kind.AUDIO, Kind.valueOf("AUDIO"));
+    assertSame(Kind.VIDEO, Kind.valueOf("VIDEO"));
+    assertSame(Kind.MUSIC, Kind.valueOf("MUSIC"));
+    for (String invalidName : List.of("", "UNKNOWN", "video", " VIDEO", "VIDEO "))
+      assertThrows(IllegalArgumentException.class, () -> Kind.valueOf(invalidName));
+    // Java Enum's nonnull contract violation, never an accepted App value or a Production catch.
+    assertThrows(NullPointerException.class, () -> Kind.valueOf(null));
+  }
+
+  @Test
+  void assetGenerated002EntryEqualityUsesEveryDeclaredComponent() {
+    var value = first();
+    assertTrue(value.equals(value));
+    assertTrue(value.equals(new Entry(Kind.SCENARIO, SOURCE, TARGET, 3, ABC)));
+    assertFalse(value.equals(null));
+    assertFalse(value.equals("different type"));
+    for (var different :
+        List.of(
+            new Entry(Kind.AUDIO, SOURCE, TARGET, 3, ABC),
+            new Entry(Kind.SCENARIO, "input/other.txt", TARGET, 3, ABC),
+            new Entry(Kind.SCENARIO, SOURCE, OTHER, 3, ABC),
+            new Entry(Kind.SCENARIO, SOURCE, TARGET, 4, ABC),
+            new Entry(Kind.SCENARIO, SOURCE, TARGET, 3, EMPTY)))
+      assertFalse(value.equals(different));
+    assertEquals("MigrationAssetEntry[REDACTED]", value.toString());
+  }
+
+  @Test
+  void assetGenerated003EntryHashUsesIndependentPolynomialAndJvmIdentity() throws Exception {
+    for (var kind : List.of(Kind.SCENARIO, Kind.AUDIO, Kind.VIDEO, Kind.MUSIC)) {
+      int expected =
+          (int)
+              (GENERATED_ENUM_COEFFICIENT * System.identityHashCode(kind)
+                  + GENERATED_ENTRY_REMAINDER);
+      assertEquals(expected, new Entry(kind, SOURCE, TARGET, 3, ABC).hashCode());
+    }
+    int unicodeExpected =
+        (int)
+            (GENERATED_ENUM_COEFFICIENT * System.identityHashCode(Kind.MUSIC)
+                + GENERATED_UNICODE_ENTRY_REMAINDER);
+    assertEquals(
+        unicodeExpected,
+        new Entry(Kind.MUSIC, "input/😀.ogg", "assets/é.ogg", Long.MAX_VALUE, EMPTY).hashCode());
+    var value = first();
+    int expected =
+        (int)
+            (GENERATED_ENUM_COEFFICIENT * System.identityHashCode(Kind.SCENARIO)
+                + GENERATED_ENTRY_REMAINDER);
+    var executor = Executors.newFixedThreadPool(GENERATED_WORKERS);
+    try {
+      var results = new ArrayList<Future<Integer>>();
+      for (int index = 0; index < GENERATED_TASKS; index++)
+        results.add(executor.submit(value::hashCode));
+      for (var result : results)
+        assertEquals(expected, result.get(GENERATED_WAIT_SECONDS, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(GENERATED_TERMINATION_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void assetGenerated004ObservationEqualityHasExactFieldsAndType() {
+    var value = new Observation(TARGET, 3, ABC);
+    assertTrue(value.equals(value));
+    assertTrue(value.equals(new Observation(TARGET, 3, ABC)));
+    assertFalse(value.equals(null));
+    assertFalse(value.equals(first()));
+    assertFalse(value.equals(new Observation(OTHER, 3, ABC)));
+    assertFalse(value.equals(new Observation(TARGET, 4, ABC)));
+    assertFalse(value.equals(new Observation(TARGET, 3, EMPTY)));
+    assertEquals("MigrationAssetObservation[REDACTED]", value.toString());
+  }
+
+  @Test
+  void assetGenerated005ObservationHashesUseIndependentUtf16AndLongVectors() {
+    assertEquals(1976508970, new Observation(TARGET, 3, ABC).hashCode());
+    assertEquals(1575271653, new Observation("音/😀.ogg", Long.MAX_VALUE, EMPTY).hashCode());
+  }
+
+  @Test
+  void assetGenerated006ComparisonEqualityIncludesAllSixCounts() {
+    var value = new Comparison(1, 2, 3, 4, 5, 6);
+    assertTrue(value.equals(value));
+    assertTrue(value.equals(new Comparison(1, 2, 3, 4, 5, 6)));
+    assertFalse(value.equals(null));
+    assertFalse(value.equals(first()));
+    for (var different :
+        List.of(
+            new Comparison(7, 2, 3, 4, 5, 6),
+            new Comparison(1, 7, 3, 4, 5, 6),
+            new Comparison(1, 2, 7, 4, 5, 6),
+            new Comparison(1, 2, 3, 7, 5, 6),
+            new Comparison(1, 2, 3, 4, 7, 6),
+            new Comparison(1, 2, 3, 4, 5, 7))) assertFalse(value.equals(different));
+  }
+
+  @Test
+  void assetGenerated007ComparisonHashesKeepIndependent32BitOverflowSemantics() {
+    assertEquals(0, new Comparison(0, 0, 0, 0, 0, 0).hashCode());
+    assertEquals(30569571, new Comparison(1, 2, 3, 4, 5, 6).hashCode());
+    assertEquals(
+        0,
+        new Comparison(
+                Long.MAX_VALUE,
+                Long.MAX_VALUE,
+                Long.MAX_VALUE,
+                Long.MAX_VALUE,
+                Long.MAX_VALUE,
+                Long.MAX_VALUE)
+            .hashCode());
+    assertEquals(-2147483648, new Comparison(Long.MAX_VALUE, 0, 0, 0, 0, 0).hashCode());
+  }
+
+  @Test
+  void assetGenerated008ComparisonTextContainsOnlyTheDeclaredAggregateCounts() {
+    assertEquals(
+        "Comparison[missingFiles=1, unexpectedFiles=2, sizeMismatches=3, hashMismatches=4, observedFiles=5, observedBytes=6]",
+        new Comparison(1, 2, 3, 4, 5, 6).toString());
+    assertEquals(
+        "Comparison[missingFiles=0, unexpectedFiles=0, sizeMismatches=0, hashMismatches=0, observedFiles=0, observedBytes=0]",
+        new Comparison(0, 0, 0, 0, 0, 0).toString());
   }
 }

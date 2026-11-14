@@ -1,0 +1,1356 @@
+Compiled from "ObjectMethods.java"
+public final class java.lang.runtime.ObjectMethods {
+  private static final int MAX_STRING_CONCAT_SLOTS;
+
+  private static final java.lang.invoke.MethodHandle FALSE;
+
+  private static final java.lang.invoke.MethodHandle TRUE;
+
+  private static final java.lang.invoke.MethodHandle ZERO;
+
+  private static final java.lang.invoke.MethodHandle CLASS_IS_INSTANCE;
+
+  private static final java.lang.invoke.MethodHandle OBJECTS_EQUALS;
+
+  private static final java.lang.invoke.MethodHandle OBJECTS_HASHCODE;
+
+  private static final java.lang.invoke.MethodHandle OBJECTS_TOSTRING;
+
+  private static final java.lang.invoke.MethodHandle OBJECT_EQ;
+
+  private static final java.lang.invoke.MethodHandle HASH_COMBINER;
+
+  private static final java.util.HashMap<java.lang.Class<?>, java.lang.invoke.MethodHandle> primitiveEquals;
+
+  private static final java.util.HashMap<java.lang.Class<?>, java.lang.invoke.MethodHandle> primitiveHashers;
+
+  private static final java.util.HashMap<java.lang.Class<?>, java.lang.invoke.MethodHandle> primitiveToString;
+
+  static final boolean $assertionsDisabled;
+
+  private java.lang.runtime.ObjectMethods();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  private static int hashCombiner(int, int);
+    Code:
+         0: iload_0
+         1: bipush        31
+         3: imul
+         4: iload_1
+         5: iadd
+         6: ireturn
+
+  private static boolean eq(java.lang.Object, java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: if_acmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static boolean eq(byte, byte);
+    Code:
+         0: iload_0
+         1: iload_1
+         2: if_icmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static boolean eq(short, short);
+    Code:
+         0: iload_0
+         1: iload_1
+         2: if_icmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static boolean eq(char, char);
+    Code:
+         0: iload_0
+         1: iload_1
+         2: if_icmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static boolean eq(int, int);
+    Code:
+         0: iload_0
+         1: iload_1
+         2: if_icmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static boolean eq(long, long);
+    Code:
+         0: lload_0
+         1: lload_2
+         2: lcmp
+         3: ifne          10
+         6: iconst_1
+         7: goto          11
+        10: iconst_0
+        11: ireturn
+
+  private static boolean eq(float, float);
+    Code:
+         0: fload_0
+         1: fload_1
+         2: invokestatic  #7                  // Method java/lang/Float.compare:(FF)I
+         5: ifne          12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: ireturn
+
+  private static boolean eq(double, double);
+    Code:
+         0: dload_0
+         1: dload_2
+         2: invokestatic  #13                 // Method java/lang/Double.compare:(DD)I
+         5: ifne          12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: ireturn
+
+  private static boolean eq(boolean, boolean);
+    Code:
+         0: iload_0
+         1: iload_1
+         2: if_icmpne     9
+         5: iconst_1
+         6: goto          10
+         9: iconst_0
+        10: ireturn
+
+  private static java.lang.invoke.MethodHandle equalator(java.lang.Class<?>);
+    Code:
+         0: aload_0
+         1: invokevirtual #18                 // Method java/lang/Class.isPrimitive:()Z
+         4: ifeq          20
+         7: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+        10: aload_0
+        11: invokevirtual #30                 // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: checkcast     #36                 // class java/lang/invoke/MethodHandle
+        17: goto          41
+        20: getstatic     #38                 // Field OBJECTS_EQUALS:Ljava/lang/invoke/MethodHandle;
+        23: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        26: aload_0
+        27: iconst_1
+        28: anewarray     #19                 // class java/lang/Class
+        31: dup
+        32: iconst_0
+        33: aload_0
+        34: aastore
+        35: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+        38: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+        41: areturn
+
+  private static java.lang.invoke.MethodHandle hasher(java.lang.Class<?>);
+    Code:
+         0: aload_0
+         1: invokevirtual #18                 // Method java/lang/Class.isPrimitive:()Z
+         4: ifeq          20
+         7: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+        10: aload_0
+        11: invokevirtual #30                 // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: checkcast     #36                 // class java/lang/invoke/MethodHandle
+        17: goto          33
+        20: getstatic     #61                 // Field OBJECTS_HASHCODE:Ljava/lang/invoke/MethodHandle;
+        23: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+        26: aload_0
+        27: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+        30: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+        33: areturn
+
+  private static java.lang.invoke.MethodHandle stringifier(java.lang.Class<?>);
+    Code:
+         0: aload_0
+         1: invokevirtual #18                 // Method java/lang/Class.isPrimitive:()Z
+         4: ifeq          20
+         7: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+        10: aload_0
+        11: invokevirtual #30                 // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: checkcast     #36                 // class java/lang/invoke/MethodHandle
+        17: goto          32
+        20: getstatic     #73                 // Field OBJECTS_TOSTRING:Ljava/lang/invoke/MethodHandle;
+        23: ldc           #76                 // class java/lang/String
+        25: aload_0
+        26: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+        29: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+        32: areturn
+
+  private static java.lang.invoke.MethodHandle makeEquals(java.lang.Class<?>, java.util.List<java.lang.invoke.MethodHandle>);
+    Code:
+         0: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+         3: aload_0
+         4: iconst_1
+         5: anewarray     #19                 // class java/lang/Class
+         8: dup
+         9: iconst_0
+        10: aload_0
+        11: aastore
+        12: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+        15: astore_2
+        16: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        19: aload_0
+        20: iconst_1
+        21: anewarray     #19                 // class java/lang/Class
+        24: dup
+        25: iconst_0
+        26: ldc           #2                  // class java/lang/Object
+        28: aastore
+        29: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+        32: astore_3
+        33: getstatic     #78                 // Field FALSE:Ljava/lang/invoke/MethodHandle;
+        36: iconst_0
+        37: iconst_2
+        38: anewarray     #19                 // class java/lang/Class
+        41: dup
+        42: iconst_0
+        43: aload_0
+        44: aastore
+        45: dup
+        46: iconst_1
+        47: ldc           #2                  // class java/lang/Object
+        49: aastore
+        50: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        53: astore        4
+        55: getstatic     #87                 // Field TRUE:Ljava/lang/invoke/MethodHandle;
+        58: iconst_0
+        59: iconst_2
+        60: anewarray     #19                 // class java/lang/Class
+        63: dup
+        64: iconst_0
+        65: aload_0
+        66: aastore
+        67: dup
+        68: iconst_1
+        69: ldc           #2                  // class java/lang/Object
+        71: aastore
+        72: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        75: astore        5
+        77: getstatic     #90                 // Field OBJECT_EQ:Ljava/lang/invoke/MethodHandle;
+        80: aload_3
+        81: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+        84: astore        6
+        86: getstatic     #93                 // Field CLASS_IS_INSTANCE:Ljava/lang/invoke/MethodHandle;
+        89: aload_0
+        90: invokevirtual #96                 // Method java/lang/invoke/MethodHandle.bindTo:(Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+        93: iconst_0
+        94: iconst_1
+        95: anewarray     #19                 // class java/lang/Class
+        98: dup
+        99: iconst_0
+       100: aload_0
+       101: aastore
+       102: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+       105: astore        7
+       107: getstatic     #87                 // Field TRUE:Ljava/lang/invoke/MethodHandle;
+       110: iconst_0
+       111: iconst_2
+       112: anewarray     #19                 // class java/lang/Class
+       115: dup
+       116: iconst_0
+       117: aload_0
+       118: aastore
+       119: dup
+       120: iconst_1
+       121: aload_0
+       122: aastore
+       123: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+       126: astore        8
+       128: aload_1
+       129: invokeinterface #100,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       134: astore        9
+       136: aload         9
+       138: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       143: ifeq          211
+       146: aload         9
+       148: invokeinterface #111,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       153: checkcast     #36                 // class java/lang/invoke/MethodHandle
+       156: astore        10
+       158: aload         10
+       160: invokevirtual #115                // Method java/lang/invoke/MethodHandle.type:()Ljava/lang/invoke/MethodType;
+       163: invokevirtual #119                // Method java/lang/invoke/MethodType.returnType:()Ljava/lang/Class;
+       166: invokestatic  #123                // Method equalator:(Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+       169: astore        11
+       171: aload         11
+       173: iconst_0
+       174: iconst_2
+       175: anewarray     #36                 // class java/lang/invoke/MethodHandle
+       178: dup
+       179: iconst_0
+       180: aload         10
+       182: aastore
+       183: dup
+       184: iconst_1
+       185: aload         10
+       187: aastore
+       188: invokestatic  #127                // Method java/lang/invoke/MethodHandles.filterArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+       191: astore        12
+       193: aload         12
+       195: aload         8
+       197: aload         4
+       199: aload_2
+       200: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       203: invokestatic  #131                // Method java/lang/invoke/MethodHandles.guardWithTest:(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+       206: astore        8
+       208: goto          136
+       211: aload         6
+       213: aload         5
+       215: aload         7
+       217: aload         8
+       219: aload_3
+       220: invokevirtual #54                 // Method java/lang/invoke/MethodHandle.asType:(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       223: aload         4
+       225: invokestatic  #131                // Method java/lang/invoke/MethodHandles.guardWithTest:(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+       228: invokestatic  #131                // Method java/lang/invoke/MethodHandles.guardWithTest:(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+       231: areturn
+
+  private static java.lang.invoke.MethodHandle makeHashCode(java.lang.Class<?>, java.util.List<java.lang.invoke.MethodHandle>);
+    Code:
+         0: getstatic     #135                // Field ZERO:Ljava/lang/invoke/MethodHandle;
+         3: iconst_0
+         4: iconst_1
+         5: anewarray     #19                 // class java/lang/Class
+         8: dup
+         9: iconst_0
+        10: aload_0
+        11: aastore
+        12: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        15: astore_2
+        16: aload_1
+        17: invokeinterface #100,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        22: astore_3
+        23: aload_3
+        24: invokeinterface #106,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        29: ifeq          119
+        32: aload_3
+        33: invokeinterface #111,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        38: checkcast     #36                 // class java/lang/invoke/MethodHandle
+        41: astore        4
+        43: aload         4
+        45: invokevirtual #115                // Method java/lang/invoke/MethodHandle.type:()Ljava/lang/invoke/MethodType;
+        48: invokevirtual #119                // Method java/lang/invoke/MethodType.returnType:()Ljava/lang/Class;
+        51: invokestatic  #138                // Method hasher:(Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        54: astore        5
+        56: aload         5
+        58: iconst_0
+        59: iconst_1
+        60: anewarray     #36                 // class java/lang/invoke/MethodHandle
+        63: dup
+        64: iconst_0
+        65: aload         4
+        67: aastore
+        68: invokestatic  #127                // Method java/lang/invoke/MethodHandles.filterArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+        71: astore        6
+        73: getstatic     #141                // Field HASH_COMBINER:Ljava/lang/invoke/MethodHandle;
+        76: iconst_0
+        77: iconst_2
+        78: anewarray     #36                 // class java/lang/invoke/MethodHandle
+        81: dup
+        82: iconst_0
+        83: aload_2
+        84: aastore
+        85: dup
+        86: iconst_1
+        87: aload         6
+        89: aastore
+        90: invokestatic  #127                // Method java/lang/invoke/MethodHandles.filterArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+        93: astore        7
+        95: aload         7
+        97: aload_2
+        98: invokevirtual #115                // Method java/lang/invoke/MethodHandle.type:()Ljava/lang/invoke/MethodType;
+       101: iconst_2
+       102: newarray       int
+       104: dup
+       105: iconst_0
+       106: iconst_0
+       107: iastore
+       108: dup
+       109: iconst_1
+       110: iconst_0
+       111: iastore
+       112: invokestatic  #144                // Method java/lang/invoke/MethodHandles.permuteArguments:(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;[I)Ljava/lang/invoke/MethodHandle;
+       115: astore_2
+       116: goto          23
+       119: aload_2
+       120: areturn
+
+  private static java.lang.invoke.MethodHandle makeToString(java.lang.invoke.MethodHandles$Lookup, java.lang.Class<?>, java.lang.invoke.MethodHandle[], java.util.List<java.lang.String>);
+    Code:
+         0: getstatic     #148                // Field $assertionsDisabled:Z
+         3: ifne          25
+         6: aload_2
+         7: arraylength
+         8: aload_3
+         9: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+        14: if_icmpeq     25
+        17: new           #156                // class java/lang/AssertionError
+        20: dup
+        21: invokespecial #158                // Method java/lang/AssertionError."<init>":()V
+        24: athrow
+        25: aload_2
+        26: arraylength
+        27: ifne          78
+        30: ldc           #76                 // class java/lang/String
+        32: new           #159                // class java/lang/StringBuilder
+        35: dup
+        36: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+        39: aload_1
+        40: invokevirtual #162                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+        43: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        46: ldc           #170                // String []
+        48: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        51: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        54: invokestatic  #175                // Method java/lang/invoke/MethodHandles.constant:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+        57: astore        4
+        59: aload         4
+        61: iconst_0
+        62: iconst_1
+        63: anewarray     #19                 // class java/lang/Class
+        66: dup
+        67: iconst_0
+        68: aload_1
+        69: aastore
+        70: invokestatic  #81                 // Method java/lang/invoke/MethodHandles.dropArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        73: astore        4
+        75: aload         4
+        77: areturn
+        78: iconst_1
+        79: istore        4
+        81: aload_2
+        82: astore        7
+        84: iconst_0
+        85: istore        8
+        87: aload         7
+        89: invokestatic  #179                // Method split:([Ljava/lang/invoke/MethodHandle;)Ljava/util/List;
+        92: astore        6
+        94: aload         6
+        96: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       101: anewarray     #36                 // class java/lang/invoke/MethodHandle
+       104: astore        5
+       106: iconst_0
+       107: istore        9
+       109: iload         9
+       111: aload         6
+       113: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       118: if_icmpge     574
+       121: ldc           #183                // String
+       123: astore        10
+       125: iload         4
+       127: ifeq          159
+       130: iload         9
+       132: ifne          159
+       135: new           #159                // class java/lang/StringBuilder
+       138: dup
+       139: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       142: aload_1
+       143: invokevirtual #162                // Method java/lang/Class.getSimpleName:()Ljava/lang/String;
+       146: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       149: ldc           #185                // String [
+       151: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       154: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       157: astore        10
+       159: iconst_0
+       160: istore        11
+       162: iload         11
+       164: aload         6
+       166: iload         9
+       168: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       173: checkcast     #101                // class java/util/List
+       176: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       181: if_icmpge     292
+       184: new           #159                // class java/lang/StringBuilder
+       187: dup
+       188: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       191: aload         10
+       193: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       196: iload         4
+       198: ifeq          233
+       201: new           #159                // class java/lang/StringBuilder
+       204: dup
+       205: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       208: aload_3
+       209: iload         8
+       211: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       216: checkcast     #76                 // class java/lang/String
+       219: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       222: ldc           #190                // String =\u0001
+       224: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       227: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       230: goto          235
+       233: ldc           #192                // String \u0001
+       235: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       238: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       241: astore        10
+       243: iload         4
+       245: ifeq          283
+       248: iload         8
+       250: aload_3
+       251: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       256: iconst_1
+       257: isub
+       258: if_icmpeq     283
+       261: new           #159                // class java/lang/StringBuilder
+       264: dup
+       265: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       268: aload         10
+       270: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       273: ldc           #194                // String ,
+       275: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       278: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       281: astore        10
+       283: iinc          8, 1
+       286: iinc          11, 1
+       289: goto          162
+       292: iload         4
+       294: ifeq          333
+       297: iload         9
+       299: aload         6
+       301: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       306: iconst_1
+       307: isub
+       308: if_icmpne     333
+       311: new           #159                // class java/lang/StringBuilder
+       314: dup
+       315: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       318: aload         10
+       320: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       323: ldc           #196                // String ]
+       325: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       328: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       331: astore        10
+       333: aload         6
+       335: iload         9
+       337: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       342: checkcast     #101                // class java/util/List
+       345: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       350: anewarray     #19                 // class java/lang/Class
+       353: astore        11
+       355: aload         6
+       357: iload         9
+       359: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       364: checkcast     #101                // class java/util/List
+       367: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       372: anewarray     #36                 // class java/lang/invoke/MethodHandle
+       375: astore        12
+       377: iconst_0
+       378: istore        13
+       380: iload         13
+       382: aload         6
+       384: iload         9
+       386: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       391: checkcast     #101                // class java/util/List
+       394: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       399: if_icmpge     468
+       402: aload         11
+       404: iload         13
+       406: aload         6
+       408: iload         9
+       410: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       415: checkcast     #101                // class java/util/List
+       418: iload         13
+       420: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       425: checkcast     #36                 // class java/lang/invoke/MethodHandle
+       428: invokevirtual #115                // Method java/lang/invoke/MethodHandle.type:()Ljava/lang/invoke/MethodType;
+       431: invokevirtual #119                // Method java/lang/invoke/MethodType.returnType:()Ljava/lang/Class;
+       434: aastore
+       435: aload         12
+       437: iload         13
+       439: aload         6
+       441: iload         9
+       443: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       448: checkcast     #101                // class java/util/List
+       451: iload         13
+       453: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       458: checkcast     #36                 // class java/lang/invoke/MethodHandle
+       461: aastore
+       462: iinc          13, 1
+       465: goto          380
+       468: ldc           #76                 // class java/lang/String
+       470: aload         11
+       472: invokestatic  #198                // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       475: astore        13
+       477: aload         5
+       479: iload         9
+       481: aload_0
+       482: ldc           #183                // String
+       484: aload         13
+       486: aload         10
+       488: iconst_0
+       489: anewarray     #2                  // class java/lang/Object
+       492: invokestatic  #201                // Method java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+       495: invokevirtual #207                // Method java/lang/invoke/CallSite.getTarget:()Ljava/lang/invoke/MethodHandle;
+       498: aastore
+       499: aload         5
+       501: iload         9
+       503: aload         5
+       505: iload         9
+       507: aaload
+       508: iconst_0
+       509: aload         12
+       511: invokestatic  #127                // Method java/lang/invoke/MethodHandles.filterArguments:(Ljava/lang/invoke/MethodHandle;I[Ljava/lang/invoke/MethodHandle;)Ljava/lang/invoke/MethodHandle;
+       514: aastore
+       515: aload         5
+       517: iload         9
+       519: aload         5
+       521: iload         9
+       523: aaload
+       524: ldc           #76                 // class java/lang/String
+       526: aload_1
+       527: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       530: aload         6
+       532: iload         9
+       534: invokeinterface #187,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       539: checkcast     #101                // class java/util/List
+       542: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       547: newarray       int
+       549: invokestatic  #144                // Method java/lang/invoke/MethodHandles.permuteArguments:(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;[I)Ljava/lang/invoke/MethodHandle;
+       552: aastore
+       553: goto          568
+       556: astore        14
+       558: new           #215                // class java/lang/RuntimeException
+       561: dup
+       562: aload         14
+       564: invokespecial #217                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+       567: athrow
+       568: iinc          9, 1
+       571: goto          109
+       574: aload         5
+       576: astore        7
+       578: iconst_0
+       579: istore        4
+       581: aload         6
+       583: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       588: iconst_1
+       589: if_icmpgt     87
+       592: aload         5
+       594: iconst_0
+       595: aaload
+       596: areturn
+      Exception table:
+         from    to  target type
+           477   553   556   Class java/lang/Throwable
+
+  private static java.util.List<java.util.List<java.lang.invoke.MethodHandle>> split(java.lang.invoke.MethodHandle[]);
+    Code:
+         0: new           #220                // class java/util/ArrayList
+         3: dup
+         4: invokespecial #222                // Method java/util/ArrayList."<init>":()V
+         7: astore_1
+         8: iconst_0
+         9: istore_2
+        10: new           #220                // class java/util/ArrayList
+        13: dup
+        14: invokespecial #222                // Method java/util/ArrayList."<init>":()V
+        17: astore_3
+        18: aload_0
+        19: astore        4
+        21: aload         4
+        23: arraylength
+        24: istore        5
+        26: iconst_0
+        27: istore        6
+        29: iload         6
+        31: iload         5
+        33: if_icmpge     123
+        36: aload         4
+        38: iload         6
+        40: aaload
+        41: astore        7
+        43: aload         7
+        45: invokevirtual #115                // Method java/lang/invoke/MethodHandle.type:()Ljava/lang/invoke/MethodType;
+        48: invokevirtual #119                // Method java/lang/invoke/MethodType.returnType:()Ljava/lang/Class;
+        51: astore        8
+        53: aload         8
+        55: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        58: if_acmpeq     69
+        61: aload         8
+        63: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+        66: if_acmpne     73
+        69: iconst_2
+        70: goto          74
+        73: iconst_1
+        74: istore        9
+        76: iload_2
+        77: iload         9
+        79: iadd
+        80: bipush        20
+        82: if_icmple     103
+        85: aload_1
+        86: aload_3
+        87: invokeinterface #227,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        92: pop
+        93: new           #220                // class java/util/ArrayList
+        96: dup
+        97: invokespecial #222                // Method java/util/ArrayList."<init>":()V
+       100: astore_3
+       101: iconst_0
+       102: istore_2
+       103: aload_3
+       104: aload         7
+       106: invokeinterface #227,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       111: pop
+       112: iload_2
+       113: iload         9
+       115: iadd
+       116: istore_2
+       117: iinc          6, 1
+       120: goto          29
+       123: aload_3
+       124: invokeinterface #231,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+       129: ifne          140
+       132: aload_1
+       133: aload_3
+       134: invokeinterface #227,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       139: pop
+       140: aload_1
+       141: areturn
+
+  public static java.lang.Object bootstrap(java.lang.invoke.MethodHandles$Lookup, java.lang.String, java.lang.invoke.TypeDescriptor, java.lang.Class<?>, java.lang.String, java.lang.invoke.MethodHandle...) throws java.lang.Throwable;
+    Code:
+         0: aload_0
+         1: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_1
+         6: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         9: pop
+        10: aload_2
+        11: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: pop
+        15: aload_3
+        16: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        19: pop
+        20: aload         4
+        22: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        25: pop
+        26: aload         5
+        28: invokestatic  #234                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        31: pop
+        32: aload         5
+        34: invokestatic  #239                // Method java/util/Arrays.stream:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+        37: invokedynamic #245,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+        42: invokeinterface #249,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+        47: aload_2
+        48: instanceof    #49                 // class java/lang/invoke/MethodType
+        51: ifeq          67
+        54: aload_2
+        55: checkcast     #49                 // class java/lang/invoke/MethodType
+        58: astore        7
+        60: aload         7
+        62: astore        6
+        64: goto          93
+        67: aconst_null
+        68: astore        6
+        70: ldc           #36                 // class java/lang/invoke/MethodHandle
+        72: aload_2
+        73: invokevirtual #255                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        76: ifne          93
+        79: new           #258                // class java/lang/IllegalArgumentException
+        82: dup
+        83: aload_2
+        84: invokeinterface #260,  1          // InterfaceMethod java/lang/invoke/TypeDescriptor.toString:()Ljava/lang/String;
+        89: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        92: athrow
+        93: aload         5
+        95: invokestatic  #266                // InterfaceMethod java/util/List.of:([Ljava/lang/Object;)Ljava/util/List;
+        98: astore        7
+       100: aload_1
+       101: astore        9
+       103: iconst_m1
+       104: istore        10
+       106: aload         9
+       108: invokevirtual #270                // Method java/lang/String.hashCode:()I
+       111: lookupswitch  { // 3
+             -1776922004: 178
+             -1295482945: 144
+               147696667: 161
+                 default: 192
+            }
+       144: aload         9
+       146: ldc_w         #273                // String equals
+       149: invokevirtual #274                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       152: ifeq          192
+       155: iconst_0
+       156: istore        10
+       158: goto          192
+       161: aload         9
+       163: ldc_w         #275                // String hashCode
+       166: invokevirtual #274                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       169: ifeq          192
+       172: iconst_1
+       173: istore        10
+       175: goto          192
+       178: aload         9
+       180: ldc_w         #276                // String toString
+       183: invokevirtual #274                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       186: ifeq          192
+       189: iconst_2
+       190: istore        10
+       192: iload         10
+       194: tableswitch   { // 0 to 2
+                       0: 220
+                       1: 287
+                       2: 345
+                 default: 462
+            }
+       220: aload         6
+       222: ifnull        278
+       225: aload         6
+       227: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       230: aload_3
+       231: iconst_1
+       232: anewarray     #19                 // class java/lang/Class
+       235: dup
+       236: iconst_0
+       237: ldc           #2                  // class java/lang/Object
+       239: aastore
+       240: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       243: invokevirtual #277                // Method java/lang/invoke/MethodType.equals:(Ljava/lang/Object;)Z
+       246: ifne          278
+       249: new           #258                // class java/lang/IllegalArgumentException
+       252: dup
+       253: new           #159                // class java/lang/StringBuilder
+       256: dup
+       257: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       260: ldc_w         #278                // String Bad method type:
+       263: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       266: aload         6
+       268: invokevirtual #280                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       271: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       274: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       277: athrow
+       278: aload_3
+       279: aload         7
+       281: invokestatic  #283                // Method makeEquals:(Ljava/lang/Class;Ljava/util/List;)Ljava/lang/invoke/MethodHandle;
+       284: goto          471
+       287: aload         6
+       289: ifnull        336
+       292: aload         6
+       294: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       297: aload_3
+       298: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       301: invokevirtual #277                // Method java/lang/invoke/MethodType.equals:(Ljava/lang/Object;)Z
+       304: ifne          336
+       307: new           #258                // class java/lang/IllegalArgumentException
+       310: dup
+       311: new           #159                // class java/lang/StringBuilder
+       314: dup
+       315: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       318: ldc_w         #278                // String Bad method type:
+       321: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       324: aload         6
+       326: invokevirtual #280                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       329: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       332: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       335: athrow
+       336: aload_3
+       337: aload         7
+       339: invokestatic  #287                // Method makeHashCode:(Ljava/lang/Class;Ljava/util/List;)Ljava/lang/invoke/MethodHandle;
+       342: goto          471
+       345: aload         6
+       347: ifnull        393
+       350: aload         6
+       352: ldc           #76                 // class java/lang/String
+       354: aload_3
+       355: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       358: invokevirtual #277                // Method java/lang/invoke/MethodType.equals:(Ljava/lang/Object;)Z
+       361: ifne          393
+       364: new           #258                // class java/lang/IllegalArgumentException
+       367: dup
+       368: new           #159                // class java/lang/StringBuilder
+       371: dup
+       372: invokespecial #161                // Method java/lang/StringBuilder."<init>":()V
+       375: ldc_w         #278                // String Bad method type:
+       378: invokevirtual #166                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       381: aload         6
+       383: invokevirtual #280                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+       386: invokevirtual #172                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       389: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       392: athrow
+       393: ldc           #183                // String
+       395: aload         4
+       397: invokevirtual #274                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       400: ifeq          409
+       403: invokestatic  #290                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       406: goto          420
+       409: aload         4
+       411: ldc_w         #293                // String ;
+       414: invokevirtual #295                // Method java/lang/String.split:(Ljava/lang/String;)[Ljava/lang/String;
+       417: invokestatic  #266                // InterfaceMethod java/util/List.of:([Ljava/lang/Object;)Ljava/util/List;
+       420: astore        11
+       422: aload         11
+       424: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       429: aload         7
+       431: invokeinterface #152,  1          // InterfaceMethod java/util/List.size:()I
+       436: if_icmpeq     450
+       439: new           #258                // class java/lang/IllegalArgumentException
+       442: dup
+       443: ldc_w         #298                // String Name list and accessor list do not match
+       446: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       449: athrow
+       450: aload_0
+       451: aload_3
+       452: aload         5
+       454: aload         11
+       456: invokestatic  #300                // Method makeToString:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/Class;[Ljava/lang/invoke/MethodHandle;Ljava/util/List;)Ljava/lang/invoke/MethodHandle;
+       459: goto          471
+       462: new           #258                // class java/lang/IllegalArgumentException
+       465: dup
+       466: aload_1
+       467: invokespecial #263                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       470: athrow
+       471: astore        8
+       473: aload         6
+       475: ifnull        490
+       478: new           #304                // class java/lang/invoke/ConstantCallSite
+       481: dup
+       482: aload         8
+       484: invokespecial #306                // Method java/lang/invoke/ConstantCallSite."<init>":(Ljava/lang/invoke/MethodHandle;)V
+       487: goto          492
+       490: aload         8
+       492: areturn
+
+  static {};
+    Code:
+         0: ldc           #25                 // class java/lang/runtime/ObjectMethods
+         2: invokevirtual #309                // Method java/lang/Class.desiredAssertionStatus:()Z
+         5: ifne          12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: putstatic     #148                // Field $assertionsDisabled:Z
+        16: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        19: invokestatic  #312                // Method java/lang/invoke/MethodHandles.zero:(Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        22: putstatic     #78                 // Field FALSE:Ljava/lang/invoke/MethodHandle;
+        25: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        28: iconst_1
+        29: invokestatic  #315                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        32: invokestatic  #175                // Method java/lang/invoke/MethodHandles.constant:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/invoke/MethodHandle;
+        35: putstatic     #87                 // Field TRUE:Ljava/lang/invoke/MethodHandle;
+        38: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+        41: invokestatic  #312                // Method java/lang/invoke/MethodHandles.zero:(Ljava/lang/Class;)Ljava/lang/invoke/MethodHandle;
+        44: putstatic     #135                // Field ZERO:Ljava/lang/invoke/MethodHandle;
+        47: new           #31                 // class java/util/HashMap
+        50: dup
+        51: invokespecial #319                // Method java/util/HashMap."<init>":()V
+        54: putstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+        57: new           #31                 // class java/util/HashMap
+        60: dup
+        61: invokespecial #319                // Method java/util/HashMap."<init>":()V
+        64: putstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+        67: new           #31                 // class java/util/HashMap
+        70: dup
+        71: invokespecial #319                // Method java/util/HashMap."<init>":()V
+        74: putstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+        77: ldc           #25                 // class java/lang/runtime/ObjectMethods
+        79: astore_0
+        80: invokestatic  #320                // Method java/lang/invoke/MethodHandles.publicLookup:()Ljava/lang/invoke/MethodHandles$Lookup;
+        83: astore_1
+        84: invokestatic  #324                // Method java/lang/invoke/MethodHandles.lookup:()Ljava/lang/invoke/MethodHandles$Lookup;
+        87: astore_2
+        88: aload_1
+        89: ldc           #19                 // class java/lang/Class
+        91: ldc_w         #327                // String isInstance
+        94: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        97: ldc           #2                  // class java/lang/Object
+        99: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       102: invokevirtual #329                // Method java/lang/invoke/MethodHandles$Lookup.findVirtual:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       105: putstatic     #93                 // Field CLASS_IS_INSTANCE:Ljava/lang/invoke/MethodHandle;
+       108: aload_1
+       109: ldc           #235                // class java/util/Objects
+       111: ldc_w         #273                // String equals
+       114: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       117: ldc           #2                  // class java/lang/Object
+       119: iconst_1
+       120: anewarray     #19                 // class java/lang/Class
+       123: dup
+       124: iconst_0
+       125: ldc           #2                  // class java/lang/Object
+       127: aastore
+       128: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       131: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       134: putstatic     #38                 // Field OBJECTS_EQUALS:Ljava/lang/invoke/MethodHandle;
+       137: aload_1
+       138: ldc           #235                // class java/util/Objects
+       140: ldc_w         #275                // String hashCode
+       143: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       146: ldc           #2                  // class java/lang/Object
+       148: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       151: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       154: putstatic     #61                 // Field OBJECTS_HASHCODE:Ljava/lang/invoke/MethodHandle;
+       157: aload_1
+       158: ldc           #235                // class java/util/Objects
+       160: ldc_w         #276                // String toString
+       163: ldc           #76                 // class java/lang/String
+       165: ldc           #2                  // class java/lang/Object
+       167: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       170: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       173: putstatic     #73                 // Field OBJECTS_TOSTRING:Ljava/lang/invoke/MethodHandle;
+       176: aload_2
+       177: aload_0
+       178: ldc_w         #338                // String eq
+       181: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       184: ldc           #2                  // class java/lang/Object
+       186: iconst_1
+       187: anewarray     #19                 // class java/lang/Class
+       190: dup
+       191: iconst_0
+       192: ldc           #2                  // class java/lang/Object
+       194: aastore
+       195: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       198: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       201: putstatic     #90                 // Field OBJECT_EQ:Ljava/lang/invoke/MethodHandle;
+       204: aload_2
+       205: aload_0
+       206: ldc_w         #340                // String hashCombiner
+       209: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       212: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       215: iconst_1
+       216: anewarray     #19                 // class java/lang/Class
+       219: dup
+       220: iconst_0
+       221: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       224: aastore
+       225: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       228: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       231: putstatic     #141                // Field HASH_COMBINER:Ljava/lang/invoke/MethodHandle;
+       234: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       237: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       240: aload_2
+       241: aload_0
+       242: ldc_w         #338                // String eq
+       245: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       248: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       251: iconst_1
+       252: anewarray     #19                 // class java/lang/Class
+       255: dup
+       256: iconst_0
+       257: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       260: aastore
+       261: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       264: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       267: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       270: pop
+       271: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       274: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       277: aload_2
+       278: aload_0
+       279: ldc_w         #338                // String eq
+       282: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       285: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       288: iconst_1
+       289: anewarray     #19                 // class java/lang/Class
+       292: dup
+       293: iconst_0
+       294: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       297: aastore
+       298: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       301: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       304: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       307: pop
+       308: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       311: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       314: aload_2
+       315: aload_0
+       316: ldc_w         #338                // String eq
+       319: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       322: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       325: iconst_1
+       326: anewarray     #19                 // class java/lang/Class
+       329: dup
+       330: iconst_0
+       331: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       334: aastore
+       335: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       338: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       341: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       344: pop
+       345: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       348: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       351: aload_2
+       352: aload_0
+       353: ldc_w         #338                // String eq
+       356: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       359: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       362: iconst_1
+       363: anewarray     #19                 // class java/lang/Class
+       366: dup
+       367: iconst_0
+       368: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       371: aastore
+       372: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       375: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       378: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       381: pop
+       382: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       385: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       388: aload_2
+       389: aload_0
+       390: ldc_w         #338                // String eq
+       393: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       396: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       399: iconst_1
+       400: anewarray     #19                 // class java/lang/Class
+       403: dup
+       404: iconst_0
+       405: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       408: aastore
+       409: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       412: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       415: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       418: pop
+       419: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       422: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       425: aload_2
+       426: aload_0
+       427: ldc_w         #338                // String eq
+       430: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       433: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       436: iconst_1
+       437: anewarray     #19                 // class java/lang/Class
+       440: dup
+       441: iconst_0
+       442: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       445: aastore
+       446: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       449: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       452: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       455: pop
+       456: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       459: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       462: aload_2
+       463: aload_0
+       464: ldc_w         #338                // String eq
+       467: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       470: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       473: iconst_1
+       474: anewarray     #19                 // class java/lang/Class
+       477: dup
+       478: iconst_0
+       479: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       482: aastore
+       483: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       486: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       489: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       492: pop
+       493: getstatic     #24                 // Field primitiveEquals:Ljava/util/HashMap;
+       496: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       499: aload_2
+       500: aload_0
+       501: ldc_w         #338                // String eq
+       504: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       507: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       510: iconst_1
+       511: anewarray     #19                 // class java/lang/Class
+       514: dup
+       515: iconst_0
+       516: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       519: aastore
+       520: invokestatic  #48                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       523: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       526: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       529: pop
+       530: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       533: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       536: aload_2
+       537: ldc_w         #343                // class java/lang/Byte
+       540: ldc_w         #275                // String hashCode
+       543: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       546: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       549: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       552: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       555: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       558: pop
+       559: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       562: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       565: aload_2
+       566: ldc_w         #350                // class java/lang/Short
+       569: ldc_w         #275                // String hashCode
+       572: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       575: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       578: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       581: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       584: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       587: pop
+       588: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       591: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       594: aload_2
+       595: ldc_w         #353                // class java/lang/Character
+       598: ldc_w         #275                // String hashCode
+       601: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       604: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       607: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       610: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       613: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       616: pop
+       617: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       620: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       623: aload_2
+       624: ldc           #65                 // class java/lang/Integer
+       626: ldc_w         #275                // String hashCode
+       629: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       632: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       635: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       638: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       641: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       644: pop
+       645: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       648: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       651: aload_2
+       652: ldc           #224                // class java/lang/Long
+       654: ldc_w         #275                // String hashCode
+       657: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       660: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       663: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       666: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       669: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       672: pop
+       673: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       676: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       679: aload_2
+       680: ldc           #8                  // class java/lang/Float
+       682: ldc_w         #275                // String hashCode
+       685: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       688: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       691: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       694: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       697: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       700: pop
+       701: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       704: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       707: aload_2
+       708: ldc           #14                 // class java/lang/Double
+       710: ldc_w         #275                // String hashCode
+       713: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       716: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       719: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       722: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       725: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       728: pop
+       729: getstatic     #58                 // Field primitiveHashers:Ljava/util/HashMap;
+       732: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       735: aload_2
+       736: ldc           #43                 // class java/lang/Boolean
+       738: ldc_w         #275                // String hashCode
+       741: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       744: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       747: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       750: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       753: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       756: pop
+       757: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       760: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       763: aload_2
+       764: ldc_w         #343                // class java/lang/Byte
+       767: ldc_w         #276                // String toString
+       770: ldc           #76                 // class java/lang/String
+       772: getstatic     #342                // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+       775: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       778: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       781: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       784: pop
+       785: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       788: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       791: aload_2
+       792: ldc_w         #350                // class java/lang/Short
+       795: ldc_w         #276                // String toString
+       798: ldc           #76                 // class java/lang/String
+       800: getstatic     #349                // Field java/lang/Short.TYPE:Ljava/lang/Class;
+       803: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       806: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       809: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       812: pop
+       813: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       816: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       819: aload_2
+       820: ldc_w         #353                // class java/lang/Character
+       823: ldc_w         #276                // String toString
+       826: ldc           #76                 // class java/lang/String
+       828: getstatic     #352                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+       831: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       834: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       837: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       840: pop
+       841: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       844: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       847: aload_2
+       848: ldc           #65                 // class java/lang/Integer
+       850: ldc_w         #276                // String toString
+       853: ldc           #76                 // class java/lang/String
+       855: getstatic     #64                 // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+       858: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       861: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       864: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       867: pop
+       868: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       871: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       874: aload_2
+       875: ldc           #224                // class java/lang/Long
+       877: ldc_w         #276                // String toString
+       880: ldc           #76                 // class java/lang/String
+       882: getstatic     #223                // Field java/lang/Long.TYPE:Ljava/lang/Class;
+       885: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       888: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       891: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       894: pop
+       895: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       898: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       901: aload_2
+       902: ldc           #8                  // class java/lang/Float
+       904: ldc_w         #276                // String toString
+       907: ldc           #76                 // class java/lang/String
+       909: getstatic     #355                // Field java/lang/Float.TYPE:Ljava/lang/Class;
+       912: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       915: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       918: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       921: pop
+       922: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       925: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       928: aload_2
+       929: ldc           #14                 // class java/lang/Double
+       931: ldc_w         #276                // String toString
+       934: ldc           #76                 // class java/lang/String
+       936: getstatic     #226                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+       939: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       942: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       945: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       948: pop
+       949: getstatic     #70                 // Field primitiveToString:Ljava/util/HashMap;
+       952: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       955: aload_2
+       956: ldc           #43                 // class java/lang/Boolean
+       958: ldc_w         #276                // String toString
+       961: ldc           #76                 // class java/lang/String
+       963: getstatic     #42                 // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+       966: invokestatic  #67                 // Method java/lang/invoke/MethodType.methodType:(Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+       969: invokevirtual #335                // Method java/lang/invoke/MethodHandles$Lookup.findStatic:(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;
+       972: invokevirtual #345                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       975: pop
+       976: goto          989
+       979: astore_0
+       980: new           #215                // class java/lang/RuntimeException
+       983: dup
+       984: aload_0
+       985: invokespecial #217                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+       988: athrow
+       989: return
+      Exception table:
+         from    to  target type
+            77   976   979   Class java/lang/ReflectiveOperationException
+}

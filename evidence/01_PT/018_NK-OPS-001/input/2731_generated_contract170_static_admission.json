@@ -1,0 +1,654 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG31456-GENERATED-CONTRACT-CLOSED170",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31450-generated-contract170-prepare-v1/manifest.json",
+    "sha256": "691637d63bddf1a9855deb4baa73ebe92d6c1e6bcb1a6708a60dbbffb1e5e3cb"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31452-generated-contract170-static-v1/manifest.json",
+    "sha256": "241c99c89c5e504488aac2e857a07b0b3e598ecb991141ab03882a9ba4f3d43c"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "EqualsNull",
+      "sourceLine": 288,
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 1,
+      "message": "Avoid using equals() to compare against null",
+      "reason": "This exact assertion deliberately invokes the generated Entry/Observation/Comparison equals method with null and independently expects the Java Object/record contract false. It is not using equals to test whether value itself is null. Replacing this with value==null would stop testing the required null argument behavior and would invalidate the PT oracle; no production EqualsNull exemption or blanket Test exclusion is granted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 322,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(GENERATED_WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit generated-record hash worker is outside managed J2EE. Eight owned workers perform64 immutable Entry hash checks against independent Python polynomial plus JVM identity primitive, all Futures join within5s, finally shutdownNow and asserted awaitTermination10s bound lifecycle. No shared fixture mutation, DB, native, FS, network, Root or service operation; no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 322,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(GENERATED_WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit generated-record hash worker is outside managed J2EE. Eight owned workers perform64 immutable Entry hash checks against independent Python polynomial plus JVM identity primitive, all Futures join within5s, finally shutdownNow and asserted awaitTermination10s bound lifecycle. No shared fixture mutation, DB, native, FS, network, Root or service operation; no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 326,
+      "sourceAnchor": "results.add(executor.submit(value::hashCode));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit generated-record hash worker is outside managed J2EE. Eight owned workers perform64 immutable Entry hash checks against independent Python polynomial plus JVM identity primitive, all Futures join within5s, finally shutdownNow and asserted awaitTermination10s bound lifecycle. No shared fixture mutation, DB, native, FS, network, Root or service operation; no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 330,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit generated-record hash worker is outside managed J2EE. Eight owned workers perform64 immutable Entry hash checks against independent Python polynomial plus JVM identity primitive, all Futures join within5s, finally shutdownNow and asserted awaitTermination10s bound lifecycle. No shared fixture mutation, DB, native, FS, network, Root or service operation; no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 331,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(GENERATED_TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit generated-record hash worker is outside managed J2EE. Eight owned workers perform64 immutable Entry hash checks against independent Python polynomial plus JVM identity primitive, all Futures join within5s, finally shutdownNow and asserted awaitTermination10s bound lifecycle. No shared fixture mutation, DB, native, FS, network, Root or service operation; no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "EqualsNull",
+      "sourceLine": 340,
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 1,
+      "message": "Avoid using equals() to compare against null",
+      "reason": "This exact assertion deliberately invokes the generated Entry/Observation/Comparison equals method with null and independently expects the Java Object/record contract false. It is not using equals to test whether value itself is null. Replacing this with value==null would stop testing the required null argument behavior and would invalidate the PT oracle; no production EqualsNull exemption or blanket Test exclusion is granted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java",
+      "rule": "EqualsNull",
+      "sourceLine": 359,
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 1,
+      "message": "Avoid using equals() to compare against null",
+      "reason": "This exact assertion deliberately invokes the generated Entry/Observation/Comparison equals method with null and independently expects the Java Object/record contract false. It is not using equals to test whether value itself is null. Replacing this with value==null would stop testing the required null argument behavior and would invalidate the PT oracle; no production EqualsNull exemption or blanket Test exclusion is granted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 88,
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "This exact sink is a memory-only TrackingSink/FailingSink, owning only ByteArrayOutputStream bytes and no descriptor, socket, driver, database or native resource. close/flush counters are the explicit independent borrowed-stream postcondition and must stay zero on success and injected IOException; not closing verifies the caller contract, with no blanket exemption for real handles.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 272,
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "This exact sink is a memory-only TrackingSink/FailingSink, owning only ByteArrayOutputStream bytes and no descriptor, socket, driver, database or native resource. close/flush counters are the explicit independent borrowed-stream postcondition and must stay zero on success and injected IOException; not closing verifies the caller contract, with no blanket exemption for real handles.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 289,
+      "sourceAnchor": "var sink = new FailingSink();",
+      "occurrences": 1,
+      "message": "Ensure that resources like this FailingSink object are closed after use",
+      "reason": "This exact sink is a memory-only TrackingSink/FailingSink, owning only ByteArrayOutputStream bytes and no descriptor, socket, driver, database or native resource. close/flush counters are the explicit independent borrowed-stream postcondition and must stay zero on success and injected IOException; not closing verifies the caller contract, with no blanket exemption for real handles.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 294,
+      "sourceAnchor": "var normal = new TrackingSink();",
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "This exact sink is a memory-only TrackingSink/FailingSink, owning only ByteArrayOutputStream bytes and no descriptor, socket, driver, database or native resource. close/flush counters are the explicit independent borrowed-stream postcondition and must stay zero on success and injected IOException; not closing verifies the caller contract, with no blanket exemption for real handles.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 303,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 303,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 308,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 317,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 318,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 361,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 361,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 365,
+      "sourceAnchor": "results.add(executor.submit(() -> row.copyBytes(encoder())));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 371,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 372,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 140,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 140,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 144,
+      "sourceAnchor": "results.add(executor.submit(() -> ids.fromDisplayPath(ASCII_PATH)));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 148,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 149,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 81,
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "This exact TrackingSink extends ByteArrayOutputStream and owns only memory bytes, not an OS file/socket/native/DB resource. Its close/flush counters must remain zero to prove the independent borrowed writer postcondition for all149 declared rows. No blanket stream exemption or real handle is involved.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 392,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 392,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 396,
+      "sourceAnchor": "results.add(executor.submit(() -> wire(catalogue.copyRows(input.ids, manifest, STAMP))));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 400,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 401,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 226,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 226,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 230,
+      "sourceAnchor": "results.add(executor.submit(() -> canonical(planner.plan(input))));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 234,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 235,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 164,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 164,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 169,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 178,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 179,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), \"owned COPY workers terminate\");",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 33,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 43,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void emptyIterableMakesNoSinkCallsAndDoesNotOwnIt() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 53,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void obtainsOneIteratorAndWritesCurrentRowBeforeObtainingTheNext() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 115,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void nullOrEmptyRowsFailWithoutWritingThatRow() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 130,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void mixedWidthRejectsBeforeSendingTheSecondRowAndKeepsTheDeclaredPrefix() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 147,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void invalidFieldPreservesCodecDiagnosticAndDoesNotSendMalformedRow() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink =",
+      "sourceLine": 178,
+      "occurrences": 1,
+      "message": "Ensure that resources like this OutputStream object are closed after use",
+      "reason": "Exact void originalSinkFailureStopsBeforeObtainingAnotherRowWithoutCloseOrFlush() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 207,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void originalIteratorFailureRemainsFailureAfterThePreviousRowWasSent() { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var sink = new TrackingSink();",
+      "sourceLine": 237,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var independent = new TrackingSink();",
+      "sourceLine": 245,
+      "occurrences": 1,
+      "message": "Ensure that resources like this TrackingSink object are closed after use",
+      "reason": "Exact void callerOwnsInputsSinkAndLaterCallsAndRedactionStaysFixed() throws Exception { declaration constructs a memory-only final TrackingSink backed solely by ByteArrayOutputStream and flags, or an anonymous OutputStream whose write throws a retained synthetic IOException. No file/socket/FD/process/database resource is acquired or retained. Borrowed-library close/flush calls are deliberately detected; these memory doubles require no external resource release.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 254,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "Exact JUnit-owned executor is acquired before try, every exit reaches finally shutdownNow and asserted awaitTermination10, and all64 Futures join5. Implicit close does not state the finite postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "sourceLine": 254,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 259,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 270,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "sourceLine": 271,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone immutable codec JUnit site is outside J2EE. Eight locally owned workers use separate memory sinks and independent literal bytes for64 tasks, Future5 and finallyshutdownNow/await10 checked; no DB/FS/process/native/Root operation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 374,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 374,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 379,
+      "sourceAnchor": "executor.submit(() -> wire(catalogue.copyRows(inputs.targetMap, manifest, STAMP))));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 383,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 384,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "This exact standalone JUnit stateless-value worker site is outside managed J2EE. Eight locally owned workers execute64 independent fixed value/hash/COPY-vector checks; all Futures join within5s, finally always shutdownNow and asserts awaitTermination within10s. Explicit bounded lifecycle avoids unbounded ExecutorService.close; no DB/driver/network/FS/native/Root/service action and no blanket Test exemption.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 432,
+      "sourceAnchor": "@Nullable InputStream found = VideoMigrationCatalogueTest.class.getResourceAsStream(name);",
+      "occurrences": 1,
+      "message": "Ensure that resources like this InputStream object are closed after use",
+      "reason": "This exact fixture InputStream is checked for null then immediately aliased into try(InputStream input=found). Both successful readAllBytes and exceptional reads close the identical owned stream by Java try-with-resources. No transfer escapes and no global resource exemption; PMD does not connect the nullable acquisition alias to the TWR ownership boundary.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
