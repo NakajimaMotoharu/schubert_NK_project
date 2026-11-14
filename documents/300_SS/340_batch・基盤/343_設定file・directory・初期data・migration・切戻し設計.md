@@ -1,5 +1,19 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC392 Current file八列と宣言assetをID対応・COPYへ接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioFileMapperはSSC391の八列projectionを既ScenarioFileMigrationMap/AssetMigrationManifest/ScenarioFileCopyBatchへ接続するpure変換。Current generatorのsource-only確認ではrelative_path=path.relative_to(game_dir).as_posix()であり、game内相対pathはgame間で重複しうる。global AssetManifest.currentPathへ無条件で直接lookup/別game推測をしない。
+
+constructor(nullable files,nullable assets,nullable gameOneRoot,nullable gameTwoRoot)は既二immutable artifactとcaller明示の二つのgame用root-relative POSIX prefixを受ける。これはデータ結合用の宣言文字であり、実FSの許可root/権限/真正観測を発行しない。prefixはnull/空/先頭末尾slash/backslash/空segment/`.`/`..`/非NFC/ISOcontrol/未対応surrogateを拒否し、二prefix同値も拒否する。外部path選択/IO/探索/環境からの推測0。SCENARIOのEntryだけをcurrentPathで不変index化し、その件数とfiles.files件数を一致させる。他kindは元manifestへ保持され、当scopeで受入れない。
+
+copyRows(nullable rows of nullable eight-column row,nullable migratedAt)はnull/UTC0001..9999年・µs以下を検証し外/内Listをsnapshotする。件数=files.files、row null/幅8以外を拒否。Current idは正準signedlong、gameは文字1/2だけ、files.lookup(game,id)で既知と対応target ID/displayOrderを得る。Current idは原DDL全体PKなのでgameを跨ぐ同ID重複も拒否。Current relative_pathはnonnull、選択game prefix+slash+保存relative_pathそのものをSCENARIO indexから一回consumeする。未知/別root/別game/path case差/backslash/`.`等のpath修復・rename・auto splitはしない。正常な宣言prefixとexact Entryだけが結合を与え、realfileの同一性は後続の独立実資格で別途検証する。
+
+Current shaがnonnullならEntry.sha256と完全一致、Current sizeがnonnullなら正準signedlongとしてEntry.byteLengthと一致を要求する。NULLは未保持metadataの意味であり、その場合だけ宣言AssetManifest値をtargetへ渡す。比較はmetadata claim同士であり、sourceのNULLや宣言一致を実file検証済みへ読み替えない。target11列はmapped targetId/game/displayOrder、Entry.targetPath、Current relative_path、Current file_name/section_code/chapter_title、Entry.sha256/byteLength、共通migration時刻。保存display path/filename/section/chapterを正規化/再導出せず、target制約は既Batchへ委ねる。nonnull Current file_nameはBatchへ渡す前に明示検査し偶発NPEなし。hash大小文字/sizeの+・zero埋め・負値を勝手に直さない。
+
+global Current ID一意/既知mapping/同件数・Entry一回consume/SCENARIO同件数で全mapping/assetの全単射を確立。mapped.filesのgame→Current ID順で出力し、target数値順や入力順へ変更しない。input/retained manifestは不変、fresh呼出の消費mapだけを持つ。固定redaction/IAE、NPE catch正常扱い0。ActualDB/原本/assetpayload/OS/network/資格/権限/IO操作0。
+
+PT-MIG-FILEMAP001..024: 001二game八列→11列独立literal、002emptyと非SCENARIO維持、003四constructor null、004prefix path/NFC/control/surrogate/同値、005rows/time null・µs境界、006不足余剰nullrow幅7-9、007Current id正準/overflow/未知、008game/二rootの分離、009sameCurrentid crossgame重複、010未知/別game/path case/バックslash拒否、011nonnull hash相違とNULLから宣言metadata、012nonnull size正準/不一致/負値/overflowとNULL、013SCENARIO件数一致/otherkind非受入、014同asset二重参照拒否、015Current filename/section/chapter/display保存とtarget NFC-byte-control拒否、016target sizeN12上限/空file、017deep snapshot/immutable、018固定COPY bytes、019時刻両端/共通stamp、020signedCurrent ID両端、021target数値順とgame内Current順分離、022失敗後fresh/固定redaction、023prefixがUnicodeの場合と同名relativeのgame分離、024有限8workers64/Future5/finallyshutdownNow-await10。入力・metadata/hash・COPY期待値は手書きfixture/独立計算でProduction method生成0。新24＋必要File38/Asset12/ScenarioGenerated16=whole90、全7Main17physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。旧37migrationMain773定義同byte、新Main1。追加不足2.5/7.5/9.9pp cap10、元費用/SV/群開始保持・実専有費token null。RD/UI/DDL/grant/QA変更不要。実CurrentDB/実rootの配備値・file認証/hash/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
 ## SSC391 Currentシナリオfile八列のborrowed snapshot読取り（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioFileProjectionReaderはcaller認証済みCurrent readonly/nonauto snapshotから八列を読むJDK JDBC部品。固定SQLは SELECT id,game_id,relative_path,file_name,section_code,chapter_title,sha256,byte_size FROM scenario.script_files ORDER BY id 。Current DDLの八列型/null契約だけを確認し、created_atは別migration共通時刻のため選択しない。DB接続取得・認証/資格/role変更・Current generator/原本master/実DB操作は実施しない。
