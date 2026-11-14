@@ -1,0 +1,98 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG32168-MASTER-COLUMN-CLOSED22",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "WBS-P019-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/2901_master_column_independent_oracle.json",
+      "sha256": "a34703895d30a19545a30270045de52693d906b0e705f7f89454e18029c9b4f7"
+    },
+    {
+      "path": "evidence/01_PT/019_NK-MIG-001/084_六表六十六カラム属性のcatalog照合・独立二十二仕様.md",
+      "sha256": "7d96a9919b66f6a57b2ccdc9dc603ffe01019616492f5e23c73ddf88c2a008fc"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32138-master-column-source22-v1/manifest.json",
+      "sha256": "383125179db532111c925d183b9367b928593eb70e896f0c5275e20e58acb84d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32158-master-column-fixed-query-repair-v1/manifest.json",
+      "sha256": "60b3d48f1f2755548f7b69a05a6c83ac575409a707031dc725fd2bd35b1ac395"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5742049f94894b9ce161760f7ed8c17b754aea7d",
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "tests": 22
+    }
+  ],
+  "expectedTests": 22,
+  "resources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-catalogue-20.tsv",
+      "placement": "TEST_CLASSPATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-video-copy-20.wire",
+      "placement": "TEST_CLASSPATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-catalogue-129.tsv",
+      "placement": "TEST_CLASSPATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-copy-129.wire",
+      "placement": "TEST_CLASSPATH"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/resources/fixtures/migration-music-extra-id-vectors.tsv",
+      "placement": "TEST_CLASSPATH"
+    }
+  ],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG32160-master-column22-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG32162-master-column22-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG32164-master-column22-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG32166-master-column22-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG32168-master-column22-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG32170-master-column22-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg32162-master-column22-prepare-v1",
+    "unit": "pg32168-master-column22-unit-v1"
+  },
+  "newTestDefinitions": 22
+}

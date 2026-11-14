@@ -1,0 +1,194 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG32168-MASTER-COLUMN-CLOSED22",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32162-master-column22-prepare-v1/manifest.json",
+    "sha256": "63596f9deac1e68aceaf6cfd169ee0e6ba11f413d124ec9bed25bebe72ae0af4"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32164-master-column22-static-v1/manifest.json",
+    "sha256": "6aa3ea10a662e4d6fbdcd8430ecb423f2301a23e55ba7a1c3b73c402e2a60763"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 125,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 125,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "sourceLine": 163,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 179,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (cleanup != primary) primary.addSuppressed(cleanup);",
+      "sourceLine": 180,
+      "occurrences": 1,
+      "message": "Use equals() to compare object references.",
+      "reason": "Throwable.addSuppressed prohibits adding the identical primary object to itself. This reference guard preserves original SQL/runtime/Error even when both resources return the same instance. Different but equal-valued exception objects are still suppressed, including duplicate cleanup attempts. Independent identity assertions verify that this is not a domain value comparison.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 192,
+      "occurrences": 1,
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error cleanup) {",
+      "sourceLine": 192,
+      "occurrences": 1,
+      "message": "Avoid catching Error in try-catch block",
+      "reason": "Exact owned JDBC boundary rethrows the original SQL/runtime/Error identity and closes Result before Statement. Cleanup remains ordered suppression rather than success, retry or raw-value logging. Independent faults at every metadata getter/wasNull/next and both close phases verify original identity, exact resource counts and termination for all three fault kinds.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (cleanup != primary) primary.addSuppressed(cleanup);",
+      "sourceLine": 193,
+      "occurrences": 1,
+      "message": "Use equals() to compare object references.",
+      "reason": "Throwable.addSuppressed prohibits adding the identical primary object to itself. This reference guard preserves original SQL/runtime/Error even when both resources return the same instance. Different but equal-valued exception objects are still suppressed, including duplicate cleanup attempts. Independent identity assertions verify that this is not a domain value comparison.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 422,
+      "occurrences": 1,
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "reason": "Exact standalone JUnit executor owns eight workers/64 independent synthetic catalog transactions sharing only a stateless verifier. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No DB/native/process resource is acquired; implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(WORKERS);",
+      "sourceLine": 422,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone JUnit executor owns eight workers/64 independent synthetic catalog transactions sharing only a stateless verifier. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No DB/native/process resource is acquired; implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "sourceLine": 427,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone JUnit executor owns eight workers/64 independent synthetic catalog transactions sharing only a stateless verifier. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No DB/native/process resource is acquired; implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 438,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone JUnit executor owns eight workers/64 independent synthetic catalog transactions sharing only a stateless verifier. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No DB/native/process resource is acquired; implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));",
+      "sourceLine": 439,
+      "occurrences": 1,
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "reason": "Exact standalone JUnit executor owns eight workers/64 independent synthetic catalog transactions sharing only a stateless verifier. Every Future joins5 seconds and finally shutdownNow plus checked awaitTermination10 applies on every path. No DB/native/process resource is acquired; implicit executor close does not establish the required finite termination postcondition.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "sourceLine": 571,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit memory-only Proxy uses the explicit loader of the same JDK java.sql interface. It acquires no application-server loader, external driver, held product class, real database or network. Unexpected methods fail the fixture, so the independent catalog SQL/getter/resource protocol has no ambient context-loader dependency.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "Statement.class.getClassLoader(),",
+      "sourceLine": 595,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit memory-only Proxy uses the explicit loader of the same JDK java.sql interface. It acquires no application-server loader, external driver, held product class, real database or network. Unexpected methods fail the fixture, so the independent catalog SQL/getter/resource protocol has no ambient context-loader dependency.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "rule": "UseProperClassLoader",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "sourceLine": 635,
+      "occurrences": 1,
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "reason": "Exact standalone JUnit memory-only Proxy uses the explicit loader of the same JDK java.sql interface. It acquires no application-server loader, external driver, held product class, real database or network. Unexpected methods fail the fixture, so the independent catalog SQL/getter/resource protocol has no ambient context-loader dependency.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
