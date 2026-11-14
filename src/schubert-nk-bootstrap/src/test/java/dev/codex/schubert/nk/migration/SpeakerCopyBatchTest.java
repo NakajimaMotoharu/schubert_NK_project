@@ -332,6 +332,7 @@ final class SpeakerCopyBatchTest {
   }
 
   private static final class FailingSink extends OutputStream {
+    private static final int PREFIX_BYTES = 2;
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private final IOException failure;
     private int failures;
@@ -344,7 +345,7 @@ final class SpeakerCopyBatchTest {
 
     @Override
     public void write(int value) throws IOException {
-      if (output.size() == 2) {
+      if (output.size() == PREFIX_BYTES) {
         failures++;
         throw failure;
       }
