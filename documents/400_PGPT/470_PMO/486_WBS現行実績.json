@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "b0284f3fbd39e69b5638b8fed7ce41e10a721f1db1dd0c281cb600d1d50ca019",
+  "inventorySha256": "68afbdbfe5ec1ab5d37795c88018b6a5583aed840b00ba8244757c3491d1c676",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -37353,8 +37353,156 @@
     "tokenTotals": null
   },
   "plannedCurrentMigrationProjectionSSC401": {
-    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "state": "COMPONENT_QUALIFIED_NOT_FULL_WBS",
+    "actualDbQualification": false,
+    "actualCurrentOrderWitness": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32864-current-snapshot898-post-v3/manifest.json",
+      "sha256": "bfbb5be94b54e8c6204f4feb985c290678fddee4235b0049de37e11c196385a2"
+    }
+  },
+  "currentSnapshot898": {
+    "state": "ALL_EXISTING_JAVA_QUALIFIED_NOT_ACTUAL_CURRENT_ORDER_DB_OR_FULL_MANUFACTURE",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32864-current-snapshot898-post-v3/manifest.json",
+      "sha256": "bfbb5be94b54e8c6204f4feb985c290678fddee4235b0049de37e11c196385a2"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32866-current-snapshot898-unfiltered-measurement-v3/manifest.json",
+      "sha256": "08d95e3377cd209a8a2fa225d2ac5d0cbcf02ffe2d850c6a5438dd263c41a102"
+    },
+    "javaCore": "d0e647059b8374362c31aa63f9d6ea714c635730",
+    "javaUnit": "930691b1c65618eaa8b521017f330a0e0f15378b",
+    "global451Accepted": false
+  },
+  "currentSnapshot898PG32862": {
+    "kind": "SSC401_BORROWED_CURRENT_FIVE_READER_COORDINATION_ALL898",
+    "source": "930691b1c65618eaa8b521017f330a0e0f15378b",
+    "productionCoreMain": "d0e647059b8374362c31aa63f9d6ea714c635730",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32864-current-snapshot898-post-v3/manifest.json",
+      "sha256": "bfbb5be94b54e8c6204f4feb985c290678fddee4235b0049de37e11c196385a2"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32866-current-snapshot898-unfiltered-measurement-v3/manifest.json",
+      "sha256": "08d95e3377cd209a8a2fa225d2ac5d0cbcf02ffe2d850c6a5438dd263c41a102"
+    },
+    "tests": 898,
+    "newUniqueTestDefinitions": 12,
+    "requalifiedExistingDefinitions": 886,
+    "newMainSources": 1,
+    "changedExistingMainSources": 0,
+    "oldTestSourcesUnchanged": 44,
+    "allExistingMigrationMain": 43,
+    "allExistingMigrationTestSources": 45,
+    "physicalClasses": 63,
+    "positiveMainCrc": 63,
+    "uniqueMainJavaDeltaFromInitial": 151,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 13221,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1773,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2696,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1365,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 475,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 63,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 13679
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1773
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2738
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1440
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 550
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 63
+      }
+    },
+    "actualJvmCodeMethods": 550,
+    "jacocoDefaultMethods": 475,
+    "all75DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 508,
+    "sameByteSites": 498,
+    "freshReviewedSites": 10,
+    "applicable": 0,
+    "unclassified": 0,
+    "spotbugs": 0,
+    "all43ScopeNullAwayLintCs": true,
+    "allSixModulesRequalified": false,
+    "borrowedSameConnectionAndFiveReaderOrder": true,
+    "callerReadonlyNonautoRequired": true,
+    "isolationAttributes": [
+      4,
+      8
+    ],
+    "beforeAfterSameModeRequired": true,
+    "actualTransactionIdentityOrSnapshotProven": false,
+    "sourceColumns": [
+      6,
+      8,
+      10,
+      10,
+      3
+    ],
+    "sourceValuesNullableAndSignedPreserved": true,
+    "ownedCleanupAndOrderedSuppression": true,
+    "deepImmutableAndFinite64": true,
+    "actualCurrentBusinessOrderWitness": false,
+    "actualDatabaseOriginalDataBackupKeyVmAruOperations": 0,
+    "limitedBugsClosed": [
+      2951,
+      2952,
+      2953,
+      2954
+    ],
+    "limitedYktsClosed": [
+      2480,
+      2481,
+      2482,
+      2483
+    ],
+    "oldPrestyleFailureProducts0": true,
+    "oldSpotbugsFiveUnqualified": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }

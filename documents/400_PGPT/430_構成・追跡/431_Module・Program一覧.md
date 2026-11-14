@@ -831,3 +831,6 @@ SSC399/NK-MIG-001/WBS-P01903 CurrentAudioLinkProjectionReader.read/rows/row/clea
 
 
 SSC400/NK-MIG-001/WBS-P01903 CurrentAudioLinkMapper/LinkOrder constructor-links-canonical-copyRowsはCurrent triplesと明示orderを既entry/audio対応・AudioCopyDatasetへ結合→RD MIG003005006/MIG-DAT001002005/FUN005/DAT004/TST→UI227242254→SS311331343/V002→PT-AUDIOLINKMAP001..024/019120121。Core2db594c2/Unitcd99a02b全886/61CRC/既定463実538両四100。実Current候補順/DB/全移行/HOLD未受入。
+
+
+SSC401/NK-MIG-001/WBS-P01903 CurrentMigrationProjection.read/snapshotMode/SourceSnapshot constructor-fivegettersは同caller Connection・前後属性を固定五readerへ接続→RD MIG003005006/MIG-DAT001002005/DAT004/TST→UI242254→SS311331343→PT-CURRENTSNAPSHOT001..012/019122123。Cored0e64705/Unit930691b1全898/63CRC/既定475実550両四100。実transaction同一性/Current候補順/DB/target全組立/HOLD未受入。
