@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC367: bootstrap.migration.SpeakerCopyRowはUI242/SS331/V002の解決済みspeaker七列のimmutable/null/byte/date/COPY契約のみを持つ。Current抽出/正規化導出/UK-FK/全175/DB/Rootを代行しない。PT-MIG-SPEAKERROW001..016/必要codec12/full28、全HOLD不変更。
+
 SSC366: ScenarioStagingTables/AssetStagingTablesの6資源scopeは同じSQL/borrowed transaction契約のままnonnull所有/型別closeとprimary-suppressed順を明示する。private helperのみ、PT-MIG-CLEANUP001..004/必要403、Root品質/全HOLD不変更。
 
 SSC365: COPY四final aggregateのconstructor防御copy/deep immutable/借用streamだけの契約を標準Immutable annotationで明示する。全method/test body不変、Root品質/全物理/static0/通常399の条件は維持。
