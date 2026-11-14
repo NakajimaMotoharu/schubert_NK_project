@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC384: 既ContentVerifierの六表後へ生成body_searchとDB lower(body)の不一致件数0を固定第七SELECTで照合、Target同ConnectionのFinalizer前後条件とする。Content029/必要642、式定義/実DB/全移行/HOLD未受入。
+
 SSC383: ConstraintVerifier75明示テーブル制約だけをn,t分離queryで照合する。承認済み遅延constraint trigger自体とNOTNULL catalogは別未完、無効化・全catalog資格の主張0。
 
 SSC382: MigrationMasterConstraintVerifierの75制約構造を既TargetPublisher.prepareのColumn後staging前へ同Connection接続、PT-CONSTRAINT22＋既Target32/必要641、全31Main45physical。実DB/全constraint意味/全移行/HOLD未受入。
