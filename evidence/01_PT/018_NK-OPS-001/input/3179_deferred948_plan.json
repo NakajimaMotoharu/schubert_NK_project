@@ -1,0 +1,29 @@
+{
+  "ssc": 406,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+  "source": "deac05a82788515b5703839fc5e984ac11026c32",
+  "estimate": {
+    "low": 3.3,
+    "base": 9.9,
+    "high": 9.9
+  },
+  "title": "遅延link制約を非transactional sequence同期前に評価",
+  "spec": "132_遅延link制約の先行評価・Final029030親037038全948仕様.md",
+  "designSlot": "PG33082-ssc406-deferred-design-only-v1",
+  "previousForecast": "2032_WBS65予実・default生成式全944後版580.json",
+  "forecast": "2035_WBS65予実・遅延制約終了依存不足追加版581.json",
+  "revision": "581-MISSING_DEFERRED_CONSTRAINT_FLUSH_BEFORE_NONTRANSACTIONAL_SEQUENCE",
+  "findingReason": "BUG2967 V002 initially-deferred constraint trigger can fail at caller COMMIT after nontransactional sequence effects. Flush this exact constraint before MAX/setval without owning caller commit; no actualDB/recovery action.",
+  "workId": "P01903_SSC406_DEFERRED_FINAL30_TARGET38_WHOLE948",
+  "planKey": "plannedDeferredConstraintSSC406",
+  "startInput": "3180_deferred948_start.json",
+  "startRecord": "2036_WBS65遅延制約終了依存開始.json",
+  "groupId": "PGPT-WBS65-SSC406-DEFERRED-FINAL30-TARGET38-948-20261115",
+  "run": "PG33096-DEFERRED-CLOSED948",
+  "newDefinitions": 4,
+  "whole": 948,
+  "moduleSummary": "Finalizer.finishへ固定link constraint即時評価をMAX/setval前一回追加、親Target同経路へ接続。既Main1＋Target doc追跡更新、新Final2/Target2=全948/45Main65physical予定。caller TX commit/rollback・実DB/HOLD操作0。",
+  "scope": "BUG2967 deferredLink constraint before nontransactionalsetval. ExistingFinalizer changed+Targettrace only; newFinal029030/Target037038/all948/45Main65physical. Additional3.3/9.9/9.9cap10 no actualDB/authority/HOLDchange.",
+  "nextCommand": "PublishSSC406SS311343914onlymain beforePG. Force exactV002 deferredlinkconstraint beforeMAX/setval inFinalizer and parentpath; preserve old94SQL+one=95, oldresourcecounts/results. Independent no-sideeffect negatives/all948/static/default-raw. ActualDB/HOLD unchanged. Ordinarygroupnotstop.",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/DAT004/TST、UI242254、SS311331343/V002。BUG2967/YKT2496: V002 ck_entry_audio_links_entry_type_limitはDEFERRABLE INITIALLY DEFERREDで、既Finalizerの五MAX→setval→ANALYZEだけでは実trigger違反が非transactional sequence変更後のCOMMITで判明し得る。既Referenceの宣言件数検査は実DB遅延trigger発火を代替しない。終了依存の内部補足でRD/UI/DDL/承認済DIF/QA変更なし。\n\nFinalizer.finishは既borrowed nonauto Connection/所有Statement/queryTimeout30を維持し、五MAX前に固定SET CONSTRAINTS schubert.ck_entry_audio_links_entry_type_limit IMMEDIATEをexecuteUpdateで一回実行、戻り0かつgetWarnings()==nullを要求する。非0はwarning取得前に失敗、warning/SQLRuntimeErrorは同primary/逆順cleanupで失敗しMAX/prepareStatement/setval/ANALYZEを一つも進めない。既五MAX/五bind setval/六ANALYZEは同byte同順保持、sequence同期の既非rollback性も不変更。即時modeは当caller所有migration TXの後続/COMMITまで維持しDEFERREDへ戻さない。他制約やsession設定/roleを変更せずConnection commit/rollback/close/set*0、権限・permit・復旧・再試行0。実DB trigger発火とCOMMIT実結果は本Proxy PTで合格にせず別HOLDへ残す。\n\nPT-MIG-FINAL029は正常SQL先頭/NULL input/borrowed属性と新command非0/SQLWarningでMAX-setval0を確認、030は新executeUpdate/getWarnings各phase×SQLRuntimeError×outer cleanup三型/自己identityで元primary同instance/順suppressed/close一回。既28を削除せず全30へ更新しnormalSQL16→17/warning読6→7、新constraint warningを既六ANALYZE warningから分離し旧fault slotは同一意味。親Target037は新flush非0/warningで五MAX前の正確prefix/sequence0、038は新二phase三型fault/cleanup自己identityを検査。親旧94SQLを同byte同順保存して最初MAX直前へ固定一commandを追加し95、query/Result76/close17/auto12/fetch4/catalog1251/scalar56/Game10/ANALYZE6不変。親Target mainのjavadoc Test範囲も001..038/SSC406へ追跡を更新し、処理bodyは不変更。\n\n新4＋旧944=全948/45Main47Test65physicalを一source一exec/RootNullAway-lint-CS-SB-PMD各site/CRC-init/既定・無filter全Code四100で資格。旧944は再認証で新成果0。他43Main/他45Test同byte、DDL30同byte、原本/Backup/key/native/VM/server/HOLD不変更。独立期待はV002の遅延trigger宣言と固定SQL順・自作fixture後条件、production methodからexpected生成0。\n\n追加不足3.3/9.9/9.9pp cap10、元費用/SV/各群開始/原残904.85等と未較正残397.324/837.386/1643.415保持、当不足だけ一度追加/限定完了時同額減算。専有実費token null、正本625/元190受入/正式1964-53/工数nullを増やさない。indexはSS343 ETL step5の後処理でありpre-COPYに存在を要求する新gateは追加しない。実DBtrigger/role-grant/deparser/Current-copy/全移行/global451/CHR/ITST/HOLDは別未受入。"
+}
