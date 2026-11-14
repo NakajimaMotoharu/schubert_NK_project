@@ -179,6 +179,12 @@ final class ScenarioCopyDatasetTest {
     dataset.writeEntries(writer, entries);
     assertArrayEquals(FILE_GOLDEN.getBytes(StandardCharsets.UTF_8), files.toByteArray());
     assertArrayEquals(ENTRY_GOLDEN.getBytes(StandardCharsets.UTF_8), entries.toByteArray());
+    var emptyFiles = new ScenarioFileCopyBatch(new ScenarioFileMigrationMap(List.of()), List.of());
+    var empty = new ScenarioCopyDataset(emptyFiles, emptyEntries());
+    var emptySink = new ByteArrayOutputStream();
+    empty.writeFiles(writer, emptySink);
+    empty.writeEntries(writer, emptySink);
+    assertArrayEquals(new byte[0], emptySink.toByteArray());
   }
 
   /** SSC351 / PT-MIG-DATASET014. */

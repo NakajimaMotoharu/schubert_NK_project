@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-STREAM001..012; literal wire values, memory-only borrowed sinks. */
 final class PostgresCopyTextWriterTest {
-  private static final String FIRST = "A\t\\N\t\\\\N\t改行\\n😀\n";
-  private static final String SECOND = "\t\\t\t\\\\\té\n";
+  private static final String ORACLE_FIRST_ROW = "A\t\\N\t\\\\N\t改行\\n😀\n";
+  private static final String ORACLE_SECOND_ROW = "\t\\t\t\\\\\té\n";
   private static final String DIAGNOSTIC = "migration COPY stream input is invalid";
   private static final String CODEC_DIAGNOSTIC = "migration COPY text data is invalid";
 
@@ -32,7 +32,8 @@ final class PostgresCopyTextWriterTest {
   void independentGoldenRetainsNullEscapesAndUtf8AcrossTwoRows() throws Exception {
     var sink = new TrackingSink();
     writer().writeRows(List.of(first(), second()), sink);
-    assertArrayEquals((FIRST + SECOND).getBytes(StandardCharsets.UTF_8), sink.bytes());
+    assertArrayEquals(
+        (ORACLE_FIRST_ROW + ORACLE_SECOND_ROW).getBytes(StandardCharsets.UTF_8), sink.bytes());
     assertFalse(sink.closed);
     assertFalse(sink.flushed);
   }
@@ -55,24 +56,25 @@ final class PostgresCopyTextWriterTest {
         () -> {
           iterators[0]++;
           return new Iterator<>() {
-            private int next;
+            private int position;
 
             @Override
             public boolean hasNext() {
-              return next < 2;
+              return position < 2;
             }
 
             @Override
             public List<@Nullable String> next() {
-              if (next++ == 0) return first();
-              assertArrayEquals(FIRST.getBytes(StandardCharsets.UTF_8), sink.bytes());
+              if (position++ == 0) return first();
+              assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), sink.bytes());
               return second();
             }
           };
         };
     writer().writeRows(input, sink);
     assertEquals(1, iterators[0]);
-    assertArrayEquals((FIRST + SECOND).getBytes(StandardCharsets.UTF_8), sink.bytes());
+    assertArrayEquals(
+        (ORACLE_FIRST_ROW + ORACLE_SECOND_ROW).getBytes(StandardCharsets.UTF_8), sink.bytes());
   }
 
   @Test
@@ -130,7 +132,7 @@ final class PostgresCopyTextWriterTest {
                 IllegalArgumentException.class,
                 () -> writer().writeRows(List.of(first(), List.of("short")), sink))
             .getMessage());
-    assertArrayEquals(FIRST.getBytes(StandardCharsets.UTF_8), sink.bytes());
+    assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), sink.bytes());
     assertFalse(sink.closed);
     assertFalse(sink.flushed);
   }
@@ -147,7 +149,7 @@ final class PostgresCopyTextWriterTest {
                   IllegalArgumentException.class,
                   () -> writer().writeRows(List.of(first(), row), sink))
               .getMessage());
-      assertArrayEquals(FIRST.getBytes(StandardCharsets.UTF_8), sink.bytes());
+      assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), sink.bytes());
     }
   }
 
@@ -204,22 +206,22 @@ final class PostgresCopyTextWriterTest {
     Iterable<List<@Nullable String>> input =
         () ->
             new Iterator<>() {
-              private int next;
+              private int position;
 
               @Override
               public boolean hasNext() {
-                return next < 2;
+                return position < 2;
               }
 
               @Override
               public List<@Nullable String> next() {
-                if (next++ == 0) return first();
+                if (position++ == 0) return first();
                 throw failure;
               }
             };
     assertSame(
         failure, assertThrows(IllegalStateException.class, () -> writer().writeRows(input, sink)));
-    assertArrayEquals(FIRST.getBytes(StandardCharsets.UTF_8), sink.bytes());
+    assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), sink.bytes());
     assertFalse(sink.closed);
     assertFalse(sink.flushed);
   }
@@ -238,7 +240,7 @@ final class PostgresCopyTextWriterTest {
     assertTrue(sink.closed);
     var independent = new TrackingSink();
     writer.writeRows(List.of(first()), independent);
-    assertArrayEquals(FIRST.getBytes(StandardCharsets.UTF_8), independent.bytes());
+    assertArrayEquals(ORACLE_FIRST_ROW.getBytes(StandardCharsets.UTF_8), independent.bytes());
     assertEquals("PostgresCopyTextWriter[REDACTED]", writer.toString());
   }
 
@@ -258,7 +260,8 @@ final class PostgresCopyTextWriterTest {
                 }));
       for (var future : futures)
         assertArrayEquals(
-            (FIRST + SECOND).getBytes(StandardCharsets.UTF_8), future.get(5, TimeUnit.SECONDS));
+            (ORACLE_FIRST_ROW + ORACLE_SECOND_ROW).getBytes(StandardCharsets.UTF_8),
+            future.get(5, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
