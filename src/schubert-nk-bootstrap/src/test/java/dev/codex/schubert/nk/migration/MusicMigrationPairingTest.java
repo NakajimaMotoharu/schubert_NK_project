@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 /** PT-MIG-MUSICPAIR001..026; hand-written pair/shadow oracles, independent distance matrix. */
 final class MusicMigrationPairingTest {
   private static final String DIAGNOSTIC = "migration music pairing input is invalid";
+  private static final String CAT_TITLE = "cat";
   private static final String ALPHA = "Alpha";
   private static final String ALPHA_INST = "Alpha inst";
   private static final String ALPHA_PAIR = "Alpha|alpha|a|z";
@@ -98,25 +99,31 @@ final class MusicMigrationPairingTest {
 
   @Test
   void exactKeyWinsOverAnEarlierCloseInstrumental() {
-    pairs(tracks("m", "cat", PATH_A, "bat inst", PATH_Z, "cat inst"), "cat|cat|m|z", "bat|bat|-|a");
+    pairs(
+        tracks("m", CAT_TITLE, PATH_A, "bat inst", PATH_Z, "cat inst"),
+        "cat|cat|m|z",
+        "bat|bat|-|a");
   }
 
   @Test
   void closestDistanceWinsOverAnEarlierDistanceTwo() {
     pairs(
-        tracks("m", "cat", PATH_A, "batx inst", PATH_Z, "cut inst"),
+        tracks("m", CAT_TITLE, PATH_A, "batx inst", PATH_Z, "cut inst"),
         "cat|cat|m|z",
         "batx|batx|-|a");
   }
 
   @Test
   void equalDistanceUsesTheFirstDisplayPath() {
-    pairs(tracks("m", "cat", PATH_Z, "cut inst", PATH_A, "bat inst"), "cat|cat|m|a", "cut|cut|-|z");
+    pairs(
+        tracks("m", CAT_TITLE, PATH_Z, "cut inst", PATH_A, "bat inst"),
+        "cat|cat|m|a",
+        "cut|cut|-|z");
   }
 
   @Test
   void consumedInstrumentalCannotBeReusedByTheNextMain() {
-    pairs(tracks("m", "cat", "n", "cats", PATH_A, "bat inst"), "cat|cat|m|a", "cats|cats|n|-");
+    pairs(tracks("m", CAT_TITLE, "n", "cats", PATH_A, "bat inst"), "cat|cat|m|a", "cats|cats|n|-");
   }
 
   @Test
