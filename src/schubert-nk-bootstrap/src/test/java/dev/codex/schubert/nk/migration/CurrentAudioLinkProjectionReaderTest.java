@@ -39,6 +39,7 @@ final class CurrentAudioLinkProjectionReaderTest {
   private static final String CALL_NULL = "wasNull";
   private static final String CALL_RESULT_CLOSE = "result.close";
   private static final String CALL_STATEMENT_CLOSE = "statement.close";
+  private static final String CURRENT_ENTRY = "-20";
   private static final String KIND = "voice";
   private static final String OTHER_KIND = "se";
   private static final int WORKERS = 8;
@@ -328,14 +329,14 @@ final class CurrentAudioLinkProjectionReaderTest {
     f.data.add(new Object[] {-20L, 700L, KIND});
     assertEquals(
         List.of(
-            List.of("-20", "700", KIND),
+            List.of(CURRENT_ENTRY, "700", KIND),
             List.of("10", "-30", OTHER_KIND),
-            List.of("-20", "700", KIND)),
+            List.of(CURRENT_ENTRY, "700", KIND)),
         new CurrentAudioLinkProjectionReader().read(f.connection(), 3));
     var reversed = normal();
     java.util.Collections.reverse(reversed.data);
     assertEquals(
-        List.of(List.of("10", "-30", OTHER_KIND), List.of("-20", "700", KIND)),
+        List.of(List.of("10", "-30", OTHER_KIND), List.of(CURRENT_ENTRY, "700", KIND)),
         new CurrentAudioLinkProjectionReader().read(reversed.connection(), 2));
   }
 
@@ -346,7 +347,7 @@ final class CurrentAudioLinkProjectionReaderTest {
     bad.nullResult = true;
     assertThrows(SQLException.class, () -> reader.read(bad.connection(), 2));
     var good = normal();
-    assertEquals("-20", reader.read(good.connection(), 2).get(0).get(0));
+    assertEquals(CURRENT_ENTRY, reader.read(good.connection(), 2).get(0).get(0));
     assertEquals("CurrentAudioLinkProjectionReader[REDACTED]", reader.toString());
     Throwable diagnostic =
         assertThrows(SQLException.class, () -> reader.read(normal().connection(), 0));
@@ -372,7 +373,8 @@ final class CurrentAudioLinkProjectionReaderTest {
                   return rows.get(0).get(0);
                 }));
       }
-      for (var future : futures) assertEquals("-20", future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      for (var future : futures)
+        assertEquals(CURRENT_ENTRY, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
     } finally {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
