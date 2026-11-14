@@ -54,6 +54,9 @@ final class MigrationMasterTargetPublisherTest {
   private static final int CATALOG_END = 12;
   private static final int CATALOG_COLUMNS = 141;
   private static final int CATALOG_FIELDS = 7;
+  private static final int COLUMN_CATALOG_FIELDS = 8;
+  private static final int COLUMN_CATALOG_TABLES = 6;
+  private static final int MIXED_CATALOG_GETTERS = 1053;
   private static final int CONTENT_COLUMNS = 66;
   private static final int RESULTS = 75;
   private static final int CLOSES = 16;
@@ -83,16 +86,16 @@ final class MigrationMasterTargetPublisherTest {
       List.of(6, 12, 13, 15, 18, 22, 30, 42, 70, 77, 83, 84, 85, 86, 87, 93);
   private static final List<Integer> CLOSE_RESULTS =
       List.of(6, 12, 12, 12, 12, 15, 21, 30, 58, 65, 71, 72, 73, 74, 75, 75);
-  private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t";
-  private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t";
+  private static final String CATALOG_IDENTITY_COLUMN = "1\tid\tint8\tbigint\ttrue\td\t\ttrue";
+  private static final String CATALOG_GAME_COLUMN = "2\tgame_id\tint2\tsmallint\ttrue\t\t\ttrue";
   private static final List<String> CATALOG_SQL =
       List.of(
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
@@ -104,75 +107,75 @@ final class MigrationMasterTargetPublisherTest {
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
-              "3\tname\ttext\ttext\ttrue\t\t",
-              "4\tnormalized_name\ttext\ttext\ttrue\t\t",
-              "5\tis_protagonist\tbool\tboolean\ttrue\t\t",
-              "6\tnotes\ttext\ttext\tfalse\t\t",
-              "7\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "3\tname\ttext\ttext\ttrue\t\t\ttrue",
+              "4\tnormalized_name\ttext\ttext\ttrue\t\t\ttrue",
+              "5\tis_protagonist\tbool\tboolean\ttrue\t\t\ttrue",
+              "6\tnotes\ttext\ttext\tfalse\t\t\ttrue",
+              "7\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
-              "3\tdisplay_order\tint8\tbigint\ttrue\t\t",
-              "4\tstorage_relative_path\ttext\ttext\ttrue\t\t",
-              "5\tdisplay_path\ttext\ttext\ttrue\t\t",
-              "6\tfile_name\ttext\ttext\ttrue\t\t",
-              "7\tsection_code\tvarchar\tcharacter varying(64)\tfalse\t\t",
-              "8\tchapter_title\ttext\ttext\tfalse\t\t",
-              "9\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
-              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
-              "11\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "3\tdisplay_order\tint8\tbigint\ttrue\t\t\ttrue",
+              "4\tstorage_relative_path\ttext\ttext\ttrue\t\t\ttrue",
+              "5\tdisplay_path\ttext\ttext\ttrue\t\t\ttrue",
+              "6\tfile_name\ttext\ttext\ttrue\t\t\ttrue",
+              "7\tsection_code\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue",
+              "8\tchapter_title\ttext\ttext\tfalse\t\t\ttrue",
+              "9\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue",
+              "11\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
-              "3\tscript_file_id\tint8\tbigint\ttrue\t\t",
-              "4\tdisplay_order\tint8\tbigint\ttrue\t\t",
-              "5\tentry_index\tint4\tinteger\ttrue\t\t",
-              "6\tline_number\tint4\tinteger\tfalse\t\t",
-              "7\tentry_type\tvarchar\tcharacter varying(9)\ttrue\t\t",
-              "8\tspeaker_id\tint8\tbigint\tfalse\t\t",
-              "9\tspeaker_label\ttext\ttext\tfalse\t\t",
-              "10\tbody\ttext\ttext\ttrue\t\t",
-              "11\tbody_search\ttext\ttext\tfalse\t\ts",
-              "12\traw_block\ttext\ttext\ttrue\t\t",
-              "13\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "3\tscript_file_id\tint8\tbigint\ttrue\t\t\ttrue",
+              "4\tdisplay_order\tint8\tbigint\ttrue\t\t\ttrue",
+              "5\tentry_index\tint4\tinteger\ttrue\t\t\ttrue",
+              "6\tline_number\tint4\tinteger\tfalse\t\t\ttrue",
+              "7\tentry_type\tvarchar\tcharacter varying(9)\ttrue\t\t\ttrue",
+              "8\tspeaker_id\tint8\tbigint\tfalse\t\t\ttrue",
+              "9\tspeaker_label\ttext\ttext\tfalse\t\t\ttrue",
+              "10\tbody\ttext\ttext\ttrue\t\t\ttrue",
+              "11\tbody_search\ttext\ttext\tfalse\t\ts\ttrue",
+              "12\traw_block\ttext\ttext\ttrue\t\t\ttrue",
+              "13\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
               CATALOG_GAME_COLUMN,
-              "3\tstorage_relative_path\ttext\ttext\ttrue\t\t",
-              "4\tdisplay_path\ttext\ttext\ttrue\t\t",
-              "5\tfile_name\ttext\ttext\ttrue\t\t",
-              "6\tbasename\ttext\ttext\ttrue\t\t",
-              "7\taudio_role\tvarchar\tcharacter varying(8)\ttrue\t\t",
-              "8\tcontainer\tvarchar\tcharacter varying(16)\tfalse\t\t",
-              "9\tduration_ms\tint8\tbigint\tfalse\t\t",
-              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
-              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
-              "12\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "3\tstorage_relative_path\ttext\ttext\ttrue\t\t\ttrue",
+              "4\tdisplay_path\ttext\ttext\ttrue\t\t\ttrue",
+              "5\tfile_name\ttext\ttext\ttrue\t\t\ttrue",
+              "6\tbasename\ttext\ttext\ttrue\t\t\ttrue",
+              "7\taudio_role\tvarchar\tcharacter varying(8)\ttrue\t\t\ttrue",
+              "8\tcontainer\tvarchar\tcharacter varying(16)\tfalse\t\t\ttrue",
+              "9\tduration_ms\tint8\tbigint\tfalse\t\t\ttrue",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue",
+              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue",
+              "12\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
               CATALOG_IDENTITY_COLUMN,
-              "2\tlogical_id\tvarchar\tcharacter varying(64)\ttrue\t\t",
-              "3\tmedia_type\tvarchar\tcharacter varying(8)\ttrue\t\t",
-              "4\ttitle\ttext\ttext\ttrue\t\t",
-              "5\tcategory\ttext\ttext\ttrue\t\t",
-              "6\tsection\ttext\ttext\tfalse\t\t",
-              "7\tstorage_relative_path\ttext\ttext\ttrue\t\t",
-              "8\tdisplay_path\ttext\ttext\ttrue\t\t",
-              "9\tfile_name\ttext\ttext\ttrue\t\t",
-              "10\tbyte_size\tint8\tbigint\ttrue\t\t",
-              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t",
-              "12\tmime_type\tvarchar\tcharacter varying(64)\ttrue\t\t",
-              "13\tparent_logical_id\tvarchar\tcharacter varying(64)\tfalse\t\t",
-              "14\tpair_key\ttext\ttext\tfalse\t\t",
-              "15\tpair_role\tbpchar\tcharacter(1)\tfalse\t\t",
-              "16\tdisplay_order\tint4\tinteger\ttrue\t\t",
-              "17\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "2\tlogical_id\tvarchar\tcharacter varying(64)\ttrue\t\t\ttrue",
+              "3\tmedia_type\tvarchar\tcharacter varying(8)\ttrue\t\t\ttrue",
+              "4\ttitle\ttext\ttext\ttrue\t\t\ttrue",
+              "5\tcategory\ttext\ttext\ttrue\t\t\ttrue",
+              "6\tsection\ttext\ttext\tfalse\t\t\ttrue",
+              "7\tstorage_relative_path\ttext\ttext\ttrue\t\t\ttrue",
+              "8\tdisplay_path\ttext\ttext\ttrue\t\t\ttrue",
+              "9\tfile_name\ttext\ttext\ttrue\t\t\ttrue",
+              "10\tbyte_size\tint8\tbigint\ttrue\t\t\ttrue",
+              "11\tsha256\tbpchar\tcharacter(64)\ttrue\t\t\ttrue",
+              "12\tmime_type\tvarchar\tcharacter varying(64)\ttrue\t\t\ttrue",
+              "13\tparent_logical_id\tvarchar\tcharacter varying(64)\tfalse\t\t\ttrue",
+              "14\tpair_key\ttext\ttext\tfalse\t\t\ttrue",
+              "15\tpair_role\tbpchar\tcharacter(1)\tfalse\t\t\ttrue",
+              "16\tdisplay_order\tint4\tinteger\ttrue\t\t\ttrue",
+              "17\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
-              "1\tentry_id\tint8\tbigint\ttrue\t\t",
-              "2\taudio_file_id\tint8\tbigint\ttrue\t\t",
-              "3\tgame_id\tint2\tsmallint\ttrue\t\t",
-              "4\tlink_type\tvarchar\tcharacter varying(5)\ttrue\t\t",
-              "5\tdisplay_order\tint2\tsmallint\ttrue\t\t",
-              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t"),
+              "1\tentry_id\tint8\tbigint\ttrue\t\t\ttrue",
+              "2\taudio_file_id\tint8\tbigint\ttrue\t\t\ttrue",
+              "3\tgame_id\tint2\tsmallint\ttrue\t\t\ttrue",
+              "4\tlink_type\tvarchar\tcharacter varying(5)\ttrue\t\t\ttrue",
+              "5\tdisplay_order\tint2\tsmallint\ttrue\t\t\ttrue",
+              "6\tcreated_at\ttimestamptz\ttimestamp with time zone\ttrue\t\t\ttrue"),
           List.of(
               "1\tck_speakers_id_n12\tc\t1\ttrue\t-\t-",
               "2\tck_speakers_name_bytes\tc\t3\ttrue\t-\t-",
@@ -274,12 +277,12 @@ final class MigrationMasterTargetPublisherTest {
           "L");
   private static final List<String> SQL =
       List.of(
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
-          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='audio_files' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='media_assets' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
+          "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='entry_audio_links' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='speakers' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_files' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
           "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='script_entries' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"",
@@ -785,7 +788,7 @@ final class MigrationMasterTargetPublisherTest {
   void target026All141CatalogRowAttributesMismatchBeforeDdl() throws Exception {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
-        for (int field = 0; field < CATALOG_FIELDS; field++) {
+        for (int field = 0; field < catalogFieldCount(table); field++) {
           var f = new Fixture();
           f.badCatalogTable = table;
           f.badCatalogRow = row;
@@ -820,8 +823,10 @@ final class MigrationMasterTargetPublisherTest {
         assertThrows(
             SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
         int expected =
-            CATALOG_ROWS.subList(0, table + 1).stream().mapToInt(List::size).sum() * CATALOG_FIELDS;
-        assertEquals(expected - (missing ? CATALOG_FIELDS : 0), f.catalogFieldReads);
+            IntStream.rangeClosed(0, table)
+                .map(index -> CATALOG_ROWS.get(index).size() * catalogFieldCount(index))
+                .sum();
+        assertEquals(expected - (missing ? catalogFieldCount(table) : 0), f.catalogFieldReads);
         catalogFailurePost(f, table, true);
       }
     }
@@ -831,7 +836,7 @@ final class MigrationMasterTargetPublisherTest {
   void target029EveryMetadataSqlNullDiffersFromZeroFalseAndEmpty() throws Exception {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
-        for (int field = 0; field < CATALOG_FIELDS; field++) {
+        for (int field = 0; field < catalogFieldCount(table); field++) {
           var f = new Fixture();
           f.badCatalogTable = table;
           f.badCatalogRow = row;
@@ -850,7 +855,7 @@ final class MigrationMasterTargetPublisherTest {
   void target030EveryCatalogGetterKeepsPrimaryThenBothCleanupIdentities() throws Exception {
     for (int table = 0; table < CATALOG_TABLES; table++) {
       for (int row = 0; row < CATALOG_ROWS.get(table).size(); row++) {
-        for (int field = 0; field < CATALOG_FIELDS; field++) {
+        for (int field = 0; field < catalogFieldCount(table); field++) {
           for (Throwable primary : failures()) {
             var f = new Fixture();
             f.badCatalogTable = table;
@@ -882,7 +887,7 @@ final class MigrationMasterTargetPublisherTest {
   void target031CatalogContentScalarResultsKeepSeparateOwnershipAndCounts() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
-    assertEquals(CATALOG_COLUMNS * CATALOG_FIELDS, f.catalogFieldReads);
+    assertEquals(MIXED_CATALOG_GETTERS, f.catalogFieldReads);
     assertEquals(CONTENT_COLUMNS, f.contentFieldReads);
     assertEquals(SCALARS, f.scalarReads);
     assertEquals(RESULTS, f.resultCloses);
@@ -917,6 +922,10 @@ final class MigrationMasterTargetPublisherTest {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
+  }
+
+  private static int catalogFieldCount(int table) {
+    return table < COLUMN_CATALOG_TABLES ? COLUMN_CATALOG_FIELDS : CATALOG_FIELDS;
   }
 
   private static void catalogFailurePost(Fixture f, int table, boolean ownedResult) {
@@ -1289,7 +1298,9 @@ final class MigrationMasterTargetPublisherTest {
                 }
                 if (List.of(GET_INT, GET_BOOLEAN, GET_STRING).contains(name)) {
                   int field = (Integer) args[0] - 1;
-                  assertEquals(field == 0 ? GET_INT : field == 4 ? GET_BOOLEAN : GET_STRING, name);
+                  assertEquals(
+                      field == 0 ? GET_INT : (field == 4 || field == 7) ? GET_BOOLEAN : GET_STRING,
+                      name);
                   catalogFieldReads++;
                   boolean bad =
                       table == badCatalogTable
