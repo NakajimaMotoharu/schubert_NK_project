@@ -1,0 +1,23 @@
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import org.apache.maven.shared.filtering.FilteringUtils;
+public final class ResourceEpochProbe {
+  public static void main(String[] args) throws Exception {
+    Path root = Path.of(args[0]);
+    Files.createDirectory(root);
+    Path input = root.resolve("literal.json");
+    Files.writeString(input, "{\"independent\":\"VALUE\"}", StandardCharsets.UTF_8);
+    Files.setLastModifiedTime(input, FileTime.fromMillis(0));
+    Path zero = root.resolve("missing-zero.json");
+    FilteringUtils.copyFile(input.toFile(), zero.toFile(), "UTF-8", null, false);
+    if (Files.exists(zero)) throw new AssertionError("epoch-zero behavior not reproduced");
+    Files.setLastModifiedTime(input, FileTime.fromMillis(1700000000000L));
+    Path positive = root.resolve("positive.json");
+    FilteringUtils.copyFile(input.toFile(), positive.toFile(), "UTF-8", null, false);
+    if (!Files.readString(positive, StandardCharsets.UTF_8).equals("{\"independent\":\"VALUE\"}"))
+      throw new AssertionError("positive timestamp must copy literal bytes");
+    System.out.println("EPOCH_ZERO_MISSING_REPRODUCED; POSITIVE_TIMESTAMP_LITERAL_COPY_OK");
+  }
+}

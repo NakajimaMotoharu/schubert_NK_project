@@ -1,0 +1,321 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-14T00:51:51.395178+00:00",
+  "source": "f9f9d28f23833257be991d142e105ec4533f7be8",
+  "productionCoreMain": "2ebbdf391873a5be6247ea59cb9addffb886c591",
+  "originalMavenExit": 1,
+  "originalCollectExit": 1,
+  "suites": [
+    {
+      "name": "ArtifactComparatorTest",
+      "expected": 9,
+      "actual": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "ea2470d7a41f6e1cc87c6bd7b1eced563dcac49e07935a7ff5176bcc63498a75"
+    },
+    {
+      "name": "GateCliTest",
+      "expected": 12,
+      "actual": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "62bb4c025ef0101acd360a037f0c7cb8a96f1a404bb41d01986b95738240552d"
+    },
+    {
+      "name": "GateContractTest",
+      "expected": 8,
+      "actual": 8,
+      "failures": 0,
+      "errors": 4,
+      "skipped": 0,
+      "rawXmlSha256": "6132c192c169da6216557ec2eab91338268ff3b51ff344fb467b634b960b9a22"
+    },
+    {
+      "name": "GateContractValidatorNegativeTest",
+      "expected": 17,
+      "actual": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "8343d3b572b26ec76ee068dd4d67d5add82baaf93e5859a0a1efe9705d4e2170"
+    },
+    {
+      "name": "TargetAdapterTest",
+      "expected": 3,
+      "actual": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "57cfb15150ad6b8f5d1b0feae9f238b3c3bc9b04cb46195c1bb015500f4f21c0"
+    },
+    {
+      "name": "CorrelatedLogEvidenceValidatorTest",
+      "expected": 11,
+      "actual": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "cc46a3e551a81eba943ec9fe5abd26c187ee8fc20754e70392bb8362c8ba78d5"
+    },
+    {
+      "name": "BaselineNumericMetadataTest",
+      "expected": 5,
+      "actual": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawXmlSha256": "bb2924b4f5b2259911f0bd01cd9b9672535ed4b3b55a50fece18d641f3b776d2"
+    },
+    {
+      "name": "GateMetricsCountTest",
+      "expected": 6,
+      "actual": 6,
+      "failures": 0,
+      "errors": 5,
+      "skipped": 0,
+      "rawXmlSha256": "8b6568333ea70ddee0c09d9839832972843833bcb3b7f1015e5e98790317d4f1"
+    },
+    {
+      "name": "GateDefinitionDocumentsTest",
+      "expected": 11,
+      "actual": 11,
+      "failures": 0,
+      "errors": 11,
+      "skipped": 0,
+      "rawXmlSha256": "072349665c56c20f0e63464dbd085f42046bb6cd5e3f3420534e40d815864e52"
+    },
+    {
+      "name": "GateEvidenceDocumentsTest",
+      "expected": 9,
+      "actual": 9,
+      "failures": 0,
+      "errors": 9,
+      "skipped": 0,
+      "rawXmlSha256": "14378bd11a26454c34ffde91a92897f399bba9aa1962c23a1f7106d01592c4d0"
+    }
+  ],
+  "actualTestCases": 91,
+  "failures": 0,
+  "errors": 29,
+  "skipped": 0,
+  "failureDetails": [
+    {
+      "classname": "dev.codex.schubert.characterization.GateContractTest",
+      "name": "expectedBaselineContainsAllStaticCounts",
+      "kind": "error",
+      "message": "resource missing: fixtures/expected.json",
+      "detail": "java.lang.IllegalStateException: resource missing: fixtures/expected.json\n\tat dev.codex.schubert.characterization.GateContractTest.resource(GateContractTest.java:173)\n\tat dev.codex.schubert.characterization.GateContractTest.expectedBaselineContainsAllStaticCounts(GateContractTest.java:58)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateContractTest",
+      "name": "catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly",
+      "kind": "error",
+      "message": "resource missing: cases/catalog.json",
+      "detail": "java.lang.IllegalStateException: resource missing: cases/catalog.json\n\tat dev.codex.schubert.characterization.GateContractTest.resource(GateContractTest.java:173)\n\tat dev.codex.schubert.characterization.GateContractTest.catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly(GateContractTest.java:26)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateContractTest",
+      "name": "browserManifestPinsExecutableRevisionAndLocale",
+      "kind": "error",
+      "message": "resource missing: browser/manifest.json",
+      "detail": "java.lang.IllegalStateException: resource missing: browser/manifest.json\n\tat dev.codex.schubert.characterization.GateContractTest.resource(GateContractTest.java:173)\n\tat dev.codex.schubert.characterization.GateContractTest.browserManifestPinsExecutableRevisionAndLocale(GateContractTest.java:69)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateContractTest",
+      "name": "differenceAllowlistIsCompleteUniqueAndNarrow",
+      "kind": "error",
+      "message": "resource missing: cases/dif-allowlist.json",
+      "detail": "java.lang.IllegalStateException: resource missing: cases/dif-allowlist.json\n\tat dev.codex.schubert.characterization.GateContractTest.resource(GateContractTest.java:173)\n\tat dev.codex.schubert.characterization.GateContractTest.differenceAllowlistIsCompleteUniqueAndNarrow(GateContractTest.java:42)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "name": "concurrentIndependentSnapshotsNeverShareUnknownValues",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.fixture(GateMetricsCountTest.java:164)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.concurrentIndependentSnapshotsNeverShareUnknownValues(GateMetricsCountTest.java:147)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "name": "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.fixture(GateMetricsCountTest.java:164)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue(GateMetricsCountTest.java:90)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "name": "javaNullAndNegativeProvidedCountsFailWithoutNpe",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.fixture(GateMetricsCountTest.java:164)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.javaNullAndNegativeProvidedCountsFailWithoutNpe(GateMetricsCountTest.java:59)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "name": "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.fixture(GateMetricsCountTest.java:164)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero(GateMetricsCountTest.java:105)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateMetricsCountTest",
+      "name": "validSnapshotUsesExactProvidedCountsAndIsImmutable",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.fixture(GateMetricsCountTest.java:164)\n\tat dev.codex.schubert.characterization.GateMetricsCountTest.validSnapshotUsesExactProvidedCountsAndIsImmutable(GateMetricsCountTest.java:31)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "contractCountsOrderIdentifiersAndHashesUseIndependentConstraints",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.contractCountsOrderIdentifiersAndHashesUseIndependentConstraints(GateDefinitionDocumentsTest.java:111)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "concurrentValidAndInvalidDefinitionsRemainIndependent",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.concurrentValidAndInvalidDefinitionsRemainIndependent(GateDefinitionDocumentsTest.java:299)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals(GateDefinitionDocumentsTest.java:267)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "schemaDraftShapeAndItemConstraintsCannotBeWeakened",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.schemaDraftShapeAndItemConstraintsCannotBeWeakened(GateDefinitionDocumentsTest.java:132)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes(GateDefinitionDocumentsTest.java:151)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "allFourVersionCallersRejectCoercionOverflowMissingAndNull",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.allFourVersionCallersRejectCoercionOverflowMissingAndNull(GateDefinitionDocumentsTest.java:96)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "rejectsEveryJavaNullDocumentWithFixedSignal",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.rejectsEveryJavaNullDocumentWithFixedSignal(GateDefinitionDocumentsTest.java:61)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions(GateDefinitionDocumentsTest.java:213)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues(GateDefinitionDocumentsTest.java:226)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "malformedJsonShapesProduceFailuresRatherThanNpe",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.malformedJsonShapesProduceFailuresRatherThanNpe(GateDefinitionDocumentsTest.java:75)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+      "name": "acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics(GateDefinitionDocumentsTest.java:47)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe(GateEvidenceDocumentsTest.java:71)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable(GateEvidenceDocumentsTest.java:60)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "concurrentFrozenFramesKeepTheirDiagnosticsIndependent",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.concurrentFrozenFramesKeepTheirDiagnosticsIndependent(GateEvidenceDocumentsTest.java:290)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "preflightMetadataUsesTypedCapacityAndExactStaticMarkers",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.preflightMetadataUsesTypedCapacityAndExactStaticMarkers(GateEvidenceDocumentsTest.java:202)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues(GateEvidenceDocumentsTest.java:130)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence(GateEvidenceDocumentsTest.java:275)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "sourceHashesRequireCanonicalTextOnBothSides",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.sourceHashesRequireCanonicalTextOnBothSides(GateEvidenceDocumentsTest.java:173)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval(GateEvidenceDocumentsTest.java:236)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    },
+    {
+      "classname": "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+      "name": "comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict",
+      "kind": "error",
+      "message": "public definition resource missing",
+      "detail": "java.io.IOException: public definition resource missing\n\tat dev.codex.schubert.characterization.GateDefinitionDocumentsTest.fixture(GateDefinitionDocumentsTest.java:319)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.fixture(GateEvidenceDocumentsTest.java:342)\n\tat dev.codex.schubert.characterization.GateEvidenceDocumentsTest.comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict(GateEvidenceDocumentsTest.java:96)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:565)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1604)\n"
+    }
+  ],
+  "missingArtifacts": [
+    "payload/source/program/characterization/target/site/jacoco/jacoco.xml"
+  ],
+  "privateArchiveSha256": "a107f5ef66bac8d3c883af37eeff9983bcaade528f4896043db5b6fe471165af",
+  "privateExecSha256": "9a37a32a7545747a262d4b654a4860cedf707e43b8b0a936b527f03ba05dc607",
+  "newTestsExecuted": 0,
+  "sourceInputsUnchanged": true,
+  "ownedGroupAbsent": true,
+  "wholeProgramAccepted": false,
+  "coverage": null,
+  "formalAcceptanceAdded": 0,
+  "allSpecificHoldsRetained": true
+}

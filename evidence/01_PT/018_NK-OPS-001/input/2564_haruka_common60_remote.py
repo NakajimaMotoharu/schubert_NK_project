@@ -1,10 +1,10 @@
 """One isolated public-tool run on haruka. Never operates a service, DB, VM or existing job."""
 from pathlib import Path
-import datetime, fcntl, hashlib, json, os, shutil, signal, stat, subprocess, sys, tarfile, time
+import datetime, fcntl, hashlib, io, json, os, shutil, signal, stat, subprocess, sys, tarfile, time
 import xml.etree.ElementTree as ET
 
-RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30726-common91-v3')
-BASE_TMP = Path('/dev/shm/pgpt-pg30726-common91-v3')
+RUN = Path('/home/mini/schubert-nk-pgpt/runs/pg30748-common91-v4')
+BASE_TMP = Path('/dev/shm/pgpt-pg30748-common91-v4')
 TMP = BASE_TMP
 JAVA = Path('/opt/schubert-nk-test-tools/jdk-25.0.4')
 MVN = Path('/opt/schubert-nk-test-tools/maven/bin/mvn')
@@ -47,6 +47,7 @@ def verify_inputs(config):
         path = RUN/'payload'/name
         require(not path.is_symlink() and path.is_file() and sha(path) == digest,
                 'immutable exact payload input')
+        require(int(path.stat().st_mtime)==config['payloadMtimeEpoch']>0, 'fixed positive source metadata')
     require((RUN/'owner.json').is_file(), 'original namespace receipt required')
     owner = json.loads((RUN/'owner.json').read_text())
     require((RUN.stat().st_dev,RUN.stat().st_ino)==(owner['runDevice'],owner['runInode']),
@@ -160,7 +161,7 @@ def commands(config):
     base = [str(MVN), '-o', '--no-transfer-progress', '-s', str(RUN/'settings.xml'),
             '-gs', str(RUN/'settings.xml'), '-Dmaven.repo.local='+str(RUN/'repository'),
             '-pl', 'program/characterization', '-Dtest='+','.join(SELECTED),
-            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30726-COMMON91',
+            '-DspotlessFiles='+','.join(formats), '-Djacoco.sessionId=PG30748-COMMON91',
             '-Dspotbugs.xmlOutput=true']
     env = dict(PATH=str(JAVA/'bin')+':/usr/bin:/bin', JAVA_HOME=str(JAVA),
                MAVEN_USER_HOME=str(RUN/'maven-home'), MAVEN_SKIP_RC='true', LANG='C.UTF-8',
@@ -205,6 +206,17 @@ def prepare(config):
     compile_result = step('compile-static', base+['test-compile',
         'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs'], env, 480)
     require(compile_result['actualExit'] == 0, 'normal compiler/format/enforcer/SpotBugs process failed; preserve terminal')
+    resource_outputs = []
+    for name, digest in config['payloadHashes'].items():
+        marker = 'source/program/characterization/tests/resources/'
+        if not name.startswith(marker):
+            continue
+        relative = name[len(marker):]
+        target = RUN/'payload/source/program/characterization/target/test-classes'/relative
+        require(target.is_file() and not target.is_symlink() and sha(target)==digest,
+                'standard Maven test resource copy must exist with exact original bytes before unit')
+        resource_outputs.append(dict(path=relative,sha256=digest,mtimeEpoch=int(target.stat().st_mtime)))
+    require(len(resource_outputs)==7, 'all seven pinned public resources admitted')
     pmd_result = step('pmd', pmd, env, 180)
     cs_result = step('checkstyle', cs, env, 180)
     root = ET.parse(RUN/'pmd.xml').getroot()
@@ -217,6 +229,7 @@ def prepare(config):
                   resources=resources, copiedPublicCacheFiles=copied, originalRepositoryModified=False,
                   os=dict(sysname=os.uname().sysname,release=os.uname().release,machine=os.uname().machine),
                   pythonVersion=sys.version, versions=versions,
+                  resourceOutputs=resource_outputs, standardResourceCopyVerified=True,
                   originalProjectArtifactsCopied=False, sourceHashesVerified=True,
                   compileStatic=compile_result, pmd=pmd_result, checkstyle=cs_result,
                   rawFindings=raw, processingErrors=errors,
@@ -256,17 +269,28 @@ def collect():
         'GateContractValidator.class', 'GateContractValidator$ValidationResult.class',
         'TargetAdapter.class', 'TargetAdapter$Target.class', 'CorrelatedLogEvidenceValidator.class'}
     actual_classes = list((module/'classes').rglob('*.class'))
-    require({p.name for p in actual_classes}==required_classes and len(actual_classes)==10,
-            'exact five public Main/ten physical classes, no held class materialization')
-    paths = [RUN/n for n in names]+actual_classes
+    # Unknown class names are recorded, never opened; expected missing outputs are preserved as missing.
+    unexpected = sorted(str(p.relative_to(RUN)) for p in actual_classes if p.name not in required_classes)
+    expected_paths = [module/'classes/dev/codex/schubert/characterization'/n for n in sorted(required_classes)]
+    paths = [RUN/n for n in names]+expected_paths
     paths += [module/'jacoco.exec', module/'site/jacoco/jacoco.xml', module/'spotbugsXml.xml']
     paths += [module/'surefire-reports'/('TEST-dev.codex.schubert.characterization.'+n+'.xml') for n in SELECTED]
     paths += sorted(RUN.glob('class-init-*.log'))
+    files = {}; missing = []
     with tarfile.open(fileobj=sys.stdout.buffer, mode='w|') as archive:
         for path in paths:
+            if not os.path.lexists(path):
+                missing.append(str(path.relative_to(RUN)))
+                continue
             require(path.is_file() and not path.is_symlink() and path.stat().st_size<64*1024**2,
                     'bounded exact own-run artifact only')
             archive.add(path, arcname=str(path.relative_to(RUN)), recursive=False)
+            files[str(path.relative_to(RUN))] = sha(path)
+        report = json.dumps(dict(actualExit=0,sourceCommit=json.loads((RUN/'stage.json').read_text())['sourceCommit'],
+                    files=files,missing=missing,unexpectedClassNames=unexpected,newTestsExecuted=0,
+                    collectionIsNotUnitAcceptance=True),indent=2).encode()
+        info = tarfile.TarInfo('collection-manifest.json');info.size=len(report);info.mode=0o600
+        archive.addfile(info,io.BytesIO(report))
 
 def main():
     global TMP
