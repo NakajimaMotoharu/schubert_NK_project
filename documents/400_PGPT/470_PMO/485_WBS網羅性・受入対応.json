@@ -552107,12 +552107,90 @@
       "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
-      "sha256": null,
-      "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "sha256": "9ec4388aa677fda237fe370734505a9b1dc55b9618e72b0e91c6fde17772090d",
+      "acceptance": "UNASSESSED",
+      "state": "ASSET_STAGING68_NORMAL_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-362",
       "testIds": "PT-MIG-ASSETSTAGE001..030",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC362_ASSET_STAGING68_NORMAL",
+        "source": "a13b227fda5ab99d81d18d2227a09d7129631c01",
+        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31426-asset-staging68-post-v1/manifest.json",
+          "sha256": "6b86c6ab7d97781c238b05e480fdbee2077c1c09459bf9ab032f91daa95d6dc5"
+        },
+        "tests": 68,
+        "newUniqueTestDefinitions": 30,
+        "existingSupportDefinitions": 38,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 128,
+        "physicalClasses": 3,
+        "positiveMainCrc": 3,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 423,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 80,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 83,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 59,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 19,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 3,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/AssetStagingTables": 11,
+          "dev/codex/schubert/nk/migration/ScenarioStagingTables": 7,
+          "dev/codex/schubert/nk/migration/AssetStagingTables$Table": 1
+        },
+        "actualJvmCodeMethods": 19,
+        "jacocoDefaultMethods": 19,
+        "newAssetStagingCodeMethods": 12,
+        "newMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 27,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.6,
+          "base": 1.8,
+          "high": 3.6
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      },
+      "sha256Evidence": {
+        "scope": "QUALIFIED_COMPONENT_BYTES_ONLY_NOT_GLOBAL_SOURCE_RUN",
+        "post": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31426-asset-staging68-post-v1/manifest.json",
+          "sha256": "6b86c6ab7d97781c238b05e480fdbee2077c1c09459bf9ab032f91daa95d6dc5"
+        },
+        "actualUnitSource": "a13b227fda5ab99d81d18d2227a09d7129631c01",
+        "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d"
+      }
     }
   ],
   "layouts": [
@@ -558172,6 +558250,75 @@
       "low": 1,
       "base": 3,
       "high": 6
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentAssetStaging68PG31424": {
+    "kind": "SSC362_ASSET_STAGING68_NORMAL",
+    "source": "a13b227fda5ab99d81d18d2227a09d7129631c01",
+    "productionCoreMain": "a2b15e1b7e5d32c1a992362ec1cc9b6931b2844d",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31426-asset-staging68-post-v1/manifest.json",
+      "sha256": "6b86c6ab7d97781c238b05e480fdbee2077c1c09459bf9ab032f91daa95d6dc5"
+    },
+    "tests": 68,
+    "newUniqueTestDefinitions": 30,
+    "existingSupportDefinitions": 38,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 128,
+    "physicalClasses": 3,
+    "positiveMainCrc": 3,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 423,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 80,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 83,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 59,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 19,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 3,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AssetStagingTables": 11,
+      "dev/codex/schubert/nk/migration/ScenarioStagingTables": 7,
+      "dev/codex/schubert/nk/migration/AssetStagingTables$Table": 1
+    },
+    "actualJvmCodeMethods": 19,
+    "jacocoDefaultMethods": 19,
+    "newAssetStagingCodeMethods": 12,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 27,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.6,
+      "base": 1.8,
+      "high": 3.6
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,

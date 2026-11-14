@@ -1,0 +1,5 @@
+# Asset三表staging/五表JDBC Proxy・通常68独立結果
+
+SSC362 Asset三表stagingをCorea2b15e1/Unita13b227で初検証、PG31424新30＋必要Scenario38 whole68/FES0・真正0。V002独立12/17/6列CTAS/三large INSERT/9scalar、各SQLnull/欠落/余分/元例外/close/suppression/三不一致・Long.MAX/有限64を確認。Scenario二表→Asset三表の同じ借用connectionで全25SQL/Statement4/Result15・commit/rollback/connectionclose0。PG31426全3CRC/init/XML・I423/L83/M19/C3/B80 miss0・四100、実Code19=既定19（新Asset11/Table1＋Scenario7）。RootNullAway/lintWerror/CS-SB0/PMD27個別根拠（旧18同byte/new9memoryproxy・ownedworker・単一fixture Map・JDKinterface loader）適用未分類error0。他19Main不変/新BUG0。App121/5270/5241/歴史29・Main128/正本184/625/元190新0/正式1964-53/工数null。normal.6/1.8/3.6のみ完了・専有費token null。実DB/原本/全ETL/constraint-trigger-role/SDK COPY/Rootnative/CHR/global451/ITST/HOLD未完。
+
+仕様049のPT-MIG-ASSETSTAGE001..030→PG31424元XML全method。日時/OS/JDK/tool/branch/source/command/exit/input/expected/actual/coverage/hashはPG31424/26/28。V00212/17/6列とsha256を一次DDLで独立固定し、Test literal SQL、post count、途中prefix、元例外instanceとsuppressedを期待とする。production SQL生成でexpectedを作らない。メモリProxyだけでdriver/接続/DB/FS/原本/Root/native操作0、全移行は未受入。
