@@ -786,3 +786,6 @@ SSC380/NK-MIG-001/WBS-P01903 MigrationMasterColumnVerifier constructor/verify/re
 
 
 SSC381/NK-MIG-001/WBS-P01903 MigrationMasterTargetPublisher.prepare→ColumnVerifier→Speaker/Scenario/Asset staging、transferAndFinalize経路維持→RD MIG003005006/MIG-DAT005/TST→UI223242254→SS311331343/V002→PT-MIG-TARGET001..032/COLUMN001..022/019086087。Core0126c0ef/Unit07296de2 PG32192/194/196全619/44CRC/実394両四100。実DB/全移行/HOLD未受入。
+
+
+SSC382/383/NK-MIG-001/WBS-P01903 MigrationMasterConstraintVerifier.verify/requireStatement/verifyRows/closeStatement/closeResult/invalid/toString/constructorと既Target.prepare→Column→Constraint→staging→RD MIG003005006/DAT004/TST→UI242254→SS311331343/V002/V029→PT-CONSTRAINT001..022/TARGET001..032/019088089090。Core73e983a3/Unit83ba8f8e PG32242/244/246全641/45CRC/実403両四100。実DB/全constraint意味/trigger/全移行/HOLD未受入。
