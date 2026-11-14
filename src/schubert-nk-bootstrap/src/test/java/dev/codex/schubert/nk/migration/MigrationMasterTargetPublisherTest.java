@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +24,18 @@ import java.util.stream.IntStream;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** PT-MIG-TARGET001..016; independent 62 SQL/44 scalar vectors, memory-only borrowed JDBC. */
+/**
+ * PT-MIG-TARGET001..024; independent 68 SQL/44 scalar plus six typed result vectors, memory-only
+ * borrowed JDBC.
+ */
 final class MigrationMasterTargetPublisherTest {
+  private static final String TRUE_TEXT = "true";
+  private static final String FILE_ID_TEXT = "700";
+  private static final String FILE_NAME_TEXT = "file.txt";
+  private static final String ENTRY_ID_TEXT = "900";
+  private static final String AUDIO_ID_TEXT = "500";
+  private static final String VOICE_TEXT = "voice";
+  private static final String CLOSE_METHOD = "close";
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
@@ -36,25 +48,47 @@ final class MigrationMasterTargetPublisherTest {
   private static final int PREPARE_END = 6;
   private static final int TRANSFER_END = 30;
   private static final int REFERENCE_END = 46;
-  private static final int SETVAL_FIRST = 51;
-  private static final int ANALYZE_FIRST = 56;
-  private static final int SQL_COUNT = 62;
+  private static final int CONTENT_END = 52;
+  private static final int CONTENT_TABLES = 6;
+  private static final int CONTENT_COLUMNS = 65;
+  private static final int RESULTS = 50;
+  private static final int CLOSES = 14;
+  private static final int CONTENT_CLOSE = 7;
+  private static final String GET_LONG = "getLong";
+  private static final String GET_INT = "getInt";
+  private static final String GET_BOOLEAN = "getBoolean";
+  private static final String GET_TIMESTAMP = "getTimestamp";
+  private static final String GET_STRING = "getString";
+  private static final int SETVAL_FIRST = 57;
+  private static final int ANALYZE_FIRST = 62;
+  private static final int SQL_COUNT = 68;
   private static final int SCALARS = 44;
   private static final int TRANSFER_SCALARS = 18;
   private static final int ORPHAN_FIRST = 24;
   private static final int REFERENCE_SCALARS_END = 34;
   private static final int SETVAL_SCALAR_FIRST = 39;
-  private static final int PREPARED_FIRST_CLOSE = 7;
-  private static final int OUTER_FINAL_CLOSE = 12;
+  private static final int PREPARED_FIRST_CLOSE = 8;
+  private static final int OUTER_FINAL_CLOSE = 13;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
-  private static final List<Integer> OWNER_START = List.of(0, 1, 3, 6, 10, 18, 30, 46);
+  private static final List<Integer> OWNER_START = List.of(0, 1, 3, 6, 10, 18, 30, 46, 52);
   private static final List<Integer> CLOSE_SQL_PREFIX =
-      List.of(1, 3, 6, 10, 18, 30, 46, 52, 53, 54, 55, 56, 62);
+      List.of(1, 3, 6, 10, 18, 30, 46, 52, 58, 59, 60, 61, 62, 68);
   private static final List<Integer> CLOSE_RESULTS =
-      List.of(0, 0, 0, 3, 9, 18, 34, 40, 41, 42, 43, 44, 44);
+      List.of(0, 0, 0, 3, 9, 18, 34, 40, 46, 47, 48, 49, 50, 50);
+  private static final List<String> CONTENT_SQL =
+      List.of(
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
+          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
+          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
+          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
+          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"");
+  private static final List<String> CONTENT_TYPES =
+      List.of(
+          "LISSBST", "LILSSSSSSLT", "LILLIISLSSST", "LISSSSSSLLST", "LSSSSSSSSLSSSSSIT", "LLISIT");
   private static final List<String> SQL =
       List.of(
           "CREATE TEMP TABLE nk_mig_speakers ON COMMIT DROP AS SELECT id, game_id, name, normalized_name, is_protagonist, notes, created_at FROM schubert.speakers WITH NO DATA",
@@ -103,6 +137,12 @@ final class MigrationMasterTargetPublisherTest {
           "SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL",
           "SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND p.logical_id IS NULL",
           "SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations",
+          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
+          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
+          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
+          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
+          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
+          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
           "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_files",
           "SELECT COALESCE(MAX(id),0) FROM schubert.script_entries",
@@ -125,18 +165,18 @@ final class MigrationMasterTargetPublisherTest {
   };
 
   @Test
-  void target001OneConnectionFixedSixtyTwoSqlAndExactResources() throws Exception {
+  void target001OneConnectionFixedSixtyEightSqlAndExactResources() throws Exception {
     var f = new Fixture();
     workflow(new MigrationMasterTargetPublisher(), f, normal());
     assertEquals(SQL, f.sql);
-    assertEquals(SCALARS, f.resultCloses);
-    assertEquals(13, f.closeAttempts);
-    assertEquals(8, f.autoReads);
-    assertEquals(8, f.statementCreates);
+    assertEquals(RESULTS, f.resultCloses);
+    assertEquals(CLOSES, f.closeAttempts);
+    assertEquals(9, f.autoReads);
+    assertEquals(9, f.statementCreates);
     assertEquals(5, f.preparedCreates);
     assertEquals(5, f.preparedExecutions);
     assertEquals(6, f.analyzes);
-    assertEquals(java.util.Collections.nCopies(13, 30), f.timeouts);
+    assertEquals(java.util.Collections.nCopies(CLOSES, 30), f.timeouts);
     assertEquals(List.of(42L, 700L, 900L, 500L, 600L), f.boundLong);
     assertEquals(java.util.Collections.nCopies(5, true), f.boundBoolean);
   }
@@ -154,8 +194,8 @@ final class MigrationMasterTargetPublisherTest {
     assertEquals(SQL, f.sql);
     assertEquals(List.of(1L, 1L, 1L, 1L, 1L), f.boundLong);
     assertEquals(java.util.Collections.nCopies(5, false), f.boundBoolean);
-    assertEquals(SCALARS, f.resultCloses);
-    assertEquals(13, f.closeAttempts);
+    assertEquals(RESULTS, f.resultCloses);
+    assertEquals(CLOSES, f.closeAttempts);
   }
 
   @Test
@@ -224,7 +264,7 @@ final class MigrationMasterTargetPublisherTest {
 
   @Test
   void target009EveryFinalizationSqlAndPreparedExecuteOriginalFailure() throws Exception {
-    sqlFailures(REFERENCE_END, SQL_COUNT);
+    sqlFailures(CONTENT_END, SQL_COUNT);
     for (int slot = 0; slot < 5; slot++)
       for (Throwable failure : failures()) {
         var f = new Fixture();
@@ -236,8 +276,8 @@ final class MigrationMasterTargetPublisherTest {
                 failure.getClass(),
                 () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
         assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
-        assertEquals(SETVAL_SCALAR_FIRST + slot, f.resultCloses);
-        assertEquals(9 + slot, f.closeAttempts);
+        assertEquals(SETVAL_SCALAR_FIRST + CONTENT_TABLES + slot, f.resultCloses);
+        assertEquals(10 + slot, f.closeAttempts);
         assertEquals(slot + 1, f.preparedExecutions);
         assertEquals(0, f.analyzes);
       }
@@ -282,7 +322,7 @@ final class MigrationMasterTargetPublisherTest {
           SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
       assertEquals(SQL.subList(0, SETVAL_FIRST + slot + 1), f.sql);
       assertEquals(slot + 1, f.preparedExecutions);
-      assertEquals(9 + slot, f.closeAttempts);
+      assertEquals(10 + slot, f.closeAttempts);
       assertEquals(0, f.analyzes);
     }
     for (int slot = 0; slot < 6; slot++) {
@@ -293,15 +333,15 @@ final class MigrationMasterTargetPublisherTest {
       assertEquals(SQL.subList(0, ANALYZE_FIRST + slot + 1), f.sql);
       assertEquals(5, f.preparedExecutions);
       assertEquals(slot + 1, f.analyzes);
-      assertEquals(13, f.closeAttempts);
-      assertEquals(SCALARS, f.resultCloses);
+      assertEquals(CLOSES, f.closeAttempts);
+      assertEquals(RESULTS, f.resultCloses);
     }
   }
 
   @Test
   void target013EveryOwnedStatementCloseFailureKeepsExactPrefixAndOuterOwnership()
       throws Exception {
-    for (int close = 0; close < 13; close++)
+    for (int close = 0; close < CLOSES; close++)
       for (Throwable failure : failures()) {
         var f = new Fixture();
         f.badClose = close;
@@ -355,7 +395,7 @@ final class MigrationMasterTargetPublisherTest {
     workflow(publisher, next, normal());
     assertEquals(SQL, next.sql);
     assertEquals(PREPARE_END + 1, failed.sql.size());
-    assertEquals(13, next.closeAttempts);
+    assertEquals(CLOSES, next.closeAttempts);
   }
 
   @Test
@@ -371,8 +411,8 @@ final class MigrationMasterTargetPublisherTest {
                 () -> {
                   var f = new Fixture();
                   workflow(publisher, f, declared);
-                  assertEquals(13, f.closeAttempts);
-                  assertEquals(SCALARS, f.resultCloses);
+                  assertEquals(CLOSES, f.closeAttempts);
+                  assertEquals(RESULTS, f.resultCloses);
                   return f.sql;
                 }));
       for (var future : futures) assertEquals(SQL, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
@@ -380,6 +420,239 @@ final class MigrationMasterTargetPublisherTest {
       executor.shutdownNow();
       assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void target017AllSixContentQueryFaultsStopBeforeFinalization() throws Exception {
+    sqlFailures(REFERENCE_END, CONTENT_END);
+  }
+
+  @Test
+  void target018AllSixtyFiveValueChangesStopBeforeMaxSetvalAnalyze() throws Exception {
+    for (int table = 0; table < CONTENT_TABLES; table++) {
+      for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
+        var f = new Fixture();
+        f.badContentTable = table;
+        f.badContentColumn = column;
+        assertThrows(
+            SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+        contentFailurePost(f, table, true);
+      }
+    }
+  }
+
+  @Test
+  void target019NullContentResultsDoNotCreateResultOwnership() throws Exception {
+    for (int table = 0; table < CONTENT_TABLES; table++) {
+      var f = new Fixture();
+      f.nullContentResult = table;
+      assertThrows(
+          SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+      contentFailurePost(f, table, false);
+    }
+  }
+
+  @Test
+  void target020MissingAndExtraRowsHaveNoExtraColumnReads() throws Exception {
+    for (int table = 0; table < CONTENT_TABLES; table++) {
+      for (boolean missing : List.of(true, false)) {
+        var f = new Fixture();
+        if (missing) f.missingContent = table;
+        else f.extraContent = table;
+        assertThrows(
+            SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+        int expected = CONTENT_TYPES.subList(0, table).stream().mapToInt(String::length).sum();
+        if (!missing) expected += CONTENT_TYPES.get(table).length();
+        assertEquals(expected, f.contentFieldReads);
+        contentFailurePost(f, table, true);
+      }
+    }
+  }
+
+  @Test
+  void target021RequiredSqlNullNeverBecomesZeroFalseOrEmpty() throws Exception {
+    for (int table = 0; table < CONTENT_TABLES; table++) {
+      for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
+        if (contentLiteral(table).get(column) == null) continue;
+        var f = new Fixture();
+        f.badContentTable = table;
+        f.badContentColumn = column;
+        f.nullContentValue = true;
+        assertThrows(
+            SQLException.class, () -> workflow(new MigrationMasterTargetPublisher(), f, normal()));
+        contentFailurePost(f, table, true);
+      }
+    }
+  }
+
+  @Test
+  void target022EveryContentGetterKeepsPrimaryThenBothCleanupIdentities() throws Exception {
+    for (int table = 0; table < CONTENT_TABLES; table++) {
+      for (int column = 0; column < CONTENT_TYPES.get(table).length(); column++) {
+        for (Throwable primary : failures()) {
+          var f = new Fixture();
+          f.badContentTable = table;
+          f.badContentColumn = column;
+          f.failContentRead = true;
+          f.failure = primary;
+          var inner = new SQLException("synthetic content close");
+          var outer = new IllegalStateException("synthetic content statement close");
+          f.extraResult = inner;
+          f.badClose = CONTENT_CLOSE;
+          f.closeFailure = outer;
+          assertSame(
+              primary,
+              assertThrows(
+                  primary.getClass(),
+                  () -> workflow(new MigrationMasterTargetPublisher(), f, normal())));
+          assertEquals(2, primary.getSuppressed().length);
+          assertSame(inner, primary.getSuppressed()[0]);
+          assertSame(outer, primary.getSuppressed()[1]);
+          contentFailurePost(f, table, true);
+        }
+      }
+    }
+  }
+
+  @Test
+  void target023ScalarAndTypedResultsRemainSeparateOnOneBorrowedConnection() throws Exception {
+    var f = new Fixture();
+    var declared = normal();
+    workflow(new MigrationMasterTargetPublisher(), f, declared);
+    assertEquals(CONTENT_COLUMNS, f.contentFieldReads);
+    assertEquals(SCALARS, f.scalarReads);
+    assertEquals(RESULTS, f.resultCloses);
+    assertEquals(CLOSES, f.closeAttempts);
+    assertEquals(List.of(1000), f.fetchSizes);
+    assertEquals(SQL, f.sql);
+    assertEquals(SPEAKER_ID, declared.speakers().rows().getFirst().fields().getFirst());
+  }
+
+  @Test
+  void target024FiniteFailedContentCallsCannotReachFinalizerOrRetainResources() throws Exception {
+    var publisher = new MigrationMasterTargetPublisher();
+    var declared = normal();
+    var executor = Executors.newFixedThreadPool(WORKERS);
+    try {
+      var futures = new ArrayList<Future<Integer>>();
+      for (int index = 0; index < TASKS; index++) {
+        int table = index % CONTENT_TABLES;
+        futures.add(
+            executor.submit(
+                () -> {
+                  var f = new Fixture();
+                  f.badContentTable = table;
+                  f.badContentColumn = 0;
+                  assertThrows(SQLException.class, () -> workflow(publisher, f, declared));
+                  contentFailurePost(f, table, true);
+                  return f.closeAttempts;
+                }));
+      }
+      for (var future : futures) assertEquals(8, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  private static void contentFailurePost(Fixture f, int table, boolean ownedResult) {
+    assertEquals(SQL.subList(0, REFERENCE_END + table + 1), f.sql);
+    assertEquals(REFERENCE_SCALARS_END + table + (ownedResult ? 1 : 0), f.resultCloses);
+    assertEquals(8, f.closeAttempts);
+    assertEquals(0, f.preparedCreates);
+    assertEquals(0, f.preparedExecutions);
+    assertEquals(0, f.analyzes);
+  }
+
+  private static String contentGetter(char kind) {
+    return switch (kind) {
+      case 'L' -> GET_LONG;
+      case 'I' -> GET_INT;
+      case 'B' -> GET_BOOLEAN;
+      case 'T' -> GET_TIMESTAMP;
+      default -> GET_STRING;
+    };
+  }
+
+  private static String changedContent(@Nullable String value, char kind) {
+    if (value == null) return kind == 'L' || kind == 'I' ? ONE : "changed";
+    return switch (kind) {
+      case 'L', 'I' -> Long.toString(Long.parseLong(value) + 1);
+      case 'B' -> value.equals(TRUE_TEXT) ? "false" : TRUE_TEXT;
+      case 'T' -> Instant.parse(value).plusNanos(1000).toString();
+      default -> value + "X";
+    };
+  }
+
+  private static List<@Nullable String> contentLiteral(int table) {
+    return switch (table) {
+      case 0 ->
+          Arrays.<@Nullable String>asList(
+              SPEAKER_ID, ONE, "Alice", "alice", TRUE_TEXT, null, STAMP);
+      case 1 ->
+          Arrays.<@Nullable String>asList(
+              FILE_ID_TEXT,
+              ONE,
+              ONE,
+              "script/file.txt",
+              FILE_NAME_TEXT,
+              FILE_NAME_TEXT,
+              null,
+              "chapter",
+              SHA,
+              THREE,
+              STAMP);
+      case 2 ->
+          Arrays.<@Nullable String>asList(
+              ENTRY_ID_TEXT,
+              ONE,
+              FILE_ID_TEXT,
+              ONE,
+              "0",
+              null,
+              "dialogue",
+              SPEAKER_ID,
+              null,
+              "hello",
+              "raw",
+              STAMP);
+      case 3 ->
+          Arrays.<@Nullable String>asList(
+              AUDIO_ID_TEXT,
+              ONE,
+              "voice/a.ogg",
+              "表示",
+              "a.ogg",
+              "a",
+              VOICE_TEXT,
+              "ogg",
+              "1200",
+              THREE,
+              SHA,
+              STAMP);
+      case 4 ->
+          Arrays.<@Nullable String>asList(
+              "600",
+              "video-a",
+              VIDEO,
+              "A",
+              "MAIN",
+              null,
+              TARGET_VIDEO,
+              SOURCE_VIDEO,
+              "a.mp4",
+              THREE,
+              SHA,
+              "video/mp4",
+              null,
+              null,
+              null,
+              ONE,
+              STAMP);
+      default ->
+          Arrays.<@Nullable String>asList(
+              ENTRY_ID_TEXT, AUDIO_ID_TEXT, ONE, VOICE_TEXT, ONE, STAMP);
+    };
   }
 
   private static void workflow(
@@ -403,7 +676,8 @@ final class MigrationMasterTargetPublisherTest {
 
   private static int scalarSqlIndex(int query) {
     return IntStream.range(0, SQL_COUNT)
-        .filter(index -> SQL.get(index).startsWith("SELECT "))
+        .filter(
+            index -> SQL.get(index).startsWith("SELECT ") && !CONTENT_SQL.contains(SQL.get(index)))
         .skip(query)
         .findFirst()
         .orElseThrow();
@@ -430,7 +704,7 @@ final class MigrationMasterTargetPublisherTest {
             ordinaryOwnersThrough(index) + Math.max(0, Math.min(5, index - SETVAL_FIRST)),
             f.closeAttempts);
         assertEquals(0, failure.getSuppressed().length);
-        if (index < REFERENCE_END) {
+        if (index < CONTENT_END) {
           assertEquals(0, f.preparedExecutions);
           assertEquals(0, f.analyzes);
         }
@@ -445,6 +719,15 @@ final class MigrationMasterTargetPublisherTest {
     private long[] scalars = NORMAL_SCALARS.clone();
     private boolean empty;
     private boolean autoCommit;
+    private int badContentTable = -1;
+    private int badContentColumn = -1;
+    private int nullContentResult = -1;
+    private int missingContent = -1;
+    private int extraContent = -1;
+    private boolean nullContentValue;
+    private boolean failContentRead;
+    private int contentFieldReads;
+    private final List<Integer> fetchSizes = new ArrayList<>();
     private int badSql = -1;
     private int badScalar = -1;
     private int badRead = -1;
@@ -527,14 +810,22 @@ final class MigrationMasterTargetPublisherTest {
                     assertTrue(List.of(8, 24, 25, 26).contains(sql.size()));
                     recordSql((String) args[0]);
                     return empty ? 0L : 1L;
+                  case "setFetchSize":
+                    assertEquals(1000, args[0]);
+                    fetchSizes.add((Integer) args[0]);
+                    return null;
                   case "executeQuery":
-                    recordSql((String) args[0]);
+                    String query = (String) args[0];
+                    recordSql(query);
+                    int contentTable = CONTENT_SQL.indexOf(query);
+                    if (contentTable >= 0)
+                      return contentTable == nullContentResult ? null : contentResult(contentTable);
                     return result();
                   case "getWarnings":
                     return badWarning == analyzes - 1
                         ? new SQLWarning("synthetic skipped analyze")
                         : null;
-                  case "close":
+                  case CLOSE_METHOD:
                     closeOwned();
                     return null;
                   default:
@@ -566,13 +857,60 @@ final class MigrationMasterTargetPublisherTest {
                     preparedExecutions++;
                     if (slot == badPreparedExecute) throw failure;
                     return result();
-                  case "close":
+                  case CLOSE_METHOD:
                     closeOwned();
                     return null;
                   default:
                     throw new AssertionError(
                         "Unexpected PreparedStatement operation: " + method.getName());
                 }
+              });
+    }
+
+    private ResultSet contentResult(int table) {
+      int[] position = {-1};
+      boolean[] wasNull = {false};
+      return (ResultSet)
+          Proxy.newProxyInstance(
+              ResultSet.class.getClassLoader(),
+              new Class<?>[] {ResultSet.class},
+              (proxy, method, args) -> {
+                String name = method.getName();
+                if (name.equals("next")) {
+                  position[0]++;
+                  if (empty || table == missingContent) return false;
+                  return position[0] == 0 || table == extraContent && position[0] == 1;
+                }
+                if (name.equals("wasNull")) return wasNull[0];
+                if (name.equals(CLOSE_METHOD)) {
+                  resultCloses++;
+                  if (table == badContentTable && extraResult != null) throw extraResult;
+                  return null;
+                }
+                if (List.of(GET_LONG, GET_INT, GET_BOOLEAN, GET_TIMESTAMP, GET_STRING)
+                    .contains(name)) {
+                  int column = (Integer) args[0] - 1;
+                  assertEquals(contentGetter(CONTENT_TYPES.get(table).charAt(column)), name);
+                  contentFieldReads++;
+                  boolean bad = table == badContentTable && column == badContentColumn;
+                  if (bad && failContentRead) throw failure;
+                  String value = contentLiteral(table).get(column);
+                  if (bad)
+                    value =
+                        nullContentValue
+                            ? null
+                            : changedContent(value, CONTENT_TYPES.get(table).charAt(column));
+                  wasNull[0] = value == null;
+                  return switch (name) {
+                    case GET_LONG -> value == null ? 0L : Long.parseLong(value);
+                    case GET_INT -> value == null ? 0 : Integer.parseInt(value);
+                    case GET_BOOLEAN -> value != null && Boolean.parseBoolean(value);
+                    case GET_TIMESTAMP ->
+                        value == null ? null : Timestamp.from(Instant.parse(value));
+                    default -> value;
+                  };
+                }
+                throw new AssertionError("Unexpected content ResultSet operation " + name);
               });
     }
 
@@ -596,7 +934,7 @@ final class MigrationMasterTargetPublisherTest {
                     return scalars[query] + (query == badScalar ? 1 : 0);
                   case "wasNull":
                     return false;
-                  case "close":
+                  case CLOSE_METHOD:
                     resultCloses++;
                     if (query == extraResultAt && extraResult != null) throw extraResult;
                     return null;
@@ -615,7 +953,9 @@ final class MigrationMasterTargetPublisherTest {
     return new MigrationCopyDataset(
         scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
-        List.of(Arrays.<@Nullable String>asList("900", "500", ONE, "voice", ONE, stamp)),
+        List.of(
+            Arrays.<@Nullable String>asList(
+                ENTRY_ID_TEXT, AUDIO_ID_TEXT, ONE, VOICE_TEXT, ONE, stamp)),
         media(stamp));
   }
 
@@ -628,7 +968,7 @@ final class MigrationMasterTargetPublisherTest {
         List.of(
             new SpeakerCopyRow(
                 Arrays.<@Nullable String>asList(
-                    SPEAKER_ID, ONE, "Alice", "alice", "true", null, stamp))));
+                    SPEAKER_ID, ONE, "Alice", "alice", TRUE_TEXT, null, stamp))));
   }
 
   private static ScenarioCopyDataset scenario(
@@ -652,12 +992,12 @@ final class MigrationMasterTargetPublisherTest {
             files,
             List.of(
                 Arrays.<@Nullable String>asList(
-                    "700",
+                    FILE_ID_TEXT,
                     game,
                     ONE,
                     "script/file.txt",
-                    "file.txt",
-                    "file.txt",
+                    FILE_NAME_TEXT,
+                    FILE_NAME_TEXT,
                     null,
                     "chapter",
                     SHA,
@@ -668,9 +1008,9 @@ final class MigrationMasterTargetPublisherTest {
             ? List.of(
                 new ScenarioEntryCopyRow(
                     Arrays.<@Nullable String>asList(
-                        "900",
+                        ENTRY_ID_TEXT,
                         game,
-                        "700",
+                        FILE_ID_TEXT,
                         ONE,
                         "0",
                         null,
@@ -696,13 +1036,13 @@ final class MigrationMasterTargetPublisherTest {
   private static AudioFileCopyRow audio(String stamp) {
     return new AudioFileCopyRow(
         Arrays.<@Nullable String>asList(
-            "500",
+            AUDIO_ID_TEXT,
             ONE,
             "voice/a.ogg",
             "表示",
             "a.ogg",
             "a",
-            "voice",
+            VOICE_TEXT,
             "ogg",
             "1200",
             THREE,

@@ -8,8 +8,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * One borrowed-connection target path; caller supplies authorized COPY between prepare and
  * transfer. NK-MIG-001; MIG003005006/MIG-DAT005/FUN004/DAT004/TST; UI223242254; SS311/331/V002/343
- * SSC373; PT-MIG-TARGET001..016. No transaction/authorization/actual migration success receipt is
- * issued.
+ * SSC373/379; PT-MIG-TARGET001..024. No transaction/authorization/actual migration success receipt
+ * is issued.
  */
 @NullMarked
 public final class MigrationMasterTargetPublisher {
@@ -41,6 +41,7 @@ public final class MigrationMasterTargetPublisher {
             content.media().rows().size(),
             content.audio().linkRows().size());
     new MigrationMasterReferenceVerifier().verify(connection, declared);
+    new MigrationMasterContentVerifier().verify(connection, declared);
     new MigrationMasterFinalizer().finish(connection, declared);
   }
 
