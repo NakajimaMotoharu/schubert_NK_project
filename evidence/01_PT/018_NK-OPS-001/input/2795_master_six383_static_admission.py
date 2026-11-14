@@ -1,0 +1,27 @@
+"""Individual same-byte prior sites and finite standalone worker ownership; no suppression."""
+from pathlib import Path
+import json,hashlib,collections
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));pf=load(i/'2796_master_six383_formatted_fixture_profile.json');sp=r/pf['slots']['static']/'manifest.json';s=load(sp)
+assert s['actualExit']==0 and not s['processingErrors'] and s['checkstyleFindings']==0 and all(s['spotbugs'][k]==0 for k in ['bugs','missing','errors'])
+newmain=next(p for p in pf['mainSources'] if p.endswith('/MigrationMasterCopyDataset.java'));newtest=newmain.replace('/main/','/test/').replace('.java','Test.java');oldpaths=set(pf['mainSources']+[x['path'] for x in pf['testSources']])-{newmain,newtest};prior={}
+for name in ['2761_staging_cleanup403_static_admission.json','2768_speaker_row28_static_admission.json','2776_speaker_batch132_static_admission.json']:
+ a=load(i/name);old=load(r/a['static']['path'])
+ for x in a['sourceAnchors']:
+  if x['path'] not in oldpaths:continue
+  assert sha(r/x['path'])==old['inputHashes'][x['path']]
+  prior[(x['path'],x['rule'],x['sourceLine'],x['sourceAnchor'],x['message'])]=x
+text=(r/newtest).read_text();assert all(x in text for x in ['WORKERS = 8','TASKS = 64','WAIT_SECONDS = 5','TERMINATION_SECONDS = 10','future.get(WAIT_SECONDS, TimeUnit.SECONDS)','executor.shutdownNow();','assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));'])
+rows=[];seen=set();counts=collections.Counter()
+for raw in s['rawFindings']:
+ path=str(Path(raw['path']).relative_to(r));line=int(raw['line']);anchor=(r/path).read_text().splitlines()[line-1].strip();key=(path,raw['rule'],line,anchor,raw['message'])
+ if path in oldpaths:
+  assert key in prior and key not in seen;seen.add(key);rows.append(prior[key]);continue
+ assert path==newtest and raw['rule'] in ['CloseResource','DoNotUseThreads']
+ if raw['rule']=='CloseResource' and anchor=='for (var sink : sinks) {':
+  reason='Exact sink is the final local MemorySink owning only a ByteArrayOutputStream memory buffer, integer counters, an in-memory order list and a synthetic Throwable. It acquires no file/socket/FD/native/DB resource. This loop independently checks that the production borrower never closes or flushes any of the six outputs, including on partial failure; closing the sink would invalidate the deliberate ownership postcondition.';counts['memorySink']+=1
+ else:
+  assert anchor in ['var executor = Executors.newFixedThreadPool(WORKERS);','executor.submit(','executor.shutdownNow();','assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));']
+  reason='Exact standalone host JUnit executor owns eight workers/64 immutable six-table datasets with only independent memory sinks; every Future joins within5 seconds and finally shutdownNow plus checked awaitTermination10 applies on all paths. This is outside a J2EE container and acquires no external DB/native/FD/process resource. Implicit executor close would omit the specifically required finite termination postcondition.';counts['finiteWorker']+=1
+ rows.append(dict(path=path,rule=raw['rule'],sourceAnchor=anchor,sourceLine=line,occurrences=1,message=raw['message'],reason=reason,disposition='NOT_APPLICABLE'))
+assert seen==set(prior) and len(prior)==153 and counts==dict(finiteWorker=5,memorySink=1) and len(rows)==159
+(i/'2795_master_six383_static_admission.json').open('x').write(json.dumps(dict(schema='PGPT_STATIC_ADMISSION_V1',profile=pf['id'],prepare=ref(r/pf['slots']['prepare']/'manifest.json'),static=ref(sp),sourceAnchors=rows),ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,rawPmd=159,oldSameByte=153,newFiniteWorker=5,newMemorySink=1,applicable=0,unclassified=0))

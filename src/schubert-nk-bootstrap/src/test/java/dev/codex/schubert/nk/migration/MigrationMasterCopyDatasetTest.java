@@ -31,7 +31,7 @@ final class MigrationMasterCopyDatasetTest {
   private static final String SOURCE_VIDEO = "current/a.mp4";
   private static final String TARGET_VIDEO = "video/a.mp4";
   private static final String VIDEO = "VIDEO";
-  private static final String SPEAKER = "42";
+  private static final String SPEAKER_ID = "42";
   private static final int STREAMS = 6;
   private static final int PREFIX_BYTES = 2;
   private static final int WORKERS = 8;
@@ -113,7 +113,7 @@ final class MigrationMasterCopyDatasetTest {
     var speakers = speakers(STAMP);
     var content =
         new MigrationCopyDataset(
-            scenario(true, SPEAKER, "2", STAMP), List.of(), List.of(), emptyMedia());
+            scenario(true, SPEAKER_ID, "2", STAMP), List.of(), List.of(), emptyMedia());
     assertThrows(
         IllegalArgumentException.class, () -> new MigrationMasterCopyDataset(speakers, content));
   }
@@ -236,7 +236,8 @@ final class MigrationMasterCopyDatasetTest {
     var input = new ArrayList<SpeakerCopyRow>();
     input.add(
         new SpeakerCopyRow(
-            Arrays.<@Nullable String>asList(SPEAKER, ONE, "Alice", "alice", "true", null, STAMP)));
+            Arrays.<@Nullable String>asList(
+                SPEAKER_ID, ONE, "Alice", "alice", "true", null, STAMP)));
     var speakers = new SpeakerCopyBatch(input);
     var content = content(STAMP);
     var dataset = new MigrationMasterCopyDataset(speakers, content);
@@ -325,7 +326,7 @@ final class MigrationMasterCopyDatasetTest {
 
   private static MigrationCopyDataset content(String stamp) throws Exception {
     return new MigrationCopyDataset(
-        scenario(true, SPEAKER, ONE, stamp),
+        scenario(true, SPEAKER_ID, ONE, stamp),
         List.of(audio(stamp)),
         List.of(Arrays.<@Nullable String>asList("900", "500", ONE, "voice", ONE, stamp)),
         media(stamp));
@@ -340,7 +341,7 @@ final class MigrationMasterCopyDatasetTest {
         List.of(
             new SpeakerCopyRow(
                 Arrays.<@Nullable String>asList(
-                    SPEAKER, ONE, "Alice", "alice", "true", null, stamp))));
+                    SPEAKER_ID, ONE, "Alice", "alice", "true", null, stamp))));
   }
 
   private static SpeakerCopyRow speaker(String id, String game, String stamp) {
