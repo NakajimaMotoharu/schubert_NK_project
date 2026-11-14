@@ -87,13 +87,12 @@ public final class MigrationMasterFinalizer {
 
   private static void synchronize(Connection connection, String table, long maximum)
       throws SQLException {
-    @Nullable PreparedStatement created =
-        connection.prepareStatement(
-            "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert."
-                + table
-                + "', 'id'), ?, ?)");
-    if (created == null) throw invalid();
-    PreparedStatement statement = created;
+    PreparedStatement statement =
+        requirePrepared(
+            connection.prepareStatement(
+                "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert."
+                    + table
+                    + "', 'id'), ?, ?)"));
     @Nullable Throwable primary = null;
     try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
@@ -107,6 +106,12 @@ public final class MigrationMasterFinalizer {
     } finally {
       closeStatement(statement, primary);
     }
+  }
+
+  private static PreparedStatement requirePrepared(@Nullable PreparedStatement created)
+      throws SQLException {
+    if (created == null) throw invalid();
+    return created;
   }
 
   private static void requireResult(@Nullable ResultSet created, long expected)

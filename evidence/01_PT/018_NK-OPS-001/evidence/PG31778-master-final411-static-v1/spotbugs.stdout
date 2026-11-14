@@ -1,0 +1,49 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for dev.codex.schubert.quality:pg31782-master-final-closed411-exact-ownership:jar:0.1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.systemPath' for dev.codex.schubert.quality:closed-sdk-0:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar @ line 2, column 743
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] --< dev.codex.schubert.quality:pg31782-master-final-closed411-exact-ownership >--
+[INFO] Building pg31782-master-final-closed411-exact-ownership 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spotbugs:4.10.4.0:check (default-cli) > :spotbugs @ pg31782-master-final-closed411-exact-ownership >>>
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ pg31782-master-final-closed411-exact-ownership ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO] 
+[INFO] <<< spotbugs:4.10.4.0:check (default-cli) < :spotbugs @ pg31782-master-final-closed411-exact-ownership <<<
+[INFO] 
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:check (default-cli) @ pg31782-master-final-closed411-exact-ownership ---
+[INFO] BugInstance size is 1
+[INFO] Error size is 0
+[INFO] Total bugs: 1
+[ERROR] Medium: Redundant nullcheck of created, which is known to be non-null in dev.codex.schubert.nk.migration.MigrationMasterFinalizer.synchronize(Connection, String, long) [dev.codex.schubert.nk.migration.MigrationMasterFinalizer] Redundant null check at MigrationMasterFinalizer.java:[line 95] RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE
+[INFO] 
+
+
+To see bug detail using the Spotbugs GUI, use the following command "mvn spotbugs:gui"
+
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.459 s
+[INFO] Finished at: 2026-11-14T20:24:31+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check (default-cli) on project pg31782-master-final-closed411-exact-ownership: failed with 1 bugs and 0 errors -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

@@ -23,6 +23,25 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-FINAL001..028; memory-only JDBC faults and independent V002/PG18 expectations. */
 final class MigrationMasterFinalizerTest {
+  private static final String CALL_AUTO = "auto";
+  private static final String CALL_CREATE = "create";
+  private static final String CALL_QUERY = "query";
+  private static final String CALL_PREPARE = "prepare";
+  private static final String CALL_OUTER_TIMEOUT = "outerTimeout";
+  private static final String CALL_PREPARED_TIMEOUT = "preparedTimeout";
+  private static final String CALL_SET_LONG = "setLong";
+  private static final String CALL_SET_BOOLEAN = "setBoolean";
+  private static final String CALL_PREPARED_QUERY = "preparedQuery";
+  private static final String CALL_NEXT1 = "next1";
+  private static final String CALL_GET_LONG = "getLong";
+  private static final String CALL_WAS_NULL = "wasNull";
+  private static final String CALL_NEXT2 = "next2";
+  private static final String CALL_RESULT_CLOSE = "resultClose";
+  private static final String CALL_PREPARED_CLOSE = "preparedClose";
+  private static final String CALL_OUTER_CLOSE = "outerClose";
+  private static final String CALL_ANALYZE = "analyze";
+  private static final String CALL_WARNINGS = "warnings";
+
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
@@ -130,8 +149,8 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final005AutoCreateOriginalFailuresAndNullVendor() throws Exception {
-    failuresAt("auto", 0, 1);
-    failuresAt("create", 0, 1);
+    failuresAt(CALL_AUTO, 0, 1);
+    failuresAt(CALL_CREATE, 0, 1);
     var f = new Fixture();
     f.nullOuter = true;
     assertThrows(SQLException.class, () -> finish(f, normal()));
@@ -140,7 +159,7 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final006OuterTimeoutPreservesFailureAndCloses() throws Exception {
-    failuresAt("outerTimeout", 0, 1);
+    failuresAt(CALL_OUTER_TIMEOUT, 0, 1);
   }
 
   @Test
@@ -150,25 +169,25 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final008EveryPreflightQueryFailureIsOriginal() throws Exception {
-    failuresAt("query", 0, IDENTITIES);
+    failuresAt(CALL_QUERY, 0, IDENTITIES);
   }
 
   @Test
   void final009EveryReadPhaseOriginalFailure() throws Exception {
-    for (var phase : List.of("next1", "getLong", "wasNull", "next2"))
+    for (var phase : List.of(CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2))
       failuresAt(phase, 0, IDENTITIES);
   }
 
   @Test
   void final010PreflightResultCloseIsNotSuccess() throws Exception {
-    failuresAt("resultClose", 0, IDENTITIES);
+    failuresAt(CALL_RESULT_CLOSE, 0, IDENTITIES);
   }
 
   @Test
   void final011ReadPrimaryKeepsResultAndOuterSuppressedOrder() throws Exception {
     for (Throwable primary : failures()) {
       var f = new Fixture();
-      f.failCall = "getLong";
+      f.failCall = CALL_GET_LONG;
       f.failSlot = 0;
       f.failure = primary;
       var inner = new SQLException("synthetic result close");
@@ -183,7 +202,7 @@ final class MigrationMasterFinalizerTest {
       assertEquals(0, f.prepares);
     }
     var self = new Fixture();
-    self.failCall = "getLong";
+    self.failCall = CALL_GET_LONG;
     self.failSlot = 0;
     self.extraResult = self.failure;
     self.faultQuery = 0;
@@ -205,7 +224,7 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final013EachPrepareNullOrOriginalFailureStopsFollowingCalls() throws Exception {
-    failuresAt("prepare", 0, IDENTITIES);
+    failuresAt(CALL_PREPARE, 0, IDENTITIES);
     for (int slot = 0; slot < IDENTITIES; slot++) {
       var f = new Fixture();
       f.nullPrepared = slot;
@@ -218,17 +237,17 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final014EachLongBindingFailure() throws Exception {
-    failuresAt("setLong", 0, IDENTITIES);
+    failuresAt(CALL_SET_LONG, 0, IDENTITIES);
   }
 
   @Test
   void final015EachBooleanBindingFailure() throws Exception {
-    failuresAt("setBoolean", 0, IDENTITIES);
+    failuresAt(CALL_SET_BOOLEAN, 0, IDENTITIES);
   }
 
   @Test
   void final016EachPreparedTimeoutFailure() throws Exception {
-    failuresAt("preparedTimeout", 0, IDENTITIES);
+    failuresAt(CALL_PREPARED_TIMEOUT, 0, IDENTITIES);
   }
 
   @Test
@@ -238,25 +257,25 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final018EveryPreparedQueryFailure() throws Exception {
-    failuresAt("preparedQuery", 0, IDENTITIES);
+    failuresAt(CALL_PREPARED_QUERY, 0, IDENTITIES);
   }
 
   @Test
   void final019EveryPreparedResultReadPhaseFailure() throws Exception {
-    for (var phase : List.of("next1", "getLong", "wasNull", "next2"))
+    for (var phase : List.of(CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2))
       failuresAt(phase, IDENTITIES, IDENTITIES);
   }
 
   @Test
   void final020EveryPreparedResultCloseFailure() throws Exception {
-    failuresAt("resultClose", IDENTITIES, IDENTITIES);
+    failuresAt(CALL_RESULT_CLOSE, IDENTITIES, IDENTITIES);
   }
 
   @Test
   void final021PreparedResultPrimaryKeepsAllThreeCloseFailuresInOrder() throws Exception {
     for (Throwable primary : failures()) {
       var f = new Fixture();
-      f.failCall = "getLong";
+      f.failCall = CALL_GET_LONG;
       f.failSlot = IDENTITIES;
       f.failure = primary;
       f.faultQuery = IDENTITIES;
@@ -277,18 +296,18 @@ final class MigrationMasterFinalizerTest {
 
   @Test
   void final022EachPreparedCloseFailureIsPropagated() throws Exception {
-    failuresAt("preparedClose", 0, IDENTITIES);
+    failuresAt(CALL_PREPARED_CLOSE, 0, IDENTITIES);
   }
 
   @Test
   void final023OuterCloseFailureCannotBeSuccess() throws Exception {
-    failuresAt("outerClose", 0, 1);
+    failuresAt(CALL_OUTER_CLOSE, 0, 1);
   }
 
   @Test
   void final024EachAnalyzeWrongCountWarningAndOriginalFailures() throws Exception {
-    failuresAt("analyze", 0, TABLES);
-    failuresAt("warnings", 0, TABLES);
+    failuresAt(CALL_ANALYZE, 0, TABLES);
+    failuresAt(CALL_WARNINGS, 0, TABLES);
     for (int slot = 0; slot < TABLES; slot++) {
       var wrong = new Fixture();
       wrong.badAnalyze = slot;
@@ -389,9 +408,22 @@ final class MigrationMasterFinalizerTest {
         f.failure = failure;
         assertSame(failure, assertThrows(failure.getClass(), () -> finish(f, declared)));
         assertEquals(1, f.failureHits);
-        assertTrue(f.outerCloses <= 1);
-        assertTrue(f.preparedCloses <= IDENTITIES);
-        assertTrue(f.resultCloses <= IDENTITIES * 2);
+        List<Integer> expectedClose =
+            switch (call) {
+              case CALL_AUTO, CALL_CREATE -> List.of(0, 0, 0);
+              case CALL_OUTER_TIMEOUT -> List.of(0, 0, 1);
+              case CALL_QUERY -> List.of(slot, 0, 1);
+              case CALL_NEXT1, CALL_GET_LONG, CALL_WAS_NULL, CALL_NEXT2, CALL_RESULT_CLOSE ->
+                  List.of(slot + 1, Math.max(0, slot - IDENTITIES + 1), 1);
+              case CALL_PREPARE -> List.of(IDENTITIES + slot, slot, 1);
+              case CALL_PREPARED_TIMEOUT, CALL_SET_LONG, CALL_SET_BOOLEAN, CALL_PREPARED_QUERY ->
+                  List.of(IDENTITIES + slot, slot + 1, 1);
+              case CALL_PREPARED_CLOSE -> List.of(IDENTITIES + slot + 1, slot + 1, 1);
+              case CALL_ANALYZE, CALL_WARNINGS, CALL_OUTER_CLOSE ->
+                  List.of(IDENTITIES * 2, IDENTITIES, 1);
+              default -> throw new AssertionError("Unspecified independent phase: " + call);
+            };
+        assertEquals(expectedClose, List.of(f.resultCloses, f.preparedCloses, f.outerCloses));
       }
   }
 
@@ -405,7 +437,10 @@ final class MigrationMasterFinalizerTest {
         assertEquals(
             DIAGNOSTIC, assertThrows(SQLException.class, () -> finish(f, normal())).getMessage());
         assertEquals(0, f.analyzes);
-        assertEquals(1, f.outerCloses);
+        assertEquals(
+            List.of(
+                slot + (shape == Shape.NULL_RESULT ? 0 : 1), Math.max(0, slot - IDENTITIES + 1), 1),
+            List.of(f.resultCloses, f.preparedCloses, f.outerCloses));
       }
   }
 
@@ -464,18 +499,18 @@ final class MigrationMasterFinalizerTest {
                 switch (method.getName()) {
                   case "getAutoCommit":
                     autoReads++;
-                    hit("auto", 0);
+                    hit(CALL_AUTO, 0);
                     return autoCommit;
                   case "createStatement":
                     creates++;
-                    hit("create", 0);
+                    hit(CALL_CREATE, 0);
                     return nullOuter ? null : statement();
                   case "prepareStatement":
                     int slot = prepares;
                     prepares++;
                     sql.add((String) args[0]);
                     assertEquals(SET_SQL.get(slot), args[0]);
-                    hit("prepare", slot);
+                    hit(CALL_PREPARE, slot);
                     return nullPrepared == slot ? null : prepared(slot);
                   default:
                     throw new AssertionError(
@@ -494,30 +529,30 @@ final class MigrationMasterFinalizerTest {
                   case "setQueryTimeout":
                     assertEquals(30, args[0]);
                     timeouts.add((Integer) args[0]);
-                    hit("outerTimeout", 0);
+                    hit(CALL_OUTER_TIMEOUT, 0);
                     return null;
                   case "executeQuery":
                     int query = reads;
                     reads++;
                     sql.add((String) args[0]);
                     assertEquals(MAX_SQL.get(query), args[0]);
-                    hit("query", query);
+                    hit(CALL_QUERY, query);
                     return result(query);
                   case "executeUpdate":
                     int position = analyzes;
                     analyzes++;
                     sql.add((String) args[0]);
                     assertEquals(ANALYZE_SQL.get(position), args[0]);
-                    hit("analyze", position);
+                    hit(CALL_ANALYZE, position);
                     return badAnalyze == position ? 1 : 0;
                   case "getWarnings":
                     warningReads++;
                     int warning = analyzes - 1;
-                    hit("warnings", warning);
+                    hit(CALL_WARNINGS, warning);
                     return badWarning == warning ? new SQLWarning("synthetic skipped table") : null;
                   case "close":
                     outerCloses++;
-                    hit("outerClose", 0);
+                    hit(CALL_OUTER_CLOSE, 0);
                     if (extraOuter != null) throw extraOuter;
                     return null;
                   default:
@@ -536,24 +571,24 @@ final class MigrationMasterFinalizerTest {
                   case "setQueryTimeout":
                     assertEquals(30, args[0]);
                     timeouts.add((Integer) args[0]);
-                    hit("preparedTimeout", slot);
+                    hit(CALL_PREPARED_TIMEOUT, slot);
                     return null;
-                  case "setLong":
+                  case CALL_SET_LONG:
                     assertEquals(1, args[0]);
-                    hit("setLong", slot);
+                    hit(CALL_SET_LONG, slot);
                     boundLong.add((Long) args[1]);
                     return null;
-                  case "setBoolean":
+                  case CALL_SET_BOOLEAN:
                     assertEquals(2, args[0]);
-                    hit("setBoolean", slot);
+                    hit(CALL_SET_BOOLEAN, slot);
                     boundBoolean.add((Boolean) args[1]);
                     return null;
                   case "executeQuery":
-                    hit("preparedQuery", slot);
+                    hit(CALL_PREPARED_QUERY, slot);
                     return result(IDENTITIES + slot);
                   case "close":
                     preparedCloses++;
-                    hit("preparedClose", slot);
+                    hit(CALL_PREPARED_CLOSE, slot);
                     if (extraPrepared != null) throw extraPrepared;
                     return null;
                   default:
@@ -576,24 +611,24 @@ final class MigrationMasterFinalizerTest {
                   case "next":
                     int call = nextCalls[0];
                     nextCalls[0]++;
-                    hit(call == 0 ? "next1" : "next2", query);
+                    hit(call == 0 ? CALL_NEXT1 : CALL_NEXT2, query);
                     return call == 0
                         ? !(selected && shape == Shape.MISSING)
                         : selected && shape == Shape.EXTRA;
-                  case "getLong":
+                  case CALL_GET_LONG:
                     assertEquals(1, args[0]);
-                    hit("getLong", query);
+                    hit(CALL_GET_LONG, query);
                     long value =
                         query < IDENTITIES
                             ? expected[query]
                             : Math.max(1, expected[query - IDENTITIES]);
                     return selected && shape == Shape.WRONG ? value + 1 : value;
-                  case "wasNull":
-                    hit("wasNull", query);
+                  case CALL_WAS_NULL:
+                    hit(CALL_WAS_NULL, query);
                     return selected && shape == Shape.SQL_NULL;
                   case "close":
                     resultCloses++;
-                    hit("resultClose", query);
+                    hit(CALL_RESULT_CLOSE, query);
                     if (selected && extraResult != null) throw extraResult;
                     return null;
                   default:
