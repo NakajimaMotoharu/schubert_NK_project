@@ -834,3 +834,6 @@ SSC400/NK-MIG-001/WBS-P01903 CurrentAudioLinkMapper/LinkOrder constructor-links-
 
 
 SSC401/NK-MIG-001/WBS-P01903 CurrentMigrationProjection.read/snapshotMode/SourceSnapshot constructor-fivegettersは同caller Connection・前後属性を固定五readerへ接続→RD MIG003005006/MIG-DAT001002005/DAT004/TST→UI242254→SS311331343→PT-CURRENTSNAPSHOT001..012/019122123。Cored0e64705/Unit930691b1全898/63CRC/既定475実550両四100。実transaction同一性/Current候補順/DB/target全組立/HOLD未受入。
+
+
+SSC402/NK-MIG-001/WBS-P01903 CurrentMigrationAssembler constructor/assembleは共通identity/asset/root/明示linkorderから既mapperを生成し五SourceSnapshot→六Masterを組立→RD MIG003005006/MIG-DAT001002005/DAT004/TST→UI227242254→SS311331343→PT-CURRENTASSEMBLY001..020/019124125。Coreec035600/Unite0e41186全918/64CRC/既定479実554両四100。実Current資格/DB-COPY/素材/全移行/HOLD未受入。

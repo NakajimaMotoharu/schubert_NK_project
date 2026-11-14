@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "fc0ab5c44ad202e13bfef8e580efc4cde7e6e419cb045102f0fbc08f830dd806",
+  "inventorySha256": "a9afae08e2c6fda812c270b731089c1f7ea93ae6fd4bfc4547d9031b4aee699c",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -37506,8 +37506,198 @@
     "tokenTotals": null
   },
   "plannedCurrentMigrationAssemblerSSC402": {
-    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "state": "COMPONENT_QUALIFIED_NOT_FULL_WBS",
+    "actualDbQualification": false,
+    "actualCurrentOrderWitness": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32908-current-assembly918-post-v2/manifest.json",
+      "sha256": "782a2c8c2c7934e44164316ac7eccd308543a55c02b7df41bedd2c8f7aea812e"
+    }
+  },
+  "currentAssembly918": {
+    "state": "ALL_EXISTING_JAVA_QUALIFIED_NOT_ACTUAL_CURRENT_ORDER_DB_OR_FULL_MANUFACTURE",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32908-current-assembly918-post-v2/manifest.json",
+      "sha256": "782a2c8c2c7934e44164316ac7eccd308543a55c02b7df41bedd2c8f7aea812e"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32910-current-assembly918-unfiltered-measurement-v2/manifest.json",
+      "sha256": "9918db51b79a3746e16f435ffd34881da287344dd01fa3e68151ec4a2fb36fdc"
+    },
+    "javaCore": "ec0356001d89aaab6a6e73e500dbba86a3d2dff3",
+    "javaUnit": "e0e411860ffa68b897cfe6ed255e285e42315175",
+    "global451Accepted": false
+  },
+  "currentAssembly918PG32906": {
+    "kind": "SSC402_CURRENT_FIVE_SOURCE_TO_SIX_TABLE_MASTER_ALL918",
+    "source": "e0e411860ffa68b897cfe6ed255e285e42315175",
+    "productionCoreMain": "ec0356001d89aaab6a6e73e500dbba86a3d2dff3",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32908-current-assembly918-post-v2/manifest.json",
+      "sha256": "782a2c8c2c7934e44164316ac7eccd308543a55c02b7df41bedd2c8f7aea812e"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32910-current-assembly918-unfiltered-measurement-v2/manifest.json",
+      "sha256": "9918db51b79a3746e16f435ffd34881da287344dd01fa3e68151ec4a2fb36fdc"
+    },
+    "tests": 918,
+    "newUniqueTestDefinitions": 20,
+    "requalifiedExistingDefinitions": 898,
+    "newMainSources": 1,
+    "changedExistingMainSources": 0,
+    "oldTestSourcesUnchanged": 44,
+    "changedTestFixtureOnlyVisibility": 1,
+    "oldTestMethodsUnchanged": true,
+    "allExistingMigrationMain": 44,
+    "allExistingMigrationTestSources": 46,
+    "physicalClasses": 64,
+    "positiveMainCrc": 64,
+    "uniqueMainJavaDeltaFromInitial": 152,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 13394,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 1797,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 2722,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1381,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 479,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 64,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 13852
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 1797
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 2764
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1456
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 554
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 64
+      }
+    },
+    "actualJvmCodeMethods": 554,
+    "jacocoDefaultMethods": 479,
+    "all75DefaultFilteredMethodsExecuted": true,
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rootFiltersChanged": false,
+    "rawPmdFindings": 515,
+    "sameByteSites": 498,
+    "freshVisibilityFixtureSites": 10,
+    "freshAssemblySites": 7,
+    "applicable": 0,
+    "unclassified": 0,
+    "spotbugs": 0,
+    "all44ScopeNullAwayLintCs": true,
+    "allSixModulesRequalified": false,
+    "fiveSourceListsThroughSharedIdentityAndAssetsToSixTableMaster": true,
+    "explicitLinkOrderNotInferred": true,
+    "sourceValuesNotRepaired": true,
+    "mediaClaimsReboundToSameArtifact": true,
+    "allForeignKeyGameAndTimestampChecksDelegated": true,
+    "twoGameLiteralVector": true,
+    "independentSixWire": [
+      {
+        "table": "speakers",
+        "rows": 1,
+        "columns": 7,
+        "bytes": 57,
+        "sha256": "1465b9962777172e714c5486b3bd8fdae661adfe91d47b1f574f1c4ae22d5f06",
+        "hex": "31303031093109204e616dc3a9200973746f7265645f6e6f726d0966616c7365095c4e09323032362d30312d30325430333a30343a30355a0a"
+      },
+      {
+        "table": "files",
+        "rows": 1,
+        "columns": 11,
+        "bytes": 123,
+        "sha256": "794348a1a0cfee65a8be5e444ff6691594fff88d9c0f558f7c5361427cda9ed2",
+        "hex": "35303109310931097363656e6172696f2f662e74787409702f660966095c4e095c4e0962613738313662663866303163666561343134313430646535646165323232336230303336316133393631373761396362343130666636316632303031356164093309323032362d30312d30325430333a30343a30355a0a"
+      },
+      {
+        "table": "entries",
+        "rows": 1,
+        "columns": 12,
+        "bytes": 72,
+        "sha256": "536f2438fc1fbb84be6c4712482ad551929f23035d007e57b7085939c50b2843",
+        "hex": "363031093109353031093109300931096e6172726174696f6e095c4e095c4e0920426f64792009207361766564207261772009323032362d30312d30325430333a30343a30355a0a"
+      },
+      {
+        "table": "audio",
+        "rows": 1,
+        "columns": 12,
+        "bytes": 139,
+        "sha256": "74de572cb8291280e7c4eea8febeb38bdf284c08ef48ffea1f6b609caa6fbe27",
+        "hex": "373031093109617564696f2f612e6f676709702f61096109615f4b455054096d6f7669655f617564696f095c4e09313233340933096261373831366266386630316366656134313431343064653564616532323233623030333631613339363137376139636234313066663631663230303135616409323032362d30312d30325430333a30343a30355a0a"
+      },
+      {
+        "table": "media",
+        "rows": 2,
+        "columns": 17,
+        "bytes": 387,
+        "sha256": "27a9abf68621bb7b8d26648a70097f766d977cbf3ecef5921bd4b353dfccb2ab",
+        "hex": "3209766964656f2d6209564944454f0942094d41494e095c4e09766964656f2f622e6d70340963757272656e742f622e6d703409622e6d70340933096261373831366266386630316366656134313431343064653564616532323233623030333631613339363137376139636234313066663631663230303135616409766964656f2f6d7034095c4e095c4e095c4e093209323032362d30312d30325430333a30343a30355a0a330936663731613632353431616233383165653031383666346639343662623661663537623038323435303966633461623631666439396233626361633531303563094d5553494309430942474d095c4e096d757369632f632e6f6767096d757369632f632e6f676709632e6f67670933096261373831366266386630316366656134313431343064653564616532323233623030333631613339363137376139636234313066663631663230303135616409617564696f2f6f6767095c4e095c4e094e093109323032362d30312d30325430333a30343a30355a0a"
+      },
+      {
+        "table": "links",
+        "rows": 1,
+        "columns": 6,
+        "bytes": 39,
+        "sha256": "75aed7a113c1fb2bb2dfe840964652bdbec66d2eba5871d75821ff07006343dc",
+        "hex": "36303109373031093109766f696365093709323032362d30312d30325430333a30343a30355a0a"
+      }
+    ],
+    "sixWireAssertionsPassed": true,
+    "wireCapture": "INDEPENDENT_EXPECTED_WITH_SUCCESSFUL_JUNIT_BYTE_ASSERTIONS_NOT_SEPARATE_RUNTIME_CAPTURE",
+    "deepImmutableAndFinite64": true,
+    "actualTransactionIdentityOrSnapshotProven": false,
+    "actualCurrentBusinessOrderWitness": false,
+    "actualDatabaseOriginalDataBackupKeyVmAruOperations": 0,
+    "limitedBugsClosed": [
+      2955,
+      2956,
+      2957
+    ],
+    "limitedYktsClosed": [
+      2484,
+      2485,
+      2486
+    ],
+    "oldSourceOracleAndPrestyleFailureProducts0": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
