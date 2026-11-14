@@ -1,5 +1,17 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC390 Current entry十列から既存ID対応・COPYへの接続（2026-11-15）
+
+NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioEntryMapperはSSC389のCurrent十列projectionから、既ScenarioFileMigrationMap/ScenarioEntryPlacementMap/SpeakerMigrationMapを使い、既ScenarioEntryCopyRow/Batchへ接続するpure変換。実DB/認証/再採番/補完/書込/権限操作はしない。
+
+constructor(nullable files,nullable placement,nullable speakers)は三nullを固定IAEで拒否し、既immutable mappingを保持する。copyRows(nullable rows of nullable row,nullable Instant migratedAt)は両null/時刻UTC0001..9999年・microsecond以下を最初に検証する。外Listをsnapshotし、件数はplacement.entriesと一致。各rowのnull/幅10以外を拒否しsnapshot、current id/file/speakerはLong.toString正準signed decimal（0、負号付き非zero含む）だけ許す。+、leadingzero、-0、空白、longoverflowは修復しない。idはplacement.lookupで既知必須、game/entry_indexはplacementの正準文字と完全一致、sourceFileはfiles.lookup(placement.game,currentfile)でtargetFile一致を要求。これにより別game/file/index、未知id/file、独立に違うfiles mappingを拒否。source ID重複も拒否し、既知/一意/同件数で全単射を確立する。
+
+target row12列はplaced.targetEntryId/game/targetFile/displayOrder/index、source line_number/type、nullable source speakerを同gameのSpeakerMigrationMap.targetSpeakerIdで変換したnullable target speaker、source speaker_label/body/raw_block、共通Instant.toStringの順。NULL speakerはそのまま、非NULLは正準signed ID/既知/同game必須。line/type/label/body/rawの保存値は変えず、targetのnonnull/raw・NFC/byte/型/domain/話者整合等は既Rowを通じて検証し、その例外をcatch正常化しない。特にCurrent raw_block NULLをbody/空へ補完しない。target Row/Batchの厳格な拒否を利用する範囲であり、実CurrentにNULLがあるかの判定や業務変換承認を代行しない。
+
+作成済Rowをsource IDで保持しplacement.entriesの既displayOrderで並べ、既ScenarioEntryCopyBatchへ渡す。inputやmapperを変更せず、未知・重複・必須欠落の部分成功なし。toString/自前IAEは固定REDACTED、NPE catch正常扱い0。既File/Placement/SpeakerMap/Row/Batch/Main/Testは変更しない。
+
+PT-MIG-ENTRYMAP001..024: 001手書き二game二行のtarget12列とCurrent順、002empty、003constructor三null、004rows/time nullと時刻境界micro、005件数不足余剰、006nullrow/幅9-11、007id正準/overflow/未知、008file正準/overflow/未知、009game/index非正準不一致、010別file mapping target不一致、011speaker正準/overflow/未知/別game、012source ID重複、013SQLNULL speaker/narrationとnonnull dialogue、014Current rawNULLを拒否し補完0、015text保存/NFC-control-byte-target拒否、016line/type/label/domain拒否、017外内入力snapshot・出力不変、018独立固定COPY bytes、019timestamp両端/µsと同一stamp、020signed Current id/file/speaker両端、021target大小とsource displayOrder分離、022失敗後freshと固定redaction、023全三参照の誤組合せ/行順違い、024有限8worker64/Future5/finallyshutdownNow-await10。期待12列、COPY escape byte、signed mappingは固定literal/独立手書き、Production methodからexpectedを生成しない。new24＋必要既156=whole180、全11Main18physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。旧35Main729定義同byte、追加不足2.5/7.5/9.9pp cap10、元費用/SV/各群開始保持・専有実費token null。RD/UI/DDL/QA変更不要。実Current/DB/原本抽出/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。
+
 ## SSC389 Currentシナリオentry十列のborrowed snapshot読取り（2026-11-15）
 
 NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioEntryProjectionReaderを追加し、caller認証済みCurrent readonly/nonauto transactionの十列を固定順の不変rowsへ読む。既CurrentSpeakerProjectionReaderと同じ所有・期限・cleanup契約を再利用するが独立したentry schemaと期待値を持つ。Current DDL script_entriesのid/game_id/script_file_id/entry_index/line_number/entry_type/speaker_id/speaker_label/body/raw_blockだけを選択する。固定SQLは SELECT id,game_id,script_file_id,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block FROM scenario.script_entries ORDER BY id 。body_searchはtarget生成、has_voiceはlinks由来のため本projectionに混ぜず、created_atは別の共通migration時刻を使う。Current DB/master/dumpを実読取せず、原schema.sqlのCREATE TABLE文だけから型/null契約を確認する。

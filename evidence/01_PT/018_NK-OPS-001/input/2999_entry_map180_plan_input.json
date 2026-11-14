@@ -1,0 +1,31 @@
+{
+  "ssc": 390,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java",
+  "source": "ffd93de1ebb4587f450a3f2f58a0609d2e661563",
+  "title": "Current entry十列から既存ID対応・COPYへの接続",
+  "detail": "NK-MIG-001/RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST/UI223242254/SS311331/V002/343。CurrentScenarioEntryMapperはSSC389のCurrent十列projectionから、既ScenarioFileMigrationMap/ScenarioEntryPlacementMap/SpeakerMigrationMapを使い、既ScenarioEntryCopyRow/Batchへ接続するpure変換。実DB/認証/再採番/補完/書込/権限操作はしない。\n\nconstructor(nullable files,nullable placement,nullable speakers)は三nullを固定IAEで拒否し、既immutable mappingを保持する。copyRows(nullable rows of nullable row,nullable Instant migratedAt)は両null/時刻UTC0001..9999年・microsecond以下を最初に検証する。外Listをsnapshotし、件数はplacement.entriesと一致。各rowのnull/幅10以外を拒否しsnapshot、current id/file/speakerはLong.toString正準signed decimal（0、負号付き非zero含む）だけ許す。+、leadingzero、-0、空白、longoverflowは修復しない。idはplacement.lookupで既知必須、game/entry_indexはplacementの正準文字と完全一致、sourceFileはfiles.lookup(placement.game,currentfile)でtargetFile一致を要求。これにより別game/file/index、未知id/file、独立に違うfiles mappingを拒否。source ID重複も拒否し、既知/一意/同件数で全単射を確立する。\n\ntarget row12列はplaced.targetEntryId/game/targetFile/displayOrder/index、source line_number/type、nullable source speakerを同gameのSpeakerMigrationMap.targetSpeakerIdで変換したnullable target speaker、source speaker_label/body/raw_block、共通Instant.toStringの順。NULL speakerはそのまま、非NULLは正準signed ID/既知/同game必須。line/type/label/body/rawの保存値は変えず、targetのnonnull/raw・NFC/byte/型/domain/話者整合等は既Rowを通じて検証し、その例外をcatch正常化しない。特にCurrent raw_block NULLをbody/空へ補完しない。target Row/Batchの厳格な拒否を利用する範囲であり、実CurrentにNULLがあるかの判定や業務変換承認を代行しない。\n\n作成済Rowをsource IDで保持しplacement.entriesの既displayOrderで並べ、既ScenarioEntryCopyBatchへ渡す。inputやmapperを変更せず、未知・重複・必須欠落の部分成功なし。toString/自前IAEは固定REDACTED、NPE catch正常扱い0。既File/Placement/SpeakerMap/Row/Batch/Main/Testは変更しない。\n\nPT-MIG-ENTRYMAP001..024: 001手書き二game二行のtarget12列とCurrent順、002empty、003constructor三null、004rows/time nullと時刻境界micro、005件数不足余剰、006nullrow/幅9-11、007id正準/overflow/未知、008file正準/overflow/未知、009game/index非正準不一致、010別file mapping target不一致、011speaker正準/overflow/未知/別game、012source ID重複、013SQLNULL speaker/narrationとnonnull dialogue、014Current rawNULLを拒否し補完0、015text保存/NFC-control-byte-target拒否、016line/type/label/domain拒否、017外内入力snapshot・出力不変、018独立固定COPY bytes、019timestamp両端/µsと同一stamp、020signed Current id/file/speaker両端、021target大小とsource displayOrder分離、022失敗後freshと固定redaction、023全三参照の誤組合せ/行順違い、024有限8worker64/Future5/finallyshutdownNow-await10。期待12列、COPY escape byte、signed mappingは固定literal/独立手書き、Production methodからexpectedを生成しない。new24＋必要既156=whole180、全11Main18physicalを同source/一exec/RootNullAway-lint-CS-SB-PMD個別/全CRC-init/既定と無filter四100で確認。旧35Main729定義同byte、追加不足2.5/7.5/9.9pp cap10、元費用/SV/各群開始保持・専有実費token null。RD/UI/DDL/QA変更不要。実Current/DB/原本抽出/全移行/Rootnative/global451/CHR/ITST/HOLD未受入。",
+  "testIds": "PT-MIG-ENTRYMAP001..024",
+  "estimate": {
+    "low": 2.5,
+    "base": 7.5,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "103_Current entry対応・COPY接続・独立二十四仕様.md",
+  "previousForecastName": "1976_WBS65予実・Current entry二十後版554.json",
+  "forecastName": "1978_WBS65予実・Current entry対応不足追加版555.json",
+  "revision": "555-MISSING_CURRENT_ENTRY_MAPPING_TO_COPY",
+  "findingReason": "Typed Current entry rows are available, but no production pure converter binds Current IDs/file placement/speaker mapping to target12-column COPY row/batch. Add explicit bijection and preserve stored values; actual rawNULL/domain issues fail rather than inferred repair.",
+  "workId": "P01903_SSC390_ENTRYMAP24_NORMAL180",
+  "planKey": "plannedCurrentEntryMapperSSC390",
+  "startRecordName": "1979_WBS65Current entry対応開始.json",
+  "startInputName": "3000_entry_map180_start.json",
+  "designSlot": "PG32414-ssc390-entry-map-design-only-v1",
+  "ledgerSummary": "十列projectionを既File/Placement/SpeakerMap経由でtarget12列Row/Batchへpure接続。signedCurrent正準/全単射/同game-file-index/保存値/時刻/独立24と必要180。rawNULLは補完せず既Row拒否を保持。実DB/全移行/HOLD未受入、RD/UI変更不要。",
+  "moduleSummary": "CurrentScenarioEntryMapper.copyRows/parseCurrent/validTimeは十列を既三ID対応と12列Row/Batchへ結合。Current保存値と順/nullable speaker保持、独立24/必要180/四100計画、実DB/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC390-CURRENT-ENTRY-MAP24-NEEDED180-20261115",
+  "run": "PG32428-ENTRY-MAP-CLOSED180",
+  "scope": "MissingCurrentScenarioEntryMapper24+needed156whole180/11Main18physical. Pure10to12field mapping/files-placement-speakers/bijection/signedID/time/storedtext/targetRow/Batch. Additional2.5/7.5/9.9cap10 noactualDB/RootnativeActual4aruHOLD.",
+  "nextCommand": "PublishSSC390SS311343914onlymain beforePG. Implement Currententrymapper24 and needed180/Rootstatic/18CRC/default-raw. Preserve old35Main729Test and source contracts; no actualDB/master/driver/VM/HOLD actions. Ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}
