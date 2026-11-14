@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC385: 既ReferenceVerifierへ47CHECK原式違反件数0の六固定SELECTを追加、Target同TX Reference22→Content7→Finalizer、Ref021/必要643。式catalog/実SQL evaluator/DB/全移行/HOLD未受入。
+
 SSC384: 既ContentVerifierの六表後へ生成body_searchとDB lower(body)の不一致件数0を固定第七SELECTで照合、Target同ConnectionのFinalizer前後条件とする。Content029/必要642、式定義/実DB/全移行/HOLD未受入。
 
 SSC383: ConstraintVerifier75明示テーブル制約だけをn,t分離queryで照合する。承認済み遅延constraint trigger自体とNOTNULL catalogは別未完、無効化・全catalog資格の主張0。
