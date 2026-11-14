@@ -68,7 +68,7 @@ public final class CurrentScenarioFileMapper {
       if (!ids.add(id)) throw invalid();
       String relativePath = required(row.get(2));
       String prefix = game == 1 ? retainedGameOneRoot : retainedGameTwoRoot;
-      @Nullable AssetMigrationManifest.Entry asset = assets.remove(prefix + "/" + relativePath);
+      AssetMigrationManifest.@Nullable Entry asset = assets.remove(prefix + "/" + relativePath);
       if (asset == null) throw invalid();
       @Nullable String sourceHash = row.get(6);
       if (sourceHash != null && !sourceHash.equals(asset.sha256())) throw invalid();
