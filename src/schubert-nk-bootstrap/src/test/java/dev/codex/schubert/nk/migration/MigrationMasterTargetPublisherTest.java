@@ -35,6 +35,8 @@ final class MigrationMasterTargetPublisherTest {
   private static final String ENTRY_ID_TEXT = "900";
   private static final String AUDIO_ID_TEXT = "500";
   private static final String VOICE_TEXT = "voice";
+  private static final String NEXT_METHOD = "next";
+  private static final String WAS_NULL_METHOD = "wasNull";
   private static final String CLOSE_METHOD = "close";
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
@@ -1370,11 +1372,11 @@ final class MigrationMasterTargetPublisherTest {
               new Class<?>[] {ResultSet.class},
               (proxy, method, args) -> {
                 String name = method.getName();
-                if (name.equals("next")) {
+                if (name.equals(NEXT_METHOD)) {
                   position[0]++;
                   return position[0] < GAMES_ROWS.size();
                 }
-                if (name.equals("wasNull")) return wasNull[0];
+                if (name.equals(WAS_NULL_METHOD)) return wasNull[0];
                 if (name.equals(CLOSE_METHOD)) {
                   resultCloses++;
                   if (gamesCloseFailure != null) throw gamesCloseFailure;
@@ -1421,7 +1423,7 @@ final class MigrationMasterTargetPublisherTest {
               new Class<?>[] {ResultSet.class},
               (proxy, method, args) -> {
                 String name = method.getName();
-                if (name.equals("next")) {
+                if (name.equals(NEXT_METHOD)) {
                   position[0]++;
                   int count =
                       CATALOG_ROWS.get(table).size()
@@ -1429,7 +1431,7 @@ final class MigrationMasterTargetPublisherTest {
                           - (table == missingCatalog ? 1 : 0);
                   return position[0] < count;
                 }
-                if (name.equals("wasNull")) return wasNull[0];
+                if (name.equals(WAS_NULL_METHOD)) return wasNull[0];
                 if (name.equals(CLOSE_METHOD)) {
                   resultCloses++;
                   if (table == badCatalogTable && extraResult != null) throw extraResult;
@@ -1478,12 +1480,12 @@ final class MigrationMasterTargetPublisherTest {
               new Class<?>[] {ResultSet.class},
               (proxy, method, args) -> {
                 String name = method.getName();
-                if (name.equals("next")) {
+                if (name.equals(NEXT_METHOD)) {
                   position[0]++;
                   if ((empty && table < 6) || table == missingContent) return false;
                   return position[0] == 0 || table == extraContent && position[0] == 1;
                 }
-                if (name.equals("wasNull")) return wasNull[0];
+                if (name.equals(WAS_NULL_METHOD)) return wasNull[0];
                 if (name.equals(CLOSE_METHOD)) {
                   resultCloses++;
                   if (table == badContentTable && extraResult != null) throw extraResult;
@@ -1526,7 +1528,7 @@ final class MigrationMasterTargetPublisherTest {
               new Class<?>[] {ResultSet.class},
               (proxy, method, args) -> {
                 switch (method.getName()) {
-                  case "next":
+                  case NEXT_METHOD:
                     int call = nextCalls[0];
                     nextCalls[0]++;
                     return call == 0;
@@ -1534,7 +1536,7 @@ final class MigrationMasterTargetPublisherTest {
                     assertEquals(1, args[0]);
                     if (query == badRead) throw failure;
                     return scalars[query] + (query == badScalar ? 1 : 0);
-                  case "wasNull":
+                  case WAS_NULL_METHOD:
                     return false;
                   case CLOSE_METHOD:
                     resultCloses++;

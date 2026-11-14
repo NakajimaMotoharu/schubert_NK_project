@@ -346,6 +346,8 @@ final class MigrationGamesVerifierTest {
     assertEquals(before, f.data.stream().map(Arrays::asList).toList());
     f.data.get(1)[3] = 1;
     reject(f);
+    assertEquals(4, f.calls.stream().filter(CALL_ID::equals).count());
+    assertEquals(1, f.position);
   }
 
   @Test
@@ -504,6 +506,8 @@ final class MigrationGamesVerifierTest {
     }
 
     ResultSet result() {
+      position = -1;
+      lastNull = false;
       return (ResultSet)
           Proxy.newProxyInstance(
               ResultSet.class.getClassLoader(),
