@@ -1,0 +1,5 @@
+# Scenario二表転記38・独立通常結果
+
+SSC353二表転記をCored1f8a68/Unitb202a98で初検証、PG31088新20＋必要旧18のwhole38/FES0・真正0。PG31090単一exec全1CRC/init/XML・I153/L37/M7/C1/B38 miss0、実Code7=既定7。独立全8SQL/target空・staging及びtarget六count/二INSERT件数・空/fileのみ/intMAX/負件数/null/欠落/extra/SQL/Runtime/Error/close抑制/有限64を確認。RootNullAway/lintWerror/全PMD18個別非該当・適用未分類error0/CS-SB0。BUG2887 Test共有literal2、2888 Test条件literal2/operand1、2889 Main vendor nullableとJDBC非null契約の混在1を先行起票、Test全literal/control逆一致・SQL/結果/close不変のNullable private境界分離で再試験。App112/4642/4613/歴史29・Main119/正本184/625/元190新0/正式1964-53/工数null。normal.35/1.05/2.1のみ完了/手戻り同群内・専有費token null、実DB/COPY SDK/全ETL/Rootnative/CHR/global451/ITST/HOLD未完。
+
+仕様031のPT-MIG-TRANSFER001..020および旧029のSTAGE001..018→PG31088元XML各methodへ一意対応。日時/OS/JDK/tool/branch/source/command/exit/input/独立SQL expected/実結果/coverage/hashはPG31088/90/92に保存。CTASの型/NO DATA/ON COMMIT DROPの一次資料は[PostgreSQL18 CREATE TABLE AS](https://www.postgresql.org/docs/18/sql-createtableas.html)。単体fixtureはJDK Connection/Statement Proxyで実通信0。実PostgreSQL解釈/期限強制/原本保持/全移行は未検証。

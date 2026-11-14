@@ -551237,43 +551237,45 @@
       "costOwner": "WBS-P019-03",
       "sha256": null,
       "acceptance": "UNASSESSED",
-      "state": "STAGING18_NORMAL_MEMORY_JDBC_FOUR100_ACTUAL_ETL_UNACCEPTED",
+      "state": "TRANSFER38_NORMAL_MEMORY_JDBC_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-352",
       "testIds": "PT-MIG-STAGE001..018",
       "historicalPath": null,
       "componentNormalQualification": {
-        "kind": "SSC352_STANDARD_JDBC_STAGING18_NORMAL",
-        "source": "02aa4e0c121b2575e9ddb35ce0787d5311b56038",
-        "productionCoreMain": "bbce93d0ce104e12e55c8e628b0f075709e2e980",
+        "kind": "SSC353_STANDARD_JDBC_TRANSFER38_NORMAL",
+        "source": "b202a98a653a701395bc5aeca5cbbb616af2a96d",
+        "productionCoreMain": "d1f8a68ab2d7d98920d5d012cb4681dc2d3beb1f",
         "evidence": {
-          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31022-scenario-staging18-literal-fixed-post-v1/manifest.json",
-          "sha256": "107239e6cb7caeed29a582e5dc73b957bf56a4e468af2dd6e4eebb563feb6a20"
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31090-scenario-transfer38-nullable-fixed-post-v1/manifest.json",
+          "sha256": "bdaba9414746e67aa62017d96d7a59b3e2d44a69cfe48221f85fd95ce69dc7e4"
         },
-        "tests": 18,
-        "newUniqueTestDefinitions": 18,
-        "newMainSources": 1,
+        "tests": 38,
+        "newUniqueTestDefinitions": 20,
+        "existingSupportDefinitions": 18,
+        "newMainSources": 0,
+        "changedExistingMainSources": 1,
         "uniqueMainJavaDeltaFromInitial": 119,
         "physicalClasses": 1,
         "positiveMainCrc": 1,
         "coverage": {
           "INSTRUCTION": {
-            "covered": 47,
+            "covered": 153,
             "missed": 0
           },
           "BRANCH": {
-            "covered": 10,
+            "covered": 38,
             "missed": 0
           },
           "LINE": {
-            "covered": 13,
+            "covered": 37,
             "missed": 0
           },
           "COMPLEXITY": {
-            "covered": 9,
+            "covered": 26,
             "missed": 0
           },
           "METHOD": {
-            "covered": 4,
+            "covered": 7,
             "missed": 0
           },
           "CLASS": {
@@ -551283,14 +551285,14 @@
         },
         "wholeScopeFour100": true,
         "actualJvmCodeMethodCounts": {
-          "dev/codex/schubert/nk/migration/ScenarioStagingTables": 4
+          "dev/codex/schubert/nk/migration/ScenarioStagingTables": 7
         },
-        "actualJvmCodeMethods": 4,
-        "jacocoDefaultMethods": 4,
+        "actualJvmCodeMethods": 7,
+        "jacocoDefaultMethods": 7,
         "newMainHasNoDefaultFilteredMethods": true,
         "generatedPolicyGloballyAccepted": false,
         "manualCoverageExclusions": [],
-        "rawPmdFindings": 9,
+        "rawPmdFindings": 18,
         "applicable": 0,
         "unclassified": 0,
         "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
@@ -551298,15 +551300,15 @@
         "whole451Accepted": false,
         "effortRate": null,
         "normalOriginalEstimateRetained": {
-          "low": 0.25,
-          "base": 0.75,
-          "high": 1.5
+          "low": 0.35,
+          "base": 1.05,
+          "high": 2.1
         },
         "grossReworkBudgetAdded": 0,
         "actualAllocatedCost": null,
         "tokenTotals": null
       },
-      "pendingTransferExtensionSSC353": true
+      "pendingTransferExtensionSSC353": false
     }
   ],
   "layouts": [
@@ -556709,6 +556711,73 @@
       "low": 0.25,
       "base": 0.75,
       "high": 1.5
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentScenarioTransfer38PG31088": {
+    "kind": "SSC353_STANDARD_JDBC_TRANSFER38_NORMAL",
+    "source": "b202a98a653a701395bc5aeca5cbbb616af2a96d",
+    "productionCoreMain": "d1f8a68ab2d7d98920d5d012cb4681dc2d3beb1f",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31090-scenario-transfer38-nullable-fixed-post-v1/manifest.json",
+      "sha256": "bdaba9414746e67aa62017d96d7a59b3e2d44a69cfe48221f85fd95ce69dc7e4"
+    },
+    "tests": 38,
+    "newUniqueTestDefinitions": 20,
+    "existingSupportDefinitions": 18,
+    "newMainSources": 0,
+    "changedExistingMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 119,
+    "physicalClasses": 1,
+    "positiveMainCrc": 1,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 153,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 38,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 37,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 26,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 7,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/ScenarioStagingTables": 7
+    },
+    "actualJvmCodeMethods": 7,
+    "jacocoDefaultMethods": 7,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 18,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.1
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,
