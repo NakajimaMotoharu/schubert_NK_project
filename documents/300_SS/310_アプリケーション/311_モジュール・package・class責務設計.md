@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC409: CurrentMigrationMappingVerifier.verify/frames/rows/numeric/model-validation/invalidとCurrentMigrationMappingManifest.verifySerializedを接続。既format byte不変更、期待SHAは元宣言artifactから渡す。新18/全976/47Main67class予定。
+
 SSC408: CurrentMigrationMappingManifest ctor/canonicalBytes/sha256/rowCounts/toString/append/invalidとCurrentMigrationAssembler.mappingManifestを接続。型・既mapping bytes/orderは不変更、新10/全958・46Main66class予定。
 
 SSC407: MigrationCleanupIdentityTest10もFinalizerの呼出元として全948再認証、他44Test同byte。Main不変更・SSC406同群手戻り。
