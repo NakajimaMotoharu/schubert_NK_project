@@ -1,0 +1,30 @@
+{
+  "ssc": 373,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java",
+  "source": "495bbf164ab4e39692103951e72d12069c92f582",
+  "title": "六表target準備・転記・検査・最終化接続",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST、UI223242254、SS311/331/V002/343 SSC369370371372。MigrationMasterTargetPublisherは既SpeakerStagingTable/ScenarioStagingTables/AssetStagingTables/ReferenceVerifier/Finalizerを一つの借用正規Connectionへ順に接続する。実Current抽出/driver COPY/stagingへの実データ送信/権限・停止・排他・Backup/全schema・全移行Goを作る部品ではない。callerはprepare後に正規COPYでstaging六表を満たしてからtransferAndFinalizeを呼ぶ。実COPY未接続/HOLDの時は実移行受入を出さない。\n\nprepare(Nullable Connection)はnullを固定IAEで副作用前拒否、Speaker→Scenario二表→Asset三表の既prepareを同じConnectionへ一回ずつ委譲する。transferAndFinalize(Nullable Connection, Nullable MigrationMasterCopyDataset)は両nullを全処理前に固定IAE、宣言各rows.size()から件数を渡してSpeaker→Scenario二表→Asset三表transfer、六表ReferenceVerifier.verify、MasterFinalizer.finishを固定順に一回だけ呼ぶ。参照違反時は非transactional setval/ANALYZEへ進まない。各部品のnonnull資源/primary-suppressed/timeout契約を維持し、publisher自身はConnection/transactionをclose/commit/rollback/setAutoCommit/再接続/認証/role変更せず、失敗時は元SQL-runtime-Errorを同instanceでそのまま伝播して後続0、自動再送/補償/成功receiptの作成0。partial staging/insert/sequence等は正規callerの実状態再認証・rollback/discard/復旧判断待ち、UNKNOWNを成功化しない。\n\n独立memory JDBCの通常一経路はprepare六SQL＋transfer24SQL＋参照16SQL＋最終化16SQL=全62SQL、Statement8/Prepared5の計13close試行、Result44close、timeout13、Connection auto読取8/所有mutation0。最後のPrepared五setvalは固定MAX42/700/900/500/600、空は1false、ANALYZE六。これはJDBC呼出の合成経路資格であって実DB・COPY・transactionや資源解放の実測ではない。全catalog/PK-UK-CK/index/原本hash/全列一致・UI/CHR/backuprestore・Rootnative・正式451/ITSTは別未完。固定redacted診断/toStringで入力や例外をlogへ渡さない。サービスは既stateless部品だけを保持しborrowedConnectionを保持しない。\n\nPT-MIG-TARGET001..016: 001正常62SQL/独立scalar44/全13close・借用所有、002全空でinvented row0とsetval1false、003prepare null前検証、004transfer両null各組合せ前検証、005autoCommit拒否の委譲/SQL0、006全六CTAS位置の元三型failure・後続0、007全24transferSQL位置の元三型failure、008全16参照SQL位置の元三型failureとfinalization0、009全16最終SQL/Prepared execute各位置の元三型failure、010全18転記scalar不一致で停止、011参照orphan/link十位置の非0でsetval0、012setval返値不一致/ANALYZEwarning時のpartial状態保持・後続/自動再送0、013全13close故障の正確prefix/close試行/Result試行とouter所有、014途中read＋Resultclose＋Statementclose二suppressed同順の伝播、015redaction/失敗後別fresh fixture正常・同publisherに旧Connection保持0、016同publisher有限8workers64/Future5/finallyshutdownNow-await10。SQL/件数/順/prefix/各終了tupleは既承認SS/V002から独立に指定し、production methodをexpected生成へ使わない。\n\n新16＋必要既527=whole543、全28Main42physicalを一source/一exec/Root静的・NullAway-lintWerror/全CRC-init/default＋無filter全Code四100で初めて結合検証する。旧27 migrationMain/既527Test source不変。既個別成功の確認再演ではなく新publisherの全caller/callee合成に必要な全閉包を検証、旧exec合算0。追加1.5/4.5/9pp cap10はPG/独立16と必要543を含む。元費用/SV/群開始保持、専有費/token null。SS内部順序具体化で上位仕様/DDL/grant変更・QA不要、全HOLD維持。",
+  "testIds": "PT-MIG-TARGET001..016",
+  "estimate": {
+    "low": 1.5,
+    "base": 4.5,
+    "high": 9
+  },
+  "capPp": 10,
+  "specName": "070_六表target準備・転記・検査・最終化接続・独立十六仕様.md",
+  "previousForecastName": "1902_WBS65予実・移行参照検査通常四百三後版522.json",
+  "forecastName": "1904_WBS65予実・六表target接続不足追加版523.json",
+  "revision": "523-MISSING_SIX_TABLE_TARGET_JDBC_ORCHESTRATION",
+  "findingReason": "Separate qualified staging/transfer/reference/finalizer components lack one fixed caller path on the same borrowed Connection. Add orchestration and necessary whole543; actual COPY/DB/authority/catalog/hash/Root remain held and unaccepted.",
+  "workId": "P01903_SSC373_TARGET16_NORMAL543",
+  "planKey": "plannedMasterTargetSSC373",
+  "startRecordName": "1905_WBS65六表target接続製造通常開始.json",
+  "startInputName": "2819_master_target543_start.json",
+  "designSlot": "PG31836-ssc373-master-target-design-only-v1",
+  "ledgerSummary": "SS311331/V002/343369370371372、WBS-P01903.02。prepare六表→caller COPY→transfer六表→参照16→最終化の同Connection固定経路。JDBC合成62SQL/13Statement/44Result、実COPY/DB/所有資格/全catalog/hash/HOLD未受入。RD/UI/DDL/grant変更・QA不要。",
+  "moduleSummary": "bootstrap.migration.MigrationMasterTargetPublisherは既三staging/transferと参照/最終化を同じ借用Connectionへ固定順接続、元障害伝播/後続0/自動retry0。PT-MIG-TARGET001..016/全543/full28Main42physical、実COPY/DB/Go/Root/HOLD未受入。",
+  "groupId": "PGPT-WBS65-SSC373-MASTER-TARGET16-NEEDED543-20261114",
+  "run": "PG31850-MASTER-TARGET-CLOSED543",
+  "scope": "MissingMasterTargetPublisher PG16+neededall527whole543/full28Main42physical 1.5/4.5/9cap10. OneConnectionprepare-transfer-reference-finalize62SQL/exactresources/noautocommit-retry-authorization. ActualCOPYDBRootnativeSDKActual4aruHOLDunchanged; old27Main527Testsunchanged",
+  "nextCommand": "PublishSSC373SS311343914onlymainbeforePG. Implementfixedborrowedtargetorchestration16+independent62SQL/44scalar/13resourcefaultfixture/neededwhole543/all28Main42CRC-init/default-rawallCode. NoactualCOPYDBpermissionRootnativeHOLDchanges. Ordinarygroupnotstop."
+}
