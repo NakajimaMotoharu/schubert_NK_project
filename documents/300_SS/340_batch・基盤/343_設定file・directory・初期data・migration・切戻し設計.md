@@ -1,5 +1,14 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC366 非null資源終了とsuppression（2026-11-14）
+
+BUG2905/YKT2436、NK-MIG-001・RD MIG003005006/MIG-DAT005/DAT004/TST、UI254、SS311/331/343 SSC352353362364/451。ScenarioStagingTablesとAssetStagingTables各prepare/transfer/requireResultの6scopeを明示的な資源終了へ具体化する。nullable vendor境界は従来どおり取得直後に検査し、nullなら所有を作らず固定SQLException。nonnull Statement/ResultSetは一度だけcloseし、Connection/transactionは借用、SQL文/列/順/count/timeout/例外文言を一切変更しない。
+
+各scopeはNullable Throwable primary=nullを保持し、業務本体のSQLException/RuntimeException/Errorをcatchして同じinstanceをprimaryへ保存しそのままrethrow、finallyから型別private closeStatement/closeResultへ渡す。helperはprimary==nullならresource.closeを一回直接呼ぶ。primaryありならcloseを一回試み、SQLException/RuntimeException/Error cleanupをprimary.addSuppressed(cleanup)へ付加して元primaryを維持する。self-suppression（同じinstance）時のJDK IllegalArgumentExceptionやaddSuppressedのErrorをcatch/正常化しない。Throwableをcatchして成功扱いすること、NPE正常化、二重close、rollback/commit/再試行、未知runtimeからの復旧は禁止。JDBCが宣言するSQL checked例外とunchecked/Errorの全型を維持、型別helperはnonnullresourceを受けcompiler null-close冗長分岐を生成しない。Java TWRの終了順と例外所有契約を維持する実装であり、到達不能扱い/除外/coverage専用公開API/反射を使わない。
+
+PT-MIG-CLEANUP001..004: ScenarioとAssetそれぞれ（1）最初queryのprimary SQL失敗＋Statement close別失敗で元primary/一suppressed/後続SQL0・Resultclose0/Statementclose1、（2）Result read primary失敗＋Result close失敗＋Statement closeさらに別失敗で元primary/二suppressed順Result→Statement/各close1/Connection操作0を独立固定instanceで検証する。既全399Test body不変、Scenario38→40/Asset30→32、全403/21Main35physicalを新source一execで通常Root全静的/NullAway/lintWerror/全CRC-init/defaultと無filter四100へ再試験する。公開SQL/全String literalの不変証明、原TWR失敗PG31550保全。normal未閉鎖1/3/6を一度だけ継承し、新手戻り追加.5/1.5/3を加え当群1.5/4.5/9cap10。元開始見積り/原S-V上限保持、既399成功を廃棄/合算せず、実費/token null。全PGPT/実DB/Root/native/CHR/ITST/HOLD未完。
+
+
 ## SSC365 COPY四不変型契約（2026-11-14）
 
 BUG2904/YKT2435、451品質は維持。ScenarioCopyDataset、AudioCopyDataset、MediaAssetCopyBatch、MigrationCopyDatasetの四final型はprivate-final参照、constructor防御snapshot、不変List/Rowとbyte配列毎回別所有、内部stateを変更しないborrowed writeだけで構成する。標準javax.annotation.concurrent.Immutableを当四型に宣言し、その不変性を既同sourceのList/入力mutation隔離/新byte所有/有限並行/borrowed資源/IO負試験で実証する。注釈はfilterやwarning suppressionではなく型契約、未検証型へ一括付与しない。SpotBugs raw BugInstance/MissingClass/Error0とClassStats全physical一致を引き続き要求し、未達なら実PT開始しない。既bootstrap provided spotbugs-annotations4.10.4のcompile推移jsr3053.0.2をclosed scopeで明示SHApin（既ローカル公開artifact、Production POM/GAV/version変更不要）。これ以外のSDK/解析aux/ルールを拡張しない。公開getterの値・同一性/constructor/永続化値/stream順/例外はそのまま。annotation以外の全Main/Testトークン不変を確認し、新immutable profileの全399と無filterを同sourceで検証、元PG31524 raw5は保持。RD/UI/外部仕様変更・QA不要、実環境/Root/native/全HOLD未受入。原normal1/3/6cap7へ内包し新規費用0、内部手戻り参考.2/.6/1.2とその他作業を区別し元開始/残見積りを変えない。
