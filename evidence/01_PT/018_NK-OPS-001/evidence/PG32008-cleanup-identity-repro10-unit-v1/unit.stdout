@@ -1,0 +1,193 @@
+
+Failures (8):
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId002ScenarioKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId002ScenarioKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.ScenarioStagingTables.closeResult(ScenarioStagingTables.java:162)
+       dev.codex.schubert.nk.migration.ScenarioStagingTables.requireResult(ScenarioStagingTables.java:125)
+       dev.codex.schubert.nk.migration.ScenarioStagingTables.requireCount(ScenarioStagingTables.java:108)
+       dev.codex.schubert.nk.migration.ScenarioStagingTables.transfer(ScenarioStagingTables.java:90)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic sql]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.closeResult(SpeakerStagingTable.java:116)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireResult(SpeakerStagingTable.java:89)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireCount(SpeakerStagingTable.java:73)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.transfer(SpeakerStagingTable.java:49)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup(MigrationCleanupIdentityTest.java:110)
+         [...]
+     Caused by: java.sql.SQLException: synthetic sql
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId007SameInnerOrSameOuterCannotMaskDifferentPeerCleanup(MigrationCleanupIdentityTest.java:109)
+       [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall', methodParameterTypes = '']
+    => java.util.concurrent.ExecutionException: org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124)
+       java.base/java.util.concurrent.FutureTask.get(FutureTask.java:207)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall(MigrationCleanupIdentityTest.java:161)
+       java.base/java.lang.reflect.Method.invoke(Method.java:565)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+       [...]
+     Caused by: org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.closeResult(SpeakerStagingTable.java:116)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireResult(SpeakerStagingTable.java:89)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireCount(SpeakerStagingTable.java:73)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.transfer(SpeakerStagingTable.java:49)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic primary
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$cleanupId010FiniteWorkersKeepFaultIdentitiesAndResourcesPerCall$0(MigrationCleanupIdentityTest.java:155)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic primary]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.closeStatement(SpeakerStagingTable.java:103)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.transfer(SpeakerStagingTable.java:57)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:192)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.lambda$assertPrimary$0(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.sql.SQLException: synthetic sql
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.cleanupId009FirstResultCloseFailureRemainsPrimaryAtSameStatementFailure(MigrationCleanupIdentityTest.java:138)
+       [...]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId004FinalizerKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId004FinalizerKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.closeResult(MigrationMasterFinalizer.java:156)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.requireResult(MigrationMasterFinalizer.java:130)
+       dev.codex.schubert.nk.migration.MigrationMasterFinalizer.finish(MigrationMasterFinalizer.java:43)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:195)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic sql]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId001SpeakerKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId001SpeakerKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.closeResult(SpeakerStagingTable.java:116)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireResult(SpeakerStagingTable.java:89)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.requireCount(SpeakerStagingTable.java:73)
+       dev.codex.schubert.nk.migration.SpeakerStagingTable.transfer(SpeakerStagingTable.java:49)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic sql]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId005ReferenceKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId005ReferenceKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifier.closeResult(MigrationMasterReferenceVerifier.java:116)
+       dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifier.requireResult(MigrationMasterReferenceVerifier.java:90)
+       dev.codex.schubert.nk.migration.MigrationMasterReferenceVerifier.verify(MigrationMasterReferenceVerifier.java:57)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.act(MigrationCleanupIdentityTest.java:196)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic sql]
+  JUnit Jupiter:MigrationCleanupIdentityTest:cleanupId003AssetKeepsSamePrimaryForAllThreeFaultKinds()
+    MethodSource [className = 'dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest', methodName = 'cleanupId003AssetKeepsSamePrimaryForAllThreeFaultKinds', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.sql.SQLException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.assertPrimary(MigrationCleanupIdentityTest.java:179)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: Self-suppression not permitted
+       java.base/java.lang.Throwable.addSuppressed(Throwable.java:1101)
+       dev.codex.schubert.nk.migration.AssetStagingTables.closeResult(AssetStagingTables.java:185)
+       dev.codex.schubert.nk.migration.AssetStagingTables.requireResult(AssetStagingTables.java:136)
+       dev.codex.schubert.nk.migration.AssetStagingTables.requireCount(AssetStagingTables.java:120)
+       dev.codex.schubert.nk.migration.AssetStagingTables.transfer(AssetStagingTables.java:75)
+       [...]
+       Suppressed: java.sql.SQLException: synthetic sql
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.failures(MigrationCleanupIdentityTest.java:214)
+         dev.codex.schubert.nk.migration.MigrationCleanupIdentityTest.self(MigrationCleanupIdentityTest.java:169)
+         [...]
+       [Circular reference: java.sql.SQLException: synthetic sql]
+
+Test run finished after 279 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[        10 tests found           ]
+[         0 tests skipped         ]
+[        10 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         8 tests failed          ]
+

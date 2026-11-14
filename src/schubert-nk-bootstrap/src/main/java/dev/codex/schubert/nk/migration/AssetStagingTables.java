@@ -168,7 +168,7 @@ public final class AssetStagingTables {
     try {
       resource.close();
     } catch (SQLException | RuntimeException | Error cleanup) {
-      primary.addSuppressed(cleanup);
+      if (cleanup != primary) primary.addSuppressed(cleanup);
     }
   }
 
@@ -182,7 +182,7 @@ public final class AssetStagingTables {
     try {
       resource.close();
     } catch (SQLException | RuntimeException | Error cleanup) {
-      primary.addSuppressed(cleanup);
+      if (cleanup != primary) primary.addSuppressed(cleanup);
     }
   }
 }

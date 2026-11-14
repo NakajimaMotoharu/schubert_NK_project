@@ -203,7 +203,8 @@ final class MigrationMasterReferenceVerifierTest {
     self.failSlot = 0;
     self.faultQuery = 0;
     self.extraResult = self.failure;
-    assertThrows(IllegalArgumentException.class, () -> verify(self, normal()));
+    assertSame(self.failure, assertThrows(SQLException.class, () -> verify(self, normal())));
+    assertEquals(0, self.failure.getSuppressed().length);
     assertEquals(1, self.resultCloses);
     assertEquals(1, self.outerCloses);
   }

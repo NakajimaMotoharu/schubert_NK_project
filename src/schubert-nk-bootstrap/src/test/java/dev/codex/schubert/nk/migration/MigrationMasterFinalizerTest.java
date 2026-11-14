@@ -206,7 +206,8 @@ final class MigrationMasterFinalizerTest {
     self.failSlot = 0;
     self.extraResult = self.failure;
     self.faultQuery = 0;
-    assertThrows(IllegalArgumentException.class, () -> finish(self, normal()));
+    assertSame(self.failure, assertThrows(SQLException.class, () -> finish(self, normal())));
+    assertEquals(0, self.failure.getSuppressed().length);
     assertEquals(1, self.resultCloses);
     assertEquals(1, self.outerCloses);
   }
