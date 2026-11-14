@@ -744,3 +744,6 @@ SSC364/365/366、NK-MIG-001/WBS-P01903: MigrationCopyDataset constructor/scenari
 
 
 SSC367/NK-MIG-001/WBS-P01903: SpeakerCopyRow constructor/columnNames/fields/copyBytes/toString/required/name/text/timestamp/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223233242254→SS311331343/V002→PT-MIG-SPEAKERROW001..016/019058059。Corec2bc511b/Unitfcd24a09・PG31592/594/596全28/2class/actual17四100。Current175/UK-FK集合/DB/全移行/HOLD未受入。
+
+
+SSC368/NK-MIG-001/WBS-P01903: SpeakerCopyBatch constructor/rows/copyBytes/writeTo/validateEntries/toString/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223233242254→SS311331343/V002→PT-MIG-SPEAKERBATCH001..016/019060061。Core07c7fedc/Unit578eefe0・PG31632/634/636全132/15class/actual120四100、Current175/DB/全移行/HOLD未受入。
