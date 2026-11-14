@@ -762,3 +762,6 @@ SSC372/NK-MIG-001/WBS-P01903 MigrationMasterReferenceVerifier verify/open/requir
 
 
 SSC373/NK-MIG-001/WBS-P01903 MigrationMasterTargetPublisher prepare/transferAndFinalize/toString/invalid→RD MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-TARGET001..016/019070071。Core0252e95a/Unit3d9fb2c0、PG31870/872/874全543/42class/実369両四100。実COPY/DB/全catalog/hash/全移行/HOLD未受入。
+
+
+SSC374/NK-MIG-001/WBS-P01903 MigrationMasterCopyFingerprint fingerprint/difference/toString/invalid、TableFingerprint private constructor/table/rows/bytes/sha256/toString、DigestSink private constructor/write/finish→RD MIG-DAT005/MIG003005006/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-FINGER001..020/019072073。Core4759dabb/Unite4461ebb、PG31914/916/918全403/38class/実319両四100。実master/DB/全移行/HOLD未受入。
