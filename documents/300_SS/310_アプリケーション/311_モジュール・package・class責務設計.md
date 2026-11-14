@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC408: CurrentMigrationMappingManifest ctor/canonicalBytes/sha256/rowCounts/toString/append/invalidとCurrentMigrationAssembler.mappingManifestを接続。型・既mapping bytes/orderは不変更、新10/全958・46Main66class予定。
+
 SSC407: MigrationCleanupIdentityTest10もFinalizerの呼出元として全948再認証、他44Test同byte。Main不変更・SSC406同群手戻り。
 
 SSC406: Finalizer.finishへ固定link constraint即時評価をMAX/setval前一回追加、親Target同経路へ接続。既Main1＋Target doc追跡更新、新Final2/Target2=全948/45Main65physical予定。caller TX commit/rollback・実DB/HOLD操作0。
