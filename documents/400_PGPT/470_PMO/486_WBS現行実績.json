@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "a1f9e7e064173e7515192fb73e580b94c8f994e1dd0c15bfa6bba2c6721f3873",
+  "inventorySha256": "637f8765b341930bce9a08a2b00d3970c796add7f35d54bd0337d6ab8482a01e",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -32130,7 +32130,99 @@
   },
   "plannedAudioDatasetSSC355": {
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "sourceCreated": true,
+    "newAcceptance": 0,
+    "state": "AUDIO_DATASET120_NORMAL_QUALIFIED_ACTUAL_ETL_UNACCEPTED",
+    "actualRuntimeQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31142-audio-dataset120-post-v1/manifest.json",
+      "sha256": "351e72754e4d6f8f301558941050f64aeff758dc0951e4a74ea92c349a8b4569"
+    }
+  },
+  "currentAudioDataset120PG31140": {
+    "kind": "SSC355_AUDIO_DATASET120_NORMAL",
+    "source": "715c2d08dcc02806cf19e883d8bd0b7caaf40f2b",
+    "productionCoreMain": "095297607eb88fdb5ac8d1589b847ad46dbe4468",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31142-audio-dataset120-post-v1/manifest.json",
+      "sha256": "351e72754e4d6f8f301558941050f64aeff758dc0951e4a74ea92c349a8b4569"
+    },
+    "tests": 120,
+    "newUniqueTestDefinitions": 20,
+    "existingSupportDefinitions": 100,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 121,
+    "physicalClasses": 17,
+    "positiveMainCrc": 17,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 2284,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 299,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 480,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 247,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 94,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 17,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AudioFileCopyRow": 13,
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+      "dev/codex/schubert/nk/migration/AudioCopyDataset": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+      "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$FilePosition": 6,
+      "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$SourceKey": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+      "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 138,
+    "jacocoDefaultMethods": 94,
+    "newDatasetActualCodeMethods": 11,
+    "newDatasetDefaultMethods": 11,
+    "newDatasetHasNoFilteredMethods": true,
+    "legacyGeneratedMethodDifference": 44,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 64,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.65,
+      "base": 1.95,
+      "high": 3.9
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
