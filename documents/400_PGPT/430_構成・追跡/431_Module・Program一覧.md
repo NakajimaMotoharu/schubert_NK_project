@@ -765,3 +765,6 @@ SSC373/NK-MIG-001/WBS-P01903 MigrationMasterTargetPublisher prepare/transferAndF
 
 
 SSC374/NK-MIG-001/WBS-P01903 MigrationMasterCopyFingerprint fingerprint/difference/toString/invalid、TableFingerprint private constructor/table/rows/bytes/sha256/toString、DigestSink private constructor/write/finish→RD MIG-DAT005/MIG003005006/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-FINGER001..020/019072073。Core4759dabb/Unite4461ebb、PG31914/916/918全403/38class/実319両四100。実master/DB/全移行/HOLD未受入。
+
+
+SSC375/NK-MIG-001/WBS-P01903 SpeakerMigrationMap constructor/mappings/targetSpeakerId/canonicalBytes/copyRows/invalid/toString、SpeakerMapping constructor/equals/hashCode/gameId/currentSpeakerId/targetSpeakerId/toString→RD MIG003005006/MIG-DAT005/FUN004/DAT004/TST→UI223242254→SS311331343/V002→PT-MIG-SPEAKERMAP001..024/019074075。Core37d20ba6/Unit6abbb4ec、PG31938/940/942全156/17class/実137両四100。実Current/DB/全移行/HOLD未受入。
