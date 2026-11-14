@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "9c94d24951ec21954061316c229fec842c53f5c2dc98bdeeb862d7ebb5e67ac0",
+  "inventorySha256": "ce0529516f0667bf8ab6a894384a8c27546a39703ace1144485bb6c7baf3a43d",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -32052,7 +32052,80 @@
   },
   "plannedAudioRowSSC354": {
     "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "sourceCreated": true,
+    "newAcceptance": 0,
+    "state": "AUDIO_COPY_ROW28_NORMAL_QUALIFIED_ACTUAL_ETL_UNACCEPTED",
+    "actualRuntimeQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31116-audio-copy-row28-post-v1/manifest.json",
+      "sha256": "6cae0cae4cafad7e958a5bb6d486b74540cf11c41ab1c53b974e93207f5b4d36"
+    }
+  },
+  "currentAudioCopyRow28PG31114": {
+    "kind": "SSC354_AUDIO_COPY_ROW28_NORMAL",
+    "source": "a07a02c8bc9aca20d4f0c5ac681955818925e8be",
+    "productionCoreMain": "8d59160afb99d71ecd3161d267f5a886134f7496",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31116-audio-copy-row28-post-v1/manifest.json",
+      "sha256": "6cae0cae4cafad7e958a5bb6d486b74540cf11c41ab1c53b974e93207f5b4d36"
+    },
+    "tests": 28,
+    "newUniqueTestDefinitions": 16,
+    "existingSupportDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 120,
+    "physicalClasses": 2,
+    "positiveMainCrc": 2,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 538,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 91,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 105,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 68,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 19,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AudioFileCopyRow": 13,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 19,
+    "jacocoDefaultMethods": 19,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 10,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }

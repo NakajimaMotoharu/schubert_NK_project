@@ -551316,11 +551316,78 @@
       "owner": "WBS-P019-03",
       "costOwner": "WBS-P019-03",
       "sha256": null,
-      "acceptance": "NOT_RUN",
-      "state": "REGISTERED_PLANNED_NOT_PRESENT",
+      "acceptance": "UNASSESSED",
+      "state": "AUDIO_ROW28_NORMAL_IMMUTABLE_VALUE_FOUR100_ACTUAL_ETL_UNACCEPTED",
       "relatedSsc": "SSC-354",
       "testIds": "PT-MIG-AUDIOROW001..016",
-      "historicalPath": null
+      "historicalPath": null,
+      "componentNormalQualification": {
+        "kind": "SSC354_AUDIO_COPY_ROW28_NORMAL",
+        "source": "a07a02c8bc9aca20d4f0c5ac681955818925e8be",
+        "productionCoreMain": "8d59160afb99d71ecd3161d267f5a886134f7496",
+        "evidence": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31116-audio-copy-row28-post-v1/manifest.json",
+          "sha256": "6cae0cae4cafad7e958a5bb6d486b74540cf11c41ab1c53b974e93207f5b4d36"
+        },
+        "tests": 28,
+        "newUniqueTestDefinitions": 16,
+        "existingSupportDefinitions": 12,
+        "newMainSources": 1,
+        "uniqueMainJavaDeltaFromInitial": 120,
+        "physicalClasses": 2,
+        "positiveMainCrc": 2,
+        "coverage": {
+          "INSTRUCTION": {
+            "covered": 538,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 91,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 105,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 68,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 19,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 2,
+            "missed": 0
+          }
+        },
+        "wholeScopeFour100": true,
+        "actualJvmCodeMethodCounts": {
+          "dev/codex/schubert/nk/migration/AudioFileCopyRow": 13,
+          "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+        },
+        "actualJvmCodeMethods": 19,
+        "jacocoDefaultMethods": 19,
+        "newMainHasNoDefaultFilteredMethods": true,
+        "generatedPolicyGloballyAccepted": false,
+        "manualCoverageExclusions": [],
+        "rawPmdFindings": 10,
+        "applicable": 0,
+        "unclassified": 0,
+        "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+        "newAcceptance": 0,
+        "whole451Accepted": false,
+        "effortRate": null,
+        "normalOriginalEstimateRetained": {
+          "low": 0.4,
+          "base": 1.2,
+          "high": 2.4
+        },
+        "grossReworkBudgetAdded": 0,
+        "actualAllocatedCost": null,
+        "tokenTotals": null
+      }
     }
   ],
   "layouts": [
@@ -556790,6 +556857,73 @@
       "low": 0.35,
       "base": 1.05,
       "high": 2.1
+    },
+    "grossReworkBudgetAdded": 0,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "currentAudioCopyRow28PG31114": {
+    "kind": "SSC354_AUDIO_COPY_ROW28_NORMAL",
+    "source": "a07a02c8bc9aca20d4f0c5ac681955818925e8be",
+    "productionCoreMain": "8d59160afb99d71ecd3161d267f5a886134f7496",
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31116-audio-copy-row28-post-v1/manifest.json",
+      "sha256": "6cae0cae4cafad7e958a5bb6d486b74540cf11c41ab1c53b974e93207f5b4d36"
+    },
+    "tests": 28,
+    "newUniqueTestDefinitions": 16,
+    "existingSupportDefinitions": 12,
+    "newMainSources": 1,
+    "uniqueMainJavaDeltaFromInitial": 120,
+    "physicalClasses": 2,
+    "positiveMainCrc": 2,
+    "coverage": {
+      "INSTRUCTION": {
+        "covered": 538,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 91,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 105,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 68,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 19,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "wholeScopeFour100": true,
+    "actualJvmCodeMethodCounts": {
+      "dev/codex/schubert/nk/migration/AudioFileCopyRow": 13,
+      "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6
+    },
+    "actualJvmCodeMethods": 19,
+    "jacocoDefaultMethods": 19,
+    "newMainHasNoDefaultFilteredMethods": true,
+    "generatedPolicyGloballyAccepted": false,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 10,
+    "applicable": 0,
+    "unclassified": 0,
+    "actualDbCopyCurrentRootVmNativeKeyServiceAruOperations": 0,
+    "newAcceptance": 0,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "normalOriginalEstimateRetained": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 2.4
     },
     "grossReworkBudgetAdded": 0,
     "actualAllocatedCost": null,
