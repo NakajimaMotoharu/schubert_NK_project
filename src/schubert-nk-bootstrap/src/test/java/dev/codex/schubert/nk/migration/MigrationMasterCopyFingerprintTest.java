@@ -16,6 +16,23 @@ import org.junit.jupiter.api.Test;
 
 /** PT-MIG-FINGER001..020; fixed Python UTF8/COPY/SHA256 vectors independent of production code. */
 final class MigrationMasterCopyFingerprintTest {
+  private static final String EXPECTED_SPEAKER_TABLE = "speakers";
+  private static final String NORMAL_NAME = "Alice";
+  private static final String NORMAL_SPEAKER_VECTOR =
+      "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac";
+  private static final String NORMAL_FILE_VECTOR =
+      "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101";
+  private static final String NORMAL_ENTRY_VECTOR =
+      "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95";
+  private static final String NORMAL_AUDIO_VECTOR =
+      "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3";
+  private static final String NORMAL_MEDIA_VECTOR =
+      "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe";
+  private static final String NORMAL_LINK_VECTOR =
+      "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef";
+  private static final String EMPTY_LINK_VECTOR =
+      "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
   private static final String SHA =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String STAMP = "2026-01-02T03:04:05Z";
@@ -32,7 +49,7 @@ final class MigrationMasterCopyFingerprintTest {
   private static final int TERMINATION_SECONDS = 10;
   private static final List<String> TABLES =
       List.of(
-          "speakers",
+          EXPECTED_SPEAKER_TABLE,
           "script_files",
           "script_entries",
           "audio_files",
@@ -40,12 +57,12 @@ final class MigrationMasterCopyFingerprintTest {
           "entry_audio_links");
   private static final List<String> NORMAL_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_SPEAKER_VECTOR,
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> EMPTY_METADATA =
       List.of(
           "speakers|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -53,103 +70,103 @@ final class MigrationMasterCopyFingerprintTest {
           "script_entries|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
           "audio_files|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
           "media_assets|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+          EMPTY_LINK_VECTOR);
   private static final List<String> JAPANESE_METADATA =
       List.of(
           "speakers|1|50|1bbf8f3149c430700c3373ac0ac8318c20c00c84b5568a643642a564360baebb",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> LITERAL_NULL_METADATA =
       List.of(
           "speakers|1|47|68b504fc7b5b7921e46c90967fe5b15021ace2f3c26e8d6a3a438bb58f5911b0",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> CONTROLS_METADATA =
       List.of(
           "speakers|1|56|e2d31eac53fba2811b0e58148a95f91275a523f7c176a47a36854c203441285e",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> LONGER_METADATA =
       List.of(
           "speakers|1|47|ddee4e52583b07416cba8457453f3d3c2c66e71e8a4039001554665006928287",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> SAME_BYTES_METADATA =
       List.of(
           "speakers|1|46|9897abf9dcc3be43398cfd77f98f68fac21455d8a82bf801cf63fb0e502f5f6e",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> TWO_SPEAKERS_METADATA =
       List.of(
           "speakers|2|89|ce3a31c727b0451ad10b61a19392f063f0f63c070831425bae39477fca958abf",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> REVERSE_SPEAKERS_METADATA =
       List.of(
           "speakers|2|89|08a6641f22d33129a26e5780b2669a1db979fc3255f38701222e3d78712ae41e",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          NORMAL_LINK_VECTOR);
   private static final List<String> NO_LINKS_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+          NORMAL_SPEAKER_VECTOR,
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          EMPTY_LINK_VECTOR);
   private static final List<String> NO_AUDIO_LINKS_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
+          NORMAL_SPEAKER_VECTOR,
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
           "audio_files|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+          NORMAL_MEDIA_VECTOR,
+          EMPTY_LINK_VECTOR);
   private static final List<String> NO_MEDIA_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
-          "script_entries|1|63|ae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
+          NORMAL_SPEAKER_VECTOR,
+          NORMAL_FILE_VECTOR,
+          NORMAL_ENTRY_VECTOR,
+          NORMAL_AUDIO_VECTOR,
           "media_assets|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "entry_audio_links|1|39|caed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef");
+          NORMAL_LINK_VECTOR);
   private static final List<String> NO_ENTRIES_LINKS_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
-          "script_files|1|141|57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101",
+          NORMAL_SPEAKER_VECTOR,
+          NORMAL_FILE_VECTOR,
           "script_entries|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          EMPTY_LINK_VECTOR);
   private static final List<String> NO_FILES_ENTRIES_LINKS_METADATA =
       List.of(
-          "speakers|1|46|7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac",
+          NORMAL_SPEAKER_VECTOR,
           "script_files|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
           "script_entries|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "audio_files|1|136|5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3",
-          "media_assets|1|169|8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe",
-          "entry_audio_links|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+          NORMAL_AUDIO_VECTOR,
+          NORMAL_MEDIA_VECTOR,
+          EMPTY_LINK_VECTOR);
   private static final List<String> CHANGED_TIME_METADATA =
       List.of(
           "speakers|1|46|c92a61b48cce1b9d80241699d0f2dcec9092a595f3de7a962c163644d0071d89",
@@ -203,9 +220,10 @@ final class MigrationMasterCopyFingerprintTest {
   void finger006NullAndLiteralBackslashNRemainDifferentBytes() throws Exception {
     var fingerprint = new MigrationMasterCopyFingerprint();
     assertEquals(
-        LITERAL_NULL_METADATA, metadata(fingerprint.fingerprint(withSpeaker("Alice", "\\N"))));
+        LITERAL_NULL_METADATA, metadata(fingerprint.fingerprint(withSpeaker(NORMAL_NAME, "\\N"))));
     assertEquals(
-        List.of("speakers"), fingerprint.difference(normal(), withSpeaker("Alice", "\\N")));
+        List.of(EXPECTED_SPEAKER_TABLE),
+        fingerprint.difference(normal(), withSpeaker(NORMAL_NAME, "\\N")));
   }
 
   @Test
@@ -214,7 +232,7 @@ final class MigrationMasterCopyFingerprintTest {
         CONTROLS_METADATA,
         metadata(
             new MigrationMasterCopyFingerprint()
-                .fingerprint(withSpeaker("Alice", "\t\n\r\\\b\f"))));
+                .fingerprint(withSpeaker(NORMAL_NAME, "\t\n\r\\\b\f"))));
   }
 
   @Test
@@ -348,7 +366,8 @@ final class MigrationMasterCopyFingerprintTest {
   @Test
   void finger018RowsDifferBeforeByteAndHashConditions() throws Exception {
     var fingerprint = new MigrationMasterCopyFingerprint();
-    assertEquals(List.of("speakers"), fingerprint.difference(normal(), twoSpeakers(false)));
+    assertEquals(
+        List.of(EXPECTED_SPEAKER_TABLE), fingerprint.difference(normal(), twoSpeakers(false)));
     assertEquals(TABLES, fingerprint.difference(normal(), emptyMaster()));
   }
 
@@ -359,8 +378,8 @@ final class MigrationMasterCopyFingerprintTest {
     var sameBytes = withSpeaker("ALICE", null);
     assertEquals(LONGER_METADATA, metadata(fingerprint.fingerprint(longer)));
     assertEquals(SAME_BYTES_METADATA, metadata(fingerprint.fingerprint(sameBytes)));
-    assertEquals(List.of("speakers"), fingerprint.difference(normal(), longer));
-    assertEquals(List.of("speakers"), fingerprint.difference(normal(), sameBytes));
+    assertEquals(List.of(EXPECTED_SPEAKER_TABLE), fingerprint.difference(normal(), longer));
+    assertEquals(List.of(EXPECTED_SPEAKER_TABLE), fingerprint.difference(normal(), sameBytes));
   }
 
   @Test
@@ -438,7 +457,7 @@ final class MigrationMasterCopyFingerprintTest {
         List.of(
             new SpeakerCopyRow(
                 Arrays.<@Nullable String>asList(
-                    SPEAKER_ID, ONE, "Alice", "alice", "true", null, stamp))));
+                    SPEAKER_ID, ONE, NORMAL_NAME, "alice", "true", null, stamp))));
   }
 
   private static ScenarioCopyDataset scenario(
