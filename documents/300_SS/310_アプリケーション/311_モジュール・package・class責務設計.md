@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC369: bootstrap.migration.SpeakerStagingTableはspeakers七列のCTAS/3count/large INSERT/nonnull資源終了を標準JDBCで持つ。Speaker先行→Scenario二表→Asset三表を同一借用Connectionで独立Proxy検証。実DB/Current175/driver COPY/全移行/Root/HOLD未受入。PT-MIG-SPEAKERSTAGE001..024/whole96/full3Main4physical。
+
 SSC368: bootstrap.migration.SpeakerCopyBatchは解決済みSpeakerRow集合のPK/ゲーム別normalizedUK/時刻とEntryのspeaker/game参照を検査し、宣言順の不変rowを借用writerへ渡す。名前を変換せずCurrent抽出/実175/DBを代行しない。PT-MIG-SPEAKERBATCH001..016/必要whole132/full9Main15physical、全HOLD不変更。
 
 SSC367: bootstrap.migration.SpeakerCopyRowはUI242/SS331/V002の解決済みspeaker七列のimmutable/null/byte/date/COPY契約のみを持つ。Current抽出/正規化導出/UK-FK/全175/DB/Rootを代行しない。PT-MIG-SPEAKERROW001..016/必要codec12/full28、全HOLD不変更。
