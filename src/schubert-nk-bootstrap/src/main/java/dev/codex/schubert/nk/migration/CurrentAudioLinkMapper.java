@@ -142,7 +142,7 @@ public final class CurrentAudioLinkMapper {
     for (var item : retainedLinks) {
       var entry = retainedPlacement.lookup(item.currentEntryId());
       output.add(
-          List.of(
+          List.<@Nullable String>of(
               Long.toString(entry.targetEntryId()),
               Long.toString(retainedAudio.targetAudioId(entry.gameId(), item.currentAudioId())),
               Integer.toString(entry.gameId()),
