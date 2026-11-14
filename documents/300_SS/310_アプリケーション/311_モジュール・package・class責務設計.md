@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC372: bootstrap.migration.MigrationMasterReferenceVerifierは六count/九orphan-game/link order違反groupを固定read-only16SQLで照合、借用Connection/nonnull終了/元primary維持。PT-MIG-REF001..020/全403/full23Main36physical、全DB/hash/catalog/移行/HOLD未受入。
+
 SSC371: bootstrap.migration.MigrationMasterFinalizerは借用正規Connection上の五MAX照合→五Prepared setval→六限定ANALYZEを行う。nonnull cleanup/固定診断/自動再試行0。PT-MIG-FINAL001..028/全411/full23Main36physical。実DB/原本/復旧/HOLD未受入。
 
 SSC370: bootstrap.migration.MigrationMasterCopyDatasetはSpeaker batchと既五表datasetを不変保持、六表時刻/Entry FKと六借用stream前検証・順序を持つ。PT-MIG-MASTER001..020/必要383/full22Main35physical。実master/DB/全移行/HOLD未受入。
