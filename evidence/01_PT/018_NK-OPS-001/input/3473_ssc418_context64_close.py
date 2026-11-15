@@ -1,0 +1,39 @@
+"""Close the scoped SSC418 host path; preserve wider horizontal and full451 holds."""
+from pathlib import Path
+from decimal import Decimal
+import datetime,hashlib,json,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';i=b/'input';d=r/'documents/400_PGPT/470_PMO/600_通常PGPT_20261106'
+ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));write=lambda p,v:p.open('x').write(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+pp=b/'evidence/PG33750-ssc418-context64-independent-v1/manifest.json';rp=b/'evidence/PG33752-ssc418-context64-unfiltered-same-exec-v1/manifest.json';p=ld(pp);raw=ld(rp)
+assert p['actualExit']==raw['actualExit']==0 and p['tests']==64 and raw['own13Source20Physical17CodeRawFour100'] is True
+assert all(v['missed']==0 for v in raw['webDiagnosticOnly'].values()) and raw['all196ScopeAccepted'] is False
+assert p['productionCoreMain']=='6e6e85b38d44bd416772e1f17dbe36f4faf0c8c3' and p['source']=='4df1681b4dbde9128e4674529c27eceee5687b57'
+previous=next(d.glob('2117*'));f=ld(previous);delivered=dict(low=.6,base=1.8,high=4.2)
+f.update(revision='617-SSC418_SAME_PATH64_OWN_CODE_ALL_COUNTERS100',previousForecast=ref(previous))
+for key,value in delivered.items():
+ for field,delta in [('additionalCompletedWorkPp',value),('additionalDiscoveredRemainingPp',-value),('revisedRemainingPp',-value)]:f[field][key]=float(Decimal(str(f[field][key]))+Decimal(str(delta)))
+f['currentFullForecastBudgetBridge']['additionalRemainingPp']=f['additionalDiscoveredRemainingPp']
+roster=f['knownObservedProductRunRoster'];before=json.dumps(roster,sort_keys=True);assert 'PG33748-SSC418-CONTEXT64' not in before
+roster.append(dict(source=p['source'],productionCoreMain=p['productionCoreMain'],run='PG33748-SSC418-CONTEXT64',actualExecutions=64,success=64,failed=0,newTestDefinitions=6,necessaryPriorDefinitions=58,evidence=ref(pp),rawEvidence=ref(rp),scope='13_WEB_SOURCE20_PHYSICAL17_CODE_OWN_DEFAULT_AND_RAW_ALL_COUNTERS100_FULL196_UNACCEPTED',qualified=True,unitFES0=True))
+assert len(roster)==181 and json.dumps(roster[:-1],sort_keys=True)==before
+t=f['knownObservedProductRunTotals'];t['runs']+=1;t['actualExecutions']+=64;t['success']+=64
+assert t==dict(runs=181,actualExecutions=35262,success=35197,failed=65,scope='EXPLICIT_OBSERVED_ROSTER_NOT_GLOBAL_UNIQUE_OR_FORMAL')
+tech=dict(kind='SSC418_CONTEXT_OWNERSHIP64_OWN_RAW_AND_DEFAULT100',productionCoreMain=p['productionCoreMain'],actualUnitSource=p['source'],tests=64,newDefinitions=6,necessaryPriorRequalification=58,failed=0,errors=0,skipped=0,physicalClasses=196,positiveCodeCrc=p['positiveMainCrc'],ownDefault=p['ownWebDefaultCounters'],ownRaw=raw['webDiagnosticOnly'],ownCodeMethod79=79,ownRawQualified=True,full196Qualified=False,wholeActualCodeMethods=raw['actualCodeMethods'],defaultFilteredDifference=raw['filteredMethodDifference'],allCountersMiss0OwnOnly=True,staticRaw43Applicable0=True,rootNullAwaySpotBugsFresh=True,newAcceptance=0,formalUpdated=False,effortRate=None)
+f['latestGroupTechnicalResult']=tech;f['followupReadwireWholeClosure']=dict(status='SSC418_HOST_OWN_PATH_QUALIFIED_FULL451_UNACCEPTED',run='PG33748-SSC418-CONTEXT64',originalCarryPp=dict(low=.2,base=.6,high=1.8),carryClosedWithoutGrossReaddition=True,newGrossOnly=dict(low=.4,base=1.2,high=2.4),old58EvidencePreserved=True)
+fp=d/'2120_WBS65予実・SSC418全64同経路閉鎖版617.json';write(fp,f)
+e=b/'evidence/PG33754-ssc418-scope-join-v1';assert not e.exists();e.mkdir()
+candidates=[]
+for path in sorted(r.glob('src/*/src/main/java/**/*.java')):
+ text=path.read_text()
+ if 'Arrays.fill' in text and re.search(r'getBytes\(|\.clone\(|Arrays\.copyOf',text):candidates.append(dict(**ref(path),status='SOURCE_CANDIDATE_NOT_GLOBAL_RETESTED',reason='Temporary copy plus wiping lexical inventory; source only, no class access or held execution.'))
+write(e/'YKT2542-source-candidates.json',dict(actualExit=0,search='Main Java getBytes/clone/Arrays.copyOf AND Arrays.fill; no Root Test or class IO',targets=candidates,candidateCount=len(candidates),qualifiedTarget='ProtectedReadWireClient only',globalHorizontalComplete=False,allOtherTargetsRequireConcreteOwnershipReviewAndApplicableTests=True))
+summary='SSC418設計PR351/main6930165b公開後、Core6e6e85b3/Unit4df1681b/PG33748全64FES0真正0。新CONTEXT6＋既58必要再資格を区別し、既58本文/golden不変。各context取得直後try/finally、nullable/64byte invariant・不正返却消去、default固定JDK、decode既fatal identityを実装。first/second/compare合成Error、wrappedError、通常RTE秘匿、nullops、null返却、不正0/63/65の独立固定272wire/zero/identity/call数を検証。PG33750現190入力・196physical/117positiveCRC-init、fresh RootNullAway/lint-CS-GJF-SB0、PMD43各site適用未分類0。PG33752同singleexec既定294L66M17C86B/無filter303L79M17C86B・1392I全miss0、全Code1528/生成差720、自然Code0/Branch0を除外や人工100にしない。全196は900methodmiss等で未受入。BUG3012/3013は当13Source通常PT範囲で是正、YKT2542他候補はsource棚卸だけでglobalOPEN、YKT2431/global451/CHR/native/Root/actual4/Root2/SDKbackend/DB/aru/COPY24はHOLD保持。元58群carry.2/.6/1.8を二重追加せず、新追加.4/1.2/2.4＋carry合計.6/1.8/4.2のみ完了、残397.324/837.386/1643.415。App181/35262/35197/歴史不成功65は混合実行数、正式1964/53・正本184/625・元190新0・工数nullは不変。'
+manifest=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=p['productionCoreMain'],productionCoreMain=p['productionCoreMain'],actualUnitSource=p['source'],independentPost=ref(pp),sameExecRaw=ref(rp),technical=tech,summary=summary,horizontalInventory=ref(e/'YKT2542-source-candidates.json'),globalHorizontalClosed=False,newAcceptance=0,whole451Accepted=False)
+write(e/'manifest.json',manifest)
+config=ld(i/'3465_ssc418_context_start.json');config.update(recordPath='documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2121_WBS65SSC418全64通常PT完了.json',sourceAfter=p['productionCoreMain'],manifestPath=str((e/'manifest.json').relative_to(r)),manifestSha256=sha(e/'manifest.json'),terminalAtUTC=manifest['terminalAtUTC'],forecastRef=ref(fp),outcome='OWN_PATH64_DEFAULT_AND_RAW_ALL_COUNTERS100_GLOBAL_HOLDS_PRESERVED',technical=tech,checkpointText=summary,nextCommand='PublishSSC418limited914onlymain then commit/push64 proof. Continue YKT2542 actual source ownership review and remaining permitted PG/PT against originalcriteria; no confirmation replay of64 or earlier migrations. Keep Protocol raw/full451/CHR/actual4Root2SDKnativeDBVM/aruHOLD and COPY24unrun. Freshquota/hourly; ordinarygroup not stop.')
+write(i/'3474_ssc418_context64_end.json',config)
+(b/'4276_SSC418_context全64通常PT・同exec全Code結果.md').open('x').write('# SSC418 context所有の通常64と実Code結果\n\n'+summary+'\n\nEvidence: '+str(pp.relative_to(r))+' '+sha(pp)+'; '+str(rp.relative_to(r))+' '+sha(rp)+'。各TestID CONTEXT001～006は4275仕様、fixtureは公開a64だけ。旧58を合算せず当singleexec64を独立資格。3472標準出力のwhole194ラベルは旧工具名残りで実manifest physicalClasses=196/all196ScopeAccepted=falseと区別し、scopeを194へ読み替えない。実OOM/秘密/運用サービス・新nativeを実施0。\n')
+for filename,ids in [('915_障害表.md','BUG3012/BUG3013'),('916_横展開管理台帳.md','YKT2541/YKT2542')]:
+ with (r/'documents/900_OTHER/910_台帳'/filename).open('a') as stream:stream.write('\n2026-11-15 '+ids+' SSC418当13Source再試験限定: Core6e6e85b3/Unit4df1681b/PG33748通常64FES0、PG33750/33752同exec default/raw全own命令行methodclassbranch miss0。BUG3012raw9I1L不足とBUG3013第一取得保護不足は当source限定CLOSED、YKT2541の当経路確認完了、広域YKT2431はOPEN。YKT2542他'+str(len(candidates)-1)+'候補は検索だけで完了にせず、source/再発防止PT/非該当根拠未確認としてOPENを維持。再試験4276とE33754参照、修正commit6e6e85b38d44bd416772e1f17dbe36f4faf0c8c3、完了日2026-11-15、実OOM未実行。\n')
+statep=r/'documents/400_PGPT/470_PMO/486_WBS現行実績.json';state=ld(statep);state['currentSsc418ContextOwnership']=dict(manifest=ref(e/'manifest.json'),technical=tech,ptPhaseComplete=False,original190AcceptanceDelta=0);state['plannedReadwire58Reason1']['status']='HISTORICAL58_PARTIAL_FOLLOWED_BY_FRESH_SSC41864_OWN_QUALIFICATION';statep.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,tests=64,newDefinitions=6,ownQualified=True,globalQualified=False,remaining=f['revisedRemainingPp'],horizontalCandidates=len(candidates))))
