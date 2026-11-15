@@ -1,0 +1,30 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35410-INBOX-OUTCOME-PURE7",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35404-inbox-outcome7-prepare-v1/manifest.json",
+    "sha256": "5dbc39feb004fefd007e1344cd2cfe431bc4a5dcf619d4ebdb6865838ed9e36d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35406-inbox-outcome7-static-v1/manifest.json",
+    "sha256": "45232c196584cb01228a245d7d83255f11956049d93b6e2b93523374ac636b9b"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 2,
+      "reason": "Deliberately mutate only a caller-owned closed-enum values copy, then assert the independent fresh array retains its fixed first constant; this checks defensive copying and never introduces a production null enum or field.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Deliberately mutate only a caller-owned closed-enum values copy, then assert the independent fresh array retains its fixed first constant; this checks defensive copying and never introduces a production null enum or field.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
