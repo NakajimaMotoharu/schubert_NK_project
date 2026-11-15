@@ -2516,3 +2516,9 @@ BUG1332/YKT1098・QA047既承認内の内部診断補足。対象はsource7bb25a
 当固定Javaはcaller入力を取らず、保持M/A・RODB内のMaintenanceRunFiles.Session.observeStartup二回（全graph同値・固定activationとWARNING10）とverifyRetainedの費用・実metadata呼出数のみ計測する。設定/原本/DBの書込、permit/epoch/intent操作、サービスsignal/Root再start/reload/配備は0。所有返却はDB rollback/close→M/A正常返却、observerによる本人DB/advisory/flock消失・同四actor/全原値不変→十Ref正常返却を確認する。UNKNOWNをnormalへ補わず、実close不明は隔離する。数値は診断だけで、親正常完了・業務受入・native coverage・回収許可ではない。30分budget/全fresh proof/451/RD/UIは変更しない。実装/PT・新停止profileは別の未完事項である。
 
 2026-11-15 SSC396/BUG2945 Program識別訂正: DDL owner WBS-P004-01の正規ProgramはNK-DAT-001。先行NK-DDL-001表記は仮称誤記、実効幅11/DDL statement/Java期待値/DBHOLDは不変更。113元仕様は既818入力hashとして保持し、115結果のtrace訂正を参照する。
+
+## SSC-419 Release署名検証の取得直後clone所有（2026-11-15）
+
+ReleaseSignatureVerifier.verifyは既null/長さ検査とpublicDER/元manifest/signatureの同byte clone・既Crypto/JDK Ed25519を維持する。key clone直後に外try、その内でmessage clone直後に中try、signature clone直後に既Crypto try/catch/finallyを置く。finallyはsignature→message→keyの逆取得順で一回ずつ消去、既GeneralSecurityExceptionのfatal graph/Error identityと固定IOExceptionを維持する。返却前のJDK未取得allocationの消去は保証せず、実OOMを起こさない。原public API/constructor/認可/署名format/鍵の固定根/結果/期限/電文は不変更、新operation portやprivate key/実署名/配備を追加0。既9Test全文は保持、新SIGN010だけ合成RuntimeException後に同instanceを正常再利用し、三copy消去/caller不変/pinned再利用/次回独立copy/call数2を固定publicRFC vectorで確認する。同source全10、RootNullAway/静的、sameexec default/raw target全命令行methodclassbranchを照合し、StorageIoException依存の未網羅を隠さずglobal451/正式へ算入0。
+
+BUG3015/YKT2542、状態:設計確定・main反映前、PG/通常PT未完、globalHOLD保持。

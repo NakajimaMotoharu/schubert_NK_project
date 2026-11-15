@@ -285,3 +285,9 @@ decodeはinstance内でこの既owned比較を使う。既catalog catchの固定
 PTは既58全本文/独立wire/golden/timeout/並行/secret-wipeを保持し、新whole ProtectedReadContextOwnershipTestの6methodを追加する。CONTEXT001 first/second/compareの合成Errorで取得済み全buffer消去とError同一、002比較RTE内Errorの同一伝播、003通常RTEの固定INVALID_RESPONSE/消去/秘匿、004null operationsの構築前拒否、005null encode第一/第二で既取得分消去と固定分類、006不正幅0/63/65を第一/第二で与え返却済み全bufferの消去と後続comparison0。正常/不一致のdefault JDK動作・全8旧クラスは既58で再資格し、必要な同source whole64・全physical数等を推測せず新compile実物から確定する。new6と旧58を区別し、old58成功を新sourceへ流用しない。
 
 原58群の未達carry.2/.6/1.8ppを保持し、新Source製造/SS補足/六PT分だけ.4/1.2/2.4pp追加、当群合計.6/1.8/4.2pp cap6。元群.8/2.4/7.2/cap8・元P005費・元904.85/SV各上限は不変更、carryを二重追加しない。新13Mainは変更sourceなのでRoot compiler/NullAwayでfresh compile、全9wholeTestと静的、同一64execのdefault及びunfiltered全命令/行/メソッド/クラス/分岐、CRC/init/sourceを確認する。各naturalB0/Code0は明示、全Protocol依存を含む全物理scopeの未達を保存しown/source/全194等を混同しない。global451/正式/工数/CHR/native/ITSTを受入にしない。
+
+## SSC-419 Release署名検証の取得直後clone所有（2026-11-15）
+
+ReleaseSignatureVerifier.verifyは既null/長さ検査とpublicDER/元manifest/signatureの同byte clone・既Crypto/JDK Ed25519を維持する。key clone直後に外try、その内でmessage clone直後に中try、signature clone直後に既Crypto try/catch/finallyを置く。finallyはsignature→message→keyの逆取得順で一回ずつ消去、既GeneralSecurityExceptionのfatal graph/Error identityと固定IOExceptionを維持する。返却前のJDK未取得allocationの消去は保証せず、実OOMを起こさない。原public API/constructor/認可/署名format/鍵の固定根/結果/期限/電文は不変更、新operation portやprivate key/実署名/配備を追加0。既9Test全文は保持、新SIGN010だけ合成RuntimeException後に同instanceを正常再利用し、三copy消去/caller不変/pinned再利用/次回独立copy/call数2を固定publicRFC vectorで確認する。同source全10、RootNullAway/静的、sameexec default/raw target全命令行methodclassbranchを照合し、StorageIoException依存の未網羅を隠さずglobal451/正式へ算入0。
+
+BUG3015/YKT2542、状態:設計確定・main反映前、PG/通常PT未完、globalHOLD保持。
