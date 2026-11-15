@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4124_dlq_delivery8_profile.json",
+    "sha256": "397902f4298b455d6cf4b78f873c00b666f035979a2246558d4a2dd1c47631d1"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java": "564190205500c14866882d60d36d654276562f38593229ef85c14da0ef7ab463",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataTest.java": "54683e12417a392faffe354584412111e7713da8a17d3b4ac0d4428358c6c47c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataTest.java": "3396be3bb620ccfb7ee9c213abea51fefa35d7b327752ef2b0819b06402b2b94",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java": "c570eaa484b16aca31256e986a89b22b62e0901b53620f469a440d5ff1a33978",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryValueContractTest.java": "af23c9fdba8bdb052f24a629e60ab3044188eb8ed5d35f838b700674d09d21fb",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35484-dlq-delivery8-prepare-v1/manifest.json",
+    "sha256": "8248c9cb173e7f9e0136b16cc526aa3ee001e404cb1c5250342ca8159704bdf5"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35486-dlq-delivery8-static-v1/manifest.json",
+    "sha256": "df3521da160bef6e92ecebfce2bed736a54c3791e5f91e77145cf2300c7b5e35"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4125_dlq_delivery8_static_admission.json",
+    "sha256": "ea40350a5d82706dc28f36d737353afb9c7790150bd0b337ff7560ed2c703e7a"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "240",
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "255",
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

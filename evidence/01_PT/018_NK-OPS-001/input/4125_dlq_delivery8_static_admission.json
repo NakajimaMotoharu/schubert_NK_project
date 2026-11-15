@@ -1,0 +1,30 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35490-DLQ-DELIVERY-OUTBOX-PURE8",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35484-dlq-delivery8-prepare-v1/manifest.json",
+    "sha256": "8248c9cb173e7f9e0136b16cc526aa3ee001e404cb1c5250342ca8159704bdf5"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35486-dlq-delivery8-static-v1/manifest.json",
+    "sha256": "df3521da160bef6e92ecebfce2bed736a54c3791e5f91e77145cf2300c7b5e35"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "destinationsCopy[0] = null;",
+      "occurrences": 1,
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "detectedCopy[0] = null;",
+      "occurrences": 1,
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
