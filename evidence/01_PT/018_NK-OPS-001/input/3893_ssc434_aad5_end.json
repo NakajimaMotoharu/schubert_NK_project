@@ -1,0 +1,108 @@
+{
+  "groupId": "PGPT-WBS65-SSC434-AAD-SINGLE-ERASE5-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2264_WBS65SSC434AAD消去五部分終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "RevocationPayloadIdentity.aadで作成したowned六field byte配列の既finally消去loop（元順Arrays.fill(field,0)）を同classのprivate static eraseFields(byte[][])へ同bodyで一箇所集約し、finallyはこのhelperを一回呼ぶ。六field内容/32bitBE長/UUID全bit/epoch秒signed64+nanos32bit/返却配列/取得前検証/消去順・回数・例外優先/公開API/QA050再送間隔/暗号仕様を変更しない。PG34695で通常return/例外finallyの同一消去loop二重生成を確認、正常aad公開package口からhelper全条件を検証する。正常・異常を架空に増やさず、実OOM/ThreadDeath/非公開反射/SDK代替/到達不能/coverage除外で穴を隠さない。原RevocationValueContractTest4とExceptionValueContractTest1の全source/独立113byteAAD期待/境界/null/clone/value/列挙期待はbyte exact保持、新Test定義0。freshMain5RootNullAway/静的/currentProtocol176/物理182CRC-init/XML、一source/runの必要whole5とraw対象六classのLINE/METHOD/CLASS/BRANCH100を確認し、補足INSTRUCTION/COMPLEXITY不足はそのまま明記する。旧5成功/default/rawを新sourceへ流用又はexec合算0。Claimed/PendingRepository/Root2Actual4/実鍵-DB-JMS-取消再送/VM/native/aru/HOLDは操作せず、helperを公開・外部設定・新portへしない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4343_SSC434_RevocationAAD単一消去・通常五仕様.md",
+      "sha256": "7c4d0a2a15060376401b7f13c82560eee40f92698e790df4198e45bfd31e13a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34700-ssc434-aad-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "c7c1e09b31503195b30f664b70de519d7ae171055a7369b60003a143e0e60f2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34695-revocation-aad-owned-code-metadata-v1/manifest.json",
+      "sha256": "72a2f8bd993e7039c407b218737788dfaa00284e98fe103654fbcd4cd8e69683"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P015-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "WBS-P015-05"
+  },
+  "source": "fe8161acaefc5fef63a94cd93d826395b7cf09ad",
+  "run": "PG34720-SSC434-AAD-ERASE-WHOLE5",
+  "estimate": {
+    "low": 0.15,
+    "base": 0.45,
+    "high": 1.35
+  },
+  "capPp": 2,
+  "workIds": [
+    "P01505_SSC434_AAD_SINGLE_ERASE5_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2263_WBS65予実・SSC434AAD消去五部分版684.json",
+    "sha256": "b04cb5d31acefcb5242db076b1813481b1a229c7f44261f59dcc3fae411cc941"
+  },
+  "nextCommand": "Continue BUG3074/3075 SSC435 protectedAADacquisition: newgross.2/.6/1.8 +oldcarry.05/.15/.45 once cap3, SS311331352914 main beforePG. Emptybyte[0]sixslot shape beforetry, originalsixexpressions assignedinside try in exactorder, existingfinallyeraseFields once. Alloriginal5byteunchanged, freshMain5Root/static/current182CRC-init/XML/rawall6 requiredfour, no syntheticOOM/privateReflection/exclusion/oldexec/HOLD actions. Freshquota/hourly ordinarypartialnotstop.",
+  "sourceAfter": "eaea0c45bc6df704f2e900825da4d00b109ac503",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG34726-ssc434-aad5-component-join-v1/manifest.json",
+  "manifestSha256": "7cd252604660f9739dcbf53c992af2ef8e85db3e17f2231d4fcae96d9dc4065a",
+  "terminalAtUTC": "2026-11-15T17:30:29.343143+00:00",
+  "outcome": "SSC434_ERASE5_BRANCH_ZERO_LINE1_GAP_NOT_FULL_CLOSED",
+  "technical": {
+    "productionCoreMain": "eaea0c45bc6df704f2e900825da4d00b109ac503",
+    "actualUnitSource": "d2cdaad0a74cd34111a53f5af4a635adb4468f08",
+    "tests": 5,
+    "newDefinitions": 0,
+    "necessaryPriorDefinitions": 5,
+    "aadGoldenBytes": 113,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 182,
+    "positiveCrc": 6,
+    "freshRootMain5": true,
+    "originalException1ByteExact": true,
+    "independentAadGolden": true,
+    "staticRaw0": 0,
+    "staticApplicable": 0,
+    "unclassified": 0,
+    "targetRawCounters": {
+      "INSTRUCTION": {
+        "missed": 5,
+        "covered": 402
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 14
+      },
+      "LINE": {
+        "missed": 1,
+        "covered": 60
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 35
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 28
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 6
+      }
+    },
+    "targetFourQualified": false,
+    "carryPp": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.45
+    },
+    "bug3074Open": true,
+    "horizontalYkt2556Open": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "Coreeaea0c45/Unitd2cdaad0/PG34720原全5FES0真正0、新定義0。SSC434はPR382/main7dda9900へ先反映、元owned六field消去loopをprivateeraseFieldsへ同順集約し元Mainbody逆展開formatted exact/全二Testclass五本文期待byte不変。PG34722現182physical6CRC-init/XML/freshMain5Root/PMD-CS-GJF-SB全0、post表示はmaplen182でBUG3073再発0。PG34724同execrawは28METHOD6CLASS14BRANCH全miss0だが60LINE/1miss・402I/5miss、必須LINE1未完のため六全体不合格、旧raw/exec/defaultを移植0。BUG3074は分岐解消のみ/行未達でOPEN、sourceでfields取得がtry前のまま、既nullnegativeで取得済みfieldがfinally未保護となるBUG3075を修正前起票。SSC435で空六slot形だけ先確立/元各exprをtry内元順取得して同helper終了へ進む、実OOM/反射/除外/到達不能0。新gross.1/.3/.9と旧carry.05/.15/.45の開始.15/.45/1.35保持、当.1/.3/.9だけ配送完了しcarry.05/.15/.45・残397.374/837.536/1643.865。App214/35637/35572/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全182/451/実再送鍵DB/CHR/native/owner終了依存未受入、全HOLD維持。"
+}
