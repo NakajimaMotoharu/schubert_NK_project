@@ -1,0 +1,49 @@
+{
+  "actualExit": 0,
+  "originalSha256": "92a2e1e393d01678de79fa5d84518c4f9b5c99269e95ab195ff9c92967dbab43",
+  "wrappedCalls": [
+    {
+      "wrapper": "requirePrepared",
+      "original": "connection.prepareStatement(\n                  \"select pg_catalog.pg_try_advisory_xact_lock_shared(71419602)\")"
+    },
+    {
+      "wrapper": "requirePrepared",
+      "original": "connection.prepareStatement(\"select pg_advisory_xact_lock(71419601)\")"
+    },
+    {
+      "wrapper": "requirePrepared",
+      "original": "connection.prepareStatement(\"select exists(select 1 from schubert.app_users)\")"
+    },
+    {
+      "wrapper": "requirePrepared",
+      "original": "connection.prepareStatement(\n              \"\"\"\n              insert into schubert.app_users(username,username_key,password_hash,role,status,\n                password_changed_at,created_at,updated_at)\n              values (?,?,?,'ADMIN','ACTIVE',?,?,?) returning id\n              \"\"\")"
+    },
+    {
+      "wrapper": "requirePrepared",
+      "original": "connection.prepareStatement(\n            \"\"\"\n            insert into schubert.app_logs(logged_at,service,category,level,action,message,\n              message_id,correlation_id,details)\n            values (?,'API',?,'INFO','USER_CREATED','USER_CREATED',?,?,\n              jsonb_build_object('outcome','SUCCESS','source','BOOTSTRAP','targetUserId',cast(? as bigint)))\n            \"\"\")"
+    },
+    {
+      "wrapper": "requireStatement",
+      "original": "connection.createStatement()"
+    },
+    {
+      "wrapper": "requireResult",
+      "original": "statement.executeQuery()"
+    },
+    {
+      "wrapper": "requireResult",
+      "original": "statement.executeQuery()"
+    },
+    {
+      "wrapper": "requireResult",
+      "original": "statement.executeQuery()"
+    },
+    {
+      "wrapper": "requireResult",
+      "original": "statement.executeQuery()"
+    }
+  ],
+  "helpersOnly": true,
+  "sqlOrBindingsOrOwnerChanged": false,
+  "actualDbOrAuthorityOperations": 0
+}
