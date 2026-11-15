@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-15T20:50:10.309">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java">
+<violation beginline="82" endline="82" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthContextCodec" method="AuthContextCodec" variable="copies" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java">
+<violation beginline="55" endline="55" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="ContextHash" method="calculate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java">
+<violation beginline="189" endline="189" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="189" endline="189" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="192" endline="197" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="199" endline="204" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="208" endline="208" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="209" endline="209" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="twoOwnedWorkersKeepIndependentStatementsAndValues" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="275" endline="275" begincolumn="40" endcolumn="72" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest.Fixture" variable="bindings" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="326" endline="326" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionAuditPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java">
+<violation beginline="84" endline="84" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="180" endline="180" begincolumn="28" endcolumn="51" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest.Fixture" method="statement" variable="bound" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="405" endline="405" begincolumn="18" endcolumn="22" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="absentDisabledAndMissingColumnsFailBeforeIssuanceOrReplacement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="525" endline="525" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="parallelPrivateFixturesDoNotShareContextBuffersOrAuditState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="525" endline="525" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="parallelPrivateFixturesDoNotShareContextBuffersOrAuditState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="531" endline="542" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="parallelPrivateFixturesDoNotShareContextBuffersOrAuditState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="547" endline="547" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="parallelPrivateFixturesDoNotShareContextBuffersOrAuditState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="548" endline="548" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionIssueJdbcPortTest" method="parallelPrivateFixturesDoNotShareContextBuffersOrAuditState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

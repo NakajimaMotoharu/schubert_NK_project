@@ -31,8 +31,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** PT-AUT-ISS001..008; DIF016/UI226/SS314332352. Public vectors, fake JDBC, no live session. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class SessionIssueJdbcPortTest {
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00.123456789Z");
   private static final Instant ISSUED = Instant.parse("2026-11-06T00:00:00.123456Z");
@@ -520,7 +522,8 @@ final class SessionIssueJdbcPortTest {
 
   @Test
   void parallelPrivateFixturesDoNotShareContextBuffersOrAuditState() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       List<Future<Integer>> results = new ArrayList<>();
       for (int i = 0; i < 16; i++) {
         int count = i % 2 == 0 ? 2 : 3;
@@ -540,6 +543,9 @@ final class SessionIssueJdbcPortTest {
       }
       for (int i = 0; i < results.size(); i++)
         assertEquals(i % 2 == 0 ? 3 : 5, results.get(i).get(5, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

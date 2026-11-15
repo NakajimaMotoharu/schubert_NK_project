@@ -29,8 +29,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** AUT-SESSION-AUDIT001..009; SS314/351; Program007 spec039. Memory JDBC only. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class SessionAuditPortTest {
   private static final String JDBC_PREPARE = "prepare";
   private static final String JDBC_EXECUTE = "execute";
@@ -184,7 +186,8 @@ final class SessionAuditPortTest {
   @Test
   void twoOwnedWorkersKeepIndependentStatementsAndValues()
       throws InterruptedException, ExecutionException, TimeoutException {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first =
           workers.submit(
               () -> {
@@ -201,6 +204,9 @@ final class SessionAuditPortTest {
               });
       assertBindings(first.get(5, TimeUnit.SECONDS), "ADMIN", new SqlNull(Types.VARCHAR));
       assertBindings(second.get(5, TimeUnit.SECONDS), "EXPIRED", new SqlNull(Types.VARCHAR));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

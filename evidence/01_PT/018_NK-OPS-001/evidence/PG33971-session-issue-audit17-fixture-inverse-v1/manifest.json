@@ -1,0 +1,48 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "21b3e5b627cbebcd39b1dfa757fa324dd9b67712",
+  "records": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "oldSha256": "367458b115a8e5f3705fb6cd5bbc4db1728d15ea6bae0b41c7e7832d06ea04d8",
+      "newBeforeFormatSha256": "39ddd0611dab8f905c2f82006e942ef7c7427c7d2a667e4787591a0bdea95751",
+      "oldDefinitions": 8,
+      "newDefinitions": 0,
+      "changes": [
+        {
+          "old": "try (var workers = Executors.newFixedThreadPool(2)) {",
+          "new": "var workers = Executors.newFixedThreadPool(2);\n    try {"
+        },
+        {
+          "old": "        assertEquals(i % 2 == 0 ? 3 : 5, results.get(i).get(5, TimeUnit.SECONDS));\n    }\n  }\n}",
+          "new": "        assertEquals(i % 2 == 0 ? 3 : 5, results.get(i).get(5, TimeUnit.SECONDS));\n    } finally {\n      workers.shutdownNow();\n      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));\n    }\n  }\n}"
+        }
+      ],
+      "originalBusinessAssertionsInverseExact": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "oldSha256": "64179428f24f1c78e6e93e320de1a840dfa0beab09538396e1df02a98557c67e",
+      "newBeforeFormatSha256": "46ebe58e1339500d007f8a1c2bec8ea4ad7c453d219c47cc8e2d7277ae0a0e7d",
+      "oldDefinitions": 9,
+      "newDefinitions": 0,
+      "changes": [
+        {
+          "old": "try (var workers = Executors.newFixedThreadPool(2)) {",
+          "new": "var workers = Executors.newFixedThreadPool(2);\n    try {"
+        },
+        {
+          "old": "      assertBindings(second.get(5, TimeUnit.SECONDS), \"EXPIRED\", new SqlNull(Types.VARCHAR));\n    }\n  }",
+          "new": "      assertBindings(second.get(5, TimeUnit.SECONDS), \"EXPIRED\", new SqlNull(Types.VARCHAR));\n    } finally {\n      workers.shutdownNow();\n      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));\n    }\n  }"
+        }
+      ],
+      "originalBusinessAssertionsInverseExact": true
+    }
+  ],
+  "expectedTests17": true,
+  "newDefinitions0": true,
+  "onlyPoolFinallyAndClassTimeout": true,
+  "applicationTestsExecuted": 0,
+  "bug": "BUG3031",
+  "horizontal": "YKT2546"
+}
