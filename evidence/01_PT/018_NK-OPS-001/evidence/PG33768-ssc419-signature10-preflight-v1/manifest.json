@@ -1,0 +1,123 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3480_ssc419_signature10_profile.json",
+    "sha256": "678a1e2089cc6269daf3414801443409b208f32518425ab7800bd226db128795"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "9b0d4b1fe6fbacf20c0cee5e0eea725514a54205200c7ad53c2a4991200f8a65",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java": "6b11e001d7b37f1757eaf0d8d3825f4f11ea184e5f9bfdc328b00b79f201cce1",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "447af133902b5cb4a98bb815483f84dbd1659f62483bfeb8a0497035239a5a68",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33764-ssc419-signature10-prepare-v1/manifest.json",
+    "sha256": "5dbc0a94fa0fdf99094c216447f71fa4f99c7de380473e5366438696c25793ce"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33766-ssc419-signature10-static-v1/manifest.json",
+    "sha256": "32119b2f9f93b61b68fc0646f1e3b3ee3728422c88406be5c69f065d4dac933f"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3482_ssc419_signature10_admission.json",
+    "sha256": "d3e43bdbdcb625d5599f4d98b7b965eea2bd0210ce42f2b2613e5e59699f505e"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "155",
+      "reason": "The independent SIGN009 oracle enumerates exactly three published local fault-graph cases:0 cause,1 suppressed,2 cyclic cause with suppressed fatal. Literal1 selects the second explicit oracle row; it is not a business threshold or configurable secret policy. Original Error identity and clone lifecycle are independently asserted for all3 cases, with no Production method used to calculate expected.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "172",
+      "reason": "This exact assertion intentionally compares three byte-array references to prove exclusive cloned ownership; content equality is independently asserted on the next three lines. Replacing reference identity by content equality would invert the required isolation oracle. All three raw findings at this source line are retained via explicit rawMultiplicity3, not dropped as duplicate warnings.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "172",
+      "reason": "This exact assertion intentionally compares three byte-array references to prove exclusive cloned ownership; content equality is independently asserted on the next three lines. Replacing reference identity by content equality would invert the required isolation oracle. All three raw findings at this source line are retained via explicit rawMultiplicity3, not dropped as duplicate warnings.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "172",
+      "reason": "This exact assertion intentionally compares three byte-array references to prove exclusive cloned ownership; content equality is independently asserted on the next three lines. Replacing reference identity by content equality would invert the required isolation oracle. All three raw findings at this source line are retained via explicit rawMultiplicity3, not dropped as duplicate warnings.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "CloseResource",
+      "line": "195",
+      "reason": "The exact four-worker executor is owned by this whole Test and always shutdownNow then awaitTermination10s asserted in finally. Barrier5s and every Futureget5s are bounded. Explicit bounded termination replaces Java25 ExecutorService.close unbounded wait per BUG2795. Timeout or failed join fails the Test; no backend/process/keyfile is accessed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "195",
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "200",
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "209",
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "210",
+      "reason": "This J2EE-container thread restriction does not apply to the standalone JUnit four-worker RFC public-signature verification fixture. It owns its pool, uses barrier5s/Futureget5s and unconditional shutdownNow/await10s asserted. No private key, signing, deployed artifact, app server, Root capability, backend or native FD is involved; immutable public verification outcome and actual worker completion are both required.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "239",
+      "reason": "SIGN010 uses exactly two independent phases: first call throws the synthetic public RuntimeException, second succeeds. Fixed1 selects that known fault phase, not a configurable business threshold. Clone erasure, retained input/pinned value, distinct next allocations and exact2 calls are independently asserted.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3480_ssc419_signature10_profile.json",
+    "sha256": "678a1e2089cc6269daf3414801443409b208f32518425ab7800bd226db128795"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "9b0d4b1fe6fbacf20c0cee5e0eea725514a54205200c7ad53c2a4991200f8a65",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java": "6b11e001d7b37f1757eaf0d8d3825f4f11ea184e5f9bfdc328b00b79f201cce1",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "447af133902b5cb4a98bb815483f84dbd1659f62483bfeb8a0497035239a5a68",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "toolHashes": {
+    "tools/quality/pgpt_closed_host_profile.py": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d",
+    "tools/quality/pgpt_closed_host_stages.py": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa",
+    "tools/quality/pgpt_closed_host_post.py": "2c7b6d0bbf397564b4ee68caf467931845697b3967d756fc454af81bbfab4133",
+    "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+    "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+    "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+    "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$Crypto.class": "1e153be8adcce6dad403acc54caa538f1166c2f6aaba4770e4e96ab0855b7937",
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.class": "99aa1aa48315e512fba3ab570449a2dabffe0dc8857b7859d2dae1333e060e71",
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier$NativeCrypto.class": "b024207c68262d010e8a3edfa5c72bce17270a487fa648e60fd453688cddedd0",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.class": "76f234e4b22cc9ee4b5291f934825efd2a681fdc714c46a3fb8bf1ec3bad7593"
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign001IndependentRfcVectors()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign002MessageSignatureAndWrongKey()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign003DerAndNullContracts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign004MaterialBoundaries()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign005SnapshotAndErasedOwnedBuffers()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign006KnownCryptoFailureIsRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign007UnknownFailureIdentityAndErasure()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign009KnownProviderFatalGraphsKeepIdentityAndEraseAllOwnedClones()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign008ConcurrentNativeProviderAndMalformedPoint()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest",
+      "name": "sign010FailureThenSuccessOwnsFreshClonesAndRetainsPinnedAndCallerValues()"
+    }
+  ],
+  "selectedClasses": [
+    "dev.codex.schubert.nk.bootstrap.ReleaseSignatureVerifierTest"
+  ],
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T08:08:23.584077+00:00",
+      "endUTC": "2026-11-15T08:08:25.905188+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg33764-ssc419-signature10-prepare-v1",
+      "stdoutSha256": "fd891a609d8d60e0bc57fc76f8765bde0dcab8cad47a05f9a4bd69bbe556939e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T08:08:25.905505+00:00",
+      "endUTC": "2026-11-15T08:08:26.621715+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg33764-ssc419-signature10-prepare-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg33764-ssc419-signature10-prepare-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifierTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preliminaryStyle": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33762-ssc419-signature10-prestyle-v1/manifest.json",
+    "sha256": "06ac339079e1426a52a55243f609d73219a6d6a3441b9e44b67918a1bde1cb31"
+  },
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "e197b913d2d76b5ad0774bdc4764ee3f60af96052ff3a0591f12dc8fb87c119d",
+  "productTestsExecuted": 0,
+  "MainCompiled": true,
+  "wholeProjectMainRebuilt": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_profile.py",
+    "sha256": "b5431bc757867c3dcfa981fa4a1911bd2933cd5c7360bf4b19f22133220d3d5d"
+  },
+  "unstartedProcess": null,
+  "analysisOnlyContext": null,
+  "guardSignature": null,
+  "freshMainSourceCount": 2,
+  "reusedRuntimeSignatureClassCount": 0
+}
