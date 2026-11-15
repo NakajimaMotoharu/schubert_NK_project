@@ -604,3 +604,9 @@ Constraint名は`pk_<table>`、`fk_<child>_<parent>_<column>`、`uq_<table>_<pur
 | 2026-09-01 | QA-043/UIC-003承認を反映し、dump専用`schubert_backup`と通常保守用`schubert_batch`のrole/grantを確定。 |
 | 2026-09-03 | SSC-005を反映し、`app_logs.security_hold_until`とcategory制約、cutoff判定、ops非公開を確定。 |
 SSC061/PG168: backup両完全handleの同一transaction確定/照合を341 §6.6で具体化する。BackupStepRepositoryは既存batch_runsの14列を2id昇順FOR UPDATEで全値検査し、両RUNNING/同一end両SUCCESS以外を保全拒否。BackupCommitServiceがborrowed Connectionのrollback/commit/再読を所有。新table/FK/DDL/grantなし、V001～020と400日保持を変更しない。root manifestの生成/保持inode信頼・実体/OS前提はcaller未完了gateとして明示する。
+
+## SSC-434 Revocation AAD所有fieldの消去を一箇所へ集約（2026-11-16）
+
+RevocationPayloadIdentity.aadで作成したowned六field byte配列の既finally消去loop（元順Arrays.fill(field,0)）を同classのprivate static eraseFields(byte[][])へ同bodyで一箇所集約し、finallyはこのhelperを一回呼ぶ。六field内容/32bitBE長/UUID全bit/epoch秒signed64+nanos32bit/返却配列/取得前検証/消去順・回数・例外優先/公開API/QA050再送間隔/暗号仕様を変更しない。PG34695で通常return/例外finallyの同一消去loop二重生成を確認、正常aad公開package口からhelper全条件を検証する。正常・異常を架空に増やさず、実OOM/ThreadDeath/非公開反射/SDK代替/到達不能/coverage除外で穴を隠さない。原RevocationValueContractTest4とExceptionValueContractTest1の全source/独立113byteAAD期待/境界/null/clone/value/列挙期待はbyte exact保持、新Test定義0。freshMain5RootNullAway/静的/currentProtocol176/物理182CRC-init/XML、一source/runの必要whole5とraw対象六classのLINE/METHOD/CLASS/BRANCH100を確認し、補足INSTRUCTION/COMPLEXITY不足はそのまま明記する。旧5成功/default/rawを新sourceへ流用又はexec合算0。Claimed/PendingRepository/Root2Actual4/実鍵-DB-JMS-取消再送/VM/native/aru/HOLDは操作せず、helperを公開・外部設定・新portへしない。
+
+BUG3074/YKT2431、状態:設計確定・main反映前、PG/PT/正式未完。
