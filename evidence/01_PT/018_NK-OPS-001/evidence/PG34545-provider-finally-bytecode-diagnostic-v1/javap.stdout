@@ -1,0 +1,220 @@
+Compiled from "MqAuthenticationProvider.java"
+public final class dev.codex.schubert.nk.web.security.MqAuthenticationProvider implements org.springframework.security.authentication.AuthenticationProvider {
+  private final dev.codex.schubert.nk.web.security.MqLoginClient login;
+
+  private final dev.codex.schubert.nk.web.security.MqLoginContextProbe probe;
+
+  public dev.codex.schubert.nk.web.security.MqAuthenticationProvider(dev.codex.schubert.nk.web.security.MqLoginClient, dev.codex.schubert.nk.web.security.MqLoginContextProbe);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #7                  // String login
+         8: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        11: checkcast     #15                 // class dev/codex/schubert/nk/web/security/MqLoginClient
+        14: putfield      #17                 // Field login:Ldev/codex/schubert/nk/web/security/MqLoginClient;
+        17: aload_0
+        18: aload_2
+        19: ldc           #22                 // String probe
+        21: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        24: checkcast     #24                 // class dev/codex/schubert/nk/web/security/MqLoginContextProbe
+        27: putfield      #26                 // Field probe:Ldev/codex/schubert/nk/web/security/MqLoginContextProbe;
+        30: return
+
+  public org.springframework.security.core.Authentication authenticate(org.springframework.security.core.Authentication);
+    Code:
+         0: aload_1
+         1: ldc           #29                 // String authentication
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: invokeinterface #31,  1           // InterfaceMethod org/springframework/security/core/Authentication.getCredentials:()Ljava/lang/Object;
+        13: astore_2
+        14: aload_0
+        15: aload_1
+        16: invokeinterface #37,  1           // InterfaceMethod org/springframework/security/core/Authentication.getClass:()Ljava/lang/Class;
+        21: invokevirtual #41                 // Method supports:(Ljava/lang/Class;)Z
+        24: ifeq          97
+        27: aload_1
+        28: invokeinterface #45,  1           // InterfaceMethod org/springframework/security/core/Authentication.isAuthenticated:()Z
+        33: ifne          97
+        36: aload_1
+        37: invokeinterface #49,  1           // InterfaceMethod org/springframework/security/core/Authentication.getPrincipal:()Ljava/lang/Object;
+        42: astore        6
+        44: aload         6
+        46: instanceof    #52                 // class java/lang/String
+        49: ifeq          97
+        52: aload         6
+        54: checkcast     #52                 // class java/lang/String
+        57: astore_3
+        58: aload_2
+        59: instanceof    #54                 // class "[C"
+        62: ifeq          97
+        65: aload_2
+        66: checkcast     #54                 // class "[C"
+        69: astore        4
+        71: aload_1
+        72: invokeinterface #56,  1           // InterfaceMethod org/springframework/security/core/Authentication.getDetails:()Ljava/lang/Object;
+        77: astore        6
+        79: aload         6
+        81: instanceof    #59                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        84: ifeq          97
+        87: aload         6
+        89: checkcast     #59                 // class dev/codex/schubert/nk/web/security/LoginClientAddress
+        92: astore        5
+        94: goto          101
+        97: invokestatic  #61                 // Method unavailable:()Lorg/springframework/security/authentication/AuthenticationServiceException;
+       100: athrow
+       101: aload_0
+       102: getfield      #17                 // Field login:Ldev/codex/schubert/nk/web/security/MqLoginClient;
+       105: aload_3
+       106: aload         4
+       108: aload         5
+       110: invokevirtual #65                 // Method dev/codex/schubert/nk/web/security/LoginClientAddress.value:()Ljava/lang/String;
+       113: invokevirtual #69                 // Method dev/codex/schubert/nk/web/security/MqLoginClient.exchange:(Ljava/lang/String;[CLjava/lang/String;)Ldev/codex/schubert/nk/web/security/MqLoginClient$Reply;
+       116: astore        6
+       118: aload         6
+       120: invokevirtual #73                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.code:()Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       123: getstatic     #79                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       126: if_acmpne     133
+       129: invokestatic  #85                 // Method badCredentials:()Lorg/springframework/security/authentication/BadCredentialsException;
+       132: athrow
+       133: aload         6
+       135: invokevirtual #73                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.code:()Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       138: getstatic     #89                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       141: if_acmpne     160
+       144: new           #92                 // class dev/codex/schubert/nk/web/security/MqLoginLockedException
+       147: dup
+       148: aload         6
+       150: invokevirtual #94                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.data:()Ldev/codex/schubert/nk/protocol/layout/auth/LoginResponseData;
+       153: invokevirtual #98                 // Method dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.retryAfterSeconds:()I
+       156: invokespecial #104                // Method dev/codex/schubert/nk/web/security/MqLoginLockedException."<init>":(I)V
+       159: athrow
+       160: aload         6
+       162: invokevirtual #73                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.code:()Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       165: getstatic     #107                // Field dev/codex/schubert/nk/protocol/header/ResultCode.TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       168: if_acmpne     175
+       171: invokestatic  #61                 // Method unavailable:()Lorg/springframework/security/authentication/AuthenticationServiceException;
+       174: athrow
+       175: aload         6
+       177: invokevirtual #94                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.data:()Ldev/codex/schubert/nk/protocol/layout/auth/LoginResponseData;
+       180: astore        7
+       182: aload         7
+       184: invokevirtual #110                // Method dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.authenticationContextId:()Ljava/util/Optional;
+       187: invokevirtual #114                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       190: checkcast     #119                // class dev/codex/schubert/nk/protocol/header/AuthenticationContext
+       193: astore        8
+       195: aload         6
+       197: invokevirtual #73                 // Method dev/codex/schubert/nk/web/security/MqLoginClient$Reply.code:()Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       200: getstatic     #121                // Field dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       203: if_acmpne     222
+       206: aload_0
+       207: getfield      #26                 // Field probe:Ldev/codex/schubert/nk/web/security/MqLoginContextProbe;
+       210: aload         8
+       212: invokevirtual #124                // Method dev/codex/schubert/nk/web/security/MqLoginContextProbe.isActive:(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Z
+       215: ifne          222
+       218: invokestatic  #85                 // Method badCredentials:()Lorg/springframework/security/authentication/BadCredentialsException;
+       221: athrow
+       222: new           #128                // class dev/codex/schubert/nk/web/session/SessionPrincipal
+       225: dup
+       226: aload         7
+       228: invokevirtual #130                // Method dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.username:()Ljava/util/Optional;
+       231: invokevirtual #114                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       234: checkcast     #52                 // class java/lang/String
+       237: aload         7
+       239: invokevirtual #133                // Method dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.role:()Ljava/util/Optional;
+       242: invokevirtual #114                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       245: checkcast     #136                // class dev/codex/schubert/nk/protocol/layout/semantic/UserRole
+       248: aload         8
+       250: aload         7
+       252: invokevirtual #138                // Method dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.issuedAt:()Ljava/util/Optional;
+       255: invokevirtual #114                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+       258: checkcast     #141                // class java/time/Instant
+       261: invokespecial #143                // Method dev/codex/schubert/nk/web/session/SessionPrincipal."<init>":(Ljava/lang/String;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ljava/time/Instant;)V
+       264: astore        9
+       266: aload         9
+       268: invokestatic  #146                // Method dev/codex/schubert/nk/web/security/ClosedWebAuthentication.authenticated:(Ldev/codex/schubert/nk/web/session/SessionPrincipal;)Lorg/springframework/security/core/Authentication;
+       271: astore        10
+       273: aload_2
+       274: instanceof    #54                 // class "[C"
+       277: ifeq          292
+       280: aload_2
+       281: checkcast     #54                 // class "[C"
+       284: astore        11
+       286: aload         11
+       288: iconst_0
+       289: invokestatic  #152                // Method java/util/Arrays.fill:([CC)V
+       292: aload_1
+       293: instanceof    #158                // class org/springframework/security/authentication/UsernamePasswordAuthenticationToken
+       296: ifeq          310
+       299: aload_1
+       300: checkcast     #158                // class org/springframework/security/authentication/UsernamePasswordAuthenticationToken
+       303: astore        11
+       305: aload         11
+       307: invokevirtual #160                // Method org/springframework/security/authentication/UsernamePasswordAuthenticationToken.eraseCredentials:()V
+       310: aload         10
+       312: areturn
+       313: astore_3
+       314: aload_3
+       315: invokevirtual #165                // Method dev/codex/schubert/nk/web/security/MqLoginExchangeException.reason:()Ldev/codex/schubert/nk/web/security/MqLoginExchangeException$Reason;
+       318: getstatic     #169                // Field dev/codex/schubert/nk/web/security/MqLoginExchangeException$Reason.INVALID_INPUT:Ldev/codex/schubert/nk/web/security/MqLoginExchangeException$Reason;
+       321: if_acmpne     328
+       324: invokestatic  #85                 // Method badCredentials:()Lorg/springframework/security/authentication/BadCredentialsException;
+       327: athrow
+       328: invokestatic  #61                 // Method unavailable:()Lorg/springframework/security/authentication/AuthenticationServiceException;
+       331: athrow
+       332: astore        12
+       334: aload_2
+       335: instanceof    #54                 // class "[C"
+       338: ifeq          353
+       341: aload_2
+       342: checkcast     #54                 // class "[C"
+       345: astore        13
+       347: aload         13
+       349: iconst_0
+       350: invokestatic  #152                // Method java/util/Arrays.fill:([CC)V
+       353: aload_1
+       354: instanceof    #158                // class org/springframework/security/authentication/UsernamePasswordAuthenticationToken
+       357: ifeq          371
+       360: aload_1
+       361: checkcast     #158                // class org/springframework/security/authentication/UsernamePasswordAuthenticationToken
+       364: astore        13
+       366: aload         13
+       368: invokevirtual #160                // Method org/springframework/security/authentication/UsernamePasswordAuthenticationToken.eraseCredentials:()V
+       371: aload         12
+       373: athrow
+      Exception table:
+         from    to  target type
+            14   273   313   Class dev/codex/schubert/nk/web/security/MqLoginExchangeException
+            14   273   332   any
+           313   334   332   any
+
+  public boolean supports(java.lang.Class<?>);
+    Code:
+         0: aload_1
+         1: ldc           #29                 // String authentication
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: ldc           #158                // class org/springframework/security/authentication/UsernamePasswordAuthenticationToken
+         8: if_acmpne     15
+        11: iconst_1
+        12: goto          16
+        15: iconst_0
+        16: ireturn
+
+  private static org.springframework.security.authentication.BadCredentialsException badCredentials();
+    Code:
+         0: new           #175                // class org/springframework/security/authentication/BadCredentialsException
+         3: dup
+         4: ldc           #177                // String login authentication failed
+         6: invokespecial #179                // Method org/springframework/security/authentication/BadCredentialsException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  private static org.springframework.security.authentication.AuthenticationServiceException unavailable();
+    Code:
+         0: new           #182                // class org/springframework/security/authentication/AuthenticationServiceException
+         3: dup
+         4: ldc           #184                // String login service is unavailable
+         6: invokespecial #186                // Method org/springframework/security/authentication/AuthenticationServiceException."<init>":(Ljava/lang/String;)V
+         9: areturn
+}
