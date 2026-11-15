@@ -1,0 +1,360 @@
+{
+  "groupId": "PGPT-WBS65-SSC422-AUTH-ENVELOPE-FACTORY-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2138_WBS65SSC422Codec十一必須四完了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "AuthContextCodecのpublic4引数/既package-private5引数を維持し、新package-private6引数へ内部EnvelopeFactoryを受ける。旧5はprivate static finalのEncryptedAuthContext::newへ固定委譲し、全通常Production組立は既record構築/防御clone/同byte/同例外を維持する。外部設定・HTTP・service loader・反射でfactoryを選択しない。追加interfaceはpackage-privateのcreate(version,storedCiphertext)一操作だけ、鍵/平文/nonce/Cipher/JCAprovider/認証/権限/DBには触れない。factory引数nonnullは既鍵/version/random検査後・機密copy前にconstructorで確立する。createの戻りはnullable境界として明示し、nullなら既CRYPTO_UNAVAILABLE固定例外へ拒否する。factory呼出しは既stored及びencryptedの二finally内に置き、Error/RTEがそのまま伝播してもowned二配列とplaintext/nonceが消去されprivate lockが解放される。実OOMやprivate reflection/JCAprovider差替え/拒否試験の代替を行わない。default record生成の内容/size/暗号/version/AAD/保持/再送/publicAPI/承認済DIFを変更0。 既whole8の全本文/期待値と有限workerを保持し、新AUTHCTX-FACT001..003の3methodを同wholeTestへ追加する。001はpublic組立ciphertextを受け取った直後の直接AssertionErrorとIllegalArgumentExceptionの二caseで元throwable同一、stored全zero、次の別worker正常・独立DataOutput/JCA envelope一致・copy別identity/call2を確認する。002nullfactoryの構築前提拒否とnonce呼出0/元public key不変。003nullable factory結果nullを固定CRYPTO_UNAVAILABLE/原因抑制初期0へ拒否しstored消去後に同codecの別worker正常と独立goldenを確認する。全worker Future5/stop-await10assert後close、入力は既公開a64/keysequence/nonce2Aだけ、expectedにProduction生成を使わない。新sourceはMain5をRootNullAwayでfreshcompileし、増えたinterface含む物理数/Code数を実測、自然Code0を除外扱いしない。必要同source whole11を一singleexec、静的/CRC/init/XML/defaultと無filter必須LINE/METHOD/CLASS/BRANCH整数100を照合し、補助Instruction/Complexity/close例外未実行は全数保持し全命令/全例外をPASSにしない。旧8成功を足して11とせず旧8は新source必要再資格で新規0、新3だけ別計上する。全依存scope/正式451/CHR/native/ITST/HOLDは未受入。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4284_SSC422_API暗号化値構築・消去通常十一仕様.md",
+      "sha256": "f1ecc5febd47ad49990e06a8bd0691d3c1c3ee6ded36e01badf14062da20670c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33820-ssc422-auth-envelope-design-only-v1/design-only-main-patch.json",
+      "sha256": "c3060aae172aa9ebe4bcdfd5c23720e753f680cc83c79ca02d521ef9b5a79507"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java"
+  ],
+  "source": "f2339838dfeaa10644ffd1e19d52ea690512002a",
+  "run": "PG33830-SSC422-AUTHCTX11",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 2.7
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00703_SSC422_AUTH_ENVELOPE_FACTORY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2137_WBS65予実・SSC422Codec十一必須四閉鎖版625.json",
+    "sha256": "ebca8c8c429924dc0b846a0fff088010acf8ceec1b3b828433c3ffb5efbbefc7"
+  },
+  "nextCommand": "PublishSSC422limited914onlymain and commit/push11 proof. Inspect existing whole tests against explicit7 helper misses and originalP00703owned criteria; add meaningful independent identity/encrypted-value HashMap/defensive-copy/format and enum closed-set tests only if absent, requalify one sameSource whole13 to close5source raw requiredfour. No private reflection or syntheticexpected/prodmethodexpected, no replay11 merelyconfirmation, allRoot2Actual4SDK/DBVMnativearuHOLD retained. Freshquota/hourly; ordinarygroupnotstop.",
+  "sourceAfter": "7459cc1eb76fab1fcf5947a260a015f463ca5a0c",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33836-ssc422-auth11-scope-join-v1/manifest.json",
+  "manifestSha256": "0f598887490bd5cf7ef84798be330f8e02e11fcb1ed787eff1665de646db929b",
+  "terminalAtUTC": "2026-11-15T09:42:18.379828+00:00",
+  "outcome": "CODEC11_REQUIRED_FOUR100_ORIGINAL_CARRY_CLOSED_HELPER7_MISSES_RETAINED",
+  "technical": {
+    "kind": "SSC422_AUTH11_CODEC_REQUIRED_FOUR100",
+    "productionCoreMain": "7459cc1eb76fab1fcf5947a260a015f463ca5a0c",
+    "actualUnitSource": "d2f06b223ae6f6d1845a3ea034b6ee40b26bad48",
+    "tests": 11,
+    "newDefinitions": 3,
+    "necessaryPriorRequalification": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 183,
+    "positiveCrc": 6,
+    "codecDefault": {
+      "INSTRUCTION": {
+        "covered": 474,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 36,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 115,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 30,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 12,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "codecRaw": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 529
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 124
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 30
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "requiredFour100": true,
+    "closeSupplementInstruction6Unexecuted": true,
+    "allInstruction100": false,
+    "allExceptionPathsTested": false,
+    "full5ApiSourceRawQualified": false,
+    "helperRawMissedMethods": [
+      {
+        "className": "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+        "name": "values",
+        "descriptor": "()[Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;",
+        "access": 9,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+        "name": "valueOf",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason;",
+        "access": 9,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "access": 17,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "name": "hashCode",
+        "descriptor": "()I",
+        "access": 17,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "access": 17,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/EncryptedAuthContext",
+        "name": "hashCode",
+        "descriptor": "()I",
+        "access": 17,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      },
+      {
+        "className": "dev/codex/schubert/nk/api/security/EncryptedAuthContext",
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "access": 17,
+        "counters": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    ],
+    "helperRawMissedMethodCount": 7,
+    "full183Qualified": false,
+    "naturalAbstractFactoryCodeMethods0": true,
+    "freshMain5RootNullAway": true,
+    "staticRaw24Applicable0": true,
+    "old8ExactPrefix": true,
+    "originalCarryClosed": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.9
+    },
+    "newGrossOnly": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.8
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "SSC422設計PR359/maindb8c8faf後、Core7459cc1e/Unitd2f06b22/PG33830全11FES0真正0。旧8本文exact保持＋新FACT3はciphertext record構築の直接Error/RTE同一・stored全zero/別worker次回正常/独立DataOutput-JCA envelope/別copy/call2、nullfactory構築前提/nonce0、null結果の固定CRYPTO_UNAVAILABLEと消去/再利用を検証。public4/既internal5維持、新internal6はciphertext値生成だけ・default既record constructor固定、鍵/平文/Cipher/provider/config/認可口を追加0。PG33832現183physical/6positiveCRC-init、抽象Factory実Code0を自然値で確認、Main5 freshRootNullAway/GJF-CS-SB0/PMD24各site適用未分類0、runner自身もUnitcommitへ固定。PG33834同singleexecraw対象Codec必須LINE/METHOD/CLASS/BRANCH各miss0で原encrypt二行の未達を閉じ、close補助6Iは未実行・全命令/全例外PASS主張0。関連Identity/Encrypted/Reasonの値契約7method未実行を保持し、五API全体/全183/451を受入にせず次に独立値semantics/enum契約を補う。元421.4/1.2/3.6 cap4は保持、旧carry.1/.3/.9を再加算せず新依存.2/.6/1.8だけgross追加、当.3/.9/2.7のみ完了・残397.324/837.386/1643.415。App185/35318/35253/歴史不成功65は再資格混合raw、正式1964/53・正本184/625・元190新0・工数null不変。BUG3021/3023当Codec通常PT限定CLOSED、YKT2542/2541globalOPEN、Root2/Actual4/SDKbackend/DB/VM/native/aru/CHR/COPY24/HOLD保持。"
+}
