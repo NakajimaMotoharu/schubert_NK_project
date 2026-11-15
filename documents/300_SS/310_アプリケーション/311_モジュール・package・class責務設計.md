@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC411: 既BootstrapAdminServiceにtyped JDBC null guardsを追加。新Boundary18＋既security9の全27/5Main6physical、実ADMIN/DB/native/HOLD未受入。
+
 SSC410: MigrationMasterCopyManifest constructor/canonicalBytes/sha256/mappingSha256/rowCounts/toString/invalidと既Assembler.copyManifestを追加。全990/48Main68physical予定。
 
 SSC409: CurrentMigrationMappingVerifier.verify/frames/rows/numeric/model-validation/invalidとCurrentMigrationMappingManifest.verifySerializedを接続。既format byte不変更、期待SHAは元宣言artifactから渡す。新18/全976/47Main67class予定。
