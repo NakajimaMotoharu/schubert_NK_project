@@ -1,0 +1,56 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for dev.codex.schubert.quality:session-issue-audit-memory-port-safe-source-subset:jar:0.1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.systemPath' for dev.codex.schubert.quality:prepared-sdk-0:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar @ line 2, column 1176
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] --< dev.codex.schubert.quality:session-issue-audit-memory-port-safe-source-subset >--
+[INFO] Building session-issue-audit-memory-port-safe-source-subset 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ session-issue-audit-memory-port-safe-source-subset ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ session-issue-audit-memory-port-safe-source-subset ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [forked debug release 25] to target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[8,23] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[9,39] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[10,37] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[13,11] error: [NullAway] returning @Nullable expression from method with @NonNull return type
+    (see http://t.uber.com/nullaway )
+[INFO] 4 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.440 s
+[INFO] Finished at: 2026-11-16T03:54:39+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.0:compile (default-compile) on project session-issue-audit-memory-port-safe-source-subset: Compilation failure: Compilation failure: 
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[8,23] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+[ERROR]     (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[9,39] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+[ERROR]     (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[10,37] error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+[ERROR]     (see http://t.uber.com/nullaway )
+[ERROR] /home/mini/codex/project1/work/pgpt-runs/PG379/pg34948-reply-null-static-v1/src/main/java/dev/codex/schubert/nk/quality/ReplyNullBoundaryProbe.java:[13,11] error: [NullAway] returning @Nullable expression from method with @NonNull return type
+[ERROR]     (see http://t.uber.com/nullaway )
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

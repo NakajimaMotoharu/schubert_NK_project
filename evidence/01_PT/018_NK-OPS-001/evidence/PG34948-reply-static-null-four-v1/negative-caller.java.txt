@@ -1,0 +1,15 @@
+package dev.codex.schubert.nk.quality;
+import dev.codex.schubert.nk.web.messaging.ValidatedReply;
+import dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException;
+import dev.codex.schubert.nk.web.messaging.JmsContextFactory;
+import java.util.UUID;
+final class ReplyNullBoundaryProbe {
+  static void invalidInputs() {
+    new ValidatedReply(null, new byte[0]); // NULL_ID
+    new ValidatedReply(new UUID(0, 1), null); // NULL_BODY
+    new CommittedFatalReplyException(null); // NULL_CAUSE
+  }
+  static JmsContextFactory invalidFactory() {
+    return () -> null; // NULL_RETURN
+  }
+}
