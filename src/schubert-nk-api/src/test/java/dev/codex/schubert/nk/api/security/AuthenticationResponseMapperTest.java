@@ -16,11 +16,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * PT-AUT-WIRE-001..003. Golden bytes come from UI234 offsets/literals, never production encoders.
  */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticationResponseMapperTest {
   private final AuthenticationResponseMapper mapper = new AuthenticationResponseMapper();
   private static final Instant AT = Instant.parse("2026-09-08T01:02:03.456789Z");
@@ -81,7 +84,8 @@ final class AuthenticationResponseMapperTest {
     }
     assertThrows(NullPointerException.class, () -> mapper.login(null));
     assertThrows(NullPointerException.class, () -> mapper.logout(null));
-    try (var executor = Executors.newFixedThreadPool(16)) {
+    var executor = Executors.newFixedThreadPool(16);
+    try {
       var futures = new ArrayList<Future<FixedPayload>>();
       for (int i = 0; i < 100; i++)
         futures.add(
@@ -89,7 +93,10 @@ final class AuthenticationResponseMapperTest {
                 () ->
                     mapper.logout(
                         new RevokedContext(IDENTITY, AT, ResultCode.IDEMPOTENT_SUCCESS))));
-      for (var future : futures) assertPayload(expected, future.get());
+      for (var future : futures) assertPayload(expected, future.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      org.junit.jupiter.api.Assertions.assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 

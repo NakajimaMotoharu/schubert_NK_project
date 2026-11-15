@@ -3881,6 +3881,8 @@
         "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAttemptState.java",
         "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditReason.java",
         "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginAuditWriter.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginResult.java",
+        "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
         "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
         "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java"
       ],
@@ -3954,6 +3956,52 @@
           "javaUnit": "23fe288182dc224b68f8da13d5f2f9bd6d95d79a",
           "newAcceptance": 0,
           "whole451Accepted": false
+        },
+        "currentLoginComponentAudit20261116": {
+          "state": "CURRENT_HOST_PARTIAL_NOT_WHOLE_SOURCE_RUN_OR_EXIT_ACCEPTANCE",
+          "inventoryMainCount": 12,
+          "correctedCurrentOwnershipOnly": true,
+          "oldPasswordSource": "6525b1bb49cdce0819f7121265d5e41b4aa6cc8a",
+          "oldPasswordUnit": "23fe288182dc224b68f8da13d5f2f9bd6d95d79a",
+          "oldPasswordInputHashesEqualCurrent": {
+            "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "5d112c7612fd4d013a60f51366784e792d9e1fb305d4a93f50f9da2af152b837",
+            "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+            "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java": "6697fe28ce9804f569102cecedd8961186e5079e72d58357519f142f7b14b993",
+            "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55"
+          },
+          "oldPasswordEvidence": {
+            "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33582-admin-encoding29-post-v1/manifest.json",
+            "sha256": "aeea782377a5e69864be0f4a488991e4633c83798af2cb5e6e9c1b0c16a35a2e"
+          },
+          "oldPasswordExecutedAgain": false,
+          "oldPasswordSuccessTransferredToNewSource": false,
+          "currentSeparateComponents": [
+            {
+              "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34382-login-fatal3-independent-v1/manifest.json",
+              "sha256": "ef906096f15f49f58858a93d4898f8028aaebf0927c2e827627cb29ae81792ad"
+            },
+            {
+              "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34384-login-fatal3-unfiltered-same-exec-v1/manifest.json",
+              "sha256": "d25284875368ff0bdb9c5f614a7fca078fc392730304bcfd9abd08a1252a6977"
+            },
+            {
+              "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34422-login-value4-independent-v1/manifest.json",
+              "sha256": "02d2110ed3e86823daeb3e64ba74e028f1fe3aeb14da2347f281b08919075b80"
+            },
+            {
+              "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34424-login-value4-unfiltered-same-exec-v1/manifest.json",
+              "sha256": "2658d324a335cd8c60bd0149db6d975d4cfce75d0d39fd5b821073abb8ce8fbb"
+            }
+          ],
+          "newSourceSingleWhole44NotRun": true,
+          "singleRunDeferredReason": "Both exit dependencies unaccepted; component witnesses are sufficient for present permitted work, avoid confirmation assembly before end-gates",
+          "exitDependencyStates": {
+            "WBS-P004-01": "NOT_ACCEPTED",
+            "WBS-P006-01": "NOT_ACCEPTED"
+          },
+          "criteriaSatisfiedDelta": [],
+          "newAcceptance": 0,
+          "formalUpdated": false
         }
       },
       "acceptanceChecks": [

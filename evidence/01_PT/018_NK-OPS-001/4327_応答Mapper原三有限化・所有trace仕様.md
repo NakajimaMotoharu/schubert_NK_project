@@ -1,0 +1,5 @@
+# 応答Mapper原三有限化・所有trace仕様
+
+Fix Mapper original3 finite Future/get/worker termination, preserving all independent UI234 fixed432/24byte goldens and 100-task16worker semantics; only Test changed. Main AuthenticationResponseMapper plus six explicit safe value dependencies (7 total), freshRootNullAway/static with currentProtocol176 and no SDK backend/heldbinary. Same source onewhole3/current physical/CRC-init/XML/raw onlyMapper; natural dependencies misses retained. In parallel reconcile actual481P00701 ten-vs485twelve ownership trace, preserve historicalSHA/owner/cost/acceptance/625counts. Reuse PasswordHasher/Policy source and Tests byte-match PG33582 only as historical reference, do not rerun7 or transfer oldsource success. P00401/P00601 exits NOT_ACCEPTED; do not perform unnecessary44 assembly or claimleaf/451/formal. No actualDB/auth/key/Root2Actual4/VM/native/aru/HOLD.
+
+NK-AUT-001/AUT001/FUN001/MQ021; UI222234/QA055; SS312314322323/451; PT-AUT-WIRE001..003。golden offsetは旧明示432byte blank/日本語literal/固定ミリ秒/JST時刻でproductioncodecからexpected生成0。finite .1/.3/.9＋trace是正.02/.06/.18=開始.12/.36/1.08 cap2。原費/SV/904.85/各開始保持、混合実費null。
