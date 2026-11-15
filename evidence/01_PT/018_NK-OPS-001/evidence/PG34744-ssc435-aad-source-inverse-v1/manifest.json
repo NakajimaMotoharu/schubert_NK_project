@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationValueContractTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/ExceptionValueContractTest.java",
+      "tests": 1
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "e4e1611f0cf10d61f4caf359175c95d6b273e86288c1d71fe9dc7d53f7dbba82",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java": "cef3f699c0f4b9eb8d562ed2c131c8c23e389808d0e8fd08bc33144b0aa55d94",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java": "7619c5d7d7f1e7904d5379123512e6a829691ab1eb2a06dd1305d44bdc7d6fe7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryException.java": "3164d1f7e0d4cfac3af0a3c234f4a6c09db7bb07f986c4f7bcd532f34841f51c",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadException.java": "b348ae32f6c4294a3e708b590fe46499386a0f1b516f7171d45574edc050ecf0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/RevocationValueContractTest.java": "635a161432b581bb5b0f1134cd9eea37daddfac4dce74ce620e9003325b29405",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/revocation/ExceptionValueContractTest.java": "81821dab9739a8c0694d2a4bceeae4484e898af51c2d4e549bb49a6cc9dddce5"
+  },
+  "sdkHashes": {},
+  "mainSourcesUnchanged": false,
+  "oldExceptionOneByteExact": true,
+  "oldTestSha256": "81821dab9739a8c0694d2a4bceeae4484e898af51c2d4e549bb49a6cc9dddce5",
+  "newDefinitions": 0,
+  "necessaryPriorDefinitions": 5,
+  "expectedTests": 5,
+  "targets": [
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity",
+    "dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload",
+    "dev/codex/schubert/nk/web/revocation/RevocationFailureCode",
+    "dev/codex/schubert/nk/web/revocation/RevocationRetryException",
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadException",
+    "dev/codex/schubert/nk/web/revocation/RevocationPayloadException$Reason"
+  ],
+  "independentAad": {
+    "spec": "SS331352 six32bit BE length prefixes/UUID BE/seconds signed64 BE+nanos signed32 BE, independent literal Python struct",
+    "fieldsHex": [
+      "7765622d7265766f6b65",
+      "73636875626572745f7765625f73657373696f6e2e70656e64696e675f636f6e746578745f7265766f636174696f6e73",
+      "000102030405060708090a0b0c0d0e0f",
+      "ffffffffffffffff075bca00",
+      "01",
+      "7631"
+    ],
+    "fieldLengths": [
+      10,
+      48,
+      16,
+      12,
+      1,
+      2
+    ],
+    "length": 113,
+    "goldenHex": "0000000a7765622d7265766f6b650000003073636875626572745f7765625f73657373696f6e2e70656e64696e675f636f6e746578745f7265766f636174696f6e7300000010000102030405060708090a0b0c0d0e0f0000000cffffffffffffffff075bca000000000101000000027631"
+  },
+  "claimedRevocationNotCompiledOrExtracted": true,
+  "applicationTestsExecuted": 0,
+  "newAcceptance": 0,
+  "noWholeWebOrApiJarPayloadAccess": true,
+  "designPublication": {
+    "actualExit": 0,
+    "atUTC": "2026-11-15T17:33:10.186000+00:00",
+    "ssc": "SSC435",
+    "baseMain": "7dda9900abc9c3d3d0b387a1eb918db17b0d9dfb",
+    "designSource": "769990d4cc95c62db770982317ad5d851b46f1a6",
+    "mainCommit": "92c6ee05d2bc96425f7950d2b3ffbf03c6369b8d",
+    "pr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/383",
+    "paths": [
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "ordinaryMerge": true,
+    "implementationIncluded": false,
+    "formalAccepted": false
+  },
+  "onlyMainFinallyHelperInverseFormattedExact": true,
+  "allOriginalFiveTestsByteExact": true,
+  "oldIdentitySha256": "874855fb2b61c563a7f4b00d74601cd3217723a53b8a0581451bcd84a3b09ca4",
+  "newIdentitySha256": "e4e1611f0cf10d61f4caf359175c95d6b273e86288c1d71fe9dc7d53f7dbba82",
+  "newPrivateHelper": "eraseFields(byte[][])",
+  "publicApiChanged": false,
+  "normalAndExceptionalCleanupOrderChanged": false,
+  "onlyMainProtectedAcquisitionInverseFormattedExact": true,
+  "allFieldAcquisitionInsideCleanupRegion": true,
+  "sixEmptyNonnullSlotShapeBeforeTry": true,
+  "originalSixExpressionsAndOrderPreserved": true,
+  "originalFinallyHelperAndResultEncodingUnchanged": true,
+  "partialAcquisitionFailureNowErasesOwnedSlots": true
+}

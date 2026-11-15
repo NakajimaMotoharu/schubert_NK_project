@@ -1,0 +1,46 @@
+{
+  "groupId": "PGPT-WBS65-SSC435-AAD-PROTECTED-ACQUIRE5-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2266_WBS65SSC435AAD取得保護開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "RevocationPayloadIdentity.aadのowned六field取得をcleanup領域内へ移す。try前では要素が全てnew byte[0]である六slot配列の形だけを確立し、元literalの六expr（purpose/table/UUID/time/format/version）を元順でtry内のfields[0]..[5]へ代入、その後の長計算/ByteBuffer/返却値はそのまま保持する。既finallyのprivateeraseFields(fields)一回で、version.getBytes(null)等の部分取得中断も取得済み全slotを元順zeroする。空slotをnullにせずconstructor/factory内部invariantとNullAwayで担保、未取得slotのemptyzeroは無害。元null版の例外型/NPE診断・正常113byteAAD・元expr順/UUID秒nanosBE/版byte/返却配列/公開API/QA050再送/暗号仕様を変更しない。SSC434時点は原全5成功だがrawLINE1未完、PG34724の5I/1LINE未達とBUG3074/3075を保持して品質完了へ算入0。元二Testclass/全5本文と独立AAD/境界/null/clone/列挙期待はbyte exact、新定義0。新source必要whole5/freshMain5RootNullAway/全静的/182physicalCRC-init/XML/raw六classの必須四100を検証、補足I/complexityも値を明記。実OOM/ThreadDeath/偽例外port/私有反射/除外/到達不能/旧exec合算で穴を隠さない。実鍵/DB/JMS/再送/Root2Actual4/Claimed-Pending/VM/native/aru/HOLDを追加しない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4345_SSC435_RevocationAAD取得保護・通常五仕様.md",
+      "sha256": "d34f6c49590adc799b62c3932757683555a9bb2c7efbdf410932ce9db0903c7d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34740-ssc435-aad-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "287350104f3e1441bd8e7c04959c781b59082e9b1566049abaeec99cb05024ca"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34695-revocation-aad-owned-code-metadata-v1/manifest.json",
+      "sha256": "72a2f8bd993e7039c407b218737788dfaa00284e98fe103654fbcd4cd8e69683"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P015-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "WBS-P015-05"
+  },
+  "source": "a491d35ade3a8796bec91d9ba17718000c3c022e",
+  "run": "PG34760-SSC435-AAD-ACQUIRE-WHOLE5",
+  "estimate": {
+    "low": 0.25,
+    "base": 0.75,
+    "high": 2.25
+  },
+  "capPp": 3,
+  "workIds": [
+    "P01505_SSC435_AAD_PROTECTED_ACQUIRE5_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2265_WBS65予実・SSC435AAD取得保護追加版685.json",
+    "sha256": "844d69fec01cc3495be66d8b0acc86f6729e8670103023bdf3232fd543164e8c"
+  },
+  "nextCommand": "PublishSSC435 SS311331352914 main beforePG. Six emptyarrayslot shape beforetry, original6 expr inside try exactlysameorder, onefinallyeraseFields. Original5byteexact, freshMain5Root/static/current182CRC-init/XML/rawall6 requiredfour incl nullacquisition failure. Newgross.2/.6/1.8 +oldcarry.05/.15/.45 once; no fakefault/privateReflection/OOM/exclusion/Root2Actual4DBkeyVMaruNativeHOLD. Freshquota/hourly ordinarynotstop."
+}

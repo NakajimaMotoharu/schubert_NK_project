@@ -1,0 +1,5 @@
+# SSC435 Revocation AAD取得保護・通常五仕様
+
+RevocationPayloadIdentity.aadのowned六field取得をcleanup領域内へ移す。try前では要素が全てnew byte[0]である六slot配列の形だけを確立し、元literalの六expr（purpose/table/UUID/time/format/version）を元順でtry内のfields[0]..[5]へ代入、その後の長計算/ByteBuffer/返却値はそのまま保持する。既finallyのprivateeraseFields(fields)一回で、version.getBytes(null)等の部分取得中断も取得済み全slotを元順zeroする。空slotをnullにせずconstructor/factory内部invariantとNullAwayで担保、未取得slotのemptyzeroは無害。元null版の例外型/NPE診断・正常113byteAAD・元expr順/UUID秒nanosBE/版byte/返却配列/公開API/QA050再送/暗号仕様を変更しない。SSC434時点は原全5成功だがrawLINE1未完、PG34724の5I/1LINE未達とBUG3074/3075を保持して品質完了へ算入0。元二Testclass/全5本文と独立AAD/境界/null/clone/列挙期待はbyte exact、新定義0。新source必要whole5/freshMain5RootNullAway/全静的/182physicalCRC-init/XML/raw六classの必須四100を検証、補足I/complexityも値を明記。実OOM/ThreadDeath/偽例外port/私有反射/除外/到達不能/旧exec合算で穴を隠さない。実鍵/DB/JMS/再送/Root2Actual4/Claimed-Pending/VM/native/aru/HOLDを追加しない。
+
+NK-WEB-002/AUT004/QA050; UI226234; SS311331352/451; 元PT-REVOKE-VALUE001..004/EXC011全期待不変。元開始.15/.45/1.35/部分.1/.3/.9保持、carry.05/.15/.45を再加算せず新gross.2/.6/1.8だけ追加、当開始.25/.75/2.25 cap3。原904.85/SV/全開始保持。
