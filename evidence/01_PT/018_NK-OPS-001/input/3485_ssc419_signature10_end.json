@@ -1,0 +1,120 @@
+{
+  "groupId": "PGPT-WBS65-SSC419-SIGNATURE-CLONE-OWNERSHIP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2125_WBS65SSC419通常十限定完了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "ReleaseSignatureVerifier.verifyは既null/長さ検査とpublicDER/元manifest/signatureの同byte clone・既Crypto/JDK Ed25519を維持する。key clone直後に外try、その内でmessage clone直後に中try、signature clone直後に既Crypto try/catch/finallyを置く。finallyはsignature→message→keyの逆取得順で一回ずつ消去、既GeneralSecurityExceptionのfatal graph/Error identityと固定IOExceptionを維持する。返却前のJDK未取得allocationの消去は保証せず、実OOMを起こさない。原public API/constructor/認可/署名format/鍵の固定根/結果/期限/電文は不変更、新operation portやprivate key/実署名/配備を追加0。既9Test全文は保持、新SIGN010だけ合成RuntimeException後に同instanceを正常再利用し、三copy消去/caller不変/pinned再利用/次回独立copy/call数2を固定publicRFC vectorで確認する。同source全10、RootNullAway/静的、sameexec default/raw target全命令行methodclassbranchを照合し、StorageIoException依存の未網羅を隠さずglobal451/正式へ算入0。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4277_SSC419_署名clone取得直後保護・通常全十仕様.md",
+      "sha256": "b9d4da04c21bb928dd79cb5e6685de850aa01b6618420b10fc5e6f5b81a9adcb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33758-ssc419-signature-design-only-v1/design-only-main-patch.json",
+      "sha256": "2b54234c2d641c20b05c116a7b820a055615f038aab8f5a931805e4b022ee692"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P018-02"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java"
+  ],
+  "source": "58ade749adfe6c34cf5f2cd45a4bc9ab71c29b0a",
+  "run": "PG33770-SSC419-SIGNATURE10",
+  "estimate": {
+    "low": 0.2,
+    "base": 0.6,
+    "high": 1.8
+  },
+  "capPp": 3,
+  "workIds": [
+    "P01802_SSC419_SIGNATURE_CLONE_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2124_WBS65予実・SSC419通常全十閉鎖版619.json",
+    "sha256": "73a67ef53f97985468cd9d3a9e7a0544021ed4573a18bc93b3ccd0fd2156136a"
+  },
+  "nextCommand": "PublishSSC419limited914onlymain and commit/push10 proof; continue YKT2542 remaining76 ownership source review, next allowed AuthContext/WebLog/Revocation/Main source before pricing. Reuse unchanged successes, actual4/Root2/SDK/native/DB/VM/aruHOLD, no refusal retries. Freshquota/hourly; normal group not stop.",
+  "sourceAfter": "9fdf9bea361a4450401d9a197785bea26e33bcf2",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33776-ssc419-signature10-scope-join-v1/manifest.json",
+  "manifestSha256": "b7484c13a445046d93d7821f3ebbc8a1972faae9446952f0e297724c8d196dae",
+  "terminalAtUTC": "2026-11-15T08:12:11.677639+00:00",
+  "outcome": "SIGNATURE10_OWN_ALL_COUNTERS100_DEPENDENCY_AND_GLOBAL_HOLD_RETAINED",
+  "technical": {
+    "kind": "SSC419_SIGNATURE_IMMEDIATE_CLONE_OWNERSHIP10",
+    "productionCoreMain": "9fdf9bea361a4450401d9a197785bea26e33bcf2",
+    "actualUnitSource": "5c470b48941b45691b1680568f9c275d7b14f931",
+    "tests": 10,
+    "newDefinitions": 1,
+    "necessaryPriorRequalification": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 5,
+    "positiveCrc": 3,
+    "ownDefault": {
+      "BRANCH": {
+        "covered": 10,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 33,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 13,
+        "missed": 0
+      },
+      "INSTRUCTION": {
+        "covered": 143,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 8,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "ownRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 164
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 10
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 36
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 13
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "ownAllCounters100": true,
+    "whole5Qualified": false,
+    "storageDependencyUncoveredRetained": true,
+    "staticRaw10Applicable0": true,
+    "realPrivateKeySigningDeploymentActions": 0,
+    "realOOMOrCloneFailureInjection": false,
+    "sourceImmediateOwnershipReasoningAndExistingProviderErrors": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "SSC419設計PR353/main37e271af公開後、Core9fdf9bea/Unit5c470b48/PG33770全10FES0真正0。三clone各取得直後try/finallyで逆順消去、既API/JDK Ed25519/元byte/例外分類不変。新SIGN010でpublicRFC入力・故障後同instance正常・三新clone/消去/callerとpinned保持/call2を独立確認、旧9本文はexact保持。PG33772全5physical/3positiveCRC-init/XML真正終端を独立照合、fresh RootNullAway-lint-GJF-CS-SB0、PMD10各site適用未分類0。PG33774同execraw own2Code164I36L8M2C10B全miss0、既定も全四100。Storage依存を含む全5は75I/10L/7M/3B/1Cmissを保持しglobal451未受入。実OOM/cloneallocation故障/実鍵/署名発行/配備0、取得前失敗はsource所有域で論証しprovider合成Error/RTEは元Testで実証。BUG3015当対象限定CLOSED、YKT2542原78の完了2/他76候補未資格でOPEN。metadataBUG3016path/3017profile分類は原失敗を保存しguard不変更・本来最初の公開/資格で限定是正、費用event追加0。新追加.2/.6/1.8のみ完了・残397.324/837.386/1643.415、元904.85/原費/SV/群開始を保持。App182/35272/35207/歴史不成功65は再資格混合raw、正式1964/53・正本184/625・元190新0・工数null不変。Root2/Actual4/SDKbackend/VM/DB/native/aru/CHR/COPY24/HOLD維持。"
+}
