@@ -14,9 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  * Closed internal projection only, not an HTTP binding. NK-WEB-001; FUN-001/AUT-001..004; UI226;
  * SS314 §7.2.6; SSC-044/PG-D-103/PT-WEB-068..075.
  */
-final class ClosedWebAuthentication {
-  private ClosedWebAuthentication() {}
-
+interface ClosedWebAuthentication {
   static Authentication authenticated(SessionPrincipal principal) {
     return UsernamePasswordAuthenticationToken.authenticated(
         principal,
