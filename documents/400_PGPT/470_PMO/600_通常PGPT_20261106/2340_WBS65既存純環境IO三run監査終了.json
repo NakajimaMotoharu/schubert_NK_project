@@ -1,0 +1,345 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5516",
+  "groupId": "PGPT-WBS65-EXISTING-MAP-ENV-RESOURCE-RAW-20261116",
+  "startEvent": "PGPT-20261008-5515",
+  "sourceAtGroupStart": "24949975caf5995899c8040df9cad065525b25a1",
+  "productionCoreMain": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "estimate": {
+    "low": 0.08,
+    "base": 0.24,
+    "high": 0.72
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-15T21:36:35.534000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 82,
+      "remainingPercent": 18,
+      "resetsAt": 1795012174,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35342-existing-pure-three-audit-join-v1/manifest.json",
+    "sha256": "4f98c85f9b848b2643de6c0ac126d2910582fc1dd638e0091a07092c49d6ee13"
+  },
+  "outcome": "EXISTING_THREE_RUNS_RAW_AUDIT_LOCATION100_PUBLIC_NAMESPACE_GAPS_OPEN",
+  "technical": {
+    "historicalRunsReferenced": 3,
+    "historicalTestsReferenced": 41,
+    "applicationTestsExecuted": 0,
+    "rawAudit": [
+      {
+        "label": "location",
+        "report": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35340-existing-pure-map-env-resource-raw-v1/location.json",
+          "sha256": "d5bfb8cfff37095f83a5ebd544ff3e79b0dfc9a9d3f793ba0b61a31f1a542fd1"
+        },
+        "declaredTargets": [
+          "dev/codex/schubert/nk/storage/ServiceCredentialLocation"
+        ],
+        "targetRawCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 95
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 26
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 21
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 18
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "targetRawRequiredFour100": true,
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 95
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 26
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 21
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 18
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "missedMethods": []
+      },
+      {
+        "label": "environment",
+        "report": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35340-existing-pure-map-env-resource-raw-v1/environment.json",
+          "sha256": "762545b08f69e07185b8638c315c968e1a3c36fdf22add141db01a6bf04f1595"
+        },
+        "declaredTargets": [
+          "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment",
+          "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment"
+        ],
+        "targetRawCounters": {
+          "INSTRUCTION": {
+            "missed": 6,
+            "covered": 124
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 18
+          },
+          "LINE": {
+            "missed": 2,
+            "covered": 23
+          },
+          "COMPLEXITY": {
+            "missed": 2,
+            "covered": 14
+          },
+          "METHOD": {
+            "missed": 2,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 2
+          }
+        },
+        "targetRawRequiredFour100": false,
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 20,
+            "covered": 162
+          },
+          "BRANCH": {
+            "missed": 3,
+            "covered": 21
+          },
+          "LINE": {
+            "missed": 4,
+            "covered": 31
+          },
+          "COMPLEXITY": {
+            "missed": 8,
+            "covered": 17
+          },
+          "METHOD": {
+            "missed": 5,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 3
+          }
+        },
+        "missedMethods": [
+          {
+            "className": "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment",
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment",
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+            "name": "hashCode",
+            "descriptor": "()I"
+          },
+          {
+            "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z"
+          }
+        ]
+      },
+      {
+        "label": "resource",
+        "report": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35340-existing-pure-map-env-resource-raw-v1/resource.json",
+          "sha256": "a716571b0c198d498c7e52ab0cce3004b9427755f80f02274df4db947061d8ff"
+        },
+        "declaredTargets": [
+          "dev/codex/schubert/nk/storage/ResourceScope"
+        ],
+        "targetRawCounters": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 172
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 20
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 52
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 15
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 5
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "targetRawRequiredFour100": false,
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 73,
+            "covered": 230
+          },
+          "BRANCH": {
+            "missed": 12,
+            "covered": 20
+          },
+          "LINE": {
+            "missed": 17,
+            "covered": 60
+          },
+          "COMPLEXITY": {
+            "missed": 9,
+            "covered": 21
+          },
+          "METHOD": {
+            "missed": 3,
+            "covered": 11
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 3
+          }
+        },
+        "missedMethods": [
+          {
+            "className": "dev/codex/schubert/nk/storage/ResourceScope",
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "valueOf",
+            "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException",
+            "name": "preserveFatal",
+            "descriptor": "(Ljava/lang/Throwable;)V"
+          }
+        ]
+      }
+    ],
+    "wholeSourceFormalPromoted": false,
+    "dependencyGapsNotMergedWithOtherExec": true,
+    "newAcceptance": 0,
+    "effortRate": null
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Commit/push audit. Continue approved independent PG/PT source/oracle inventory (batch immutable metadata or API pure domain), no old41 confirmation replay. Publicutility constructor representation needs internaldesign/privatefields/allcaller ABI beforePG, not mechanical interface conversion. KeepBUG3090/YKT2562 open. PreserveLocation historicalraw100 reference only. AllRoot2Actual4/DBkeys/VMnativearu/HOLD intact; freshquota/hourly06:56:13 ordinarynotstop.",
+  "remainingEstimatePp": {
+    "low": 397.324,
+    "base": 837.386,
+    "high": 1643.415
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2339_WBS65予実・既存純環境IO三run監査完了版720.json",
+    "sha256": "0de5f1ec751cc9b8a8eee5a66f7da7ae6aedbecf0862d01f9cc16b35baef1560"
+  },
+  "forecastNotActualCost": true,
+  "canonical625Progress": {
+    "canonicalRowCount": 625,
+    "uniqueCompletedRows": 184,
+    "completedStage1Rows": 156,
+    "completedStage2Rows": 10,
+    "completedStandaloneRows": 18,
+    "unknownCompletedIds": [],
+    "duplicateCompletedIds": [],
+    "legacyPreparationEntryCount": 157,
+    "legacyPreparationDistinctEntryCount": 155,
+    "legacyPreparationCanonicalStage1References": 142,
+    "legacyPreparationCanonicalCompletedStage1Rows": 142,
+    "legacyPreparationDuplicateEntries": [
+      "WBS-P005-01/1",
+      "WBS-P020-01.01/1"
+    ],
+    "legacyPreparationNoncanonicalLabels": [
+      "C01 current resource/old limited proof binding",
+      "C02 Inspector required exclusive-current-CP requalification",
+      "C02-R1",
+      "C02-R2",
+      "C03 32/16/20 static configuration expectations",
+      "C05 eight source tuples",
+      "C06 public seven config and ID/profile declarations",
+      "C07 eight distribution configs/current-byte historical offline parser scope",
+      "C08 wrapper/receipt/runbook scope correspondence",
+      "F04 host tool/version/retention preparation",
+      "G13.02 source-owner-SQL-requirement candidate trace",
+      "G13.03 bootstrap source/owner/requirement/structural-method index",
+      "WBS-C04 static preparation"
+    ],
+    "preparationRowsNotCompleted": [],
+    "coherent": true,
+    "coherenceScope": "PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+    "legacyPreparationMatchesPrimary": true,
+    "effortCompletionRate": null,
+    "rowsAreNotEffortWeights": true,
+    "legacyEntriesAreNotCanonicalRowCounts": true,
+    "masterTable": {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv",
+      "sha256": "b7bf00dbea8ab47d3820db70335342e543f6f7bcd595e2ffc43e6e1086054579"
+    },
+    "completedCanonicalOriginalPricePp": {
+      "low": 21.726,
+      "base": 55.664,
+      "high": 112.285
+    },
+    "pricesAreForecastNotActualCost": true,
+    "formalAcceptanceDerivedFromRowCount": false
+  }
+}

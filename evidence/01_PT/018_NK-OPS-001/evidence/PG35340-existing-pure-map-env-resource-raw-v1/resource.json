@@ -1,0 +1,1096 @@
+{
+  "declaredTargets": [
+    "dev/codex/schubert/nk/storage/ResourceScope"
+  ],
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 3,
+      "covered": 172
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 1,
+      "covered": 52
+    },
+    "COMPLEXITY": {
+      "missed": 1,
+      "covered": 15
+    },
+    "METHOD": {
+      "missed": 1,
+      "covered": 5
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "targetRawRequiredFour100": false,
+  "label": "resource",
+  "actualExit": 0,
+  "historicalUnitSource": "49bfa61b6dabf68b66e7fa1b777a9bab8a1e791e",
+  "historicalCore": "eeba9dd506a3d221e447b3031fa4497e21f948c4",
+  "historicalTestsReferenced": 26,
+  "currentRelevantMainAndTestSourceExact": true,
+  "originalPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29342-resource26-post-v1/manifest.json",
+    "sha256": "fa9a0ca9abce9e837a8945483f8b6d47864503423db42098a6d37d180e532bcb"
+  },
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2289_resource26_closed_profile.json",
+    "sha256": "d450ddb0f353510b8a8a89d1aeb083396ef615a0ef66b07cc236e8f4513e8412"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29334-resource26-prepare-v1/manifest.json",
+    "sha256": "8ef6e409c89563d0a6bdcbb6577756620fb57061f350dcb1b63edd6a3fc146ef"
+  },
+  "singleOriginalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29342-resource26-post-v1/jacoco.exec",
+    "sha256": "76b5a2f3a321a53a94e4c0a34735836d9e6b43804eefede1eb0b3a3b32933332"
+  },
+  "originalCoverageXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29342-resource26-post-v1/original-coverage.xml",
+    "sha256": "37ca373c0a69aabf14e552578c0c148115f22fc3663e8821660add8d603c9588"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class": "e50a2e03b678c0f47f0d00190542b7f1e8f631acb27055d49e4c969b1cd31a91",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class": "3d6e9dc674275dce70291887b24fbb95cc15617a31ac49a6328cff3f2f5e3291",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class": "5942d0b8d678b791ae99e042d65552ebcd657030b6637bb80754d36aaf83bf83",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class": "c9f519c33f71a3eb4f120bcd6f22592c7b5efc3ff05164591f904b98d508f96c",
+    "dev/codex/schubert/nk/storage/ResourceScope.class": "0e538ce9c35a6b9eeae6d0326270f99e6fa57c561ebae3140122fb9baeee2115",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire": "1c34210267385aba",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action": "f3538b9d8bcdfe63",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction": "437d12e381b1ebd3",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release": "db9e2262a7b0b30b",
+    "dev/codex/schubert/nk/storage/ResourceScope": "acd5339d83e61cf3",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": "37214ecd32efe326",
+    "dev/codex/schubert/nk/storage/StorageIoException": "02ab1f0a35f7f9e5"
+  },
+  "rawCounters": {
+    "INSTRUCTION": {
+      "missed": 73,
+      "covered": 230
+    },
+    "BRANCH": {
+      "missed": 12,
+      "covered": 20
+    },
+    "LINE": {
+      "missed": 17,
+      "covered": 60
+    },
+    "COMPLEXITY": {
+      "missed": 9,
+      "covered": 21
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 11
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 3
+    }
+  },
+  "defaultCounters": {
+    "INSTRUCTION": {
+      "covered": 206,
+      "missed": 65
+    },
+    "BRANCH": {
+      "covered": 20,
+      "missed": 12
+    },
+    "LINE": {
+      "covered": 60,
+      "missed": 16
+    },
+    "COMPLEXITY": {
+      "covered": 18,
+      "missed": 7
+    },
+    "METHOD": {
+      "covered": 8,
+      "missed": 1
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    }
+  },
+  "defaultFilteredMethods": [
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 15
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "missedCodeMethods": [
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 65,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 12,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 16,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 7,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "classes": {
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire": {
+      "name": "dev/codex/schubert/nk/storage/ResourceScope$Acquire",
+      "id": "1c34210267385aba",
+      "dataPresent": false,
+      "probes": 0,
+      "access": 1537,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/ResourceScope$Action": {
+      "name": "dev/codex/schubert/nk/storage/ResourceScope$Action",
+      "id": "f3538b9d8bcdfe63",
+      "dataPresent": false,
+      "probes": 0,
+      "access": 1537,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction": {
+      "name": "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction",
+      "id": "437d12e381b1ebd3",
+      "dataPresent": false,
+      "probes": 0,
+      "access": 1537,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/ResourceScope$Release": {
+      "name": "dev/codex/schubert/nk/storage/ResourceScope$Release",
+      "id": "db9e2262a7b0b30b",
+      "dataPresent": false,
+      "probes": 0,
+      "access": 1537,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/ResourceScope": {
+      "name": "dev/codex/schubert/nk/storage/ResourceScope",
+      "id": "acd5339d83e61cf3",
+      "dataPresent": true,
+      "probes": 47,
+      "access": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 172
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 20
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 52
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "name": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "id": "37214ecd32efe326",
+      "dataPresent": true,
+      "probes": 8,
+      "access": 16433,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 45
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "name": "dev/codex/schubert/nk/storage/StorageIoException",
+      "id": "02ab1f0a35f7f9e5",
+      "dataPresent": true,
+      "probes": 21,
+      "access": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 65,
+          "covered": 13
+        },
+        "BRANCH": {
+          "missed": 12,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 16,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 7,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "handoff",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 24
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "acquire",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 72
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 23
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "use",
+      "descriptor": "(Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action;)Ljava/lang/Object;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 56
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 19
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "lambda$handoff$1",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 12
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/ResourceScope",
+      "name": "lambda$handoff$0",
+      "descriptor": "([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 8
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 15
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 21
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 10
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "reason",
+      "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 65,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 12,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 16,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 7,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "actualCodeMethods": 14,
+  "toolSelftest12ReferenceOnly": true,
+  "applicationTestsExecuted": 0,
+  "productClassDefinitionOrInitialization": 0,
+  "oldSourcesOrExecsCombined": false,
+  "sourceHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java": "4065bc7cc8e3eb88224b38b2103049fa287515278bb14b9405ff7ace920c083f",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java": "76f862737d14f8de6676ff189f0842568e515149a3e7539ea6a960dec1d3fbd0"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29342-resource26-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/ResourceScope.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29334-resource26-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException.class"
+  ]
+}

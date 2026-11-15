@@ -1,0 +1,5 @@
+# 既存純Map環境・IOscope三run raw監査結果
+
+Core5a60309d/PG35340 原Location5/環境10/ResourceScope26の関連Main-Test現source全一致、各元singleexecと1/3/7physicalのhash/CRC/Code method数を独立照合、製品41再演0/工具12再演0/productionclass define-init0。Locationは元Unit0d2d1fae/PG29642の21LINE5METHOD1CLASS26BRANCH95I raw全miss0で現部品sourceと同値の歴史証跡参照可、wholeCore/currentSource runへ昇格0。環境二targetは23L5M2C18B124I hitに空privatector二件2L2M6I不足、ResourceScope targetは52L5M1C20B172I hitに空privatector1L1M3I不足。依存BatchRun生成同値/StorageReason.valueOf・preserveFatalの不足は同runの不足として別保持、他run成功で埋めない、Code0四interfaceは自然N/A。BUG3090/YKT2562を修正前起票、三publicutilityはpattern/privatefield/全callerとbinary契約を伴うのでpackage-private二helperの変更を機械適用せず、表現判断・全caller調査を次の内部依存へ残す。private反射/空instance/coverage除外/未達成功化0。追加.08/.24/.72監査だけ完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持。App228/35777/35712/歴史不成功65増加0、正式1964/53・正本184/625・元17/190・工数null不変、全451/実Map元file-OS認証/全caller/DB-Root/CHR/native/owner終了依存未受入/全HOLD保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35340-existing-pure-map-env-resource-raw-v1/manifest.json SHA256 8cb239f0be1787d028eb8af72b7731c497082542fc16f541c40f96dc38510bd6
