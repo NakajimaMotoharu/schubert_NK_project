@@ -65,20 +65,25 @@ def validate_context(group_id, fields):
 
 
 def collect_canonical_nodes(plans):
-    """Collect authoritative plan nodes; no filesystem or caller-provided cost aliases."""
+    """Read only 481/484 structural arrays, never historical estimates with reused IDs."""
     nodes = {}
-
-    def visit(value):
-        if isinstance(value, dict):
-            if isinstance(value.get('id'), str):
-                nodes[value['id']] = value
-            for child in value.values():
-                visit(child)
-        elif isinstance(value, list):
-            for child in value:
-                visit(child)
-
-    visit(plans)
+    for plan in plans:
+        _require(isinstance(plan, dict), 'canonical plan object')
+        arrays = [plan[key] for key in ('tasks', 'children', 'sharedBudgets') if key in plan]
+        _require(arrays and all(isinstance(array, list) for array in arrays),
+                 'canonical structural arrays')
+        for array in arrays:
+            for node in array:
+                _require(isinstance(node, dict), 'canonical structural node')
+                node_id = node.get('id')
+                _require(isinstance(node_id, str) and node_id.startswith('WBS-') and
+                         ':' not in node_id, 'canonical structural WBS identity')
+                _require(node_id not in nodes, 'duplicate canonical structural identity')
+                children = node.get('children', [])
+                _require(isinstance(children, list) and
+                         all(isinstance(child, str) for child in children),
+                         'canonical structural child IDs')
+                nodes[node_id] = node
     return nodes
 
 

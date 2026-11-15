@@ -79,15 +79,10 @@ def append(group,event_type,values):
         raise ValueError('registered 487 work category required; unknown stays null')
     template=specification['eventTemplate']
     if values.get('wbsLeafIds'):
-        nodes={}
-        def collect(item):
-            if isinstance(item,dict):
-                if isinstance(item.get('id'),str):nodes[item['id']]=item
-                for child in item.values():collect(child)
-            elif isinstance(item,list):
-                for child in item:collect(child)
-        for name in ('481_PGPT詳細WBS.json','484_WBSコスト枠・細分化.json'):
-            collect(json.loads((ROOT/'documents/400_PGPT/470_PMO'/name).read_bytes()))
+        from pmo_group_context import collect_canonical_nodes
+        nodes=collect_canonical_nodes([
+            json.loads((ROOT/'documents/400_PGPT/470_PMO'/name).read_bytes())
+            for name in ('481_PGPT詳細WBS.json','484_WBSコスト枠・細分化.json')])
         if any(leaf not in nodes or nodes[leaf].get('children') or ':' in leaf for leaf in values['wbsLeafIds']):
             raise ValueError('actual 481/484 leaf ids only; split parents cannot add a second cost')
     with EVENTS.open('a+b') as f:
