@@ -39,8 +39,12 @@ public record RevocationPayloadIdentity(UUID id, Instant requestedAt) {
       for (byte[] field : fields) buffer.putInt(field.length).put(field);
       return buffer.array();
     } finally {
-      for (byte[] field : fields) Arrays.fill(field, (byte) 0);
+      eraseFields(fields);
     }
+  }
+
+  private static void eraseFields(byte[][] fields) {
+    for (byte[] field : fields) Arrays.fill(field, (byte) 0);
   }
 
   @Override
