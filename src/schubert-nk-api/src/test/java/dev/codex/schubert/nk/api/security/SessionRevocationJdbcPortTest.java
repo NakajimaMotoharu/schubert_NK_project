@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.security;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -38,6 +39,8 @@ import org.junit.jupiter.api.Timeout;
 /** PT-AUT-REV001..008; SS3146.3/332/35212. Own JDBC/Clock, not a Logout/ADMIN request. */
 @Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class SessionRevocationJdbcPortTest {
+  private static final String PUBLIC_SQL_STATE = "08006";
+  private static final String QUERY_SUFFIX = ".executeQuery";
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00.123456789Z");
   private static final Instant AT = Instant.parse("2026-11-06T00:00:00.123456Z");
   private static final Instant OLD = Instant.parse("2026-11-05T23:00:00Z");
@@ -107,6 +110,7 @@ final class SessionRevocationJdbcPortTest {
     int audited = 1;
     int ownerChanges;
     int clockCalls;
+    final Map<String, Throwable> injectedFailures = new HashMap<>();
     String failAt = "";
     String nullStatementAt = "";
     String nullRowAt = "";
@@ -123,6 +127,10 @@ final class SessionRevocationJdbcPortTest {
     }
 
     void fault(String at) throws SQLException {
+      Throwable injected = injectedFailures.get(at);
+      if (injected instanceof SQLException sql) throw sql;
+      if (injected instanceof RuntimeException runtime) throw runtime;
+      if (injected instanceof Error fatal) throw fatal;
       if (at.equals(failAt)) {
         if (runtimeFailure != null) throw runtimeFailure;
         throw new SQLException(PUBLIC_MARKER, "08006");
@@ -131,6 +139,7 @@ final class SessionRevocationJdbcPortTest {
 
     void finish(String at) throws SQLException {
       closed.add(at);
+      fault(at + ".close");
       if (badCloses.contains(at)) throw new SQLException(PUBLIC_MARKER, "08006");
     }
 
@@ -803,6 +812,143 @@ final class SessionRevocationJdbcPortTest {
         infra(f, admin);
         assertEquals(label, f.order.getLast());
       }
+    }
+  }
+
+  @Test
+  void fatal001DirectBodyAndOwnedCloseErrorsKeepIdentityAndReleaseAllAcquiredResources()
+      throws Exception {
+    for (boolean admin : new boolean[] {false, true}) {
+      List<String> bodyPoints =
+          admin
+              ? List.of(
+                  "target.prepare",
+                  "target.next",
+                  "all.prepare",
+                  "all.executeQuery",
+                  "all.getObject",
+                  "update.prepare",
+                  "update.executeUpdate",
+                  "audit.prepare",
+                  "audit.executeUpdate")
+              : List.of(
+                  "user.prepare",
+                  "user.next",
+                  "session.prepare",
+                  "session.executeQuery",
+                  "session.getObject",
+                  "update.prepare",
+                  "update.executeUpdate",
+                  "audit.prepare",
+                  "audit.executeUpdate");
+      List<String> closePoints =
+          admin
+              ? List.of(
+                  "target-1.row.close",
+                  "target-1.statement.close",
+                  "all-2.row.close",
+                  "all-2.statement.close",
+                  "update-3.statement.close",
+                  "audit-4.statement.close")
+              : List.of(
+                  "user-1.row.close",
+                  "user-1.statement.close",
+                  "session-2.row.close",
+                  "session-2.statement.close",
+                  "update-3.statement.close",
+                  "audit-4.statement.close");
+      var points = new ArrayList<>(bodyPoints);
+      points.addAll(closePoints);
+      for (String point : points) {
+        Fixture f = new Fixture();
+        var fatal = new AssertionError("PUBLIC direct fatal");
+        f.injectedFailures.put(point, fatal);
+        assertSame(
+            fatal,
+            assertThrows(
+                AssertionError.class,
+                () -> {
+                  if (admin) f.revoke();
+                  else f.logout();
+                }));
+        assertNull(fatal.getCause());
+        assertEquals(0, fatal.getSuppressed().length);
+        f.owned();
+      }
+    }
+  }
+
+  @Test
+  void fatal002WrappedSqlFatalUsesOriginalSuppressedIdentityAndClosesBorrowedTxResources()
+      throws Exception {
+    for (boolean admin : new boolean[] {false, true}) {
+      Fixture f = new Fixture();
+      var fatal = new AssertionError("PUBLIC wrapped fatal");
+      var sql = new SQLException("PUBLIC wrapper", PUBLIC_SQL_STATE);
+      sql.addSuppressed(fatal);
+      f.injectedFailures.put((admin ? A : S) + QUERY_SUFFIX, sql);
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class,
+              () -> {
+                if (admin) f.revoke();
+                else f.logout();
+              }));
+      assertArrayEquals(new Throwable[] {fatal}, sql.getSuppressed());
+      f.owned();
+    }
+  }
+
+  @Test
+  void fatal003PrimarySecondaryAndSelfAliasKeepExactOriginalFailurePrecedence() throws Exception {
+    for (boolean admin : new boolean[] {false, true}) {
+      for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
+        for (boolean fatalClose : new boolean[] {false, true}) {
+          Fixture f = new Fixture();
+          Throwable primary =
+              primaryKind == 0
+                  ? new SQLException("PUBLIC body", PUBLIC_SQL_STATE)
+                  : primaryKind == 1
+                      ? new IllegalStateException("PUBLIC body")
+                      : new AssertionError("PUBLIC body");
+          Throwable secondary =
+              fatalClose
+                  ? new AssertionError("PUBLIC close")
+                  : new SQLException("PUBLIC close", PUBLIC_SQL_STATE);
+          f.injectedFailures.put((admin ? A : S) + QUERY_SUFFIX, primary);
+          f.injectedFailures.put(
+              (admin ? "all-2.statement" : "session-2.statement") + ".close", secondary);
+          if (primaryKind == 0 && !fatalClose) {
+            infra(f, admin);
+          } else {
+            Throwable expected = primaryKind == 0 ? secondary : primary;
+            assertSame(
+                expected,
+                assertThrows(
+                    expected.getClass(),
+                    () -> {
+                      if (admin) f.revoke();
+                      else f.logout();
+                    }));
+          }
+          assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+          f.owned();
+        }
+      }
+      Fixture alias = new Fixture();
+      var same = new SQLException("PUBLIC self alias", PUBLIC_SQL_STATE);
+      alias.injectedFailures.put((admin ? A : S) + QUERY_SUFFIX, same);
+      alias.injectedFailures.put(
+          (admin ? "all-2.statement" : "session-2.statement") + ".close", same);
+      if (admin) {
+        var observed = assertThrows(IllegalArgumentException.class, alias::revoke);
+        assertSame(same, observed.getCause());
+      } else {
+        infra(alias, false);
+      }
+      assertEquals(0, same.getSuppressed().length);
+      alias.owned();
     }
   }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-15T22:18:10.976">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/RevokedContextValueContractTest.java">
+<violation beginline="34" endline="34" begincolumn="17" endcolumn="35" rule="EqualsNull" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="RevokedContextValueContractTest" method="revoked001ValueMapRedactionAndOnlyTwoAllowedResultsAtAllNullBoundaries" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionRevocationJdbcPortTest.java">
+<violation beginline="88" endline="88" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="94" endline="94" begincolumn="41" endcolumn="65" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest.Fixture" variable="fields" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="111" endline="111" begincolumn="34" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest.Fixture" variable="injectedFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="134" endline="134" begincolumn="47" endcolumn="54" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest.Fixture" method="fault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "08006" appears 6 times in this file; the first occurrence is on line 134
+</violation>
+<violation beginline="177" endline="177" begincolumn="28" endcolumn="51" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest.Fixture" method="statement" variable="bound" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="480" endline="480" begincolumn="9" endcolumn="10" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="boundaryNullOwnerReasonAndCurrentAdminContractsPrecedeSql" variable="c" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="709" endline="709" begincolumn="36" endcolumn="51" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="invalidValuesAndUnknownProviderExceptionsKeepTheirDefinedBoundary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal ".executeQuery" appears 4 times in this file; the first occurrence is on line 709
+</violation>
+<violation beginline="756" endline="756" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="756" endline="756" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="762" endline="782" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="787" endline="787" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="788" endline="788" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="SessionRevocationJdbcPortTest" method="sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

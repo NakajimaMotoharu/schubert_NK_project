@@ -1,0 +1,32 @@
+{
+  "actualExit": 0,
+  "productionSource": "5b77f70d4b0a389e3089087cc92a4b40d8e47288",
+  "old10SourceSha256": "d6d4badab644801da9ae542fab67f0ec6456e6349be5b2e855aff53142b6bc18",
+  "old10InverseFormattedExact": true,
+  "defaultEmptyControlsOnly": [
+    [
+      "import static org.junit.jupiter.api.Assertions.assertArrayEquals;\n",
+      ""
+    ],
+    [
+      "    final Map<String, Throwable> injectedFailures = new HashMap<>();\n",
+      ""
+    ],
+    [
+      "      Throwable injected = injectedFailures.get(at);\n      if (injected instanceof SQLException sql) throw sql;\n      if (injected instanceof RuntimeException runtime) throw runtime;\n      if (injected instanceof Error fatal) throw fatal;\n",
+      ""
+    ],
+    [
+      "      fault(at + \".close\");\n",
+      ""
+    ]
+  ],
+  "changedTestSha256": "fb94220c6d26bea943a5c3e2c5c188f86fba07ae9128a7d2a78a3e3416e0da4a",
+  "newValueTestSha256": "2d24c0cd951841c2123fd7e8f288be31a93b7750edcc0aaec13e3c838fa3b606",
+  "newDefinitions": 4,
+  "necessaryPriorDefinitions": 10,
+  "expectedTests": 14,
+  "allMainAndPomsUnchanged": true,
+  "applicationTestsExecuted": 0,
+  "formalUpdated": false
+}
