@@ -1,0 +1,51 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4073_storage_lexical6_profile_v2.json",
+    "sha256": "a5ab9a455a4fe2d3080d9b25c93dd4ce4f7d0dab388554bb0797c27a759b1884"
+  },
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java": "bd23afae98cccd71ae899630db2d623a8c5546207187c44cab5a1cff311e6745",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageLexicalValueContractTest.java": "40310e1de4dff7c906b7cc9babf62c5f2291cb4620fb2cd8c6030c854eef54ca",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35304-storage-lexical6-prepare-v1/manifest.json",
+    "sha256": "f3e7634b0fccf125a0be9ab5576b877334c288b8a16a1c605c0aaf9059694c69"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35306-storage-lexical6-static-v1/manifest.json",
+    "sha256": "edff06fccb07f20cf80868e33ee4b25ea14305e16bdb1ac3fd8c999d2056f03b"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4074_storage_lexical6_static_admission.json",
+    "sha256": "e34048c1a0a2db7dd01faac8aa7f635ebb6657b76a605b3af524675bea8b494e"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java",
+      "rule": "NullAssignment",
+      "line": "46",
+      "reason": "Each of six independent fixture components is deliberately missing to assert constructor rejects null before admitting any layout; no production null assignment or null state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

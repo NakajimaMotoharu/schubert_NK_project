@@ -1,0 +1,22 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35310-STORAGE-LEXICAL-WHOLE6",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35304-storage-lexical6-prepare-v1/manifest.json",
+    "sha256": "f3e7634b0fccf125a0be9ab5576b877334c288b8a16a1c605c0aaf9059694c69"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35306-storage-lexical6-static-v1/manifest.json",
+    "sha256": "edff06fccb07f20cf80868e33ee4b25ea14305e16bdb1ac3fd8c999d2056f03b"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageRootLayoutTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "missing[index] = null;",
+      "occurrences": 1,
+      "reason": "Each of six independent fixture components is deliberately missing to assert constructor rejects null before admitting any layout; no production null assignment or null state is accepted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

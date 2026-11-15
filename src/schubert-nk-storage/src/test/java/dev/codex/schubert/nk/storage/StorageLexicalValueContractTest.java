@@ -1,0 +1,117 @@
+package dev.codex.schubert.nk.storage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+
+/**
+ * PT-STORAGE-IDENT001..003/LEX004; SS333/343/354: strings and lexical paths, never OS authority.
+ */
+final class StorageLexicalValueContractTest {
+  private static final String FIXED_IDENTITY = "StorageIdentity[REDACTED]";
+  private static final String FIXED_LAYOUT = "StorageRootLayout[REDACTED]";
+  private static final String LOOKUP_VALUE = "found";
+  private static final String OWNER = "nk_asset";
+  private static final String GROUP = "nk_shared";
+
+  @Test
+  void ident001LiteralNamesAndLengthBoundariesArePreservedAsBothRecordComponents() {
+    for (String name : List.of("a", "_", "nk_asset", "a0_-", "a".repeat(32), "_".repeat(32))) {
+      StorageIdentity owner = new StorageIdentity(name, GROUP);
+      StorageIdentity group = new StorageIdentity(OWNER, name);
+      assertEquals(name, owner.owner());
+      assertEquals(GROUP, owner.group());
+      assertEquals(OWNER, group.owner());
+      assertEquals(name, group.group());
+      assertEquals(FIXED_IDENTITY, owner.toString());
+      assertEquals(FIXED_IDENTITY, group.toString());
+    }
+  }
+
+  @Test
+  void ident002EveryInvalidComponentRejectsWithoutLeakingItsLiteralInput() {
+    for (String name :
+        List.of("", "a".repeat(33), "0name", "-name", "Upper", "space name", "x/y", "あ", "a\n")) {
+      IllegalArgumentException owner =
+          assertThrows(IllegalArgumentException.class, () -> new StorageIdentity(name, GROUP));
+      IllegalArgumentException group =
+          assertThrows(IllegalArgumentException.class, () -> new StorageIdentity(OWNER, name));
+      for (IllegalArgumentException failure : List.of(owner, group)) {
+        assertEquals("invalid storage OS identity", failure.getMessage());
+        assertNull(failure.getCause());
+        assertEquals(0, failure.getSuppressed().length);
+      }
+    }
+    assertEquals(
+        "OS identity",
+        assertThrows(NullPointerException.class, () -> new StorageIdentity(null, GROUP))
+            .getMessage());
+    assertEquals(
+        "OS identity",
+        assertThrows(NullPointerException.class, () -> new StorageIdentity(OWNER, null))
+            .getMessage());
+  }
+
+  @Test
+  void ident003BothComponentsDefineEqualityEvenWhenDistinctOwnersHaveEqualStringHashes() {
+    StorageIdentity value = new StorageIdentity(OWNER, GROUP);
+    StorageIdentity equal = new StorageIdentity(OWNER, GROUP);
+    assertEquals(value, value);
+    assertEquals(value, equal);
+    assertEquals(equal, value);
+    assertEquals(value.hashCode(), equal.hashCode());
+    assertEquals(LOOKUP_VALUE, Map.of(value, LOOKUP_VALUE).get(equal));
+    assertNotEquals(value, null);
+    assertNotEquals(value, OWNER);
+    for (StorageIdentity other :
+        List.of(
+            new StorageIdentity("other_owner", GROUP), new StorageIdentity(OWNER, "other_group"))) {
+      assertNotEquals(value, other);
+      assertNotEquals(other, value);
+    }
+    StorageIdentity first = new StorageIdentity("an", GROUP);
+    StorageIdentity second = new StorageIdentity("c0", GROUP);
+    assertEquals(3117, "an".hashCode());
+    assertEquals(3117, "c0".hashCode());
+    assertEquals(first.hashCode(), second.hashCode());
+    assertNotEquals(first, second);
+    Map<StorageIdentity, String> values = Map.of(first, "first", second, "second");
+    assertEquals("first", values.get(new StorageIdentity("an", GROUP)));
+    assertEquals("second", values.get(new StorageIdentity("c0", GROUP)));
+  }
+
+  @Test
+  void lex004EachOfSixComponentsDefinesRecordIdentityWithoutResolvingTheSyntheticPath() {
+    Path[] roots = {
+      Path.of("/synthetic/asset"), Path.of("/synthetic/transfer"), Path.of("/synthetic/backup"),
+      Path.of("/synthetic/log"), Path.of("/synthetic/artemis"), Path.of("/synthetic/staging")
+    };
+    StorageRootLayout value = layout(roots);
+    StorageRootLayout equal = layout(roots.clone());
+    assertEquals(value, value);
+    assertEquals(value, equal);
+    assertEquals(equal, value);
+    assertEquals(value.hashCode(), equal.hashCode());
+    assertEquals(LOOKUP_VALUE, Map.of(value, LOOKUP_VALUE).get(equal));
+    assertNotEquals(value, null);
+    assertNotEquals(value, FIXED_LAYOUT);
+    assertEquals(FIXED_LAYOUT, value.toString());
+    for (int index = 0; index < roots.length; index++) {
+      Path[] changed = roots.clone();
+      changed[index] = Path.of("/synthetic/other" + index);
+      StorageRootLayout other = layout(changed);
+      assertNotEquals(value, other);
+      assertNotEquals(other, value);
+    }
+  }
+
+  private static StorageRootLayout layout(Path[] paths) {
+    return new StorageRootLayout(paths[0], paths[1], paths[2], paths[3], paths[4], paths[5]);
+  }
+}
