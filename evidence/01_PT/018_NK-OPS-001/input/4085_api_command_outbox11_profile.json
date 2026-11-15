@@ -1,0 +1,94 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35360-API-COMMAND-OUTBOX-PURE11",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": "WBS-P011-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java": "WBS-P012-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java": "WBS-P006-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4381_API質問値・Outbox純値全十一仕様.md",
+      "sha256": "5d979ca53636d7cf5b387359ecbec0f49d528d42aad38314110a9496834db50b"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35350-api-command-outbox11-source-v1/manifest.json",
+      "sha256": "6749f092da660c6d5f477d23c0f957783fa242047aacf769aec61a4980e8a75f"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java",
+      "tests": 2
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReportBoundaryTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "tests": 3
+    }
+  ],
+  "expectedTests": 11,
+  "newTestDefinitions": 6,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.class",
+    "dev/codex/schubert/nk/api/application/question/AnswerResult.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+    "dev/codex/schubert/nk/api/application/question/AnswerResult",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35352-api-command-outbox11-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35354-api-command-outbox11-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35356-api-command-outbox11-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35358-api-command-outbox11-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35360-api-command-outbox11-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35362-api-command-outbox11-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg35354-api-command-outbox11-v1",
+    "unit": "pg35360-api-command-outbox11-v1"
+  }
+}

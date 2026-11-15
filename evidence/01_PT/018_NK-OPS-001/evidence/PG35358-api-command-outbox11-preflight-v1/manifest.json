@@ -1,0 +1,63 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4085_api_command_outbox11_profile.json",
+    "sha256": "1797192a16247a0826f7e48a057429d5bb12d2f8aef3a7a8ee425f4969bd3660"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.java": "c62cea835ecc09e2e811cdf704d2e8c562b207f802a50c8f1789868fff3cfc1c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/AnswerResult.java": "bfa7c5a2827d5c97579a030df72997f928f5817b6d68ea9b0d918d88aef3fae6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandMetadataContractTest.java": "35defc94dd7470149d6e4c741ee00cc9196d5ad6731dd5290aecbcd61f9ce71c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReportBoundaryTest.java": "19d79b9b2d1c49b87b1d56df39f6bd4d37103403cca4311541bfdf741e440ffc",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionValueContractTest.java": "a9d4c3a9ced433c3c460df2da9f8cda2c7f69a700e88548d64270b87d37559db",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java": "b194e691797ce0e77608ac357062a8150c064f7ea25a5af0be437edb9396088b",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35354-api-command-outbox11-prepare-v1/manifest.json",
+    "sha256": "f73fd74fdf7e00989d933fb36a40572f4ac97468b3ccbb429761366cdef682d4"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35356-api-command-outbox11-static-v1/manifest.json",
+    "sha256": "62ee68d06edcb20e2ac7882a37e28eee2786e4fffbf98058d3592f73e67ed568"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4086_api_command_outbox11_static_admission.json",
+    "sha256": "6f6c5ab6a8c7d8a7557c0312167cf87a936271e022596348a2e749bb7f8a0ef5"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "58",
+      "reason": "Each explicitly selected enum factory returns a defensive independent array; deliberately mutate only the caller copy and independently assert a subsequent values result retains its literal first constant. No production field or admitted null enum is introduced.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "87",
+      "reason": "Each explicitly selected enum factory returns a defensive independent array; deliberately mutate only the caller copy and independently assert a subsequent values result retains its literal first constant. No production field or admitted null enum is introduced.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

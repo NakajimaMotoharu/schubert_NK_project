@@ -1,0 +1,22 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35360-API-COMMAND-OUTBOX-PURE11",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35354-api-command-outbox11-prepare-v1/manifest.json",
+    "sha256": "f73fd74fdf7e00989d933fb36a40572f4ac97468b3ccbb429761366cdef682d4"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35356-api-command-outbox11-static-v1/manifest.json",
+    "sha256": "62ee68d06edcb20e2ac7882a37e28eee2786e4fffbf98058d3592f73e67ed568"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 2,
+      "reason": "Each explicitly selected enum factory returns a defensive independent array; deliberately mutate only the caller copy and independently assert a subsequent values result retains its literal first constant. No production field or admitted null enum is introduced.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
