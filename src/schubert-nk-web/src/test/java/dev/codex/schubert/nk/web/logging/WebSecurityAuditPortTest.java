@@ -34,9 +34,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.function.Executable;
 
 /** AUT/MON/UI226252/SS314351352/PT-WEB-SECAUD001..010, no actual log backend or DB. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class WebSecurityAuditPortTest {
   private static final String K_TIMESTAMP = "timestamp";
   private static final String K_LEVEL = "level";
@@ -522,7 +524,8 @@ final class WebSecurityAuditPortTest {
   void concurrentRecordsKeepRequestIdsAndActorsSeparate() throws Exception {
     var sink = new Sink();
     var audit = audit(sink);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 8; i++) {
         int number = i;
@@ -540,6 +543,9 @@ final class WebSecurityAuditPortTest {
                 }));
       }
       for (var future : pending) assertTrue(future.get(10, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(8, sink.rows.size());
     var ids = new HashSet<String>();
@@ -555,5 +561,58 @@ final class WebSecurityAuditPortTest {
       assertTrue(ids.contains(new UUID(1, i + 1).toString()));
       assertTrue(names.contains(READER + i));
     }
+  }
+
+  @Test
+  void secaud011ClosedEnumsHaveExactNamesLookupAndDefensiveArrays() {
+    List<String> eventNames =
+        List.of(
+            "LOGIN_SUCCEEDED",
+            "LOGIN_FAILED",
+            "LOGIN_LOCKED",
+            "CSRF_DENIED",
+            "ROLE_DENIED",
+            "PROXY_DENIED",
+            "AUTHENTICATION_REQUIRED",
+            "API_SESSION_INVALID",
+            "LOGOUT_SUCCEEDED",
+            "LOGOUT_REVOCATION_QUEUED");
+    List<Event> events =
+        List.of(
+            Event.LOGIN_SUCCEEDED,
+            Event.LOGIN_FAILED,
+            Event.LOGIN_LOCKED,
+            Event.CSRF_DENIED,
+            Event.ROLE_DENIED,
+            Event.PROXY_DENIED,
+            Event.AUTHENTICATION_REQUIRED,
+            Event.API_SESSION_INVALID,
+            Event.LOGOUT_SUCCEEDED,
+            Event.LOGOUT_REVOCATION_QUEUED);
+    assertEquals(events, List.of(Event.values()));
+    for (int index = 0; index < eventNames.size(); index++) {
+      assertEquals(eventNames.get(index), events.get(index).name());
+      assertSame(events.get(index), Event.valueOf(eventNames.get(index)));
+    }
+    List<String> routeNames = List.of("LOGIN", "LOGOUT", "ALL_WEB", "ADMIN_USERS", "LOGS");
+    List<Route> routes =
+        List.of(Route.LOGIN, Route.LOGOUT, Route.ALL_WEB, Route.ADMIN_USERS, Route.LOGS);
+    assertEquals(routes, List.of(Route.values()));
+    for (int index = 0; index < routeNames.size(); index++) {
+      assertEquals(routeNames.get(index), routes.get(index).name());
+      assertSame(routes.get(index), Route.valueOf(routeNames.get(index)));
+    }
+    Event[] eventCopy = Event.values();
+    eventCopy[0] = Event.LOGIN_FAILED;
+    assertSame(Event.LOGIN_SUCCEEDED, Event.values()[0]);
+    Route[] routeCopy = Route.values();
+    routeCopy[0] = Route.LOGS;
+    assertSame(Route.LOGIN, Route.values()[0]);
+    for (String unknown : List.of("UNKNOWN", "", "login", "LOGIN ")) {
+      assertThrows(IllegalArgumentException.class, () -> Event.valueOf(unknown));
+      assertThrows(IllegalArgumentException.class, () -> Route.valueOf(unknown));
+    }
+    assertThrows(NullPointerException.class, () -> Event.valueOf(null));
+    assertThrows(NullPointerException.class, () -> Route.valueOf(null));
   }
 }

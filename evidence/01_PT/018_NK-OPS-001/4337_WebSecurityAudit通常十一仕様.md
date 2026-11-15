@@ -1,0 +1,5 @@
+# WebSecurityAudit通常十一仕様
+
+WebSecurityAudit originalPort10 all independent JSON keysets, ten event catalog, five routes, fixed UTCmillis, actor/context redaction, numericIP/nonDNS, versions1/64/65, null and callback fault identities, eight task/two workers. Fixonlyunboundedpool.close to finallyshutdownNow/await10assert/Timeout30, inverseallten. Add one public enum fixedname/lookup/unknown/null/valuesdefensive contract, whole11. Main Audit andSessionPrincipal two source unchanged; freshRootNullAway/static/currentProtocol176/explicitGson2.14+errorproneannotations SDK. No actual loggerprovider/logfile/HTTP/JMS/DB/backend/Root2Actual4/VM/native/aru/HOLD. Currentphysical CRC-init/XML/default/rawAudit+Event+Route target3, exposeothermisses. Nooldwholejars/pastsuccessreplays, nooriginal625leaf/formal/451 promotion.
+
+NK-WEB-001/MON004/AUT001..004; UI226252; SS314351352/451; PT-WEB-SECAUD001..011。期待は既fixedcatalog/JSON literal/schemaと新enum名十五定数を独立固定、productionhelperでexpected生成0。finite.1/.3/.9＋enum/当source通常PT.1/.3/.9＝追加.2/.6/1.8 cap2、原904.85/SV/全開始保持。Main変更0/SS修正不要、失敗未実行をPASSへ算入0。
