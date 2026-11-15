@@ -1,0 +1,124 @@
+{
+  "groupId": "PGPT-WBS65-SSC424-JDBC-NONNULL-CLEANUP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2176_WBS65SSC424425通常二十六限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "AuthSessionService.issue及びSessionAuditWriter.writeの全owned PreparedStatement/ResultSetは取得直後に既RequiredColumn.requireValueを通しnonnullを確立する。provider返却nullは既22004 SQLDataExceptionとして拒否し、発行側は既9000固定AuthenticationInfrastructureExceptionへ変換する。正常SQL/順序/binding/lock/rowcount/時刻8時間/microsecond/DIF016/監査JSON/role/owner/暗号/format/public API/呼出元TX所有を変更しない。Connectionは借用でcommit/rollback/close/setAutoCommitを行わず、取得できたstatement/rowだけを一回逆順にcloseする。各nonnull資源の本体を明示try-catch(SQLException|RuntimeException|Error)-finallyで保護、catchはnullable primaryへ同一failureを保存して再throwし、finallyはAPI database内の小さいstateless JdbcResourceCleanup.close(primary,SqlClose)でcloseする。SqlCloseはthrowsSQLExceptionに限定したfunctional interface、cleanupはstatic操作だけを持つ非生成可能interfaceで余分なconstructor/instance状態を持たない。action nonnullは呼出前提。close成功はprimary graphへ変更0、primary無しclose失敗は同一SQL/RTE/Errorを伝播、primary有りclose失敗は元primary.addSuppressedで元graphを保持、同一instance self-suppressionはJDK IllegalArgumentException/causeをTWR同様に維持する。Batchの別failure precedence helperを流用せずAPI→Batch依存0、fatal分類の追加/変更も0。INSERT ciphertextはprepare/nonnull検査まで含む最外側の既finallyで必ずzeroにし、取得失敗を保護域の外へ出さない。resource nullは取得無しでrelease0、row nullでも既statementは一回closeする。外部設定/provider/driver接続/資格/権限/秘密/DDL/電文/承認済DIFを追加変更0。 原issue8/audit9の全Test本文・独立三AESgolden/固定hash/完全SQL/UTC/JSON/alias/error/所有/finite workerを保持し、Issueの既純粋Proxy FixtureへnullStatementAt/nullRowAtのdefault空値controlだけを追加する。新AUT-ISS-RESOURCE001/002はstatement五箇所(USER/INSERT/ACTIVE/REPLACE/AUDIT)とrow二箇所(USER/ACTIVE)のnull返却を独立に与え、9000固定/cause-suppression初期0/owned row-statement一回close/借用TX変更0/entropy-nonce-ciphertext全zeroを確認する。新JdbcResourceCleanupTest全五はaction null前提、通常closeの呼出一回/primary不変、primary無しSQL-RTE-Error同一、primary有り各closefailureの正確なsuppressed identity、selfaliasの元IllegalArgumentException causeを固定graph期待で検証。期待をproduction cleanup/hash/codecで作らず元literalと独立公開objects/countersだけを使う。新七だけ新定義、旧十七は新Main必要再資格で新規加算0、全二十四を当source一singleexecにしてfreshRootNullAway/static/Code物理実測/CRC-init/XML/default+raw必須四を照合する。新interface/SqlClose/package Code0は自然値、未実行をcompiler除外/到達不能/旧exec合算へしない。実DB/生session/Root/cohort/VM/native/aru/actual4/Root2/SDKbackend/HOLDは未受入を維持する。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4300_SSC424_JDBC資源nonnull・発行監査通常二十四仕様.md",
+      "sha256": "bf85e93a2954d6e9a35c1ed24949662df6827b793882d5ef215450ae99f53d58"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34000-ssc424-jdbc-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "6fa4e5e316fe17513a9f9afba863054244dee3dff2b4aee0d8d708b14af312c7"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-02",
+    "WBS-P004-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "WBS-P007-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java": "WBS-P007-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java": "WBS-P004-05"
+  },
+  "source": "d96e3a32c8549f59fddb9610f39caff8eaaa3bc2",
+  "run": "PG34020-SSC424-SESSION-AUDIT-CLEANUP-WHOLE24",
+  "estimate": {
+    "low": 0.8,
+    "base": 2.4,
+    "high": 7.2
+  },
+  "capPp": 8,
+  "workIds": [
+    "P00702_SSC424_ISSUE_AUDIT_NONNULL_CLOSE",
+    "P00405_SSC424_JDBC_RESOURCE_CLEANUP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2175_WBS65予実・SSC424425通常二十六限定閉鎖版642.json",
+    "sha256": "dd1240f59c6148c68096b7c1332654b8c436c647dc39d8e8247c0af1127b0b8b"
+  },
+  "nextCommand": "Commit/push26 proof and publish limitedSSC424425ledger onlymain. Continue original source criteria: inspect IssuedContext value/equals/hashCode and SessionRevocationReason closed-set gap; reuse unchanged old26/root/static by exact scope where valid, add meaningful independent tests and one necessary whole28 only if original tests absent. No replay26 solelyconfirmation and no fakecounter/equality expected. Keep allRoot2/Actual4/SDKbackend/DBVMnativearu/CHR/COPY24/QA051HOLD. Freshquota/hourly; ordinarygroupnotstop.",
+  "sourceAfter": "aae6e4a310eae9eff5c63ab5346321f96d19dd6f",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG34046-ssc425-session26-component-join-v1/manifest.json",
+  "manifestSha256": "52b058052e7431b158e2b3d09cf9ab4911e1d849634c3d5ed0a0ad50c7375d31",
+  "terminalAtUTC": "2026-11-15T12:55:04.081591+00:00",
+  "outcome": "THREE_MAIN_COMPONENT_FOUR100_ONLY_FULL_API_AND_FORMAL_UNACCEPTED",
+  "technical": {
+    "productionCoreMain": "aae6e4a310eae9eff5c63ab5346321f96d19dd6f",
+    "actualUnitSource": "5ac87aa44cd80ae298c3d7908d373c6bb4af36b9",
+    "tests": 26,
+    "newDefinitions": 9,
+    "necessaryPriorDefinitions": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 196,
+    "positiveCrc": 15,
+    "freshMainRootNullAway": true,
+    "staticPmdRaw": 47,
+    "staticApplicable": 0,
+    "staticUnclassified": 0,
+    "spotbugsRaw": 1,
+    "spotbugsApplicable": 0,
+    "spotbugsGuardCheckedEdgeProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34036-ssc425-session26-preflight-v1/manifest.json",
+      "sha256": "10892fee2e56949ef4aa6eb2d66888c6368480133eb04fed7d56e6359cdb3dd9"
+    },
+    "targetRawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 604
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 30
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 153
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 23
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 3
+      }
+    },
+    "targetFourQualified": true,
+    "fullApiFourQualified": false,
+    "whole196Qualified": false,
+    "completedGroup": {
+      "low": 0.9,
+      "base": 2.7,
+      "high": 7.8
+    },
+    "originalStartFrozen": {
+      "low": 0.8,
+      "base": 2.4,
+      "high": 7.2
+    },
+    "newDependencyOnly": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.6
+    },
+    "groupCapPp": 8,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "Coreaae6e4a3/Unit5ac87aa4/PG34040原17＋新9の全26FES0真正0。資源null全七境界は22004→9000固定・borrowedTX非所有・取得済一回終了・INSERT最外側wipeを保持。Issue/Auditはtyped close呼出以外inverse byte exact、旧17本文保持、新cleanup五＋typed二でSQL/RTE/Error/primary/suppression/selfalias/呼出一回/nullable前提を独立検証。PG34042現196physical/15positiveCRC-init/XML真正、freshMain15RootNullAway/GJF-CS0。PMD47は全site理由を記録し適用未分類0、SBraw1はrequireValueがnull時だけthrowし非null時は必ずfinallyへ到達するchecked-edge反例で限定false-positive判定、元XML保持・抑制0。PG34044同execraw対象3Mainは153LINE/8METHOD/3CLASS/30BRANCH/604I全miss0で必須四100。全API/196は未実行method/branchあり未受入、旧24未実行/旧static1/41を成功へせず歴史保持。BUG3033/3034当3Main通常PT限定是正、YKT2553globalOPEN。原開始.8/2.4/7.2 cap8保持、追補.1/.3/.6だけ追加、合計.9/2.7/7.8配送のみ完了・残397.324/837.386/1643.415。App193/35392/35327/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変。実DB/Root/SDKbackend/Actual4/Root2/VM/native/aru/CHR/COPY24/QA051HOLD保持。"
+}
