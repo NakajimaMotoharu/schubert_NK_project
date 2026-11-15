@@ -1,0 +1,71 @@
+{
+  "groupId": "PGPT-WBS65-LEDGER-OPEN-CLOSED-TRACE-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2083_WBS65障害状態26照合終了.json",
+  "category": "CONTRACT_AUDIT",
+  "kind": "REWORK",
+  "scope": "Read-only original public qualification manifest/source refs and ledger status correction for recent migration BUG2900..2925, plus225-candidate disposition inventory. Preserve all held/partial/unproved statuses and original text, no PT replay/runtime/source change. BUG2999/YKT2527 remain open until every applicable candidate is resolved or reasoned nonapplicable.",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/3395_ledger_status_reconciliation_plan.json",
+      "sha256": "ec02a0221b84a624030b86fcbe3b3dd280c9e3d3d2f41437e00188f9bddd9eca"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "source": "84467c681ebf2c905879147c1c113f4b48ba3f96",
+  "run": "PG33690-LEDGER-STATUS-ORIGINAL-PROOF",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 5.4
+  },
+  "capPp": 6,
+  "workIds": [
+    "F03_LEDGER_STATUS_RECONCILIATION_REWORK"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2082_WBS65予実・障害状態26照合後版600.json",
+    "sha256": "27489da2c6ff997a0862e4e1646150c6c9074480d6e579005c2427cb71a05eee"
+  },
+  "nextCommand": "Commit ledger26/sourcejoin; continue remaining199 candidate scope/evidence review in next bounded group using dated catalog, no product success replay or held runtime/DB/native/source actions. Do not close sharedYkt2431 or BUG2999/YKT2527 until all candidate scopes resolved/nonapplicable. Reconcile next permitted original PG/PT after ledger quality. Freshquota/hourly; ordinarygroupnotstop.",
+  "sourceAfter": "ef461eba8bea80b4ed17f52d832094c139fef122",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33698-ledger26-source-state-join-v1/manifest.json",
+  "manifestSha256": "77a150c72d058ca8c848bc09c204c7bcad6fae84386fa16ed8f69aed6be5d3ef",
+  "terminalAtUTC": "2026-11-15T03:40:49.777770+00:00",
+  "outcome": "EXISTING26BUG_24YKT_LIMITED_STATE_SYNC_199_PENDING_NO_PRODUCT_REPLAY",
+  "technical": {
+    "kind": "LEDGER26_EXISTING_LIMITED_CLOSURES_EVIDENCE_RECONCILIATION",
+    "sourceCoreUnchanged": "ef461eba8bea80b4ed17f52d832094c139fef122",
+    "actualOriginalUnit": "a48eec601dfeeb623e2ed073445b906e3560104a",
+    "audit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33696-ledger-status-26-evidence-join-v1/manifest.json",
+      "sha256": "f24d2635dc20e9010a29df0b37f1a306c0eda3fec2ff73213d974d90cde4f0a5"
+    },
+    "candidateCatalog": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33694-ledger-status-dated-catalog-v1/candidate-catalog.json",
+      "sha256": "4c03bb70ac8f542ed1939b02a1e88c1b67d53b43e0203fb69255f58184a32e4c"
+    },
+    "originalCandidates": 225,
+    "reviewedCandidates": 26,
+    "bugStatusCorrections": 26,
+    "yktStatusCorrections": 24,
+    "remainingOriginalCandidates": 199,
+    "remainingCandidatesNotDeclaredUnresolved": true,
+    "sharedYkt2431Unchanged": true,
+    "bug2999Ykt2527RemainOpen": true,
+    "parserDefect3000AndYkt2528MetadataClosed": true,
+    "independentToolChecks": 10,
+    "productTestsExecuted": 0,
+    "qualifiedProductSourceBytesUnchanged": 105,
+    "newUniqueProductTestDefinitions": 0,
+    "oldSuccessfulTestsReplayed": 0,
+    "failedOriginalEvidencePreserved": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "checkpointText": "PG33694/33696/33698で直近BUG2900～2925の26記録・対応YKT24記録を元2026-11-14の明示限定CLOSEDと元公開manifest/hash/source/run/成功結果/同source default-raw/工具固有後条件で照合し、原OPEN表記を当時履歴として残して現行限定状態へ同期。原失敗/prestyle/未達を保存し新試験・新受入0、共有YKT2431の他対象OPEN/実環境HOLDは不変更。元OPEN表記候補225の残199は未reviewで未解決件数と断定しない。BUG2999/YKT2527は全候補照合未完でOPEN、抽出工具BUG3000/YKT2528の日本語PG境界/複数CLOSED/参照偽陽性は独立正負10例・元26対象でmetadata限定CLOSED、初版catalog二つは未受入保全。Coreef461eba/Unita48eec60全1050/default534/raw617認定byte105source不変、元成功再演0。正式1964/53・正本184/625・元190新0・工数null、rawApp179/35140/35075/不成功65を不変更。手戻り群.6/1.8/5.4のみ完了、残397.324/837.386/1643.415・原904.85/SV/元費保持、専有実費token不明。全PGPT/RootActual4/native/DB/aru/CHR/451/ITST/HOLD未受入。"
+}

@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5398",
+  "groupId": "PGPT-WBS65-LEDGER-OPEN-CLOSED-TRACE-20261115",
+  "startEvent": "PGPT-20261008-5397",
+  "sourceAtGroupStart": "84467c681ebf2c905879147c1c113f4b48ba3f96",
+  "productionCoreMain": "ef461eba8bea80b4ed17f52d832094c139fef122",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 5.4
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-15T03:41:10.059826+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 66,
+      "remainingPercent": 34,
+      "resetsAt": 1795012174,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "observedSharedPp": 0,
+  "actualAllocatedPp": null,
+  "N": null,
+  "T": null,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33698-ledger26-source-state-join-v1/manifest.json",
+    "sha256": "77a150c72d058ca8c848bc09c204c7bcad6fae84386fa16ed8f69aed6be5d3ef"
+  },
+  "outcome": "EXISTING26BUG_24YKT_LIMITED_STATE_SYNC_199_PENDING_NO_PRODUCT_REPLAY",
+  "technical": {
+    "kind": "LEDGER26_EXISTING_LIMITED_CLOSURES_EVIDENCE_RECONCILIATION",
+    "sourceCoreUnchanged": "ef461eba8bea80b4ed17f52d832094c139fef122",
+    "actualOriginalUnit": "a48eec601dfeeb623e2ed073445b906e3560104a",
+    "audit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33696-ledger-status-26-evidence-join-v1/manifest.json",
+      "sha256": "f24d2635dc20e9010a29df0b37f1a306c0eda3fec2ff73213d974d90cde4f0a5"
+    },
+    "candidateCatalog": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33694-ledger-status-dated-catalog-v1/candidate-catalog.json",
+      "sha256": "4c03bb70ac8f542ed1939b02a1e88c1b67d53b43e0203fb69255f58184a32e4c"
+    },
+    "originalCandidates": 225,
+    "reviewedCandidates": 26,
+    "bugStatusCorrections": 26,
+    "yktStatusCorrections": 24,
+    "remainingOriginalCandidates": 199,
+    "remainingCandidatesNotDeclaredUnresolved": true,
+    "sharedYkt2431Unchanged": true,
+    "bug2999Ykt2527RemainOpen": true,
+    "parserDefect3000AndYkt2528MetadataClosed": true,
+    "independentToolChecks": 10,
+    "productTestsExecuted": 0,
+    "qualifiedProductSourceBytesUnchanged": 105,
+    "newUniqueProductTestDefinitions": 0,
+    "oldSuccessfulTestsReplayed": 0,
+    "failedOriginalEvidencePreserved": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "newAcceptance": 0,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortRate": null,
+  "nextCommand": "Commit ledger26/sourcejoin; continue remaining199 candidate scope/evidence review in next bounded group using dated catalog, no product success replay or held runtime/DB/native/source actions. Do not close sharedYkt2431 or BUG2999/YKT2527 until all candidate scopes resolved/nonapplicable. Reconcile next permitted original PG/PT after ledger quality. Freshquota/hourly; ordinarygroupnotstop.",
+  "remainingEstimatePp": {
+    "low": 397.324,
+    "base": 837.386,
+    "high": 1643.415
+  },
+  "remainingForecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2082_WBS65予実・障害状態26照合後版600.json",
+    "sha256": "27489da2c6ff997a0862e4e1646150c6c9074480d6e579005c2427cb71a05eee"
+  },
+  "forecastNotActualCost": true,
+  "canonical625Progress": {
+    "canonicalRowCount": 625,
+    "uniqueCompletedRows": 184,
+    "completedStage1Rows": 156,
+    "completedStage2Rows": 10,
+    "completedStandaloneRows": 18,
+    "unknownCompletedIds": [],
+    "duplicateCompletedIds": [],
+    "legacyPreparationEntryCount": 157,
+    "legacyPreparationDistinctEntryCount": 155,
+    "legacyPreparationCanonicalStage1References": 142,
+    "legacyPreparationCanonicalCompletedStage1Rows": 142,
+    "legacyPreparationDuplicateEntries": [
+      "WBS-P005-01/1",
+      "WBS-P020-01.01/1"
+    ],
+    "legacyPreparationNoncanonicalLabels": [
+      "C01 current resource/old limited proof binding",
+      "C02 Inspector required exclusive-current-CP requalification",
+      "C02-R1",
+      "C02-R2",
+      "C03 32/16/20 static configuration expectations",
+      "C05 eight source tuples",
+      "C06 public seven config and ID/profile declarations",
+      "C07 eight distribution configs/current-byte historical offline parser scope",
+      "C08 wrapper/receipt/runbook scope correspondence",
+      "F04 host tool/version/retention preparation",
+      "G13.02 source-owner-SQL-requirement candidate trace",
+      "G13.03 bootstrap source/owner/requirement/structural-method index",
+      "WBS-C04 static preparation"
+    ],
+    "preparationRowsNotCompleted": [],
+    "coherent": true,
+    "coherenceScope": "PRIMARY_CANONICAL_COMPLETION; LEGACY_ENTRIES_ARE_REFERENCES_ONLY",
+    "legacyPreparationMatchesPrimary": true,
+    "effortCompletionRate": null,
+    "rowsAreNotEffortWeights": true,
+    "legacyEntriesAreNotCanonicalRowCounts": true,
+    "masterTable": {
+      "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv",
+      "sha256": "b7bf00dbea8ab47d3820db70335342e543f6f7bcd595e2ffc43e6e1086054579"
+    },
+    "completedCanonicalOriginalPricePp": {
+      "low": 21.726,
+      "base": 55.664,
+      "high": 112.285
+    },
+    "pricesAreForecastNotActualCost": true,
+    "formalAcceptanceDerivedFromRowCount": false
+  }
+}
