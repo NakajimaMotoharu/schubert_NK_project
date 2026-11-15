@@ -126,7 +126,7 @@ public final class CurrentMigrationMappingVerifier {
       long currentId = signed(row[0]);
       ids.add(new ScenarioEntryMigrationMap.IdPair(currentId, signed(row[1])));
       int game = unsigned(row[3]);
-      @Nullable ScenarioFileMigrationMap.MappedFile file = byTarget.get(signed(row[4]));
+      ScenarioFileMigrationMap.@Nullable MappedFile file = byTarget.get(signed(row[4]));
       if (file == null || file.gameId() != game) throw invalid();
       placements.add(
           new ScenarioEntryPlacementMap.Placement(
