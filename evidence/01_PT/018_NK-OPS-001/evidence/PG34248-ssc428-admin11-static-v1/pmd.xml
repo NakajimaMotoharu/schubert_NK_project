@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-15T23:16:31.016">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java">
+<violation beginline="30" endline="30" begincolumn="29" endcolumn="45" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="30" endline="30" begincolumn="48" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="42" endline="42" begincolumn="29" endcolumn="45" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="closeStatement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="42" endline="42" begincolumn="48" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="closeStatement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="54" endline="54" begincolumn="29" endcolumn="45" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="closeRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="54" endline="54" begincolumn="48" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.database" class="JdbcResourceCleanup" method="closeRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java">
+<violation beginline="81" endline="81" begincolumn="15" endcolumn="24" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="86" endline="86" begincolumn="19" endcolumn="22" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="91" endline="91" begincolumn="39" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="91" endline="91" begincolumn="58" endcolumn="63" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="98" endline="98" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="98" endline="98" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="verifyIdentity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="126" endline="126" begincolumn="11" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="131" endline="131" begincolumn="15" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="139" endline="139" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="139" endline="139" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="146" endline="146" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="146" endline="146" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="owner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="158" endline="158" begincolumn="11" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="172" endline="172" begincolumn="15" endcolumn="19" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" variable="rows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="184" endline="184" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="184" endline="184" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="191" endline="191" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="191" endline="191" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminCommandAuthenticator" method="lockUsers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java">
+<violation beginline="54" endline="54" begincolumn="13" endcolumn="22" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="59" endline="59" begincolumn="17" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="65" endline="65" begincolumn="37" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="65" endline="65" begincolumn="56" endcolumn="61" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="72" endline="72" begincolumn="33" endcolumn="49" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="72" endline="72" begincolumn="52" endcolumn="57" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="81" endline="81" begincolumn="13" endcolumn="22" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="90" endline="90" begincolumn="33" endcolumn="49" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="90" endline="90" begincolumn="52" endcolumn="57" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="verify" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="142" endline="142" begincolumn="11" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" variable="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="147" endline="147" begincolumn="15" endcolumn="18" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" variable="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="168" endline="168" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="168" endline="168" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="175" endline="175" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="175" endline="175" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthenticationContextVerifier" method="readSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java">
+<violation beginline="55" endline="55" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="ContextHash" method="calculate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java">
+<violation beginline="77" endline="77" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="97" endline="97" begincolumn="45" endcolumn="71" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest.Fixture" variable="bindings" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="149" endline="149" begincolumn="28" endcolumn="51" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest.Fixture" method="statement" variable="bound" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="283" endline="283" begincolumn="16" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="targetPresenceN12AndNullContractsFailBeforeAnySql" variable="c" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="466" endline="466" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="466" endline="466" begincolumn="16" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="472" endline="484" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="489" endline="489" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="490" endline="490" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

@@ -28,9 +28,12 @@ import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** PT-AUT-PRE001..008; SS314 9.2/SS332 12. Own interface callbacks, no database/lock. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AdminPreludeJdbcPortTest {
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00Z");
   private static final AuthenticationContext INPUT = AuthenticationContext.of("a".repeat(64));
@@ -87,7 +90,9 @@ final class AdminPreludeJdbcPortTest {
     boolean authenticated = true;
     String role = ADMIN;
     String faultAt = "";
-    RuntimeException runtimeFailure;
+    String nullStatementAt = "";
+    String nullRowAt = "";
+    @Nullable RuntimeException runtimeFailure;
     final List<String> order = new ArrayList<>();
     final Map<String, Map<Integer, Object>> bindings = new HashMap<>();
     final List<String> acquired = new ArrayList<>();
@@ -125,7 +130,7 @@ final class AdminPreludeJdbcPortTest {
           });
     }
 
-    PreparedStatement statement(String sql) throws SQLException {
+    @Nullable PreparedStatement statement(String sql) throws SQLException {
       String name =
           switch (sql) {
             case OWNER_SQL -> CANDIDATE;
@@ -139,6 +144,7 @@ final class AdminPreludeJdbcPortTest {
           };
       order.add(name);
       fault(name + ".prepare");
+      if (name.equals(nullStatementAt)) return null;
       acquired.add(name + ".statement");
       Map<Integer, Object> bound = new HashMap<>();
       bindings.put(name, bound);
@@ -162,7 +168,8 @@ final class AdminPreludeJdbcPortTest {
           });
     }
 
-    ResultSet row(String name) {
+    @Nullable ResultSet row(String name) {
+      if (name.equals(nullRowAt)) return null;
       acquired.add(name + ".row");
       List<Long> ids =
           switch (name) {
@@ -456,7 +463,8 @@ final class AdminPreludeJdbcPortTest {
 
   @Test
   void parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership() throws Exception {
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       List<Future<Long>> futures = new ArrayList<>();
       for (long id = 1; id <= 32; id++) {
         long expected = id;
@@ -477,6 +485,54 @@ final class AdminPreludeJdbcPortTest {
       }
       for (int index = 0; index < futures.size(); index++)
         assertEquals(index + 1L, futures.get(index).get(5, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void resource001AllPreludeAndAuthenticationStatementsFailClosedOnNull() {
+    for (String label :
+        List.of(CANDIDATE, ADVISORY, USERS, LOCKED, AUTH_USER, AUTH_SESSION, TOUCH)) {
+      Fixture f = new Fixture();
+      f.nullStatementAt = label;
+      infrastructure(f, Mutation.DISABLE, OptionalLong.of(20));
+      assertEquals(label, f.order.getLast());
+    }
+  }
+
+  @Test
+  void resource002AllPreludeAndAuthenticationNullRowsCloseTheirOwnedStatements() {
+    for (String label : List.of(CANDIDATE, ADVISORY, USERS, LOCKED, AUTH_USER, AUTH_SESSION)) {
+      Fixture f = new Fixture();
+      f.nullRowAt = label;
+      infrastructure(f, Mutation.DISABLE, OptionalLong.of(20));
+      assertEquals(label, f.order.getLast());
+    }
+  }
+
+  @Test
+  void mutation001ClosedVocabularyLookupDefensiveValuesAndMembershipReduction() {
+    assertEquals(
+        List.of("CREATE", "ENABLE", "DISABLE", "PROMOTE", "DEMOTE", "RESET_PASSWORD", "UNLOCK"),
+        java.util.Arrays.stream(Mutation.values()).map(Enum::name).toList());
+    assertSame(Mutation.CREATE, Mutation.valueOf("CREATE"));
+    assertSame(Mutation.ENABLE, Mutation.valueOf("ENABLE"));
+    assertSame(Mutation.DISABLE, Mutation.valueOf("DISABLE"));
+    assertSame(Mutation.PROMOTE, Mutation.valueOf("PROMOTE"));
+    assertSame(Mutation.DEMOTE, Mutation.valueOf("DEMOTE"));
+    assertSame(Mutation.RESET_PASSWORD, Mutation.valueOf("RESET_PASSWORD"));
+    assertSame(Mutation.UNLOCK, Mutation.valueOf("UNLOCK"));
+    var exposed = Mutation.values();
+    exposed[0] = Mutation.UNLOCK;
+    assertSame(Mutation.CREATE, Mutation.values()[0]);
+    for (Mutation mutation : Mutation.values())
+      assertEquals(
+          List.of(Mutation.DISABLE, Mutation.DEMOTE).contains(mutation),
+          mutation.reducesMembership());
+    for (String unknown : List.of("UNKNOWN", "", "create", " CREATE "))
+      assertThrows(IllegalArgumentException.class, () -> Mutation.valueOf(unknown));
+    assertThrows(NullPointerException.class, () -> Mutation.valueOf(null));
   }
 }

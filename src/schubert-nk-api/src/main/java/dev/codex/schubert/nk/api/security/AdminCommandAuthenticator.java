@@ -1,5 +1,8 @@
 package dev.codex.schubert.nk.api.security;
 
+import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
+
+import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,6 +10,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.OptionalLong;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Ordered prelude for User mutations, before normal authentication and Inbox. Caller owns the write
@@ -73,10 +77,30 @@ public final class AdminCommandAuthenticator {
       String hash = hashes.calculate(context);
       long candidate = owner(connection, hash, false);
       if (mutation.reducesMembership()) {
-        try (var statement = connection.prepareStatement("select pg_advisory_xact_lock(71419601)");
-            var row = statement.executeQuery()) {
-          require(row.next());
-          require(!row.next());
+        {
+          var statement =
+              requireValue(connection.prepareStatement("select pg_advisory_xact_lock(71419601)"));
+          @Nullable Throwable jdbcFailure1 = null;
+          try {
+            {
+              var row = requireValue(statement.executeQuery());
+              @Nullable Throwable jdbcFailure2 = null;
+              try {
+                require(row.next());
+                require(!row.next());
+              } catch (SQLException | RuntimeException | Error failure) {
+                jdbcFailure2 = failure;
+                throw failure;
+              } finally {
+                JdbcResourceCleanup.closeRows(jdbcFailure2, row);
+              }
+            }
+          } catch (SQLException | RuntimeException | Error failure) {
+            jdbcFailure1 = failure;
+            throw failure;
+          } finally {
+            JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);
+          }
         }
       }
       lockUsers(connection, candidate, target.orElse(candidate), mutation.reducesMembership());
@@ -98,40 +122,77 @@ public final class AdminCommandAuthenticator {
     String sql =
         "select user_id from schubert.auth_sessions where context_hash=?"
             + (lock ? " for update" : "");
-    try (var statement = connection.prepareStatement(sql)) {
-      statement.setString(1, hash);
-      try (var row = statement.executeQuery()) {
-        if (!row.next()) throw new AuthenticationContextException();
-        long id = number(row);
-        require(id >= 1 && id <= 999_999_999_999L);
-        require(!row.next());
-        return id;
+    {
+      var statement = requireValue(connection.prepareStatement(sql));
+      @Nullable Throwable jdbcFailure3 = null;
+      try {
+        statement.setString(1, hash);
+        {
+          var row = requireValue(statement.executeQuery());
+          @Nullable Throwable jdbcFailure4 = null;
+          try {
+            if (!row.next()) throw new AuthenticationContextException();
+            long id = number(row);
+            require(id >= 1 && id <= 999_999_999_999L);
+            require(!row.next());
+            return id;
+          } catch (SQLException | RuntimeException | Error failure) {
+            jdbcFailure4 = failure;
+            throw failure;
+          } finally {
+            JdbcResourceCleanup.closeRows(jdbcFailure4, row);
+          }
+        }
+      } catch (SQLException | RuntimeException | Error failure) {
+        jdbcFailure3 = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);
       }
     }
   }
 
   private static void lockUsers(
       Connection connection, long candidate, long target, boolean reducing) throws SQLException {
-    try (var statement =
-        connection.prepareStatement(
-            """
+    {
+      var statement =
+          requireValue(
+              connection.prepareStatement(
+                  """
         select id from schubert.app_users
          where id=? or id=? or (? and role='ADMIN' and status='ACTIVE')
          order by id for update
-        """)) {
-      statement.setLong(1, candidate);
-      statement.setLong(2, target);
-      statement.setBoolean(3, reducing);
-      try (var rows = statement.executeQuery()) {
-        boolean found = false;
-        long previous = 0;
-        while (rows.next()) {
-          long id = number(rows);
-          require(id > previous);
-          previous = id;
-          found |= id == candidate;
+        """));
+      @Nullable Throwable jdbcFailure5 = null;
+      try {
+        statement.setLong(1, candidate);
+        statement.setLong(2, target);
+        statement.setBoolean(3, reducing);
+        {
+          var rows = requireValue(statement.executeQuery());
+          @Nullable Throwable jdbcFailure6 = null;
+          try {
+            boolean found = false;
+            long previous = 0;
+            while (rows.next()) {
+              long id = number(rows);
+              require(id > previous);
+              previous = id;
+              found |= id == candidate;
+            }
+            require(found);
+          } catch (SQLException | RuntimeException | Error failure) {
+            jdbcFailure6 = failure;
+            throw failure;
+          } finally {
+            JdbcResourceCleanup.closeRows(jdbcFailure6, rows);
+          }
         }
-        require(found);
+      } catch (SQLException | RuntimeException | Error failure) {
+        jdbcFailure5 = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);
       }
     }
   }

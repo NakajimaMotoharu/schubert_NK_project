@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "e646c8f27838fa57a877738c215aaea7ffa65aac",
+  "designPublication": {
+    "actualExit": 0,
+    "atUTC": "2026-11-15T14:10:06.328949+00:00",
+    "ssc": "SSC428",
+    "baseMain": "28d5485d9382ef7f5f5addb9610c1f9e27dcc02f",
+    "designSource": "b272c70bda36cfce5475da382f39694425628af7",
+    "mainCommit": "71898c4d8b9cc15faf9e402608b11207fde6c264",
+    "pr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/371",
+    "paths": [
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "ordinaryMerge": true,
+    "implementationIncluded": false,
+    "formalAccepted": false
+  },
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java",
+      "tests": 11
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextVerifier.java": "37b2aca8c1bc67d91baea35d3b5e214b82bb083e24d0ac36a67deedbd25c6e62",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticatedActor.java": "830a87635d2782354fe9c03e5d7612a2ab88364cdc31157b501fbf7baf361469",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": "61f34f72e9936842effced2a9ea52719226f8a8311f4b0e04dc21933b936d6d9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java": "5a0e03c3b5aa5c14f41b8273bca454409288b88b50190f23d1d59982be8552ce",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java": "614b497aa86335988521334eb519c689aa1a056318d93e345e6faf8bd0137a5a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/package-info.java": "a91727bb730f8cc691a3d9e256efb2c942e33ed5254d3cf3d3c03e6b486ad453",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AdminCommandAuthenticator.java": "07ccf831ef7e491d5d58cc4de65904228da27e225175d44c35e4f9727549374b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationService.java": "8aa174fe39b5d71afe07443beb133063418edd1de095c16b3e288ac26d1faebb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthorizationException.java": "d380238db3295ef027da57f23eb88cc7ade4c319aefe5f73d7bd71392bce4ffa",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java": "a8a91d826e2f3c07c7cd3e01e7fcbc612c483cd0a0a71ebd3c353b88621c4fa9"
+  },
+  "sdkHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "mainOwnershipWrapperInverseBeforeFormattingExact": true,
+  "oneMultiHeaderNormalizedAndInverseExact": true,
+  "resourceScopes": {
+    "statement": 3,
+    "row": 2,
+    "rows": 1
+  },
+  "originalEightAssertionsInverseFormattedExact": true,
+  "oldTestSha256": "3e1ae38ba52644c2027a712bd22ea165c29e42f6d044712c6d61d70ce1d4516f",
+  "mainRegularLiteralSequenceExact": true,
+  "textBlockSqlValueExactAfterIncidentalIndent": true,
+  "newDefinitions": 3,
+  "necessaryPriorDefinitions": 8,
+  "expectedTests": 11,
+  "targets": [
+    "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator",
+    "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation"
+  ],
+  "memoryProxyOnly": true,
+  "actualDbFixtureNotCopiedOrExtracted": true,
+  "actualAdvisoryLockOrAdminMutation": false,
+  "applicationTestsExecuted": 0,
+  "newAcceptance": 0
+}
