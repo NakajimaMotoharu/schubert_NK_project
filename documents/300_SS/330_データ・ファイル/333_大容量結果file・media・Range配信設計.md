@@ -360,3 +360,9 @@ Metric labelにpath、file名、user ID、media IDを設定しない。Type、st
 | 2026-08-31 | 横断監査でAsset 512/Transfer 256 byteのpath上限と、wire表示file name 256 byteをUI 235/237に統一。 |
 | 2026-09-01 | SSC-003によりAPI descriptor発行を`MediaQueryService`、Web Range配信を`MediaRangeService`へ統一し、311/323との委譲関係を明確化。 |
 | 2026-09-02 | SSC-004によりmedia descriptorの7拡張子/MIME組合せとHTTP attachment専用`application/octet-stream`を固定。 |
+
+## SSC-439 純例外policyの非instance namespace責務（2026-11-16）
+
+MorningSqlFailuresとJdbcResourceFailuresは例外優先順位だけを扱う非instanceのpackage-private static namespaceとし、final class宣言とprivate空constructorだけをstatic-only package-private interfaceへ置き換える。全static method名・descriptor・注釈・bodyを逆展開byte exactで保持し、既知SQL/IO/catalog判定・null契約・primary/secondary優先・suppressed固定診断・Error cause/suppressed/SQLnextのidentity付き有限BFS順・閉じたredactionを変更0。新instance/abstract method/field/portを導入せず、型のpackage可視性は不変。型kindがclassからinterfaceになるため旧Methodref callerbinary混用は禁止、全十sourcecallerのpath/hash/owner/static呼出箇所を保存、将来releaseは全caller/fullmoduleをfresh再compileする。今回は実JDBC-DBやHOLD依存の全callerをcompile/実行せず、二純helperを呼ぶ元Morning12/JDBC8を全source byte exact保持し、新たな独立StorageReason固定3値のvalues/valueOf/ordinal/defensivearray/未知空大小文字/null/固定Storage診断契約1だけを加え、新source同一run21で四Main五Codeclassの全分岐・raw四counter100/RootNullAway/全静的/currentCRC-initXMLを検証する。StorageIoExceptionのproduction bodyは変更0、実DB接続/driver/transaction/credential/Root2Actual4/鍵/VM/native/aru/permit等のHOLDを代替せず、旧二sourceのraw不足や成功は歴史証拠で別保持する。BUG3087/YKT2559/YKT2431、SS332333354。private反射/空instance生成/除外/到達不能扱いで未網羅を埋めない。内部責務の詳細補足のみでRD/UI/QA/承認DIF変更不要、全caller/451/正式受入は未達条件が閉じるまで更新しない。
+
+状態:設計確定・main反映前、PG/PT/全caller/正式未完。
