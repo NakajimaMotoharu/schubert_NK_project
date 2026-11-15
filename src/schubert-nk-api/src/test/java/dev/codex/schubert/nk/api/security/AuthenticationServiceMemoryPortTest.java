@@ -513,7 +513,9 @@ final class AuthenticationServiceMemoryPortTest {
     EXECUTE,
     NEXT,
     CLOSE_RESULT,
-    CLOSE_STATEMENT
+    CLOSE_STATEMENT,
+    READ,
+    TRANSACTION
   }
 
   private record Fault(Stage stage, Site site, Throwable failure) {}
@@ -556,6 +558,8 @@ final class AuthenticationServiceMemoryPortTest {
     Optional<Instant> ipLock = Optional.empty();
     Optional<Throwable> checkerFault = Optional.empty();
     Optional<Fault> fault = Optional.empty();
+    final Map<Stage, Map<Site, Throwable>> additionalFailures =
+        new java.util.EnumMap<>(Stage.class);
     Optional<Stage> nullStatementAt = Optional.empty();
     Optional<Stage> nullRowsAt = Optional.empty();
     final List<Stage> prepareAttempts = new ArrayList<>();
@@ -586,7 +590,10 @@ final class AuthenticationServiceMemoryPortTest {
               Connection.class,
               (method, args) ->
                   switch (method) {
-                    case "getAutoCommit" -> autoCommit;
+                    case "getAutoCommit" -> {
+                      inject(Stage.USER, Site.TRANSACTION);
+                      yield autoCommit;
+                    }
                     case "prepareStatement" -> prepare((String) args[0]);
                     case "toString" -> "OwnMemoryJdbc";
                     default ->
@@ -680,6 +687,21 @@ final class AuthenticationServiceMemoryPortTest {
         if (failure instanceof Error error) throw error;
         throw new AssertionError("unsupported JDBC fixture failure type");
       }
+      var extra =
+          Optional.ofNullable(additionalFailures.get(stage)).map(values -> values.get(site));
+      if (extra.isPresent()) {
+        Throwable failure = extra.orElseThrow();
+        if (failure instanceof SQLException sql) throw sql;
+        if (failure instanceof RuntimeException runtime) throw runtime;
+        if (failure instanceof Error error) throw error;
+        throw new AssertionError("unsupported additional JDBC fixture failure type");
+      }
+    }
+
+    void addFault(Stage stage, Site site, Throwable failure) {
+      additionalFailures
+          .computeIfAbsent(stage, ignored -> new java.util.EnumMap<>(Site.class))
+          .put(site, failure);
     }
 
     void useSecondActor() {
@@ -852,6 +874,7 @@ final class AuthenticationServiceMemoryPortTest {
                         yield at < rows.size();
                       }
                       case "getString", "getObject" -> {
+                        inject(stage, Site.READ);
                         assertTrue(at >= 0 && at < rows.size());
                         assertTrue(
                             rows.get(at).containsKey((String) args[0]), "unknown fixture column");
@@ -1047,5 +1070,121 @@ final class AuthenticationServiceMemoryPortTest {
         }
       }
     }
+  }
+
+  @Test
+  void fatal023DirectErrorIdentityAcrossEveryLoginOwnedResourceBoundary() throws Exception {
+    for (Stage stage :
+        List.of(
+            Stage.USER,
+            Stage.CREATE_IP,
+            Stage.IP,
+            Stage.UPDATE_USER,
+            Stage.UPDATE_IP,
+            Stage.LOGIN_AUDIT)) {
+      for (Site site : List.of(Site.PREPARE, Site.EXECUTE, Site.CLOSE_STATEMENT)) {
+        try (Fixture f = new Fixture()) {
+          AssertionError fatal = new AssertionError(SYNTHETIC_FAULT);
+          f.fault = Optional.of(new Fault(stage, site, fatal));
+          assertSame(fatal, assertThrows(AssertionError.class, f::call));
+          assertEquals(0, fatal.getSuppressed().length);
+          f.verifyReleasedAndConsumed();
+        }
+      }
+    }
+    for (Stage stage : List.of(Stage.USER, Stage.IP)) {
+      for (Site site : List.of(Site.NEXT, Site.READ, Site.CLOSE_RESULT)) {
+        try (Fixture f = new Fixture()) {
+          AssertionError fatal = new AssertionError(SYNTHETIC_FAULT);
+          f.fault = Optional.of(new Fault(stage, site, fatal));
+          assertSame(fatal, assertThrows(AssertionError.class, f::call));
+          assertEquals(0, fatal.getSuppressed().length);
+          f.verifyReleasedAndConsumed();
+        }
+      }
+    }
+    try (Fixture f = new Fixture()) {
+      AssertionError fatal = new AssertionError(SYNTHETIC_FAULT);
+      f.fault = Optional.of(new Fault(Stage.USER, Site.TRANSACTION, fatal));
+      assertSame(fatal, assertThrows(AssertionError.class, f::call));
+      assertTrue(f.statements.isEmpty());
+      f.verifyReleasedAndConsumed();
+    }
+  }
+
+  @Test
+  void fatal024WrappedSqlAndProductionRowcountFailurePreserveCleanupFatal() throws Exception {
+    for (Stage stage : List.of(Stage.USER, Stage.IP, Stage.LOGIN_AUDIT)) {
+      try (Fixture f = new Fixture()) {
+        AssertionError fatal = new AssertionError(SYNTHETIC_FAULT);
+        SQLException sql = new SQLException(SYNTHETIC_FAULT);
+        sql.addSuppressed(fatal);
+        f.fault = Optional.of(new Fault(stage, Site.EXECUTE, sql));
+        assertSame(fatal, assertThrows(AssertionError.class, f::call));
+        assertArrayEquals(new Throwable[] {fatal}, sql.getSuppressed());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+    for (Stage stage : List.of(Stage.UPDATE_USER, Stage.UPDATE_IP, Stage.LOGIN_AUDIT)) {
+      try (Fixture f = new Fixture()) {
+        AssertionError fatal = new AssertionError(SYNTHETIC_FAULT);
+        f.updateCounts.put(stage, 0);
+        f.addFault(stage, Site.CLOSE_STATEMENT, fatal);
+        assertSame(fatal, assertThrows(AssertionError.class, f::call));
+        assertEquals(stage, f.prepareAttempts.getLast());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+  }
+
+  @Test
+  void fatal025PrimarySecondaryAndSelfaliasMatchIndependentJdkContract() throws Exception {
+    for (Stage stage : List.of(Stage.UPDATE_USER, Stage.LOGIN_AUDIT)) {
+      Set<Integer> classifiedKinds =
+          stage == Stage.LOGIN_AUDIT ? Set.of(0, 1, 2) : Set.of(0, 1, 2, 3);
+      for (int kind = 0; kind < 6; kind++) {
+        for (boolean fatalClose : new boolean[] {false, true}) {
+          try (Fixture f = new Fixture()) {
+            Throwable primary = syntheticPrimary(kind);
+            Throwable secondary =
+                fatalClose
+                    ? new AssertionError(SYNTHETIC_FAULT)
+                    : new SQLException(SYNTHETIC_FAULT);
+            f.addFault(stage, Site.EXECUTE, primary);
+            f.addFault(stage, Site.CLOSE_STATEMENT, secondary);
+            if (classifiedKinds.contains(kind)) {
+              if (fatalClose) assertSame(secondary, assertThrows(AssertionError.class, f::call));
+              else expectStorageFailure(f::call);
+            } else assertSame(primary, assertThrows(primary.getClass(), f::call));
+            assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+            assertEquals(stage, f.prepareAttempts.getLast());
+            f.verifyReleasedAndConsumed();
+          }
+        }
+        try (Fixture f = new Fixture()) {
+          Throwable primary = syntheticPrimary(kind);
+          f.addFault(stage, Site.EXECUTE, primary);
+          f.addFault(stage, Site.CLOSE_STATEMENT, primary);
+          if (primary instanceof Error)
+            assertSame(primary, assertThrows(AssertionError.class, f::call));
+          else expectStorageFailure(f::call);
+          assertEquals(0, primary.getSuppressed().length);
+          assertEquals(stage, f.prepareAttempts.getLast());
+          f.verifyReleasedAndConsumed();
+        }
+      }
+    }
+  }
+
+  private static Throwable syntheticPrimary(int kind) {
+    return switch (kind) {
+      case 0 -> new SQLException(SYNTHETIC_FAULT);
+      case 1 -> new IllegalArgumentException(SYNTHETIC_FAULT);
+      case 2 -> new IllegalStateException(SYNTHETIC_FAULT);
+      case 3 -> new java.time.DateTimeException(SYNTHETIC_FAULT);
+      case 4 -> new UnsupportedOperationException(SYNTHETIC_FAULT);
+      case 5 -> new AssertionError(SYNTHETIC_FAULT);
+      default -> throw new AssertionError("unknown independent fixture primary");
+    };
   }
 }

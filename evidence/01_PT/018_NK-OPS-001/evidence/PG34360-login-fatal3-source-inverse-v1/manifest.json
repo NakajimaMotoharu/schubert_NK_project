@@ -1,0 +1,38 @@
+{
+  "actualExit": 0,
+  "original22InverseFormattedExact": true,
+  "oldTestSha256": "334bd3cb4c30b4bc47a31e8a4083aba3961e4d68bdbdc9847816c3988fad77fb",
+  "newTestSha256": "de8b3b782601db7151d696b2bf4068437f865a64d4c83c0ef190ca70525e7e6a",
+  "allMainAndPomsUnchanged": true,
+  "sourceBefore": "e1c084fea4fd58ffba55e17d630a24b89b2544a0",
+  "syntheticCases": 67,
+  "expectedTests": 25,
+  "newDefinitions": 3,
+  "necessaryPriorDefinitions": 22,
+  "testSource": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationServiceMemoryPortTest.java",
+  "testHooks": [
+    {
+      "before": "                      case \"getString\", \"getObject\" -> {",
+      "after": "                      case \"getString\", \"getObject\" -> {\n                        inject(stage, Site.READ);",
+      "exactNonWhitespaceTokens": true
+    },
+    {
+      "before": "case \"getAutoCommit\" -> autoCommit;",
+      "after": "case \"getAutoCommit\" -> {\n                    inject(Stage.USER, Site.TRANSACTION);\n                    yield autoCommit;\n                  }",
+      "exactNonWhitespaceTokens": true
+    },
+    {
+      "before": "    Optional<Fault> fault = Optional.empty();",
+      "after": "    Optional<Fault> fault = Optional.empty();\n    final Map<Stage, Map<Site, Throwable>> additionalFailures = new java.util.EnumMap<>(Stage.class);",
+      "exactNonWhitespaceTokens": true
+    },
+    {
+      "before": "    CLOSE_STATEMENT\n",
+      "after": "    CLOSE_STATEMENT,\n    READ,\n    TRANSACTION\n",
+      "exactNonWhitespaceTokens": true
+    }
+  ],
+  "applicationTestsExecuted": 0,
+  "bug": "BUG3056",
+  "atUTC": "2026-11-15T15:19:26.761474+00:00"
+}
