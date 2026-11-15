@@ -399,3 +399,15 @@ SSC055/PG163: .batch.repository.BatchStepは既定10stepとbackup例外、BatchS
 | 2026-08-31 | Module、package、主要class、依存規則を初版作成。 |
 | 2026-09-01 | SSC-002により`FixedWidthDecoder.decode`を322 §5の完全なtransport/route検査署名へ統一。 |
 SSC061/PG168: .batch.repository.BackupStepRepositoryと.backup.BackupCommitServiceは341 §6.6/331 §8.3の同一真正manifest両完全stepのread/transaction確定・不明commit再読を担当する。BAK/BKO/OPS009/UI251、017041～044/BAT210～225へconstructor/inspect/complete/helperを追跡。manifest生成/信頼reader/実artifact/root/OS/最新選択/7世代は別必須。DDLやmodule依存は変更しない。
+
+## SSC-418 保護読取の一時context buffer所有・例外消去（2026-11-15）
+
+ProtectedReadWireClientの既6引数package-private構築口と全public facade APIを維持し、defaultはprivate stateless JDK操作実装に固定する。ASCII変換はAuthenticationContext.wireValueからUS_ASCIIの新規64byte、比較は既MessageDigest.isEqualでありalgorithm/認証/権限/電文/画面/再送/期限/queueを変更しない。外部設定・HTTP選択・動的loadingで切替えない。新しい7引数package-private口は内部ContextOperations（encodeとsameの二操作）を受け、operations nullをconstructorの明示nonnull preconditionで拒否する。標準実装は状態/credentialを保持しないprivate static final class、操作interfaceはpackage-privateでbinary Code0を実証し除外としない。
+
+encodeの戻りはnullable boundaryとして宣言し、contextBytesがnull又は64以外を固定IllegalStateExceptionで拒否する。nullは未取得、非null返却時にownedとなる。長さ不正の返却bufferはhelper自身が消去してから失敗し、呼出側へ返した正規bufferだけが次の所有へ移る。第一bufferを取得した直後に外側try/finallyへ入り、その中で第二を取得して内側try/finallyへ入る。第二の取得/検査に失敗すれば取得済み第一だけを消去、比較失敗なら第二→第一をそれぞれ一回消去する。JDK内部の返却前の未到達allocationまでを消去保証したと主張しない。実OOM/Thread操作/JDK差替えで故障を誘発しない。
+
+decodeはinstance内でこの既owned比較を使う。既catalog catchの固定INVALID_RESPONSEは保持し、変換前に既JmsRequestReplyException.preserveFatalでcause/suppressed/SQLnext/JMSlinkedのError identityを保存する。新package-private口の非fatal/不正結果だけが従来の閉分類へ落ち、Errorを通常結果へ変換しない。Root/VM/DB/SDKbackend/actual4/Root2/拒否fixtureへの代替口ではなく、元から許可された同memory-only componentの例外消去を検証する。public synthetic contextだけを用い、実token・session・鍵・原本にアクセスしない。
+
+PTは既58全本文/独立wire/golden/timeout/並行/secret-wipeを保持し、新whole ProtectedReadContextOwnershipTestの6methodを追加する。CONTEXT001 first/second/compareの合成Errorで取得済み全buffer消去とError同一、002比較RTE内Errorの同一伝播、003通常RTEの固定INVALID_RESPONSE/消去/秘匿、004null operationsの構築前拒否、005null encode第一/第二で既取得分消去と固定分類、006不正幅0/63/65を第一/第二で与え返却済み全bufferの消去と後続comparison0。正常/不一致のdefault JDK動作・全8旧クラスは既58で再資格し、必要な同source whole64・全physical数等を推測せず新compile実物から確定する。new6と旧58を区別し、old58成功を新sourceへ流用しない。
+
+原58群の未達carry.2/.6/1.8ppを保持し、新Source製造/SS補足/六PT分だけ.4/1.2/2.4pp追加、当群合計.6/1.8/4.2pp cap6。元群.8/2.4/7.2/cap8・元P005費・元904.85/SV各上限は不変更、carryを二重追加しない。新13Mainは変更sourceなのでRoot compiler/NullAwayでfresh compile、全9wholeTestと静的、同一64execのdefault及びunfiltered全命令/行/メソッド/クラス/分岐、CRC/init/sourceを確認する。各naturalB0/Code0は明示、全Protocol依存を含む全物理scopeの未達を保存しown/source/全194等を混同しない。global451/正式/工数/CHR/native/ITSTを受入にしない。
