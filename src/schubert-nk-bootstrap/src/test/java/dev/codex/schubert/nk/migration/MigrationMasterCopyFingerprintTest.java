@@ -55,7 +55,7 @@ final class MigrationMasterCopyFingerprintTest {
           "audio_files",
           "media_assets",
           "entry_audio_links");
-  private static final List<String> NORMAL_METADATA =
+  static final List<String> NORMAL_METADATA =
       List.of(
           NORMAL_SPEAKER_VECTOR,
           NORMAL_FILE_VECTOR,
@@ -63,7 +63,7 @@ final class MigrationMasterCopyFingerprintTest {
           NORMAL_AUDIO_VECTOR,
           NORMAL_MEDIA_VECTOR,
           NORMAL_LINK_VECTOR);
-  private static final List<String> EMPTY_METADATA =
+  static final List<String> EMPTY_METADATA =
       List.of(
           "speakers|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
           "script_files|0|0|e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",

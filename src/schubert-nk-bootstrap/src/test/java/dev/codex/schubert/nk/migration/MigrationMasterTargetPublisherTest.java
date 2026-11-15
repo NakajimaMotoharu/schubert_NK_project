@@ -1280,14 +1280,17 @@ final class MigrationMasterTargetPublisherTest {
       }
   }
 
-  private static final class Fixture {
-    private final List<String> sql = new ArrayList<>();
+  static final class Fixture {
+    final List<String> sql = new ArrayList<>();
     private final List<Integer> timeouts = new ArrayList<>();
     private final List<Long> boundLong = new ArrayList<>();
     private final List<Boolean> boundBoolean = new ArrayList<>();
     private long[] scalars = NORMAL_SCALARS.clone();
     private boolean empty;
-    private boolean autoCommit;
+    boolean autoCommit;
+    boolean readOnly;
+    boolean failReadOnly;
+    @Nullable Throwable attributeFailure;
     private int badGamesRow = -1;
     private int badGamesField = -1;
     private boolean nullGamesValue;
@@ -1312,14 +1315,14 @@ final class MigrationMasterTargetPublisherTest {
     private boolean failContentRead;
     private int contentFieldReads;
     private final List<Integer> fetchSizes = new ArrayList<>();
-    private int badSql = -1;
+    int badSql = -1;
     private int badScalar = -1;
     private int badRead = -1;
     private int badPreparedExecute = -1;
     private int badWarning = -1;
     private int badClose = -1;
     private int extraResultAt = -1;
-    private Throwable failure = new SQLException("synthetic primary");
+    Throwable failure = new SQLException("synthetic primary");
     private Throwable closeFailure = new SQLException("synthetic close");
     private @Nullable Throwable extraResult;
     private int autoReads;
@@ -1348,7 +1351,7 @@ final class MigrationMasterTargetPublisherTest {
       if (index == badClose) throw closeFailure;
     }
 
-    private Connection connection() {
+    Connection connection() {
       return (Connection)
           Proxy.newProxyInstance(
               Connection.class.getClassLoader(),
@@ -1357,7 +1360,11 @@ final class MigrationMasterTargetPublisherTest {
                 switch (method.getName()) {
                   case "getAutoCommit":
                     autoReads++;
+                    if (attributeFailure != null && !failReadOnly) throw attributeFailure;
                     return autoCommit;
+                  case "isReadOnly":
+                    if (attributeFailure != null && failReadOnly) throw attributeFailure;
+                    return readOnly;
                   case "createStatement":
                     statementCreates++;
                     return statement();
@@ -1659,7 +1666,17 @@ final class MigrationMasterTargetPublisherTest {
     }
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  static Fixture coordinatorFixture(boolean empty) {
+    var f = new Fixture();
+    if (empty) {
+      f.empty = true;
+      f.scalars = new long[SCALARS];
+      Arrays.fill(f.scalars, SETVAL_SCALAR_FIRST, SCALARS, 1L);
+    }
+    return f;
+  }
+
+  static MigrationMasterCopyDataset normal() throws Exception {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 

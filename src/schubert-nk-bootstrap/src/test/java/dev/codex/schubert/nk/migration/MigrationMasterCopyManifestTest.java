@@ -195,8 +195,7 @@ final class MigrationMasterCopyManifestTest {
     assertNull(failure.getCause());
   }
 
-  private static CurrentMigrationMappingManifest mappings(int extra, long currentSpeaker)
-      throws Exception {
+  static CurrentMigrationMappingManifest mappings(int extra, long currentSpeaker) throws Exception {
     var files = new ArrayList<ScenarioFileMigrationMap.FilePair>();
     files.add(new ScenarioFileMigrationMap.FilePair(1, 10, 700));
     if (extra == FILES_PART) files.add(new ScenarioFileMigrationMap.FilePair(2, 11, 701));
@@ -231,7 +230,7 @@ final class MigrationMasterCopyManifestTest {
         new AudioMigrationMap(audio, new AssetMigrationManifest(assets), "g1", "g2"));
   }
 
-  private static CurrentMigrationMappingManifest emptyMappings() throws Exception {
+  static CurrentMigrationMappingManifest emptyMappings() throws Exception {
     var files = new ScenarioFileMigrationMap(List.of());
     return new CurrentMigrationMappingManifest(
         files,
@@ -240,7 +239,7 @@ final class MigrationMasterCopyManifestTest {
         new AudioMigrationMap(List.of(), new AssetMigrationManifest(List.of()), "g1", "g2"));
   }
 
-  private static MigrationMasterCopyDataset empty() throws Exception {
+  static MigrationMasterCopyDataset empty() throws Exception {
     var files = new ScenarioFileMigrationMap(List.of());
     var scenario =
         new ScenarioCopyDataset(
