@@ -19,6 +19,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class CurrentMigrationMappingVerifier {
+  private static final char LINE_FEED = '\n';
   private static final byte[] MAGIC = "NKMIGMAPPING1\n".getBytes(StandardCharsets.US_ASCII);
   private static final List<String> KINDS = List.of("FILES", "ENTRIES", "SPEAKERS", "AUDIO");
   private static final List<String> HEADERS =
@@ -81,7 +82,7 @@ public final class CurrentMigrationMappingVerifier {
 
   private static int lineEnd(byte[] data, int first) {
     int end = first;
-    while (end < data.length && data[end] != '\n') {
+    while (end < data.length && data[end] != LINE_FEED) {
       if (end - first >= MAXIMUM_HEADER_LINE_BYTES
           || (data[end] < 0x20 && data[end] != '\t')
           || data[end] > 0x7e) throw invalid();
@@ -94,7 +95,7 @@ public final class CurrentMigrationMappingVerifier {
   private static List<String[]> rows(byte[] body, int part, int expectedCount) {
     int first = 0;
     for (int index = 0; index < body.length; index++) {
-      if (body[index] == '\n') {
+      if (body[index] == LINE_FEED) {
         if (index - first > MAXIMUM_BODY_LINE_BYTES) throw invalid();
         first = index + 1;
       } else if ((body[index] < 0x20 && body[index] != '\t') || body[index] > 0x7e) throw invalid();
@@ -147,7 +148,7 @@ public final class CurrentMigrationMappingVerifier {
     boolean first = true;
     long previousCurrent = 0;
     long previousTarget = 0;
-    var canonical = new StringBuilder(HEADERS.get(3)).append('\n');
+    var canonical = new StringBuilder(HEADERS.get(3)).append(LINE_FEED);
     for (String[] row : rows(body, 3, count)) {
       var value =
           new AudioMigrationMap.AudioMapping(unsigned(row[0]), signed(row[1]), signed(row[2]));
@@ -162,7 +163,7 @@ public final class CurrentMigrationMappingVerifier {
           .append(value.currentAudioId())
           .append('\t')
           .append(value.targetAudioId())
-          .append('\n');
+          .append(LINE_FEED);
     }
     exact(body, canonical.toString().getBytes(StandardCharsets.US_ASCII));
   }
