@@ -13,13 +13,13 @@ root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';tc=root.parent/'toolch
 load=lambda path:json.loads(path.read_text());sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest();ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
 assert len(sys.argv)==2 and re.fullmatch('[0-9a-f]{40}',sys.argv[1]);unit_source=sys.argv[1]
 producer_path=Path(__file__).resolve();producer_rel=str(producer_path.relative_to(root));assert sha(producer_path)==hashlib.sha256(subprocess.check_output(['git','show',unit_source+':'+producer_rel])).hexdigest()
-prepared_path=base/'evidence/PG34336-login-negative4-prepare-v1/manifest.json';prepared=load(prepared_path);admission_path=base/'evidence/PG34338-login-negative4-preflight-v1/manifest.json';admission=load(admission_path)
+prepared_path=base/'evidence/PG34336-login-negative4-prepare-v2/manifest.json';prepared=load(prepared_path);admission_path=base/'evidence/PG34338-login-negative4-preflight-v1/manifest.json';admission=load(admission_path)
 assert admission['actualExit']==0 and admission['staticApplicable']==admission['unclassified']==0 and admission['expectedTests']==22
 assert admission['inputHashes']==prepared['inputHashes'] and len(prepared['expectedCases'])==22
 for path,value in prepared['inputHashes'].items():
     assert sha(root/path)==value
     assert hashlib.sha256(subprocess.check_output(['git','show',unit_source+':'+path])).hexdigest()==value
-work=runs/'pg34336-login-negative4-v1'
+work=runs/'pg34336-login-negative4-v2'
 for name in list(prepared['physicalClassHashes'])+list(prepared['testClassHashes']):policy.relative_name(name)
 for folder,key in [('component','physicalClassHashes'),('test-classes','testClassHashes')]:assert {name:sha(work/folder/name) for name in prepared[key]}==prepared[key]
 assert all(sha(Path(path))==value for path,value in prepared['dependencies'].items())

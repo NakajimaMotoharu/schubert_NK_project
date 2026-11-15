@@ -12,7 +12,7 @@ import sys
 import xml.etree.ElementTree as ET
 import pgpt_closed_host_profile as policy
 
-root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';runs=root.parent/'pgpt-runs/PG379';work=runs/'pg34336-login-negative4-v1';unit=runs/'pg34350-login-negative4-v1';run=base/'evidence/PG34350-login-negative4-unit-v1';output=base/'evidence/PG34352-login-negative4-independent-v1';assert not output.exists()
+root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';runs=root.parent/'pgpt-runs/PG379';work=runs/'pg34336-login-negative4-v2';unit=runs/'pg34350-login-negative4-v1';run=base/'evidence/PG34350-login-negative4-unit-v1';output=base/'evidence/PG34352-login-negative4-independent-v1';assert not output.exists()
 load=lambda path:json.loads(path.read_text());sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest();ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
 assert len(sys.argv)==2
 manifest=load(run/'manifest.json');begin=manifest['begin'];assert begin['source']==sys.argv[1] and begin['productionCoreMain']=='881cc70098d219000218ca78a90396cdf5e56003'
