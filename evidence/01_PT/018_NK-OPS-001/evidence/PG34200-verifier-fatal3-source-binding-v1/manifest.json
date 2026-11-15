@@ -1,0 +1,45 @@
+{
+  "actualExit": 0,
+  "productionCore": "08eef7ec152adc5d886040bdef14188beaeea6ff",
+  "old9InverseFormattedExact": true,
+  "oldTestSha256": "dd7840c6ad51053d7088ca195d1fae092f2a41ccbf8d32905efc55d3a031f97a",
+  "newTestSha256": "d8559afdc03cf6816f9a64831dadc8be3c9198c65e0aad64acf732c609cf2812",
+  "fixedMethodNameConstants": {
+    "getAutoCommit": "JDBC_GET_AUTO_COMMIT",
+    "prepareStatement": "JDBC_PREPARE_STATEMENT",
+    "setString": "JDBC_SET_STRING",
+    "executeQuery": "JDBC_EXECUTE_QUERY",
+    "getObject": "JDBC_GET_OBJECT",
+    "getString": "JDBC_GET_STRING"
+  },
+  "fixedConstantsText": "  private static final String JDBC_GET_AUTO_COMMIT = \"getAutoCommit\";\n  private static final String JDBC_PREPARE_STATEMENT = \"prepareStatement\";\n  private static final String JDBC_SET_STRING = \"setString\";\n  private static final String JDBC_EXECUTE_QUERY = \"executeQuery\";\n  private static final String JDBC_GET_OBJECT = \"getObject\";\n  private static final String JDBC_GET_STRING = \"getString\";\n  private static final String PUBLIC_SQL_STATE = \"08006\";\n  private static final String CLOSE_SUFFIX = \".close\";\n",
+  "defaultEmptyControls": [
+    [
+      "    String failMethod = \"\";",
+      "    final Map<String, Throwable> injectedFailures = new HashMap<>();\n    String failMethod = \"\";"
+    ],
+    [
+      "    void fault(String method) throws SQLException {",
+      "    void fault(String method) throws SQLException {\n      Throwable injected = injectedFailures.get(method);\n      if (injected instanceof SQLException sqlFailure) throw sqlFailure;\n      if (injected instanceof RuntimeException runtime) throw runtime;\n      if (injected instanceof Error fatal) throw fatal;"
+    ],
+    [
+      "      closes.add(name);",
+      "      closes.add(name);\n      fault(name + CLOSE_SUFFIX);"
+    ]
+  ],
+  "allMainAndPomsUnchanged": true,
+  "expectedTests": 12,
+  "newDefinitions": 3,
+  "necessaryPriorDefinitions": 9,
+  "originalStartSyntheticCases40Frozen": true,
+  "additionalDomainGeneratedCleanupCases": 2,
+  "currentSyntheticCases": 42,
+  "additionWithinSameExistingBudget": true,
+  "applicationTestsExecuted": 0,
+  "formalUpdated": false,
+  "originalSourceProducerExit": 1,
+  "originalInverseGuardRejectedSingleBoundaryBlank": true,
+  "originalSourceProducerSha256": "279098dc4b7b9d7d9779c1afdb1ec119d25ccce70e4f990f0ebd7d5ee84eb1aa",
+  "sourceWritesReplayed": false,
+  "onlyExactGeneratedBoundaryBlankRemoved": true
+}

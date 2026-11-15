@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.security;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,6 +33,15 @@ import org.junit.jupiter.api.Timeout;
 /** PT-AUT-JDBC001..006; UI226/SS312314332. New interface fixture, never a DB connection. */
 @Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticationVerifierJdbcPortTest {
+  private static final String JDBC_GET_AUTO_COMMIT = "getAutoCommit";
+  private static final String JDBC_PREPARE_STATEMENT = "prepareStatement";
+  private static final String JDBC_SET_STRING = "setString";
+  private static final String JDBC_EXECUTE_QUERY = "executeQuery";
+  private static final String JDBC_GET_OBJECT = "getObject";
+  private static final String JDBC_GET_STRING = "getString";
+  private static final String PUBLIC_SQL_STATE = "08006";
+  private static final String CLOSE_SUFFIX = ".close";
+
   private static final String USER_LABEL = "user";
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00Z");
   // Public SHA-256 vector: 64 ASCII 'a', independently verified with Python hashlib.
@@ -80,6 +90,7 @@ final class AuthenticationVerifierJdbcPortTest {
     boolean sessionExists = true;
     int affected = 1;
     int forbiddenOwnerCalls;
+    final Map<String, Throwable> injectedFailures = new HashMap<>();
     String failMethod = "";
     String nullStatementAt = "";
     String nullRowAt = "";
@@ -96,6 +107,10 @@ final class AuthenticationVerifierJdbcPortTest {
     }
 
     void fault(String method) throws SQLException {
+      Throwable injected = injectedFailures.get(method);
+      if (injected instanceof SQLException sqlFailure) throw sqlFailure;
+      if (injected instanceof RuntimeException runtime) throw runtime;
+      if (injected instanceof Error fatal) throw fatal;
       if (method.equals(failMethod)) {
         if (runtimeFailure != null) throw runtimeFailure;
         throw new SQLException(PUBLIC_MARKER, "08006");
@@ -108,9 +123,9 @@ final class AuthenticationVerifierJdbcPortTest {
           (p, m, args) -> {
             fault(m.getName());
             return switch (m.getName()) {
-              case "getAutoCommit" -> autoCommit;
+              case JDBC_GET_AUTO_COMMIT -> autoCommit;
               case "isReadOnly" -> readOnly;
-              case "prepareStatement" -> statement((String) args[0]);
+              case JDBC_PREPARE_STATEMENT -> statement((String) args[0]);
               case "commit", "rollback", "close", "setAutoCommit", "setReadOnly" -> {
                 forbiddenOwnerCalls++;
                 throw new AssertionError("borrowed connection ownership changed");
@@ -134,11 +149,11 @@ final class AuthenticationVerifierJdbcPortTest {
           (p, m, args) -> {
             fault(m.getName());
             return switch (m.getName()) {
-              case "setString", "setObject" -> {
+              case JDBC_SET_STRING, "setObject" -> {
                 bound.put((Integer) args[0], args[1]);
                 yield null;
               }
-              case "executeQuery" -> row(name);
+              case JDBC_EXECUTE_QUERY -> row(name);
               case "executeUpdate" -> affected;
               case "close" -> {
                 close(name + ".statement");
@@ -158,8 +173,8 @@ final class AuthenticationVerifierJdbcPortTest {
             fault(m.getName());
             return switch (m.getName()) {
               case "next" -> name.equals("user") ? userExists : sessionExists;
-              case "getString" -> fields.get((String) args[0]);
-              case "getObject" -> {
+              case JDBC_GET_STRING -> fields.get((String) args[0]);
+              case JDBC_GET_OBJECT -> {
                 var value = fields.get((String) args[0]);
                 if (value != null) assertTrue(((Class<?>) args[1]).isInstance(value));
                 yield value;
@@ -175,6 +190,7 @@ final class AuthenticationVerifierJdbcPortTest {
 
     void close(String name) throws SQLException {
       closes.add(name);
+      fault(name + CLOSE_SUFFIX);
       if (closeFailures.contains(name)) throw new SQLException(PUBLIC_MARKER, "08006");
     }
 
@@ -335,12 +351,12 @@ final class AuthenticationVerifierJdbcPortTest {
     var verifier = new AuthenticationContextVerifier(new ContextHash());
     for (String position :
         List.of(
-            "getAutoCommit",
-            "prepareStatement",
-            "setString",
-            "executeQuery",
-            "getObject",
-            "getString",
+            JDBC_GET_AUTO_COMMIT,
+            JDBC_PREPARE_STATEMENT,
+            JDBC_SET_STRING,
+            JDBC_EXECUTE_QUERY,
+            JDBC_GET_OBJECT,
+            JDBC_GET_STRING,
             "setObject",
             "executeUpdate")) {
       var f = new Fixture();
@@ -382,7 +398,7 @@ final class AuthenticationVerifierJdbcPortTest {
       assertEquals(0, f.forbiddenOwnerCalls);
     }
     var unknown = new Fixture();
-    unknown.failMethod = "getObject";
+    unknown.failMethod = JDBC_GET_OBJECT;
     var marker = new IllegalStateException(PUBLIC_MARKER);
     unknown.runtimeFailure = marker;
     assertSame(
@@ -486,6 +502,155 @@ final class AuthenticationVerifierJdbcPortTest {
             f.closes);
         f.owned();
       }
+    }
+  }
+
+  @Test
+  void fatal001DirectBodyAndOwnedCloseErrorsKeepIdentityInBothVerificationModes() throws Exception {
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      List<String> body =
+          inspect
+              ? List.of(
+                  JDBC_GET_AUTO_COMMIT,
+                  "isReadOnly",
+                  JDBC_PREPARE_STATEMENT,
+                  JDBC_SET_STRING,
+                  JDBC_EXECUTE_QUERY,
+                  "next",
+                  JDBC_GET_OBJECT,
+                  JDBC_GET_STRING)
+              : List.of(
+                  JDBC_GET_AUTO_COMMIT,
+                  JDBC_PREPARE_STATEMENT,
+                  JDBC_SET_STRING,
+                  JDBC_EXECUTE_QUERY,
+                  "next",
+                  JDBC_GET_OBJECT,
+                  JDBC_GET_STRING,
+                  "setObject",
+                  "executeUpdate");
+      List<String> closes =
+          inspect
+              ? List.of(SESSION_ROW, SESSION_STATEMENT)
+              : List.of(USER_ROW, USER_STATEMENT, SESSION_ROW, SESSION_STATEMENT, TOUCH_STATEMENT);
+      var positions = new ArrayList<>(body);
+      for (String name : closes) positions.add(name + CLOSE_SUFFIX);
+      for (String position : positions) {
+        var f = new Fixture();
+        f.readOnly = inspect;
+        var fatal = new AssertionError("PUBLIC direct error");
+        f.injectedFailures.put(position, fatal);
+        assertSame(
+            fatal,
+            assertThrows(
+                AssertionError.class,
+                () -> {
+                  if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+                  else verifier.verify(f.connection(), INPUT, NOW);
+                }));
+        assertNull(fatal.getCause());
+        assertEquals(0, fatal.getSuppressed().length);
+        f.owned();
+      }
+    }
+  }
+
+  @Test
+  void fatal002SqlAndDomainFailureSuppressedFatalUsesTheOriginalErrorInstance() throws Exception {
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      var f = new Fixture();
+      f.readOnly = inspect;
+      var fatal = new AssertionError("PUBLIC wrapped error");
+      var sql = new SQLException("PUBLIC wrapper", PUBLIC_SQL_STATE);
+      sql.addSuppressed(fatal);
+      f.injectedFailures.put(JDBC_GET_OBJECT, sql);
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class,
+              () -> {
+                if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+                else verifier.verify(f.connection(), INPUT, NOW);
+              }));
+      assertArrayEquals(new Throwable[] {fatal}, sql.getSuppressed());
+      f.owned();
+      var denied = new Fixture();
+      denied.readOnly = inspect;
+      denied.fields.put(COL_REVOKED, true);
+      var cleanupError = new AssertionError("PUBLIC domain cleanup error");
+      denied.injectedFailures.put(SESSION_ROW + CLOSE_SUFFIX, cleanupError);
+      assertSame(
+          cleanupError,
+          assertThrows(
+              AssertionError.class,
+              () -> {
+                if (inspect) verifier.inspectReadOnly(denied.connection(), INPUT, NOW);
+                else verifier.verify(denied.connection(), INPUT, NOW);
+              }));
+      assertFalse(denied.sql.contains(TOUCH));
+      denied.owned();
+    }
+  }
+
+  @Test
+  void fatal003PrimarySecondaryAndSelfAliasPreserveOriginalFailureGraphInBothModes()
+      throws Exception {
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
+        for (boolean fatalClose : List.of(false, true)) {
+          var f = new Fixture();
+          f.readOnly = inspect;
+          Throwable primary =
+              primaryKind == 0
+                  ? new SQLException("PUBLIC body", PUBLIC_SQL_STATE)
+                  : primaryKind == 1
+                      ? new IllegalStateException("PUBLIC body")
+                      : new AssertionError("PUBLIC body");
+          Throwable secondary =
+              fatalClose
+                  ? new AssertionError("PUBLIC close")
+                  : new SQLException("PUBLIC close", PUBLIC_SQL_STATE);
+          f.injectedFailures.put(JDBC_GET_OBJECT, primary);
+          f.injectedFailures.put(SESSION_ROW + CLOSE_SUFFIX, secondary);
+          if (primaryKind == 0 && !fatalClose) {
+            fixedInfrastructure(
+                () -> {
+                  if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+                  else verifier.verify(f.connection(), INPUT, NOW);
+                });
+          } else {
+            Throwable expected = primaryKind == 0 ? secondary : primary;
+            assertSame(
+                expected,
+                assertThrows(
+                    expected.getClass(),
+                    () -> {
+                      if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+                      else verifier.verify(f.connection(), INPUT, NOW);
+                    }));
+          }
+          assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+          f.owned();
+        }
+      }
+      var alias = new Fixture();
+      alias.readOnly = inspect;
+      var same = new SQLException("PUBLIC same alias", PUBLIC_SQL_STATE);
+      alias.injectedFailures.put(JDBC_GET_OBJECT, same);
+      alias.injectedFailures.put(SESSION_ROW + CLOSE_SUFFIX, same);
+      var observed =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> {
+                if (inspect) verifier.inspectReadOnly(alias.connection(), INPUT, NOW);
+                else verifier.verify(alias.connection(), INPUT, NOW);
+              });
+      assertSame(same, observed.getCause());
+      assertEquals(0, same.getSuppressed().length);
+      alias.owned();
     }
   }
 }
