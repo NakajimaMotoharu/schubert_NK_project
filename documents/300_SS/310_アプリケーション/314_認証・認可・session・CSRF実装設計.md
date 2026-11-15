@@ -434,3 +434,9 @@ issue/require/completeはfresh current-rowを既存短mutateで読み、現在li
 ## QA-050承認反映：API expired rowの内部fence（2026-10-03）
 
 API Logoutで既存の未失効sessionが期限切れの場合、User→sessionの既定lock順で取得した現在状態と取得後の現在時刻を再検証し、EXPIRED/revoked fenceと監査・既定0102 ERROR snapshotを同transactionで確定する。古いnowによる遅延認証の許可や、wireの一般0102を永久失効proofにする変更は行わない。既失効0200は真正保存状態/日時を検証して返す既存経路を守り、Web rowの自動削除は実際に検証済0000/0200を受けた場合だけとする。User lock/業務TOUCH/Logout/cleanup競合、rollback/commit-close不明、expiry±1µs、監査・ERROR snapshotと応答不変更を独立PTし、未実証を実装済みとしない。
+
+## SSC-420 Web暗号化二codecの機密取得保護（2026-11-15）
+
+WebLogPayloadCodec.encryptとRevocationPayloadCodec.encryptで取得済みplaintext/candidateの後にnonce/AAD/emptybuffer初期化がtry前にある取得漏れを是正する。placeholderの非秘密空配列だけをowned機密取得前に準備し、既try内でplaintext copy→nonce→AADを順に取得する。従来finallyで返却済みowned全配列を消去し、返却前のJDK内部allocationは保証せず実OOMを誘発しない。既lock/ensureOpen/null/鍵version/固定AES256GCM128/nonce12/AAD/format/過去鍵/再送結果/例外catalog/既fatal guard/外部APIを保持、新provider/新crypto切替口/権限/実鍵/DB/実nonceを追加0。既Revocation7＋FailureGraph1＋JdbcGraph3＋Fatal5＋WebLog9=25Test本文と独立DataOutput/JCA goldenを保持し、新各1Testだけpublic固定鍵/nonceで初回乱数故障→別worker正常と元caller/nonce消去/既独立golden/call2を検証する。workerはFutureget5s、finallyshutdownNow/await10s確認後codecclose、process隔離内の旧JCA provider復元fixture以外のsystem操作なし。新27は当source一singleexecでfreshMain13 RootNullAway/静的/CRC/init/default及びrawを確認、対象二codecの全Codeと全191等依存scopeの未達を区別し数を実compileから確定する。旧成功/Protocol130は確認再演せず当sourceへ合算しない。
+
+BUG3018/YKT2542、状態:設計確定・main反映前、PG/PT/全451未受入。
