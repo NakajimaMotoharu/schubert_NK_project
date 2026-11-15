@@ -1,0 +1,5 @@
+# ContextHash原三有限化結果・raw必須二行未達
+
+Core7459cc1e/MainHash不変・Unit2ab247e5/PG33870原全3FES0真正0。二fixtureをget5/stop-await10assertへ有限化し全原業務assert/vector/provider復元本文inverseexact、PG33872現178physical/2positiveCRC-initとXML/同source/全12静的site適用未分類0/RootNullAway-SB0を確認。PG33874同execrawHashは2METHOD/1CLASS全実行・自然BRANCH0だが14LINE中2miss/62instruction中12miss、default11LINE全実行からraw合格へ拡張0。analyzer0/guard1は正当、3547既stdout回収のみでUnit/analyzer再演0。BUG3026/YKT2550二fixture限定CLOSED、BUG3027/YKT2541消去二LINE未実行はOPEN。元群.2/.6/1.8 cap3保持、部分.15/.45/1.35のみ計上・carry.05/.15/.45未完、残397.374/837.536/1643.865。App187/35334/35269/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変。次は同Hash経路の合理的内部digest/format境界とError/RTE消去・再利用独立PTをSSへ先反映してからPG。Root2/Actual4/SDKbackend/DB/VM/native/aru/CHR/COPY24/global451HOLD保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG33872-context-hash3-independent-v1/manifest.json SHA256 7336d36842632cf4de6a4a4eba3762c5e80dca95d1b90b4b19c47f7747ea1226; evidence/01_PT/018_NK-OPS-001/evidence/PG33874-context-hash3-unfiltered-same-exec-v1/manifest.json SHA256 7b386426855e3d820b65c03c662eee67e339a09ccc303aeab2e71e2bbc64b930。自然BRANCH0を人工100へせずN/Aとして記録。次source/新PTの成功を旧3へ転用せず元3は限定成功/coverage未受入のまま保存。
