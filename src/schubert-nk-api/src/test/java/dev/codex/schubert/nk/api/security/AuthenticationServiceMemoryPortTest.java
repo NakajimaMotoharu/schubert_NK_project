@@ -36,12 +36,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * NK-AUT-001; AUT001..004/MON004; UI226/234; SS314/332/351; PT-AUT-MEMPORT001..016. Existing
  * checker/JDBC ports, own in-memory rows and unissued synthetic crypto only. No original DB
  * fixture/helper, socket, driver, server, actual login/session or key file.
  */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticationServiceMemoryPortTest {
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456789Z");
   private static final Instant AT = Instant.parse("2026-09-08T00:00:00.123456Z");
@@ -440,9 +442,10 @@ final class AuthenticationServiceMemoryPortTest {
   @Test
   void memory016TwoOwnedFiniteTasksUseSeparateBorrowedConnectionsAndConsumeEachArray()
       throws Exception {
-    try (Fixture first = new Fixture();
-        Fixture second = new Fixture();
-        var executor = Executors.newFixedThreadPool(2)) {
+    Fixture first = new Fixture();
+    Fixture second = new Fixture();
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       second.useSecondActor();
       AuthenticationService service = first.service();
       var one =
@@ -468,6 +471,14 @@ final class AuthenticationServiceMemoryPortTest {
       assertEquals(1, second.count(Stage.LOGIN_AUDIT));
       first.verifyReleasedAndConsumed();
       second.verifyReleasedAndConsumed();
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      try {
+        first.close();
+      } finally {
+        second.close();
+      }
     }
   }
 
@@ -536,6 +547,9 @@ final class AuthenticationServiceMemoryPortTest {
     Optional<Instant> ipLock = Optional.empty();
     Optional<Throwable> checkerFault = Optional.empty();
     Optional<Fault> fault = Optional.empty();
+    Optional<Stage> nullStatementAt = Optional.empty();
+    Optional<Stage> nullRowsAt = Optional.empty();
+    final List<Stage> prepareAttempts = new ArrayList<>();
     Optional<String> nullUserColumn = Optional.empty();
     List<UUID> priorActive = List.of();
     volatile String observedStoredHash = "";
@@ -601,9 +615,12 @@ final class AuthenticationServiceMemoryPortTest {
           connection, inputName, password, client, messageId, correlationId, NOW);
     }
 
+    @org.jspecify.annotations.Nullable
     PreparedStatement prepare(String sql) throws SQLException {
       Stage stage = classify(sql);
       inject(stage, Site.PREPARE);
+      prepareAttempts.add(stage);
+      if (nullStatementAt.filter(value -> value == stage).isPresent()) return null;
       Statement statement = new Statement(stage);
       statements.add(statement);
       return statement.proxy;
@@ -744,6 +761,7 @@ final class AuthenticationServiceMemoryPortTest {
                   return switch (method) {
                     case "executeQuery" -> {
                       inject(stage, Site.EXECUTE);
+                      if (nullRowsAt.filter(value -> value == stage).isPresent()) yield null;
                       Cursor cursor = new Cursor(stage, rows());
                       cursors.add(cursor);
                       yield cursor.proxy;
@@ -852,5 +870,55 @@ final class AuthenticationServiceMemoryPortTest {
             type.getClassLoader(),
             new Class<?>[] {type},
             (ignored, method, args) -> invocation.invoke(method.getName(), args)));
+  }
+
+  @Test
+  void resource017AllLoginStatementsRejectNullAndConsumePassword() throws Exception {
+    List<Stage> route =
+        List.of(
+            Stage.USER,
+            Stage.CREATE_IP,
+            Stage.IP,
+            Stage.UPDATE_USER,
+            Stage.UPDATE_IP,
+            Stage.SESSION_USER,
+            Stage.SESSION_INSERT,
+            Stage.SESSION_ACTIVE,
+            Stage.LOGIN_AUDIT);
+    for (Stage stage :
+        List.of(
+            Stage.USER,
+            Stage.CREATE_IP,
+            Stage.IP,
+            Stage.UPDATE_USER,
+            Stage.UPDATE_IP,
+            Stage.LOGIN_AUDIT)) {
+      try (Fixture f = new Fixture()) {
+        f.nullStatementAt = Optional.of(stage);
+        expectStorageFailure(f::call);
+        int stop = route.indexOf(stage);
+        assertEquals(route.subList(0, stop + 1), f.prepareAttempts);
+        assertEquals(route.subList(0, stop), f.stages());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+  }
+
+  @Test
+  void resource018BothLoginNullRowsCloseTheirOwnedStatement() throws Exception {
+    for (Stage stage : List.of(Stage.USER, Stage.IP)) {
+      try (Fixture f = new Fixture()) {
+        f.nullRowsAt = Optional.of(stage);
+        expectStorageFailure(f::call);
+        assertEquals(stage, f.prepareAttempts.getLast());
+        assertEquals(
+            stage == Stage.USER
+                ? List.of(Stage.USER)
+                : List.of(Stage.USER, Stage.CREATE_IP, Stage.IP),
+            f.stages());
+        assertTrue(f.statements.getLast().cursors.isEmpty());
+        f.verifyReleasedAndConsumed();
+      }
+    }
   }
 }
