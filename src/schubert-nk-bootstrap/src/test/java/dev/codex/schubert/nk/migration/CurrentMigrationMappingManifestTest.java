@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-/** PT-MIG-MAPMAN001..008; independent SS408 frames and Python SHA256 literals, no data/DB IO. */
+/** PT-MIG-MAPMAN001..010; independent SS408 frames and Python SHA256 literals, no data/DB IO. */
 final class CurrentMigrationMappingManifestTest {
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
@@ -199,6 +199,27 @@ final class CurrentMigrationMappingManifestTest {
     assertEquals(
         "CurrentMigrationMappingManifest[REDACTED]",
         inputs(false, false, false).manifest().toString());
+  }
+
+  @Test
+  void mapman009SerializedReadbackUsesRetainedDeclaredDigest() throws Exception {
+    var declared = inputs(false, false, false).manifest();
+    declared.verifySerialized(NORMAL.getBytes(StandardCharsets.US_ASCII));
+    assertEquals(NORMAL_HASH, declared.sha256());
+    assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), declared.canonicalBytes());
+  }
+
+  @Test
+  void mapman010OtherValidManifestNullAndCorruptBytesCannotBorrowExpectedHash() throws Exception {
+    var declared = inputs(false, false, false).manifest();
+    assertThrows(IllegalArgumentException.class, () -> declared.verifySerialized(null));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> declared.verifySerialized(EMPTY.getBytes(StandardCharsets.US_ASCII)));
+    byte[] corrupt = NORMAL.getBytes(StandardCharsets.US_ASCII);
+    corrupt[0] = 0;
+    assertThrows(IllegalArgumentException.class, () -> declared.verifySerialized(corrupt));
+    assertEquals(NORMAL_HASH, declared.sha256());
   }
 
   private record Inputs(

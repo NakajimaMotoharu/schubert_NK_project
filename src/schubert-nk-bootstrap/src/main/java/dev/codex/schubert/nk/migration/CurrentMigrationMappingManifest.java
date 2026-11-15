@@ -13,8 +13,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Bound declared ID correspondence, never actual Current data, persistence or authority proof.
- * NK-MIG-001; MIG003005006/MIG-DAT005/TST; UI223242254; SS311331343 SSC408; PT-MIG-MAPMAN001..008.
- * Existing canonical part bytes retain their original ID/order contracts.
+ * NK-MIG-001; MIG003005006/MIG-DAT005/TST; UI223242254; SS311331343 SSC408/409;
+ * PT-MIG-MAPMAN001..010. Existing canonical part bytes retain their original ID/order contracts.
  */
 @NullMarked
 @Immutable
@@ -64,6 +64,10 @@ public final class CurrentMigrationMappingManifest {
 
   public Map<String, Integer> rowCounts() {
     return retainedCounts;
+  }
+
+  public void verifySerialized(byte @Nullable [] candidate) throws NoSuchAlgorithmException {
+    new CurrentMigrationMappingVerifier().verify(candidate, retainedSha256);
   }
 
   private static void append(
