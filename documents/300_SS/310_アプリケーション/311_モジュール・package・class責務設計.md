@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC410: MigrationMasterCopyManifest constructor/canonicalBytes/sha256/mappingSha256/rowCounts/toString/invalidと既Assembler.copyManifestを追加。全990/48Main68physical予定。
+
 SSC409: CurrentMigrationMappingVerifier.verify/frames/rows/numeric/model-validation/invalidとCurrentMigrationMappingManifest.verifySerializedを接続。既format byte不変更、期待SHAは元宣言artifactから渡す。新18/全976/47Main67class予定。
 
 SSC408: CurrentMigrationMappingManifest ctor/canonicalBytes/sha256/rowCounts/toString/append/invalidとCurrentMigrationAssembler.mappingManifestを接続。型・既mapping bytes/orderは不変更、新10/全958・46Main66class予定。
