@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC416: MigrationMasterCopyVerifier.verify/toString/invalid/default ctor。取得済み保持byteを防御copyしtrusted expected SHA→既宣言再構成→canonical byte完全一致。実永続化・認証なし。全1050/52Main73physical予定（自然NoCode1）。
+
 SSC415: CurrentMigrationTransfer.transfer/SourceCounts/invalid/toString/default constructor。二借用接続の所有を変更せずread→assemble→same-target-copyへ接続。新20/whole1030/51Main72physical（自然NoCode1）予定。
 
 SSC414: MigrationMasterCopyCoordinator.transfer/rows/toString/input/stateとMigrationCopyPort.copyを追加。caller認証/CopyIn正常終了とTX所有は別、固定六表のみ。全1010/50Main70physical（自然NoCode1）予定。
