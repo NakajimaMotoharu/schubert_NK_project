@@ -1,0 +1,5 @@
+# 既存純例外二run 生成code監査仕様
+
+Source-only admission found originalMorning12 and JdbcResourceFailures8 already successful at historical sources with all relevant Main/Test bytes exactly current. Do not reexecute20 justconfirmation. Analyze each original single JaCoCo exec against its own explicit4 physical classes using existing qualified unfiltered tool12 reference; all names admitted before class stat/read, verify private compiled physical hashes and independent CRC/method counts before source metadata analysis. No product class definition/initialization, native/DB/JDBC-driver or runtime owner action, old source/runtime successes not promoted to currentCore or formal. Record raw missing generated methods/constructors, then ticket before any repair; no exclusions/reflection/new-for-coverage. Originalcost/SV/904.85 immutable. Additional .05/.15/.45 cap.5, allHOLD preserved.
+
+Original PT-MDB-PURE341001..012/JDBC2757001..008、SS332333352354/451/YKT2431。既存12/8を一つのrunへ合算せず各source/exec/class CRCを保持。期待はclassFile Code method総数とraw/default差の全量一致、Root4/2 class access0、source proof/hash、原物は読取のみ。工具試験再演0、製品試験0。

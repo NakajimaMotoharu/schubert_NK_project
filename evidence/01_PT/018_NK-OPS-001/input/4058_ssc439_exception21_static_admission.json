@@ -1,0 +1,22 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35270-SSC439-PURE-EXCEPTION-WHOLE21",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35258-ssc439-exception21-prepare-v1/manifest.json",
+    "sha256": "cea9656b34c43d80e215dc8de7a2ba229ff986cb34109a2333af016188e87a24"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35260-ssc439-exception21-static-v1/manifest.json",
+    "sha256": "3c11340c2cb7038bb2e964101899ef0f7c532822093998f8315063ea0392834d"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Deliberate mutation of the returned independent enum array proves the public defensive-copy contract; no production null state or assignment exists. Original enum array and fresh values remain asserted independently.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

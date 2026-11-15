@@ -1,0 +1,267 @@
+{
+  "actualExit": 0,
+  "source": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "productionCoreMain": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "terminalAtUTC": "2026-11-15T21:14:24.505366+00:00",
+  "runs": [
+    {
+      "label": "morning",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/morning.json",
+        "sha256": "2b9cc36fc983edb42923054ffdd127a3ae0dd2d91c45b9409582e2e8ddf1b3fb"
+      },
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 186
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 38
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 27
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 4
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        }
+      ]
+    },
+    {
+      "label": "jdbc",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/jdbc.json",
+        "sha256": "6f886d87a2e00825ca4e5e21d72710b8d8461d46c24901dfc4d22c0e14fbdf15"
+      },
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 66,
+          "covered": 94
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 19
+        },
+        "LINE": {
+          "missed": 9,
+          "covered": 24
+        },
+        "COMPLEXITY": {
+          "missed": 9,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 8,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 3
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<clinit>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        }
+      ]
+    }
+  ],
+  "applicationTestsExecuted": 0,
+  "historicalTestsReferenced": 20,
+  "physicalReadsAdmittedNamesOnly": true,
+  "sourceSpecificRunsKeptSeparate": true,
+  "oldSuccessPromotedToCurrentCore": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "summary": "Coredeaed367/PG35240 既存純例外二runの現関連Main-Test全source一致、歴史Morning12(Unit6eeb0485/Core3f65cf67)とJDBC8(Unitf5d3ab45/Coree9d0c012)の各singleexec/各4physical/hash/CRC/Code method数を独立照合、製品試験再演0/工具12再演0/productionclass define-init0。rawMorning38LINE10METHOD4CLASS34BRANCH186I hitに1LINE2METHOD8I不足、MorningSqlFailures空privatectorとStorageReason.valueOf。JDBC24LINE3METHOD3CLASS19BRANCH94I hitに9LINE8METHOD1CLASS1BRANCH66I不足、JdbcResourceFailures空ctor及び別runStorage補助未hit。二source/execを合算せず各証跡を歴史保存し現Core全体へ昇格0。BUG3087/YKT2559を修正前起票、非instance staticnamespace補足と独立enum境界を必要修正の候補として次群へ。追加.05/.15/.45監査だけ完了、残397.324/837.386/1643.415、原904.85/SV/各開始保持。App226/35750/35685/歴史不成功65は増加0、正式1964/53・正本184/625・元17/190・工数null不変、全451/全caller/実JDBC-DB/CHR/native/owner終了依存未受入・全HOLD/aru停止保持。",
+  "technical": {
+    "historicalRunsReferenced": 2,
+    "historicalTestsReferenced": 20,
+    "newProductExecutions": 0,
+    "actualCodeRawAudit": [
+      {
+        "label": "morning",
+        "report": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/morning.json",
+          "sha256": "2b9cc36fc983edb42923054ffdd127a3ae0dd2d91c45b9409582e2e8ddf1b3fb"
+        },
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 8,
+            "covered": 186
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 34
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 38
+          },
+          "COMPLEXITY": {
+            "missed": 2,
+            "covered": 27
+          },
+          "METHOD": {
+            "missed": 2,
+            "covered": 10
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 4
+          }
+        },
+        "missedMethods": [
+          {
+            "className": "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "valueOf",
+            "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          }
+        ]
+      },
+      {
+        "label": "jdbc",
+        "report": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/jdbc.json",
+          "sha256": "6f886d87a2e00825ca4e5e21d72710b8d8461d46c24901dfc4d22c0e14fbdf15"
+        },
+        "rawCounters": {
+          "INSTRUCTION": {
+            "missed": 66,
+            "covered": 94
+          },
+          "BRANCH": {
+            "missed": 1,
+            "covered": 19
+          },
+          "LINE": {
+            "missed": 9,
+            "covered": 24
+          },
+          "COMPLEXITY": {
+            "missed": 9,
+            "covered": 12
+          },
+          "METHOD": {
+            "missed": 8,
+            "covered": 3
+          },
+          "CLASS": {
+            "missed": 1,
+            "covered": 3
+          }
+        },
+        "missedMethods": [
+          {
+            "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "values",
+            "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "valueOf",
+            "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;I)V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "$values",
+            "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+            "name": "<clinit>",
+            "descriptor": "()V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException",
+            "name": "<init>",
+            "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V"
+          },
+          {
+            "className": "dev/codex/schubert/nk/storage/StorageIoException",
+            "name": "reason",
+            "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+          }
+        ]
+      }
+    ],
+    "wholeSourceFormalPromoted": false,
+    "newAcceptance": 0,
+    "effortRate": null
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4057_ssc439_exception21_profile.json",
+    "sha256": "3ef2069abda879dc27b99ef3e470df43b43a7b8cbe9d80872f75a0aea5e1beda"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": "5732b3c02487f292bdd1863950096e62098cc687b76cbdfd073bbe24dcf02f76",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "5784f01574923a7c1939cb63ee2fe4907f3536b377ccee9fc77ae675a9b47e7b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java": "95e6b836793434461ea17d1e527020cb7772aca782fbbd0dac5b6e8822f40ea2",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java": "269d5384508a877d55814f880efdb6b2081553b53839773b99daa0db42ea6c7d",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java": "352483829274800db29d48ca4892395d9afd89b9d26cd639b2d38bfbc20109fe",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35258-ssc439-exception21-prepare-v1/manifest.json",
+    "sha256": "cea9656b34c43d80e215dc8de7a2ba229ff986cb34109a2333af016188e87a24"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35260-ssc439-exception21-static-v1/manifest.json",
+    "sha256": "3c11340c2cb7038bb2e964101899ef0f7c532822093998f8315063ea0392834d"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4058_ssc439_exception21_static_admission.json",
+    "sha256": "da3dcce3a2c187a1be47c99aa6aa695eddb01b3b3f9be475d89700e6f8912a71"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "34",
+      "reason": "Deliberate mutation of the returned independent enum array proves the public defensive-copy contract; no production null state or assignment exists. Original enum array and fresh values remain asserted independently.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

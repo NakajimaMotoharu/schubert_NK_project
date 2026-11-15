@@ -1,0 +1,89 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35270-SSC439-PURE-EXCEPTION-WHOLE21",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4375_SSC439_純例外全二十一仕様.md",
+      "sha256": "a114e1d5e0fe44b92afde1d3dd14c44015bfc1f447bb80fb24a9d3c83744b459"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35254-ssc439-pure-exception-source-v1/manifest.json",
+      "sha256": "bc77a42ea3bbfb57c006ab95b0655badf5ca4565c0d3b47ca5a19a261a0b61cf"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java",
+      "tests": 12
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 21,
+  "newTestDefinitions": 1,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException",
+    "dev/codex/schubert/nk/storage/StorageIoException",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-storage/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35256-ssc439-exception21-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35258-ssc439-exception21-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35260-ssc439-exception21-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35262-ssc439-exception21-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35270-ssc439-exception21-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35272-ssc439-exception21-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg35258-ssc439-exception21-v1",
+    "unit": "pg35270-ssc439-exception21-v1"
+  }
+}

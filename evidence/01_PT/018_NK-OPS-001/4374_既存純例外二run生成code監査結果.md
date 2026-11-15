@@ -1,0 +1,5 @@
+# 既存純例外二run生成code監査結果
+
+Coredeaed367/PG35240 既存純例外二runの現関連Main-Test全source一致、歴史Morning12(Unit6eeb0485/Core3f65cf67)とJDBC8(Unitf5d3ab45/Coree9d0c012)の各singleexec/各4physical/hash/CRC/Code method数を独立照合、製品試験再演0/工具12再演0/productionclass define-init0。rawMorning38LINE10METHOD4CLASS34BRANCH186I hitに1LINE2METHOD8I不足、MorningSqlFailures空privatectorとStorageReason.valueOf。JDBC24LINE3METHOD3CLASS19BRANCH94I hitに9LINE8METHOD1CLASS1BRANCH66I不足、JdbcResourceFailures空ctor及び別runStorage補助未hit。二source/execを合算せず各証跡を歴史保存し現Core全体へ昇格0。BUG3087/YKT2559を修正前起票、非instance staticnamespace補足と独立enum境界を必要修正の候補として次群へ。追加.05/.15/.45監査だけ完了、残397.324/837.386/1643.415、原904.85/SV/各開始保持。App226/35750/35685/歴史不成功65は増加0、正式1964/53・正本184/625・元17/190・工数null不変、全451/全caller/実JDBC-DB/CHR/native/owner終了依存未受入・全HOLD/aru停止保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/manifest.json SHA256 d8e3b84c78364ab07b3902a619e2d1b9830aaa43987820b8857af769b6c789fe

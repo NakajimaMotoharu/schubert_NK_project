@@ -1,0 +1,115 @@
+{
+  "actualExit": 0,
+  "callers": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+      "sha256": "a46d8a7712245f915dfa55dbaded65911d1984dedf575250bcfac891d050393b",
+      "owner": "WBS-P017-06",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+      "sha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "owner": "WBS-P017-02",
+      "calls": [
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java",
+      "sha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "owner": "WBS-P017-07",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(failure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+      "sha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+      "owner": "WBS-P017-07",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+      "sha256": "a0a48838a0fc7792962fc246c47e4228572d51622b60dedd7e2b8ffc0a98b852",
+      "owner": "WBS-P017-07",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, failure)) throw failure;",
+        "if (JdbcResourceFailures.replace(statementFailure, failure)) throw failure;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java",
+      "sha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3",
+      "owner": "WBS-P017-07",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(rowsFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+      "sha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+      "owner": "WBS-P017-11",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sha256": "100d4f98f20d7e7f99e8ad0738778fc729f6717ee158dfc0c4ac140631430527",
+      "owner": "WBS-P004-02",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+      "sha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+      "owner": "WBS-P017-01",
+      "calls": [
+        "MorningSqlFailures.preserveCatalogFatal(failure);",
+        "return MorningSqlFailures.closeReplace(primary, secondary);",
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(failure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(failure, secondary)) throw secondary;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "sha256": "0f0657f9307800083ecb70006dd1322df49153dfad5ea08762d119857e0ff9d4",
+      "owner": "WBS-P004-03",
+      "calls": [
+        "if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;",
+        "if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;"
+      ]
+    }
+  ],
+  "sourceReadOnly": true,
+  "allCallersBinaryRebuildBeforeRelease": true,
+  "fullCallerCurrentRuntimeQualified": false
+}

@@ -1,0 +1,136 @@
+{
+  "actualExit": 0,
+  "source": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "productionCoreMain": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "terminalAtUTC": "2026-11-15T21:13:22.856713+00:00",
+  "runs": [
+    {
+      "label": "morning",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/morning.json",
+        "sha256": "2b9cc36fc983edb42923054ffdd127a3ae0dd2d91c45b9409582e2e8ddf1b3fb"
+      },
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 186
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 38
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 27
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 10
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 4
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        }
+      ]
+    },
+    {
+      "label": "jdbc",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35240-exception-helper-existing-raw-audit-v1/jdbc.json",
+        "sha256": "6f886d87a2e00825ca4e5e21d72710b8d8461d46c24901dfc4d22c0e14fbdf15"
+      },
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 66,
+          "covered": 94
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 19
+        },
+        "LINE": {
+          "missed": 9,
+          "covered": 24
+        },
+        "COMPLEXITY": {
+          "missed": 9,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 8,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 3
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<clinit>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        }
+      ]
+    }
+  ],
+  "applicationTestsExecuted": 0,
+  "historicalTestsReferenced": 20,
+  "physicalReadsAdmittedNamesOnly": true,
+  "sourceSpecificRunsKeptSeparate": true,
+  "oldSuccessPromotedToCurrentCore": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
