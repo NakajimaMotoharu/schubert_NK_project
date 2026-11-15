@@ -19,36 +19,30 @@ public record BatchStepResult(
   }
 
   public enum Reason {
-    NONE,
-    ALREADY_SUCCESSFUL,
-    BACKUP_UNAVAILABLE,
-    PROTECTED_RECORDS,
-    ABANDONED,
-    DATABASE_FAILURE,
-    COMMAND_FAILURE,
-    SAFETY_FAILURE,
-    IO_FAILURE,
-    TIMEOUT,
-    INTERRUPTED;
+    NONE(null),
+    ALREADY_SUCCESSFUL("step already successful for business date"),
+    BACKUP_UNAVAILABLE("verified backup unavailable"),
+    PROTECTED_RECORDS("protected records retained"),
+    ABANDONED("previous same-run attempt abandoned"),
+    DATABASE_FAILURE("batch database operation failed"),
+    COMMAND_FAILURE("batch command failed"),
+    SAFETY_FAILURE("batch safety check failed"),
+    IO_FAILURE("batch file operation failed"),
+    TIMEOUT("batch step deadline reached"),
+    INTERRUPTED("batch step interrupted");
+
+    private final @Nullable String diagnosticSummary;
+
+    Reason(@Nullable String diagnosticSummary) {
+      this.diagnosticSummary = diagnosticSummary;
+    }
 
     public @Nullable String code() {
       return this == NONE ? null : name();
     }
 
     public @Nullable String summary() {
-      return switch (this) {
-        case NONE -> null;
-        case ALREADY_SUCCESSFUL -> "step already successful for business date";
-        case BACKUP_UNAVAILABLE -> "verified backup unavailable";
-        case PROTECTED_RECORDS -> "protected records retained";
-        case ABANDONED -> "previous same-run attempt abandoned";
-        case DATABASE_FAILURE -> "batch database operation failed";
-        case COMMAND_FAILURE -> "batch command failed";
-        case SAFETY_FAILURE -> "batch safety check failed";
-        case IO_FAILURE -> "batch file operation failed";
-        case TIMEOUT -> "batch step deadline reached";
-        case INTERRUPTED -> "batch step interrupted";
-      };
+      return diagnosticSummary;
     }
 
     private boolean allows(Status status) {

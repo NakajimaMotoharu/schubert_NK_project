@@ -1,0 +1,57 @@
+{
+  "groupId": "PGPT-WBS65-SSC438-RESULT-DIAGNOSTIC-FIELD4-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2313_WBS65SSC438固定診断四開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "BatchStepResult.Reasonの固定11診断を各enum定数のfinal nullable diagnosticSummary fieldで表し、private constructorの@Nullable String引数へ既定値を明示しsummary()はそのfield読取とする。NONEのみsummary NULL、ALREADY_SUCCESSFUL→step already successful for business date、BACKUP_UNAVAILABLE→verified backup unavailable、PROTECTED_RECORDS→protected records retained、ABANDONED→previous same-run attempt abandoned、DATABASE_FAILURE→batch database operation failed、COMMAND_FAILURE→batch command failed、SAFETY_FAILURE→batch safety check failed、IO_FAILURE→batch file operation failed、TIMEOUT→batch step deadline reached、INTERRUPTED→batch step interruptedの既存固定文を完全保持する。enum名/順序/ordinal/public descriptor、Reason.code()及びallows(Status)の全body、外側recordのStatus/Reason NN・各計数非負/SUCCESS failure0/SKIPPED全0と17許容27拒否の44組合せ・固定秘匿診断を変更0。private constructorは閉じたenum初期化だけでnullableは既存NONEの契約を表し、任意入力/例外/SQL/path/body/credentialを診断へ取り込まない。switch式が生成するsummary default1分岐6命令の未実行BUG3085を除外/到達不能/反射/偽enumで埋めず、既定値を保持する責務表現へ是正する。元独立全4Testsource/fixture/全期待をbyte exact保持、新sourceのfreshMain1RootNullAway/全静的/同singleexec全4/current179physicalCRC-initXML/raw全三Codeclassで確認する。DB schema/値互換/transaction/原本/所有/権限/HTTP/UI/電文/DIF変更0、元8反射fixtureやRoot2Actual4/DB鍵/VM/native/aru/HOLDを実行・抽出・代替0。旧sourceのdefault四100/raw不足を新sourceへ加算0、正式/全WBS/451/終了依存は別受入を維持。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4367_SSC438_batch固定診断・通常四仕様.md",
+      "sha256": "df99c45dafd6f4a9e79885a465d29f35af4f966d2dcb705e1b6a92e9a581dd3c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35150-ssc438-result-summary-design-only-v1/design-only-main-patch.json",
+      "sha256": "dbbd72c2e6ff619c9fa48cc601a74b1aebf1759abe2095604560e311eb73f980"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P017-02.01"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "WBS-P017-02"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P017-02": [
+      "WBS-P017-02.01"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "119e724346a9872c7cbd9b59c5ac375f3006f3a5",
+  "run": "PG35170-SSC438-RESULT-DIAGNOSTIC-WHOLE4",
+  "estimate": {
+    "low": 0.2,
+    "base": 0.6,
+    "high": 1.8
+  },
+  "capPp": 2,
+  "workIds": [
+    "SSC438_RESULT_DIAGNOSTIC4_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2312_WBS65予実・SSC438固定診断四追加版707.json",
+    "sha256": "6c92ef5f466383addcc324a301066f19b9eeb0566aa5538a3ec9097fdb14e46f"
+  },
+  "nextCommand": "Publish SS331341354/914 main beforePG. Fixed11 nullable diagnostic enum field/privatector; preserve code-allows-recordvalidation and original4 Testsource byteexact. FreshMain1Root/static/current179CRC-initXML/raw3/whole4, no DB/keys/VM/nativearu/Root2Actual4HOLD operations. Freshquota/hourly ordinarynotstop."
+}
