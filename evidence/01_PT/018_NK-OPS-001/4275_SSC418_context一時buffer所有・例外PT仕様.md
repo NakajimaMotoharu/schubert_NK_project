@@ -1,0 +1,15 @@
+# SSC418 context buffer取得直後保護・独立単体仕様
+
+RD AUT/MQ/TST、UI232234235、SS311323352、BUG3012/3013・YKT2541/2542、WBS-P005-02・関連F03/P01607/10/13/14。
+
+ProtectedReadWireClientの既6引数package-private構築口と全public facade APIを維持し、defaultはprivate stateless JDK操作実装に固定する。ASCII変換はAuthenticationContext.wireValueからUS_ASCIIの新規64byte、比較は既MessageDigest.isEqualでありalgorithm/認証/権限/電文/画面/再送/期限/queueを変更しない。外部設定・HTTP選択・動的loadingで切替えない。新しい7引数package-private口は内部ContextOperations（encodeとsameの二操作）を受け、operations nullをconstructorの明示nonnull preconditionで拒否する。標準実装は状態/credentialを保持しないprivate static final class、操作interfaceはpackage-privateでbinary Code0を実証し除外としない。
+
+encodeの戻りはnullable boundaryとして宣言し、contextBytesがnull又は64以外を固定IllegalStateExceptionで拒否する。nullは未取得、非null返却時にownedとなる。長さ不正の返却bufferはhelper自身が消去してから失敗し、呼出側へ返した正規bufferだけが次の所有へ移る。第一bufferを取得した直後に外側try/finallyへ入り、その中で第二を取得して内側try/finallyへ入る。第二の取得/検査に失敗すれば取得済み第一だけを消去、比較失敗なら第二→第一をそれぞれ一回消去する。JDK内部の返却前の未到達allocationまでを消去保証したと主張しない。実OOM/Thread操作/JDK差替えで故障を誘発しない。
+
+decodeはinstance内でこの既owned比較を使う。既catalog catchの固定INVALID_RESPONSEは保持し、変換前に既JmsRequestReplyException.preserveFatalでcause/suppressed/SQLnext/JMSlinkedのError identityを保存する。新package-private口の非fatal/不正結果だけが従来の閉分類へ落ち、Errorを通常結果へ変換しない。Root/VM/DB/SDKbackend/actual4/Root2/拒否fixtureへの代替口ではなく、元から許可された同memory-only componentの例外消去を検証する。public synthetic contextだけを用い、実token・session・鍵・原本にアクセスしない。
+
+PTは既58全本文/独立wire/golden/timeout/並行/secret-wipeを保持し、新whole ProtectedReadContextOwnershipTestの6methodを追加する。CONTEXT001 first/second/compareの合成Errorで取得済み全buffer消去とError同一、002比較RTE内Errorの同一伝播、003通常RTEの固定INVALID_RESPONSE/消去/秘匿、004null operationsの構築前拒否、005null encode第一/第二で既取得分消去と固定分類、006不正幅0/63/65を第一/第二で与え返却済み全bufferの消去と後続comparison0。正常/不一致のdefault JDK動作・全8旧クラスは既58で再資格し、必要な同source whole64・全physical数等を推測せず新compile実物から確定する。new6と旧58を区別し、old58成功を新sourceへ流用しない。
+
+原58群の未達carry.2/.6/1.8ppを保持し、新Source製造/SS補足/六PT分だけ.4/1.2/2.4pp追加、当群合計.6/1.8/4.2pp cap6。元群.8/2.4/7.2/cap8・元P005費・元904.85/SV各上限は不変更、carryを二重追加しない。新13Mainは変更sourceなのでRoot compiler/NullAwayでfresh compile、全9wholeTestと静的、同一64execのdefault及びunfiltered全命令/行/メソッド/クラス/分岐、CRC/init/sourceを確認する。各naturalB0/Code0は明示、全Protocol依存を含む全物理scopeの未達を保存しown/source/全194等を混同しない。global451/正式/工数/CHR/native/ITSTを受入にしない。
+
+新入力は独立UI232のoffset0/8/11/19/22/23/24/60/96/113/177/181/187/193/199/208を使う272byte ANMRSP01成功・16byte空menu（全count0/flag0/reserved spaces）の手書きvector。expectedはfixedASCII64/zero配列/明示call数/同一Error/固定reasonでありProduction codec/比較/消去methodで生成しない。返却bufferと旧caller-owned contextは区別し元String/入力contextの再認証やsecret解決をしない。null operationsはnonnull構築契約の明示拒否でNPEを正常処理としてcatchしない。encoder null/不正幅は固定失敗で偶発NPEを排除する。negative actualprovider/VM/Rootは一切起動しない。

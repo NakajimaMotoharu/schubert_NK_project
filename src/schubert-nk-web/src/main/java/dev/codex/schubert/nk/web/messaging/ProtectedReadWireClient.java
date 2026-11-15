@@ -30,6 +30,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Trusted-facade protected read exchange; JMS ACL/property validation remains upstream.
@@ -37,12 +38,14 @@ import java.util.function.Supplier;
  * PG206/PT-WEB166..173,238..245. Package construction prevents HTTP-selected capabilities.
  */
 public final class ProtectedReadWireClient {
+  private static final ContextOperations JDK_CONTEXT = new JdkContextOperations();
   private final Set<String> requests;
   private final JmsRequestReplyClient client;
   private final JmsRequestSender sender;
   private final Clock clock;
   private final Supplier<UUID> identifiers;
   private final Duration timeout;
+  private final ContextOperations contextOperations;
 
   ProtectedReadWireClient(
       Set<String> requestLayouts,
@@ -51,6 +54,17 @@ public final class ProtectedReadWireClient {
       Clock clock,
       Supplier<UUID> identifiers,
       Duration timeout) {
+    this(requestLayouts, client, sender, clock, identifiers, timeout, JDK_CONTEXT);
+  }
+
+  ProtectedReadWireClient(
+      Set<String> requestLayouts,
+      JmsRequestReplyClient client,
+      JmsRequestSender sender,
+      Clock clock,
+      Supplier<UUID> identifiers,
+      Duration timeout,
+      ContextOperations contextOperations) {
     this.requests = Set.copyOf(requestLayouts);
     this.client = Objects.requireNonNull(client, "client");
     this.sender = Objects.requireNonNull(sender, "sender");
@@ -61,6 +75,7 @@ public final class ProtectedReadWireClient {
         || timeout.isNegative()
         || timeout.compareTo(JmsRequestReplyClient.MAXIMUM_WAIT) > 0)
       throw new IllegalArgumentException("protected read wait must be between 1ns and 2s");
+    this.contextOperations = Objects.requireNonNull(contextOperations, "contextOperations");
   }
 
   /**
@@ -135,7 +150,7 @@ public final class ProtectedReadWireClient {
     }
   }
 
-  private static Result decode(
+  private Result decode(
       LayoutId expected, byte[] response, UUID correlation, AuthenticationContext context) {
     var definition = LayoutRegistry.standard().require(expected, 1);
     if (response.length < 256 + definition.dataLength()
@@ -170,18 +185,52 @@ public final class ProtectedReadWireClient {
     } catch (PermanentProtocolException
         | IllegalArgumentException
         | IllegalStateException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       throw new ProtectedReadWireException(Reason.INVALID_RESPONSE);
     }
   }
 
-  private static boolean sameContext(AuthenticationContext left, AuthenticationContext right) {
-    byte[] first = left.wireValue().getBytes(StandardCharsets.US_ASCII);
-    byte[] second = right.wireValue().getBytes(StandardCharsets.US_ASCII);
+  /** SSC418/BUG3013: ownership starts on return, before the next acquisition can fail. */
+  private boolean sameContext(AuthenticationContext left, AuthenticationContext right) {
+    byte[] first = contextBytes(left);
     try {
-      return MessageDigest.isEqual(first, second);
+      byte[] second = contextBytes(right);
+      try {
+        return contextOperations.same(first, second);
+      } finally {
+        Arrays.fill(second, (byte) 0);
+      }
     } finally {
       Arrays.fill(first, (byte) 0);
-      Arrays.fill(second, (byte) 0);
+    }
+  }
+
+  private byte[] contextBytes(AuthenticationContext context) {
+    byte[] bytes = contextOperations.encode(context);
+    if (bytes == null) throw new IllegalStateException("invalid context buffer");
+    if (bytes.length != 64) {
+      Arrays.fill(bytes, (byte) 0);
+      throw new IllegalStateException("invalid context buffer");
+    }
+    return bytes;
+  }
+
+  /** Internal, trusted fault boundary; never selected by HTTP or runtime configuration. */
+  interface ContextOperations {
+    byte @Nullable [] encode(AuthenticationContext context);
+
+    boolean same(byte[] first, byte[] second);
+  }
+
+  private static final class JdkContextOperations implements ContextOperations {
+    @Override
+    public byte[] encode(AuthenticationContext context) {
+      return context.wireValue().getBytes(StandardCharsets.US_ASCII);
+    }
+
+    @Override
+    public boolean same(byte[] first, byte[] second) {
+      return MessageDigest.isEqual(first, second);
     }
   }
 
