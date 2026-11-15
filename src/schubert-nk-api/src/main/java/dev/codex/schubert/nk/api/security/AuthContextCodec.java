@@ -75,9 +75,12 @@ public final class AuthContextCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(raw, "raw");
-      byte[] plaintext = raw.wireValue().getBytes(StandardCharsets.US_ASCII);
-      byte[] nonce = new byte[12];
+      // SSC421/BUG3021: acquire every owned buffer inside its cleanup region.
+      byte[] plaintext = new byte[0];
+      byte[] nonce = new byte[0];
       try {
+        plaintext = raw.wireValue().getBytes(StandardCharsets.US_ASCII);
+        nonce = new byte[12];
         random.nextBytes(nonce);
         byte[] encrypted =
             crypt(
@@ -137,9 +140,11 @@ public final class AuthContextCodec implements AutoCloseable {
           throw new AuthContextCryptoException(AuthContextCryptoException.Reason.INVALID);
         }
         byte[] selected = key(version);
-        byte[] nonce = Arrays.copyOfRange(stored, 8 + idLength, 20 + idLength);
-        byte[] encrypted = Arrays.copyOfRange(stored, 20 + idLength, stored.length);
+        byte[] nonce = new byte[0];
+        byte[] encrypted = new byte[0];
         try {
+          nonce = Arrays.copyOfRange(stored, 8 + idLength, 20 + idLength);
+          encrypted = Arrays.copyOfRange(stored, 20 + idLength, stored.length);
           byte[] plaintext =
               crypt(Cipher.DECRYPT_MODE, selected, nonce, identity.aad(version), encrypted);
           try {

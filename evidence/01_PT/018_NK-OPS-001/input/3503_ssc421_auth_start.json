@@ -1,0 +1,39 @@
+{
+  "groupId": "PGPT-WBS65-SSC421-AUTH-CONTEXT-OWNERSHIP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2131_WBS65SSC421Auth所有開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "AuthContextCodec.encryptでplaintext取得後のnonce生成、decryptでnonce取得後のencrypted生成が既try前にある所有保護漏れを是正する。機密取得前に非秘密の空placeholderだけを準備し、実plaintext/nonce又はnonce/encryptedを既try内で順に取得する。取得済みownedだけが既finallyへ必ず届くようにし、JDK内部返却前allocationや実OOMの消去を保証したとしない。既stateLock/close/nonnull/鍵version/前鍵/固定AES256GCM128/nonce12/NKENC1/identityAAD/例外分類/public APIを保持し新crypto/provider/権限/secret口0。全MainはAuthCodec/Identity/Encrypted/CryptoException/package-infoの5sourceと現在Protocol同byteだけ、Actual4/Root2/実DB/実鍵/SDKbackendの代替口を作らない。原whole7の独立DataOutput/JCA expectedと業務assertを維持し、caller-monitorと100nonce並行TestのExecutorService.close/Future.get無期限だけをstop→Futureget5s又は元10s/await10s明示assert→worker確認後codec.closeへ直す。元nonce数100/identity/mutation/null/provider復元契約を弱めない。新AUTHCTX-OWN001はpublic deterministic nonceの初回直接Error同一/nonce消去、別workerで同codec正常と独立envelope一致/元context不変/call2を検証。変更後whole8一singleexec、freshRootNullAway/静的、CRC/init/default及び無filter必須LINE/METHOD/CLASS/BRANCH整数100を対象Codecで確認する。補助Instruction/Complexityも全保存し未実行を隠さず、全物理依存scope/他Main/全例外/全命令のPASSへ拡張0。原7成功は確認再演せず当変更の必要再資格だけ行う。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4282_SSC421_API認証context取得保護・通常八仕様.md",
+      "sha256": "270048caab585ece622fe2d18d995da14d39c35dae65cfd9df73befbaa02d74c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33800-ssc421-auth-context-design-only-v1/design-only-main-patch.json",
+      "sha256": "e1ae71b6f94c6282510ae95c446ca0f1645e3e9a9c93be3afa3cf557cb5db6be"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java"
+  ],
+  "source": "5758f38d500f0525b4a759065a7080e403f8f12b",
+  "run": "PG33810-SSC421-AUTHCTX8",
+  "estimate": {
+    "low": 0.4,
+    "base": 1.2,
+    "high": 3.6
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00703_SSC421_AUTH_CONTEXT_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2130_WBS65予実・SSC421Auth所有追加版622.json",
+    "sha256": "1f1b4d8cd1c3a6bfbb256d2d53608d8c09d34ae705de47e4e39eae85fcce1e57"
+  },
+  "nextCommand": "PublishSSC421SS311314352914 onlymain beforePG. Fix two context acquisition sites, finite two oldworker fixtures, newNonceError1+old7=whole8. FreshMain5/protocolsamebyte/static/default+raw mandatoryfour/CRC. Preserve supplements/fullscope misses, no realOOM/privatekeys/DB/VM/Root2Actual4SDK/native/aru/refusal. Freshquota/hourly; ordinarygroupnotstop."
+}
