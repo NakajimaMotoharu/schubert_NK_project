@@ -188,7 +188,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk', 'pgpt_unstarted_process']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk', 'pgpt_unstarted_process', 'pgpt_public_unit_xml']]
     return {p: digest(R / p) for p in paths}
 
 

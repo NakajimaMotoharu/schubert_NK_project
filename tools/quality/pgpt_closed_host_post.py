@@ -8,12 +8,12 @@ import ast
 import hashlib
 import json
 import re
-import shutil
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
 import pgpt_closed_host_profile as policy
+from pgpt_public_unit_xml import UNIT_ENV_PROPERTY_NAMES, copy_public_evidence
 
 
 def validate_switch_map_shape(text, item):
@@ -230,7 +230,7 @@ def verify(c, config, source):
     targets = {n: counters(classes[n]) for n in c['targetClasses']}
     component = {key: dict(covered=sum(v.get(key, {}).get('covered', 0) for v in targets.values()), missed=sum(v.get(key, {}).get('missed', 0) for v in targets.values())) for key in set().union(*(set(v) for v in targets.values()))}
     component100 = all(component.get(k, {}).get('covered', 0) > 0 and component[k]['missed'] == 0 for k in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
-    out = policy.environment(c, 'post'); files = {}
+    out = policy.environment(c, 'post'); files = {}; original_unit_xml_hashes = {}
     for i, (name, value) in enumerate(map_evidence.items()):
         filename = f'standard-switch-map-{i:03d}.txt'
         (out / filename).write_text(value.pop('disassembly'))
@@ -242,9 +242,15 @@ def verify(c, config, source):
             require(path.suffix != '.class', 'no product binaries in public evidence')
             name = 'jacoco.exec' if path.name == 'jacoco.exec' else prefix + ('class-init.stdout' if path.name == 'class-init.log' else path.name)
             require(name not in files, 'unique copied evidence name')
-            shutil.copyfile(path, out / name); files[name] = sha(out / name)
+            published = copy_public_evidence(path, out / name)
+            files[name] = published['sha256']
+            if published['originalUnitXmlSha256'] is not None:
+                original_unit_xml_hashes[name] = published['originalUnitXmlSha256']
     result = dict(actualExit=0, source=source, productionCoreMain=b['productionCoreMain'], config=policy.ref(config), run=c['id'], tests=len(actual), newTestDefinitions=c.get('newTestDefinitions', 0), physicalClasses=len(physical), positiveMainCrc=len(observed), coverage=coverage, targetCounters=targets, completeSourceComponentCounters=component, completeSourceComponentFour100=component100, wholeScopeFour100=not uncovered, uncoveredFullSourceClasses=uncovered, naturalNoCodeClasses=sorted(no_code), naturalNoBranchClasses=sorted(n for n, row in targets.items() if 'BRANCH' not in row), classIds=ids, actualJvmCodeMethodCounts=method_counts, hiddenJvmAdapters=bindings, manualCoverageExclusions=[], oldExecCombined=False, preflight=policy.ref(pf), inputHashes=b['inputHashes'], dependencies=b['dependencies'], environment=env, productTestsExecuted=len(actual), actualBackendNativeFsRootOrHeldClassActions=0, formalUpdated=False, whole451Accepted=False, newAcceptance=0, effortRate=None, files=files, verifier=policy.ref(Path(__file__).resolve()))
     result.update(defaultStandardFilteredSwitchMaps=map_evidence, forbiddenInitializedClasses=c.get('forbiddenInitializedClasses', []), forbiddenInitializedClassesObserved=[], reviewedReflection=c.get('reviewedReflection', []))
+    result.update(originalUnitXmlHashes=original_unit_xml_hashes,
+                  publicUnitXmlPropertyNames=sorted(UNIT_ENV_PROPERTY_NAMES),
+                  unitXmlSystemOutErrExported=False)
     result['unstartedProcess'] = type_symbols
     result['unstartedProcessInitializationObserved'] = []
     result['unqualifiedStreamingExecutionObserved'] = False
