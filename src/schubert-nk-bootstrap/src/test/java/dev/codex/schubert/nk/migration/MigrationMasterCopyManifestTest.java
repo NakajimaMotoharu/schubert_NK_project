@@ -22,17 +22,19 @@ final class MigrationMasterCopyManifestTest {
   private static final String CLAIM_HASH =
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   private static final String DIAGNOSTIC = "migration COPY manifest input is invalid";
+  private static final int FILES_PART = 0;
+  private static final int ENTRY_PART = 1;
   private static final int SPEAKER_PART = 2;
   private static final int AUDIO_PART = 3;
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
   private static final int WAIT_SECONDS = 5;
   private static final int TERMINATION_SECONDS = 10;
-  private static final String NORMAL =
+  private static final String NORMAL_VECTOR =
       "NKMIGCOPY1\nMAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\nspeakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\nscript_files\t1\t141\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\nscript_entries\t1\t63\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\naudio_files\t1\t136\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\nmedia_assets\t1\t169\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\nentry_audio_links\t1\t39\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
   private static final String NORMAL_HASH =
       "744f7e0bd0a7dd16ab4454db3c0852c244101d25b22692de2cf167adb5dbdc90";
-  private static final String EMPTY =
+  private static final String EMPTY_VECTOR =
       "NKMIGCOPY1\nMAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\nspeakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_entries\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\naudio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nmedia_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nentry_audio_links\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
   private static final String EMPTY_HASH =
       "4444698baa3c905644477124201c2c291637b7c8441ed296c30acb231b1dcd90";
@@ -46,7 +48,7 @@ final class MigrationMasterCopyManifestTest {
   @Test
   void copyman001IndependentNormalSixTuples() throws Exception {
     var result = normal();
-    assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
+    assertArrayEquals(NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(NORMAL_HASH, result.sha256());
     assertEquals(NORMAL_MAPPING_HASH, result.mappingSha256());
   }
@@ -54,7 +56,7 @@ final class MigrationMasterCopyManifestTest {
   @Test
   void copyman002EmptySixStreamsHaveFixedEmptySha() throws Exception {
     var result = new MigrationMasterCopyManifest(emptyMappings(), empty());
-    assertArrayEquals(EMPTY.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
+    assertArrayEquals(EMPTY_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(EMPTY_HASH, result.sha256());
     assertEquals(
         Map.of(
@@ -108,7 +110,7 @@ final class MigrationMasterCopyManifestTest {
     var bytes = result.canonicalBytes();
     bytes[0] = 0;
     assertNotSame(bytes, result.canonicalBytes());
-    assertArrayEquals(NORMAL.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
+    assertArrayEquals(NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
     assertEquals(NORMAL_HASH, result.sha256());
   }
 
@@ -157,7 +159,7 @@ final class MigrationMasterCopyManifestTest {
                   var result = new MigrationMasterCopyManifest(mapping, data);
                   assertEquals(NORMAL_HASH, result.sha256());
                   assertArrayEquals(
-                      NORMAL.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
+                      NORMAL_VECTOR.getBytes(StandardCharsets.US_ASCII), result.canonicalBytes());
                   return null;
                 }));
       for (var future : futures) assertNull(future.get(WAIT_SECONDS, TimeUnit.SECONDS));
@@ -197,13 +199,13 @@ final class MigrationMasterCopyManifestTest {
       throws Exception {
     var files = new ArrayList<ScenarioFileMigrationMap.FilePair>();
     files.add(new ScenarioFileMigrationMap.FilePair(1, 10, 700));
-    if (extra == 0) files.add(new ScenarioFileMigrationMap.FilePair(2, 11, 701));
+    if (extra == FILES_PART) files.add(new ScenarioFileMigrationMap.FilePair(2, 11, 701));
     var fm = new ScenarioFileMigrationMap(files);
     var ids = new ArrayList<ScenarioEntryMigrationMap.IdPair>();
     var placement = new ArrayList<ScenarioEntryPlacementMap.Placement>();
     ids.add(new ScenarioEntryMigrationMap.IdPair(20, 900));
     placement.add(new ScenarioEntryPlacementMap.Placement(1, 10, 20, 0));
-    if (extra == 1) {
+    if (extra == ENTRY_PART) {
       ids.add(new ScenarioEntryMigrationMap.IdPair(21, 901));
       placement.add(new ScenarioEntryPlacementMap.Placement(1, 10, 21, 1));
     }
