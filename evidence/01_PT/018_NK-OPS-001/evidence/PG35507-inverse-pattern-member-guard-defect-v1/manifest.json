@@ -1,0 +1,14 @@
+{
+  "actualExit": 1,
+  "parentBug": "BUG3092",
+  "phase": "RECOVERY_BEFORE_COMPILE_OR_PRODUCT_TEST",
+  "producerSha256": "6262a28105ba9d86fe2e84d136ecd452baeffe464c8168f1e121c36105bcf812",
+  "falsePositiveLines": [
+    "    final Pattern filePattern =",
+    "    final Pattern versionPattern = Pattern.compile(\"[A-Za-z0-9][A-Za-z0-9._-]{0,15}\");"
+  ],
+  "cause": "Regex two spaces plus dot-star also matches four-space method locals",
+  "productionSourceChanged": false,
+  "productExecutions": 0,
+  "atUTC": "2026-11-15T23:23:11.356267+00:00"
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35520-SSC440-PUBLIC-NAMESPACE-WHOLE39",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "WBS-P003-08",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java": "WBS-P004-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java": "WBS-P004-04",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4391_SSC440_public純utility全三十九仕様.md",
+      "sha256": "71a71f5253342217c683ca8290ab6d5a8fcd1df26ee3c8bb39ac7cca3b8de73e"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35504-ssc440-public-namespace-source-v1/manifest.json",
+      "sha256": "dac9787c589211b05ff90bca356ee536cc95d7ac796dc3b990184260086fa943"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35510-ssc440-namespace39-source-profile-v1/manifest.json",
+      "sha256": "a2c206781d11590a699791c30125deab2c1cc3cee0a350e6aab48a325f3d4b17"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "716595eec955ae02ad4897bc844d75796a53035b",
+  "mainSources": [
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "tests": 18
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironmentTest.java",
+      "tests": 6
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StoragePublicContractTest.java",
+      "tests": 2
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunPureContractTest.java",
+      "tests": 1
+    }
+  ],
+  "expectedTests": 39,
+  "newTestDefinitions": 3,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.class",
+    "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope",
+    "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment",
+    "dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment",
+    "dev/codex/schubert/nk/storage/StorageIoException",
+    "dev/codex/schubert/nk/batch/repository/BatchRun",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35512-ssc440-namespace39-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35514-ssc440-namespace39-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35516-ssc440-namespace39-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35518-ssc440-namespace39-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35520-ssc440-namespace39-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35522-ssc440-namespace39-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg35514-ssc440-namespace39-v1",
+    "unit": "pg35520-ssc440-namespace39-v1"
+  }
+}
