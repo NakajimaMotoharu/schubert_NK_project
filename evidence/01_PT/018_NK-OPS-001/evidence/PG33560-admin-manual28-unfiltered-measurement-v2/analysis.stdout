@@ -1,0 +1,50 @@
+CLASS	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	bec7efa51626d9ec	true	112	49	INSTRUCTION:6:437	BRANCH:0:52	LINE:0:113	COMPLEXITY:0:39	METHOD:0:13	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	<init>	()V	1	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	create	(Ljava/sql/Connection;Ljava/lang/String;[CLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;)Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;	1	INSTRUCTION:6:170	BRANCH:0:14	LINE:0:40	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	query	(Ljava/sql/Connection;Ljava/lang/String;I)J	10	INSTRUCTION:0:27	BRANCH:0:0	LINE:0:8	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	read	(Ljava/sql/PreparedStatement;I)J	10	INSTRUCTION:0:87	BRANCH:0:20	LINE:0:16	COMPLEXITY:0:11	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	lockMembership	(Ljava/sql/Connection;)V	10	INSTRUCTION:0:26	BRANCH:0:0	LINE:0:9	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	audit	(Ljava/sql/Connection;JLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/lang/String;)V	10	INSTRUCTION:0:56	BRANCH:0:2	LINE:0:16	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	closeStatement	(Ljava/sql/Statement;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:15	BRANCH:0:4	LINE:0:6	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	closeResult	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:15	BRANCH:0:4	LINE:0:6	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	requirePrepared	(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;	10	INSTRUCTION:0:6	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	requireStatement	(Ljava/sql/Statement;)Ljava/sql/Statement;	10	INSTRUCTION:0:6	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	requireResult	(Ljava/sql/ResultSet;)Ljava/sql/ResultSet;	10	INSTRUCTION:0:6	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	invalidBoundary	()Ljava/sql/SQLException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService	require	(Z)V	10	INSTRUCTION:0:5	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/PasswordHasher	79cacf94a425e746	true	22	49	INSTRUCTION:0:99	BRANCH:0:2	LINE:0:24	COMPLEXITY:0:8	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	<init>	(Lorg/springframework/security/crypto/password/PasswordEncoder;)V	0	INSTRUCTION:0:14	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	defaultEncoder	()Lorg/springframework/security/crypto/password/PasswordEncoder;	10	INSTRUCTION:0:13	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	encode	([C)Ljava/lang/String;	1	INSTRUCTION:0:22	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	matches	([CLjava/lang/String;)Z	1	INSTRUCTION:0:25	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	needsUpgrade	(Ljava/lang/String;)Z	1	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordHasher	requireHash	(Ljava/lang/String;)V	10	INSTRUCTION:0:14	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/PasswordPolicy	b70c5147e1379786	true	35	49	INSTRUCTION:0:142	BRANCH:0:20	LINE:0:28	COMPLEXITY:0:15	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/PasswordPolicy	<init>	()V	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordPolicy	normalizeForLogin	([C)[C	1	INSTRUCTION:0:25	BRANCH:0:0	LINE:0:6	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordPolicy	normalizeForCreation	([CLjava/lang/String;)[C	1	INSTRUCTION:0:59	BRANCH:0:6	LINE:0:12	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordPolicy	validateWire	(Ljava/lang/String;)V	10	INSTRUCTION:0:42	BRANCH:0:8	LINE:0:8	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/PasswordPolicy	invalidCodePoint	(I)Z	10	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:1	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/security/LoginUsername	53faed1d573cdfaa	true	23	65585	INSTRUCTION:0:74	BRANCH:0:14	LINE:0:13	COMPLEXITY:0:14	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	<init>	(Ljava/lang/String;)V	1	INSTRUCTION:0:44	BRANCH:0:8	LINE:0:9	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	key	()Ljava/lang/String;	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	invalidCodePoint	(I)Z	10	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:1	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/security/LoginUsername	value	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	a1ec591eb8fadca9	true	10	65585	INSTRUCTION:0:45	BRANCH:0:0	LINE:0:7	COMPLEXITY:0:7	METHOD:0:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	<init>	(Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:0:27	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	messageId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	correlationId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/UserCommandMetadata	at	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	b82f5880f31e7c54	true	7	16433	INSTRUCTION:0:40	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	values	()[Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	$values	()[Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;	4106	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome	<clinit>	()V	8	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0

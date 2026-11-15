@@ -11,13 +11,14 @@ import java.sql.Statement;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
  * Initial ADMIN only; not an authenticated HTTP/User CREATE bypass. Caller owns write transaction,
  * commit, rollback and close. NK-ADM-001; AUT001002/DAT009/MON004/OPS009; UI225226242;
- * SS3143313323438.2/351352 SSC188189411412; PT-ADM-BOOT001..008/BOOTBOUND001..018.
+ * SS3143313323438.2/351352 SSC188/189/411/412/413; PT-ADM-BOOT001..008/BOOTBOUND001..019.
  */
 @NullMarked
 public final class BootstrapAdminService {
@@ -35,8 +36,17 @@ public final class BootstrapAdminService {
       "select pg_catalog.pg_try_advisory_xact_lock_shared(71419602)";
   private static final String MEMBERSHIP = "select pg_advisory_xact_lock(71419601)";
   private static final String ACCOUNT_EXISTS = "select exists(select 1 from schubert.app_users)";
-  private final PasswordHasher passwords = new PasswordHasher();
+  private final Function<char[], String> passwords;
   private final PasswordPolicy policy = new PasswordPolicy();
+
+  public BootstrapAdminService() {
+    this(new PasswordHasher()::encode);
+  }
+
+  /** SSC413/BOOTBOUND019: internal failure port; public noarg remains crypto-pinned. */
+  BootstrapAdminService(Function<char[], String> encoder) {
+    passwords = Objects.requireNonNull(encoder, "encoder");
+  }
 
   /**
    * Consumes password on every path. CREATED is provisional until caller commit and normal close.
@@ -65,7 +75,7 @@ public final class BootstrapAdminService {
       char[] normalized = policy.normalizeForCreation(password, name.value());
       String hash;
       try {
-        hash = passwords.encode(normalized);
+        hash = passwords.apply(normalized);
       } finally {
         Arrays.fill(normalized, '\0');
       }

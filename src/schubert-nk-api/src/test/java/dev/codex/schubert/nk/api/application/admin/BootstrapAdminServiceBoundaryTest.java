@@ -23,10 +23,12 @@ import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.junit.jupiter.api.Test;
@@ -443,6 +445,33 @@ final class BootstrapAdminServiceBoundaryTest {
     assertEquals("new.admin", name.key());
     assertEquals("LoginUsername[REDACTED]", name.toString());
     assertEquals(301470017, name.hashCode());
+  }
+
+  @Test
+  void bootbound019DirectEncodingFailureWipesBothPasswordArrays() {
+    for (Throwable failure :
+        List.of(
+            new IllegalStateException("synthetic encoding port"),
+            new AssertionError("synthetic encoding port"))) {
+      var observed = new AtomicReference<char[]>();
+      var service =
+          new BootstrapAdminService(
+              buffer -> {
+                observed.set(buffer);
+                if (failure instanceof Error error) throw error;
+                throw (RuntimeException) failure;
+              });
+      var f = new Port();
+      char[] input = "e\u0301".repeat(12).toCharArray();
+      assertSame(
+          failure,
+          assertThrows(Throwable.class, () -> service.create(f.connection(), USER, input, META)));
+      assertArrayEquals(new char[input.length], input);
+      assertArrayEquals(new char[12], Objects.requireNonNull(observed.get()));
+      assertEquals(SQL.subList(0, 4), f.sql);
+      f.finished();
+    }
+    assertThrows(NullPointerException.class, () -> new BootstrapAdminService(null));
   }
 
   private static List<Throwable> failures() {
