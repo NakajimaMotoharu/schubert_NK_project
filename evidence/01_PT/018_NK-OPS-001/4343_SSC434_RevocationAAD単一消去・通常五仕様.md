@@ -1,0 +1,5 @@
+# SSC434 Revocation AAD単一消去・通常五仕様
+
+RevocationPayloadIdentity.aadで作成したowned六field byte配列の既finally消去loop（元順Arrays.fill(field,0)）を同classのprivate static eraseFields(byte[][])へ同bodyで一箇所集約し、finallyはこのhelperを一回呼ぶ。六field内容/32bitBE長/UUID全bit/epoch秒signed64+nanos32bit/返却配列/取得前検証/消去順・回数・例外優先/公開API/QA050再送間隔/暗号仕様を変更しない。PG34695で通常return/例外finallyの同一消去loop二重生成を確認、正常aad公開package口からhelper全条件を検証する。正常・異常を架空に増やさず、実OOM/ThreadDeath/非公開反射/SDK代替/到達不能/coverage除外で穴を隠さない。原RevocationValueContractTest4とExceptionValueContractTest1の全source/独立113byteAAD期待/境界/null/clone/value/列挙期待はbyte exact保持、新Test定義0。freshMain5RootNullAway/静的/currentProtocol176/物理182CRC-init/XML、一source/runの必要whole5とraw対象六classのLINE/METHOD/CLASS/BRANCH100を確認し、補足INSTRUCTION/COMPLEXITY不足はそのまま明記する。旧5成功/default/rawを新sourceへ流用又はexec合算0。Claimed/PendingRepository/Root2Actual4/実鍵-DB-JMS-取消再送/VM/native/aru/HOLDは操作せず、helperを公開・外部設定・新portへしない。
+
+NK-WEB-002/AUT004/QA050; UI226234; SS311331352/451; 元PT-REVOKE-VALUE001..004/EXC011全期待不変。元開始.15/.45/1.35/部分.1/.3/.9保持、carry.05/.15/.45を再加算せず新gross.1/.3/.9だけ追加、当開始.15/.45/1.35 cap2。原904.85/SV/全開始保持。

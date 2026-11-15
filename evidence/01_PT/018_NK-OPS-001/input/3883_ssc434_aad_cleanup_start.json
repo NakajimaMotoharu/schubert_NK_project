@@ -1,0 +1,46 @@
+{
+  "groupId": "PGPT-WBS65-SSC434-AAD-SINGLE-ERASE5-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2262_WBS65SSC434AAD消去開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "RevocationPayloadIdentity.aadで作成したowned六field byte配列の既finally消去loop（元順Arrays.fill(field,0)）を同classのprivate static eraseFields(byte[][])へ同bodyで一箇所集約し、finallyはこのhelperを一回呼ぶ。六field内容/32bitBE長/UUID全bit/epoch秒signed64+nanos32bit/返却配列/取得前検証/消去順・回数・例外優先/公開API/QA050再送間隔/暗号仕様を変更しない。PG34695で通常return/例外finallyの同一消去loop二重生成を確認、正常aad公開package口からhelper全条件を検証する。正常・異常を架空に増やさず、実OOM/ThreadDeath/非公開反射/SDK代替/到達不能/coverage除外で穴を隠さない。原RevocationValueContractTest4とExceptionValueContractTest1の全source/独立113byteAAD期待/境界/null/clone/value/列挙期待はbyte exact保持、新Test定義0。freshMain5RootNullAway/静的/currentProtocol176/物理182CRC-init/XML、一source/runの必要whole5とraw対象六classのLINE/METHOD/CLASS/BRANCH100を確認し、補足INSTRUCTION/COMPLEXITY不足はそのまま明記する。旧5成功/default/rawを新sourceへ流用又はexec合算0。Claimed/PendingRepository/Root2Actual4/実鍵-DB-JMS-取消再送/VM/native/aru/HOLDは操作せず、helperを公開・外部設定・新portへしない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4343_SSC434_RevocationAAD単一消去・通常五仕様.md",
+      "sha256": "7c4d0a2a15060376401b7f13c82560eee40f92698e790df4198e45bfd31e13a0"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34700-ssc434-aad-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "c7c1e09b31503195b30f664b70de519d7ae171055a7369b60003a143e0e60f2b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34695-revocation-aad-owned-code-metadata-v1/manifest.json",
+      "sha256": "72a2f8bd993e7039c407b218737788dfaa00284e98fe103654fbcd4cd8e69683"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P015-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java": "WBS-P015-05"
+  },
+  "source": "fe8161acaefc5fef63a94cd93d826395b7cf09ad",
+  "run": "PG34720-SSC434-AAD-ERASE-WHOLE5",
+  "estimate": {
+    "low": 0.15,
+    "base": 0.45,
+    "high": 1.35
+  },
+  "capPp": 2,
+  "workIds": [
+    "P01505_SSC434_AAD_SINGLE_ERASE5_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2261_WBS65予実・SSC434AAD消去追加版683.json",
+    "sha256": "e68d96ab1cd694e390d68e4d01f8fe047cb4918bccc439693e70828c80600093"
+  },
+  "nextCommand": "PublishSSC434 SS311331352914 main beforePG. Exactownedfield erase loop into privateeraseFields, finallyonecall, alloriginal5byteexact. FreshMain5Root/static/current182CRC-init/XML/rawall6 requiredfour; keep supplementalI misses ifany, no OOM/reflection/exclusions/oldexecunion/Root2Actual4DBkeyVMaruNativeHOLD. Freshquota/hourly ordinarynotstop."
+}
