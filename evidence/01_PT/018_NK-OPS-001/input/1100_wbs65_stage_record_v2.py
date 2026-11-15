@@ -42,11 +42,14 @@ import csv
 from pgpt_wbs_canonical_progress import validated_snapshot
 import pg998_metrics as metrics
 from pmo_quota_binding import append_start,digest,end_fields
+from pmo_stage_input import validate_checkpoint_text
 from pmo_group_context import build_context,validate_implementation_artifacts,collect_canonical_nodes
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_text())
 write=lambda p,v:p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
-mode,cfgpath,quotapath=sys.argv[1:];c=load(cfgpath);q=load(quotapath)
+mode,cfgpath,quotapath=sys.argv[1:];c=load(cfgpath)
+validate_checkpoint_text(mode,c)
+q=load(quotapath)
 group=c['groupId'];out=R/c['recordPath'];assert not out.exists()
 forecastRef=c.get('forecastRef');forecast=None
 if forecastRef is not None:
