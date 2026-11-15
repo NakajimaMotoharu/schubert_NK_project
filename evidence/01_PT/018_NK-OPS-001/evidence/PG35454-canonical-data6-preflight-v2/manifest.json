@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4120_canonical_data6_profile_v2.json",
+    "sha256": "f98280a5c6a07d17e4c4adb4a7f4888760212d40a7cc4f95ddcf3f45f0b22668"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "db04a40f6d009f37c4e70696657003d9ef4ed759db69b83d91610d0992955b9e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "5a56fe3ee6a2dd3fe62f97102d90c9d590eae3013b5db36d9ed3ff5905d31952",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java": "0b10a762ba66659b57aa3ae924030faa75f5a4cab1cbf7a06cc1b65002e05661",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java": "e8c5f8807937854fdca3d841c32633e3354cd49db6cb5b010649df21a813634f",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35450-canonical-data6-prepare-v2/manifest.json",
+    "sha256": "7234d00fc57e9ff3909a57d084c3466dc79454fd8403ba22fed9d50051c1b5f0"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35452-canonical-data6-static-v2/manifest.json",
+    "sha256": "f951b569c0f5321ccc5301cc9b8af52398b7415655c52757c48b6ec2131bb4dc"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4114_canonical_data6_static_admission.json",
+    "sha256": "7dbe165dc6b2003a083198e92503defc4b3492d518a083cdb2e9a98cc75c920f"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "line": "22",
+      "reason": "SS3243 NKOP1 explicitly distinguishes null sentinel FFFFFFFF from empty length zero; the annotated nullable array must retain null and clone only present data. Constructor/caller null-versus-empty and cleanup tests independently verify this wire contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "27",
+      "reason": "SS3243 nullable field bytes encode null and empty differently; returning an empty array for null would change the approved canonical payload fingerprint. Preserve the explicit nullable getter and defensive cloning, with independent null/empty fixtures.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "267",
+      "reason": "Only the caller-owned enum values copy is mutated, then the independent fresh array is asserted to retain MATCH; no production null value or assignment is admitted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

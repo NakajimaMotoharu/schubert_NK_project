@@ -1,0 +1,38 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35460-CANONICAL-PURE-DATA6-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35450-canonical-data6-prepare-v2/manifest.json",
+    "sha256": "7234d00fc57e9ff3909a57d084c3466dc79454fd8403ba22fed9d50051c1b5f0"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35452-canonical-data6-static-v2/manifest.json",
+    "sha256": "f951b569c0f5321ccc5301cc9b8af52398b7415655c52757c48b6ec2131bb4dc"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "value = value == null ? null : value.clone();",
+      "occurrences": 1,
+      "reason": "SS3243 NKOP1 explicitly distinguishes null sentinel FFFFFFFF from empty length zero; the annotated nullable array must retain null and clone only present data. Constructor/caller null-versus-empty and cleanup tests independently verify this wire contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "sourceAnchor": "return value == null ? null : value.clone();",
+      "occurrences": 1,
+      "reason": "SS3243 nullable field bytes encode null and empty differently; returning an empty array for null would change the approved canonical payload fingerprint. Preserve the explicit nullable getter and defensive cloning, with independent null/empty fixtures.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Only the caller-owned enum values copy is mutated, then the independent fresh array is asserted to retain MATCH; no production null value or assignment is admitted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

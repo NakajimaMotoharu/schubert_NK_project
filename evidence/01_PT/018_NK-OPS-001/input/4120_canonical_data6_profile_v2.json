@@ -1,0 +1,82 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35460-CANONICAL-PURE-DATA6-V2",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "WBS-P006-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "WBS-P006-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java": "WBS-P006-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java": "WBS-P006-01"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4387_Canonical純値四class・独立六仕様.md",
+      "sha256": "80b9edc4e4cb12c4de70019e72df340396d17e854c750c7c74548a9b63a2b658"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35430-canonical-data6-source-v1/independent-python-golden.json",
+      "sha256": "f4e50c68467f2cd67bc3ea5b9f4b10747dbc777d90a14af787852b7e3056f24d"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35431-canonical-data6-source-v2/manifest.json",
+      "sha256": "d7df3a351256496d53f23b1a08fcbfa5a7d8fde285b5a99d80d6b70309102e5b"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "tests": 6
+    }
+  ],
+  "expectedTests": 6,
+  "newTestDefinitions": 6,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/idempotency/CanonicalField.class",
+    "dev/codex/schubert/nk/api/idempotency/CanonicalRequest.class",
+    "dev/codex/schubert/nk/api/idempotency/Fingerprint.class",
+    "dev/codex/schubert/nk/api/idempotency/FingerprintVerification.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/idempotency/CanonicalField",
+    "dev/codex/schubert/nk/api/idempotency/CanonicalRequest",
+    "dev/codex/schubert/nk/api/idempotency/Fingerprint",
+    "dev/codex/schubert/nk/api/idempotency/FingerprintVerification"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35433-canonical-data6-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35450-canonical-data6-prepare-v2",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35452-canonical-data6-static-v2",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35454-canonical-data6-preflight-v2",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35460-canonical-data6-unit-v2",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35462-canonical-data6-post-v2"
+  },
+  "privateDirs": {
+    "prepare": "pg35450-canonical-data6-v2",
+    "unit": "pg35460-canonical-data6-v2"
+  }
+}
