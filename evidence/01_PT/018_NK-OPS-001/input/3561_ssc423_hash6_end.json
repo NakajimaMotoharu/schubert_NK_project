@@ -1,0 +1,107 @@
+{
+  "groupId": "PGPT-WBS65-SSC423-HASH-OPERATIONS-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2153_WBS65SSC423Hash六実Code完了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "ContextHashのpublic noargs/checked NoSuchAlgorithmException/calculate(AuthenticationContext)と既private stateLockを維持する。package-private DigestOperations（digest(rawASCII)、format(hashed)の二操作）とpackage-private constructorを追加し、public constructorはprivate JdkOperationsの既SHA-256 MessageDigestとHexFormat.of().formatHexだけへ固定委譲する。外部設定/HTTP/ServiceLoader/反射/DBからOperationsを選ばず、通常production組立の認証判定・rawASCII64→SHA256→lowercase hex64・借用context・例外identity・provider選択・共有digestの排他を変更0。Operationsのnonnullを機密取得前constructorで確立、二戻りは内部nonnull契約、所有raw/hashedの各既finallyを維持し、digest/formatから直接Error/RTEが伝播しても取得済owned配列を消去しprivate lockを解放する。private stateへの反射/実OOM/独自provider/権限操作/拒否試験の迂回を行わない。 原ContextHashTest全三の有限worker/固定Python hashlib vector/100並行/null/未知/元provider unavailable復元の全本文と期待値をexact保持、新HASH-OWN001/002/003を同wholeTestへ追加する。001はdigestとformatの各段階で直接AssertionError/IllegalArgumentExceptionを一回だけ発生させ、原throwable同一、captureしたowned raw及び生成済hashed全zero、次の別workerによる同hashの固定既vector成功/call2/borrowed context不変を確認する。002はnulloperationsの構築前提拒否（機密入力なし）。003は通常委譲のrawASCII長64/byte a、32byte公開固定SHA値、独立lowerhex string/copy所有/zero/otherworker及びprivate lockのcaller-monitor非干渉を確認する。期待値をContextHash.calculateから作らず元固定二vectorとJDK明示SHA-256のactual処理だけ使用。新sourceMain/内部adapter/抽象interface実Code0をRoot25/NullAway/staticでfresh構築し、必要同source全六一singleexecの真正XML/source/CRC/initと無filter実Code必須四を照合、自然Branch0/Code0を人工100/除外にしない。元三を新規定義へ加算0、補助Instruction/Complexityや全178/451/leaf/CHR/nativeは未受入を保持する。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4290_SSC423_ContextHash内部計算消去・通常六仕様.md",
+      "sha256": "7bce9fb12f57429405a3e6b1bc05497b08481fbb94d68bcc16168376dcb4204d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33880-ssc423-hash-operations-design-only-v1/design-only-main-patch.json",
+      "sha256": "3f9bc1313841d565d544f3d56b8f573094dfcb9b50327318aee1663e01293f86"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java"
+  ],
+  "source": "d02dd39b49c6225422ef16eb288550ad3c0da53b",
+  "run": "PG33900-SSC423-CONTEXT-HASH-WHOLE6",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 3.15
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00703_SSC423_HASH_OPERATIONS_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2152_WBS65予実・SSC423Hash六実Code閉鎖版631.json",
+    "sha256": "a9df151ed68482fa3153801ceca4e46c8a83360f634790c7df6df426ba4ae580"
+  },
+  "nextCommand": "Publish onlySSC423limited914status via ordinarymainPR, commit/push proof. Continue originalP00703 remaining owned sources/independent tests and globalYKT2328 source-specific UTF8 contracts, originalcriteria before any PG. Do not replay qualified Hash6/Auth13/Authorization132 for confirmation or accept leaf from six sources. AllRoot2Actual4SDKDBVMnativearuCHR/COPY24HOLD. Freshquota/hourly; normalgroupnotstop.",
+  "sourceAfter": "5a5d852e5f9c98755abd20f982331c23819605d7",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33906-ssc423-hash6-scope-join-v1/manifest.json",
+  "manifestSha256": "380ae7e44127992dce489927c0115d354caa3f5b837f38f71685ed046d3dacb7",
+  "terminalAtUTC": "2026-11-15T10:58:58.333906+00:00",
+  "outcome": "HASH6_RAW_APPLICABLE_COUNTERS_QUALIFIED_ORIGINAL_CARRY_CLOSED_WIDER_ENDINGS_OPEN",
+  "technical": {
+    "kind": "SSC423_HASH6_BUFFER_ERASURE_RAW_CARRY_CLOSED",
+    "productionCoreMain": "5a5d852e5f9c98755abd20f982331c23819605d7",
+    "actualUnitSource": "a4f16ce0c8dbdc2fa4c1c2a5a7cbe942ea8ffb8b",
+    "tests": 6,
+    "newDefinitions": 3,
+    "necessaryPriorRequalification": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 180,
+    "positiveCrc": 3,
+    "ownRawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 88
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 21
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 6
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "rawLineMethodClass100": true,
+    "naturalBranch0NotArtificial100": true,
+    "unexecutedHashCodeMethods0": true,
+    "instructionMiss0": true,
+    "full180Qualified": false,
+    "freshMain2RootNullAway": true,
+    "staticRaw24Applicable0": true,
+    "initialStatic25Applicable1Preserved": true,
+    "oldWhole3ExactPrefix": true,
+    "newOperationsExternallyConfigurable": false,
+    "originalCarryClosed": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.45
+    },
+    "newGrossOnly": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 2.7
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "SSC423設計PR361/main889bb505後、Core5a5d852e/Unita4f16ce0/PG33900全6FES0真正0。元三本文/vector/100並行/provider復元exactprefix保持、新HASH-OWN三はdigest/format各直接Error/RTE同一・owned raw/hashed全zero・次別worker固定vector/call2/別copy・null内部ops構築前提・ASCII64/SHA32/固定hex/借用context不変/private monitor非干渉を検証。publicnoargs/checkedstartup失敗/calculate/排他/既SHA256とHexFormat不変、Operationsはpackage-local・通常privateJDK固定・外部設定/独自provider/反射/認可入口追加0。PG33902現180physical/3positiveCRC-init/真正XML、freshRootMain2NullAway/GJF-CS-SB0/PMD24各site適用未分類0。初回新field同名静的1はBUG3028を先起票しsha256へ改名、新source必要freshcompile/staticで解消、元25履歴保持。PG33904同singleexecraw own21LINE/6METHOD/2CLASS/88instruction全miss0、自然BRANCH0/抽象ops/package Code0を人工100や除外にせず保持。原三raw消去二LINEの不足を新source六で閉じ、旧三へ成功転用0。元Hash群.2/.6/1.8 cap3とcarry.05/.15/.45を保持し新依存.3/.9/2.7だけgross追加、当.35/1.05/3.15のみ完了・残397.324/837.386/1643.415。App188/35340/35275/歴史不成功65は再資格混合raw、正式1964/53・正本184/625・元17/190・工数null不変。BUG3027/3028当Hash通常PT/静的範囲CLOSED、広域YKT2541/2542/2431とglobal451/全180/15ownedartifact/CHR/native/Root2/Actual4/SDK/DBVMaru/COPY24HOLDは未受入。"
+}
