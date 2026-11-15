@@ -1,0 +1,5 @@
+# SSC437 cleanup固定親step・通常八結果
+
+Coreda78f7b4/Unit04f31f8f/PG35070 SSC437 batch純値元全8FES0真正0/新定義0。設計はPR387/main1e89319bへ先反映、CleanupKind既定九種parentStepをfinal enum fieldへ保持/privatectorNonnull invariant/stepはfield読取。enum名-order-ordinal/publicdescriptor/function/maxRows/親backup/SQLmetadata/外部仕様/元全8Testsourceは不変、表現逆展開byte exact。PG35072現186physical10CRC-initXML/freshMain10Root/format-CS-PMD-SB全0、同singleexecPG35074宣言全十Codeclassは85LINE69METHOD10CLASS34BRANCH683I全miss0、旧source生成default1B6Iは保存し別exec合算0/除外-反射-到達不能0。BUG3083当metadata限定CLOSED、広域YKT2431OPEN。新gross.2/.6/1.8＋既carry.05/.15/.45を一回使い当.25/.75/2.25完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持。App222/35724/35659/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全186/451/actualSQL-DB-owner/CHR/native/終了依存は未受入/全HOLD維持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35072-ssc437-batch8-independent-v1/manifest.json SHA256 e4667d8e0c36174faeb9184893f54332647a97a74b6d79dc4b61c48e0e772253; evidence/01_PT/018_NK-OPS-001/evidence/PG35074-ssc437-batch8-unfiltered-same-exec-v1/manifest.json SHA256 09224a749cd68cec931e532ff2f56babd5285765b610b171b266e158f9534907。
