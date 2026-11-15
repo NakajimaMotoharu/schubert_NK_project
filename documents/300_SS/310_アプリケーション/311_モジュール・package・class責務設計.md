@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC414: MigrationMasterCopyCoordinator.transfer/rows/toString/input/stateとMigrationCopyPort.copyを追加。caller認証/CopyIn正常終了とTX所有は別、固定六表のみ。全1010/50Main70physical（自然NoCode1）予定。
+
 ## SSC413 初期ADMIN内encoding失敗の消去試験口（2026-11-15）
 
 SSC412に続くBUG2993/YKT2522の内部testability補足。PG33556全28FES0/既定四100とPG33560無filterbranch-line-method-class100は保存するが、BootstrapAdminService.createのencode例外finally 6instruction未達なので全Code未資格。到達不能扱い/coverage除外/合成PASSで閉じない。
