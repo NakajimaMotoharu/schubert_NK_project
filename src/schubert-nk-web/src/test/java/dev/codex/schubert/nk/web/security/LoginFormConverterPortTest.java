@@ -23,12 +23,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
 /** FUN001/AUT/UI226/SS313314352/PT-WEB-FORMPORT001..013; untrusted input only, no auth manager. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class LoginFormConverterPortTest {
   private static final String FIXTURE_FAULT = "synthetic fixture fault";
+  private static final String FORM_GET_METHOD = "getMethod";
+  private static final String FORM_GET_PARAMETER_VALUES = "getParameterValues";
   private static final String USERNAME = "username";
   private static final String PASSWORD = "password";
   private static final String READER = "public-reader";
@@ -101,13 +105,13 @@ final class LoginFormConverterPortTest {
               (proxy, method, args) -> {
                 if (method.getName().equals(faultAt)) throw fault;
                 return switch (method.getName()) {
-                  case "getMethod" -> httpMethod;
+                  case FORM_GET_METHOD -> httpMethod;
                   case "getRequestURI" -> uri;
                   case "getCharacterEncoding" -> encoding;
                   case "getContentType" -> contentType;
                   case "getQueryString" -> query;
                   case "getParameterNames" -> parameterNames();
-                  case "getParameterValues" -> parameters.get((String) args[0]);
+                  case FORM_GET_PARAMETER_VALUES -> parameters.get((String) args[0]);
                   case "getRemoteAddr" -> peer;
                   case "getHeaders" ->
                       Collections.enumeration(headers.getOrDefault((String) args[0], List.of()));
@@ -285,13 +289,13 @@ final class LoginFormConverterPortTest {
             new IllegalStateException(FIXTURE_FAULT),
             new NoSuchElementException(FIXTURE_FAULT))) {
       var f = new Fixture();
-      f.faultAt = "getParameterValues";
+      f.faultAt = FORM_GET_PARAMETER_VALUES;
       f.fault = failure;
       rejected(f);
     }
     var fatal = new AssertionError("synthetic fatal");
     var f = new Fixture();
-    f.faultAt = "getMethod";
+    f.faultAt = FORM_GET_METHOD;
     f.fault = fatal;
     assertSame(fatal, assertThrows(AssertionError.class, () -> CONVERTER.convert(f.asRequest())));
   }
@@ -304,7 +308,8 @@ final class LoginFormConverterPortTest {
 
   @Test
   void sharedConverterKeepsParallelInputsSeparate() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var pending = new ArrayList<Future<Authentication>>();
       for (int i = 0; i < 8; i++) {
         String name = READER + i;
@@ -318,6 +323,64 @@ final class LoginFormConverterPortTest {
       }
       for (int i = 0; i < 8; i++)
         untrusted(pending.get(i).get(10, TimeUnit.SECONDS), READER + i, PUBLIC_PASSWORD);
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void formfatal014EveryDeclaredClassificationPreservesCauseAndSuppressedFatalIdentity() {
+    for (int kind = 0; kind < 3; kind++) {
+      for (String site : List.of(FORM_GET_METHOD, FORM_GET_PARAMETER_VALUES)) {
+        for (boolean cause : new boolean[] {true, false}) {
+          AssertionError fatal = new AssertionError(FIXTURE_FAULT);
+          RuntimeException wrapper = classifiedFormFailure(kind, cause ? fatal : null);
+          if (!cause) wrapper.addSuppressed(fatal);
+          Fixture f = new Fixture();
+          f.faultAt = site;
+          f.fault = wrapper;
+          assertSame(
+              fatal, assertThrows(AssertionError.class, () -> CONVERTER.convert(f.asRequest())));
+          assertEquals(0, fatal.getSuppressed().length);
+        }
+      }
+    }
+  }
+
+  @Test
+  void formfatal015NonfatalCyclesAreFiniteRedactedAndUnknownRuntimeKeepsIdentity() {
+    for (int kind = 0; kind < 3; kind++) {
+      RuntimeException first = new RuntimeException(FIXTURE_FAULT);
+      RuntimeException second = new RuntimeException(FIXTURE_FAULT);
+      first.initCause(second);
+      second.initCause(first);
+      RuntimeException shared = new RuntimeException(FIXTURE_FAULT);
+      first.addSuppressed(shared);
+      RuntimeException wrapper = classifiedFormFailure(kind, first);
+      wrapper.addSuppressed(shared);
+      Fixture f = new Fixture();
+      f.faultAt = FORM_GET_PARAMETER_VALUES;
+      f.fault = wrapper;
+      rejected(f);
+      assertSame(second, first.getCause());
+      assertSame(first, second.getCause());
+    }
+    Fixture f = new Fixture();
+    UnsupportedOperationException unknown = new UnsupportedOperationException(FIXTURE_FAULT);
+    f.faultAt = FORM_GET_METHOD;
+    f.fault = unknown;
+    assertSame(
+        unknown,
+        assertThrows(UnsupportedOperationException.class, () -> CONVERTER.convert(f.asRequest())));
+  }
+
+  private static RuntimeException classifiedFormFailure(int kind, Throwable cause) {
+    return switch (kind) {
+      case 0 -> new IllegalArgumentException(FIXTURE_FAULT, cause);
+      case 1 -> new IllegalStateException(FIXTURE_FAULT, cause);
+      case 2 -> new NoSuchElementException(FIXTURE_FAULT, cause);
+      default -> throw new AssertionError("unknown form exception fixture");
+    };
   }
 }

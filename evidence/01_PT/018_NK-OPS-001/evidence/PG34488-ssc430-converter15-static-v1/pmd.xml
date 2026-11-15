@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-16T00:54:48.545">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/LoginFormConverterPortTest.java">
+<violation beginline="69" endline="69" begincolumn="33" endcolumn="67" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest.Fixture" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="70" endline="70" begincolumn="37" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest.Fixture" variable="headers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="103" endline="103" begincolumn="15" endcolumn="56" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest.Fixture" method="asRequest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="120" endline="120" begincolumn="36" endcolumn="52" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest.Fixture" method="asRequest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="311" endline="311" begincolumn="9" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest" method="sharedConverterKeepsParallelInputsSeparate" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="311" endline="311" begincolumn="19" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest" method="sharedConverterKeepsParallelInputsSeparate" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="317" endline="322" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest" method="sharedConverterKeepsParallelInputsSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="327" endline="327" begincolumn="7" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest" method="sharedConverterKeepsParallelInputsSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="328" endline="328" begincolumn="18" endcolumn="64" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="LoginFormConverterPortTest" method="sharedConverterKeepsParallelInputsSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
