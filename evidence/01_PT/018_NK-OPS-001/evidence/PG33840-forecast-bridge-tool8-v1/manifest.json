@@ -1,0 +1,136 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-15T10:10:50.604118+00:00",
+  "toolSource": "f8ff4066cf8b79168e8d432bc8d45f8007d31b27",
+  "inputHashes": {
+    "tools/quality/pmo_forecast_bridge.py": "bf02d7e1335db6de94b639c72e283329597470a7f54da211002363fca362850b",
+    "tools/quality/tests/test_pmo_forecast_bridge.py": "78fa8caa22aad2f9bd88118496790a23f36db7356b4fc4716b0a537adf300401",
+    "evidence/01_PT/018_NK-OPS-001/input/3529_bridge_tool8_run.py": "471a33c90bc213469356e1e82972e7816e11bf2dbc6df0adf571b70564669845"
+  },
+  "testDefinitions": 8,
+  "toolExecutions": 8,
+  "success": 8,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "caseNames": [
+    "test_stale_total_and_revision_are_replaced_without_mutating_history",
+    "test_decimal_identity_is_exact_without_binary_float_rounding",
+    "test_each_mismatched_total_is_rejected",
+    "test_original_canonical_disagreement_is_rejected",
+    "test_forecast_and_bridge_must_be_explicit_objects",
+    "test_missing_and_extra_price_dimensions_are_not_inferred",
+    "test_bool_nonfinite_string_and_null_amounts_are_rejected",
+    "test_revision_must_be_nonempty_text"
+  ],
+  "coverage": {
+    "covered_lines": 39,
+    "num_statements": 39,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "percent_statements_covered": 100.0,
+    "percent_statements_covered_display": "100",
+    "num_branches": 18,
+    "num_partial_branches": 0,
+    "covered_branches": 18,
+    "missing_branches": 0,
+    "percent_branches_covered": 100.0,
+    "percent_branches_covered_display": "100"
+  },
+  "manualExclusions": [],
+  "coverageVersion": "7.17.3",
+  "stages": {
+    "pyflakes": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:10:49.991473+00:00",
+      "endUTC": "2026-11-15T10:10:50.106557+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pmo_forecast_bridge.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pmo_forecast_bridge.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/3529_bridge_tool8_run.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tool-unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:10:50.106878+00:00",
+      "endUTC": "2026-11-15T10:10:50.271945+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "--source=pmo_forecast_bridge",
+        "--data-file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg33840-forecast-bridge-tool8-v1/coverage.data",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pmo_forecast_bridge.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "698d16d7b93c4bd9707d3cfacda6fb1e0fea99ed0cda6e69bedc42772940540a"
+    },
+    "coverage-json": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:10:50.272287+00:00",
+      "endUTC": "2026-11-15T10:10:50.437704+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "coverage",
+        "json",
+        "--data-file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg33840-forecast-bridge-tool8-v1/coverage.data",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG33840-forecast-bridge-tool8-v1/coverage.json"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "46e69903c7109ba57caa8e576effe36d68a31c37e6b5ef9cdc48a306e092daf5"
+    },
+    "coverage-report": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:10:50.438018+00:00",
+      "endUTC": "2026-11-15T10:10:50.603468+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "coverage",
+        "report",
+        "--data-file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg33840-forecast-bridge-tool8-v1/coverage.data",
+        "--fail-under=100"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "198ad88034c37fba61684a0dff809ed24804498604a0da866fccc340e8b46de9",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "environment": {
+    "python": "Python 3.14.4"
+  },
+  "scope": "ONLY_FORECAST_BRIDGE_HELPER_NOT_APPLICATION_OR_ALL_TOOLS",
+  "applicationTestsExecuted": 0,
+  "originalBudgetChanged": false,
+  "actualCostOrEffortCompletionNotInferred": true,
+  "bug": "BUG3024",
+  "horizontal": "YKT2548"
+}

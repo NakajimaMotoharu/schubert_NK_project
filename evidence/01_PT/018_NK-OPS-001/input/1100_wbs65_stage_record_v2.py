@@ -43,6 +43,7 @@ from pgpt_wbs_canonical_progress import validated_snapshot
 import pg998_metrics as metrics
 from pmo_quota_binding import append_start,digest,end_fields
 from pmo_stage_input import validate_checkpoint_text
+from pmo_forecast_bridge import reconcile_current_bridge
 from pmo_group_context import build_context,validate_implementation_artifacts,collect_canonical_nodes
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 load=lambda p:json.loads(Path(p).read_text())
@@ -55,6 +56,9 @@ forecastRef=c.get('forecastRef');forecast=None
 if forecastRef is not None:
  p=R/forecastRef['path'];assert forecastRef['path'].startswith('documents/400_PGPT/470_PMO/600_通常PGPT_20261106/') and p.suffix=='.json' and sha(p)==forecastRef['sha256']
  forecast=load(p);points=forecast['revisedRemainingPp'];assert set(points)=={'low','base','high'} and 0<=points['low']<=points['base']<=points['high']
+ expected_bridge=reconcile_current_bridge(forecast)
+ if json.dumps(forecast['currentFullForecastBudgetBridge'],sort_keys=True,allow_nan=False)!=json.dumps(expected_bridge,sort_keys=True,allow_nan=False):
+  raise ValueError('FORECAST_CURRENT_BRIDGE_NOT_RECONCILED')
 if forecast is not None and 'canonical625Progress' in forecast:
  plan_table=R.parent/'PMO/hourly-monitor/execution-plan-20261110/65-前回の実績と初週の未達で予算を見直す条件/全領域で週20件のときの625行WBS.tsv'
  with plan_table.open(encoding='utf-8-sig') as stream:canonical_rows=list(csv.DictReader(stream,delimiter='\t'))
