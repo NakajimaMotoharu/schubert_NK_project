@@ -2,6 +2,7 @@ package dev.codex.schubert.nk.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -214,5 +215,45 @@ final class ReleaseSignatureVerifierTest {
             new ReleaseSignatureVerifier(hex(PREFIX + "ff".repeat(32)))
                 .verify(new byte[0], hex(SIGN1)));
     assertThrows(IOException.class, () -> subject.verify(new byte[0], hex("ff".repeat(64))));
+  }
+
+  /** SIGN010/SSC419: failed clones cannot damage caller values or the next verification. */
+  @Test
+  void sign010FailureThenSuccessOwnsFreshClonesAndRetainsPinnedAndCallerValues() throws Exception {
+    byte[] key = hex(PREFIX + PUBLIC1);
+    byte[] message = hex("72");
+    byte[] signature = hex(SIGN2);
+    var failure = new IllegalStateException("PUBLIC injected failure");
+    var attempts = new ArrayList<List<byte[]>>();
+    var subject =
+        new ReleaseSignatureVerifier(
+            key,
+            (k, m, s) -> {
+              assertNotSame(key, k);
+              assertNotSame(message, m);
+              assertNotSame(signature, s);
+              assertArrayEquals(hex(PREFIX + PUBLIC1), k);
+              assertArrayEquals(hex("72"), m);
+              assertArrayEquals(hex(SIGN2), s);
+              attempts.add(List.of(k, m, s));
+              if (attempts.size() == 1) throw failure;
+              return true;
+            });
+    assertSame(
+        failure,
+        assertThrows(IllegalStateException.class, () -> subject.verify(message, signature)));
+    assertEquals(1, attempts.size());
+    for (byte[] owned : attempts.getFirst()) assertArrayEquals(new byte[owned.length], owned);
+    subject.verify(message, signature);
+    assertEquals(2, attempts.size());
+    for (int index = 0; index < 3; index++) {
+      assertNotSame(attempts.getFirst().get(index), attempts.getLast().get(index));
+      assertArrayEquals(
+          new byte[attempts.getLast().get(index).length], attempts.getLast().get(index));
+    }
+    assertArrayEquals(hex(PREFIX + PUBLIC1), key);
+    assertArrayEquals(hex("72"), message);
+    assertArrayEquals(hex(SIGN2), signature);
+    for (byte[] owned : attempts.getFirst()) assertArrayEquals(new byte[owned.length], owned);
   }
 }
