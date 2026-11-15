@@ -1,0 +1,33 @@
+CLASS	dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment	06c85bc063e5cc55	true	7	1537	INSTRUCTION:0:29	BRANCH:0:2	LINE:0:7	COMPLEXITY:0:3	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment	encode	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)[B	9	INSTRUCTION:0:14	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment	requireMatches	(Ldev/codex/schubert/nk/batch/repository/BatchRun;[B)V	9	INSTRUCTION:0:15	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment	64e7f0e3a86a03ff	true	21	1537	INSTRUCTION:0:98	BRANCH:0:16	LINE:0:17	COMPLEXITY:0:10	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment	requireValid	([B)V	9	INSTRUCTION:0:93	BRANCH:0:16	LINE:0:16	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment	invalid	()Ljava/lang/IllegalArgumentException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRun	7ebe79e62602f09c	true	15	65585	INSTRUCTION:0:52	BRANCH:0:6	LINE:0:10	COMPLEXITY:0:9	METHOD:0:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:0:37	BRANCH:0:6	LINE:0:8	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	id	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	cutoff	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/ResourceScope$Acquire	1c34210267385aba	false	0	1537	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/ResourceScope$Action	f3538b9d8bcdfe63	false	0	1537	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/ResourceScope$OwnedAction	437d12e381b1ebd3	false	0	1537	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/ResourceScope$Release	db9e2262a7b0b30b	false	0	1537	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/ResourceScope	971cc33e5efe25ef	true	46	1537	INSTRUCTION:0:172	BRANCH:0:20	LINE:0:52	COMPLEXITY:0:15	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/ResourceScope	handoff	(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;	9	INSTRUCTION:0:24	BRANCH:0:0	LINE:0:5	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ResourceScope	acquire	(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;	9	INSTRUCTION:0:72	BRANCH:0:10	LINE:0:23	COMPLEXITY:0:6	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ResourceScope	use	(Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action;)Ljava/lang/Object;	9	INSTRUCTION:0:56	BRANCH:0:8	LINE:0:19	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ResourceScope	lambda$handoff$1	(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;	4106	INSTRUCTION:0:12	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ResourceScope	lambda$handoff$0	([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V	4106	INSTRUCTION:0:8	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException$Reason	37214ecd32efe326	true	8	16433	INSTRUCTION:0:50	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:5	METHOD:0:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	4106	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	8	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException	02ab1f0a35f7f9e5	true	21	49	INSTRUCTION:0:78	BRANCH:0:12	LINE:0:20	COMPLEXITY:0:9	METHOD:0:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	1	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:0:65	BRANCH:0:12	LINE:0:16	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
