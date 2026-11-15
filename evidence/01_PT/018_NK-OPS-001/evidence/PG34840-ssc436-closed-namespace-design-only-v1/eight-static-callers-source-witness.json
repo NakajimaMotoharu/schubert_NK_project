@@ -1,0 +1,76 @@
+{
+  "actualExit": 0,
+  "callers": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java",
+      "sha256": "4e164255bc480266cb6bafc631f85217fcc215478ce3f3198c3925868180171a",
+      "uses": [
+        "ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());"
+      ],
+      "owner": "WBS-P015-02"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java",
+      "sha256": "b0d53b2888a852d64b75fc8c900895310fc644cf2a1dc83df5133374418d8f3c",
+      "uses": [
+        "return ClosedWebAuthentication.authenticated(principal);"
+      ],
+      "owner": "WBS-P007-06"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+      "sha256": "6a9133ccab69b519ad0d6a3b4e359b9c7d056a24c7fe04eb93c6bdc545c424ed",
+      "uses": [
+        "ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());"
+      ],
+      "owner": "WBS-P015-06"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java",
+      "sha256": "7110dd99b3f90c82230d2884f7818df52c392a2368db505f9ccf67b90d31100c",
+      "uses": [
+        "ClosedWebAuthentication.principal(authentication).orElseThrow(SessionStoreException::new);"
+      ],
+      "owner": "WBS-P007-06"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+      "sha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+      "uses": [
+        "ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication())"
+      ],
+      "owner": "WBS-P015-04"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java",
+      "sha256": "b4f450f2056ad1948b5474fdf1b3a3f8afd3a8440e4bba6dfeec97c3da653c67",
+      "uses": [
+        "ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());"
+      ],
+      "owner": "WBS-P015-02"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter.java",
+      "sha256": "24abf2cf2260772671c29caaa2d84bb7f6f24d22052881615705d896ab3d2194",
+      "uses": [
+        "ClosedWebAuthentication.principal(SecurityContextHolder.getContext().getAuthentication());"
+      ],
+      "owner": "WBS-P015-02"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java",
+      "sha256": "14d69f5999d9c225bde9190ef757635553ce7da8322f129ea4206bd0924e758d",
+      "uses": [
+        "var desired = ClosedWebAuthentication.principal(context.getAuthentication());",
+        "ClosedWebAuthentication.principal(authentication).orElseThrow(SessionStoreException::new);",
+        "p -> value.setAuthentication(ClosedWebAuthentication.authenticated(p)));"
+      ],
+      "owner": "WBS-P015-02"
+    }
+  ],
+  "count": 8,
+  "sourceOnly": true,
+  "applicationTestsExecuted": 0,
+  "allRuntimeCallersQualified": false,
+  "oldCallerBinaryReuseAllowed": false
+}
