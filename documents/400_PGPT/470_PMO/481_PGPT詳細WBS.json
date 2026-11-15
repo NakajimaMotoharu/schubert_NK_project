@@ -12677,7 +12677,8 @@
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java",
         "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java",
-        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java"
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java",
+        "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java"
       ],
       "requirementIds": [
         "SCP-005",
@@ -12751,7 +12752,8 @@
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifestTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifierTest.java",
           "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java",
-          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java"
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java",
+          "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java"
         ],
         "designFiles": [
           "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md"
@@ -14050,6 +14052,14 @@
             "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33616-coordinator1010-post-v1/manifest.json",
             "sha256": "0e2f4811972df97e341ec381e0178d4ab08e892f2a229f856369c832148b9b39"
           }
+        },
+        "plannedCurrentMigrationTransferSSC415": {
+          "state": "REGISTERED_NOT_PRESENT",
+          "spec": {
+            "path": "evidence/01_PT/019_NK-MIG-001/144_Current読取から六COPY接続・全1030独立仕様.md",
+            "sha256": "25fe17b1cef3c9085207a113b5eba4dfcf4b22441c442fa14a0dd7f6956bde06"
+          },
+          "actualRuntimeQualification": false
         }
       },
       "acceptanceChecks": [

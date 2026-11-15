@@ -16,7 +16,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -1282,6 +1284,7 @@ final class MigrationMasterTargetPublisherTest {
 
   static final class Fixture {
     final List<String> sql = new ArrayList<>();
+    final Map<Integer, List<@Nullable String>> transferContent = new HashMap<>();
     private final List<Integer> timeouts = new ArrayList<>();
     private final List<Long> boundLong = new ArrayList<>();
     private final List<Boolean> boundBoolean = new ArrayList<>();
@@ -1615,7 +1618,8 @@ final class MigrationMasterTargetPublisherTest {
                   contentFieldReads++;
                   boolean bad = table == badContentTable && column == badContentColumn;
                   if (bad && failContentRead) throw failure;
-                  String value = contentLiteral(table).get(column);
+                  String value =
+                      transferContent.getOrDefault(table, contentLiteral(table)).get(column);
                   if (bad)
                     value =
                         nullContentValue
