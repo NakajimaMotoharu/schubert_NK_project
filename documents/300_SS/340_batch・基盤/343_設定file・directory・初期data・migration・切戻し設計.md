@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC415 Current五projectionから同target六COPYまでの借用接続経路（2026-11-15）
+
+新CurrentMigrationTransferはstateless final @NullMarked。nested public record SourceCounts(int speakers,int files,int entries,int audio,int links)は各0..Integer.MAX_VALUEのみ受け付け、負数を固定IAEで拒否する。数字自体は実DB件数認証ではない。transfer(Nullable Connection source,Nullable Connection target,Nullable CurrentMigrationAssembler assembler,Nullable SourceCounts expected,Nullable List<? extends Nullable MediaAssetCopyRow> media,Nullable Instant at,Nullable MigrationCopyPort copy) throws SQLException,IOException,NoSuchAlgorithmException。七null又はsource==targetは最初に固定IAE拒否。target autoCommit=true/readOnly=trueは固定SQLException拒否しsource query前に止める。同じ実peer・別connection/TX/権限・snapshotはcallerが既契約により認証・排他所有することが前提で、参照非同一はその認証の代替でない。
+
+既CurrentMigrationProjection.read(source,五expected count)を一回、既assembler.assemble(snapshot,media,at)とmappingManifest()を同じassemblerから生成し、既MigrationMasterCopyCoordinator.transfer(target,mapping,data,copy)を一回呼ぶ。returnはdeclared COPY manifestのみ。read/assembly/mappingの失敗時target SQL0/COPY0、copy/finalize失敗時は既first-fault契約、SQL/IO/runtime/Errorを捕捉・変換・再送しない。commit/rollback/close/setAutoCommit/setReadOnly/認可発行を一切行わず、sourceとtargetのTX後処置はcaller。既全50Main byte不変更。
+
+新PT-MIG-CURRENTTRANSFER001正常は5source SQL完了/10close後にtarget SQL19/固定六port、最終95SQLを検査。source literalからmapped target六row literalと独立Python COPY framing/SHAを作り、production methodでexpectedを生成しない。002空、003七null、004same ref、005auto、006readonly、007target属性三型、008source属性三型、009全五query三型、010各count不一致、011unknown映射ID、012media mismatch、013時刻境界、014六COPY三型+IO、015全六count不一致、016target prepare/final故障、017五negative Counts、018五accessor/Max/value equality-hash-toStringの独立vector、019再利用/redaction、0208worker64/Future5/finallyshutdownNow-await10。同source old1010の本文/期待と50Main保持。既TargetPublisherTestは既normal/empty strict95SQLに加え、新Testのみliteral六content override可能なtest-only fieldを付け、元38本文/SQL/他faultを不変更。
+
+新20/whole1030、51Main52Test72physical（自然abstract port1/実Code71）。全source RootNullAway/lintWerror/CS/SB/PMD個別分類、一exec CRC/init/既定及び無filter全実Codeのline-method-class-branch/instruction100、除外0。実DB/read snapshot/Current ID順/資産/driver/COPY transport/認証/永続化/署名/Root/native/全移行/451/CHR/ITST/HOLD未受入。追加不足3/9/9.9pp cap10は当不足のみで元費/SV/原904.85/各群開始保持、閉鎖時同額だけ減額、専有実費/token null、正式1964/53・正本184/625・元190新0・工数null維持。
+
 ## SSC414 同target接続の六COPYと後段検証を一経路へ結合（2026-11-15）
 
 SS343§10.1/4のcaller COPY gapを一つのapplication pathへ接続する。新MigrationMasterCopyCoordinator.transfer(Nullable Connection target,Nullable CurrentMigrationMappingManifest mappings,Nullable MigrationMasterCopyDataset declared,Nullable MigrationCopyPort copy) throws SQLException,IOException,NoSuchAlgorithmException。四参照nullを最初に固定IAE拒否、target autoCommit=true/readOnly=trueは固定SQLException拒否。callerが認証・排他・同一write TXを所有し本処理はcommit/rollback/close/role変更しない。まず元mappingsとdeclaredから既MigrationMasterCopyManifestを一回生成し四count/六digestを検査、次に既MigrationMasterTargetPublisher.prepare、固定六表COPY、既transferAndFinalizeの同一Connection・一経路とする。戻りはdeclared manifestで実移行/commit/authority receiptではない。
