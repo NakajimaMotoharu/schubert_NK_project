@@ -1,0 +1,84 @@
+"""Supplement verifier8 singleexec with guarded current physical191."""
+from pathlib import Path
+import datetime
+import hashlib
+import json
+import subprocess
+import xml.etree.ElementTree as ET
+import pgpt_closed_host_profile as policy
+
+root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001'
+load=lambda path:json.loads(path.read_text())
+sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
+postdir=base/'evidence/PG34162-ssc427-verifier8-independent-v1'
+post=load(postdir/'manifest.json');assert post['actualExit']==0 and post['tests']==8
+names=sorted(post['physicalClassHashes']);assert len(names)==len(set(names))==191
+for name in names:policy.relative_name(name)
+# Only after the exact194 permitted names are admitted may their pinned class files be accessed.
+classdir=root.parent/'pgpt-runs/PG379/pg34158-ssc427-verifier8-v2/component'
+files=[classdir/name for name in names];before={name:sha(path) for name,path in zip(names,files)}
+assert before==post['physicalClassHashes']
+assert all(sha(root/path)==value for path,value in post['inputHashes'].items())
+execpath=postdir/'jacoco.exec';xmlpath=postdir/'original-coverage.xml'
+assert sha(execpath)==post['files']['jacoco.exec'] and sha(xmlpath)==post['files']['original-coverage.xml']
+default_classes={node.attrib['name']:node for node in ET.parse(xmlpath).getroot().findall('.//package/class')}
+assert set(default_classes)<=set(post['classIds'])
+assert set(post['classIds'])-set(default_classes)<=set(post['naturalNoCodeClasses'])
+compiled=load(base/'evidence/PG31432-generated-code-supplemental-tool-v1/compile.json')
+selftest=load(base/'evidence/PG31434-generated-code-tool-selftest-v1/manifest.json')
+assert selftest['actualExit']==0 and selftest['toolTests']==12
+for pin in compiled['dependencies']+[dict(path=str(root/compiled['source']['path']),sha256=compiled['source']['sha256'])]:assert sha(Path(pin['path']))==pin['sha256']
+
+def crc64(binary):
+    assert int.from_bytes(binary[6:8],'big')==69
+    value=0
+    for byte in binary:
+        value^=byte
+        for _ in range(8):value=(value>>1)^0xd800000000000000 if value&1 else value>>1
+    return f'{value:016x}'
+
+independent_crc={name[:-6]:crc64(path.read_bytes()) for name,path in zip(names,files)}
+assert independent_crc==post['classIds']
+output=base/'evidence/PG34164-ssc427-verifier8-unfiltered-same-exec-v1';assert not output.exists();output.mkdir()
+toolwork=root.parent/'pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1'
+classpath=':'.join([str(toolwork/'toolclasses'),*[pin['path'] for pin in compiled['dependencies']]])
+command=[str(root.parent/'toolchain/jdk-25.0.4/bin/java'),'-cp',classpath,'org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement',str(execpath),*map(str,files)]
+started=datetime.datetime.now(datetime.timezone.utc).isoformat();result=subprocess.run(command,capture_output=True,timeout=60)
+(output/'analysis.stdout').open('xb').write(result.stdout);(output/'analysis.stderr').open('xb').write(result.stderr)
+(output/'analysis-exit.json').open('x').write(json.dumps(dict(command=command,actualExit=result.returncode,startedUTC=started,completedUTC=datetime.datetime.now(datetime.timezone.utc).isoformat()),indent=2)+'\n')
+assert result.returncode==0,result.stderr.decode()[:800]
+classes={};methods=[]
+for line in result.stdout.decode().splitlines():
+    fields=line.split('\t')
+    if fields[0]=='CLASS':
+        assert len(fields)==12;name=fields[1];assert name not in classes
+        row=dict(name=name,id=fields[2],dataPresent=fields[3]=='true',probes=int(fields[4]),access=int(fields[5]),counters={});classes[name]=row;start=6
+    else:
+        assert fields[0]=='METHOD' and len(fields)==11
+        row=dict(className=fields[1],name=fields[2],descriptor=fields[3],access=int(fields[4]),counters={});methods.append(row);start=5
+    for item in fields[start:]:
+        kind,missed,covered=item.split(':');row['counters'][kind]=dict(missed=int(missed),covered=int(covered))
+assert set(classes)==set(independent_crc) and all(value['id']==independent_crc[name] for name,value in classes.items())
+for name,value in classes.items():assert sum(value['counters']['METHOD'].values())==post['actualJvmCodeMethodCounts'][name]
+def default_methods(name):
+    node=default_classes.get(name)
+    if node is None:return set()
+    return {(method.attrib['name'],method.attrib['desc']) for method in node.findall('method') if any(counter.attrib['type']=='METHOD' and int(counter.attrib['missed'])+int(counter.attrib['covered'])>0 for counter in method.findall('counter'))}
+filtered=[method for method in methods if (method['name'],method['descriptor']) not in default_methods(method['className'])]
+missed=[method for method in methods if method['counters']['METHOD']['missed']]
+counter={kind:dict(missed=sum(value['counters'][kind]['missed'] for value in classes.values()),covered=sum(value['counters'][kind]['covered'] for value in classes.values())) for kind in classes[names[0][:-6]]['counters']}
+assert sum(counter['METHOD'].values())==len(methods)==sum(post['actualJvmCodeMethodCounts'].values())
+assert len(filtered)==len(methods)-sum(post['coverage']['METHOD'].values())
+assert before=={name:sha(path) for name,path in zip(names,files)} and sha(execpath)==post['files']['jacoco.exec']
+assert all(sha(root/path)==value for path,value in post['inputHashes'].items())
+web_names=[name for name in classes if '/api/' in name]
+web_diagnostic={kind:dict(missed=sum(classes[name]['counters'][kind]['missed'] for name in web_names),covered=sum(classes[name]['counters'][kind]['covered'] for name in web_names)) for kind in counter}
+required=['LINE','METHOD','CLASS','BRANCH'];own_web100=all(web_diagnostic[kind]['missed']==0 and (web_diagnostic[kind]['covered']>0 or kind=='BRANCH') for kind in required)
+target_names=post['declaredTargets'];assert len(target_names)==2 and set(target_names)<=set(web_names)
+target_counter={kind:dict(missed=sum(classes[name]['counters'][kind]['missed'] for name in target_names),covered=sum(classes[name]['counters'][kind]['covered'] for name in target_names)) for kind in counter}
+target100=all(target_counter[kind]['missed']==0 and (target_counter[kind]['covered']>0 or kind=='BRANCH') for kind in required);target_six100=all(value['missed']==0 and value['covered']>0 for value in target_counter.values());assert target100
+assert counter['METHOD']['missed']>0
+report=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=post['productionCoreMain'],productionCoreMain=post['productionCoreMain'],actualUnitSource=post['source'],actualCoreSource=post['productionCoreMain'],originalPost=ref(postdir/'manifest.json'),originalSingleExec=ref(execpath),allCurrentSourceInputsUnchanged=True,measurementOnly=True,classes=classes,methods=methods,independentCrc=independent_crc,classFileHashes=before,rawCounterClassSum=counter,defaultCounter=post['coverage'],defaultFilteredMethods=filtered,missedCodeMethods=missed,apiDiagnosticOnly=web_diagnostic,own11ApiSource15PhysicalRawFour100=own_web100,targetIssueAuditRawFour100=target100,targetIssueAuditRawAllSix100=target_six100,requiredCounterNames=required,naturalZeroDependencyCountersNotExcluded=True,targetIssueAuditCounters=target_counter,declaredTargets=target_names,declaredTargetScopeQualifiedOnly=True,missedApiCodeMethods=[method for method in missed if '/api/' in method['className']],physicalClasses=len(names),actualCodeMethods=len(methods),filteredMethodDifference=len(filtered),defaultNaturallyOmittedCode0=sorted(set(classes)-set(default_classes)),defaultFiltersChanged=False,manualExclusions=0,all191ScopeAccepted=False,applicationTestsExecuted=0,oldExecCombined=False,productionBinaryClassDefinitionOrInitialization=0,sdkRuntimeOrBackendOrRootOrVmOrPrivateRawOperations=0,toolSelftest12Replayed=False,whole451Accepted=False,formalUpdated=False,newAcceptance=0,effortRate=None)
+(output/'manifest.json').open('x').write(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,physical=191,actualCodeMethods=len(methods),defaultMethods=sum(post['coverage']['METHOD'].values()),filteredMethods=len(filtered),missedApi=[dict(className=method['className'],method=method['name'],descriptor=method['descriptor']) for method in report['missedApiCodeMethods']],apiDiagnostic=web_diagnostic,whole191=counter,appTestsExecuted=0)))
