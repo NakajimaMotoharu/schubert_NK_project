@@ -639,7 +639,7 @@ final class CurrentMigrationTransferTest {
         "g2");
   }
 
-  private static List<@Nullable MediaAssetCopyRow> media() {
+  private static List<@Nullable MediaAssetCopyRow> media() throws NoSuchAlgorithmException {
     return List.of(
         new MediaAssetCopyRow(
             Arrays.asList(
