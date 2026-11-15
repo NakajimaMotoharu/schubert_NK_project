@@ -1,0 +1,8 @@
+{
+  "baseMain": "e09c3110f8c41ba12ae327238e6792f4234c677a",
+  "paths": [
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+  ],
+  "patchUtf8Sha256": "613ca68aa3aa6754880826782ea4f36bfefd907b19240e525acb5535bea78a89",
+  "patch": "--- a/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n+++ b/documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md\n@@ -2240,4 +2240,6 @@\n \n ## SSC-414 同target接続の六COPYと後段検証を一経路へ結合（2026-11-15、PG/PT）\n \n-既target.prepare→固定六staging COPY port→transferAndFinalizeを同借用接続へ結合、row数/失敗停止/declaredmanifest。Port自然NoCode含む新2Main/新20/whole1010予定、全HOLD/実DB未受入。 状態: 設計確定・main公開待ち、PG/通常PT/全PGPT/HOLD未完。\n+既target.prepare→固定六staging COPY port→transferAndFinalizeを同借用接続へ結合、row数/失敗停止/declaredmanifest。Port自然NoCode含む新2Main/新20/whole1010予定、全HOLD/実DB未受入。 状態: 設計確定・main公開済み（https://github.com/NakajimaMotoharu/schubert_NK_project/pull/343、e09c3110f8c41ba12ae327238e6792f4234c677a）、PG/通常PT/全PGPT/HOLD未完。\n+\n+2026-11-15 SSC414限定製造/PT結果: SSC414 同一借用targetのprepare→固定六COPY→件数照合→transfer/finalizeをPR343/maine09c3110設計公開後に製造。Core00e02c36/Unit3cb794e0/PG33614新Coordinator20＋既990=全1010FES0真正0、PG33616全50Main70physicalの実Code69CRC-initとabstract-only MigrationCopyPortの実Code0を区別、PG33618同singleexec既定525／無filter600・生成差75全Code実行、両line-method-class-branch/instruction100、除外0。四null/auto/readOnly/属性故障、prepare全19/後続全76SQLの三型故障、六COPY SQL-IO-runtime-Error/負数過少過大LongMax件数/即停止、空と正常の独立固定六wire tuple/root SHA、deep immutable、有限64を確認。borrowed接続のcommit/rollback/close0、既990本文と95source不変更。静的562site分類・適用未分類0、RootNullAway-lint-CS-SB0。旧990再認証は新成果0、App177/33060/32995/歴史不成功65は混合raw、正本184/625・元190新0・正式1964/53・工数null。追加不足3.3/9.9/9.9のみ完了、残397.324/837.386/1643.415・原904.85等保持、専有実費/token不明。実driver/COPY/DB/Current/永続化/署名/authority/全移行/native/RootActual4/aru/global451/CHR/ITST/HOLD未受入。 mainへ当台帳限定反映。\n"
+}

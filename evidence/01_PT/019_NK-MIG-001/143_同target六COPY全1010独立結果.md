@@ -1,0 +1,5 @@
+# SSC414 同target六COPY接続 実行結果
+
+SSC414 同一借用targetのprepare→固定六COPY→件数照合→transfer/finalizeをPR343/maine09c3110設計公開後に製造。Core00e02c36/Unit3cb794e0/PG33614新Coordinator20＋既990=全1010FES0真正0、PG33616全50Main70physicalの実Code69CRC-initとabstract-only MigrationCopyPortの実Code0を区別、PG33618同singleexec既定525／無filter600・生成差75全Code実行、両line-method-class-branch/instruction100、除外0。四null/auto/readOnly/属性故障、prepare全19/後続全76SQLの三型故障、六COPY SQL-IO-runtime-Error/負数過少過大LongMax件数/即停止、空と正常の独立固定六wire tuple/root SHA、deep immutable、有限64を確認。borrowed接続のcommit/rollback/close0、既990本文と95source不変更。静的562site分類・適用未分類0、RootNullAway-lint-CS-SB0。旧990再認証は新成果0、App177/33060/32995/歴史不成功65は混合raw、正本184/625・元190新0・正式1964/53・工数null。追加不足3.3/9.9/9.9のみ完了、残397.324/837.386/1643.415・原904.85等保持、専有実費/token不明。実driver/COPY/DB/Current/永続化/署名/authority/全移行/native/RootActual4/aru/global451/CHR/ITST/HOLD未受入。
+
+Test ID PT-MIG-COORD001..020、仕様142→PG33604 source/oracle→PG33606/608/610/612→PG33614 XML→PG33616 default→PG33618 raw→PG33620独立join。command/environment/時刻/exit/hashは各manifest、入力・期待値は新Test固定値と元PG33314独立Python golden/既Fingerprint固定tuple。実DB/driver/native/COPY実transportはNOT_RUN_HOLD。
