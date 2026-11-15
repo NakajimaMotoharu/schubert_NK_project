@@ -1,0 +1,5 @@
+# batch終端結果純値・通常四 部分結果
+
+Coreda78f7b4/Unit5c69ae1f/PG35140 batch終端結果純値新4全4FES0真正0。origin/main SS3318.3を公開抜粋/hashで照合した独立11理由×4状態44cell（17許容/27拒否）/全11固定診断/NONE null/全計数-1とMIN・SKIP四非0・SUCCESSfailure非0拒否/LongMAX/勝手なtarget=sum制約なし/全六field同値hashMap-一成分差-null異型-固定診断/4Status11Reason閉factoryを確認。private履歴反射を含む旧BatchStepValuesTestの実行/抽出/Repository compile0、Main一source変更0。PG35142現179physical3CRC-initXML/freshMain1Root/GJF-CS-PMD-SB全0、default44L7M3C54B miss0に対しPG35144同execraw45L23M3C54Bcovered/1B6Imiss、Reason.summary生成defaultのBUG3085OPEN、全三class合格へ変換0/除外-反射-到達不能0。開始.25/.75/2.25保持し部分.2/.6/1.8のみ配送完了/carry.05/.15/.45、残397.374/837.536/1643.865。App224/35738/35673/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全179/451/実command-DB-owner/CHR/native/終了依存未受入/全HOLD維持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35142-batch-result4-independent-v1/manifest.json SHA256 93896862ca3ab66613f7ef8a2b187ba1a73790c38cf90c8ad687f9db68de5832; evidence/01_PT/018_NK-OPS-001/evidence/PG35144-batch-result4-unfiltered-same-exec-v1/manifest.json SHA256 7a872741820e1c171bcb0f21718102371d8dd88545d11f675079e4620af90acb。
