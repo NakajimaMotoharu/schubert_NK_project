@@ -16,7 +16,7 @@ post=load(postdir/'manifest.json');assert post['actualExit']==0 and post['tests'
 names=sorted(post['physicalClassHashes']);assert len(names)==len(set(names))==180
 for name in names:policy.relative_name(name)
 # Only after the exact194 permitted names are admitted may their pinned class files be accessed.
-classdir=root.parent/'pgpt-runs/PG379/pg33884-ssc423-hash6-v1/component'
+classdir=root.parent/'pgpt-runs/PG379/pg33885-ssc423-hash6-v2/component'
 files=[classdir/name for name in names];before={name:sha(path) for name,path in zip(names,files)}
 assert before==post['physicalClassHashes']
 assert all(sha(root/path)==value for path,value in post['inputHashes'].items())

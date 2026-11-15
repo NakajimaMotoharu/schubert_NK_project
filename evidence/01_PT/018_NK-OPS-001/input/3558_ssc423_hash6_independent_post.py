@@ -12,10 +12,10 @@ import sys
 import xml.etree.ElementTree as ET
 import pgpt_closed_host_profile as policy
 
-root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';runs=root.parent/'pgpt-runs/PG379';work=runs/'pg33884-ssc423-hash6-v1';unit=runs/'pg33900-ssc423-hash6-v1';run=base/'evidence/PG33900-ssc423-hash6-unit-v1';output=base/'evidence/PG33902-ssc423-hash6-independent-v1';assert not output.exists()
+root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';runs=root.parent/'pgpt-runs/PG379';work=runs/'pg33885-ssc423-hash6-v2';unit=runs/'pg33900-ssc423-hash6-v1';run=base/'evidence/PG33900-ssc423-hash6-unit-v1';output=base/'evidence/PG33902-ssc423-hash6-independent-v1';assert not output.exists()
 load=lambda path:json.loads(path.read_text());sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest();ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
 assert len(sys.argv)==2
-manifest=load(run/'manifest.json');begin=manifest['begin'];assert begin['source']==sys.argv[1] and begin['productionCoreMain']=='35884e31494d559492b8ef46cded5550c150da3e'
+manifest=load(run/'manifest.json');begin=manifest['begin'];assert begin['source']==sys.argv[1] and begin['productionCoreMain']=='5a5d852e5f9c98755abd20f982331c23819605d7'
 assert (manifest['actualExit'],manifest['actualUnitExit'],manifest['tests'],manifest['failures'],manifest['errors'],manifest['skipped'])==(0,0,6,0,0,0)
 for path,value in begin['inputHashes'].items():assert sha(root/path)==value==hashlib.sha256(subprocess.check_output(['git','show',begin['source']+':'+path])).hexdigest()
 for path,value in begin['dependencies'].items():assert sha(Path(path))==value

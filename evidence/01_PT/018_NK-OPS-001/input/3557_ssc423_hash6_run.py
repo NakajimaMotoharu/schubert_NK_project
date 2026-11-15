@@ -13,13 +13,13 @@ root=Path.cwd();base=root/'evidence/01_PT/018_NK-OPS-001';tc=root.parent/'toolch
 load=lambda path:json.loads(path.read_text());sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest();ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
 assert len(sys.argv)==2 and re.fullmatch('[0-9a-f]{40}',sys.argv[1]);unit_source=sys.argv[1]
 producer_path=Path(__file__).resolve();producer_rel=str(producer_path.relative_to(root));assert sha(producer_path)==hashlib.sha256(subprocess.check_output(['git','show',unit_source+':'+producer_rel])).hexdigest()
-prepared_path=base/'evidence/PG33884-ssc423-hash6-prepare-v1/manifest.json';prepared=load(prepared_path);admission_path=base/'evidence/PG33888-ssc423-hash6-preflight-v1/manifest.json';admission=load(admission_path)
+prepared_path=base/'evidence/PG33885-ssc423-hash6-prepare-v2/manifest.json';prepared=load(prepared_path);admission_path=base/'evidence/PG33888-ssc423-hash6-preflight-v1/manifest.json';admission=load(admission_path)
 assert admission['actualExit']==0 and admission['staticApplicable']==admission['unclassified']==0 and admission['expectedTests']==6
 assert admission['inputHashes']==prepared['inputHashes'] and len(prepared['expectedCases'])==6
 for path,value in prepared['inputHashes'].items():
     assert sha(root/path)==value
     assert hashlib.sha256(subprocess.check_output(['git','show',unit_source+':'+path])).hexdigest()==value
-work=runs/'pg33884-ssc423-hash6-v1'
+work=runs/'pg33885-ssc423-hash6-v2'
 for name in list(prepared['physicalClassHashes'])+list(prepared['testClassHashes']):policy.relative_name(name)
 for folder,key in [('component','physicalClassHashes'),('test-classes','testClassHashes')]:assert {name:sha(work/folder/name) for name in prepared[key]}==prepared[key]
 assert all(sha(Path(path))==value for path,value in prepared['dependencies'].items())
@@ -27,7 +27,7 @@ output=base/'evidence/PG33900-ssc423-hash6-unit-v1';unit=runs/'pg33900-ssc423-ha
 jdk=tc/'jdk-25.0.4/bin';console=tc/'junit-platform-console-standalone-1.13.4.jar';agent=tc/'m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar';cli=tc/'org.jacoco.cli-0.8.15-nodeps.jar';session='PG33900-SSC423-CONTEXT-HASH-WHOLE6'
 classpath=':'.join([str(work/'component'),str(work/'test-classes'),*prepared['dependencies']]);selected=sorted({case['classname'] for case in prepared['expectedCases']});assert len(selected)==1
 command=[str(jdk/'java'),'-Djava.io.tmpdir='+str(unit/'tmp'),'-Dfile.encoding=UTF-8','-Duser.timezone=Asia/Tokyo','-Djunit.jupiter.execution.parallel.enabled=false','-Djunit.jupiter.extensions.autodetection.enabled=false','-javaagent:'+str(agent)+'=destfile='+str(unit/'jacoco.exec')+',sessionid='+session+',append=false','-Xlog:class+init=info:file='+str(unit/'class-init.log'),'-jar',str(console),'execute','--disable-banner','--class-path',classpath,*[argument for name in selected for argument in ['--select-class',name]],'--reports-dir',str(unit/'xml'),'--fail-if-no-tests','--details','summary']
-begin=dict(producer=ref(Path(__file__).resolve()),source=unit_source,productionCoreMain='35884e31494d559492b8ef46cded5550c150da3e',inputHashes=prepared['inputHashes'],physicalClassHashes=prepared['physicalClassHashes'],testClassHashes=prepared['testClassHashes'],dependencies=prepared['dependencies'],expectedCases=prepared['expectedCases'],expectedTests=6,newDefinitions=3,necessaryPriorDefinitions=3,selectedClasses=selected,session=session,oldExecCombined=False,prepare=ref(prepared_path),preflight=ref(admission_path),mainCompilationReusedExactCurrentSource=False,freshRootNullAwayCompileWithinSameGroup=True,rootNullAwayReusedExactUnchangedMainFromPriorQualifiedGroup=False,all180FullCoverageClaim=False,actualBackendOrHeldClassActions=0)
+begin=dict(producer=ref(Path(__file__).resolve()),source=unit_source,productionCoreMain='5a5d852e5f9c98755abd20f982331c23819605d7',inputHashes=prepared['inputHashes'],physicalClassHashes=prepared['physicalClassHashes'],testClassHashes=prepared['testClassHashes'],dependencies=prepared['dependencies'],expectedCases=prepared['expectedCases'],expectedTests=6,newDefinitions=3,necessaryPriorDefinitions=3,selectedClasses=selected,session=session,oldExecCombined=False,prepare=ref(prepared_path),preflight=ref(admission_path),mainCompilationReusedExactCurrentSource=False,freshRootNullAwayCompileWithinSameGroup=True,rootNullAwayReusedExactUnchangedMainFromPriorQualifiedGroup=False,all180FullCoverageClaim=False,actualBackendOrHeldClassActions=0)
 (output/'begin.json').open('x').write(json.dumps(begin,indent=2)+'\n')
 stages={'unit':capture.step('unit',command,unit,timeout=180)}
 if (unit/'jacoco.exec').is_file():
