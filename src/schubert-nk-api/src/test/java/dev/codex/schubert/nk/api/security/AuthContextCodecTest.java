@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.io.ByteArrayOutputStream;
@@ -39,7 +40,8 @@ final class AuthContextCodecTest {
         independentEnvelope(
             "v1", key(0), IDENTITY, RAW.wireValue().getBytes(StandardCharsets.US_ASCII));
     var codec = new AuthContextCodec("v1", key(0), null, null, new FixedNonce());
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       synchronized (codec) {
         executor
             .submit(
@@ -54,6 +56,8 @@ final class AuthContextCodecTest {
             .get(5, java.util.concurrent.TimeUnit.SECONDS);
       }
     } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
       codec.close();
     }
   }
@@ -249,19 +253,24 @@ final class AuthContextCodecTest {
 
   @Test
   void concurrentEncryptionHasDistinctNoncesAndCorrectRowBinding() throws Exception {
-    try (var codec = new AuthContextCodec("v1", key(0), null, null);
-        var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var codec = new AuthContextCodec("v1", key(0), null, null);
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var results = new ArrayList<Future<EncryptedAuthContext>>();
       for (int i = 0; i < 100; i++)
         results.add(executor.submit(() -> codec.encrypt(IDENTITY, RAW)));
       var nonces = new HashSet<String>();
       for (var result : results) {
-        EncryptedAuthContext value = result.get();
+        EncryptedAuthContext value = result.get(5, java.util.concurrent.TimeUnit.SECONDS);
         assertEquals(RAW, codec.decrypt(IDENTITY, value));
         byte[] bytes = value.ciphertext();
         nonces.add(HexFormat.of().formatHex(Arrays.copyOfRange(bytes, 10, 22)));
       }
       assertEquals(100, nonces.size());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
+      codec.close();
     }
   }
 
@@ -328,6 +337,52 @@ final class AuthContextCodecTest {
     @Override
     public void nextBytes(byte[] bytes) {
       Arrays.fill(bytes, (byte) 42);
+    }
+  }
+
+  /** AUTHCTX-OWN001/SSC421: direct nonce Error cleans up and releases lock to another worker. */
+  @Test
+  void authctxOwn001NonceErrorThenOtherWorkerMatchesIndependentEnvelope() throws Exception {
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var nonces = new ArrayList<byte[]>();
+    var fatal = new AssertionError("PUBLIC nonce fault");
+    var random =
+        new SecureRandom() {
+          private static final long serialVersionUID = 1L;
+
+          @Override
+          public void nextBytes(byte[] bytes) {
+            nonces.add(bytes);
+            Arrays.fill(bytes, (byte) 42);
+            if (calls.incrementAndGet() == 1) throw fatal;
+          }
+        };
+    byte[] expected =
+        independentEnvelope(
+            "v1", key(0), IDENTITY, "a".repeat(64).getBytes(StandardCharsets.US_ASCII));
+    byte[] callerKey = key(0);
+    var codec = new AuthContextCodec("v1", callerKey, null, null, random);
+    var executor = Executors.newSingleThreadExecutor();
+    try {
+      org.junit.jupiter.api.Assertions.assertSame(
+          fatal, assertThrows(AssertionError.class, () -> codec.encrypt(IDENTITY, RAW)));
+      assertEquals(1, calls.get());
+      assertArrayEquals(new byte[12], nonces.getFirst());
+      var actual =
+          executor
+              .submit(() -> codec.encrypt(IDENTITY, RAW))
+              .get(5, java.util.concurrent.TimeUnit.SECONDS);
+      assertArrayEquals(expected, actual.ciphertext());
+      assertEquals(2, calls.get());
+      assertEquals(2, nonces.size());
+      org.junit.jupiter.api.Assertions.assertNotSame(nonces.getFirst(), nonces.getLast());
+      for (byte[] bytes : nonces) assertArrayEquals(new byte[12], bytes);
+      assertArrayEquals(key(0), callerKey);
+      assertEquals("a".repeat(64), RAW.wireValue());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
+      codec.close();
     }
   }
 }
