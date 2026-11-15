@@ -4,6 +4,7 @@ package dev.codex.schubert.nk.api.security;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.api.domain.Role;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +16,7 @@ import java.sql.Types;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Persisted rate-limit rows, User -> IP lock order and caller transaction only. NK-AUT-001;
@@ -55,59 +57,105 @@ public final class LoginAttemptRepository {
     try {
       requireTransaction(connection);
       Optional<LoginAccount> account = Optional.empty();
-      try (var statement = connection.prepareStatement(USER)) {
-        statement.setString(1, usernameKey);
-        try (var row = statement.executeQuery()) {
-          if (row.next()) {
-            Role role =
-                switch (requireValue(row.getString("role"))) {
-                  case "USER" -> Role.USER;
-                  case "ADMIN" -> Role.ADMIN;
-                  default -> throw new SQLException("invalid persisted role", "22000");
-                };
-            boolean active =
-                switch (requireValue(row.getString("status"))) {
-                  case "ACTIVE" -> true;
-                  case "DISABLED" -> false;
-                  default -> throw new SQLException("invalid persisted status", "22000");
-                };
-            account =
-                Optional.of(
-                    new LoginAccount(
-                        new AuthenticatedActor(
-                            requireValue(row.getObject("id", Long.class)),
-                            requireValue(row.getString("username")),
-                            role),
-                        active,
-                        requireValue(row.getString("password_hash")),
-                        new LoginAttemptState(
-                            LoginAttemptKind.USER,
-                            requireValue(row.getObject("failed_count", Integer.class)),
-                            optionalInstant(row, "failure_window_started_at"),
-                            optionalInstant(row, "locked_until"))));
+      {
+        var statement = requireValue(connection.prepareStatement(USER));
+        @Nullable Throwable jdbcFailure1 = null;
+        try {
+          statement.setString(1, usernameKey);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure2 = null;
+            try {
+              if (row.next()) {
+                Role role =
+                    switch (requireValue(row.getString("role"))) {
+                      case "USER" -> Role.USER;
+                      case "ADMIN" -> Role.ADMIN;
+                      default -> throw new SQLException("invalid persisted role", "22000");
+                    };
+                boolean active =
+                    switch (requireValue(row.getString("status"))) {
+                      case "ACTIVE" -> true;
+                      case "DISABLED" -> false;
+                      default -> throw new SQLException("invalid persisted status", "22000");
+                    };
+                account =
+                    Optional.of(
+                        new LoginAccount(
+                            new AuthenticatedActor(
+                                requireValue(row.getObject("id", Long.class)),
+                                requireValue(row.getString("username")),
+                                role),
+                            active,
+                            requireValue(row.getString("password_hash")),
+                            new LoginAttemptState(
+                                LoginAttemptKind.USER,
+                                requireValue(row.getObject("failed_count", Integer.class)),
+                                optionalInstant(row, "failure_window_started_at"),
+                                optionalInstant(row, "locked_until"))));
+              }
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure2 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure2, row);
+            }
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure1 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);
         }
       }
-      try (var statement = connection.prepareStatement(CREATE_IP)) {
-        statement.setString(1, client.getHostAddress());
-        statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
-        statement.setObject(3, now.atOffset(java.time.ZoneOffset.UTC));
-        statement.executeUpdate();
+      {
+        var statement = requireValue(connection.prepareStatement(CREATE_IP));
+        @Nullable Throwable jdbcFailure3 = null;
+        try {
+          statement.setString(1, client.getHostAddress());
+          statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
+          statement.setObject(3, now.atOffset(java.time.ZoneOffset.UTC));
+          statement.executeUpdate();
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure3 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);
+        }
       }
-      try (var statement = connection.prepareStatement(IP)) {
-        statement.setString(1, client.getHostAddress());
-        try (var row = statement.executeQuery()) {
-          if (!row.next()) throw new SQLException("login IP row is missing", "40001");
-          var state =
-              new LoginAttemptState(
-                  LoginAttemptKind.IP,
-                  requireValue(row.getObject("failed_count", Integer.class)),
-                  Optional.of(
-                      requireValue(
-                              row.getObject("window_started_at", java.time.OffsetDateTime.class))
-                          .toInstant()),
-                  optionalInstant(row, "locked_until"));
-          return new LockedLoginAttempt(client.getHostAddress(), account, state);
+      {
+        var statement = requireValue(connection.prepareStatement(IP));
+        @Nullable Throwable jdbcFailure4 = null;
+        try {
+          statement.setString(1, client.getHostAddress());
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure5 = null;
+            try {
+              if (!row.next()) throw new SQLException("login IP row is missing", "40001");
+              var state =
+                  new LoginAttemptState(
+                      LoginAttemptKind.IP,
+                      requireValue(row.getObject("failed_count", Integer.class)),
+                      Optional.of(
+                          requireValue(
+                                  row.getObject(
+                                      "window_started_at", java.time.OffsetDateTime.class))
+                              .toInstant()),
+                      optionalInstant(row, "locked_until"));
+              return new LockedLoginAttempt(client.getHostAddress(), account, state);
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure5 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure5, row);
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure4 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure4, statement);
         }
       }
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
@@ -137,27 +185,45 @@ public final class LoginAttemptRepository {
         var account = locked.account().orElseThrow();
         var state =
             success ? account.attempts().afterSuccess() : account.attempts().afterFailure(now);
-        try (var statement = connection.prepareStatement(UPDATE_USER)) {
-          statement.setInt(1, state.failedCount());
-          setInstant(statement, 2, state.windowStartedAt());
-          setInstant(statement, 3, state.lockedUntil());
-          statement.setBoolean(4, success);
-          statement.setObject(5, now.atOffset(java.time.ZoneOffset.UTC));
-          statement.setLong(6, account.identity().userId());
-          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
-            throw new SQLException("login user update count differs", "40001");
+        {
+          var statement = requireValue(connection.prepareStatement(UPDATE_USER));
+          @Nullable Throwable jdbcFailure6 = null;
+          try {
+            statement.setInt(1, state.failedCount());
+            setInstant(statement, 2, state.windowStartedAt());
+            setInstant(statement, 3, state.lockedUntil());
+            statement.setBoolean(4, success);
+            statement.setObject(5, now.atOffset(java.time.ZoneOffset.UTC));
+            statement.setLong(6, account.identity().userId());
+            if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
+              throw new SQLException("login user update count differs", "40001");
+          } catch (SQLException | RuntimeException | Error failure) {
+            jdbcFailure6 = failure;
+            throw failure;
+          } finally {
+            JdbcResourceCleanup.closeStatement(jdbcFailure6, statement);
+          }
         }
       }
       var state = success ? locked.ip().afterSuccess() : locked.ip().afterFailure(now);
-      try (var statement = connection.prepareStatement(UPDATE_IP)) {
-        statement.setInt(1, state.failedCount());
-        statement.setObject(
-            2, state.windowStartedAt().orElse(now).atOffset(java.time.ZoneOffset.UTC));
-        setInstant(statement, 3, state.lockedUntil());
-        statement.setObject(4, now.atOffset(java.time.ZoneOffset.UTC));
-        statement.setString(5, locked.clientAddress());
-        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
-          throw new SQLException("login IP update count differs", "40001");
+      {
+        var statement = requireValue(connection.prepareStatement(UPDATE_IP));
+        @Nullable Throwable jdbcFailure7 = null;
+        try {
+          statement.setInt(1, state.failedCount());
+          statement.setObject(
+              2, state.windowStartedAt().orElse(now).atOffset(java.time.ZoneOffset.UTC));
+          setInstant(statement, 3, state.lockedUntil());
+          statement.setObject(4, now.atOffset(java.time.ZoneOffset.UTC));
+          statement.setString(5, locked.clientAddress());
+          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
+            throw new SQLException("login IP update count differs", "40001");
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure7 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure7, statement);
+        }
       }
     } catch (SQLException | IllegalArgumentException | java.time.DateTimeException failure) {
       AuthenticationInfrastructureException.preserveFatal(failure);
