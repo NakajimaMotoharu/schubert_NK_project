@@ -1,4 +1,4 @@
-"""Supplement verifier8 singleexec with guarded current physical191."""
+"""Measure Login18 raw code against its current physical210 only."""
 from pathlib import Path
 import datetime
 import hashlib
@@ -12,10 +12,10 @@ load=lambda path:json.loads(path.read_text())
 sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
 ref=lambda path:dict(path=str(path.relative_to(root)),sha256=sha(path))
 postdir=base/'evidence/PG34322-ssc429-login18-independent-v1'
-post=load(postdir/'manifest.json');assert post['actualExit']==0 and post['tests']==11
+post=load(postdir/'manifest.json');assert post['actualExit']==0 and post['tests']==18
 names=sorted(post['physicalClassHashes']);assert len(names)==len(set(names))==210
 for name in names:policy.relative_name(name)
-# Only after the exact194 permitted names are admitted may their pinned class files be accessed.
+# Only after the exact210 permitted names are admitted may their pinned class files be accessed.
 classdir=root.parent/'pgpt-runs/PG379/pg34306-ssc429-login18-v1/component'
 files=[classdir/name for name in names];before={name:sha(path) for name,path in zip(names,files)}
 assert before==post['physicalClassHashes']

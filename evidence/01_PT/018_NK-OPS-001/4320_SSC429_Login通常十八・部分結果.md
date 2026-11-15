@@ -1,0 +1,5 @@
+# SSC429 Login通常十八・部分結果
+
+Core881cc700/Unitef2c4f03/PG34320元16＋資源null新2全18FES0真正0。六statement二row nullは固定9000/秘密消去/正確取得prefix/owned一回/借用TX不操作、元16全期待はinverse byte exact、二workerはstop-await10成功後のみ二codec fixtureclose/Timeout30。PG34322現210physical31positiveCRC-init/XML、freshMain27RootNullAway/GJF-CS0、PMD64全site適用未分類0、SBraw2はnull-only checked guardの具体根拠・抑制0。PG34324同singleexecraw AuthenticationService55LINE5METHOD1CLASS24BRANCH277I全miss0、repository8LINE10BRANCH/audit1LINE1BRANCH不足BUG3052OPEN。十八成功を全三source/全210/451/実DB/CHR/native/owner終了へ拡張0。BUG3047/3048当有限/null限定及び工具3049..3051限定CLOSED、globalYKT2546/2553/2555OPEN。原開始.9/2.7/8.1 cap9保持、部分.75/2.25/6.75のみ配送完了・carry.15/.45/1.35、残397.474/837.836/1644.765。App202/35490/35425/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全HOLD保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG34322-ssc429-login18-independent-v1/manifest.json SHA256 3472b7529c006de5fe7ab50af94659b72d0fed73071e0528f30560ca2151fc7c; evidence/01_PT/018_NK-OPS-001/evidence/PG34324-ssc429-login18-unfiltered-same-exec-v1/manifest.json SHA256 bc9cb5b06ecac1ddefc361191f23d98f963336270465aeb8b47d835fa4c0325a。
