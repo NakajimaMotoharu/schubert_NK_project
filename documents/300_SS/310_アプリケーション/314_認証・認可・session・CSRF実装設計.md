@@ -490,3 +490,9 @@ AuthenticationContextVerifier.verify/readSessionの三owned statement/二row取�
 BUG3039/3040、YKT2546/2553、状態:設計確定・main反映前、PG/PT/正式未完。
 
 2026-11-15 SSC427継続補足（BUG3041）: private fieldと既id()/actor() methodの規約上重複を避ける上記field名だけを確定。constructor引数/idactor accessor/nonnull invariant/外部結果/SQLは不変、新fixture user labelは新側constantのみでまとめ、元6期待は除去inverseで保持。元設計の履歴と未実行8/初回static32は保存し、再試験前に完了扱いしない。
+
+## SSC-428 ADMIN前処理資源nonnullと明示終了（2026-11-15）
+
+AdminCommandAuthenticator.verifyIdentity/owner/lockUsersの三owned statement/三row取得へ既RequiredColumn.requireValueを置きnonnull・22004を確立し、既typed JdbcResourceCleanupとSQL/RTE/Error primary同一再throw/finallyで一回逆順終了する。advisoryの二資源TWR headerは同じ取得順/逆順終了のnested単一資源へ正規化してから明示終了にする。SQL全文/7mutation集合/target presence-N12/候補owner単一行と範囲/減少系だけadvisory一行/候補target現ACTIVE ADMINの昇順lock/locked owner再照合/最新Verifier/currentADMIN/Inbox前段/rowcount/UTC8h/既失敗分類/primary-suppression-selfalias/borrowedTX所有を変更しない。実advisory lockや利用者更新は発行せず、元091 PT_DEFAULTの既hardcoded JDBC-interface fixtureだけを使う。原AdminPreludeJdbcPortTest8の完全SQL/固定hash/UTC/Mapbindings/全7Mutation lock有無順序/cardinality/owner非権限/拒否/rowcount/資源/並行全期待を保持し、poolだけfinally shutdownNow/await10assert/Timeout30へ有限化する。fixture runtimeFailureのnullable契約とdefault空nullStatementAt/nullRowAtを明記、新null二はstatement全7label(candidate/advisory/users/locked/auth-user/auth-session/touch)及び非touch row全6labelを固定DISABLE入力で試し、固定9000/cause-supp0/最後label/owned一回/borrowedTX0を検証する。下位Verifierは同byte既qualified12を依存としてfresh Root閉包へ含めるが成功件数へ加算しない。新Mutation閉集合一は固定CREATE/ENABLE/DISABLE/PROMOTE/DEMOTE/RESET_PASSWORD/UNLOCK順序とidentity/valueOf/防御values/unknown-empty-case-space-null、membership減少はDISABLE/DEMOTEだけと明示期待で検証する。元八＋新三全十一、Main14/全195physical/RootNullAway/static/CRC-init/XML/default及びraw対象Admin本体とMutation全Codeを照合する。旧012全APIjar/realDBfixture/Root/VM/native/SDKbackend/aru/四held/HOLDへ拡張しない。
+
+BUG3044/3045、YKT2546/2553、状態:設計確定・main反映前、PG/PT/正式未完。
