@@ -436,7 +436,7 @@ final class MigrationMasterCopyFingerprintTest {
         new SpeakerCopyBatch(reverse ? List.of(bob, alice) : List.of(alice, bob)), content(STAMP));
   }
 
-  private static MigrationMasterCopyDataset normal() throws Exception {
+  static MigrationMasterCopyDataset normal() throws Exception {
     return new MigrationMasterCopyDataset(speakers(STAMP), content(STAMP));
   }
 

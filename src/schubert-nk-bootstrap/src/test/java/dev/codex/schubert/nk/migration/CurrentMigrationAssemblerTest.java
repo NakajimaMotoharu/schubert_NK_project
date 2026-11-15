@@ -683,6 +683,54 @@ final class CurrentMigrationAssemblerTest {
     assertEquals(0, second.rowCounts().get("ENTRIES"));
   }
 
+  @Test
+  void assembly023EmptyCopyManifestUsesSameDeclaredAssembly() throws Exception {
+    var files = new ScenarioFileMigrationMap(List.of());
+    var placement =
+        new ScenarioEntryPlacementMap(files, new ScenarioEntryMigrationMap(List.of()), List.of());
+    var configured =
+        new CurrentMigrationAssembler(
+            files,
+            placement,
+            new SpeakerMigrationMap(List.of()),
+            List.of(),
+            List.of(),
+            new AssetMigrationManifest(List.of()),
+            "g1",
+            "g2");
+    var f = new CurrentMigrationProjectionTest.Fixture();
+    for (int index = 0; index < 5; index++) f.tables.add(new ArrayList<>());
+    var result = configured.copyManifest(snapshot(f), List.of(), at());
+    assertArrayEquals(
+        "NKMIGCOPY1\nMAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\nspeakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_entries\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\naudio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nmedia_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nentry_audio_links\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n"
+            .getBytes(StandardCharsets.US_ASCII),
+        result.canonicalBytes());
+    assertEquals(
+        "4444698baa3c905644477124201c2c291637b7c8441ed296c30acb231b1dcd90", result.sha256());
+  }
+
+  @Test
+  void assembly024NormalCopyManifestCountsAndSameMappingBinding() throws Exception {
+    var result = assembler().copyManifest(snapshot(fixture()), media(STAMP), at());
+    assertEquals(
+        java.util.Map.of(
+            "speakers",
+            1L,
+            "script_files",
+            1L,
+            "script_entries",
+            1L,
+            "audio_files",
+            1L,
+            "media_assets",
+            2L,
+            "entry_audio_links",
+            1L),
+        result.rowCounts());
+    assertEquals(
+        "94e90234d64532dc9af1dd9d1361dbcee36e9ec03ba12401f10a64e444a2e254", result.mappingSha256());
+  }
+
   private static CurrentMigrationProjectionTest.Fixture fixture() {
     var f = CurrentMigrationProjectionTest.normal();
     f.tables.get(2).get(0)[9] = RAW;

@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.migration;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -68,6 +69,16 @@ public final class CurrentMigrationAssembler {
     var scenario = new ScenarioCopyDataset(files, entries);
     var content = new MigrationCopyDataset(scenario, links.audioRows(), links.linkRows(), media);
     return new MigrationMasterCopyDataset(speakers, content);
+  }
+
+  /** SSC410, PT-MIG-CURRENTASSEMBLY023024: same declared mapping and COPY values, no authority. */
+  public MigrationMasterCopyManifest copyManifest(
+      CurrentMigrationProjection.@Nullable SourceSnapshot snapshot,
+      @Nullable List<? extends @Nullable MediaAssetCopyRow> mediaRows,
+      @Nullable Instant migratedAt)
+      throws IOException, NoSuchAlgorithmException {
+    return new MigrationMasterCopyManifest(
+        mappingManifest(), assemble(snapshot, mediaRows, migratedAt));
   }
 
   public CurrentMigrationMappingManifest mappingManifest() throws NoSuchAlgorithmException {

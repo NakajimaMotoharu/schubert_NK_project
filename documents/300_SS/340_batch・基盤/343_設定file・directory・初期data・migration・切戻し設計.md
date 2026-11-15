@@ -1,5 +1,15 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC410 四ID対応表と六COPY指紋のdeclared結合artifact（2026-11-15）
+
+SS343§10.1のdeclared移行artifactをCurrent ID対応表と六COPY fingerprintへ結合する内部補足。新MigrationMasterCopyManifest(Nullable CurrentMigrationMappingManifest mappings,Nullable MigrationMasterCopyDataset declared) throws IOException,NoSuchAlgorithmExceptionを追加。四mapping行数と対応するfiles/entries/speakers/audioの宣言行数を比較し、不一致は固定IAEで非修復拒否。六stream fingerprintは既MigrationMasterCopyFingerprintの固定順(speakers,script_files,script_entries,audio_files,media_assets,entry_audio_links)を使う。全wireを保持せず既DigestSinkで逐次計数する。外部保存・実Current照合・DB/COPY/admission/signatureの実行はしない。
+
+canonical bytesはUS_ASCIIで NKMIGCOPY1\nMAPPING\t<元四対応表sha256>\n に続き各六行 <table>\t<rows>\t<bytes>\t<lowerhex sha256>\n。件数/byteはcanonical非負decimal。hashはこの全bytesのSHA256。保持byte[]を防御clone、mappingSha256/sha256はimmutable String、rowCountsは固定六keyのimmutable Map、toString/invalidは固定redacted。countsが同じ別内容の組合せを実対応証明にしない。このartifactは元四対応表と六宣言stream digestの結合だけで実asset/Current/保存/移行の正しさの証明ではない。
+
+既CurrentMigrationAssemblerへcopyManifest(snapshot,mediaRows,migratedAt) throws IOException,NoSuchAlgorithmExceptionを追加し、そのinstanceのmappingManifestとassembleの同じ宣言から作る。既assemble/対応表frame/wire/source抽出の挙動を変更しない。PT-MIG-COPYMAN001正常六tuple独立golden、002空六SHA、003両null、004file count差、005entry count差、006speaker count差、007audio count差、008防御clone、009immutable六count、010期待SHA/別mapping結合、011共有8worker64/Future5/finallyshutdownNow-await10、012redaction/反復。既Assembler023空factory/024正常countsと独立mappingSHA。新12+既追加2+旧976=全990、48Main50Test68physical。同source RootNullAway/lint/format/CS/SB/PMD全site/一execCRC-init/既定及び無filter全Codeの四100。既FingerprintTest.normalだけprivate→package fixture公開一token、旧20本文不変更。既old22Assembler本文・他92source本文保持。
+
+不足追加2.7/8.1/9.9pp、cap10。原費用/開始見積り/SV/原904.85等と未較正残397.324/837.386/1643.415保持。限定完了時だけ当追加を一回減額。専有実費/token null、625正本/元190/正式1964-53/工数null不変更。DB/Rootnative/Current実体/VM/aru/鍵/権限/拒否操作全HOLDを保持。
+
 ## SSC409 対応表artifactの期待SHA束縛・形式とID結合の読戻し検証（2026-11-15）
 
 NK-MIG-001、RD MIG003005006/MIG-DAT005/MIG006/TST、UI223242254、SS311331343 ETL3/13証跡。SSC408四対応表の出力に、元宣言の期待SHAと保存候補bytesを照合する入口が未実装。メモリ内読戻しを追加し形式/内容の破損を判定する内部補足で、format/RD/UI/DDL/DIF/QA変更0。実file読取・保存・Current ID資格・authorityを授与しない。
