@@ -24,15 +24,15 @@ public final class ContextHash {
   }
 
   private static final class JdkOperations implements DigestOperations {
-    private final MessageDigest digest;
+    private final MessageDigest sha256;
 
-    private JdkOperations(MessageDigest digest) {
-      this.digest = digest;
+    private JdkOperations(MessageDigest sha256) {
+      this.sha256 = sha256;
     }
 
     @Override
     public byte[] digest(byte[] raw) {
-      return digest.digest(raw);
+      return sha256.digest(raw);
     }
 
     @Override
