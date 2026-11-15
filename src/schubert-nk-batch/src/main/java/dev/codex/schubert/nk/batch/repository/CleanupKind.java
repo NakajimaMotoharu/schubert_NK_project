@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -8,21 +9,23 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public enum CleanupKind {
-  NOTIFICATIONS("notifications", 1000),
-  QUESTIONS("questions", 1000),
-  SESSIONS("sessions", 1000),
-  OUTBOX("message_stores", 1000),
-  LOGS("logs", 10000),
-  WEB_RECEIPTS("web_receipt_references", 1000),
-  BATCH_RUNS("batch_runs", 1000),
-  INBOX_PROGRESS("inbox_progress", 1000),
-  LOG_PROGRESS("log_progress", 1000);
+  NOTIFICATIONS("notifications", 1000, BatchStep.CLEAN_NOTIFICATION),
+  QUESTIONS("questions", 1000, BatchStep.CLEAN_QUESTION),
+  SESSIONS("sessions", 1000, BatchStep.CLEAN_SESSION),
+  OUTBOX("message_stores", 1000, BatchStep.CLEAN_INBOX_OUTBOX),
+  LOGS("logs", 10000, BatchStep.CLEAN_LOG),
+  WEB_RECEIPTS("web_receipt_references", 1000, BatchStep.CLEAN_BATCH_RUN),
+  BATCH_RUNS("batch_runs", 1000, BatchStep.CLEAN_BATCH_RUN),
+  INBOX_PROGRESS("inbox_progress", 1000, BatchStep.CLEAN_BATCH_RUN),
+  LOG_PROGRESS("log_progress", 1000, BatchStep.CLEAN_BATCH_RUN);
   private final String sqlFunction;
   private final int rowLimit;
+  private final BatchStep parentStep;
 
-  CleanupKind(String suffix, int maximumRows) {
+  CleanupKind(String suffix, int maximumRows, BatchStep parentStep) {
     this.sqlFunction = "schubert.maintenance_cleanup_" + suffix;
     this.rowLimit = maximumRows;
+    this.parentStep = Objects.requireNonNull(parentStep, "parent step");
   }
 
   public String function() {
@@ -38,13 +41,6 @@ public enum CleanupKind {
    * 3.14/332/341; SSC057/PG164; BAT154.
    */
   public BatchStep step() {
-    return switch (this) {
-      case NOTIFICATIONS -> BatchStep.CLEAN_NOTIFICATION;
-      case QUESTIONS -> BatchStep.CLEAN_QUESTION;
-      case SESSIONS -> BatchStep.CLEAN_SESSION;
-      case OUTBOX -> BatchStep.CLEAN_INBOX_OUTBOX;
-      case LOGS -> BatchStep.CLEAN_LOG;
-      case WEB_RECEIPTS, BATCH_RUNS, INBOX_PROGRESS, LOG_PROGRESS -> BatchStep.CLEAN_BATCH_RUN;
-    };
+    return parentStep;
   }
 }
