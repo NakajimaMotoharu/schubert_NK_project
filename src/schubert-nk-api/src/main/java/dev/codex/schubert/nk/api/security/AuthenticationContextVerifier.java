@@ -4,14 +4,15 @@ package dev.codex.schubert.nk.api.security;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
+import org.jspecify.annotations.Nullable;
 
 /**
  * DB-authoritative context verification in a caller-owned transaction, with User -> session locks.
@@ -49,21 +50,48 @@ public final class AuthenticationContextVerifier {
         throw new SQLException("authentication requires an explicit transaction", "25000");
       }
       String hash = hashes.calculate(raw);
-      try (var statement = connection.prepareStatement(LOCK_USER)) {
-        statement.setString(1, hash);
-        try (ResultSet row = statement.executeQuery()) {
-          if (!row.next()) {
-            throw new AuthenticationContextException();
+      {
+        var statement = requireValue(connection.prepareStatement(LOCK_USER));
+        @Nullable Throwable jdbcFailure1 = null;
+        try {
+          statement.setString(1, hash);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure2 = null;
+            try {
+              if (!row.next()) {
+                throw new AuthenticationContextException();
+              }
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure2 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure2, row);
+            }
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure1 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);
         }
       }
       VerifiedSession session = readSession(connection, LOCK_SESSION, hash, now);
-      try (var statement = connection.prepareStatement(TOUCH)) {
-        statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
-        statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
-        statement.setObject(3, session.id());
-        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
-          throw new SQLException("authentication session changed during verification", "40001");
+      {
+        var statement = requireValue(connection.prepareStatement(TOUCH));
+        @Nullable Throwable jdbcFailure3 = null;
+        try {
+          statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
+          statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
+          statement.setObject(3, session.id());
+          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
+            throw new SQLException("authentication session changed during verification", "40001");
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure3 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);
         }
       }
       return session.actor();
@@ -110,31 +138,66 @@ public final class AuthenticationContextVerifier {
 
   private static VerifiedSession readSession(
       Connection connection, String sql, String hash, Instant now) throws SQLException {
-    try (var statement = connection.prepareStatement(sql)) {
-      statement.setString(1, hash);
-      try (ResultSet row = statement.executeQuery()) {
-        if (!row.next()) {
-          throw new AuthenticationContextException();
+    {
+      var statement = requireValue(connection.prepareStatement(sql));
+      @Nullable Throwable jdbcFailure4 = null;
+      try {
+        statement.setString(1, hash);
+        {
+          var row = requireValue(statement.executeQuery());
+          @Nullable Throwable jdbcFailure5 = null;
+          try {
+            if (!row.next()) {
+              throw new AuthenticationContextException();
+            }
+            boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
+            Instant expires =
+                requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class))
+                    .toInstant();
+            String status = requireValue(row.getString("status"));
+            if (revoked || !expires.isAfter(now) || !status.equals("ACTIVE")) {
+              throw new AuthenticationContextException();
+            }
+            UUID sessionId = requireValue(row.getObject("id", UUID.class));
+            AuthenticatedActor actor =
+                new AuthenticatedActor(
+                    requireValue(row.getObject("user_id", Long.class)),
+                    requireValue(row.getString("username")),
+                    readRole(requireValue(row.getString("role"))));
+            return new VerifiedSession(sessionId, actor);
+          } catch (SQLException | RuntimeException | Error failure) {
+            jdbcFailure5 = failure;
+            throw failure;
+          } finally {
+            JdbcResourceCleanup.closeRows(jdbcFailure5, row);
+          }
         }
-        boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
-        Instant expires =
-            requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class)).toInstant();
-        String status = requireValue(row.getString("status"));
-        if (revoked || !expires.isAfter(now) || !status.equals("ACTIVE")) {
-          throw new AuthenticationContextException();
-        }
-        UUID sessionId = requireValue(row.getObject("id", UUID.class));
-        AuthenticatedActor actor =
-            new AuthenticatedActor(
-                requireValue(row.getObject("user_id", Long.class)),
-                requireValue(row.getString("username")),
-                readRole(requireValue(row.getString("role"))));
-        return new VerifiedSession(sessionId, actor);
+      } catch (SQLException | RuntimeException | Error failure) {
+        jdbcFailure4 = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.closeStatement(jdbcFailure4, statement);
       }
     }
   }
 
-  private record VerifiedSession(UUID id, AuthenticatedActor actor) {}
+  private static final class VerifiedSession {
+    private final UUID sessionId;
+    private final AuthenticatedActor authenticatedActor;
+
+    private VerifiedSession(UUID id, AuthenticatedActor actor) {
+      this.sessionId = Objects.requireNonNull(id, "id");
+      this.authenticatedActor = Objects.requireNonNull(actor, "actor");
+    }
+
+    private UUID id() {
+      return sessionId;
+    }
+
+    private AuthenticatedActor actor() {
+      return authenticatedActor;
+    }
+  }
 
   private static Role readRole(String role) throws SQLException {
     return switch (role) {

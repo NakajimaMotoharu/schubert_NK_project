@@ -25,10 +25,14 @@ import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** PT-AUT-JDBC001..006; UI226/SS312314332. New interface fixture, never a DB connection. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticationVerifierJdbcPortTest {
+  private static final String USER_LABEL = "user";
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00Z");
   // Public SHA-256 vector: 64 ASCII 'a', independently verified with Python hashlib.
   private static final AuthenticationContext INPUT = AuthenticationContext.of("a".repeat(64));
@@ -64,10 +68,11 @@ final class AuthenticationVerifierJdbcPortTest {
   }
 
   private static final class Fixture {
-    final Map<String, Object> fields = new HashMap<>();
+    final Map<String, @Nullable Object> fields = new HashMap<>();
     final List<String> sql = new ArrayList<>();
     final List<Map<Integer, Object>> bindings = new ArrayList<>();
     final List<String> closes = new ArrayList<>();
+    final List<String> acquired = new ArrayList<>();
     final List<String> closeFailures = new ArrayList<>();
     boolean autoCommit;
     boolean readOnly;
@@ -76,7 +81,9 @@ final class AuthenticationVerifierJdbcPortTest {
     int affected = 1;
     int forbiddenOwnerCalls;
     String failMethod = "";
-    RuntimeException runtimeFailure;
+    String nullStatementAt = "";
+    String nullRowAt = "";
+    @Nullable RuntimeException runtimeFailure;
 
     Fixture() {
       fields.put("id", STORED_ID);
@@ -114,12 +121,14 @@ final class AuthenticationVerifierJdbcPortTest {
           });
     }
 
-    PreparedStatement statement(String actual) {
+    @Nullable PreparedStatement statement(String actual) {
       assertTrue(List.of(USER_LOCK, SESSION_LOCK, READ, TOUCH).contains(actual));
       sql.add(actual);
       var bound = new HashMap<Integer, Object>();
       bindings.add(bound);
       String name = actual.equals(USER_LOCK) ? "user" : actual.equals(TOUCH) ? "touch" : "session";
+      if (actual.equals(nullStatementAt)) return null;
+      acquired.add(name + ".statement");
       return proxy(
           PreparedStatement.class,
           (p, m, args) -> {
@@ -140,7 +149,9 @@ final class AuthenticationVerifierJdbcPortTest {
           });
     }
 
-    ResultSet row(String name) {
+    @Nullable ResultSet row(String name) {
+      if (name.equals(nullRowAt)) return null;
+      acquired.add(name + ".row");
       return proxy(
           ResultSet.class,
           (p, m, args) -> {
@@ -165,6 +176,12 @@ final class AuthenticationVerifierJdbcPortTest {
     void close(String name) throws SQLException {
       closes.add(name);
       if (closeFailures.contains(name)) throw new SQLException(PUBLIC_MARKER, "08006");
+    }
+
+    void owned() {
+      assertEquals(0, forbiddenOwnerCalls);
+      assertEquals(acquired.size(), closes.size());
+      for (String name : acquired) assertEquals(1, closes.stream().filter(name::equals).count());
     }
   }
 
@@ -379,7 +396,8 @@ final class AuthenticationVerifierJdbcPortTest {
   void parallelFreshRowsDoNotShareActorOrTransactionState() throws Exception {
     var verifier = new AuthenticationContextVerifier(new ContextHash());
     var results = new ArrayList<Future<Long>>();
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       for (long id = 1; id <= 32; id++) {
         long expected = id;
         results.add(
@@ -395,6 +413,48 @@ final class AuthenticationVerifierJdbcPortTest {
       }
       for (int index = 0; index < 32; index++)
         assertEquals((long) index + 1, results.get(index).get(10, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void resource001NullStatementsFailClosedBeforeAnyLaterStatement() throws Exception {
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      for (String sql : inspect ? List.of(READ) : List.of(USER_LOCK, SESSION_LOCK, TOUCH)) {
+        var f = new Fixture();
+        f.readOnly = inspect;
+        f.nullStatementAt = sql;
+        fixedInfrastructure(
+            () -> {
+              if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+              else verifier.verify(f.connection(), INPUT, NOW);
+            });
+        assertEquals(sql, f.sql.getLast());
+        f.owned();
+      }
+    }
+  }
+
+  @Test
+  void resource002NullRowsCloseOnlyThePreviouslyAcquiredResourcesExactlyOnce() throws Exception {
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      for (String label : inspect ? List.of("session") : List.of(USER_LABEL, "session")) {
+        var f = new Fixture();
+        f.readOnly = inspect;
+        f.nullRowAt = label;
+        fixedInfrastructure(
+            () -> {
+              if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+              else verifier.verify(f.connection(), INPUT, NOW);
+            });
+        assertEquals(
+            inspect ? READ : label.equals(USER_LABEL) ? USER_LOCK : SESSION_LOCK, f.sql.getLast());
+        f.owned();
+      }
     }
   }
 }
