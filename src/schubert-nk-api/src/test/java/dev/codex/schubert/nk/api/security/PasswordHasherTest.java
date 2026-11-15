@@ -4,15 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /** PT-AUT-002; independent JCA oracle, fixed 0..15 salt, no production method creates expected. */
 final class PasswordHasherTest {
@@ -71,6 +75,50 @@ final class PasswordHasherTest {
     assertThrows(NullPointerException.class, () -> hasher.matches(null, ""));
     assertThrows(NullPointerException.class, () -> hasher.needsUpgrade(null));
     assertThrows(IllegalArgumentException.class, () -> hasher.encode(new char[0]));
+  }
+
+  @Test
+  void hashfault001EncoderFailureConsumesCallerAndObservedNormalizedBuffer() {
+    for (Throwable failure :
+        List.of(
+            new IllegalStateException("synthetic encoder fault"),
+            new AssertionError("synthetic encoder fault"))) {
+      var observed = new AtomicReference<CharSequence>();
+      var encoder =
+          new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence raw) {
+              observed.set(raw);
+              throw encoderFailure(failure);
+            }
+
+            @Override
+            public boolean matches(CharSequence raw, String stored) {
+              observed.set(raw);
+              throw encoderFailure(failure);
+            }
+          };
+      var subject = new PasswordHasher(encoder);
+      for (boolean matching : List.of(false, true)) {
+        char[] input = "e\u0301".repeat(12).toCharArray();
+        assertSame(
+            failure,
+            assertThrows(
+                Throwable.class,
+                () -> {
+                  if (matching) subject.matches(input, "{pbkdf2-v1}" + "0".repeat(96));
+                  else subject.encode(input);
+                }));
+        assertArrayEquals(new char[input.length], input);
+        assertEquals("\0".repeat(12), Objects.requireNonNull(observed.get()).toString());
+      }
+    }
+    assertThrows(NullPointerException.class, () -> new PasswordHasher(null));
+  }
+
+  private static RuntimeException encoderFailure(Throwable failure) {
+    if (failure instanceof Error error) throw error;
+    return (RuntimeException) failure;
   }
 
   private static String independentHash(String value, byte[] salt) throws Exception {

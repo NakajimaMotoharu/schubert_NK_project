@@ -343,32 +343,34 @@ final class BootstrapAdminServiceBoundaryTest {
   }
 
   @Test
-  void bootbound016EveryCloseFailureAndTwrCompositeOrdering() {
+  void bootbound016EveryCloseFailureAndPrimarySecondaryIdentity() {
     for (String site : CLOSE_SITES)
-      for (Throwable failure :
-          List.of(
-              new SQLException("synthetic close"),
-              new IllegalStateException("synthetic close"),
-              new AssertionError("synthetic close"))) {
+      for (Throwable failure : failures()) {
         var f = new Port();
         f.faults.put(site, failure);
         assertSame(failure, assertThrows(Throwable.class, () -> call(f)));
         f.finished();
       }
-    var f = new Port();
-    var primary = new SQLException("primary");
-    var secondary = new IllegalStateException("secondary");
-    f.faults.put("query0", primary);
-    f.faults.put("closeP0", secondary);
-    assertSame(primary, assertThrows(SQLException.class, () -> call(f)));
-    assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
-    f.finished();
-    var same = new Port();
-    var fatal = new AssertionError("same");
-    same.faults.put("query0", fatal);
-    same.faults.put("closeP0", fatal);
-    assertSame(fatal, assertThrows(IllegalArgumentException.class, () -> call(same)).getCause());
-    same.finished();
+    for (boolean resultOwner : List.of(false, true))
+      for (int primaryKind : List.of(0, 1, 2))
+        for (Throwable secondary : failures()) {
+          var primary = failures().get(primaryKind);
+          var f = new Port();
+          f.faults.put(resultOwner ? "boolean0" : "query0", primary);
+          f.faults.put(resultOwner ? "closeR0" : "closeP0", secondary);
+          assertSame(primary, assertThrows(Throwable.class, () -> call(f)));
+          assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+          f.finished();
+        }
+    for (boolean resultOwner : List.of(false, true))
+      for (Throwable primary : failures()) {
+        var f = new Port();
+        f.faults.put(resultOwner ? "boolean0" : "query0", primary);
+        f.faults.put(resultOwner ? "closeR0" : "closeP0", primary);
+        assertSame(primary, assertThrows(Throwable.class, () -> call(f)));
+        assertEquals(0, primary.getSuppressed().length);
+        f.finished();
+      }
   }
 
   @Test
@@ -441,6 +443,13 @@ final class BootstrapAdminServiceBoundaryTest {
     assertEquals("new.admin", name.key());
     assertEquals("LoginUsername[REDACTED]", name.toString());
     assertEquals(301470017, name.hashCode());
+  }
+
+  private static List<Throwable> failures() {
+    return List.of(
+        new SQLException("synthetic fault"),
+        new IllegalStateException("synthetic fault"),
+        new AssertionError("synthetic fault"));
   }
 
   private static char[] password() {

@@ -17,9 +17,18 @@ public final class PasswordHasher {
   private final PasswordPolicy policy = new PasswordPolicy();
 
   public PasswordHasher() {
+    this(defaultEncoder());
+  }
+
+  /** SSC412/PT-AUT-HASHFAULT001: internal fault port; production noarg remains algorithm-pinned. */
+  PasswordHasher(PasswordEncoder encoder) {
+    this.encoder = Objects.requireNonNull(encoder, "encoder");
+  }
+
+  private static PasswordEncoder defaultEncoder() {
     Pbkdf2PasswordEncoder v1 = Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     v1.setEncodeHashAsBase64(false);
-    encoder = new DelegatingPasswordEncoder("pbkdf2-v1", Map.of("pbkdf2-v1", v1));
+    return new DelegatingPasswordEncoder("pbkdf2-v1", Map.of("pbkdf2-v1", v1));
   }
 
   /**
