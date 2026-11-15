@@ -1,0 +1,22 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35390-INBOX-REFERENCE-PURE3",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35384-inbox-reference3-prepare-v1/manifest.json",
+    "sha256": "4d4dc680a6102a9f4935aed5e81423590ffb44d69295bf92a4d8f2ddbe3195ab"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35386-inbox-reference3-static-v1/manifest.json",
+    "sha256": "09847b0567d9ae7f5790fa19fe8c145e4b7b5b81eba64e11996214fe6e6d8be0"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Deliberately mutate only the caller-owned enum values copy, then assert an independent fresh array still has its literal NONE constant; production null state is never accepted or assigned.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
