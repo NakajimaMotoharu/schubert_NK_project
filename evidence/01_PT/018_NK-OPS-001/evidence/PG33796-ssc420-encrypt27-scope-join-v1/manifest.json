@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-15T08:36:33.999151+00:00",
+  "source": "19f25fa0edda8604f70696fa95b1ec9e39319dbd",
+  "productionCoreMain": "19f25fa0edda8604f70696fa95b1ec9e39319dbd",
+  "actualUnitSource": "1dd87d79054b24481c4acb56f8b8f1c2420b60be",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33790-ssc420-encrypt27-unit-v1/manifest.json",
+    "sha256": "e234e32f8a7b79269bd959a9dbaf6de267914f8f6de69e77fdef7ba92988af71"
+  },
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33792-ssc420-encrypt27-independent-v1/manifest.json",
+    "sha256": "e857fc7058788406db9db94cc8830dc462a864e6bf2be96dcad13d6fad95c692"
+  },
+  "sameExecRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33794-ssc420-encrypt27-unfiltered-same-exec-v1/manifest.json",
+    "sha256": "1df96c287c55540d6021079f74c30ed2f7694fd90a49814c61c512f1322f8c9e"
+  },
+  "technical": {
+    "kind": "SSC420_WEB_ENCRYPT_OWNERSHIP27_REQUIRED_FOUR100",
+    "productionCoreMain": "19f25fa0edda8604f70696fa95b1ec9e39319dbd",
+    "actualUnitSource": "1dd87d79054b24481c4acb56f8b8f1c2420b60be",
+    "tests": 27,
+    "newDefinitions": 2,
+    "necessaryPriorRequalification": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 191,
+    "positiveCrc": 51,
+    "targetDefault": {
+      "INSTRUCTION": {
+        "covered": 979,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 90,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 235,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 67,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 22,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 1071
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 90
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 245
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 67
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 22
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "requiredCounters": [
+      "LINE",
+      "METHOD",
+      "CLASS",
+      "BRANCH"
+    ],
+    "requiredFour100": true,
+    "allInstruction100": false,
+    "supplementalUnexecutedInstructions": 12,
+    "unexecutedCloseExceptionPathsNotClaimedTested": true,
+    "full191Qualified": false,
+    "own15PhysicalScopeQualified": false,
+    "staticRaw40Applicable0": true,
+    "freshRootCompileCount": 1,
+    "wholeTestCompileStages": 3,
+    "old25AssertionsInverseExact": true,
+    "fixtureOnlyChangesForBug3019": true,
+    "metadataCanaries": 8,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "summary": "SSC420設計PR355/main1043fd24公開後、Core19f25fa0/Unit1dd87d79/PG33790全27FES0真正0。WebLog/Revocation二encryptの平文copy/nonce/AAD取得をtry内へ移し既AES256GCM/format/鍵/外部結果不変。新OWN各1は初回publicnonce故障の分類又はError同一・消去後に別workerで同codec正常/独立DataOutput-JCA golden/元caller不変/call2を確認、旧25asserts inverse保持。BUG3019の旧codec finally欠落1と二pool未確認closeを修正前起票、stop→await10assert→確認後closeへ是正。PG33792現191physical/51positiveCRC-init/真正XMLを独立照合、Main13 freshRootNullAway1回のみ、fixture是正に必要Testcompile三段を区別、最終GJF-CS-SB0/PMD40各site適用未分類0。PG33794同singleexecraw対象二codec245L22M2C90B全miss0、必須四100。close例外finally複製各6I計12Iは未実行で残し、全命令/close例外実測成功を主張0。3497は451四条件へ補助Instructionまで混同し工具1だがAnalyzer0、BUG3020を先行起票し3498で元stdoutだけ回収、8metadata正負canaryで旧58LINE1拒否も保持、Unit/Analyzer再演0/閾値緩和・除外・到達不能認定0。全191/自分15physical scopeは未受入。BUG3018当encrypt二method/3019fixture/3020metadataを限定是正、YKT2542は4method限定是正と他74候補未reviewを区別し、当4sourceの他method全受入を推定せずglobalOPEN。追加.6/1.8/5.4のみ完了・残397.324/837.386/1643.415、原904.85/費/SV/開始を保持。App183/35299/35234/歴史不成功65は再資格混合raw、正式1964/53・正本184/625・元190新0・工数null不変。Root2/Actual4/SDKbackend/VM/DB/native/aru/CHR/COPY24/HOLD保持。",
+  "canaries": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33796-ssc420-encrypt27-scope-join-v1/required-four-eight-canaries.json",
+    "sha256": "38badbdca00dd377d1177615b6178820066de433df2a4bbbc4c3713225bdc890"
+  },
+  "globalHorizontalClosed": false,
+  "newAcceptance": 0,
+  "whole451Accepted": false
+}

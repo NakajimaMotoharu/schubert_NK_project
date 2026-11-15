@@ -1,0 +1,58 @@
+{
+  "actualExit": 0,
+  "cases": [
+    {
+      "case": "SUPPLEMENT12_INSTRUCTION_NOT_MANDATORY_FOUR",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "case": "MANDATORY_LINE_MISS1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "MANDATORY_METHOD_MISS1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "MANDATORY_CLASS_MISS1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "MANDATORY_BRANCH_MISS1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "MISSING_MANDATORY_LINE_REJECTED",
+      "expected": "KeyError",
+      "actual": "KeyError"
+    },
+    {
+      "case": "HISTORICAL58_LINE1_STILL_REJECTED",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "HISTORICAL64_SIX_ZERO_STILL_FOUR_PASS",
+      "expected": true,
+      "actual": true
+    }
+  ],
+  "appTestsExecuted": 0,
+  "toolContractChecks": 8,
+  "policy": {
+    "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+    "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+  },
+  "requiredCounters": [
+    "LINE",
+    "METHOD",
+    "CLASS",
+    "BRANCH"
+  ],
+  "supplement12UnexecutedNotAccepted": true
+}

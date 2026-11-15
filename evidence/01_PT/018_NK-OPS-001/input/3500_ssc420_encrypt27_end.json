@@ -1,0 +1,133 @@
+{
+  "groupId": "PGPT-WBS65-SSC420-WEB-ENCRYPT-OWNERSHIP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2129_WBS65SSC420通常27限定完了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "WebLogPayloadCodec.encryptとRevocationPayloadCodec.encryptで取得済みplaintext/candidateの後にnonce/AAD/emptybuffer初期化がtry前にある取得漏れを是正する。placeholderの非秘密空配列だけをowned機密取得前に準備し、既try内でplaintext copy→nonce→AADを順に取得する。従来finallyで返却済みowned全配列を消去し、返却前のJDK内部allocationは保証せず実OOMを誘発しない。既lock/ensureOpen/null/鍵version/固定AES256GCM128/nonce12/AAD/format/過去鍵/再送結果/例外catalog/既fatal guard/外部APIを保持、新provider/新crypto切替口/権限/実鍵/DB/実nonceを追加0。既Revocation7＋FailureGraph1＋JdbcGraph3＋Fatal5＋WebLog9=25Test本文と独立DataOutput/JCA goldenを保持し、新各1Testだけpublic固定鍵/nonceで初回乱数故障→別worker正常と元caller/nonce消去/既独立golden/call2を検証する。workerはFutureget5s、finallyshutdownNow/await10s確認後codecclose、process隔離内の旧JCA provider復元fixture以外のsystem操作なし。新27は当source一singleexecでfreshMain13 RootNullAway/静的/CRC/init/default及びrawを確認、対象二codecの全Codeと全191等依存scopeの未達を区別し数を実compileから確定する。旧成功/Protocol130は確認再演せず当sourceへ合算しない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4279_SSC420_Web暗号化取得保護・通常全27仕様.md",
+      "sha256": "4ac74e1b80dea747c8fe5884f71bd8cdefaf3eef38e35db366f3fcfc74d9da6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33780-ssc420-web-encryption-design-only-v1/design-only-main-patch.json",
+      "sha256": "d3ac70f035ceaa052d6b49af13d8f8bee1cca71592117719cfa78fadc26627e8"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P006-04",
+    "WBS-P015-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java"
+  ],
+  "source": "d3f0aa6862d280c30f6e5025ebb2bb608594ec63",
+  "run": "PG33790-SSC420-WEB-ENCRYPT27",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 5.4
+  },
+  "capPp": 6,
+  "workIds": [
+    "P00604P01505_SSC420_WEB_ENCRYPT_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2128_WBS65予実・SSC420通常27必須四閉鎖版621.json",
+    "sha256": "347381fb3096bac3225b874af81fa15e81d730f704d24fb020ce15fd2a1adbe4"
+  },
+  "nextCommand": "PublishSSC420limited914onlymain then commit/push27 proof. Continue original permitted PG/PT and YKT2542 other74 source candidates / all78 othermethods, inspect AuthContextCodec exact safe wholeTest closure before any pricing. Reuse all unchanged successes, no actual4/Root2/SDKbackend/DB/VM/native/aru/refusal actions. Freshquota/hourly; ordinarygroupnotstop.",
+  "sourceAfter": "19f25fa0edda8604f70696fa95b1ec9e39319dbd",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33796-ssc420-encrypt27-scope-join-v1/manifest.json",
+  "manifestSha256": "978f35301faf113f919755cfa29e9667379cc02fa6b88d64dc713f9532283322",
+  "terminalAtUTC": "2026-11-15T08:36:33.999151+00:00",
+  "outcome": "WEB27_REQUIRED_FOUR100_SUPPLEMENT12I_AND_GLOBAL_MISSES_RETAINED",
+  "technical": {
+    "kind": "SSC420_WEB_ENCRYPT_OWNERSHIP27_REQUIRED_FOUR100",
+    "productionCoreMain": "19f25fa0edda8604f70696fa95b1ec9e39319dbd",
+    "actualUnitSource": "1dd87d79054b24481c4acb56f8b8f1c2420b60be",
+    "tests": 27,
+    "newDefinitions": 2,
+    "necessaryPriorRequalification": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 191,
+    "positiveCrc": 51,
+    "targetDefault": {
+      "INSTRUCTION": {
+        "covered": 979,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 90,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 235,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 67,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 22,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 2,
+        "missed": 0
+      }
+    },
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 1071
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 90
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 245
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 67
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 22
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "requiredCounters": [
+      "LINE",
+      "METHOD",
+      "CLASS",
+      "BRANCH"
+    ],
+    "requiredFour100": true,
+    "allInstruction100": false,
+    "supplementalUnexecutedInstructions": 12,
+    "unexecutedCloseExceptionPathsNotClaimedTested": true,
+    "full191Qualified": false,
+    "own15PhysicalScopeQualified": false,
+    "staticRaw40Applicable0": true,
+    "freshRootCompileCount": 1,
+    "wholeTestCompileStages": 3,
+    "old25AssertionsInverseExact": true,
+    "fixtureOnlyChangesForBug3019": true,
+    "metadataCanaries": 8,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "SSC420設計PR355/main1043fd24公開後、Core19f25fa0/Unit1dd87d79/PG33790全27FES0真正0。WebLog/Revocation二encryptの平文copy/nonce/AAD取得をtry内へ移し既AES256GCM/format/鍵/外部結果不変。新OWN各1は初回publicnonce故障の分類又はError同一・消去後に別workerで同codec正常/独立DataOutput-JCA golden/元caller不変/call2を確認、旧25asserts inverse保持。BUG3019の旧codec finally欠落1と二pool未確認closeを修正前起票、stop→await10assert→確認後closeへ是正。PG33792現191physical/51positiveCRC-init/真正XMLを独立照合、Main13 freshRootNullAway1回のみ、fixture是正に必要Testcompile三段を区別、最終GJF-CS-SB0/PMD40各site適用未分類0。PG33794同singleexecraw対象二codec245L22M2C90B全miss0、必須四100。close例外finally複製各6I計12Iは未実行で残し、全命令/close例外実測成功を主張0。3497は451四条件へ補助Instructionまで混同し工具1だがAnalyzer0、BUG3020を先行起票し3498で元stdoutだけ回収、8metadata正負canaryで旧58LINE1拒否も保持、Unit/Analyzer再演0/閾値緩和・除外・到達不能認定0。全191/自分15physical scopeは未受入。BUG3018当encrypt二method/3019fixture/3020metadataを限定是正、YKT2542は4method限定是正と他74候補未reviewを区別し、当4sourceの他method全受入を推定せずglobalOPEN。追加.6/1.8/5.4のみ完了・残397.324/837.386/1643.415、原904.85/費/SV/開始を保持。App183/35299/35234/歴史不成功65は再資格混合raw、正式1964/53・正本184/625・元190新0・工数null不変。Root2/Actual4/SDKbackend/VM/DB/native/aru/CHR/COPY24/HOLD保持。"
+}
