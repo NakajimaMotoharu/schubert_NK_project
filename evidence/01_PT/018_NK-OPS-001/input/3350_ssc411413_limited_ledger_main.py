@@ -1,0 +1,21 @@
+"""Publish only SSC411412413's evidenced limited status; preserve upstream ledger prefix and ordinary PR checks."""
+from pathlib import Path
+import datetime,difflib,hashlib,json,subprocess,time
+r=Path.cwd();w=r.parent/'ssc413-admin-encoding-port-design-20261115';b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG33588-ssc411413-limited-ledger-main-v1';private=r.parent/'pgpt-runs/PG379/pg33588-ssc411413-ledger';assert not e.exists() and not private.exists();e.mkdir();private.mkdir(mode=0o700)
+def run(args,cwd=r):return subprocess.check_output(args,cwd=cwd,stderr=subprocess.STDOUT,text=True).strip()
+path='documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md';base=run(['git','rev-parse','origin/main']);old=subprocess.check_output(['git','show',base+':'+path],cwd=r,text=True);local=(r/path).read_text();marker='## SSC-411 ';assert old.count(marker)==local.count(marker)==1
+section=local[local.index(marker):].replace('mainへ当台帳限定反映予定','mainへ当台帳限定反映');new=old[:old.index(marker)]+section;assert new!=old
+patch=''.join(difflib.unified_diff(old.splitlines(True),new.splitlines(True),fromfile='a/'+path,tofile='b/'+path));(e/'design-only-main-patch.json').write_text(json.dumps(dict(baseMain=base,paths=[path],patchUtf8Sha256=hashlib.sha256(patch.encode()).hexdigest(),patch=patch),ensure_ascii=False,indent=2)+'\n')
+assert run(['git','status','--porcelain'],w)=='';branch='docs/ssc411413-limited-qualification-20261115';run(['git','switch','-c',branch,'origin/main'],w);p=private/'ledger.patch';p.write_text(patch);run(['git','apply','--check',str(p)],w);run(['git','apply',str(p)],w)
+assert subprocess.check_output(['git','diff','--name-only','-z'],cwd=w)==(path+'\0').encode();run(['git','diff','--check'],w);run(['git','add','--',path],w);run(['git','commit','-m','docs(ssc411413): record ADMIN JDBC/encoding all29 raw45 limited qualification'],w);head=run(['git','rev-parse','HEAD'],w);run(['git','push','-u','origin',branch],w)
+body=private/'pr-body.txt';body.write_text('SSC411/412/413: typed JDBC null guards, explicit primary/finally owned cleanup and two internal crypto failure ports. Public defaults/SQL/roles/borrowed owner preserved. Core6525b1bb/Unit23fe2881 PG33580 all29 FES0 exit0; PG33582/33584/33586 all5Main6CRC/default33/raw45 all counters100, static applicable/unclassified0. New20/oldsecurity9 requalified. Original27 and28 FES0 default100 remain raw-unqualified; no union. BUG2983..2994/YKT2512..2523 host-only retest closed. Frozen start.9/2.7/6 and supplement.9/2.7/3.9, total1.8/5.4/9.9 cap10; actual cost/token unknown. Actual DB/ADMIN/Main/native/global451/HOLD unaccepted, formal1964/53 unchanged. Only last3 ledger sections; implementation/config/tool/evidence excluded. Validation: same-source manifests and exact upstream-prefix/914 diff.\n')
+repo='NakajimaMotoharu/schubert_NK_project';url=run(['gh','pr','create','--repo',repo,'--base','main','--head',branch,'--title','docs(ssc411413): 初期ADMIN境界と暗号消去全29・実45限定実績','--body-file',str(body)],w)
+for attempt in range(6):
+ review=json.loads(run(['gh','pr','view',url,'--repo',repo,'--json','headRefOid,mergeStateStatus,reviewDecision,statusCheckRollup,files,state'],w))
+ if review['mergeStateStatus']!='UNKNOWN':break
+ time.sleep(1)
+assert review['headRefOid']==head and [x['path'] for x in review['files']]==[path] and review['mergeStateStatus']=='CLEAN' and review['state']=='OPEN' and not review['statusCheckRollup']
+run(['gh','pr','merge',url,'--repo',repo,'--merge','--match-head-commit',head],w);run(['git','fetch','origin','main']);main=run(['git','rev-parse','origin/main']);run(['git','merge-base','--is-ancestor',head,'origin/main']);assert subprocess.check_output(['git','show','origin/main:'+path],cwd=r,text=True)==new
+# The execution tree's historical prefix is intentionally independent; update its last SSC411412413 section only.
+p=r/path;p.write_text(local[:local.index(marker)]+section)
+(e/'manifest.json').write_text(json.dumps(dict(actualExit=0,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),ssc='SSC411412413',baseMain=base,designSource=head,mainCommit=main,pr=url,paths=[path],ordinaryMerge=True,upstreamPrefixPreserved=True,implementationIncluded=False,formalAccepted=False),ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,pr=url,mainCommit=main,designSource=head,implementationIncluded=False)))
