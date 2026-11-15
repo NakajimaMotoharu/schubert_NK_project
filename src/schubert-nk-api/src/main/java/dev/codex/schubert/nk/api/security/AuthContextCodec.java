@@ -23,13 +23,21 @@ public final class AuthContextCodec implements AutoCloseable {
   private static final int AUTH_CONTEXT_KEY_BYTES = 32;
 
   private static final byte[] MAGIC = "NKENC1".getBytes(StandardCharsets.US_ASCII);
+  private static final EnvelopeFactory STANDARD_ENVELOPE = EncryptedAuthContext::new;
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
   private final java.util.concurrent.locks.ReentrantLock stateLock =
       new java.util.concurrent.locks.ReentrantLock();
   private final String currentVersion;
   private final Map<String, byte[]> keys;
   private final SecureRandom random;
+  private final EnvelopeFactory envelopes;
   private boolean closed;
+
+  /** SSC422/BUG3023, AUTHCTX-FACT001..003: internal ciphertext value construction only. */
+  @FunctionalInterface
+  interface EnvelopeFactory {
+    @Nullable EncryptedAuthContext create(String version, byte[] ciphertext);
+  }
 
   public AuthContextCodec(
       String currentVersion,
@@ -45,6 +53,16 @@ public final class AuthContextCodec implements AutoCloseable {
       @Nullable String previousVersion,
       byte @Nullable [] previousKey,
       SecureRandom random) {
+    this(currentVersion, currentKey, previousVersion, previousKey, random, STANDARD_ENVELOPE);
+  }
+
+  AuthContextCodec(
+      String currentVersion,
+      byte[] currentKey,
+      @Nullable String previousVersion,
+      byte @Nullable [] previousKey,
+      SecureRandom random,
+      EnvelopeFactory envelopes) {
     validateVersion(currentVersion);
     validateKey(currentKey);
     Objects.requireNonNull(random, "random");
@@ -60,6 +78,7 @@ public final class AuthContextCodec implements AutoCloseable {
     }
     this.currentVersion = currentVersion;
     this.random = random;
+    this.envelopes = Objects.requireNonNull(envelopes, "context envelope factory");
     Map<String, byte[]> copies = new HashMap<>();
     copies.put(currentVersion, currentKey.clone());
     if (previousVersion != null) {
@@ -101,7 +120,11 @@ public final class AuthContextCodec implements AutoCloseable {
                   .put(encrypted)
                   .array();
           try {
-            return new EncryptedAuthContext(currentVersion, stored);
+            var result = envelopes.create(currentVersion, stored);
+            if (result == null)
+              throw new AuthContextCryptoException(
+                  AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE);
+            return result;
           } finally {
             Arrays.fill(stored, (byte) 0);
           }

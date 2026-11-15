@@ -1,0 +1,39 @@
+{
+  "groupId": "PGPT-WBS65-SSC422-AUTH-ENVELOPE-FACTORY-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2136_WBS65SSC422値構築消去開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "AuthContextCodecのpublic4引数/既package-private5引数を維持し、新package-private6引数へ内部EnvelopeFactoryを受ける。旧5はprivate static finalのEncryptedAuthContext::newへ固定委譲し、全通常Production組立は既record構築/防御clone/同byte/同例外を維持する。外部設定・HTTP・service loader・反射でfactoryを選択しない。追加interfaceはpackage-privateのcreate(version,storedCiphertext)一操作だけ、鍵/平文/nonce/Cipher/JCAprovider/認証/権限/DBには触れない。factory引数nonnullは既鍵/version/random検査後・機密copy前にconstructorで確立する。createの戻りはnullable境界として明示し、nullなら既CRYPTO_UNAVAILABLE固定例外へ拒否する。factory呼出しは既stored及びencryptedの二finally内に置き、Error/RTEがそのまま伝播してもowned二配列とplaintext/nonceが消去されprivate lockが解放される。実OOMやprivate reflection/JCAprovider差替え/拒否試験の代替を行わない。default record生成の内容/size/暗号/version/AAD/保持/再送/publicAPI/承認済DIFを変更0。 既whole8の全本文/期待値と有限workerを保持し、新AUTHCTX-FACT001..003の3methodを同wholeTestへ追加する。001はpublic組立ciphertextを受け取った直後の直接AssertionErrorとIllegalArgumentExceptionの二caseで元throwable同一、stored全zero、次の別worker正常・独立DataOutput/JCA envelope一致・copy別identity/call2を確認する。002nullfactoryの構築前提拒否とnonce呼出0/元public key不変。003nullable factory結果nullを固定CRYPTO_UNAVAILABLE/原因抑制初期0へ拒否しstored消去後に同codecの別worker正常と独立goldenを確認する。全worker Future5/stop-await10assert後close、入力は既公開a64/keysequence/nonce2Aだけ、expectedにProduction生成を使わない。新sourceはMain5をRootNullAwayでfreshcompileし、増えたinterface含む物理数/Code数を実測、自然Code0を除外扱いしない。必要同source whole11を一singleexec、静的/CRC/init/XML/defaultと無filter必須LINE/METHOD/CLASS/BRANCH整数100を照合し、補助Instruction/Complexity/close例外未実行は全数保持し全命令/全例外をPASSにしない。旧8成功を足して11とせず旧8は新source必要再資格で新規0、新3だけ別計上する。全依存scope/正式451/CHR/native/ITST/HOLDは未受入。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4284_SSC422_API暗号化値構築・消去通常十一仕様.md",
+      "sha256": "f1ecc5febd47ad49990e06a8bd0691d3c1c3ee6ded36e01badf14062da20670c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33820-ssc422-auth-envelope-design-only-v1/design-only-main-patch.json",
+      "sha256": "c3060aae172aa9ebe4bcdfd5c23720e753f680cc83c79ca02d521ef9b5a79507"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java"
+  ],
+  "source": "f2339838dfeaa10644ffd1e19d52ea690512002a",
+  "run": "PG33830-SSC422-AUTHCTX11",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 2.7
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00703_SSC422_AUTH_ENVELOPE_FACTORY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2135_WBS65予実・SSC422内部依存追加carry版624.json",
+    "sha256": "8c2bc689bfd0d291b8a841e7383de8669f36d8e904a6fb69db5f42bf765e95dc"
+  },
+  "nextCommand": "PublishSSC422SS311314352914 onlymain beforePG. Add trusted ciphertext-only nullable record factory default existing ctor, three Error-RTE/null independent tests+old8 unchanged. Fresh5Main/interfaceCode0/static/whole11 singleexec/default+raw mandatoryfour/CRC/init. Preserve supplemental close misses and allglobal/HOLD, no key/plaintext/crypto/provider/reflection/OOM/actual4Root2/SDK/DBVMnativearu/refusal probe. Freshquota/hourly; ordinarygroupnotstop."
+}
