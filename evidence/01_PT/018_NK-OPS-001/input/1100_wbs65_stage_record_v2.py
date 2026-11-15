@@ -1,6 +1,6 @@
 """Append WBS65 bounded group records using existing quota/487 guards; no product operations."""
 from pathlib import Path
-import datetime as dt,hashlib,json,sys,re,subprocess
+import datetime as dt,hashlib,json,sys,re
 def bind_current_identity(state,head,main):
     assert isinstance(head,str) and re.fullmatch('[0-9a-f]{40}',head)
     assert isinstance(main,str) and re.fullmatch('[0-9a-f]{40}',main)
