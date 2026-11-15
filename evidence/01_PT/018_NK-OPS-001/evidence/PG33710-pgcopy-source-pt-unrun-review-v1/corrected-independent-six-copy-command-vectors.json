@@ -1,0 +1,57 @@
+{
+  "columns": {
+    "speakers": "id, game_id, name, normalized_name, is_protagonist, notes, created_at",
+    "script_files": "id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at",
+    "script_entries": "id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at",
+    "audio_files": "id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at",
+    "media_assets": "id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at",
+    "entry_audio_links": "entry_id, audio_file_id, game_id, link_type, display_order, created_at"
+  },
+  "widths": [
+    7,
+    11,
+    12,
+    12,
+    17,
+    6
+  ],
+  "commands": {
+    "pg_temp.nk_mig_speakers": "COPY pg_temp.nk_mig_speakers (id, game_id, name, normalized_name, is_protagonist, notes, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_script_files": "COPY pg_temp.nk_mig_script_files (id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_script_entries": "COPY pg_temp.nk_mig_script_entries (id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_audio_files": "COPY pg_temp.nk_mig_audio_files (id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_media_assets": "COPY pg_temp.nk_mig_media_assets (id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_entry_audio_links": "COPY pg_temp.nk_mig_entry_audio_links (entry_id, audio_file_id, game_id, link_type, display_order, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')"
+  },
+  "expectedSource": "SS331343 and PostgreSQL17 semantic bytes09/5c4e → independent SQL E literal builder; no production method called",
+  "references": [
+    {
+      "url": "https://raw.githubusercontent.com/pgjdbc/pgjdbc/REL42.7.13/pgjdbc/src/main/java/org/postgresql/PGConnection.java",
+      "scope": "public tagged42.7.13 source API, not SDK class/ABI execution"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pgjdbc/pgjdbc/REL42.7.13/pgjdbc/src/main/java/org/postgresql/copy/CopyManager.java",
+      "scope": "public tagged42.7.13 source API, not SDK class/ABI execution"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pgjdbc/pgjdbc/REL42.7.13/pgjdbc/src/main/java/org/postgresql/copy/CopyIn.java",
+      "scope": "public tagged42.7.13 source API, not SDK class/ABI execution"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pgjdbc/pgjdbc/REL42.7.13/pgjdbc/src/main/java/org/postgresql/copy/CopyOperation.java",
+      "scope": "public tagged42.7.13 source API, not SDK class/ABI execution"
+    },
+    {
+      "url": "https://www.postgresql.org/docs/17/sql-copy.html",
+      "scope": "COPY columns/STDIN/text/tab/null/encoding grammar, no DB execution"
+    }
+  ],
+  "actualDriverVersion": "42.7.13",
+  "publicLatestJavadoc42_7_14NotUsedAsVersionSubstitute": true,
+  "productTestsExecuted": 0,
+  "semanticOracle": {
+    "delimiterHex": "09",
+    "nullMarkerHex": "5c4e"
+  },
+  "originalIncorrectVectorsPreserved": "original-six-copy-command-vectors-before-escape-fix.json"
+}

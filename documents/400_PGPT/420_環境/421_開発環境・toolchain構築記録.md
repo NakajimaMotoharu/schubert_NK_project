@@ -521,3 +521,12 @@ PG22826/22828/22834はhost既設`linux-libc-dev 7.0.0-42.42`、`libc6-dev 2.43-2
 Java25.0.4/Maven3.9.12/Root NullAway0.14.1・ErrorProne2.50.0、lint-all/Werrorを維持。初期ADMINの新しいメモリ内JDBC単体試験は既m2のspring-security-crypto7.1.1・commons-logging1.4.0を使用する。crypto公開APIのorg.springframework.lang.Contract依存は通常jdepsのcode参照/POMだけでは不足するため、既reactor採用spring-core7.0.9（/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar、SHA256 5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36）を明示classpathへ含める。今回の新規download/導入/role変更は0、入手元は既構築toolchain/m2、取得履歴未確認を今回取得として記載しない。Contract.classは元jarの既entryを確認し抽出代替jarを作らない。
 
 再現はclosed host profileの明示5Main/6physical/SDK exacthashに従い、新しい未使用phase namespaceを作ってprestyle→prepare（Root NullAway/lint-Werror）→static→preflight→固定Unit→post/無filter一exec測定を行う。既phaseの再発行/原証跡上書きはしない。PG33442のMain compile1とPG33458 proc-none診断は品質合格ではなく保存、PG33464はMain Rootcompile0/Testcompile1（JUnit expectedClassの型推論）で未資格。修正後の正規fresh profile3312/PG33484へ追跡する。全SDK SHAは各profile、補正根拠はPG33460/BUG2986/YKT2515、当source/元SQL/期待値を変更せず、抑制/品質緩和0。actual DB/bootstrapMain/credential/native/RootActual4/HOLDは未実行。
+
+
+2026-11-15 SSC417 source段: 2026-11-15、dev-foundation、source前HEAD7b2f17f40bfff283913a30a6fe4ab8329d9d8031。実行環境/時刻/command/exit/hashはPG33710/source-only-checks-v2.json、独立source判断はsource-only-review-v2.json。整形GJF1.36.1とCheckstyle14.3のJava source parseは終了0・指摘0。旧途中結果も保存し、新24Testを一度も起動していない。
+
+SDK ABI/compile、NullAway、SpotBugs、semantic PMD、全体build、動的PT24、実Driver/DB/nativeはNOT_RUN_HOLD。line/method/class/branch/instruction coverageはすべてnull、PASS数0。旧Coreef461eba/Unita48eec60の全1050は新POM変更前の歴史資格として保持し、新port・新POMへ流用しない。旧105Java source byte不変はレビュー済みだが、新依存グラフ全体の受入を意味しない。
+
+BUG3001/YKT2530は表示escape誤読による誤検知取り下げ、source修正実績0。BUG3002/YKT2531はfuture fixture初期化順をsource是正し型compile/PT待ち。BUG3003/YKT2532はowned capture後の幅検査へsource是正、未来PGCOPY005を追加し、既4Mainの非該当根拠をsource-only水平確認、動的未完OPEN。BUG3004/YKT2533の誤った旧vector異常前提は原・現同値正例と独立合成負例で是正、metadata source review限定で閉鎖し製品PT成功に数えない。
+
+価格1/3/8pp cap9はこのsource製造・PT source・強化レビュー段のみ。未実行SDK/PTの残工数を0としない。後続費用は元P019/全451費用に含む未確定内訳として保留、追加二重課金0、今回段完了を工程完了/工数完成率に換算しない。正式1964PT/53scope、正本184/625、元190新0、工数率nullを維持。

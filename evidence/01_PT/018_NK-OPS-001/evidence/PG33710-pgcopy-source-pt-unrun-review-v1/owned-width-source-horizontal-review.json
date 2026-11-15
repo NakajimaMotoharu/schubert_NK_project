@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "relatedBug": "BUG3003",
+  "relatedYkt": "YKT2532",
+  "targets": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "sha256": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+      "ownedCapture": [
+        [
+          24,
+          "var snapshot = new ArrayList<@Nullable String>(row);"
+        ]
+      ],
+      "widthGuard": [
+        [
+          26,
+          "if (width == 0) width = snapshot.size();"
+        ],
+        [
+          27,
+          "else if (snapshot.size() != width) throw invalid();"
+        ]
+      ],
+      "disposition": "SOURCE_ONLY_NONAPPLICABLE_OWNED_COPY_PRECEDES_CHECK_NOT_DYNAMIC_RETEST"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java",
+      "sha256": "0a927338f752332269cab8b221d001b95f780b2504b19b7ecf277024359f4660",
+      "ownedCapture": [
+        [
+          64,
+          "var row = new ArrayList<@Nullable String>(source);"
+        ],
+        [
+          78,
+          "var target = new ArrayList<@Nullable String>();"
+        ]
+      ],
+      "widthGuard": [
+        [
+          65,
+          "if (row.size() != CURRENT_COLUMNS) throw invalid();"
+        ]
+      ],
+      "disposition": "SOURCE_ONLY_NONAPPLICABLE_OWNED_COPY_PRECEDES_CHECK_NOT_DYNAMIC_RETEST"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java",
+      "sha256": "63e3a32d69491fee9cc86fd41479c5fdf7480d2860a944b3d241c0f4552f8f45",
+      "ownedCapture": [
+        [
+          47,
+          "var row = new ArrayList<@Nullable String>(source);"
+        ],
+        [
+          61,
+          "var target = new ArrayList<@Nullable String>();"
+        ]
+      ],
+      "widthGuard": [
+        [
+          48,
+          "if (row.size() != CURRENT_COLUMNS) throw invalid();"
+        ]
+      ],
+      "disposition": "SOURCE_ONLY_NONAPPLICABLE_OWNED_COPY_PRECEDES_CHECK_NOT_DYNAMIC_RETEST"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java",
+      "sha256": "44f69f9c9a08c2a7b15018cb4840307f6ca68577a6df1f2d5daad07fff1fe341",
+      "ownedCapture": [
+        [
+          122,
+          "var row = new ArrayList<@Nullable String>(source);"
+        ],
+        [
+          136,
+          "var target = new ArrayList<@Nullable String>();"
+        ]
+      ],
+      "widthGuard": [
+        [
+          123,
+          "if (row.size() != CURRENT_COLUMNS) throw invalid();"
+        ]
+      ],
+      "disposition": "SOURCE_ONLY_NONAPPLICABLE_OWNED_COPY_PRECEDES_CHECK_NOT_DYNAMIC_RETEST"
+    }
+  ],
+  "newPortHash": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+  "futureNegative": "PGCOPY005 capture-changing row/empty/width+-1/null row; NOT_RUN_HOLD",
+  "runtimeTests": 0
+}

@@ -1,5 +1,21 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC417 固定六staging向けPgJDBC COPY transport製造と未実行PTの分離（2026-11-15）
+
+具象PostgresMigrationCopyPortはstateless final @NullMarked implements MigrationCopyPort。既配備依存org.postgresql:postgresql:42.7.13を不変更で用い、bootstrap POMの同一dependencyをruntimeから既定compileへ変更する（runtime依存も維持、新version/新binaryの取得なし）。SDK jar読取/compile/define/init/実DriverやDB接続は本群ではHOLDのまま、型ABI/動的試験・NullAway/SB/semanticPMD/fullbuild/coverageを成功へしない。既閉じたhost profileのSDK allowlist/guardを変更しない。SDK14のlatest Javadocで代用せず公式REL42.7.13 PGConnection/CopyManager/CopyIn/CopyOperation sourceの公開APIをsource reviewで照合する。新sourceを旧1050の資格sourceへ合算しない。
+
+copyはnullable受入を明示しtarget/table/rows/row null、未知table、列数不一致を固定IAEで拒否する。固定tableはpg_temp.nk_mig_のspeakers/script_files/script_entries/audio_files/media_assets/entry_audio_linksのみ。列名・順・幅7/11/12/12/17/6はSS331/343と既三staging SQLの完全リストに固定し、generated body_norm等を含めない。行をdeep snapshot（String nullは保持）後、target autoCommit=false/readOnly=falseを確認、borrowed Connection.unwrap(PGConnection.class)→getCopyAPI()→copyIn(固定SQL)を一回、vendorの各nullは固定SQLExceptionで拒否する。unwrapの物理peer/権限/排他/timeoutはcaller/vendorの既認証契約でありreference一致やport成功で認証しない。role/grant/credential/connection状態を変更せずcommit/rollback/Connection.closeを行わない。
+
+SQLは明示列付きCOPY ... FROM STDIN WITH (FORMAT text, DELIMITER E backslash-t, NULL E double-backslash-N, ENCODING UTF8)。実SQLの各quote/escapeを独立六vectorへ固定しserver filename/PROGRAM/TO/汎用SQL/動的column/ignore-error/CSV/binary modeを導入しない。COPY handleは取得後protected tryに入り最初にactiveを確認。各deep-immutable rowを既PostgresCopyTextEncoder.encodeRowで一行ずつUTF8 textへencodeしwriteToCopy(byte[],0,length)を順次呼ぶ。endCopyを一回、実戻りrow数がsnapshot.sizeと等しくhandle inactiveの場合だけ実戻りcountを返す。空もCOPY/endを明示、bad count/activeAfterEndは固定SQL失敗で後続へ成功を返さない。flushCopyは呼ばない。
+
+SQL/Runtime/Errorの最初のprimaryをそのまま保持し、失敗時だけ所有CopyInがactiveならcancelCopyを一回、再active確認で不明を固定SQL失敗として扱う。cleanupのSQL/Runtime/Errorは同一primaryなら自己suppressionを避け、別実体なら順suppressedへ一回追加してprimaryを再throwする。取得前失敗は未取得handleへcancel0。成功後のhandleへ再cancelしない。失敗は実DB/copy/TX回収成功の証明ではなくcallerの隔離/rollback/後条件認証が必要、unknownを成功へ読み替えず自動再送0。toStringは固定redacted、data/SQL/原Errorのlogを保存しない。既encoder/宣言/coordinator/Current転送の52Main/1050Test byteは変更しない。
+
+PGと同時に24のPT sourceと独立仕様を作る（未実行）。PGCOPY001六SQLと独立六wire、002空、003三null、004unknown/injection-like table、005六width/nullrow、006auto、007readonly、008属性三型、009unwrap null/三型、010manager null/三型、011start null/三型、012inactive start、013全write位置三型/後続0、014encoder不正Unicode/NULでcancel、015end三型、016count負/過少/過大/LongMax、017active-after-end、018cancel三型×primary三型/順suppressed、019selfalias、020active問合せ異常、021deep input copy/nullable fields保持、022connection/manager非所有・成功再利用、023固定redaction/六SQL公開vector、024共有stateless8worker64/Future5/finallyshutdownNow-await10。将来許可時はJDK Proxyの固定BaseConnection/QueryExecutor/CopyInを使うSDK contract PTで実DB接続は行わないが、今は当SDK実行自体未許可のためcompile/define/init/実行を一切しない。fake SDK stubの別実行・既拒否試験の抽出/改名・別モデルへの再試行は禁止。期待はSS列リスト/手書きCOPY SQL・独立六wire/明示所有call順、productionメソッドからexpected生成0。
+
+本群の許可source確認はGJF1.36.1/RootCheckstyleのJava source parse、公開API/SQLgrammarとの独立review、source構造と独立六SQL/frame/例外所有matrixの照合のみ。これはPG強化review/静的代替でありPTのPASS・実測coverage・NPE解析完了・正式451へ算入0。未確認の型ABI/動的・native/DB/driver/cancel/実回収・秘密保全/Root/ownership/全移行/ITSTは明示HOLD、追加承認なしに試走しない。
+
+不足PG source+PT source/reviewの追加価格1/3/8pp cap9を開始時固定、元P019費/SV各上限/原904.85/各群開始/元worker価格を保持。型/動的PTは未実施のまま後続残件へ残し全作業完了としない。source段完了による見積減額を工数完成率にせず、正式1964/53・正本184/625・元190新0・工数nullを維持する。
+
 ## SSC416 保持COPY宣言の期待SHA・四mapping・六wire結合読戻し照合（2026-11-15）
 
 新MigrationMasterCopyVerifierはstateless final @NullMarked。verify(Nullable byte[] retained,Nullable String expectedSha,Nullable CurrentMigrationMappingManifest mappings,Nullable MigrationMasterCopyDataset declared) throws IOException,NoSuchAlgorithmException。四null又はexpectedShaが小文字64hex以外なら固定IAE。retainedを一回cloneし当コピーのJDK SHA256を独立に計算、trusted expectedShaと一致しなければ固定IAE。callerが取得元と期待SHAを既契約で認証していることが前提で、この一致自体はファイル/署名/authorityの認証でない。次に既MigrationMasterCopyManifest(mappings,declared)を一回生成し、stable retainedとそのcanonicalBytesをMessageDigest.isEqualで完全比較し、不一致を固定IAE。返却は生成されたimmutable declaration、保存原本/移行/commit receiptでない。既manifestの四countと六streamed digest/固定frame/期待対応をそのまま使用し、別parserによる正規化・未登録項目・CRLF/BOM/末尾/非ASCII受容・不足補完を行わない。SQL/IO/crypto/runtime/Errorをcatch変換/再送しない。既51Main byte不変更。

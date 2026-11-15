@@ -1,0 +1,103 @@
+{
+  "origin": "Independent literal rows from SS331343/PG33314 normal fixture, own PG text escaping and UTF8; no production methods",
+  "rows": [
+    [
+      "42",
+      "1",
+      "Alice",
+      "alice",
+      "true",
+      null,
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "700",
+      "1",
+      "1",
+      "script/file.txt",
+      "file.txt",
+      "file.txt",
+      null,
+      "chapter",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "3",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "900",
+      "1",
+      "700",
+      "1",
+      "0",
+      null,
+      "dialogue",
+      "42",
+      null,
+      "hello",
+      "raw",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "500",
+      "1",
+      "voice/a.ogg",
+      "表示",
+      "a.ogg",
+      "a",
+      "voice",
+      "ogg",
+      "1200",
+      "3",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "600",
+      "video-a",
+      "VIDEO",
+      "A",
+      "MAIN",
+      null,
+      "video/a.mp4",
+      "current/a.mp4",
+      "a.mp4",
+      "3",
+      "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "video/mp4",
+      null,
+      null,
+      null,
+      "1",
+      "2026-01-02T03:04:05Z"
+    ],
+    [
+      "900",
+      "500",
+      "1",
+      "voice",
+      "1",
+      "2026-01-02T03:04:05Z"
+    ]
+  ],
+  "wireUtf8Hex": [
+    "3432093109416c69636509616c6963650974727565095c4e09323032362d30312d30325430333a30343a30355a0a",
+    "37303009310931097363726970742f66696c652e7478740966696c652e7478740966696c652e747874095c4e09636861707465720962613738313662663866303163666561343134313430646535646165323232336230303336316133393631373761396362343130666636316632303031356164093309323032362d30312d30325430333a30343a30355a0a",
+    "39303009310937303009310930095c4e096469616c6f677565093432095c4e0968656c6c6f0972617709323032362d30312d30325430333a30343a30355a0a",
+    "353030093109766f6963652f612e6f676709e8a1a8e7a4ba09612e6f6767096109766f696365096f676709313230300933096261373831366266386630316366656134313431343064653564616532323233623030333631613339363137376139636234313066663631663230303135616409323032362d30312d30325430333a30343a30355a0a",
+    "36303009766964656f2d6109564944454f0941094d41494e095c4e09766964656f2f612e6d70340963757272656e742f612e6d703409612e6d70340933096261373831366266386630316366656134313431343064653564616532323233623030333631613339363137376139636234313066663631663230303135616409766964656f2f6d7034095c4e095c4e095c4e093109323032362d30312d30325430333a30343a30355a0a",
+    "39303009353030093109766f696365093109323032362d30312d30325430333a30343a30355a0a"
+  ],
+  "commands": {
+    "pg_temp.nk_mig_speakers": "COPY pg_temp.nk_mig_speakers (id, game_id, name, normalized_name, is_protagonist, notes, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_script_files": "COPY pg_temp.nk_mig_script_files (id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_script_entries": "COPY pg_temp.nk_mig_script_entries (id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_audio_files": "COPY pg_temp.nk_mig_audio_files (id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_media_assets": "COPY pg_temp.nk_mig_media_assets (id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')",
+    "pg_temp.nk_mig_entry_audio_links": "COPY pg_temp.nk_mig_entry_audio_links (entry_id, audio_file_id, game_id, link_type, display_order, created_at) FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')"
+  },
+  "semanticOracle": {
+    "delimiterHex": "09",
+    "nullMarkerHex": "5c4e"
+  },
+  "productTestsExecuted": 0
+}

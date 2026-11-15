@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>dev.codex.schubert</groupId>
+    <artifactId>schubert-nk</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <artifactId>schubert-nk-bootstrap</artifactId>
+  <name>Schubert NK Shared Bootstrap</name>
+
+  <properties>
+    <maven.compiler.release>25</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.13.4</junit.version>
+    <jacoco.version>0.8.15</jacoco.version>
+    <spotbugs.plugin.version>4.10.4.0</spotbugs.plugin.version>
+  </properties>
+
+  <dependencies>
+    <!-- SSC126: existing strict non-secret scalar parsers shared with the trusted issuer. -->
+    <dependency><groupId>org.snakeyaml</groupId><artifactId>snakeyaml-engine</artifactId><version>3.1.1</version></dependency>
+    <!-- SSC088: compile-only exact fixed-kernel-path portability review; no quality exclusions. -->
+    <dependency><groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.10.4</version><scope>provided</scope></dependency>
+    <!-- SSC084: shared credentials/JDBC, no business API or HTTP/JMS dependency. -->
+    <!-- SSC096: fixed strict release JSON, same pinned parser as API/Web; no lenient fallback. -->
+    <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>2.14.0</version></dependency>
+    <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-storage</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><version>42.7.13</version><scope>runtime</scope></dependency>
+    <dependency><groupId>com.zaxxer</groupId><artifactId>HikariCP</artifactId><version>7.1.0</version></dependency>
+    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</artifactId><version>13.4.0</version><scope>test</scope></dependency>
+    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-database-postgresql</artifactId><version>13.4.0</version><scope>test</scope></dependency>
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>${jspecify.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version><executions><execution><id>shared-test-fixtures</id><goals><goal>test-jar</goal></goals></execution></executions></plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.0</version>
+        <configuration>
+          <showWarnings>true</showWarnings>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <failIfNoTests>true</failIfNoTests>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <argLine>@{argLine} --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</argLine>
+          <systemPropertyVariables>
+            <nk.pt.repository>${maven.multiModuleProjectDirectory}</nk.pt.repository>
+            <user.language>ja</user.language>
+            <user.country>JP</user.country>
+            <user.timezone>Asia/Tokyo</user.timezone>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-coverage-agent</id>
+            <goals><goal>prepare-agent</goal></goals>
+          </execution>
+          <execution>
+            <id>coverage-report</id>
+            <phase>verify</phase>
+            <goals><goal>report</goal></goals>
+          </execution>
+          <execution>
+            <id>coverage-check</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>1.0</minimum></limit>
+                    <limit><counter>BRANCH</counter><value>COVEREDRATIO</value><minimum>1.0</minimum></limit>
+                    <limit><counter>METHOD</counter><value>COVEREDRATIO</value><minimum>1.0</minimum></limit>
+                    <limit><counter>CLASS</counter><value>COVEREDRATIO</value><minimum>1.0</minimum></limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.plugin.version}</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <failOnError>true</failOnError>
+          <xmlOutput>true</xmlOutput>
+        </configuration>
+        <executions>
+          <execution>
+            <id>static-analysis</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

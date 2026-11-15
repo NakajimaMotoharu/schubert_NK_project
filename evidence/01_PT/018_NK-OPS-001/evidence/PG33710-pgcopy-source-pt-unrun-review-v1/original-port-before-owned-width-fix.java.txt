@@ -1,0 +1,112 @@
+package dev.codex.schubert.nk.migration;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.postgresql.PGConnection;
+import org.postgresql.copy.CopyIn;
+import org.postgresql.copy.CopyManager;
+
+/**
+ * Fixed six-table PostgreSQL COPY transport on an already admitted borrowed write transaction.
+ * NK-MIG-001; MIG003005006/MIG-DAT005/TST; UI223242254; SS311331343 SSC417;
+ * PT-MIG-PGCOPY001..024 NOT_RUN_HOLD until SDK/runtime admission. No authorization or TX ownership.
+ * Failure never proves backend cleanup: caller must isolate/rollback/authenticate postconditions.
+ */
+@NullMarked
+public final class PostgresMigrationCopyPort implements MigrationCopyPort {
+  private static final Map<String, String> COLUMNS = Map.of(
+      "pg_temp.nk_mig_speakers",
+      "id, game_id, name, normalized_name, is_protagonist, notes, created_at",
+      "pg_temp.nk_mig_script_files",
+      "id, game_id, display_order, storage_relative_path, display_path, file_name, section_code, chapter_title, sha256, byte_size, created_at",
+      "pg_temp.nk_mig_script_entries",
+      "id, game_id, script_file_id, display_order, entry_index, line_number, entry_type, speaker_id, speaker_label, body, raw_block, created_at",
+      "pg_temp.nk_mig_audio_files",
+      "id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at",
+      "pg_temp.nk_mig_media_assets",
+      "id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at",
+      "pg_temp.nk_mig_entry_audio_links",
+      "entry_id, audio_file_id, game_id, link_type, display_order, created_at");
+  private static final String OPTIONS =
+      " FROM STDIN WITH (FORMAT text, DELIMITER E'\\t', NULL E'\\\\N', ENCODING 'UTF8')";
+
+  @Override
+  public long copy(@Nullable Connection target, @Nullable String stagingTable,
+      @Nullable List<? extends @Nullable List<@Nullable String>> rows) throws SQLException {
+    if (target == null || stagingTable == null || rows == null) throw invalidInput();
+    @Nullable String columns = COLUMNS.get(stagingTable);
+    if (columns == null) throw invalidInput();
+    var snapshot = snapshot(rows, columns.split(",").length);
+    if (target.getAutoCommit() || target.isReadOnly()) throw unavailable();
+    var pg = requirePg(target.unwrap(PGConnection.class));
+    var manager = requireManager(pg.getCopyAPI());
+    var copy = requireCopy(manager.copyIn("COPY " + stagingTable + " (" + columns + ")" + OPTIONS));
+    try {
+      if (!copy.isActive()) throw unavailable();
+      var encoder = new PostgresCopyTextEncoder();
+      for (var fields : snapshot) {
+        byte[] bytes = encoder.encodeRow(fields);
+        copy.writeToCopy(bytes, 0, bytes.length);
+      }
+      long count = copy.endCopy();
+      if (count != snapshot.size() || copy.isActive()) throw unavailable();
+      return count;
+    } catch (SQLException | RuntimeException | Error primary) {
+      cancelOwned(copy, primary);
+      throw primary;
+    }
+  }
+
+  private static List<List<@Nullable String>> snapshot(
+      List<? extends @Nullable List<@Nullable String>> rows, int width) {
+    var result = new ArrayList<List<@Nullable String>>();
+    for (@Nullable List<@Nullable String> row : new ArrayList<>(rows)) {
+      if (row == null || row.size() != width) throw invalidInput();
+      result.add(Collections.unmodifiableList(new ArrayList<@Nullable String>(row)));
+    }
+    return List.copyOf(result);
+  }
+
+  private static void cancelOwned(CopyIn copy, Throwable primary) {
+    try {
+      if (copy.isActive()) {
+        copy.cancelCopy();
+        if (copy.isActive()) throw unavailable();
+      }
+    } catch (SQLException | RuntimeException | Error cleanup) {
+      if (cleanup != primary) primary.addSuppressed(cleanup);
+    }
+  }
+
+  private static PGConnection requirePg(@Nullable PGConnection value) throws SQLException {
+    if (value == null) throw unavailable();
+    return value;
+  }
+
+  private static CopyManager requireManager(@Nullable CopyManager value) throws SQLException {
+    if (value == null) throw unavailable();
+    return value;
+  }
+
+  private static CopyIn requireCopy(@Nullable CopyIn value) throws SQLException {
+    if (value == null) throw unavailable();
+    return value;
+  }
+
+  private static IllegalArgumentException invalidInput() {
+    return new IllegalArgumentException("migration PostgreSQL COPY input is invalid");
+  }
+
+  private static SQLException unavailable() {
+    return new SQLException("migration PostgreSQL COPY transport is unavailable");
+  }
+
+  @Override
+  public String toString() { return "PostgresMigrationCopyPort[REDACTED]"; }
+}

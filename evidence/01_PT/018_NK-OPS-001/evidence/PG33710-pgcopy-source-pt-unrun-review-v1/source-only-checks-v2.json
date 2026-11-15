@@ -1,0 +1,51 @@
+{
+  "actualExit": 0,
+  "sourceParseOnly": true,
+  "stages": {
+    "format": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+        "--skip-reflowing-long-strings",
+        "--dry-run",
+        "--set-exit-if-changed",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPortTest.java"
+      ],
+      "actualExit": 0,
+      "startUTC": "2026-11-15T05:04:34.836072+00:00",
+      "endUTC": "2026-11-15T05:04:35.309721+00:00"
+    },
+    "checkstyle": {
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+        "-c",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+        "-f",
+        "xml",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG33710-pgcopy-source-pt-unrun-review-v1/source-only-checkstyle-v2.xml",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPortTest.java"
+      ],
+      "actualExit": 0,
+      "startUTC": "2026-11-15T05:04:35.309737+00:00",
+      "endUTC": "2026-11-15T05:04:36.049857+00:00"
+    }
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPortTest.java": "bf752389a7ab0787c2d99de96906f3eb681b431908ed0040c599517ff7541858"
+  },
+  "checkstyleFindings": 0,
+  "sourceFormatFindings": 0,
+  "sdkJarOrClassActions": 0,
+  "applicationTestsExecuted": 0,
+  "notNullabilityOrSemanticStaticAnalysis": true,
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "branch": "dev-foundation",
+  "headBeforeSourceCommit": "7b2f17f40bfff283913a30a6fe4ab8329d9d8031"
+}
