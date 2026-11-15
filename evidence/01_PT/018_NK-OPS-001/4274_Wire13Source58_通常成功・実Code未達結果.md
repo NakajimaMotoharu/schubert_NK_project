@@ -1,0 +1,5 @@
+# Wire58通常成功・実Code未達の部分結果
+
+Corefb1783d3/Unite1200036/PG33734通常58FES0真正0、新定義Reason1＋既57の必要同source再資格を区別。PG33736独立XML/source189/CRC194/init116/41静的site適用未分類0/RootNullAway-SB同byte再用を確認。既定own13Source281L61M16C82B全miss0だがPG33738同exec実Codeは73M/82B全実行でもsameContext例外finally9instruction/1line未実行でown raw未受入。3456の既定method71誤予測BUG3011/YKT2540は元XML61/raw73/全filtered12で是正しUnit再演0、3458のraw0guard停止はAnalyzer0の元stdoutを3459で読取回収し再測定0。BUG3012/YKT2541にfilter内命令未網羅、BUG3013/YKT2542に二本目copy失敗時firstがtry前で消去漏れのsource反例を先行起票、実OOM/実事故は未実施・不明。raw合格へせず新SS418/既一経路の通常PG/PTが必要。元群.8/2.4/7.2とcap8保持、実施部分.6/1.8/5.4だけ完了、未達carry.2/.6/1.8を次へ保持（追加二重費用0）、残397.524/837.986/1645.215。App技術roster180/35198/35133/歴史不成功65・新定義1でformal1964/53/正本184/625/元190新0/工数nullは不変。COPY24/Root/SDKbackend/actual4/Root2/native/DB/aru/global451/CHR/HOLD未受入。
+
+命令・行未達は品質不合格として残す。PG33738はraw analyzerそのもの0/既出力回収であり、ownRawFour100=false。RTE/合成Error/二取得の所有保護は既methodの例外安全条件であり外部仕様を変更せず、承認済み領域の内部testabilityとして続行する。現在Sourceは未変更でSS418公開前にPG修正しない。元Unit/生exec/source/hash/失敗postを保全し、設定71やraw0を修正して試験期待値を弱めることはしない。
