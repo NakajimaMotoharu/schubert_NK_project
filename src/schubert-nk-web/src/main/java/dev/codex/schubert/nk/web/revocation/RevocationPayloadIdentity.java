@@ -19,20 +19,25 @@ public record RevocationPayloadIdentity(UUID id, Instant requestedAt) {
   /** Six explicit length-prefixed fields; caller owns and erases returned bytes. */
   byte[] aad(String version) {
     byte[][] fields = {
-      "web-revoke".getBytes(StandardCharsets.US_ASCII),
-      "schubert_web_session.pending_context_revocations".getBytes(StandardCharsets.US_ASCII),
-      ByteBuffer.allocate(16)
-          .putLong(id.getMostSignificantBits())
-          .putLong(id.getLeastSignificantBits())
-          .array(),
-      ByteBuffer.allocate(12)
-          .putLong(requestedAt.getEpochSecond())
-          .putInt(requestedAt.getNano())
-          .array(),
-      new byte[] {1},
-      version.getBytes(StandardCharsets.US_ASCII)
+      new byte[0], new byte[0], new byte[0], new byte[0], new byte[0], new byte[0]
     };
     try {
+      // SSC435/BUG3075: every owned metadata allocation is protected by the erasure region.
+      fields[0] = "web-revoke".getBytes(StandardCharsets.US_ASCII);
+      fields[1] =
+          "schubert_web_session.pending_context_revocations".getBytes(StandardCharsets.US_ASCII);
+      fields[2] =
+          ByteBuffer.allocate(16)
+              .putLong(id.getMostSignificantBits())
+              .putLong(id.getLeastSignificantBits())
+              .array();
+      fields[3] =
+          ByteBuffer.allocate(12)
+              .putLong(requestedAt.getEpochSecond())
+              .putInt(requestedAt.getNano())
+              .array();
+      fields[4] = new byte[] {1};
+      fields[5] = version.getBytes(StandardCharsets.US_ASCII);
       int size = fields.length * Integer.BYTES;
       for (byte[] field : fields) size += field.length;
       var buffer = ByteBuffer.allocate(size);
