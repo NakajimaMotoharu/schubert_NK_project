@@ -20,3 +20,5 @@ WBS-F03、BUG3006/YKT2535、451/487。対象tools/quality/pmo_stage_input.py val
 正常期待は明示literal、例外型/message・元config完全同値・許容field読取有無を独立規定しproduction helperでexpectedを作らない。全12は通常unittest、skip/expectedFailure0。source moduleの全line/branch/関数実行をcoverage.pyで測定、除外pragmas追加0。scopeはこの新pure helperだけ、1100 whole-engine/外部event IOや451全工程はこのcoverageへ混ぜない。Python null/missing/empty/unknown/誤type負例、nonreturn並行/再送はこのpure無資源functionに非該当、既event5402や仕事を再発行しない。
 
 実行は3435の固定source/hash/command/環境/終了code/XML相当unittest結果とcoverage JSON/manifestへ対応する。SDK/Java/class/DB/Root/VM/native/aruを呼ばず、実tokenは欠測null。既end5402/台帳26/ProductionCOPYsourceの試験成功を確認のため再演しない。
+
+追加独立PT-OPS-ENDINPUT013: writer自身へ元summaryのみのshapeと存在しないquota pathを渡し、固定ValueError/child1、quota未読取、公開events/state三つhash不変を期待する。3437/PG33724、12単体と別scenario、coverage合算なし。

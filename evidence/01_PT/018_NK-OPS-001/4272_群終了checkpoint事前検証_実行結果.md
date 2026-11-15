@@ -1,0 +1,5 @@
+# 群終了入力・工具独立結果
+
+BUG3006/YKT2535の終了checkpointText遅延検出をwriter全mutationより前のpure helper検証へ是正。Toolsourcec9d13ff5、PG33722普通12FES0・新helper11line/8branch各100/除外0・三pyflakes0。PG33724独立writer原summaryだけの負例1は期待ValueError/child1を確認しquota未open・eventsとstate三つhash完全不変、元5402再発行0。初回PG33720普通12は0だが旧unusedimport静的1の未受入を保全、BUG3008/YKT2537を修正前起票し直接unusedimportのみ是正後必要同source12を実施。工具12定義/独立1scenarioと繰返し実行24を区別、App179/35140/35075/歴史不成功65へ加算0。Productionfb1783d3COPYsource-only/PT24HOLD、旧ef461eba/a48eec60全1050はPOM前歴史資格。正式1964/53・正本184/625・元190新0・工数null、工具手戻り.2/.6/1.8のみ完了、残397.324/837.386/1643.415・元費/上限保持・専有token不明。
+
+12ケースはPG33722/tool-test-result.jsonの実command/UTC/OS/Python/source hash/終了code/coverage JSONへ結合。独立13はPG33724/manifest.json、期待されたchild1は工具negativeの正常結果であり、製品試験Failedの読み替えではない。初回33720の全phase/raw未達を保持し新sourceと合算しない。全writerのcoverage/実外部job/Backend/SDK/Root/VM/DB/nativeは未測定でこの工具scopeへ拡張しない。再現3436/3437は一回専用の証跡namespace、結果回収済みのため確認だけの再演不要。

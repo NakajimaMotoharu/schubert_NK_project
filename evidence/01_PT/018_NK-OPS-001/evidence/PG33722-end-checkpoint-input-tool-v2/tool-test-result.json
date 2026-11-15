@@ -1,0 +1,103 @@
+{
+  "actualExit": 0,
+  "operatorSource": "c9d13ff51cbcf249ecc42d869708acf00cfc1faf",
+  "sourceHashes": {
+    "tools/quality/pmo_stage_input.py": "cfe694a526c0fe804b6789c69e2b83fddb854e2eed853a822d67fb7d71b85bea",
+    "tools/quality/tests/test_pmo_stage_input.py": "15cb178b5dd93c04437d69eab8233a8eed346e01547053a8772086b67725f4d0",
+    "evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py": "60f769cec6c406b93cc94d8a37800694dfab61c9f1eb3dbc3da119778b72aa3b"
+  },
+  "stages": {
+    "unittest": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "--source=pmo_stage_input",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pmo_stage_input.py",
+        "-v"
+      ],
+      "actualExit": 0,
+      "startedUTC": "2026-11-15T05:30:51.301688+00:00",
+      "completedUTC": "2026-11-15T05:30:51.458771+00:00"
+    },
+    "coverage-json": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG33722-end-checkpoint-input-tool-v2/coverage.json"
+      ],
+      "actualExit": 0,
+      "startedUTC": "2026-11-15T05:30:51.458894+00:00",
+      "completedUTC": "2026-11-15T05:30:51.607569+00:00"
+    },
+    "coverage-report": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "coverage",
+        "report",
+        "--fail-under=100"
+      ],
+      "actualExit": 0,
+      "startedUTC": "2026-11-15T05:30:51.607661+00:00",
+      "completedUTC": "2026-11-15T05:30:51.756911+00:00"
+    },
+    "pyflakes": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "tools/quality/pmo_stage_input.py",
+        "tools/quality/tests/test_pmo_stage_input.py",
+        "evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py"
+      ],
+      "actualExit": 0,
+      "startedUTC": "2026-11-15T05:30:51.756983+00:00",
+      "completedUTC": "2026-11-15T05:30:51.836976+00:00"
+    }
+  },
+  "terminalAtUTC": "2026-11-15T05:30:51.837203+00:00",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "toolTests": 12,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "coverage": {
+    "covered_lines": 11,
+    "num_statements": 11,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "percent_statements_covered": 100.0,
+    "percent_statements_covered_display": "100",
+    "num_branches": 8,
+    "num_partial_branches": 0,
+    "covered_branches": 8,
+    "missing_branches": 0,
+    "percent_branches_covered": 100.0,
+    "percent_branches_covered_display": "100"
+  },
+  "coverageScope": "NEW_PURE_PMO_STAGE_INPUT_MODULE_ONLY_NOT_WHOLE_RECORDER_OR_APPLICATION",
+  "productTestsExecuted": 0,
+  "actualSDKorJavaVmDbNativeRootOperations": 0,
+  "original5402Reissued": false,
+  "formalUpdated": false,
+  "effortRate": null
+}
