@@ -1,0 +1,281 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3345_admin_encoding29_profile.json",
+    "sha256": "ed663c56cada70f30155e9fb461efbf7d8b1161b583111d7a439788b5e5d6cb9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "8aca829fb6f08507ef5a27280546e830131bcf08c90ff91c7040329c1b837b97",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "5d112c7612fd4d013a60f51366784e792d9e1fb305d4a93f50f9da2af152b837",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java": "a2c5090304e8632eb77f40f05a8cc38b852ff9b727468abe41f90c53ec53991a",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java": "6697fe28ce9804f569102cecedd8961186e5079e72d58357519f142f7b14b993",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java": "1fdb742c0aab4c1be6ce90ca68e2f357c7030a7d5a916df34f9f91a61bfccf00",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33574-admin-encoding29-prepare-v1/manifest.json",
+    "sha256": "66f2e9a2af033b467aa83af9f2b2b2561f6bdf24f119931e03ecdd04cd4facef"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33576-admin-encoding29-static-v1/manifest.json",
+    "sha256": "d0e9bb64c3667306e5216cb8ec2afb86037f8bf2c939937323ebe79c8728f517"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3346_admin_encoding29_static_admission.json",
+    "sha256": "c3e254fa6577776f6cef1d938676b8683094d83a6ec2003f9994ef1650cd9f04"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "99",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope create. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "99",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope create. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "118",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope query. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "118",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope query. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "141",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope read. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "141",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope read. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "154",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope lockMembership. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "154",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope lockMembership. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "182",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope audit. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "182",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope audit. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "194",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope closeStatement. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "194",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope closeStatement. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "196",
+      "reason": "Required Throwable identity comparison for JDK addSuppressed self guard. Same object must not self-suppress; distinct objects must be retained even if a Throwable subclass overrides value equals. Calling equals would conflate independent failures and violate SSC412 primary/secondary ownership. Both equal-identity and distinct cases are observed for SQL/Runtime/Error with separate Statement/ResultSet scopes.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "204",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope closeResult. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "204",
+      "reason": "SSC412 explicitly requires exact SQL/Runtime/Error primary preservation across the owned Statement/ResultSet cleanup scope closeResult. Catch body stores and rethrows the identical primary; finally attempts the already-held resource once. Close helpers rethrow standalone close failure, or attach only a distinct secondary while the outer primary remains pending. They never convert failure into normal completion or catalog, catch NPE for success, retry or assume caller TX ownership. All3 types/normal-close/secondary/self are independently exercised in wholeBOOTBOUND014..016; narrower SQL-only capture would omit primary ownership on Runtime/Error.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "206",
+      "reason": "Required Throwable identity comparison for JDK addSuppressed self guard. Same object must not self-suppress; distinct objects must be retained even if a Throwable subclass overrides value equals. Calling equals would conflate independent failures and violate SSC412 primary/secondary ownership. Both equal-identity and distinct cases are observed for SQL/Runtime/Error with separate Statement/ResultSet scopes.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "CloseResource",
+      "line": "381",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "381",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "386",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "401",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "402",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "EqualsNull",
+      "line": "422",
+      "reason": "Intentional independent negative equals(null)==false assertion for generated record contracts, not an application null test. Replacing it with reference comparison would stop executing/verifying the record method and miss the specified null behavior. Both return and absence of an exception are observed; no production null handling or exception is suppressed. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "EqualsNull",
+      "line": "442",
+      "reason": "Intentional independent negative equals(null)==false assertion for generated record contracts, not an application null test. Replacing it with reference comparison would stop executing/verifying the record method and miss the specified null behavior. Both return and absence of an exception are observed; no production null handling or exception is suppressed. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "511",
+      "reason": "This exact JDBC dynamic-proxy Object.equals implementation deliberately implements identity equality. Calling proxy.equals recursively re-enters the same InvocationHandler and never terminates. The compared reference is the proxy itself; no domain value comparison occurs. The memory-only fixture needs identity, not application equality semantics. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "523",
+      "reason": "Per-Port private fault configuration; every sequential test and each concurrent task creates a separate Port. No Port/fault map is static, published or shared across tasks; mutation precedes the same-thread service call. Concurrent test shares only the service and immutable metadata, never a Port. ConcurrentHashMap would add no required thread-safety contract. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "570",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "609",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "636",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "675",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy. Re-reviewed current SSC412 source: this exact original statement remains unchanged; current17 non-composite Boundary bodies and finite-worker/Port ownership remain byte-identical. Manual cleanup affects only SUT failure handling, not fixture sharing or JDK-interface loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
