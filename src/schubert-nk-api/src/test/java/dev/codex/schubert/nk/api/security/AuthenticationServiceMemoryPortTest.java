@@ -45,6 +45,10 @@ import org.junit.jupiter.api.Timeout;
  */
 @Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticationServiceMemoryPortTest {
+  private static final String DISABLED_STATUS = "DISABLED";
+  private static final String ACTIVE_STATUS = "ACTIVE";
+  private static final String FAILED_COUNT_COLUMN = "failed_count";
+
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456789Z");
   private static final Instant AT = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final Instant EXPIRES = Instant.parse("2026-09-08T08:00:00.123456Z");
@@ -142,7 +146,7 @@ final class AuthenticationServiceMemoryPortTest {
       for (boolean predicateAnswer : new boolean[] {true, false}) {
         try (Fixture f = new Fixture()) {
           f.absent = absent;
-          f.status = "DISABLED";
+          f.status = DISABLED_STATUS;
           f.matches = predicateAnswer;
           LoginResult.Failure result = assertInstanceOf(LoginResult.Failure.class, f.call());
           assertEquals(ResultCode.AUTHENTICATION_FAILED, result.resultCode());
@@ -152,7 +156,7 @@ final class AuthenticationServiceMemoryPortTest {
           assertEquals(0, f.count(Stage.SESSION_INSERT));
           assertEquals(absent ? 0 : 1, f.count(Stage.UPDATE_USER));
           f.verifyAudit(
-              "0101", absent ? "NO_ACCOUNT" : "DISABLED", "LOGIN_FAILED", DENIED, 0, false);
+              "0101", absent ? "NO_ACCOUNT" : DISABLED_STATUS, "LOGIN_FAILED", DENIED, 0, false);
           f.verifyReleasedAndConsumed();
         }
       }
@@ -361,7 +365,7 @@ final class AuthenticationServiceMemoryPortTest {
       }
     }
     for (String column :
-        List.of("role", "status", "id", "username", "password_hash", "failed_count")) {
+        List.of("role", "status", "id", "username", "password_hash", FAILED_COUNT_COLUMN)) {
       try (Fixture f = new Fixture()) {
         f.nullUserColumn = Optional.of(column);
         expectStorageFailure(f::call);
@@ -371,7 +375,7 @@ final class AuthenticationServiceMemoryPortTest {
     for (boolean badRole : new boolean[] {true, false}) {
       try (Fixture f = new Fixture()) {
         f.role = badRole ? "UNKNOWN" : "USER";
-        f.status = badRole ? "ACTIVE" : "UNKNOWN";
+        f.status = badRole ? ACTIVE_STATUS : "UNKNOWN";
         expectStorageFailure(f::call);
         f.verifyReleasedAndConsumed();
       }
@@ -431,7 +435,7 @@ final class AuthenticationServiceMemoryPortTest {
       AuthenticationService service = first.service();
       assertEquals(ResultCode.SUCCESS, first.call(service).resultCode());
       // A different caller row controls the outcome; the shared consumer retains no prior actor.
-      second.status = "DISABLED";
+      second.status = DISABLED_STATUS;
       assertEquals(ResultCode.AUTHENTICATION_FAILED, second.call(service).resultCode());
       assertEquals(0, second.count(Stage.SESSION_INSERT));
       first.verifyReleasedAndConsumed();
@@ -536,8 +540,13 @@ final class AuthenticationServiceMemoryPortTest {
     final AtomicInteger checked = new AtomicInteger();
     final char[] password = new char[16];
     boolean absent;
+    boolean autoCommit;
+    boolean ipAbsent;
+    boolean userWindowAbsent;
+    Optional<String> nullIpColumn = Optional.empty();
+    final Map<Stage, Integer> updateCounts = new HashMap<>();
     String role = "USER";
-    String status = "ACTIVE";
+    String status = ACTIVE_STATUS;
     boolean matches = true;
     int userFailures;
     int ipFailures;
@@ -577,7 +586,7 @@ final class AuthenticationServiceMemoryPortTest {
               Connection.class,
               (method, args) ->
                   switch (method) {
-                    case "getAutoCommit" -> false;
+                    case "getAutoCommit" -> autoCommit;
                     case "prepareStatement" -> prepare((String) args[0]);
                     case "toString" -> "OwnMemoryJdbc";
                     default ->
@@ -769,7 +778,7 @@ final class AuthenticationServiceMemoryPortTest {
                     case "executeUpdate" -> {
                       inject(stage, Site.EXECUTE);
                       if (stage == Stage.SESSION_INSERT) insertedId = (UUID) parameters.get(1);
-                      yield 1;
+                      yield updateCounts.getOrDefault(stage, 1);
                     }
                     case "close" -> {
                       closed++;
@@ -793,20 +802,24 @@ final class AuthenticationServiceMemoryPortTest {
           row.put("role", role);
           row.put("status", status);
           row.put("password_hash", STORED_HASH);
-          row.put("failed_count", userFailures);
-          row.put("failure_window_started_at", userWindow.atOffset(ZoneOffset.UTC));
+          row.put(FAILED_COUNT_COLUMN, userFailures);
+          row.put(
+              "failure_window_started_at",
+              userWindowAbsent ? null : userWindow.atOffset(ZoneOffset.UTC));
           row.put("locked_until", userLock.map(v -> v.atOffset(ZoneOffset.UTC)).orElse(null));
           nullUserColumn.ifPresent(v -> row.put(v, null));
           return List.of(row);
         }
         if (stage == Stage.IP) {
+          if (ipAbsent) return List.of();
           Map<String, Object> row = new HashMap<>();
-          row.put("failed_count", ipFailures);
+          row.put(FAILED_COUNT_COLUMN, ipFailures);
           row.put("window_started_at", ipWindow.atOffset(ZoneOffset.UTC));
+          nullIpColumn.ifPresent(value -> row.put(value, null));
           row.put("locked_until", ipLock.map(v -> v.atOffset(ZoneOffset.UTC)).orElse(null));
           return List.of(row);
         }
-        if (stage == Stage.SESSION_USER) return List.of(Map.of("status", "ACTIVE"));
+        if (stage == Stage.SESSION_USER) return List.of(Map.of("status", ACTIVE_STATUS));
         if (stage == Stage.SESSION_ACTIVE) {
           List<Map<String, Object>> rows = new ArrayList<>();
           for (UUID old : priorActive) rows.add(Map.of("id", old));
@@ -918,6 +931,120 @@ final class AuthenticationServiceMemoryPortTest {
             f.stages());
         assertTrue(f.statements.getLast().cursors.isEmpty());
         f.verifyReleasedAndConsumed();
+      }
+    }
+  }
+
+  @Test
+  void negative019DirectRequiredArgumentsKeyBytesAndTransactionBoundary() throws Exception {
+    try (Fixture f = new Fixture()) {
+      for (int missing = 0; missing < 4; missing++) {
+        int slot = missing;
+        assertThrows(
+            NullPointerException.class,
+            () ->
+                f.attempts.lockForAttempt(
+                    slot == 0 ? null : f.connection, slot == 1 ? null : KEY,
+                    slot == 2 ? null : CLIENT, slot == 3 ? null : AT));
+      }
+      for (String invalid : List.of("", "x".repeat(97), "é".repeat(49)))
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> f.attempts.lockForAttempt(f.connection, invalid, CLIENT, AT));
+      assertTrue(f.statements.isEmpty());
+    }
+    for (String boundary : List.of("a", "x".repeat(96), "é".repeat(48))) {
+      try (Fixture f = new Fixture()) {
+        f.expectedKey = boundary;
+        var result = f.attempts.lockForAttempt(f.connection, boundary, CLIENT, AT);
+        assertEquals(7, result.account().orElseThrow().identity().userId());
+        assertEquals(List.of(Stage.USER, Stage.CREATE_IP, Stage.IP), f.stages());
+        for (var statement : f.statements) {
+          assertEquals(1, statement.closed);
+          for (var cursor : statement.cursors) assertEquals(1, cursor.closed);
+        }
+      }
+    }
+    try (Fixture f = new Fixture()) {
+      f.autoCommit = true;
+      expectStorageFailure(f::call);
+      var locked =
+          new LockedLoginAttempt(
+              CLIENT.getHostAddress(),
+              Optional.empty(),
+              new LoginAttemptState(LoginAttemptKind.IP, 0, Optional.of(AT), Optional.empty()));
+      expectStorageFailure(() -> f.attempts.recordSuccess(f.connection, locked, AT));
+      expectStorageFailure(() -> f.attempts.recordFailure(f.connection, locked, AT));
+      assertTrue(f.statements.isEmpty());
+      f.verifyReleasedAndConsumed();
+    }
+  }
+
+  @Test
+  void negative020PersistedRoleAndStatusHashCollisionsNeverAcquireAuthority() throws Exception {
+    assertEquals(2614219, "USER".hashCode());
+    assertEquals(2614219, "V4ER".hashCode());
+    assertEquals(62130991, "ADMIN".hashCode());
+    assertEquals(62130991, "B%MIN".hashCode());
+    assertEquals(ACTIVE_STATUS.hashCode(), "B$TIVE".hashCode());
+    assertEquals(DISABLED_STATUS.hashCode(), "E*SABLED".hashCode());
+    for (String role : List.of("V4ER", "B%MIN", "", "user", " USER ")) {
+      try (Fixture f = new Fixture()) {
+        f.role = role;
+        expectStorageFailure(f::call);
+        assertEquals(List.of(Stage.USER), f.stages());
+        assertEquals(0, f.checked.get());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+    for (String status : List.of("B$TIVE", "E*SABLED", "", "active", " ACTIVE ")) {
+      try (Fixture f = new Fixture()) {
+        f.status = status;
+        expectStorageFailure(f::call);
+        assertEquals(List.of(Stage.USER), f.stages());
+        assertEquals(0, f.checked.get());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+  }
+
+  @Test
+  void negative021MissingIpRequiredColumnsAndOptionalUserWindow() throws Exception {
+    for (String missing : List.of("ROW", FAILED_COUNT_COLUMN, "window_started_at")) {
+      try (Fixture f = new Fixture()) {
+        f.ipAbsent = missing.equals("ROW");
+        if (!f.ipAbsent) f.nullIpColumn = Optional.of(missing);
+        expectStorageFailure(f::call);
+        assertEquals(List.of(Stage.USER, Stage.CREATE_IP, Stage.IP), f.stages());
+        assertEquals(0, f.checked.get());
+        f.verifyReleasedAndConsumed();
+      }
+    }
+    try (Fixture f = new Fixture()) {
+      f.userWindowAbsent = true;
+      f.matches = false;
+      assertEquals(ResultCode.AUTHENTICATION_FAILED, f.call().resultCode());
+      assertEquals(1, f.param(Stage.UPDATE_USER, 1));
+      assertEquals(AT.atOffset(ZoneOffset.UTC), f.param(Stage.UPDATE_USER, 2));
+      f.verifyAudit("0101", "PASSWORD_MISMATCH", "LOGIN_FAILED", DENIED, 0, false);
+      f.verifyReleasedAndConsumed();
+    }
+  }
+
+  @Test
+  void negative022EveryCriticalUpdateRequiresExactlyOneRowInEitherOutcome() throws Exception {
+    for (Stage stage : List.of(Stage.UPDATE_USER, Stage.UPDATE_IP, Stage.LOGIN_AUDIT)) {
+      for (int count : new int[] {0, 2}) {
+        for (boolean matches : new boolean[] {false, true}) {
+          try (Fixture f = new Fixture()) {
+            f.matches = matches;
+            f.updateCounts.put(stage, count);
+            expectStorageFailure(f::call);
+            assertEquals(stage, f.prepareAttempts.getLast());
+            assertEquals(1, f.count(stage));
+            f.verifyReleasedAndConsumed();
+          }
+        }
       }
     }
   }

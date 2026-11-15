@@ -1,0 +1,5 @@
+# Login独立異常境界四・通常二十二仕様
+
+BUG3052 same Login path four new negative definitions: direct repository required arguments/key UTF8 0/1/96/97 and autocommit boundary; fixed role/status ASCII polynomial collision strings; IP missing/null persisted values and USER optional timestamp absence; USER/IP/audit update count 0/2 and both success/failure write modes. Existing18 inverse exact, default-empty fixture flags only, same Main27/POM/SDK/Root/static class bytes reused and new Test compile/style, necessary whole22 exactly once. No actualDB/driver/realDBfixture/Root2Actual4/VM/native/aru/HOLD. Independently specify fixed 9000/cause/suppression, SQLSTATE at audit boundary, exact owned close/borrowedTX and password consumption. Default and unfiltered sameexec three-source required four; any residual preserved, no threshold reduction.
+
+NK-AUT-001/AUT001/MON004; UI226252; SS312314331332351/451/SSC429; PT-LOGIN-NEG019..022。原18費へ重複加算せずcarry .15/.45/1.35＋新gross .1/.3/.9=当開始.25/.75/2.25 cap3、904.85/SV/全開始保持。期待は明示length/byte、固定ASCII31 hash値、literal入力/SQL独立fixture、production計算でexpected生成0。
