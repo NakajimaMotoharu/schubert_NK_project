@@ -1,0 +1,5 @@
+# 応答Mapper原三有限・trace結果
+
+Core881cc700/Unitafb564a4/PG34460原Mapper三試験全3FES0真正0。全UI234独立432/24byte offsetgolden/日本語固定lock文/USER-ADMIN/JSTミリ秒境界/borrowed値不変/100task16worker期待はinverse formatted byte exact、Futureget5/stop-await10assert/Timeout30だけ有限化。PG34462現185physical44positiveCRC-init/XML、freshMain7RootNullAway/GJF-CS-SB0/PMD5全site適用未分類0、PG34464同singleexecraw Mapper34LINE6METHOD1CLASS6BRANCH136I全miss0。BUG3062当fixture限定CLOSED、YKT2546globalOPEN。BUG3061は481P00701現在所有十本を485実十二本（Result/Username二欠落）へ整合し原owner/cost/歴史/625受入条件を維持、限定CLOSED。Password二Main＋二TestはPG33582同byteだけ参照し旧Core652の成功をCore881へ移植0/7又は44再演0。P00401/P00601 exitNOT_ACCEPTED、P00701/04criteria受入や全185/451/DB/CHR/native/owner終了へ拡張0。追加.12/.36/1.08のみ配送完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持。App206/35552/35487/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全HOLD保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG34462-mapper-finite3-independent-v1/manifest.json SHA256 1a114b703f07a42be03ab7f0a175b0549b1f7b1b8f163b253bfafd8622a38bdd; evidence/01_PT/018_NK-OPS-001/evidence/PG34464-mapper-finite3-unfiltered-same-exec-v1/manifest.json SHA256 bd3708ecc22ed7066476f829d649b659bc73f44ede6ff1673eedfcd61697865e。
