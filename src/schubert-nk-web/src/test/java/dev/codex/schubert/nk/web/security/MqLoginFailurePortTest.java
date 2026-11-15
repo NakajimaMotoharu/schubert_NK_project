@@ -30,12 +30,15 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 
 /** PT-LOGIN-FAIL001..006; UI226/SS314351352/QA055; own interface/logger callbacks only. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class MqLoginFailurePortTest {
+  private static final int SUPPRESSED_GRAPH = 1;
   private static final int PROXY_FAILURE_INDEX = 2;
   private static final String RETRY = "Retry-After";
   private static final String LOCATION = "Location";
@@ -281,7 +284,8 @@ final class MqLoginFailurePortTest {
   void sharedHandlerParallelCallsKeepOwnDelayHeadersAndRequestAudit() throws Exception {
     var log = new MemoryLog();
     var shared = handler(log);
-    try (var pool = Executors.newFixedThreadPool(2)) {
+    var pool = Executors.newFixedThreadPool(2);
+    try {
       var jobs = new ArrayList<java.util.concurrent.Future<UUID>>();
       for (int index = 0; index < 16; index++) {
         int delay = index;
@@ -305,6 +309,82 @@ final class MqLoginFailurePortTest {
           expected,
           new HashSet<>(log.json().stream().map(v -> v.get(REQUEST_ID).getAsString()).toList()));
       assertEquals(16, log.events.size());
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void failurefatal007EveryHttpClassificationPreservesFatalIdentityBeforeResponseAndAudit() {
+    for (int kind = 0; kind < 5; kind++) {
+      for (int graph = 0; graph < 3; graph++) {
+        AuthenticationException failure = classifiedFailure(kind);
+        AssertionError fatal = new AssertionError(MARKER);
+        if (graph == 0) {
+          failure.initCause(fatal);
+        } else if (graph == SUPPRESSED_GRAPH) {
+          failure.addSuppressed(fatal);
+        } else {
+          var sql = new java.sql.SQLException(MARKER, fatal);
+          var jms = new jakarta.jms.JMSException(MARKER);
+          jms.setLinkedException(sql);
+          failure.initCause(jms);
+        }
+        var f = new Fixture(1);
+        var log = new MemoryLog();
+        assertSame(
+            fatal,
+            assertThrows(
+                AssertionError.class,
+                () -> handler(log).onAuthenticationFailure(f.request(), f.response(), failure)));
+        assertEquals(0, f.status);
+        assertTrue(f.headers.isEmpty());
+        assertTrue(log.events.isEmpty());
+        assertEquals(List.of("request.getAttribute"), f.calls);
+      }
+    }
+  }
+
+  @Test
+  void failurenonfatal008CyclesRemainFiniteAndKeepExplicitHttpAuditCatalog() throws Exception {
+    List<Integer> status = List.of(302, 302, 400, 403, 503);
+    List<Integer> events = List.of(1, 1, 0, 1, 0);
+    for (int kind = 0; kind < 5; kind++) {
+      AuthenticationException failure = classifiedFailure(kind);
+      RuntimeException first = new RuntimeException(MARKER);
+      RuntimeException second = new RuntimeException(MARKER);
+      RuntimeException shared = new RuntimeException(MARKER);
+      first.initCause(second);
+      second.initCause(first);
+      first.addSuppressed(shared);
+      failure.initCause(first);
+      failure.addSuppressed(shared);
+      var f = new Fixture(1);
+      var log = new MemoryLog();
+      handler(log).onAuthenticationFailure(f.request(), f.response(), failure);
+      assertEquals(status.get(kind), f.status);
+      assertEquals(events.get(kind), log.events.size());
+      Map<String, String> headers =
+          switch (kind) {
+            case 0 -> Map.of(RETRY, "7", LOCATION, LOCKED_URL);
+            case 1 -> Map.of(LOCATION, ERROR_URL);
+            default -> Map.of();
+          };
+      assertEquals(headers, f.headers);
+      assertSame(second, first.getCause());
+      assertSame(first, second.getCause());
+    }
+  }
+
+  private static AuthenticationException classifiedFailure(int kind) {
+    return switch (kind) {
+      case 0 -> new MqLoginLockedException(7);
+      case 1 -> new BadCredentialsException(MARKER);
+      case 2 -> new LoginFormRejectedException();
+      case 3 -> new CaddyRequestRejectedException();
+      case 4 -> new AuthenticationServiceException(MARKER);
+      default -> throw new AssertionError(MARKER);
+    };
   }
 }

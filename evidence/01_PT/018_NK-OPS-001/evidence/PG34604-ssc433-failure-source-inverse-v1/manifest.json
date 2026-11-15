@@ -1,0 +1,80 @@
+{
+  "actualExit": 0,
+  "designPublication": {
+    "actualExit": 0,
+    "atUTC": "2026-11-15T16:56:09.775221+00:00",
+    "ssc": "SSC433",
+    "baseMain": "9c9231d4f691df51e671da8e76308484eb8c0699",
+    "designSource": "cb3733ca0549d2c8b6a8a2286aa541fea3febc63",
+    "mainCommit": "e8baafcfdb93b80d0d00c84562a6c892aa472442",
+    "pr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/380",
+    "paths": [
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "ordinaryMerge": true,
+    "implementationIncluded": false,
+    "formalAccepted": false
+  },
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginLockedException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginFormRejectedException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java",
+      "tests": 8
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java": "af105883d5126b38d01ff4e0d851c98c1f61d3329854776b8955592013c0da92",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginLockedException.java": "badfaf084badf1923f112e49a89aa2b7ce61712ae8d66e4e181231dd856b1c1b",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginFormRejectedException.java": "ee5feba42de3f8a4275f36e412226878e4f9a1edc6bb1c4813d127b614c3f294",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java": "d6c50441cde4887be9a0d9585bb41512ee5228042419b78d48437a1f88620967",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "09758f7eb669d78245636629df215e1d3ce0345be0532385f4b27b2244df4f48",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java": "4e6cfb538744d81daf4c5e132b729b6800b1ee3f3aa6682ad06e46c9aabb56c5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": "c5740de502e5044d49e6c9b8e3cc2fd31e2a7e1da2612dadc3ef293dca6f1041",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/MqLoginFailurePortTest.java": "8e1f17e8738b1851260b9d664a4c5cdaa0eab3e5188f012ed1063bc7b7e662cb"
+  },
+  "sdkHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+  },
+  "originalSixAssertionsInverseFormattedExact": true,
+  "onlyMainGuardImportAndDocInverseExact": true,
+  "oldTestSha256": "3b70e5c73c52960db73ee96c7cf632c6399ec2a167de47846baae277bcee1815",
+  "newDefinitions": 2,
+  "necessaryPriorDefinitions": 6,
+  "expectedTests": 8,
+  "syntheticGraphCases": 20,
+  "targets": [
+    "dev/codex/schubert/nk/web/security/MqLoginFailureHandler"
+  ],
+  "noWholeWebOrApiJarPayloadAccess": true,
+  "original2Workers16TasksGet10Preserved": true,
+  "applicationTestsExecuted": 0,
+  "newAcceptance": 0
+}
