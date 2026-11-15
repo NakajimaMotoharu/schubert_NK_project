@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.util.Arrays;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -56,9 +57,7 @@ public final class MqAuthenticationProvider implements AuthenticationProvider {
       if (failure.reason() == MqLoginExchangeException.Reason.INVALID_INPUT) throw badCredentials();
       throw unavailable();
     } finally {
-      if (credentials instanceof char[] password) Arrays.fill(password, '\0');
-      if (authentication instanceof UsernamePasswordAuthenticationToken token)
-        token.eraseCredentials();
+      consumeCredentials(authentication, credentials);
     }
   }
 
@@ -66,6 +65,13 @@ public final class MqAuthenticationProvider implements AuthenticationProvider {
   public boolean supports(Class<?> authentication) {
     return Objects.requireNonNull(authentication, "authentication")
         == UsernamePasswordAuthenticationToken.class;
+  }
+
+  private static void consumeCredentials(
+      Authentication authentication, @Nullable Object credentials) {
+    if (credentials instanceof char[] password) Arrays.fill(password, '\0');
+    if (authentication instanceof UsernamePasswordAuthenticationToken token)
+      token.eraseCredentials();
   }
 
   private static BadCredentialsException badCredentials() {
