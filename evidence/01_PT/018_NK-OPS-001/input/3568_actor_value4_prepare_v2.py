@@ -1,0 +1,32 @@
+"""Reuse the exact qualified API6/Protocol176 and old2; compile/style only the new ActorValue2."""
+from pathlib import Path
+import hashlib,json,re,shutil,xml.etree.ElementTree as ET
+import pg9666_pagination_static as capture
+import pgpt_closed_host_profile as policy
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';tc=r.parent/'toolchain';runs=r.parent/'pgpt-runs/PG379';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+pp=b/'evidence/PG26736-authorization-current-closed-profile-v1/manifest.json';qp=b/'evidence/PG26740-authorization-current-preflight-v1/manifest.json';postp=b/'evidence/PG26744-authorization-current-independent-v1/manifest.json';old=ld(pp);quality=ld(qp);post=ld(postp);origin=runs/'pg26736-authorization-current-closed-profile-v1';work=runs/'pg33915-actor-value4-prepare-v2';out=b/'evidence/PG33915-actor-value4-prepare-v2';assert not work.exists() and not out.exists()
+assert old['actualExit']==quality['actualExit']==post['actualExit']==0 and post['tests']==132 and quality['staticApplicable']==quality['unclassified']==quality['processingErrors']==0 and len(old['apiMainSources'])==6
+normalp=r/quality['apiNormalCompile']['path'];normal=ld(normalp);assert sha(normalp)==quality['apiNormalCompile']['sha256'] and sha(r/'pom.xml')==normal['begin']['inputHashes']['pom.xml']
+main=old['apiMainSources'];oldtest=old['apiTestSource'];inputs={n:sha(r/n) for n in main+[oldtest]};assert all(h==old['inputHashes'][n]==post['inputHashes'][n] for n,h in inputs.items())
+protop=r/old['protoMain']['path'];proto=ld(protop);assert sha(protop)==old['protoMain']['sha256'];assert all(sha(r/n)==h for n,h in proto['inputHashes'].items());inputs.update(proto['inputHashes']);inputs.update({n:sha(r/n) for n in ['pom.xml','src/schubert-nk-api/pom.xml']})
+for n in list(old['physicalClassHashes'])+list(old['testClassHashes']):policy.relative_name(n)
+for folder,key in [('component','physicalClassHashes'),('test-classes','testClassHashes')]:assert {n:sha(origin/folder/n) for n in old[key]}==old[key]
+assert len(old['physicalClassHashes'])==182 and all(sha(Path(n))==h for n,h in old['dependencies'].items())
+new='src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java';text=(r/new).read_text();assert all(x not in text for x in ['Class.forName','java.lang.reflect','setAccessible','DataSource','DriverManager','@TempDir','ProcessBuilder','FingerprintKeyRing','ResponseSnapshotCodec','WebStartupException','TemporaryInfrastructureException']);methods=re.findall(r'@Test\s*void (\w+)\s*\(',text);assert len(methods)==2
+oldcases=[c for c in old['expectedCases'] if c['classname']=='dev.codex.schubert.nk.api.security.AuthorizationServiceTest'];expected=oldcases+[dict(classname='dev.codex.schubert.nk.api.security.AuthenticatedActorValueContractTest',name=n+'()') for n in methods];assert len(oldcases)==2 and len(expected)==4
+work.mkdir();out.mkdir();(work/'component').mkdir();(work/'test-classes').mkdir()
+for folder,key in [('component','physicalClassHashes'),('test-classes','testClassHashes')]:
+ for n,h in old[key].items():
+  dest=work/folder/n;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(origin/folder/n,dest);assert sha(dest)==h
+capture.SLOT=out;jdk=tc/'jdk-25.0.4/bin';gates=tc/'static-gates-20261015';cp=':'.join([str(work/'component'),*old['dependencies']]);stages={}
+stages['value-test-compile']=capture.step('value-test-compile',[str(jdk/'javac'),'--release','25','-g','-proc:none','-implicit:none','-encoding','UTF-8','-Xlint:all','-Werror','-cp',cp,'-d',str(work/'test-classes'),str(r/new)],r);assert stages['value-test-compile']['actualExit']==0 and not stages['value-test-compile']['timedOut']
+listing=out/'new-sources.txt';listing.write_text(str(r/new)+'\n');stages['format']=capture.step('format',[str(jdk/'java'),'-jar',str(tc/'google-java-format-1.36.1-all-deps.jar'),'--dry-run','--set-exit-if-changed','--skip-reflowing-long-strings',str(r/new)],r);stages['checkstyle']=capture.step('checkstyle',[str(jdk/'java'),'-jar',str(gates/'checkstyle-14.3.0-all.jar'),'-c',str(r/'tools/quality/static/checkstyle.xml'),'-f','xml','-o',str(out/'checkstyle.xml'),'@'+str(listing)],r)
+pmd=[gates/'record-fix-v1/pmd-record-1298.jar',*sorted((gates/'pmd-bin-7.28.0/lib').glob('*.jar'))];stages['pmd']=capture.step('pmd',[str(jdk/'java'),'-cp',':'.join(map(str,pmd)),'net.sourceforge.pmd.cli.PmdCli','check','--file-list',str(listing),'--rulesets',str(r/'tools/quality/static/pmd.xml'),'--use-version','java-25','--aux-classpath',str(tc/'jdk-25.0.4/lib/jrt-fs.jar')+':'+cp,'--no-cache','--format','xml','--report-file',str(out/'pmd.xml')],r)
+assert stages['format']['actualExit']==stages['checkstyle']['actualExit']==0 and stages['pmd']['actualExit'] in [0,4] and all(not v['timedOut'] for v in stages.values())
+parsed=ET.parse(out/'pmd.xml').getroot();errors=[dict(n.attrib) for n in parsed.iter() if n.tag.rpartition('}')[2] in ['error','configerror']];findings=[dict(path=n.get('name'),rule=v.get('rule'),line=v.get('beginline'),message=(v.text or '').strip()) for n in parsed if n.tag.rpartition('}')[2]=='file' for v in n if v.tag.rpartition('}')[2]=='violation'];assert errors==[] and not ET.parse(out/'checkstyle.xml').findall('.//error')
+testhash={}
+for path in (work/'test-classes').rglob('*.class'):
+ n=str(path.relative_to(work/'test-classes'));policy.relative_name(n);testhash[n]=sha(path)
+assert all(testhash[n]==h for n,h in old['testClassHashes'].items());inputs[new]=sha(r/new)
+v=dict(actualExit=0,inputHashes=inputs,dependencies=old['dependencies'],apiMainSources=main,apiTestSources=[oldtest,new],physicalClassHashes=old['physicalClassHashes'],mainClassHashes=old['apiPhysicalHashes'],testClassHashes=testhash,expectedCases=expected,expectedTests=4,newDefinitions=2,necessaryPriorDefinitions=2,stages=stages,rawFindings=findings,processingErrors=errors,checkstyleFindings=0,exactMainCompile=ref(normalp),exactMainStatic=ref(qp),exactPriorWhole132Post=ref(postp),MainCompilationRepeated=False,old2TestCompilationRepeated=False,onlyNewValueTestCompiled=True,rootPOMAndSixSourceAndClassExact=True,ApiPomScopeChangeDoesNotAddDependencyToTheseSixClosedSources=True,applicationTestsExecuted=0,newAcceptance=0,whole451Accepted=False)
+(out/'manifest.json').open('x').write(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,expectedTests=4,newDefinitions=2,mainRebuilds=0,old2Recompiles=0,newStaticRaw=findings)))
