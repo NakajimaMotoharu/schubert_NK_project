@@ -12,11 +12,42 @@ import java.util.Objects;
 public final class ContextHash {
   // BUG-036/YKT-032: caller monitors must not control internal state/resource lifetime.
   private final Object stateLock = new Object();
-  private final MessageDigest digest;
+  private final DigestOperations operations;
+
+  /**
+   * SSC423: trusted package-local calculation boundary; public assembly always uses JDK SHA-256.
+   */
+  interface DigestOperations {
+    byte[] digest(byte[] raw);
+
+    String format(byte[] hashed);
+  }
+
+  private static final class JdkOperations implements DigestOperations {
+    private final MessageDigest digest;
+
+    private JdkOperations(MessageDigest digest) {
+      this.digest = digest;
+    }
+
+    @Override
+    public byte[] digest(byte[] raw) {
+      return digest.digest(raw);
+    }
+
+    @Override
+    public String format(byte[] hashed) {
+      return HexFormat.of().formatHex(hashed);
+    }
+  }
 
   /** Missing mandatory JCA algorithm prevents startup, not an authentication success fallback. */
   public ContextHash() throws NoSuchAlgorithmException {
-    digest = MessageDigest.getInstance("SHA-256");
+    this(new JdkOperations(MessageDigest.getInstance("SHA-256")));
+  }
+
+  ContextHash(DigestOperations operations) {
+    this.operations = Objects.requireNonNull(operations, "operations");
   }
 
   /** Only the repository lookup receives this secret-derived value; never log it. */
@@ -25,9 +56,9 @@ public final class ContextHash {
       Objects.requireNonNull(context, "context");
       byte[] raw = context.wireValue().getBytes(StandardCharsets.US_ASCII);
       try {
-        byte[] hashed = digest.digest(raw);
+        byte[] hashed = operations.digest(raw);
         try {
-          return HexFormat.of().formatHex(hashed);
+          return operations.format(hashed);
         } finally {
           Arrays.fill(hashed, (byte) 0);
         }

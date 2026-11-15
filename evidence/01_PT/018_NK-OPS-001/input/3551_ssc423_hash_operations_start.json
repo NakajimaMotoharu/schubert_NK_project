@@ -1,0 +1,39 @@
+{
+  "groupId": "PGPT-WBS65-SSC423-HASH-OPERATIONS-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2151_WBS65SSC423内部Hash消去開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "ContextHashのpublic noargs/checked NoSuchAlgorithmException/calculate(AuthenticationContext)と既private stateLockを維持する。package-private DigestOperations（digest(rawASCII)、format(hashed)の二操作）とpackage-private constructorを追加し、public constructorはprivate JdkOperationsの既SHA-256 MessageDigestとHexFormat.of().formatHexだけへ固定委譲する。外部設定/HTTP/ServiceLoader/反射/DBからOperationsを選ばず、通常production組立の認証判定・rawASCII64→SHA256→lowercase hex64・借用context・例外identity・provider選択・共有digestの排他を変更0。Operationsのnonnullを機密取得前constructorで確立、二戻りは内部nonnull契約、所有raw/hashedの各既finallyを維持し、digest/formatから直接Error/RTEが伝播しても取得済owned配列を消去しprivate lockを解放する。private stateへの反射/実OOM/独自provider/権限操作/拒否試験の迂回を行わない。 原ContextHashTest全三の有限worker/固定Python hashlib vector/100並行/null/未知/元provider unavailable復元の全本文と期待値をexact保持、新HASH-OWN001/002/003を同wholeTestへ追加する。001はdigestとformatの各段階で直接AssertionError/IllegalArgumentExceptionを一回だけ発生させ、原throwable同一、captureしたowned raw及び生成済hashed全zero、次の別workerによる同hashの固定既vector成功/call2/borrowed context不変を確認する。002はnulloperationsの構築前提拒否（機密入力なし）。003は通常委譲のrawASCII長64/byte a、32byte公開固定SHA値、独立lowerhex string/copy所有/zero/otherworker及びprivate lockのcaller-monitor非干渉を確認する。期待値をContextHash.calculateから作らず元固定二vectorとJDK明示SHA-256のactual処理だけ使用。新sourceMain/内部adapter/抽象interface実Code0をRoot25/NullAway/staticでfresh構築し、必要同source全六一singleexecの真正XML/source/CRC/initと無filter実Code必須四を照合、自然Branch0/Code0を人工100/除外にしない。元三を新規定義へ加算0、補助Instruction/Complexityや全178/451/leaf/CHR/nativeは未受入を保持する。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4290_SSC423_ContextHash内部計算消去・通常六仕様.md",
+      "sha256": "7bce9fb12f57429405a3e6b1bc05497b08481fbb94d68bcc16168376dcb4204d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33880-ssc423-hash-operations-design-only-v1/design-only-main-patch.json",
+      "sha256": "3f9bc1313841d565d544f3d56b8f573094dfcb9b50327318aee1663e01293f86"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java"
+  ],
+  "source": "d02dd39b49c6225422ef16eb288550ad3c0da53b",
+  "run": "PG33900-SSC423-CONTEXT-HASH-WHOLE6",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 3.15
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00703_SSC423_HASH_OPERATIONS_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2150_WBS65予実・SSC423内部計算依存carry版630.json",
+    "sha256": "dcb292f28da408f96fc24ec7ca93e33ab22a43e31e0ea3df96a1e550391e9f32"
+  },
+  "nextCommand": "PublishSS311314352914 onlymain beforePG. Add trusted package-local digest/format operations with fixed privateJDKdefault, preserve publicAPI/hash and original3 text; add independent Error/RTE/zero/next-otherworker/constructor-null/normal-boundary3. FreshRootMain/static/whole6 oneexec/currentCodeCRC-init/rawrequiredfour, retain allglobal/HOLD; no OOM/private reflection/newprovider/config/actual4Root2SDKnativeDBVMaru/refusal probing. Freshquota/hourly; ordinarygroupnotstop."
+}
