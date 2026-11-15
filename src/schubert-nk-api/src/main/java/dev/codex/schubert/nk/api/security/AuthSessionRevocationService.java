@@ -4,6 +4,7 @@ package dev.codex.schubert.nk.api.security;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Logout-specific verification and authorized administrative revocation. Caller owns transaction.
@@ -69,61 +71,99 @@ public final class AuthSessionRevocationService {
     try {
       requireTransaction(connection);
       String hash = hashes.calculate(raw);
-      try (var statement =
-          connection.prepareStatement(
-              "select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id "
-                  + "where s.context_hash=? for update of u")) {
-        statement.setString(1, hash);
-        try (var row = statement.executeQuery()) {
-          if (!row.next()) throw new AuthenticationContextException();
+      {
+        var statement =
+            requireValue(
+                connection.prepareStatement(
+                    "select u.id from schubert.app_users u join schubert.auth_sessions s on s.user_id=u.id "
+                        + "where s.context_hash=? for update of u"));
+        @Nullable Throwable jdbcFailure1 = null;
+        try {
+          statement.setString(1, hash);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure2 = null;
+            try {
+              if (!row.next()) throw new AuthenticationContextException();
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure2 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure2, row);
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure1 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure1, statement);
         }
       }
       AuthContextIdentity identity;
       Instant at;
       Instant revokedAt;
       ResultCode result;
-      try (var statement =
-          connection.prepareStatement(
-              "select s.id,s.user_id,s.revoked,s.revoked_at,s.expires_at,u.status "
-                  + "from schubert.auth_sessions s join schubert.app_users u on u.id=s.user_id "
-                  + "where s.context_hash=? for update of s")) {
-        statement.setString(1, hash);
-        try (var row = statement.executeQuery()) {
-          if (!row.next()) throw new AuthenticationContextException();
-          at = clock.instant().truncatedTo(ChronoUnit.MICROS);
-          identity =
-              new AuthContextIdentity(
-                  requireValue(row.getObject("id", UUID.class)),
-                  requireValue(row.getObject("user_id", Long.class)));
-          boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
-          if (revoked) {
-            revokedAt =
-                requireValue(row.getObject("revoked_at", java.time.OffsetDateTime.class))
-                    .toInstant();
-            result = ResultCode.IDEMPOTENT_SUCCESS;
-          } else {
-            Instant expiry =
-                requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class))
-                    .toInstant();
-            String status = requireValue(row.getString("status"));
-            if (!expiry.isAfter(at)) {
-              update(connection, identity.sessionId(), at, SessionRevocationReason.EXPIRED);
-              audit.write(
-                  connection,
-                  identity.userId(),
-                  identity.userId(),
-                  client,
-                  messageId,
-                  correlationId,
-                  at,
-                  SessionRevocationReason.EXPIRED,
-                  ResultCode.SESSION_INVALID);
-              throw new AuthenticationContextException();
+      {
+        var statement =
+            requireValue(
+                connection.prepareStatement(
+                    "select s.id,s.user_id,s.revoked,s.revoked_at,s.expires_at,u.status "
+                        + "from schubert.auth_sessions s join schubert.app_users u on u.id=s.user_id "
+                        + "where s.context_hash=? for update of s"));
+        @Nullable Throwable jdbcFailure3 = null;
+        try {
+          statement.setString(1, hash);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure4 = null;
+            try {
+              if (!row.next()) throw new AuthenticationContextException();
+              at = clock.instant().truncatedTo(ChronoUnit.MICROS);
+              identity =
+                  new AuthContextIdentity(
+                      requireValue(row.getObject("id", UUID.class)),
+                      requireValue(row.getObject("user_id", Long.class)));
+              boolean revoked = requireValue(row.getObject("revoked", Boolean.class));
+              if (revoked) {
+                revokedAt =
+                    requireValue(row.getObject("revoked_at", java.time.OffsetDateTime.class))
+                        .toInstant();
+                result = ResultCode.IDEMPOTENT_SUCCESS;
+              } else {
+                Instant expiry =
+                    requireValue(row.getObject("expires_at", java.time.OffsetDateTime.class))
+                        .toInstant();
+                String status = requireValue(row.getString("status"));
+                if (!expiry.isAfter(at)) {
+                  update(connection, identity.sessionId(), at, SessionRevocationReason.EXPIRED);
+                  audit.write(
+                      connection,
+                      identity.userId(),
+                      identity.userId(),
+                      client,
+                      messageId,
+                      correlationId,
+                      at,
+                      SessionRevocationReason.EXPIRED,
+                      ResultCode.SESSION_INVALID);
+                  throw new AuthenticationContextException();
+                }
+                if (!status.equals("ACTIVE")) throw new AuthenticationContextException();
+                revokedAt = at;
+                result = ResultCode.SUCCESS;
+              }
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure4 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure4, row);
             }
-            if (!status.equals("ACTIVE")) throw new AuthenticationContextException();
-            revokedAt = at;
-            result = ResultCode.SUCCESS;
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure3 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure3, statement);
         }
       }
       if (result == ResultCode.SUCCESS)
@@ -173,20 +213,59 @@ public final class AuthSessionRevocationService {
     Instant at = arguments(connection, client, messageId, correlationId, now);
     try {
       requireTransaction(connection);
-      try (var statement =
-          connection.prepareStatement("select id from schubert.app_users where id=? for update")) {
-        statement.setLong(1, targetUserId);
-        try (var row = statement.executeQuery()) {
-          if (!row.next()) throw new AuthorizationException(ResultCode.NOT_FOUND);
+      {
+        var statement =
+            requireValue(
+                connection.prepareStatement(
+                    "select id from schubert.app_users where id=? for update"));
+        @Nullable Throwable jdbcFailure5 = null;
+        try {
+          statement.setLong(1, targetUserId);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure6 = null;
+            try {
+              if (!row.next()) throw new AuthorizationException(ResultCode.NOT_FOUND);
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure6 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure6, row);
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure5 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure5, statement);
         }
       }
       var ids = new ArrayList<UUID>();
-      try (var statement =
-          connection.prepareStatement(
-              "select id from schubert.auth_sessions where user_id=? and not revoked order by id for update")) {
-        statement.setLong(1, targetUserId);
-        try (var row = statement.executeQuery()) {
-          while (row.next()) ids.add(requireValue(row.getObject("id", UUID.class)));
+      {
+        var statement =
+            requireValue(
+                connection.prepareStatement(
+                    "select id from schubert.auth_sessions where user_id=? and not revoked order by id for update"));
+        @Nullable Throwable jdbcFailure7 = null;
+        try {
+          statement.setLong(1, targetUserId);
+          {
+            var row = requireValue(statement.executeQuery());
+            @Nullable Throwable jdbcFailure8 = null;
+            try {
+              while (row.next()) ids.add(requireValue(row.getObject("id", UUID.class)));
+            } catch (SQLException | RuntimeException | Error failure) {
+              jdbcFailure8 = failure;
+              throw failure;
+            } finally {
+              JdbcResourceCleanup.closeRows(jdbcFailure8, row);
+            }
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          jdbcFailure7 = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.closeStatement(jdbcFailure7, statement);
         }
       }
       for (UUID id : ids) {
@@ -234,14 +313,24 @@ public final class AuthSessionRevocationService {
   private static void update(
       Connection connection, UUID id, Instant at, SessionRevocationReason reason)
       throws SQLException {
-    try (var statement =
-        connection.prepareStatement(
-            "update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked")) {
-      statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
-      statement.setString(2, reason.name());
-      statement.setObject(3, id);
-      if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
-        throw new SQLException("session changed during revocation", "40001");
+    {
+      var statement =
+          requireValue(
+              connection.prepareStatement(
+                  "update schubert.auth_sessions set revoked=true,revoked_at=?,revoke_reason=? where id=? and not revoked"));
+      @Nullable Throwable jdbcFailure9 = null;
+      try {
+        statement.setObject(1, at.atOffset(java.time.ZoneOffset.UTC));
+        statement.setString(2, reason.name());
+        statement.setObject(3, id);
+        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS)
+          throw new SQLException("session changed during revocation", "40001");
+      } catch (SQLException | RuntimeException | Error failure) {
+        jdbcFailure9 = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.closeStatement(jdbcFailure9, statement);
+      }
     }
   }
 }

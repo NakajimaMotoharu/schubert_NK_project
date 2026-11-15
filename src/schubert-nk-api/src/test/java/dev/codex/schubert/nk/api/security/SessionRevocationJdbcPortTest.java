@@ -33,8 +33,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** PT-AUT-REV001..008; SS3146.3/332/35212. Own JDBC/Clock, not a Logout/ADMIN request. */
+@Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class SessionRevocationJdbcPortTest {
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00.123456789Z");
   private static final Instant AT = Instant.parse("2026-11-06T00:00:00.123456Z");
@@ -106,6 +108,8 @@ final class SessionRevocationJdbcPortTest {
     int ownerChanges;
     int clockCalls;
     String failAt = "";
+    String nullStatementAt = "";
+    String nullRowAt = "";
     @Nullable RuntimeException runtimeFailure;
     Instant observed = NOW;
 
@@ -147,7 +151,7 @@ final class SessionRevocationJdbcPortTest {
           });
     }
 
-    PreparedStatement statement(String sql) throws SQLException {
+    @Nullable PreparedStatement statement(String sql) throws SQLException {
       String label =
           switch (sql) {
             case USER_SQL -> U;
@@ -160,6 +164,7 @@ final class SessionRevocationJdbcPortTest {
           };
       order.add(label);
       fault(label + ".prepare");
+      if (label.equals(nullStatementAt)) return null;
       String name = label + "-" + order.size();
       acquired.add(name + ".statement");
       Map<Integer, Object> bound = new HashMap<>();
@@ -189,7 +194,8 @@ final class SessionRevocationJdbcPortTest {
           });
     }
 
-    ResultSet row(String label, String name) {
+    @Nullable ResultSet row(String label, String name) {
+      if (label.equals(nullRowAt)) return null;
       acquired.add(name + ".row");
       int[] cursor = {-1};
       int count =
@@ -740,7 +746,8 @@ final class SessionRevocationJdbcPortTest {
   @Test
   void sharedServiceParallelCallsRetainOwnResultCorrelationAndResourceState() throws Exception {
     var shared = new AuthSessionRevocationService(new ContextHash());
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       List<Future<Integer>> results = new ArrayList<>();
       for (int i = 0; i < 16; i++) {
         int index = i;
@@ -769,6 +776,33 @@ final class SessionRevocationJdbcPortTest {
       }
       for (int i = 0; i < results.size(); i++)
         assertEquals(i % 2 == 0 ? 3 : 4, results.get(i).get(5, TimeUnit.SECONDS));
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void resource001NullStatementsFailClosedForLogoutAndAdministrativeRevocation() throws Exception {
+    for (boolean admin : new boolean[] {false, true}) {
+      for (String label : admin ? List.of(T, A, X, L) : List.of(U, S, X, L)) {
+        Fixture f = new Fixture();
+        f.nullStatementAt = label;
+        infra(f, admin);
+        assertEquals(label, f.order.getLast());
+      }
+    }
+  }
+
+  @Test
+  void resource002NullRowsStillCloseTheirOwnedStatementExactlyOnce() throws Exception {
+    for (boolean admin : new boolean[] {false, true}) {
+      for (String label : admin ? List.of(T, A) : List.of(U, S)) {
+        Fixture f = new Fixture();
+        f.nullRowAt = label;
+        infra(f, admin);
+        assertEquals(label, f.order.getLast());
+      }
     }
   }
 }
