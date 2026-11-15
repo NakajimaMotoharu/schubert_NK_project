@@ -26,6 +26,8 @@
   </properties>
 
   <dependencies>
+    <!-- SSC425: explicit JDBC close ownership contract; existing SDK, no warning suppression. -->
+    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version><scope>provided</scope></dependency>
     <!-- SS351/1808/PG-D614: fixed official standard-text source; prepared SDK bytes only. -->
     <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-registry-prometheus</artifactId><version>1.17.1</version></dependency>
     <!-- SS311/351/1757/BUG1697: app-owned in-memory exposition, not Bootstrap responsibility. -->

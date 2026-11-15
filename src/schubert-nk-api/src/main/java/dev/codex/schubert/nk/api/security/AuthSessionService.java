@@ -96,13 +96,13 @@ public final class AuthSessionService {
           userRowsFailure = failure;
           throw failure;
         } finally {
-          JdbcResourceCleanup.close(userRowsFailure, userRows::close);
+          JdbcResourceCleanup.closeRows(userRowsFailure, userRows);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         userFailure = failure;
         throw failure;
       } finally {
-        JdbcResourceCleanup.close(userFailure, userStatement::close);
+        JdbcResourceCleanup.closeStatement(userFailure, userStatement);
       }
       AuthContextIdentity identity = new AuthContextIdentity(ids.get(), userId);
       byte[] bytes = new byte[32];
@@ -136,7 +136,7 @@ public final class AuthSessionService {
           insertFailure = failure;
           throw failure;
         } finally {
-          JdbcResourceCleanup.close(insertFailure, insertStatement::close);
+          JdbcResourceCleanup.closeStatement(insertFailure, insertStatement);
         }
       } finally {
         Arrays.fill(ciphertext, (byte) 0);
@@ -156,13 +156,13 @@ public final class AuthSessionService {
           activeRowsFailure = failure;
           throw failure;
         } finally {
-          JdbcResourceCleanup.close(activeRowsFailure, activeRows::close);
+          JdbcResourceCleanup.closeRows(activeRowsFailure, activeRows);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         activeFailure = failure;
         throw failure;
       } finally {
-        JdbcResourceCleanup.close(activeFailure, activeStatement::close);
+        JdbcResourceCleanup.closeStatement(activeFailure, activeStatement);
       }
       for (int index = 0; index < active.size() - 2; index++) {
         var replacementStatement = requireValue(connection.prepareStatement(REPLACE));
@@ -177,7 +177,7 @@ public final class AuthSessionService {
           replacementFailure = failure;
           throw failure;
         } finally {
-          JdbcResourceCleanup.close(replacementFailure, replacementStatement::close);
+          JdbcResourceCleanup.closeStatement(replacementFailure, replacementStatement);
         }
         audit.write(
             connection,

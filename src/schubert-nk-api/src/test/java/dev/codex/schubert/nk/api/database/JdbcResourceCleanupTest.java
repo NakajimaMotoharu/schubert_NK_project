@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.lang.reflect.Proxy;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -82,6 +85,67 @@ final class JdbcResourceCleanupTest {
     assertSame(failure, observed.getCause());
     assertEquals(0, failure.getSuppressed().length);
     assertEquals(1, calls.get());
+  }
+
+  @Test
+  void cleanup006TypedStatementOwnerPreservesAllFailureGraphsAndClosesOnce() throws SQLException {
+    assertThrows(NullPointerException.class, () -> JdbcResourceCleanup.closeStatement(null, null));
+    verifyOwner(
+        Statement.class,
+        (primary, resource) -> JdbcResourceCleanup.closeStatement(primary, (Statement) resource));
+  }
+
+  @Test
+  void cleanup007TypedRowOwnerPreservesAllFailureGraphsAndClosesOnce() throws SQLException {
+    assertThrows(NullPointerException.class, () -> JdbcResourceCleanup.closeRows(null, null));
+    verifyOwner(
+        ResultSet.class,
+        (primary, resource) -> JdbcResourceCleanup.closeRows(primary, (ResultSet) resource));
+  }
+
+  private interface OwnerClose {
+    void run(@org.jspecify.annotations.Nullable Throwable primary, Object resource)
+        throws SQLException;
+  }
+
+  private static void verifyOwner(Class<?> type, OwnerClose close) throws SQLException {
+    for (Throwable failure :
+        Arrays.asList(
+            null,
+            new SQLException("PUBLIC SQL"),
+            new IllegalStateException("PUBLIC runtime"),
+            new AssertionError("PUBLIC fatal"))) {
+      for (int mode = 0; mode < 3; mode++) {
+        Throwable primary =
+            mode == 0 ? null : mode == 1 ? new SQLException("PUBLIC body") : failure;
+        var calls = new AtomicInteger();
+        Object resource =
+            Proxy.newProxyInstance(
+                type.getClassLoader(),
+                new Class<?>[] {type},
+                (proxy, method, args) -> {
+                  assertEquals("close", method.getName());
+                  calls.incrementAndGet();
+                  if (failure != null) throw failure;
+                  return null;
+                });
+        if (failure == null) {
+          close.run(primary, resource);
+          if (primary != null) assertEquals(0, primary.getSuppressed().length);
+        } else if (primary == null) {
+          assertSame(failure, assertThrows(failure.getClass(), () -> close.run(null, resource)));
+        } else if (primary == failure) {
+          var observed =
+              assertThrows(IllegalArgumentException.class, () -> close.run(primary, resource));
+          assertSame(primary, observed.getCause());
+          assertEquals(0, primary.getSuppressed().length);
+        } else {
+          close.run(primary, resource);
+          assertArrayEquals(new Throwable[] {failure}, primary.getSuppressed());
+        }
+        assertEquals(1, calls.get());
+      }
+    }
   }
 
   private static List<Throwable> failures() {

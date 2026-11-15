@@ -1,0 +1,51 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for dev.codex.schubert.quality:session-issue-audit-memory-port-safe-source-subset:jar:0.1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.systemPath' for dev.codex.schubert.quality:prepared-sdk-0:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar @ line 2, column 1176
+[WARNING] 'dependencies.dependency.systemPath' for dev.codex.schubert.quality:prepared-sdk-1:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar @ line 2, column 1454
+[WARNING] 'dependencies.dependency.systemPath' for dev.codex.schubert.quality:prepared-sdk-2:jar should use a variable instead of a hard-coded path /home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar @ line 2, column 1771
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] --< dev.codex.schubert.quality:session-issue-audit-memory-port-safe-source-subset >--
+[INFO] Building session-issue-audit-memory-port-safe-source-subset 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spotbugs:4.10.4.0:check (default-cli) > :spotbugs @ session-issue-audit-memory-port-safe-source-subset >>>
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:spotbugs (spotbugs) @ session-issue-audit-memory-port-safe-source-subset ---
+[INFO] Done SpotBugs Analysis....
+[INFO] Skipping com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:spotbugs report goal
+[INFO] 
+[INFO] <<< spotbugs:4.10.4.0:check (default-cli) < :spotbugs @ session-issue-audit-memory-port-safe-source-subset <<<
+[INFO] 
+[INFO] 
+[INFO] --- spotbugs:4.10.4.0:check (default-cli) @ session-issue-audit-memory-port-safe-source-subset ---
+[INFO] BugInstance size is 1
+[INFO] Error size is 0
+[INFO] Total bugs: 1
+[ERROR] Medium: dev.codex.schubert.nk.api.security.SessionAuditWriter.write(Connection, long, long, Optional, UUID, UUID, Instant, SessionRevocationReason, ResultCode) may fail to clean up java.sql.Statement on checked exception [dev.codex.schubert.nk.api.security.SessionAuditWriter] Obligation to clean up resource created at SessionAuditWriter.java:[line 43] is not discharged OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
+[INFO] 
+
+
+To see bug detail using the Spotbugs GUI, use the following command "mvn spotbugs:gui"
+
+
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.510 s
+[INFO] Finished at: 2026-11-15T21:51:38+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check (default-cli) on project session-issue-audit-memory-port-safe-source-subset: failed with 1 bugs and 0 errors -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

@@ -60,7 +60,7 @@ public final class SessionAuditWriter {
       primary = failure;
       throw failure;
     } finally {
-      JdbcResourceCleanup.close(primary, statement::close);
+      JdbcResourceCleanup.closeStatement(primary, statement);
     }
   }
 }
