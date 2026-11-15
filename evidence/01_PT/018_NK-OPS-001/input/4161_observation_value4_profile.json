@@ -1,0 +1,83 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35610-OBSERVATION-REFERENCE-PURE4",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "WBS-P004-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "WBS-P017-12"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4395_観測参照record純契約四class通常四仕様.md",
+      "sha256": "78c031310940c590483a42c32257fd482f679b0a2371ba8aa58f0a5bf1f66600"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35600-observation-value4-source-v1/manifest.json",
+      "sha256": "e7f82dfd090580e5d3843bccf84e14d0b7a849645b8be92a8ef943f14c743b4f"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "716595eec955ae02ad4897bc844d75796a53035b",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunPureContractTest.java",
+      "tests": 1
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ObservationValueContractTest.java",
+      "tests": 3
+    }
+  ],
+  "expectedTests": 4,
+  "newTestDefinitions": 3,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+    "dev/codex/schubert/nk/batch/repository/RunReferences"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35602-observation-value4-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35604-observation-value4-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35606-observation-value4-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35608-observation-value4-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35610-observation-value4-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35612-observation-value4-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg35604-observation-value4-v1",
+    "unit": "pg35610-observation-value4-v1"
+  }
+}
