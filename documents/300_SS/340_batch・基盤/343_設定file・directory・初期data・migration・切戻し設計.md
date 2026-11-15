@@ -1,5 +1,13 @@
 # 設定file・directory・初期data・migration・切戻し設計
 
+## SSC416 保持COPY宣言の期待SHA・四mapping・六wire結合読戻し照合（2026-11-15）
+
+新MigrationMasterCopyVerifierはstateless final @NullMarked。verify(Nullable byte[] retained,Nullable String expectedSha,Nullable CurrentMigrationMappingManifest mappings,Nullable MigrationMasterCopyDataset declared) throws IOException,NoSuchAlgorithmException。四null又はexpectedShaが小文字64hex以外なら固定IAE。retainedを一回cloneし当コピーのJDK SHA256を独立に計算、trusted expectedShaと一致しなければ固定IAE。callerが取得元と期待SHAを既契約で認証していることが前提で、この一致自体はファイル/署名/authorityの認証でない。次に既MigrationMasterCopyManifest(mappings,declared)を一回生成し、stable retainedとそのcanonicalBytesをMessageDigest.isEqualで完全比較し、不一致を固定IAE。返却は生成されたimmutable declaration、保存原本/移行/commit receiptでない。既manifestの四countと六streamed digest/固定frame/期待対応をそのまま使用し、別parserによる正規化・未登録項目・CRLF/BOM/末尾/非ASCII受容・不足補完を行わない。SQL/IO/crypto/runtime/Errorをcatch変換/再送しない。既51Main byte不変更。
+
+新COPYVERIFY001正常と002空は元PG33314独立Python canonical literal/期待SHAを入力し返却canonical/map/digestを固定値で照合する。003四null、004期待SHA空/長さ63/65/upper/非hex/空白LF、005正しい長さの別SHA、006保持frame各byte一箇所反転後に独立JDK SHAを再計算して完全同値拒否、007全prefix切断後に独立SHA再計算、008末尾改変、009BOM/非ASCII/不正UTF8、010CRLF、011table順変更、012rowcount0/2/LongMax/非canonical数字、013wire byte数変更、014wire SHA変更、015mapping SHA変更、016mapping/data count不一致、017同count別mapping、018input defensive cloneと返却bytes/map不変、019再利用/固定redaction、020共有8worker64/Future5/finallyshutdownNow-await10。異常frameのexpectedShaはTest内独立JDK MessageDigest、productionメソッドでexpected生成0。正常goldenは元Python literalのまま（新Verifierをexpected generatorに使わない）。テスト専用既fixture mappings/normal/empty helpersのみ使用し旧1030本文と全既sourceを保持。
+
+新20/whole1050、52Main53Test73physical（自然abstract port1/実Code72）、全source RootNullAway/lintWerror/CS/SB/PMD個別分類、一exec CRC/init/既定及び無filter全実Codeのline-method-class-branch/instruction100、除外0。実ファイル取得/保存/cold復旧/DB/COPY transport/Current/署名/authority/Root/native/451/CHR/全PGPT/ITSTとHOLD未受入。追加不足2.5/7.5/9.9pp cap10は当不足のみ。元費/SV/原904.85/各群開始を保持し閉鎖時同額だけ減額、専有実費/token null。正式1964/53・正本184/625・元190新0・工数nullを増やさず継続する。
+
 ## SSC415 Current五projectionから同target六COPYまでの借用接続経路（2026-11-15）
 
 新CurrentMigrationTransferはstateless final @NullMarked。nested public record SourceCounts(int speakers,int files,int entries,int audio,int links)は各0..Integer.MAX_VALUEのみ受け付け、負数を固定IAEで拒否する。数字自体は実DB件数認証ではない。transfer(Nullable Connection source,Nullable Connection target,Nullable CurrentMigrationAssembler assembler,Nullable SourceCounts expected,Nullable List<? extends Nullable MediaAssetCopyRow> media,Nullable Instant at,Nullable MigrationCopyPort copy) throws SQLException,IOException,NoSuchAlgorithmException。七null又はsource==targetは最初に固定IAE拒否。target autoCommit=true/readOnly=trueは固定SQLException拒否しsource query前に止める。同じ実peer・別connection/TX/権限・snapshotはcallerが既契約により認証・排他所有することが前提で、参照非同一はその認証の代替でない。

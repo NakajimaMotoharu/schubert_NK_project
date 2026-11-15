@@ -1,0 +1,314 @@
+package dev.codex.schubert.nk.migration;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Test;
+
+/** PT-MIG-COPYVERIFY001..020; original independent Python frames, not production expected. */
+final class MigrationMasterCopyVerifierTest {
+  private static final String ZERO = "0";
+  private static final String LF = "\n";
+  private static final String NORMAL_FRAME =
+      "NKMIGCOPY1\nMAPPING\ta9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500\nspeakers\t1\t46\t7075f6a72b05c4cff3830220732aa044852d3c871eb3c016c550015c2aa501ac\nscript_files\t1\t141\t57621009e943ae8a6da658cc58070e0442f5af23a9300ef631e6a6fe4302e101\nscript_entries\t1\t63\tae22539e017a3b2884b3cd62b362ad1738ce54a5d2459693d8c670c9c0eafe95\naudio_files\t1\t136\t5916f31fc39b26175b3383fc5944e9972fb532fa30e76ac8f70e0de18070cbe3\nmedia_assets\t1\t169\t8d47e701d4300e31892e1ee4516660581c632689da66c0cad440be50954b30fe\nentry_audio_links\t1\t39\tcaed946009561acc38580f847b47b139f453a88356b204b73391bcb5cc4f9eef\n";
+  private static final String EMPTY_FRAME =
+      "NKMIGCOPY1\nMAPPING\t83b87552a2f59f743b0c28ad12ed8bbb5e0f38c4a3794c68a29f35a3974284e9\nspeakers\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nscript_entries\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\naudio_files\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nmedia_assets\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nentry_audio_links\t0\t0\te3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n";
+  private static final String NORMAL_SHA =
+      "744f7e0bd0a7dd16ab4454db3c0852c244101d25b22692de2cf167adb5dbdc90";
+  private static final String EMPTY_SHA =
+      "4444698baa3c905644477124201c2c291637b7c8441ed296c30acb231b1dcd90";
+  private static final String ERROR = "migration retained COPY declaration is invalid";
+  private static final int WORKERS = 8;
+  private static final int TASKS = 64;
+  private static final int WAIT_SECONDS = 5;
+  private static final int TERMINATION_SECONDS = 10;
+
+  @Test
+  void copyverify001NormalFixedGoldenAndFullMappingCounts() throws Exception {
+    var result = new MigrationMasterCopyVerifier().verify(wire(), NORMAL_SHA, mappings(), data());
+    assertEquals(NORMAL_SHA, result.sha256());
+    assertArrayEquals(wire(), result.canonicalBytes());
+    assertEquals(
+        "a9dd686885362b4e2455c9ada4770fcbafd983819fee70ca02a0177323bd0500", result.mappingSha256());
+    assertEquals(
+        java.util.Map.of(
+            "speakers",
+            1L,
+            "script_files",
+            1L,
+            "script_entries",
+            1L,
+            "audio_files",
+            1L,
+            "media_assets",
+            1L,
+            "entry_audio_links",
+            1L),
+        result.rowCounts());
+  }
+
+  @Test
+  void copyverify002EmptyGoldenPreservesExplicitSixTuples() throws Exception {
+    var bytes = EMPTY_FRAME.getBytes(StandardCharsets.US_ASCII);
+    var result =
+        new MigrationMasterCopyVerifier()
+            .verify(
+                bytes,
+                EMPTY_SHA,
+                MigrationMasterCopyManifestTest.emptyMappings(),
+                MigrationMasterCopyManifestTest.empty());
+    assertEquals(EMPTY_SHA, result.sha256());
+    assertArrayEquals(bytes, result.canonicalBytes());
+    assertEquals(6, result.rowCounts().size());
+    assertTrue(result.rowCounts().values().stream().allMatch(v -> v == 0L));
+  }
+
+  @Test
+  void copyverify003AllFourNullsAreExplicitDomainRejection() throws Exception {
+    for (int missing = 0; missing < 4; missing++) {
+      final int field = missing;
+      var bytes = wire();
+      var mappings = mappings();
+      var data = data();
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  new MigrationMasterCopyVerifier()
+                      .verify(
+                          field == 0 ? null : bytes,
+                          field == 1 ? null : NORMAL_SHA,
+                          field == 2 ? null : mappings,
+                          field == 3 ? null : data));
+      assertEquals(ERROR, failure.getMessage());
+      assertNull(failure.getCause());
+    }
+  }
+
+  @Test
+  void copyverify004ExpectedShaSyntaxIsStrictLowerHex() throws Exception {
+    var mappings = mappings();
+    var data = data();
+    for (String value :
+        List.of(
+            "",
+            NORMAL_SHA.substring(1),
+            NORMAL_SHA + ZERO,
+            NORMAL_SHA.toUpperCase(java.util.Locale.ROOT),
+            "g".repeat(64),
+            " " + NORMAL_SHA,
+            NORMAL_SHA + LF))
+      assertEquals(
+          ERROR,
+          assertThrows(
+                  IllegalArgumentException.class,
+                  () -> new MigrationMasterCopyVerifier().verify(wire(), value, mappings, data))
+              .getMessage());
+  }
+
+  @Test
+  void copyverify005DifferentTrustedShaCannotQualifyCorrectBytes() throws Exception {
+    var mappings = mappings();
+    var data = data();
+    assertEquals(
+        ERROR,
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                    new MigrationMasterCopyVerifier()
+                        .verify(wire(), ZERO.repeat(64), mappings, data))
+            .getMessage());
+  }
+
+  @Test
+  void copyverify006EveryByteChangeRejectsEvenWithMatchingIndependentSha() throws Exception {
+    byte[] original = wire();
+    for (int index = 0; index < original.length; index++) {
+      byte[] changed = original.clone();
+      changed[index] ^= 1;
+      rejected(changed);
+    }
+    assertArrayEquals(wire(), original);
+  }
+
+  @Test
+  void copyverify007EveryTruncatedPrefixRejectsWithMatchingSha() throws Exception {
+    byte[] original = wire();
+    for (int length = 0; length < original.length; length++)
+      rejected(Arrays.copyOf(original, length));
+  }
+
+  @Test
+  void copyverify008AppendedByteAndExtraLineAreNotIgnored() throws Exception {
+    for (byte value : new byte[] {0, 10, 13, 32}) {
+      byte[] changed = Arrays.copyOf(wire(), wire().length + 1);
+      changed[changed.length - 1] = value;
+      rejected(changed);
+    }
+    rejected((NORMAL_FRAME + "extra\t0\n").getBytes(StandardCharsets.US_ASCII));
+  }
+
+  @Test
+  void copyverify009BomMalformedUtf8AndControlCannotBeNormalized() throws Exception {
+    byte[] bom = new byte[wire().length + 3];
+    bom[0] = (byte) 0xef;
+    bom[1] = (byte) 0xbb;
+    bom[2] = (byte) 0xbf;
+    System.arraycopy(wire(), 0, bom, 3, wire().length);
+    rejected(bom);
+    for (byte value : new byte[] {(byte) 0x80, (byte) 0xff, 0}) {
+      byte[] changed = wire();
+      changed[0] = value;
+      rejected(changed);
+    }
+  }
+
+  @Test
+  void copyverify010CrLfIsNotSilentlyReframed() throws Exception {
+    rejected(NORMAL_FRAME.replace(LF, "\r\n").getBytes(StandardCharsets.US_ASCII));
+  }
+
+  @Test
+  void copyverify011AllSixTablePositionsAreFixed() throws Exception {
+    var lines = new ArrayList<>(NORMAL_FRAME.lines().toList());
+    for (int index = 2; index < 7; index++) {
+      var changed = new ArrayList<>(lines);
+      java.util.Collections.swap(changed, index, index + 1);
+      rejected((String.join(LF, changed) + LF).getBytes(StandardCharsets.US_ASCII));
+    }
+  }
+
+  @Test
+  void copyverify012EveryRowCountIsCanonicalAndExactlyBound() throws Exception {
+    for (int line = 2; line < 8; line++)
+      for (String value : List.of(ZERO, "2", Long.toString(Long.MAX_VALUE), "01", "+1", "-1"))
+        rejected(changed(line, 1, value));
+  }
+
+  @Test
+  void copyverify013EveryWireLengthIsExactlyBound() throws Exception {
+    for (int line = 2; line < 8; line++)
+      for (String value : List.of(ZERO, Long.toString(Long.MAX_VALUE), "-1"))
+        rejected(changed(line, 2, value));
+  }
+
+  @Test
+  void copyverify014EveryWireShaIsExactlyBound() throws Exception {
+    for (int line = 2; line < 8; line++) rejected(changed(line, 3, ZERO.repeat(64)));
+  }
+
+  @Test
+  void copyverify015MappingDigestCannotBeSubstituted() throws Exception {
+    rejected(changed(1, 1, ZERO.repeat(64)));
+  }
+
+  @Test
+  void copyverify016MappingCountMismatchIsNeverRepaired() throws Exception {
+    var mappings = MigrationMasterCopyManifestTest.mappings(0, -2);
+    var data = data();
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new MigrationMasterCopyVerifier().verify(wire(), NORMAL_SHA, mappings, data));
+  }
+
+  @Test
+  void copyverify017SameCountDifferentMappingCannotReuseRetainedBytes() throws Exception {
+    var mappings = MigrationMasterCopyManifestTest.mappings(-1, -3);
+    var data = data();
+    assertEquals(
+        ERROR,
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new MigrationMasterCopyVerifier().verify(wire(), NORMAL_SHA, mappings, data))
+            .getMessage());
+  }
+
+  @Test
+  void copyverify018CallerAndReturnedByteArraysNeverAlias() throws Exception {
+    var bytes = wire();
+    var result = new MigrationMasterCopyVerifier().verify(bytes, NORMAL_SHA, mappings(), data());
+    Arrays.fill(bytes, (byte) 0);
+    byte[] out = result.canonicalBytes();
+    Arrays.fill(out, (byte) 0);
+    assertArrayEquals(wire(), result.canonicalBytes());
+    assertEquals(NORMAL_SHA, result.sha256());
+    assertThrows(UnsupportedOperationException.class, () -> result.rowCounts().put("speakers", 2L));
+  }
+
+  @Test
+  void copyverify019StatelessReuseAndDiagnosticAreRedacted() throws Exception {
+    var job = new MigrationMasterCopyVerifier();
+    for (int index = 0; index < 2; index++)
+      assertEquals(NORMAL_SHA, job.verify(wire(), NORMAL_SHA, mappings(), data()).sha256());
+    assertEquals("MigrationMasterCopyVerifier[REDACTED]", job.toString());
+  }
+
+  @Test
+  void copyverify020FiniteSharedImmutableInputsRemainIndependent() throws Exception {
+    var job = new MigrationMasterCopyVerifier();
+    var bytes = wire();
+    var mappings = mappings();
+    var data = data();
+    var executor = Executors.newFixedThreadPool(WORKERS);
+    try {
+      var futures = new ArrayList<Future<String>>();
+      for (int index = 0; index < TASKS; index++)
+        futures.add(executor.submit(() -> job.verify(bytes, NORMAL_SHA, mappings, data).sha256()));
+      for (var future : futures)
+        assertEquals(NORMAL_SHA, future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      assertArrayEquals(wire(), bytes);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  private static byte[] wire() {
+    return NORMAL_FRAME.getBytes(StandardCharsets.US_ASCII);
+  }
+
+  private static CurrentMigrationMappingManifest mappings() throws Exception {
+    return MigrationMasterCopyManifestTest.mappings(-1, -2);
+  }
+
+  private static MigrationMasterCopyDataset data() throws Exception {
+    return MigrationMasterTargetPublisherTest.normal();
+  }
+
+  private static String hash(byte[] bytes) throws NoSuchAlgorithmException {
+    return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+  }
+
+  private static void rejected(byte[] bytes) throws Exception {
+    var mappings = mappings();
+    var data = data();
+    String expected = hash(bytes);
+    assertEquals(
+        ERROR,
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new MigrationMasterCopyVerifier().verify(bytes, expected, mappings, data))
+            .getMessage());
+  }
+
+  private static byte[] changed(int line, int field, String value) {
+    var lines = new ArrayList<>(NORMAL_FRAME.lines().toList());
+    String[] fields = lines.get(line).split("\t", -1);
+    fields[field] = value;
+    lines.set(line, String.join("\t", fields));
+    return (String.join(LF, lines) + LF).getBytes(StandardCharsets.US_ASCII);
+  }
+}
