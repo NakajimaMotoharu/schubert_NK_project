@@ -1,0 +1,1601 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-15T04:07:19.015298+00:00",
+  "source": "ef461eba8bea80b4ed17f52d832094c139fef122",
+  "productionCoreMain": "ef461eba8bea80b4ed17f52d832094c139fef122",
+  "decisions": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3405_ledger_second26_decisions.json",
+    "sha256": "99a5b0e26548aeedd8920c5cc36f7ef47cd0a73b9caff19c042f845334036bf4"
+  },
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33700-ledger-second26-catalog-v1/candidate-catalog.json",
+    "sha256": "6187ed16a051468232dbe6d6aaeb96e2d4752e19b3335445c74b4d6fe5b50d06"
+  },
+  "reviewedOriginalCandidates": 26,
+  "priorReviewedOriginalCandidates": 26,
+  "totalReviewedOriginalCandidates": 52,
+  "remainingOriginalCandidates": 173,
+  "bugLimitedStatusSync": 21,
+  "validOpenPartialHold": 5,
+  "yktLimitedStatusSync": 9,
+  "newYkt2529ForDistinctFiveWorkerScope": true,
+  "relatedDifferentYkt2387Unchanged": true,
+  "changes": [
+    {
+      "id": "BUG2725",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "工具lexer/token展開のみ。原1862a凍結/再実行不可を維持。BUG2722十三caller HOLDは別scope。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27866-user-pure32-preflight-v1/manifest.json",
+          "sha256": "8480226aeb4e0980e53b5abe4dcb745fa9fddecd8d619e3f9e2280eb185e059e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27868-user-pure32-v1/manifest.json",
+          "sha256": "c7b21e98e0c441ac5388259ef65751f73a8d5c90462a30c192ed742f980edc41"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27870-user-pure32-independent-v1/manifest.json",
+          "sha256": "a992452b112a4e5efb612624cae6fb80276024a4e7c7be181629c321c937e7b7"
+        }
+      ],
+      "beforeSha256": "85412c705f95bff2db126acedfffb8cb2c5df298cb2a846ee69264a1b12af429",
+      "afterSha256": "f008d8afe6ce925ca724717407ccc05ec439a12cac88f02380bf589572cc04fd",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2738",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "元五worker修正と全API7/Router18/Metric28の既成功、現在Test byteを照合。原関連YKT2387のServlet別対象は不変、新YKT2529へ五対象を結合。Router全7Mainの未実行口/global451は未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28076-api-config7-worker-fix-v1/manifest.json",
+          "sha256": "719e1457193403b50db1065fce5492fbe7aaa57e0f7f14bf3b5c418ee9dfc188"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28088-api-config7-v1/manifest.json",
+          "sha256": "0ac79e3179c65beee0d114805602d030d069631162648bea110fb0c6b3689616"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28090-api-config7-independent-v1/manifest.json",
+          "sha256": "fc05094dde47b16b9db0af60eb59d5aaebcba5085dcff42986f1ffb934b2dd11"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28098-router18-worker-fix-v1/manifest.json",
+          "sha256": "fcfc982786794971590f90df6d52de4d7a14347ef461d7ec67e02c9820332b35"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28110-router18-v1/manifest.json",
+          "sha256": "5dab5e75d797100e3e5f523f2b77671cd27a68c85c36aaa81d0806a954708cd2"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+          "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28120-http-metric28-worker-fix-v1/manifest.json",
+          "sha256": "aa506d5ad91c8f5c50b75a6adfc130c234e618a2a2cc10f581e1a5aa9c6104da"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28134-http-metric28-v1/manifest.json",
+          "sha256": "9469eeb4a2afc8ff98bbe893c31475284f33cca13a61255ecd24912cb1ae1662"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28136-http-metric28-independent-v1/manifest.json",
+          "sha256": "3b470c5f1dae6fc774676a5d7bc56bc2dca6c82034cefac64043378da6ad5ef9"
+        }
+      ],
+      "beforeSha256": "0b7f753c87c14558351e8ab7f7a0619b4aea0945e6333d31f903a6f0b3983bbd",
+      "afterSha256": "ffa2fb67f213919d42b7d4f8a255c04fdc9dd0224f1c0868c911a634d0c75012",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2814",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "元指摘後のsource029cで全46工具試験・同sourceの明示適用分類0、元a3d60098失敗保存。実CHR/GateCliHOLD12を解消したとはしない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29254-chr-whole5-normal46-v1/manifest.json",
+          "sha256": "ddceedb4b47ea40be6ff90f6a74c7b29217e94a6b6123c514620e3009990e07b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29256-chr-tool-full-static-v1/manifest.json",
+          "sha256": "2df95a4c48603d799f9fb20671ce935407904ac4897ae85e6ee180a5b5abad5a"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29258-chr-tool-independent-post-v1/manifest.json",
+          "sha256": "4196ea20e607fd3280e8ca3fca1cfa3f746391b2d8b5cd723756cf739d73a93b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29260-chr-static-exact-applicability-v1/manifest.json",
+          "sha256": "3f5e5e98680873d1635db7556b659b6bc3d484282ac2840dd3aa45a949d95a3f"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29262-chr-tool-two-fixes-result-join-v1/manifest.json",
+          "sha256": "ec4d9bb1060ee4f148591dbe0773e96523ea477b8c2f4c3432ee0a76899f05ef"
+        }
+      ],
+      "beforeSha256": "9386b7f329355d792c205d4ed6559653fe0ee61c2d6f354e10e205487fc0a08c",
+      "afterSha256": "aecf9c4c1430009251bce4645421ed6c3d35391d646dcfa842d8daa6e19b06d9",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2819",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "三literal等価化と元whole9逆一致、新whole11/対象source四100。全10physical bundle未受入は保持。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29276-correlated11-source-oracles-v1/manifest.json",
+          "sha256": "f55f1c2a532e52d28680dc6bed3ea11f61879bee60ab8739707ebe517b2ede67"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29286-correlated-whole11-normal-v1/manifest.json",
+          "sha256": "6c83951048416256999d0299dc5124eb2fbb33a4770ea8c540abfdae8545653d"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29288-correlated11-independent-post-v1/manifest.json",
+          "sha256": "3a22479ade3fb2c8746ad00a648acd7958f93ab868ed59438eef8c75fe428db9"
+        }
+      ],
+      "beforeSha256": "c41a538365dcd4a3cd5b2d93b5f5d7a0dde95479d1a54b51a2e3a3adfc470ff4",
+      "afterSha256": "dc07bfc76833c575367377ff31b2ee24d391392152c65fd55dab073f05965199",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2828",
+      "disposition": "OPEN_PARTIAL_HOLD_TYPED_PRIORITY",
+      "reason": "初回ordinaryAPI fatal規則移植仮説はSS3417.3/SS332と照合して撤回済み。current typed順位を未承認変更しない。未知/fatal cleanup一般行列の独立資格が未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29414-handoff-explicit-priority-audit-v1/manifest.json",
+          "sha256": "601e8cb731c4b7cca62a1ec5df02207a18153581a84a1f57774b5f46d7705be2"
+        }
+      ],
+      "beforeSha256": "86160b032476aed96f842e681fe1dde5c1ce6233fd9945b688fa2eae3a8d0c48",
+      "afterSha256": "010cafecd262ae2a95eb9e3d5f7ce1b0d43e1e4c2c7d27eaa80a5965235480b1",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2832",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "metadata raw8=6IRQ+2CLI各site分類のみ。BUG2828のtyped順位未受入とは別。関連YKT2402の原patch対象を本scopeで閉じない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+          "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697"
+        }
+      ],
+      "beforeSha256": "9bbeec4e8e5c5fa4e7aab215fa92b27c8918d3f40354482d2f98a33bf84554a1",
+      "afterSha256": "098188b5f4fa133be97dd0975973f548385a1776fc28d9f176f3d1b630adfd85",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2834",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "Login graph新1定義/13inputを含む同source155 FES0と全closure四100、元7oracle保持。実broker/WBS/global451は未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29452-login-graph-source-manufacture-v1/manifest.json",
+          "sha256": "e26cbf9325f18f176631aad28fe0e6b88b79495c2b3580a108b73055b3799e6b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29476-login-graph-connected155-v1/manifest.json",
+          "sha256": "be33d1f7821fe9dd86793684fb95c599bf371b1689ea55e50d3b6db0b56efa6e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29478-login-independent-v1/manifest.json",
+          "sha256": "eeab9b2aee8667feca3734855e68b032f707c774a426d9029d7e19daafe4f751"
+        }
+      ],
+      "beforeSha256": "51941ed99c3b6893de06ad17f886200f45abfc70e6d5adb73777029165a6508b",
+      "afterSha256": "0f406b69a83b9e68fbd946e3ce34f804f279ad27dcf796e3037b92d78856534f",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2840",
+      "disposition": "OPEN_NATIVE_PT_HOLD_SOURCE_STATIC_FIXED",
+      "reason": "sameFD source是正/許可static代替済。whole9 native Test未実行・coverage null。source/staticを実PT成功へしない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29578-sealed-duplicate-source-manufacture-v1/manifest.json",
+          "sha256": "7ddd398234b765969db62539a3d72f134fb087590a5c9191a573a7361419c958"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29600-sealed-public-compile-v1/manifest.json",
+          "sha256": "14b58498e53d85a7ed07d1297c6b90e1d23f549538769447652dd4d054c0ee58"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29602-sealed-public-static-v1/manifest.json",
+          "sha256": "a0ffcd3bbc6fd37561ab021a65d920d834a31725ca35dffc8281e3a85f5c44c9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29606-sealed-changed-test-static-v1/manifest.json",
+          "sha256": "cd06b1bd198a1c7be005b45bf3534635d3fc4169e2150f64b31436014f82eb98"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29608-sealed-public-byte-review-v1/manifest.json",
+          "sha256": "bf39eca0a25f81ffe589061f9bff436c977c684c7607b25f8d96f14e990aede0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29610-sealed-static-independent-source-join-v1/manifest.json",
+          "sha256": "428b2c1c417462a6962d4c6d4e7fe40be60b26035809d4727546ff72c6e0926f"
+        }
+      ],
+      "beforeSha256": "e17d8d080b2b575172d904a302bb5aa15df03fdbdadef0c22e0c35992ddaf036",
+      "afterSha256": "a2cb0d08120d250f37ff3b15e098c6feaf12d9546cf11ca0380e94f5271842e7",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2843",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "Testsource反復literalの静的規約に限り解決。whole9nativeはNOT_RUN_HOLD、実PT/coverageへ加算しない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29604-sealed-test-literal-source-refine-v1/manifest.json",
+          "sha256": "6126d01ff6855b8700a78b6dca2b4d257c85633350cef7f611f332f0b45ec342"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29606-sealed-changed-test-static-v1/manifest.json",
+          "sha256": "cd06b1bd198a1c7be005b45bf3534635d3fc4169e2150f64b31436014f82eb98"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29610-sealed-static-independent-source-join-v1/manifest.json",
+          "sha256": "428b2c1c417462a6962d4c6d4e7fe40be60b26035809d4727546ff72c6e0926f"
+        }
+      ],
+      "beforeSha256": "0c6c00df3443699c075c5850f0b5091f9141cce5d1a2c2a5f028142ef25a0ea7",
+      "afterSha256": "b829daa9cb3a1fa3beb0bebaa9d79f0c1a4c3895a06d154a55eb4e85ff34ce7e",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2848",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当SSC340 section同期callerだけ。原feature追補/他設計/Root2未展開、BUG2846 DB条件はOPENを保持。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29682-ssc340-design-main-publication-v1/manifest.json",
+          "sha256": "d5e8798d3630439d82c10d2cd252d29f8f5974a1d3f8dc6477a312db8535b50e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29684-design-ledger-section-sync-before-v1/manifest.json",
+          "sha256": "3eb4659454bf0788ab951d9f3f5c5405de21a6fff2ff3992362e7f6ef3dda37a"
+        }
+      ],
+      "beforeSha256": "51a39c1cf3eeeeaf5c1d6baef082ccb7b572325e3d276d9dcf09b9a5e45acef5",
+      "afterSha256": "c6c2e9ed419b6b168cc5701fb2c0cb4f369081f962df9aceae750268e8104d7f",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2849",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "元公開index/二raw md hashと限定whitespace許容のmetadataだけ。原文を変更せず他path diffcheck/秘密scan0。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29690-preserved-markdown-publication-v1/manifest.json",
+          "sha256": "034deb079c56ca331630e06df1b4349549d02e816de4843d53b577f7827face5"
+        }
+      ],
+      "beforeSha256": "582a0888f4c2fa41c7ad9b8cb17cd7eacbe6f930fd9988d04475e4363a96995f",
+      "afterSha256": "b848549e7cfed7c4327d52c036ccc77f0bf3ecb5a9a9199ede799eda0f46098b",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2850",
+      "disposition": "OPEN_DB_PT_HOLD_TEST_SOURCE_STATIC_FIXED",
+      "reason": "url helper/型長内負例のsource是正と非実行javac/GJF/CSのみ。DB PT/SQL後条件/coverageは未実行、元source限定CLOSED記載は履歴として保持。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29698-null-test-source-review-before-v1/manifest.json",
+          "sha256": "721806607fb1006771f98fa3713eaa57f6d7a9119aa32b7babda221eff099cd1"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29710-nullable-check-source-static-v2/manifest.json",
+          "sha256": "7b1b84658a3466bfa35c60e1b5252c718943f9b97f48b0a36450c9fd67734fde"
+        }
+      ],
+      "beforeSha256": "10777969ccd41889fd8c6eb0b53af57301c9600e4fd9b81937e31efa5a25406f",
+      "afterSha256": "fabe81240f29ed97d2c2c5c8f0d34be780bfb87f29fa3da38feff01e795583c2",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2851",
+      "disposition": "OPEN_DB_ROLE_CONTRACT_HOLD_SOURCE_FIXED",
+      "reason": "V029の既owner SET/RESETはsourceで明示済。旧V001..028/roles不変。実role/DDL適用・upgrade/rollbackのDB契約は未証明。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29708-nullable-check-independent-source-review-v2/manifest.json",
+          "sha256": "eaf2318e9c19a8ace7da420fc69183dcaa99a109cc6913b2e633f1274c81ec07"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29710-nullable-check-source-static-v2/manifest.json",
+          "sha256": "7b1b84658a3466bfa35c60e1b5252c718943f9b97f48b0a36450c9fd67734fde"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29714-nullable-check-source-static-join-v1/manifest.json",
+          "sha256": "86dd88c1180ce85d765d36250a9c1d363c149915dd387bd600aeabd74a07a730"
+        }
+      ],
+      "beforeSha256": "5ddd2a1161aada53426cf97e58257fa3b4ed591ab3c44547ffa099584aa13fac",
+      "afterSha256": "e45f78b39b975accecb562419e9b018d199b5f0e306377700fa30506f92a6c7b",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2852",
+      "disposition": "OPEN_MORNING_WHOLE65_DB_OWNER_HOLD_SOURCE_PURE12_FIXED",
+      "reason": "既知20変換site/23guardはsource製造・強化review済、pure12のみ資格済。全Morning65/実DB/owned資源/原本/nativeは未実行、pure成功で全callerを閉じない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29778-morning-typed-sql-source-manufacture-v1/manifest.json",
+          "sha256": "5195965a83a5f452dfc664414ebf5658948ee9624ae42e054a6fc99e629e6446"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29788-morning-typed-sql-independent-source-review-v1/manifest.json",
+          "sha256": "3d52889d725fa0518c2f09a62085c8f55192eefb97136305b38af5439f6ddd5d"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4/manifest.json",
+          "sha256": "cf3f3ae74ed0412378cde7438e8fafd2e3cc50732bbae5a03c6f489f9dbc53d3"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+          "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29904-morning-pure-retest-source-ykt-join-v1/manifest.json",
+          "sha256": "5b1beb27dfbe8469d716606b5be104ca08c22796baf9820fa5ef8a2ed3736a59"
+        }
+      ],
+      "beforeSha256": "8dcc6593b42d797118725ad02a0868e3ddba463bae4ab7d89310b21167ebfb9e",
+      "afterSha256": "eaf7f7445a794acd999a034d0842b70ec4fd1e1d14698cd299148edf78ef68cb",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2853",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "説明TestID一箇所の追記訂正だけ。元8試験/費用/受入不変更。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29724-p01701-four-owned-source-contract-v1/manifest.json",
+          "sha256": "e36935487ce11435f392b0110c1a188d866a68775587c1a2a73d9f438bab2244"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29730-p01701-test-id-corrected-contract-v1/manifest.json",
+          "sha256": "0b9ec146411a831d1f24241ae0b6ee42fbb4827a25bbbd45cc8f20a8cbc37b75"
+        }
+      ],
+      "beforeSha256": "fe6744113577bde1a54d564c87abfb0341f820295551ada3732dda3d76460be5",
+      "afterSha256": "f506928b80728a54c5f829931ca874ec83aecaec5d39291c219d3b4583a34032",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2854",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "Git quoted日本語path collectorを-z/NULへ是正した公開後検証だけ。remote再push0/Root2未展開。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29768-ssc341-design-main-publication-v1/manifest.json",
+          "sha256": "d50debbc42caa72c5db8aed0796960bb7f6c005870c434fc21ced910e2f395e0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29770-design-path-quoting-before-v1/manifest.json",
+          "sha256": "1af1521cc44cf6513628104c5cc726ba1df5c33771b97592c6fbb927bef2cb40"
+        }
+      ],
+      "beforeSha256": "9014cab5c85192b3aadb2520a90e25279a58fc5830d50f0c5f52bdb4c7b7fc77",
+      "afterSha256": "a233a7ef4477c280696d81574887589ba61220ca3950b831bb3642e05a48110e",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2855",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当設計section末尾LF2だけの可逆metadata是正。Main設計/他追補/元raw保持。Morning全20経路/65/DBのBUG2852は別のOPEN。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29780-design-ledger-eof-before-v1/manifest.json",
+          "sha256": "89cecd1becd8e2957db17c8d9e376cbbda798882bd50bdb9777a42c1d05dcd6e"
+        }
+      ],
+      "beforeSha256": "09650788a2325ea3b55f460bc256dd1f2ead1c496e29761a5d583c83a67e1a66",
+      "afterSha256": "a5f2142d9b90033dcf850b2b849cf6e85e2f9121d4bf5938c1595d3e258432ca",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2856",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "Testのassert前increment分離と独立12 FES0/静的0。BUG2852の全Morning/実DBを閉じない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29828-pure-helper-test-operand-before-v1/manifest.json",
+          "sha256": "75421f2dcc12a7631b8529e52b9fffd3a66a91a9cae44e0a2f91bf9a5723585e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29892-morning-pure-sql12-static-v4/manifest.json",
+          "sha256": "c928c08dc6291715241aa7ba7f02dd5b5ab148053c28f9fb3c12258175166a76"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4/manifest.json",
+          "sha256": "cf3f3ae74ed0412378cde7438e8fafd2e3cc50732bbae5a03c6f489f9dbc53d3"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+          "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+        }
+      ],
+      "beforeSha256": "334b773bae22e6fa466398ce4609d80061c1dcab54e9e1eb1e5fe27e81323aff",
+      "afterSha256": "24d0d4ac42fbbfbad87677d31dc73a4357c43db03d92a52e10469202ab40e9d9",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2857",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "先行型条件の冗長後段predicateを独立24型等価と同whole12・四100で確認、六横展開対象は修正又は非該当。全Morning/DBは未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+          "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4/manifest.json",
+          "sha256": "cf3f3ae74ed0412378cde7438e8fafd2e3cc50732bbae5a03c6f489f9dbc53d3"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+          "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29904-morning-pure-retest-source-ykt-join-v1/manifest.json",
+          "sha256": "5b1beb27dfbe8469d716606b5be104ca08c22796baf9820fa5ef8a2ed3736a59"
+        }
+      ],
+      "beforeSha256": "f5c0817dc53858e4593e8236550cf396cab726e4335443cb75501e20019273c8",
+      "afterSha256": "812abd5278be2b83a0664da9872d1158667671183c7a40907cd99e5bb521e8b6",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2875",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当ScenarioEntryCopyBatch条件literalの意味名化と元whole72のみ。後段の別BUG2874アクセス/PT保留/共有YKT2055は不変。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30636-entry-copy-batch-literal-independent-inverse-v1/manifest.json",
+          "sha256": "ef0eb7081e4c4bb607deb7f72b82ac781d83bf20bf8fee075e64fdd1d833af6c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30642-entry-copy-batch72-fixed-static-v1/manifest.json",
+          "sha256": "ee52cb548d21f1935f6871b899af144debbbd50eb1d7121ee23d9c1ac7194043"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30646-entry-copy-batch72-fixed-unit-v1/manifest.json",
+          "sha256": "4b2c63a6b0f8382b86a4ce5e423a26c92d1289f1c7675402589dea60bf4adff6"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30648-entry-copy-batch72-fixed-post-v1/manifest.json",
+          "sha256": "3fc0f0e1ba71cb41095d292caa933d7e95253908346a8e68694282b11932d32e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30654-entry-copy-batch72-independent-source-trace-join-v1/manifest.json",
+          "sha256": "f12b423ee69d11785581897f4e7fabd8e580712e88ccebb8af9ba6384ce7850d"
+        }
+      ],
+      "beforeSha256": "e6bf8ebd43ace08f36229a3e64e269fdeaf1c110b68a0251c5c3a19439ff2ce4",
+      "afterSha256": "b723af9b18a9ff7e31dc5aa8b5312c12c583ed3eb44f6494a006116bcb689973",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2893",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "nullable factoryの実compile0/全scope static/Video80 FES0のみ。元compile4errorを保全。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31282-video-nullable-varargs-fix-review-v1/manifest.json",
+          "sha256": "f63b238feafb4bad198511806697830c30475aee34505406c0af349801605f2c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31284-video-catalogue80-nullable-factory-fixed-prestyle-v1/manifest.json",
+          "sha256": "412649f4b5331ee6fd2da920c09267451f5fbd4dd19825aa31086ee873556225"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31286-video-catalogue80-nullable-factory-fixed-prepare-v1/manifest.json",
+          "sha256": "04a1223b2cfffcf49093cc279dea8bed3e075368e7f51b9dfd0c6009e6cba1e9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31288-video-catalogue80-nullable-factory-fixed-static-v1/manifest.json",
+          "sha256": "59a30e300ef9e78ed1af65b47146621a9fb51ff73c58daab0e8afc1a0893e73c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31290-video-catalogue80-nullable-factory-fixed-preflight-v1/manifest.json",
+          "sha256": "c1ee2deeb9d1bb7d69fec80d1c723842ca1a3fd437ab7b7cf71f46e0059ebd17"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31292-video-catalogue80-nullable-factory-fixed-unit-v1/manifest.json",
+          "sha256": "816e38713c15a466c847f702f704c1d17cdf4c424150565b0ce1717702b6d109"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31294-video-catalogue80-nullable-factory-fixed-post-v1/manifest.json",
+          "sha256": "edbf32f17e83ce5dd5a8de9e2ef7b4e00b8b3e515477163de8f999a03502e59b"
+        }
+      ],
+      "beforeSha256": "1da3dcc20c014601cbe54bb7d81d6d9aead010769c30d6fd35d6771c43c3c13f",
+      "afterSha256": "997bc0c56b847e5ef1e0aea637e5175e47f5c546695a02f18c626cdbdb60a671",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2894",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "誤worktree cwd後の未適用patch一回継続と正規PR239/main/design/914一path一致。二重操作/新publicationなし。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31298-ssc358-limited-ledger-main-v1/manifest.json",
+          "sha256": "a629c7cc8713075682523eb8f026905fea332eb99547738e90de0bcb003e3d62"
+        }
+      ],
+      "beforeSha256": "e3f501a45f51e1f55c58fac120d7e27acbb6874608163690e7bc3e5efea67356",
+      "afterSha256": "533baa9f1df200971ba3e068eba7baa0ee02dcebd21d00f6f9e3bde2bfe8005d",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2895",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当四literalの逆展開・全26 FES0と既定四100。旧style失敗は製品Unitへ混入しない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31344-music-pairing-test-literal-fix-v1/manifest.json",
+          "sha256": "d400133a6fe955c2239837bb0bbf395c1073f93d0aa1ff544f08f6fe17864571"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31360-music-test-format-fix-v1/manifest.json",
+          "sha256": "3e103d22717baf1bc12e94e0c5dbb973d488d19636bbf472dadd8515c6b870c9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31364-music-pairing26-format-fixed-prestyle-v1/manifest.json",
+          "sha256": "6cac0f045cbd77d31c6d66462b41539ba9e316dbc0a33cd2cb8f1fa7e5b08592"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31372-music-pairing26-format-fixed-unit-v1/manifest.json",
+          "sha256": "184a486f765440044155dc374f0cd4be000cc4473b89e38254e649d48eb84a88"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        }
+      ],
+      "beforeSha256": "086061d2cf8ce7e821fb893031f4a10c7f90e4c1d9f96744aeae23506d1a6b4e",
+      "afterSha256": "fcd8d335bf0fb808ed9b02da6a4173f249a87747430e4edf91a0b9a5c0f81b20",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2896",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当Testのquoted/nonspace token不変GJFだけ、元26 FES0/既定四100。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31360-music-test-format-fix-v1/manifest.json",
+          "sha256": "3e103d22717baf1bc12e94e0c5dbb973d488d19636bbf472dadd8515c6b870c9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31364-music-pairing26-format-fixed-prestyle-v1/manifest.json",
+          "sha256": "6cac0f045cbd77d31c6d66462b41539ba9e316dbc0a33cd2cb8f1fa7e5b08592"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31372-music-pairing26-format-fixed-unit-v1/manifest.json",
+          "sha256": "184a486f765440044155dc374f0cd4be000cc4473b89e38254e649d48eb84a88"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        }
+      ],
+      "beforeSha256": "88e93957e93bbe5e1000292e1442bcb83fefbb6d8dfb94b3811c079372e5ba57",
+      "afterSha256": "420f2be5c7fe534dd9170ed5632a47dd39222d56ec550eece79cf886cb91a294",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2897",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "二宣言を等価分離し入力/評価順/Main不変、全162 FES0/16CRC既定四100。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31386-music-catalogue-test-declaration-fix-v1/manifest.json",
+          "sha256": "35352b36df6a826030c647986b298ed56cb94a65a310a36e7701bac4b3bba2e0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31388-music-catalogue-source-style-fixed-v1/manifest.json",
+          "sha256": "1e26db5a677379d632ac2413cbe6a9db0f8d5961f7b8efed08b9b7b4fdbd2858"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31392-music-catalogue162-prestyle-v1/manifest.json",
+          "sha256": "c00715ee1d01b86007c2ffc8e18f1bbda627c9bb7073575b354086ea306a939f"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31394-music-catalogue162-prepare-v1/manifest.json",
+          "sha256": "d18dffc765db99e1559fc033613b116ffd6d5456e3264f0b341ff1ab943b883c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31396-music-catalogue162-static-v1/manifest.json",
+          "sha256": "5a3d2fcbe400b9c90e6448433b080af9bbc0c485ef211d1c521097b63acda41f"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31398-music-catalogue162-preflight-v1/manifest.json",
+          "sha256": "591787315fa0d928619d9ac600fb8b3a6dd697436517a3504df8dc002d7d7b38"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31400-music-catalogue162-unit-v1/manifest.json",
+          "sha256": "879b665af6a944e37fa6a4da43aa7acb36bf95da9cfa7937ddf2e1b2596c8458"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+          "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+        }
+      ],
+      "beforeSha256": "809bc9613cadfb8b88f9190e049820c5489bb639806875066d579794707931d3",
+      "afterSha256": "8c1161f36a2d977cd1f9e9b4c1a78977603bbddbaf0ade15377edbf4a8be4e9e",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "BUG2898",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "過去16明示classのprepare/class-root選択と同exec入力不変の測定caller修正だけ。元Java前失敗保持、全Code137/default112/diff25は歴史測定でnewsource資格へ転用しない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/manifest.json",
+          "sha256": "238c51f2f71e8377ac66fe7a4b8df411882c73278b733c6122ecf78c14dc5b20"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31436-generated-measurement-caller-root-failure-v1/manifest.json",
+          "sha256": "5b4d9c4e88a6a220984cf56e8dfd3c063ff2a8908bc1e5b096d046119363cdde"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31438-historical-media16-unfiltered-measurement-v1/manifest.json",
+          "sha256": "a04a516c16f619e82873364398b2f95ac3e2fc85ebd2901a9519c6b60cf89ba6"
+        }
+      ],
+      "beforeSha256": "c5625f8b70073951f487ebde3e6fb6e31ce4c8bd647b96326bd6bdb6e5d60afa",
+      "afterSha256": "e8dd24fa3a98bcc871178c61abac1361d94db01a4aaf2497cfe7020f586e15bb",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2380",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "工具lexer/token展開のみ。原1862a凍結/再実行不可を維持。BUG2722十三caller HOLDは別scope。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27866-user-pure32-preflight-v1/manifest.json",
+          "sha256": "8480226aeb4e0980e53b5abe4dcb745fa9fddecd8d619e3f9e2280eb185e059e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27868-user-pure32-v1/manifest.json",
+          "sha256": "c7b21e98e0c441ac5388259ef65751f73a8d5c90462a30c192ed742f980edc41"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27870-user-pure32-independent-v1/manifest.json",
+          "sha256": "a992452b112a4e5efb612624cae6fb80276024a4e7c7be181629c321c937e7b7"
+        }
+      ],
+      "beforeSha256": "d9f45e5a4c5d661b64ea2fc5e44a9bc7fc6d1ddb21f4bfa050ac3360b5438479",
+      "afterSha256": "bc4b0ff7dfed8f25c85fae0f54478d2f1d2b6cbdb4484893e6e725ddb6be34cf",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2406",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "先行型条件の冗長後段predicateを独立24型等価と同whole12・四100で確認、六横展開対象は修正又は非該当。全Morning/DBは未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+          "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4/manifest.json",
+          "sha256": "cf3f3ae74ed0412378cde7438e8fafd2e3cc50732bbae5a03c6f489f9dbc53d3"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+          "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29904-morning-pure-retest-source-ykt-join-v1/manifest.json",
+          "sha256": "5b1beb27dfbe8469d716606b5be104ca08c22796baf9820fa5ef8a2ed3736a59"
+        }
+      ],
+      "beforeSha256": "bd9e9ea0d091734bb7b0e9cf074b99baf1bb5294ea3edadb1139a9cb4eeb97ab",
+      "afterSha256": "b9bc6e0c2726952a81b658ae60976d1551be33c9c579181b9c8230b212c5929b",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2425",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "nullable factoryの実compile0/全scope static/Video80 FES0のみ。元compile4errorを保全。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31282-video-nullable-varargs-fix-review-v1/manifest.json",
+          "sha256": "f63b238feafb4bad198511806697830c30475aee34505406c0af349801605f2c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31284-video-catalogue80-nullable-factory-fixed-prestyle-v1/manifest.json",
+          "sha256": "412649f4b5331ee6fd2da920c09267451f5fbd4dd19825aa31086ee873556225"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31286-video-catalogue80-nullable-factory-fixed-prepare-v1/manifest.json",
+          "sha256": "04a1223b2cfffcf49093cc279dea8bed3e075368e7f51b9dfd0c6009e6cba1e9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31288-video-catalogue80-nullable-factory-fixed-static-v1/manifest.json",
+          "sha256": "59a30e300ef9e78ed1af65b47146621a9fb51ff73c58daab0e8afc1a0893e73c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31290-video-catalogue80-nullable-factory-fixed-preflight-v1/manifest.json",
+          "sha256": "c1ee2deeb9d1bb7d69fec80d1c723842ca1a3fd437ab7b7cf71f46e0059ebd17"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31292-video-catalogue80-nullable-factory-fixed-unit-v1/manifest.json",
+          "sha256": "816e38713c15a466c847f702f704c1d17cdf4c424150565b0ce1717702b6d109"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31294-video-catalogue80-nullable-factory-fixed-post-v1/manifest.json",
+          "sha256": "edbf32f17e83ce5dd5a8de9e2ef7b4e00b8b3e515477163de8f999a03502e59b"
+        }
+      ],
+      "beforeSha256": "1cd519a954fd9aa6f138cca52733a022fd66e4ba9434b74a68d660f519468a20",
+      "afterSha256": "cd8945e2e0b53dd65272f9b157aa4f9b72898cbe70950cb38e773a0fc12f2e5a",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2426",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "誤worktree cwd後の未適用patch一回継続と正規PR239/main/design/914一path一致。二重操作/新publicationなし。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31298-ssc358-limited-ledger-main-v1/manifest.json",
+          "sha256": "a629c7cc8713075682523eb8f026905fea332eb99547738e90de0bcb003e3d62"
+        }
+      ],
+      "beforeSha256": "400cc9ec7905945a2ecc6bcb44f8cd048050f2c4f7db149d96aab99eee5f552d",
+      "afterSha256": "177ae290212d4ed1af5a321d042f355d16352d2c2e0c107474dcc5aeaff5b31d",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2427",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当四literalの逆展開・全26 FES0と既定四100。旧style失敗は製品Unitへ混入しない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31344-music-pairing-test-literal-fix-v1/manifest.json",
+          "sha256": "d400133a6fe955c2239837bb0bbf395c1073f93d0aa1ff544f08f6fe17864571"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31360-music-test-format-fix-v1/manifest.json",
+          "sha256": "3e103d22717baf1bc12e94e0c5dbb973d488d19636bbf472dadd8515c6b870c9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31364-music-pairing26-format-fixed-prestyle-v1/manifest.json",
+          "sha256": "6cac0f045cbd77d31c6d66462b41539ba9e316dbc0a33cd2cb8f1fa7e5b08592"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31372-music-pairing26-format-fixed-unit-v1/manifest.json",
+          "sha256": "184a486f765440044155dc374f0cd4be000cc4473b89e38254e649d48eb84a88"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        }
+      ],
+      "beforeSha256": "389171637a5d9721ad223f8a025cb703b530095c975c5688683a3cf2bc74dede",
+      "afterSha256": "d4aaf2207a86e56ffc45495d332dc73e3596fb386925a6061b3b91a7812edf2e",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2428",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "当Testのquoted/nonspace token不変GJFだけ、元26 FES0/既定四100。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31360-music-test-format-fix-v1/manifest.json",
+          "sha256": "3e103d22717baf1bc12e94e0c5dbb973d488d19636bbf472dadd8515c6b870c9"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31364-music-pairing26-format-fixed-prestyle-v1/manifest.json",
+          "sha256": "6cac0f045cbd77d31c6d66462b41539ba9e316dbc0a33cd2cb8f1fa7e5b08592"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31372-music-pairing26-format-fixed-unit-v1/manifest.json",
+          "sha256": "184a486f765440044155dc374f0cd4be000cc4473b89e38254e649d48eb84a88"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+          "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3"
+        }
+      ],
+      "beforeSha256": "833e1b1ef28327bccd1ddba4d372954600f15a7ba3f675224755445cff789248",
+      "afterSha256": "6fe29f054ad99bcffa2c94d5279870284f575cb2cc404198c4e6b4d35a6d86f7",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2429",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "二宣言を等価分離し入力/評価順/Main不変、全162 FES0/16CRC既定四100。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31386-music-catalogue-test-declaration-fix-v1/manifest.json",
+          "sha256": "35352b36df6a826030c647986b298ed56cb94a65a310a36e7701bac4b3bba2e0"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31388-music-catalogue-source-style-fixed-v1/manifest.json",
+          "sha256": "1e26db5a677379d632ac2413cbe6a9db0f8d5961f7b8efed08b9b7b4fdbd2858"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31392-music-catalogue162-prestyle-v1/manifest.json",
+          "sha256": "c00715ee1d01b86007c2ffc8e18f1bbda627c9bb7073575b354086ea306a939f"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31394-music-catalogue162-prepare-v1/manifest.json",
+          "sha256": "d18dffc765db99e1559fc033613b116ffd6d5456e3264f0b341ff1ab943b883c"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31396-music-catalogue162-static-v1/manifest.json",
+          "sha256": "5a3d2fcbe400b9c90e6448433b080af9bbc0c485ef211d1c521097b63acda41f"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31398-music-catalogue162-preflight-v1/manifest.json",
+          "sha256": "591787315fa0d928619d9ac600fb8b3a6dd697436517a3504df8dc002d7d7b38"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31400-music-catalogue162-unit-v1/manifest.json",
+          "sha256": "879b665af6a944e37fa6a4da43aa7acb36bf95da9cfa7937ddf2e1b2596c8458"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+          "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b"
+        }
+      ],
+      "beforeSha256": "548b16bcbd49fe8416f86bdc6fe47489b88d2b599d81b1dd3bc540f1ee2bcb37",
+      "afterSha256": "1b896a96e4cdc3f40966cb00c2d606d4119a905ea755c8463ccfdfe4eb809d3b",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2430",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "過去16明示classのprepare/class-root選択と同exec入力不変の測定caller修正だけ。元Java前失敗保持、全Code137/default112/diff25は歴史測定でnewsource資格へ転用しない。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/manifest.json",
+          "sha256": "238c51f2f71e8377ac66fe7a4b8df411882c73278b733c6122ecf78c14dc5b20"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31436-generated-measurement-caller-root-failure-v1/manifest.json",
+          "sha256": "5b4d9c4e88a6a220984cf56e8dfd3c063ff2a8908bc1e5b096d046119363cdde"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31438-historical-media16-unfiltered-measurement-v1/manifest.json",
+          "sha256": "a04a516c16f619e82873364398b2f95ac3e2fc85ebd2901a9519c6b60cf89ba6"
+        }
+      ],
+      "beforeSha256": "8919df7639aaf35f71718027610baa77d5701d5600635f1963913ffe77b385c7",
+      "afterSha256": "12b95f334e0c9000834cbb424a40ebc3726dda47acbabbcae5cbdaee03dca184",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    },
+    {
+      "id": "YKT2529",
+      "disposition": "HISTORICAL_LIMITED_CLOSED_SYNC",
+      "reason": "元五worker修正と全API7/Router18/Metric28の既成功、現在Test byteを照合。原関連YKT2387のServlet別対象は不変、新YKT2529へ五対象を結合。Router全7Mainの未実行口/global451は未受入。",
+      "proofs": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28076-api-config7-worker-fix-v1/manifest.json",
+          "sha256": "719e1457193403b50db1065fce5492fbe7aaa57e0f7f14bf3b5c418ee9dfc188"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28088-api-config7-v1/manifest.json",
+          "sha256": "0ac79e3179c65beee0d114805602d030d069631162648bea110fb0c6b3689616"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28090-api-config7-independent-v1/manifest.json",
+          "sha256": "fc05094dde47b16b9db0af60eb59d5aaebcba5085dcff42986f1ffb934b2dd11"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28098-router18-worker-fix-v1/manifest.json",
+          "sha256": "fcfc982786794971590f90df6d52de4d7a14347ef461d7ec67e02c9820332b35"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28110-router18-v1/manifest.json",
+          "sha256": "5dab5e75d797100e3e5f523f2b77671cd27a68c85c36aaa81d0806a954708cd2"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+          "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28120-http-metric28-worker-fix-v1/manifest.json",
+          "sha256": "aa506d5ad91c8f5c50b75a6adfc130c234e618a2a2cc10f581e1a5aa9c6104da"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28134-http-metric28-v1/manifest.json",
+          "sha256": "9469eeb4a2afc8ff98bbe893c31475284f33cca13a61255ecd24912cb1ae1662"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28136-http-metric28-independent-v1/manifest.json",
+          "sha256": "3b470c5f1dae6fc774676a5d7bc56bc2dca6c82034cefac64043378da6ad5ef9"
+        }
+      ],
+      "beforeSha256": "311c8dbc1826c840e3e8f6384126f09799592f4bc50fec92ab75120709990337",
+      "afterSha256": "a71a9406ef2dde8a64cb94b7270a93e8eda02c4e685f9e828e61b509d663dbc0",
+      "changedOnlyOwnFirstParagraphStateAndExplicitFooter": true,
+      "foreignIssueParagraphsUnchanged": true
+    }
+  ],
+  "publicProofManifests": [
+    {
+      "pg": 27866,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27866-user-pure32-preflight-v1/manifest.json",
+      "sha256": "8480226aeb4e0980e53b5abe4dcb745fa9fddecd8d619e3f9e2280eb185e059e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 27868,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27868-user-pure32-v1/manifest.json",
+      "sha256": "c7b21e98e0c441ac5388259ef65751f73a8d5c90462a30c192ed742f980edc41",
+      "recordedExit": 0
+    },
+    {
+      "pg": 27870,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27870-user-pure32-independent-v1/manifest.json",
+      "sha256": "a992452b112a4e5efb612624cae6fb80276024a4e7c7be181629c321c937e7b7",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28076,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28076-api-config7-worker-fix-v1/manifest.json",
+      "sha256": "719e1457193403b50db1065fce5492fbe7aaa57e0f7f14bf3b5c418ee9dfc188",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28088,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28088-api-config7-v1/manifest.json",
+      "sha256": "0ac79e3179c65beee0d114805602d030d069631162648bea110fb0c6b3689616",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28090,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28090-api-config7-independent-v1/manifest.json",
+      "sha256": "fc05094dde47b16b9db0af60eb59d5aaebcba5085dcff42986f1ffb934b2dd11",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28098,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28098-router18-worker-fix-v1/manifest.json",
+      "sha256": "fcfc982786794971590f90df6d52de4d7a14347ef461d7ec67e02c9820332b35",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28110,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28110-router18-v1/manifest.json",
+      "sha256": "5dab5e75d797100e3e5f523f2b77671cd27a68c85c36aaa81d0806a954708cd2",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28112,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28112-router18-independent-v1/manifest.json",
+      "sha256": "8917d0d6abb8b579747e177680d463d12841c61dc0cf6bf67ad2db9bece1c9bd",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28120,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28120-http-metric28-worker-fix-v1/manifest.json",
+      "sha256": "aa506d5ad91c8f5c50b75a6adfc130c234e618a2a2cc10f581e1a5aa9c6104da",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28134,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28134-http-metric28-v1/manifest.json",
+      "sha256": "9469eeb4a2afc8ff98bbe893c31475284f33cca13a61255ecd24912cb1ae1662",
+      "recordedExit": 0
+    },
+    {
+      "pg": 28136,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28136-http-metric28-independent-v1/manifest.json",
+      "sha256": "3b470c5f1dae6fc774676a5d7bc56bc2dca6c82034cefac64043378da6ad5ef9",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29254,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29254-chr-whole5-normal46-v1/manifest.json",
+      "sha256": "ddceedb4b47ea40be6ff90f6a74c7b29217e94a6b6123c514620e3009990e07b",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29256,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29256-chr-tool-full-static-v1/manifest.json",
+      "sha256": "2df95a4c48603d799f9fb20671ce935407904ac4897ae85e6ee180a5b5abad5a",
+      "recordedExit": null
+    },
+    {
+      "pg": 29258,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29258-chr-tool-independent-post-v1/manifest.json",
+      "sha256": "4196ea20e607fd3280e8ca3fca1cfa3f746391b2d8b5cd723756cf739d73a93b",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29260,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29260-chr-static-exact-applicability-v1/manifest.json",
+      "sha256": "3f5e5e98680873d1635db7556b659b6bc3d484282ac2840dd3aa45a949d95a3f",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29262,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29262-chr-tool-two-fixes-result-join-v1/manifest.json",
+      "sha256": "ec4d9bb1060ee4f148591dbe0773e96523ea477b8c2f4c3432ee0a76899f05ef",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29276,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29276-correlated11-source-oracles-v1/manifest.json",
+      "sha256": "f55f1c2a532e52d28680dc6bed3ea11f61879bee60ab8739707ebe517b2ede67",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29286,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29286-correlated-whole11-normal-v1/manifest.json",
+      "sha256": "6c83951048416256999d0299dc5124eb2fbb33a4770ea8c540abfdae8545653d",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29288,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29288-correlated11-independent-post-v1/manifest.json",
+      "sha256": "3a22479ade3fb2c8746ad00a648acd7958f93ab868ed59438eef8c75fe428db9",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29404,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29404-inspector-six-main-source-review-v1/manifest.json",
+      "sha256": "69d52f37f5503d5ccb7d4d07403cf2e899260937bfbc8f9c4fe06a2199002697",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29414,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29414-handoff-explicit-priority-audit-v1/manifest.json",
+      "sha256": "601e8cb731c4b7cca62a1ec5df02207a18153581a84a1f57774b5f46d7705be2",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29452,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29452-login-graph-source-manufacture-v1/manifest.json",
+      "sha256": "e26cbf9325f18f176631aad28fe0e6b88b79495c2b3580a108b73055b3799e6b",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29476,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29476-login-graph-connected155-v1/manifest.json",
+      "sha256": "be33d1f7821fe9dd86793684fb95c599bf371b1689ea55e50d3b6db0b56efa6e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29478,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29478-login-independent-v1/manifest.json",
+      "sha256": "eeab9b2aee8667feca3734855e68b032f707c774a426d9029d7e19daafe4f751",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29578,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29578-sealed-duplicate-source-manufacture-v1/manifest.json",
+      "sha256": "7ddd398234b765969db62539a3d72f134fb087590a5c9191a573a7361419c958",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29600,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29600-sealed-public-compile-v1/manifest.json",
+      "sha256": "14b58498e53d85a7ed07d1297c6b90e1d23f549538769447652dd4d054c0ee58",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29602,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29602-sealed-public-static-v1/manifest.json",
+      "sha256": "a0ffcd3bbc6fd37561ab021a65d920d834a31725ca35dffc8281e3a85f5c44c9",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29604,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29604-sealed-test-literal-source-refine-v1/manifest.json",
+      "sha256": "6126d01ff6855b8700a78b6dca2b4d257c85633350cef7f611f332f0b45ec342",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29606,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29606-sealed-changed-test-static-v1/manifest.json",
+      "sha256": "cd06b1bd198a1c7be005b45bf3534635d3fc4169e2150f64b31436014f82eb98",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29608,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29608-sealed-public-byte-review-v1/manifest.json",
+      "sha256": "bf39eca0a25f81ffe589061f9bff436c977c684c7607b25f8d96f14e990aede0",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29610,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29610-sealed-static-independent-source-join-v1/manifest.json",
+      "sha256": "428b2c1c417462a6962d4c6d4e7fe40be60b26035809d4727546ff72c6e0926f",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29682,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29682-ssc340-design-main-publication-v1/manifest.json",
+      "sha256": "d5e8798d3630439d82c10d2cd252d29f8f5974a1d3f8dc6477a312db8535b50e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29684,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29684-design-ledger-section-sync-before-v1/manifest.json",
+      "sha256": "3eb4659454bf0788ab951d9f3f5c5405de21a6fff2ff3992362e7f6ef3dda37a",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29690,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29690-preserved-markdown-publication-v1/manifest.json",
+      "sha256": "034deb079c56ca331630e06df1b4349549d02e816de4843d53b577f7827face5",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29698,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29698-null-test-source-review-before-v1/manifest.json",
+      "sha256": "721806607fb1006771f98fa3713eaa57f6d7a9119aa32b7babda221eff099cd1",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29708,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29708-nullable-check-independent-source-review-v2/manifest.json",
+      "sha256": "eaf2318e9c19a8ace7da420fc69183dcaa99a109cc6913b2e633f1274c81ec07",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29710,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29710-nullable-check-source-static-v2/manifest.json",
+      "sha256": "7b1b84658a3466bfa35c60e1b5252c718943f9b97f48b0a36450c9fd67734fde",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29714,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29714-nullable-check-source-static-join-v1/manifest.json",
+      "sha256": "86dd88c1180ce85d765d36250a9c1d363c149915dd387bd600aeabd74a07a730",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29724,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29724-p01701-four-owned-source-contract-v1/manifest.json",
+      "sha256": "e36935487ce11435f392b0110c1a188d866a68775587c1a2a73d9f438bab2244",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29730,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29730-p01701-test-id-corrected-contract-v1/manifest.json",
+      "sha256": "0b9ec146411a831d1f24241ae0b6ee42fbb4827a25bbbd45cc8f20a8cbc37b75",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29768,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29768-ssc341-design-main-publication-v1/manifest.json",
+      "sha256": "d50debbc42caa72c5db8aed0796960bb7f6c005870c434fc21ced910e2f395e0",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29770,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29770-design-path-quoting-before-v1/manifest.json",
+      "sha256": "1af1521cc44cf6513628104c5cc726ba1df5c33771b97592c6fbb927bef2cb40",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29778,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29778-morning-typed-sql-source-manufacture-v1/manifest.json",
+      "sha256": "5195965a83a5f452dfc664414ebf5658948ee9624ae42e054a6fc99e629e6446",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29780,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29780-design-ledger-eof-before-v1/manifest.json",
+      "sha256": "89cecd1becd8e2957db17c8d9e376cbbda798882bd50bdb9777a42c1d05dcd6e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29788,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29788-morning-typed-sql-independent-source-review-v1/manifest.json",
+      "sha256": "3d52889d725fa0518c2f09a62085c8f55192eefb97136305b38af5439f6ddd5d",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29828,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29828-pure-helper-test-operand-before-v1/manifest.json",
+      "sha256": "75421f2dcc12a7631b8529e52b9fffd3a66a91a9cae44e0a2f91bf9a5723585e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29874,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29874-morning-dominated-condition-source-v1/manifest.json",
+      "sha256": "d0c5ce3b82225392c6e6c0eb13ecba24794387f12857a3b0744db18451f15db1",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29892,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29892-morning-pure-sql12-static-v4/manifest.json",
+      "sha256": "c928c08dc6291715241aa7ba7f02dd5b5ab148053c28f9fb3c12258175166a76",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29896,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29896-morning-pure-sql12-unit-v4/manifest.json",
+      "sha256": "cf3f3ae74ed0412378cde7438e8fafd2e3cc50732bbae5a03c6f489f9dbc53d3",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29898,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29898-morning-pure-sql12-post-v4/manifest.json",
+      "sha256": "16f65a4467982b53791f0812107f863bb93d77e67e5bf3be836c5f7ab6d3dfc0",
+      "recordedExit": 0
+    },
+    {
+      "pg": 29904,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29904-morning-pure-retest-source-ykt-join-v1/manifest.json",
+      "sha256": "5b1beb27dfbe8469d716606b5be104ca08c22796baf9820fa5ef8a2ed3736a59",
+      "recordedExit": 0
+    },
+    {
+      "pg": 30636,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30636-entry-copy-batch-literal-independent-inverse-v1/manifest.json",
+      "sha256": "ef0eb7081e4c4bb607deb7f72b82ac781d83bf20bf8fee075e64fdd1d833af6c",
+      "recordedExit": 0
+    },
+    {
+      "pg": 30642,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30642-entry-copy-batch72-fixed-static-v1/manifest.json",
+      "sha256": "ee52cb548d21f1935f6871b899af144debbbd50eb1d7121ee23d9c1ac7194043",
+      "recordedExit": 0
+    },
+    {
+      "pg": 30646,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30646-entry-copy-batch72-fixed-unit-v1/manifest.json",
+      "sha256": "4b2c63a6b0f8382b86a4ce5e423a26c92d1289f1c7675402589dea60bf4adff6",
+      "recordedExit": 0
+    },
+    {
+      "pg": 30648,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30648-entry-copy-batch72-fixed-post-v1/manifest.json",
+      "sha256": "3fc0f0e1ba71cb41095d292caa933d7e95253908346a8e68694282b11932d32e",
+      "recordedExit": 0
+    },
+    {
+      "pg": 30654,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG30654-entry-copy-batch72-independent-source-trace-join-v1/manifest.json",
+      "sha256": "f12b423ee69d11785581897f4e7fabd8e580712e88ccebb8af9ba6384ce7850d",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31282,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31282-video-nullable-varargs-fix-review-v1/manifest.json",
+      "sha256": "f63b238feafb4bad198511806697830c30475aee34505406c0af349801605f2c",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31284,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31284-video-catalogue80-nullable-factory-fixed-prestyle-v1/manifest.json",
+      "sha256": "412649f4b5331ee6fd2da920c09267451f5fbd4dd19825aa31086ee873556225",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31286,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31286-video-catalogue80-nullable-factory-fixed-prepare-v1/manifest.json",
+      "sha256": "04a1223b2cfffcf49093cc279dea8bed3e075368e7f51b9dfd0c6009e6cba1e9",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31288,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31288-video-catalogue80-nullable-factory-fixed-static-v1/manifest.json",
+      "sha256": "59a30e300ef9e78ed1af65b47146621a9fb51ff73c58daab0e8afc1a0893e73c",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31290,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31290-video-catalogue80-nullable-factory-fixed-preflight-v1/manifest.json",
+      "sha256": "c1ee2deeb9d1bb7d69fec80d1c723842ca1a3fd437ab7b7cf71f46e0059ebd17",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31292,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31292-video-catalogue80-nullable-factory-fixed-unit-v1/manifest.json",
+      "sha256": "816e38713c15a466c847f702f704c1d17cdf4c424150565b0ce1717702b6d109",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31294,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31294-video-catalogue80-nullable-factory-fixed-post-v1/manifest.json",
+      "sha256": "edbf32f17e83ce5dd5a8de9e2ef7b4e00b8b3e515477163de8f999a03502e59b",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31298,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31298-ssc358-limited-ledger-main-v1/manifest.json",
+      "sha256": "a629c7cc8713075682523eb8f026905fea332eb99547738e90de0bcb003e3d62",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31344,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31344-music-pairing-test-literal-fix-v1/manifest.json",
+      "sha256": "d400133a6fe955c2239837bb0bbf395c1073f93d0aa1ff544f08f6fe17864571",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31360,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31360-music-test-format-fix-v1/manifest.json",
+      "sha256": "3e103d22717baf1bc12e94e0c5dbb973d488d19636bbf472dadd8515c6b870c9",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31364,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31364-music-pairing26-format-fixed-prestyle-v1/manifest.json",
+      "sha256": "6cac0f045cbd77d31c6d66462b41539ba9e316dbc0a33cd2cb8f1fa7e5b08592",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31372,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31372-music-pairing26-format-fixed-unit-v1/manifest.json",
+      "sha256": "184a486f765440044155dc374f0cd4be000cc4473b89e38254e649d48eb84a88",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31374,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31374-music-pairing26-format-fixed-post-v1/manifest.json",
+      "sha256": "4297bf498518f54c8017b6b762ae65b165f362c7720c06b4f97ec5c1072f9af3",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31386,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31386-music-catalogue-test-declaration-fix-v1/manifest.json",
+      "sha256": "35352b36df6a826030c647986b298ed56cb94a65a310a36e7701bac4b3bba2e0",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31388,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31388-music-catalogue-source-style-fixed-v1/manifest.json",
+      "sha256": "1e26db5a677379d632ac2413cbe6a9db0f8d5961f7b8efed08b9b7b4fdbd2858",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31392,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31392-music-catalogue162-prestyle-v1/manifest.json",
+      "sha256": "c00715ee1d01b86007c2ffc8e18f1bbda627c9bb7073575b354086ea306a939f",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31394,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31394-music-catalogue162-prepare-v1/manifest.json",
+      "sha256": "d18dffc765db99e1559fc033613b116ffd6d5456e3264f0b341ff1ab943b883c",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31396,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31396-music-catalogue162-static-v1/manifest.json",
+      "sha256": "5a3d2fcbe400b9c90e6448433b080af9bbc0c485ef211d1c521097b63acda41f",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31398,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31398-music-catalogue162-preflight-v1/manifest.json",
+      "sha256": "591787315fa0d928619d9ac600fb8b3a6dd697436517a3504df8dc002d7d7b38",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31400,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31400-music-catalogue162-unit-v1/manifest.json",
+      "sha256": "879b665af6a944e37fa6a4da43aa7acb36bf95da9cfa7937ddf2e1b2596c8458",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31402,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31402-music-catalogue162-post-v1/manifest.json",
+      "sha256": "76614d006c431e20b613e2d624b27d48a0829c687b377cc93d62275ba5a2781b",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31434,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/manifest.json",
+      "sha256": "238c51f2f71e8377ac66fe7a4b8df411882c73278b733c6122ecf78c14dc5b20",
+      "recordedExit": 0
+    },
+    {
+      "pg": 31436,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31436-generated-measurement-caller-root-failure-v1/manifest.json",
+      "sha256": "5b4d9c4e88a6a220984cf56e8dfd3c063ff2a8908bc1e5b096d046119363cdde",
+      "recordedExit": 1
+    },
+    {
+      "pg": 31438,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31438-historical-media16-unfiltered-measurement-v1/manifest.json",
+      "sha256": "a04a516c16f619e82873364398b2f95ac3e2fc85ebd2901a9519c6b60cf89ba6",
+      "recordedExit": 0
+    }
+  ],
+  "fiveCurrentTestPinsMatchOriginalWorkerQualifications": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "b9101fe7cf8a6465da8ebc19ac60adad64573dc8813aef95ad6c2948c3f299fb",
+      "originalPost": 28090,
+      "source": "3ad1d9869587cca716c152afe93f79496cdcb3b1"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/InternalErrorRouterPortTest.java",
+      "sha256": "06fdd443bf914ad9b7a1696697d2f7ca37ff690d3640d49520df06156bca8306",
+      "originalPost": 28112,
+      "source": "e2f1fdbe8d9fb172fccaf8bc4b3d05bf8e531ba4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/ErrorDispatchRouterPortTest.java",
+      "sha256": "8be257a041d6e7d64c9f351a71f2155746f57de8d8da419007728a4bcf16f9f9",
+      "originalPost": 28112,
+      "source": "e2f1fdbe8d9fb172fccaf8bc4b3d05bf8e531ba4"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "sha256": "cdd8d6da87e199742bdc7c33cad637e485d14e2ab46603d711a23781446fc449",
+      "originalPost": 28136,
+      "source": "7241e7d16eb27ba5a06f7d5a48b9ee7a6dc3c4e5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "sha256": "ddd4b35be315b612cc80587f619dad24e0c009280c92e471c4bb557fbe7ec950",
+      "originalPost": 28136,
+      "source": "7241e7d16eb27ba5a06f7d5a48b9ee7a6dc3c4e5"
+    }
+  ],
+  "all105QualifiedJavaSourcePinsUnchanged": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": "8e22a0c8da9b500d0213c8550eacfc4527e1839b4fb4b09c7acd40bfa808a547",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "c5469c0088d9b8effe2b22f26c2159942f32b127ad9c0a40f93e736be3038520",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": "45f55dd1ce4c01329f9f9e6c10f7efa38483f76c1be7c46d30d91c1028966d21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java": "44f69f9c9a08c2a7b15018cb4840307f6ca68577a6df1f2d5daad07fff1fe341",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java": "e1f9f8ff3160bf5f5ba13bbfdff0ac63e91753d9d647b82ae36b0c889e625ffd",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java": "fe4d7988dae688fb589d47a4056c7ab82077b2565e6dc3ffa8a3d71d1a7aeec2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java": "fbd5388c58212b11d1492e42624130f019ff4ea4d1b332bd95596e96764f4f2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java": "4af1c5dbd38f07f53e58dc7c293d0981071ccc98834048c39fa744b1e7e7f964",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java": "b1defeb746f70baf41b840e35da8eaaf312dc5fa323f04dfc4af8ecca2410f52",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java": "63e3a32d69491fee9cc86fd41479c5fdf7480d2860a944b3d241c0f4552f8f45",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java": "652bf8c557d37c57ddaddb1fa1690d0c7f80a184ae8770b28c88c4edc607c74e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java": "0a927338f752332269cab8b221d001b95f780b2504b19b7ecf277024359f4660",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java": "9bf74db29e26b5ead8a7dfc0e9b996fd01d09df5bf695ac6aa7bf2b0e3995ca1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java": "607d81ec04cdaa56d9b7f67386a06933cb26d2da626d3d1096fb7b7181e70fea",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java": "e6fd5c324585f2ac7435b8d701d27795b594462f6893af2ee66102773fdae2a5",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "99fb3103406bccfac5ca2ebfad79aa90b6ed846e016cd297d0fbc4af73ef72b1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "235372dec6e7edfac1cffd293df2ebbc02076ed6c9bbdb93b8a77c304c3faf7d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "7acc61e96dc0138ee68dc3ac8a1058a8efc26841aa05ffa5113f0154665ae893",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": "087c49bbb56bb77b0ae2c509bc648f4161e3e7c977a242323616d3dfc6e83d89",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java": "f2b45e3b3af748309a156f4cb76c76a922260caba10faafa4a4c2a858029bdc2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "5fd8ada1aa540a17f22d833c86b55a1b68b0f8d770342f0aad49033f3b60315b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "22b1920ecbbea3f6de27f028236ab0f2832b01625e3ef0d9588195efa0ae9453",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java": "a1edd16c1d88d7a703c7ec11f03f7fda3e9aa7772ccf90f8f637f66bc9c2d55e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java": "52922f18ff3969243cceb6d8599645321f087fd4a1aea7d170164546934c6e21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "451c5a97d09b5eacb2e33e2b4c931906663252bb916e3acf3fe30127ec86fa8c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java": "512950dd87dd65bda553724928839256d23fe75e4edd6eb73e36b8d2f6325b54",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java": "86fa917f56ddbe06dbddeac8f6ae8157c57627f75657995e328d8c48862bffa0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java": "02add010a85af786dc783967587d7873028c68787f87b83696109fa2c994bd60",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java": "852aa946ab564a4a5610cffb44fd8e8cc14090c960e7caf36de0d2c19e6cc302",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java": "3299ff40a3eef6ea67f0428950e835339a673e741ddac8493f8cc4aed3aef180",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java": "0d3ccea6313fd02ef9130d8b52f0261d79da887c1c5fe457f260749a2a50c14a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java": "745f41fafe37d522a0a039f040bf6c9b6299d722a532b06a128835e54e2100d6",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetMigrationManifestTest.java": "c1e1d0a2d65d0c72f185618b50321fa0534e0ffa41f5afc293e6f425a96071c1",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java": "300346ef98cd3eb1185be9a816e3915ab3c2017026704fbc04ee40a4ab336b70",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioCopyDatasetTest.java": "a9e7b3790668501934134496adebab5a9a45bbb58dc4d5498020b1c4c8b8dbda",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioFileCopyRowTest.java": "b9f585c34eb3e2d6a7c8d76c4d98d5ee3ab416a0148b6440747e7d0f9f5c6310",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AudioMigrationMapTest.java": "18d0c1e126cbfa3229dff32ef7211f652bf8ad0e548349a6902ff47817502778",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapperTest.java": "3d8075eaa17339ca732b805b5a5eebdaf237f4d2e2c2a31aaf496db86e556b1a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReaderTest.java": "6307bc5294d767066efb04626c2ce887b0aaa66e33738baf6b4711c1a11db709",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReaderTest.java": "90353e4b99ad5e27854df05b02f748a4ff017da36a1d5bfa02523f42c6d99ca6",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationAssemblerTest.java": "55ea802760a03879636f2c0577937c24d9acee4998b699317687976eb65a8a37",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationProjectionTest.java": "1fff006ab28c623d1153331b9d02607c33968e56293289276a27a31f85e0da00",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapperTest.java": "80993c1ac9810be89b0b3dd1e804446db0f93ee0374a433f674b51bf5dc499a7",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReaderTest.java": "72b37ee5991e56c50dbe4c7842a3c9de1cc97e27d7ef5459a7be3452d4928a21",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapperTest.java": "209b5e0ed546bf9ebf0376fc037c8e9fa3aac5e298c90fa62f460dc95e1c7195",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReaderTest.java": "6585b3dce23c74aca0a2b3a6e6f04126b46788bbfa6c8c743de8b68ceadd2f6a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReaderTest.java": "978ab30f93d0025db00690a214ec575577af0aa5842c944470ee15a889028165",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatchTest.java": "94a466d3bf99bbd6ab2fbb69ff49d5525ef8193a36c9f3fcde1b151d752c303b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MediaAssetCopyRowTest.java": "72e2c5fc9a7c4b43bda7f27793f735a3e6070b146538d81ca56330917e166725",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCleanupIdentityTest.java": "243296263b58b90bdbc61c6ba6193813c459da7a11e07824f0b95b52b5733363",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationCopyDatasetTest.java": "4d46fdb216630c2aa42cb20c39266cb21e2518dd2b87f6e5d44fec461eb7063b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationGamesVerifierTest.java": "1889005b57717244a56171d87c092f9bcdfa361a8716ad69df6f2bf6c3755a6c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java": "cca987730c5f9363bcda5061f618052520727ff5353cddb88e29c11b2fc54bcd",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java": "d090b2fb603a00ce5dbf7051471a431e46cae846db6e42542ce338596f49e056",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java": "c2304d089f33c998a511899fdc566750f02488ec5294048c6d692bfec83b636a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDatasetTest.java": "f62951c441cfd00f763a3351f52b880c74f332ae2188dc9a35939bf01af232cc",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprintTest.java": "d0c07570dd7d5df141bd5ee87cf9498892850a15a0539098c63fe218bca06b70",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java": "daa6dd77fea6e593f51a6b9d29195a9644ff2abd27d545a8e5deab75d24d7ca6",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.java": "feb5862893c7164e018af496e3b48f74a67b178aa7c13d07ce35eb7d96298209",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisherTest.java": "c11b07f7e31ce25d524b1aec2f245d5303e7d8e8878ffd3ada1f621915c2287b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicLogicalIdTest.java": "90f96962f121fde5175c9f52fc942d7304b189dca9a3af2eb6405302b131eeb4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogueTest.java": "f84d1e7b223da5de2725bb40ef711f1c3574973d6c57bcad476b0da28bc25bc4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MusicMigrationPairingTest.java": "9bfdc29e8d92cd0830d27cd66e01c2037bf7758b5fb7d9c14b2065086abc28f0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoderTest.java": "cbee2582f1f9728ae804d572b48624f0b191916e6e2bc6c85651d01e605d55f8",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriterTest.java": "48357e8d92a245361933a34d43e0e705f430554000b2afaff36fb36fd98ab24b",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioCopyDatasetTest.java": "13d6b049c885fc4a6c201b83899e7fba330ec8982256d9e107b78b9b53bd4306",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatchTest.java": "11d12471658e2a97b75cad70ea8b96b90590acec3d3f16b8db7a8a540063ead0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRowTest.java": "7f95ecc98b41b34daa5c7ed4acde8f0ae6705ba0364cbfb57b235c84324034d4",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMapTest.java": "3049e810bd7b34071cd585c1295c444e7d4b1829800e49d2162a53f94a974815",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMapTest.java": "9ef8e166c4c6e3bbeed6accbbd6c1a832be907b332f7d282d3c622a87b02fb9c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatchTest.java": "c429571193e26ddba8726df4e5ce74238361030e806f12f75abb25c081b37089",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMapTest.java": "d5ab182d366e21f0f169697ad5606a483ad36fa883ec1887e343a683dca67f3d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioGeneratedValueTest.java": "6c609a9e7d259ca7672496eb81e068606f4816b42fa94d824313f347971067ac",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/ScenarioStagingTablesTest.java": "03547a65ca12998d154256db410b3fc422f3eda6ffc4f4fac9fc03f10e571765",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyBatchTest.java": "2d47fd03b673e296d9cec4282542c7e62bf3c9fe13777490c133a941cd087538",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerCopyRowTest.java": "44f19d3afa8f4feb2f8e388d152d4518ae0a211d82c96cd7139e3c57bf3d785d",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerMigrationMapTest.java": "3f5f05d5e68204fb5977c260a9e6ffb18c5c02fcbe6a69164ae6f3fe2faeab24",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/SpeakerStagingTableTest.java": "c249f5414fb3d229b86ba6e2b977fd3683b435e624398cbf1e07968eb9e90d3f",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogueTest.java": "2c22001d8962ef28ce02fcaad0da600b29ef23c18c271058f7e896ee88c1ec7a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifestTest.java": "d451455c2a1d0dbb951209f66a7c747c592a40e96365ff93bc33390fa7cc216c",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifierTest.java": "2a947e37feaaf16380b77c9ec2f54467f8134059632217c255f1d55fdcb00a21",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifestTest.java": "de0a1731114d137bd3bc8bae11a2c6de674e1ea378cce544138f533e6dae3660",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinatorTest.java": "c0a70307863a7b2eec43427b97c67df7e2c235d755fb9d81b35ff0205cf1a691",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/CurrentMigrationTransferTest.java": "d6590b13251856d2df7442b917403dac626cd74ba82eae582d7ca374141912ff",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifierTest.java": "d144a6486f36db6f4d92bb25c490db029454cc74917c5fd5f62811fc57afec08"
+  },
+  "originalFailureAndPartialEvidencePreserved": true,
+  "unconfirmedHistoricalMentionedReferences": [
+    {
+      "pg": 29688,
+      "reason": "Historical mention has no direct public manifest in approved namespace; not accessed or counted successful"
+    }
+  ],
+  "unconfirmedHistoricalReferenceNotUsedForQualification": true,
+  "oldSuccessfulTestsReplayed": 0,
+  "productTestsExecuted": 0,
+  "newProductDefinitions": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "effortRate": null,
+  "bug2999Ykt2527RemainOpen": true
+}

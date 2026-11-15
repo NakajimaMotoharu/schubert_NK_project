@@ -1,0 +1,78 @@
+{
+  "groupId": "PGPT-WBS65-LEDGER-SECOND26-SCOPE-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2088_WBS65障害次26scope照合終了.json",
+  "category": "CONTRACT_AUDIT",
+  "kind": "REWORK",
+  "scope": "Next26 of original199 unreviewed ledger candidates. Original dated/undated explicit scope and existing immutable host proof joins; BUG2738 API7/Router18/Metric28 already done, never redo. Source-only/actual-native/DB/unknown not accepted; preserve OPEN and state exact unmet condition. No source/runtime/DB/native/Test changes or new product jobs.",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/3402_ledger_second26_plan.json",
+      "sha256": "75751c27e1ea31a156d6410a408c6689db16584c0deeba7ff4a413fe126add87"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-F03"
+  ],
+  "source": "90a077a21e47616c235800f019ae66b521f72631",
+  "run": "PG33700-LEDGER-SECOND26-SCOPE",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 5.4
+  },
+  "capPp": 6,
+  "workIds": [
+    "F03_LEDGER_SECOND26_SCOPE_REVIEW"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2087_WBS65予実・障害次26scope照合後版602.json",
+    "sha256": "a4b38769a4e00db92badb3ed6c81c942ee949446e093f2a03ffd7f3021ce8009"
+  },
+  "nextCommand": "Commit second26 ledger scope proof. Remaining173 original candidates require scope/current proof audit; do not replay API7/Router18/Metric28/CHRtool46/Login155/Morningpure12/Migration1050 successes. Keep five validOPEN/related YKT global/native/DB/Root holds. Reconcile real permitted production gaps after historical status audit before any new PG/PT pricing. Freshquota/hourly; ordinarygroupnotstop.",
+  "sourceAfter": "ef461eba8bea80b4ed17f52d832094c139fef122",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG33702-ledger-second26-scope-join-v1/manifest.json",
+  "manifestSha256": "d7754524fc02348e038fb34bb61a1c7fbdb0f1280a21831cac9823590a5e7309",
+  "terminalAtUTC": "2026-11-15T04:09:30.583007+00:00",
+  "outcome": "LEDGER_SECOND26_REVIEWED21_LIMITED_SYNC5_VALID_OPEN_NO_PRODUCT_REPLAY",
+  "technical": {
+    "kind": "LEDGER_SECOND26_SCOPE21_LIMITED_SYNC5_VALID_OPEN",
+    "productionCoreMain": "ef461eba8bea80b4ed17f52d832094c139fef122",
+    "actualLastQualifiedUnit": "a48eec601dfeeb623e2ed073445b906e3560104a",
+    "audit": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33702-ledger-second26-scope-join-v1/manifest.json",
+      "sha256": "d7754524fc02348e038fb34bb61a1c7fbdb0f1280a21831cac9823590a5e7309"
+    },
+    "reviewedOriginalCandidates": 26,
+    "totalReviewedOriginalCandidates": 52,
+    "remainingOriginalCandidates": 173,
+    "bugLimitedStatusSync": 21,
+    "validOpenPartialHolds": [
+      2828,
+      2840,
+      2850,
+      2851,
+      2852
+    ],
+    "legacyYktSync": 8,
+    "newYkt2529FiveWorkerScope": true,
+    "relatedYkt2387DifferentServletScopePreserved": true,
+    "sharedYkt2359_2055_2404_2405Preserved": true,
+    "oldWorkerProofsReusedOnly": [
+      28090,
+      28112,
+      28136
+    ],
+    "oldWorkerApi7Router18Metric28NotReexecuted": true,
+    "all105QualifiedJavaSourcePinsUnchanged": true,
+    "workerTestPinsMatchOriginal": true,
+    "newProductTests": 0,
+    "newProductDefinitions": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
+  },
+  "checkpointText": "PG33700/33702で元225候補の次26（BUG2725/2738/2814/2819/2828/2832/2834/2840/2843/2848～2857/2875/2893～2898）のscopeを元公開manifest/hash/source/run・個別後条件と照合。21件は既限定解決の状態を同期、5件2828/2840/2850/2851/2852はtyped順位/実native/DB/PT/親65等の有効なOPEN-HOLDを保持し現行source是正済部分と区別した。旧BUG2738未修正記録は古く、API7/Router18/Metric28は元PG28090/28112/28136で成功済み、五Test byte同一/finite finallyを確認し再実行0。原YKT2387はServlet別二workerなので変更せず、五hostworkerは新YKT2529に全対象/非該当/既再試験を結合し限定閉鎖、既YKT8件同期。YKT2359/2055/2404/2405等global/partialは不変。foreign BUG2722/2846/2874の途中OPEN段落を変更せず、各対象自身の初回状態と明示最新footerだけ訂正。元52候補review済=47限定同期+5有効OPEN、残173未reviewは未解決数と断定しない。BUG2999/YKT2527は全体未完OPEN。全105qualified Java source byte不変、Coreef461eba/Unita48eec60の1050/default534/raw617は前scope資格として保存、新規試験/正式/受入0。正式1964/53・正本184/625・元190新0・工数null・App179/35140/35075/歴史不成功65不変更。追加台帳手戻り.6/1.8/5.4のみ完了、元worker価格/元904.85/SV/群開始を保持し二重費用0、残397.324/837.386/1643.415・専有実費token不明。実RootActual4/native/DB/aru/全451/CHR/ITST/HOLD未受入。"
+}
