@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.security;
 
+import dev.codex.schubert.nk.web.session.SessionStoreException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -65,6 +66,7 @@ public final class LoginFormAuthenticationConverter implements AuthenticationCon
       token.setDetails(address);
       return token;
     } catch (IllegalArgumentException | IllegalStateException | NoSuchElementException failure) {
+      SessionStoreException.preserveFatal(failure);
       throw new LoginFormRejectedException();
     }
   }
