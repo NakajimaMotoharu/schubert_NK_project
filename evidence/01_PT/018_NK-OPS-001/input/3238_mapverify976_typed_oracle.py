@@ -1,0 +1,21 @@
+"""Declared readback contract and original958 preservation; no actual artifact/database access."""
+from pathlib import Path
+import re,json,hashlib,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';e=b/'evidence/PG33200-mapverify976-source-v1';ref=lambda p:dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest());base='src/schubert-nk-bootstrap/src/';main=base+'main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java';test=main.replace('/main/','/test/').replace('.java','Test.java');manifest=main.replace('CurrentMigrationMappingVerifier','CurrentMigrationMappingManifest');mt=test.replace('CurrentMigrationMappingVerifierTest','CurrentMigrationMappingManifestTest');changed={main,test,manifest,mt};old={}
+for folder,source in [('main','a4a8c7ee2955053bc2ca3632cdeb68f948c45dda'),('test','a3d095f6e0d353e23a139c97c8ecdfb901a159e5')]:
+ for p in (r/(base+folder+'/java/dev/codex/schubert/nk/migration')).glob('*.java'):
+  path=str(p.relative_to(r))
+  if path in changed:continue
+  h=hashlib.sha256(subprocess.check_output(['git','show',source+':'+path])).hexdigest();assert ref(p)['sha256']==h,path;old[path]=h
+assert len(old)==92 and sum(len(re.findall(r'@Test\b',(r/p).read_text())) for p in old if '/test/' in p)==950
+before=(e/'original-CurrentMigrationMappingManifest.java.txt').read_text();now=(r/manifest).read_text();new='  public void verifySerialized(byte @Nullable [] candidate) throws NoSuchAlgorithmException {\n    new CurrentMigrationMappingVerifier().verify(candidate, retainedSha256);\n  }\n';assert now.count(new)==1
+def tokens(s):return [x for x in re.findall(r'//[^\n]*|/\*[\s\S]*?\*/|"(?:[^"\\]|\\.)*"|\w+|[^\s]',s) if not x.startswith(('//','/*'))]
+assert tokens(now.replace(new,''))==tokens(before)
+def methods(s):return {m.group(1):m.group(0).strip() for m in re.finditer(r'  @Test\n  void (\w+)\([^\n]*\)[\s\S]*?(?=\n  @Test|\n  private record)',s)}
+a=methods((e/'original-CurrentMigrationMappingManifestTest.java.txt').read_text());z=methods((r/mt).read_text());assert len(a)==8 and len(z)==10 and all(z[k]==v for k,v in a.items());assert len(re.findall(r'@Test\b',(r/test).read_text()))==16
+v=json.loads((b/'evidence/PG33154-mapping958-source-v1/independent-golden-vectors.json').read_text());t=(r/test).read_text()
+for key in ['normal','empty','oneFile','boundary','overlap']:assert json.dumps(v[key]['canonical']) in t and json.dumps(v[key]['sha256']) in t
+code=(r/main).read_text();assert all(x in code for x in ['byte[] data = candidate.clone();','bytes > data.length - cursor','cursor != data.length','MAXIMUM_HEADER_LINE_BYTES = 95','MAXIMUM_BODY_LINE_BYTES = 125','new ScenarioFileMigrationMap(files)','new ScenarioEntryMigrationMap(ids)','new SpeakerMigrationMap(speakers)','new AudioMigrationMap.AudioMapping','return Long.parseLong(value);','catch (NumberFormatException ignored)','catch (IllegalArgumentException ignored)'])
+assert all(x in t for x in ['reject(new CurrentMigrationMappingVerifier(), data, hash(data));','wire.field(part, 3, hash);','wire.cell(1, 0, 4, "999");','wire.reverse(3);','assertNull(failure.getCause());']);assert 8+3+10+10+64==95 and 6*20+5==125
+m=dict(actualExit=0,oldUnchangedSourceHashes=old,newMain=ref(r/main),newTest=ref(r/test),changedManifest=ref(r/manifest),changedManifestTest=ref(r/mt),originalManifest=ref(e/'original-CurrentMigrationMappingManifest.java.txt'),originalManifestTest=ref(e/'original-CurrentMigrationMappingManifestTest.java.txt'),manifestOnlyReadbackMethodAdded=True,allOld8ManifestTestsByteUnchanged=True,oldPartBytesAndHashContractUnchanged=True,independentGolden=ref(b/'evidence/PG33154-mapping958-source-v1/independent-golden-vectors.json'),malformedFixturesHashIndependentlyRecomputed=True,sourceBoundExpectedShaEntryPoint=True,numericAndModelContractsFromQualifiedExistingComponents=True,headerLimitDerived=95,bodyLineLimitDerived=125,newDefinitions=18,oldDefinitions=958,wholeExpected=976,allMain=47,allTestSources=49,physicalClasses=67,actualCurrentOrFileOrDbAccess=False,authorityIssued=False,newAcceptance=0,formalAccepted=False)
+(e/'typed-corrected-manifest.json').open('x').write(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(dict(actualExit=0,new=18,whole=976,oldSource=92,headerMax=95,bodyLineMax=125))

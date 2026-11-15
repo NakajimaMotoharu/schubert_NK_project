@@ -1,0 +1,31 @@
+{
+  "ssc": 409,
+  "main": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java",
+  "source": "b8fa33a5c0aeaf48d979930001f9ea9997a55ce7",
+  "title": "対応表artifactの期待SHA束縛・形式とID結合の読戻し検証",
+  "detail": "NK-MIG-001、RD MIG003005006/MIG-DAT005/MIG006/TST、UI223242254、SS311331343 ETL3/13証跡。SSC408四対応表の出力に、元宣言の期待SHAと保存候補bytesを照合する入口が未実装。メモリ内読戻しを追加し形式/内容の破損を判定する内部補足で、format/RD/UI/DDL/DIF/QA変更0。実file読取・保存・Current ID資格・authorityを授与しない。\n\nCurrentMigrationMappingVerifier.verify(Nullable byte[] candidate, Nullable String expectedSha256) throws NoSuchAlgorithmException はnullとlowerhex64以外の期待値を固定IAEで拒否、入力をcloneして以後snapshotだけを使用する。全体SHA256を元宣言の期待値へ照合してからNKMIGMAPPING1 LFと四frame FILES/ENTRIES/SPEAKERS/AUDIOの固定順を検査。期待SHAを同じ未信頼inputから算出して渡すことは元証跡の代わりにならない。戻りはimmutable四件数Mapで、認証/権限/業務成功を表すreceiptではない。署名/key/permit/credential/DB/FS/復旧/再送0。\n\n各frame headerはTAB四field(kind,count,length,lowerhex64)とLF、ASCII可視文字/TABだけ、header最大95 byte（LF除外、8+3+10+10+64）を満たす。count/lengthは正準decimal0..Integer.MAX_VALUE（+/-0/leadingzero/空/overflow禁止）。length<=残byteを加算前に検査してcopyし各part SHAを照合、余剰/欠落/順/未知/重複/末尾byteを拒否。各bodyは対応する既headerを厳密保持、LF終端、正確行数とTAB列数4/6/3/3、ASCII/control規則、行125byte以内（六field最大20digitと五TABから導出）を検査する。これは既numeric領域の表現上限で業務件数の新上限を追加しない。宣言巨大件数から配列を先行確保せず実byte/実行数で検査。\n\n数値は0又は-?[1-9][0-9]{0,18}をLong.parseLongで範囲照合、uintは0..Integer.MAXを別検査。FilePair→FileMapの再構成canonical bytesを原bodyへ完全一致比較しgame/current順・target一意・game別dense順を検証。EntryのtargetFileをFileMapへjoinしてgame一致、currentFileを逆引きしIdPair/PlacementModelを再構成して全六列/現行global順・entryIndex・PK/順を完全比較。SpeakerMapping→SpeakerMapの同canonical比較でsigned ID/target N12/重複/順を検査。Audioは既AudioMapping recordのgame/N12に加えcurrent ID/target IDのstrict increasingと正準三列byte完全一致を検査する（assetを合成せずAudioMapのasset契約を迂回しない）。内部modelのIAE/数値overflowは自前固定診断へ再throwしraw入力/causeを露出しない、NPEを正常化しない。SDK SHA256 unavailableはchecked例外を透過し自動正常化/再試行なし。\n\n既CurrentMigrationMappingManifestへ verifySerialized(Nullable byte[] candidate) throws NoSuchAlgorithmException を追加し、このinstanceが保持する期待SHAを新verifierへ渡す。既constructor/四frame bytes/hash/count/clone/factoryを不変更。actual保存callerは別HOLDでありこのmethodがFSを開かない。四表実Currentとの整合・署名・全移行・ITSTは未受入を維持。\n\nPT-MIG-MAPVERIFY001独立正常五golden/既hash、002null/期待hash書式、003全体改変/違う期待/clone、004magic/短欠落、005四順/未知/重複/余剰、006TAB数/ASCII/control/LF/header長、007count/length decimal境界/巨大値/overflow、008不足/part hash書式・不一致、009子header/行数/LF/列数/行長、010signedLong正準/overflowとuint、011file game/重複/並び/display-order/target N12、012entry orphan/game/重複/順/indexと六列、013speaker重複/順/game/N12、014audio重複/逆順/game/N12、015固定redaction/不変counts/入力非修復/繰返し、016共有8worker64/Future5/finallyshutdownNow-await10。悪条件は独立fixture builderがbody/part/root hashを再計算して構造検査へ到達させ、単なる先行hashエラーで誤PASSにしない。新Manifest009010は保持SHAへの束縛・正しいserialized/異なる有効manifest/NULL・改変を検証する。期待は固定Python goldenと独立JDK hash計算/明示したbyteと後条件で、本番expected methodを呼ばない。\n\n新16+既Manifest新2＋旧958=全976/47Main49Test67physicalを同source一exec/RootNullAway-lint-CS-SB-PMD各site/CRC-init/既定と無filter全Code四100で検証。既他45Main47Testはbyte同一、旧958は再認証で新成果0。追加不足3.3/9.9/9.9pp cap10、元費用/SV/各群開始/原904.85等/未較正397.324-837.386-1643.415保持、当不足だけ一回追加/限定完了時同額減算。専有実費token null、正本625/元190受入/正式1964-53/工数nullを増やさない。既BUG2943実DB八caseと全HOLDを維持し、旧失敗証跡を合格へ加算0。",
+  "testIds": "PT-MIG-MAPVERIFY001..016; PT-MIG-MAPMAN009010",
+  "estimate": {
+    "low": 3.3,
+    "base": 9.9,
+    "high": 9.9
+  },
+  "capPp": 10,
+  "specName": "138_対応表読戻し期待SHA・形式ID結合全976仕様.md",
+  "previousForecastName": "2042_WBS65予実・現行ID対応表全958後版584.json",
+  "forecastName": "2045_WBS65予実・対応表読戻し不足追加版585.json",
+  "revision": "585-MISSING_SOURCE_BOUND_MAPPING_ARTIFACT_READBACK_VERIFIER",
+  "findingReason": "SS343 correspondence artifact needs readback integrity against the original declared expected SHA, canonical four-frame structure and typed mapping semantics. Existing writer has no verification API. Add memory-only verifier and manifest-bound entry point; no file read/persistence/authority or actualID attestation.",
+  "workId": "P01903_SSC409_MAPVERIFY16_MAPMAN10_WHOLE976",
+  "planKey": "plannedCurrentMappingVerifierSSC409",
+  "startRecordName": "2046_WBS65対応表読戻し検証開始.json",
+  "startInputName": "3225_mapverify976_start.json",
+  "designSlot": "PG33194-ssc409-mapverify-design-only-v1",
+  "ledgerSummary": "既artifact bytesを期待SHAへ束縛して四frame/各hash/数値/既三modelとaudio順を読戻し検査、既Manifestから同expectedへ接続。新16＋既Manifest新2=全976/47Main67physical予定、実保存/Current/DB/authority/HOLD未受入。",
+  "moduleSummary": "CurrentMigrationMappingVerifier.verify/frames/rows/numeric/model-validation/invalidとCurrentMigrationMappingManifest.verifySerializedを接続。既format byte不変更、期待SHAは元宣言artifactから渡す。新18/全976/47Main67class予定。",
+  "groupId": "PGPT-WBS65-SSC409-MAPVERIFY16-MAPMAN10-976-20261115",
+  "run": "PG33208-MAPVERIFY-CLOSED976",
+  "scope": "Missing source-bound artifact readback verifier memory-only. NewMain1/existingManifest1/newVerifier16+Manifest2/all976/47Main67physical. Exact four frames/expectedSHA/canonical typed IDs/binding/no repair; additional3.3/9.9/9.9cap10 allholds unchanged.",
+  "nextCommand": "PublishSSC409SS311343914onlymain beforePG. Implement memory-only four-frame expectedSHA verifier with canonical model readback and Manifest.verifySerialized bound to retainedSha; independent malformed vectors and old958 same bytes exceptManifest method/test2. All47Main67CRC/976/static/default-raw. No actualFiles/CurrentDB/authority/RootnativeHOLD operations or confirmation replay; ordinarygroupnotstop.",
+  "currentSourceAudit": []
+}

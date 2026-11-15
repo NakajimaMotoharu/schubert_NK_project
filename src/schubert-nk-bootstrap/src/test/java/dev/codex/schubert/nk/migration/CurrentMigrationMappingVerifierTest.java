@@ -27,6 +27,7 @@ final class CurrentMigrationMappingVerifierTest {
   private static final String PART_ENTRIES = "ENTRIES";
   private static final String PART_SPEAKERS = "SPEAKERS";
   private static final String PART_AUDIO = "AUDIO";
+  private static final String MAX_INT_TEXT = "2147483647";
   private static final String DIAGNOSTIC = "migration mapping serialization is invalid";
   private static final int WORKERS = 8;
   private static final int TASKS = 64;
@@ -173,11 +174,11 @@ final class CurrentMigrationMappingVerifierTest {
         reject(wire.encode());
       }
     var huge = new Wire();
-    huge.field(2, 1, "2147483647");
-    huge.field(2, 2, "2147483647");
+    huge.field(2, 1, MAX_INT_TEXT);
+    huge.field(2, 2, MAX_INT_TEXT);
     reject(huge.encode());
     huge = new Wire();
-    huge.field(0, 1, "2147483647");
+    huge.field(0, 1, MAX_INT_TEXT);
     reject(huge.encode());
   }
 
@@ -192,7 +193,7 @@ final class CurrentMigrationMappingVerifierTest {
         reject(wire.encode());
       }
       var shortBody = new Wire();
-      shortBody.field(part, 2, "2147483647");
+      shortBody.field(part, 2, MAX_INT_TEXT);
       reject(shortBody.encode());
     }
   }
@@ -253,7 +254,7 @@ final class CurrentMigrationMappingVerifierTest {
       reject(wire.encode());
     }
     var max = new Wire();
-    max.cell(1, 0, 5, "2147483647");
+    max.cell(1, 0, 5, MAX_INT_TEXT);
     valid(max);
   }
 
