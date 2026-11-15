@@ -1,0 +1,153 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3319_admin_boundary27_increment_profile.json",
+    "sha256": "1d5ae89beaad85b99328a7447cd2017f97ecd51c60e88b516cdf387867badfc9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "8d1c71780951fd2d9cb0d818ae2cdad64a4a44bd9a98ac90b8bd9722d38e272d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java": "2b7fd8c73e7b82b3fe9c92bad37283f595d602bb2cec04b383ad20f3d428d2f3",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java": "a44c27a8e9b3869fd01ef90dae2a28bfebc0f5f78b4bd0d417b12eb3b319daae",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java": "1fdb742c0aab4c1be6ce90ca68e2f357c7030a7d5a916df34f9f91a61bfccf00",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33504-admin-boundary27-prepare-v6/manifest.json",
+    "sha256": "b8a3d094bcae84fbef4328ff2804dd5c836dbe543510dca8ba185cab91d7bd11"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33506-admin-boundary27-static-v6/manifest.json",
+    "sha256": "b1659c5511701ee49006fa1ac92372dbb1241e1df007ef1e7c13d4d0365c23ff"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/3320_admin_boundary27_static_admission.json",
+    "sha256": "0f85df14e162f450c3ef98ffbc637bef4981a3a0ba7b24fa2d1c778c86d623b3"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "CloseResource",
+      "line": "377",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "377",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "382",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "397",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "398",
+      "reason": "Exact standalone JUnit shared-service8-worker64-call negative-leak test. Every task creates its own memory-only JDBC Port, password array, row lists and fault map. Shared service returns ALREADY_EXISTS before password hashing/inserts/audits, verified by exact first4 SQL and wiped private input. Every Future has5-second get and finally shutdownNow with asserted10-second awaitTermination. No container/application thread or actual database/resource authority is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "EqualsNull",
+      "line": "418",
+      "reason": "Intentional independent negative equals(null)==false assertion for generated record contracts, not an application null test. Replacing it with reference comparison would stop executing/verifying the record method and miss the specified null behavior. Both return and absence of an exception are observed; no production null handling or exception is suppressed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "EqualsNull",
+      "line": "438",
+      "reason": "Intentional independent negative equals(null)==false assertion for generated record contracts, not an application null test. Replacing it with reference comparison would stop executing/verifying the record method and miss the specified null behavior. Both return and absence of an exception are observed; no production null handling or exception is suppressed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "473",
+      "reason": "This exact JDBC dynamic-proxy Object.equals implementation deliberately implements identity equality. Calling proxy.equals recursively re-enters the same InvocationHandler and never terminates. The compared reference is the proxy itself; no domain value comparison occurs. The memory-only fixture needs identity, not application equality semantics.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "485",
+      "reason": "Per-Port private fault configuration; every sequential test and each concurrent task creates a separate Port. No Port/fault map is static, published or shared across tasks; mutation precedes the same-thread service call. Concurrent test shares only the service and immutable metadata, never a Port. ConcurrentHashMap would add no required thread-safety contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "532",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "571",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "598",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "637",
+      "reason": "Standalone JUnit memory-only JDBC dynamic proxy, not J2EE code. This exact loader owns the fixed java.sql interface and establishes its visibility for Proxy.newProxyInstance. No application/plugin interface, context loader selection, service lookup or deployment occurs; using a mutable Thread context loader would introduce unrelated ambient state. All4 interfaces use the same explicit interface-owned loader policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

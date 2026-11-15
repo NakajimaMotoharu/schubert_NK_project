@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 /** New in-memory JDBC port tests, not extracts of held actual-DB/Main fixtures. SSC411. */
 final class BootstrapAdminServiceBoundaryTest {
+  private static final String CLOSE_NAME = "close";
   private static final String OBJECT_STRING = "toString";
   private static final String OBJECT_HASH = "hashCode";
   private static final String OBJECT_EQUALS = "equals";
@@ -334,10 +335,9 @@ final class BootstrapAdminServiceBoundaryTest {
               new AssertionError("synthetic error"))) {
         var f = new Port();
         f.faults.put(site, failure);
-        assertSame(
-            failure,
-            assertThrows(
-                failure instanceof Error ? Error.class : RuntimeException.class, () -> call(f)));
+        Class<? extends Throwable> expectedType =
+            failure instanceof Error ? Error.class : RuntimeException.class;
+        assertSame(failure, assertThrows(expectedType, () -> call(f)));
         f.finished();
       }
   }
@@ -486,10 +486,14 @@ final class BootstrapAdminServiceBoundaryTest {
     final int[] cursors = {-1, -1, -1, -1};
     final boolean[] wasNull = new boolean[4];
     final int[] updated = {1, 1};
-    boolean auto, readonly, nullPlain;
+    boolean auto;
+    boolean readonly;
+    boolean nullPlain;
     int isolation = Connection.TRANSACTION_READ_COMMITTED;
-    int prepared, queries;
-    int nullPrepared = -1, nullResult = -1;
+    int prepared;
+    int queries;
+    int nullPrepared = -1;
+    int nullResult = -1;
 
     Port() {
       rows.add(new ArrayList<>(Arrays.asList(true)));
@@ -513,7 +517,7 @@ final class BootstrapAdminServiceBoundaryTest {
       assertEquals(id, resources.removeLast());
       assertFalse(closes.contains(id));
       closes.add(id);
-      hit("close" + id);
+      hit(CLOSE_NAME + id);
     }
 
     void finished() {
@@ -544,7 +548,8 @@ final class BootstrapAdminServiceBoundaryTest {
                     yield isolation;
                   }
                   case "prepareStatement" -> {
-                    int index = prepared++;
+                    int index = prepared;
+                    prepared++;
                     hit("prepare" + index);
                     parameters.add(new HashMap<>());
                     yield index == nullPrepared ? null : statement(index, (String) args[0]);
@@ -574,7 +579,7 @@ final class BootstrapAdminServiceBoundaryTest {
                     sql.add((String) args[0]);
                     yield false;
                   }
-                  case "close" -> {
+                  case CLOSE_NAME -> {
                     close("L");
                     yield null;
                   }
@@ -603,7 +608,8 @@ final class BootstrapAdminServiceBoundaryTest {
                   }
                   case "executeQuery" -> {
                     hit("query" + index);
-                    int q = queries++;
+                    int q = queries;
+                    queries++;
                     sql.add(canonical(query));
                     yield q == nullResult ? null : result(q);
                   }
@@ -613,7 +619,7 @@ final class BootstrapAdminServiceBoundaryTest {
                     sql.add(canonical(query));
                     yield updated[index - 4];
                   }
-                  case "close" -> {
+                  case CLOSE_NAME -> {
                     close(id);
                     yield null;
                   }
@@ -635,7 +641,8 @@ final class BootstrapAdminServiceBoundaryTest {
                 return switch (method.getName()) {
                   case "next" -> {
                     hit("next" + index);
-                    yield ++cursors[index] < rows.get(index).size();
+                    cursors[index]++;
+                    yield cursors[index] < rows.get(index).size();
                   }
                   case "getBoolean" -> {
                     hit("boolean" + index);
@@ -655,7 +662,7 @@ final class BootstrapAdminServiceBoundaryTest {
                     hit("wasnull" + index);
                     yield wasNull[index];
                   }
-                  case "close" -> {
+                  case CLOSE_NAME -> {
                     close(id);
                     yield null;
                   }

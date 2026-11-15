@@ -1,0 +1,670 @@
+package dev.codex.schubert.nk.api.application.admin;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.api.security.LoginUsername;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import org.junit.jupiter.api.Test;
+
+/** New in-memory JDBC port tests, not extracts of held actual-DB/Main fixtures. SSC411. */
+final class BootstrapAdminServiceBoundaryTest {
+  private static final String CLOSE_NAME = "close";
+  private static final String OBJECT_STRING = "toString";
+  private static final String OBJECT_HASH = "hashCode";
+  private static final String OBJECT_EQUALS = "equals";
+  private static final String USER = " New.Admin ";
+  private static final String DISPLAY = "New.Admin";
+  private static final String DIAGNOSTIC = "bootstrap account transaction is invalid";
+  private static final String PASSWORD_PREFIX = "{pbkdf2-v1}";
+  private static final int PASSWORD_LENGTH = 12;
+  private static final int WORKERS = 8;
+  private static final int TASKS = 64;
+  private static final int WAIT_SECONDS = 5;
+  private static final int TERMINATION_SECONDS = 10;
+  private static final Instant NOW = Instant.parse("2026-10-05T00:00:00Z");
+  private static final UUID MESSAGE = new UUID(9, 1);
+  private static final UUID CORRELATION = new UUID(9, 2);
+  private static final UserCommandMetadata META =
+      new UserCommandMetadata(MESSAGE, CORRELATION, NOW);
+  private static final String SHARED =
+      "select pg_catalog.pg_try_advisory_xact_lock_shared(71419602)";
+  private static final String MEMBERSHIP = "select pg_advisory_xact_lock(71419601)";
+  private static final String LOCK = "lock table schubert.app_users in share row exclusive mode";
+  private static final String EXISTS = "select exists(select 1 from schubert.app_users)";
+  private static final String INSERT =
+      "insert into schubert.app_users(username,username_key,password_hash,role,status, password_changed_at,created_at,updated_at) values (?,?,?,'ADMIN','ACTIVE',?,?,?) returning id";
+  private static final String AUDIT =
+      "insert into schubert.app_logs(logged_at,service,category,level,action,message, message_id,correlation_id,details) values (?,'API',?,'INFO','USER_CREATED','USER_CREATED',?,?, jsonb_build_object('outcome','SUCCESS','source','BOOTSTRAP','targetUserId',cast(? as bigint)))";
+  private static final List<String> SQL =
+      List.of(SHARED, MEMBERSHIP, LOCK, EXISTS, INSERT, AUDIT, AUDIT);
+  private static final List<String> FAULT_SITES =
+      List.of(
+          "auto",
+          "readonly",
+          "isolation",
+          "prepare0",
+          "query0",
+          "next0",
+          "boolean0",
+          "wasnull0",
+          "prepare1",
+          "query1",
+          "next1",
+          "plain",
+          "executeLock",
+          "prepare2",
+          "query2",
+          "boolean2",
+          "wasnull2",
+          "prepare3",
+          "setString3.1",
+          "setObject3.4",
+          "query3",
+          "long3",
+          "wasnull3",
+          "prepare4",
+          "setString4.2",
+          "update4",
+          "prepare5",
+          "update5");
+  private static final List<String> CLOSE_SITES =
+      List.of(
+          "closeR0", "closeP0", "closeR1", "closeP1", "closeL", "closeR2", "closeP2", "closeR3",
+          "closeP3", "closeP4", "closeP5");
+
+  @Test
+  void bootbound001CreatedFixedSqlBindingsAndIndependentPbkdf() throws Exception {
+    var f = new Port();
+    assertEquals(BootstrapAdminService.Outcome.CREATED, call(f));
+    assertEquals(SQL, f.sql);
+    assertEquals(
+        List.of("R0", "P0", "R1", "P1", "L", "R2", "P2", "R3", "P3", "P4", "P5"), f.closes);
+    var user = f.parameters.get(3);
+    assertEquals(DISPLAY, user.get(1));
+    assertEquals("new.admin", user.get(2));
+    String stored = (String) user.get(3);
+    assertTrue(stored.matches("\\{pbkdf2-v1}[0-9a-f]{96}"));
+    byte[] bytes = HexFormat.of().parseHex(stored.substring(PASSWORD_PREFIX.length()));
+    var key =
+        new PBEKeySpec(
+            "a".repeat(PASSWORD_LENGTH).toCharArray(), Arrays.copyOf(bytes, 16), 310_000, 256);
+    try {
+      String independent =
+          PASSWORD_PREFIX
+              + HexFormat.of().formatHex(Arrays.copyOf(bytes, 16))
+              + HexFormat.of()
+                  .formatHex(
+                      SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+                          .generateSecret(key)
+                          .getEncoded());
+      assertEquals(independent, stored);
+    } finally {
+      key.clearPassword();
+    }
+    for (int index = 4; index <= 6; index++)
+      assertEquals(NOW.atOffset(ZoneOffset.UTC), user.get(index));
+    for (int index = 4; index <= 5; index++) {
+      var values = f.parameters.get(index);
+      assertEquals(NOW.atOffset(ZoneOffset.UTC), values.get(1));
+      assertEquals(index == 4 ? "ACTION" : "SECURITY", values.get(2));
+      assertEquals(MESSAGE, values.get(3));
+      assertEquals(CORRELATION, values.get(4));
+      assertEquals(42L, values.get(5));
+      assertEquals(5, values.size());
+    }
+    assertEquals(6, user.size());
+    f.finished();
+  }
+
+  @Test
+  void bootbound002ExistingNeverHashesInsertsOrAudits() throws Exception {
+    var f = new Port();
+    f.rows.get(2).set(0, true);
+    assertEquals(BootstrapAdminService.Outcome.ALREADY_EXISTS, call(f));
+    assertEquals(SQL.subList(0, 4), f.sql);
+    assertEquals(3, f.parameters.size());
+    f.finished();
+  }
+
+  @Test
+  void bootbound003ApiNullsStillConsumePassword() {
+    var service = new BootstrapAdminService();
+    assertThrows(
+        NullPointerException.class,
+        () -> service.create(new Port().connection(), USER, null, META));
+    for (int field = 0; field < 3; field++) {
+      var f = new Port();
+      var password = password();
+      final int missing = field;
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              service.create(
+                  missing == 0 ? null : f.connection(),
+                  missing == 1 ? null : USER,
+                  password,
+                  missing == 2 ? null : META));
+      assertArrayEquals(new char[password.length], password);
+      assertTrue(f.sql.isEmpty());
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound004BorrowedTransactionAttributes() {
+    for (int field = 0; field < 3; field++) {
+      var f = new Port();
+      f.auto = field == 0;
+      f.readonly = field == 1;
+      f.isolation =
+          field == 2 ? Connection.TRANSACTION_SERIALIZABLE : Connection.TRANSACTION_READ_COMMITTED;
+      invalid(f);
+      assertTrue(f.sql.isEmpty());
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound005SharedLockRowsNullAndDenied() {
+    for (var rows :
+        List.of(List.of(false), Arrays.asList((Object) null), List.of(), List.of(true, true))) {
+      var f = new Port();
+      f.rows.set(0, new ArrayList<>(rows));
+      invalid(f);
+      assertEquals(List.of(SHARED), f.sql);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound006MembershipSingleRow() {
+    for (var rows : List.of(List.of(), List.of("void", "void"))) {
+      var f = new Port();
+      f.rows.set(1, new ArrayList<>(rows));
+      invalid(f);
+      assertEquals(List.of(SHARED, MEMBERSHIP), f.sql);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound007ExistingQueryNullOrWrongCardinality() {
+    for (var rows : List.of(List.of(), Arrays.asList((Object) null), List.of(false, false))) {
+      var f = new Port();
+      f.rows.set(2, new ArrayList<>(rows));
+      invalid(f);
+      assertEquals(SQL.subList(0, 4), f.sql);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound008TargetIdBoundariesAndRowCount() throws Exception {
+    for (long id : List.of(1L, 999_999_999_999L)) {
+      var f = new Port();
+      f.rows.get(3).set(0, id);
+      assertEquals(BootstrapAdminService.Outcome.CREATED, call(f));
+      assertEquals(id, f.parameters.get(4).get(5));
+      assertEquals(id, f.parameters.get(5).get(5));
+      f.finished();
+    }
+    for (var rows :
+        List.of(
+            List.of(0L),
+            List.of(-1L),
+            List.of(1_000_000_000_000L),
+            List.of(Long.MAX_VALUE),
+            List.of(),
+            Arrays.asList((Object) null),
+            List.of(42L, 43L))) {
+      var f = new Port();
+      f.rows.set(3, new ArrayList<>(rows));
+      invalid(f);
+      assertEquals(SQL.subList(0, 5), f.sql);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound009UsernameAndCreationPasswordPolicy() {
+    for (String name : List.of("", "New Name", "é", "x".repeat(65))) {
+      var f = new Port();
+      var raw = password();
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> new BootstrapAdminService().create(f.connection(), name, raw, META));
+      assertArrayEquals(new char[raw.length], raw);
+      assertEquals(SQL.subList(0, 4), f.sql);
+      f.finished();
+    }
+    var f = new Port();
+    char[] raw = "short".toCharArray();
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new BootstrapAdminService().create(f.connection(), USER, raw, META));
+    assertArrayEquals(new char[raw.length], raw);
+    assertEquals(SQL.subList(0, 4), f.sql);
+    f.finished();
+  }
+
+  @Test
+  void bootbound010AuditAffectedRowsMustBeExactlyOne() {
+    for (int audit = 0; audit < 2; audit++)
+      for (int count : List.of(-1, 0, 2)) {
+        var f = new Port();
+        f.updated[audit] = count;
+        invalid(f);
+        assertEquals(SQL.subList(0, 6 + audit), f.sql);
+        f.finished();
+      }
+  }
+
+  @Test
+  void bootbound011EveryPreparedNullRejectsTyped() {
+    for (int index = 0; index < 6; index++) {
+      var f = new Port();
+      f.nullPrepared = index;
+      invalid(f);
+      assertEquals(index + 1, f.prepared);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound012PlainStatementNullRejectsTyped() {
+    var f = new Port();
+    f.nullPlain = true;
+    invalid(f);
+    assertEquals(List.of(SHARED, MEMBERSHIP), f.sql);
+    f.finished();
+  }
+
+  @Test
+  void bootbound013EveryResultSetNullRejectsTypedAndClosesStatement() {
+    for (int index = 0; index < 4; index++) {
+      var f = new Port();
+      f.nullResult = index;
+      invalid(f);
+      assertEquals(index + 1, f.queries);
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound014SqlFaultsPropagateOriginalObject() {
+    for (String site : FAULT_SITES) {
+      var f = new Port();
+      var failure = new SQLException("synthetic jdbc fault");
+      f.faults.put(site, failure);
+      assertSame(failure, assertThrows(SQLException.class, () -> call(f)));
+      f.finished();
+    }
+  }
+
+  @Test
+  void bootbound015RuntimeAndErrorAreNeverSuccessful() {
+    for (String site : FAULT_SITES)
+      for (Throwable failure :
+          List.of(
+              new IllegalStateException("synthetic runtime"),
+              new AssertionError("synthetic error"))) {
+        var f = new Port();
+        f.faults.put(site, failure);
+        assertSame(
+            failure,
+            assertThrows(
+                failure instanceof Error ? Error.class : RuntimeException.class, () -> call(f)));
+        f.finished();
+      }
+  }
+
+  @Test
+  void bootbound016EveryCloseFailureAndTwrCompositeOrdering() {
+    for (String site : CLOSE_SITES)
+      for (Throwable failure :
+          List.of(
+              new SQLException("synthetic close"),
+              new IllegalStateException("synthetic close"),
+              new AssertionError("synthetic close"))) {
+        var f = new Port();
+        f.faults.put(site, failure);
+        assertSame(failure, assertThrows(Throwable.class, () -> call(f)));
+        f.finished();
+      }
+    var f = new Port();
+    var primary = new SQLException("primary");
+    var secondary = new IllegalStateException("secondary");
+    f.faults.put("query0", primary);
+    f.faults.put("closeP0", secondary);
+    assertSame(primary, assertThrows(SQLException.class, () -> call(f)));
+    assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+    f.finished();
+    var same = new Port();
+    var fatal = new AssertionError("same");
+    same.faults.put("query0", fatal);
+    same.faults.put("closeP0", fatal);
+    assertSame(fatal, assertThrows(IllegalArgumentException.class, () -> call(same)).getCause());
+    same.finished();
+  }
+
+  @Test
+  void bootbound017FiniteSharedServiceExistingPath() throws Exception {
+    var service = new BootstrapAdminService();
+    var executor = Executors.newFixedThreadPool(WORKERS);
+    try {
+      var futures = new ArrayList<Future<Void>>();
+      for (int index = 0; index < TASKS; index++)
+        futures.add(
+            executor.submit(
+                () -> {
+                  var f = new Port();
+                  f.rows.get(2).set(0, true);
+                  char[] raw = password();
+                  assertEquals(
+                      BootstrapAdminService.Outcome.ALREADY_EXISTS,
+                      service.create(f.connection(), USER, raw, META));
+                  assertArrayEquals(new char[raw.length], raw);
+                  assertEquals(SQL.subList(0, 4), f.sql);
+                  f.finished();
+                  return null;
+                }));
+      for (var future : futures) assertNull(future.get(WAIT_SECONDS, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(TERMINATION_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void bootbound018GeneratedContractsAndRedaction() {
+    assertArrayEquals(
+        new BootstrapAdminService.Outcome[] {
+          BootstrapAdminService.Outcome.CREATED, BootstrapAdminService.Outcome.ALREADY_EXISTS
+        },
+        BootstrapAdminService.Outcome.values());
+    assertEquals(
+        BootstrapAdminService.Outcome.CREATED, BootstrapAdminService.Outcome.valueOf("CREATED"));
+    assertEquals(
+        BootstrapAdminService.Outcome.ALREADY_EXISTS,
+        BootstrapAdminService.Outcome.valueOf("ALREADY_EXISTS"));
+    assertThrows(
+        IllegalArgumentException.class, () -> BootstrapAdminService.Outcome.valueOf("UNKNOWN"));
+    var copy = new UserCommandMetadata(MESSAGE, CORRELATION, NOW.plusNanos(999));
+    assertEquals(META, copy);
+    assertFalse(META.equals(null));
+    assertFalse(META.equals("metadata"));
+    assertFalse(META.equals(new UserCommandMetadata(new UUID(9, 3), CORRELATION, NOW)));
+    assertEquals("UserCommandMetadata[REDACTED]", META.toString());
+    assertEquals(MESSAGE, META.messageId());
+    assertEquals(CORRELATION, META.correlationId());
+    assertEquals(NOW, META.at());
+    assertEquals(1791166429, META.hashCode());
+    for (int field = 0; field < 3; field++) {
+      final int missing = field;
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new UserCommandMetadata(
+                  missing == 0 ? null : MESSAGE,
+                  missing == 1 ? null : CORRELATION,
+                  missing == 2 ? null : NOW));
+    }
+    var name = new LoginUsername(USER);
+    assertEquals(new LoginUsername(DISPLAY), name);
+    assertFalse(name.equals(null));
+    assertFalse(name.equals(USER));
+    assertEquals(DISPLAY, name.value());
+    assertEquals("new.admin", name.key());
+    assertEquals("LoginUsername[REDACTED]", name.toString());
+    assertEquals(301470017, name.hashCode());
+  }
+
+  private static char[] password() {
+    return "a".repeat(PASSWORD_LENGTH).toCharArray();
+  }
+
+  private static BootstrapAdminService.Outcome call(Port port) throws SQLException {
+    char[] raw = password();
+    try {
+      return new BootstrapAdminService().create(port.connection(), USER, raw, META);
+    } finally {
+      assertArrayEquals(new char[raw.length], raw);
+    }
+  }
+
+  private static void invalid(Port port) {
+    var failure = assertThrows(SQLException.class, () -> call(port));
+    assertEquals(DIAGNOSTIC, failure.getMessage());
+    assertNull(failure.getCause());
+  }
+
+  private static String canonical(String sql) {
+    return sql.replaceAll("\\s+", " ").trim();
+  }
+
+  private static Object objectMethod(Object proxy, String method, Object[] args) {
+    return switch (method) {
+      case OBJECT_STRING -> "JdbcPort[REDACTED]";
+      case OBJECT_HASH -> System.identityHashCode(proxy);
+      case OBJECT_EQUALS -> proxy == args[0];
+      default -> throw new AssertionError(method);
+    };
+  }
+
+  private static final class Port {
+    final List<List<Object>> rows = new ArrayList<>();
+    final List<Map<Integer, Object>> parameters = new ArrayList<>();
+    final List<String> sql = new ArrayList<>();
+    final List<String> resources = new ArrayList<>();
+    final List<String> acquired = new ArrayList<>();
+    final List<String> closes = new ArrayList<>();
+    final Map<String, Throwable> faults = new HashMap<>();
+    final int[] cursors = {-1, -1, -1, -1};
+    final boolean[] wasNull = new boolean[4];
+    final int[] updated = {1, 1};
+    boolean auto, readonly, nullPlain;
+    int isolation = Connection.TRANSACTION_READ_COMMITTED;
+    int prepared, queries;
+    int nullPrepared = -1, nullResult = -1;
+
+    Port() {
+      rows.add(new ArrayList<>(Arrays.asList(true)));
+      rows.add(new ArrayList<>(Arrays.asList("void")));
+      rows.add(new ArrayList<>(Arrays.asList(false)));
+      rows.add(new ArrayList<>(Arrays.asList(42L)));
+    }
+
+    void hit(String key) throws Throwable {
+      var failure = faults.get(key);
+      if (failure != null) throw failure;
+    }
+
+    void acquire(String id) {
+      assertFalse(acquired.contains(id));
+      acquired.add(id);
+      resources.add(id);
+    }
+
+    void close(String id) throws Throwable {
+      assertEquals(id, resources.removeLast());
+      assertFalse(closes.contains(id));
+      closes.add(id);
+      hit(CLOSE_NAME + id);
+    }
+
+    void finished() {
+      assertTrue(resources.isEmpty());
+      assertEquals(acquired.size(), closes.size());
+      assertTrue(closes.containsAll(acquired));
+    }
+
+    Connection connection() {
+      return (Connection)
+          Proxy.newProxyInstance(
+              Connection.class.getClassLoader(),
+              new Class<?>[] {Connection.class},
+              (proxy, method, arguments) -> {
+                var args = arguments == null ? new Object[0] : arguments;
+                String name = method.getName();
+                return switch (name) {
+                  case "getAutoCommit" -> {
+                    hit("auto");
+                    yield auto;
+                  }
+                  case "isReadOnly" -> {
+                    hit("readonly");
+                    yield readonly;
+                  }
+                  case "getTransactionIsolation" -> {
+                    hit("isolation");
+                    yield isolation;
+                  }
+                  case "prepareStatement" -> {
+                    int index = prepared++;
+                    hit("prepare" + index);
+                    parameters.add(new HashMap<>());
+                    yield index == nullPrepared ? null : statement(index, (String) args[0]);
+                  }
+                  case "createStatement" -> {
+                    hit("plain");
+                    yield nullPlain ? null : plain();
+                  }
+                  case OBJECT_STRING, OBJECT_HASH, OBJECT_EQUALS -> objectMethod(proxy, name, args);
+                  default -> throw new AssertionError("borrowed Connection method: " + name);
+                };
+              });
+    }
+
+    Statement plain() {
+      acquire("L");
+      return (Statement)
+          Proxy.newProxyInstance(
+              Statement.class.getClassLoader(),
+              new Class<?>[] {Statement.class},
+              (proxy, method, arguments) -> {
+                var args = arguments == null ? new Object[0] : arguments;
+                return switch (method.getName()) {
+                  case "execute" -> {
+                    hit("executeLock");
+                    assertEquals(LOCK, args[0]);
+                    sql.add((String) args[0]);
+                    yield false;
+                  }
+                  case CLOSE_NAME -> {
+                    close("L");
+                    yield null;
+                  }
+                  case OBJECT_STRING, OBJECT_HASH, OBJECT_EQUALS ->
+                      objectMethod(proxy, method.getName(), args);
+                  default -> throw new AssertionError(method.getName());
+                };
+              });
+    }
+
+    PreparedStatement statement(int index, String query) {
+      String id = "P" + index;
+      acquire(id);
+      return (PreparedStatement)
+          Proxy.newProxyInstance(
+              PreparedStatement.class.getClassLoader(),
+              new Class<?>[] {PreparedStatement.class},
+              (proxy, method, arguments) -> {
+                var args = arguments == null ? new Object[0] : arguments;
+                String name = method.getName();
+                return switch (name) {
+                  case "setString", "setObject", "setLong" -> {
+                    hit(name + index + "." + args[0]);
+                    assertNull(parameters.get(index).put((Integer) args[0], args[1]));
+                    yield null;
+                  }
+                  case "executeQuery" -> {
+                    hit("query" + index);
+                    int q = queries++;
+                    sql.add(canonical(query));
+                    yield q == nullResult ? null : result(q);
+                  }
+                  case "executeUpdate" -> {
+                    hit("update" + index);
+                    assertTrue(index == 4 || index == 5);
+                    sql.add(canonical(query));
+                    yield updated[index - 4];
+                  }
+                  case CLOSE_NAME -> {
+                    close(id);
+                    yield null;
+                  }
+                  case OBJECT_STRING, OBJECT_HASH, OBJECT_EQUALS -> objectMethod(proxy, name, args);
+                  default -> throw new AssertionError(name);
+                };
+              });
+    }
+
+    ResultSet result(int index) {
+      String id = "R" + index;
+      acquire(id);
+      return (ResultSet)
+          Proxy.newProxyInstance(
+              ResultSet.class.getClassLoader(),
+              new Class<?>[] {ResultSet.class},
+              (proxy, method, arguments) -> {
+                var args = arguments == null ? new Object[0] : arguments;
+                return switch (method.getName()) {
+                  case "next" -> {
+                    hit("next" + index);
+                    yield ++cursors[index] < rows.get(index).size();
+                  }
+                  case "getBoolean" -> {
+                    hit("boolean" + index);
+                    assertEquals(1, args[0]);
+                    Object value = rows.get(index).get(cursors[index]);
+                    wasNull[index] = value == null;
+                    yield Boolean.TRUE.equals(value);
+                  }
+                  case "getLong" -> {
+                    hit("long" + index);
+                    assertEquals(1, args[0]);
+                    Object value = rows.get(index).get(cursors[index]);
+                    wasNull[index] = value == null;
+                    yield value == null ? 0L : (Long) value;
+                  }
+                  case "wasNull" -> {
+                    hit("wasnull" + index);
+                    yield wasNull[index];
+                  }
+                  case CLOSE_NAME -> {
+                    close(id);
+                    yield null;
+                  }
+                  case OBJECT_STRING, OBJECT_HASH, OBJECT_EQUALS ->
+                      objectMethod(proxy, method.getName(), args);
+                  default -> throw new AssertionError(method.getName());
+                };
+              });
+    }
+  }
+}

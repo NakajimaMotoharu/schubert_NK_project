@@ -1,0 +1,105 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG33448-ADMIN-BOUNDARY27",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "WBS-P010-05",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "WBS-P010-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/4095_P01005初期ADMINのJDBC返値境界・通常二十七仕様.md",
+      "sha256": "8d56238badc9c4454caab9499ce9c77bb251747a374dc8b8c8cbca98e5d4c06f"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33394-admin-boundary27-source-v1/declarations-corrected-manifest.json",
+      "sha256": "08c4dbb0ff71efcf8b88d30a79433c8bb047049e60b1d38e439683b8080260bc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33392-ssc411-design-main-publication-v1/manifest.json",
+      "sha256": "5ae0bcfc6cbeed0a594fb52138ef545ff61c679084c4ad27e5f6a925fab9a5db"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "29e32fb7346df499660daf138026c006ef9fb361",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "tests": 18
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java",
+      "tests": 3
+    }
+  ],
+  "expectedTests": 27,
+  "resources": [],
+  "sdkJars": [
+    "org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar",
+    "commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.class",
+    "dev/codex/schubert/nk/api/security/PasswordHasher.class",
+    "dev/codex/schubert/nk/api/security/PasswordPolicy.class",
+    "dev/codex/schubert/nk/api/security/LoginUsername.class",
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.class",
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService",
+    "dev/codex/schubert/nk/api/security/PasswordHasher",
+    "dev/codex/schubert/nk/api/security/PasswordPolicy",
+    "dev/codex/schubert/nk/api/security/LoginUsername",
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG33440-admin-boundary27-prestyle-v3",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG33442-admin-boundary27-prepare-v3",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG33444-admin-boundary27-static-v3",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG33446-admin-boundary27-preflight-v3",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG33448-admin-boundary27-unit-v3",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG33450-admin-boundary27-post-v3"
+  },
+  "privateDirs": {
+    "prepare": "pg33442-admin-boundary27-prepare-v3",
+    "unit": "pg33448-admin-boundary27-unit-v3"
+  },
+  "newTestDefinitions": 18
+}

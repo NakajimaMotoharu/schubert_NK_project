@@ -514,3 +514,10 @@ PG22826/22828/22834はhost既設`linux-libc-dev 7.0.0-42.42`、`libc6-dev 2.43-2
 
 
 2026-11-14 SSC365: JSR3053.0.2の既ローカル公開artifact（com.google.code.findbugs:jsr305:3.0.2、既provided spotbugs-annotations4.10.4のcompile推移依存）を閉鎖scopeのannotation classpathへ明示SHApin。新download/install/Production POM/GAV変更無し。四final COPY型の既deep-immutable契約をjavax.annotation.concurrent.Immutableで宣言し、method/Test body/解析rule/filterを変えずPG31564 rawSpotBugs-Missing-error0と全403で検証。artifact/POM path/version/hash・再現commandはPG31536/562manifest及びI2760profile。class注釈だけを不変性実証やPT合格へ読み替えない。
+
+
+## 2026-11-15 SSC411 公開annotationを含む限定SDK
+
+Java25.0.4/Maven3.9.12/Root NullAway0.14.1・ErrorProne2.50.0、lint-all/Werrorを維持。初期ADMINの新しいメモリ内JDBC単体試験は既m2のspring-security-crypto7.1.1・commons-logging1.4.0を使用する。crypto公開APIのorg.springframework.lang.Contract依存は通常jdepsのcode参照/POMだけでは不足するため、既reactor採用spring-core7.0.9（/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar、SHA256 5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36）を明示classpathへ含める。今回の新規download/導入/role変更は0、入手元は既構築toolchain/m2、取得履歴未確認を今回取得として記載しない。Contract.classは元jarの既entryを確認し抽出代替jarを作らない。
+
+再現はclosed host profileの明示5Main/6physical/SDK exacthashに従い、新しい未使用phase namespaceを作ってprestyle→prepare（Root NullAway/lint-Werror）→static→preflight→固定Unit→post/無filter一exec測定を行う。既phaseの再発行/原証跡上書きはしない。PG33442のMain compile1とPG33458 proc-none診断は品質合格ではなく保存、PG33464はMain Rootcompile0/Testcompile1（JUnit expectedClassの型推論）で未資格。修正後の正規fresh profile3312/PG33484へ追跡する。全SDK SHAは各profile、補正根拠はPG33460/BUG2986/YKT2515、当source/元SQL/期待値を変更せず、抑制/品質緩和0。actual DB/bootstrapMain/credential/native/RootActual4/HOLDは未実行。
