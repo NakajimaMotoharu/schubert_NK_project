@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -317,5 +318,88 @@ final class MqLoginContextProbeTest {
       if (failure != null) throw failure;
       return null;
     }
+  }
+
+  @Test
+  void probegraph001EveryCatalogFamilyPreservesFatalWipesAndReturnsTheOneSlot() throws Exception {
+    for (int family = 0; family < 7; family++) {
+      AssertionError fatal = new AssertionError(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+      Exception failure = probeGraphFailure(family, fatal);
+      JmsRequestReplyClient oneSlot =
+          new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 1);
+      AtomicReference<byte[]> owned = new AtomicReference<>();
+      var subject =
+          new MqLoginContextProbe(
+              oneSlot,
+              (id, bytes) -> {
+                owned.set(bytes);
+                if (failure instanceof JMSException checked) throw checked;
+                throw (RuntimeException) failure;
+              },
+              CLOCK,
+              () -> ID,
+              WAIT);
+      assertSame(fatal, assertThrows(AssertionError.class, () -> subject.isActive(CONTEXT)));
+      assertArrayEquals(new byte[256], owned.get());
+      assertEquals(0, oneSlot.pendingCount());
+      UUID next = new UUID(0, 3);
+      var recovered =
+          new MqLoginContextProbe(
+              oneSlot,
+              (id, bytes) -> {
+                owned.set(bytes);
+                assertEquals(next, id);
+                assertTrue(
+                    oneSlot.onReply(id, response(id, "a".repeat(64), FIXTURE_0000_876EEFE0, 0)));
+              },
+              CLOCK,
+              () -> next,
+              WAIT);
+      assertTrue(recovered.isActive(CONTEXT));
+      assertArrayEquals(new byte[256], owned.get());
+      assertEquals(0, oneSlot.pendingCount());
+    }
+  }
+
+  private static Exception probeGraphFailure(int family, AssertionError fatal) throws Exception {
+    return switch (family) {
+      case 0 -> {
+        var failure = new JMSException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+        failure.setLinkedException(
+            new java.sql.SQLException(FIXTURE_SYNTHETIC_SECRET_BCCB0977, fatal));
+        yield failure;
+      }
+      case 1 -> new JMSRuntimeException(FIXTURE_SYNTHETIC_SECRET_BCCB0977, null, fatal);
+      case 2 ->
+          new dev.codex.schubert.nk.protocol.codec.PermanentProtocolException(
+              FIXTURE_SYNTHETIC_SECRET_BCCB0977, fatal);
+      case 3 -> new IllegalArgumentException(FIXTURE_SYNTHETIC_SECRET_BCCB0977, fatal);
+      case 4 -> {
+        var failure = new IllegalStateException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+        failure.addSuppressed(fatal);
+        yield failure;
+      }
+      case 5 -> new DateTimeException(FIXTURE_SYNTHETIC_SECRET_BCCB0977, fatal);
+      case 6 -> {
+        var full = new ReplyCorrelationRegistry(1);
+        Instant at = Instant.parse("2026-09-08T00:00:00.123456Z");
+        UUID occupying = new UUID(0, 99);
+        full.register(occupying, at.plusSeconds(2), at).orElseThrow();
+        var bounded = new JmsRequestReplyClient(full, CLOCK, 1);
+        var failure =
+            assertThrows(
+                dev.codex.schubert.nk.web.messaging.JmsRequestReplyException.class,
+                () ->
+                    bounded.exchange(
+                        ID,
+                        new byte[256],
+                        WAIT,
+                        (id, bytes) -> fail("full registry must not send")));
+        failure.addSuppressed(fatal);
+        assertTrue(full.cancel(occupying));
+        yield failure;
+      }
+      default -> throw new AssertionError("unknown independent probe fixture family");
+    };
   }
 }

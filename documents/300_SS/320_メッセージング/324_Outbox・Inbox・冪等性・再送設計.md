@@ -411,3 +411,9 @@ Metric labelへowner、token、Message ID、question本文を使わない。ID�
 ## QA-054 API LOG_SEARCHEDと結果再送（SSC-336）
 
 初回成功ログ検索の結果snapshot取得後、LOG_SEARCHED/ACTION保存とInbox・再送結果の成功確定を同じ業務transactionに含める。既存の原子性・排他・結果保持契約を維持し、監査失敗ではrollbackする。保存済み応答の再送/同一要求の競合では成功確定を一度だけ行い、LOG_SEARCHEDを増やさない。INBOX_REPLAYED等の必要MQ記録は独立期待値とし、成功ACTIONの代替にしない。検索snapshotとcommit後の監査DB後条件を別々に検証する。再送間隔/保持期限/operation token契約の変更はない。
+
+## SSC-431 Login現在context probeのfatal保全（2026-11-16）
+
+MqLoginContextProbe.isActiveの既七catch(JMSException/JMSRuntimeException/JmsRequestReplyException/PermanentProtocolException/IllegalArgumentException/IllegalStateException/DateTimeException)は固定UNAVAILABLEへ変換する前に既JmsRequestReplyException.preserveFatal(failure)を呼び、cause/suppressed/SQLnext/JMSlinkedの元Error identityを有限に保存する。header/IF003現在context再確認/UUID freshness/256byte request/全reply検査/0102 false/他非success固定例外/timeout1ns..2s/12wait/再Login禁止/所有request-sendercopy-reply-data-records全消去/正常認証ロール/公開API/秘密非保持を変えない。Provider本体は変更しない。catch唯一のfinal MqLoginExchangeExceptionはsuper(message,null,false,true)によりcause/suppressedを保持できず今回のmissing-guard条件に非該当、固定reason INVALID_INPUT/UNAVAILABLEと例外秘匿を独立回帰契約にする。新PROBEGRAPH001は各七catch族の公開合成Error graph（JMSlinked→SQLcause含む）を既memory senderから与え元Error/256ownedcopy全zero/pending0と同one-slot clientで別freshID正常復帰を検証する。新LOGINFAILVALUE001は二reasonの固定message/nullcause/disabledsuppression/initCause拒否/null constructor/enum閉集合lookup/values防御を独立literalで確認する。元MqLoginClientTest8/ProbeTest3/ProviderTest5の全16本文・独立wire・100並行/get10/stop-await5及び既固有例外/消去期待は保持、compile依存するfixture helperは抽出せず元whole class全実行する。新2＋旧16全18を一source/run、既明示safeWeb18sourceと現在Protocol176だけfreshRootNullAway/static/物理CRC-init/XML/default/raw対象Probe/Provider/ExchangeException全sourceで照合する。旧162/166/Protocol130は確認再演0、実JMS broker/socket/DB/auth session/鍵/Root2Actual4/VM/native/aru/HOLDや旧全WebAPIjar読取抽出を行わない。
+
+BUG3065/YKT2556、状態:設計確定・main反映前、PG/PT/正式未完。
