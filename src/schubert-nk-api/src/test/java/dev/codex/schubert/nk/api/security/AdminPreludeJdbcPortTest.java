@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.security;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -35,6 +36,18 @@ import org.junit.jupiter.api.Timeout;
 /** PT-AUT-PRE001..008; SS314 9.2/SS332 12. Own interface callbacks, no database/lock. */
 @Timeout(value = 30, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AdminPreludeJdbcPortTest {
+  private static final String PUBLIC_SQL_STATE = "08006";
+  private static final String PUBLIC_PRIMARY = "PUBLIC synthetic primary";
+  private static final String PUBLIC_CLOSE = "PUBLIC synthetic close";
+  private static final String QUERY_SUFFIX = ".executeQuery";
+  private static final String CLOSE_SUFFIX = ".close";
+  private static final String ROW_SUFFIX = ".row";
+  private static final String STATEMENT_SUFFIX = ".statement";
+  private static final String METHOD_NEXT = "next";
+  private static final String METHOD_GET_LONG = "getLong";
+  private static final String METHOD_WAS_NULL = "wasNull";
+  private static final String METHOD_GET_OBJECT = "getObject";
+  private static final String METHOD_GET_STRING = "getString";
   private static final Instant NOW = Instant.parse("2026-11-06T00:00:00Z");
   private static final AuthenticationContext INPUT = AuthenticationContext.of("a".repeat(64));
   private static final String HASH =
@@ -89,6 +102,7 @@ final class AdminPreludeJdbcPortTest {
     boolean readOnly;
     boolean authenticated = true;
     String role = ADMIN;
+    final Map<String, Throwable> injectedFailures = new HashMap<>();
     String faultAt = "";
     String nullStatementAt = "";
     String nullRowAt = "";
@@ -101,6 +115,10 @@ final class AdminPreludeJdbcPortTest {
     int forbiddenOwnerCalls;
 
     void fault(String at) throws SQLException {
+      Throwable injected = injectedFailures.get(at);
+      if (injected instanceof SQLException sqlFailure) throw sqlFailure;
+      if (injected instanceof RuntimeException runtime) throw runtime;
+      if (injected instanceof Error fatal) throw fatal;
       if (faultAt.equals(at)) {
         if (runtimeFailure != null) throw runtimeFailure;
         throw new SQLException(PUBLIC_MARKER, "08006");
@@ -109,6 +127,7 @@ final class AdminPreludeJdbcPortTest {
 
     void close(String at) throws SQLException {
       closed.add(at);
+      fault(at + CLOSE_SUFFIX);
       if (badCloses.contains(at)) throw new SQLException(PUBLIC_MARKER, "08006");
     }
 
@@ -170,7 +189,7 @@ final class AdminPreludeJdbcPortTest {
 
     @Nullable ResultSet row(String name) {
       if (name.equals(nullRowAt)) return null;
-      acquired.add(name + ".row");
+      acquired.add(name + ROW_SUFFIX);
       List<Long> ids =
           switch (name) {
             case CANDIDATE -> candidateRows;
@@ -210,7 +229,7 @@ final class AdminPreludeJdbcPortTest {
                     default -> throw new AssertionError("unregistered typed column");
                   };
               case "close" -> {
-                close(name + ".row");
+                close(name + ROW_SUFFIX);
                 yield null;
               }
               default -> throw new AssertionError("unregistered row method " + m.getName());
@@ -448,7 +467,7 @@ final class AdminPreludeJdbcPortTest {
     }
     Fixture suppressed = new Fixture();
     suppressed.candidateRows = List.of();
-    suppressed.badCloses.add(CANDIDATE + ".row");
+    suppressed.badCloses.add(CANDIDATE + ROW_SUFFIX);
     infrastructure(suppressed, Mutation.CREATE, OptionalLong.empty());
     Fixture unknown = new Fixture();
     unknown.runtimeFailure = new IllegalStateException(PUBLIC_MARKER);
@@ -534,5 +553,121 @@ final class AdminPreludeJdbcPortTest {
     for (String unknown : List.of("UNKNOWN", "", "create", " CREATE "))
       assertThrows(IllegalArgumentException.class, () -> Mutation.valueOf(unknown));
     assertThrows(NullPointerException.class, () -> Mutation.valueOf(null));
+  }
+
+  @Test
+  void fatal001AllPreludeBodyAndOwnedCloseErrorsKeepOriginalIdentityAndOwnership() {
+    var positions = new ArrayList<>(List.of("getAutoCommit", "isReadOnly"));
+    List<String> labels =
+        List.of(CANDIDATE, ADVISORY, USERS, LOCKED, AUTH_USER, AUTH_SESSION, TOUCH);
+    for (String label : labels) {
+      positions.add(label + ".prepare");
+      positions.add(label + (label.equals(TOUCH) ? ".executeUpdate" : QUERY_SUFFIX));
+    }
+    var getters =
+        Map.of(
+            CANDIDATE, List.of(METHOD_NEXT, METHOD_GET_LONG, METHOD_WAS_NULL),
+            ADVISORY, List.of(METHOD_NEXT),
+            USERS, List.of(METHOD_NEXT, METHOD_GET_LONG, METHOD_WAS_NULL),
+            LOCKED, List.of(METHOD_NEXT, METHOD_GET_LONG, METHOD_WAS_NULL),
+            AUTH_USER, List.of(METHOD_NEXT),
+            AUTH_SESSION, List.of(METHOD_NEXT, METHOD_GET_OBJECT, METHOD_GET_STRING));
+    for (var row : getters.entrySet())
+      for (String method : row.getValue()) positions.add(row.getKey() + "." + method);
+    for (String label : labels) {
+      positions.add(label + STATEMENT_SUFFIX + CLOSE_SUFFIX);
+      if (!label.equals(TOUCH)) positions.add(label + ROW_SUFFIX + CLOSE_SUFFIX);
+    }
+    assertEquals(43, positions.size());
+    for (String position : positions) {
+      Fixture f = new Fixture();
+      var fatal = new AssertionError("PUBLIC direct prelude error");
+      f.injectedFailures.put(position, fatal);
+      assertSame(
+          fatal,
+          assertThrows(
+              AssertionError.class, () -> identity(f, Mutation.DISABLE, OptionalLong.of(20))));
+      assertNull(fatal.getCause());
+      assertEquals(0, fatal.getSuppressed().length);
+      f.ownerUnchanged();
+    }
+  }
+
+  @Test
+  void fatal002WrappedSqlAndProductionDomainCleanupErrorUseOriginalFatalIdentity() {
+    Fixture f = new Fixture();
+    var fatal = new AssertionError("PUBLIC wrapped prelude error");
+    var sql = new SQLException("PUBLIC wrapper", PUBLIC_SQL_STATE);
+    sql.addSuppressed(fatal);
+    f.injectedFailures.put(USERS + QUERY_SUFFIX, sql);
+    assertSame(
+        fatal,
+        assertThrows(
+            AssertionError.class, () -> identity(f, Mutation.DISABLE, OptionalLong.of(20))));
+    assertArrayEquals(new Throwable[] {fatal}, sql.getSuppressed());
+    f.ownerUnchanged();
+    Fixture missing = new Fixture();
+    missing.candidateRows = List.of();
+    var cleanup = new AssertionError("PUBLIC missing candidate cleanup");
+    missing.injectedFailures.put(CANDIDATE + ROW_SUFFIX + CLOSE_SUFFIX, cleanup);
+    assertSame(
+        cleanup,
+        assertThrows(
+            AssertionError.class, () -> identity(missing, Mutation.DISABLE, OptionalLong.of(20))));
+    assertEquals(List.of(CANDIDATE), missing.order);
+    missing.ownerUnchanged();
+  }
+
+  @Test
+  void fatal003ClassifiedAndOrdinaryPrimarySecondarySelfAliasKeepTheirExactContract() {
+    for (int kind = 0; kind < 5; kind++) {
+      for (boolean fatalClose : List.of(false, true)) {
+        Fixture f = new Fixture();
+        Throwable primary = primary(kind);
+        Throwable secondary =
+            fatalClose
+                ? new AssertionError(PUBLIC_CLOSE)
+                : new SQLException(PUBLIC_CLOSE, PUBLIC_SQL_STATE);
+        f.injectedFailures.put(USERS + QUERY_SUFFIX, primary);
+        f.injectedFailures.put(USERS + STATEMENT_SUFFIX + CLOSE_SUFFIX, secondary);
+        if (kind < 3 && !fatalClose) {
+          infrastructure(f, Mutation.DISABLE, OptionalLong.of(20));
+        } else {
+          Throwable expected = kind < 3 ? secondary : primary;
+          assertSame(
+              expected,
+              assertThrows(
+                  expected.getClass(), () -> identity(f, Mutation.DISABLE, OptionalLong.of(20))));
+        }
+        assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
+        f.ownerUnchanged();
+      }
+      Fixture alias = new Fixture();
+      Throwable same = primary(kind);
+      alias.injectedFailures.put(USERS + QUERY_SUFFIX, same);
+      alias.injectedFailures.put(USERS + STATEMENT_SUFFIX + CLOSE_SUFFIX, same);
+      if (same instanceof Error) {
+        assertSame(
+            same,
+            assertThrows(
+                AssertionError.class,
+                () -> identity(alias, Mutation.DISABLE, OptionalLong.of(20))));
+      } else {
+        infrastructure(alias, Mutation.DISABLE, OptionalLong.of(20));
+      }
+      assertEquals(0, same.getSuppressed().length);
+      alias.ownerUnchanged();
+    }
+  }
+
+  private static Throwable primary(int kind) {
+    return switch (kind) {
+      case 0 -> new SQLException(PUBLIC_PRIMARY, PUBLIC_SQL_STATE);
+      case 1 -> new IllegalArgumentException(PUBLIC_PRIMARY);
+      case 2 -> new java.time.DateTimeException(PUBLIC_PRIMARY);
+      case 3 -> new IllegalStateException(PUBLIC_PRIMARY);
+      case 4 -> new AssertionError(PUBLIC_PRIMARY);
+      default -> throw new IllegalArgumentException("unsupported synthetic failure kind");
+    };
   }
 }

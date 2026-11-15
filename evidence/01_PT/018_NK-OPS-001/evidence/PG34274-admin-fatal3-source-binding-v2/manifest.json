@@ -1,0 +1,41 @@
+{
+  "actualExit": 0,
+  "productionCore": "fdcf397bd80a0a8d2131b465897bc29722ec3900",
+  "old11InverseFormattedExact": true,
+  "oldTestSha256": "a8a91d826e2f3c07c7cd3e01e7fcbc612c483cd0a0a71ebd3c353b88621c4fa9",
+  "newTestSha256": "798d7ad8dbf2b09a05c03930bd3a5bbc841f9c7b5d22f5029db09bdfc281e391",
+  "fixedConstantsText": "  private static final String PUBLIC_SQL_STATE = \"08006\";\n  private static final String PUBLIC_PRIMARY = \"PUBLIC synthetic primary\";\n  private static final String PUBLIC_CLOSE = \"PUBLIC synthetic close\";\n  private static final String QUERY_SUFFIX = \".executeQuery\";\n  private static final String CLOSE_SUFFIX = \".close\";\n  private static final String ROW_SUFFIX = \".row\";\n  private static final String STATEMENT_SUFFIX = \".statement\";\n  private static final String METHOD_NEXT = \"next\";\n  private static final String METHOD_GET_LONG = \"getLong\";\n  private static final String METHOD_WAS_NULL = \"wasNull\";\n  private static final String METHOD_GET_OBJECT = \"getObject\";\n  private static final String METHOD_GET_STRING = \"getString\";\n",
+  "defaultEmptyControls": [
+    [
+      "    String faultAt = \"\";",
+      "    final Map<String, Throwable> injectedFailures = new HashMap<>();\n    String faultAt = \"\";"
+    ],
+    [
+      "    void fault(String at) throws SQLException {",
+      "    void fault(String at) throws SQLException {\n      Throwable injected = injectedFailures.get(at);\n      if (injected instanceof SQLException sqlFailure) throw sqlFailure;\n      if (injected instanceof RuntimeException runtime) throw runtime;\n      if (injected instanceof Error fatal) throw fatal;"
+    ],
+    [
+      "      closed.add(at);",
+      "      closed.add(at);\n      fault(at + CLOSE_SUFFIX);"
+    ]
+  ],
+  "allMainAndPomsUnchanged": true,
+  "expectedTests": 14,
+  "newDefinitions": 3,
+  "necessaryPriorDefinitions": 11,
+  "currentSyntheticCases": 60,
+  "syntheticDirect43": true,
+  "wrappedSqlDomain2": true,
+  "classifiedOrdinaryPrimaryAlias15": true,
+  "applicationTestsExecuted": 0,
+  "formalUpdated": false,
+  "rowLabelLiteralRepresentationsRestoredOnly3": true,
+  "aliasErrorTypedPredicate": true,
+  "initialPmdApplicable2Preserved": true,
+  "withinOriginalGroupReworkEstimate": {
+    "low": 0.02,
+    "base": 0.06,
+    "high": 0.18
+  },
+  "newGrossAdded": false
+}

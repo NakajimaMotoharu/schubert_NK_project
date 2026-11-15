@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-15T23:36:12.431">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AdminPreludeJdbcPortTest.java">
+<violation beginline="44" endline="44" begincolumn="44" endcolumn="50" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" variable="ROW_SUFFIX" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal ".row" appears 4 times in this file; the first occurrence is on line 44
+</violation>
+<violation beginline="90" endline="90" begincolumn="45" endcolumn="66" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="105" endline="105" begincolumn="34" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest.Fixture" variable="injectedFailures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="111" endline="111" begincolumn="45" endcolumn="71" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest.Fixture" variable="bindings" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="168" endline="168" begincolumn="28" endcolumn="51" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest.Fixture" method="statement" variable="bound" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="302" endline="302" begincolumn="16" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="targetPresenceN12AndNullContractsFailBeforeAnySql" variable="c" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="485" endline="485" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="485" endline="485" begincolumn="16" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="491" endline="503" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="508" endline="508" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="509" endline="509" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="parallelFreshPreludeRowsDoNotShareActorsOrResourceOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="649" endline="649" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AdminPreludeJdbcPortTest" method="fatal003ClassifiedAndOrdinaryPrimarySecondarySelfAliasKeepTheirExactContract" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 4 in if statements
+</violation>
+</file>
+</pmd>
