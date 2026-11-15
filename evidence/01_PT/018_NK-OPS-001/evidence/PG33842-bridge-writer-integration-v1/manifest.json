@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "toolSource": "fe936655df528abc4b951cc144276b9956fcde2c",
+  "inputHashes": {
+    "tools/quality/pmo_forecast_bridge.py": "bf02d7e1335db6de94b639c72e283329597470a7f54da211002363fca362850b",
+    "tools/quality/pmo_stage_input.py": "cfe694a526c0fe804b6789c69e2b83fddb854e2eed853a822d67fb7d71b85bea",
+    "tools/quality/tests/test_pmo_stage_input.py": "15cb178b5dd93c04437d69eab8233a8eed346e01547053a8772086b67725f4d0",
+    "evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py": "778147311adfe1b8549f71741ef88cc65c671fcdb7f8f53d028231245d6c14bd",
+    "evidence/01_PT/018_NK-OPS-001/input/3531_bridge_writer_integration_v2.py": "1179a751b1bd3d266cfb9f5dad83b73c435a7523c4e4acaaf057268311b979f5"
+  },
+  "existingInputTests12Requalified": true,
+  "independentWriterNegativeScenarios": 1,
+  "expectedChildExit": 1,
+  "stages": {
+    "pyflakes": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:32:45.446765+00:00",
+      "endUTC": "2026-11-15T10:32:45.561717+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pmo_forecast_bridge.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pmo_stage_input.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/test_pmo_stage_input.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/3531_bridge_writer_integration_v2.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "existing-input12": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:32:45.562016+00:00",
+      "endUTC": "2026-11-15T10:32:45.626755+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/quality/tests",
+        "-p",
+        "test_pmo_stage_input.py"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "ddbc5bf15c26bf2c15a86c04aa1c4eb9dbb31a4d245c800b95a5282be426a476"
+    },
+    "writer-negative": {
+      "actualExit": 1,
+      "timedOut": false,
+      "startUTC": "2026-11-15T10:32:45.627062+00:00",
+      "endUTC": "2026-11-15T10:32:45.742152+00:00",
+      "command": [
+        "python3",
+        "-B",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/1100_wbs65_stage_record_v2.py",
+        "start",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG33842-bridge-writer-integration-v1/negative-config.json",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG33842-bridge-writer-integration-v1/invalid-quota-no-authority.json"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "c25f13693188725958cedd646c37406effeb6e25c0ffb1880ce06c7e0a40b22e"
+    }
+  },
+  "guardBeforeAllMutations": true,
+  "publicEventAndStateHashesBefore": {
+    "/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/events.jsonl": "067b9edfdb81f95709270511565600a291930e15382dd0a5a613b75b5e616cd6",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/checkpoint.json": "2ccb9033c5afa08d41e1bdc671a4b1fa74dd1ac9710a98203fac59a1c4d512f9",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/continuation-gate.json": "0cf17a45447cd91930f07184a0a1568d9e5e3691a995cc0cb1c3fd88e2c9fb25",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/cost-ledger.json": "3f90dc712c290014517e5ca0c9f3fc73b256b192a719463d4c7c87e90c524e13"
+  },
+  "publicEventAndStateHashesAfter": {
+    "/home/mini/codex/project1/work/PMO/pgpt-execution-metrics/events.jsonl": "067b9edfdb81f95709270511565600a291930e15382dd0a5a613b75b5e616cd6",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/checkpoint.json": "2ccb9033c5afa08d41e1bdc671a4b1fa74dd1ac9710a98203fac59a1c4d512f9",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/continuation-gate.json": "0cf17a45447cd91930f07184a0a1568d9e5e3691a995cc0cb1c3fd88e2c9fb25",
+    "/home/mini/codex/project1/work/PMO/pgpt-completion-stage-20261102/cost-ledger.json": "3f90dc712c290014517e5ca0c9f3fc73b256b192a719463d4c7c87e90c524e13"
+  },
+  "noEventsOrStateMutated": true,
+  "noQuotaAuthorityUsed": true,
+  "noApplicationTestsExecuted": true,
+  "applicationTestsExecuted": 0,
+  "fixture": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/999_検証fixture/PG33842-stale-bridge-negative.json",
+    "sha256": "6069381febc96081363480397fe4538b8afd2eb0678ef61c3fa18836de99d92f"
+  },
+  "qualityThresholdsChanged": false,
+  "bug": "BUG3024",
+  "horizontal": "YKT2548"
+}
