@@ -1,0 +1,98 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-15T13:50:27.839360+00:00",
+  "source": "08eef7ec152adc5d886040bdef14188beaeea6ff",
+  "productionCoreMain": "08eef7ec152adc5d886040bdef14188beaeea6ff",
+  "actualUnitSource": "dc12167394f92bc63d800164689f2a77e4c300f4",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34190-verifier-collision1-unit-v1/manifest.json",
+    "sha256": "5150d50201f3152f07e6fba07b6de74d3fd01ff8a8613b91f60c625271c528d7"
+  },
+  "independentPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34192-verifier-collision1-independent-v1/manifest.json",
+    "sha256": "deabe76960d4dee4bd2a26d792f8905913c9e77072cfd902bdadd7d6f2edecaa"
+  },
+  "sameExecRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34194-verifier-collision1-unfiltered-same-exec-v1/manifest.json",
+    "sha256": "cbc6f5774b6c1db1da32c4642983eacf0b40f0f2516ef2e85df3f8b99001d560"
+  },
+  "technical": {
+    "productionCoreMain": "08eef7ec152adc5d886040bdef14188beaeea6ff",
+    "actualUnitSource": "dc12167394f92bc63d800164689f2a77e4c300f4",
+    "tests": 9,
+    "newDefinitions": 1,
+    "necessaryPriorDefinitions": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 191,
+    "positiveCrc": 11,
+    "exactMain11RootStaticReuse": true,
+    "original8ByteExact": true,
+    "fixedHashVectors": [
+      {
+        "strings": [
+          "USER",
+          "V4ER"
+        ],
+        "hash": 2614219
+      },
+      {
+        "strings": [
+          "ADMIN",
+          "B%MIN"
+        ],
+        "hash": 62130991
+      }
+    ],
+    "verifyAndInspectBothRejectWrongRoles": true,
+    "staticRaw7": 7,
+    "staticApplicable": 0,
+    "unclassified": 0,
+    "targetRawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 413
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 32
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 102
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 25
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 8
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "targetFourQualified": true,
+    "wholeApiFourQualified": false,
+    "fullFatalMatrixNotClaimed": true,
+    "completedWithExistingCarry": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 1.35
+    },
+    "newGrossOnly": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.45
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "summary": "Core08eef7ec/Unitdc121673/PG34190元8＋固定role衝突新1の全9FES0真正0。独立ASCII31多項式2614219(USER/V4ER)/62130991(ADMIN/B%MIN)でJDK hash preconditionを固定し、異なるrole二衝突＋空/loweradmin/paddedUSERをverify/inspect両modeで固定9000/cause-supp0/noTouch/正確SQL-closes/borrowedTX0/owned一回として検証。元8本文とMain11/POM/SDKはbyte exact、RootNullAway/既static再用、新Testだけcompile/GJF-CS0/同七fixture site根拠継承で適用未分類0。PG34192現191physical/11positiveCRC-init/XML真正、PG34194同singleexecrawはVerifier＋private carrierで413I102LINE8METHOD2CLASS32BRANCH全miss0、旧readRole二分岐を実測で閉鎖。旧8/raw2/guard1は歴史保持し再演0、exec合算/除外/到達不能/閾値変更0。BUG3040当nonnullSource/3042当role負例限定CLOSED、3039/3041既限定完了、YKT2546/2553/2555globalOPEN。旧carry.1/.3/.9を再加算せず新.05/.15/.45だけ追加、当.15/.45/1.35配送完了・残397.324/837.386/1643.415、427原.7/2.1/6.3 cap7と部分.6/1.8/5.4保持。App198/35435/35370/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変。全API/191/451/実DB/CHR/native/全fatalmatrix/owner終了は未受入、全HOLD保持。",
+  "newAcceptance": 0,
+  "whole451Accepted": false
+}
