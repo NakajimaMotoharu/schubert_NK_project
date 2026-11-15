@@ -1,0 +1,69 @@
+{
+  "actualExit": 0,
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/ExceptionValueContractTest.java",
+      "tests": 1
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java": "98cd13d71d07dadf4bb2a65b2d40f9222c0ee1f7d35bc6dfcd46abd1724c9956",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java": "a040ed22b820dccdb7da66a7af28dcdc1ea0a43c295aae150202090daac127df",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java": "8d1ce7abd62df2f2be4f02c68348455608c512a767eb0f5d64bb7ab07abf5222",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/ExceptionValueContractTest.java": "d8c183c953e82790dfa4faf59f0876c455030d21dbae2c3ab138058a619a942c"
+  },
+  "sdkHashes": {},
+  "mainSourcesUnchanged": true,
+  "oldExceptionOneByteExact": true,
+  "oldTestSha256": "d8c183c953e82790dfa4faf59f0876c455030d21dbae2c3ab138058a619a942c",
+  "newDefinitions": 4,
+  "necessaryPriorDefinitions": 1,
+  "expectedTests": 5,
+  "targets": [
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity",
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+    "dev/codex/schubert/nk/web/logging/ClaimedWebLog",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason"
+  ],
+  "independentAad": {
+    "spec": "SS324352 eight length-prefixes 32bit BE/UUID BE; literal fields independent Python struct",
+    "fieldsHex": [
+      "7765622d6c6f672d6f7574626f78",
+      "73636875626572745f7765625f73657373696f6e2e7765625f6c6f675f6f7574626f78",
+      "000102030405060708090a0b0c0d0e0f",
+      "101112131415161718191a1b1c1d1e1f",
+      "01",
+      "7631",
+      "574c474556543031",
+      "303031"
+    ],
+    "fieldLengths": [
+      14,
+      35,
+      16,
+      16,
+      1,
+      2,
+      8,
+      3
+    ],
+    "length": 127,
+    "goldenHex": "0000000e7765622d6c6f672d6f7574626f780000002373636875626572745f7765625f73657373696f6e2e7765625f6c6f675f6f7574626f7800000010000102030405060708090a0b0c0d0e0f00000010101112131415161718191a1b1c1d1e1f000000010100000002763100000008574c47455654303100000003303031"
+  },
+  "applicationTestsExecuted": 0,
+  "newAcceptance": 0,
+  "noWholeWebOrApiJarPayloadAccess": true
+}
