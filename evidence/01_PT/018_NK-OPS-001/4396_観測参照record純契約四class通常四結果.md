@@ -1,0 +1,5 @@
+# 観測参照record純契約四class通常四結果
+
+Core716595ee/Unit0c5d4483/PG35610 観測参照純契約Main四・独立新3＋必要な元BatchRun1を全保持し全4FES0真正0。Main source不変、InspectionSummary全三成分/NN二箇所/固定秘匿/同値異値-Map、RunReferencesは独立literal全16boolean表15許容1拒否/anyReference/全四成分、CleanupCountsは独立7正常13異常tripleで非負-差分-LongMAX各条件を確認。新三recordの全同値/反射なしMap/固定hash期待91596-37895104-1954を独立多項式から確認、実DB/worker/authority操作0。PG35612-35613現4physical4CRC-initXML/freshMain4Root/format-CS-PMD-SB全0、35614同singleexec全四Codeclass28LINE29METHOD4CLASS30BRANCH210I全miss0。BUG3096当二record/YKT2568四純依存限定CLOSED、広域YKT2431/元portやworker本体はOPEN又は未受入。追加.3/.9/2.7限定完了・残397.324/837.386/1643.415、原904.85/SV保持、App236/35894/35828/歴史不成功66、正式1964/53・正本184/625・元17/190・工数null不変。全451/DB-Root/CHR/native/owner終了依存/全HOLD保持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35613-observation-value4-post-join-v1/manifest.json SHA256 54c14093d691f5220b3b62e8d9fbc438102cc2401008666d06c4f22a78a66a9d; evidence/01_PT/018_NK-OPS-001/evidence/PG35614-observation-value4-unfiltered-v1/manifest.json SHA256 d39e5683088f43eb27f1e5b279eef8186748feb50399ec04955354ccf93861e6。
