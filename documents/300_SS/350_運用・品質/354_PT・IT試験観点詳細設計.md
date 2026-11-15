@@ -520,3 +520,9 @@ QA050承認に基づき、初期5秒/30秒/5分後の継続再試行を15分で�
 ## SSC309 exec中の世代とreadyの独立反例
 
 PT-OPS-EXECGEN309001～003：API/Web固定世代の一時Z→同PID/startTicksのordinary復帰、Z継続中は終了false、二回NoSuch後のみ終了true。Zを初回Root/self/PID1へ使えず、X/x/未知、不正/別ticks、cgroup/Unit drift、未知IOを拒否する。世代guardの通過だけではreadyにならず、空cmdlineはsocket/HTTP前false、復帰後は完全ordinary/same-socket/HTTP200 UP/infoを要求し503を拒否。kernel fixtureはpidfd非終端を独立に観測し、業務Root再起動を使わない。元失敗raw state未保存と新再現を区別し、旧source成功/失敗nativeを新sourceの正常nativeへ合算しない。元期限/UNKNOWN/451四100は不変更、fresh必要全体と実nativeは別受入。
+
+## SSC-437 CleanupKind親stepの固定metadata責務（2026-11-16）
+
+CleanupKindの閉じた九種から親BatchStepへの対応を各enum定数のfinal parentStep fieldで表す。private enum constructorへ固定BatchStep引数を追加しObjects.requireNonNullで内部invariantを確立、step()はfinal fieldを返す。対応はNOTIFICATIONS→CLEAN_NOTIFICATION、QUESTIONS→CLEAN_QUESTION、SESSIONS→CLEAN_SESSION、OUTBOX→CLEAN_INBOX_OUTBOX、LOGS→CLEAN_LOG、WEB_RECEIPTS/BATCH_RUNS/INBOX_PROGRESS/LOG_PROGRESS→CLEAN_BATCH_RUNの既存九件を完全保持する。enum名/定義順/ordinal/values-valueOf/public method descriptor/function()/maximumRows()/親BatchStep.backup/SQL識別子/DDL/削除条件/transaction/実行権限/HTTP電文/画面/承認DIFを変更0。private constructor内部引数だけで外部binary method/type kindは変えず、enumは不変metadataで実処理/原本/所有/commitの証明ではない。元switch式のraw生成default1分岐6命令不足BUG3083は除外・到達不能宣言・反射で埋めず、責務を既定値に保持する表現へ修正する。元Boundary二Testclass四＋独立値四の全三class8のfixture/入力/独立期待/全sourceを変更0、新sourceのfreshMain10RootNullAway/全静的/同singleexec全8/current186physicalCRC-init/XML/raw全十Codeclassで再検証する。旧default四100/別source/rawを現source合格へ加算0、未実行/HOLDのrepository/SQL/DB/Root2Actual4/鍵/VM/native/aru/終了依存を代替0。内部詳細補足でRD/UI/QA変更不要、全WBS/正式受入は個別criteriaと終了依存が満たされるまで更新しない。
+
+BUG3083/YKT2431、状態:設計確定・main反映前、PG/PT/全criteria・終了依存/正式未完。
