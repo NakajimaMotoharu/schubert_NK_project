@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "999922831ec10240a9e35089fb15cffc63a38e81f0e053ab83849d07aa168963",
+  "inventorySha256": "406f464ce40c1bd837c91d20a7090cd992e4b59a79418f3ecf816748cef716cf",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -39102,8 +39102,143 @@
     "tokenTotals": null
   },
   "plannedCurrentMigrationTransferSSC415": {
-    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java",
-    "sourceCreated": false,
-    "newAcceptance": 0
+    "state": "COMPONENT_QUALIFIED_NOT_FULL_WBS",
+    "actualDbOrPeerQualification": false,
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33658-current-transfer1030-post-v2/manifest.json",
+      "sha256": "35453e15bf6aef9189e65348898723906c8d3d3a976ad1b1c3fbcd6327438ccf"
+    }
+  },
+  "currentTransfer1030": {
+    "state": "CURRENT_TO_TARGET_DECLARED_TRANSFER_JAVA_QUALIFIED_NOT_ACTUAL_DB_OR_FULL_MANUFACTURE",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33658-current-transfer1030-post-v2/manifest.json",
+      "sha256": "35453e15bf6aef9189e65348898723906c8d3d3a976ad1b1c3fbcd6327438ccf"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33660-current-transfer1030-unfiltered-measurement-v2/manifest.json",
+      "sha256": "3fb55e4e223e6e5cb8dbad6da725d9075852fbf181a5b863489844724d475321"
+    },
+    "javaCore": "cdb08ef56167c1263a97790787f7415903e777cb",
+    "javaUnit": "af4a65492636083355a87bb494497291c2e35e16",
+    "global451Accepted": false
+  },
+  "currentTransfer1030PG33656": {
+    "kind": "SSC415_CURRENT_SOURCE_TO_TARGET20_WHOLE1030",
+    "source": "af4a65492636083355a87bb494497291c2e35e16",
+    "productionCoreMain": "cdb08ef56167c1263a97790787f7415903e777cb",
+    "post": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33658-current-transfer1030-post-v2/manifest.json",
+      "sha256": "35453e15bf6aef9189e65348898723906c8d3d3a976ad1b1c3fbcd6327438ccf"
+    },
+    "unfiltered": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33660-current-transfer1030-unfiltered-measurement-v2/manifest.json",
+      "sha256": "3fb55e4e223e6e5cb8dbad6da725d9075852fbf181a5b863489844724d475321"
+    },
+    "sourceProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33628-current-transfer1030-source-v1/media-throws-corrected-manifest.json",
+      "sha256": "a37110fd23e3ead74e7e2799678551de3445cc289f9121255cd30604ada1ccd1"
+    },
+    "tests": 1030,
+    "newUniqueTestDefinitions": 20,
+    "requalifiedExistingDefinitions": 1010,
+    "newMainSources": 1,
+    "allExistingMigrationMain": 51,
+    "allExistingMigrationTestSources": 52,
+    "physicalClasses": 72,
+    "positiveMainCrc": 71,
+    "naturalZeroCodeInterface": "dev/codex/schubert/nk/migration/MigrationCopyPort",
+    "actualJvmCodeMethods": 613,
+    "jacocoDefaultMethods": 530,
+    "all83DefaultFilteredMethodsExecuted": true,
+    "defaultCoverage": {
+      "INSTRUCTION": {
+        "covered": 15044,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 2003,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 3051,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1535,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 530,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 71,
+        "missed": 0
+      }
+    },
+    "unfilteredCoverage": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 15541
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 2003
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 3096
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1618
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 613
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 71
+      }
+    },
+    "defaultAndUnfilteredFour100": true,
+    "manualCoverageExclusions": [],
+    "rawPmdFindings": 570,
+    "applicable": 0,
+    "unclassified": 0,
+    "spotbugs": 0,
+    "all51ScopeNullAwayLintCs": true,
+    "allSixModulesRequalified": false,
+    "sourceFiveReadersToSameAssemblerMappingAndDatasetToSameTarget": true,
+    "sourceCompletesBeforeTargetSql": true,
+    "sevenNullSameReferenceAndCountGates": true,
+    "independentGoldenManifestAndWire": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33628-current-transfer1030-source-v1/independent-golden.json",
+      "sha256": "b8c2f449366c9e627b64ae1152900bda305fc408848a5a4ca1f92a6c98479b11"
+    },
+    "callerOwnsBothTransactionsAndConnections": true,
+    "firstSqlIoRuntimeErrorFailureStops": true,
+    "finiteConcurrentCalls": 64,
+    "limitedBugsClosed": [
+      2995,
+      2996,
+      2997
+    ],
+    "limitedYktsClosed": [
+      2524,
+      2525
+    ],
+    "actualDatabaseOriginalDataBackupKeyFileVmAruOperations": 0,
+    "actualCurrentCorrespondenceQualified": false,
+    "actualCopyTransportDriverImplemented": false,
+    "signatureOrAuthorityIssued": false,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "whole451Accepted": false,
+    "effortRate": null,
+    "actualAllocatedCost": null,
+    "tokenTotals": null
   }
 }
