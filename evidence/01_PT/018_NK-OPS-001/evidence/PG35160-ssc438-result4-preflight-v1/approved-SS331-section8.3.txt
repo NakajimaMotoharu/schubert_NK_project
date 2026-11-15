@@ -1,0 +1,15 @@
+### 8.3 親step履歴の借用Repository
+
+SSC055/PG163（先行898cc267）の親step Repository契約:
+
+- ProductionはBatchStep（BACKUP_DB、BACKUP_CONFIG、CLEAN_NOTIFICATION、CLEAN_QUESTION、CLEAN_SESSION、CLEAN_INBOX_OUTBOX、CLEAN_LOG、CLEAN_BATCH_RUN、CLEAN_TRANSFER、CLEAN_EXPIRY）、BatchStepAttempt、BatchStepResult、BatchRunRepository。原本由来BatchRunを受け取り、business_dateだけcutoffのAsia/Tokyo日付から導出する。step.started_atは呼出側が一度取得した別のnow。新now/終了timeはUTC0001～9999・µs、run.cutoff以上。原本backfillやclock丸め/補完はしない。
+- Repositoryは単独所有の借用Connection、autoCommit=false/readOnly=false/READ_COMMITTED。各操作前後にRunReferenceRepositoryの自己DB排他/同run identity整合を確認する。OS lock/原本正本/fresh子終端を代行しない。全PreparedStatementはtimeout5秒。Connection生成/config変更/commit/rollback/closeなし、callerが成功後commit・失敗後rollback/破棄する。途中のINSERT/UPDATEだけで確定済みとしない。
+- begin(run,step,now,recoverAbandoned)は同business_date/stepをattempt昇順LIMIT100 FOR UPDATEで全読取。12非秘密列id/run_id/business_date/step/attempt/started_at/ended_at/status/target_count/success_count/failure_count/byte_countだけを投影し、error_code/summaryを返さない。最大99行、id1～999999999999/一意、attempt1～99/厳密昇順、同date/step・UUID必須、全非負counts、µs/UTC時刻、RUNNINGだけended=NULL・terminalはended>=started、全時刻<=nowを検証。同run行のstartedは原本cutoff以上。未知status/null/不整合は保全拒否。既存別runのcutoffをstep時刻から推測しない。
+- 次attemptはその日/stepの最大値+1（初回1）、99超では一切更新しない。既RUNNINGはrecoverAbandoned=trueかつ全件同runの場合だけ、保持した各id/run/started/RUNNING/endedNULLをCASしFAILED・ended=now・固定ABANDONED診断へ更新、件数は保存する。false/別run RUNNINGは失敗。明示recoveryのcallerは子全終端/同run原本/OS排他を事前確認する。過去SUCCESS/WARNING/FAILED/SKIPPEDや別run診断を書換えない。
+- 非backupは同日/stepの既SUCCESSがあれば新attemptをSKIPPED（started=ended=now、4counts0、ALREADY_SUCCESSFUL）としてINSERT。backup2stepは毎回RUNNINGをINSERTし、既SUCCESSを保持する。他の新規もRUNNING/endedNULL/4counts0/診断NULL。RETURNING idは1行必須・有効id・全close後だけimmutable BatchStepAttempt(id,run,step,attempt,startedAt,skipped)を返す。日をまたいでresumeしても原本business_dateを使う。
+- finish(attempt,endedAt,result)はskipped handleを拒否し、全handle identity（id/run/date/step/attempt/started）かつRUNNING/endedNULLに対してterminal値をCASする。更新1件だけ新終了、0件は同identityとended/status/4counts/error_code/error_summaryが全て同値の場合だけ冪等成功（IS NOT DISTINCT FROMでNULL比較）。それ以外/複数件は失敗。過去終了を新timeや異なるresultで上書きしない。DB全資源と最終排他/割込確認後だけ返却する。成否不明commitは同じfinish値の再試行か新beginの既SUCCESS skipで扱い、未観測件数を補完しない。
+- BatchStepResultはStatus SUCCESS/WARNING/FAILED/SKIPPEDとtarget/success/failure/bytes各非負long、Reasonの固定組。SUCCESSはfailure0・NONEのみ。SKIPPEDは4counts0・ALREADY_SUCCESSFULまたはBACKUP_UNAVAILABLE。PROTECTED_RECORDSはWARNING、ABANDONEDはFAILED。DATABASE_FAILURE/COMMAND_FAILURE/SAFETY_FAILURE/IO_FAILURE/TIMEOUT/INTERRUPTEDはWARNINGまたはFAILED。保存codeはNONEだけSQL NULL、それ以外はenum名、summaryは対応する固定文だけ。任意exception/SQL/path/body/credentialを保存しない。保護skipをfailureへ勝手に置換せず、累積/今回差分はcallerが別責務として正しく分類する。
+- public型のnullは契約違反、不正value/timeは固定IllegalArgumentException。不正DB投影/SQL/owned closeはcause/suppressedなしBatchRepositoryException、開始/最終割込はflag保持で非成功。未知Runtime/NPE/Errorを正常化しない。全recordのtoStringはidentity/診断実体をredact。nullや未知値を0/SUCCESSへ補完しない。
+- V001～019/DDL/grant/保持期限・外部動作は変更しない。原本と実親全stepの結線/実backup/子unit/全cleanup loop/ITSTは本Repositoryだけでは完了にならない。017/021～024・BAT130～153、411/451の独立SQL/golden/全JDBC位置・4coverage100へ追跡する。
+
+## 9. Web technical schema
