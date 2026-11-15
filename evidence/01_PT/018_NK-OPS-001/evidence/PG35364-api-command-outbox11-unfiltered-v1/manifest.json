@@ -1,0 +1,2264 @@
+{
+  "actualExit": 0,
+  "declaredRequiredCountersAll100": true,
+  "terminalAtUTC": "2026-11-15T21:43:56.340358+00:00",
+  "source": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "productionCoreMain": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "actualUnitSource": "85b924192dff23d035319467e326d2511b60cdc5",
+  "actualCoreSource": "5a60309d2f9e078a92dbca31fb5c5b74c862436d",
+  "originalPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35363-api-command-outbox11-post-join-v1/manifest.json",
+    "sha256": "a5c8669d2c4e88ec9994cbb9cf201e8818e310a0970a4b37aa78e2164603c24e"
+  },
+  "originalSingleExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35363-api-command-outbox11-post-join-v1/jacoco.exec",
+    "sha256": "b9357da58dcbddcbd388157666abd8c693743a3708726d948d0d8a04a026b65d"
+  },
+  "allCurrentSourceInputsUnchanged": true,
+  "measurementOnly": true,
+  "classes": {
+    "dev/codex/schubert/nk/api/application/question/AnswerResult": {
+      "name": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "id": "c7b9da4508a223ce",
+      "dataPresent": true,
+      "probes": 8,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 32
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata": {
+      "name": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "id": "0c8d226e1b4789ab",
+      "dataPresent": true,
+      "probes": 15,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 60
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+      "name": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "id": "f335df72f09e3b86",
+      "dataPresent": true,
+      "probes": 16,
+      "access": 16433,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 75
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 13
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 9
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport": {
+      "name": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "id": "9faf3e1b9d11b160",
+      "dataPresent": true,
+      "probes": 14,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 62
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 13
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+      "name": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "id": "60500b8b9cf1018d",
+      "dataPresent": true,
+      "probes": 20,
+      "access": 16433,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 89
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 13
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 15
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 15
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/time/Instant;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "body",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "answeredAt",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/UUID;Ljava/util/UUID;Ljava/time/Instant;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 42
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "messageId",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "correlationId",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "at",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;ILjava/lang/String;)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 8
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "address",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "fromAddress",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "lambda$fromAddress$1",
+      "descriptor": "()Ljava/lang/IllegalArgumentException;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "lambda$fromAddress$0",
+      "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;)Z",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "<init>",
+      "descriptor": "(IIII)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 40
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "claimed",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "sent",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "failed",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "leaseLost",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "delayAfterFailure",
+      "descriptor": "(I)Ljava/time/Duration;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 28
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 9
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "nextAttemptAt",
+      "descriptor": "(Ljava/time/Instant;II)Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 31
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "independentCrc": {
+    "dev/codex/schubert/nk/api/application/question/AnswerResult": "c7b9da4508a223ce",
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata": "0c8d226e1b4789ab",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": "f335df72f09e3b86",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport": "9faf3e1b9d11b160",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": "60500b8b9cf1018d"
+  },
+  "classFileHashes": {
+    "dev/codex/schubert/nk/api/application/question/AnswerResult.class": "e2a819a1a9d98c05ec22e60963884d9d3b56598768d69c8cde6df0caaed80427",
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata.class": "30112eb88301f4acc1c504526b33bfb11f65cc3008320ad2ca21e14c9f458bfc",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class": "d1935ee173a91313ee76ae4ce03c0e788261e3db32882087cb7e1123608b88b9",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.class": "12338f68dd73f2ee4bcc7be41cf60fd8e3055246b55b725e05562ca89a78de67",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.class": "6ea9674669c18745a2f7c478f94959eaeceb7f3df609b0b2da015950e654b0be"
+  },
+  "rawCounterClassSum": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 318
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 29
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 49
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 53
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 37
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    }
+  },
+  "defaultCounter": {
+    "INSTRUCTION": {
+      "covered": 226,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 29,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 46,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 30,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 14,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 0
+    }
+  },
+  "defaultFilteredMethods": [
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "body",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "name": "answeredAt",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "messageId",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "correlationId",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+      "name": "at",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "claimed",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "sent",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "failed",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+      "name": "leaseLost",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "missedCodeMethods": [],
+  "apiDiagnosticOnly": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 318
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 29
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 49
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 53
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 37
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    }
+  },
+  "own5Main5PhysicalRawFour100": true,
+  "targetIssueAuditRawFour100": true,
+  "targetIssueAuditRawAllSix100": true,
+  "requiredCounterNames": [
+    "LINE",
+    "METHOD",
+    "CLASS",
+    "BRANCH"
+  ],
+  "naturalZeroDependencyCountersNotExcluded": true,
+  "targetIssueAuditCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 318
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 29
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 49
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 53
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 37
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 5
+    }
+  },
+  "declaredTargets": [
+    "dev/codex/schubert/nk/api/application/question/QuestionCommandMetadata",
+    "dev/codex/schubert/nk/api/application/question/AnswerResult",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule"
+  ],
+  "declaredTargetScopeQualifiedOnly": true,
+  "missedTargetCodeMethods": [],
+  "physicalClasses": 5,
+  "actualCodeMethods": 37,
+  "filteredMethodDifference": 23,
+  "defaultNaturallyOmittedCode0": [],
+  "defaultFiltersChanged": false,
+  "manualExclusions": 0,
+  "all5ScopeAccepted": false,
+  "applicationTestsExecuted": 0,
+  "oldExecCombined": false,
+  "productionBinaryClassDefinitionOrInitialization": 0,
+  "sdkRuntimeOrBackendOrRootOrVmOrPrivateRawOperations": 0,
+  "toolSelftest12Replayed": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}
