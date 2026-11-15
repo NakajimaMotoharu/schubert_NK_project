@@ -1,0 +1,104 @@
+{
+  "groupId": "PGPT-WBS65-SSC432-PROVIDER-SINGLE-CLEANUP18-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2243_WBS65SSC432資格消費通常十八限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "MqAuthenticationProvider.authenticateの既finally二guard（captured credentialsがchar[]ならzero、その後authenticationがUsernamePasswordAuthenticationTokenならeraseCredentials）を、同じclassの一つのprivate static consumeCredentials(Authentication,@Nullable Object)へ同順・同条件で集約する。finallyはこのhelperを一回呼ぶだけとし、正常/拒否/例外で資格消費の実装を一箇所へ統一する。authenticationの既nonnull前提/getCredentials一回をtry前に採る順序、nullable credentialsを含む不正型/unsupported subclassの拒否、公開API/認証成功条件/closedprincipal/Role/Probe/再送/014/0101/0106/9000分類/char配列zero後tokeneraseの順序・回数/cleanup例外の既優先を変えない。helperを公開・port・外部設定化せず、private reflection/SDK型偽装/到達不能扱い/除外/閾値緩和で分岐を隠さない。PG34545の通常return/例外の二重生成cleanupに対し、既通常API試験が持つ成功・不正token型・null/非char資格・派生型・transport失敗の実入力で単一helperの両guardを検証する。元Client8/Probe4/Provider5/closedfailure1全18の全source/期待/fixtureはbyte exact保持、新Test定義0。fresh safeMain18/RootNullAway/静的/現在SDK-JDK/protocol/物理CRC-init/XML/default及び無filter対象Probe/Provider/ExchangeException全Codeの必須四100を同一source/runで確認、旧18成功/defaultを新sourceへ転用0。外部権限/認証経路/実JMS-DB-session-key/Root2Actual4/VM/native/aru/HOLDを変更0。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4333_SSC432_Provider単一資格消費・全十八仕様.md",
+      "sha256": "f47a4f1c6c0383bbefc7f17c05d8cc502fcf8287628cecfb8430c92d42f78e3b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34560-ssc432-provider-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "8fda123bdec112fe64b3fb9e349ec35d1065e21da45ebe32ebe7260a7a23e503"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34545-provider-finally-bytecode-diagnostic-v1/manifest.json",
+      "sha256": "e8724f3586a187c565be20b56d027693e4bfc8ba042ad88f258e8bbb9a5fa0dc"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-06"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java": "WBS-P007-06"
+  },
+  "source": "39984b65f12d38975c06d4fcedcbf77742f8b029",
+  "run": "PG34580-SSC432-LOGIN-CLEANUP-WHOLE18",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 3.15
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00706_SSC432_SINGLE_CLEANUP18_RAW_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2242_WBS65予実・SSC432Provider通常十八限定閉鎖版674.json",
+    "sha256": "996c3329523b64d1eff21f3732bd77c7097012fdcd16a7575176368906a3a67e"
+  },
+  "nextCommand": "Publish onlySSC431/432 limited914 status main, commit/push18. Continue originalP00706 MqLoginFailureHandler path with MqLoginFailurePortTest6: existing own logger/JDK Servlet proxies source/proofs and safe logging dependencies beforeprice, observed poolTWR unbounded notyet ticketed/fixed. KeepSS432source/four-target success, no18confirmation replay/oldexecunion. AllRoot2Actual4SDKbackendDBVMnativearu/HOLD maintained; freshquota/hourly ordinarynotstop.",
+  "sourceAfter": "3cb3f31eddf3919010cc6ce5ed919765fd2f4446",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG34588-ssc432-cleanup18-component-join-v1/manifest.json",
+  "manifestSha256": "30ae27b8acb43765a7d35c100e64263c80f983eca0160c3bf2e30cd27729e445",
+  "terminalAtUTC": "2026-11-15T16:44:10.692267+00:00",
+  "outcome": "LOGIN_FOUR_CLASSES_RAW_FOUR100_SINGLE_CLEANUP_AND_PRIOR_CARRY_ONLY",
+  "technical": {
+    "productionCoreMain": "3cb3f31eddf3919010cc6ce5ed919765fd2f4446",
+    "actualUnitSource": "bd64d6e9472fc2bc8688d98362d7bab5f5428ce6",
+    "tests": 18,
+    "newDefinitions": 0,
+    "necessaryPriorDefinitions": 18,
+    "newPrivateCodeMethods": 1,
+    "original18TestsByteExact": true,
+    "providerBodyInverseFormattedExact": true,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 197,
+    "positiveCrc": 62,
+    "freshRootMain18": true,
+    "staticRaw31": 31,
+    "staticApplicable": 0,
+    "unclassified": 0,
+    "targetRawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 519
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 48
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 99
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 44
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 20
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 4
+      }
+    },
+    "targetFourQualified": true,
+    "previousRawBranchesMissed2NotExcluded": true,
+    "knownHorizontalSixTargetsChecked": true,
+    "globalHorizontalStillOpen": true,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "Core3cb3f31e/Unitbd64d6e9/PG34580全元18FES0真正0・新Test定義0。Provider finally二guardを同順のprivate consumeCredentials(Authentication,@Nullable Object)へ一箇所集約し全exitで一回呼ぶ、captured資格取得順/認証/Role/Probe/固定failure/charzero→tokenerase/例外優先/公開APIは元body逆展開formatted byte exact。元全4Testclass/18本文・期待・fixtureはbyte exact、新helperは成功/不正型/null-非char資格/unsupported token等の普通API経路だけで両guardを実行。PG34582現197physical62positiveCRC-init/XML、freshMain18RootNullAway/GJF-CS-SB0/PMD31具体site適用未分類0、JDKSQLgetter既staticを同module/javap/新CP/initへ結合。PG34584同singleexecraw対象Probe/Provider/ExchangeExceptionとReasonは99LINE20METHOD4CLASS48BRANCH519I全miss0、旧529I/BRANCH2未実行は保存し除外/到達不能/反射偽状態/旧exec合算0。BUG3067当ProviderCode限定CLOSED、PG34586でLogin既知六型は修正又は非該当をsource byteと個別PTへ対応しCaddy/graph旧証拠を再演0・新source全体成功へ移植0。YKT2556は広域影響確認未完、2431/2554もglobalOPEN。新gross.2/.6/1.8だけ追加、旧carry.15/.45/1.35を重複加算せず当.35/1.05/3.15配送完了・残397.324/837.386/1643.415。App209/35603/35538/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全197/451/実JMS-DB-認証/CHR/native/owner終了依存・全HOLD保持。"
+}
