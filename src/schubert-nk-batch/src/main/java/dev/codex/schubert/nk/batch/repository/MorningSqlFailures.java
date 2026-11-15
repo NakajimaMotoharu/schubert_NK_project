@@ -13,9 +13,7 @@ import org.jspecify.annotations.Nullable;
  * actual Morning caller retains cleanup and primary tracking.
  */
 @NullMarked
-final class MorningSqlFailures {
-  private MorningSqlFailures() {}
-
+interface MorningSqlFailures {
   static void preserveCatalogFatal(Throwable failure) {
     Objects.requireNonNull(failure, "known catalog failure");
     if (failure instanceof SQLException || failure instanceof BatchRepositoryException) {

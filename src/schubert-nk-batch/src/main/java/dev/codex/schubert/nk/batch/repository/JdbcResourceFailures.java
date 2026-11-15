@@ -10,9 +10,7 @@ import org.jspecify.annotations.Nullable;
  * SS332/SSC063/PG179/BUG195,206/YKT154,162; BAT087,121. Never owns a connection or transaction.
  */
 @NullMarked
-final class JdbcResourceFailures {
-  private JdbcResourceFailures() {}
-
+interface JdbcResourceFailures {
   static boolean replace(@Nullable Throwable primary, Throwable secondary) {
     if (primary == null
         || (primary instanceof SQLException && !(secondary instanceof SQLException))) return true;
