@@ -457,4 +457,35 @@ final class AuthenticationVerifierJdbcPortTest {
       }
     }
   }
+
+  @Test
+  void roleCollision001WrongRoleStringsWithEqualHashesStillFailClosedInBothModes()
+      throws Exception {
+    // Independent ASCII 31-polynomial golden values; these are fixture preconditions only.
+    assertEquals(2_614_219, "USER".hashCode());
+    assertEquals(2_614_219, "V4ER".hashCode());
+    assertEquals(62_130_991, "ADMIN".hashCode());
+    assertEquals(62_130_991, "B%MIN".hashCode());
+    var verifier = new AuthenticationContextVerifier(new ContextHash());
+    for (boolean inspect : List.of(false, true)) {
+      for (String rejected : List.of("V4ER", "B%MIN", "", "admin", " USER ")) {
+        var f = new Fixture();
+        f.readOnly = inspect;
+        f.fields.put(COL_ROLE, rejected);
+        fixedInfrastructure(
+            () -> {
+              if (inspect) verifier.inspectReadOnly(f.connection(), INPUT, NOW);
+              else verifier.verify(f.connection(), INPUT, NOW);
+            });
+        assertFalse(f.sql.contains(TOUCH));
+        assertEquals(inspect ? List.of(READ) : List.of(USER_LOCK, SESSION_LOCK), f.sql);
+        assertEquals(
+            inspect
+                ? List.of(SESSION_ROW, SESSION_STATEMENT)
+                : List.of(USER_ROW, USER_STATEMENT, SESSION_ROW, SESSION_STATEMENT),
+            f.closes);
+        f.owned();
+      }
+    }
+  }
 }
