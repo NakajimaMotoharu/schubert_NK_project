@@ -220,6 +220,10 @@ final class CurrentMigrationMappingVerifierTest {
         wire.field(part, 1, "0");
         reject(wire.encode());
       }
+      var wrongWidth = new Wire();
+      wrongWidth.parts.set(part, childHeader + "\n1\n");
+      wrongWidth.field(part, 1, "1");
+      reject(wrongWidth.encode());
       var wrongCount = new Wire();
       wrongCount.field(part, 1, "1");
       reject(wrongCount.encode());
