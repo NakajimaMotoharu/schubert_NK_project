@@ -1,0 +1,129 @@
+{
+  "actualExit": 0,
+  "atJST": "2026-11-15T10:25:04.408271+09:00",
+  "originalUnit": "23bb667e26cb7e879a5d2d07589fc7e3ba723745",
+  "source": "29e32fb7346df499660daf138026c006ef9fb361",
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33514-admin-boundary27-unfiltered-measurement-v6/manifest.json",
+    "sha256": "77599dfd5c35b794e00187a5edf60695645b7d8efcfdde798c34b8aeed100bf0"
+  },
+  "javap": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33520-admin-twr-static-miss-analysis-v1/javap.txt",
+    "sha256": "c41797b305438f8db858cf0c3ccfc2b15d04c927c9a8db0ee535c4903c22d238"
+  },
+  "tests27Fes0ButNotQualified": true,
+  "rawInstructionMissed": 48,
+  "rawBranchMissed": 20,
+  "rawLineMissed": 1,
+  "defaultFour100": true,
+  "rawFour100": false,
+  "methodsWithMiss": [
+    {
+      "className": "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService",
+      "name": "create",
+      "descriptor": "(Ljava/sql/Connection;Ljava/lang/String;[CLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;)Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 38,
+          "covered": 373
+        },
+        "BRANCH": {
+          "missed": 18,
+          "covered": 48
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 65
+        },
+        "COMPLEXITY": {
+          "missed": 18,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService",
+      "name": "audit",
+      "descriptor": "(Ljava/sql/Connection;JLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/lang/String;)V",
+      "access": 10,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 52
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/security/PasswordHasher",
+      "name": "encode",
+      "descriptor": "([C)Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 16
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "bugs": [
+    "BUG-2989",
+    "BUG-2990"
+  ],
+  "ykt": [
+    "YKT-2518",
+    "YKT-2519"
+  ],
+  "applicationTestsExecuted": 0,
+  "heldOrBackendActions": 0,
+  "newAcceptance": 0
+}

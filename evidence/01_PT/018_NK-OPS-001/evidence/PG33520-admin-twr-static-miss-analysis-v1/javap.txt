@@ -1,0 +1,570 @@
+Compiled from "BootstrapAdminService.java"
+public final class dev.codex.schubert.nk.api.application.admin.BootstrapAdminService {
+  private final dev.codex.schubert.nk.api.security.PasswordHasher passwords;
+
+  private final dev.codex.schubert.nk.api.security.PasswordPolicy policy;
+
+  public dev.codex.schubert.nk.api.application.admin.BootstrapAdminService();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class dev/codex/schubert/nk/api/security/PasswordHasher
+         8: dup
+         9: invokespecial #9                  // Method dev/codex/schubert/nk/api/security/PasswordHasher."<init>":()V
+        12: putfield      #10                 // Field passwords:Ldev/codex/schubert/nk/api/security/PasswordHasher;
+        15: aload_0
+        16: new           #16                 // class dev/codex/schubert/nk/api/security/PasswordPolicy
+        19: dup
+        20: invokespecial #18                 // Method dev/codex/schubert/nk/api/security/PasswordPolicy."<init>":()V
+        23: putfield      #19                 // Field policy:Ldev/codex/schubert/nk/api/security/PasswordPolicy;
+        26: return
+
+  public dev.codex.schubert.nk.api.application.admin.BootstrapAdminService$Outcome create(java.sql.Connection, java.lang.String, char[], dev.codex.schubert.nk.api.application.admin.UserCommandMetadata) throws java.sql.SQLException;
+    Code:
+         0: aload_3
+         1: ldc           #23                 // String password
+         3: invokestatic  #25                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #31                 // String connection
+        10: invokestatic  #25                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #33                 // String username
+        17: invokestatic  #25                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload         4
+        23: ldc           #35                 // String metadata
+        25: invokestatic  #25                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        28: pop
+        29: aload_1
+        30: invokeinterface #37,  1           // InterfaceMethod java/sql/Connection.getAutoCommit:()Z
+        35: ifne          61
+        38: aload_1
+        39: invokeinterface #43,  1           // InterfaceMethod java/sql/Connection.isReadOnly:()Z
+        44: ifne          61
+        47: aload_1
+        48: invokeinterface #46,  1           // InterfaceMethod java/sql/Connection.getTransactionIsolation:()I
+        53: iconst_2
+        54: if_icmpne     61
+        57: iconst_1
+        58: goto          62
+        61: iconst_0
+        62: invokestatic  #50                 // Method require:(Z)V
+        65: aload_1
+        66: ldc           #54                 // String select pg_catalog.pg_try_advisory_xact_lock_shared(71419602)
+        68: invokeinterface #56,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+        73: invokestatic  #60                 // Method requirePrepared:(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;
+        76: astore        5
+        78: aload         5
+        80: invokeinterface #64,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+        85: invokestatic  #70                 // Method requireResult:(Ljava/sql/ResultSet;)Ljava/sql/ResultSet;
+        88: astore        6
+        90: aload         6
+        92: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+        97: invokestatic  #50                 // Method require:(Z)V
+       100: aload         6
+       102: iconst_1
+       103: invokeinterface #79,  2           // InterfaceMethod java/sql/ResultSet.getBoolean:(I)Z
+       108: istore        7
+       110: aload         6
+       112: invokeinterface #83,  1           // InterfaceMethod java/sql/ResultSet.wasNull:()Z
+       117: ifne          124
+       120: iconst_1
+       121: goto          125
+       124: iconst_0
+       125: invokestatic  #50                 // Method require:(Z)V
+       128: iload         7
+       130: invokestatic  #50                 // Method require:(Z)V
+       133: aload         6
+       135: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       140: ifne          147
+       143: iconst_1
+       144: goto          148
+       147: iconst_0
+       148: invokestatic  #50                 // Method require:(Z)V
+       151: aload         6
+       153: ifnull        195
+       156: aload         6
+       158: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       163: goto          195
+       166: astore        7
+       168: aload         6
+       170: ifnull        192
+       173: aload         6
+       175: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       180: goto          192
+       183: astore        8
+       185: aload         7
+       187: aload         8
+       189: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       192: aload         7
+       194: athrow
+       195: aload         5
+       197: ifnull        239
+       200: aload         5
+       202: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       207: goto          239
+       210: astore        6
+       212: aload         5
+       214: ifnull        236
+       217: aload         5
+       219: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       224: goto          236
+       227: astore        7
+       229: aload         6
+       231: aload         7
+       233: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       236: aload         6
+       238: athrow
+       239: aload_1
+       240: ldc           #96                 // String select pg_advisory_xact_lock(71419601)
+       242: invokeinterface #56,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       247: invokestatic  #60                 // Method requirePrepared:(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;
+       250: astore        5
+       252: aload         5
+       254: invokeinterface #64,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       259: invokestatic  #70                 // Method requireResult:(Ljava/sql/ResultSet;)Ljava/sql/ResultSet;
+       262: astore        6
+       264: aload         6
+       266: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       271: invokestatic  #50                 // Method require:(Z)V
+       274: aload         6
+       276: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       281: ifne          288
+       284: iconst_1
+       285: goto          289
+       288: iconst_0
+       289: invokestatic  #50                 // Method require:(Z)V
+       292: aload         6
+       294: ifnull        336
+       297: aload         6
+       299: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       304: goto          336
+       307: astore        7
+       309: aload         6
+       311: ifnull        333
+       314: aload         6
+       316: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       321: goto          333
+       324: astore        8
+       326: aload         7
+       328: aload         8
+       330: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       333: aload         7
+       335: athrow
+       336: aload         5
+       338: ifnull        380
+       341: aload         5
+       343: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       348: goto          380
+       351: astore        6
+       353: aload         5
+       355: ifnull        377
+       358: aload         5
+       360: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       365: goto          377
+       368: astore        7
+       370: aload         6
+       372: aload         7
+       374: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       377: aload         6
+       379: athrow
+       380: aload_1
+       381: invokeinterface #98,  1           // InterfaceMethod java/sql/Connection.createStatement:()Ljava/sql/Statement;
+       386: invokestatic  #102                // Method requireStatement:(Ljava/sql/Statement;)Ljava/sql/Statement;
+       389: astore        5
+       391: aload         5
+       393: ldc           #106                // String lock table schubert.app_users in share row exclusive mode
+       395: invokeinterface #108,  2          // InterfaceMethod java/sql/Statement.execute:(Ljava/lang/String;)Z
+       400: pop
+       401: aload         5
+       403: ifnull        445
+       406: aload         5
+       408: invokeinterface #114,  1          // InterfaceMethod java/sql/Statement.close:()V
+       413: goto          445
+       416: astore        6
+       418: aload         5
+       420: ifnull        442
+       423: aload         5
+       425: invokeinterface #114,  1          // InterfaceMethod java/sql/Statement.close:()V
+       430: goto          442
+       433: astore        7
+       435: aload         6
+       437: aload         7
+       439: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       442: aload         6
+       444: athrow
+       445: aload_1
+       446: ldc           #115                // String select exists(select 1 from schubert.app_users)
+       448: invokeinterface #56,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       453: invokestatic  #60                 // Method requirePrepared:(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;
+       456: astore        6
+       458: aload         6
+       460: invokeinterface #64,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       465: invokestatic  #70                 // Method requireResult:(Ljava/sql/ResultSet;)Ljava/sql/ResultSet;
+       468: astore        7
+       470: aload         7
+       472: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       477: invokestatic  #50                 // Method require:(Z)V
+       480: aload         7
+       482: iconst_1
+       483: invokeinterface #79,  2           // InterfaceMethod java/sql/ResultSet.getBoolean:(I)Z
+       488: istore        5
+       490: aload         7
+       492: invokeinterface #83,  1           // InterfaceMethod java/sql/ResultSet.wasNull:()Z
+       497: ifne          504
+       500: iconst_1
+       501: goto          505
+       504: iconst_0
+       505: invokestatic  #50                 // Method require:(Z)V
+       508: aload         7
+       510: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       515: ifne          522
+       518: iconst_1
+       519: goto          523
+       522: iconst_0
+       523: invokestatic  #50                 // Method require:(Z)V
+       526: aload         7
+       528: ifnull        570
+       531: aload         7
+       533: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       538: goto          570
+       541: astore        8
+       543: aload         7
+       545: ifnull        567
+       548: aload         7
+       550: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       555: goto          567
+       558: astore        9
+       560: aload         8
+       562: aload         9
+       564: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       567: aload         8
+       569: athrow
+       570: aload         6
+       572: ifnull        614
+       575: aload         6
+       577: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       582: goto          614
+       585: astore        7
+       587: aload         6
+       589: ifnull        611
+       592: aload         6
+       594: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       599: goto          611
+       602: astore        8
+       604: aload         7
+       606: aload         8
+       608: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       611: aload         7
+       613: athrow
+       614: iload         5
+       616: ifeq          632
+       619: getstatic     #117                // Field dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome.ALREADY_EXISTS:Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;
+       622: astore        6
+       624: aload_3
+       625: iconst_0
+       626: invokestatic  #123                // Method java/util/Arrays.fill:([CC)V
+       629: aload         6
+       631: areturn
+       632: new           #129                // class dev/codex/schubert/nk/api/security/LoginUsername
+       635: dup
+       636: aload_2
+       637: invokespecial #131                // Method dev/codex/schubert/nk/api/security/LoginUsername."<init>":(Ljava/lang/String;)V
+       640: astore        6
+       642: aload         6
+       644: invokevirtual #134                // Method dev/codex/schubert/nk/api/security/LoginUsername.value:()Ljava/lang/String;
+       647: ldc           #138                // String [A-Za-z0-9._-]+
+       649: invokevirtual #140                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       652: ifne          665
+       655: new           #145                // class java/lang/IllegalArgumentException
+       658: dup
+       659: ldc           #147                // String bootstrap username is invalid
+       661: invokespecial #149                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       664: athrow
+       665: aload_0
+       666: getfield      #19                 // Field policy:Ldev/codex/schubert/nk/api/security/PasswordPolicy;
+       669: aload_3
+       670: aload         6
+       672: invokevirtual #134                // Method dev/codex/schubert/nk/api/security/LoginUsername.value:()Ljava/lang/String;
+       675: invokevirtual #150                // Method dev/codex/schubert/nk/api/security/PasswordPolicy.normalizeForCreation:([CLjava/lang/String;)[C
+       678: astore        7
+       680: aload_0
+       681: getfield      #10                 // Field passwords:Ldev/codex/schubert/nk/api/security/PasswordHasher;
+       684: aload         7
+       686: invokevirtual #154                // Method dev/codex/schubert/nk/api/security/PasswordHasher.encode:([C)Ljava/lang/String;
+       689: astore        8
+       691: aload         7
+       693: iconst_0
+       694: invokestatic  #123                // Method java/util/Arrays.fill:([CC)V
+       697: goto          711
+       700: astore        10
+       702: aload         7
+       704: iconst_0
+       705: invokestatic  #123                // Method java/util/Arrays.fill:([CC)V
+       708: aload         10
+       710: athrow
+       711: aload_1
+       712: ldc           #158                // String insert into schubert.app_users(username,username_key,password_hash,role,status,\n  password_changed_at,created_at,updated_at)\nvalues (?,?,?,\'ADMIN\',\'ACTIVE\',?,?,?) returning id\n
+       714: invokeinterface #56,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+       719: invokestatic  #60                 // Method requirePrepared:(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;
+       722: astore        11
+       724: aload         11
+       726: iconst_1
+       727: aload         6
+       729: invokevirtual #134                // Method dev/codex/schubert/nk/api/security/LoginUsername.value:()Ljava/lang/String;
+       732: invokeinterface #160,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       737: aload         11
+       739: iconst_2
+       740: aload         6
+       742: invokevirtual #164                // Method dev/codex/schubert/nk/api/security/LoginUsername.key:()Ljava/lang/String;
+       745: invokeinterface #160,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       750: aload         11
+       752: iconst_3
+       753: aload         8
+       755: invokeinterface #160,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+       760: iconst_4
+       761: istore        12
+       763: iload         12
+       765: bipush        6
+       767: if_icmpgt     796
+       770: aload         11
+       772: iload         12
+       774: aload         4
+       776: invokevirtual #167                // Method dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.at:()Ljava/time/Instant;
+       779: getstatic     #173                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+       782: invokevirtual #179                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+       785: invokeinterface #185,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+       790: iinc          12, 1
+       793: goto          763
+       796: aload         11
+       798: invokeinterface #64,  1           // InterfaceMethod java/sql/PreparedStatement.executeQuery:()Ljava/sql/ResultSet;
+       803: invokestatic  #70                 // Method requireResult:(Ljava/sql/ResultSet;)Ljava/sql/ResultSet;
+       806: astore        12
+       808: aload         12
+       810: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       815: invokestatic  #50                 // Method require:(Z)V
+       818: aload         12
+       820: iconst_1
+       821: invokeinterface #189,  2          // InterfaceMethod java/sql/ResultSet.getLong:(I)J
+       826: lstore        9
+       828: aload         12
+       830: invokeinterface #83,  1           // InterfaceMethod java/sql/ResultSet.wasNull:()Z
+       835: ifne          842
+       838: iconst_1
+       839: goto          843
+       842: iconst_0
+       843: invokestatic  #50                 // Method require:(Z)V
+       846: lload         9
+       848: lconst_1
+       849: lcmp
+       850: iflt          866
+       853: lload         9
+       855: ldc2_w        #193                // long 999999999999l
+       858: lcmp
+       859: ifgt          866
+       862: iconst_1
+       863: goto          867
+       866: iconst_0
+       867: invokestatic  #50                 // Method require:(Z)V
+       870: aload         12
+       872: invokeinterface #74,  1           // InterfaceMethod java/sql/ResultSet.next:()Z
+       877: ifne          884
+       880: iconst_1
+       881: goto          885
+       884: iconst_0
+       885: invokestatic  #50                 // Method require:(Z)V
+       888: aload         12
+       890: ifnull        932
+       893: aload         12
+       895: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       900: goto          932
+       903: astore        13
+       905: aload         12
+       907: ifnull        929
+       910: aload         12
+       912: invokeinterface #86,  1           // InterfaceMethod java/sql/ResultSet.close:()V
+       917: goto          929
+       920: astore        14
+       922: aload         13
+       924: aload         14
+       926: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       929: aload         13
+       931: athrow
+       932: aload         11
+       934: ifnull        976
+       937: aload         11
+       939: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       944: goto          976
+       947: astore        12
+       949: aload         11
+       951: ifnull        973
+       954: aload         11
+       956: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       961: goto          973
+       964: astore        13
+       966: aload         12
+       968: aload         13
+       970: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       973: aload         12
+       975: athrow
+       976: aload_1
+       977: lload         9
+       979: aload         4
+       981: ldc           #195                // String ACTION
+       983: invokestatic  #197                // Method audit:(Ljava/sql/Connection;JLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/lang/String;)V
+       986: aload_1
+       987: lload         9
+       989: aload         4
+       991: ldc           #201                // String SECURITY
+       993: invokestatic  #197                // Method audit:(Ljava/sql/Connection;JLdev/codex/schubert/nk/api/application/admin/UserCommandMetadata;Ljava/lang/String;)V
+       996: getstatic     #203                // Field dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome.CREATED:Ldev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome;
+       999: astore        11
+      1001: aload_3
+      1002: iconst_0
+      1003: invokestatic  #123                // Method java/util/Arrays.fill:([CC)V
+      1006: aload         11
+      1008: areturn
+      1009: astore        15
+      1011: aload_3
+      1012: iconst_0
+      1013: invokestatic  #123                // Method java/util/Arrays.fill:([CC)V
+      1016: aload         15
+      1018: athrow
+      Exception table:
+         from    to  target type
+            90   151   166   Class java/lang/Throwable
+           173   180   183   Class java/lang/Throwable
+            78   195   210   Class java/lang/Throwable
+           217   224   227   Class java/lang/Throwable
+           264   292   307   Class java/lang/Throwable
+           314   321   324   Class java/lang/Throwable
+           252   336   351   Class java/lang/Throwable
+           358   365   368   Class java/lang/Throwable
+           391   401   416   Class java/lang/Throwable
+           423   430   433   Class java/lang/Throwable
+           470   526   541   Class java/lang/Throwable
+           548   555   558   Class java/lang/Throwable
+           458   570   585   Class java/lang/Throwable
+           592   599   602   Class java/lang/Throwable
+           680   691   700   any
+           700   702   700   any
+           808   888   903   Class java/lang/Throwable
+           910   917   920   Class java/lang/Throwable
+           724   932   947   Class java/lang/Throwable
+           954   961   964   Class java/lang/Throwable
+             7   624  1009   any
+           632  1001  1009   any
+          1009  1011  1009   any
+
+  private static void audit(java.sql.Connection, long, dev.codex.schubert.nk.api.application.admin.UserCommandMetadata, java.lang.String) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: ldc           #206                // String insert into schubert.app_logs(logged_at,service,category,level,action,message,\n  message_id,correlation_id,details)\nvalues (?,\'API\',?,\'INFO\',\'USER_CREATED\',\'USER_CREATED\',?,?,\n  jsonb_build_object(\'outcome\',\'SUCCESS\',\'source\',\'BOOTSTRAP\',\'targetUserId\',cast(? as bigint)))\n
+         3: invokeinterface #56,  2           // InterfaceMethod java/sql/Connection.prepareStatement:(Ljava/lang/String;)Ljava/sql/PreparedStatement;
+         8: invokestatic  #60                 // Method requirePrepared:(Ljava/sql/PreparedStatement;)Ljava/sql/PreparedStatement;
+        11: astore        5
+        13: aload         5
+        15: iconst_1
+        16: aload_3
+        17: invokevirtual #167                // Method dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.at:()Ljava/time/Instant;
+        20: getstatic     #173                // Field java/time/ZoneOffset.UTC:Ljava/time/ZoneOffset;
+        23: invokevirtual #179                // Method java/time/Instant.atOffset:(Ljava/time/ZoneOffset;)Ljava/time/OffsetDateTime;
+        26: invokeinterface #185,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        31: aload         5
+        33: iconst_2
+        34: aload         4
+        36: invokeinterface #160,  3          // InterfaceMethod java/sql/PreparedStatement.setString:(ILjava/lang/String;)V
+        41: aload         5
+        43: iconst_3
+        44: aload_3
+        45: invokevirtual #208                // Method dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.messageId:()Ljava/util/UUID;
+        48: invokeinterface #185,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        53: aload         5
+        55: iconst_4
+        56: aload_3
+        57: invokevirtual #212                // Method dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.correlationId:()Ljava/util/UUID;
+        60: invokeinterface #185,  3          // InterfaceMethod java/sql/PreparedStatement.setObject:(ILjava/lang/Object;)V
+        65: aload         5
+        67: iconst_5
+        68: lload_1
+        69: invokeinterface #215,  4          // InterfaceMethod java/sql/PreparedStatement.setLong:(IJ)V
+        74: aload         5
+        76: invokeinterface #219,  1          // InterfaceMethod java/sql/PreparedStatement.executeUpdate:()I
+        81: iconst_1
+        82: if_icmpne     89
+        85: iconst_1
+        86: goto          90
+        89: iconst_0
+        90: invokestatic  #50                 // Method require:(Z)V
+        93: aload         5
+        95: ifnull        137
+        98: aload         5
+       100: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       105: goto          137
+       108: astore        6
+       110: aload         5
+       112: ifnull        134
+       115: aload         5
+       117: invokeinterface #95,  1           // InterfaceMethod java/sql/PreparedStatement.close:()V
+       122: goto          134
+       125: astore        7
+       127: aload         6
+       129: aload         7
+       131: invokevirtual #91                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       134: aload         6
+       136: athrow
+       137: return
+      Exception table:
+         from    to  target type
+            13    93   108   Class java/lang/Throwable
+           115   122   125   Class java/lang/Throwable
+
+  private static java.sql.PreparedStatement requirePrepared(java.sql.PreparedStatement) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: ifnonnull     8
+         4: invokestatic  #222                // Method invalidBoundary:()Ljava/sql/SQLException;
+         7: athrow
+         8: aload_0
+         9: areturn
+
+  private static java.sql.Statement requireStatement(java.sql.Statement) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: ifnonnull     8
+         4: invokestatic  #222                // Method invalidBoundary:()Ljava/sql/SQLException;
+         7: athrow
+         8: aload_0
+         9: areturn
+
+  private static java.sql.ResultSet requireResult(java.sql.ResultSet) throws java.sql.SQLException;
+    Code:
+         0: aload_0
+         1: ifnonnull     8
+         4: invokestatic  #222                // Method invalidBoundary:()Ljava/sql/SQLException;
+         7: athrow
+         8: aload_0
+         9: areturn
+
+  private static java.sql.SQLException invalidBoundary();
+    Code:
+         0: new           #226                // class java/sql/SQLException
+         3: dup
+         4: ldc           #228                // String bootstrap account transaction is invalid
+         6: invokespecial #230                // Method java/sql/SQLException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  private static void require(boolean) throws java.sql.SQLException;
+    Code:
+         0: iload_0
+         1: ifne          14
+         4: new           #226                // class java/sql/SQLException
+         7: dup
+         8: ldc           #228                // String bootstrap account transaction is invalid
+        10: invokespecial #230                // Method java/sql/SQLException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: return
+}
