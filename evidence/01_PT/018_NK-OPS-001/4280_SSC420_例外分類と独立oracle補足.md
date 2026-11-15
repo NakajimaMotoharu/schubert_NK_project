@@ -1,0 +1,3 @@
+# SSC420例外分類と独立oracle補足
+
+4279の固定catalogは分類対象の非fatal故障に適用する。REVOKE-OWN001は既仕様のProviderException→CRYPTO_UNAVAILABLE、WEBLOG-OWN001はSS352の直接AssertionError同一伝播を検証し、Errorをcatalogに変換しない。元4279/5417 oracle pinは保存し書き換えない。二つの旧Test内DataOutput/JCA独立envelopeを期待値に使用し、Production encrypt/decryptをexpected算出へ使わない。再利用は別worker Future5sでlock解放も確認、nonce12zero、元caller/公開context不変、実行回数2。実鍵/実OOM/新JCA providerは追加0。

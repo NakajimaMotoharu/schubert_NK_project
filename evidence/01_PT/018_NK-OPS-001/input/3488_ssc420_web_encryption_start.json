@@ -1,0 +1,41 @@
+{
+  "groupId": "PGPT-WBS65-SSC420-WEB-ENCRYPT-OWNERSHIP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2127_WBS65SSC420Web暗号所有開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "WebLogPayloadCodec.encryptとRevocationPayloadCodec.encryptで取得済みplaintext/candidateの後にnonce/AAD/emptybuffer初期化がtry前にある取得漏れを是正する。placeholderの非秘密空配列だけをowned機密取得前に準備し、既try内でplaintext copy→nonce→AADを順に取得する。従来finallyで返却済みowned全配列を消去し、返却前のJDK内部allocationは保証せず実OOMを誘発しない。既lock/ensureOpen/null/鍵version/固定AES256GCM128/nonce12/AAD/format/過去鍵/再送結果/例外catalog/既fatal guard/外部APIを保持、新provider/新crypto切替口/権限/実鍵/DB/実nonceを追加0。既Revocation7＋FailureGraph1＋JdbcGraph3＋Fatal5＋WebLog9=25Test本文と独立DataOutput/JCA goldenを保持し、新各1Testだけpublic固定鍵/nonceで初回乱数故障→別worker正常と元caller/nonce消去/既独立golden/call2を検証する。workerはFutureget5s、finallyshutdownNow/await10s確認後codecclose、process隔離内の旧JCA provider復元fixture以外のsystem操作なし。新27は当source一singleexecでfreshMain13 RootNullAway/静的/CRC/init/default及びrawを確認、対象二codecの全Codeと全191等依存scopeの未達を区別し数を実compileから確定する。旧成功/Protocol130は確認再演せず当sourceへ合算しない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4279_SSC420_Web暗号化取得保護・通常全27仕様.md",
+      "sha256": "4ac74e1b80dea747c8fe5884f71bd8cdefaf3eef38e35db366f3fcfc74d9da6a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33780-ssc420-web-encryption-design-only-v1/design-only-main-patch.json",
+      "sha256": "d3ac70f035ceaa052d6b49af13d8f8bee1cca71592117719cfa78fadc26627e8"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P006-04",
+    "WBS-P015-05"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java"
+  ],
+  "source": "d3f0aa6862d280c30f6e5025ebb2bb608594ec63",
+  "run": "PG33790-SSC420-WEB-ENCRYPT27",
+  "estimate": {
+    "low": 0.6,
+    "base": 1.8,
+    "high": 5.4
+  },
+  "capPp": 6,
+  "workIds": [
+    "P00604P01505_SSC420_WEB_ENCRYPT_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2126_WBS65予実・SSC420Web暗号所有追加版620.json",
+    "sha256": "2fed911041ceeb76d0510831db050de30c2cd8c1b3526a7baebfdebe7fbc120c"
+  },
+  "nextCommand": "PublishSSC420docs-onlymain beforePG. Move secret acquisition into owned try in two Web codecs; preserve25 oldTest bodies+new2, fresh13Main/Protocol samebytes/whole27/static/sameexec raw CRC. No actual4/Root2/SDKbackend/native/DB/VM/aru/refusal operations. Freshquota/hourly; normalgroupnotstop."
+}

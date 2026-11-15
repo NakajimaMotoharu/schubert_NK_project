@@ -68,12 +68,16 @@ public final class RevocationPayloadCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "revocation identity");
       Objects.requireNonNull(context, "revocation context");
-      byte[] plaintext = context.wireValue().getBytes(StandardCharsets.US_ASCII);
-      byte[] nonce = new byte[12];
-      byte[] aad = identity.aad(currentVersion);
+      // SSC420/BUG3018: all owned secret acquisition takes place inside cleanup protection.
+      byte[] plaintext = new byte[0];
+      byte[] nonce = new byte[0];
+      byte[] aad = new byte[0];
       byte[] encrypted = new byte[0];
       byte[] envelope = new byte[0];
       try {
+        plaintext = context.wireValue().getBytes(StandardCharsets.US_ASCII);
+        nonce = new byte[12];
+        aad = identity.aad(currentVersion);
         random.nextBytes(nonce);
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
         cipher.init(

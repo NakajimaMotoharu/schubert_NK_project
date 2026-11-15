@@ -1,0 +1,15 @@
+{
+  "actualExit": 0,
+  "rawSites": 41,
+  "applicableSites": [
+    {
+      "file": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "originalLine": 305,
+      "rule": "CloseResource"
+    }
+  ],
+  "other40NotYetClassified": true,
+  "wholeStaticQualified": false,
+  "oldSegment": "    EncryptedWebLogPayload encrypted = codec.encrypt(IDENTITY, goldenWire());\n    assertThrows(NullPointerException.class, () -> codec.encrypt(null, goldenWire()));\n    assertThrows(NullPointerException.class, () -> codec.encrypt(IDENTITY, null));\n    assertThrows(NullPointerException.class, () -> codec.decrypt(null, encrypted));\n    assertThrows(NullPointerException.class, () -> codec.decrypt(IDENTITY, null));\n    codec.close();\n    codec.close();\n    assertThrows(IllegalStateException.class, () -> codec.encrypt(IDENTITY, goldenWire()));\n    assertThrows(IllegalStateException.class, () -> codec.decrypt(IDENTITY, encrypted));",
+  "insertedWrapperOnly": true
+}

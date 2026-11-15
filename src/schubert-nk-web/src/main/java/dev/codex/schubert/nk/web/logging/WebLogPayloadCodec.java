@@ -83,12 +83,16 @@ public final class WebLogPayloadCodec implements AutoCloseable {
       ensureOpen();
       Objects.requireNonNull(identity, "identity");
       Objects.requireNonNull(plaintext, "plaintext");
-      byte[] candidate = plaintext.clone();
-      byte[] nonce = new byte[NONCE_BYTES];
-      byte[] aad = identity.aad(currentVersion);
+      // SSC420/BUG3018: allocate no owned plaintext before the cleanup region starts.
+      byte[] candidate = new byte[0];
+      byte[] nonce = new byte[0];
+      byte[] aad = new byte[0];
       byte[] encrypted = new byte[0];
       byte[] stored = new byte[0];
       try {
+        candidate = plaintext.clone();
+        nonce = new byte[NONCE_BYTES];
+        aad = identity.aad(currentVersion);
         validatePlaintext(identity, candidate);
         random.nextBytes(nonce);
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
