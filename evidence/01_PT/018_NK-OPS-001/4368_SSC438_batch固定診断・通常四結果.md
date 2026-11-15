@@ -1,0 +1,5 @@
+# SSC438 batch固定診断・通常四結果
+
+Coredeaed367/Unite46d8fea/PG35170 SSC438 batch終端結果元全4FES0真正0/新定義0。設計はPR389/main82b1a124へ先反映、Reason既定11診断をfinal nullable field/private ctorへ保持しsummaryはfield読取。NONE nullable/全11固定文字・enum名順ordinal/publicdescriptor、code()/allows(Status)/record検証bodyと元全4Testsourceは表現逆展開byte exact、SS3318.3独立44cell17許容27拒否・計数/null/同値全期待不変。PG35172現179physical3CRC-initXML/freshMain1Root/format-CS-PMD-SB全0、同singleexecPG35174全三Codeclass37LINE23METHOD3CLASS43BRANCH363I全miss0。旧Sourceのsummary生成default1B6Iは保存、別exec合算/除外/反射/到達不能0。BUG3085当固定診断限定CLOSED、広域YKT2431OPEN。新gross.15/.45/1.35＋既carry.05/.15/.45を一回使用して当.2/.6/1.8完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持。App225/35742/35677/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全179/451/実command-DB-owner/CHR/native/終了依存未受入/全HOLD維持。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35172-ssc438-result4-independent-v1/manifest.json SHA256 2a2bafb2b52ceb4c8357c8b708508e19579348494e47cb26d43f458c5d50c831; evidence/01_PT/018_NK-OPS-001/evidence/PG35174-ssc438-result4-unfiltered-same-exec-v1/manifest.json SHA256 648ee2fa7fd8ed19ecab9f1a36ee398f9daa88d6e88ab75b140f5ef5eb9d48c4。

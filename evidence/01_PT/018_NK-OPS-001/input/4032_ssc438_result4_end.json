@@ -1,0 +1,138 @@
+{
+  "groupId": "PGPT-WBS65-SSC438-RESULT-DIAGNOSTIC-FIELD4-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2315_WBS65SSC438固定診断四限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "BatchStepResult.Reasonの固定11診断を各enum定数のfinal nullable diagnosticSummary fieldで表し、private constructorの@Nullable String引数へ既定値を明示しsummary()はそのfield読取とする。NONEのみsummary NULL、ALREADY_SUCCESSFUL→step already successful for business date、BACKUP_UNAVAILABLE→verified backup unavailable、PROTECTED_RECORDS→protected records retained、ABANDONED→previous same-run attempt abandoned、DATABASE_FAILURE→batch database operation failed、COMMAND_FAILURE→batch command failed、SAFETY_FAILURE→batch safety check failed、IO_FAILURE→batch file operation failed、TIMEOUT→batch step deadline reached、INTERRUPTED→batch step interruptedの既存固定文を完全保持する。enum名/順序/ordinal/public descriptor、Reason.code()及びallows(Status)の全body、外側recordのStatus/Reason NN・各計数非負/SUCCESS failure0/SKIPPED全0と17許容27拒否の44組合せ・固定秘匿診断を変更0。private constructorは閉じたenum初期化だけでnullableは既存NONEの契約を表し、任意入力/例外/SQL/path/body/credentialを診断へ取り込まない。switch式が生成するsummary default1分岐6命令の未実行BUG3085を除外/到達不能/反射/偽enumで埋めず、既定値を保持する責務表現へ是正する。元独立全4Testsource/fixture/全期待をbyte exact保持、新sourceのfreshMain1RootNullAway/全静的/同singleexec全4/current179physicalCRC-initXML/raw全三Codeclassで確認する。DB schema/値互換/transaction/原本/所有/権限/HTTP/UI/電文/DIF変更0、元8反射fixtureやRoot2Actual4/DB鍵/VM/native/aru/HOLDを実行・抽出・代替0。旧sourceのdefault四100/raw不足を新sourceへ加算0、正式/全WBS/451/終了依存は別受入を維持。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4367_SSC438_batch固定診断・通常四仕様.md",
+      "sha256": "df99c45dafd6f4a9e79885a465d29f35af4f966d2dcb705e1b6a92e9a581dd3c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35150-ssc438-result-summary-design-only-v1/design-only-main-patch.json",
+      "sha256": "dbbd72c2e6ff619c9fa48cc601a74b1aebf1759abe2095604560e311eb73f980"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P017-02.01"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "WBS-P017-02"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P017-02": [
+      "WBS-P017-02.01"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "119e724346a9872c7cbd9b59c5ac375f3006f3a5",
+  "run": "PG35170-SSC438-RESULT-DIAGNOSTIC-WHOLE4",
+  "estimate": {
+    "low": 0.2,
+    "base": 0.6,
+    "high": 1.8
+  },
+  "capPp": 2,
+  "workIds": [
+    "SSC438_RESULT_DIAGNOSTIC4_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2314_WBS65予実・SSC438固定診断四限定版708.json",
+    "sha256": "e8455c90da539b3b95ac4245a118d5159e32d8feaa2afbf0c6d1b6113b245af4"
+  },
+  "nextCommand": "Publish onlySSC438 limited914 main/commitpush. Continue pure MaintenanceRunState/Completion/Retirement/Activation/BatchRun source-proof admission: originalRunState6 no file/db/authority action, values never certify actual done/retirement. Prefer existing closed-host generic profile for JDK-only closure if all451/source/static/raw checks are retained, avoid unnecessary proto176 dependency and boilerplate; review config/post format beforeprice/execution. No originalFile/intent-retire/Root2Actual4/DBkeys/VMnativearu/HOLD operations or old4 confirmation replay. Freshquota/hourly due05:55:37 ordinarynotstop.",
+  "sourceAfter": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG35176-ssc438-result4-component-join-v1/manifest.json",
+  "manifestSha256": "9d437c6ac4f212b3e6667755ded8547591f26cc767acd26fd3c4c36f558513ee",
+  "terminalAtUTC": "2026-11-15T20:23:49.497618+00:00",
+  "outcome": "SSC438_RESULT_DIAGNOSTIC4_RAW_FOUR100_AND_PRIOR_CARRY_CLOSED",
+  "technical": {
+    "productionCoreMain": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+    "actualUnitSource": "e46d8feabc549ed7c0b88ae1218125d327ef4967",
+    "tests": 4,
+    "newDefinitions": 0,
+    "necessaryPriorDefinitions": 4,
+    "physicalClasses": 179,
+    "positiveCrc": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "freshRootMain1": true,
+    "staticRawApplicableUnclassified0": true,
+    "sourceInverseByteExact": true,
+    "whole4TestSourceUnchanged": true,
+    "codeAllowsAndRecordValidationUnchanged": true,
+    "nullableNoneAndFixed11DiagnosticValues": {
+      "NONE": null,
+      "ALREADY_SUCCESSFUL": "step already successful for business date",
+      "BACKUP_UNAVAILABLE": "verified backup unavailable",
+      "PROTECTED_RECORDS": "protected records retained",
+      "ABANDONED": "previous same-run attempt abandoned",
+      "DATABASE_FAILURE": "batch database operation failed",
+      "COMMAND_FAILURE": "batch command failed",
+      "SAFETY_FAILURE": "batch safety check failed",
+      "IO_FAILURE": "batch file operation failed",
+      "TIMEOUT": "batch step deadline reached",
+      "INTERRUPTED": "batch step interrupted"
+    },
+    "independentMatrix44": {
+      "accepted": 17,
+      "rejected": 27
+    },
+    "rawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 363
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 43
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 37
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 46
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 23
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 3
+      }
+    },
+    "fullThreeCodeClassesQualified": true,
+    "oldSummaryGapPreserved": true,
+    "carryPpClosed": {
+      "low": 0.05,
+      "base": 0.15,
+      "high": 0.45
+    },
+    "newGross": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 1.35
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "Coredeaed367/Unite46d8fea/PG35170 SSC438 batch終端結果元全4FES0真正0/新定義0。設計はPR389/main82b1a124へ先反映、Reason既定11診断をfinal nullable field/private ctorへ保持しsummaryはfield読取。NONE nullable/全11固定文字・enum名順ordinal/publicdescriptor、code()/allows(Status)/record検証bodyと元全4Testsourceは表現逆展開byte exact、SS3318.3独立44cell17許容27拒否・計数/null/同値全期待不変。PG35172現179physical3CRC-initXML/freshMain1Root/format-CS-PMD-SB全0、同singleexecPG35174全三Codeclass37LINE23METHOD3CLASS43BRANCH363I全miss0。旧Sourceのsummary生成default1B6Iは保存、別exec合算/除外/反射/到達不能0。BUG3085当固定診断限定CLOSED、広域YKT2431OPEN。新gross.15/.45/1.35＋既carry.05/.15/.45を一回使用して当.2/.6/1.8完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持。App225/35742/35677/歴史不成功65、正式1964/53・正本184/625・元17/190・工数null不変、全179/451/実command-DB-owner/CHR/native/終了依存未受入/全HOLD維持。"
+}
