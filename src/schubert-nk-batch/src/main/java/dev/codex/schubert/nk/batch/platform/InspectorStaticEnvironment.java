@@ -13,33 +13,30 @@ import org.jspecify.annotations.NullMarked;
  * and credential permissions independently. No environment, URL or version is logged.
  */
 @NullMarked
-public final class InspectorStaticEnvironment {
-  private static final int MAXIMUM_INTERFACE_NAMES_CHARACTERS = 65536;
-  private static final int MAXIMUM_TCP_PORT = 65535;
+public interface InspectorStaticEnvironment {
 
-  public static final int MAXIMUM_BYTES = 65848;
-  private static final Pattern FILE =
-      Pattern.compile(
-          "NK_INSPECTOR_DB_URL=jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/[a-z_][a-z0-9_]{0,62}\n"
-              + "NK_INSPECTOR_FINGERPRINT_VERSIONS=([A-Za-z0-9,._-]+)\n");
-  private static final Pattern VERSION = Pattern.compile("[A-Za-z0-9][A-Za-z0-9._-]{0,15}");
-
-  private InspectorStaticEnvironment() {}
+  int MAXIMUM_BYTES = 65848;
 
   /** Exact ASCII source grammar; malformed content gets a fixed diagnostic without raw values. */
-  public static void requireValid(byte[] observed) {
+  static void requireValid(byte[] observed) {
+    final int maximumInterfaceNamesCharacters = 65536;
+    final int maximumTcpPort = 65535;
+    final Pattern filePattern =
+        Pattern.compile(
+            "NK_INSPECTOR_DB_URL=jdbc:postgresql://127\\.0\\.0\\.1:([1-9][0-9]{0,4})/[a-z_][a-z0-9_]{0,62}\n"
+                + "NK_INSPECTOR_FINGERPRINT_VERSIONS=([A-Za-z0-9,._-]+)\n");
+    final Pattern versionPattern = Pattern.compile("[A-Za-z0-9][A-Za-z0-9._-]{0,15}");
     Objects.requireNonNull(observed, "static environment bytes");
     if (observed.length == 0 || observed.length > MAXIMUM_BYTES) throw invalid();
     // Non-ASCII bytes decode to replacement characters that the complete ASCII grammar rejects.
-    var match = FILE.matcher(new String(observed, StandardCharsets.US_ASCII));
+    var match = filePattern.matcher(new String(observed, StandardCharsets.US_ASCII));
     if (!match.matches()) throw invalid();
-    if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > MAXIMUM_TCP_PORT)
-      throw invalid();
+    if (Integer.parseInt(Objects.requireNonNull(match.group(1))) > maximumTcpPort) throw invalid();
     String names = Objects.requireNonNull(match.group(2));
-    if (names.length() > MAXIMUM_INTERFACE_NAMES_CHARACTERS) throw invalid();
+    if (names.length() > maximumInterfaceNamesCharacters) throw invalid();
     var unique = new HashSet<String>();
     for (String version : names.split(",", -1)) {
-      if (!VERSION.matcher(version).matches() || !unique.add(version)) throw invalid();
+      if (!versionPattern.matcher(version).matches() || !unique.add(version)) throw invalid();
     }
   }
 

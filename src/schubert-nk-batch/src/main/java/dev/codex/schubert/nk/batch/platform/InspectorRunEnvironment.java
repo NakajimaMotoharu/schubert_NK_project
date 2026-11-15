@@ -13,18 +13,17 @@ import org.jspecify.annotations.NullMarked;
  * IO.
  */
 @NullMarked
-public final class InspectorRunEnvironment {
-  private InspectorRunEnvironment() {}
+public interface InspectorRunEnvironment {
 
   /** Fresh caller-owned ASCII bytes; no alternate run, timestamp rounding, quoting or expansion. */
-  public static byte[] encode(BatchRun run) {
+  static byte[] encode(BatchRun run) {
     Objects.requireNonNull(run, "run");
     return ("NK_INSPECTOR_RUN_ID=" + run.id() + "\nNK_INSPECTOR_CUTOFF=" + run.cutoff() + "\n")
         .getBytes(StandardCharsets.US_ASCII);
   }
 
   /** Exact nonsecret byte match, not proof of the observed file's provenance or continued state. */
-  public static void requireMatches(BatchRun run, byte[] observed) {
+  static void requireMatches(BatchRun run, byte[] observed) {
     Objects.requireNonNull(observed, "observed bytes");
     if (!Arrays.equals(encode(run), observed))
       throw new IllegalArgumentException("inspector run environment mismatch");

@@ -12,27 +12,26 @@ import org.jspecify.annotations.Nullable;
  * validated before ownership is accepted. Callback null values stay explicit.
  */
 @NullMarked
-public final class ResourceScope {
-  private ResourceScope() {}
+public interface ResourceScope {
 
   @FunctionalInterface
-  public interface Action<T extends @Nullable Object> {
+  interface Action<T extends @Nullable Object> {
     T run() throws IOException;
   }
 
   /** SSC308/PT-IOFACT-001..005: all ports exist before this acquisition is invoked. */
   @FunctionalInterface
-  public interface Acquire<R, E extends IOException> {
+  interface Acquire<R, E extends IOException> {
     @Nullable R open() throws E;
   }
 
   @FunctionalInterface
-  public interface Release<R> {
+  interface Release<R> {
     void close(R resource) throws IOException;
   }
 
   @FunctionalInterface
-  public interface OwnedAction<R, T extends @Nullable Object> {
+  interface OwnedAction<R, T extends @Nullable Object> {
     T run(R resource) throws IOException;
   }
 
@@ -43,7 +42,7 @@ public final class ResourceScope {
    * owner, not this helper, then owns R. A nullable T bound permits testing rejected null assembly,
    * never a null owner result.
    */
-  public static <R, T extends @Nullable Object, E extends IOException> T handoff(
+  static <R, T extends @Nullable Object, E extends IOException> T handoff(
       Acquire<R, E> acquire, Release<R> release, OwnedAction<R, T> assemble)
       throws E, StorageIoException {
     Objects.requireNonNull(acquire, "resource acquire");
@@ -66,7 +65,7 @@ public final class ResourceScope {
    * SSC308/PT-IOFACT-001..012: factory failures retain E/identity; owned failures follow use's
    * explicit IO precedence. No callback or wrapper is allocated after ownership starts.
    */
-  public static <R, T extends @Nullable Object, E extends IOException> T acquire(
+  static <R, T extends @Nullable Object, E extends IOException> T acquire(
       Acquire<R, E> acquire, Release<R> release, OwnedAction<R, T> action)
       throws E, StorageIoException {
     Objects.requireNonNull(acquire, "resource acquire");
@@ -101,7 +100,7 @@ public final class ResourceScope {
     }
   }
 
-  public static <T extends @Nullable Object> T use(Closeable release, Action<T> action)
+  static <T extends @Nullable Object> T use(Closeable release, Action<T> action)
       throws StorageIoException {
     Objects.requireNonNull(release, "resource release");
     Objects.requireNonNull(action, "resource action");
