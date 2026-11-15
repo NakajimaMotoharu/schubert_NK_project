@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /** PT-AUT-002; independent JCA oracle, fixed 0..15 salt, no production method creates expected. */
 final class PasswordHasherTest {
+  private static final String SYNTHETIC_HASH =
+      "{pbkdf2-v1}000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
   private final PasswordHasher hasher = new PasswordHasher();
 
   @Test
@@ -106,7 +108,7 @@ final class PasswordHasherTest {
             assertThrows(
                 Throwable.class,
                 () -> {
-                  if (matching) subject.matches(input, "{pbkdf2-v1}" + "0".repeat(96));
+                  if (matching) subject.matches(input, SYNTHETIC_HASH);
                   else subject.encode(input);
                 }));
         assertArrayEquals(new char[input.length], input);

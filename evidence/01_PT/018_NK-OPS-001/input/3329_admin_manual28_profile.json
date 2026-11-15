@@ -1,0 +1,115 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG33536-ADMIN-MANUAL28",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java": "WBS-P010-05",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "WBS-P007-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "WBS-P010-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/4095_P01005初期ADMINのJDBC返値境界・通常二十七仕様.md",
+      "sha256": "8d56238badc9c4454caab9499ce9c77bb251747a374dc8b8c8cbca98e5d4c06f"
+    },
+    {
+      "path": "evidence/01_PT/010_NK-ADM-001/4096_P01005資源終了・暗号障害境界の全二十八追加仕様.md",
+      "sha256": "31d52fc20a46908b03a7f663c0a824605b71052204b96980a97ed084a90c3e4c"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33526-admin-manual28-source-v1/manifest.json",
+      "sha256": "b0965dfc881a61706c995e5704419b1215b66f98584552e5c9f7deea34cd09c3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33524-ssc412-design-main-publication-v1/manifest.json",
+      "sha256": "116e60bf46926d724b0e943061830fa745d71558be9c8f8961a5987d80d77657"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33460-admin-boundary27-annotation-sdk-correction-v1/manifest.json",
+      "sha256": "81f78823209ac08572fa76a1a6e136d754b4da7739979a94aaf44399fd7476e3"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "4c1454f787cfa51b522db79b15c1534aa4e39982",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "tests": 18
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java",
+      "tests": 3
+    }
+  ],
+  "expectedTests": 28,
+  "resources": [],
+  "sdkJars": [
+    "org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar",
+    "commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+    "org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.class",
+    "dev/codex/schubert/nk/api/security/PasswordHasher.class",
+    "dev/codex/schubert/nk/api/security/PasswordPolicy.class",
+    "dev/codex/schubert/nk/api/security/LoginUsername.class",
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.class",
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService",
+    "dev/codex/schubert/nk/api/security/PasswordHasher",
+    "dev/codex/schubert/nk/api/security/PasswordPolicy",
+    "dev/codex/schubert/nk/api/security/LoginUsername",
+    "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+    "dev/codex/schubert/nk/api/application/admin/BootstrapAdminService$Outcome"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG33528-admin-manual28-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG33530-admin-manual28-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG33532-admin-manual28-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG33534-admin-manual28-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG33536-admin-manual28-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG33538-admin-manual28-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg33530-admin-manual28-prepare-v1",
+    "unit": "pg33536-admin-manual28-unit-v1"
+  },
+  "newTestDefinitions": 19
+}

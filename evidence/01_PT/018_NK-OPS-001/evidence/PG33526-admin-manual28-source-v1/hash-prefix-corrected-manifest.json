@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminService.java",
+      "sha256": "7c0924cb17f543a09e23e0a31b091dc417df1cd764e95df5a0c244e1af126851"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordHasher.java",
+      "sha256": "5d112c7612fd4d013a60f51366784e792d9e1fb305d4a93f50f9da2af152b837"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/BootstrapAdminServiceBoundaryTest.java",
+      "sha256": "1858659fb37cd3d7565619423b2f2c5ccd71b6aa20a1c55e3275bff620f3e3a4"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordHasherTest.java",
+      "sha256": "6697fe28ce9804f569102cecedd8961186e5079e72d58357519f142f7b14b993"
+    }
+  ],
+  "originalSnapshots": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33526-admin-manual28-source-v1/original-BootstrapAdminService.java.txt",
+      "sha256": "8d1c71780951fd2d9cb0d818ae2cdad64a4a44bd9a98ac90b8bd9722d38e272d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33526-admin-manual28-source-v1/original-PasswordHasher.java.txt",
+      "sha256": "af26da6781015b67cf36a6e35497c334dd1eadf05e00da38f1e2c43460d91baf"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33526-admin-manual28-source-v1/original-BootstrapAdminServiceBoundaryTest.java.txt",
+      "sha256": "2b7fd8c73e7b82b3fe9c92bad37283f595d602bb2cec04b383ad20f3d428d2f3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33526-admin-manual28-source-v1/original-PasswordHasherTest.java.txt",
+      "sha256": "a44c27a8e9b3869fd01ef90dae2a28bfebc0f5f78b4bd0d417b12eb3b319daae"
+    }
+  ],
+  "allSixSqlLiteralsAndNormalBindingsPreserved": true,
+  "sqlValues": {
+    "select pg_catalog.pg_try_advisory_xact_lock_shared(71419602)": 1,
+    "select pg_advisory_xact_lock(71419601)": 1,
+    "select exists(select 1 from schubert.app_users)": 1,
+    "insert into schubert.app_users(username,username_key,password_hash,role,status, password_changed_at,created_at,updated_at) values (?,?,?,'ADMIN','ACTIVE',?,?,?) returning id": 1,
+    "lock table schubert.app_users in share row exclusive mode": 1,
+    "insert into schubert.app_logs(logged_at,service,category,level,action,message, message_id,correlation_id,details) values (?,'API',?,'INFO','USER_CREATED','USER_CREATED',?,?, jsonb_build_object('outcome','SUCCESS','source','BOOTSTRAP','targetUserId',cast(? as bigint)))": 1
+  },
+  "manualCleanupPrimarySecondaryAndSelfIdentity": true,
+  "borrowedConnectionOwnerPreserved": true,
+  "publicHashCtorPinnedSameFactory": true,
+  "allFourOriginalHasherNonConstructorMethodsByteUnchanged": true,
+  "old17BoundaryTestBodiesUnchanged": true,
+  "original3HasherTestBodiesUnchanged": true,
+  "oldUnchangedSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/PasswordPolicy.java": "6d8ffe5b35fc04f4056999d5a4a4a73ce6c3103a62b4b2cd87fbcfbeb1c8e608",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginUsername.java": "970b0b15993f72f0881cdf64b00839cb1fdf4f601a6c4b0827e2adc0bb4e0359",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserCommandMetadata.java": "2f2eeb0e07a5682a657ea23ca912b036b14b08e3ad5cf30cd0d5582a526e14a0",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/PasswordPolicyTest.java": "fe466645fdf4739e44df74b3197c1b55631a5b2b0c423d526f005468ac87fc55",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginUsernameTest.java": "1fdb742c0aab4c1be6ce90ca68e2f357c7030a7d5a916df34f9f91a61bfccf00"
+  },
+  "independentJcaOraclePreserved": true,
+  "newRuntimeAndErrorEncoderFailureTests": true,
+  "originalUnqualifiedRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33514-admin-boundary27-unfiltered-measurement-v6/manifest.json",
+    "sha256": "77599dfd5c35b794e00187a5edf60695645b7d8efcfdde798c34b8aeed100bf0"
+  },
+  "original27NotCountedQualified": true,
+  "newDefinitionAddedThisSupplement": 1,
+  "newDefinitionsTotalGroup": 19,
+  "wholeExpected": 28,
+  "mainSources": 5,
+  "physicalClasses": 6,
+  "providerOrBackendOrAuthorityOrHeldClasses": 0,
+  "newAcceptance": 0,
+  "formalAccepted": false,
+  "effortRate": null
+}
