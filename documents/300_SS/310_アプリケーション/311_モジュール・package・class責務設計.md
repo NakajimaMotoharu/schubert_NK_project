@@ -1,5 +1,7 @@
 # モジュール・package・class責務設計
 
+SSC417: PostgresMigrationCopyPort implements MigrationCopyPort。固定六staging/列順・同借用ConnectionのPG unwrap→COPY binarywrite→endCopy/count/inactive確認。新1MainとPT source24を作るが全Test NOT_RUN_HOLD、source静的のみと区別。
+
 SSC416: MigrationMasterCopyVerifier.verify/toString/invalid/default ctor。取得済み保持byteを防御copyしtrusted expected SHA→既宣言再構成→canonical byte完全一致。実永続化・認証なし。全1050/52Main73physical予定（自然NoCode1）。
 
 SSC415: CurrentMigrationTransfer.transfer/SourceCounts/invalid/toString/default constructor。二借用接続の所有を変更せずread→assemble→same-target-copyへ接続。新20/whole1030/51Main72physical（自然NoCode1）予定。
