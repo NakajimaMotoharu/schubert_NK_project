@@ -1,0 +1,88 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG35210-MAINTENANCE-DATA-WHOLE8",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java": "WBS-P004-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4371_Maintenance純値六class・通常八仕様.md",
+      "sha256": "cb12e7d7e9f47e27e914c48ec9cc8a5e41f109a14814c05c6d7d1aa638994752"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35200-maintenance-data8-source-closure-v1/manifest.json",
+      "sha256": "f926ba07ba530bb13b8813c4e9def56efeb56a2576d4f5d2957ba05db0120043"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "deaed367cb4f234af95fe9e96014f6c01e30486d",
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRunStateValuesTest.java",
+      "tests": 6
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceDataValueContractTest.java",
+      "tests": 2
+    }
+  ],
+  "expectedTests": 8,
+  "newTestDefinitions": 2,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunState.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.class",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/BatchRun",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRunState",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG35202-maintenance-data8-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG35204-maintenance-data8-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG35206-maintenance-data8-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG35208-maintenance-data8-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG35210-maintenance-data8-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG35212-maintenance-data8-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg35204-maintenance-data8-v1",
+    "unit": "pg35210-maintenance-data8-v1"
+  }
+}
