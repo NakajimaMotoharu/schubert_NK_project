@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.security.NoSuchAlgorithmException;
@@ -13,17 +14,20 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.parallel.Isolated;
 
 /**
  * PT-AUT-005-H01: vectors independently calculated by Python hashlib SHA-256 over 64 ASCII bytes.
  */
 @Isolated("Temporarily remove JCA providers to verify fail-closed startup")
+@Timeout(value = 20, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class ContextHashTest {
   @Test
   void bug036CallerMonitorCannotBlockSharedDigest() throws Exception {
     ContextHash hashes = new ContextHash();
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       synchronized (hashes) {
         assertEquals(
             "ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb",
@@ -31,6 +35,9 @@ final class ContextHashTest {
                 .submit(() -> hashes.calculate(AuthenticationContext.of("a".repeat(64))))
                 .get(5, java.util.concurrent.TimeUnit.SECONDS));
       }
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
   }
 
@@ -44,13 +51,18 @@ final class ContextHashTest {
     AuthenticationContext[] input = {
       AuthenticationContext.of("a".repeat(64)), AuthenticationContext.of("b".repeat(64))
     };
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var futures = new ArrayList<Future<String>>();
       for (int i = 0; i < 100; i++) {
         int index = i % 2;
         futures.add(executor.submit(() -> hashes.calculate(input[index])));
       }
-      for (int i = 0; i < futures.size(); i++) assertEquals(expected[i % 2], futures.get(i).get());
+      for (int i = 0; i < futures.size(); i++)
+        assertEquals(expected[i % 2], futures.get(i).get(5, java.util.concurrent.TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
     }
     assertThrows(NullPointerException.class, () -> hashes.calculate(null));
     assertFalse(hashes.toString().contains(expected[0]));

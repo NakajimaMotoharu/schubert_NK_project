@@ -1,0 +1,37 @@
+{
+  "actualExit": 0,
+  "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ContextHashTest.java",
+  "sourceBefore": "befff435d7fab00234f41379998ffc7f219c807d",
+  "oldSha256": "eafd2eb1a16ac85b8d8eb40f1d75cdcf49c0c894c9d08c883d546b233e62b353",
+  "changes": [
+    {
+      "old": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {",
+      "new": "var executor = Executors.newVirtualThreadPerTaskExecutor();\n    try {",
+      "count": 2
+    },
+    {
+      "old": "futures.get(i).get()",
+      "new": "futures.get(i).get(5, java.util.concurrent.TimeUnit.SECONDS)",
+      "count": 1
+    },
+    {
+      "old": "      }\n    }\n  }\n\n  @Test\n  void asciiVectors",
+      "new": "      }\n    } finally {\n      executor.shutdownNow();\n      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));\n    }\n  }\n\n  @Test\n  void asciiVectors",
+      "count": 1
+    },
+    {
+      "old": "futures.get(i).get(5, java.util.concurrent.TimeUnit.SECONDS));\n    }\n    assertThrows",
+      "new": "futures.get(i).get(5, java.util.concurrent.TimeUnit.SECONDS));\n    } finally {\n      executor.shutdownNow();\n      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));\n    }\n    assertThrows",
+      "count": 1
+    }
+  ],
+  "rawAfterSha256": "42d46f0e69cd8cc124346e44fddd1ef33baf7545a274fd3411947605f2996402",
+  "inverseOriginalExact": true,
+  "originalBusinessAssertionsUnchanged": true,
+  "originalProviderUnavailableBodyUnchanged": true,
+  "oldTestDefinitions": 3,
+  "newTestDefinitions": 0,
+  "applicationTestsExecuted": 0,
+  "bug": "BUG3026",
+  "horizontal": "YKT2550"
+}
