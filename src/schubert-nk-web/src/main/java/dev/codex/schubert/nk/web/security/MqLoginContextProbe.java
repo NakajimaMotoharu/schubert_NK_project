@@ -111,6 +111,7 @@ public final class MqLoginContextProbe {
         | IllegalArgumentException
         | IllegalStateException
         | DateTimeException failure) {
+      JmsRequestReplyException.preserveFatal(failure);
       throw unavailable();
     }
   }
