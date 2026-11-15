@@ -1,0 +1,46 @@
+{
+  "groupId": "PGPT-WBS65-SSC432-PROVIDER-SINGLE-CLEANUP18-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2241_WBS65SSC432Provider資格消費開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "MqAuthenticationProvider.authenticateの既finally二guard（captured credentialsがchar[]ならzero、その後authenticationがUsernamePasswordAuthenticationTokenならeraseCredentials）を、同じclassの一つのprivate static consumeCredentials(Authentication,@Nullable Object)へ同順・同条件で集約する。finallyはこのhelperを一回呼ぶだけとし、正常/拒否/例外で資格消費の実装を一箇所へ統一する。authenticationの既nonnull前提/getCredentials一回をtry前に採る順序、nullable credentialsを含む不正型/unsupported subclassの拒否、公開API/認証成功条件/closedprincipal/Role/Probe/再送/014/0101/0106/9000分類/char配列zero後tokeneraseの順序・回数/cleanup例外の既優先を変えない。helperを公開・port・外部設定化せず、private reflection/SDK型偽装/到達不能扱い/除外/閾値緩和で分岐を隠さない。PG34545の通常return/例外の二重生成cleanupに対し、既通常API試験が持つ成功・不正token型・null/非char資格・派生型・transport失敗の実入力で単一helperの両guardを検証する。元Client8/Probe4/Provider5/closedfailure1全18の全source/期待/fixtureはbyte exact保持、新Test定義0。fresh safeMain18/RootNullAway/静的/現在SDK-JDK/protocol/物理CRC-init/XML/default及び無filter対象Probe/Provider/ExchangeException全Codeの必須四100を同一source/runで確認、旧18成功/defaultを新sourceへ転用0。外部権限/認証経路/実JMS-DB-session-key/Root2Actual4/VM/native/aru/HOLDを変更0。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4333_SSC432_Provider単一資格消費・全十八仕様.md",
+      "sha256": "f47a4f1c6c0383bbefc7f17c05d8cc502fcf8287628cecfb8430c92d42f78e3b"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34560-ssc432-provider-cleanup-design-only-v1/design-only-main-patch.json",
+      "sha256": "8fda123bdec112fe64b3fb9e349ec35d1065e21da45ebe32ebe7260a7a23e503"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34545-provider-finally-bytecode-diagnostic-v1/manifest.json",
+      "sha256": "e8724f3586a187c565be20b56d027693e4bfc8ba042ad88f258e8bbb9a5fa0dc"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P007-06"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java": "WBS-P007-06"
+  },
+  "source": "39984b65f12d38975c06d4fcedcbf77742f8b029",
+  "run": "PG34580-SSC432-LOGIN-CLEANUP-WHOLE18",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 3.15
+  },
+  "capPp": 4,
+  "workIds": [
+    "P00706_SSC432_SINGLE_CLEANUP18_RAW_CARRY"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2240_WBS65予実・SSC432資格消費追加版673.json",
+    "sha256": "fea934fa25d4b725a0824b3b2a99cbdea32191d4ce5c8d621daa8137100a8093"
+  },
+  "nextCommand": "PublishSSC432 SS311314352914 main beforePG. Exactfinallybody into private staticconsumeCredentials(Authentication,@Nullable Object), finallyonecall, newNullableimport only. Original4 Testclasses/all18 byteunchanged; freshMain18Root/static/JDK/current197CRC-init/XML/raw4targets oneWhole18. No privateReflection/filters/unreachable declaration/noauth/API changes/oldexecunion/HOLD actions. Newgross.2/.6/1.8 plus oldcarryonce; freshquota/hourly ordinarypartialnotstop."
+}
