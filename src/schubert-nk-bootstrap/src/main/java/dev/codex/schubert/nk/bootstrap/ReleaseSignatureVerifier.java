@@ -45,17 +45,24 @@ public final class ReleaseSignatureVerifier {
     Objects.requireNonNull(detachedSignature, "detached signature");
     require(originalManifest.length <= 1_048_576 && detachedSignature.length == 64);
     byte[] key = pinned.clone();
-    byte[] message = originalManifest.clone();
-    byte[] signature = detachedSignature.clone();
+    // SSC419/BUG3015: protect each owned clone before another allocation can fail.
     try {
-      if (!crypto.verify(key, message, signature)) throw unavailable();
-    } catch (GeneralSecurityException invalid) {
-      StorageIoException.preserveFatal(invalid);
-      throw unavailable();
+      byte[] message = originalManifest.clone();
+      try {
+        byte[] signature = detachedSignature.clone();
+        try {
+          if (!crypto.verify(key, message, signature)) throw unavailable();
+        } catch (GeneralSecurityException invalid) {
+          StorageIoException.preserveFatal(invalid);
+          throw unavailable();
+        } finally {
+          Arrays.fill(signature, (byte) 0);
+        }
+      } finally {
+        Arrays.fill(message, (byte) 0);
+      }
     } finally {
       Arrays.fill(key, (byte) 0);
-      Arrays.fill(message, (byte) 0);
-      Arrays.fill(signature, (byte) 0);
     }
   }
 

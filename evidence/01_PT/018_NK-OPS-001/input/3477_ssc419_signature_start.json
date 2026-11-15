@@ -1,0 +1,39 @@
+{
+  "groupId": "PGPT-WBS65-SSC419-SIGNATURE-CLONE-OWNERSHIP-20261115",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2123_WBS65SSC419署名所有開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "ADDITIONAL_FINDING",
+  "scope": "ReleaseSignatureVerifier.verifyは既null/長さ検査とpublicDER/元manifest/signatureの同byte clone・既Crypto/JDK Ed25519を維持する。key clone直後に外try、その内でmessage clone直後に中try、signature clone直後に既Crypto try/catch/finallyを置く。finallyはsignature→message→keyの逆取得順で一回ずつ消去、既GeneralSecurityExceptionのfatal graph/Error identityと固定IOExceptionを維持する。返却前のJDK未取得allocationの消去は保証せず、実OOMを起こさない。原public API/constructor/認可/署名format/鍵の固定根/結果/期限/電文は不変更、新operation portやprivate key/実署名/配備を追加0。既9Test全文は保持、新SIGN010だけ合成RuntimeException後に同instanceを正常再利用し、三copy消去/caller不変/pinned再利用/次回独立copy/call数2を固定publicRFC vectorで確認する。同source全10、RootNullAway/静的、sameexec default/raw target全命令行methodclassbranchを照合し、StorageIoException依存の未網羅を隠さずglobal451/正式へ算入0。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4277_SSC419_署名clone取得直後保護・通常全十仕様.md",
+      "sha256": "b9d4da04c21bb928dd79cb5e6685de850aa01b6618420b10fc5e6f5b81a9adcb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33758-ssc419-signature-design-only-v1/design-only-main-patch.json",
+      "sha256": "2b54234c2d641c20b05c116a7b820a055615f038aab8f5a931805e4b022ee692"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P018-02"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java"
+  ],
+  "source": "58ade749adfe6c34cf5f2cd45a4bc9ab71c29b0a",
+  "run": "PG33770-SSC419-SIGNATURE10",
+  "estimate": {
+    "low": 0.2,
+    "base": 0.6,
+    "high": 1.8
+  },
+  "capPp": 3,
+  "workIds": [
+    "P01802_SSC419_SIGNATURE_CLONE_OWNERSHIP"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2122_WBS65予実・SSC419署名所有追加版618.json",
+    "sha256": "3971305ab313ac27a746653d77438e7e3ce36ddd39d442a5da806ca85063936f"
+  },
+  "nextCommand": "PublishSSC419 docs-onlymain beforePG then nested immediate clone ownership and public SIGN010. FreshMain2+whole10 compile/static/default+sameexec raw/CRC post, keep all Storage dependency misses and globalHOLD/formal unchanged. No actualprivate key/signing/deploy/VM/DB/Root/aru. Freshquota/hourly, ordinarygroupnotstop."
+}
