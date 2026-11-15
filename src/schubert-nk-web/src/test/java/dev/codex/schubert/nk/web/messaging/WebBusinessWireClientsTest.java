@@ -75,6 +75,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-WEB001/UI232/234/235/236/SS323; PG-D-342; PT-WEB-S3WIRE001..008. */
 class WebBusinessWireClientsTest {
+  private static final String PUBLIC_FAILURE = "public unissued failure";
   private static final String QSB_TYPE = "QSB";
   private static final String QSS_TYPE = "QSS";
   private static final String QSD_TYPE = "QSD";
@@ -544,6 +545,91 @@ class WebBusinessWireClientsTest {
       assertEquals(0, wire.pendingCount());
       assertEquals(0, wire.lateReplyCount());
       sent.forEach(body -> assertArrayEquals(new byte[body.length], body));
+    }
+  }
+
+  @Test
+  @org.junit.jupiter.api.Timeout(30)
+  void wire014AllEighteenFacadesPreserveFatalIdentityWipeAndReleaseWithoutAutomaticRetry() {
+    for (String type : TYPES) {
+      var fatal = new AssertionError(PUBLIC_FAILURE);
+      var wrapped = new IllegalStateException(PUBLIC_FAILURE, fatal);
+      var sql = new java.sql.SQLException(PUBLIC_FAILURE);
+      var next = new java.sql.SQLException(PUBLIC_FAILURE, fatal);
+      sql.setNextException(next);
+      var linked = new JMSException(PUBLIC_FAILURE);
+      linked.setLinkedException(sql);
+      for (Throwable failure : List.of(fatal, wrapped, linked)) {
+        var wire = new JmsRequestReplyClient(new ReplyCorrelationRegistry(1), CLOCK, 1);
+        var sent = new ArrayList<byte[]>();
+        JmsRequestSender sender =
+            (id, body) -> {
+              assertArrayEquals(request(type, id, CONTEXT.wireValue()), body);
+              sent.add(body);
+              if (failure instanceof Error error) throw error;
+              if (failure instanceof JMSException checked) throw checked;
+              throw (IllegalStateException) failure;
+            };
+        var client = facade(group(type), wire, sender, CLOCK, () -> ID, WAIT);
+        for (int attempt = 1; attempt <= 2; attempt++) {
+          assertSame(
+              fatal, assertThrows(AssertionError.class, () -> client.apply(input(type), CONTEXT)));
+          assertEquals(attempt, sent.size());
+          assertArrayEquals(new byte[sent.getLast().length], sent.getLast());
+          assertEquals(0, wire.pendingCount());
+          assertEquals(0, wire.lateReplyCount());
+        }
+        assertSame(fatal, wrapped.getCause());
+        assertSame(sql, linked.getLinkedException());
+        assertSame(next, sql.getNextException());
+        assertSame(fatal, next.getCause());
+        assertEquals(0, fatal.getSuppressed().length);
+      }
+    }
+  }
+
+  @Test
+  @org.junit.jupiter.api.Timeout(30)
+  void wire015AllEighteenFacadesTerminateMixedCyclesAndKeepFixedCatalogAndCapacity() {
+    for (String type : TYPES) {
+      var failure = new JMSException(PUBLIC_FAILURE);
+      var linked = new JMSException(PUBLIC_FAILURE);
+      var sql = new java.sql.SQLException(PUBLIC_FAILURE);
+      var next = new java.sql.SQLException(PUBLIC_FAILURE);
+      failure.setLinkedException(linked);
+      linked.setLinkedException(failure);
+      sql.setNextException(next);
+      next.setNextException(sql);
+      linked.addSuppressed(sql);
+      next.addSuppressed(failure);
+      var wire = new JmsRequestReplyClient(new ReplyCorrelationRegistry(1), CLOCK, 1);
+      var sent = new ArrayList<byte[]>();
+      JmsRequestSender sender =
+          (id, body) -> {
+            assertArrayEquals(request(type, id, CONTEXT.wireValue()), body);
+            sent.add(body);
+            throw failure;
+          };
+      var client = facade(group(type), wire, sender, CLOCK, () -> ID, WAIT);
+      for (int attempt = 1; attempt <= 2; attempt++) {
+        var actual =
+            assertThrows(
+                ProtectedReadWireException.class, () -> client.apply(input(type), CONTEXT));
+        assertSame(ProtectedReadWireException.Reason.UNAVAILABLE, actual.reason());
+        assertEquals("protected read exchange rejected", actual.getMessage());
+        assertNull(actual.getCause());
+        assertEquals(0, actual.getSuppressed().length);
+        assertEquals(attempt, sent.size());
+        assertArrayEquals(new byte[sent.getLast().length], sent.getLast());
+        assertEquals(0, wire.pendingCount());
+        assertEquals(0, wire.lateReplyCount());
+      }
+      assertSame(linked, failure.getLinkedException());
+      assertSame(failure, linked.getLinkedException());
+      assertSame(next, sql.getNextException());
+      assertSame(sql, next.getNextException());
+      assertArrayEquals(new Throwable[] {sql}, linked.getSuppressed());
+      assertArrayEquals(new Throwable[] {failure}, next.getSuppressed());
     }
   }
 
