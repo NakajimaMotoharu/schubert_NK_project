@@ -65,12 +65,9 @@ final class WebLogPayloadCodecTest {
             .get(5, java.util.concurrent.TimeUnit.SECONDS);
       }
     } finally {
-      try {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-      } finally {
-        codec.close();
-      }
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      codec.close();
     }
   }
 
@@ -303,39 +300,43 @@ final class WebLogPayloadCodecTest {
     assertThrows(
         NullPointerException.class, () -> new WebLogPayloadCodec("v2", CURRENT, null, null, null));
     WebLogPayloadCodec codec = fixedCodec("v2", CURRENT, null, null);
-    EncryptedWebLogPayload encrypted = codec.encrypt(IDENTITY, goldenWire());
-    assertThrows(NullPointerException.class, () -> codec.encrypt(null, goldenWire()));
-    assertThrows(NullPointerException.class, () -> codec.encrypt(IDENTITY, null));
-    assertThrows(NullPointerException.class, () -> codec.decrypt(null, encrypted));
-    assertThrows(NullPointerException.class, () -> codec.decrypt(IDENTITY, null));
-    codec.close();
-    codec.close();
-    assertThrows(IllegalStateException.class, () -> codec.encrypt(IDENTITY, goldenWire()));
-    assertThrows(IllegalStateException.class, () -> codec.decrypt(IDENTITY, encrypted));
+    try {
+      EncryptedWebLogPayload encrypted = codec.encrypt(IDENTITY, goldenWire());
+      assertThrows(NullPointerException.class, () -> codec.encrypt(null, goldenWire()));
+      assertThrows(NullPointerException.class, () -> codec.encrypt(IDENTITY, null));
+      assertThrows(NullPointerException.class, () -> codec.decrypt(null, encrypted));
+      assertThrows(NullPointerException.class, () -> codec.decrypt(IDENTITY, null));
+      codec.close();
+      codec.close();
+      assertThrows(IllegalStateException.class, () -> codec.encrypt(IDENTITY, goldenWire()));
+      assertThrows(IllegalStateException.class, () -> codec.decrypt(IDENTITY, encrypted));
+    } finally {
+      codec.close();
+    }
   }
 
   @Test
   void concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct() throws Exception {
-    try (WebLogPayloadCodec codec = new WebLogPayloadCodec("v2", CURRENT, "v1", PREVIOUS)) {
-      var executor = Executors.newFixedThreadPool(4);
-      try {
-        List<Callable<EncryptedWebLogPayload>> jobs = new ArrayList<>();
-        for (int index = 0; index < 100; index++) {
-          jobs.add(() -> codec.encrypt(IDENTITY, goldenWire()));
-        }
-        HashSet<String> nonces = new HashSet<>();
-        for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) {
-          EncryptedWebLogPayload encrypted = future.get(10, TimeUnit.SECONDS);
-          assertTrue(
-              nonces.add(
-                  HexFormat.of().formatHex(Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
-          assertArrayEquals(goldenWire(), codec.decrypt(IDENTITY, encrypted));
-        }
-        assertEquals(100, nonces.size());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    WebLogPayloadCodec codec = new WebLogPayloadCodec("v2", CURRENT, "v1", PREVIOUS);
+    var executor = Executors.newFixedThreadPool(4);
+    try {
+      List<Callable<EncryptedWebLogPayload>> jobs = new ArrayList<>();
+      for (int index = 0; index < 100; index++) {
+        jobs.add(() -> codec.encrypt(IDENTITY, goldenWire()));
       }
+      HashSet<String> nonces = new HashSet<>();
+      for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) {
+        EncryptedWebLogPayload encrypted = future.get(10, TimeUnit.SECONDS);
+        assertTrue(
+            nonces.add(
+                HexFormat.of().formatHex(Arrays.copyOfRange(encrypted.ciphertext(), 10, 22))));
+        assertArrayEquals(goldenWire(), codec.decrypt(IDENTITY, encrypted));
+      }
+      assertEquals(100, nonces.size());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      codec.close();
     }
   }
 
@@ -470,6 +471,49 @@ final class WebLogPayloadCodecTest {
     public void nextBytes(byte[] bytes) {
       assertEquals(12, bytes.length);
       System.arraycopy(NONCE, 0, bytes, 0, NONCE.length);
+    }
+  }
+
+  /** WEBLOG-OWN001/SSC420: direct Error is retained, then another worker uses the same codec. */
+  @Test
+  void weblogOwn001NonceErrorThenOtherWorkerMatchesIndependentGolden() throws Exception {
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var buffers = new ArrayList<byte[]>();
+    var fatal = new AssertionError("PUBLIC nonce fault");
+    var random =
+        new SecureRandom() {
+          private static final long serialVersionUID = 1L;
+
+          @Override
+          public void nextBytes(byte[] output) {
+            buffers.add(output);
+            System.arraycopy(NONCE, 0, output, 0, NONCE.length);
+            if (calls.incrementAndGet() == 1) throw fatal;
+          }
+        };
+    byte[] plaintext = goldenWire();
+    byte[] before = plaintext.clone();
+    byte[] expected = independentEnvelope("v2", CURRENT, independentAad(IDENTITY, "v2"), plaintext);
+    var codec = new WebLogPayloadCodec("v2", CURRENT, null, null, random);
+    var executor = Executors.newSingleThreadExecutor();
+    try {
+      org.junit.jupiter.api.Assertions.assertSame(
+          fatal, assertThrows(AssertionError.class, () -> codec.encrypt(IDENTITY, plaintext)));
+      assertEquals(1, calls.get());
+      assertArrayEquals(new byte[12], buffers.getFirst());
+      assertArrayEquals(before, plaintext);
+      var actual =
+          executor.submit(() -> codec.encrypt(IDENTITY, plaintext)).get(5, TimeUnit.SECONDS);
+      assertArrayEquals(expected, actual.ciphertext());
+      assertEquals(2, calls.get());
+      assertEquals(2, buffers.size());
+      org.junit.jupiter.api.Assertions.assertNotSame(buffers.getFirst(), buffers.getLast());
+      for (byte[] bytes : buffers) assertArrayEquals(new byte[12], bytes);
+      assertArrayEquals(before, plaintext);
+    } finally {
+      executor.shutdownNow();
+      if (executor.awaitTermination(10, TimeUnit.SECONDS)) codec.close();
+      else throw new AssertionError("PUBLIC encryption worker termination unconfirmed");
     }
   }
 }

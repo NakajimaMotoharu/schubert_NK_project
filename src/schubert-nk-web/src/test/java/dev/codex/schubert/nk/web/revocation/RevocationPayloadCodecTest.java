@@ -391,4 +391,42 @@ final class RevocationPayloadCodecTest {
       if (fail) throw new ProviderException("private-test-only-marker");
     }
   }
+
+  /** REVOKE-OWN001/SSC420: failed nonce is erased and another worker can use the codec. */
+  @Test
+  void revokeOwn001NonceFailureThenOtherWorkerMatchesIndependentGolden() throws Exception {
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var random =
+        new FixedRandom() {
+          private static final long serialVersionUID = 1L;
+
+          @Override
+          public void nextBytes(byte[] output) {
+            calls.incrementAndGet();
+            super.nextBytes(output);
+          }
+        };
+    random.fail = true;
+    var codec = new RevocationPayloadCodec("v2", KEY, null, null, random);
+    var executor = Executors.newSingleThreadExecutor();
+    try {
+      var rejected =
+          assertThrows(RevocationPayloadException.class, () -> codec.encrypt(IDENTITY, AUTH));
+      assertEquals(RevocationPayloadException.Reason.CRYPTO_UNAVAILABLE, rejected.reason());
+      assertNull(rejected.getCause());
+      assertArrayEquals(new byte[12], random.last);
+      assertEquals(1, calls.get());
+      random.fail = false;
+      byte[] expected = envelope("v2", KEY, fields("v2"), ascii(CONTEXT));
+      var actual = executor.submit(() -> codec.encrypt(IDENTITY, AUTH)).get(5, TimeUnit.SECONDS);
+      assertArrayEquals(expected, actual.ciphertext());
+      assertEquals(2, calls.get());
+      assertArrayEquals(new byte[12], random.last);
+      assertEquals(CONTEXT, AUTH.wireValue());
+    } finally {
+      executor.shutdownNow();
+      if (executor.awaitTermination(10, TimeUnit.SECONDS)) codec.close();
+      else throw new AssertionError("PUBLIC encryption worker termination unconfirmed");
+    }
+  }
 }
