@@ -4,6 +4,7 @@ package dev.codex.schubert.nk.api.security;
 
 import static dev.codex.schubert.nk.api.database.RequiredColumn.requireValue;
 
+import dev.codex.schubert.nk.api.database.JdbcResourceCleanup;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.net.InetAddress;
@@ -18,6 +19,7 @@ import java.util.HexFormat;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Supplier;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Session issuance with atomic replacement audit; the authenticated Login/Inbox caller owns
@@ -79,13 +81,28 @@ public final class AuthSessionService {
       if (connection.getAutoCommit()) {
         throw new SQLException("session issue requires an explicit transaction", "25000");
       }
-      try (var statement = connection.prepareStatement(LOCK_USER)) {
-        statement.setLong(1, userId);
-        try (var row = statement.executeQuery()) {
-          if (!row.next() || !requireValue(row.getString("status")).equals("ACTIVE")) {
+      // SSC424: provider-null is an integrity error; close only established owned resources.
+      var userStatement = requireValue(connection.prepareStatement(LOCK_USER));
+      @Nullable Throwable userFailure = null;
+      try {
+        userStatement.setLong(1, userId);
+        var userRows = requireValue(userStatement.executeQuery());
+        @Nullable Throwable userRowsFailure = null;
+        try {
+          if (!userRows.next() || !requireValue(userRows.getString("status")).equals("ACTIVE")) {
             throw new AuthenticationContextException();
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          userRowsFailure = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.close(userRowsFailure, userRows::close);
         }
+      } catch (SQLException | RuntimeException | Error failure) {
+        userFailure = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.close(userFailure, userStatement::close);
       }
       AuthContextIdentity identity = new AuthContextIdentity(ids.get(), userId);
       byte[] bytes = new byte[32];
@@ -98,38 +115,69 @@ public final class AuthSessionService {
       }
       EncryptedAuthContext encrypted = codec.encrypt(identity, raw);
       byte[] ciphertext = encrypted.ciphertext();
-      try (var statement = connection.prepareStatement(INSERT)) {
-        statement.setObject(1, identity.sessionId());
-        statement.setLong(2, userId);
-        statement.setString(3, hashes.calculate(raw));
-        statement.setBytes(4, ciphertext);
-        statement.setString(5, encrypted.keyVersion());
-        statement.setObject(6, issuedAt.atOffset(java.time.ZoneOffset.UTC));
-        statement.setObject(7, issuedAt.atOffset(java.time.ZoneOffset.UTC));
-        statement.setObject(8, expiresAt.atOffset(java.time.ZoneOffset.UTC));
-        statement.setString(9, client.getHostAddress());
-        statement.setObject(10, messageId);
-        if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
-          throw new SQLException("session insert did not create one row", "40001");
+      try {
+        var insertStatement = requireValue(connection.prepareStatement(INSERT));
+        @Nullable Throwable insertFailure = null;
+        try {
+          insertStatement.setObject(1, identity.sessionId());
+          insertStatement.setLong(2, userId);
+          insertStatement.setString(3, hashes.calculate(raw));
+          insertStatement.setBytes(4, ciphertext);
+          insertStatement.setString(5, encrypted.keyVersion());
+          insertStatement.setObject(6, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+          insertStatement.setObject(7, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+          insertStatement.setObject(8, expiresAt.atOffset(java.time.ZoneOffset.UTC));
+          insertStatement.setString(9, client.getHostAddress());
+          insertStatement.setObject(10, messageId);
+          if (insertStatement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
+            throw new SQLException("session insert did not create one row", "40001");
+          }
+        } catch (SQLException | RuntimeException | Error failure) {
+          insertFailure = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.close(insertFailure, insertStatement::close);
         }
       } finally {
         Arrays.fill(ciphertext, (byte) 0);
       }
       var active = new ArrayList<UUID>();
-      try (var statement = connection.prepareStatement(LOCK_ACTIVE)) {
-        statement.setLong(1, userId);
-        statement.setObject(2, issuedAt.atOffset(java.time.ZoneOffset.UTC));
-        try (var row = statement.executeQuery()) {
-          while (row.next()) active.add(requireValue(row.getObject("id", UUID.class)));
+      var activeStatement = requireValue(connection.prepareStatement(LOCK_ACTIVE));
+      @Nullable Throwable activeFailure = null;
+      try {
+        activeStatement.setLong(1, userId);
+        activeStatement.setObject(2, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+        var activeRows = requireValue(activeStatement.executeQuery());
+        @Nullable Throwable activeRowsFailure = null;
+        try {
+          while (activeRows.next())
+            active.add(requireValue(activeRows.getObject("id", UUID.class)));
+        } catch (SQLException | RuntimeException | Error failure) {
+          activeRowsFailure = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.close(activeRowsFailure, activeRows::close);
         }
+      } catch (SQLException | RuntimeException | Error failure) {
+        activeFailure = failure;
+        throw failure;
+      } finally {
+        JdbcResourceCleanup.close(activeFailure, activeStatement::close);
       }
       for (int index = 0; index < active.size() - 2; index++) {
-        try (var statement = connection.prepareStatement(REPLACE)) {
-          statement.setObject(1, issuedAt.atOffset(java.time.ZoneOffset.UTC));
-          statement.setObject(2, active.get(index));
-          if (statement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
+        var replacementStatement = requireValue(connection.prepareStatement(REPLACE));
+        @Nullable Throwable replacementFailure = null;
+        try {
+          replacementStatement.setObject(1, issuedAt.atOffset(java.time.ZoneOffset.UTC));
+          replacementStatement.setObject(2, active.get(index));
+          if (replacementStatement.executeUpdate() != EXPECTED_AFFECTED_ROWS) {
             throw new SQLException("session replacement changed during issue", "40001");
           }
+        } catch (SQLException | RuntimeException | Error failure) {
+          replacementFailure = failure;
+          throw failure;
+        } finally {
+          JdbcResourceCleanup.close(replacementFailure, replacementStatement::close);
         }
         audit.write(
             connection,

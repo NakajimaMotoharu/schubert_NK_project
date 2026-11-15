@@ -1,0 +1,130 @@
+{
+  "actualExit": 0,
+  "sourceBefore": "3999bc6571f8eff31562e5e0f15f18ff56d53f8b",
+  "designPublication": {
+    "actualExit": 0,
+    "atUTC": "2026-11-15T12:25:18.768946+00:00",
+    "ssc": "SSC424",
+    "baseMain": "85faa600ba4b431d29a1eb86fc19fdf3079851d9",
+    "designSource": "88ad22813dea9297e5ea496fb9c84230f96a25a8",
+    "mainCommit": "cdb8adaefcb5ef906ea1047ddc4c3542bc7ffbc1",
+    "pr": "https://github.com/NakajimaMotoharu/schubert_NK_project/pull/363",
+    "paths": [
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "ordinaryMerge": true,
+    "implementationIncluded": false,
+    "formalAccepted": false
+  },
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java",
+      "tests": 10
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java",
+      "tests": 9
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java",
+      "tests": 5
+    }
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java": "bfa8e118516ed26a37afbf1743a6578652423af6435b41e5fd6c712a12b59964",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java": "64a94bcdb8ccb312b96b54a881da3f241a5f002fe389203dd8e55135497ad426",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionRevocationReason.java": "213a5fb2c04bf79b447f0a981f4f8b0eb3834b948476f8b2ddadb56b472cdd74",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": "61f34f72e9936842effced2a9ea52719226f8a8311f4b0e04dc21933b936d6d9",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java": "add11713a8ec87737f7c0c5064f104abba459e709f99c4273e4c02a3e67c65ab",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java": "b9dbed4233756c481cdb747d96f6de8843e9d910a4c18f51c30454d16130d7dd",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java": "d503847e6b1b1a3853033cbe82eb53678b529d616f36d1dfc0a354b3635954b7",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java": "a54b29289de7d08e01d6cbc814e9a815ae2162de559e02eebdb6e677a850066f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/IssuedContext.java": "e63b4f5bc96fef9df4b42ca1bff2de29098ab1139d96d49d4aedb1dbbc991ec1",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationContextException.java": "5a0e03c3b5aa5c14f41b8273bca454409288b88b50190f23d1d59982be8552ce",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": "7219a69f7f8d33d3c9923fc9870f8703472a9a945a7ceb4580f08e529c4a6f95",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/package-info.java": "9f28051696b527a1dee26618b554c0bf6f9d47cdc7324dcba733cb896156e04e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanup.java": "6fadc70907f5ff51909203ae53e4c5383da85d033eda4176c2e1cea4bbe9b6c4",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionIssueJdbcPortTest.java": "7f8830022d9379a80865bcd12c27bb2033eaf6449eb9324519a49fb228726e42",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/SessionAuditPortTest.java": "46ebe58e1339500d007f8a1c2bec8ea4ad7c453d219c47cc8e2d7277ae0a0e7d",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/JdbcResourceCleanupTest.java": "45aa737a1db2de586a38000b0a00f1fb1693f7bfb8354ddceadf2c1d0904eba6"
+  },
+  "sdkHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+  },
+  "mainLiteralSequenceComparisons": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthSessionService.java",
+      "oldSourceSha256": "1ec3c856c555f77de597745defbbd6ea6f60292013117a44daf81e78a5f5eda8",
+      "currentSourceSha256": "bfa8e118516ed26a37afbf1743a6578652423af6435b41e5fd6c712a12b59964",
+      "literalCount": 27,
+      "literalSequenceSha256": "948f6759a4995b21634ff8fa804bc398e90d3b1b1f2ce8d76bb4c4f4f794f1e9",
+      "sqlAndMessageLiteralsExact": true
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/SessionAuditWriter.java",
+      "oldSourceSha256": "173393177007aeb17a945ae37894e4d4a4c8b9b7f386765628bdbede6d7ebb6d",
+      "currentSourceSha256": "64a94bcdb8ccb312b96b54a881da3f241a5f002fe389203dd8e55135497ad426",
+      "literalCount": 9,
+      "literalSequenceSha256": "1bb955a8b69e98ed6a5cb2c5769752ba982799929088f4f87f29cf522c68bfee",
+      "sqlAndMessageLiteralsExact": true
+    }
+  ],
+  "oldIssue8InverseExact": true,
+  "issueFixtureNullHooks": [
+    [
+      "    String nullStatementAt = \"\";\n    String nullRowAt = \"\";\n",
+      ""
+    ],
+    [
+      "    @Nullable PreparedStatement statement(String sql) throws SQLException {",
+      "    PreparedStatement statement(String sql) throws SQLException {"
+    ],
+    [
+      "      if (label.equals(nullStatementAt)) return null;\n",
+      ""
+    ],
+    [
+      "    @Nullable ResultSet row(String label, String name) {\n      if (label.equals(nullRowAt)) return null;",
+      "    ResultSet row(String label, String name) {"
+    ]
+  ],
+  "oldAudit9BytesExact": true,
+  "newDefinitions": 7,
+  "necessaryPriorDefinitions": 17,
+  "expectedTests": 24,
+  "targets": [
+    "dev/codex/schubert/nk/api/security/AuthSessionService",
+    "dev/codex/schubert/nk/api/security/SessionAuditWriter",
+    "dev/codex/schubert/nk/api/database/JdbcResourceCleanup"
+  ],
+  "ciphertextProtectionIncludesAcquisitionAndNonnullCheck": true,
+  "cleanupPrimarySemanticsExactTwr": true,
+  "borrowedConnectionNeverPassedAsOwnedClose": true,
+  "actualBackendOrHeldActions": 0,
+  "applicationTestsExecuted": 0,
+  "newAcceptance": 0
+}

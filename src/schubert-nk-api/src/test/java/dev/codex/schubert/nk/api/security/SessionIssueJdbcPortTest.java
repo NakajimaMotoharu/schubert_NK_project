@@ -128,6 +128,8 @@ final class SessionIssueJdbcPortTest {
     int audited = 1;
     int ownerChanges;
     String failAt = "";
+    String nullStatementAt = "";
+    String nullRowAt = "";
     @Nullable RuntimeException runtimeFailure;
     byte @Nullable [] borrowedCiphertext;
     byte @Nullable [] receivedCiphertext;
@@ -163,7 +165,7 @@ final class SessionIssueJdbcPortTest {
           });
     }
 
-    PreparedStatement statement(String sql) throws SQLException {
+    @Nullable PreparedStatement statement(String sql) throws SQLException {
       String label =
           switch (sql) {
             case USER_SQL -> USER;
@@ -175,6 +177,7 @@ final class SessionIssueJdbcPortTest {
           };
       sqlOrder.add(label);
       fault(label + ".prepare");
+      if (label.equals(nullStatementAt)) return null;
       String name = label + "-" + sqlOrder.size();
       acquired.add(name + ".statement");
       Map<Integer, Object> bound = new HashMap<>();
@@ -206,7 +209,8 @@ final class SessionIssueJdbcPortTest {
           });
     }
 
-    ResultSet row(String label, String name) {
+    @Nullable ResultSet row(String label, String name) {
+      if (label.equals(nullRowAt)) return null;
       acquired.add(name + ".row");
       int[] index = {-1};
       return proxy(
@@ -546,6 +550,31 @@ final class SessionIssueJdbcPortTest {
     } finally {
       workers.shutdownNow();
       assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void resource001NullStatementsFailClosedWithoutLeakingOwnedBuffers() throws Exception {
+    for (String label : List.of(USER, INSERT, ACTIVE, REPLACE, AUDIT)) {
+      try (Fixture f = new Fixture()) {
+        f.active = List.of(OLDEST, SECOND, SESSION);
+        f.nullStatementAt = label;
+        infra(f);
+        assertEquals(label, f.sqlOrder.getLast());
+        assertEquals(0, f.ownerChanges);
+      }
+    }
+  }
+
+  @Test
+  void resource002NullRowsStillCloseTheirStatementExactlyOnce() throws Exception {
+    for (String label : List.of(USER, ACTIVE)) {
+      try (Fixture f = new Fixture()) {
+        f.nullRowAt = label;
+        infra(f);
+        assertEquals(label, f.sqlOrder.getLast());
+        assertEquals(0, f.ownerChanges);
+      }
     }
   }
 }
