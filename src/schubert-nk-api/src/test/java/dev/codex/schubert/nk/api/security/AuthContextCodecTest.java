@@ -385,4 +385,101 @@ final class AuthContextCodecTest {
       codec.close();
     }
   }
+
+  /** AUTHCTX-FACT001/SSC422: exact fatal/nonfatal identity and ciphertext ownership on failure. */
+  @Test
+  void authctxFact001ConstructionFaultsEraseCiphertextThenAllowIndependentRecovery()
+      throws Exception {
+    for (Throwable fault :
+        List.of(
+            new AssertionError("PUBLIC record failure"),
+            new IllegalArgumentException("PUBLIC record failure"))) {
+      assertEnvelopeRecovery(fault);
+    }
+  }
+
+  /** AUTHCTX-FACT002/SSC422: explicit nonnull construction invariant, before nonce use. */
+  @Test
+  void authctxFact002NullFactoryIsRejectedBeforeNonceUse() {
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var random =
+        new SecureRandom() {
+          private static final long serialVersionUID = 1L;
+
+          @Override
+          public void nextBytes(byte[] bytes) {
+            calls.incrementAndGet();
+            throw new AssertionError("nonce must not be requested during construction");
+          }
+        };
+    byte[] callerKey = key(0);
+    var failure =
+        assertThrows(
+            NullPointerException.class,
+            () -> new AuthContextCodec("v1", callerKey, null, null, random, null));
+    assertEquals("context envelope factory", failure.getMessage());
+    assertEquals(0, calls.get());
+    assertArrayEquals(key(0), callerKey);
+  }
+
+  /** AUTHCTX-FACT003/SSC422: nullable result is a fixed typed rejection, not an accidental NPE. */
+  @Test
+  void authctxFact003NullResultErasesCiphertextThenAllowsIndependentRecovery() throws Exception {
+    assertEnvelopeRecovery(null);
+  }
+
+  private static void assertEnvelopeRecovery(@org.jspecify.annotations.Nullable Throwable fault)
+      throws Exception {
+    byte[] expected =
+        independentEnvelope(
+            "v1", key(0), IDENTITY, "a".repeat(64).getBytes(StandardCharsets.US_ASCII));
+    var calls = new java.util.concurrent.atomic.AtomicInteger();
+    var buffers = new ArrayList<byte[]>();
+    var codec =
+        new AuthContextCodec(
+            "v1",
+            key(0),
+            null,
+            null,
+            new FixedNonce(),
+            (version, stored) -> {
+              assertEquals("v1", version);
+              assertArrayEquals(expected, stored);
+              buffers.add(stored);
+              if (calls.incrementAndGet() == 1) {
+                if (fault == null) return null;
+                if (fault instanceof Error fatal) throw fatal;
+                throw (RuntimeException) fault;
+              }
+              return new EncryptedAuthContext(version, stored);
+            });
+    var executor = Executors.newSingleThreadExecutor();
+    try {
+      if (fault == null) {
+        assertReason(
+            AuthContextCryptoException.Reason.CRYPTO_UNAVAILABLE,
+            () -> codec.encrypt(IDENTITY, RAW));
+      } else {
+        org.junit.jupiter.api.Assertions.assertSame(
+            fault, assertThrows(fault.getClass(), () -> codec.encrypt(IDENTITY, RAW)));
+      }
+      assertEquals(1, calls.get());
+      assertEquals(1, buffers.size());
+      assertArrayEquals(new byte[expected.length], buffers.getFirst());
+      var actual =
+          executor
+              .submit(() -> codec.encrypt(IDENTITY, RAW))
+              .get(5, java.util.concurrent.TimeUnit.SECONDS);
+      assertArrayEquals(expected, actual.ciphertext());
+      assertEquals(2, calls.get());
+      assertEquals(2, buffers.size());
+      org.junit.jupiter.api.Assertions.assertNotSame(buffers.getFirst(), buffers.getLast());
+      for (byte[] bytes : buffers) assertArrayEquals(new byte[expected.length], bytes);
+      assertEquals("a".repeat(64), RAW.wireValue());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
+      codec.close();
+    }
+  }
 }
