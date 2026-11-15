@@ -1,0 +1,316 @@
+{
+  "actualExit": 0,
+  "source": "716595eec955ae02ad4897bc844d75796a53035b",
+  "productionCoreMain": "716595eec955ae02ad4897bc844d75796a53035b",
+  "terminalAtUTC": "2026-11-15T23:52:28.223380+00:00",
+  "runs": [
+    {
+      "label": "inspection",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35580-existing-inspection-runref-raw-v1/inspection.json",
+        "sha256": "f21ed4bdccfc2913fb73822a009f7da323eaa29c897f4cede83941ec3d31be90"
+      },
+      "declaredTargets": [
+        "dev/codex/schubert/nk/batch/repository/InspectionSummary"
+      ],
+      "targetRawCounters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "targetRawRequiredFour100": false,
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 135,
+          "covered": 396
+        },
+        "BRANCH": {
+          "missed": 14,
+          "covered": 32
+        },
+        "LINE": {
+          "missed": 23,
+          "covered": 61
+        },
+        "COMPLEXITY": {
+          "missed": 32,
+          "covered": 43
+        },
+        "METHOD": {
+          "missed": 21,
+          "covered": 31
+        },
+        "CLASS": {
+          "missed": 2,
+          "covered": 5
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/UUID;)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "businessDate",
+          "descriptor": "()Ljava/time/LocalDate;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "run",
+          "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "id",
+          "descriptor": "()Ljava/util/UUID;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+          "name": "<clinit>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "activation",
+          "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "endedAt",
+          "descriptor": "()Ljava/time/Instant;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+          "name": "outcome",
+          "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;"
+        }
+      ]
+    },
+    {
+      "label": "runref",
+      "report": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35580-existing-inspection-runref-raw-v1/runref.json",
+        "sha256": "1c745586fe0d8cdb5a514d942129a9bec535bf9806346a92c27e93374b20e189"
+      },
+      "declaredTargets": [
+        "dev/codex/schubert/nk/batch/repository/RunReferences"
+      ],
+      "targetRawCounters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 55
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "targetRawRequiredFour100": false,
+      "rawCounters": {
+        "INSTRUCTION": {
+          "missed": 93,
+          "covered": 421
+        },
+        "BRANCH": {
+          "missed": 8,
+          "covered": 64
+        },
+        "LINE": {
+          "missed": 11,
+          "covered": 94
+        },
+        "COMPLEXITY": {
+          "missed": 21,
+          "covered": 45
+        },
+        "METHOD": {
+          "missed": 13,
+          "covered": 17
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 6
+        }
+      },
+      "missedMethods": [
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+          "name": "<init>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+          "name": "hashCode",
+          "descriptor": "()I"
+        },
+        {
+          "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+          "name": "<clinit>",
+          "descriptor": "()V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V"
+        },
+        {
+          "className": "dev/codex/schubert/nk/storage/StorageIoException",
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;"
+        }
+      ]
+    }
+  ],
+  "applicationTestsExecuted": 0,
+  "historicalTestsReferenced": 18,
+  "physicalReadsAdmittedNamesOnly": true,
+  "sourceSpecificRunsKeptSeparate": true,
+  "oldSuccessPromotedToCurrentCore": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "effortRate": null
+}

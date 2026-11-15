@@ -1,0 +1,5 @@
+# 既存Inspection・RunReference二run raw監査仕様
+
+Historical InspectionAttempt8 and RunReference10 original singleexec raw audit only, including pure InspectionSummary/RunReferences generated record methods. All candidate physical names admitted before I/O; classhash/CRC/Code count exact to original run. Record current per-Java source equality explicitly; historical JdbcResourceFailures class became interface under SSC439, therefore do not promote old RunReference whole closure to current source. Independent metadata parsing only, no product replay18, no DB/proxy calls/testclass init/old raw logs. Prior execs never union, target gap informs necessary new independent pure contract fixtures only. AllRoot2Actual4/VMDBkeys/native/aruHOLD remain. Estimate .08/.24/.72 cap1 additional source requalification; not formal acceptance.
+
+SS331341343354/451、原InspectionAttempt8/RunReference10。独立期待:現source hash、classFile CRC64/実Code数とdefault/rawの全差、各元source/runの真正metadataだけ。工具12は資格済み参照、製品/工具試験再演0。code未網羅は通常PASSへ混ぜず記録。

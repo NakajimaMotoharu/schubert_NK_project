@@ -1,0 +1,2261 @@
+{
+  "declaredTargets": [
+    "dev/codex/schubert/nk/batch/repository/RunReferences"
+  ],
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 7,
+      "covered": 55
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 14
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 7
+    },
+    "COMPLEXITY": {
+      "missed": 2,
+      "covered": 14
+    },
+    "METHOD": {
+      "missed": 2,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "targetRawRequiredFour100": false,
+  "label": "runref",
+  "actualExit": 0,
+  "historicalUnitSource": "11335c53bd1717308bef7c2e1844e7fa551cbff5",
+  "historicalCore": "3c6123a6df082bccef70da70178846bb0b81601e",
+  "historicalTestsReferenced": 10,
+  "currentRelevantMainAndTestSourceExact": false,
+  "perJavaCurrentSourceEquality": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": false,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": true,
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": true,
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java": true
+  },
+  "currentFullClosureQualified": false,
+  "originalPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28664-runref10-post-v1/manifest.json",
+    "sha256": "6d113bae71c846e2eeac604fd21d859e34773f9e67d40c1fbfe942d75b8ce1d6"
+  },
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2170_runref10_closed_profile.json",
+    "sha256": "a6b351adf6764742c00291020c99394be24751b0b560a7be5bd6fa8a60a735f3"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28654-runref10-prepare-v1/manifest.json",
+    "sha256": "933c13fa4bdda114e3bf37646803c0ab9312dae2f0fe7e148a320abf215ed8ff"
+  },
+  "singleOriginalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28664-runref10-post-v1/jacoco.exec",
+    "sha256": "31345458da956b0e56a4cf11d7d8e2e355b8a2b889522e8d50718ad79ab0ebe0"
+  },
+  "originalCoverageXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28664-runref10-post-v1/original-coverage.xml",
+    "sha256": "46714efbf51c19994c65d9fd37749674a83d8b526362850a9e175b38c0e4c5a6"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "2927a6a18e2b9c9e1ad36c0c51195f64f74d70283d5fbaf0d6b5005788330c7c",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "6fdd848dab99b5732ba0240d75c29c8ddde12475e80542870086eced424aa56c",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": "87ddf065baea68a9",
+    "dev/codex/schubert/nk/batch/repository/BatchRun": "7ebe79e62602f09c",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": "0e390ee0e3fbb08d",
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": "7b20327361e50239",
+    "dev/codex/schubert/nk/batch/repository/RunReferences": "9718b54b7a517e38",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": "37214ecd32efe326",
+    "dev/codex/schubert/nk/storage/StorageIoException": "02ab1f0a35f7f9e5"
+  },
+  "rawCounters": {
+    "INSTRUCTION": {
+      "missed": 93,
+      "covered": 421
+    },
+    "BRANCH": {
+      "missed": 8,
+      "covered": 64
+    },
+    "LINE": {
+      "missed": 11,
+      "covered": 94
+    },
+    "COMPLEXITY": {
+      "missed": 21,
+      "covered": 45
+    },
+    "METHOD": {
+      "missed": 13,
+      "covered": 17
+    },
+    "CLASS": {
+      "missed": 1,
+      "covered": 6
+    }
+  },
+  "defaultCounters": {
+    "INSTRUCTION": {
+      "covered": 373,
+      "missed": 45
+    },
+    "BRANCH": {
+      "covered": 60,
+      "missed": 4
+    },
+    "LINE": {
+      "covered": 90,
+      "missed": 10
+    },
+    "COMPLEXITY": {
+      "covered": 39,
+      "missed": 8
+    },
+    "METHOD": {
+      "covered": 11,
+      "missed": 4
+    },
+    "CLASS": {
+      "covered": 6,
+      "missed": 1
+    }
+  },
+  "defaultFilteredMethods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "cutoff",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasBatchHistory",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasInboxProgress",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasLogProgress",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "identityConsistent",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "missedCodeMethods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 21,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "reason",
+      "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "classes": {
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": {
+      "name": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException",
+      "id": "87ddf065baea68a9",
+      "dataPresent": true,
+      "probes": 1,
+      "access": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "name": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "id": "7ebe79e62602f09c",
+      "dataPresent": true,
+      "probes": 15,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 14,
+          "covered": 38
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": {
+      "name": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "id": "0e390ee0e3fbb08d",
+      "dataPresent": true,
+      "probes": 10,
+      "access": 48,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 25
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+      "name": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
+      "id": "7b20327361e50239",
+      "dataPresent": true,
+      "probes": 69,
+      "access": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 238
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 28
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 55
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 16
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences": {
+      "name": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "id": "9718b54b7a517e38",
+      "dataPresent": true,
+      "probes": 20,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 55
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "name": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "id": "37214ecd32efe326",
+      "dataPresent": false,
+      "probes": 8,
+      "access": 16433,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 50,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 5,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "name": "dev/codex/schubert/nk/storage/StorageIoException",
+      "id": "02ab1f0a35f7f9e5",
+      "dataPresent": true,
+      "probes": 21,
+      "access": 49,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 17,
+          "covered": 61
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 11
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRepositoryException",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/UUID;Ljava/time/Instant;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 32
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "cutoff",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "name": "replace",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 25
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
+      "name": "<init>",
+      "descriptor": "(Ljava/sql/Connection;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
+      "name": "read",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/RunReferences;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 212
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 48
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
+      "name": "require",
+      "descriptor": "(Z)V",
+      "access": 10,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 8
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferenceRepository",
+      "name": "present",
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "access": 10,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "<init>",
+      "descriptor": "(ZZZZ)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 28
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "anyReference",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 13
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasBatchHistory",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasInboxProgress",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "hasLogProgress",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/RunReferences",
+      "name": "identityConsistent",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 21,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "reason",
+      "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException",
+      "name": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 61
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 11
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "actualCodeMethods": 30,
+  "toolSelftest12ReferenceOnly": true,
+  "applicationTestsExecuted": 0,
+  "productClassDefinitionOrInitialization": 0,
+  "oldSourcesOrExecsCombined": false,
+  "sourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "0f0657f9307800083ecb70006dd1322df49153dfad5ea08762d119857e0ff9d4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "5784f01574923a7c1939cb63ee2fe4907f3536b377ccee9fc77ae675a9b47e7b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferencePortTest.java": "b063c8913572075d29d9865f69d3da2ef5272f7f02cabc1107045bc78304610f"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG28664-runref10-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg28654-runref10-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException.class"
+  ]
+}

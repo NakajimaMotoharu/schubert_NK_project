@@ -1,0 +1,3797 @@
+{
+  "declaredTargets": [
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary"
+  ],
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 9,
+      "covered": 29
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 0
+    },
+    "LINE": {
+      "missed": 1,
+      "covered": 5
+    },
+    "COMPLEXITY": {
+      "missed": 3,
+      "covered": 4
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 4
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "targetRawRequiredFour100": false,
+  "label": "inspection",
+  "actualExit": 0,
+  "historicalUnitSource": "b8f5261a03405b7fd7e2cfafa2e22dbb11e9220f",
+  "historicalCore": "bba3e0cd94e426e82bceec3182060c3695cd0ec6",
+  "historicalTestsReferenced": 8,
+  "currentRelevantMainAndTestSourceExact": true,
+  "perJavaCurrentSourceEquality": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": true,
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": true,
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java": true
+  },
+  "currentFullClosureQualified": false,
+  "originalPost": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/manifest.json",
+    "sha256": "a2a61b3def2b92069c84e7b751df1daa21e451beaabd5e1a677ceebee024718b"
+  },
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/2310_attempt8_closed_profile.json",
+    "sha256": "ba859f049de48a5b9450fd095d4b05da5cdb66992215e4911f6314678bdb1656"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29426-attempt8-prepare-v1/manifest.json",
+    "sha256": "7037030aa41a9855fa62ede1db0a9c860f20007152de24a4b27a1cf2815f7dc3"
+  },
+  "singleOriginalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/jacoco.exec",
+    "sha256": "563caf5118f958b7c260c47ba6ec36f16a74d87709ffa3d6d2e0bae05b7ceaf4"
+  },
+  "originalCoverageXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/original-coverage.xml",
+    "sha256": "18fd0d7dd42f1de3779461b947572f2078da5e007cd7dac204fbf96d9033a3aa"
+  },
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.class": "9ec15a5c75fbe7cc22b96dcc3d8c9683e4f7d0c5b1c74d0317886c2de639148e",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class": "a5e9c7c1005bb63c72d4d950f6f628fcb0831f3dcd0881c3be002736189b8c13",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class": "876b2a03fc51c860acf7efe94b6287e9e5c87218d42e24bee995b0aee69444ba"
+  },
+  "classIds": {
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt": "bc2e2e4586ea813f",
+    "dev/codex/schubert/nk/batch/repository/BatchRun": "7ebe79e62602f09c",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts": "6a52dcaf3ebdb461",
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary": "37c65e6603b26928",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": "2a3ec4093e066fe6",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome": "0dfc7f62c0106f0f",
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion": "c0d937e689508b1b"
+  },
+  "rawCounters": {
+    "INSTRUCTION": {
+      "missed": 135,
+      "covered": 396
+    },
+    "BRANCH": {
+      "missed": 14,
+      "covered": 32
+    },
+    "LINE": {
+      "missed": 23,
+      "covered": 61
+    },
+    "COMPLEXITY": {
+      "missed": 32,
+      "covered": 43
+    },
+    "METHOD": {
+      "missed": 21,
+      "covered": 31
+    },
+    "CLASS": {
+      "missed": 2,
+      "covered": 5
+    }
+  },
+  "defaultCounters": {
+    "INSTRUCTION": {
+      "covered": 324,
+      "missed": 91
+    },
+    "BRANCH": {
+      "covered": 32,
+      "missed": 14
+    },
+    "LINE": {
+      "covered": 57,
+      "missed": 21
+    },
+    "COMPLEXITY": {
+      "covered": 23,
+      "missed": 19
+    },
+    "METHOD": {
+      "covered": 11,
+      "missed": 8
+    },
+    "CLASS": {
+      "covered": 5,
+      "missed": 2
+    }
+  },
+  "defaultFilteredMethods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "cumulative",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "attempt",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "outcome",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "cutoff",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "target",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "deleted",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "skipped",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "counts",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "complete",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "activation",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "endedAt",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "outcome",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "missedCodeMethods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/UUID;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 17,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "businessDate",
+      "descriptor": "()Ljava/time/LocalDate;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 45,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 9,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "activation",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "endedAt",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "outcome",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "classes": {
+    "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt": {
+      "name": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "id": "bc2e2e4586ea813f",
+      "dataPresent": true,
+      "probes": 60,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 229
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 37
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 23
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 11
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "name": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "id": "7ebe79e62602f09c",
+      "dataPresent": true,
+      "probes": 15,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 45
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts": {
+      "name": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "id": "6a52dcaf3ebdb461",
+      "dataPresent": true,
+      "probes": 13,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 50
+        },
+        "BRANCH": {
+          "missed": 5,
+          "covered": 5
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 6,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/InspectionSummary": {
+      "name": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "id": "37c65e6603b26928",
+      "dataPresent": true,
+      "probes": 9,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 29
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 3,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": {
+      "name": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "id": "2a3ec4093e066fe6",
+      "dataPresent": false,
+      "probes": 10,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 43,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 8,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 8,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 8,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome": {
+      "name": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "id": "0dfc7f62c0106f0f",
+      "dataPresent": true,
+      "probes": 8,
+      "access": 16433,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 43
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion": {
+      "name": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "id": "c0d937e689508b1b",
+      "dataPresent": false,
+      "probes": 17,
+      "access": 65585,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 63,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 11,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 10,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 7,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 1,
+          "covered": 0
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 69
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "reconcile",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/Optional;Ldev/codex/schubert/nk/batch/repository/InspectionSummary;I)Ldev/codex/schubert/nk/batch/cleanup/InspectionAttempt;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 122
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 22
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "expectedOutcome",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 10,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 9
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "require",
+      "descriptor": "(Z)V",
+      "access": 10,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 8
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "cumulative",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "attempt",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/cleanup/InspectionAttempt",
+      "name": "outcome",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/UUID;Ljava/time/Instant;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 32
+        },
+        "BRANCH": {
+          "missed": 3,
+          "covered": 3
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 7
+        },
+        "COMPLEXITY": {
+          "missed": 3,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "cutoff",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "<init>",
+      "descriptor": "(JJJ)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 34
+        },
+        "BRANCH": {
+          "missed": 5,
+          "covered": 5
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "target",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "deleted",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "skipped",
+      "descriptor": "()J",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Z)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "counts",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "complete",
+      "descriptor": "()Z",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/UUID;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 17,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 4,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "businessDate",
+      "descriptor": "()Ljava/time/LocalDate;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "run",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/BatchRun;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "id",
+      "descriptor": "()Ljava/util/UUID;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceActivation",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 9,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;II)V",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 8
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "exitCode",
+      "descriptor": "()I",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 3
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 4106,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 11
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 17
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 3
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 45,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 9,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 17,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "activation",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "endedAt",
+      "descriptor": "()Ljava/time/Instant;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion",
+      "name": "outcome",
+      "descriptor": "()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "actualCodeMethods": 52,
+  "toolSelftest12ReferenceOnly": true,
+  "applicationTestsExecuted": 0,
+  "productClassDefinitionOrInitialization": 0,
+  "oldSourcesOrExecsCombined": false,
+  "sourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java": "87e838668d69c083eaf0b9e9420a59f47ec344629a492c8002edd7adbfc8a8a7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java": "3713fb2ce03a4ec926c4d193051373348da922c15d5f22e8f43cabd215b36dcd",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java": "0467e9722cc3c46e238fcdb9e2d1deffde11b3a498e54e61c0f477d18440889e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java": "e470927d66599488f16a7d9db8253372a728ad5e7579e8da52989d11b2e4606c"
+  },
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG29434-attempt8-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/InspectionSummary.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/MaintenanceActivation.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg29426-attempt8-prepare-v1/component/dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.class"
+  ]
+}

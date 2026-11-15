@@ -1,0 +1,59 @@
+CLASS	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	bc2e2e4586ea813f	true	60	65585	INSTRUCTION:0:229	BRANCH:0:24	LINE:0:37	COMPLEXITY:0:23	METHOD:0:11	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V	1	INSTRUCTION:0:69	BRANCH:0:8	LINE:0:10	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	reconcile	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/Optional;Ldev/codex/schubert/nk/batch/repository/InspectionSummary;I)Ldev/codex/schubert/nk/batch/cleanup/InspectionAttempt;	9	INSTRUCTION:0:122	BRANCH:0:12	LINE:0:22	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	expectedOutcome	(Ldev/codex/schubert/nk/batch/repository/CleanupCounts;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	10	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:1	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	require	(Z)V	10	INSTRUCTION:0:8	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	cumulative	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	attempt	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/cleanup/InspectionAttempt	outcome	()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRun	7ebe79e62602f09c	true	15	65585	INSTRUCTION:7:45	BRANCH:3:3	LINE:2:8	COMPLEXITY:4:5	METHOD:1:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:5:32	BRANCH:3:3	LINE:1:7	COMPLEXITY:3:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	id	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	cutoff	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/CleanupCounts	6a52dcaf3ebdb461	true	13	65585	INSTRUCTION:8:50	BRANCH:5:5	LINE:1:4	COMPLEXITY:6:6	METHOD:1:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	<init>	(JJJ)V	1	INSTRUCTION:5:34	BRANCH:5:5	LINE:1:3	COMPLEXITY:5:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	toString	()Ljava/lang/String;	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	target	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	deleted	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/CleanupCounts	skipped	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/InspectionSummary	37c65e6603b26928	true	9	65585	INSTRUCTION:9:29	BRANCH:0:0	LINE:1:5	COMPLEXITY:3:4	METHOD:3:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ldev/codex/schubert/nk/batch/repository/CleanupCounts;Z)V	1	INSTRUCTION:0:20	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	counts	()Ldev/codex/schubert/nk/batch/repository/CleanupCounts;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/InspectionSummary	complete	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	2a3ec4093e066fe6	false	10	65585	INSTRUCTION:43:0	BRANCH:0:0	LINE:8:0	COMPLEXITY:8:0	METHOD:8:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	<init>	(Ldev/codex/schubert/nk/batch/repository/BatchRun;Ljava/util/UUID;)V	1	INSTRUCTION:17:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	businessDate	()Ljava/time/LocalDate;	1	INSTRUCTION:7:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	run	()Ldev/codex/schubert/nk/batch/repository/BatchRun;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	id	()Ljava/util/UUID;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceActivation	<clinit>	()V	8	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	0dfc7f62c0106f0f	true	8	16433	INSTRUCTION:5:43	BRANCH:0:0	LINE:0:7	COMPLEXITY:1:5	METHOD:1:5	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	values	()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	<init>	(Ljava/lang/String;II)V	2	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	exitCode	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	$values	()[Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	4106	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome	<clinit>	()V	8	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	c0d937e689508b1b	false	17	65585	INSTRUCTION:63:0	BRANCH:6:0	LINE:11:0	COMPLEXITY:10:0	METHOD:7:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	<init>	(Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;Ljava/time/Instant;Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;)V	1	INSTRUCTION:45:0	BRANCH:6:0	LINE:9:0	COMPLEXITY:4:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	activation	()Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	endedAt	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/MaintenanceCompletion	outcome	()Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
