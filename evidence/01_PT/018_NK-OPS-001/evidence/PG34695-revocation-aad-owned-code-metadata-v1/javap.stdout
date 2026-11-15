@@ -1,0 +1,301 @@
+Compiled from "RevocationPayloadIdentity.java"
+public final class dev.codex.schubert.nk.web.revocation.RevocationPayloadIdentity extends java.lang.Record {
+  private final java.util.UUID id;
+
+  private final java.time.Instant requestedAt;
+
+  public dev.codex.schubert.nk.web.revocation.RevocationPayloadIdentity(java.util.UUID, java.time.Instant);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: aload_1
+         5: ldc           #7                  // String revocation row id
+         7: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_2
+        12: ldc           #15                 // String revocation requested time
+        14: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload_2
+        19: invokevirtual #17                 // Method java/time/Instant.getNano:()I
+        22: sipush        1000
+        25: irem
+        26: ifeq          39
+        29: new           #23                 // class java/lang/IllegalArgumentException
+        32: dup
+        33: ldc           #25                 // String revocation time must fit database microseconds
+        35: invokespecial #27                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        38: athrow
+        39: aload_0
+        40: aload_1
+        41: putfield      #30                 // Field id:Ljava/util/UUID;
+        44: aload_0
+        45: aload_2
+        46: putfield      #36                 // Field requestedAt:Ljava/time/Instant;
+        49: return
+      LineNumberTable:
+        line 12: 0
+        line 13: 4
+        line 14: 11
+        line 15: 18
+        line 16: 29
+        line 12: 39
+        line 17: 49
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      50     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+            0      50     1    id   Ljava/util/UUID;
+            0      50     2 requestedAt   Ljava/time/Instant;
+
+  byte[] aad(java.lang.String);
+    Code:
+         0: bipush        6
+         2: anewarray     #40                 // class "[B"
+         5: dup
+         6: iconst_0
+         7: ldc           #42                 // String web-revoke
+         9: getstatic     #44                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+        12: invokevirtual #50                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+        15: aastore
+        16: dup
+        17: iconst_1
+        18: ldc           #56                 // String schubert_web_session.pending_context_revocations
+        20: getstatic     #44                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+        23: invokevirtual #50                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+        26: aastore
+        27: dup
+        28: iconst_2
+        29: bipush        16
+        31: invokestatic  #58                 // Method java/nio/ByteBuffer.allocate:(I)Ljava/nio/ByteBuffer;
+        34: aload_0
+        35: getfield      #30                 // Field id:Ljava/util/UUID;
+        38: invokevirtual #64                 // Method java/util/UUID.getMostSignificantBits:()J
+        41: invokevirtual #70                 // Method java/nio/ByteBuffer.putLong:(J)Ljava/nio/ByteBuffer;
+        44: aload_0
+        45: getfield      #30                 // Field id:Ljava/util/UUID;
+        48: invokevirtual #74                 // Method java/util/UUID.getLeastSignificantBits:()J
+        51: invokevirtual #70                 // Method java/nio/ByteBuffer.putLong:(J)Ljava/nio/ByteBuffer;
+        54: invokevirtual #77                 // Method java/nio/ByteBuffer.array:()[B
+        57: aastore
+        58: dup
+        59: iconst_3
+        60: bipush        12
+        62: invokestatic  #58                 // Method java/nio/ByteBuffer.allocate:(I)Ljava/nio/ByteBuffer;
+        65: aload_0
+        66: getfield      #36                 // Field requestedAt:Ljava/time/Instant;
+        69: invokevirtual #81                 // Method java/time/Instant.getEpochSecond:()J
+        72: invokevirtual #70                 // Method java/nio/ByteBuffer.putLong:(J)Ljava/nio/ByteBuffer;
+        75: aload_0
+        76: getfield      #36                 // Field requestedAt:Ljava/time/Instant;
+        79: invokevirtual #17                 // Method java/time/Instant.getNano:()I
+        82: invokevirtual #84                 // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+        85: invokevirtual #77                 // Method java/nio/ByteBuffer.array:()[B
+        88: aastore
+        89: dup
+        90: iconst_4
+        91: iconst_1
+        92: newarray       byte
+        94: dup
+        95: iconst_0
+        96: iconst_1
+        97: bastore
+        98: aastore
+        99: dup
+       100: iconst_5
+       101: aload_1
+       102: getstatic     #44                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+       105: invokevirtual #50                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       108: aastore
+       109: astore_2
+       110: aload_2
+       111: arraylength
+       112: iconst_4
+       113: imul
+       114: istore_3
+       115: aload_2
+       116: astore        4
+       118: aload         4
+       120: arraylength
+       121: istore        5
+       123: iconst_0
+       124: istore        6
+       126: iload         6
+       128: iload         5
+       130: if_icmpge     152
+       133: aload         4
+       135: iload         6
+       137: aaload
+       138: astore        7
+       140: iload_3
+       141: aload         7
+       143: arraylength
+       144: iadd
+       145: istore_3
+       146: iinc          6, 1
+       149: goto          126
+       152: iload_3
+       153: invokestatic  #58                 // Method java/nio/ByteBuffer.allocate:(I)Ljava/nio/ByteBuffer;
+       156: astore        4
+       158: aload_2
+       159: astore        5
+       161: aload         5
+       163: arraylength
+       164: istore        6
+       166: iconst_0
+       167: istore        7
+       169: iload         7
+       171: iload         6
+       173: if_icmpge     203
+       176: aload         5
+       178: iload         7
+       180: aaload
+       181: astore        8
+       183: aload         4
+       185: aload         8
+       187: arraylength
+       188: invokevirtual #84                 // Method java/nio/ByteBuffer.putInt:(I)Ljava/nio/ByteBuffer;
+       191: aload         8
+       193: invokevirtual #89                 // Method java/nio/ByteBuffer.put:([B)Ljava/nio/ByteBuffer;
+       196: pop
+       197: iinc          7, 1
+       200: goto          169
+       203: aload         4
+       205: invokevirtual #77                 // Method java/nio/ByteBuffer.array:()[B
+       208: astore        5
+       210: aload_2
+       211: astore        6
+       213: aload         6
+       215: arraylength
+       216: istore        7
+       218: iconst_0
+       219: istore        8
+       221: iload         8
+       223: iload         7
+       225: if_icmpge     247
+       228: aload         6
+       230: iload         8
+       232: aaload
+       233: astore        9
+       235: aload         9
+       237: iconst_0
+       238: invokestatic  #93                 // Method java/util/Arrays.fill:([BB)V
+       241: iinc          8, 1
+       244: goto          221
+       247: aload         5
+       249: areturn
+       250: astore        10
+       252: aload_2
+       253: astore        11
+       255: aload         11
+       257: arraylength
+       258: istore        12
+       260: iconst_0
+       261: istore        13
+       263: iload         13
+       265: iload         12
+       267: if_icmpge     289
+       270: aload         11
+       272: iload         13
+       274: aaload
+       275: astore        14
+       277: aload         14
+       279: iconst_0
+       280: invokestatic  #93                 // Method java/util/Arrays.fill:([BB)V
+       283: iinc          13, 1
+       286: goto          263
+       289: aload         10
+       291: athrow
+      Exception table:
+         from    to  target type
+           110   210   250   any
+           250   252   250   any
+      LineNumberTable:
+        line 21: 0
+        line 22: 12
+        line 23: 23
+        line 24: 31
+        line 25: 38
+        line 26: 48
+        line 27: 54
+        line 28: 62
+        line 29: 69
+        line 30: 79
+        line 31: 85
+        line 33: 105
+        line 36: 110
+        line 37: 115
+        line 38: 152
+        line 39: 158
+        line 40: 203
+        line 42: 210
+        line 40: 247
+        line 42: 250
+        line 43: 289
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          140       6     7 field   [B
+          183      14     8 field   [B
+          235       6     9 field   [B
+          115     135     3  size   I
+          158      92     4 buffer   Ljava/nio/ByteBuffer;
+          277       6    14 field   [B
+            0     292     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+            0     292     1 version   Ljava/lang/String;
+          110     182     2 fields   [[B
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #99                 // String RevocationPayloadIdentity[REDACTED]
+         2: areturn
+      LineNumberTable:
+        line 48: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       3     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+
+  public final int hashCode();
+    Code:
+         0: aload_0
+         1: invokedynamic #101,  0            // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;)I
+         6: ireturn
+      LineNumberTable:
+        line 11: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+
+  public final boolean equals(java.lang.Object);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #105,  0            // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;Ljava/lang/Object;)Z
+         7: ireturn
+      LineNumberTable:
+        line 11: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+            0       8     1     o   Ljava/lang/Object;
+
+  public java.util.UUID id();
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field id:Ljava/util/UUID;
+         4: areturn
+      LineNumberTable:
+        line 11: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+
+  public java.time.Instant requestedAt();
+    Code:
+         0: aload_0
+         1: getfield      #36                 // Field requestedAt:Ljava/time/Instant;
+         4: areturn
+      LineNumberTable:
+        line 11: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ldev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity;
+}
