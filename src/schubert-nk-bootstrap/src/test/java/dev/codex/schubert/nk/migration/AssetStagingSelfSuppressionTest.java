@@ -50,6 +50,44 @@ final class AssetStagingSelfSuppressionTest {
     }
   }
 
+  @Test
+  void referenceSelf002SameStatementFailureIsNotAddedAsItsOwnSuppression() {
+    var files = new ScenarioFileMigrationMap(List.of());
+    var entries = new ScenarioEntryMigrationMap(List.of());
+    var scenario =
+        new ScenarioCopyDataset(
+            new ScenarioFileCopyBatch(files, List.of()),
+            new ScenarioEntryCopyBatch(
+                new ScenarioEntryPlacementMap(files, entries, List.of()), List.of()));
+    var content =
+        new MigrationCopyDataset(
+            scenario,
+            List.of(),
+            List.of(),
+            new MediaAssetCopyBatch(new AssetMigrationManifest(List.of()), List.of()));
+    var declared = new MigrationMasterCopyDataset(new SpeakerCopyBatch(List.of()), content);
+    for (int kind = 0; kind < 3; kind++) {
+      Throwable failure =
+          switch (kind) {
+            case 0 -> new SQLException(MARKER);
+            case 1 -> new IllegalStateException(MARKER);
+            default -> new AssertionError(MARKER);
+          };
+      var fixture = new Fixture(false, failure);
+      assertSame(
+          failure,
+          assertThrows(
+              failure.getClass(),
+              () -> new MigrationMasterReferenceVerifier().verify(fixture.connection, declared)));
+      assertEquals(0, failure.getSuppressed().length);
+      assertEquals(1, fixture.autoCommitReads);
+      assertEquals(1, fixture.statementsCreated);
+      assertEquals(1, fixture.statementsClosed);
+      assertEquals(0, fixture.queries);
+      assertEquals(0, fixture.resultsClosed);
+    }
+  }
+
   private static final class Fixture {
     private final Connection connection;
     private int autoCommitReads;
