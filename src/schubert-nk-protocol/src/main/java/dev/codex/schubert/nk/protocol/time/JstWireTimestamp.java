@@ -12,12 +12,17 @@ import java.util.regex.Pattern;
 /** Strict JST yyyyMMddHHmmssSSS codec. Trace: NK-PRO-003, UI 232 §3, SS 322 §4.2. */
 public final class JstWireTimestamp {
   public static final int WIRE_LENGTH = 17;
-  private static final ZoneId JAPAN = ZoneId.of("Asia/Tokyo");
-  private static final Pattern DIGITS = Pattern.compile("[0-9]{17}");
-  private static final DateTimeFormatter FORMATTER =
-      DateTimeFormatter.ofPattern("uuuuMMddHHmmssSSS").withResolverStyle(ResolverStyle.STRICT);
+  private static final JstWireTimestamp INSTANCE = new JstWireTimestamp();
+  private final ZoneId retainedJapanZone;
+  private final Pattern retainedWireDigits;
+  private final DateTimeFormatter retainedWireFormatter;
 
-  private JstWireTimestamp() {}
+  private JstWireTimestamp() {
+    retainedJapanZone = ZoneId.of("Asia/Tokyo");
+    retainedWireDigits = Pattern.compile("[0-9]{17}");
+    retainedWireFormatter =
+        DateTimeFormatter.ofPattern("uuuuMMddHHmmssSSS").withResolverStyle(ResolverStyle.STRICT);
+  }
 
   public static String format(Instant instant) {
     Objects.requireNonNull(instant, "instant");
@@ -25,8 +30,9 @@ public final class JstWireTimestamp {
       throw new IllegalArgumentException("wire timestamp requires millisecond precision");
     }
     try {
-      String value = FORMATTER.format(instant.atZone(JAPAN));
-      if (!DIGITS.matcher(value).matches()) {
+      String value =
+          INSTANCE.retainedWireFormatter.format(instant.atZone(INSTANCE.retainedJapanZone));
+      if (!INSTANCE.retainedWireDigits.matcher(value).matches()) {
         throw new IllegalArgumentException("wire timestamp must fit exactly 17 ASCII digits");
       }
       return value;
@@ -38,11 +44,13 @@ public final class JstWireTimestamp {
 
   public static Instant parse(String value) {
     Objects.requireNonNull(value, "value");
-    if (!DIGITS.matcher(value).matches()) {
+    if (!INSTANCE.retainedWireDigits.matcher(value).matches()) {
       throw new IllegalArgumentException("wire timestamp must be exactly 17 ASCII digits");
     }
     try {
-      return LocalDateTime.parse(value, FORMATTER).atZone(JAPAN).toInstant();
+      return LocalDateTime.parse(value, INSTANCE.retainedWireFormatter)
+          .atZone(INSTANCE.retainedJapanZone)
+          .toInstant();
     } catch (DateTimeException exception) {
       throw new IllegalArgumentException("wire timestamp is not a valid JST date-time", exception);
     }

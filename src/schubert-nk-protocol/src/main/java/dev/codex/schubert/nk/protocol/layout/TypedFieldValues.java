@@ -25,9 +25,12 @@ import java.util.regex.Pattern;
 public final class TypedFieldValues {
   private static final java.lang.String LITERAL_VALUE = "value";
 
-  private static final Pattern OPTIONAL_ID = Pattern.compile("[0-9]{1,12}");
+  private static final TypedFieldValues INSTANCE = new TypedFieldValues();
+  private final Pattern retainedOptionalId;
 
-  private TypedFieldValues() {}
+  private TypedFieldValues() {
+    retainedOptionalId = Pattern.compile("[0-9]{1,12}");
+  }
 
   public static FieldValue.Text requiredText(FieldValueSet fields, String name) {
     FieldValue value = require(fields, name);
@@ -352,7 +355,7 @@ public final class TypedFieldValues {
   }
 
   private static long parseOptionalId(String value) {
-    if (!OPTIONAL_ID.matcher(value).matches()) {
+    if (!INSTANCE.retainedOptionalId.matcher(value).matches()) {
       throw new IllegalArgumentException("optional protocol ID must contain 1 to 12 ASCII digits");
     }
     return Long.parseLong(value);

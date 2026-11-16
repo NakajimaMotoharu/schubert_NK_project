@@ -1,0 +1,3448 @@
+{
+  "actualExit": 0,
+  "source": "ab4e8eafa6fb4835c792753357c50c6ceffbd29f",
+  "callers": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java",
+      "owner": "WBS-P002-03",
+      "sha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3",
+      "references": [
+        {
+          "line": 11,
+          "text": "import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;"
+        },
+        {
+          "line": 53,
+          "text": "JstWireTimestamp.format(header.sentAt()).getBytes(StandardCharsets.US_ASCII));"
+        },
+        {
+          "line": 94,
+          "text": "Instant sentAt = JstWireTimestamp.parse(requiredText(body, 96, 113));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "owner": "WBS-P002-02",
+      "sha256": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+      "references": [
+        {
+          "line": 3,
+          "text": "import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;"
+        },
+        {
+          "line": 138,
+          "text": "JstWireTimestamp.parse(text(data, \"発行日時\"))"
+        },
+        {
+          "line": 139,
+          "text": ".isBefore(JstWireTimestamp.parse(text(data, \"期限日時\"))),"
+        },
+        {
+          "line": 475,
+          "text": "return Optional.of(JstWireTimestamp.parse(text.value()));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "07b1b58d8ccd0cff7c1fd5a836abfd0b5cdf36b7906b6b31e1f1c41de1a91abe",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requireUnsignedRange(\"expectedVersion\", expectedVersion, 9);"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredString(fields, \"New Password\"),"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requiredLong(fields, \"Expected version\"),"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 34,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"New Password\", TypedFieldValues.text(newPassword)),"
+        },
+        {
+          "line": 36,
+          "text": "Map.entry(\"Expected version\", TypedFieldValues.numeric(expectedVersion)),"
+        },
+        {
+          "line": 37,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "975f2cf129e380283678c4d99122c8613e21622b31725ac88494f7da0de10883",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredString(fields, \"Initial Password\"),"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"Enabled\"),"
+        },
+        {
+          "line": 28,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 36,
+          "text": "Map.entry(\"Initial Password\", TypedFieldValues.text(initialPassword)),"
+        },
+        {
+          "line": 37,
+          "text": "Map.entry(\"Role\", TypedFieldValues.enumValue(role)),"
+        },
+        {
+          "line": 38,
+          "text": "Map.entry(\"Enabled\", TypedFieldValues.flag(enabled)),"
+        },
+        {
+          "line": 39,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "b3a30f36f4121ac716b0a68d729574c32dc8a09d2d63422b51736c52f6da95b3",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 17,
+          "text": "return new UserDetailRequestData(TypedFieldValues.requiredId(fields, \"User ID\", UserId::new));"
+        },
+        {
+          "line": 22,
+          "text": "return new FieldValueSet(Map.ofEntries(Map.entry(\"User ID\", TypedFieldValues.id(userId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "38f7177993c2eba0e5fce69a85d55ec420a25b9d6cb1900bbaa4ea49121607cf",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requireUnsignedRange(\"activeSessionCount\", activeSessionCount, 3);"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requireUnsignedRange(\"version\", version, 9);"
+        },
+        {
+          "line": 48,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 49,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 50,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 51,
+          "text": "TypedFieldValues.requiredEnum(fields, \"State\", UserState.class),"
+        },
+        {
+          "line": 52,
+          "text": "TypedFieldValues.optionalInstant(fields, \"Locked until\"),"
+        },
+        {
+          "line": 53,
+          "text": "TypedFieldValues.optionalInstant(fields, \"Last Login\"),"
+        },
+        {
+          "line": 54,
+          "text": "TypedFieldValues.requiredInstant(fields, \"Password changed at\"),"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.requiredInstant(fields, \"Created at\"),"
+        },
+        {
+          "line": 56,
+          "text": "TypedFieldValues.requiredInstant(fields, \"Updated at\"),"
+        },
+        {
+          "line": 57,
+          "text": "TypedFieldValues.requiredInt(fields, \"Active session数\"),"
+        },
+        {
+          "line": 58,
+          "text": "TypedFieldValues.requiredLong(fields, \"Version\"),"
+        },
+        {
+          "line": 59,
+          "text": "TypedFieldValues.requiredString(fields, \"Created by\"),"
+        },
+        {
+          "line": 60,
+          "text": "TypedFieldValues.requiredString(fields, \"Updated by\"));"
+        },
+        {
+          "line": 67,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 68,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 69,
+          "text": "Map.entry(\"Role\", TypedFieldValues.enumValue(role)),"
+        },
+        {
+          "line": 70,
+          "text": "Map.entry(\"State\", TypedFieldValues.enumValue(state)),"
+        },
+        {
+          "line": 71,
+          "text": "Map.entry(\"Locked until\", TypedFieldValues.optionalInstantValue(lockedUntil)),"
+        },
+        {
+          "line": 72,
+          "text": "Map.entry(\"Last Login\", TypedFieldValues.optionalInstantValue(lastLogin)),"
+        },
+        {
+          "line": 73,
+          "text": "Map.entry(\"Password changed at\", TypedFieldValues.instant(passwordChangedAt)),"
+        },
+        {
+          "line": 74,
+          "text": "Map.entry(\"Created at\", TypedFieldValues.instant(createdAt)),"
+        },
+        {
+          "line": 75,
+          "text": "Map.entry(\"Updated at\", TypedFieldValues.instant(updatedAt)),"
+        },
+        {
+          "line": 76,
+          "text": "Map.entry(\"Active session数\", TypedFieldValues.numeric(activeSessionCount)),"
+        },
+        {
+          "line": 77,
+          "text": "Map.entry(\"Version\", TypedFieldValues.numeric(version)),"
+        },
+        {
+          "line": 78,
+          "text": "Map.entry(\"Created by\", TypedFieldValues.text(createdBy)),"
+        },
+        {
+          "line": 79,
+          "text": "Map.entry(\"Updated by\", TypedFieldValues.text(updatedBy))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "5bf98b1c3f7c67fc33e331c122b64672eb216b2398208107ca225131e870629b",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 17,
+          "text": "TypedFieldValues.requireUnsignedRange(\"updatedVersion\", updatedVersion, 9);"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredLong(fields, \"更新後version\"));"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"更新後version\", TypedFieldValues.numeric(updatedVersion))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "5c74402ddfb935a3a7f59af52fa6758859c43d67ceedb6f0e082ad7548ba392a",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.requireUnsignedRange(\"version\", version, 9);"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredEnum(fields, \"State\", UserState.class),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalInstant(fields, \"Locked until\"),"
+        },
+        {
+          "line": 45,
+          "text": "TypedFieldValues.optionalInstant(fields, \"Last Login\"),"
+        },
+        {
+          "line": 46,
+          "text": "TypedFieldValues.requiredInstant(fields, \"Created at\"),"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.requiredInstant(fields, \"Updated at\"),"
+        },
+        {
+          "line": 48,
+          "text": "TypedFieldValues.requiredLong(fields, \"Version\"));"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"Role\", TypedFieldValues.enumValue(role)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"State\", TypedFieldValues.enumValue(state)),"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"Locked until\", TypedFieldValues.optionalInstantValue(lockedUntil)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"Last Login\", TypedFieldValues.optionalInstantValue(lastLogin)),"
+        },
+        {
+          "line": 61,
+          "text": "Map.entry(\"Created at\", TypedFieldValues.instant(createdAt)),"
+        },
+        {
+          "line": 62,
+          "text": "Map.entry(\"Updated at\", TypedFieldValues.instant(updatedAt)),"
+        },
+        {
+          "line": 63,
+          "text": "Map.entry(\"Version\", TypedFieldValues.numeric(version))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "099883bf78de39ddf48b0467c0f20b8b1e052cc89c2f1e4efd6be682bbe481ed",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requireUnsignedRange(\"expectedVersion\", expectedVersion, 9);"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requiredEnum(fields, \"New role\", UserRole.class),"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requiredLong(fields, \"Expected version\"),"
+        },
+        {
+          "line": 28,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 36,
+          "text": "Map.entry(\"New role\", TypedFieldValues.enumValue(newRole)),"
+        },
+        {
+          "line": 37,
+          "text": "Map.entry(\"Expected version\", TypedFieldValues.numeric(expectedVersion)),"
+        },
+        {
+          "line": 38,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "58ff4b6dbd140e907ed8d9dd7d9f5225be0972ef6d9fb506a97ffb9c8e11ec7a",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requireUnsignedRange(\"page\", page, 6);"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 30,
+          "text": "TypedFieldValues.optionalString(fields, \"Username prefix\"),"
+        },
+        {
+          "line": 31,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 32,
+          "text": "TypedFieldValues.optionalEnum(fields, \"State\", UserState.class),"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page\"),"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"));"
+        },
+        {
+          "line": 41,
+          "text": "Map.entry(\"Username prefix\", TypedFieldValues.optionalStringValue(usernamePrefix)),"
+        },
+        {
+          "line": 42,
+          "text": "Map.entry(\"Role\", TypedFieldValues.optionalEnumValue(role)),"
+        },
+        {
+          "line": 43,
+          "text": "Map.entry(\"State\", TypedFieldValues.optionalEnumValue(state)),"
+        },
+        {
+          "line": 44,
+          "text": "Map.entry(\"Page\", TypedFieldValues.numeric(page)),"
+        },
+        {
+          "line": 45,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "33b3117a8f54b441c63f676f2c3bc789ad7e82be7d841dbf11cd0425b219f6e8",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 17,
+          "text": "TypedFieldValues.requireUnsignedRange(\"expectedVersion\", expectedVersion, 9);"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"Enabled\"),"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredLong(fields, \"Expected version\"),"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 34,
+          "text": "Map.entry(\"Enabled\", TypedFieldValues.flag(enabled)),"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"Expected version\", TypedFieldValues.numeric(expectedVersion)),"
+        },
+        {
+          "line": 36,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "1b1a8ca063746c14149c53c7121b1d2a8c31619fade43c41bb1780d671cdcec9",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 16,
+          "text": "TypedFieldValues.requireUnsignedRange(\"expectedVersion\", expectedVersion, 9);"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredId(fields, \"User ID\", UserId::new),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredLong(fields, \"Expected version\"),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"User ID\", TypedFieldValues.id(userId)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Expected version\", TypedFieldValues.numeric(expectedVersion)),"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "26a303d816443d7375731a897b323087f7eb04e60940b821df5a4e10783c160f",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredString(fields, \"Password\"),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredString(fields, \"Client address\"));"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Password\", TypedFieldValues.text(password)),"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"Client address\", TypedFieldValues.text(clientAddress))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "73516a6bb1892756bd5bb857f7404b1631af5e8b865234176a99ea9c0def2860",
+      "references": [
+        {
+          "line": 6,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 30,
+          "text": "TypedFieldValues.requireUnsignedRange(\"retryAfterSeconds\", retryAfterSeconds, 6);"
+        },
+        {
+          "line": 31,
+          "text": "TypedFieldValues.requireUnsignedRange(\"remainingAttempts\", remainingAttempts, 3);"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.optionalString(fields, \"Username\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.optionalAuthenticationContext(fields, \"認証context ID\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.optionalInstant(fields, \"発行日時\"),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.optionalInstant(fields, \"期限日時\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.requiredInt(fields, \"Retry after秒\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredInt(fields, \"残り試行回数\"),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalString(fields, \"利用者message\"));"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"Username\", TypedFieldValues.optionalStringValue(username)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"Role\", TypedFieldValues.optionalEnumValue(role)),"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.optionalAuthenticationContextValue(authenticationContextId)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"発行日時\", TypedFieldValues.optionalInstantValue(issuedAt)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"期限日時\", TypedFieldValues.optionalInstantValue(expiresAt)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"Retry after秒\", TypedFieldValues.numeric(retryAfterSeconds)),"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"残り試行回数\", TypedFieldValues.numeric(remainingAttempts)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"利用者message\", TypedFieldValues.optionalStringValue(userMessage))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "40d4674e04d918235ab5509f79d07a6706b56cce5aa98382103e6a0aacea2c38",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireEmpty(fields);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "dfeaeeba960ca5b198f8cba945ea979a218b2d991b56852ec516b05b8c3ee846",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 17,
+          "text": "return new LogoutResponseData(TypedFieldValues.requiredInstant(fields, \"Session失効日時\"));"
+        },
+        {
+          "line": 23,
+          "text": "Map.ofEntries(Map.entry(\"Session失効日時\", TypedFieldValues.instant(sessionRevokedAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/common/PagedResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "54c61eaac197e54d18a76d5c7f129d3b88f494e2022cc764155200ac44e70591",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requireUnsignedRange(\"effectivePage\", effectivePage, 6);"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalPages\", totalPages, 6);"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requireUnsignedRange(\"firstResult\", firstResult, 9);"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requireUnsignedRange(\"lastResult\", lastResult, 9);"
+        },
+        {
+          "line": 31,
+          "text": "TypedFieldValues.requiredInt(fields, \"Effective page\"),"
+        },
+        {
+          "line": 32,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"),"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requiredLong(fields, \"Total count\"),"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.requiredInt(fields, \"Total pages\"),"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.requiredLong(fields, \"First result\"),"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requiredLong(fields, \"Last result\"));"
+        },
+        {
+          "line": 43,
+          "text": "Map.entry(\"Effective page\", TypedFieldValues.numeric(effectivePage)),"
+        },
+        {
+          "line": 44,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize)),"
+        },
+        {
+          "line": 45,
+          "text": "Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount)),"
+        },
+        {
+          "line": 46,
+          "text": "Map.entry(\"Total pages\", TypedFieldValues.numeric(totalPages)),"
+        },
+        {
+          "line": 47,
+          "text": "Map.entry(\"First result\", TypedFieldValues.numeric(firstResult)),"
+        },
+        {
+          "line": 48,
+          "text": "Map.entry(\"Last result\", TypedFieldValues.numeric(lastResult))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "c92c10612d4380661f4a82ee2d9f72ffd60407bb48cd934055520e1e3092603a",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.requiredId(fields, \"Log ID\", LogId::new),"
+        },
+        {
+          "line": 56,
+          "text": "TypedFieldValues.requiredInstant(fields, \"発生日時\"),"
+        },
+        {
+          "line": 57,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Log type\", LogType.class),"
+        },
+        {
+          "line": 58,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Level\", LogLevel.class),"
+        },
+        {
+          "line": 59,
+          "text": "TypedFieldValues.optionalString(fields, \"Action\"),"
+        },
+        {
+          "line": 60,
+          "text": "TypedFieldValues.requiredString(fields, \"Message\"),"
+        },
+        {
+          "line": 61,
+          "text": "TypedFieldValues.optionalUuid(fields, \"HTTP request ID\"),"
+        },
+        {
+          "line": 62,
+          "text": "TypedFieldValues.optionalUuid(fields, \"業務Message ID\"),"
+        },
+        {
+          "line": 63,
+          "text": "TypedFieldValues.optionalUuid(fields, \"Correlation ID\"),"
+        },
+        {
+          "line": 64,
+          "text": "TypedFieldValues.optionalString(fields, \"HTTP method\"),"
+        },
+        {
+          "line": 65,
+          "text": "TypedFieldValues.optionalString(fields, \"Path\"),"
+        },
+        {
+          "line": 66,
+          "text": "TypedFieldValues.optionalHttpStatusCode(fields, \"HTTP status\"),"
+        },
+        {
+          "line": 67,
+          "text": "TypedFieldValues.optionalElapsedMilliseconds(fields, \"Elapsed ms\"),"
+        },
+        {
+          "line": 68,
+          "text": "TypedFieldValues.optionalString(fields, \"Remote address\"),"
+        },
+        {
+          "line": 69,
+          "text": "TypedFieldValues.optionalString(fields, \"Details\"));"
+        },
+        {
+          "line": 76,
+          "text": "Map.entry(\"Log ID\", TypedFieldValues.id(logId)),"
+        },
+        {
+          "line": 77,
+          "text": "Map.entry(\"発生日時\", TypedFieldValues.instant(occurredAt)),"
+        },
+        {
+          "line": 78,
+          "text": "Map.entry(\"Log type\", TypedFieldValues.enumValue(logType)),"
+        },
+        {
+          "line": 79,
+          "text": "Map.entry(\"Level\", TypedFieldValues.enumValue(level)),"
+        },
+        {
+          "line": 80,
+          "text": "Map.entry(\"Action\", TypedFieldValues.optionalStringValue(action)),"
+        },
+        {
+          "line": 81,
+          "text": "Map.entry(\"Message\", TypedFieldValues.text(message)),"
+        },
+        {
+          "line": 82,
+          "text": "Map.entry(\"HTTP request ID\", TypedFieldValues.optionalUuidValue(httpRequestId)),"
+        },
+        {
+          "line": 83,
+          "text": "Map.entry(\"業務Message ID\", TypedFieldValues.optionalUuidValue(businessMessageId)),"
+        },
+        {
+          "line": 84,
+          "text": "Map.entry(\"Correlation ID\", TypedFieldValues.optionalUuidValue(correlationId)),"
+        },
+        {
+          "line": 85,
+          "text": "Map.entry(\"HTTP method\", TypedFieldValues.optionalStringValue(httpMethod)),"
+        },
+        {
+          "line": 86,
+          "text": "Map.entry(\"Path\", TypedFieldValues.optionalStringValue(path)),"
+        },
+        {
+          "line": 87,
+          "text": "Map.entry(\"HTTP status\", TypedFieldValues.optionalHttpStatusCodeValue(httpStatus)),"
+        },
+        {
+          "line": 88,
+          "text": "Map.entry(\"Elapsed ms\", TypedFieldValues.optionalElapsedMillisecondsValue(elapsedMs)),"
+        },
+        {
+          "line": 89,
+          "text": "Map.entry(\"Remote address\", TypedFieldValues.optionalStringValue(remoteAddress)),"
+        },
+        {
+          "line": 90,
+          "text": "Map.entry(\"Details\", TypedFieldValues.optionalStringValue(details))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "5f78131cdb62aa454eb68ac962d1e58cf542947c45f94753697a63ebc4d09ad6",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requireUnsignedRange(\"page\", page, 6);"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.optionalString(fields, \"Keyword\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Log type\", LogType.class),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.optionalString(fields, \"Action\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.optionalString(fields, \"Path\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Level\", LogLevel.class),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalInstant(fields, \"From日時\"),"
+        },
+        {
+          "line": 45,
+          "text": "TypedFieldValues.optionalInstant(fields, \"To日時\"),"
+        },
+        {
+          "line": 46,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page\"),"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"));"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"Keyword\", TypedFieldValues.optionalStringValue(keyword)),"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"Log type\", TypedFieldValues.optionalEnumValue(logType)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"Action\", TypedFieldValues.optionalStringValue(action)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"Path\", TypedFieldValues.optionalStringValue(path)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"Level\", TypedFieldValues.optionalEnumValue(level)),"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"From日時\", TypedFieldValues.optionalInstantValue(fromAt)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"To日時\", TypedFieldValues.optionalInstantValue(toAt)),"
+        },
+        {
+          "line": 61,
+          "text": "Map.entry(\"Page\", TypedFieldValues.numeric(page)),"
+        },
+        {
+          "line": 62,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/log/WebLogEventData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "4d0dfd1f30653be3c16f16f4f273e2d2e089c546da7aa98b48c6e8f900de5adb",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 85,
+          "text": "TypedFieldValues.requiredInstant(fields, \"発生日時\"),"
+        },
+        {
+          "line": 86,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Log type\", LogType.class),"
+        },
+        {
+          "line": 87,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Level\", LogLevel.class),"
+        },
+        {
+          "line": 88,
+          "text": "TypedFieldValues.optionalString(fields, \"Action\"),"
+        },
+        {
+          "line": 89,
+          "text": "TypedFieldValues.requiredString(fields, \"Message\"),"
+        },
+        {
+          "line": 90,
+          "text": "TypedFieldValues.requiredUuid(fields, \"HTTP request ID\"),"
+        },
+        {
+          "line": 91,
+          "text": "TypedFieldValues.requiredString(fields, \"HTTP method\"),"
+        },
+        {
+          "line": 92,
+          "text": "TypedFieldValues.requiredString(fields, \"Path\"),"
+        },
+        {
+          "line": 93,
+          "text": "TypedFieldValues.requiredHttpStatusCode(fields, \"HTTP status\"),"
+        },
+        {
+          "line": 94,
+          "text": "TypedFieldValues.requiredElapsedMilliseconds(fields, \"Elapsed ms\"),"
+        },
+        {
+          "line": 95,
+          "text": "TypedFieldValues.requiredString(fields, \"Remote address\"),"
+        },
+        {
+          "line": 96,
+          "text": "TypedFieldValues.optionalString(fields, \"Username\"),"
+        },
+        {
+          "line": 97,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Role\", UserRole.class),"
+        },
+        {
+          "line": 98,
+          "text": "TypedFieldValues.optionalString(fields, \"Details\"));"
+        },
+        {
+          "line": 105,
+          "text": "Map.entry(\"発生日時\", TypedFieldValues.instant(occurredAt)),"
+        },
+        {
+          "line": 106,
+          "text": "Map.entry(\"Log type\", TypedFieldValues.enumValue(logType)),"
+        },
+        {
+          "line": 107,
+          "text": "Map.entry(\"Level\", TypedFieldValues.enumValue(level)),"
+        },
+        {
+          "line": 108,
+          "text": "Map.entry(\"Action\", TypedFieldValues.optionalStringValue(action)),"
+        },
+        {
+          "line": 109,
+          "text": "Map.entry(\"Message\", TypedFieldValues.text(message)),"
+        },
+        {
+          "line": 110,
+          "text": "Map.entry(\"HTTP request ID\", TypedFieldValues.uuid(httpRequestId)),"
+        },
+        {
+          "line": 111,
+          "text": "Map.entry(\"HTTP method\", TypedFieldValues.text(httpMethod)),"
+        },
+        {
+          "line": 112,
+          "text": "Map.entry(\"Path\", TypedFieldValues.text(path)),"
+        },
+        {
+          "line": 113,
+          "text": "Map.entry(\"HTTP status\", TypedFieldValues.httpStatusCode(httpStatus)),"
+        },
+        {
+          "line": 114,
+          "text": "Map.entry(\"Elapsed ms\", TypedFieldValues.elapsedMilliseconds(elapsedMs)),"
+        },
+        {
+          "line": 115,
+          "text": "Map.entry(\"Remote address\", TypedFieldValues.text(remoteAddress)),"
+        },
+        {
+          "line": 116,
+          "text": "Map.entry(\"Username\", TypedFieldValues.optionalStringValue(username)),"
+        },
+        {
+          "line": 117,
+          "text": "Map.entry(\"Role\", TypedFieldValues.optionalEnumValue(role)),"
+        },
+        {
+          "line": 118,
+          "text": "Map.entry(\"Details\", TypedFieldValues.optionalStringValue(details))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "ae9b2fb77ab83a4962537ecda88516243d3ce3e4713080d9945949308bda52ca",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Category\", AnimationListCategory.class));"
+        },
+        {
+          "line": 24,
+          "text": "Map.ofEntries(Map.entry(\"Category\", TypedFieldValues.enumValue(category))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "9ea09d9d4566e2c23b8ecfb0f68845f2e598217250c7305c1959f4cb29735192",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 6);"
+        },
+        {
+          "line": 15,
+          "text": "return new AnimationListResponseData(TypedFieldValues.requiredInt(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "4bfc67a93038d2c833a21c9783417c65ab00c9fd03cc24bb91ef9a65bb696227",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireEmpty(fields);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3fdb04f41e7f22281747e06c959338db7d8df0548038f05286f55a362b032d2c",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 13,
+          "text": "TypedFieldValues.requireUnsignedRange(\"mainSubtrackCount\", mainSubtrackCount, 3);"
+        },
+        {
+          "line": 14,
+          "text": "TypedFieldValues.requireUnsignedRange(\"ovaCount\", ovaCount, 3);"
+        },
+        {
+          "line": 15,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalFileCount\", totalFileCount, 3);"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredInt(fields, \"Main/SUBTRACK件数\"),"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredInt(fields, \"OVA件数\"),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"Opening有無\"),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredInt(fields, \"総file件数\"));"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Main/SUBTRACK件数\", TypedFieldValues.numeric(mainSubtrackCount)),"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"OVA件数\", TypedFieldValues.numeric(ovaCount)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Opening有無\", TypedFieldValues.flag(openingPresent)),"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"総file件数\", TypedFieldValues.numeric(totalFileCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AnimationRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "76be7cbc0ad448d5db04b6f887107c07c730c8787de4a19ded78ac959b279796",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileByteLength\", fileByteLength, 12);"
+        },
+        {
+          "line": 29,
+          "text": "TypedFieldValues.requireUnsignedRange(\"displayOrder\", displayOrder, 4);"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.requiredString(fields, \"Video ID\"),"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.requiredString(fields, \"Title\"),"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Category\", AnimationCategory.class),"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Display path\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredLong(fields, \"File byte長\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.optionalString(fields, \"Parent main ID\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredInt(fields, \"Display order\"));"
+        },
+        {
+          "line": 47,
+          "text": "Map.entry(\"Video ID\", TypedFieldValues.text(videoId)),"
+        },
+        {
+          "line": 48,
+          "text": "Map.entry(\"Title\", TypedFieldValues.text(title)),"
+        },
+        {
+          "line": 49,
+          "text": "Map.entry(\"Category\", TypedFieldValues.enumValue(category)),"
+        },
+        {
+          "line": 50,
+          "text": "Map.entry(\"Display path\", TypedFieldValues.displayPath(displayPath)),"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"File byte長\", TypedFieldValues.numeric(fileByteLength)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"Parent main ID\", TypedFieldValues.optionalStringValue(parentMainId)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"Display order\", TypedFieldValues.numeric(displayOrder))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "966cb8cd91e5cb839b17f516cc967a12449b9eee909e1d896e49b809a5a6fc1e",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredId(fields, \"Audio ID\", AudioId::new),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Disposition\", ContentDisposition.class));"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Audio ID\", TypedFieldValues.id(audioId)),"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Disposition\", TypedFieldValues.enumValue(disposition))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "b527e7e808aef26b0406627165b8301b629aea1895d29ca1391f588d7f1c638f",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileByteLength\", fileByteLength, 12);"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.requiredString(fields, \"Media logical ID\"),"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requiredRelativePath(fields, \"Storage relative path\"),"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.requiredString(fields, \"File name\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredLong(fields, \"File byte長\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredSha256(fields, \"SHA-256\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredEnum(fields, \"MIME type\", MediaMimeType.class),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Content disposition\", ContentDisposition.class));"
+        },
+        {
+          "line": 48,
+          "text": "Map.entry(\"Media logical ID\", TypedFieldValues.text(mediaLogicalId)),"
+        },
+        {
+          "line": 49,
+          "text": "Map.entry(\"Storage relative path\", TypedFieldValues.relativePath(storageRelativePath)),"
+        },
+        {
+          "line": 50,
+          "text": "Map.entry(\"File name\", TypedFieldValues.text(fileName)),"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"File byte長\", TypedFieldValues.numeric(fileByteLength)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"SHA-256\", TypedFieldValues.sha256(sha256)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"MIME type\", TypedFieldValues.enumValue(mimeType)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"Content disposition\", TypedFieldValues.enumValue(contentDisposition))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "5cd1305fb2372d39e20563e5ed6b18d0d2bb37e40eece3770dcbfedf2f91e008",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 13,
+          "text": "TypedFieldValues.requireUnsignedRange(\"trackCount\", trackCount, 6);"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredString(fields, \"Category\"),"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requiredInt(fields, \"Track件数\"));"
+        },
+        {
+          "line": 26,
+          "text": "Map.entry(\"Category\", TypedFieldValues.text(category)),"
+        },
+        {
+          "line": 27,
+          "text": "Map.entry(\"Track件数\", TypedFieldValues.numeric(trackCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "262f161786c74c973fb08de827241b895fae54b914e1e35409749d339f47114b",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireEmpty(fields);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "adcb506327201d9cd54b1a8d716a1d99f4803f1fe11833dcc3a45f0985318d68",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 6);"
+        },
+        {
+          "line": 15,
+          "text": "return new MusicCategoryResponseData(TypedFieldValues.requiredInt(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "6ca2ed033acb1e238b7000f3c7d488afa8ac2fe74c9c9c9841362ba4e20785f3",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredString(fields, \"Track ID\"),"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Disposition\", ContentDisposition.class));"
+        },
+        {
+          "line": 28,
+          "text": "Map.entry(\"Track ID\", TypedFieldValues.text(trackId)),"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Disposition\", TypedFieldValues.enumValue(disposition))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "455da9904dcbde3b1d7be1dce720897c003138c2d9f1a736871deab7ac1de9b4",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 13,
+          "text": "TypedFieldValues.requireUnsignedRange(\"trackCount\", trackCount, 6);"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredString(fields, \"Section\"),"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requiredInt(fields, \"Track件数\"));"
+        },
+        {
+          "line": 26,
+          "text": "Map.entry(\"Section\", TypedFieldValues.text(section)),"
+        },
+        {
+          "line": 27,
+          "text": "Map.entry(\"Track件数\", TypedFieldValues.numeric(trackCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "1179f10e4c80515451240869c52ec9c113b89d883949171daa03660f58eacb73",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 16,
+          "text": "return new MusicSectionRequestData(TypedFieldValues.requiredString(fields, \"Category\"));"
+        },
+        {
+          "line": 21,
+          "text": "return new FieldValueSet(Map.ofEntries(Map.entry(\"Category\", TypedFieldValues.text(category))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "b2e55cc1a3b15dad3cc7933e6a0dafe39e8c2d4b9afcf186248e08994c0f91c1",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 6);"
+        },
+        {
+          "line": 15,
+          "text": "return new MusicSectionResponseData(TypedFieldValues.requiredInt(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "c3e4d5a5e4de04642a361826684fa1f902681bbf455c754ad8fafb8c76ba262e",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 30,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileByteLength\", fileByteLength, 12);"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requireUnsignedRange(\"displayOrder\", displayOrder, 4);"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredString(fields, \"Track ID\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredString(fields, \"Title\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredString(fields, \"Category\"),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredString(fields, \"Section\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Display path\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredLong(fields, \"File byte長\"),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalString(fields, \"Pair key\"),"
+        },
+        {
+          "line": 45,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Pair role\", PairRole.class),"
+        },
+        {
+          "line": 46,
+          "text": "TypedFieldValues.requiredInt(fields, \"Display order\"));"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"Track ID\", TypedFieldValues.text(trackId)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"Title\", TypedFieldValues.text(title)),"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"Category\", TypedFieldValues.text(category)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"Section\", TypedFieldValues.text(section)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"Display path\", TypedFieldValues.displayPath(displayPath)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"File byte長\", TypedFieldValues.numeric(fileByteLength)),"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"Pair key\", TypedFieldValues.optionalStringValue(pairKey)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"Pair role\", TypedFieldValues.enumValue(pairRole)),"
+        },
+        {
+          "line": 61,
+          "text": "Map.entry(\"Display order\", TypedFieldValues.numeric(displayOrder))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "28a578047a92633709aee42b08c52d113981ba4fd406dcc90984db96ebea4dbc",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredString(fields, \"Category\"),"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requiredString(fields, \"Section\"));"
+        },
+        {
+          "line": 26,
+          "text": "Map.entry(\"Category\", TypedFieldValues.text(category)),"
+        },
+        {
+          "line": 27,
+          "text": "Map.entry(\"Section\", TypedFieldValues.text(section))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "69270c63ce61efded7400fdea0494290e60d6e3e20927612a5ad4a676e984f81",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 15,
+          "text": "return new MusicTrackResponseData(TypedFieldValues.requiredLong(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3f398129709614dd5190184dd58f57175a193e3e51a958cc557ef8d050345f5f",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 16,
+          "text": "return new VideoDescriptorRequestData(TypedFieldValues.requiredString(fields, \"Video ID\"));"
+        },
+        {
+          "line": 21,
+          "text": "return new FieldValueSet(Map.ofEntries(Map.entry(\"Video ID\", TypedFieldValues.text(videoId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "7ed7ea562f6ee8a7fab5e299e4226c2a521c6014ddce4c5ea51d32986c71ae64",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 32,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileByteLength\", fileByteLength, 12);"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredString(fields, \"Media logical ID\"),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.requiredRelativePath(fields, \"Storage relative path\"),"
+        },
+        {
+          "line": 45,
+          "text": "TypedFieldValues.requiredString(fields, \"File name\"),"
+        },
+        {
+          "line": 46,
+          "text": "TypedFieldValues.requiredLong(fields, \"File byte長\"),"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.requiredSha256(fields, \"SHA-256\"),"
+        },
+        {
+          "line": 48,
+          "text": "TypedFieldValues.requiredEnum(fields, \"MIME type\", MediaMimeType.class),"
+        },
+        {
+          "line": 49,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Content disposition\", ContentDisposition.class),"
+        },
+        {
+          "line": 50,
+          "text": "TypedFieldValues.requiredString(fields, \"Title\"),"
+        },
+        {
+          "line": 51,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Category\", VideoCategory.class),"
+        },
+        {
+          "line": 52,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Display path\"));"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"Media logical ID\", TypedFieldValues.text(mediaLogicalId)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"Storage relative path\", TypedFieldValues.relativePath(storageRelativePath)),"
+        },
+        {
+          "line": 61,
+          "text": "Map.entry(\"File name\", TypedFieldValues.text(fileName)),"
+        },
+        {
+          "line": 62,
+          "text": "Map.entry(\"File byte長\", TypedFieldValues.numeric(fileByteLength)),"
+        },
+        {
+          "line": 63,
+          "text": "Map.entry(\"SHA-256\", TypedFieldValues.sha256(sha256)),"
+        },
+        {
+          "line": 64,
+          "text": "Map.entry(\"MIME type\", TypedFieldValues.enumValue(mimeType)),"
+        },
+        {
+          "line": 65,
+          "text": "Map.entry(\"Content disposition\", TypedFieldValues.enumValue(contentDisposition)),"
+        },
+        {
+          "line": 66,
+          "text": "Map.entry(\"Title\", TypedFieldValues.text(title)),"
+        },
+        {
+          "line": 67,
+          "text": "Map.entry(\"Category\", TypedFieldValues.enumValue(category)),"
+        },
+        {
+          "line": 68,
+          "text": "Map.entry(\"Display path\", TypedFieldValues.displayPath(displayPath))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "f5e5add9b4222ba2ab624bfe8a2ee3cfdacb65bca31df61856587390e2ef06d0",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredId(fields, \"Notification ID\", NotificationId::new),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Notification ID\", TypedFieldValues.id(notificationId)),"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "7632addc47ad41c0518e6b2dd1794e189d41f9549f00c02c2f106ce4fe5ff83e",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.optionalEnum(fields, \"更新後状態\", NotificationState.class),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.optionalInstant(fields, \"取消日時\"));"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"更新後状態\", TypedFieldValues.optionalEnumValue(updatedState)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"取消日時\", TypedFieldValues.optionalInstantValue(cancelledAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "ff53c6d7cb77d2f6a21a31173b8468f4fbcbdcfba8a643fd5984adf2f0f559a1",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredId(fields, \"Notification ID\", NotificationId::new));"
+        },
+        {
+          "line": 24,
+          "text": "Map.ofEntries(Map.entry(\"Notification ID\", TypedFieldValues.id(notificationId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "e8a1c6393778b9a3fe1592dda7bdd8e46bf7a274b1cd3c6019f81fefe87d8053",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 53,
+          "text": "TypedFieldValues.requiredId(fields, \"Notification ID\", NotificationId::new),"
+        },
+        {
+          "line": 54,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.requiredEnum(fields, \"通知区分\", NotificationType.class),"
+        },
+        {
+          "line": 56,
+          "text": "TypedFieldValues.requiredEnum(fields, \"内部状態\", NotificationState.class),"
+        },
+        {
+          "line": 57,
+          "text": "TypedFieldValues.requiredInstant(fields, \"受付日時\"),"
+        },
+        {
+          "line": 58,
+          "text": "TypedFieldValues.optionalInstant(fields, \"処理開始日時\"),"
+        },
+        {
+          "line": 59,
+          "text": "TypedFieldValues.optionalInstant(fields, \"処理完了日時\"),"
+        },
+        {
+          "line": 60,
+          "text": "TypedFieldValues.optionalInstant(fields, \"Error日時\"),"
+        },
+        {
+          "line": 61,
+          "text": "TypedFieldValues.optionalInstant(fields, \"取消日時\"),"
+        },
+        {
+          "line": 62,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"質問削除済み\"),"
+        },
+        {
+          "line": 63,
+          "text": "TypedFieldValues.optionalString(fields, \"質問本文\"),"
+        },
+        {
+          "line": 64,
+          "text": "TypedFieldValues.optionalString(fields, \"回答本文\"),"
+        },
+        {
+          "line": 65,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Error code\", NotificationErrorCode.class),"
+        },
+        {
+          "line": 66,
+          "text": "TypedFieldValues.optionalString(fields, \"利用者向けerror\"),"
+        },
+        {
+          "line": 67,
+          "text": "TypedFieldValues.optionalId(fields, \"Question ID\", QuestionId::new));"
+        },
+        {
+          "line": 74,
+          "text": "Map.entry(\"Notification ID\", TypedFieldValues.id(notificationId)),"
+        },
+        {
+          "line": 75,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 76,
+          "text": "Map.entry(\"通知区分\", TypedFieldValues.enumValue(notificationType)),"
+        },
+        {
+          "line": 77,
+          "text": "Map.entry(\"内部状態\", TypedFieldValues.enumValue(internalState)),"
+        },
+        {
+          "line": 78,
+          "text": "Map.entry(\"受付日時\", TypedFieldValues.instant(submittedAt)),"
+        },
+        {
+          "line": 79,
+          "text": "Map.entry(\"処理開始日時\", TypedFieldValues.optionalInstantValue(processingStartedAt)),"
+        },
+        {
+          "line": 80,
+          "text": "Map.entry(\"処理完了日時\", TypedFieldValues.optionalInstantValue(processingCompletedAt)),"
+        },
+        {
+          "line": 81,
+          "text": "Map.entry(\"Error日時\", TypedFieldValues.optionalInstantValue(errorAt)),"
+        },
+        {
+          "line": 82,
+          "text": "Map.entry(\"取消日時\", TypedFieldValues.optionalInstantValue(cancelledAt)),"
+        },
+        {
+          "line": 83,
+          "text": "Map.entry(\"質問削除済み\", TypedFieldValues.flag(questionDeleted)),"
+        },
+        {
+          "line": 84,
+          "text": "Map.entry(\"質問本文\", TypedFieldValues.optionalStringValue(questionText)),"
+        },
+        {
+          "line": 85,
+          "text": "Map.entry(\"回答本文\", TypedFieldValues.optionalStringValue(answerText)),"
+        },
+        {
+          "line": 86,
+          "text": "Map.entry(\"Error code\", TypedFieldValues.optionalEnumValue(errorCode)),"
+        },
+        {
+          "line": 87,
+          "text": "Map.entry(\"利用者向けerror\", TypedFieldValues.optionalStringValue(userFacingError)),"
+        },
+        {
+          "line": 88,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.optionalIdValue(questionId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "56c16891758b3cdfe1073bff5f9338b5db1085fd82e382e357bc91bf99386bb2",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requiredId(fields, \"Notification ID\", NotificationId::new),"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredEnum(fields, \"通知区分\", NotificationType.class),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredEnum(fields, \"内部状態\", NotificationState.class),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredInstant(fields, \"受付日時\"),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredInstant(fields, \"最終更新日時\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.requiredString(fields, \"質問概要\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"質問削除済み\"));"
+        },
+        {
+          "line": 50,
+          "text": "Map.entry(\"Notification ID\", TypedFieldValues.id(notificationId)),"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"通知区分\", TypedFieldValues.enumValue(notificationType)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"内部状態\", TypedFieldValues.enumValue(internalState)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"受付日時\", TypedFieldValues.instant(submittedAt)),"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"最終更新日時\", TypedFieldValues.instant(lastUpdatedAt)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"質問概要\", TypedFieldValues.text(questionSummary)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"質問削除済み\", TypedFieldValues.flag(questionDeleted))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "c33f1d8853f19f0b927b903f2856d6029bc807f666de8700f26c8e062ec600e2",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requireUnsignedRange(\"page\", page, 6);"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 30,
+          "text": "TypedFieldValues.optionalEnum(fields, \"通知区分\", NotificationType.class),"
+        },
+        {
+          "line": 31,
+          "text": "TypedFieldValues.optionalInstant(fields, \"受付日時From\"),"
+        },
+        {
+          "line": 32,
+          "text": "TypedFieldValues.optionalInstant(fields, \"受付日時To\"),"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page\"),"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"));"
+        },
+        {
+          "line": 41,
+          "text": "Map.entry(\"通知区分\", TypedFieldValues.optionalEnumValue(notificationType)),"
+        },
+        {
+          "line": 42,
+          "text": "Map.entry(\"受付日時From\", TypedFieldValues.optionalInstantValue(submittedFrom)),"
+        },
+        {
+          "line": 43,
+          "text": "Map.entry(\"受付日時To\", TypedFieldValues.optionalInstantValue(submittedTo)),"
+        },
+        {
+          "line": 44,
+          "text": "Map.entry(\"Page\", TypedFieldValues.numeric(page)),"
+        },
+        {
+          "line": 45,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "d13958aea41cfb4e846dbde2142a9fc90d8c253961d5ea7ff67808e9bec4407b",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.id(questionId)),"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "93f793ea16d1b3c864ff9e5fa0d77dee2205f6040c27f1af295153f4c9a45cd9",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 17,
+          "text": "return new QuestionDeleteResponseData(TypedFieldValues.requiredInstant(fields, \"削除日時\"));"
+        },
+        {
+          "line": 22,
+          "text": "return new FieldValueSet(Map.ofEntries(Map.entry(\"削除日時\", TypedFieldValues.instant(deletedAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "c8e961953b587bde006c568847331c325f9f79ae3ae41cb44b8dfb50a1cfdfdf",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new));"
+        },
+        {
+          "line": 24,
+          "text": "Map.ofEntries(Map.entry(\"Question ID\", TypedFieldValues.id(questionId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "c3caddc69e01cca280fb7e06822c9748ae38d142c81b47df8d447b0a049dcbdf",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredEnum(fields, \"回答状態\", AnswerState.class),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredString(fields, \"質問本文\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.optionalString(fields, \"回答本文\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredInstant(fields, \"受付日時\"),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalInstant(fields, \"回答日時\"));"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.id(questionId)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"回答状態\", TypedFieldValues.enumValue(answerState)),"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"質問本文\", TypedFieldValues.text(questionText)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"回答本文\", TypedFieldValues.optionalStringValue(answerText)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"受付日時\", TypedFieldValues.instant(submittedAt)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"回答日時\", TypedFieldValues.optionalInstantValue(answeredAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "e93c0affdb135f6af27adbc223d5de106748df8514188513a3ab4f66687c9128",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 28,
+          "text": "TypedFieldValues.requireUnsignedRange(\"page\", page, 6);"
+        },
+        {
+          "line": 29,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 34,
+          "text": "TypedFieldValues.optionalString(fields, \"Keyword\"),"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.optionalString(fields, \"Username\"),"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.optionalEnum(fields, \"回答状態\", AnswerState.class),"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.optionalInstant(fields, \"受付日時From\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.optionalInstant(fields, \"受付日時To\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"));"
+        },
+        {
+          "line": 47,
+          "text": "Map.entry(\"Keyword\", TypedFieldValues.optionalStringValue(keyword)),"
+        },
+        {
+          "line": 48,
+          "text": "Map.entry(\"Username\", TypedFieldValues.optionalStringValue(username)),"
+        },
+        {
+          "line": 49,
+          "text": "Map.entry(\"回答状態\", TypedFieldValues.optionalEnumValue(answerState)),"
+        },
+        {
+          "line": 50,
+          "text": "Map.entry(\"受付日時From\", TypedFieldValues.optionalInstantValue(submittedFrom)),"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"受付日時To\", TypedFieldValues.optionalInstantValue(submittedTo)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"Page\", TypedFieldValues.numeric(page)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "631b79eda983258ffe2ccb33a6a95ed74d498a7f058b95ea1730702211f39ec8",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredString(fields, \"質問本文\"),"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredUuid(fields, \"Operation token\"));"
+        },
+        {
+          "line": 28,
+          "text": "Map.entry(\"質問本文\", TypedFieldValues.text(questionText)),"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Operation token\", TypedFieldValues.uuid(operationToken))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "d41802650a3f5312c4f7f6336f103f068c0d634010217356632ae12b80356942",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredInstant(fields, \"受付日時\"));"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.id(questionId)),"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"受付日時\", TypedFieldValues.instant(submittedAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "5edf3044aca7b0932d099a2044053be6722c99e21ba82fd0adc28a930da82a37",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 35,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new),"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.requiredString(fields, \"Username\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.requiredString(fields, \"質問概要\"),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.requiredEnum(fields, \"回答状態\", AnswerState.class),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredInstant(fields, \"受付日時\"),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.optionalInstant(fields, \"回答日時\"));"
+        },
+        {
+          "line": 48,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.id(questionId)),"
+        },
+        {
+          "line": 49,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 50,
+          "text": "Map.entry(\"Username\", TypedFieldValues.text(username)),"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"質問概要\", TypedFieldValues.text(questionSummary)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"回答状態\", TypedFieldValues.enumValue(answerState)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"受付日時\", TypedFieldValues.instant(submittedAt)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"回答日時\", TypedFieldValues.optionalInstantValue(answeredAt))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "13c895247b630d1fe12267361ba24fd94aede101167e78a6a7438dc55d0ac4e7",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredString(fields, \"受付ID\"),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredId(fields, \"Question ID\", QuestionId::new),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredId(fields, \"Async job ID\", AsyncJobId::new));"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"受付ID\", TypedFieldValues.text(receiptId)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Question ID\", TypedFieldValues.id(questionId)),"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"Async job ID\", TypedFieldValues.id(asyncJobId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "dd1215daa281f971ba16134229338ee8a8cca0720a8469637e8c3b3a56a4a05b",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireEmpty(fields);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "155ecfd10ec246a8beed2bbcf6799cb70fbd180f6fad5ec23cef3168258939ab",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 15,
+          "text": "return new GameListResponseData(TypedFieldValues.requiredLong(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/GameRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3d23656ab88501d8ae046e4fea304037b2a0ba61bea78e0a2c7ece7b81b37d7f",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 16,
+          "text": "TypedFieldValues.requireUnsignedRange(\"displayOrder\", displayOrder, 3);"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredString(fields, \"Title\"),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredInt(fields, \"Display order\"));"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode)),"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"Title\", TypedFieldValues.text(title)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Display order\", TypedFieldValues.numeric(displayOrder))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "961efbdfb469d7de55232aeb692551f1a07ab7c3791b96e4022231e9c970150f",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class));"
+        },
+        {
+          "line": 24,
+          "text": "Map.ofEntries(Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3b551a1b7febfd1de9a83b62703b12e9d897328a2a3bdcde615204b467d195fd",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 15,
+          "text": "return new RouteListResponseData(TypedFieldValues.requiredLong(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3b6b2262484845e71e3ccf6fee13d9b07a7c8d2a00c689fd83f736a6db9e4b3e",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 12,
+          "text": "TypedFieldValues.requireUnsignedRange(\"prefix\", prefix, 2);"
+        },
+        {
+          "line": 14,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileCount\", fileCount, 6);"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requiredInt(fields, \"Prefix\"),"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredString(fields, \"Route名\"),"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredInt(fields, \"File件数\"));"
+        },
+        {
+          "line": 28,
+          "text": "Map.entry(\"Prefix\", TypedFieldValues.numeric(prefix)),"
+        },
+        {
+          "line": 29,
+          "text": "Map.entry(\"Route名\", TypedFieldValues.text(routeName)),"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"File件数\", TypedFieldValues.numeric(fileCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "4ad341d195f5e7ae6345afef839ed90d2dc18119c892e3037dc55dba91fafd21",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 18,
+          "text": "TypedFieldValues.requiredId(fields, \"Script file ID\", ScriptFileId::new));"
+        },
+        {
+          "line": 24,
+          "text": "Map.ofEntries(Map.entry(\"Script file ID\", TypedFieldValues.id(scriptFileId))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "10e780b70f67c15c27e9f306b98ea2482927bbec124cb3de66239953ff5c994a",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileByteLength\", fileByteLength, 12);"
+        },
+        {
+          "line": 49,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileRecordLength\", fileRecordLength, 6);"
+        },
+        {
+          "line": 50,
+          "text": "TypedFieldValues.requireUnsignedRange(\"fileRecordCount\", fileRecordCount, 9);"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.requiredId(fields, \"Script file ID\", ScriptFileId::new),"
+        },
+        {
+          "line": 56,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 57,
+          "text": "TypedFieldValues.requiredString(fields, \"Display title\"),"
+        },
+        {
+          "line": 58,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Display path\"),"
+        },
+        {
+          "line": 59,
+          "text": "TypedFieldValues.optionalId(fields, \"Previous file ID\", ScriptFileId::new),"
+        },
+        {
+          "line": 60,
+          "text": "TypedFieldValues.optionalString(fields, \"Previous title\"),"
+        },
+        {
+          "line": 61,
+          "text": "TypedFieldValues.optionalId(fields, \"Next file ID\", ScriptFileId::new),"
+        },
+        {
+          "line": 62,
+          "text": "TypedFieldValues.optionalString(fields, \"Next title\"),"
+        },
+        {
+          "line": 63,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Delivery mode\", DeliveryMode.class),"
+        },
+        {
+          "line": 64,
+          "text": "TypedFieldValues.optionalUuid(fields, \"File ID\"),"
+        },
+        {
+          "line": 65,
+          "text": "TypedFieldValues.optionalRelativePath(fields, \"File relative path\"),"
+        },
+        {
+          "line": 66,
+          "text": "TypedFieldValues.requiredLong(fields, \"File byte長\"),"
+        },
+        {
+          "line": 67,
+          "text": "TypedFieldValues.optionalSha256(fields, \"File SHA-256\"),"
+        },
+        {
+          "line": 68,
+          "text": "TypedFieldValues.requiredInt(fields, \"File record長\"),"
+        },
+        {
+          "line": 69,
+          "text": "TypedFieldValues.requiredLong(fields, \"File record件数\"));"
+        },
+        {
+          "line": 76,
+          "text": "Map.entry(\"Script file ID\", TypedFieldValues.id(scriptFileId)),"
+        },
+        {
+          "line": 77,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode)),"
+        },
+        {
+          "line": 78,
+          "text": "Map.entry(\"Display title\", TypedFieldValues.text(displayTitle)),"
+        },
+        {
+          "line": 79,
+          "text": "Map.entry(\"Display path\", TypedFieldValues.displayPath(displayPath)),"
+        },
+        {
+          "line": 80,
+          "text": "Map.entry(\"Previous file ID\", TypedFieldValues.optionalIdValue(previousFileId)),"
+        },
+        {
+          "line": 81,
+          "text": "Map.entry(\"Previous title\", TypedFieldValues.optionalStringValue(previousTitle)),"
+        },
+        {
+          "line": 82,
+          "text": "Map.entry(\"Next file ID\", TypedFieldValues.optionalIdValue(nextFileId)),"
+        },
+        {
+          "line": 83,
+          "text": "Map.entry(\"Next title\", TypedFieldValues.optionalStringValue(nextTitle)),"
+        },
+        {
+          "line": 84,
+          "text": "Map.entry(\"Delivery mode\", TypedFieldValues.enumValue(deliveryMode)),"
+        },
+        {
+          "line": 85,
+          "text": "Map.entry(\"File ID\", TypedFieldValues.optionalUuidValue(fileId)),"
+        },
+        {
+          "line": 87,
+          "text": "\"File relative path\", TypedFieldValues.optionalRelativePathValue(fileRelativePath)),"
+        },
+        {
+          "line": 88,
+          "text": "Map.entry(\"File byte長\", TypedFieldValues.numeric(fileByteLength)),"
+        },
+        {
+          "line": 89,
+          "text": "Map.entry(\"File SHA-256\", TypedFieldValues.optionalSha256Value(fileSha256)),"
+        },
+        {
+          "line": 90,
+          "text": "Map.entry(\"File record長\", TypedFieldValues.numeric(fileRecordLength)),"
+        },
+        {
+          "line": 91,
+          "text": "Map.entry(\"File record件数\", TypedFieldValues.numeric(fileRecordCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "757cad4dfa3e68ff373cf9e3109a28273f627c8aff27d265e87bc3348f5f4d7c",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 28,
+          "text": "TypedFieldValues.requireUnsignedRange(\"entrySequence\", entrySequence, 6);"
+        },
+        {
+          "line": 29,
+          "text": "TypedFieldValues.requireUnsignedRange(\"lineNumber\", lineNumber, 8);"
+        },
+        {
+          "line": 33,
+          "text": "TypedFieldValues.requireUnsignedRange(\"audioSequence\", audioSequence, 3);"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.requiredId(fields, \"Entry ID\", EntryId::new),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.requiredInt(fields, \"Entry sequence\"),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.requiredInt(fields, \"Line番号\"),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Entry type\", EntryType.class),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.optionalString(fields, \"Speaker名\"),"
+        },
+        {
+          "line": 45,
+          "text": "TypedFieldValues.requiredString(fields, \"本文\"),"
+        },
+        {
+          "line": 46,
+          "text": "TypedFieldValues.requiredInt(fields, \"Audio sequence\"),"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.optionalId(fields, \"Audio ID\", AudioId::new),"
+        },
+        {
+          "line": 48,
+          "text": "TypedFieldValues.optionalDisplayPath(fields, \"Audio display path\"));"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"Entry ID\", TypedFieldValues.id(entryId)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"Entry sequence\", TypedFieldValues.numeric(entrySequence)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"Line番号\", TypedFieldValues.numeric(lineNumber)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"Entry type\", TypedFieldValues.enumValue(entryType)),"
+        },
+        {
+          "line": 59,
+          "text": "Map.entry(\"Speaker名\", TypedFieldValues.optionalStringValue(speakerName)),"
+        },
+        {
+          "line": 60,
+          "text": "Map.entry(\"本文\", TypedFieldValues.text(bodyText)),"
+        },
+        {
+          "line": 61,
+          "text": "Map.entry(\"Audio sequence\", TypedFieldValues.numeric(audioSequence)),"
+        },
+        {
+          "line": 62,
+          "text": "Map.entry(\"Audio ID\", TypedFieldValues.optionalIdValue(audioId)),"
+        },
+        {
+          "line": 65,
+          "text": "TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "eaa6f96baffa023a0ee8739f0bcef478e02488bc9dccf0d2ae9c76986b9357d5",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 14,
+          "text": "TypedFieldValues.requireUnsignedRange(\"prefix\", prefix, 2);"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 20,
+          "text": "TypedFieldValues.requiredInt(fields, \"Prefix\"));"
+        },
+        {
+          "line": 27,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode)),"
+        },
+        {
+          "line": 28,
+          "text": "Map.entry(\"Prefix\", TypedFieldValues.numeric(prefix))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "2f61f8299fcd69fa9ced3a88d4479e7cc789a9ca6b37a8bde5aeecff37437881",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 15,
+          "text": "TypedFieldValues.requireUnsignedRange(\"prefix\", prefix, 2);"
+        },
+        {
+          "line": 17,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredInt(fields, \"Prefix\"),"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredString(fields, \"Route名\"),"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredLong(fields, \"Total count\"));"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode)),"
+        },
+        {
+          "line": 33,
+          "text": "Map.entry(\"Prefix\", TypedFieldValues.numeric(prefix)),"
+        },
+        {
+          "line": 34,
+          "text": "Map.entry(\"Route名\", TypedFieldValues.text(routeName)),"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "04d454ee61c3cb5c902bc6de83ae4a14d87aebce90b903eca1d02035d92448d0",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.requireUnsignedRange(\"entryCount\", entryCount, 6);"
+        },
+        {
+          "line": 24,
+          "text": "TypedFieldValues.requiredId(fields, \"Script file ID\", ScriptFileId::new),"
+        },
+        {
+          "line": 25,
+          "text": "TypedFieldValues.requiredString(fields, \"Display title\"),"
+        },
+        {
+          "line": 26,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Display path\"),"
+        },
+        {
+          "line": 27,
+          "text": "TypedFieldValues.requiredInt(fields, \"Entry件数\"));"
+        },
+        {
+          "line": 34,
+          "text": "Map.entry(\"Script file ID\", TypedFieldValues.id(scriptFileId)),"
+        },
+        {
+          "line": 35,
+          "text": "Map.entry(\"Display title\", TypedFieldValues.text(displayTitle)),"
+        },
+        {
+          "line": 36,
+          "text": "Map.entry(\"Display path\", TypedFieldValues.displayPath(displayPath)),"
+        },
+        {
+          "line": 37,
+          "text": "Map.entry(\"Entry件数\", TypedFieldValues.numeric(entryCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "bd7098e3cdf5cc11a54ad737c6a5cfdd09d448eb7900594807ef6378c13f37f6",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 36,
+          "text": "TypedFieldValues.requireUnsignedRange(\"lineNumber\", lineNumber, 8);"
+        },
+        {
+          "line": 47,
+          "text": "TypedFieldValues.requiredId(fields, \"Entry ID\", EntryId::new),"
+        },
+        {
+          "line": 48,
+          "text": "TypedFieldValues.requiredId(fields, \"Script file ID\", ScriptFileId::new),"
+        },
+        {
+          "line": 49,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 50,
+          "text": "TypedFieldValues.optionalString(fields, \"章title\"),"
+        },
+        {
+          "line": 51,
+          "text": "TypedFieldValues.requiredInt(fields, \"Line番号\"),"
+        },
+        {
+          "line": 52,
+          "text": "TypedFieldValues.requiredEnum(fields, \"Entry type\", EntryType.class),"
+        },
+        {
+          "line": 53,
+          "text": "TypedFieldValues.optionalString(fields, \"Speaker名\"),"
+        },
+        {
+          "line": 54,
+          "text": "TypedFieldValues.requiredString(fields, \"本文\"),"
+        },
+        {
+          "line": 55,
+          "text": "TypedFieldValues.requiredBoolean(fields, \"Audio有無\"),"
+        },
+        {
+          "line": 56,
+          "text": "TypedFieldValues.optionalId(fields, \"Audio ID\", AudioId::new),"
+        },
+        {
+          "line": 57,
+          "text": "TypedFieldValues.requiredDisplayPath(fields, \"Script display path\"),"
+        },
+        {
+          "line": 58,
+          "text": "TypedFieldValues.optionalDisplayPath(fields, \"Audio display path\"));"
+        },
+        {
+          "line": 65,
+          "text": "Map.entry(\"Entry ID\", TypedFieldValues.id(entryId)),"
+        },
+        {
+          "line": 66,
+          "text": "Map.entry(\"Script file ID\", TypedFieldValues.id(scriptFileId)),"
+        },
+        {
+          "line": 67,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.enumValue(gameCode)),"
+        },
+        {
+          "line": 68,
+          "text": "Map.entry(\"章title\", TypedFieldValues.optionalStringValue(chapterTitle)),"
+        },
+        {
+          "line": 69,
+          "text": "Map.entry(\"Line番号\", TypedFieldValues.numeric(lineNumber)),"
+        },
+        {
+          "line": 70,
+          "text": "Map.entry(\"Entry type\", TypedFieldValues.enumValue(entryType)),"
+        },
+        {
+          "line": 71,
+          "text": "Map.entry(\"Speaker名\", TypedFieldValues.optionalStringValue(speakerName)),"
+        },
+        {
+          "line": 72,
+          "text": "Map.entry(\"本文\", TypedFieldValues.text(bodyText)),"
+        },
+        {
+          "line": 73,
+          "text": "Map.entry(\"Audio有無\", TypedFieldValues.flag(audioPresent)),"
+        },
+        {
+          "line": 74,
+          "text": "Map.entry(\"Audio ID\", TypedFieldValues.optionalIdValue(audioId)),"
+        },
+        {
+          "line": 75,
+          "text": "Map.entry(\"Script display path\", TypedFieldValues.displayPath(scriptDisplayPath)),"
+        },
+        {
+          "line": 78,
+          "text": "TypedFieldValues.optionalDisplayPathValue(audioDisplayPath))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "3f54c2f51f1b8fdcb7a327f11fab1c1d5d714c36ff17e340b4caa3f38f7c31c8",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 31,
+          "text": "TypedFieldValues.requireUnsignedRange(\"page\", page, 6);"
+        },
+        {
+          "line": 32,
+          "text": "TypedFieldValues.requireUnsignedRange(\"pageSize\", pageSize, 3);"
+        },
+        {
+          "line": 37,
+          "text": "TypedFieldValues.optionalString(fields, \"本文keyword\"),"
+        },
+        {
+          "line": 38,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Game code\", GameCode.class),"
+        },
+        {
+          "line": 39,
+          "text": "TypedFieldValues.optionalString(fields, \"Speaker名\"),"
+        },
+        {
+          "line": 40,
+          "text": "TypedFieldValues.optionalString(fields, \"章title\"),"
+        },
+        {
+          "line": 41,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Entry type\", EntryType.class),"
+        },
+        {
+          "line": 42,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Voice条件\", VoiceCondition.class),"
+        },
+        {
+          "line": 43,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page\"),"
+        },
+        {
+          "line": 44,
+          "text": "TypedFieldValues.requiredInt(fields, \"Page size\"));"
+        },
+        {
+          "line": 51,
+          "text": "Map.entry(\"本文keyword\", TypedFieldValues.optionalStringValue(bodyKeyword)),"
+        },
+        {
+          "line": 52,
+          "text": "Map.entry(\"Game code\", TypedFieldValues.optionalEnumValue(gameCode)),"
+        },
+        {
+          "line": 53,
+          "text": "Map.entry(\"Speaker名\", TypedFieldValues.optionalStringValue(speakerName)),"
+        },
+        {
+          "line": 54,
+          "text": "Map.entry(\"章title\", TypedFieldValues.optionalStringValue(chapterTitle)),"
+        },
+        {
+          "line": 55,
+          "text": "Map.entry(\"Entry type\", TypedFieldValues.optionalEnumValue(entryType)),"
+        },
+        {
+          "line": 56,
+          "text": "Map.entry(\"Voice条件\", TypedFieldValues.optionalEnumValue(voiceCondition)),"
+        },
+        {
+          "line": 57,
+          "text": "Map.entry(\"Page\", TypedFieldValues.numeric(page)),"
+        },
+        {
+          "line": 58,
+          "text": "Map.entry(\"Page size\", TypedFieldValues.numeric(pageSize))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "36a96085c16dae5702860cc2172962a62c79124a3fd94b5d94dc411b85646815",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 19,
+          "text": "TypedFieldValues.optionalEnum(fields, \"Game code\", GameCode.class));"
+        },
+        {
+          "line": 25,
+          "text": "Map.ofEntries(Map.entry(\"Game code\", TypedFieldValues.optionalEnumValue(gameCode))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData.java",
+      "owner": "WBS-P001-03",
+      "sha256": "69c71b71ba91f229b013f699f7b1c59c7b679f4bce5b8dd0f4cad14c6a1e9004",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 11,
+          "text": "TypedFieldValues.requireUnsignedRange(\"totalCount\", totalCount, 9);"
+        },
+        {
+          "line": 15,
+          "text": "return new SpeakerListResponseData(TypedFieldValues.requiredLong(fields, \"Total count\"));"
+        },
+        {
+          "line": 21,
+          "text": "Map.ofEntries(Map.entry(\"Total count\", TypedFieldValues.numeric(totalCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord.java",
+      "owner": "WBS-P001-03",
+      "sha256": "2b9a229f61b077ec6719f7fc03faad9bb8d6c8c53596c1d92c19e55f5dc7450c",
+      "references": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 16,
+          "text": "TypedFieldValues.requireUnsignedRange(\"occurrenceCount\", occurrenceCount, 9);"
+        },
+        {
+          "line": 21,
+          "text": "TypedFieldValues.requiredId(fields, \"Speaker ID\", SpeakerId::new),"
+        },
+        {
+          "line": 22,
+          "text": "TypedFieldValues.requiredString(fields, \"Speaker名\"),"
+        },
+        {
+          "line": 23,
+          "text": "TypedFieldValues.requiredLong(fields, \"出現件数\"));"
+        },
+        {
+          "line": 30,
+          "text": "Map.entry(\"Speaker ID\", TypedFieldValues.id(speakerId)),"
+        },
+        {
+          "line": 31,
+          "text": "Map.entry(\"Speaker名\", TypedFieldValues.text(speakerName)),"
+        },
+        {
+          "line": 32,
+          "text": "Map.entry(\"出現件数\", TypedFieldValues.numeric(occurrenceCount))));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+      "owner": "WBS-P005-02",
+      "sha256": "235f3b543f74cd8efe684e12103e69da98e2369c8d6637d2510418fefa80c9a5",
+      "references": [
+        {
+          "line": 14,
+          "text": "import dev.codex.schubert.nk.protocol.layout.TypedFieldValues;"
+        },
+        {
+          "line": 193,
+          "text": "? TypedFieldValues.requiredInt(values.data(), \"Retry after秒\")"
+        },
+        {
+          "line": 196,
+          "text": "TypedFieldValues.optionalString(values.data(), \"利用者message\"));"
+        }
+      ]
+    }
+  ],
+  "sourceOnly": true,
+  "publicStaticSignaturesUnchangedRequired": true
+}

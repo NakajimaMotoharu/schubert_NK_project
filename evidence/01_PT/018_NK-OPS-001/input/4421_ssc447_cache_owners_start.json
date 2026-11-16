@@ -1,0 +1,67 @@
+{
+  "groupId": "PGPT-WBS65-SSC447-IMMUTABLE-CACHE-OWNERS-CURRENT152-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2459_WBS65SSC447不変cache所有開始.json",
+  "category": "IMPLEMENTATION",
+  "kind": "REWORK",
+  "scope": "BUG3111/YKT2583のうちTypedFieldValues/JstWireTimestampのprivate empty constructorと不変cache所有だけを整理する。公開finalclass/全public static APIとWIRE_LENGTH=17は保持、private cacheを外部公開0。TypedFieldValuesはprivate final Pattern retainedOptionalIdを実状態として所有するprivate INSTANCEをclass初期化時に一回生成し、constructorで元OPTIONAL_IDと同じPattern.compile(\"[0-9]{1,12}\")を初期化、元parseOptionalIdはINSTANCE.retainedOptionalIdを読む。LITERAL_VALUE定数や全semantic変換/例外/範囲診断は不変。JstWireTimestampは元JAPAN ZoneId/17桁Pattern/STRICT formatter三cacheをprivate final retainedJapanZone/retainedWireDigits/retainedWireFormatterとして実所有し、private INSTANCE constructorで元と同じ順序・引数で一回生成、format/parseはその不変stateを参照する。class初期化/finalfieldの安全公開、Pattern matcherは毎callで分離、非並行mutable formatterやnew publicinstanceは追加しない。constructorは通常static経路が必ず使用する実cache状態のinvariantを確立し、試験から無意味なinstanceやprivate反射で呼ばない。追加二owner objectのheap/性能は未測定でITST合格を断定0。全cache literal/初期化順/変換body/診断を逆展開formatted完全一致、他163Main/全Test/五TSV不変、公開ABI完全一致・親二class以外173physical byte不変を確認する。生成class数は175/Code162を維持。日時header・全named69変換に影響するため、新定義0で既全35Testsource（helper含む）152通常PTを当source一回必要回帰し、両親raw100と全175raw不足を別記録、Module/451/正式を推測昇格0。元public oracleの四Class.forName/閉32public scalar/元helper inverse SHA/全期待は不変、工具は既module33/145に新二fixtureを加えた35/152構成だけ認識するよう補足し14負境界等の自己検証を実施、private/任意/HOLD反射やSDK接続を許可しない。旧同145/18の確認再演や旧exec合成0。SS322323354914をPG前にmain反映、RD/UI/DIF変更不要、全HOLD/枠10以下停止/正式1964-53/184-625/工数null保持。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4438_SSC447_不変cache所有・通常一五二仕様.md",
+      "sha256": "988bb4a87d42aed7ed2f0615a1333f52e6396de7a57ab855253939eb33e57939"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36600-ssc447-cache-owners-design-only-v1/design-only-main-patch.json",
+      "sha256": "31822e0aedb0906cacd69a2f394392d6ddf2a89eb661a20f562c0b95dfa47a47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36600-ssc447-cache-owners-design-only-v1/all-callers-source-witness.json",
+      "sha256": "80a4173b42254445b808a7d0b885870d2166d8902a51c20c5ffbc25a5aaf1eb9"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P001-03",
+    "WBS-P003-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": "WBS-P001-03",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "WBS-P003-03"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P001-03": [
+      "WBS-P001-03"
+    ],
+    "WBS-P003-03": [
+      "WBS-P003-03"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "ab4e8eafa6fb4835c792753357c50c6ceffbd29f",
+  "run": "PG36620-SSC447-CACHE-OWNERS-CURRENT152",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 2.7
+  },
+  "capPp": 3,
+  "workIds": [
+    "SSC447_IMMUTABLE_CACHE_OWNERS_CURRENT152"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2458_WBS65予実・SSC447不変cache所有追加版776.json",
+    "sha256": "e5601439affb44b9a96771f8325e69d1341cf77b75a502ce8b2eb476ba634517"
+  },
+  "nextCommand": "Publish SS322323354914 normalmainPR beforePG. Real private immutable cache owner state, initialized once with original literals/order, inversefullbody formatted exact/publicABI exact/other173classbyte retained. All165freshMain/175physical/new0 whole152 source35; oracle tool exact35/152 mode only with unchanged public32scalar helper and self14 checks. Parent2raw100; fullmodule deficits reported not promoted. AllHOLD/quota<=10/unavailable preservationstop; hourly15:14:59."
+}
