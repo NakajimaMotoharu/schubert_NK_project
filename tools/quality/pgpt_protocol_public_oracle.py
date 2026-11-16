@@ -22,7 +22,8 @@ def syntax(c):
  p.require(len(c['mainSources'])==165,'reviewed complete Protocol Main closure only')
  module=len(c['testSources'])==31 and c['expectedTests']==140
  record=len(c['testSources'])==2 and c['expectedTests']==6 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java'}
- p.require(module or record,'reviewed complete140 or exact record caller whole6 only')
+ legacy=len(c['testSources'])==3 and c['expectedTests']==19 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java',PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java'}
+ p.require(module or record or legacy,'reviewed complete140 or exact record caller whole6/19 only')
  p.require(all(n.startswith(PREFIX) for n in c['mainSources']+[t['path'] for t in c['testSources']]),'Protocol-only source boundary')
  p.require(sum(t['path']==HELPER and t['tests']==0 for t in c['testSources'])==1,'unchanged whole helper required')
  p.require(c['sdkJars']==[],'no external SDK/backend capability')
