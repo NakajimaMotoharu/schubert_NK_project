@@ -55,16 +55,19 @@ public record FieldDefinition<T>(
     if (end != checkedEnd(start, length)) {
       throw new LayoutValidationException("field end does not match start and length");
     }
-    final Padding expected;
-    if (wireType == WireType.TEXT) {
-      expected = Padding.SPACE_RIGHT;
-    } else if (wireType == WireType.NUMERIC) {
-      expected = Padding.ZERO_LEFT;
-    } else {
-      expected = Padding.NONE;
-    }
+    final Padding expected = expectedPaddingFor(wireType);
     if (padding != expected) {
       throw new LayoutValidationException("padding does not match the wire type");
+    }
+  }
+
+  private static Padding expectedPaddingFor(WireType wireType) {
+    if (wireType == WireType.TEXT) {
+      return Padding.SPACE_RIGHT;
+    } else if (wireType == WireType.NUMERIC) {
+      return Padding.ZERO_LEFT;
+    } else {
+      return Padding.NONE;
     }
   }
 
