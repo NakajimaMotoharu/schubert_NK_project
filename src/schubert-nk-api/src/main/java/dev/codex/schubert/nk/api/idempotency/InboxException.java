@@ -14,14 +14,14 @@ public final class InboxException extends SQLException {
     STATE_CORRUPT("XX000"),
     TRANSACTION_REQUIRED("25000");
 
-    private final String sqlState;
+    private final String retainedSqlState;
 
     Reason(String sqlState) {
-      this.sqlState = sqlState;
+      this.retainedSqlState = sqlState;
     }
 
     String sqlState() {
-      return sqlState;
+      return retainedSqlState;
     }
   }
 
