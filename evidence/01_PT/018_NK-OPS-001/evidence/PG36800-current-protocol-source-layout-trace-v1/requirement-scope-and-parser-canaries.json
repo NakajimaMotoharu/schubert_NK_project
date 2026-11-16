@@ -1,0 +1,73 @@
+{
+  "requirements": [
+    {
+      "id": "SYS-011",
+      "text": "要件定義、基本設計、詳細設計、実装、単体試験、結合試験、総合試験、リリースの順に工程を進める。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "sourceSha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+      "protocolScope": "Lifecycle/contract/source/trace for the protocol slice only; original requirement completion across UI/API/DB/master/runtime remains with original owner",
+      "excludedPhysicalAction": "No master migration, DB, runtime or IT/ST completion certified"
+    },
+    {
+      "id": "SCP-001",
+      "text": "現行のログイン、メニュー、シナリオ検索・閲覧、音声、アニメ、音楽および必要な運用機能をNKへ移行する。",
+      "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+      "sourceSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "protocolScope": "Lifecycle/contract/source/trace for the protocol slice only; original requirement completion across UI/API/DB/master/runtime remains with original owner",
+      "excludedPhysicalAction": "No master migration, DB, runtime or IT/ST completion certified"
+    },
+    {
+      "id": "SCP-002",
+      "text": "Java 25、Spring系アプリ基盤、PostgreSQL、Apache ActiveMQ Artemisおよび起動・監視基盤を新規構築する。",
+      "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+      "sourceSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "protocolScope": "Lifecycle/contract/source/trace for the protocol slice only; original requirement completion across UI/API/DB/master/runtime remains with original owner",
+      "excludedPhysicalAction": "No master migration, DB, runtime or IT/ST completion certified"
+    },
+    {
+      "id": "SCP-003",
+      "text": "現行マスタからNK用DBおよびファイル配置を再構築する。",
+      "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+      "sourceSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "protocolScope": "Lifecycle/contract/source/trace for the protocol slice only; original requirement completion across UI/API/DB/master/runtime remains with original owner",
+      "excludedPhysicalAction": "No master migration, DB, runtime or IT/ST completion certified"
+    },
+    {
+      "id": "SCP-006",
+      "text": "質問要求・受付完了、通知情報一覧・明細、質問回答一覧検索・閲覧・削除、通知・質問・回答DB表および空回答stub処理を実装する。",
+      "source": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+      "sourceSha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "protocolScope": "Lifecycle/contract/source/trace for the protocol slice only; original requirement completion across UI/API/DB/master/runtime remains with original owner",
+      "excludedPhysicalAction": "No master migration, DB, runtime or IT/ST completion certified"
+    }
+  ],
+  "parserCanaries": [
+    {
+      "testId": "TRACE-PARSER-DUPLICATE-LAYOUT",
+      "passed": true
+    },
+    {
+      "testId": "TRACE-PARSER-UNKNOWN-LAYOUT",
+      "passed": true
+    },
+    {
+      "testId": "TRACE-PARSER-WRONG-LENGTH",
+      "passed": true
+    },
+    {
+      "testId": "TRACE-PARSER-FALSE-ZERO",
+      "passed": true
+    },
+    {
+      "testId": "TRACE-PARSER-RESPONSE-ALIAS-NOT-REQUEST-PREFIX",
+      "passed": true
+    },
+    {
+      "testId": "TRACE-PARSER-COMMON-RESPONSE-WITHOUT-OWN-HEADING",
+      "passed": true
+    }
+  ],
+  "internalLabelAliases": [],
+  "fieldRulesAreNotClaimedFullyEquivalent": true,
+  "flowValidationRemainsWithBusinessOwners": true
+}

@@ -1,0 +1,18 @@
+{
+  "actualExit": 0,
+  "currentSource": "7123bb3bc8319cfadea41e5be38a75e825e5c14c",
+  "policy": {
+    "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+    "sha256": "c598f51482da52e35b06515bab36b674adec6a704765e9fdece1cd6fe5fa7e51"
+  },
+  "oldAcceptedSource": "7fffab57a567914956b66452e5e54388642efdec",
+  "policyDelta": "Additive guard/trace/static/TYPE_USE clarifications and one exact strengthened close-fixture sentence reviewed; no original requirement or prohibition removed",
+  "reviewedOldCloseRule": "- close後・二重close・close競合を試験する場合、対象resourceはplain try/finallyで必ず回収する。try-with-resources対象への明示closeによるjavac警告を抑止しない。通常の寿命はtry-with-resourcesを使用する（BUG-077/096、YKT-087）。",
+  "reviewedCurrentCloseRule": "- close後・二重close・close競合を試験する場合、対象resourceはplain try/finallyで必ず回収する。try-with-resources対象への明示closeによるjavac警告を抑止しない。新しいclose遷移fixtureにもこの既規約を適用し、owner宣言/finallyと元assert保持の起動前guard・旧TWR反例を結合する。通常の寿命はtry-with-resourcesを使用する（BUG-077/096/1722、YKT-087/1473、1834）。",
+  "mandatoryTopicDefinitionsPresent": true,
+  "neededExternalDependency": "WBS-F01",
+  "newAcceptanceCredit": 0,
+  "oldOther16Requalified": false,
+  "F03Accepted": false,
+  "productQualityNotInferred": true
+}
