@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.bootstrap;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +18,9 @@ import org.junit.jupiter.api.Test;
 final class CheckpointFatalBoundaryTest {
   private static final String PUBLIC_MARKER = "PUBLIC_FIXED_FAILURE";
   private static final String FIXED_DIAGNOSTIC = "fixed PT native capture unavailable";
+  private static final String FIXTURE_INVOCATION = "1234567890abcdef1234567890abcdef";
+  private static final String FIXTURE_AGENT_PREFIX =
+      "-javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar=output=none,append=false,dumponexit=false,sessionid=";
 
   private static FixedNativeCoverageCheckpoint.PublicAgent.Classes fixtureClasses() {
     return name ->
@@ -127,6 +132,88 @@ final class CheckpointFatalBoundaryTest {
     }
     var ordinary = failingGetter("getExecutionData", nonfatalCycle());
     fixedFailure(ordinary::executionDataWithoutReset);
+  }
+
+  @Test
+  void ncheckClosing004FixedPointValuesEarlyConsumptionAndNormalClosing() throws Exception {
+    assertSame(
+        FixedNativeCoverageCheckpoint.Point.BEFORE_EXEC,
+        FixedNativeCoverageCheckpoint.Point.valueOf("BEFORE_EXEC"));
+    assertSame(
+        FixedNativeCoverageCheckpoint.Point.TERMINAL,
+        FixedNativeCoverageCheckpoint.Point.valueOf("TERMINAL"));
+    assertSame(
+        FixedNativeCoverageCheckpoint.Point.CLOSING,
+        FixedNativeCoverageCheckpoint.Point.valueOf("CLOSING"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> FixedNativeCoverageCheckpoint.Point.valueOf("UNKNOWN"));
+    var rejectedNames = new ArrayList<String>();
+    var rejected = checkpointFor(false, rejectedNames, new ArrayList<>());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> rejected.capture(FixedNativeCoverageCheckpoint.Point.CLOSING));
+    assertEquals(List.of(), rejectedNames);
+
+    var earlyNames = new ArrayList<String>();
+    var early = checkpointFor(true, earlyNames, new ArrayList<>());
+    fixedFailure(() -> early.capture(FixedNativeCoverageCheckpoint.Point.CLOSING));
+    assertEquals(List.of(), earlyNames);
+    early.capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    fixedFailure(() -> early.capture(FixedNativeCoverageCheckpoint.Point.CLOSING));
+    assertEquals(List.of(FIXTURE_INVOCATION + ".terminal.exec"), earlyNames);
+
+    var names = new ArrayList<String>();
+    var payloads = new ArrayList<byte[]>();
+    var actual = checkpointFor(true, names, payloads);
+    actual.capture(FixedNativeCoverageCheckpoint.Point.TERMINAL);
+    actual.capture(FixedNativeCoverageCheckpoint.Point.CLOSING);
+    assertEquals(
+        List.of(FIXTURE_INVOCATION + ".terminal.exec", FIXTURE_INVOCATION + ".closing.exec"),
+        names);
+    assertEquals(2, payloads.size());
+    for (var bytes : payloads)
+      assertArrayEquals(new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1}, bytes);
+    fixedFailure(() -> actual.capture(FixedNativeCoverageCheckpoint.Point.CLOSING));
+    assertEquals(2, names.size());
+  }
+
+  private static FixedNativeCoverageCheckpoint checkpointFor(
+      boolean terminal, List<String> names, List<byte[]> payloads) {
+    String session = (terminal ? "INSPECTOR-" : "API-") + FIXTURE_INVOCATION + "-ordinary";
+    var profile =
+        terminal
+            ? FixedNativeCoverageProfile.parseTerminal(
+                FixedNativeCoverageProfile.TerminalRole.INSPECTOR,
+                FIXTURE_INVOCATION,
+                List.of(FIXTURE_AGENT_PREFIX + session))
+            : FixedNativeCoverageProfile.parse(
+                dev.codex.schubert.nk.storage.ServiceConfigFiles.Service.API,
+                FixedNativeCoverageProfile.Phase.ORDINARY,
+                FIXTURE_INVOCATION,
+                List.of(FIXTURE_AGENT_PREFIX + session));
+    return new FixedNativeCoverageCheckpoint(
+        profile.orElseThrow(),
+        new FixedNativeCoverageCheckpoint.Agent() {
+          @Override
+          public String version() {
+            return "0.8.15.202606040825";
+          }
+
+          @Override
+          public String session() {
+            return session;
+          }
+
+          @Override
+          public byte[] executionDataWithoutReset() {
+            return new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
+          }
+        },
+        (name, bytes) -> {
+          names.add(name);
+          payloads.add(bytes.clone());
+        });
   }
 
   private static FixedNativeCoverageCheckpoint.PublicAgent failingGetter(

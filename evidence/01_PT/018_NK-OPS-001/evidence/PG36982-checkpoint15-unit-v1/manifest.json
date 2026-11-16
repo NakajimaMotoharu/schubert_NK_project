@@ -1,0 +1,347 @@
+{
+  "source": "5b18060ae4d78900a5a3e6403a08ef94e4af5b02",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "branch": "dev-foundation",
+  "run": "PG36982-CHECKPOINT-PUBLIC15",
+  "atUTC": "2026-11-16T21:10:26.416808+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/jacoco.exec,append=false,sessionid=PG36982-CHECKPOINT-PUBLIC15",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36976-checkpoint15-prepare-v2/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg36976-checkpoint15-prepare-v2/component:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+    "--select-class",
+    "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest"
+  ],
+  "expectedTests": 15,
+  "expectedCases": [
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "common922001CurrentJvmFactoryRejectsMissingRoleWithoutCreatingAgentAuthority()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck597005TerminalFactoryWithNoReservedAgentDoesNotCreateNativeAuthority()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck597001RealPublicReflectionReadsLiteralDataWithoutReset()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck597002ConstructorMissingNullTypeAndProviderFailuresNeverExposeRawCause()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck597003NullWrongTypesAndReflectionFailuresAtEveryPublicGetterAreFixed()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck597004CodeSourceMetadataNullLocationForeignAndFixedPathAreSeparate()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193001DefaultDoesNotLoadReservedAgentOrOutput()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193002FourRolesAndTwoRootPointsHaveIndependentNamesAndNoReset()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193003UnknownVersionSessionNullShortLargeHeaderAndChangedSessionReject()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193004NullAndOrdinaryBeforeExecCannotConsumeOrExport()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193005KnownOrUnknownExportNeverRetriesOrNormalizes()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "ncheck193006ConcurrentCaptureHasExactlyOneDataAndExport()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "ncheckFatal001ConstructorKeepsSameErrorFromSourceAndInvocation()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "ncheckFatal002BothStringGettersKeepSameGraphErrorAndFixedNonfatal()"
+    ],
+    [
+      "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "ncheckFatal003DataGetterKeepsSameGraphErrorAndNeverRequestsReset()"
+    ]
+  ],
+  "inputHashes": {
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java": "5e3bfa74453c1f250adefbad4c97ea3670933b3ddcd01c12bea63ead58d388a0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java": "c29504c77d98c9b287cdc1b2e6cd4ffc5e5869af43634da0a8459cef94d46f06",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java": "353029ce353dde7628d64c7b9fb20e541f2387f1912391838d8835b571f7e8e6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java": "0d89d9a2cd78560731882bff49d38a1d48515a4739b25e04cbca0fcd0655d3ed",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java": "b9f8d3425dd94e3481e7f88c1b4c25070a4410b37c07fdfc9c7b92aec436fd94",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java": "7e7854e40a04437d262a102518e9e41a2dedc8ff06f9919b758b8dbda8cd3178",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java": "717fc4f3c2afd1019cbc0912b56f7288a8cfdedfa87e747df2d396000da21057",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java": "0bbc59214a3793b3a964bb32fd2369f4216f633fa6bd7d13fc8625fb5fb1465f",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java": "73b35bb21ae6d801563680541c5b3984faa23f33434f8ca8cfca078abd71f3a0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java": "009b87f24bdcb9c2c592992d150f869afa51a3844c04fb4ba378dbe68e4f251b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java": "bec3eda194f903fff992c1b6301ee128a878e35b883d19beb2b3b17b71871a6b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java": "1d6f6922f1ed8ecdd2df6a3eddb62f059952ac43eeaa34f6a0aaa6cb4a58f2a7",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "5764718de5644b4e008e5407748b277cdd1e87abf001889a555a2e802c58b99a",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java": "d4752c82283b4ab0fc11b5ba738b32b5ce43045bab4576bc210fe4c4d50c635b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java": "92d522c3789d511cd908cf184856840b3b366b071545fe857bc6ddf8826df4ba",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": "a5646e0931961db5aa6aba20d303d33e85c2693ab1e252160752249fb0b8ad9a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "571478ad292c963718e8476af06e96f5e3d27d39e8f99b45f8b6ec79eaf4e05e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "c935662109d84a65412221609b0229ead513a5f4b910e92f2780106b985f5fa7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "12f6ff6bf49cbed3d8e4f43b831e33c64faaea111056f6e51ed47cfaca797788",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java": "2e997f3fd7ff7c0075b51333682b3e02b254461326ffe0f92f407aa53716a2f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialException.java": "316e8b5aa67665f816fb51f54b217f873b9c1b1df284393dcbb2aad1f397ad10",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialException.java": "3fcb0a3417ddf3e02ed0076ff99b6911c373b80574c6630b1a86294e3b7d48c0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialReader.java": "30a67be43a07e95e2ab4d5854ec234c72c36816be202861f021eec956f4a1159",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java": "e7d2f7b92faebadf6133baeb407d6352d6362cee087b89a8f2959515322e3aca",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java": "653122ba99e00ebd2b29eb2d1d406f79e370d1f577b4cc212a411535439c7bf8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java": "34d7683b52bf6f75f9881324618a56160c110c3de0646b91fc5dc337776e5c34",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": "68f7c253171f2245f0b238f7c4481eaf5495acca9330aa750947f2ff1cd67ae0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java": "b07dec9433f1259f1f3269f0c74a158357d422977d60906e37070899e421bddd",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java": "c7795f515153a7597d882a60bcc9cb68ade3851b219944c4f64a642355e7730f",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java": "2c09eebf305c537bf18c00ae38774ada72269b94529c2c6f749e55cc953cfaab",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java": "aaba456dd60171f1c2530f62cff3366e90514364f6f0a2b4cde1f3bdbaeeb711",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java": "5c535995426d4e18179189259e8ef12d08d7ac2d1a6e068bb164454f5e8f0c2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": "a1e08af58cc36682e9224bcebb4b70b6891730dd6d7935c9a5f7d86c9d5c0ba0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "9b0d4b1fe6fbacf20c0cee5e0eea725514a54205200c7ad53c2a4991200f8a65",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java": "22ea6cf3eeff49c4d70899b5b6d0e91c0b585515e3ec8a794b43caa79d9e506e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupProofFrame.java": "54f06205d273eb7bc60edaec6a1e532f206b73c13565c23a9dd04807a32848e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": "54bb4bf244047c02ab70cf9c55faf916897127817c1d4e15d65fb3ab284def62",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": "8e22a0c8da9b500d0213c8550eacfc4527e1839b4fb4b09c7acd40bfa808a547",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "6ccdd31966cf0674e762d52c9cd9731c167bcc4f75b5305f3fee95e16dcd815e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": "45f55dd1ce4c01329f9f9e6c10f7efa38483f76c1be7c46d30d91c1028966d21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java": "44f69f9c9a08c2a7b15018cb4840307f6ca68577a6df1f2d5daad07fff1fe341",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java": "e1f9f8ff3160bf5f5ba13bbfdff0ac63e91753d9d647b82ae36b0c889e625ffd",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java": "fe4d7988dae688fb589d47a4056c7ab82077b2565e6dc3ffa8a3d71d1a7aeec2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java": "fbd5388c58212b11d1492e42624130f019ff4ea4d1b332bd95596e96764f4f2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java": "4af1c5dbd38f07f53e58dc7c293d0981071ccc98834048c39fa744b1e7e7f964",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java": "512950dd87dd65bda553724928839256d23fe75e4edd6eb73e36b8d2f6325b54",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java": "86fa917f56ddbe06dbddeac8f6ae8157c57627f75657995e328d8c48862bffa0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java": "b1defeb746f70baf41b840e35da8eaaf312dc5fa323f04dfc4af8ecca2410f52",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java": "0d3ccea6313fd02ef9130d8b52f0261d79da887c1c5fe457f260749a2a50c14a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java": "63e3a32d69491fee9cc86fd41479c5fdf7480d2860a944b3d241c0f4552f8f45",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java": "652bf8c557d37c57ddaddb1fa1690d0c7f80a184ae8770b28c88c4edc607c74e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java": "0a927338f752332269cab8b221d001b95f780b2504b19b7ecf277024359f4660",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java": "9bf74db29e26b5ead8a7dfc0e9b996fd01d09df5bf695ac6aa7bf2b0e3995ca1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java": "607d81ec04cdaa56d9b7f67386a06933cb26d2da626d3d1096fb7b7181e70fea",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java": "852aa946ab564a4a5610cffb44fd8e8cc14090c960e7caf36de0d2c19e6cc302",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java": "e6fd5c324585f2ac7435b8d701d27795b594462f6893af2ee66102773fdae2a5",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "8dca6551545b05ce5090093c7e1e24f93657be4658a45d0b78f654a1b0a9ec57",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "cc632eea4d299c3b98bae4d413431c238bc8f7ca6946fafabdc4c767b5c594b8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "5202a8eeb5a1f2fc8f02220ab18b49c5d4e6c6c11344b54da1df281f6aa7c409",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java": "3299ff40a3eef6ea67f0428950e835339a673e741ddac8493f8cc4aed3aef180",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": "087c49bbb56bb77b0ae2c509bc648f4161e3e7c977a242323616d3dfc6e83d89",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java": "f2b45e3b3af748309a156f4cb76c76a922260caba10faafa4a4c2a858029bdc2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java": "02add010a85af786dc783967587d7873028c68787f87b83696109fa2c994bd60",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java": "745f41fafe37d522a0a039f040bf6c9b6299d722a532b06a128835e54e2100d6",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "f35b20476ab4e13512ac2a86cb30ab42c1e08d522fb7fa3ab3255b8ede11c825",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "a68c7bf896b659151e1eadfb80273bee54051b77b18ddcde9a0fa490a484332b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java": "a1edd16c1d88d7a703c7ec11f03f7fda3e9aa7772ccf90f8f637f66bc9c2d55e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java": "52922f18ff3969243cceb6d8599645321f087fd4a1aea7d170164546934c6e21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "451c5a97d09b5eacb2e33e2b4c931906663252bb916e3acf3fe30127ec86fa8c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": "3bb45310175acaf596d4f9047e3cfd350f690693b5dfd71a3c9b76aa7460b0cd",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java": "034afaeebe96c7e1f78f3667b5f6042f72f7606962ae571d7dd2728522762426",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CheckpointFatalBoundaryTest.java": "2bae5c28f61cbf05c7cb4966ef664422fc322528ad7b85f9e12c4aaa33d9c733"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36976-checkpoint15-prepare-static-v2/manifest.json",
+    "sha256": "5c1b5bb4e6233992035ba4b76bb2d651fe732765d1f79a788d0f776a40219421"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36980-checkpoint15-static-admission-v2/manifest.json",
+    "sha256": "7fc7cc38f31d1057751ff988e8e33d8347f362ba644b06b801f9ff9071d77446"
+  },
+  "measurementAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "reservedNativeAgentSelected": false,
+  "knownSourceChange": "BUG2803 three preserveFatal catalogs, original whole12 oracle semantics kept; three new fatal tests",
+  "actualExit": 0,
+  "timedOut": false,
+  "terminalAtUTC": "2026-11-16T21:10:27.688124+00:00",
+  "tests": 15,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193003UnknownVersionSessionNullShortLargeHeaderAndChangedSessionReject()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck597005TerminalFactoryWithNoReservedAgentDoesNotCreateNativeAuthority()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "name": "ncheckFatal001ConstructorKeepsSameErrorFromSourceAndInvocation()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "name": "ncheckFatal003DataGetterKeepsSameGraphErrorAndNeverRequestsReset()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck597001RealPublicReflectionReadsLiteralDataWithoutReset()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck597002ConstructorMissingNullTypeAndProviderFailuresNeverExposeRawCause()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193006ConcurrentCaptureHasExactlyOneDataAndExport()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "common922001CurrentJvmFactoryRejectsMissingRoleWithoutCreatingAgentAuthority()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest",
+      "name": "ncheckFatal002BothStringGettersKeepSameGraphErrorAndFixedNonfatal()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193005KnownOrUnknownExportNeverRetriesOrNormalizes()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193001DefaultDoesNotLoadReservedAgentOrOutput()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193004NullAndOrdinaryBeforeExecCannotConsumeOrExport()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck193002FourRolesAndTwoRootPointsHaveIndependentNamesAndNoReset()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck597004CodeSourceMetadataNullLocationForeignAndFixedPathAreSeparate()",
+      "result": "NON_PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "name": "ncheck597003NullWrongTypesAndReflectionFailuresAtEveryPublicGetterAreFixed()",
+      "result": "NON_PASS"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-16T21:10:26.419954+00:00",
+    "endUTC": "2026-11-16T21:10:27.688124+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/class-init.log",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/jacoco.exec,append=false,sessionid=PG36982-CHECKPOINT-PUBLIC15",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36976-checkpoint15-prepare-v2/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg36976-checkpoint15-prepare-v2/component:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-banner",
+      "--details=summary",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1/xml",
+      "--select-class",
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpointTest",
+      "--select-class",
+      "dev.codex.schubert.nk.bootstrap.CheckpointFatalBoundaryTest"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36982-checkpoint15-unit-v1",
+    "stdoutSha256": "cba17455515db8a15180ad0dcd534104c257bca87753e2cfcc27746c5c735c81",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "execSha256": "b5cca434c95c1d05e0823e3d2627f667ab195b63854b777ba0ee3abb5baca76e",
+  "classInitLogSha256": "526c4bfe559e5fccc8d92a09ab503c8b8b8abad464ea1af4f2ff7803f9a9df81",
+  "xmlHashes": {
+    "TEST-junit-platform-suite.xml": "dc966ac4a714e62e394c1cb7422138cfe02cb12dbe4be5fd11b7052fffe47f7a",
+    "TEST-junit-vintage.xml": "f6cf4d64f365a5f3beb568a551b715364ebef558da7e1ec14508f3d8c3986ee1",
+    "TEST-junit-jupiter.xml": "4187059d038868d4ee40bcd1398d9de06607f1de0e79b064f718f9875772727f"
+  },
+  "productEntryPointsInvoked": false,
+  "actualDbNetworkVmRootKeyIntentOperations": 0,
+  "nativeBoundaryAbsence": "INDEPENDENT_POST_PENDING",
+  "oldExecCombined": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
