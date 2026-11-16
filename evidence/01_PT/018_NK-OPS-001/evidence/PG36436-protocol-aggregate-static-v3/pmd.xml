@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-16T14:23:39.187">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java">
+<violation beginline="169" endline="169" begincolumn="29" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadCodec" method="decodeArea" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java">
+<violation beginline="22" endline="22" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="FailedJmsIsolationException" method="FailedJmsIsolationException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java">
+<violation beginline="18" endline="18" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="UnconfirmedJmsRollbackException" method="UnconfirmedJmsRollbackException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolAggregateValueContractTest.java">
+<violation beginline="192" endline="192" begincolumn="20" endcolumn="42" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="ProtocolAggregateValueContractTest" method="assertKeys" variable="keys" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="198" endline="198" begincolumn="17" endcolumn="35" rule="EqualsNull" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="ProtocolAggregateValueContractTest" method="assertKeys" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+</file>
+</pmd>

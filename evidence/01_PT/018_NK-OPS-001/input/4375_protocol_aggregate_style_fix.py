@@ -1,0 +1,14 @@
+"""Ticket the case-insensitive field/method naming collision before the minimal fix."""
+from pathlib import Path
+import hashlib,json,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';l=r/'documents/900_OTHER/910_台帳';a=l/'915_障害表.md';y=l/'916_横展開管理台帳.md'
+assert max(map(int,re.findall(r'^## BUG-?(\d{3,4})(?!\d)',a.read_text(),re.M)))==3118
+assert max(map(int,re.findall(r'^## YKT-?(\d{3,4})(?!\d)',y.read_text(),re.M)))==2590
+with a.open('a') as o:o.write('\n## BUG3119\n発見PT/2026-11-16、低/中、ProtocolAggregateValueContractTestのLAYOUT constantとlayout() helper。期待Root命名規則適合、実際PG36362 PMD AvoidFieldNameMatchingMethodName一件/製品0。原因大文字constantと小文字methodのcase-insensitive衝突を事前確認不足（BUG3115/3102共通）。元TestをPG36399へ保存し修正前OPEN、YKT2591/SS322323354/451。constantだけLAYOUT_IDENTIFIERへ全識別子改名、元期待/操作/四case/body不変を逆展開exactで確認しRoot規則と同source必要18PTで再検証する。\n')
+with y.open('a') as o:o.write('\n## YKT2591\n元BUG3119、対象新Test全field/method名をcasefoldで横断照合、当LAYOUT/layout一組だけ修正し他は非該当根拠とする。Main/既Test変更0、全Test逆展開exact・静的再検証/当18実行で再発防止確認前OPEN。検索だけ完了0。\n')
+t=r/'src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolAggregateValueContractTest.java';old=t.read_text();e=b/'evidence/PG36399-protocol-aggregate-original-style-failure-v1';e.mkdir();(e/'ProtocolAggregateValueContractTest.java.txt').write_text(old)
+new=re.sub(r'\bLAYOUT\b','LAYOUT_IDENTIFIER',old);assert re.sub(r'\bLAYOUT_IDENTIFIER\b','LAYOUT',new)==old;t.write_text(new)
+fields=re.findall(r'private static final \w+ (\w+)\s*=',new);methods=re.findall(r'(?:void|CommonHeader|LayoutDefinition|FieldValueSet|FieldDefinition<String>) (\w+)\(',new);assert not set(x.casefold() for x in fields)&set(x.casefold() for x in methods)
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));mp=e/'manifest.json';mp.open('x').write(json.dumps(dict(actualExit=0,originalStyleExit=1,bug='BUG3119',ykt='YKT2591',originalFixture=ref(e/'ProtocolAggregateValueContractTest.java.txt'),fixedFixture=ref(t),wordBoundaryRenameInverseByteExact=True,allFieldMethodCasefoldPairsChecked=True,mainChanged=0,productTestsExecuted=0),indent=2)+'\n')
+c=json.loads((b/'input/4372_protocol_aggregate_profile.json').read_text());c.update(id='PG36410-PROTOCOL-AGGREGATE-SEVEN-VALUES-18-V2',slots={k:str((b/('evidence/PG'+str(n)+'-protocol-aggregate-'+k+'-v2')).relative_to(r)) for k,n in [('prestyle',36402),('prepare',36404),('static',36406),('preflight',36408),('unit',36410),('post',36412)]},privateDirs=dict(prepare='pg36404-protocol-aggregate-values-v2',unit='pg36410-protocol-aggregate-values-v2'));c['closureProofs'].append(ref(mp));(b/'input/4376_protocol_aggregate_profile_v2.json').open('x').write(json.dumps(c,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,inverseByteExact=True,newTests=4,mainChanged=0)))
