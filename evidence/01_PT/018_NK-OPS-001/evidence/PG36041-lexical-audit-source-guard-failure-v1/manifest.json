@@ -1,0 +1,11 @@
+{
+  "actualExit": 1,
+  "guard": "current source differs from historical source; no promotion",
+  "atUTC": "2026-11-16T02:44:43.407471+00:00",
+  "producerSha256": "f1f4219e5856bab07df1163b4dc355273ea4fd0ae22ef609888374fcdea782d7",
+  "copiedAllowedClassBeforeFailure": "PathSyntax",
+  "remaining3ClassesRead": false,
+  "productTestsExecuted": 0,
+  "rootCause": "Audit producer assumed all four sources still matched oldProtocol120; two have approved strict Unicode checks",
+  "plannedRecovery": "Preserve oldsource identities and prove current source per-class. Changed RelativePath/DisplayPath are historical-only, never current coverage. Recover existing allowedPathSyntax byte after hash check; no product rerun."
+}
