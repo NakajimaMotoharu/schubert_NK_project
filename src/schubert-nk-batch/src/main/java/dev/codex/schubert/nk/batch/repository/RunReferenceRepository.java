@@ -4,6 +4,8 @@ package dev.codex.schubert.nk.batch.repository;
 
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -78,7 +80,7 @@ public final class RunReferenceRepository {
   }
 
   // SSC448/BUG3126: one typed cleanup body, shared by normal and exceptional finally exits.
-  private static void closeRow(@Nullable java.sql.ResultSet row, @Nullable Throwable primary)
+  private static void closeRow(@Nullable ResultSet row, @Nullable Throwable primary)
       throws SQLException {
     if (row != null)
       try {
@@ -89,8 +91,7 @@ public final class RunReferenceRepository {
   }
 
   private static void closeStatement(
-      @Nullable java.sql.PreparedStatement statement, @Nullable Throwable primary)
-      throws SQLException {
+      @Nullable PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
     if (statement != null)
       try {
         statement.close();
