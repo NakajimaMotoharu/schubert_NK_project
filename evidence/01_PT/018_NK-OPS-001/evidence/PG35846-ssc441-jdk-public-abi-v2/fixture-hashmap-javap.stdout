@@ -1,0 +1,925 @@
+Compiled from "InboxRequestValueContractTest.java"
+final class dev.codex.schubert.nk.api.idempotency.InboxRequestValueContractTest {
+  private static final java.util.UUID MESSAGE;
+
+  private static final java.util.UUID CORRELATION;
+
+  private static final java.util.UUID TOKEN;
+
+  private static final java.time.Instant RECEIVED;
+
+  private static final java.time.Instant EXPIRES;
+
+  private static final java.util.OptionalLong OWNER;
+
+  private static final java.lang.String READ;
+
+  private static final java.lang.String SUBMIT;
+
+  private static final java.lang.String READ_TARGET;
+
+  private static final java.lang.String UPDATE_TARGET;
+
+  dev.codex.schubert.nk.api.idempotency.InboxRequestValueContractTest();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  void requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry();
+    Code:
+         0: ldc           #7                  // String 7
+         2: ldc           #11                 // String QSTREQ01
+         4: ldc           #13                 // String read
+         6: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+         9: astore_1
+        10: ldc           #19                 // String ANONYMOUS
+        12: ldc           #21                 // String LGNREQ01
+        14: ldc           #23                 // String login
+        16: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+        19: astore_2
+        20: ldc           #25                 // String 8
+        22: ldc           #11                 // String QSTREQ01
+        24: ldc           #13                 // String read
+        26: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+        29: astore_3
+        30: invokestatic  #27                 // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        33: invokestatic  #27                 // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+        36: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        39: aload_2
+        40: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        43: invokevirtual #42                 // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.ownerUserId:()Ljava/util/OptionalLong;
+        46: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        49: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        52: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        55: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        58: aload_1
+        59: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        62: invokevirtual #42                 // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.ownerUserId:()Ljava/util/OptionalLong;
+        65: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        68: ldc           #57                 // class java/lang/NullPointerException
+        70: aload_1
+        71: invokedynamic #59,  0             // InvokeDynamic #0:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+        76: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        79: pop
+        80: ldc           #57                 // class java/lang/NullPointerException
+        82: aload_1
+        83: invokedynamic #67,  0             // InvokeDynamic #1:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+        88: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+        91: pop
+        92: ldc           #57                 // class java/lang/NullPointerException
+        94: aload_1
+        95: invokedynamic #68,  0             // InvokeDynamic #2:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       100: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       103: pop
+       104: ldc           #57                 // class java/lang/NullPointerException
+       106: aload_1
+       107: invokedynamic #69,  0             // InvokeDynamic #3:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       112: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       115: pop
+       116: ldc           #57                 // class java/lang/NullPointerException
+       118: invokedynamic #70,  0             // InvokeDynamic #4:execute:()Lorg/junit/jupiter/api/function/Executable;
+       123: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       126: pop
+       127: ldc           #57                 // class java/lang/NullPointerException
+       129: aload_1
+       130: invokedynamic #73,  0             // InvokeDynamic #5:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       135: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       138: pop
+       139: ldc           #57                 // class java/lang/NullPointerException
+       141: aload_1
+       142: invokedynamic #74,  0             // InvokeDynamic #6:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       147: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       150: pop
+       151: ldc           #75                 // class java/lang/IllegalArgumentException
+       153: aload_2
+       154: invokedynamic #77,  0             // InvokeDynamic #7:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       159: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       162: pop
+       163: ldc           #75                 // class java/lang/IllegalArgumentException
+       165: aload_1
+       166: invokedynamic #78,  0             // InvokeDynamic #8:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       171: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       174: pop
+       175: ldc           #79                 // String canonical owner scope does not match Inbox owner
+       177: ldc           #75                 // class java/lang/IllegalArgumentException
+       179: aload_3
+       180: invokedynamic #81,  0             // InvokeDynamic #9:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       185: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       188: checkcast     #75                 // class java/lang/IllegalArgumentException
+       191: invokevirtual #82                 // Method java/lang/IllegalArgumentException.getMessage:()Ljava/lang/String;
+       194: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       197: ldc           #75                 // class java/lang/IllegalArgumentException
+       199: aload_1
+       200: invokedynamic #86,  0             // InvokeDynamic #10:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       205: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       208: pop
+       209: ldc           #75                 // class java/lang/IllegalArgumentException
+       211: aload_2
+       212: invokedynamic #87,  0             // InvokeDynamic #11:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       217: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       220: pop
+       221: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       224: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       227: lconst_1
+       228: invokevirtual #92                 // Method java/time/Instant.minusSeconds:(J)Ljava/time/Instant;
+       231: invokestatic  #98                 // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       234: invokeinterface #104,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       239: astore        4
+       241: aload         4
+       243: invokeinterface #108,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       248: ifeq          290
+       251: aload         4
+       253: invokeinterface #114,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       258: checkcast     #93                 // class java/time/Instant
+       261: astore        5
+       263: ldc           #118                // String Inbox expiry must be after receipt time
+       265: ldc           #75                 // class java/lang/IllegalArgumentException
+       267: aload_1
+       268: aload         5
+       270: invokedynamic #120,  0            // InvokeDynamic #12:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;)Lorg/junit/jupiter/api/function/Executable;
+       275: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       278: checkcast     #75                 // class java/lang/IllegalArgumentException
+       281: invokevirtual #82                 // Method java/lang/IllegalArgumentException.getMessage:()Ljava/lang/String;
+       284: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       287: goto          241
+       290: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       293: lconst_1
+       294: invokevirtual #123                // Method java/time/Instant.plusSeconds:(J)Ljava/time/Instant;
+       297: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       300: dup
+       301: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+       304: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+       307: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       310: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       313: aload_1
+       314: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       317: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       320: lconst_1
+       321: invokevirtual #123                // Method java/time/Instant.plusSeconds:(J)Ljava/time/Instant;
+       324: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+       327: invokevirtual #136                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.expiresAt:()Ljava/time/Instant;
+       330: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       333: aload_3
+       334: ifnull        369
+       337: aload_3
+       338: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       341: goto          369
+       344: astore        4
+       346: aload_3
+       347: ifnull        366
+       350: aload_3
+       351: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       354: goto          366
+       357: astore        5
+       359: aload         4
+       361: aload         5
+       363: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       366: aload         4
+       368: athrow
+       369: aload_2
+       370: ifnull        402
+       373: aload_2
+       374: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       377: goto          402
+       380: astore_3
+       381: aload_2
+       382: ifnull        400
+       385: aload_2
+       386: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       389: goto          400
+       392: astore        4
+       394: aload_3
+       395: aload         4
+       397: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       400: aload_3
+       401: athrow
+       402: aload_1
+       403: ifnull        433
+       406: aload_1
+       407: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       410: goto          433
+       413: astore_2
+       414: aload_1
+       415: ifnull        431
+       418: aload_1
+       419: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       422: goto          431
+       425: astore_3
+       426: aload_2
+       427: aload_3
+       428: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       431: aload_2
+       432: athrow
+       433: iconst_5
+       434: newarray       long
+       436: dup
+       437: iconst_0
+       438: ldc2_w        #153                // long -9223372036854775808l
+       441: lastore
+       442: dup
+       443: iconst_1
+       444: ldc2_w        #155                // long -1l
+       447: lastore
+       448: dup
+       449: iconst_2
+       450: lconst_0
+       451: lastore
+       452: dup
+       453: iconst_3
+       454: ldc2_w        #157                // long 1000000000000l
+       457: lastore
+       458: dup
+       459: iconst_4
+       460: ldc2_w        #159                // long 9223372036854775807l
+       463: lastore
+       464: astore_1
+       465: aload_1
+       466: arraylength
+       467: istore_2
+       468: iconst_0
+       469: istore_3
+       470: iload_3
+       471: iload_2
+       472: if_icmpge     565
+       475: aload_1
+       476: iload_3
+       477: laload
+       478: lstore        4
+       480: lload         4
+       482: invokestatic  #161                // Method java/lang/Long.toString:(J)Ljava/lang/String;
+       485: ldc           #11                 // String QSTREQ01
+       487: ldc           #13                 // String read
+       489: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+       492: astore        6
+       494: ldc           #165                // String ownerUserId is outside N12
+       496: ldc           #75                 // class java/lang/IllegalArgumentException
+       498: lload         4
+       500: aload         6
+       502: invokedynamic #167,  0            // InvokeDynamic #13:execute:(JLdev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       507: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       510: checkcast     #75                 // class java/lang/IllegalArgumentException
+       513: invokevirtual #82                 // Method java/lang/IllegalArgumentException.getMessage:()Ljava/lang/String;
+       516: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       519: aload         6
+       521: ifnull        559
+       524: aload         6
+       526: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       529: goto          559
+       532: astore        7
+       534: aload         6
+       536: ifnull        556
+       539: aload         6
+       541: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       544: goto          556
+       547: astore        8
+       549: aload         7
+       551: aload         8
+       553: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       556: aload         7
+       558: athrow
+       559: iinc          3, 1
+       562: goto          470
+       565: iconst_2
+       566: newarray       long
+       568: dup
+       569: iconst_0
+       570: lconst_1
+       571: lastore
+       572: dup
+       573: iconst_1
+       574: ldc2_w        #170                // long 999999999999l
+       577: lastore
+       578: astore_1
+       579: aload_1
+       580: arraylength
+       581: istore_2
+       582: iconst_0
+       583: istore_3
+       584: iload_3
+       585: iload_2
+       586: if_icmpge     678
+       589: aload_1
+       590: iload_3
+       591: laload
+       592: lstore        4
+       594: lload         4
+       596: invokestatic  #161                // Method java/lang/Long.toString:(J)Ljava/lang/String;
+       599: ldc           #11                 // String QSTREQ01
+       601: ldc           #13                 // String read
+       603: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+       606: astore        6
+       608: lload         4
+       610: invokestatic  #172                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       613: lload         4
+       615: invokestatic  #172                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       618: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+       621: aload         6
+       623: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+       626: invokevirtual #42                 // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.ownerUserId:()Ljava/util/OptionalLong;
+       629: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       632: aload         6
+       634: ifnull        672
+       637: aload         6
+       639: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       642: goto          672
+       645: astore        7
+       647: aload         6
+       649: ifnull        669
+       652: aload         6
+       654: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       657: goto          669
+       660: astore        8
+       662: aload         7
+       664: aload         8
+       666: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       669: aload         7
+       671: athrow
+       672: iinc          3, 1
+       675: goto          584
+       678: ldc           #175                // String UCRREQ01
+       680: ldc           #177                // String USTREQ01
+       682: ldc           #179                // String URLREQ01
+       684: ldc           #181                // String UPWREQ01
+       686: ldc           #183                // String ULKREQ01
+       688: ldc           #185                // String QSBREQ01
+       690: ldc           #187                // String NTCREQ01
+       692: ldc           #189                // String QDLREQ01
+       694: invokestatic  #191                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       697: invokeinterface #104,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       702: astore_1
+       703: aload_1
+       704: invokeinterface #108,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       709: ifeq          817
+       712: aload_1
+       713: invokeinterface #114,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       718: checkcast     #194                // class java/lang/String
+       721: astore_2
+       722: ldc           #7                  // String 7
+       724: aload_2
+       725: ldc           #196                // String update
+       727: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+       730: astore_3
+       731: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       734: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       737: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       740: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       743: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       746: aload_3
+       747: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+       750: invokevirtual #204                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.operationToken:()Ljava/util/Optional;
+       753: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       756: ldc           #207                // String operation token presence does not match request layout
+       758: ldc           #75                 // class java/lang/IllegalArgumentException
+       760: aload_3
+       761: invokedynamic #209,  0            // InvokeDynamic #14:execute:(Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Lorg/junit/jupiter/api/function/Executable;
+       766: invokestatic  #63                 // Method org/junit/jupiter/api/Assertions.assertThrows:(Ljava/lang/Class;Lorg/junit/jupiter/api/function/Executable;)Ljava/lang/Throwable;
+       769: checkcast     #75                 // class java/lang/IllegalArgumentException
+       772: invokevirtual #82                 // Method java/lang/IllegalArgumentException.getMessage:()Ljava/lang/String;
+       775: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       778: aload_3
+       779: ifnull        814
+       782: aload_3
+       783: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       786: goto          814
+       789: astore        4
+       791: aload_3
+       792: ifnull        811
+       795: aload_3
+       796: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       799: goto          811
+       802: astore        5
+       804: aload         4
+       806: aload         5
+       808: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       811: aload         4
+       813: athrow
+       814: goto          703
+       817: return
+      Exception table:
+         from    to  target type
+            30   333   344   Class java/lang/Throwable
+           350   354   357   Class java/lang/Throwable
+            20   369   380   Class java/lang/Throwable
+           385   389   392   Class java/lang/Throwable
+            10   402   413   Class java/lang/Throwable
+           418   422   425   Class java/lang/Throwable
+           494   519   532   Class java/lang/Throwable
+           539   544   547   Class java/lang/Throwable
+           608   632   645   Class java/lang/Throwable
+           652   657   660   Class java/lang/Throwable
+           731   778   789   Class java/lang/Throwable
+           795   799   802   Class java/lang/Throwable
+
+  void requestValue002OrderedValueComponentsAndFixedRedactionRetainBorrowedCanonical();
+    Code:
+         0: ldc           #7                  // String 7
+         2: ldc           #185                // String QSBREQ01
+         4: ldc           #196                // String update
+         6: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+         9: astore_1
+        10: ldc           #7                  // String 7
+        12: ldc           #185                // String QSBREQ01
+        14: ldc           #196                // String update
+        16: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+        19: astore_2
+        20: ldc           #25                 // String 8
+        22: ldc           #185                // String QSBREQ01
+        24: ldc           #196                // String update
+        26: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+        29: astore_3
+        30: ldc           #7                  // String 7
+        32: ldc           #185                // String QSBREQ01
+        34: ldc           #210                // String other
+        36: invokestatic  #15                 // Method canonical:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+        39: astore        4
+        41: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        44: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+        47: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        50: aload_1
+        51: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        54: astore        5
+        56: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        59: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+        62: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        65: aload_2
+        66: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        69: astore        6
+        71: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+        74: aload         5
+        76: invokevirtual #212                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.messageId:()Ljava/util/UUID;
+        79: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        82: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        85: aload         5
+        87: invokevirtual #216                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.correlationId:()Ljava/util/UUID;
+        90: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+        93: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        96: aload         5
+        98: invokevirtual #42                 // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.ownerUserId:()Ljava/util/OptionalLong;
+       101: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       104: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       107: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       110: aload         5
+       112: invokevirtual #204                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.operationToken:()Ljava/util/Optional;
+       115: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       118: aload_1
+       119: aload         5
+       121: invokevirtual #219                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.canonicalRequest:()Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;
+       124: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       127: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       130: aload         5
+       132: invokevirtual #223                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.receivedAt:()Ljava/time/Instant;
+       135: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       138: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+       141: aload         5
+       143: invokevirtual #136                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.expiresAt:()Ljava/time/Instant;
+       146: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       149: ldc           #229                // String InboxRequest[message/correlation/owner/token/request/time=<redacted>]
+       151: aload         5
+       153: invokevirtual #231                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest.toString:()Ljava/lang/String;
+       156: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       159: aload         5
+       161: aload         5
+       163: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       166: aload         5
+       168: aload         6
+       170: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       173: aload         6
+       175: aload         5
+       177: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       180: ldc           #233                // String retained
+       182: new           #235                // class java/util/HashMap
+       185: dup
+       186: aload         5
+       188: ldc           #233                // String retained
+       190: invokestatic  #237                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+       193: invokespecial #242                // Method java/util/HashMap."<init>":(Ljava/util/Map;)V
+       196: aload         6
+       198: invokevirtual #245                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       201: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       204: aload         5
+       206: aconst_null
+       207: invokestatic  #249                // Method org/junit/jupiter/api/Assertions.assertNotEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       210: aload         5
+       212: ldc           #252                // String other type
+       214: invokestatic  #249                // Method org/junit/jupiter/api/Assertions.assertNotEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       217: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       220: dup
+       221: new           #254                // class java/util/UUID
+       224: dup
+       225: lconst_0
+       226: ldc2_w        #256                // long 4l
+       229: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+       232: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+       235: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       238: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       241: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       244: aload_1
+       245: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       248: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+       251: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+       254: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       257: dup
+       258: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+       261: new           #254                // class java/util/UUID
+       264: dup
+       265: lconst_0
+       266: ldc2_w        #256                // long 4l
+       269: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+       272: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       275: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       278: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       281: aload_1
+       282: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       285: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+       288: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+       291: ldc2_w        #261                // long 8l
+       294: invokestatic  #172                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+       297: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       300: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       303: aload_3
+       304: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+       307: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       310: new           #254                // class java/util/UUID
+       313: dup
+       314: lconst_0
+       315: ldc2_w        #256                // long 4l
+       318: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+       321: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       324: aload_1
+       325: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+       328: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       331: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       334: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       337: aload         4
+       339: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+       342: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       345: dup
+       346: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+       349: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+       352: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       355: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       358: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       361: aload_1
+       362: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       365: lconst_1
+       366: invokevirtual #123                // Method java/time/Instant.plusSeconds:(J)Ljava/time/Instant;
+       369: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+       372: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+       375: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       378: dup
+       379: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+       382: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+       385: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+       388: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+       391: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+       394: aload_1
+       395: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+       398: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+       401: lconst_1
+       402: invokevirtual #123                // Method java/time/Instant.plusSeconds:(J)Ljava/time/Instant;
+       405: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+       408: invokestatic  #263                // InterfaceMethod java/util/List.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;
+       411: invokeinterface #104,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       416: astore        7
+       418: aload         7
+       420: invokeinterface #108,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       425: ifeq          457
+       428: aload         7
+       430: invokeinterface #114,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       435: checkcast     #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+       438: astore        8
+       440: aload         5
+       442: aload         8
+       444: invokestatic  #249                // Method org/junit/jupiter/api/Assertions.assertNotEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       447: aload         8
+       449: aload         5
+       451: invokestatic  #249                // Method org/junit/jupiter/api/Assertions.assertNotEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       454: goto          418
+       457: invokestatic  #266                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       460: aload_1
+       461: invokevirtual #269                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.fields:()Ljava/util/List;
+       464: invokestatic  #47                 // Method org/junit/jupiter/api/Assertions.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+       467: aload         4
+       469: ifnull        507
+       472: aload         4
+       474: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       477: goto          507
+       480: astore        5
+       482: aload         4
+       484: ifnull        504
+       487: aload         4
+       489: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       492: goto          504
+       495: astore        6
+       497: aload         5
+       499: aload         6
+       501: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       504: aload         5
+       506: athrow
+       507: aload_3
+       508: ifnull        543
+       511: aload_3
+       512: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       515: goto          543
+       518: astore        4
+       520: aload_3
+       521: ifnull        540
+       524: aload_3
+       525: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       528: goto          540
+       531: astore        5
+       533: aload         4
+       535: aload         5
+       537: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       540: aload         4
+       542: athrow
+       543: aload_2
+       544: ifnull        576
+       547: aload_2
+       548: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       551: goto          576
+       554: astore_3
+       555: aload_2
+       556: ifnull        574
+       559: aload_2
+       560: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       563: goto          574
+       566: astore        4
+       568: aload_3
+       569: aload         4
+       571: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       574: aload_3
+       575: athrow
+       576: aload_1
+       577: ifnull        607
+       580: aload_1
+       581: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       584: goto          607
+       587: astore_2
+       588: aload_1
+       589: ifnull        605
+       592: aload_1
+       593: invokevirtual #140                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest.close:()V
+       596: goto          605
+       599: astore_3
+       600: aload_2
+       601: aload_3
+       602: invokevirtual #147                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       605: aload_2
+       606: athrow
+       607: return
+      Exception table:
+         from    to  target type
+            41   467   480   Class java/lang/Throwable
+           487   492   495   Class java/lang/Throwable
+            30   507   518   Class java/lang/Throwable
+           524   528   531   Class java/lang/Throwable
+            20   543   554   Class java/lang/Throwable
+           559   563   566   Class java/lang/Throwable
+            10   576   587   Class java/lang/Throwable
+           592   596   599   Class java/lang/Throwable
+
+  private static dev.codex.schubert.nk.api.idempotency.CanonicalRequest canonical(java.lang.String, java.lang.String, java.lang.String);
+    Code:
+         0: new           #141                // class dev/codex/schubert/nk/api/idempotency/CanonicalRequest
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: ldc_w         #272                // String 001
+         9: aload_2
+        10: invokestatic  #266                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        13: invokespecial #274                // Method dev/codex/schubert/nk/api/idempotency/CanonicalRequest."<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+        16: areturn
+
+  private static dev.codex.schubert.nk.api.idempotency.InboxRequest request(java.util.OptionalLong, java.util.Optional<java.util.UUID>, dev.codex.schubert.nk.api.idempotency.CanonicalRequest);
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: aload_0
+        11: aload_1
+        12: aload_2
+        13: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        16: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        19: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        22: areturn
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$14(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+         3: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+         6: aload_0
+         7: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        10: pop
+        11: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$13(long, dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: lload_0
+         1: invokestatic  #172                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+         4: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+         7: aload_2
+         8: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        11: pop
+        12: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$12(dev.codex.schubert.nk.api.idempotency.CanonicalRequest, java.time.Instant) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        13: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        16: aload_0
+        17: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        20: aload_1
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$11(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: invokestatic  #27                 // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+         3: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+         6: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+         9: aload_0
+        10: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        13: pop
+        14: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$10(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+         3: getstatic     #198                // Field TOKEN:Ljava/util/UUID;
+         6: invokestatic  #201                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+         9: aload_0
+        10: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        13: pop
+        14: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$9(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+         3: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+         6: aload_0
+         7: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        10: pop
+        11: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$8(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: invokestatic  #27                 // Method java/util/OptionalLong.empty:()Ljava/util/OptionalLong;
+         3: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+         6: aload_0
+         7: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        10: pop
+        11: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$7(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+         3: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+         6: aload_0
+         7: invokestatic  #38                 // Method request:(Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;)Ldev/codex/schubert/nk/api/idempotency/InboxRequest;
+        10: pop
+        11: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$6(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        13: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        16: aload_0
+        17: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        20: aconst_null
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$5(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        13: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        16: aload_0
+        17: aconst_null
+        18: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$4() throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        13: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        16: aconst_null
+        17: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        20: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        23: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        26: pop
+        27: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$3(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        13: aconst_null
+        14: aload_0
+        15: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        18: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$2(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        10: aconst_null
+        11: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        14: aload_0
+        15: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        18: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$1(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: getstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+         7: aconst_null
+         8: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        11: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        14: aload_0
+        15: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        18: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  private static void lambda$requestValue001SevenNullContractsOwnerScopeTokenAndStrictExpiry$0(dev.codex.schubert.nk.api.idempotency.CanonicalRequest) throws java.lang.Throwable;
+    Code:
+         0: new           #43                 // class dev/codex/schubert/nk/api/idempotency/InboxRequest
+         3: dup
+         4: aconst_null
+         5: getstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+         8: getstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        11: invokestatic  #33                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        14: aload_0
+        15: getstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        18: getstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        21: invokespecial #133                // Method dev/codex/schubert/nk/api/idempotency/InboxRequest."<init>":(Ljava/util/UUID;Ljava/util/UUID;Ljava/util/OptionalLong;Ljava/util/Optional;Ldev/codex/schubert/nk/api/idempotency/CanonicalRequest;Ljava/time/Instant;Ljava/time/Instant;)V
+        24: pop
+        25: return
+
+  static {};
+    Code:
+         0: new           #254                // class java/util/UUID
+         3: dup
+         4: lconst_0
+         5: lconst_1
+         6: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+         9: putstatic     #126                // Field MESSAGE:Ljava/util/UUID;
+        12: new           #254                // class java/util/UUID
+        15: dup
+        16: lconst_0
+        17: ldc2_w        #277                // long 2l
+        20: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+        23: putstatic     #130                // Field CORRELATION:Ljava/util/UUID;
+        26: new           #254                // class java/util/UUID
+        29: dup
+        30: lconst_0
+        31: ldc2_w        #279                // long 3l
+        34: invokespecial #258                // Method java/util/UUID."<init>":(JJ)V
+        37: putstatic     #198                // Field TOKEN:Ljava/util/UUID;
+        40: ldc_w         #281                // String 2026-01-01T00:00:00Z
+        43: invokestatic  #283                // Method java/time/Instant.parse:(Ljava/lang/CharSequence;)Ljava/time/Instant;
+        46: putstatic     #88                 // Field RECEIVED:Ljava/time/Instant;
+        49: ldc_w         #287                // String 2026-01-02T00:00:00Z
+        52: invokestatic  #283                // Method java/time/Instant.parse:(Ljava/lang/CharSequence;)Ljava/time/Instant;
+        55: putstatic     #226                // Field EXPIRES:Ljava/time/Instant;
+        58: ldc2_w        #289                // long 7l
+        61: invokestatic  #172                // Method java/util/OptionalLong.of:(J)Ljava/util/OptionalLong;
+        64: putstatic     #53                 // Field OWNER:Ljava/util/OptionalLong;
+        67: return
+}

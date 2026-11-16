@@ -1,0 +1,127 @@
+{
+  "groupId": "PGPT-WBS65-SSC441-INBOX-REASON-WHOLE21-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2391_WBS65SSC441Inbox理由全二十一限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "REWORK",
+  "scope": "BUG3100/YKT2572のInboxException.sqlState閉enum switchを、Reason五定数が既固定SQLstateをprivatefinal metadataで保持する表現へ置換する。MESSAGE_ID_REUSE/OPERATION_TOKEN_REUSE=23000、FINGERPRINT_KEY_UNAVAILABLE=55000、STATE_CORRUPT=XX000、TRANSACTION_REQUIRED=25000の順序・name/ordinal/values/valueOf/可視性を完全保持する。private enum constructorだけで五つのnonnull literalを一度代入し、package-private accessorをouter privatehelperから読む。privatehelperはObjects.requireNonNull(reason,reason)を元と同じmessageで先に行い、SQLException継承/constructor/message/SQLstate/errorCode/reason getter/throw identity・全caller public ABIを変えない。閉定数のprivate constructionへ到達しないnull guardや反射用経路を足さず、NullAwayとliteral閉包でfield invariantを確立する。生成MatchException defaultだけが表現から不要になるので、coverage除外/到達不能合格/別enum binary/私有反射/無意味instanceを使わない。BUG3101/YKT2573の新Request fixtureは独立期待retainedを保持し、単一entry Map.of.getから実HashMapへのput/getへ変えてhash-equalityを実操作で確認する。元21のTest ID・入力・期待・全assertとMain1の他bodyを逆展開formatted exactで確認する。SS範囲内の内部詳細でRD/UI/DIF/QA変更不要。先にSS324352354914だけをmainへ反映してからPGし、新Core同run全21/freshMain14Root/適用未分類0/current15physical15CRC-initXML/同singleexecraw必須四100を要求する。五SQLstateとNullableReason拒否のgoldenは元21を保持、元raw不足PG35714を残し旧exec合算0。全caller source/既public ABIの一致を確認するが、実DBcoordinatorや全module/全451/native/CHR/終了依存の受入にはしない。Actual4/Root2/鍵/VMDB/native/aru/HOLDを維持、古いRootや無関係PTを確認だけで反復しない。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4403_SSC441_Inbox閉Reason・hash修正全二十一仕様.md",
+      "sha256": "bfd777d7f62afe94411c5f41fd3c524cdfdf4e4e7eb48045e3186e339db833f7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35800-ssc441-inbox-reason-design-only-v1/design-only-main-patch.json",
+      "sha256": "8d1ad26a6e3eb44ca3d8af91661b2b774bbb0c2012434a14053efd5efb6923b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35800-ssc441-inbox-reason-design-only-v1/callers-source-witness.json",
+      "sha256": "90126bab1bf92c9803a4ce68e73b0fdd9677a7ec00aa15b4485a2d2eefe801ec"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P006-01"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxException.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxException.java": "WBS-P006-01"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P006-01": [
+      "WBS-P006-01"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "d97bc6159629ffd32ab8418c5d92ffaa1d0a282b",
+  "run": "PG35820-SSC441-INBOX-REASON-WHOLE21",
+  "estimate": {
+    "low": 0.4,
+    "base": 1.2,
+    "high": 3.6
+  },
+  "capPp": 4.5,
+  "workIds": [
+    "SSC441_INBOX_REASON_WHOLE21"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2390_WBS65予実・SSC441Inbox理由全二十一限定版744.json",
+    "sha256": "e227542eb2eebb7ab82e5e1a245195d303f3d9313eecd7045d6c41154e45c1f7"
+  },
+  "nextCommand": "Publish limited914 to normalmainPR using same sparse docs-only tree, commit/push all sanitized outputs. Continue permitted original PG/PT after verifying genuine remaining gaps; review pure protocol/result metadata source and existing relevant run/raw beforepricing, no unchangedqualifiedtest confirmation. AllActual4/Root2/DBkeysVMnativearuHOLD preserve, freshquota <=10/unavailable preservationstop; next hourly09:58:43.",
+  "sourceAfter": "44ec859d0c8aaf5f2b5a77c9d1c8d57fbe7db9f3",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG35848-ssc441-inbox21-quality-join-v2/manifest.json",
+  "manifestSha256": "65897074217b6767c9030370c29182ee6ad433c203ceb8d4c30c5ca376e0e5b2",
+  "terminalAtUTC": "2026-11-16T00:47:23.296941+00:00",
+  "outcome": "SSC441_INBOX_WHOLE21_RAW15_CODE100_ACTUAL_COORDINATOR_PENDING",
+  "technical": {
+    "productionCoreMain": "44ec859d0c8aaf5f2b5a77c9d1c8d57fbe7db9f3",
+    "actualUnitSource": "0ab86bfd53c1e670c5a9f40995dc64722438bca5",
+    "tests": 21,
+    "newDefinitions": 0,
+    "necessaryOriginalDefinitions": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "physicalClasses": 15,
+    "positiveCrc": 15,
+    "freshRootMain14": true,
+    "originalTestIdsInputsExpectedAssertionsInverseExact": true,
+    "otherMain13AndTestFiles5ByteExact": true,
+    "staticApplicableUnclassified0": true,
+    "pmdRaw": 7,
+    "rawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1199
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 86
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 187
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 155
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 112
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 15
+      }
+    },
+    "publicOuterReasonAbiExact": true,
+    "elevenCallerSourceUnchanged": true,
+    "elevenActualCallerDbOrRuntimeQualified": false,
+    "sameJdkSqlProofBound": true,
+    "actualHashMapBytecodeConfirmed": true,
+    "initialRawGapsPreserved": "PG35714",
+    "oldPlanned35820ProductNotStarted": true,
+    "namingFailure35806BeforeRootPreserved": true,
+    "toolAndStyleReworkEstimateWithinGroup": {
+      "low": 0.01,
+      "base": 0.03,
+      "high": 0.09
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null,
+    "actualPgptCostPp": null
+  },
+  "checkpointText": "Core44ec859d/Unit0ab86bfd/PG35840 SSC441 Inbox閉Reason固定SQLstate metadata＋Request実HashMap契約、Main14・元全21FES0真正0。PR395/main7560c713はSS324352354914をPG前に先反映、五Reason順序/name/ordinal/lookup/23000-23000-55000-XX000-25000とNullReason固定拒否・SQLException/msg契約保持、privateconstructorのnonnull literal閉包でfield invariant確立。Main/fixtureの表現を逆展開formatted exact・他Main13/五Testfile19定義不変、全21入力/期待/assertを保持。単一Map.of.getのhash未観測は実HashMap put/getと独立期待retainedで是正、無意味hash呼出やexpected生成0。PG35842-35843 current15physical15CRC-initXML/freshMain14Root/静的適用未分類0(PMDraw7各根拠)、35844同singleexec全15Codeclass187LINE112METHOD15CLASS86BRANCH1199I全miss0。35846旧新outer/Reason public javap完全一致・11caller source不変・現在HashMap bytecode/JDKSQL静的hashとCP/initを確認、全runtimecaller/実DB受入0。BUG3100/3101/YKT2572/2573当純値範囲CLOSED、広域2431/P00601/全451はOPEN又は未受入。BUG3102 privatefieldとmethod命名衝突はretainedSqlState三参照だけ是正・逆置換exact、元prestyle失敗35806/未試験Coref6保全、予定35820製品未起動なので製品再演0、当命名/YKT2574限定CLOSED。是正手戻り見積.4/1.2/3.6だけ完了・残397.324/837.386/1643.415、原904.85/SV/各開始保持、追加新機能と混同0。App239/35939/35873/歴史不成功66、正式1964/53・正本184/625・元17/190・工数null不変、実DB/driver/鍵/暗号/Root/CHR/native/終了依存/全HOLD保持。"
+}
