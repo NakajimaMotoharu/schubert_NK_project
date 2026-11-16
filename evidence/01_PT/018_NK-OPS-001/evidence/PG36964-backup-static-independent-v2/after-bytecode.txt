@@ -1,0 +1,1022 @@
+Compiled from "BackupStartIntentFiles.java"
+public final class dev.codex.schubert.nk.batch.file.BackupStartIntentFiles implements java.lang.AutoCloseable {
+  private static final java.lang.String NAME;
+
+  private final dev.codex.schubert.nk.storage.OwnedTransferDirectory root;
+
+  private final dev.codex.schubert.nk.storage.InodeSecurityCalls security;
+
+  private final dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy policy;
+
+  private final dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate gate;
+
+  private final java.lang.Object lock;
+
+  private boolean begun;
+
+  private final java.lang.String name;
+
+  public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles create(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: getstatic     #1                  // Field dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.BACKUP:Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;
+         5: invokestatic  #7                  // Method create:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;)Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;
+         8: areturn
+
+  public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles create(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Target) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: ldc           #13                 // String Morning root context
+         3: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #21                 // String Morning root snapshot
+        10: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_2
+        15: ldc           #23                 // String closed phase
+        17: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        20: pop
+        21: aload_2
+        22: aload_1
+        23: invokevirtual #25                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.service:()Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        26: invokevirtual #31                 // Method dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.ownedBy:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;)Z
+        29: ifne          36
+        32: invokestatic  #35                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        35: athrow
+        36: aload_0
+        37: aload_1
+        38: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+        41: invokestatic  #47                 // Method dev/codex/schubert/nk/storage/LinuxDirectoryCalls.create:()Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;
+        44: astore_3
+        45: aload_2
+        46: invokevirtual #52                 // Method dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.requestDirectory:()Ljava/lang/String;
+        49: iconst_0
+        50: anewarray     #56                 // class java/lang/String
+        53: invokestatic  #58                 // InterfaceMethod java/nio/file/Path.of:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+        56: astore        4
+        58: aload_3
+        59: aload         4
+        61: invokedynamic #64,  0             // InvokeDynamic #0:open:(Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+        66: invokedynamic #68,  0             // InvokeDynamic #1:close:()Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+        71: aload_0
+        72: aload_1
+        73: aload_2
+        74: invokedynamic #72,  0             // InvokeDynamic #2:run:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+        79: invokestatic  #76                 // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope.handoff:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+        82: checkcast     #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+        85: areturn
+
+  public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles createPublication(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: ldc           #82                 // String Morning publication context
+         3: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #84                 // String Morning publication identity
+        10: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_1
+        15: invokevirtual #25                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.service:()Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        18: getstatic     #86                 // Field dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.MORNING:Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        21: if_acmpne     28
+        24: iconst_1
+        25: goto          29
+        28: iconst_0
+        29: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        32: aload_0
+        33: aload_1
+        34: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+        37: invokestatic  #47                 // Method dev/codex/schubert/nk/storage/LinuxDirectoryCalls.create:()Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;
+        40: astore_2
+        41: ldc           #96                 // String /run/schubert-nk/startup
+        43: iconst_0
+        44: anewarray     #56                 // class java/lang/String
+        47: invokestatic  #58                 // InterfaceMethod java/nio/file/Path.of:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+        50: astore_3
+        51: aload_2
+        52: aload_3
+        53: invokedynamic #98,  0             // InvokeDynamic #3:open:(Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+        58: invokedynamic #68,  0             // InvokeDynamic #1:close:()Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+        63: aload_0
+        64: aload_1
+        65: invokedynamic #99,  0             // InvokeDynamic #4:run:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+        70: invokestatic  #76                 // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope.handoff:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+        73: checkcast     #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+        76: areturn
+
+  dev.codex.schubert.nk.batch.file.BackupStartIntentFiles(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: new           #102                // class dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo
+         6: dup
+         7: invokespecial #104                // Method dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo."<init>":()V
+        10: aload_3
+        11: invokespecial #108                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;)V
+        14: return
+
+  public static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles createService(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.storage.ServiceConfigFiles$Service, dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_1
+         6: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         9: pop
+        10: aload_2
+        11: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        14: pop
+        15: aload_3
+        16: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        19: pop
+        20: aload_1
+        21: invokevirtual #25                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.service:()Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        24: getstatic     #86                 // Field dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.MORNING:Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        27: if_acmpne     44
+        30: aload_3
+        31: invokevirtual #114                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.state:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$State;
+        34: getstatic     #120                // Field dev/codex/schubert/nk/batch/file/StartupPermitRecords$State.ISSUED:Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$State;
+        37: if_acmpne     44
+        40: iconst_1
+        41: goto          45
+        44: iconst_0
+        45: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        48: aload_0
+        49: aload_1
+        50: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+        53: ldc           #96                 // String /run/schubert-nk/startup
+        55: iconst_0
+        56: anewarray     #56                 // class java/lang/String
+        59: invokestatic  #58                 // InterfaceMethod java/nio/file/Path.of:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;
+        62: astore        4
+        64: aload         4
+        66: invokedynamic #126,  0            // InvokeDynamic #5:open:(Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;
+        71: invokedynamic #68,  0             // InvokeDynamic #1:close:()Ldev/codex/schubert/nk/storage/ResourceScope$Release;
+        76: aload_3
+        77: aload_1
+        78: aload_0
+        79: aload_2
+        80: invokedynamic #129,  0            // InvokeDynamic #6:run:(Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;
+        85: invokestatic  #76                 // InterfaceMethod dev/codex/schubert/nk/storage/ResourceScope.handoff:(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;
+        88: checkcast     #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+        91: areturn
+
+  dev.codex.schubert.nk.batch.file.BackupStartIntentFiles(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source, dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: getstatic     #1                  // Field dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.BACKUP:Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;
+         9: invokespecial #132                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;)V
+        12: return
+
+  dev.codex.schubert.nk.batch.file.BackupStartIntentFiles(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source, dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate, dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Target);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: aload         5
+         8: ldc           #23                 // String closed phase
+        10: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: checkcast     #2                  // class dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target
+        16: invokevirtual #135                // Method dev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target.marker:()Ljava/lang/String;
+        19: invokespecial #138                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;Ljava/lang/String;)V
+        22: return
+
+  dev.codex.schubert.nk.batch.file.BackupStartIntentFiles(dev.codex.schubert.nk.storage.OwnedTransferDirectory, dev.codex.schubert.nk.storage.InodeSecurityCalls, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source, dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate, java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #141                // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #142                // class java/lang/Object
+         8: dup
+         9: invokespecial #141                // Method java/lang/Object."<init>":()V
+        12: putfield      #144                // Field lock:Ljava/lang/Object;
+        15: aload_0
+        16: aload_1
+        17: ldc           #148                // String fixed Backup request root
+        19: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        22: checkcast     #150                // class dev/codex/schubert/nk/storage/OwnedTransferDirectory
+        25: putfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        28: aload_0
+        29: aload_2
+        30: ldc           #156                // String inode security
+        32: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        35: checkcast     #158                // class dev/codex/schubert/nk/storage/InodeSecurityCalls
+        38: putfield      #160                // Field security:Ldev/codex/schubert/nk/storage/InodeSecurityCalls;
+        41: aload_0
+        42: new           #36                 // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy
+        45: dup
+        46: aload_2
+        47: aload_3
+        48: ldc           #164                // String inode source
+        50: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        53: checkcast     #166                // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source
+        56: invokespecial #168                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy."<init>":(Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;)V
+        59: putfield      #171                // Field policy:Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy;
+        62: aload_0
+        63: aload         4
+        65: ldc           #175                // String Morning root recheck
+        67: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        70: checkcast     #177                // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate
+        73: putfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        76: aload_0
+        77: aload         5
+        79: ldc           #183                // String fixed marker
+        81: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        84: checkcast     #56                 // class java/lang/String
+        87: putfield      #185                // Field name:Ljava/lang/String;
+        90: return
+
+  public void requireClear() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        11: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        16: aload_0
+        17: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        20: astore_2
+        21: aload_0
+        22: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        25: aload_0
+        26: getfield      #185                // Field name:Ljava/lang/String;
+        29: aload_0
+        30: aload_2
+        31: invokedynamic #196,  0            // InvokeDynamic #7:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        36: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        39: pop
+        40: goto          81
+        43: astore_3
+        44: aload_3
+        45: invokevirtual #206                // Method dev/codex/schubert/nk/storage/StorageIoException.reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        48: getstatic     #210                // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        51: if_acmpeq     58
+        54: invokestatic  #35                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        57: athrow
+        58: aload_2
+        59: aload_0
+        60: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        63: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+        66: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        69: aload_0
+        70: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        73: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        78: aload_1
+        79: monitorexit
+        80: return
+        81: invokestatic  #35                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        84: athrow
+        85: astore        4
+        87: aload_1
+        88: monitorexit
+        89: aload         4
+        91: athrow
+      Exception table:
+         from    to  target type
+            21    40    43   Class dev/codex/schubert/nk/storage/StorageIoException
+             7    80    85   any
+            81    89    85   any
+
+  public dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent begin() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: invokevirtual #222                // Method requireClear:()V
+        11: aload_0
+        12: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        15: astore_2
+        16: aload_0
+        17: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        20: aload_0
+        21: invokedynamic #225,  0            // InvokeDynamic #8:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        26: invokevirtual #228                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atDirectory:(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        29: pop
+        30: aload_0
+        31: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        34: invokevirtual #232                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.sync:()V
+        37: aload_0
+        38: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        41: aload_0
+        42: getfield      #185                // Field name:Ljava/lang/String;
+        45: aload_0
+        46: aload_2
+        47: invokedynamic #235,  0            // InvokeDynamic #9:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        52: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        55: checkcast     #217                // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot
+        58: astore_3
+        59: aload_2
+        60: aload_0
+        61: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        64: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+        67: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        70: aload_0
+        71: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        74: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        79: aload_0
+        80: iconst_1
+        81: putfield      #236                // Field begun:Z
+        84: new           #240                // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent
+        87: dup
+        88: aload_0
+        89: aload_3
+        90: invokespecial #242                // Method dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent."<init>":(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)V
+        93: aload_1
+        94: monitorexit
+        95: areturn
+        96: astore        4
+        98: aload_1
+        99: monitorexit
+       100: aload         4
+       102: athrow
+      Exception table:
+         from    to  target type
+             7    95    96   any
+            96   100    96   any
+
+  dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent observeQuarantine() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #236                // Field begun:Z
+        11: ifne          18
+        14: iconst_1
+        15: goto          19
+        18: iconst_0
+        19: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        22: aload_0
+        23: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        26: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        31: aload_0
+        32: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        35: astore_2
+        36: aload_0
+        37: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        40: aload_0
+        41: getfield      #185                // Field name:Ljava/lang/String;
+        44: aload_0
+        45: aload_2
+        46: invokedynamic #245,  0            // InvokeDynamic #10:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        51: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        54: checkcast     #217                // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot
+        57: astore_3
+        58: aload_2
+        59: aload_0
+        60: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        63: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+        66: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        69: aload_0
+        70: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        73: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        78: aload_0
+        79: iconst_1
+        80: putfield      #236                // Field begun:Z
+        83: new           #240                // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent
+        86: dup
+        87: aload_0
+        88: aload_3
+        89: invokespecial #242                // Method dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent."<init>":(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)V
+        92: aload_1
+        93: monitorexit
+        94: areturn
+        95: astore        4
+        97: aload_1
+        98: monitorexit
+        99: aload         4
+       101: athrow
+      Exception table:
+         from    to  target type
+             7    94    95   any
+            95    99    95   any
+
+  public void retire(dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_2
+         6: monitorenter
+         7: aload_1
+         8: ldc           #246                // String same-start marker
+        10: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_0
+        15: getfield      #236                // Field begun:Z
+        18: ifeq          29
+        21: aload_1
+        22: getfield      #248                // Field dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.owner:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;
+        25: aload_0
+        26: if_acmpeq     33
+        29: invokestatic  #35                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        32: athrow
+        33: aload_0
+        34: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        37: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        42: aload_0
+        43: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        46: astore_3
+        47: aload_0
+        48: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        51: aload_0
+        52: getfield      #185                // Field name:Ljava/lang/String;
+        55: aload_0
+        56: aload_3
+        57: invokedynamic #252,  0            // InvokeDynamic #11:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        62: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        65: checkcast     #217                // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot
+        68: astore        4
+        70: aload_1
+        71: getfield      #253                // Field dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.marker:Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        74: aload         4
+        76: invokevirtual #256                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.equals:(Ljava/lang/Object;)Z
+        79: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        82: aload_0
+        83: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        86: aload_0
+        87: getfield      #185                // Field name:Ljava/lang/String;
+        90: invokevirtual #260                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.unlinkEntry:(Ljava/lang/String;)V
+        93: aload_3
+        94: aload_0
+        95: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        98: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+       101: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+       104: aload_0
+       105: iconst_0
+       106: putfield      #236                // Field begun:Z
+       109: aload_0
+       110: invokevirtual #222                // Method requireClear:()V
+       113: aload_2
+       114: monitorexit
+       115: goto          125
+       118: astore        5
+       120: aload_2
+       121: monitorexit
+       122: aload         5
+       124: athrow
+       125: return
+      Exception table:
+         from    to  target type
+             7   115   118   any
+           118   122   118   any
+
+  public void requirePresent(dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_2
+         6: monitorenter
+         7: aload_1
+         8: ldc_w         #264                // String same publication marker
+        11: invokestatic  #15                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        14: pop
+        15: aload_0
+        16: getfield      #236                // Field begun:Z
+        19: ifeq          34
+        22: aload_1
+        23: getfield      #248                // Field dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.owner:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;
+        26: aload_0
+        27: if_acmpne     34
+        30: iconst_1
+        31: goto          35
+        34: iconst_0
+        35: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        38: aload_0
+        39: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        42: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        47: aload_0
+        48: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        51: astore_3
+        52: aload_1
+        53: getfield      #253                // Field dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent.marker:Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        56: aload_0
+        57: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        60: aload_0
+        61: getfield      #185                // Field name:Ljava/lang/String;
+        64: aload_0
+        65: aload_3
+        66: invokedynamic #266,  0            // InvokeDynamic #12:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        71: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        74: invokevirtual #256                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.equals:(Ljava/lang/Object;)Z
+        77: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        80: aload_3
+        81: aload_0
+        82: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        85: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+        88: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        91: aload_0
+        92: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        95: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+       100: aload_2
+       101: monitorexit
+       102: goto          112
+       105: astore        4
+       107: aload_2
+       108: monitorexit
+       109: aload         4
+       111: athrow
+       112: return
+      Exception table:
+         from    to  target type
+             7   102   105   any
+           105   109   105   any
+
+  void quarantinePublication() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #185                // Field name:Ljava/lang/String;
+         4: ldc_w         #267                // String permit-start.intent
+         7: invokevirtual #269                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        10: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        13: aload_0
+        14: invokevirtual #270                // Method quarantineFixed:()V
+        17: return
+
+  void quarantineService(dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch, dev.codex.schubert.nk.storage.ServiceConfigFiles$Service) throws java.io.IOException;
+    Code:
+         0: aload_1
+         1: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         4: pop
+         5: aload_2
+         6: invokestatic  #111                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+         9: pop
+        10: aload_1
+        11: invokevirtual #114                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.state:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$State;
+        14: getstatic     #273                // Field dev/codex/schubert/nk/batch/file/StartupPermitRecords$State.INVALID:Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$State;
+        17: if_acmpne     24
+        20: iconst_1
+        21: goto          25
+        24: iconst_0
+        25: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        28: aload_0
+        29: getfield      #185                // Field name:Ljava/lang/String;
+        32: aload_1
+        33: invokevirtual #276                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.epoch:()Ljava/util/UUID;
+        36: invokestatic  #280                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+        39: aload_2
+        40: invokevirtual #284                // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.name:()Ljava/lang/String;
+        43: invokedynamic #288,  0            // InvokeDynamic #13:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        48: invokevirtual #269                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        51: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        54: aload_0
+        55: invokevirtual #270                // Method quarantineFixed:()V
+        58: return
+
+  private void quarantineFixed() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        11: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        16: aload_0
+        17: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        20: astore_2
+        21: iconst_1
+        22: newarray       boolean
+        24: dup
+        25: iconst_0
+        26: iconst_0
+        27: bastore
+        28: astore_3
+        29: aload_0
+        30: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        33: aload_0
+        34: getfield      #185                // Field name:Ljava/lang/String;
+        37: aload_0
+        38: aload_3
+        39: aload_2
+        40: invokedynamic #292,  0            // InvokeDynamic #14:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;[ZLdev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        45: invokevirtual #200                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atExistingEntryHandle:(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        48: pop
+        49: aload_2
+        50: aload_0
+        51: invokevirtual #192                // Method directory:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        54: invokevirtual #216                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.sameIdentity:(Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Z
+        57: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        60: aload_0
+        61: getfield      #179                // Field gate:Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        64: invokeinterface #189,  1          // InterfaceMethod dev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate.verify:()V
+        69: goto          104
+        72: astore        4
+        74: aload_3
+        75: iconst_0
+        76: baload
+        77: ifne          95
+        80: aload         4
+        82: invokevirtual #206                // Method dev/codex/schubert/nk/storage/StorageIoException.reason:()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        85: getstatic     #210                // Field dev/codex/schubert/nk/storage/StorageIoException$Reason.MISSING:Ldev/codex/schubert/nk/storage/StorageIoException$Reason;
+        88: if_acmpne     95
+        91: iconst_1
+        92: goto          96
+        95: iconst_0
+        96: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        99: aload_0
+       100: invokevirtual #295                // Method begin:()Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Intent;
+       103: pop
+       104: aload_1
+       105: monitorexit
+       106: goto          116
+       109: astore        5
+       111: aload_1
+       112: monitorexit
+       113: aload         5
+       115: athrow
+       116: return
+      Exception table:
+         from    to  target type
+            29    69    72   Class dev/codex/schubert/nk/storage/StorageIoException
+             7   106   109   any
+           109   113   109   any
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot directory() throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: invokestatic  #299                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+         3: invokevirtual #305                // Method java/lang/Thread.isInterrupted:()Z
+         6: ifne          27
+         9: aload_0
+        10: getfield      #160                // Field security:Ldev/codex/schubert/nk/storage/InodeSecurityCalls;
+        13: invokeinterface #309,  1          // InterfaceMethod dev/codex/schubert/nk/storage/InodeSecurityCalls.effectiveUid:()J
+        18: lconst_0
+        19: lcmp
+        20: ifne          27
+        23: iconst_1
+        24: goto          28
+        27: iconst_0
+        28: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        31: aload_0
+        32: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        35: aload_0
+        36: invokedynamic #313,  0            // InvokeDynamic #15:execute:(Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;
+        41: invokevirtual #228                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.atDirectory:(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;
+        44: checkcast     #217                // class dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot
+        47: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot file(java.nio.file.Path, dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot) throws java.io.IOException;
+    Code:
+         0: invokestatic  #299                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+         3: invokevirtual #305                // Method java/lang/Thread.isInterrupted:()Z
+         6: ifne          27
+         9: aload_0
+        10: getfield      #160                // Field security:Ldev/codex/schubert/nk/storage/InodeSecurityCalls;
+        13: invokeinterface #309,  1          // InterfaceMethod dev/codex/schubert/nk/storage/InodeSecurityCalls.effectiveUid:()J
+        18: lconst_0
+        19: lcmp
+        20: ifne          27
+        23: iconst_1
+        24: goto          28
+        27: iconst_0
+        28: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        31: aload_0
+        32: getfield      #171                // Field policy:Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy;
+        35: aload_1
+        36: iconst_1
+        37: iconst_0
+        38: iconst_0
+        39: iconst_0
+        40: lconst_0
+        41: invokevirtual #314                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.snapshot:(Ljava/nio/file/Path;ZZIIJ)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        44: astore_3
+        45: aload_3
+        46: invokevirtual #318                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.metadata:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata;
+        49: invokevirtual #322                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.device:()J
+        52: aload_2
+        53: invokevirtual #318                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot.metadata:()Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata;
+        56: invokevirtual #322                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Metadata.device:()J
+        59: lcmp
+        60: ifne          67
+        63: iconst_1
+        64: goto          68
+        67: iconst_0
+        68: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        71: aload_3
+        72: areturn
+
+  public void close() throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #144                // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_1
+         6: monitorenter
+         7: aload_0
+         8: getfield      #152                // Field root:Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+        11: invokevirtual #327                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.close:()V
+        14: aload_1
+        15: monitorexit
+        16: goto          24
+        19: astore_2
+        20: aload_1
+        21: monitorexit
+        22: aload_2
+        23: athrow
+        24: return
+      Exception table:
+         from    to  target type
+             7    16    19   any
+            19    22    19   any
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$directory$0(java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: getfield      #171                // Field policy:Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy;
+         4: aload_1
+         5: iconst_1
+         6: iconst_1
+         7: iconst_0
+         8: iconst_0
+         9: lconst_0
+        10: invokevirtual #314                // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.snapshot:(Ljava/nio/file/Path;ZZIIJ)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        13: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$quarantineFixed$0(boolean[], dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_1
+         1: iconst_0
+         2: iconst_1
+         3: bastore
+         4: aload_0
+         5: aload_3
+         6: aload_2
+         7: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+        10: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$requirePresent$0(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: aload_1
+         3: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+         6: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$retire$0(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: aload_1
+         3: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+         6: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$observeQuarantine$0(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: aload_1
+         3: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+         6: areturn
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$begin$1(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: aload_1
+         3: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+         6: areturn
+
+  private java.lang.Boolean lambda$begin$0(java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_1
+         1: aload_0
+         2: getfield      #185                // Field name:Ljava/lang/String;
+         5: invokeinterface #333,  2          // InterfaceMethod java/nio/file/Path.resolve:(Ljava/lang/String;)Ljava/nio/file/Path;
+        10: astore_2
+        11: aload_2
+        12: getstatic     #337                // Field java/nio/file/StandardOpenOption.CREATE_NEW:Ljava/nio/file/StandardOpenOption;
+        15: getstatic     #343                // Field java/nio/file/StandardOpenOption.WRITE:Ljava/nio/file/StandardOpenOption;
+        18: getstatic     #346                // Field java/nio/file/LinkOption.NOFOLLOW_LINKS:Ljava/nio/file/LinkOption;
+        21: invokestatic  #352                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        24: iconst_1
+        25: anewarray     #357                // class java/nio/file/attribute/FileAttribute
+        28: dup
+        29: iconst_0
+        30: ldc_w         #359                // String rw-------
+        33: invokestatic  #361                // Method java/nio/file/attribute/PosixFilePermissions.fromString:(Ljava/lang/String;)Ljava/util/Set;
+        36: invokestatic  #367                // Method java/nio/file/attribute/PosixFilePermissions.asFileAttribute:(Ljava/util/Set;)Ljava/nio/file/attribute/FileAttribute;
+        39: aastore
+        40: invokestatic  #371                // Method java/nio/channels/FileChannel.open:(Ljava/nio/file/Path;Ljava/util/Set;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/channels/FileChannel;
+        43: astore_3
+        44: aload_3
+        45: iconst_1
+        46: invokevirtual #376                // Method java/nio/channels/FileChannel.force:(Z)V
+        49: aload_3
+        50: ifnull        85
+        53: aload_3
+        54: invokevirtual #379                // Method java/nio/channels/FileChannel.close:()V
+        57: goto          85
+        60: astore        4
+        62: aload_3
+        63: ifnull        82
+        66: aload_3
+        67: invokevirtual #379                // Method java/nio/channels/FileChannel.close:()V
+        70: goto          82
+        73: astore        5
+        75: aload         4
+        77: aload         5
+        79: invokevirtual #382                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        82: aload         4
+        84: athrow
+        85: goto          93
+        88: astore_3
+        89: invokestatic  #35                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.unavailable:()Ldev/codex/schubert/nk/storage/StorageIoException;
+        92: athrow
+        93: iconst_1
+        94: invokestatic  #388                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        97: areturn
+      Exception table:
+         from    to  target type
+            44    49    60   Class java/lang/Throwable
+            66    70    73   Class java/lang/Throwable
+            11    85    88   Class java/nio/file/FileAlreadyExistsException
+
+  private dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot lambda$requireClear$0(dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot, java.nio.file.Path) throws java.io.IOException, java.security.NoSuchAlgorithmException;
+    Code:
+         0: aload_0
+         1: aload_2
+         2: aload_1
+         3: invokevirtual #329                // Method file:(Ljava/nio/file/Path;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;)Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Snapshot;
+         6: areturn
+
+  private static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles lambda$createService$1(dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.storage.ServiceConfigFiles$Service, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;
+    Code:
+         0: invokestatic  #393                // Method dev/codex/schubert/nk/storage/LinuxInodeSecurity.create:()Ldev/codex/schubert/nk/storage/LinuxInodeSecurity;
+         3: astore        5
+         5: new           #398                // class dev/codex/schubert/nk/batch/file/StartupPermitFiles
+         8: dup
+         9: aload         4
+        11: aload         5
+        13: invokespecial #400                // Method dev/codex/schubert/nk/batch/file/StartupPermitFiles."<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;)V
+        16: astore        6
+        18: aload_0
+        19: aload         6
+        21: invokevirtual #403                // Method dev/codex/schubert/nk/batch/file/StartupPermitFiles.current:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch;
+        24: invokevirtual #407                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.equals:(Ljava/lang/Object;)Z
+        27: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        30: aload         6
+        32: invokevirtual #408                // Method dev/codex/schubert/nk/batch/file/StartupPermitFiles.readIssued:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Permit;
+        35: pop
+        36: new           #412                // class dev/codex/schubert/nk/batch/file/StartupLaunchFiles
+        39: dup
+        40: aload         4
+        42: aload         5
+        44: aload_0
+        45: invokespecial #414                // Method dev/codex/schubert/nk/batch/file/StartupLaunchFiles."<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch;)V
+        48: invokevirtual #417                // Method dev/codex/schubert/nk/batch/file/StartupLaunchFiles.readOwner:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame;
+        51: astore        7
+        53: aload         7
+        55: invokevirtual #421                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.morning:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent;
+        58: invokevirtual #427                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent.invocation:()Ljava/lang/String;
+        61: aload_1
+        62: invokevirtual #432                // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.invocation:()Ljava/lang/String;
+        65: invokevirtual #269                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        68: ifeq          107
+        71: aload         7
+        73: invokevirtual #421                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.morning:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent;
+        76: invokevirtual #433                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent.pid:()J
+        79: aload_1
+        80: invokevirtual #436                // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.pid:()J
+        83: lcmp
+        84: ifne          107
+        87: aload         7
+        89: invokevirtual #421                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.morning:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent;
+        92: invokevirtual #437                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent.startTicks:()J
+        95: aload_1
+        96: invokevirtual #440                // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot.startTicks:()J
+        99: lcmp
+       100: ifne          107
+       103: iconst_1
+       104: goto          108
+       107: iconst_0
+       108: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+       111: aload         7
+       113: invokevirtual #441                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.parentsGuard:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;
+       116: invokeinterface #445,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.check:()V
+       121: new           #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+       124: dup
+       125: aload         4
+       127: aload         5
+       129: new           #102                // class dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo
+       132: dup
+       133: invokespecial #104                // Method dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo."<init>":()V
+       136: aload_2
+       137: aload_1
+       138: aload         7
+       140: aload_0
+       141: aload         6
+       143: invokedynamic #450,  0            // InvokeDynamic #16:verify:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame;Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch;Ldev/codex/schubert/nk/batch/file/StartupPermitFiles;)Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+       148: aload_0
+       149: invokevirtual #276                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.epoch:()Ljava/util/UUID;
+       152: invokestatic  #280                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       155: aload_3
+       156: invokevirtual #284                // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.name:()Ljava/lang/String;
+       159: invokedynamic #288,  0            // InvokeDynamic #13:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       164: invokespecial #138                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;Ljava/lang/String;)V
+       167: areturn
+
+  private static void lambda$createService$2(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame, dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch, dev.codex.schubert.nk.batch.file.StartupPermitFiles) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+         5: aload_2
+         6: invokevirtual #441                // Method dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.parentsGuard:()Ldev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard;
+         9: invokeinterface #445,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard.check:()V
+        14: aload_3
+        15: aload         4
+        17: invokevirtual #403                // Method dev/codex/schubert/nk/batch/file/StartupPermitFiles.current:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch;
+        20: invokevirtual #407                // Method dev/codex/schubert/nk/batch/file/StartupPermitRecords$Epoch.equals:(Ljava/lang/Object;)Z
+        23: invokestatic  #92                 // Method dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.require:(Z)V
+        26: aload         4
+        28: invokevirtual #408                // Method dev/codex/schubert/nk/batch/file/StartupPermitFiles.readIssued:()Ldev/codex/schubert/nk/batch/file/StartupPermitRecords$Permit;
+        31: pop
+        32: return
+
+  private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$createService$0(java.nio.file.Path) throws java.io.IOException;
+    Code:
+         0: invokestatic  #47                 // Method dev/codex/schubert/nk/storage/LinuxDirectoryCalls.create:()Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;
+         3: aload_0
+         4: invokestatic  #453                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.open:(Ldev/codex/schubert/nk/storage/DirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+         7: areturn
+
+  private static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles lambda$createPublication$1(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;
+    Code:
+         0: new           #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+         3: dup
+         4: aload_2
+         5: invokestatic  #393                // Method dev/codex/schubert/nk/storage/LinuxInodeSecurity.create:()Ldev/codex/schubert/nk/storage/LinuxInodeSecurity;
+         8: new           #102                // class dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo
+        11: dup
+        12: invokespecial #104                // Method dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo."<init>":()V
+        15: aload_0
+        16: aload_1
+        17: invokedynamic #456,  0            // InvokeDynamic #17:verify:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        22: ldc_w         #267                // String permit-start.intent
+        25: invokespecial #138                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;Ljava/lang/String;)V
+        28: areturn
+
+  private static void lambda$createPublication$2(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+         5: return
+
+  private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$createPublication$0(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #453                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.open:(Ldev/codex/schubert/nk/storage/DirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+         5: areturn
+
+  private static dev.codex.schubert.nk.batch.file.BackupStartIntentFiles lambda$create$1(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot, dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Target, dev.codex.schubert.nk.storage.OwnedTransferDirectory) throws java.io.IOException;
+    Code:
+         0: new           #8                  // class dev/codex/schubert/nk/batch/file/BackupStartIntentFiles
+         3: dup
+         4: aload_3
+         5: invokestatic  #393                // Method dev/codex/schubert/nk/storage/LinuxInodeSecurity.create:()Ldev/codex/schubert/nk/storage/LinuxInodeSecurity;
+         8: new           #102                // class dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo
+        11: dup
+        12: invokespecial #104                // Method dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher$NioIo."<init>":()V
+        15: aload_0
+        16: aload_1
+        17: invokedynamic #459,  0            // InvokeDynamic #18:verify:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext;Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;
+        22: aload_2
+        23: invokespecial #132                // Method "<init>":(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/batch/file/EnvironmentInodePolicy$Source;Ldev/codex/schubert/nk/batch/file/BackupStartIntentFiles$Gate;Ldev/codex/schubert/nk/batch/platform/BackupUnitStartClient$Target;)V
+        26: areturn
+
+  private static void lambda$create$2(dev.codex.schubert.nk.batch.platform.RootStartupContext, dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #41                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext.recheck:(Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Snapshot;)V
+         5: return
+
+  private static dev.codex.schubert.nk.storage.OwnedTransferDirectory lambda$create$0(dev.codex.schubert.nk.storage.LinuxDirectoryCalls, java.nio.file.Path) throws dev.codex.schubert.nk.storage.StorageIoException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #453                // Method dev/codex/schubert/nk/storage/OwnedTransferDirectory.open:(Ldev/codex/schubert/nk/storage/DirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;
+         5: areturn
+}
