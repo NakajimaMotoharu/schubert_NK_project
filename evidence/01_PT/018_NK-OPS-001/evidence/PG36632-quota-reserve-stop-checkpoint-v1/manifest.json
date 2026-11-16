@@ -1,0 +1,102 @@
+{
+  "actualExit": 0,
+  "recordKind": "QUOTA_PRESERVATION_NOT_ACCEPTANCE",
+  "atJST": "2026-11-16T15:12:03.591048+09:00",
+  "productionCoreMain": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "headAtCaptureBeforePreservationCommit": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "branch": "dev-foundation",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T06:12:02+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 90,
+      "remainingPercent": 10,
+      "resetsAt": 1795012174,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "trackedAndOrdinaryPendingPaths": [
+    " M documents/400_PGPT/450_品質/456_領域別進捗・利用枠・中断再開管理.md",
+    " M documents/400_PGPT/450_品質/460_基盤残件・再開優先順.md",
+    " M tools/quality/pgpt_protocol_public_oracle.py",
+    "?? documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2460_WBS65予実・SSC447ビルド済PT未実行保全版777.json",
+    "?? documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2461_WBS65SSC447保全停止・未完終了記録.json",
+    "?? evidence/01_PT/018_NK-OPS-001/4439_SSC447_ビルド済・一五二PT未実行保全記録.md",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36606-ssc447-current152-oracle-composition-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36610-ssc447-source-fixed-pending-pt-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36611-ssc447-public-oracle-selftest-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36612-ssc447-cache-owners-prestyle-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36614-ssc447-cache-owners-prepare-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/evidence/PG36630-ssc447-built-untested-reserve-stop-v1/",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4424_ssc447_profile_pending.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4425_ssc447_profile.json",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4426_ssc447_public_oracle_selftest.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4427_ssc447_post_join.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4428_ssc447_unfiltered.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4429_ssc447_public_abi.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4430_ssc447_reserve_stop.py",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4431_ssc447_reserve_end.json",
+    "?? evidence/01_PT/018_NK-OPS-001/input/4432_ssc447_stop_state.py"
+  ],
+  "protectedUntrackedPaths": [
+    "tools/quality/architecture/SnapshotKeyCloseWitness.java",
+    "tools/quality/pg9892_snapshot_key_close_witness.py"
+  ],
+  "protectedFileContentsReadOrHashed": false,
+  "stashCount": 7,
+  "ownedJobs": [
+    {
+      "kind": "prestyle",
+      "toolSession": 77531,
+      "terminalExit": 0
+    },
+    {
+      "kind": "prepare",
+      "toolSession": 17910,
+      "terminalExit": 0
+    }
+  ],
+  "foreignVmJobState": "UNQUERIED_UNKNOWN",
+  "productRun": "PG36620-SSC447-CACHE-OWNERS-CURRENT152",
+  "productRunState": "NOT_STARTED",
+  "expectedCases": 152,
+  "staticState": "NOT_RUN",
+  "abiState": "NOT_RUN",
+  "rawCoverageState": "NOT_RUN",
+  "formalRun": "PT-WEB-20260925-24",
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "canonicalCompletedRows": 184,
+  "canonicalRows": 625,
+  "originalAcceptedItems": 17,
+  "originalItems": 190,
+  "effortRate": null,
+  "allComplete": false,
+  "newAcceptance": 0,
+  "currentActivity": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36630-ssc447-built-untested-reserve-stop-v1/manifest.json",
+    "sha256": "5b878749975766bde8e8fada60c6b7ba8bd32635b906a8c0198261ff9aaec8cc"
+  },
+  "forecast": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2460_WBS65予実・SSC447ビルド済PT未実行保全版777.json",
+    "sha256": "0d51f90045e8bc7a871c596147039ee3cd9b767207b4fa005d3e89a9aee92904"
+  },
+  "remainingEstimatePp": {
+    "low": 397.624,
+    "base": 838.286,
+    "high": 1646.115
+  },
+  "nextCommand": "PYTHONPATH=tools/quality python3 -B tools/quality/pgpt_closed_host_profile.py static evidence/01_PT/018_NK-OPS-001/input/4425_ssc447_profile.json",
+  "resumeRequiresExplicitUserInstruction": true,
+  "automaticResumeAllowed": false,
+  "resetTicketConsumed": false,
+  "modelChanged": false,
+  "extraChargesAuthorized": false,
+  "lastHourlyReceipt": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2449_毎時計測_WireMetadata三検証.json",
+  "lastHourlyMeasurementId": "02263ed3235e95e15a2d12f6fa768282a34fc56d02e357d880bc00711e2a9be6",
+  "nextHourlyNotBeforeJST": "2026-11-16T15:14:59+09:00",
+  "N": null,
+  "T": null
+}

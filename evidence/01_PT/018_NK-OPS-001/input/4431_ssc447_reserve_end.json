@@ -1,0 +1,105 @@
+{
+  "groupId": "PGPT-WBS65-SSC447-IMMUTABLE-CACHE-OWNERS-CURRENT152-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2461_WBS65SSC447保全停止・未完終了記録.json",
+  "category": "IMPLEMENTATION",
+  "kind": "REWORK",
+  "scope": "BUG3111/YKT2583のうちTypedFieldValues/JstWireTimestampのprivate empty constructorと不変cache所有だけを整理する。公開finalclass/全public static APIとWIRE_LENGTH=17は保持、private cacheを外部公開0。TypedFieldValuesはprivate final Pattern retainedOptionalIdを実状態として所有するprivate INSTANCEをclass初期化時に一回生成し、constructorで元OPTIONAL_IDと同じPattern.compile(\"[0-9]{1,12}\")を初期化、元parseOptionalIdはINSTANCE.retainedOptionalIdを読む。LITERAL_VALUE定数や全semantic変換/例外/範囲診断は不変。JstWireTimestampは元JAPAN ZoneId/17桁Pattern/STRICT formatter三cacheをprivate final retainedJapanZone/retainedWireDigits/retainedWireFormatterとして実所有し、private INSTANCE constructorで元と同じ順序・引数で一回生成、format/parseはその不変stateを参照する。class初期化/finalfieldの安全公開、Pattern matcherは毎callで分離、非並行mutable formatterやnew publicinstanceは追加しない。constructorは通常static経路が必ず使用する実cache状態のinvariantを確立し、試験から無意味なinstanceやprivate反射で呼ばない。追加二owner objectのheap/性能は未測定でITST合格を断定0。全cache literal/初期化順/変換body/診断を逆展開formatted完全一致、他163Main/全Test/五TSV不変、公開ABI完全一致・親二class以外173physical byte不変を確認する。生成class数は175/Code162を維持。日時header・全named69変換に影響するため、新定義0で既全35Testsource（helper含む）152通常PTを当source一回必要回帰し、両親raw100と全175raw不足を別記録、Module/451/正式を推測昇格0。元public oracleの四Class.forName/閉32public scalar/元helper inverse SHA/全期待は不変、工具は既module33/145に新二fixtureを加えた35/152構成だけ認識するよう補足し14負境界等の自己検証を実施、private/任意/HOLD反射やSDK接続を許可しない。旧同145/18の確認再演や旧exec合成0。SS322323354914をPG前にmain反映、RD/UI/DIF変更不要、全HOLD/枠10以下停止/正式1964-53/184-625/工数null保持。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4438_SSC447_不変cache所有・通常一五二仕様.md",
+      "sha256": "988bb4a87d42aed7ed2f0615a1333f52e6396de7a57ab855253939eb33e57939"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36600-ssc447-cache-owners-design-only-v1/design-only-main-patch.json",
+      "sha256": "31822e0aedb0906cacd69a2f394392d6ddf2a89eb661a20f562c0b95dfa47a47"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36600-ssc447-cache-owners-design-only-v1/all-callers-source-witness.json",
+      "sha256": "80a4173b42254445b808a7d0b885870d2166d8902a51c20c5ffbc25a5aaf1eb9"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P001-03",
+    "WBS-P003-03"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": "WBS-P001-03",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": "WBS-P003-03"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P001-03": [
+      "WBS-P001-03"
+    ],
+    "WBS-P003-03": [
+      "WBS-P003-03"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "ab4e8eafa6fb4835c792753357c50c6ceffbd29f",
+  "run": "PG36620-SSC447-CACHE-OWNERS-CURRENT152",
+  "estimate": {
+    "low": 0.3,
+    "base": 0.9,
+    "high": 2.7
+  },
+  "capPp": 3,
+  "workIds": [
+    "SSC447_IMMUTABLE_CACHE_OWNERS_CURRENT152"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2460_WBS65予実・SSC447ビルド済PT未実行保全版777.json",
+    "sha256": "0d51f90045e8bc7a871c596147039ee3cd9b767207b4fa005d3e89a9aee92904"
+  },
+  "nextCommand": "STOP: quota remaining10, no new work or automatic resume. On explicit resume obtain fresh all quota windows (>10 required), verify current Git/source/tool hashes and existing PG36614 preparation source/hash identity, check PG36620 has not since been started without querying foreign VM/aru. Then execute static command from PG36630; do not repeat prepare/prestyle/self16. Full152/ABI/raw remainNOT_RUN; no older source success transfer. Hourly cursor2449/measurement02263ed3/2026-11-16T14:14:59+09:00, next15:14:59; N/Tnull.",
+  "sourceAfter": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG36630-ssc447-built-untested-reserve-stop-v1/manifest.json",
+  "manifestSha256": "5b878749975766bde8e8fada60c6b7ba8bd32635b906a8c0198261ff9aaec8cc",
+  "terminalAtUTC": "2026-11-16T06:08:42.116599+00:00",
+  "outcome": "RESERVE_STOP_BUILT_UNTESTED_PT152_NOT_RUN_WORK_INCOMPLETE",
+  "technical": {
+    "productionCoreMain": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "actualUnitSource": null,
+    "plannedRun": "PG36620-SSC447-CACHE-OWNERS-CURRENT152",
+    "mainSources": 165,
+    "physicalClasses": 175,
+    "testClassFiles": 55,
+    "compiledOrdinaryCases": 152,
+    "toolChecks": 16,
+    "rootMainCompileExit": 0,
+    "testCompileExit": 0,
+    "prestyleExit": 0,
+    "applicationTestsExecuted": 0,
+    "productUnitState": "NOT_RUN",
+    "staticAnalysisState": "NOT_RUN",
+    "publicAbiState": "NOT_RUN",
+    "rawCoverageState": "NOT_RUN",
+    "rootNullAwayCompilePassed": true,
+    "manufacturingAccepted": false,
+    "ptAccepted": false,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null,
+    "originalGroupEstimateRetained": true,
+    "remainingGroupEstimatePp": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 2.7
+    },
+    "completedGroupEstimatePp": 0,
+    "actualExclusivePp": null
+  },
+  "checkpointText": "共有枠fresh used90/残10で必須保全停止。SSC447 Coree4794ddfはPR408/mainc66e9490設計先反映後、型変換/JST不変cacheの実private ownerを製造し全body/作成順/diagnostic逆展開formatted exact・他163Main/全Test/五TSV/72caller source不変。元四lookup/閉32scalar/旧helper inverse SHAを保った35source152case構成だけ工具へ追加し16toolcheck成功。PG36612 prestyle0/PG36614 freshRoot Main165及び全Test compile0、175physical/55Testclass/152定義を組立済み。PG36620製品jobは未起動、152PT/静的/公開ABI/CRC-initXML/rawcoverageはNOT_RUN、旧a188/7f04成功を新sourceへ転用0。新scopeは未完で開始.3/.9/2.7を完了消化0、残397.624/838.286/1646.115（原904.85/SV/既開始費用保持）。正式1964/53・正本184/625・元17/190・工数null、App252/36330/36263/歴史不成功67不変。BUG3111/YKT2583/SSC447と全HOLD維持、own prestyle77531/prepare17910は真正終了0・他job/VM/aruは未照会UNKNOWN、実VM/DB/鍵/Backup/意図退役/配備/再起動0。自動再開/reset券/追加課金/モデル変更なし。"
+}
