@@ -139,6 +139,8 @@ def validate_syntax(c):
 
 
 def validate_optional_capabilities(c):
+    import pgpt_protocol_public_oracle
+    pgpt_protocol_public_oracle.syntax(c)
     """Explicit reviewed source capabilities; never infer permission from a matching name."""
     reflection = c.get('reviewedReflection', [])
     require(isinstance(reflection, list) and len(reflection) <= 1, 'one reviewed immutable History reflection only')
@@ -188,7 +190,7 @@ def validate_owners(c, owners):
 
 
 def tool_hashes():
-    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk', 'pgpt_unstarted_process', 'pgpt_public_unit_xml']]
+    paths = ['tools/quality/' + n + '.py' for n in ['pgpt_closed_host_profile', 'pgpt_closed_host_stages', 'pgpt_closed_host_post', 'pgpt_guard_signature', 'pgpt_analysis_symbols', 'pgpt_artemis_sdk', 'pgpt_unstarted_process', 'pgpt_public_unit_xml', 'pgpt_protocol_public_oracle']]
     return {p: digest(R / p) for p in paths}
 
 
@@ -216,8 +218,10 @@ def checked_inputs(c):
         require(source.count(item['sourceAnchor']) == source.count('Class.forName') == 1, 'no additional reflection call')
     import pgpt_unstarted_process as process
     process.checked(c)
+    import pgpt_protocol_public_oracle
+    pgpt_protocol_public_oracle.checked(c)
     for path in c['mainSources'] + [t['path'] for t in c['testSources']]:
-        text = (R / path).read_text()
+        text = pgpt_protocol_public_oracle.reviewed_text(c, path, (R / path).read_text())
         for item in c.get('reviewedReflection', []):
             if path == item['testPath']:
                 text = text.replace(item['sourceAnchor'], '', 1)
