@@ -12,12 +12,17 @@ PREFIX='src/schubert-nk-protocol/'
 ANCHORS=['Class.forName(SEMANTIC + semantic)','Class.forName(SEMANTIC + "Sha256Hex")','Class.forName(SEMANTIC + "RelativePath")','Class.forName(SEMANTIC + "DisplayPath")']
 SCALARS=['UserId','EntryId','AudioId','LogId','NotificationId','QuestionId','ScriptFileId','SpeakerId','AsyncJobId','GameCode','EntryType','VoiceCondition','ContentDisposition','DeliveryMode','PairRole','UserRole','LogLevel','LogType','UserState','NotificationState','AnswerState','NotificationType','NotificationErrorCode','MediaMimeType','HttpStatusCode','ElapsedMilliseconds','AnimationListCategory','VideoCategory','AnimationCategory','Sha256Hex','RelativePath','DisplayPath']
 
+COLLECTION_BLOCK='\n    // PT-PRO-NAMED-RECORD-COLLECTION-BEGIN\n    Map<Object, String> recordIndex = new HashMap<>();\n    recordIndex.put(constructed, "typed-record");\n    assertEquals("typed-record", recordIndex.get(decoded));\n    org.junit.jupiter.api.Assertions.assertFalse(constructed.equals(null));\n    org.junit.jupiter.api.Assertions.assertFalse(constructed.equals("other-type"));\n    Map<Object, String> wireIndex = new HashMap<>();\n    wireIndex.put(input, "wire-fields");\n    assertEquals("wire-fields", wireIndex.get(fieldsOf(decoded)));\n    // PT-PRO-NAMED-RECORD-COLLECTION-END'
+
 def syntax(c):
  import pgpt_closed_host_profile as p
  v=c.get('reviewedProtocolPublicOracle')
  if v is None:return
  p.require(isinstance(v,dict) and set(v)=={'closureProof'} and v['closureProof'] in c['closureProofs'],'explicit independent public-oracle closure')
- p.require(len(c['mainSources'])==165 and len(c['testSources'])==31 and c['expectedTests']==140,'reviewed complete Protocol140 scope only')
+ p.require(len(c['mainSources'])==165,'reviewed complete Protocol Main closure only')
+ module=len(c['testSources'])==31 and c['expectedTests']==140
+ record=len(c['testSources'])==2 and c['expectedTests']==6 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java'}
+ p.require(module or record,'reviewed complete140 or exact record caller whole6 only')
  p.require(all(n.startswith(PREFIX) for n in c['mainSources']+[t['path'] for t in c['testSources']]),'Protocol-only source boundary')
  p.require(sum(t['path']==HELPER and t['tests']==0 for t in c['testSources'])==1,'unchanged whole helper required')
  p.require(c['sdkJars']==[],'no external SDK/backend capability')
@@ -28,7 +33,12 @@ def checked(c):
  v=c.get('reviewedProtocolPublicOracle')
  if v is None:return
  pin=v['closureProof'];proof=json.loads((p.R/pin['path']).read_text());p.require(p.digest(p.R/pin['path'])==pin['sha256'] and proof['actualExit']==0,'public oracle proof hash')
- p.require(proof['helper']['path']==HELPER and proof['helper']['sha256']==HELPER_SHA==p.digest(p.R/HELPER),'original whole helper immutable')
+ p.require(proof['helper']['path']==HELPER and proof['helper']['sha256']==p.digest(p.R/HELPER),'whole helper immutable against current closure')
+ helper=(p.R/HELPER).read_text()
+ if p.digest(p.R/HELPER)!=HELPER_SHA:
+  import hashlib
+  p.require(helper.count(COLLECTION_BLOCK)==1 and proof.get('additiveContractExtensionOriginalSha')==HELPER_SHA,'only exact additive collection contract block')
+  p.require(hashlib.sha256(helper.replace(COLLECTION_BLOCK,'',1).encode()).hexdigest()==HELPER_SHA,'all original helper bytes/oracles exact under inverse')
  p.require(proof['lookupAnchors']==ANCHORS and proof['closedScalarTypes']==SCALARS and proof['privateOrHeldTypeAccess'] is False,'source-reviewed closed target set')
  for oldpin,tests in [(proof['historicalCompile'],None),(proof['historicalPost'],130)]:
   oldpath=p.R/oldpin['path'];old=json.loads(oldpath.read_text());p.require(p.digest(oldpath)==oldpin['sha256'] and old['actualExit']==0,'qualified historical proof identity')

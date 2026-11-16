@@ -1,0 +1,110 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36150-NAMED-RECORD-COLLECTION-WHOLE6",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36144-named-record-collection-prepare-v1/manifest.json",
+    "sha256": "2180507b85f980b996288ad1701eedf258e3ed67ffd0c647f55145d76be25616"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36146-named-record-collection-static-v1/manifest.json",
+    "sha256": "5ad05ff5bcb35c6d4d268b29b077f1c6e8ce452055efaa8fe5235de3f27e1090"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> values = new LinkedHashMap<>();",
+      "occurrences": 1,
+      "reason": "decodeArea creates a method-local LinkedHashMap, fills it only within that invocation and constructs a FieldValueSet from it. Independent concurrent codec callers have separate maps; this is no concurrently shared mutable map.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (protocolFailure != primary) {",
+      "occurrences": 1,
+      "reason": "The references are Throwables. Identity intentionally determines whether the same Throwable would be attached to itself via suppressed failures; equals() could be overridden and must not replace the identity contract. Whole original tests verify distinct and identical causes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (rollbackFailure != primary) {",
+      "occurrences": 1,
+      "reason": "The references are Throwables. Identity intentionally determines whether the same Throwable would be attached to itself via suppressed failures; equals() could be overridden and must not replace the identity contract. Whole original tests verify distinct and identical causes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, String> accessors = new LinkedHashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, List<Field>> areas = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, List<Field>> reviewed = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> recordIndex = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This collection is local to one verifyType invocation and has no concurrent access or publication. Its stable keys are the independently constructed immutable record or the completed independent wire-field map; fixed lookup text tests actual equality/hash composition. The input map is no longer mutated.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "org.junit.jupiter.api.Assertions.assertFalse(constructed.equals(null));",
+      "occurrences": 1,
+      "reason": "This direct negative assertion verifies the public immutable record equality contract rejects null, rather than production null comparison logic. All69 named types are checked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> wireIndex = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This collection is local to one verifyType invocation and has no concurrent access or publication. Its stable keys are the independently constructed immutable record or the completed independent wire-field map; fixed lookup text tests actual equality/hash composition. The input map is no longer mutated.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "bad[n] = null;",
+      "occurrences": 1,
+      "reason": "A test-local Object[] copy deliberately replaces exactly one public constructor argument with null to verify the independent nonnull invariant. This is negative fixture input, not a production null assignment.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> absent = new LinkedHashMap<>(input);",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> flagFields = new LinkedHashMap<>(input);",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

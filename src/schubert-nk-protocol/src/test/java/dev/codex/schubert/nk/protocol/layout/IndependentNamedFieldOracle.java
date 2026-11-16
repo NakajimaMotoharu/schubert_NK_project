@@ -180,6 +180,16 @@ final class IndependentNamedFieldOracle {
     var constructor = type.getConstructor(signature.toArray(Class<?>[]::new));
     Object constructed = constructor.newInstance(arguments.toArray());
     assertWireMap(input, fieldsOf(constructed));
+    // PT-PRO-NAMED-RECORD-COLLECTION-BEGIN
+    Map<Object, String> recordIndex = new HashMap<>();
+    recordIndex.put(constructed, "typed-record");
+    assertEquals("typed-record", recordIndex.get(decoded));
+    org.junit.jupiter.api.Assertions.assertFalse(constructed.equals(null));
+    org.junit.jupiter.api.Assertions.assertFalse(constructed.equals("other-type"));
+    Map<Object, String> wireIndex = new HashMap<>();
+    wireIndex.put(input, "wire-fields");
+    assertEquals("wire-fields", wireIndex.get(fieldsOf(decoded)));
+    // PT-PRO-NAMED-RECORD-COLLECTION-END
     for (int n = 0; n < fields.size(); n++) {
       Field field = fields.get(n);
       if (!signature.get(n).isPrimitive()) {
