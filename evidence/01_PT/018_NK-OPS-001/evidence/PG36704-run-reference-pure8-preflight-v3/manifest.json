@@ -1,0 +1,360 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4448_run_reference_pure8_profile_v3.json",
+    "sha256": "22e5d0eea697741ccd7c76064742c0bb4b91bf64d018e084aae2f175f904ac01"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "0f0657f9307800083ecb70006dd1322df49153dfad5ea08762d119857e0ff9d4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "5784f01574923a7c1939cb63ee2fe4907f3536b377ccee9fc77ae675a9b47e7b",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java": "1c4edae2aa736bc73770c6e598a4d0fe4c52635c43e1bbcb7cedfbeab4f13114",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36700-run-reference-pure8-prepare-v3/manifest.json",
+    "sha256": "3a3f5d9619df085b6dbc3a0572769e7e8298f5da942bf7fe2794eb726341a8e8"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36702-run-reference-pure8-static-v3/manifest.json",
+    "sha256": "85dd77263f155148cce1959b5c9dd63ff8d08877afb7274eb72669bb238da322"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4450_run_reference_pure8_static_admission.json",
+    "sha256": "bbbb6fc10da705ed30f19165f40cf0cc845732033495c7fbb64049b38fa6b70f"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": "29",
+      "reason": "SS332 single-owner borrowed-connection read observes the current thread interrupt at entry and after both owned JDBC resources close. It creates no thread, executor, daemon or J2EE container work.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": "40",
+      "reason": "checked is a non-null alias of the acquired statement. Its original statement reference is closed exactly once in the outer finally after row close; explicit precedence is SS332. RRF-PURE-004/005/006 asserts acquired equals close count.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "CloseResource",
+      "line": "47",
+      "reason": "values is a non-null alias of the acquired ResultSet. The original row reference is closed exactly once in the inner finally, including projection/null/runtime/error failures; statement still closes afterward. RRF-PURE-004/005/006 checks counters.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ResultSet object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "59",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "59",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "62",
+      "reason": "SS332/SSC063 requires row then statement close with explicit SQLException-versus-fatal precedence. Finally may rethrow the selected failure; it never returns a success or abandons a sibling resource. RRF-PURE-005/006 checks all owned close calls.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "66",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "66",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "70",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "70",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "73",
+      "reason": "SS332/SSC063 requires row then statement close with explicit SQLException-versus-fatal precedence. Finally may rethrow the selected failure; it never returns a success or abandons a sibling resource. RRF-PURE-005/006 checks all owned close calls.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "77",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "77",
+      "reason": "SS332/SSC063 mandates explicit resource-failure precedence: capture and rethrow identical RuntimeException/Error after both finally blocks, never normalise an NPE or swallow fatal. Exact primary/secondary matrix is RRF-PURE-006.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "rule": "DoNotUseThreads",
+      "line": "81",
+      "reason": "SS332 single-owner borrowed-connection read observes the current thread interrupt at entry and after both owned JDBC resources close. It creates no thread, executor, daemon or J2EE container work.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "109",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "110",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 2 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "116",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "118",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "121",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "127",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "130",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "139",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "140",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 2 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "141",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 3 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "142",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 4 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "143",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 5 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "NullAssignment",
+      "line": "143",
+      "reason": "RRF-PURE-004 deliberately places SQL NULL at each of four column positions. Null is the negative input, not an allowed invariant or catch-NPE normal result.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "208",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "209",
+      "reason": "This exact test-only mode/edge selector enumerates independently specified missing-row, transaction or exception-graph cases in RRF-PURE-003/004/007. Numbers identify fixture variants; production conditions and expected SQL/values are independent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 2 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "CloseResource",
+      "line": "218",
+      "reason": "The exact executor is test-owned and always reaches finally shutdownNow plus asserted awaitTermination10s; returned futures are bounded10s. No JVM shutdown or backend process is involved.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "218",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "223",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "233",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "234",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "281",
+      "reason": "Each Fixture is created inside one synchronous read or one independent virtual task and never escapes that owner. Its event/count/failure/bind maps are accessed only by that task. The concurrent test uses 32 separate fixtures, so no concurrent map access exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "282",
+      "reason": "Each Fixture is created inside one synchronous read or one independent virtual task and never escapes that owner. Its event/count/failure/bind maps are accessed only by that task. The concurrent test uses 32 separate fixtures, so no concurrent map access exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "283",
+      "reason": "Each Fixture is created inside one synchronous read or one independent virtual task and never escapes that owner. Its event/count/failure/bind maps are accessed only by that task. The concurrent test uses 32 separate fixtures, so no concurrent map access exists.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "375",
+      "reason": "Finite, test-owned virtual executor or explicit interrupt setup/assertion/cleanup for RRF-PURE-003/008; finally shutdownNow plus awaitTermination10s, per-Future10s and no service threads.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "400",
+      "reason": "Only standard java.sql interfaces are proxied. The explicit loader owning the exact interface is required by Proxy.newProxyInstance; no contextual/plugin/product class loading or Class.forName is used.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-17T01:28:37.545">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java">
+<violation beginline="29" endline="29" begincolumn="16" endcolumn="22" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="40" endline="40" begincolumn="13" endcolumn="20" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" variable="checked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this PreparedStatement object are closed after use
+</violation>
+<violation beginline="47" endline="47" begincolumn="15" endcolumn="21" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ResultSet object are closed after use
+</violation>
+<violation beginline="59" endline="59" begincolumn="33" endcolumn="49" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="59" endline="59" begincolumn="52" endcolumn="57" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="62" endline="69" begincolumn="11" endcolumn="10" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="66" endline="66" begincolumn="37" endcolumn="53" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="66" endline="66" begincolumn="56" endcolumn="61" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="70" endline="70" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="70" endline="70" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="73" endline="80" begincolumn="9" endcolumn="8" rule="DoNotThrowExceptionInFinally" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally" priority="4">
+A throw statement in a finally block makes the control flow hard to understand.
+</violation>
+<violation beginline="77" endline="77" begincolumn="35" endcolumn="51" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="77" endline="77" begincolumn="54" endcolumn="59" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="81" endline="81" begincolumn="16" endcolumn="22" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepository" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java">
+<violation beginline="109" endline="109" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="110" endline="110" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="116" endline="116" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="118" endline="118" begincolumn="18" endcolumn="24" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="121" endline="121" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="127" endline="127" begincolumn="18" endcolumn="24" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="130" endline="130" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="nullTransactionAndInterruptContracts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="139" endline="139" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="140" endline="140" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="141" endline="141" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 3 in if statements
+</violation>
+<violation beginline="142" endline="142" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 4 in if statements
+</violation>
+<violation beginline="143" endline="143" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 5 in if statements
+</violation>
+<violation beginline="143" endline="143" begincolumn="49" endcolumn="53" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="missingProjectionAndCardinality" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="208" endline="208" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="fatalProviderGraphIsNotDiscarded" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="209" endline="209" begincolumn="19" endcolumn="20" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="fatalProviderGraphIsNotDiscarded" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="218" endline="218" begincolumn="9" endcolumn="17" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="independentConnectionsCanRunConcurrently" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="218" endline="218" begincolumn="20" endcolumn="63" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="independentConnectionsCanRunConcurrently" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="223" endline="229" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="independentConnectionsCanRunConcurrently" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="233" endline="233" begincolumn="7" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="independentConnectionsCanRunConcurrently" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="234" endline="234" begincolumn="18" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="independentConnectionsCanRunConcurrently" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="281" endline="281" begincolumn="32" endcolumn="56" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest.Fixture" variable="counts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="282" endline="282" begincolumn="36" endcolumn="62" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest.Fixture" variable="failures" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="283" endline="283" begincolumn="32" endcolumn="60" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest.Fixture" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="375" endline="375" begincolumn="42" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest.Fixture" method="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="400" endline="400" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="RunReferenceRepositoryPureJdbcTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+</pmd>
