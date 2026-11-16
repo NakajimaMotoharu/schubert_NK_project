@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-16T19:07:41.668627+00:00",
+  "source": "e8822b0e40d08a0a733bd21b6866b3ece3de5b65",
+  "bug": "BUG3131",
+  "horizontal": "YKT2602",
+  "affectedOriginal": "input4497",
+  "corrected": "input4498",
+  "sourceDomainNegativeChecks": [
+    "src/schubert-nk-bootstrap/src/main/java/Changed.java",
+    "src/schubert-nk-bootstrap/src/test/java/ChangedTest.java",
+    "pom.xml"
+  ],
+  "freshSiblingNegativeChecks": [
+    "old-source",
+    "old-local-m2",
+    "incomplete-count",
+    "wrong-hash"
+  ],
+  "remainingSevenReviewed": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4477_g1301_qualification.py",
+      "sha256": "1fd42a3473d5f805605a0c30362b7a0b31d3f86dfa43907c4054dce8b9664dff",
+      "scope": "Protocol205 Main/Test/resource vs original Unit explicit per-input pins, current Main Core distinct",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4463_ssc448_abi_and_return.py",
+      "sha256": "1dc2a78354a7bbdef0fe1891583746251829959d062bdd4ac1f577a98bd319ae",
+      "scope": "DAO public ABI and other6 physical vs exact prepared Unit, MainCore separately declared",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4484_storage_static_independent.py",
+      "sha256": "3c45247db3e8f792a6b90a6d7d261358e6c00a97d3e1e5bbc4371828ece541eb",
+      "scope": "Storage25 Main-only inputs, no Test source assumption",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4491_four_compile_failed_phase_end.py",
+      "sha256": "c0d03de0a5b4dc90ce61f2e6cd4813837a1e89eaab372b1f7d5dc5cd89e57fa7",
+      "scope": "failed Main-only compile, no production Test executed or old PT transferred; POM-only statement applies to subsequent fix parent",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4492_ssc449_four_main_compile.py",
+      "sha256": "d138e47350c0c4d96d82c529a1466900ce6c6454108f43ee27236272f176754e",
+      "scope": "new e882 Core only declared477 Main/allPOM snapshots, no Test sources",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4495_boot_batch_pmd_candidates.py",
+      "sha256": "af90ce3eb9eb35f54e8ed53fd32f05476167fff091bf622d301ab59d27711be8",
+      "scope": "Main SHA/site/message candidates only, not old Test results or acceptance",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/4496_boot_batch_all_profile_pmd_candidates.py",
+      "sha256": "ee7a8638eb56f5196e7870e762cd463f61524a2bfaccf4b8bfdd8be7259c7c9d",
+      "scope": "same Main SHA/site candidate role, Test source identity never used to claim PASS",
+      "disposition": "NON_APPLICABLE_TO_WRONG_UNIT_PARENT_ASSERT"
+    }
+  ],
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36854-ssc449-four-main-partial-return-v2/manifest.json",
+    "sha256": "c0c49bc320e8543426b5a3988113551b5bf5cd145ae638aae8141ccde99d08b7"
+  },
+  "productTestsReexecuted": 0,
+  "newAcceptance": 0
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "resources": [],
+  "systemProperties": {},
+  "id": "PG36884-SSC450-SQL80",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productionCoreMain": "84d9d3eda489c89c522ff4a4785a12c4c5a51f20",
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4453_SSC450\u9589SQL\u516dMain\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "6536e4bac0bf8344513440cab0341ee101834e0a0a0fcd2d0053a9bbcfe42eee"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36874-ssc450-sql80-source-admission-v1/manifest.json",
+      "sha256": "d2f97227640c2f60b41eb62707b958f4aedc03190550fc6a4b9eae48be44de49"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36870-ssc450-sql-equivalence-v1/manifest.json",
+      "sha256": "be3802271c19f9013b74c76c80f50cd003161185ce12357e383421a408f1510b"
+    }
+  ],
+  "mainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java",
+      "tests": 32
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java",
+      "tests": 26
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java",
+      "tests": 22
+    }
+  ],
+  "expectedTests": 80,
+  "newTestDefinitions": 0,
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "productOwnerByMainPath": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "WBS-P019-03",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "WBS-P019-03"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table.class",
+    "dev/codex/schubert/nk/migration/AssetStagingTables.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery.class",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table",
+    "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier"
+  ],
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG36876-ssc450-sql80-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG36878-ssc450-sql80-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG36880-ssc450-sql80-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG36882-ssc450-sql80-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG36884-ssc450-sql80-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG36886-ssc450-sql80-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg36878-ssc450-sql80-prepare-v1",
+    "unit": "pg36884-ssc450-sql80-unit-v1"
+  }
+}

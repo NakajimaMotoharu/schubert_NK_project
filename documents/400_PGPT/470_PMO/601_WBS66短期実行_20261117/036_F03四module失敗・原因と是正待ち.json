@@ -1,0 +1,101 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5590",
+  "values": {
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-16T18:38:35.238Z",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 3,
+        "remainingPercent": 97,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "353830267bfca932cd95b40bb498c7f90bdda19a014683bfc4d46441e0b2c98b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-16T18:38:35.238Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 3,
+          "remainingPercent": 97,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-16T18:33:31.625708+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "source": "7123bb3bc8319cfadea41e5be38a75e825e5c14c",
+    "groupBoundary": "END",
+    "originalFailedEvidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36836-bootstrap-original-javac-diagnostic-v1/manifest.json",
+      "sha256": "f45b974fee0c45563acf7da51217997b725a7e7dd1457a1f9155fd051a2c18f3",
+      "actualExit": 1
+    },
+    "groupResult": "FAILED_ORIGINAL_SOURCE_NOT_ACCEPTED",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "workCategory": "CONTRACT_AUDIT",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.9,
+      "base": 2.4,
+      "high": 4.8
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "remainingOriginalRowPricePp": 2.4,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "criterionReductions": [
+      "F03 four-module compile: Protocol/Storage succeeded, Bootstrap failed due10 missing SDK annotation warnings; Batch not run",
+      "BUG3129/YKT2600 source cause proven by original javac flags; SSC449 missing checker-qual3.55.1 compile scope fixed but not yet retested"
+    ],
+    "technicalMeasurementDelta": {
+      "mainSourcesAttempted": 477,
+      "protocolPhysical": 175,
+      "storagePhysical": 80,
+      "bootstrapPhysical": 0,
+      "batchPhysical": 0,
+      "rawCompileExit": 1,
+      "warnings": 10,
+      "newProductTests": 0,
+      "heldClassfileActions": 0
+    },
+    "nextCommand": "SSC449 design PR412/main7e883a3f is published; POM-only fix Coree8822b0e is committed, business Main/Test/Root flags unchanged. Start fresh original-POM four-module Main477 compile at the fixed Core; same checker-qual3.55.1 now explicit compile, no Test/app/native/DB or QA056 four held types. Preserve PG36830/34/36 exit1/10warnings and do not count them passed. Then current-source static and exact dependency/runtime/ABI checks, no old successful PT replay."
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T18:38:35.238Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 3,
+      "remainingPercent": 97,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "remainingDetailBasePp": "1094.336"
+}

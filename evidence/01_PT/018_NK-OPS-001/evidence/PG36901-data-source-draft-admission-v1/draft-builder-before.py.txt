@@ -1,0 +1,68 @@
+"""Whole remaining3/80 memory-only tests and recursive current same-package Main closure."""
+from pathlib import Path
+import datetime
+import hashlib
+import json
+import re
+import subprocess
+import sys
+
+r=Path.cwd();sys.path.insert(0,str(r/'tools/quality'))
+from trace_owner_join import canonical
+b=r/'evidence/01_PT/018_NK-OPS-001';core='84d9d3eda489c89c522ff4a4785a12c4c5a51f20'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+names=dict(MigrationMasterContentVerifier=29,MigrationMasterFinalizer=30,MigrationMasterReferenceVerifier=21)
+prefix='dev/codex/schubert/nk/migration/'
+folder=r/'src/schubert-nk-bootstrap/src/main/java'/prefix
+catalog={p.stem:p for p in folder.glob('*.java')}
+def references(text):
+    stripped=re.sub(r'"(?:\\.|[^"\\])*"|/\*.*?\*/|//[^\n]*',' ',text,flags=re.S)
+    return set(re.findall(r'\b[A-Z]\w*\b',stripped))&set(catalog)
+tests=[dict(path='src/schubert-nk-bootstrap/src/test/java/'+prefix+n+'Test.java',tests=count) for n,count in names.items()]
+required=set(names);test_refs={}
+for item in tests:
+    text=(r/item['path']).read_text();test_refs[item['path']]=sorted(references(text));required.update(test_refs[item['path']])
+    assert len(re.findall(r'@Test\s+void (\w+)\s*\(',text))==item['tests']
+pending=list(required);reviewed={}
+while pending:
+    name=pending.pop()
+    if name in reviewed:continue
+    text=catalog[name].read_text();refs=references(text)-{name};reviewed[name]=sorted(refs)
+    for target in refs:
+        if target not in required:required.add(target);pending.append(target)
+main=sorted(str(catalog[name].relative_to(r)) for name in required)
+for path in main+[x['path'] for x in tests]:
+    text=(r/path).read_text()
+    assert not any(word in text for word in ['DriverManager','DataSource','Class.forName','java.lang.foreign','java.net.Socket','ProcessBuilder','@BeforeAll','@TestFactory','@ParameterizedTest','Files.','getenv(']),path
+    assert subprocess.check_output(['git','show',core+':'+path])==(r/path).read_bytes()
+logical={x['path']:x for x in json.loads((r/'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json').read_text())['artifacts']}
+owners={p:canonical(p,logical)['canonicalOwner'] for p in main};assert all(owners.values())
+compiled=json.loads((b/'evidence/PG36872-ssc450-four-main-compile-v1/manifest.json').read_text());assert compiled['actualExit']==0
+physical=sorted(p for p in compiled['physicalClassHashes']['bootstrap'] if
+    any(p==prefix+n+'.class' or p.startswith(prefix+n+'$') for n in required))
+targets=sorted(p[:-6] for p in physical if any(p==prefix+n+'.class' or p.startswith(prefix+n+'$') for n in names))
+assert len(targets)==8
+out=b/'evidence/PG36902-ssc450-data80-source-admission-v1';assert not out.exists();out.mkdir()
+proof=dict(actualExit=0,sourceCore=core,atUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    scope='Three whole changed source units and required entire DTO/codec Main helpers; three whole original Test classes/80 declarations',
+    inputHashes={p:sha(r/p) for p in main+[x['path'] for x in tests]},mainCount=len(main),
+    ownerByMain=owners,physicalClasses=physical,changedSourceTargets=targets,
+    recursiveSamePackageMainReferences=reviewed,testToMainReferences=test_refs,
+    independentOracle='Unchanged independent literal SQL/row/metadata/hash/bind/timeout/order/null/exception/close tests; source SQL equivalence is supplemental only',
+    runtimeBoundary='JDBC-interface Proxy, public synthetic in-memory datasets and owned bounded executor only; no backend/driver/app/files/native/Root/keys/held classes',
+    targetScopeIsNotWholeComponent=True,allHelperCountersRetained=True,
+    productTestsExecuted=0,heldClassfileActions=0,formalUpdated=False)
+(out/'manifest.json').open('x').write(json.dumps(proof,indent=2)+'\n')
+c=json.loads((b/'input/4509_ssc450_sql80_profile_v2.json').read_text())
+c.update(id='PG36912-SSC450-DATA80',mainSources=main,testSources=tests,physicalClasses=physical,
+    targetClasses=targets,productOwnerByMainPath=owners,
+    closureProofs=[ref(out/'manifest.json'),ref(b/'evidence/PG36870-ssc450-sql-equivalence-v1/manifest.json')],
+    slots=dict(zip(['prestyle','prepare','static','preflight','unit','post'],[
+      'evidence/01_PT/018_NK-OPS-001/evidence/'+n for n in [
+        'PG36904-ssc450-data80-prestyle-v1','PG36906-ssc450-data80-prepare-v1',
+        'PG36908-ssc450-data80-static-v1','PG36910-ssc450-data80-preflight-v1',
+        'PG36912-ssc450-data80-unit-v1','PG36914-ssc450-data80-post-v1']])) ,
+    privateDirs=dict(prepare='pg36906-ssc450-data80-prepare-v1',unit='pg36912-ssc450-data80-unit-v1'))
+for path in c['slots'].values():assert not (r/path).exists()
+p=b/'input/4511_ssc450_data80_profile.json';assert not p.exists();p.open('x').write(json.dumps(c,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,Main=len(main),physical=len(physical),changedSources=3,wholeTests=80)))

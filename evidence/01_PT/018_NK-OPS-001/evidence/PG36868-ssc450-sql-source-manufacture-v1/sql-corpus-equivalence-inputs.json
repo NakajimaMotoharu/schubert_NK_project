@@ -1,0 +1,139 @@
+{
+  "MigrationMasterColumnVerifier": {
+    "queriesBefore": [
+      "QUERY_PREFIX + \"speakers\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_entries\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"audio_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"media_assets\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"entry_audio_links\" + QUERY_SUFFIX"
+    ],
+    "queriesAfter": [
+      "QUERY_PREFIX + \"speakers\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_entries\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"audio_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"media_assets\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"entry_audio_links\" + QUERY_SUFFIX"
+    ]
+  },
+  "MigrationMasterConstraintVerifier": {
+    "queriesBefore": [
+      "QUERY_PREFIX + \"speakers\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_entries\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"audio_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"media_assets\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"entry_audio_links\" + QUERY_SUFFIX"
+    ],
+    "queriesAfter": [
+      "QUERY_PREFIX + \"speakers\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"script_entries\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"audio_files\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"media_assets\" + QUERY_SUFFIX",
+      "QUERY_PREFIX + \"entry_audio_links\" + QUERY_SUFFIX"
+    ]
+  },
+  "MigrationMasterContentVerifier": {
+    "queriesBefore": [
+      "\"SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id\"",
+      "\"SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id\"",
+      "\"SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id\"",
+      "\"SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id\"",
+      "\"SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id\"",
+      "\"SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \\\"C\\\"\"",
+      "\"SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)\""
+    ],
+    "queriesAfter": [
+      "\"SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id\"",
+      "\"SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id\"",
+      "\"SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id\"",
+      "\"SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id\"",
+      "\"SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id\"",
+      "\"SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \\\"C\\\"\"",
+      "\"SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)\""
+    ]
+  },
+  "MigrationMasterReferenceVerifier": {
+    "COUNTS": [
+      "\"SELECT count(*) FROM schubert.speakers\"",
+      "\"SELECT count(*) FROM schubert.script_files\"",
+      "\"SELECT count(*) FROM schubert.script_entries\"",
+      "\"SELECT count(*) FROM schubert.audio_files\"",
+      "\"SELECT count(*) FROM schubert.media_assets\"",
+      "\"SELECT count(*) FROM schubert.entry_audio_links\""
+    ],
+    "INSPECTIONS": [
+      "\"SELECT count(*) FROM schubert.script_files c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.speakers c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.audio_files c LEFT JOIN schubert.games p ON p.id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.script_files p ON p.id=c.script_file_id AND p.game_id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.script_entries c LEFT JOIN schubert.speakers p ON p.id=c.speaker_id AND p.game_id=c.game_id WHERE c.speaker_id IS NOT NULL AND p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.script_entries p ON p.id=c.entry_id AND p.game_id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.entry_audio_links c LEFT JOIN schubert.audio_files p ON p.id=c.audio_file_id AND p.game_id=c.game_id WHERE p.id IS NULL\"",
+      "\"SELECT count(*) FROM schubert.media_assets c LEFT JOIN schubert.media_assets p ON p.logical_id=c.parent_logical_id WHERE c.parent_logical_id IS NOT NULL AND p.logical_id IS NULL\"",
+      "\"SELECT count(*) FROM (SELECT entry_id,link_type FROM schubert.entry_audio_links GROUP BY entry_id,link_type HAVING count(*)>999 OR min(display_order)<1 OR max(display_order)>999 OR count(DISTINCT display_order)<>count(*)) violations\"",
+      "\"SELECT count(*) FROM schubert.speakers WHERE ((id BETWEEN 1 AND 999999999999) AND (octet_length(name) BETWEEN 1 AND 128) AND (octet_length(normalized_name) BETWEEN 1 AND 128)) IS FALSE\"",
+      "\"SELECT count(*) FROM schubert.script_files WHERE ((byte_size BETWEEN 0 AND 999999999999) AND (\\n        chapter_title IS NULL OR octet_length(chapter_title) <= 256) AND (display_order BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\\n        storage_relative_path !~ '(^/|\\\\\\\\|(^|/)\\\\.\\\\.?(/|$)|//)')) IS FALSE\"",
+      "\"SELECT count(*) FROM schubert.script_entries WHERE ((octet_length(body) BETWEEN 1 AND 4096) AND (display_order BETWEEN 1 AND 999999999999) AND (entry_index >= 0) AND (entry_type IN ('dialogue', 'narration')) AND (id BETWEEN 1 AND 999999999999) AND (line_number IS NULL OR line_number >= 1) AND (\\n        (entry_type = 'dialogue' AND speaker_id IS NOT NULL)\\n        OR (entry_type = 'narration' AND speaker_id IS NULL)) AND (\\n        speaker_label IS NULL OR octet_length(speaker_label) <= 128)) IS FALSE\"",
+      "\"SELECT count(*) FROM schubert.audio_files WHERE ((octet_length(audio_role) BETWEEN 1 AND 11) AND (octet_length(basename) BETWEEN 1 AND 255) AND (byte_size BETWEEN 1 AND 999999999999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (duration_ms IS NULL OR duration_ms BETWEEN 0 AND 999999999999) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\\n        storage_relative_path !~ '(^/|\\\\\\\\|(^|/)\\\\.\\\\.?(/|$)|//)')) IS FALSE\"",
+      "\"SELECT count(*) FROM schubert.media_assets WHERE ((byte_size BETWEEN 1 AND 999999999999) AND (octet_length(category) BETWEEN 1 AND 64) AND (display_order BETWEEN 1 AND 9999) AND (octet_length(display_path) BETWEEN 1 AND 512) AND (octet_length(file_name) BETWEEN 1 AND 256) AND (id BETWEEN 1 AND 999999999999) AND (octet_length(logical_id) BETWEEN 1 AND 64) AND (media_type IN ('VIDEO', 'MUSIC')) AND (\\n        mime_type IN ('video/mp4', 'audio/mp4', 'audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/flac')) AND ((\\n        (media_type = 'VIDEO' AND pair_key IS NULL AND pair_role IS NULL)\\n        OR (media_type = 'MUSIC' AND (\\n            (pair_role IN ('M', 'I') AND octet_length(pair_key) BETWEEN 1 AND 256)\\n            OR (pair_role = 'N' AND pair_key IS NULL)))\\n    ) IS TRUE) AND (section IS NULL OR octet_length(section) <= 128) AND (sha256 ~ '^[0-9a-f]{64}$') AND (octet_length(storage_relative_path) BETWEEN 1 AND 512) AND (\\n        storage_relative_path !~ '(^/|\\\\\\\\|(^|/)\\\\.\\\\.?(/|$)|//)') AND (octet_length(title) BETWEEN 1 AND 256)) IS FALSE\"",
+      "\"SELECT count(*) FROM schubert.entry_audio_links WHERE ((display_order BETWEEN 1 AND 999) AND (link_type IN ('voice', 'se', 'bgm', 'other'))) IS FALSE\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.speakers GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.speakers WHERE game_id IS NOT NULL AND normalized_name IS NOT NULL GROUP BY game_id,normalized_name HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.speakers WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.script_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND display_order IS NOT NULL GROUP BY game_id,display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.script_entries GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.script_entries WHERE display_order IS NOT NULL GROUP BY display_order HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE script_file_id IS NOT NULL AND entry_index IS NOT NULL GROUP BY script_file_id,entry_index HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.script_entries WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.audio_files GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.audio_files WHERE game_id IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY game_id,storage_relative_path HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.audio_files WHERE id IS NOT NULL AND game_id IS NOT NULL GROUP BY id,game_id HAVING count(*)>1) violations\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.media_assets GROUP BY id HAVING count(*)>1 OR (id IS NULL) UNION ALL SELECT 1 FROM schubert.media_assets WHERE logical_id IS NOT NULL GROUP BY logical_id HAVING count(*)>1 UNION ALL SELECT 1 FROM schubert.media_assets WHERE media_type IS NOT NULL AND storage_relative_path IS NOT NULL GROUP BY media_type,storage_relative_path HAVING count(*)>1) violations\"",
+      "\"SELECT count(*) FROM (SELECT 1 FROM schubert.entry_audio_links GROUP BY entry_id,audio_file_id,link_type HAVING count(*)>1 OR (entry_id IS NULL OR audio_file_id IS NULL OR link_type IS NULL) UNION ALL SELECT 1 FROM schubert.entry_audio_links WHERE entry_id IS NOT NULL AND link_type IS NOT NULL AND display_order IS NOT NULL GROUP BY entry_id,link_type,display_order HAVING count(*)>1) violations\""
+    ]
+  },
+  "MigrationMasterFinalizer": {
+    "maximum": [
+      "SELECT COALESCE(MAX(id),0) FROM schubert.speakers",
+      "SELECT COALESCE(MAX(id),0) FROM schubert.script_files",
+      "SELECT COALESCE(MAX(id),0) FROM schubert.script_entries",
+      "SELECT COALESCE(MAX(id),0) FROM schubert.audio_files",
+      "SELECT COALESCE(MAX(id),0) FROM schubert.media_assets"
+    ],
+    "prepare": [
+      "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.speakers', 'id'), ?, ?)",
+      "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_files', 'id'), ?, ?)",
+      "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_entries', 'id'), ?, ?)",
+      "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.audio_files', 'id'), ?, ?)",
+      "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.media_assets', 'id'), ?, ?)"
+    ],
+    "analyze": [
+      "ANALYZE schubert.speakers",
+      "ANALYZE schubert.script_files",
+      "ANALYZE schubert.script_entries",
+      "ANALYZE schubert.audio_files",
+      "ANALYZE schubert.media_assets",
+      "ANALYZE schubert.entry_audio_links"
+    ]
+  },
+  "AssetStagingTables": [
+    {
+      "table": "audio_files",
+      "prepare": "CREATE TEMP TABLE nk_mig_audio_files ON COMMIT DROP AS SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM schubert.audio_files WITH NO DATA",
+      "targetCount": "SELECT count(*) FROM schubert.audio_files",
+      "stagedCount": "SELECT count(*) FROM pg_temp.nk_mig_audio_files",
+      "insert": "INSERT INTO schubert.audio_files (id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at) SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM pg_temp.nk_mig_audio_files ORDER BY id"
+    },
+    {
+      "table": "media_assets",
+      "prepare": "CREATE TEMP TABLE nk_mig_media_assets ON COMMIT DROP AS SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM schubert.media_assets WITH NO DATA",
+      "targetCount": "SELECT count(*) FROM schubert.media_assets",
+      "stagedCount": "SELECT count(*) FROM pg_temp.nk_mig_media_assets",
+      "insert": "INSERT INTO schubert.media_assets (id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at) SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM pg_temp.nk_mig_media_assets ORDER BY id"
+    },
+    {
+      "table": "entry_audio_links",
+      "prepare": "CREATE TEMP TABLE nk_mig_entry_audio_links ON COMMIT DROP AS SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM schubert.entry_audio_links WITH NO DATA",
+      "targetCount": "SELECT count(*) FROM schubert.entry_audio_links",
+      "stagedCount": "SELECT count(*) FROM pg_temp.nk_mig_entry_audio_links",
+      "insert": "INSERT INTO schubert.entry_audio_links (entry_id, audio_file_id, game_id, link_type, display_order, created_at) SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM pg_temp.nk_mig_entry_audio_links ORDER BY entry_id, link_type, display_order, audio_file_id"
+    }
+  ]
+}
