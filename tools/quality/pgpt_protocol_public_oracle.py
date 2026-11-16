@@ -20,7 +20,7 @@ def syntax(c):
  if v is None:return
  p.require(isinstance(v,dict) and set(v)=={'closureProof'} and v['closureProof'] in c['closureProofs'],'explicit independent public-oracle closure')
  p.require(len(c['mainSources'])==165,'reviewed complete Protocol Main closure only')
- module=len(c['testSources'])==31 and c['expectedTests']==140
+ module=(len(c['testSources']),c['expectedTests']) in [(31,140),(32,144),(33,145)]
  record=len(c['testSources'])==2 and c['expectedTests']==6 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java'}
  legacy=len(c['testSources'])==3 and c['expectedTests']==19 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java',PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java'}
  p.require(module or record or legacy,'reviewed complete140 or exact record caller whole6/19 only')

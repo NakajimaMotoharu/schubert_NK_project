@@ -1,0 +1,342 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36280-SSC445-REGISTRY-CURRENT145-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36274-ssc445-registry-prepare-v2/manifest.json",
+    "sha256": "377e83e51ffba0d29d2fd0cc6d36c02218b804f198c7b11f5a5ce6187001c61e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36276-ssc445-registry-static-v2/manifest.json",
+    "sha256": "a50e85a7c0d6213388edc2054880eae59e701c793cafbc21f29d3ae109fa1685"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> values = new LinkedHashMap<>();",
+      "occurrences": 1,
+      "reason": "decodeArea creates a method-local LinkedHashMap, fills it only within that invocation and constructs a FieldValueSet from it. Independent concurrent codec callers have separate maps; this is no concurrently shared mutable map.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (protocolFailure != primary) {",
+      "occurrences": 1,
+      "reason": "The references are Throwables. Identity intentionally determines whether the same Throwable would be attached to itself via suppressed failures; equals() could be overridden and must not replace the identity contract. Whole original tests verify distinct and identical causes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "if (rollbackFailure != primary) {",
+      "occurrences": 1,
+      "reason": "The references are Throwables. Identity intentionally determines whether the same Throwable would be attached to itself via suppressed failures; equals() could be overridden and must not replace the identity contract. Whole original tests verify distinct and identical causes.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, String> accessors = new LinkedHashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, List<Field>> areas = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, List<Field>> reviewed = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> recordIndex = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This collection is local to one verifyType invocation and has no concurrent access or publication. Its stable keys are the independently constructed immutable record or the completed independent wire-field map; fixed lookup text tests actual equality/hash composition. The input map is no longer mutated.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "org.junit.jupiter.api.Assertions.assertFalse(constructed.equals(null));",
+      "occurrences": 1,
+      "reason": "This direct negative assertion verifies the public immutable record equality contract rejects null, rather than production null comparison logic. All69 named types are checked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> wireIndex = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This collection is local to one verifyType invocation and has no concurrent access or publication. Its stable keys are the independently constructed immutable record or the completed independent wire-field map; fixed lookup text tests actual equality/hash composition. The input map is no longer mutated.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "bad[n] = null;",
+      "occurrences": 1,
+      "reason": "A test-local Object[] copy deliberately replaces exactly one public constructor argument with null to verify the independent nonnull invariant. This is negative fixture input, not a production null assignment.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> absent = new LinkedHashMap<>(input);",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, FieldValue> flagFields = new LinkedHashMap<>(input);",
+      "occurrences": 1,
+      "reason": "This map is confined to the one verifyAll/verifyType call stack and holds independent expected field/accessor metadata or a copy for one optional-value negative case. The helper does not publish it or submit it to worker threads.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var first = workers.submit(readAll);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var second = workers.submit(readAll);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogStateContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns exactly two bounded readers, not a J2EE container. Ready/start awaits and both futures have10second bounds; finally releases the start latch, calls shutdownNow and asserts awaitTermination(10seconds), including failed assertions/interruptions. All input rows are immutable independent SS323 literals, each worker owns its result list, and no backend/service/VM thread is started.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<FieldValue.Numeric, String> collisions = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> typed = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(original.equals(null));",
+      "occurrences": 1,
+      "reason": "The assertion directly tests the public immutable value equality contract returns false for null. This is intentional negative test input, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "values[0] = null;",
+      "occurrences": 1,
+      "reason": "A caller-owned values() copy is deliberately corrupted to prove subsequent arrays retain all canonical enum constants. No production field or shared state is assigned null.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "invalid[i] = null;",
+      "occurrences": 1,
+      "reason": "A test-local Object[] copy deliberately replaces exactly one public constructor argument with null to verify the independent nonnull invariant. This is negative fixture input, not a production null assignment.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var first = workers.submit(() -> encode(legacy(Optional.empty())));",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var second = workers.submit(() -> encode(value(LogType.ACTION, Optional.of(MENU_ACTION))));",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This standalone JUnit fixture owns its bounded pool (8 golden-vector workers or 2 QA054 category workers), not a J2EE container. All await/get operations have 10-second bounds; finally releases the start latch where present, shutdownNow(), and asserts awaitTermination(10s). The pool is closed on every path, including failed assertions.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/N12IdentifierValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<ProtocolId, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary immutable-value test invocation, never shared or published. Actual key lookup by independently equal values is the assertion; there is no concurrent map access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 2,
+      "reason": "This explicit assertFalse verifies each public immutable path value implements Object.equals(null) as false. It is the required independent negative contract under test.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<RelativePath, String> stored = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary immutable-value test invocation, never shared or published. Actual key lookup by independently equal values is the assertion; there is no concurrent map access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<DisplayPath, String> stored = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary immutable-value test invocation, never shared or published. Actual key lookup by independently equal values is the assertion; there is no concurrent map access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "first[0] = null;",
+      "occurrences": 1,
+      "reason": "Caller-owned array copy is deliberately corrupted to verify a second copy and subsequent values() retain the catalog, without changing production/shared state.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<WireEnum, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary immutable-value test invocation, never shared or published. Actual key lookup by independently equal values is the assertion; there is no concurrent map access.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

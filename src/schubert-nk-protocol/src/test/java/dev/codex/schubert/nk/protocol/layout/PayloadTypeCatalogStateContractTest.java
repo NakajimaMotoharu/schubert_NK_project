@@ -23,7 +23,7 @@ class PayloadTypeCatalogStateContractTest {
     try (var input = getClass().getResourceAsStream("/protocol/named-types-ss323.tsv")) {
       assertNotNull(input);
       try (var reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-        for (String line; (line = reader.readLine()) != null; ) {
+        for (String line = reader.readLine(); line != null; line = reader.readLine()) {
           if (line.isBlank() || line.startsWith("#")) continue;
           String[] columns = line.split("\t", -1);
           assertEquals(3, columns.length);
