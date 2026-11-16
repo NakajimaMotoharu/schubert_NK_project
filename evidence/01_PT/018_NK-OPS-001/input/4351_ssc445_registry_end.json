@@ -1,0 +1,217 @@
+{
+  "groupId": "PGPT-WBS65-SSC445-REGISTRY-STATE-CURRENT-MODULE145-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2440_WBS65SSC445型registry三class限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "REWORK",
+  "scope": "BUG3111/YKT2583のうちPayloadTypeCatalogとprivate補助Mapping/RecordMapping責務だけを整理する。公開finalclass/四static APIの型・引数戻り値・例外/diagnostic・全64layout key/69namedtype・decoder methodref/登録順と不変Map/読取順序を保持する。privateSTANDARD cacheはclass初期化時に一回生成する実cache owner INSTANCEのprivatefinal standardへ移す。privateconstructorはこの不変registry実状態を確立し全lookupが参照する責務を持つためのもので、試験から無意味なinstanceや反射で空ctorを呼ばない。JLS class初期化とfinalfield safe publicationを保持し新publicinstance/API/可変cache公開0、性能/heap量は未測定でITST承認しない。二private recordはvalue-equality対象ではないdecoder bindingなのでprivate static final field-only classとし、実使用dataType/dataDecoder/recordMapping・recordType/recordDecoderのprivategetterとconstructorだけを定義する。外部から利用不能でsource検索上未使用のrecord由来equals/hash/toStringとMapping.layoutId accessorは生成せず、registry keyと重複するlayoutId component/privatefactory引数を除く。64Map.entry keyは不変、各mapping引数先頭に重複していた同じkey literalだけを除き、逆展開時は当Map.entry keyから元重複literal/旧privatefactory二signature/元record表現へ復元して全body/表/diagnosticをformatted完全一致で証明する。対象削除はprivateに不要なvalue APIの責務整理でありcoverage除外や到達不能合格としない。private全constructionは固定class literal/methodref/Optional.empty-or-ofに閉じたnonnull入力をRoot静的解析で確認、任意入力/private反射を追加しない。全Main参照をsource/ownerで保存し公開API javap完全一致を確認、他164Mainと既32Test source/五TSVの期待を保持する。新通常1は独立named-types-ss323.tsv64行からexpected class名/record有無を作り、有限二reader/ready-start latch/future10sec/finally shutdownNow-await10secで全64lookupを同時検証、128観測を128Testへ増幅0。初回cold-initを実測したと断定せず公開同時readとJLS安全公開根拠を分ける。Main変更の下流として同source全165Main/176physicalをfresh組立・既144＋新1＝全145通常PTを一回実行、旧source成功/exec転用0。Code変化はparent＋private2 classだけが想定で他173classのbyte一致を確認、parent/private2全Code raw100・全module rawは実値と不足を保存し全451へ昇格0。SS322323354914をPG前にmain反映、RD/UI/DIF変更不要。モデル/枠/Root2Actual4/実DB鍵VMnativearu/QA051final等HOLDと正式1964/53・正本184/625・工数nullを維持する。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4427_SSC445_型registry状態・通常一四五仕様.md",
+      "sha256": "3424230e0d67b620fb1527bb51ca584bdec8a76c28bc024d4e5f44f07b3cf44d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36240-ssc445-registry-design-only-v1/design-only-main-patch.json",
+      "sha256": "7718779a44af6aba7898302da7d1e351e328a42eb5d67b95e3d55696c34d8e9e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36240-ssc445-registry-design-only-v1/all-callers-source-witness.json",
+      "sha256": "603a1787b3c6e0f20ef9551cc4660bb4aa630e2bf5836da415324fd05446c439"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P001-02"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java": "WBS-P001-02"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P001-02": [
+      "WBS-P001-02"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "fb02511b62f36638ceb9b5cfab67473cfbad2789",
+  "run": "PG36260-SSC445-REGISTRY-CURRENT145",
+  "estimate": {
+    "low": 0.35,
+    "base": 1.05,
+    "high": 3.15
+  },
+  "capPp": 3.5,
+  "workIds": [
+    "SSC445_REGISTRY_STATE_CURRENT_MODULE145"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2439_WBS65予実・SSC445型registry三class限定版767.json",
+    "sha256": "669d9580a8d340ed953514d198b56cfce4bed889cda9bc2b1e499878b1a5740a"
+  },
+  "nextCommand": "Publish only limited914status through normal clean sparse mainPR, then commit/push all feature artifacts. Continue remaining currentSource33method/59branch actual gap inventory: source-review public wire/model value contracts and six stateless utility/currentenum-string switch defects, price coherent minimum changes before PG. No current145/19/6 confirmation replay; full regression only after actual source/fixture change. AllHOLD/model/quality unchanged, quota<=10 or unavailable stopnewwork/preserve, next hourly14:14:51.",
+  "sourceAfter": "7f04f07fb43c6fac322808fa3251d4f1b95e44ae",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG36288-ssc445-registry-quality-join-v2/manifest.json",
+  "manifestSha256": "847678f42854939dc5ca06294c6b6a83d409a6009db87382461f4481ee9b83ad",
+  "terminalAtUTC": "2026-11-16T04:58:38.626541+00:00",
+  "outcome": "SSC445_REGISTRY_RAW18_TRUE145_PUBLICABI_SAME_GLOBAL33M59B_OPEN",
+  "technical": {
+    "productionCoreMain": "7f04f07fb43c6fac322808fa3251d4f1b95e44ae",
+    "actualUnitSource": "5b12c4089ca1f59407529596e3e650aac513392c",
+    "tests": 145,
+    "newDefinitions": 1,
+    "necessaryPriorDefinitions": 144,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "mainSources": 165,
+    "physicalClasses": 176,
+    "positiveCrc": 163,
+    "freshRoot165": true,
+    "changedClasses": 3,
+    "other173ClassBytesIdentical": true,
+    "publicFourStaticApiAndTypeAbiExact": true,
+    "all37CallerSourcesUnchanged": true,
+    "all64LayoutKeys69NamedTypesDecoderReferencesExact": true,
+    "registryOriginalBodyInverseExact": true,
+    "privateFieldRenameInverseExact": true,
+    "readerLoopOnlyStyleInverseExact": true,
+    "oneRealImmutableCacheOwner": true,
+    "newPublicStateOrApi": false,
+    "privateUnusedValueApiAndDuplicateKeyMetadataRemovedAsDesigned": true,
+    "changedClassCodeMethods": 18,
+    "changedClassRawCounters": {
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 763
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 18
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 159
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 20
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 11
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 21
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 4
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 15
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "concurrentReaders": 2,
+    "independentLookupObservations": 128,
+    "observationsNotTestCount": true,
+    "coldInitOrPerformanceAccepted": false,
+    "staticApplicableUnclassified0": true,
+    "pmdRaw": 42,
+    "concretePmdAnchors": 41,
+    "oldPlanned36260NotRun": true,
+    "globalRawCounters": {
+      "INSTRUCTION": {
+        "missed": 189,
+        "covered": 20461
+      },
+      "BRANCH": {
+        "missed": 59,
+        "covered": 1123
+      },
+      "LINE": {
+        "missed": 6,
+        "covered": 3572
+      },
+      "COMPLEXITY": {
+        "missed": 92,
+        "covered": 1990
+      },
+      "METHOD": {
+        "missed": 33,
+        "covered": 1405
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 163
+      }
+    },
+    "globalRawRequiredFour100": false,
+    "globalMissingMethods": 33,
+    "globalMissingBranches": 59,
+    "globalMissingLines": 6,
+    "globalMissingInstructions": 189,
+    "actualExclusiveCostPp": null,
+    "wholeModuleOr451OrNativeAccepted": false,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null
+  },
+  "checkpointText": "Core7f04f07f/Unit5b12c408/PG36280 SSC445 registry状態所有の当source全145FES0真正0（既144＋新finite concurrent reader1）。PR403/main6fa20888でSS322323354914先反映、公開finalclass/四static APIはjavap完全一致・全37caller source不変。privateINSTANCEが一回生成する不変standard Mapの実状態を所有しclass初期化/finalfield安全公開を保持、空instanceを試験から呼出0。二private decoder bindingは必要field/getterだけのfinalclass、外部未使用のrecord value APIと重複layoutIdを除去、全64key/69型/登録順/decoder ref・全body診断は逆展開formatted exact・他164Main/既32Test/五TSV不変。独立SS323 tableから二reader各64lookupをfuture/await10sec/finally停止で検証、128観測を128Testへ増幅0/cold-initや性能合格を断定0。36282-36283現176physical/163CRC-initXML/freshMain165Root/静的適用未分類0(PMDraw42具体anchor41)、36286想定3class差・他173class byte完全一致/公開ABI一致/実owner割当一つを確認。当parent/private二class全18Code rawmiss0。36284同145の全module raw3572Lhit6miss/1405Mhit33miss/163C全hit/1123Bhit59miss/20461Ihit189miss、default集計100だけで全451/Module合格化0。BUG3111/YKT2583当3class限定是正済み・global33M59B残はOPEN。BUG3114 ownerは485正本P00102へ補正し正本owner変更0、3115五private保持field名だけ/3116識別子境界逆展開/3117新readerloopstyleだけを元失敗/保存sourceと全期待保持で是正し限定CLOSED、予定36260製品未起動・確認再演0。追加.35/1.05/3.15限定完了、残397.324/837.386/1643.415・原904.85/SV/各開始保持、App248/36273/36206/歴史不成功67、正式1964/53・正本184/625・元17/190・工数null不変、全Root2Actual4/DB鍵VMnativearu等HOLD保持。"
+}

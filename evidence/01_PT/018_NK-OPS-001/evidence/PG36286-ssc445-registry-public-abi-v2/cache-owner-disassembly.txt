@@ -1,0 +1,802 @@
+Compiled from "PayloadTypeCatalog.java"
+public final class dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog {
+  private static final dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog INSTANCE;
+
+  private final java.util.Map<java.lang.String, dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping> standard;
+
+  private dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: bipush        64
+         7: anewarray     #7                  // class java/util/Map$Entry
+        10: dup
+        11: iconst_0
+        12: ldc           #9                  // String LGNREQ01
+        14: ldc           #11                 // class dev/codex/schubert/nk/protocol/layout/auth/LoginRequestData
+        16: invokedynamic #13,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+        21: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        24: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+        27: aastore
+        28: dup
+        29: iconst_1
+        30: ldc           #29                 // String LGNRSP01
+        32: ldc           #31                 // class dev/codex/schubert/nk/protocol/layout/auth/LoginResponseData
+        34: invokedynamic #33,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        39: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        42: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+        45: aastore
+        46: dup
+        47: iconst_2
+        48: ldc           #34                 // String LOGREQ01
+        50: ldc           #36                 // class dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData
+        52: invokedynamic #38,  0             // InvokeDynamic #2:apply:()Ljava/util/function/Function;
+        57: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        60: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+        63: aastore
+        64: dup
+        65: iconst_3
+        66: ldc           #39                 // String LOGRSP01
+        68: ldc           #41                 // class dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData
+        70: invokedynamic #43,  0             // InvokeDynamic #3:apply:()Ljava/util/function/Function;
+        75: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        78: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+        81: aastore
+        82: dup
+        83: iconst_4
+        84: ldc           #44                 // String GAMREQ01
+        86: ldc           #46                 // class dev/codex/schubert/nk/protocol/layout/scenario/GameListRequestData
+        88: invokedynamic #48,  0             // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+        93: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        96: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+        99: aastore
+       100: dup
+       101: iconst_5
+       102: ldc           #49                 // String GAMRSP01
+       104: ldc           #51                 // class dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData
+       106: invokedynamic #53,  0             // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+       111: ldc           #54                 // class dev/codex/schubert/nk/protocol/layout/scenario/GameRecord
+       113: invokedynamic #56,  0             // InvokeDynamic #6:apply:()Ljava/util/function/Function;
+       118: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       121: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       124: aastore
+       125: dup
+       126: bipush        6
+       128: ldc           #60                 // String SPKREQ01
+       130: ldc           #62                 // class dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListRequestData
+       132: invokedynamic #64,  0             // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+       137: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       140: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       143: aastore
+       144: dup
+       145: bipush        7
+       147: ldc           #65                 // String SPKRSP01
+       149: ldc           #67                 // class dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData
+       151: invokedynamic #69,  0             // InvokeDynamic #8:apply:()Ljava/util/function/Function;
+       156: ldc           #70                 // class dev/codex/schubert/nk/protocol/layout/scenario/SpeakerRecord
+       158: invokedynamic #72,  0             // InvokeDynamic #9:apply:()Ljava/util/function/Function;
+       163: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       166: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       169: aastore
+       170: dup
+       171: bipush        8
+       173: ldc           #73                 // String SRCREQ01
+       175: ldc           #75                 // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData
+       177: invokedynamic #77,  0             // InvokeDynamic #10:apply:()Ljava/util/function/Function;
+       182: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       185: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       188: aastore
+       189: dup
+       190: bipush        9
+       192: ldc           #78                 // String SRCRSP01
+       194: ldc           #80                 // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+       196: invokedynamic #82,  0             // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+       201: ldc           #83                 // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRecord
+       203: invokedynamic #85,  0             // InvokeDynamic #12:apply:()Ljava/util/function/Function;
+       208: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       211: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       214: aastore
+       215: dup
+       216: bipush        10
+       218: ldc           #86                 // String RTEREQ01
+       220: ldc           #88                 // class dev/codex/schubert/nk/protocol/layout/scenario/RouteListRequestData
+       222: invokedynamic #90,  0             // InvokeDynamic #13:apply:()Ljava/util/function/Function;
+       227: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       230: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       233: aastore
+       234: dup
+       235: bipush        11
+       237: ldc           #91                 // String RTERSP01
+       239: ldc           #93                 // class dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData
+       241: invokedynamic #95,  0             // InvokeDynamic #14:apply:()Ljava/util/function/Function;
+       246: ldc           #96                 // class dev/codex/schubert/nk/protocol/layout/scenario/RouteRecord
+       248: invokedynamic #98,  0             // InvokeDynamic #15:apply:()Ljava/util/function/Function;
+       253: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       256: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       259: aastore
+       260: dup
+       261: bipush        12
+       263: ldc           #99                 // String SCFREQ01
+       265: ldc           #101                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListRequestData
+       267: invokedynamic #103,  0            // InvokeDynamic #16:apply:()Ljava/util/function/Function;
+       272: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       275: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       278: aastore
+       279: dup
+       280: bipush        13
+       282: ldc           #104                // String SCFRSP01
+       284: ldc           #106                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData
+       286: invokedynamic #108,  0            // InvokeDynamic #17:apply:()Ljava/util/function/Function;
+       291: ldc           #109                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileRecord
+       293: invokedynamic #111,  0            // InvokeDynamic #18:apply:()Ljava/util/function/Function;
+       298: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       301: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       304: aastore
+       305: dup
+       306: bipush        14
+       308: ldc           #112                // String SCNREQ01
+       310: ldc           #114                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailRequestData
+       312: invokedynamic #116,  0            // InvokeDynamic #19:apply:()Ljava/util/function/Function;
+       317: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       320: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       323: aastore
+       324: dup
+       325: bipush        15
+       327: ldc           #117                // String SCNRSP01
+       329: ldc           #119                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData
+       331: invokedynamic #121,  0            // InvokeDynamic #20:apply:()Ljava/util/function/Function;
+       336: ldc           #122                // class dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord
+       338: invokedynamic #124,  0            // InvokeDynamic #21:apply:()Ljava/util/function/Function;
+       343: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       346: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       349: aastore
+       350: dup
+       351: bipush        16
+       353: ldc           #125                // String AUDREQ01
+       355: ldc           #127                // class dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData
+       357: invokedynamic #129,  0            // InvokeDynamic #22:apply:()Ljava/util/function/Function;
+       362: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       365: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       368: aastore
+       369: dup
+       370: bipush        17
+       372: ldc           #130                // String AUDRSP01
+       374: ldc           #132                // class dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData
+       376: invokedynamic #134,  0            // InvokeDynamic #23:apply:()Ljava/util/function/Function;
+       381: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       384: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       387: aastore
+       388: dup
+       389: bipush        18
+       391: ldc           #135                // String ANMREQ01
+       393: ldc           #137                // class dev/codex/schubert/nk/protocol/layout/media/AnimationMenuRequestData
+       395: invokedynamic #139,  0            // InvokeDynamic #24:apply:()Ljava/util/function/Function;
+       400: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       403: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       406: aastore
+       407: dup
+       408: bipush        19
+       410: ldc           #140                // String ANMRSP01
+       412: ldc           #142                // class dev/codex/schubert/nk/protocol/layout/media/AnimationMenuResponseData
+       414: invokedynamic #144,  0            // InvokeDynamic #25:apply:()Ljava/util/function/Function;
+       419: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       422: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       425: aastore
+       426: dup
+       427: bipush        20
+       429: ldc           #145                // String ANLREQ01
+       431: ldc           #147                // class dev/codex/schubert/nk/protocol/layout/media/AnimationListRequestData
+       433: invokedynamic #149,  0            // InvokeDynamic #26:apply:()Ljava/util/function/Function;
+       438: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       441: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       444: aastore
+       445: dup
+       446: bipush        21
+       448: ldc           #150                // String ANLRSP01
+       450: ldc           #152                // class dev/codex/schubert/nk/protocol/layout/media/AnimationListResponseData
+       452: invokedynamic #154,  0            // InvokeDynamic #27:apply:()Ljava/util/function/Function;
+       457: ldc           #155                // class dev/codex/schubert/nk/protocol/layout/media/AnimationRecord
+       459: invokedynamic #157,  0            // InvokeDynamic #28:apply:()Ljava/util/function/Function;
+       464: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       467: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       470: aastore
+       471: dup
+       472: bipush        22
+       474: ldc           #158                // String VIDREQ01
+       476: ldc           #160                // class dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData
+       478: invokedynamic #162,  0            // InvokeDynamic #29:apply:()Ljava/util/function/Function;
+       483: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       486: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       489: aastore
+       490: dup
+       491: bipush        23
+       493: ldc           #163                // String VIDRSP01
+       495: ldc           #165                // class dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorResponseData
+       497: invokedynamic #167,  0            // InvokeDynamic #30:apply:()Ljava/util/function/Function;
+       502: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       505: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       508: aastore
+       509: dup
+       510: bipush        24
+       512: ldc           #168                // String MCTREQ01
+       514: ldc           #170                // class dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRequestData
+       516: invokedynamic #172,  0            // InvokeDynamic #31:apply:()Ljava/util/function/Function;
+       521: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       524: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       527: aastore
+       528: dup
+       529: bipush        25
+       531: ldc           #173                // String MCTRSP01
+       533: ldc           #175                // class dev/codex/schubert/nk/protocol/layout/media/MusicCategoryResponseData
+       535: invokedynamic #177,  0            // InvokeDynamic #32:apply:()Ljava/util/function/Function;
+       540: ldc           #178                // class dev/codex/schubert/nk/protocol/layout/media/MusicCategoryRecord
+       542: invokedynamic #180,  0            // InvokeDynamic #33:apply:()Ljava/util/function/Function;
+       547: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       550: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       553: aastore
+       554: dup
+       555: bipush        26
+       557: ldc           #181                // String MCSREQ01
+       559: ldc           #183                // class dev/codex/schubert/nk/protocol/layout/media/MusicSectionRequestData
+       561: invokedynamic #185,  0            // InvokeDynamic #34:apply:()Ljava/util/function/Function;
+       566: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       569: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       572: aastore
+       573: dup
+       574: bipush        27
+       576: ldc           #186                // String MCSRSP01
+       578: ldc           #188                // class dev/codex/schubert/nk/protocol/layout/media/MusicSectionResponseData
+       580: invokedynamic #190,  0            // InvokeDynamic #35:apply:()Ljava/util/function/Function;
+       585: ldc           #191                // class dev/codex/schubert/nk/protocol/layout/media/MusicSectionRecord
+       587: invokedynamic #193,  0            // InvokeDynamic #36:apply:()Ljava/util/function/Function;
+       592: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       595: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       598: aastore
+       599: dup
+       600: bipush        28
+       602: ldc           #194                // String MTRREQ01
+       604: ldc           #196                // class dev/codex/schubert/nk/protocol/layout/media/MusicTrackRequestData
+       606: invokedynamic #198,  0            // InvokeDynamic #37:apply:()Ljava/util/function/Function;
+       611: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       614: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       617: aastore
+       618: dup
+       619: bipush        29
+       621: ldc           #199                // String MTRRSP01
+       623: ldc           #201                // class dev/codex/schubert/nk/protocol/layout/media/MusicTrackResponseData
+       625: invokedynamic #203,  0            // InvokeDynamic #38:apply:()Ljava/util/function/Function;
+       630: ldc           #204                // class dev/codex/schubert/nk/protocol/layout/media/MusicTrackRecord
+       632: invokedynamic #206,  0            // InvokeDynamic #39:apply:()Ljava/util/function/Function;
+       637: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       640: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       643: aastore
+       644: dup
+       645: bipush        30
+       647: ldc           #207                // String MEDREQ01
+       649: ldc           #209                // class dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData
+       651: invokedynamic #211,  0            // InvokeDynamic #40:apply:()Ljava/util/function/Function;
+       656: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       659: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       662: aastore
+       663: dup
+       664: bipush        31
+       666: ldc           #212                // String MEDRSP01
+       668: ldc           #132                // class dev/codex/schubert/nk/protocol/layout/media/MediaDescriptorData
+       670: invokedynamic #134,  0            // InvokeDynamic #23:apply:()Ljava/util/function/Function;
+       675: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       678: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       681: aastore
+       682: dup
+       683: bipush        32
+       685: ldc           #214                // String LGSREQ01
+       687: ldc           #216                // class dev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData
+       689: invokedynamic #218,  0            // InvokeDynamic #41:apply:()Ljava/util/function/Function;
+       694: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       697: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       700: aastore
+       701: dup
+       702: bipush        33
+       704: ldc           #219                // String LGSRSP01
+       706: ldc           #80                 // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+       708: invokedynamic #82,  0             // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+       713: ldc           #221                // class dev/codex/schubert/nk/protocol/layout/log/LogRecord
+       715: invokedynamic #223,  0            // InvokeDynamic #42:apply:()Ljava/util/function/Function;
+       720: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       723: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       726: aastore
+       727: dup
+       728: bipush        34
+       730: ldc           #224                // String USRREQ01
+       732: ldc           #226                // class dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData
+       734: invokedynamic #228,  0            // InvokeDynamic #43:apply:()Ljava/util/function/Function;
+       739: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       742: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       745: aastore
+       746: dup
+       747: bipush        35
+       749: ldc           #229                // String USRRSP01
+       751: ldc           #80                 // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+       753: invokedynamic #82,  0             // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+       758: ldc           #231                // class dev/codex/schubert/nk/protocol/layout/admin/UserRecord
+       760: invokedynamic #233,  0            // InvokeDynamic #44:apply:()Ljava/util/function/Function;
+       765: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       768: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       771: aastore
+       772: dup
+       773: bipush        36
+       775: ldc           #234                // String UCRREQ01
+       777: ldc           #236                // class dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData
+       779: invokedynamic #238,  0            // InvokeDynamic #45:apply:()Ljava/util/function/Function;
+       784: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       787: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       790: aastore
+       791: dup
+       792: bipush        37
+       794: ldc           #239                // String UCRRSP01
+       796: ldc           #241                // class dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData
+       798: invokedynamic #243,  0            // InvokeDynamic #46:apply:()Ljava/util/function/Function;
+       803: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       806: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       809: aastore
+       810: dup
+       811: bipush        38
+       813: ldc           #244                // String UDTREQ01
+       815: ldc           #246                // class dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData
+       817: invokedynamic #248,  0            // InvokeDynamic #47:apply:()Ljava/util/function/Function;
+       822: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       825: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       828: aastore
+       829: dup
+       830: bipush        39
+       832: ldc           #249                // String UDTRSP01
+       834: ldc           #251                // class dev/codex/schubert/nk/protocol/layout/admin/UserDetailResponseData
+       836: invokedynamic #253,  0            // InvokeDynamic #48:apply:()Ljava/util/function/Function;
+       841: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       844: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       847: aastore
+       848: dup
+       849: bipush        40
+       851: ldc           #254                // String USTREQ01
+       853: ldc_w         #256                // class dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData
+       856: invokedynamic #258,  0            // InvokeDynamic #49:apply:()Ljava/util/function/Function;
+       861: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       864: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       867: aastore
+       868: dup
+       869: bipush        41
+       871: ldc_w         #259                // String USTRSP01
+       874: ldc           #241                // class dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData
+       876: invokedynamic #243,  0            // InvokeDynamic #46:apply:()Ljava/util/function/Function;
+       881: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       884: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       887: aastore
+       888: dup
+       889: bipush        42
+       891: ldc_w         #261                // String URLREQ01
+       894: ldc_w         #263                // class dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData
+       897: invokedynamic #265,  0            // InvokeDynamic #50:apply:()Ljava/util/function/Function;
+       902: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       905: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       908: aastore
+       909: dup
+       910: bipush        43
+       912: ldc_w         #266                // String URLRSP01
+       915: ldc           #241                // class dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData
+       917: invokedynamic #243,  0            // InvokeDynamic #46:apply:()Ljava/util/function/Function;
+       922: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       925: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       928: aastore
+       929: dup
+       930: bipush        44
+       932: ldc_w         #268                // String UPWREQ01
+       935: ldc_w         #270                // class dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData
+       938: invokedynamic #272,  0            // InvokeDynamic #51:apply:()Ljava/util/function/Function;
+       943: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       946: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       949: aastore
+       950: dup
+       951: bipush        45
+       953: ldc_w         #273                // String UPWRSP01
+       956: ldc           #241                // class dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData
+       958: invokedynamic #243,  0            // InvokeDynamic #46:apply:()Ljava/util/function/Function;
+       963: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       966: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       969: aastore
+       970: dup
+       971: bipush        46
+       973: ldc_w         #275                // String ULKREQ01
+       976: ldc_w         #277                // class dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData
+       979: invokedynamic #279,  0            // InvokeDynamic #52:apply:()Ljava/util/function/Function;
+       984: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+       987: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+       990: aastore
+       991: dup
+       992: bipush        47
+       994: ldc_w         #280                // String ULKRSP01
+       997: ldc           #241                // class dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData
+       999: invokedynamic #243,  0            // InvokeDynamic #46:apply:()Ljava/util/function/Function;
+      1004: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1007: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1010: aastore
+      1011: dup
+      1012: bipush        48
+      1014: ldc_w         #282                // String QSBREQ01
+      1017: ldc_w         #284                // class dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData
+      1020: invokedynamic #286,  0            // InvokeDynamic #53:apply:()Ljava/util/function/Function;
+      1025: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1028: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1031: aastore
+      1032: dup
+      1033: bipush        49
+      1035: ldc_w         #287                // String QSBRSP01
+      1038: ldc_w         #289                // class dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData
+      1041: invokedynamic #291,  0            // InvokeDynamic #54:apply:()Ljava/util/function/Function;
+      1046: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1049: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1052: aastore
+      1053: dup
+      1054: bipush        50
+      1056: ldc_w         #292                // String NTSREQ01
+      1059: ldc_w         #294                // class dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData
+      1062: invokedynamic #296,  0            // InvokeDynamic #55:apply:()Ljava/util/function/Function;
+      1067: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1070: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1073: aastore
+      1074: dup
+      1075: bipush        51
+      1077: ldc_w         #297                // String NTSRSP01
+      1080: ldc           #80                 // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+      1082: invokedynamic #82,  0             // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+      1087: ldc_w         #299                // class dev/codex/schubert/nk/protocol/layout/question/NotificationRecord
+      1090: invokedynamic #301,  0            // InvokeDynamic #56:apply:()Ljava/util/function/Function;
+      1095: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1098: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1101: aastore
+      1102: dup
+      1103: bipush        52
+      1105: ldc_w         #302                // String NTDREQ01
+      1108: ldc_w         #304                // class dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData
+      1111: invokedynamic #306,  0            // InvokeDynamic #57:apply:()Ljava/util/function/Function;
+      1116: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1119: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1122: aastore
+      1123: dup
+      1124: bipush        53
+      1126: ldc_w         #307                // String NTDRSP01
+      1129: ldc_w         #309                // class dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData
+      1132: invokedynamic #311,  0            // InvokeDynamic #58:apply:()Ljava/util/function/Function;
+      1137: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1140: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1143: aastore
+      1144: dup
+      1145: bipush        54
+      1147: ldc_w         #312                // String NTCREQ01
+      1150: ldc_w         #314                // class dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData
+      1153: invokedynamic #316,  0            // InvokeDynamic #59:apply:()Ljava/util/function/Function;
+      1158: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1161: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1164: aastore
+      1165: dup
+      1166: bipush        55
+      1168: ldc_w         #317                // String NTCRSP01
+      1171: ldc_w         #319                // class dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData
+      1174: invokedynamic #321,  0            // InvokeDynamic #60:apply:()Ljava/util/function/Function;
+      1179: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1182: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1185: aastore
+      1186: dup
+      1187: bipush        56
+      1189: ldc_w         #322                // String QSSREQ01
+      1192: ldc_w         #324                // class dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData
+      1195: invokedynamic #326,  0            // InvokeDynamic #61:apply:()Ljava/util/function/Function;
+      1200: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1203: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1206: aastore
+      1207: dup
+      1208: bipush        57
+      1210: ldc_w         #327                // String QSSRSP01
+      1213: ldc           #80                 // class dev/codex/schubert/nk/protocol/layout/common/PagedResponseData
+      1215: invokedynamic #82,  0             // InvokeDynamic #11:apply:()Ljava/util/function/Function;
+      1220: ldc_w         #329                // class dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord
+      1223: invokedynamic #331,  0            // InvokeDynamic #62:apply:()Ljava/util/function/Function;
+      1228: invokestatic  #57                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1231: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1234: aastore
+      1235: dup
+      1236: bipush        58
+      1238: ldc_w         #332                // String QSDREQ01
+      1241: ldc_w         #334                // class dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData
+      1244: invokedynamic #336,  0            // InvokeDynamic #63:apply:()Ljava/util/function/Function;
+      1249: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1252: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1255: aastore
+      1256: dup
+      1257: bipush        59
+      1259: ldc_w         #337                // String QSDRSP01
+      1262: ldc_w         #339                // class dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData
+      1265: invokedynamic #341,  0            // InvokeDynamic #64:apply:()Ljava/util/function/Function;
+      1270: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1273: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1276: aastore
+      1277: dup
+      1278: bipush        60
+      1280: ldc_w         #342                // String QDLREQ01
+      1283: ldc_w         #344                // class dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData
+      1286: invokedynamic #346,  0            // InvokeDynamic #65:apply:()Ljava/util/function/Function;
+      1291: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1294: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1297: aastore
+      1298: dup
+      1299: bipush        61
+      1301: ldc_w         #347                // String QDLRSP01
+      1304: ldc_w         #349                // class dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData
+      1307: invokedynamic #351,  0            // InvokeDynamic #66:apply:()Ljava/util/function/Function;
+      1312: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1315: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1318: aastore
+      1319: dup
+      1320: bipush        62
+      1322: ldc_w         #352                // String QWKREQ01
+      1325: ldc_w         #354                // class dev/codex/schubert/nk/protocol/layout/question/QuestionWorkData
+      1328: invokedynamic #356,  0            // InvokeDynamic #67:apply:()Ljava/util/function/Function;
+      1333: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1336: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1339: aastore
+      1340: dup
+      1341: bipush        63
+      1343: ldc_w         #357                // String WLGEVT01
+      1346: ldc_w         #359                // class dev/codex/schubert/nk/protocol/layout/log/WebLogEventData
+      1349: invokedynamic #361,  0            // InvokeDynamic #68:apply:()Ljava/util/function/Function;
+      1354: invokestatic  #17                 // Method mapping:(Ljava/lang/Class;Ljava/util/function/Function;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+      1357: invokestatic  #23                 // InterfaceMethod java/util/Map.entry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;
+      1360: aastore
+      1361: invokestatic  #362                // InterfaceMethod java/util/Map.ofEntries:([Ljava/util/Map$Entry;)Ljava/util/Map;
+      1364: putfield      #366                // Field standard:Ljava/util/Map;
+      1367: return
+
+  public static dev.codex.schubert.nk.protocol.layout.TypedPayloadValues decode(dev.codex.schubert.nk.protocol.layout.PayloadValues);
+    Code:
+         0: aload_0
+         1: ldc_w         #370                // String values
+         4: invokestatic  #372                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload_0
+         9: invokevirtual #378                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        12: invokestatic  #384                // Method require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        15: astore_1
+        16: aload_1
+        17: invokevirtual #388                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.dataDecoder:()Ljava/util/function/Function;
+        20: aload_0
+        21: invokevirtual #393                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.data:()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;
+        24: invokeinterface #397,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+        29: checkcast     #402                // class dev/codex/schubert/nk/protocol/layout/PayloadData
+        32: astore_2
+        33: aload_0
+        34: aload_1
+        35: invokevirtual #404                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.recordMapping:()Ljava/util/Optional;
+        38: invokestatic  #408                // Method decodeRecords:(Ldev/codex/schubert/nk/protocol/layout/PayloadValues;Ljava/util/Optional;)Ljava/util/List;
+        41: astore_3
+        42: new           #412                // class dev/codex/schubert/nk/protocol/layout/TypedPayloadValues
+        45: dup
+        46: aload_0
+        47: invokevirtual #378                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        50: aload_2
+        51: aload_3
+        52: invokespecial #414                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues."<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/PayloadData;Ljava/util/List;)V
+        55: astore        4
+        57: aload         4
+        59: invokestatic  #417                // Method dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.validate:(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V
+        62: aload         4
+        64: areturn
+
+  public static dev.codex.schubert.nk.protocol.layout.PayloadValues encode(dev.codex.schubert.nk.protocol.layout.TypedPayloadValues);
+    Code:
+         0: aload_0
+         1: ldc_w         #370                // String values
+         4: invokestatic  #372                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload_0
+         9: invokevirtual #423                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        12: invokestatic  #384                // Method require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+        15: astore_1
+        16: aload_1
+        17: invokevirtual #424                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.dataType:()Ljava/lang/Class;
+        20: aload_0
+        21: invokevirtual #428                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.data:()Ldev/codex/schubert/nk/protocol/layout/PayloadData;
+        24: invokevirtual #431                // Method java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+        27: ifne          41
+        30: new           #437                // class dev/codex/schubert/nk/protocol/layout/LayoutValidationException
+        33: dup
+        34: ldc_w         #439                // String named data type does not match layout
+        37: invokespecial #441                // Method dev/codex/schubert/nk/protocol/layout/LayoutValidationException."<init>":(Ljava/lang/String;)V
+        40: athrow
+        41: aload_0
+        42: invokevirtual #444                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.records:()Ljava/util/List;
+        45: aload_1
+        46: invokevirtual #404                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.recordMapping:()Ljava/util/Optional;
+        49: invokestatic  #448                // Method validateRecordTypes:(Ljava/util/List;Ljava/util/Optional;)V
+        52: aload_0
+        53: invokestatic  #417                // Method dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.validate:(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)V
+        56: aload_0
+        57: invokevirtual #444                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.records:()Ljava/util/List;
+        60: invokeinterface #452,  1          // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+        65: invokedynamic #458,  0            // InvokeDynamic #69:apply:()Ljava/util/function/Function;
+        70: invokeinterface #459,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        75: invokeinterface #465,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+        80: astore_2
+        81: new           #379                // class dev/codex/schubert/nk/protocol/layout/PayloadValues
+        84: dup
+        85: aload_0
+        86: invokevirtual #423                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.layoutId:()Ldev/codex/schubert/nk/protocol/layout/LayoutId;
+        89: aload_0
+        90: invokevirtual #428                // Method dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.data:()Ldev/codex/schubert/nk/protocol/layout/PayloadData;
+        93: invokeinterface #468,  1          // InterfaceMethod dev/codex/schubert/nk/protocol/layout/PayloadData.fields:()Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;
+        98: aload_2
+        99: invokespecial #471                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues."<init>":(Ldev/codex/schubert/nk/protocol/layout/LayoutId;Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/util/List;)V
+       102: areturn
+
+  public static java.lang.Class<? extends dev.codex.schubert.nk.protocol.layout.PayloadData> dataType(dev.codex.schubert.nk.protocol.layout.LayoutId);
+    Code:
+         0: aload_0
+         1: invokestatic  #384                // Method require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+         4: invokevirtual #424                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.dataType:()Ljava/lang/Class;
+         7: areturn
+
+  public static java.util.Optional<java.lang.Class<? extends dev.codex.schubert.nk.protocol.layout.PayloadRecord>> recordType(dev.codex.schubert.nk.protocol.layout.LayoutId);
+    Code:
+         0: aload_0
+         1: invokestatic  #384                // Method require:(Ldev/codex/schubert/nk/protocol/layout/LayoutId;)Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping;
+         4: invokevirtual #404                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping.recordMapping:()Ljava/util/Optional;
+         7: invokedynamic #474,  0            // InvokeDynamic #70:apply:()Ljava/util/function/Function;
+        12: invokevirtual #475                // Method java/util/Optional.map:(Ljava/util/function/Function;)Ljava/util/Optional;
+        15: areturn
+
+  private static java.util.List<dev.codex.schubert.nk.protocol.layout.PayloadRecord> decodeRecords(dev.codex.schubert.nk.protocol.layout.PayloadValues, java.util.Optional<dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$RecordMapping>);
+    Code:
+         0: aload_1
+         1: invokevirtual #480                // Method java/util/Optional.isEmpty:()Z
+         4: ifeq          34
+         7: aload_0
+         8: invokevirtual #484                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.records:()Ljava/util/List;
+        11: invokeinterface #485,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+        16: ifne          30
+        19: new           #437                // class dev/codex/schubert/nk/protocol/layout/LayoutValidationException
+        22: dup
+        23: ldc_w         #486                // String layout does not define repeating records
+        26: invokespecial #441                // Method dev/codex/schubert/nk/protocol/layout/LayoutValidationException."<init>":(Ljava/lang/String;)V
+        29: athrow
+        30: invokestatic  #488                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+        33: areturn
+        34: aload_1
+        35: invokevirtual #491                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        38: checkcast     #495                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping
+        41: astore_2
+        42: new           #497                // class java/util/ArrayList
+        45: dup
+        46: aload_0
+        47: invokevirtual #484                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.records:()Ljava/util/List;
+        50: invokeinterface #499,  1          // InterfaceMethod java/util/List.size:()I
+        55: invokespecial #503                // Method java/util/ArrayList."<init>":(I)V
+        58: astore_3
+        59: aload_0
+        60: invokevirtual #484                // Method dev/codex/schubert/nk/protocol/layout/PayloadValues.records:()Ljava/util/List;
+        63: invokeinterface #506,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        68: astore        4
+        70: aload         4
+        72: invokeinterface #510,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        77: ifeq          116
+        80: aload         4
+        82: invokeinterface #515,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        87: checkcast     #518                // class dev/codex/schubert/nk/protocol/layout/FieldValueSet
+        90: astore        5
+        92: aload_3
+        93: aload_2
+        94: invokevirtual #520                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping.recordDecoder:()Ljava/util/function/Function;
+        97: aload         5
+        99: invokeinterface #397,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+       104: checkcast     #523                // class dev/codex/schubert/nk/protocol/layout/PayloadRecord
+       107: invokeinterface #525,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       112: pop
+       113: goto          70
+       116: aload_3
+       117: invokestatic  #528                // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       120: areturn
+
+  private static void validateRecordTypes(java.util.List<dev.codex.schubert.nk.protocol.layout.PayloadRecord>, java.util.Optional<dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$RecordMapping>);
+    Code:
+         0: aload_1
+         1: invokevirtual #480                // Method java/util/Optional.isEmpty:()Z
+         4: ifeq          28
+         7: aload_0
+         8: invokeinterface #485,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+        13: ifne          27
+        16: new           #437                // class dev/codex/schubert/nk/protocol/layout/LayoutValidationException
+        19: dup
+        20: ldc_w         #486                // String layout does not define repeating records
+        23: invokespecial #441                // Method dev/codex/schubert/nk/protocol/layout/LayoutValidationException."<init>":(Ljava/lang/String;)V
+        26: athrow
+        27: return
+        28: aload_1
+        29: invokevirtual #491                // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        32: checkcast     #495                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping
+        35: invokevirtual #532                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping.recordType:()Ljava/lang/Class;
+        38: astore_2
+        39: aload_0
+        40: invokeinterface #506,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        45: astore_3
+        46: aload_3
+        47: invokeinterface #510,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        52: ifeq          89
+        55: aload_3
+        56: invokeinterface #515,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        61: checkcast     #523                // class dev/codex/schubert/nk/protocol/layout/PayloadRecord
+        64: astore        4
+        66: aload_2
+        67: aload         4
+        69: invokevirtual #431                // Method java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+        72: ifne          86
+        75: new           #437                // class dev/codex/schubert/nk/protocol/layout/LayoutValidationException
+        78: dup
+        79: ldc_w         #535                // String named record type does not match layout
+        82: invokespecial #441                // Method dev/codex/schubert/nk/protocol/layout/LayoutValidationException."<init>":(Ljava/lang/String;)V
+        85: athrow
+        86: goto          46
+        89: return
+
+  private static dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping require(dev.codex.schubert.nk.protocol.layout.LayoutId);
+    Code:
+         0: aload_0
+         1: ldc_w         #537                // String layoutId
+         4: invokestatic  #372                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: getstatic     #538                // Field INSTANCE:Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog;
+        11: getfield      #366                // Field standard:Ljava/util/Map;
+        14: aload_0
+        15: invokevirtual #542                // Method dev/codex/schubert/nk/protocol/layout/LayoutId.value:()Ljava/lang/String;
+        18: invokeinterface #548,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        23: checkcast     #389                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping
+        26: astore_1
+        27: aload_1
+        28: ifnonnull     42
+        31: new           #551                // class dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException
+        34: dup
+        35: ldc_w         #553                // String unsupported named payload layout
+        38: invokespecial #555                // Method dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException."<init>":(Ljava/lang/String;)V
+        41: athrow
+        42: aload_1
+        43: areturn
+
+  private static dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping mapping(java.lang.Class<? extends dev.codex.schubert.nk.protocol.layout.PayloadData>, java.util.function.Function<dev.codex.schubert.nk.protocol.layout.FieldValueSet, ? extends dev.codex.schubert.nk.protocol.layout.PayloadData>);
+    Code:
+         0: new           #389                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: invokestatic  #556                // Method java/util/Optional.empty:()Ljava/util/Optional;
+         9: invokespecial #559                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping."<init>":(Ljava/lang/Class;Ljava/util/function/Function;Ljava/util/Optional;)V
+        12: areturn
+
+  private static dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog$Mapping mapping(java.lang.Class<? extends dev.codex.schubert.nk.protocol.layout.PayloadData>, java.util.function.Function<dev.codex.schubert.nk.protocol.layout.FieldValueSet, ? extends dev.codex.schubert.nk.protocol.layout.PayloadData>, java.lang.Class<? extends dev.codex.schubert.nk.protocol.layout.PayloadRecord>, java.util.function.Function<dev.codex.schubert.nk.protocol.layout.FieldValueSet, ? extends dev.codex.schubert.nk.protocol.layout.PayloadRecord>);
+    Code:
+         0: new           #389                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping
+         3: dup
+         4: aload_0
+         5: aload_1
+         6: new           #495                // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping
+         9: dup
+        10: aload_2
+        11: aload_3
+        12: invokespecial #562                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping."<init>":(Ljava/lang/Class;Ljava/util/function/Function;)V
+        15: invokestatic  #565                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        18: invokespecial #559                // Method dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping."<init>":(Ljava/lang/Class;Ljava/util/function/Function;Ljava/util/Optional;)V
+        21: areturn
+
+  static {};
+    Code:
+         0: new           #18                 // class dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog
+         3: dup
+         4: invokespecial #568                // Method "<init>":()V
+         7: putstatic     #538                // Field INSTANCE:Ldev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog;
+        10: return
+}
