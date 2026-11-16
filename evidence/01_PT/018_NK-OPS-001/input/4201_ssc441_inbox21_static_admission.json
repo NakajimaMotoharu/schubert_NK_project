@@ -1,0 +1,62 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35840-SSC441-INBOX-REASON-WHOLE21-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35816-ssc441-inbox21-prepare-v2/manifest.json",
+    "sha256": "7bc1061e0ce9b38d160a84d032fe31cf0d9b852d1dbac8b4486598211a2180e6"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35818-ssc441-inbox21-static-v2/manifest.json",
+    "sha256": "da3cb682f893b622c2f5d6b21db0d5beba971f571cab15c0f7e49beb4d168ca2"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "value = value == null ? null : value.clone();",
+      "occurrences": 1,
+      "reason": "SS3243 NKOP1 explicitly distinguishes null sentinel FFFFFFFF from empty length zero; the annotated nullable array must retain null and clone only present data. Constructor/caller null-versus-empty and cleanup tests independently verify this wire contract.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "sourceAnchor": "return value == null ? null : value.clone();",
+      "occurrences": 1,
+      "reason": "SS3243 nullable field bytes encode null and empty differently; returning an empty array for null would change the approved canonical payload fingerprint. Preserve the explicit nullable getter and defensive cloning, with independent null/empty fixtures.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Only the caller-owned enum values copy is mutated, then the independent fresh array is asserted to retain MATCH; no production null value or assignment is admitted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 2,
+      "reason": "Deliberately mutate only a caller-owned closed-enum values copy, then assert the independent fresh array retains its fixed first constant; this checks defensive copying and never introduces a production null enum or field.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Deliberately mutate only a caller-owned closed-enum values copy, then assert the independent fresh array retains its fixed first constant; this checks defensive copying and never introduces a production null enum or field.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxExceptionValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "occurrences": 1,
+      "reason": "Deliberately mutate only the caller-owned closed Reason values copy, then assert a fresh values array retains the independent first constant MESSAGE_ID_REUSE. Production fields/state are not assigned null and the unknown/null lookup contract is independently checked.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

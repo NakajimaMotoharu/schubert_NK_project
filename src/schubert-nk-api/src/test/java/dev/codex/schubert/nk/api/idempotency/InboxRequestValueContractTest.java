@@ -159,7 +159,7 @@ final class InboxRequestValueContractTest {
       assertEquals(value, value);
       assertEquals(value, equal);
       assertEquals(equal, value);
-      assertEquals("retained", Map.of(value, "retained").get(equal));
+      assertEquals("retained", new java.util.HashMap<>(Map.of(value, "retained")).get(equal));
       assertNotEquals(value, null);
       assertNotEquals(value, "other type");
       for (InboxRequest other :

@@ -1,0 +1,328 @@
+{
+  "actualExit": 0,
+  "callers": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "sha256": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b",
+      "owner": "WBS-P010-02",
+      "sourceReferences": [
+        {
+          "line": 7,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 169,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 172,
+          "text": "if (failure.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {"
+        },
+        {
+          "line": 177,
+          "text": "if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "sha256": "26c1ae5f478d9561660fbd010a6496ff3edbe5cdf5416535af50fe12021285c3",
+      "owner": "WBS-P010-01",
+      "sourceReferences": [
+        {
+          "line": 9,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 128,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 210,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 251,
+          "text": "private static boolean messageMismatch(InboxException failure) {"
+        },
+        {
+          "line": 253,
+          "text": "&& failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE;"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "sha256": "48a0381ddf09f251b50b4b2e7882511d0f64aa83ff7d7c9bc63efae306070d8e",
+      "owner": "WBS-P010-04",
+      "sourceReferences": [
+        {
+          "line": 9,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 128,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 204,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 250,
+          "text": "private static boolean messageMismatch(InboxException failure) {"
+        },
+        {
+          "line": 252,
+          "text": "&& failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE;"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "sha256": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a",
+      "owner": "WBS-P009-01",
+      "sourceReferences": [
+        {
+          "line": 8,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 244,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 247,
+          "text": "&& failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+      "sha256": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5",
+      "owner": "WBS-P014-02",
+      "sourceReferences": [
+        {
+          "line": 7,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 175,
+          "text": "} catch (InboxException conflict) {"
+        },
+        {
+          "line": 178,
+          "text": "if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {"
+        },
+        {
+          "line": 182,
+          "text": "if (conflict.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "sha256": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275",
+      "owner": "WBS-P014-01",
+      "sourceReferences": [
+        {
+          "line": 9,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 127,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 226,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 271,
+          "text": "private static boolean messageMismatch(InboxException failure) {"
+        },
+        {
+          "line": 273,
+          "text": "&& failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE;"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "sha256": "02b5effa37786246afbbbc39997eaae6ed6713723cc51938df8f82dce123aa13",
+      "owner": "WBS-P011-02",
+      "sourceReferences": [
+        {
+          "line": 10,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 258,
+          "text": "} catch (InboxException conflict) {"
+        },
+        {
+          "line": 261,
+          "text": "if (conflict.reason() == InboxException.Reason.OPERATION_TOKEN_REUSE) {"
+        },
+        {
+          "line": 265,
+          "text": "if (conflict.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "sha256": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa",
+      "owner": "WBS-P008-02",
+      "sourceReferences": [
+        {
+          "line": 9,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 311,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 314,
+          "text": "&& failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java",
+      "sha256": "f2b26e3f56a3bcce94417f76d10be38058549d3dda778b5fc4979e6324cc4d9e",
+      "owner": "WBS-P006-01",
+      "sourceReferences": [
+        {
+          "line": 79,
+          "text": "InboxException.Reason.TRANSACTION_REQUIRED,"
+        },
+        {
+          "line": 140,
+          "text": "InboxException.Reason.STATE_CORRUPT,"
+        },
+        {
+          "line": 160,
+          "text": "InboxException.Reason.TRANSACTION_REQUIRED,"
+        },
+        {
+          "line": 192,
+          "text": "InboxException.Reason.TRANSACTION_REQUIRED,"
+        },
+        {
+          "line": 208,
+          "text": "InboxException.Reason.STATE_CORRUPT, \"Scenario Inbox result is missing\"));"
+        },
+        {
+          "line": 251,
+          "text": "private static void requireReplacement(boolean valid) throws InboxException {"
+        },
+        {
+          "line": 254,
+          "text": "InboxException.Reason.STATE_CORRUPT, \"Scenario Inbox result changed or is invalid\");"
+        },
+        {
+          "line": 378,
+          "text": "InboxException.Reason.STATE_CORRUPT,"
+        },
+        {
+          "line": 385,
+          "text": "throws InboxException {"
+        },
+        {
+          "line": 395,
+          "text": "InboxException.Reason.MESSAGE_ID_REUSE,"
+        },
+        {
+          "line": 401,
+          "text": "InboxException.Reason.MESSAGE_ID_REUSE,"
+        },
+        {
+          "line": 406,
+          "text": "throws InboxException {"
+        },
+        {
+          "line": 410,
+          "text": "InboxException.Reason.OPERATION_TOKEN_REUSE,"
+        },
+        {
+          "line": 417,
+          "text": "InboxException.Reason mismatchReason,"
+        },
+        {
+          "line": 419,
+          "text": "throws InboxException {"
+        },
+        {
+          "line": 428,
+          "text": "InboxException.Reason.FINGERPRINT_KEY_UNAVAILABLE,"
+        },
+        {
+          "line": 432,
+          "text": "private static BoundInboxExecution existing(StoredRow row) throws InboxException {"
+        },
+        {
+          "line": 458,
+          "text": "private static InboxException failure(InboxException.Reason reason, String message) {"
+        },
+        {
+          "line": 459,
+          "text": "return new InboxException(reason, message);"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+      "sha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090",
+      "owner": "WBS-P007-04",
+      "sourceReferences": [
+        {
+          "line": 5,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 131,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 133,
+          "text": "if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE) {"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutInboxService.java",
+      "sha256": "8894228a382268524f7a56f808de50a14b2461719e03e1b57c362655a8b2380b",
+      "owner": "WBS-P007-05",
+      "sourceReferences": [
+        {
+          "line": 6,
+          "text": "import dev.codex.schubert.nk.api.idempotency.InboxException;"
+        },
+        {
+          "line": 135,
+          "text": "} catch (InboxException failure) {"
+        },
+        {
+          "line": 137,
+          "text": "if (failure.reason() == InboxException.Reason.MESSAGE_ID_REUSE)"
+        }
+      ],
+      "classification": "SOURCE_ONLY_NO_CURRENT_RUNTIME_OR_DB_QUALIFICATION"
+    }
+  ],
+  "sourceOnly": true,
+  "actualCallerRuntimeQualified": false,
+  "publicTypeAndMemberDescriptorsRemainUnchanged": true
+}
