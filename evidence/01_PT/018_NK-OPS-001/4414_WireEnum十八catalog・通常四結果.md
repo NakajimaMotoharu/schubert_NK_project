@@ -1,0 +1,5 @@
+# WireEnum十八catalog・通常四結果
+
+Core185c27a8/Unitb690f2ae/PG36010 WireEnum十八catalog独立new全4FES0真正0。Main十九source不変、元UI由来十八table/58名称-wire literalを独立照合し、各Class::values/valueOf直参照で全名称・順序ordinal・wire・default表示・未知/empty/space/case/null・wire別名拒否・配列独立・全58 typed key実HashMapを検証。58観測を58Testへ増幅0。PG36012-36013 現19physical/18CRC-initXML/freshMain19Root/静的適用未分類0、PMDraw2はcaller-owned配列防御検証とmethod内非並行Mapの具体非該当。36014同singleexec raw148LINE108METHOD18CLASS1106I全miss0、branch0/WireEnum Code0は自然N/Aで100%実測値へ捏造0。BUG3105/YKT2577当十八factoryと十九source限定CLOSED、元不足35960/旧exec保持・旧120/124再演/exec合算0。是正.25/.75/2.25限定完了・残397.324/837.386/1643.415、原904.85/SV/開始見積保持、App241/35946/35880/歴史不成功66、正式1964/53・正本184/625・元17/190・工数null不変。広域2431/wholeProtocol/451/native/CHRは未受入、全HOLD保持。
+
+/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG36013-wire-enum-value4-post-join-v1/manifest.json SHA256 fdc53411501eb3f803fe09d7af93cffbdd9d9651c3abb35afab1ddbfb9cc09b0; /home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG36014-wire-enum-value4-unfiltered-v1/manifest.json SHA256 d89d02ef04f98305bade65f02fd362f00d96bb981fb26ae5d85ad9402f6336bc。

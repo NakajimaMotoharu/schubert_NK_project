@@ -55,7 +55,7 @@ for line in result.stdout.decode().splitlines():
         assert len(fields)==12;name=fields[1];assert name not in classes
         row=dict(name=name,id=fields[2],dataPresent=fields[3]=='true',probes=int(fields[4]),access=int(fields[5]),counters={});classes[name]=row;start=6
     else:
-        assert fields[0]=='METHOD' and len(fields)==19
+        assert fields[0]=='METHOD' and len(fields)==11
         row=dict(className=fields[1],name=fields[2],descriptor=fields[3],access=int(fields[4]),counters={});methods.append(row);start=5
     for item in fields[start:]:
         kind,missed,covered=item.split(':');row['counters'][kind]=dict(missed=int(missed),covered=int(covered))
