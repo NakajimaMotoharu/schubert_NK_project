@@ -1,0 +1,22 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG35920-SSC442-N12-IDENTIFIERS3",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35908-ssc442-n12-prepare-v1/manifest.json",
+    "sha256": "ff7a7ab3e0b2aaacfeaa7c206e7fa4b4f2501fb17f8e04113507ff39351b43de"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35910-ssc442-n12-static-v1/manifest.json",
+    "sha256": "c13b025a17976ff191863c2659957c975a09e3e0a96fbc2324fdc6cc230ff05a"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/N12IdentifierValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<ProtocolId, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary test invocation, never published, captured by worker tasks, or shared across threads. Its nine immutable typed ID keys verify real hash/equality semantics under identical numeric values. There is no concurrent access and no production collection change; replacing the map solely to silence a conditional concurrency recommendation is unwarranted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

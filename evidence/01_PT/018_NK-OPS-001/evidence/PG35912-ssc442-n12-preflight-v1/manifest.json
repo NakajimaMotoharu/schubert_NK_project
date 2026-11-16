@@ -1,0 +1,60 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4230_ssc442_n12_profile.json",
+    "sha256": "8cb3f60cf7292584eac253492da2e77ccbe722a987c30bc5756c3163d3c7d0a3"
+  },
+  "inputHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java": "f08d12175c9185fa1549862923976f3fe92a179a46599757f09b56320d63a72c",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.java": "448aca86c81f447fb392d2f3f762006559d42a9d720b9bf9b8a6b17564974bcb",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.java": "cc3a28d386fbfccd8f1508439706f8f7b033bc826d1b25a2a4b72fd82f1806d2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AudioId.java": "76ef923a1a3252318a475663b45559a2233f1e65c5ad3d22b6cf9c92026bf3f6",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryId.java": "f4a1642d932924d09fc9364fddbc8f5f2a6b017f40a1fe3cc13b0ff86b7d552e",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogId.java": "5a8e7b00184d66c21d08dfd9fa49a46bb787b944e455715f3348fea8230a4cea",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.java": "9754a3220c258db45262d9447bdbaadf95a80348e57eeb202b1a8fbbecc83ffd",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.java": "a0c57ac09481d1a033b35faf9059c7f9c2d152ad62563f9099078c97e3febf3c",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.java": "c4e173ae47563d5220fac49b5664d2d7493f5e273eefaabca97899f3e93ccae7",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.java": "b873745a1447f68db8c40d5742171b773af788f11c6c3e1a9efe792fc2ce7974",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserId.java": "482cd1b41f0f5e2408086ca0ea4e6742a2a1c0c80bc541249261c9c339564383",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/N12IdentifierValueContractTest.java": "dae57d2f03740b97ff759722dd175505b3f2447573bb18ac7dfc402ff4916887",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35908-ssc442-n12-prepare-v1/manifest.json",
+    "sha256": "ff7a7ab3e0b2aaacfeaa7c206e7fa4b4f2501fb17f8e04113507ff39351b43de"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35910-ssc442-n12-static-v1/manifest.json",
+    "sha256": "c13b025a17976ff191863c2659957c975a09e3e0a96fbc2324fdc6cc230ff05a"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4237_ssc442_n12_static_admission.json",
+    "sha256": "4024579689fba66905b4c7566b7975a5c403135f57e09f0636d34a49b4134725"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/N12IdentifierValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "84",
+      "reason": "This map is confined to one ordinary test invocation, never published, captured by worker tasks, or shared across threads. Its nine immutable typed ID keys verify real hash/equality semantics under identical numeric values. There is no concurrent access and no production collection change; replacing the map solely to silence a conditional concurrency recommendation is unwarranted.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
