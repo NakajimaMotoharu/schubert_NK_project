@@ -1,0 +1,833 @@
+{
+  "actualExit": 0,
+  "source": "0864b0a22f8a9047b8517a2ef3b4dabfaa08c26a",
+  "productionCoreMain": "84d9d3eda489c89c522ff4a4785a12c4c5a51f20",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4522_ssc450_all162_profile.json",
+    "sha256": "18cb14108195b497ec6f62e5e5ce8cb202bc3edfa53937d93c4ac2330f8b87a9"
+  },
+  "run": "PG36942-SSC450-ALL162",
+  "tests": 162,
+  "newTestDefinitions": 2,
+  "physicalClasses": 46,
+  "positiveMainCrc": 32,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 6173,
+      "missed": 1767
+    },
+    "BRANCH": {
+      "covered": 580,
+      "missed": 467
+    },
+    "LINE": {
+      "covered": 1234,
+      "missed": 342
+    },
+    "COMPLEXITY": {
+      "covered": 432,
+      "missed": 448
+    },
+    "METHOD": {
+      "covered": 259,
+      "missed": 94
+    },
+    "CLASS": {
+      "covered": 32,
+      "missed": 5
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/migration/AssetStagingTables": {
+      "INSTRUCTION": {
+        "covered": 349,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 50,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 78,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 49,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 24,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation": {},
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery": {},
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table": {
+      "INSTRUCTION": {
+        "covered": 15,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 6,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 1,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 1,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier": {
+      "INSTRUCTION": {
+        "covered": 526,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 46,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 83,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 38,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 15,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier": {
+      "INSTRUCTION": {
+        "covered": 521,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 32,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 77,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 31,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 15,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": {
+      "INSTRUCTION": {
+        "covered": 379,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 48,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 94,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 47,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 23,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": {
+      "INSTRUCTION": {
+        "covered": 412,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 48,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 104,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 54,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 30,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery": {},
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": {
+      "INSTRUCTION": {
+        "covered": 415,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 30,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 88,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 54,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 39,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery": {}
+  },
+  "completeSourceComponentCounters": {
+    "CLASS": {
+      "covered": 7,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 254,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 530,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 2617,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 147,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 274,
+      "missed": 0
+    }
+  },
+  "completeSourceComponentFour100": true,
+  "wholeScopeFour100": false,
+  "uncoveredFullSourceClasses": {
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": {
+      "INSTRUCTION": 100,
+      "BRANCH": 13,
+      "LINE": 21,
+      "COMPLEXITY": 15,
+      "METHOD": 5
+    },
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": {
+      "INSTRUCTION": 65,
+      "BRANCH": 33,
+      "LINE": 8,
+      "COMPLEXITY": 36,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": {
+      "INSTRUCTION": 69,
+      "BRANCH": 16,
+      "LINE": 17,
+      "COMPLEXITY": 12,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset": {
+      "INSTRUCTION": 42,
+      "BRANCH": 17,
+      "LINE": 7,
+      "COMPLEXITY": 13,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": {
+      "INSTRUCTION": 200,
+      "BRANCH": 33,
+      "LINE": 44,
+      "COMPLEXITY": 26,
+      "METHOD": 6,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": {
+      "INSTRUCTION": 61,
+      "BRANCH": 25,
+      "LINE": 9,
+      "COMPLEXITY": 25,
+      "METHOD": 5
+    },
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow": {
+      "INSTRUCTION": 57,
+      "BRANCH": 27,
+      "LINE": 9,
+      "COMPLEXITY": 29,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow": {
+      "INSTRUCTION": 45,
+      "BRANCH": 19,
+      "LINE": 8,
+      "COMPLEXITY": 21,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": {
+      "INSTRUCTION": 111,
+      "BRANCH": 14,
+      "LINE": 28,
+      "COMPLEXITY": 17,
+      "METHOD": 6
+    },
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset": {
+      "INSTRUCTION": 51,
+      "BRANCH": 15,
+      "LINE": 10,
+      "COMPLEXITY": 12,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch": {
+      "INSTRUCTION": 83,
+      "BRANCH": 19,
+      "LINE": 12,
+      "COMPLEXITY": 18,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/MusicLogicalId": {
+      "INSTRUCTION": 68,
+      "BRANCH": 12,
+      "LINE": 13,
+      "COMPLEXITY": 10,
+      "METHOD": 4,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": {
+      "INSTRUCTION": 71,
+      "BRANCH": 32,
+      "LINE": 10,
+      "COMPLEXITY": 29,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset": {
+      "INSTRUCTION": 73,
+      "BRANCH": 15,
+      "LINE": 14,
+      "COMPLEXITY": 16,
+      "METHOD": 6
+    },
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow": {
+      "INSTRUCTION": 131,
+      "BRANCH": 57,
+      "LINE": 20,
+      "COMPLEXITY": 48,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": {
+      "INSTRUCTION": 52,
+      "BRANCH": 7,
+      "LINE": 13,
+      "COMPLEXITY": 9,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": {
+      "INSTRUCTION": 19,
+      "LINE": 5,
+      "COMPLEXITY": 2,
+      "METHOD": 2,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables": {
+      "INSTRUCTION": 78,
+      "BRANCH": 26,
+      "LINE": 23,
+      "COMPLEXITY": 25,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": {
+      "INSTRUCTION": 46,
+      "BRANCH": 7,
+      "LINE": 6,
+      "COMPLEXITY": 9,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": {
+      "INSTRUCTION": 2,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/migration/AudioCopyDataset": {
+      "INSTRUCTION": 86,
+      "BRANCH": 30,
+      "LINE": 15,
+      "COMPLEXITY": 30,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest": {
+      "INSTRUCTION": 174,
+      "BRANCH": 30,
+      "LINE": 38,
+      "COMPLEXITY": 27,
+      "METHOD": 5
+    },
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": {
+      "INSTRUCTION": 71,
+      "BRANCH": 20,
+      "LINE": 5,
+      "COMPLEXITY": 12,
+      "METHOD": 2,
+      "CLASS": 1
+    }
+  },
+  "naturalNoCodeClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery"
+  ],
+  "naturalNoBranchClasses": [
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery"
+  ],
+  "classIds": {
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": "e6c6bdc61330aece",
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow": "692a5bc6886c710a",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": "3d602a3afa548783",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": "182a61311cbf8753",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": "324542181cb09b16",
+    "dev/codex/schubert/nk/migration/AudioCopyDataset": "5948429dfdaee181",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": "e846e0be2e9d24d4",
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch": "281cf2f6a196cb54",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow": "b4ea72113694ecde",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare": "9292a1eab49b9590",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": "bf2246fe939020e1",
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": "b2ce25844344a757",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": "9be7d6fda6a33be6",
+    "dev/codex/schubert/nk/migration/AssetStagingTables": "33b9ec86c622912d",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": "1fbf1800a19b9cc3",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery": "587cc8ef90cd48b4",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery": "b065bc7c108ee6c9",
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset": "57cbc2a9c46a180c",
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables": "5ee532d83bddeb5c",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": "8b7d5dadddf8189a",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery": "68dc45b1c893fb54",
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow": "32f520b3b8287da4",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": "bcaffef1341e07c6",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation": "5f5e1b7f780c0f0d",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier": "52e8c095106a023d",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": "c3a752180ca44b6c",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": "9ecb7cff24c58230",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery": "dc9cfb2c2c9dbd2d",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery": "8646ca56764dc6bd",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": "32a0d662a7ebddc6",
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset": "2cb26ee0d6355813",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": "26d3c5985043f6d2",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": "66b8b470b88420d8",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery": "d92cdb87dbae5088",
+    "dev/codex/schubert/nk/migration/MusicLogicalId": "51e59859afe500ee",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": "fde46c1c4182db5f",
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset": "7a84ec236997ea2c",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table": "00c80f74bcca6fb1",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": "7421783cd4cedc8a",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier": "ef5024c22f142612",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest": "3c3374bf07cdf575",
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": "1dc7a6f19cf719e7",
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": "df9bfcb3651c3c28",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": "d233bdd06fc71632",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": "fe2fbbeb7447ede3",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation": "bf7e10314a283a8b"
+  },
+  "actualJvmCodeMethodCounts": {
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Kind": 5,
+    "dev/codex/schubert/nk/migration/AudioFileCopyRow": 13,
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch": 5,
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap": 11,
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$FilePair": 7,
+    "dev/codex/schubert/nk/migration/AudioCopyDataset": 11,
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap": 11,
+    "dev/codex/schubert/nk/migration/SpeakerCopyBatch": 7,
+    "dev/codex/schubert/nk/migration/MediaAssetCopyRow": 24,
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlPrepare": 0,
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$PlacedEntry": 10,
+    "dev/codex/schubert/nk/migration/ScenarioFileCopyBatch": 11,
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$MappedEntry": 7,
+    "dev/codex/schubert/nk/migration/AssetStagingTables": 24,
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$MappedFile": 8,
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/ScenarioCopyDataset": 9,
+    "dev/codex/schubert/nk/migration/ScenarioStagingTables": 9,
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer": 30,
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/SpeakerCopyRow": 11,
+    "dev/codex/schubert/nk/migration/PostgresCopyTextWriter": 4,
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlMutation": 0,
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier": 15,
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap": 7,
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$Placement": 8,
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier": 23,
+    "dev/codex/schubert/nk/migration/MigrationMasterCopyDataset": 6,
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Observation": 7,
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$IdPair": 6,
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$SqlQuery": 0,
+    "dev/codex/schubert/nk/migration/MusicLogicalId": 4,
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch": 8,
+    "dev/codex/schubert/nk/migration/MigrationCopyDataset": 7,
+    "dev/codex/schubert/nk/migration/AssetStagingTables$Table": 1,
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Comparison": 11,
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier": 15,
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest": 11,
+    "dev/codex/schubert/nk/migration/ScenarioEntryCopyRow": 12,
+    "dev/codex/schubert/nk/migration/PostgresCopyTextEncoder": 6,
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$Entry": 9,
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier": 39,
+    "dev/codex/schubert/nk/migration/AssetStagingTables$SqlMutation": 0
+  },
+  "hiddenJvmAdapters": {
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b2490": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188cf0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9da8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ae858": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185450": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511aece8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511aeaa0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a2808": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188678": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a7a20": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119c880": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511aba50": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5920": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x000000005119f980": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5248": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b5370": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x00000000511899e0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051187998": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511adae8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x000000005119bc00": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5490": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap$$Lambda+0x000000005113aea8": "dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a25e0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a4a48": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9240": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118b598": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a96d0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ae610": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118b148": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8000": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$$Lambda+0x00000000511a6200": "dev/codex/schubert/nk/migration/AssetMigrationManifest",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b2248": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/AssetMigrationManifest$$Lambda+0x000000005113b508": "dev/codex/schubert/nk/migration/AssetMigrationManifest",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x000000005119f758": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ad470": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511aa238": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119caa8": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap$$Lambda+0x000000005113a428": "dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ae3c8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x000000005119fba8": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8db0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051186cd0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511abea0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x00000000511888a0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119c658": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b66b8": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a2e80": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118a028": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9b60": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118acf8": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x00000000511a0000": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119c208": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b6490": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185cf0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118a8a8": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a32d0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185000": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a2c58": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b77d8": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ad8c0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185228": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a2a30": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$$Lambda+0x00000000510e5ae0": "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118a680": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier$$Lambda+0x000000005119fdd0": "dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b59e8": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MediaAssetCopyBatch$$Lambda+0x000000005113b968": "dev/codex/schubert/nk/migration/MediaAssetCopyBatch",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x00000000511858a0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ab600": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118b7c0": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118aad0": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b7160": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9ff0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051189140": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051189368": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ad698": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8920": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9488": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188228": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b6f38": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a9918": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b6d10": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8b68": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x00000000511897b8": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a56d8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a30a8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8248": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118a458": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051189590": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b6040": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b6268": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188000": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511adf38": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051186ef8": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b5598": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118b370": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ae180": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b5c10": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119c430": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188f18": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051187348": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118b9e8": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b7c30": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5db0": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051186aa8": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b57c0": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a4c90": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a86d8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a4800": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188450": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ab828": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5b68": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185678": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051185ac8": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b7388": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap$$Lambda+0x00000000510e5d08": "dev/codex/schubert/nk/migration/ScenarioFileMigrationMap",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a7c68": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511abc78": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/AssetStagingTables$$Lambda+0x000000005118af20": "dev/codex/schubert/nk/migration/AssetStagingTables",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511add10": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b68e0": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051187120": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051187570": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a5000": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051187bc0": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b2000": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterFinalizer$$Lambda+0x00000000511b75b0": "dev/codex/schubert/nk/migration/MigrationMasterFinalizer",
+    "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier$$Lambda+0x000000005119ccd0": "dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511ac0c8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8490": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier$$Lambda+0x0000000051188ac8": "dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier",
+    "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier$$Lambda+0x00000000511a8ff8": "dev/codex/schubert/nk/migration/MigrationMasterContentVerifier"
+  },
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36940-ssc450-all162-preflight-v1/manifest.json",
+    "sha256": "c9863de7f6b6f68e87e199aaf37fdf76f83fd3cb5481d6ceff697f456948377a"
+  },
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": "8e22a0c8da9b500d0213c8550eacfc4527e1839b4fb4b09c7acd40bfa808a547",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "6ccdd31966cf0674e762d52c9cd9731c167bcc4f75b5305f3fee95e16dcd815e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": "45f55dd1ce4c01329f9f9e6c10f7efa38483f76c1be7c46d30d91c1028966d21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "8dca6551545b05ce5090093c7e1e24f93657be4658a45d0b78f654a1b0a9ec57",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "cc632eea4d299c3b98bae4d413431c238bc8f7ca6946fafabdc4c767b5c594b8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "5202a8eeb5a1f2fc8f02220ab18b49c5d4e6c6c11344b54da1df281f6aa7c409",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": "087c49bbb56bb77b0ae2c509bc648f4161e3e7c977a242323616d3dfc6e83d89",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "f35b20476ab4e13512ac2a86cb30ab42c1e08d522fb7fa3ab3255b8ede11c825",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "a68c7bf896b659151e1eadfb80273bee54051b77b18ddcde9a0fa490a484332b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingTablesTest.java": "300346ef98cd3eb1185be9a816e3915ab3c2017026704fbc04ee40a4ab336b70",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifierTest.java": "cca987730c5f9363bcda5061f618052520727ff5353cddb88e29c11b2fc54bcd",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifierTest.java": "d090b2fb603a00ce5dbf7051471a431e46cae846db6e42542ce338596f49e056",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/AssetStagingSelfSuppressionTest.java": "21b229e64f5dd6de49cf8141a711b0e3f97bbc06f46cec4fd03fcb0627630406",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifierTest.java": "c2304d089f33c998a511899fdc566750f02488ec5294048c6d692bfec83b636a",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizerTest.java": "daa6dd77fea6e593f51a6b9d29195a9644ff2abd27d545a8e5deab75d24d7ca6",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifierTest.java": "feb5862893c7164e018af496e3b48f74a67b178aa7c13d07ce35eb7d96298209",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "productTestsExecuted": 162,
+  "actualBackendNativeFsRootOrHeldClassActions": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "files": {
+    "unit-classinfo-begin.safe.json": "65f85145e5be84100b5ab46a89550c60194de7a3c76882db84626fc898a8eb99",
+    "unit-coverage.stdout": "29620277d360cf5a3cf06208559b280ebad095cdb415ef43773c6c749d833137",
+    "unit-execinfo-begin.safe.json": "e4af488df606b79d7cf55f8bb11375e2f40ec4e1696e4aa1dcaf6546d12b742d",
+    "unit-coverage-exit.safe.json": "0f341259741b38e2bd01b0a6ed265fe17a456909e3677eaa89e5156784c8fd4b",
+    "unit-classinfo-exit.safe.json": "91fb7b258fb7a000347ce7515da57849cad54b759751b1b7019e748bb4dc43c6",
+    "unit-unit-begin.safe.json": "8bc3062b89193e458e913db7d3398641d7cdecef30eb33372dd2afe18544f873",
+    "unit-unit-process.safe.json": "fa2cc6d06675e473593faeaec42762355c23af88e812a21c7ca2f628955c50cd",
+    "unit-coverage-begin.safe.json": "861ed6f2eea87fa134f4d114606f35eb9947b8116836c617865481bc8c67aece",
+    "unit-classinfo.stdout": "9103a257daae7c3296c4cf883be0e668b10c952c0d62122d907ea08d8af4a60a",
+    "unit-execinfo-process.safe.json": "2500a40a7934d9a8934e53f15b5d8f709086141eff4386bf6fb5ab807bc13e42",
+    "unit-coverage-process.safe.json": "933cdc6bf7802069900b23a1b904def86986767f5caafa504a6828b689056b7a",
+    "unit-execinfo-exit.safe.json": "7dc714bd866ed3fa6b4ffeb1d65d2b2b5bc131d9f87923ebea66de6b4bb0ebec",
+    "unit-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-execinfo.stdout": "b72415338afcbacf56e5e0c3f19c0e6c8873bdaa336277fdc14be7f6c7716326",
+    "unit-begin.json": "4704113c7bf4b27e6106f138300f5bd4ccc737012ff716fa0b26339704cdbb52",
+    "unit-unit-exit.safe.json": "d57acfb589d602f72c3e9341c75091694a2eeedcd5882f76537c495f6602fc9e",
+    "unit-classinfo-process.safe.json": "0d7d9622ddfb503f14bf54d96ea491cf16908317d7a332a07d3e20106832defc",
+    "unit-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-manifest.json": "e985074eee053556c098df01874d73121ba7f2ecd096b1982aee9a5ddc8ca844",
+    "unit-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-unit.stdout": "008c8b00e32a302076d350b018d28bff98dac6b548d5ba6181693950c44896f5",
+    "original-coverage.xml": "7efde93456f822509806bdfb2fad239df6962a6b26ac8bf6c9ed957f1c1c1ce0",
+    "jacoco.exec": "7e2a2e77957b1b33e2406f19253b485cde1900e84def5978a69cbd4e3a94dc47",
+    "original-class-init.stdout": "55f43e77041234fbb43653bccbbecbfdec257d0984757c79f06cd795b4865270",
+    "original-TEST-junit-platform-suite.xml": "97eb26ad0dba776d741637c4ae6c805b30e20a6462aa4c1fbe78a5480a6c038c",
+    "original-TEST-junit-vintage.xml": "23ebb5827b99a749e67ac3f04772ebfba63c58c519ba4b3dfebef0e1a25f6599",
+    "original-TEST-junit-jupiter.xml": "9e35e841e165aa4e6d5f0e7a8429861b1de97ff89f81f154dc6ef89e0183ef0f"
+  },
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_post_v3.py",
+    "sha256": "70270d9b457eb0bdec30b7f5009b0df4f095e2d91d811b76604d6e9bdaf764a3"
+  },
+  "defaultStandardFilteredSwitchMaps": {},
+  "forbiddenInitializedClasses": [],
+  "forbiddenInitializedClassesObserved": [],
+  "reviewedReflection": [],
+  "originalUnitXmlHashes": {
+    "original-TEST-junit-platform-suite.xml": "22d0b90ab3fb5e7d87b04e0ef3a10da47b817f17219b9947163dadb68f0b745d",
+    "original-TEST-junit-vintage.xml": "ba020b58b4b7910b04c4ebcf9972b5714d12bfddac5d33ba058e5413210c9791",
+    "original-TEST-junit-jupiter.xml": "64c6ebca8c8b9a1ba1d380065e387eb1d4e5c6da6c4c74c2f3b9bc17f2820fed"
+  },
+  "publicUnitXmlPropertyNames": [
+    "file.encoding",
+    "java.version",
+    "os.arch",
+    "os.name",
+    "user.timezone"
+  ],
+  "unitXmlSystemOutErrExported": false,
+  "unstartedProcess": null,
+  "unstartedProcessInitializationObserved": [],
+  "unqualifiedStreamingExecutionObserved": false,
+  "guardSignature": null,
+  "guardExecutionMode": null,
+  "analysisOnlyContext": null,
+  "reviewedArtemisSdk": null
+}
