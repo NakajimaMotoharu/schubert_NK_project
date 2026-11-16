@@ -605,3 +605,14 @@ Bootstrap POMへorg.checkerframework:checker-qual:3.55.1を明示compile依存�
 独立資格: 原失敗のwarnings10/exit1と新compileのwarnings0/exit0を同じRoot flags/版/業務Main byte/sourceで対照し、実効compile classpathへ3.55.1の同JARが入ること、六module依存境界/収束を照合する。生成Mainは旧sourceの公開APIと必要byteを比較し、失敗元の未生成classは旧成功と同一扱いしない。四module全477Mainの通常compile・該当静的を先行し、API/WebのQA056該当classfile操作は回答まで保留、全六/F02/F03/451を宣言しない。PTを暗黙に起動せず、実PT/coverage/CHRと分離する。同source通常PTが必要な変更なら対象triggerと独立oracleを先に確定する。
 
 状態:設計確定・main反映前・POM未変更・是正後compile/静的未実施。関連元F02/F03・P01808/00403/00405終了依存。元F03/2-2残2.4ppとcap5は据置き、診断/手戻りを原成果とは分離記録し、追加予算消化/工数率へ変換しない。BUG3129/YKT2600は再試験と全横展開判定までOPEN。
+
+
+## SSC-450 閉SQLの実行位置をliteral操作として保持（2026-11-17）
+
+BUG3132/YKT2603、上位RD/UI変更なし、canonical主担当/費用WBS-P019-03、F03受領。AssetStagingTables、MigrationMasterColumnVerifier、MigrationMasterConstraintVerifier、MigrationMasterContentVerifier、MigrationMasterFinalizer、MigrationMasterReferenceVerifierのprivate閉SQL表現を補足する。全SQL文字列・固定表/列/順序・実行順・timeout/fetch/setval bind・借用transaction・null/一次例外/cleanup規則・public APIは変更しない。
+
+private stateless関数型の実装をclass初期化時に固定Listへ登録し、各executeQuery/executeUpdate/executeLargeUpdate/prepareStatement呼出位置の引数をcompile-time constantのSQL式にする。callbackはStatement/Connectionを保持せず呼出引数として借用し、一SQLごとのcallback割当や可変registry/外部SQL選択口を作らない。Assetのprivate Tableはname/columns/order文字列からprepare/targetCount/stagedCount/insertの四操作を持つ閉じた計画へ変更する。Column/Constraint各六query、Content七query、Reference六count及び全inspectionは同順の固定query操作、Finalizerは五MAX/五setval prepare/六ANALYZEの固定操作へ変更する。setvalの五事前MAX検査→全setval→全ANALYZE・constraint phase、known zero/nonnull/wasNull/row数とmetadata期待を維持する。NoCode private interfaceも物理集合に含め、除外/架空到達/SQL難読化/新suppression/flag緩和をしない。
+
+旧承認SQL全byteと順序を一対一で照合するSource equivalenceは補助証拠とする。PT期待はproductionを呼んで生成せず、既独立Testのliteral SQL/metadata/rows/固定hash/JDBC後条件と承認SS/DDLから保持する。元Asset32・Column26・Constraint22・Content29・Finalizer30・Reference21のwhole160 Test本文/独立期待値を不変とし、必要なwhole helperをscope確定してから新sourceで一exec、Root NullAway/Werror/全静的/物理CRC-init/XML/当六sourceの未filter四counter/公開API及び不変byteを確認する。private関数型の真のNoCodeを隠さず、共通DTO等の残coverageも全componentに残す。実DB/master/原本/鍵/Backup/Root/VM/native/QA056四型/QA051 finalの保留は解除しない。
+
+既instanceのtoString/redactionと例外診断を維持する。literal化は所有開始後のString組立を除去するが、性能やheap OOME挙動の実測合格を主張しない。追加A .4/1.2/3.6pp cap4を一回だけ計上、元F03 C2.4/SV/原見積りを保持する。元P01903/全F03/正式/ITSTの受入は別。状態:設計確定・main反映前・製造/PT未実施。
