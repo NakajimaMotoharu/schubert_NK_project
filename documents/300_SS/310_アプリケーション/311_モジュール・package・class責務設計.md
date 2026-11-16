@@ -527,3 +527,14 @@ BUG3074/3075/YKT2431、状態:設計確定・main反映前、PG/PT/正式未完�
 ClosedWebAuthenticationは認証主体を保持しないpackage-privateの閉じたstatic factory/projection責務をstatic-only package-private interfaceで表す。元final classの宣言とprivate空constructorだけを置き換え、authenticated/principalの二static method名・descriptor・注釈・全body・null/匿名空Optional・token exacttype/認証済/credentials-null/details-null/authority一件/role一致の全判定と固定SessionStoreExceptionをbyte逆展開保持する。interfaceはinstance API/abstract method/fields/新port/設定/権限経路を持たず、型自体はpackage-privateのまま。Java interface static methodのpublic modifierは型のpackage可視性の内側だけ、外部Web/認証/セッション/HTTP/UI/RD/DIFを変更0。private反射・意味のないinstance生成・coverage除外・到達不能宣言で空ctorを埋めない。型kind変更により旧class Methodrefを含むbinaryは混用不可、全module/八source呼出元をfresh再compileしたreleaseだけが将来配備対象。八callersのpath/hash/ownerとstatic呼出構文を記録する。今回の許可済みsafeMain19は元Login18＋TopBar1、callerはProviderのみ実接続、元Client8/Probe4/Provider5/閉例外1/ClosedValue4/PrincipalTopBar2の全六Testclass24をbyte exact保持して新sourceで一回再資格。元二method/PrincipalTopBar/ProbeProvider/閉例外とReasonの七targetを同一source/runのfreshRootNullAway/全静的/current198physicalCRC-init/XML/raw必須四100で確認、他依存missは保持。残七callerや正式Webassembly/全回帰はHOLD依存があるため未実行のまま、本文source互換だけで成功へ変換しない。実Root2Actual4/鍵DB-JMS-認証service/session/VM/native/aru/HOLDをcompile/代替/操作0、旧source全体/exec成功移植0。
 
 BUG3078/YKT2431、状態:設計確定・main反映前、PG/PT/全caller/正式未完。
+
+
+## SSC-449 PostgreSQL JDBC注釈の正規compile依存（2026-11-17）
+
+BUG3129/YKT2600、RD/UI変更なし。pgjdbc42.7.13の公式POMはchecker-qual3.55.1をruntime依存にしているが、PostgresMigrationCopyPort及びQuestionSubmissionServiceのPGConnection/CopyManager等をjavac -Xlint:all -Werrorで型検査するとorg.postgresql package-infoのDefaultQualifier/TypeUseLocationがcompile classpathへ無く10警告→終了1になる。PG36830元Maven/36834診断/36836元flagsの直接javacで同じ失敗を保全。これは製品業務処理や原本/権限の失敗ではなく、SDK注釈の依存scope不足。
+
+Bootstrap POMへorg.checkerframework:checker-qual:3.55.1を明示compile依存として追加する。版は既pgjdbc POMのruntime版と完全一致、既toolchain cacheから使用し新規version選定/更新をしない。Bootstrapをcompile依存とするAPI/Web/Batchへも型情報を正規推移し、既runtimeに存在する同一artifactを別版へ置換/増幅しない。Root flags、NullAway/JSpecify/Werror、PMD/CS/SB、既業務Main/Test/SQL/電文/既goldenは不変。注釈classをstub/削除したり-Xlint:-classfile/-nowarn/-Werror解除で回避しない。実SDKの注釈解決だけであり、秘密・鍵・許可・署名・native/DBの実操作を追加しない。
+
+独立資格: 原失敗のwarnings10/exit1と新compileのwarnings0/exit0を同じRoot flags/版/業務Main byte/sourceで対照し、実効compile classpathへ3.55.1の同JARが入ること、六module依存境界/収束を照合する。生成Mainは旧sourceの公開APIと必要byteを比較し、失敗元の未生成classは旧成功と同一扱いしない。四module全477Mainの通常compile・該当静的を先行し、API/WebのQA056該当classfile操作は回答まで保留、全六/F02/F03/451を宣言しない。PTを暗黙に起動せず、実PT/coverage/CHRと分離する。同source通常PTが必要な変更なら対象triggerと独立oracleを先に確定する。
+
+状態:設計確定・main反映前・POM未変更・是正後compile/静的未実施。関連元F02/F03・P01808/00403/00405終了依存。元F03/2-2残2.4ppとcap5は据置き、診断/手戻りを原成果とは分離記録し、追加予算消化/工数率へ変換しない。BUG3129/YKT2600は再試験と全横展開判定までOPEN。

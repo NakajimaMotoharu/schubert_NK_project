@@ -30,6 +30,10 @@
     <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>2.14.0</version></dependency>
     <dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-storage</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>org.postgresql</groupId><artifactId>postgresql</artifactId><version>42.7.13</version></dependency>
+    <!-- SSC449/BUG3129: pgjdbc's existing runtime annotation version is also required by
+         javac -Xlint:all -Werror when reading PGConnection/CopyManager package metadata.
+         Compile scope propagates the same annotations to API consumers; no runtime version change. -->
+    <dependency><groupId>org.checkerframework</groupId><artifactId>checker-qual</artifactId><version>3.55.1</version></dependency>
     <dependency><groupId>com.zaxxer</groupId><artifactId>HikariCP</artifactId><version>7.1.0</version></dependency>
     <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</artifactId><version>13.4.0</version><scope>test</scope></dependency>
     <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-database-postgresql</artifactId><version>13.4.0</version><scope>test</scope></dependency>

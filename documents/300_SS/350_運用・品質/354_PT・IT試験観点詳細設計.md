@@ -594,3 +594,14 @@ BUG3111/YKT2583のうちTypedFieldValues/JstWireTimestampのprivate empty constr
 ## SSC-448 参照DAO純JDBCとraw必須分岐
 
 同sourceのRRF-PURE-001..008はSS332SSC448を正とし、未filter全Codeの四counterを必須判定する。SQL全文/UTC独立literal・全nullable/transaction/interrupt・各呼出例外・row/statementのSQL/RTE/Error primary/secondary全組合せ・owned各一回close・borrowedConnection不変・有限32独立fixtureを照合。原実DB8件はHOLDのまま、実DBlock/visibility/全P00403/F02F03の終了依存は別。default filter/raw両値と未hitを保存し、default100でraw不足を隠さない。共有6classも全物理集合に残し、当DAO100を全closure100へ換算0。元8定義/期待不変、公開API/他6byteと全Root静的を確認する。
+
+
+## SSC-449 PostgreSQL JDBC注釈の正規compile依存（2026-11-17）
+
+BUG3129/YKT2600、RD/UI変更なし。pgjdbc42.7.13の公式POMはchecker-qual3.55.1をruntime依存にしているが、PostgresMigrationCopyPort及びQuestionSubmissionServiceのPGConnection/CopyManager等をjavac -Xlint:all -Werrorで型検査するとorg.postgresql package-infoのDefaultQualifier/TypeUseLocationがcompile classpathへ無く10警告→終了1になる。PG36830元Maven/36834診断/36836元flagsの直接javacで同じ失敗を保全。これは製品業務処理や原本/権限の失敗ではなく、SDK注釈の依存scope不足。
+
+Bootstrap POMへorg.checkerframework:checker-qual:3.55.1を明示compile依存として追加する。版は既pgjdbc POMのruntime版と完全一致、既toolchain cacheから使用し新規version選定/更新をしない。Bootstrapをcompile依存とするAPI/Web/Batchへも型情報を正規推移し、既runtimeに存在する同一artifactを別版へ置換/増幅しない。Root flags、NullAway/JSpecify/Werror、PMD/CS/SB、既業務Main/Test/SQL/電文/既goldenは不変。注釈classをstub/削除したり-Xlint:-classfile/-nowarn/-Werror解除で回避しない。実SDKの注釈解決だけであり、秘密・鍵・許可・署名・native/DBの実操作を追加しない。
+
+独立資格: 原失敗のwarnings10/exit1と新compileのwarnings0/exit0を同じRoot flags/版/業務Main byte/sourceで対照し、実効compile classpathへ3.55.1の同JARが入ること、六module依存境界/収束を照合する。生成Mainは旧sourceの公開APIと必要byteを比較し、失敗元の未生成classは旧成功と同一扱いしない。四module全477Mainの通常compile・該当静的を先行し、API/WebのQA056該当classfile操作は回答まで保留、全六/F02/F03/451を宣言しない。PTを暗黙に起動せず、実PT/coverage/CHRと分離する。同source通常PTが必要な変更なら対象triggerと独立oracleを先に確定する。
+
+状態:設計確定・main反映前・POM未変更・是正後compile/静的未実施。関連元F02/F03・P01808/00403/00405終了依存。元F03/2-2残2.4ppとcap5は据置き、診断/手戻りを原成果とは分離記録し、追加予算消化/工数率へ変換しない。BUG3129/YKT2600は再試験と全横展開判定までOPEN。

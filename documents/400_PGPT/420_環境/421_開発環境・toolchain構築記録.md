@@ -532,3 +532,8 @@ BUG3001/YKT2530は表示escape誤読による誤検知取り下げ、source修�
 価格1/3/8pp cap9はこのsource製造・PT source・強化レビュー段のみ。未実行SDK/PTの残工数を0としない。後続費用は元P019/全451費用に含む未確定内訳として保留、追加二重課金0、今回段完了を工程完了/工数完成率に換算しない。正式1964PT/53scope、正本184/625、元190新0、工数率nullを維持。
 
 2026-11-15管理工具限定: coverage.py7.17.3 pure wheel219999byteを公式PyPI固定metadata→files.pythonhosted.orgから取得、SHA25621745c08f2835b847a16887b748d3084dddeb0571ae2a0d62e33644413568b99を照合しwork/toolchain/coverage-7.17.3/runtimeへ隔離展開。global pip/SDK導入なし、取得再現3434、URL/hash/時刻/設定はPG33720/coverage-toolchain.json。Python3.14.4、当pure metadata helperのbranch/lineだけ測定しJava/PT/451へ流用しない。vendor attestation自体は未検証。
+
+
+## SSC449 pgjdbc annotation compile scope（2026-11-17）
+
+BUG3129/YKT2600。既pgjdbc42.7.13公式POMがruntime宣言するorg.checkerframework:checker-qual:3.55.1を、Bootstrapの正規compile依存として同版で明示する。新規download/ツール更新なし。既Maven Central cacheのJAR SHA256 `857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288`、元POM/JARのpath/hashはPG36838へ保存。SDKのpublic qualifierを実際に型解決し、annotation stub、Xlint classfile除外、Werror解除をしない。compileの再現は原Root POM・Java25.0.4/Maven3.9.12で通常`compile`、Test source/アプリ/DB/native実行は別の許可条件を適用する。既runtimeの同GAVをcompileにも可視化する変更であり、driver/runtime版や業務Main/Test/SQLは変更しない。正規main設計PR412/7e883a3fd07e55f7dbd8d91cc516294b3db034bcを先行反映済み。是正後compile/staticの成否は新runの実物だけで判定、PG36830/34/36失敗を保全する。
