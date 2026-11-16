@@ -1,0 +1,159 @@
+{
+  "actualExit": 0,
+  "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "owner": "WBS-F02",
+  "requirements": [
+    {
+      "id": "SYS-001",
+      "requirement": "次期システムの名称をschubert NKとする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 12,
+      "handoffObservation": "名称の要求原文をUI/brandingの当候補証拠へ結合する必要。Module buildだけではUIタイトル成立を判定しない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-002",
+      "requirement": "Java 25 LTSを使用する。Ubuntu標準パッケージ`openjdk-25-jdk`で動作可能な構成とする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 13,
+      "handoffObservation": "Root maven.compiler.release=25、SSC447実JDK25.0.4 compile0、haruka既存Java25.0.4。残五module/Ubuntu標準JDK適合のscopeを別確認。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-003",
+      "requirement": "OSはUbuntu Server 26.04 LTSとする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 14,
+      "handoffObservation": "要求はUbuntu Server26.04 LTS。今回読取済み公開環境票にOS release値がなく、この受渡しで現実機OS版を未確認。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-004",
+      "requirement": "DBMSはPostgreSQL 18系を使用し、構築時点の最新minor releaseを採用する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 15,
+      "handoffObservation": "haruka既存票PostgreSQL18.6。現在接続先/role/schema/sourceは未認証、DBへ接続しない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-005",
+      "requirement": "Web層とサーバ側アプリケーション層の通信は、すべてApache ActiveMQ Artemisを介する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 16,
+      "handoffObservation": "六module POM内部依存は抽出済み。全Web→API Artemis境界と独立architecture gate当source適用の照合が残る。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-006",
+      "requirement": "ブラウザ向け画面デザインは極力維持する。MQ導入等に伴う必要不可欠な変更は許容する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 17,
+      "handoffObservation": "ブラウザ互換/DIFの当候補証拠のjoinが必要。SSC447はwire goldenであり実Browser/CHRの代用ではない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-007",
+      "requirement": "Web層より後段の内部処理方式は、利用者から見た挙動を極端に変えない範囲で変更できる。安定性を優先する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 18,
+      "handoffObservation": "codec/型/JSTは152通常PTとinverse/publicABIで限定検証。元全操作/終端の安定性は各主担当の証拠が必要。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-008",
+      "requirement": "本番環境はオンプレミス、単一拠点、インターネット接続ありとする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 19,
+      "handoffObservation": "利用者提供の専用haruka直接OS整備票はある。本番配置/当source稼働をこの資料で成立させない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-009",
+      "requirement": "コンテナおよびKubernetesは初期前提としない。必要性が確認された場合に再評価する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 20,
+      "handoffObservation": "Root reactor六製品moduleと直接OS標準tool構成。コンテナ/Kubernetes導入や新probeを実施しない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-010",
+      "requirement": "大容量マスタ素材を含む業務データはローカルストレージに保持し、外部ストレージサービスを利用しない。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 21,
+      "handoffObservation": "ローカル保管方針/設定と担当WBSを結合する必要。master実体/DBdump/保護資産は読取しない。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-012",
+      "requirement": "初期公開方式はdomainを使用せず、到達確認済みのglobal IP addressと現行外部port `55160/tcp`を使用する。本番サーバ側のport開放は完了済みとする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 23,
+      "handoffObservation": "55160/tcpとglobal IP入口の設計/設定はC02/N担当へ。実効公開到達の現source証拠は今回未取得。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-013",
+      "requirement": "初期TLS方式は現行相当のCaddy内部証明書を許容し、client側の証明書警告を許容する。通信暗号化は維持する。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 24,
+      "handoffObservation": "Caddy内部証明書許容と暗号化の設計原文を実効TLS証拠へ結合する必要。秘密key/credential操作0。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    },
+    {
+      "id": "SYS-014",
+      "requirement": "Domainまたは公的に信頼されるIP address証明書を将来採用する場合に、業務アプリを改修せず入口設定と証明書を交換できる構成とする。",
+      "source": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "line": 25,
+      "handoffObservation": "入口設定/証明書交換とapp独立の設計・source・試験参照のjoinが残る。",
+      "status": "PARTIAL_OR_PENDING_NOT_ACCEPTED",
+      "nextOwner": "WBS-F02"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "WBS-F02/reuse",
+      "condition": "Trace these exact requirements and named contract to independent TestID/oracle/source proof; reuse only individually justified subset; do not repeat a success just to count it",
+      "scope": "WBS-F02",
+      "originalHold": "",
+      "terminal": "閉/WBS-F02",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F02/criterion/contract",
+      "condition": "JDK/Maven/toolchain・6module build・依存境界：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。 固有要求：SYS-001,SYS-002,SYS-003,SYS-004,SYS-005,SYS-006,SYS-007,SYS-008,SYS-009,SYS-010,SYS-012,SYS-013,SYS-014",
+      "scope": "WBS-F02",
+      "originalHold": "",
+      "terminal": "閉/WBS-F02",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F02/criterion/scope",
+      "condition": "485のownedArtifactsとsharedClassReferencesを全件照合。主担当共通費を再計上せず、必要下位型/例外/組立/資源も欠落0。",
+      "scope": "WBS-F02",
+      "originalHold": "",
+      "terminal": "閉/WBS-F02",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F02/criterion/quality",
+      "condition": "451の該当品質条件、同source/byte、独立正常/境界/異常/null/例外/再送/競合、F/E/S/flaky/not-run0、資源後条件を照合。非該当は根拠を明記。",
+      "scope": "WBS-F02",
+      "originalHold": "",
+      "terminal": "閉/WBS-F02",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    }
+  ],
+  "wholeF02Accepted": false
+}

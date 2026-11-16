@@ -1,0 +1,125 @@
+{
+  "actualExit": 0,
+  "manifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+    "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+  },
+  "technical": {
+    "productionCoreMain": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "actualUnitSource": "0601086e6ae95ba09c4fc137cff45ffa7a9ba239",
+    "productRun": "PG36620-SSC447-CACHE-OWNERS-CURRENT152",
+    "tests": 152,
+    "success": 152,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "mainSources": 165,
+    "physicalClasses": 175,
+    "codeClasses": 162,
+    "positiveCrc": 162,
+    "defaultFour100": true,
+    "parent2RawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 897
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 175
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 109
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 91
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "protocolFullRawCounters": {
+      "INSTRUCTION": {
+        "missed": 85,
+        "covered": 20556
+      },
+      "BRANCH": {
+        "missed": 58,
+        "covered": 1124
+      },
+      "LINE": {
+        "missed": 4,
+        "covered": 3581
+      },
+      "COMPLEXITY": {
+        "missed": 62,
+        "covered": 2019
+      },
+      "METHOD": {
+        "missed": 4,
+        "covered": 1434
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 162
+      }
+    },
+    "fullProtocolRawFour100": false,
+    "staticApplicable": 0,
+    "staticUnclassified": 0,
+    "pmdOccurrences": 46,
+    "pmdConcreteAnchors": 46,
+    "publicApis": 2,
+    "other173PhysicalByteExact": true,
+    "normalPtExecuted": true,
+    "toolChecksReferencedNotRerun": 16,
+    "wholeSixModuleAccepted": false,
+    "newOriginalItemAcceptance": 0,
+    "effortRate": null
+  },
+  "criterionReductions": [
+    {
+      "originalItem": "WBS-F03",
+      "criterion": "WBS-F03/criterion/contract",
+      "subscope": "schubert-nk-protocol",
+      "before": "CURRENT_SOURCE_STATIC_NOT_RUN",
+      "after": "CURRENT_SOURCE_ROOT_LINT_NULLAWAY_PMD_CS_SB_PASS_SCOPE_ONLY",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36623-ssc447-cache-owners-post-join-v1/manifest.json",
+        "sha256": "3002e26e553eabb6d35aa4e81224fea421734270710998d2fae611ceee31ee9d"
+      },
+      "parentCriterionSatisfied": false
+    },
+    {
+      "originalItem": "WBS-F03",
+      "criterion": "WBS-F03/criterion/quality",
+      "subscope": "schubert-nk-protocol",
+      "before": "CURRENT_SOURCE_PT152_NOT_RUN_RAW_UNKNOWN",
+      "after": "152_PASS_FULL_RAW4METHOD58BRANCH_MISSING_PARENT2_RAW100",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36624-ssc447-cache-owners-unfiltered-v1/manifest.json",
+        "sha256": "f734306708d21c3d94057461cab035c75a7bb33840323016d5f930f2c8dc3490"
+      },
+      "parentCriterionSatisfied": false
+    },
+    {
+      "originalItem": "WBS-F03",
+      "criterion": "WBS-F03/reuse",
+      "subscope": "SSC447",
+      "before": "UNTESTED_BUILD_RECEIPT_ONLY",
+      "after": "EXACT_SOURCE_CLASS_CRC_INIT_XML_ABI_INDEPENDENT_POST_AVAILABLE",
+      "proof": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36626-ssc447-cache-owners-public-abi-v1/manifest.json",
+        "sha256": "808ad092612a003479c5a6263a87f87dfd9d469430b67698d5607ba2f2bce015"
+      },
+      "parentCriterionSatisfied": false
+    }
+  ]
+}

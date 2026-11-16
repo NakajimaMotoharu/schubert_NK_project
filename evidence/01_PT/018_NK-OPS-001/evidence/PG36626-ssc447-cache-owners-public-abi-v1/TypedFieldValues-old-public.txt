@@ -1,0 +1,164 @@
+Compiled from "TypedFieldValues.java"
+public final class dev.codex.schubert.nk.protocol.layout.TypedFieldValues {
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue$Text requiredText(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Text;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue$Numeric requiredNumeric(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Numeric;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue$Flag requiredFlag(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue$Flag;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.FieldValue$Text> optionalText(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static java.lang.String requiredString(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/lang/String;
+
+  public static long requiredLong(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)J
+
+  public static int requiredInt(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)I
+
+  public static void requireUnsignedRange(java.lang.String, long, int);
+    descriptor: (Ljava/lang/String;JI)V
+
+  public static boolean requiredBoolean(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Z
+
+  public static java.util.Optional<java.lang.String> optionalString(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static <T extends dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId> T requiredId(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String, java.util.function.LongFunction<T>);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/util/function/LongFunction;)Ldev/codex/schubert/nk/protocol/layout/semantic/ProtocolId;
+
+  public static <T extends dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId> java.util.Optional<T> optionalId(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String, java.util.function.LongFunction<T>);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/util/function/LongFunction;)Ljava/util/Optional;
+
+  public static <E extends java.lang.Enum<E> & dev.codex.schubert.nk.protocol.layout.semantic.WireEnum> E requiredEnum(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String, java.lang.Class<E>);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Enum;
+
+  public static <E extends java.lang.Enum<E> & dev.codex.schubert.nk.protocol.layout.semantic.WireEnum> java.util.Optional<E> optionalEnum(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String, java.lang.Class<E>);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;Ljava/lang/Class;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode requiredHttpStatusCode(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode> optionalHttpStatusCode(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds requiredElapsedMilliseconds(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds> optionalElapsedMilliseconds(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static java.time.Instant requiredInstant(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/time/Instant;
+
+  public static java.util.Optional<java.time.Instant> optionalInstant(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static java.util.UUID requiredUuid(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/UUID;
+
+  public static java.util.Optional<java.util.UUID> optionalUuid(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.header.AuthenticationContext> optionalAuthenticationContext(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex requiredSha256(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex> optionalSha256(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.semantic.RelativePath requiredRelativePath(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/RelativePath;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.RelativePath> optionalRelativePath(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath requiredDisplayPath(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/DisplayPath;
+
+  public static java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath> optionalDisplayPath(dev.codex.schubert.nk.protocol.layout.FieldValueSet, java.lang.String);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;Ljava/lang/String;)Ljava/util/Optional;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue orUnset(java.util.Optional<dev.codex.schubert.nk.protocol.layout.FieldValue$Text>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue text(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue numeric(long);
+    descriptor: (J)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue flag(boolean);
+    descriptor: (Z)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue id(dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/ProtocolId;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalIdValue(java.util.Optional<? extends dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue enumValue(dev.codex.schubert.nk.protocol.layout.semantic.WireEnum);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/WireEnum;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalEnumValue(java.util.Optional<? extends dev.codex.schubert.nk.protocol.layout.semantic.WireEnum>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue httpStatusCode(dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalHttpStatusCodeValue(java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue elapsedMilliseconds(dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalElapsedMillisecondsValue(java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalStringValue(java.util.Optional<java.lang.String>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue instant(java.time.Instant);
+    descriptor: (Ljava/time/Instant;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalInstantValue(java.util.Optional<java.time.Instant>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue uuid(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalUuidValue(java.util.Optional<java.util.UUID>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalAuthenticationContextValue(java.util.Optional<dev.codex.schubert.nk.protocol.header.AuthenticationContext>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue sha256(dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalSha256Value(java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue relativePath(dev.codex.schubert.nk.protocol.layout.semantic.RelativePath);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/RelativePath;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalRelativePathValue(java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.RelativePath>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue displayPath(dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/semantic/DisplayPath;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static dev.codex.schubert.nk.protocol.layout.FieldValue optionalDisplayPathValue(java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath>);
+    descriptor: (Ljava/util/Optional;)Ldev/codex/schubert/nk/protocol/layout/FieldValue;
+
+  public static void requireEmpty(dev.codex.schubert.nk.protocol.layout.FieldValueSet);
+    descriptor: (Ldev/codex/schubert/nk/protocol/layout/FieldValueSet;)V
+}

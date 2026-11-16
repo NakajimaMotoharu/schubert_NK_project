@@ -1,0 +1,100 @@
+{
+  "actualExit": 0,
+  "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "owner": "WBS-F04",
+  "haruka": {
+    "statusFromExistingRecord": "DIRECT_OS_BASELINE_READY",
+    "recordFiles": [
+      {
+        "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/HARUKA_EXECUTION_ENVIRONMENT.json",
+        "sha256": "794d283c66cf05a2446403845eac80e97539efcdd0d17944f1140b516045bdf7"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/haruka-mini-access-readiness.json",
+        "sha256": "7a2db2de6b734320d160b5ad8b7108ac14f6dd94973babe0edf21285fe4f3fad"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/haruka-services.json",
+        "sha256": "70d24b2a3a19ad2c7652bdecbf17dd21f4dbacbe2c058e0282ea895ca73c2d21"
+      },
+      {
+        "path": "/home/mini/codex/project1/work/PMO/hourly-monitor/haruka-transition-20261114/completion.json",
+        "sha256": "f47651f844a181df418d8122b919dc4c8f2500f17f307772fd8ffee4775ef7dd"
+      }
+    ],
+    "host": "haruka",
+    "executionUser": "mini",
+    "tools": {
+      "JAVA_HOME": "/opt/schubert-nk-test-tools/jdk-25.0.4",
+      "MAVEN_HOME": "/opt/schubert-nk-test-tools/maven",
+      "ARTEMIS_HOME": "/opt/schubert-nk-test-tools/apache-artemis-2.56.0",
+      "CADDY": "/usr/bin/caddy",
+      "mavenCache": "/home/mini/schubert-nk-pgpt/m2/repository"
+    },
+    "versions": {
+      "java": "25.0.4",
+      "maven": "3.9.12",
+      "postgresql": "18.6",
+      "caddy": "2.11.4",
+      "artemis": "2.56.0"
+    },
+    "miniReadinessAtUTC": "2026-11-13T22:58:49.376339+00:00",
+    "miniReadinessUser": "mini",
+    "miniToolReadExecutePreviouslyVerified": true,
+    "historicalApplicationDeployed": false,
+    "currentDeploymentAndOwnership": "UNQUERIED_UNKNOWN",
+    "oldVmRequired": false,
+    "legacyVmProofStillUnaccepted": true,
+    "perOperationConditions": "Fresh source/run/ownership/permissions/quality/roles/schema/resources and safety gates still required. No old aru hardcoded target or old VM run/keys/Root/UNKNOWN acceptance reuse. Reboot/fault injection or actual production-style root actions need their existing specific conditions. Root-only PMO smoke was insufficient for mini access; public vendor mode defect corrected, mini Java/Maven/Caddy/Artemis basic probes now pass. This does not OPEN product retry/Root/DB/VM/native holds.",
+    "acceptanceBoundary": {
+      "F04LegacyVmSpecificProof": "Retained unaccepted; direct host baseline is not a claim of legacy VM proof",
+      "N01_N02_N03": "Real source/run/boot/owner/Unit/DB/original/end and independent resource checks still required, dedicated direct haruka can provide the host context",
+      "hostIsolation": "User-provided clean dedicated host; no production application/data deployed",
+      "qualityRelaxation": false
+    },
+    "servicesMetadataOnly": {
+      "caddyDefaultDisabled": true,
+      "postgresVersion": "psql (PostgreSQL) 18.6 (Ubuntu 18.6-0ubuntu0.26.04.1)",
+      "caddyVersion": "2.6.2",
+      "postgresListen": "LISTEN 0      4096      127.0.0.54:53   0.0.0.0:*\nLISTEN 0      200        127.0.0.1:5432 0.0.0.0:*\nLISTEN 0      4096   127.0.0.53%lo:53   0.0.0.0:*\nLISTEN 0      4096         0.0.0.0:22   0.0.0.0:*\nLISTEN 0      4096            [::]:22      [::]:*\n"
+    },
+    "newSshOrServiceOrDbActions": 0,
+    "aruActions": 0,
+    "productAcceptance": false
+  },
+  "criteria": [
+    {
+      "id": "WBS-F04/reuse",
+      "condition": "Trace these exact requirements and named contract to independent TestID/oracle/source proof; reuse only individually justified subset; do not repeat a success just to count it",
+      "scope": "WBS-F04",
+      "originalHold": "",
+      "terminal": "閉/WBS-F04",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F04/criterion/contract",
+      "condition": "隔離VM/tool導入・再現手順・保全確認：requirementIdsの485原文・evidencePlan.designFiles・ownedArtifactsの具体的入力/戻り値/状態/例外/資源後条件を当対象の独立期待値へ対応付け、候補試験とspecDirectoryのTestIDで全件照合。",
+      "scope": "WBS-F04",
+      "originalHold": "",
+      "terminal": "閉/WBS-F04",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F04/criterion/scope",
+      "condition": "485のownedArtifactsとsharedClassReferencesを全件照合。主担当共通費を再計上せず、必要下位型/例外/組立/資源も欠落0。",
+      "scope": "WBS-F04",
+      "originalHold": "",
+      "terminal": "閉/WBS-F04",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    },
+    {
+      "id": "WBS-F04/criterion/quality",
+      "condition": "451の該当品質条件、同source/byte、独立正常/境界/異常/null/例外/再送/競合、F/E/S/flaky/not-run0、資源後条件を照合。非該当は根拠を明記。",
+      "scope": "WBS-F04",
+      "originalHold": "",
+      "terminal": "閉/WBS-F04",
+      "currentCandidateStatus": "PENDING_INDIVIDUAL_SOURCE_SCOPE_QUALITY_END_DEPENDENCIES"
+    }
+  ],
+  "wholeF04Accepted": false
+}
