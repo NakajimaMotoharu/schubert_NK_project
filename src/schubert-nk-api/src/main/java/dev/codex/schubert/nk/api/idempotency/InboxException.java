@@ -8,11 +8,21 @@ public final class InboxException extends SQLException {
   private static final long serialVersionUID = 1L;
 
   public enum Reason {
-    MESSAGE_ID_REUSE,
-    OPERATION_TOKEN_REUSE,
-    FINGERPRINT_KEY_UNAVAILABLE,
-    STATE_CORRUPT,
-    TRANSACTION_REQUIRED
+    MESSAGE_ID_REUSE("23000"),
+    OPERATION_TOKEN_REUSE("23000"),
+    FINGERPRINT_KEY_UNAVAILABLE("55000"),
+    STATE_CORRUPT("XX000"),
+    TRANSACTION_REQUIRED("25000");
+
+    private final String sqlState;
+
+    Reason(String sqlState) {
+      this.sqlState = sqlState;
+    }
+
+    String sqlState() {
+      return sqlState;
+    }
   }
 
   private final Reason failureReason;
@@ -27,12 +37,6 @@ public final class InboxException extends SQLException {
   }
 
   private static String sqlState(Reason reason) {
-    Objects.requireNonNull(reason, "reason");
-    return switch (reason) {
-      case MESSAGE_ID_REUSE, OPERATION_TOKEN_REUSE -> "23000";
-      case FINGERPRINT_KEY_UNAVAILABLE -> "55000";
-      case STATE_CORRUPT -> "XX000";
-      case TRANSACTION_REQUIRED -> "25000";
-    };
+    return Objects.requireNonNull(reason, "reason").sqlState();
   }
 }
