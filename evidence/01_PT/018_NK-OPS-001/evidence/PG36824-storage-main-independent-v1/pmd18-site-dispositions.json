@@ -1,0 +1,488 @@
+[
+  {
+    "rawFindingIndex": 0,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "81",
+      "endline": "81",
+      "begincolumn": "30",
+      "endcolumn": "46",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741401+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 1,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "81",
+      "endline": "81",
+      "begincolumn": "49",
+      "endcolumn": "54",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741473+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 2,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "85",
+      "endline": "85",
+      "begincolumn": "34",
+      "endcolumn": "50",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741509+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 3,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "85",
+      "endline": "85",
+      "begincolumn": "53",
+      "endcolumn": "58",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741541+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 4,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "86",
+      "endline": "86",
+      "begincolumn": "36",
+      "endcolumn": "47",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741571+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 5,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "86",
+      "endline": "86",
+      "begincolumn": "36",
+      "endcolumn": "47",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741601+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 6,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "86",
+      "endline": "86",
+      "begincolumn": "74",
+      "endcolumn": "85",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741630+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 7,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "86",
+      "endline": "86",
+      "begincolumn": "74",
+      "endcolumn": "85",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741659+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 8,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "97",
+      "endline": "97",
+      "begincolumn": "30",
+      "endcolumn": "48",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "acquire",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741689+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 9,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "111",
+      "endline": "111",
+      "begincolumn": "30",
+      "endcolumn": "46",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741718+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 10,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "111",
+      "endline": "111",
+      "begincolumn": "49",
+      "endcolumn": "54",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 SSC063/308 requires this owned-body IO/Runtime/Error boundary solely to release exactly once before preserving the specified unknown primary identity; no exception is swallowed or reported successful.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741747+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 11,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "114",
+      "endline": "114",
+      "begincolumn": "32",
+      "endcolumn": "48",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741780+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 12,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "114",
+      "endline": "114",
+      "begincolumn": "51",
+      "endcolumn": "56",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 compound-close contract requires all three declared failure families after the one owned release attempt. This is typed priority/sanitized secondary assembly, not generic business exception normalization.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741810+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 13,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "115",
+      "endline": "115",
+      "begincolumn": "34",
+      "endcolumn": "45",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741843+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 14,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "115",
+      "endline": "115",
+      "begincolumn": "34",
+      "endcolumn": "45",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741874+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 15,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "115",
+      "endline": "115",
+      "begincolumn": "72",
+      "endcolumn": "83",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741907+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 16,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "115",
+      "endline": "115",
+      "begincolumn": "72",
+      "endcolumn": "83",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 explicitly distinguishes primary IOException plus unknown secondary from unknown-primary priority after the same single release. instanceof implements the independent golden matrix without duplicating or retrying the owned cleanup.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741940+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  },
+  {
+    "rawFindingIndex": 17,
+    "raw": {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "beginline": "125",
+      "endline": "125",
+      "begincolumn": "30",
+      "endcolumn": "48",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.storage",
+      "class": "ResourceScope",
+      "method": "use",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+      "priority": "3",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException."
+    },
+    "disposition": "NOT_APPLICABLE",
+    "sourceSha256": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "reason": "SS333 requires preserving an existing StorageIoException reason only with no suppressed failure, otherwise fixed UNAVAILABLE after release. Type inspection is the specified closed error catalog, not an omitted subtype-specific business handler.",
+    "currentContract": "SS333 SSC063/308 explicit close-once, unknown primary identity, known IO versus unknown cleanup precedence, sanitized suppression; never success conversion",
+    "independentlyReviewedAtUTC": "2026-11-16T18:26:51.741988+00:00",
+    "originalPerSiteReview": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35546-ssc440-namespace39-preflight-v2/manifest.json",
+      "sha256": "4d570d7fa685cacd981e3fad7d8356c3aff86ad2ed362e3040e76dc838c0c856"
+    }
+  }
+]

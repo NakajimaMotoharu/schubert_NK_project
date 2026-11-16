@@ -1,0 +1,3459 @@
+{
+  "dev/codex/schubert/nk/storage/DirectoryCalls.class": {
+    "flags": 1537,
+    "sourceFile": "DirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "openRoot",
+        "descriptor": "()I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "openDirectory",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "openEntry",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "createFile",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "createPrivateFile",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "createDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "createPrivateDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "publish",
+        "descriptor": "(ILjava/lang/String;Ljava/lang/String;)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "unlink",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "removeEmptyDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "sync",
+        "descriptor": "(I)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "close",
+        "descriptor": "(I)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ExistingFileAccess$Io.class": {
+    "flags": 1536,
+    "sourceFile": "ExistingFileAccess.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "attributes",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/util/Map;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "openReadOnly",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ExistingFileAccess$NioIo.class": {
+    "flags": 48,
+    "sourceFile": "ExistingFileAccess.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "attributes",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/util/Map;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "openReadOnly",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 15
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation.class": {
+    "flags": 1537,
+    "sourceFile": "ExistingFileAccess.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "(Ljava/nio/channels/SeekableByteChannel;)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ExistingFileAccess.class": {
+    "flags": 49,
+    "sourceFile": "ExistingFileAccess.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 14
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/ExistingFileAccess$Io;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "read",
+        "descriptor": "(Ljava/util/List;JLdev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 86
+      },
+      {
+        "name": "walk",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ljava/util/List;IJLdev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation;)Ljava/lang/Object;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 81
+      },
+      {
+        "name": "requireSize",
+        "descriptor": "(Ljava/nio/channels/SeekableByteChannel;J)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "lambda$walk$5",
+        "descriptor": "(Ljava/util/List;IJLdev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ljava/lang/Object;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 14
+      },
+      {
+        "name": "lambda$walk$4",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 6
+      },
+      {
+        "name": "lambda$walk$1",
+        "descriptor": "(JLdev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation;Ljava/nio/file/Path;)Ljava/lang/Object;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 46
+      },
+      {
+        "name": "lambda$walk$3",
+        "descriptor": "(JLdev/codex/schubert/nk/storage/ExistingFileAccess$ReadOperation;Ljava/nio/file/Path;Ljava/nio/channels/SeekableByteChannel;)Ljava/lang/Object;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "lambda$walk$2",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$walk$0",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/Boolean;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 21
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/InodeSecurityCalls.class": {
+    "flags": 1537,
+    "sourceFile": "InodeSecurityCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "accessAcl",
+        "descriptor": "(Ljava/nio/file/Path;I)[B",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "readOnlyFilesystem",
+        "descriptor": "(Ljava/nio/file/Path;)Z",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "effectiveUid",
+        "descriptor": "()J",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$FdCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$MkdirCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;ILjava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$OpenCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;ILjava/lang/foreign/MemorySegment;II)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$RenameCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;ILjava/lang/foreign/MemorySegment;ILjava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls$UnlinkCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;ILjava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxDirectoryCalls.class": {
+    "flags": 49,
+    "sourceFile": "LinuxDirectoryCalls.java",
+    "fields": 13,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 67
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 378
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;",
+        "flags": 138,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "openRoot",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "openDirectory",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "openEntry",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "createFile",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "createPrivateFile",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "open",
+        "descriptor": "(ILjava/lang/String;I)I",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 9
+      },
+      {
+        "name": "open",
+        "descriptor": "(ILjava/lang/String;II)I",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 91
+      },
+      {
+        "name": "createDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 89
+      },
+      {
+        "name": "createPrivateDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 89
+      },
+      {
+        "name": "publish",
+        "descriptor": "(ILjava/lang/String;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 108
+      },
+      {
+        "name": "unlink",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "removeEmptyDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "unlink",
+        "descriptor": "(ILjava/lang/String;I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 94
+      },
+      {
+        "name": "sync",
+        "descriptor": "(I)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 9
+      },
+      {
+        "name": "close",
+        "descriptor": "(I)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 9
+      },
+      {
+        "name": "call",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxDirectoryCalls$FdCall;I)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 65
+      },
+      {
+        "name": "check",
+        "descriptor": "(ILjava/lang/foreign/MemorySegment;)I",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 69
+      },
+      {
+        "name": "segment",
+        "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 65
+      },
+      {
+        "name": "lambda$bind$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 30
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxExecDescriptors.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(III)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxExecDescriptors.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "()V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxExecDescriptors.class": {
+    "flags": 49,
+    "sourceFile": "LinuxExecDescriptors.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxExecDescriptors;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxExecDescriptors;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 142
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "withInherited",
+        "descriptor": "(IILdev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 62
+      },
+      {
+        "name": "inherit",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 40
+      },
+      {
+        "name": "set",
+        "descriptor": "(II)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 20
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$inherit$1",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation;)Ljava/lang/Boolean;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 16
+      },
+      {
+        "name": "lambda$inherit$0",
+        "descriptor": "(I)V",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "lambda$withInherited$0",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/LinuxExecDescriptors$Operation;)V",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "lambda$create$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$CloseCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$LockCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;II)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$OpenCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;II)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$Operation.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "()Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor.class": {
+    "flags": 48,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/util/function/IntSupplier;Ldev/codex/schubert/nk/storage/LinuxFileLock$CloseCall;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 30
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 69
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "(I)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFileLock.class": {
+    "flags": 49,
+    "sourceFile": "LinuxFileLock.java",
+    "fields": 7,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxFileLock;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxFileLock;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 279
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxFileLock$OpenCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$LockCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$CloseCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxFileLock$OpenCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$LockCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$CloseCall;Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 21
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxFileLock$OpenCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$LockCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$CloseCall;Ljava/util/Optional;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 50
+      },
+      {
+        "name": "tryExclusive",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/LinuxFileLock$Operation;)Ljava/util/Optional;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 77
+      },
+      {
+        "name": "tryExclusiveForStartup",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation;)Ljava/util/Optional;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 96
+      },
+      {
+        "name": "acquireStartup",
+        "descriptor": "(Ljava/lang/foreign/Arena;Ljava/lang/String;Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation;)Ljava/util/Optional;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "duplicateStartup",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;I)I",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 25
+      },
+      {
+        "name": "acquire",
+        "descriptor": "(Ljava/lang/foreign/Arena;Ljava/lang/String;Ldev/codex/schubert/nk/storage/LinuxFileLock$Operation;)Ljava/util/Optional;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 42
+      },
+      {
+        "name": "locked",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;ILdev/codex/schubert/nk/storage/LinuxFileLock$Operation;)Ljava/util/Optional;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 61
+      },
+      {
+        "name": "heldPath",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/String;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 61
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;",
+        "flags": 138,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$bind$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "lambda$acquire$2",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ldev/codex/schubert/nk/storage/LinuxFileLock$Operation;Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;)Ljava/util/Optional;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$acquire$0",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/Arena;Ljava/lang/String;)Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 21
+      },
+      {
+        "name": "lambda$acquire$1",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/Arena;Ljava/lang/String;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 22
+      },
+      {
+        "name": "lambda$acquireStartup$2",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;Ljava/lang/foreign/MemorySegment;Ldev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation;Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;)Ljava/util/Optional;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 29
+      },
+      {
+        "name": "lambda$acquireStartup$5",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ldev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation;Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;)Ljava/util/Optional;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 42
+      },
+      {
+        "name": "lambda$acquireStartup$6",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxFileLock$StartupOperation;I)Ljava/lang/Object;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "lambda$acquireStartup$3",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;)Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 19
+      },
+      {
+        "name": "lambda$acquireStartup$4",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;)I",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 9
+      },
+      {
+        "name": "lambda$acquireStartup$0",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/Arena;Ljava/lang/String;)Ldev/codex/schubert/nk/storage/LinuxFileLock$OwnedDescriptor;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 21
+      },
+      {
+        "name": "lambda$acquireStartup$1",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/Arena;Ljava/lang/String;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 22
+      },
+      {
+        "name": "lambda$tryExclusiveForStartup$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 30
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFilesystemClassifier$StatfsCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxFilesystemClassifier.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.class": {
+    "flags": 49,
+    "sourceFile": "LinuxFilesystemClassifier.java",
+    "fields": 6,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxFilesystemClassifier$StatfsCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxFilesystemClassifier;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 34
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxFilesystemClassifier;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 72
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxFilesystemClassifier$StatfsCall;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 64
+      },
+      {
+        "name": "filesystem",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 80
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "platformUnavailable",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "lambda$filesystem$0",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/foreign/Arena;)Ljava/lang/String;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 101
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls$OpenCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxHostDirectoryCalls.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;II)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.class": {
+    "flags": 49,
+    "sourceFile": "LinuxHostDirectoryCalls.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxHostDirectoryCalls;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxHostDirectoryCalls;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 158
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;Ldev/codex/schubert/nk/storage/InodeSecurityCalls;Ldev/codex/schubert/nk/storage/LinuxHostDirectoryCalls$OpenCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "openRoot",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 87
+      },
+      {
+        "name": "openDirectory",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "openEntry",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "close",
+        "descriptor": "(I)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "createFile",
+        "descriptor": "(ILjava/lang/String;)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "createDirectory",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "publish",
+        "descriptor": "(ILjava/lang/String;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "unlink",
+        "descriptor": "(ILjava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "sync",
+        "descriptor": "(I)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$create$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxInodeSecurity$GetXattrCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxInodeSecurity.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;J)J",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxInodeSecurity$StatvfsCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxInodeSecurity.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxInodeSecurity$UidCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxInodeSecurity.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "()I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxInodeSecurity.class": {
+    "flags": 49,
+    "sourceFile": "LinuxInodeSecurity.java",
+    "fields": 7,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxInodeSecurity$GetXattrCall;Ldev/codex/schubert/nk/storage/LinuxInodeSecurity$StatvfsCall;Ldev/codex/schubert/nk/storage/LinuxInodeSecurity$UidCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxInodeSecurity;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxInodeSecurity;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 215
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;",
+        "flags": 138,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "unavailablePlatform",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "accessAcl",
+        "descriptor": "(Ljava/nio/file/Path;I)[B",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 85
+      },
+      {
+        "name": "readAcl",
+        "descriptor": "(Ljava/lang/foreign/Arena;Ljava/lang/String;I)[B",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 133
+      },
+      {
+        "name": "requireNoFileCapabilities",
+        "descriptor": "(Ljava/nio/file/Path;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 136
+      },
+      {
+        "name": "readOnlyFilesystem",
+        "descriptor": "(Ljava/nio/file/Path;)Z",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 125
+      },
+      {
+        "name": "effectiveUid",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 13
+      },
+      {
+        "name": "capability",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/String;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 54
+      },
+      {
+        "name": "failure",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 64
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxMonotonicClock.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(ILjava/lang/foreign/MemorySegment;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxMonotonicClock.class": {
+    "flags": 49,
+    "sourceFile": "LinuxMonotonicClock.java",
+    "fields": 1,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 34
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxMonotonicClock;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 133
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxMonotonicClock$ReadCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "nowNanos",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 141
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ljava/io/IOException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "lambda$create$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxProcessExec$ExecCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxProcessExec.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxProcessExec.class": {
+    "flags": 49,
+    "sourceFile": "LinuxProcessExec.java",
+    "fields": 1,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxProcessExec;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxProcessExec;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 135
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxProcessExec$ExecCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "replace",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/util/List;Ljava/util/Map;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 326
+      },
+      {
+        "name": "validate",
+        "descriptor": "(Ljava/lang/String;)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 32
+      },
+      {
+        "name": "vector",
+        "descriptor": "(Ljava/lang/foreign/Arena;Ljava/util/List;)Ljava/lang/foreign/MemorySegment;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 85
+      },
+      {
+        "name": "invalid",
+        "descriptor": "()Ljava/lang/IllegalArgumentException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$validate$0",
+        "descriptor": "(I)Z",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "lambda$create$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(Ljava/lang/foreign/MemorySegment;I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor.class": {
+    "flags": 48,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxSealedProof;Ljava/util/function/IntSupplier;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 35
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 12
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(III)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(II)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$Operation.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "(I)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(ILjava/lang/foreign/MemorySegment;JJ)J",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "call",
+        "descriptor": "(ILjava/lang/foreign/MemorySegment;J)J",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxSealedProof.class": {
+    "flags": 49,
+    "sourceFile": "LinuxSealedProof.java",
+    "fields": 7,
+    "methods": [
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxSealedProof;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxSealedProof;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 313
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxSealedProof$CreateCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$WriteCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$ReadCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$ModeCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 86
+      },
+      {
+        "name": "withProof",
+        "descriptor": "([BLdev/codex/schubert/nk/storage/LinuxSealedProof$Operation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 131
+      },
+      {
+        "name": "prepare",
+        "descriptor": "(Ljava/lang/foreign/Arena;I[BLdev/codex/schubert/nk/storage/LinuxSealedProof$Operation;)Ljava/lang/Object;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 149
+      },
+      {
+        "name": "duplicateReserved",
+        "descriptor": "(I)I",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 28
+      },
+      {
+        "name": "read",
+        "descriptor": "(I)[B",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 208
+      },
+      {
+        "name": "closeOwned",
+        "descriptor": "(I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;",
+        "flags": 138,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "invalid",
+        "descriptor": "()Ljava/lang/IllegalArgumentException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$bind$0",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "lambda$prepare$2",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxSealedProof$Operation;Ldev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor;)Ljava/lang/Object;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 30
+      },
+      {
+        "name": "lambda$prepare$0",
+        "descriptor": "(I)Ldev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 16
+      },
+      {
+        "name": "lambda$prepare$1",
+        "descriptor": "(I)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 6
+      },
+      {
+        "name": "lambda$withProof$2",
+        "descriptor": "(Ljava/lang/foreign/Arena;[BLdev/codex/schubert/nk/storage/LinuxSealedProof$Operation;Ldev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor;)Ljava/lang/Object;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 13
+      },
+      {
+        "name": "lambda$withProof$0",
+        "descriptor": "(Ljava/lang/foreign/Arena;)Ldev/codex/schubert/nk/storage/LinuxSealedProof$Descriptor;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 16
+      },
+      {
+        "name": "lambda$withProof$1",
+        "descriptor": "(Ljava/lang/foreign/Arena;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 20
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Attributes.class": {
+    "flags": 48,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 4,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(IJJJ)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 27
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "links",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "size",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "device",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "inode",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwner.class": {
+    "flags": 48,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/LinuxStartupAdmission$Io;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 26
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 33
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners.class": {
+    "flags": 48,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 4,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(IILdev/codex/schubert/nk/storage/LinuxStartupAdmission$Io;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 66
+      },
+      {
+        "name": "closeProof",
+        "descriptor": "()V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 13
+      },
+      {
+        "name": "lambda$new$0",
+        "descriptor": "()Ljava/lang/Boolean;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 11
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Identity.class": {
+    "flags": 49,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(IJJ)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 21
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "descriptor",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "device",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "inode",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Io.class": {
+    "flags": 1536,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "fcntl",
+        "descriptor": "(III)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "close",
+        "descriptor": "(I)I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "attributes",
+        "descriptor": "(I)Ljava/util/Map;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "proof",
+        "descriptor": "(I)[B",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Lease.class": {
+    "flags": 49,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Identity;Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwner;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "identity",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Identity;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 8
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$NativeIo.class": {
+    "flags": 48,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxExecDescriptors$FcntlCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof$CloseCall;Ldev/codex/schubert/nk/storage/LinuxSealedProof;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 38
+      },
+      {
+        "name": "fcntl",
+        "descriptor": "(III)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 13
+      },
+      {
+        "name": "close",
+        "descriptor": "(I)I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "attributes",
+        "descriptor": "(I)Ljava/util/Map;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "proof",
+        "descriptor": "(I)[B",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 9
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission$Operation.class": {
+    "flags": 1537,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Lease;[B)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/LinuxStartupAdmission.class": {
+    "flags": 49,
+    "sourceFile": "LinuxStartupAdmission.java",
+    "fields": 1,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Io;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "create",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/LinuxStartupAdmission;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 34
+      },
+      {
+        "name": "create",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/foreign/SymbolLookup;)Ldev/codex/schubert/nk/storage/LinuxStartupAdmission;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 157
+      },
+      {
+        "name": "bind",
+        "descriptor": "(Ljava/lang/foreign/SymbolLookup;Ljava/lang/String;Ljava/lang/Class;Ljava/lang/foreign/FunctionDescriptor;[Ljava/lang/foreign/Linker$Option;)Ljava/lang/Object;",
+        "flags": 138,
+        "hasCode": true,
+        "codeLength": 34
+      },
+      {
+        "name": "unsupported",
+        "descriptor": "()Ljava/lang/IllegalStateException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "withAdmitted",
+        "descriptor": "(IILdev/codex/schubert/nk/storage/LinuxStartupAdmission$Operation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 74
+      },
+      {
+        "name": "attributes",
+        "descriptor": "(I)Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Attributes;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 277
+      },
+      {
+        "name": "require",
+        "descriptor": "(Z)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 9
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$withAdmitted$1",
+        "descriptor": "(IILdev/codex/schubert/nk/storage/LinuxStartupAdmission$Operation;Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners;)Ljava/lang/Object;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 92
+      },
+      {
+        "name": "lambda$withAdmitted$3",
+        "descriptor": "(II[[BLdev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners;)Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$Identity;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 280
+      },
+      {
+        "name": "lambda$withAdmitted$2",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners;)Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 2
+      },
+      {
+        "name": "lambda$withAdmitted$0",
+        "descriptor": "(II)Ldev/codex/schubert/nk/storage/LinuxStartupAdmission$FdOwners;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 14
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/NonSecretConfigSource.class": {
+    "flags": 1537,
+    "sourceFile": "NonSecretConfigSource.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "read",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Contents;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryHandle.class": {
+    "flags": 48,
+    "sourceFile": "OwnedTransferDirectory.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 14
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryOpen.class": {
+    "flags": 1536,
+    "sourceFile": "OwnedTransferDirectory.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "open",
+        "descriptor": "()I",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation.class": {
+    "flags": 1537,
+    "sourceFile": "OwnedTransferDirectory.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "execute",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/OwnedTransferDirectory.class": {
+    "flags": 49,
+    "sourceFile": "OwnedTransferDirectory.java",
+    "fields": 5,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 26
+      },
+      {
+        "name": "openRoot",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 29
+      },
+      {
+        "name": "open",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 82
+      },
+      {
+        "name": "openExistingDate",
+        "descriptor": "(Ljava/time/LocalDate;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 106
+      },
+      {
+        "name": "openExistingChild",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 69
+      },
+      {
+        "name": "atExistingEntryHandle",
+        "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 56
+      },
+      {
+        "name": "requireSegment",
+        "descriptor": "(Ljava/lang/String;)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 60
+      },
+      {
+        "name": "openDate",
+        "descriptor": "(Ljava/time/LocalDate;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "openDate",
+        "descriptor": "(Ljava/time/LocalDate;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 168
+      },
+      {
+        "name": "createPrivateChild",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 73
+      },
+      {
+        "name": "atDirectory",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 61
+      },
+      {
+        "name": "atPart",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 37
+      },
+      {
+        "name": "atReady",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 37
+      },
+      {
+        "name": "atFile",
+        "descriptor": "(Ljava/util/UUID;Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 59
+      },
+      {
+        "name": "atPartHandle",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 37
+      },
+      {
+        "name": "atReadyHandle",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 37
+      },
+      {
+        "name": "atHandle",
+        "descriptor": "(Ljava/util/UUID;Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 32
+      },
+      {
+        "name": "createPart",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 59
+      },
+      {
+        "name": "createPrivatePart",
+        "descriptor": "(Ljava/util/UUID;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 59
+      },
+      {
+        "name": "createPrivateEntry",
+        "descriptor": "(Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 67
+      },
+      {
+        "name": "withEntry",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryOpen;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 22
+      },
+      {
+        "name": "execute",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;)Ljava/lang/Object;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 56
+      },
+      {
+        "name": "publish",
+        "descriptor": "(Ljava/util/UUID;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 83
+      },
+      {
+        "name": "deletePart",
+        "descriptor": "(Ljava/util/UUID;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 61
+      },
+      {
+        "name": "publishAs",
+        "descriptor": "(Ljava/util/UUID;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 79
+      },
+      {
+        "name": "unlinkEntry",
+        "descriptor": "(Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 63
+      },
+      {
+        "name": "removeEmptyChild",
+        "descriptor": "(Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 63
+      },
+      {
+        "name": "publishChild",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 83
+      },
+      {
+        "name": "sync",
+        "descriptor": "()V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 45
+      },
+      {
+        "name": "requireOpen",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 19
+      },
+      {
+        "name": "close",
+        "descriptor": "()V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 55
+      },
+      {
+        "name": "lambda$publishChild$1",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ljava/lang/Boolean;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 32
+      },
+      {
+        "name": "lambda$publishChild$0",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 6
+      },
+      {
+        "name": "lambda$withEntry$1",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryHandle;)Ljava/lang/Object;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 24
+      },
+      {
+        "name": "lambda$withEntry$0",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryOpen;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory$EntryHandle;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "lambda$createPrivateEntry$0",
+        "descriptor": "(Ljava/lang/String;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "lambda$createPrivatePart$0",
+        "descriptor": "(Ljava/util/UUID;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "lambda$createPart$0",
+        "descriptor": "(Ljava/util/UUID;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "lambda$atHandle$0",
+        "descriptor": "(Ljava/util/UUID;Ljava/lang/String;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 24
+      },
+      {
+        "name": "lambda$createPrivateChild$1",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 49
+      },
+      {
+        "name": "lambda$createPrivateChild$0",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 6
+      },
+      {
+        "name": "lambda$openDate$2",
+        "descriptor": "(ZLdev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 48
+      },
+      {
+        "name": "lambda$openDate$1",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 6
+      },
+      {
+        "name": "lambda$openDate$0",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/lang/Boolean;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "lambda$atExistingEntryHandle$0",
+        "descriptor": "(Ljava/lang/String;)I",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "lambda$open$1",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/DirectoryCalls;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 89
+      },
+      {
+        "name": "lambda$open$0",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/DirectoryCalls;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class": {
+    "flags": 1537,
+    "sourceFile": "ResourceScope.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "open",
+        "descriptor": "()Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ResourceScope$Action.class": {
+    "flags": 1537,
+    "sourceFile": "ResourceScope.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "run",
+        "descriptor": "()Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class": {
+    "flags": 1537,
+    "sourceFile": "ResourceScope.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "run",
+        "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ResourceScope$Release.class": {
+    "flags": 1537,
+    "sourceFile": "ResourceScope.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "close",
+        "descriptor": "(Ljava/lang/Object;)V",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ResourceScope.class": {
+    "flags": 1537,
+    "sourceFile": "ResourceScope.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "handoff",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "acquire",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$Acquire;Ldev/codex/schubert/nk/storage/ResourceScope$Release;Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;)Ljava/lang/Object;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 160
+      },
+      {
+        "name": "use",
+        "descriptor": "(Ljava/io/Closeable;Ldev/codex/schubert/nk/storage/ResourceScope$Action;)Ljava/lang/Object;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 117
+      },
+      {
+        "name": "lambda$handoff$1",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ResourceScope$OwnedAction;[ZLjava/lang/Object;)Ljava/lang/Object;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 19
+      },
+      {
+        "name": "lambda$handoff$0",
+        "descriptor": "([ZLdev/codex/schubert/nk/storage/ResourceScope$Release;Ljava/lang/Object;)V",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 14
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles$Contents.class": {
+    "flags": 49,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 29
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "commonYaml",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "serviceYaml",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles$Io.class": {
+    "flags": 1536,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "attributes",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/util/Map;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      },
+      {
+        "name": "openReadOnly",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 1025,
+        "hasCode": false,
+        "codeLength": 0
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles$NioIo.class": {
+    "flags": 48,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 0,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "attributes",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/util/Map;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "openReadOnly",
+        "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 15
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.class": {
+    "flags": 16433,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 4,
+    "methods": [
+      {
+        "name": "values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "valueOf",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;ILjava/lang/String;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "$values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 17
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 37
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot.class": {
+    "flags": 48,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 6,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(JJIIJLjava/nio/file/attribute/FileTime;)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 39
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "device",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "inode",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "mode",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "links",
+        "descriptor": "()I",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "size",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "changed",
+        "descriptor": "()Ljava/nio/file/attribute/FileTime;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceConfigFiles.class": {
+    "flags": 49,
+    "sourceFile": "ServiceConfigFiles.java",
+    "fields": 7,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/DirectoryCalls;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 58
+      },
+      {
+        "name": "production",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/ServiceConfigFiles;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 4
+      },
+      {
+        "name": "read",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/DirectoryCalls;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Contents;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 22
+      },
+      {
+        "name": "read",
+        "descriptor": "(Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/DirectoryCalls;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Contents;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 17
+      },
+      {
+        "name": "read",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Contents;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 37
+      },
+      {
+        "name": "inspect",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "readOne",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;Ljava/lang/String;Ldev/codex/schubert/nk/storage/StorageIdentity;JLdev/codex/schubert/nk/storage/ServiceConfigFiles$Io;)Ljava/lang/String;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "checked",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;ZJ)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 404
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$readOne$0",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;Ldev/codex/schubert/nk/storage/StorageIdentity;JLjava/nio/file/Path;)Ljava/lang/String;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 48
+      },
+      {
+        "name": "lambda$readOne$2",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot;Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;Ljava/nio/file/Path;Ldev/codex/schubert/nk/storage/StorageIdentity;JLjava/nio/channels/SeekableByteChannel;)Ljava/lang/String;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 170
+      },
+      {
+        "name": "lambda$readOne$1",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;Ljava/nio/file/Path;)Ljava/nio/channels/SeekableByteChannel;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "lambda$inspect$0",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Io;Ldev/codex/schubert/nk/storage/StorageIdentity;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Snapshot;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 16
+      },
+      {
+        "name": "lambda$read$1",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Contents;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 91
+      },
+      {
+        "name": "lambda$read$0",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4098,
+        "hasCode": true,
+        "codeLength": 12
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 50
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceCredentialId$1.class": {
+    "flags": 4128,
+    "sourceFile": "ServiceCredentialId.java",
+    "fields": 1,
+    "methods": [
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 40
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceCredentialId$Kind.class": {
+    "flags": 16433,
+    "sourceFile": "ServiceCredentialId.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceCredentialId$Kind;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "valueOf",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceCredentialId$Kind;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "$values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceCredentialId$Kind;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 17
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 33
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceCredentialId.class": {
+    "flags": 16433,
+    "sourceFile": "ServiceCredentialId.java",
+    "fields": 16,
+    "methods": [
+      {
+        "name": "values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceCredentialId;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "valueOf",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceCredentialId;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;ILdev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;Ldev/codex/schubert/nk/storage/ServiceCredentialId$Kind;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 24
+      },
+      {
+        "name": "forService",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;)Ljava/util/List;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 64
+      },
+      {
+        "name": "service",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "fileName",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "kind",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/ServiceCredentialId$Kind;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "$values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/ServiceCredentialId;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 70
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 263
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/ServiceCredentialLocation.class": {
+    "flags": 49,
+    "sourceFile": "ServiceCredentialLocation.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/nio/file/Path;)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "read",
+        "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/storage/ServiceCredentialLocation;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 185
+      },
+      {
+        "name": "directory",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 3
+      },
+      {
+        "name": "invalid",
+        "descriptor": "()Ljava/lang/IllegalArgumentException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 10
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageAttributeGuard.class": {
+    "flags": 49,
+    "sourceFile": "StorageAttributeGuard.java",
+    "fields": 1,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "directory",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 44
+      },
+      {
+        "name": "file",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;J)V",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 45
+      },
+      {
+        "name": "existingFile",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;J)V",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 79
+      },
+      {
+        "name": "transferSize",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;Z)J",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 105
+      },
+      {
+        "name": "requireRegularFile",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 43
+      },
+      {
+        "name": "requireOwnership",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 109
+      },
+      {
+        "name": "integer",
+        "descriptor": "(Ljava/util/Map;Ljava/lang/String;)I",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 39
+      },
+      {
+        "name": "require",
+        "descriptor": "(Z)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 16
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageIdentity.class": {
+    "flags": 49,
+    "sourceFile": "StorageIdentity.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;Ljava/lang/String;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "validate",
+        "descriptor": "(Ljava/lang/String;)V",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 27
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 3
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "owner",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "group",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+    "flags": 16433,
+    "sourceFile": "StorageIoException.java",
+    "fields": 4,
+    "methods": [
+      {
+        "name": "values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "valueOf",
+        "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 10
+      },
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;I)V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "$values",
+        "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 23
+      },
+      {
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 46
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageIoException.class": {
+    "flags": 49,
+    "sourceFile": "StorageIoException.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 20
+      },
+      {
+        "name": "reason",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "preserveFatal",
+        "descriptor": "(Ljava/lang/Throwable;)V",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 135
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageRootInspection$Inode.class": {
+    "flags": 48,
+    "sourceFile": "StorageRootInspection.java",
+    "fields": 2,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(JJ)V",
+        "flags": 0,
+        "hasCode": true,
+        "codeLength": 15
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "device",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "number",
+        "descriptor": "()J",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageRootInspection.class": {
+    "flags": 49,
+    "sourceFile": "StorageRootInspection.java",
+    "fields": 3,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "()V",
+        "flags": 2,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "inspect",
+        "descriptor": "(Ldev/codex/schubert/nk/storage/StorageRootLayout;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 9,
+        "hasCode": true,
+        "codeLength": 117
+      },
+      {
+        "name": "inspectOne",
+        "descriptor": "(Ljava/nio/file/Path;ILdev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;)Ldev/codex/schubert/nk/storage/StorageRootInspection$Inode;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 28
+      },
+      {
+        "name": "inode",
+        "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/storage/StorageRootInspection$Inode;",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 87
+      },
+      {
+        "name": "requireDistinct",
+        "descriptor": "(Ljava/util/Set;Ldev/codex/schubert/nk/storage/StorageRootInspection$Inode;)V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 29
+      },
+      {
+        "name": "requireBackup",
+        "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/storage/StorageIdentity;)V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 107
+      },
+      {
+        "name": "requireDirectory",
+        "descriptor": "(Ljava/util/Map;)V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 70
+      },
+      {
+        "name": "requireSecureStream",
+        "descriptor": "(Ljava/nio/file/DirectoryStream;)V",
+        "flags": 8,
+        "hasCode": true,
+        "codeLength": 19
+      },
+      {
+        "name": "unavailable",
+        "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException;",
+        "flags": 10,
+        "hasCode": true,
+        "codeLength": 11
+      },
+      {
+        "name": "lambda$inspectOne$1",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;)Ldev/codex/schubert/nk/storage/StorageRootInspection$Inode;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 18
+      },
+      {
+        "name": "lambda$inspectOne$2",
+        "descriptor": "(ILdev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ldev/codex/schubert/nk/storage/StorageIdentity;Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/StorageRootInspection$Inode;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 127
+      },
+      {
+        "name": "lambda$inspectOne$0",
+        "descriptor": "(Ljava/nio/file/Path;)Ldev/codex/schubert/nk/storage/OwnedTransferDirectory;",
+        "flags": 4106,
+        "hasCode": true,
+        "codeLength": 8
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/StorageRootLayout.class": {
+    "flags": 49,
+    "sourceFile": "StorageRootLayout.java",
+    "fields": 6,
+    "methods": [
+      {
+        "name": "<init>",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 252
+      },
+      {
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 3
+      },
+      {
+        "name": "hashCode",
+        "descriptor": "()I",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 7
+      },
+      {
+        "name": "equals",
+        "descriptor": "(Ljava/lang/Object;)Z",
+        "flags": 17,
+        "hasCode": true,
+        "codeLength": 8
+      },
+      {
+        "name": "asset",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "transfer",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "backup",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "log",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "artemis",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      },
+      {
+        "name": "staging",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "flags": 1,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    ]
+  },
+  "dev/codex/schubert/nk/storage/package-info.class": {
+    "flags": 5632,
+    "sourceFile": "package-info.java",
+    "fields": 0,
+    "methods": []
+  }
+}
