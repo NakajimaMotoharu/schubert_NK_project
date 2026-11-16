@@ -1,0 +1,5 @@
+# WireEnum既存十九class・元exec raw監査仕様
+
+Read-only 451 raw generated-method audit of eighteen WireEnum catalogs plus the natural Code0 WireEnum interface from original Protocol120. Match current nineteen sources and original verified JAR/classhash/CRC/Code counts to originalsingleexec, admit only explicit nineteen entries before binary read. Existing Protocol public enum names/order/wire literals are unchanged; inspect actual generated values/valueOf/helper misses before any new fixture. No original120/124 reexecution or accepted17 blanket requalification/currentwholeCore promotion, no production class load/init. Use qualified unfiltered12 reference without replay. AllRoot2Actual4/VMDBkeys/native/aruHOLD remain. .06/.18/.54 cap.6 source audit only, no producttest credit.
+
+NK-PRO-002/MSG001..011/UI232233/SS322323354/451、元PT-PRO-001-T04/approvedEnumNamesWireValuesAndConversionMatchIndependentDesignTablesを含む元120は参照のみ。独立期待は元classhash/CRC64/Code method数とraw各counter、現関連sourceのbyte一致。既default generatedfilterを合格や除外にせずraw実測を別保存。JDK25.0.4/UTF8/JST、Code0はcounter0自然N/A、toolとprogram実行を区別し未測定を0埋めしない。
