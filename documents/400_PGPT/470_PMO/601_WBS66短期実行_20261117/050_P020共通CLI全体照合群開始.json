@@ -1,0 +1,76 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5599",
+  "groupId": "PGPT-WBS66-P020-COMMON-AUDIT-20261117",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-COMMON-AUDIT-20261117",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-P020-COMMON-AUDIT-20261117",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "# P020 共通CLI全体照合\n\nWBS66 P020-01.01/2-a、開始見積0.166/0.488/0.976pp、cap2。既済/1と元1532～1536及びSS355を保持し、common adapter/comparison/gateの三名義へ、全Main五source・全Test/helper・参照resourceと実行済証跡を対応させる。原Main四にQA054 CorrelatedLogEvidenceValidatorが追加済み（485のPG21766/21780登録）であり、ownedArtifacts旧四件だけを全体にしない。\n\n最初は実行せず、PG6976/6980の旧44とPG21102/21116 comparator10、PG21140/21146 validator60等のsource/Test/fixture hash・変更triggerを個別照合する。同source成功を確認目的で再演しない。未証明のCLIと必要whole Testを確定し、後続/2-b（既存1.5pp）に渡す。古いcoverage100や合計invocation数から現五Mainの成功を生成しない。\n\n許可境界はSDKのみのoffline共通harness。Actual Current/NK browser/DB/Root/cohort/native/SSH/key/permit/Unit操作を起動しない。Live CurrentCharacterizationTestと実capture entryはCHR/Nの別scope。共通Testが使うCharacterizationEnvironmentの純static render/load-fixture等と、実運用constructor/startを区別し、後者へ達するTestは保留する。既閉host profile guardは変更しない。実行対象はwhole Testを単位とし、必要helper本文をすべて保持する。\n\n原Current baselineを保全する。後続Testは新規の隔離snapshotとJUnit TempDirだけで出力・故障を作り、chr.unitProjectRoot/chr.projectRoot等が本repoの原本を書き換えないよう実引数と全Test IOを確認する。固定fake master bytesやpublic metadataは実原本・credential・sessionの証拠としない。実native/CHR-G01～G06の達成と工具の単体検証は別判定。未実施・不明・別sourceはPASS/coverageへ足さない。\n\n終了証拠は三名義と各子への全path/TestID・独立oracle・既済/未証明・必要な通常PT・個別HOLD・source/byte pin一覧。親190の受入や工数率は更新しない。開始見積/元費用/SV上限・残10%停止を維持する。\n",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4464_P020共通CLI全体照合仕様.md",
+        "sha256": "35c3a1b3c5b08d36a2b5c118bef807e072d8783e31925e737a21b9844c746c5b"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+        "sha256": "ec8af014cfe96b59bf8b578d6207bbec4d0c6c659c1da181f06ce036c063e444"
+      }
+    ],
+    "source": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+    "headAtStart": "1f5ea8f143a8465fd67fd1b78131b4c5052e59ff",
+    "wbsLeafIds": [
+      "WBS-P020-01.01",
+      "WBS-P020-01.02",
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-a"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.166,
+      "base": 0.488,
+      "high": 0.976
+    },
+    "groupCapPp": 2,
+    "originalRow": {
+      "ID": "WBS-P020-01.01/2-a",
+      "元行": "WBS-P020-01.01/2",
+      "費目": "B",
+      "主担当": "WBS-P020-01.01",
+      "状態": "計画",
+      "作業": "CLI全体のTest・helper・参照元を既済/1と突合",
+      "残pp": "0.488",
+      "着手": "設計355・当該source・作業所有・既存成果を照合。必要な局所成果を費目Aで一度だけ作成し、受入候補のTestIDと独立期待値を確定。着手依存、当該A成果、終了依存と未解決条件を確認",
+      "終了証拠": "未証明対象と必要Testのみ確定。3つの共通試験名義と適用できる子IDを保存。未解決PTは-bから実測",
+      "補正根拠": "777の親増1.75を/2へ適用、/1完了価格0.262の再計上を除外",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "SCP-004、TST-001、TST-002、TST-003、TST-004、TST-005",
+      "保存証跡": "同一定義での両adapter出力・基準843de94の不変性・上書き防止・該当source/451の証跡",
+      "順次": "False",
+      "配賦窓": "2",
+      "楽観pp": "0.166",
+      "慎重pp": "0.976",
+      "要求設計の版差": "PT基準仕様 NK-CHR-001"
+    },
+    "additionalPricePp": 0,
+    "newAcceptance": 0,
+    "completedOriginalRowPricePp": 0,
+    "nextCommand": "Audit all five common Main, whole Test/helper/references and precise old proof applicability; bind required missing whole PT to three original child roles, then proceed existing /2-b without PMO wait. No actual Current/browser/native/DB/Root/VM/key operations."
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T21:48:35.346Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 5,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445753,
+      "remainingPercent": 95
+    },
+    "secondary": null
+  }
+}

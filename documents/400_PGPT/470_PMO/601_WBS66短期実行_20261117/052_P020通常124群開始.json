@@ -1,0 +1,76 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5601",
+  "groupId": "PGPT-WBS66-P020-COMMON-WHOLE124-20261117",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-COMMON-WHOLE124-20261117",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P020-COMMON-WHOLE124-20261117",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "# P020 現行共通ツール通常124仕様\n\nPG37004に五Main・17whole suite・124invocation・全入力hash・独立literal expectedの元Testを固定。旧comparator10はMain変更、旧gate60は全Test三件と依存helper変更があるため、新sourceのwhole閉包を一runで検証する。旧成功の算術加算・確認だけの再演はしない。\n\n原Testの固定hash/JSON/HTTP/metadata期待値を変更しない。JDK25 javac -Xlint:all -WerrorでMainと必要Test/helper全本文をコンパイルし、JUnit Consoleの17class指定のみ実行する。新規snapshot chr.unitProjectRoot、JUnit TempDirは低容量/tmp、正の20GiB条件は専用scratchと実FS空きで満たす。fixture内の偽ユーザ文字列・偽master bytesは実秘密ではなく、実原本・privateログは取得しない。原Baselineは変更前後hash比較。\n\n実行124の失敗/skip/未実行は合格にしない。標準/無除外raw全物理counterを両方保存し、四counter未達は未達とする。helperも集合に残す。実CHRや両実adapter、HOLD、451、終了依存は別途未受入。環境・command・actualexit・XML・exec・classCRC・hashはPG37012以降の原runへ一意に対応する予定。\n",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4465_P020全体照合結果・通常124仕様.md",
+        "sha256": "506a9ecb22281fa99d2b31bcbe71b7f30e7137afc675e465b81d41a275221d44"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37004-p020-whole-scope-audit-v1/manifest.json",
+        "sha256": "c5ac002d4f3906031f99b3fef0ff0a721935a16ebb52e5025c3a8cbd0fca1c0c"
+      }
+    ],
+    "source": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+    "actualUnitSource": "1f5ea8f143a8465fd67fd1b78131b4c5052e59ff",
+    "wbsLeafIds": [
+      "WBS-P020-01.01",
+      "WBS-P020-01.02",
+      "WBS-P020-01.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.01/2-b"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.511,
+      "base": 1.5,
+      "high": 2.999
+    },
+    "groupCapPp": 4,
+    "originalRow": {
+      "ID": "WBS-P020-01.01/2-b",
+      "元行": "WBS-P020-01.01/2",
+      "費目": "B",
+      "主担当": "WBS-P020-01.01",
+      "状態": "計画",
+      "作業": "不足したCLIの許可済み通常PTと品質証拠",
+      "残pp": "1.5",
+      "着手": "前段。F02/F03の該当着手条件とsource",
+      "終了証拠": "同一runの不足分と未解決品質を記録",
+      "補正根拠": "777のs2相当",
+      "契約HOLD": "",
+      "対象": "",
+      "範囲": "SCP-004、TST-001、TST-002、TST-003、TST-004、TST-005",
+      "保存証跡": "同一定義での両adapter出力・基準843de94の不変性・上書き防止・該当source/451の証跡",
+      "順次": "True",
+      "配賦窓": "2",
+      "楽観pp": "0.511",
+      "慎重pp": "2.999",
+      "要求設計の版差": "PT基準仕様 NK-CHR-001"
+    },
+    "additionalPricePp": 0,
+    "newAcceptance": 0,
+    "completedOriginalRowPricePp": 0,
+    "nextCommand": "Freeze public snapshot and SDK plus bounded ordinary javac/JUnit124 runner, authenticate fresh owned haruka scratch, launch exactly once. Keep real Current/NK/native/Root/service/DB and pending QA056 operations held. Independently recover genuine terminal/XML/CRC/raw without replay."
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T22:01:38.204Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 5,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445752,
+      "remainingPercent": 95
+    },
+    "secondary": null
+  }
+}

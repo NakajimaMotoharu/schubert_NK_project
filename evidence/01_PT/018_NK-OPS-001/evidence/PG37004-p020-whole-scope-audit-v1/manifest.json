@@ -1,0 +1,744 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-16T22:01:30.678662+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "actualUnitSource": "1f5ea8f143a8465fd67fd1b78131b4c5052e59ff",
+  "main": [
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+      "sha256": "266710a63e779fa041f280be6eb1b92f76b647ef06591cddbbfb62c06ad9f8a1"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+      "sha256": "6104a414adc343271b3deeb47a87888b2b9ccf54fb20fd78a0bc8bd421159541"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+      "sha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+      "sha256": "2179121f50f31183b2b2d04e19ad489d9fc601dead1083291db882a7a050a6f9"
+    },
+    {
+      "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/TargetAdapter.java",
+      "sha256": "c73d16ee3183dc7315fe8b03ea1af83a4972f1061616f218884308b4e8cc9003"
+    }
+  ],
+  "selectedWholeSuites": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+      "sha256": "68d20a2af7430f22b53db6be886286939617df165364fc302c7f29219f8dc26f",
+      "suite": "ArtifactComparatorTest",
+      "ordinaryMethods": [
+        "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences",
+        "rejectsNullMissingAndWrongInputTypesWithoutNpe",
+        "reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift",
+        "rejectsMalformedObservationEnvelope",
+        "rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations",
+        "rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid",
+        "rejectsNonIntegralOrOversizedObservationVersions",
+        "lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference",
+        "contractChangeAndInvalidClaimCannotHideUnregisteredDrift"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 9
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+      "sha256": "00e2e05fab9e3f69a1bb8e9b397e27d917f18c9d853b118b1f46cd9bda7e47d4",
+      "suite": "GateCliTest",
+      "ordinaryMethods": [
+        "hashRejectsNullSourceBeforeIoWithFixedDiagnostic",
+        "mainRejectsMissingUnknownAndIncompleteCommands",
+        "verifySourceAcceptsIndependentInventoryAndRejectsDriftAndSymlink",
+        "preflightValidatesFilesPermissionsStorageNetworkAndPorts",
+        "repeatComparisonRequiresTwentyEightIdenticalArtifacts",
+        "preflightRejectsParentlessLogPathWithoutNpe",
+        "jsonWriterRejectsParentlessOutputWithoutNpe",
+        "reportMapsEveryGateAndRejectsSecretCanaries",
+        "promotionRejectsNullAndUnnamedSourceBeforeAnyIo",
+        "baselinePromotionIsImmutableCommitBoundAndSymlinkSafe",
+        "fileInventoryUtilitiesHandleMissingFilteredNestedAndLinkedFiles",
+        "secretScanHandlesCredentialSessionMissingLargeAndBinaryInputs",
+        "atomicJsonWriterRejectsConcurrentUseOfTheSameOutput"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 13
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractTest.java",
+      "sha256": "0b39886ece2d9920035596534dac83bd6696274ca1a9545be30a4ee4b4b1dc78",
+      "suite": "GateContractTest",
+      "ordinaryMethods": [
+        "baselineMetadataAndHashRejectNullBeforeIoWithFixedDiagnostics",
+        "catalogHasExactlyTwentyFourUniqueCasesAndOnlyN01IsNkOnly",
+        "differenceAllowlistIsCompleteUniqueAndNarrow",
+        "expectedBaselineContainsAllStaticCounts",
+        "browserManifestPinsExecutableRevisionAndLocale",
+        "caddyFixturePreservesAllForwardedRequestHeaders",
+        "secretScannerHandlesBinaryEvidenceWithoutUtf8Decoding",
+        "strengthenedGateContractAcceptsTwoCompleteRepeatableRuns",
+        "fullByteScanIncludesLargeFilesBoundariesPrefixesEmptyAndIo"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 9
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+      "sha256": "c963648021fa5a09d166c8bd714886127c7708cbc14bb374fdf403fcce4144de",
+      "suite": "GateContractValidatorNegativeTest",
+      "ordinaryMethods": [
+        "rejectsMalformedContractSchemaCatalogAndBrowser",
+        "rejectsUnknownCatalogGroupAndSecondaryViewportMismatches",
+        "rejectsBroadAndMalformedDifferenceRules",
+        "rejectsIncompleteRequirementMatrix",
+        "rejectsMissingFailedAndIncompleteRunArtifacts",
+        "rejectsMissingScreenshotDirectoriesAndOptionalReports",
+        "rejectsComparisonSourceInventoryPreflightAndReviewFailures",
+        "rejectsAlteredBaselineManifestTreeAndCommit",
+        "rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot",
+        "acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories"
+      ],
+      "parameterizedInvocations": 7,
+      "expectedInvocations": 17
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/TargetAdapterTest.java",
+      "sha256": "69bf147d90936517c1d71d1499a52a2c09a256e409fe0c304568fc9bb5df5fbf",
+      "suite": "TargetAdapterTest",
+      "ordinaryMethods": [
+        "currentAndNkUseSameCatalogWithOnlyDeclaredApplicabilityDifference",
+        "adapterRejectsNullUnknownExternalAndOverwriteInputs",
+        "adapterRejectsCrossOriginPathsBadCaseIdsAndMalformedCatalogs"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 3
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+      "sha256": "4cb2aa3657224f3ba033d3bbc8f8d437f4a536e5b729e21145e469ba6a65b570",
+      "suite": "ArtifactComparatorEmptyInputTest",
+      "ordinaryMethods": [
+        "emptyJsonInputsFailClosedWithoutNullDereference",
+        "comparisonResultOwnsImmutableNonNullListSnapshots"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 2
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/BaselineNumericMetadataTest.java",
+      "sha256": "cbebd96b4e3bdfcae8c17d31d951c60e6bc97d76b0ecc779bedd9e8c7951197b",
+      "suite": "BaselineNumericMetadataTest",
+      "ordinaryMethods": [
+        "fixedAndBoundaryValuesStayExactAndInputsRemainFrozen",
+        "missingAndNullDocumentsOrFieldsNeverBecomeZeroDefaults",
+        "invalidScalarKindsFractionsOverflowAndNegativeNumbersAreRejected",
+        "primitiveRecordConstructorEstablishesRangeInvariants",
+        "concurrentIndependentValidAndInvalidInputsPreserveTheirOwnResults"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 5
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationHashTest.java",
+      "sha256": "3d428a7e5adab39424c9f872f8c89d5bbd7c9f9d8450a608c88be20f73862997",
+      "suite": "CharacterizationHashTest",
+      "ordinaryMethods": [
+        "bothReadersMatchPublicVectorsAndTheIndependentOverBufferVector",
+        "nullAndUnavailableInputsNeverBecomeAnEmptyOrSuccessfulDigest"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 2
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+      "sha256": "1ec25d02801cde9a3ed3ca9ec2e7b5a4c510a35c452db88fd3b906d744e463f9",
+      "suite": "CorrelatedLogEvidenceValidatorTest",
+      "ordinaryMethods": [
+        "validActionMappingRequestChainAndKnownNullOldRowsRemainDistinct",
+        "envelopeVersionAndIndependentOracleBindingAreRequired",
+        "expectedPayloadsUseClosedSafeFieldsAndExplicitRequestHttpValues",
+        "preservesAllBeforeRowsAndRejectsEveryMissingDuplicateOrUncorrelatedNewEvent",
+        "requestWitnessesMustBeBothStagesOfTheSameLogicalEventAndSameHttpFields",
+        "operationSetsCannotDriftAndExtraTechnicalRowsRequireTheirOwnIndependentExpectation",
+        "inclusiveHttpBoundariesAndOptionalFieldsArePreservedExactly",
+        "concurrentValidAndInvalidSnapshotsKeepTheirDiagnosticsAndInputsIsolated",
+        "strictVersionPredicateNeverCoercesMissingFractionalTextOrOversizedValues",
+        "qa054ActionPairsAreOncePerOperationAndMenuRequiresExactHttpAndWitnesses",
+        "optionalResponseBytesAndSameSizeFieldReplacementStayStrict"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 11
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogHttpNumberTest.java",
+      "sha256": "2c46f42f8b8df8b08ba7d08b56f00bebf2ac53e059044b91f82d1018f77200e1",
+      "suite": "CorrelatedLogHttpNumberTest",
+      "ordinaryMethods": [
+        "rejectsConsistentlyInvalidNewResponseBytesAcrossBothSidesAndAllStages",
+        "acceptsAbsentAndIntegralN12BoundariesWithoutNormalizingKnownNullOldRows"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 2
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedMenuActionContractTest.java",
+      "sha256": "417b0fdefc0e6248e411667e7a12219a271ae9a54f470912a19fa0fb89864e60",
+      "suite": "CorrelatedMenuActionContractTest",
+      "ordinaryMethods": [
+        "qa054log001ApprovedPairsAndMenuWitnessesPassWithoutMutatingEvidence",
+        "qa054log002MenuNeedsExactlyOneLocalAndOutboxWitnessEach",
+        "qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness",
+        "qa054log004OnlyExactActionCategoryAliasesAreApproved",
+        "qa054log005OperationBindingAndDatabaseReplayCountsRemainStrict",
+        "qa054log006TwoActionsInBothExpectationsCannotHideDuplicateSuccess",
+        "qa054log007OptionalResponseBytesHaveIndependentUnsignedN12Boundaries"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 7
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+      "sha256": "1c9144508676a7c31f0a52684f43986a761fc18adcfdbd1bb5d949bd45fec700",
+      "suite": "GateBaselineMetadataTest",
+      "ordinaryMethods": [
+        "acceptsIndependentManifestItemsWithoutMutatingInputsAndReturnsImmutableList",
+        "javaNullBoundariesFailWithFixedSignalAndJsonNullNeverCausesNpe",
+        "manifestCardinalitiesMustBeTypedExactIntegers",
+        "sourceAndDocumentHashesMustBeCanonicalMatchingText",
+        "masterCountsAndBytesRejectCoercionDefaultsAndOverflowOnBothSides",
+        "environmentAndTargetUseExactMarkersAndIntegerBrowserRevision",
+        "concurrentManifestFramesNeverShareMutationsOrFailures",
+        "contractCountsRejectCoercionAndKeepPinnedTwentyThreeAndTwentySeven"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 8
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+      "sha256": "c9f828f2a13e68ab4a5128acf8e6083479e54878723a981d28365fe92ea9ad69",
+      "suite": "GateDefinitionDocumentsTest",
+      "ordinaryMethods": [
+        "expectedBrowserRevisionRejectsMissingTypeAndIntegerOverflow",
+        "acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics",
+        "rejectsEveryJavaNullDocumentWithFixedSignal",
+        "malformedJsonShapesProduceFailuresRatherThanNpe",
+        "allFourVersionCallersRejectCoercionOverflowMissingAndNull",
+        "contractCountsOrderIdentifiersAndHashesUseIndependentConstraints",
+        "schemaDraftShapeAndItemConstraintsCannotBeWeakened",
+        "catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes",
+        "everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions",
+        "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues",
+        "requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals",
+        "concurrentValidAndInvalidDefinitionsRemainIndependent"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 12
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+      "sha256": "5131f714aa4ca4f877f17a17d18180ee0e3921fb56ce1cb9f981483ffd4e22e3",
+      "suite": "GateDefinitionNumericTest",
+      "ordinaryMethods": [
+        "schemaAndBrowserIntegersRejectTextFractionAndOverflow",
+        "equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero",
+        "validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 3
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+      "sha256": "832da3b92ca67ed157981b140300fb72cc8cfd0364969ea3145475592f24af2f",
+      "suite": "GateEvidenceDocumentsTest",
+      "ordinaryMethods": [
+        "acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable",
+        "rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe",
+        "comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict",
+        "sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues",
+        "sourceHashesRequireCanonicalTextOnBothSides",
+        "preflightMetadataUsesTypedCapacityAndExactStaticMarkers",
+        "reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval",
+        "statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence",
+        "concurrentFrozenFramesKeepTheirDiagnosticsIndependent"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 9
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+      "sha256": "99e4bf2733255ac01bf673f9d1363831a534bc7ab4125fbc073430c239044bbe",
+      "suite": "GateMetricsCountTest",
+      "ordinaryMethods": [
+        "validSnapshotUsesExactProvidedCountsAndIsImmutable",
+        "javaNullAndNegativeProvidedCountsFailWithoutNpe",
+        "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue",
+        "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero",
+        "baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary",
+        "concurrentIndependentSnapshotsNeverShareUnknownValues"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 6
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+      "sha256": "32ece82be553a3ad0f65576909989f3e5188536570c6d00a869c707cc38351b3",
+      "suite": "GateSyntheticRunPortTest",
+      "ordinaryMethods": [
+        "completeSyntheticTreeAcceptsIndependentAggregateAndOwnsImmutableReports",
+        "screenshotHashAndUnknownArtifactNamesFailOrIgnoreByExplicitContract",
+        "nkOnlySupplementalAllowedOnlyForExplicitApprovedCheckAndEvidence",
+        "missingAndMalformedRequiredDocumentsAreIoFailuresNeverPassingGate",
+        "hashFixedVectorsIncludeEmptyMultiBufferNullAndMissingFile",
+        "concurrentSeparateTreesNeverShareFailuresOrInputMutation"
+      ],
+      "parameterizedInvocations": 0,
+      "expectedInvocations": 6
+    }
+  ],
+  "expectedInvocations": 124,
+  "priorBindings": [
+    {
+      "manifest": "evidence/01_PT/020_NK-CHR-001/evidence/PG21102-comparator-selected-ten-v1/manifest.json",
+      "sha256": "af618355e6b71eed4e33d92b8970c7db5e7c0f434d08d8c9f6c86ff46beada06",
+      "source": "e7a8fe792ffe6b85a80a5fd897bd1dfe415e230f",
+      "unchangedInputs": [
+        "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorEmptyInputTest.java",
+        "program/characterization/tests/resources/cases/catalog.json",
+        "program/characterization/tests/resources/cases/dif-allowlist.json",
+        "evidence/01_PT/020_NK-CHR-001/input/002_comparator_host_qualifier.py"
+      ],
+      "changedOrMissingInputs": [
+        "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidatorTest.java",
+        "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java"
+      ],
+      "selectedMethods": [
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+          "comparisonResultOwnsImmutableNonNullListSnapshots"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorEmptyInputTest",
+          "emptyJsonInputsFailClosedWithoutNullDereference"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "acceptsTwentyFourPassCasesAndExactlySixteenApprovedDifferences"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "lexicalArtifactNamesRejectNullAndNamelessPathsBeforeDereference"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "rejectsMalformedObservationEnvelope"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "rejectsMissingOrUncorrelatedL01ProjectionEvenWhenDifClaimsAreValid"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "rejectsNonIntegralOrOversizedObservationVersions"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "rejectsNullMissingAndWrongInputTypesWithoutNpe"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "rejectsUnknownOutOfScopeBroadWrongOverlappingAndUnusedObservations"
+        ],
+        [
+          "dev.codex.schubert.characterization.ArtifactComparatorTest",
+          "reportsCatalogArtifactStatusSetSymlinkAndUnregisteredDrift"
+        ]
+      ],
+      "coverage": {
+        "dev/codex/schubert/characterization/ArtifactComparator": {
+          "INSTRUCTION": {
+            "covered": 1065,
+            "missed": 0
+          },
+          "BRANCH": {
+            "covered": 96,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 207,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 74,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 26,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        },
+        "dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult": {
+          "INSTRUCTION": {
+            "covered": 47,
+            "missed": 0
+          },
+          "LINE": {
+            "covered": 7,
+            "missed": 0
+          },
+          "COMPLEXITY": {
+            "covered": 2,
+            "missed": 0
+          },
+          "METHOD": {
+            "covered": 2,
+            "missed": 0
+          },
+          "CLASS": {
+            "covered": 1,
+            "missed": 0
+          }
+        }
+      }
+    },
+    {
+      "manifest": "evidence/01_PT/020_NK-CHR-001/evidence/PG21140-gate-synthetic-sixty-v1/manifest.json",
+      "sha256": "1d672d4a736b9b14b684a73822ef1602ee4065b18aa171c37001bfaef7f360cd",
+      "source": "7b9df0b9812b0e3f7445b619261a4dbdce89aa14",
+      "unchangedInputs": [
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateContractValidatorNegativeTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionNumericTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateBaselineMetadataTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateSyntheticRunPortTest.java",
+        "program/characterization/tests/resources/cases/gate-contract.json",
+        "program/characterization/tests/resources/cases/catalog.json",
+        "program/characterization/tests/resources/cases/schema.json",
+        "program/characterization/tests/resources/cases/dif-allowlist.json",
+        "program/characterization/tests/resources/browser/manifest.json",
+        "program/characterization/tests/resources/cases/case-requirements.json",
+        "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+        "evidence/01_PT/020_NK-CHR-001/input/005_gate_synthetic_fixture.py"
+      ],
+      "changedOrMissingInputs": [
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateDefinitionDocumentsTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateEvidenceDocumentsTest.java",
+        "program/characterization/tests/java/dev/codex/schubert/characterization/GateMetricsCountTest.java",
+        "evidence/01_PT/020_NK-CHR-001/input/006_gate_host_qualifier.py"
+      ],
+      "selectedMethods": [
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "acceptsIndependentManifestItemsWithoutMutatingInputsAndReturnsImmutableList()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "concurrentManifestFramesNeverShareMutationsOrFailures()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "contractCountsRejectCoercionAndKeepPinnedTwentyThreeAndTwentySeven()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "environmentAndTargetUseExactMarkersAndIntegerBrowserRevision()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "javaNullBoundariesFailWithFixedSignalAndJsonNullNeverCausesNpe()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "manifestCardinalitiesMustBeTypedExactIntegers()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "masterCountsAndBytesRejectCoercionDefaultsAndOverflowOnBothSides()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateBaselineMetadataTest",
+          "sourceAndDocumentHashesMustBeCanonicalMatchingText()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "acceptsActualBaselineCommitAndRejectsMissingBaselineDirectories()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsAlteredBaselineManifestTreeAndCommit()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsBroadAndMalformedDifferenceRules()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsComparisonSourceInventoryPreflightAndReviewFailures()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[1]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[2]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[3]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[4]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[5]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[6]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsEveryNonPassExecutionStatus(String)[7]"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsIncompleteRequirementMatrix()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsMalformedContractSchemaCatalogAndBrowser()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsMissingFailedAndIncompleteRunArtifacts()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsMissingScreenshotDirectoriesAndOptionalReports()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsNonEmptyCompositeReportsAndMissingMobileScreenshot()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateContractValidatorNegativeTest",
+          "rejectsUnknownCatalogGroupAndSecondaryViewportMismatches()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "acceptsPinnedPublicDefinitionsWithoutMutationAndReturnsImmutableDiagnostics()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "allFourVersionCallersRejectCoercionOverflowMissingAndNull()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "catalogRejectsDuplicateMalformedUnknownAndShortIdsAndWrongModes()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "concurrentValidAndInvalidDefinitionsRemainIndependent()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "contractCountsOrderIdentifiersAndHashesUseIndependentConstraints()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "differencesRejectUnknownModesCasesBroadSelectorsDuplicatesAndEmptyValues()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "everyBrowserConstraintHasAnIndependentWrongValueIncludingSecondaryDimensions()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "malformedJsonShapesProduceFailuresRatherThanNpe()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "rejectsEveryJavaNullDocumentWithFixedSignal()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "requirementsRejectMissingCoreKeysDuplicatesUnknownAndUnboundSupplementals()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionDocumentsTest",
+          "schemaDraftShapeAndItemConstraintsCannotBeWeakened()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+          "equalMalformedExpectedAndObservedNumbersNeverValidateThroughDefaultZero()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+          "schemaAndBrowserIntegersRejectTextFractionAndOverflow()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateDefinitionNumericTest",
+          "validIntegralRepresentationsStayEquivalentAndDifferentIntegersFail()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "acceptsIndependentLiteralMetadataAndKeepsInputsAndResultsImmutable()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "comparisonCountsAndEmptyDifferenceCollectionsMustBeStrict()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "concurrentFrozenFramesKeepTheirDiagnosticsIndependent()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "preflightMetadataUsesTypedCapacityAndExactStaticMarkers()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "rejectsEveryJavaNullBoundaryAndReportsJsonNullWithoutNpe()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "reviewMetadataRequiresBooleanChecksAndTypedRoleWithoutGrantingApproval()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "sourceAndInventoryCountsRejectCoercionDefaultsOverflowAndNegativeValues()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "sourceHashesRequireCanonicalTextOnBothSides()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateEvidenceDocumentsTest",
+          "statusMarkersAndRepeatInventoryCannotSubstituteDifferentEvidence()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "baselineCountComparisonRejectsCoercionAndRespectsExactIntegerBoundary()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "concurrentIndependentSnapshotsNeverShareUnknownValues()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "invalidOrMissingCurrentCountIsUnknownAndNeverAZeroOrCoercedValue()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "javaNullAndNegativeProvidedCountsFailWithoutNpe()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "unavailableDeclarationArraysAreOmittedInsteadOfReportedAsZero()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateMetricsCountTest",
+          "validSnapshotUsesExactProvidedCountsAndIsImmutable()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "completeSyntheticTreeAcceptsIndependentAggregateAndOwnsImmutableReports()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "concurrentSeparateTreesNeverShareFailuresOrInputMutation()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "hashFixedVectorsIncludeEmptyMultiBufferNullAndMissingFile()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "missingAndMalformedRequiredDocumentsAreIoFailuresNeverPassingGate()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "nkOnlySupplementalAllowedOnlyForExplicitApprovedCheckAndEvidence()"
+        ],
+        [
+          "dev.codex.schubert.characterization.GateSyntheticRunPortTest",
+          "screenshotHashAndUnknownArtifactNamesFailOrIgnoreByExplicitContract()"
+        ]
+      ],
+      "coverage": {
+        "LINE": 488,
+        "METHOD": 51,
+        "CLASS": 2,
+        "BRANCH": 253
+      }
+    }
+  ],
+  "helperReferences": [
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationEnvironment.java",
+      "sha256": "33bdc243714e3c3fd21844b1119dbe9c2f8c7636a6ffd5d6722e8806273b9545"
+    },
+    {
+      "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactSink.java",
+      "sha256": "ef71bbaa6fde05a48039c6599b6e2a9e7aee569aab7dae8c7f21298de36af93b"
+    }
+  ],
+  "commonScopeDecision": "CURRENT_WHOLE124_REQUIRED_CHANGED_MAIN_HELPER_AND_TEST_CLOSURE",
+  "oldSuccessfulTestsReexecuted": 0,
+  "newTestsExecuted": 0,
+  "oldResultsAutomaticallyCarriedToCurrent": 0,
+  "reason": "PG21102 comparator Main/Test changed. PG21140 validator Main unchanged but three whole Test files and helper ArtifactComparator changed; original60 is historical and not a complete current closure. Re-execution124 is changed-source closure, not confirmation replay.",
+  "roles": {
+    "WBS-P020-01.01": "TargetAdapter/common root and baseline immutability",
+    "WBS-P020-01.02": "ArtifactComparator/Correlated evidence exact DIF/missing/drift",
+    "WBS-P020-01.03": "GateCli/Validator tool contracts only; real G01..G06 not claimed"
+  },
+  "ordinaryExecutionBoundary": "JDK25 compile preserved Main5 and whole Test/helper sources; JUnit exact17 whole classes124. Compile no test initializer; selected methods use synthetic JSON/fake memory or own isolated filesystem only. CharacterizationEnvironment.renderCaddyConfig static pure; no constructor/start. Never select CurrentCharacterizationTest/native capture. Do not invoke existing closed-host guard or its four denied classfiles.",
+  "fixtureRootDecision": "New isolated source snapshot on fresh authenticated haruka mini scratch, >20GiB; JUnit TempDir below20GiB on existing /tmp. SyntheticRun copies source-only snapshot; no SDK/build outputs beneath snapshot. No actual baseline/master/credential/session inputs.",
+  "environmentReadOnlyAdmissionSha256": "0ea156de073b6f0f50ea12b56e0b1f78d4cf5be4cbe468a5bb54a67c7bcccaa6",
+  "sourceRootBaselineHashes": {
+    "program/characterization/baseline/current/artifacts/CHR-A01.json": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993",
+    "program/characterization/baseline/current/artifacts/CHR-A02.json": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75",
+    "program/characterization/baseline/current/artifacts/CHR-A03.json": "71f6b1d5e940a17025ae76d977f35ca442a0647125753b5832eccb8da5a70994",
+    "program/characterization/baseline/current/artifacts/CHR-E01.json": "d5864a7688d23239062bfb4b95cf94c4b3da1abf746295d66787e6232a3f0fca",
+    "program/characterization/baseline/current/artifacts/CHR-L01.json": "7c8015cbe754b108447c60be45731ce0c5b5b3a044184febdef2fdf10c4e5134",
+    "program/characterization/baseline/current/artifacts/CHR-M01.json": "c746b82417532889708d5816c05965bf539f6f9f659ed6fde5b95a5f0e02f895",
+    "program/characterization/baseline/current/artifacts/CHR-M02.json": "54153f94ec28d227e0de6f48e1201fea203a8393bea4d69f7a5b7c2e02d20e8e",
+    "program/characterization/baseline/current/artifacts/CHR-M03.json": "6ae6c538ad17e74a17596d26bd909e89089e7025b91d3821b992390aea6984a4",
+    "program/characterization/baseline/current/artifacts/CHR-M04.json": "289b0b1b8bc0282464eac51bbf5a51ae5bd05486efdfd42509570dc5ba691b8f",
+    "program/characterization/baseline/current/artifacts/CHR-M05.json": "dd58b7dfd48e3c44f9e44ed44db195cb1109fa140610b3ed6e65a00e56fd6f9c",
+    "program/characterization/baseline/current/artifacts/CHR-M06.json": "2baaeac37af45dc3d5bfa41e42edc7b9eba9699056435770040586e4e665c91c",
+    "program/characterization/baseline/current/artifacts/CHR-M07.json": "3114210545501ed9311fd342b59472e7fb450f591597d1b4a811648ae0af2a3b",
+    "program/characterization/baseline/current/artifacts/CHR-N01.json": "487289b9b10f8865061fc15e37d58debd7e47602afa2bf8704fb27bfb1eed59f",
+    "program/characterization/baseline/current/artifacts/CHR-O01.json": "76731f9ce334fd6aed892363d680054d2697ace54a138e370528bae107fe42e2",
+    "program/characterization/baseline/current/artifacts/CHR-S01.json": "4f2f2f73e4a3be69d019f5aa3719272caa5be92097c496149d10a018cfdcb728",
+    "program/characterization/baseline/current/artifacts/CHR-S02.json": "f24e9682e094f5a3a3983860afa4a7082fd5ac15101a633ad03b93b482641f87",
+    "program/characterization/baseline/current/artifacts/CHR-S03.json": "eaa4d80f34a9777a2041ba9d08c1a3f84e51837e4d9c6fb5f2dac73fadbd419e",
+    "program/characterization/baseline/current/artifacts/CHR-S04.json": "da0d34b73adaadde9826210d6eb21aeff8f3ae16c613457adafad04fc1c30fbe",
+    "program/characterization/baseline/current/artifacts/CHR-S05.json": "bed685ac5e02a3f4da55a2da17d479ad2935041f7be9cb2fb6d8a4a617724def",
+    "program/characterization/baseline/current/artifacts/CHR-S06.json": "19a69fe122b1cd4f0a816b21807d4a9e63846394d438145be0a6c0f9cf9ca55d",
+    "program/characterization/baseline/current/artifacts/CHR-S07.json": "17d41fd789ceb5f300cebceca45d9a1e561ba7356b630e35cf11009ef4540772",
+    "program/characterization/baseline/current/artifacts/CHR-S08.json": "6b0715bc53a37879e31e7f8494caa3638d15af292aa8f71bcfa84127ff540f20",
+    "program/characterization/baseline/current/artifacts/CHR-U01.json": "5669dda7a9d7aec457023a7287b5508901f02e8e80c20131b281137326e701c7",
+    "program/characterization/baseline/current/artifacts/CHR-U02.json": "08755d79fb4795a3f5c391b9fb0e880c7c1c142c3417885dea96973af929f4d1",
+    "program/characterization/baseline/current/manifest.json": "4eb22323a475e15a3fae4ef9ccf3e128f1616591c2271f048bcf6473915ab8f9",
+    "program/characterization/baseline/current/screenshots/CHR-U01-desktop.png": "3c034d8b00dbcad9bc79a059f07546d22a97c4e077577cfa47598fda66c96b76",
+    "program/characterization/baseline/current/screenshots/CHR-U01-mobile.png": "17f476d099ff38cb2e2dab40ace855c82b50f01f5385f3df9f3ed40fa2173114"
+  },
+  "remaining": [
+    "P020 individual criteria and end dependencies not accepted",
+    "Raw current five Main coverage and static applicability must be independently measured",
+    "Actual Current/NK/CHR/native/service/Root and QA056 four product classfile phases remain held"
+  ],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null
+}

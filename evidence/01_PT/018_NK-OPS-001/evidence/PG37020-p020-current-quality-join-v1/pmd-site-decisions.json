@@ -1,0 +1,137 @@
+[
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "266710a63e779fa041f280be6eb1b92f76b647ef06591cddbbfb62c06ad9f8a1",
+    "line": 74,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "compare-local currentByCase TreeMap, passed only to current invocation semantic comparison; deterministic case order required",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "266710a63e779fa041f280be6eb1b92f76b647ef06591cddbbfb62c06ad9f8a1",
+    "line": 75,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "compare-local nkByCase TreeMap, no static publication, deterministic case ordering",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "266710a63e779fa041f280be6eb1b92f76b647ef06591cddbbfb62c06ad9f8a1",
+    "line": 103,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "compare-local allowlist rules LinkedHashMap preserves declared order, one invocation only",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "266710a63e779fa041f280be6eb1b92f76b647ef06591cddbbfb62c06ad9f8a1",
+    "line": 253,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "artifactFiles returns fresh TreeMap to current invocation only; deterministic file names, no shared worker mutation",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "6104a414adc343271b3deeb47a87888b2b9ccf54fb20fd78a0bc8bd421159541",
+    "line": 100,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "expectations builds fresh event index for one immutable JSON input/validation; method-local, concurrency Test isolates calls",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "6104a414adc343271b3deeb47a87888b2b9ccf54fb20fd78a0bc8bd421159541",
+    "line": 167,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "verifyRows creates fresh addedEvents from current before/after maps, no static/shared retention",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "6104a414adc343271b3deeb47a87888b2b9ccf54fb20fd78a0bc8bd421159541",
+    "line": 188,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "rows creates fresh row-id index consumed only by same validation; independent concurrent calls tested",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 128,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "verifySource invocation-local ordered report actual map written by current invocation",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 214,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "preflight invocation-local ordered report map; no shared mutable result writer",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 265,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "compareCurrent local ordered aggregate result; thread confined to current report generation",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 336,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "report local ordered gate result; returns immutable/publicly serialized report, no cross-invocation mutable map",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 496,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "promoteCurrent creates one local deterministic manifest for owned synthetic destination; original baseline never passed",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 560,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "prefixed builds fresh sorted map from current parameter; no concurrent mutation contract",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "a7d783efce80689f0debfd02e100cc7983d680f531c5c3a3ffadc80ab841803b",
+    "line": 566,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "fileHashes builds fresh sorted path/hash map, consumed by current comparison only",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+    "sourceSha256": "2179121f50f31183b2b2d04e19ad489d9fc601dead1083291db882a7a050a6f9",
+    "line": 124,
+    "rule": "UseConcurrentHashMap",
+    "decision": "NOT_APPLICABLE_THREAD_CONFINED_ORDERED_VALUE",
+    "reason": "validate local ordered metrics map; ValidationResult copies immutable metrics and failures; concurrent independent trees tested",
+    "evidence": "PG37012 all124 including independent concurrent JSON/tree/file output tests; exact byte/source PG37016"
+  }
+]
