@@ -1,0 +1,3 @@
+# Checkpoint原12fixture 静的三site是正追補
+
+BUG3141/YKT2610、PG36972全PMD raw6のうち、fault==1一literalとAgent.version/session二field-method名衝突を修正前に特定。fixture内部field名とconstructor引数をreportedVersion/reportedSession/declaredSessionへ、fault==1は同値int定数WRONG_TYPE_MODE=1へ移すだけ。原12case名・操作・全assert/固定byte/例外期待を保持し、元wholeTest byteを保存して識別子/同値定数の逆展開で全byte一致を確認する。4459の原12不変は期待/操作の不変として本追補で厳密化、元file本文のbyte差を隠さず新Unit sourceで15を実行する。null代入は故意のnegative入力で保持、二thread指摘は有限4worker/32tasks/future各5秒/finally shutdown-awaitの元fixtureへ個別判断し、静的除外や新抑制を追加しない。元Main全280class/rootflags/新fatal三Test不変更、価格3.9/cap8不変。

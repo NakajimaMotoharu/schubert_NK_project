@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "testPath": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpointTest.java",
+  "testShaBefore": "40d28e8f5c637ed3bade554aa703d828bbd279cb22aa43c2a9edcc6228183264",
+  "testShaAfter": "034afaeebe96c7e1f78f3667b5f6042f72f7606962ae571d7dd2728522762426",
+  "inverseWholeByteExact": true,
+  "testIdsAndOraclesUnchanged": true,
+  "replacements": [
+    [
+      "  private static final String INV =",
+      "  private static final int WRONG_TYPE_MODE = 1;\n  private static final String INV =",
+      1
+    ],
+    [
+      "if (fault == 1) return Integer.valueOf(7);",
+      "if (fault == WRONG_TYPE_MODE) return Integer.valueOf(7);",
+      1
+    ],
+    [
+      "agent.version =",
+      "agent.reportedVersion =",
+      1
+    ],
+    [
+      "agent.session =",
+      "agent.reportedSession =",
+      1
+    ],
+    [
+      "String version =",
+      "String reportedVersion =",
+      1
+    ],
+    [
+      "String session;",
+      "String reportedSession;",
+      1
+    ],
+    [
+      "Agent(String session) {\n      this.session = session;",
+      "Agent(String declaredSession) {\n      reportedSession = declaredSession;",
+      1
+    ],
+    [
+      "return version;",
+      "return reportedVersion;",
+      1
+    ],
+    [
+      "return session;",
+      "return reportedSession;",
+      1
+    ],
+    [
+      ")) session = \"changed\";",
+      ")) reportedSession = \"changed\";",
+      1
+    ],
+    [
+      ")) version = \"changed\";",
+      ")) reportedVersion = \"changed\";",
+      1
+    ]
+  ],
+  "mainSourceChanged": false
+}

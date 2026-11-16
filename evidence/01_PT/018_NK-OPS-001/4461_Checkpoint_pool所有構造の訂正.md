@@ -1,0 +1,3 @@
+# pool所有構造の訂正
+
+4460末尾のfinally shutdown-awaitという説明は誤り。原TestはJava25のtry(var pool=Executors.newFixedThreadPool(4))で所有し、32有限memory taskをFuture#get各5秒で全回収後、TWRのExecutorService.closeで解放する。新JUnit全体を同一owned JVMの120秒上限で監視する。元Testへ架空のshutdownNow/await assertを追加しない。閉じない外部resourceや業務providerは使わない。PMD原文のJ2EE前提はSS311/342のstandaloneに非該当という判定と、実終了/再現性の品質確認は分ける。BUG3142/YKT2611、製品未実施のまま。

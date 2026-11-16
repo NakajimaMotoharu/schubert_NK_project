@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 /** Literal JaCoCo0.8.15 public format/profile oracle; no production-generated expected. */
 final class FixedNativeCoverageCheckpointTest {
+  private static final int WRONG_TYPE_MODE = 1;
   private static final String INV = "1234567890abcdef1234567890abcdef";
   private static final byte[] GOLDEN = {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
 
@@ -222,7 +223,7 @@ final class FixedNativeCoverageCheckpointTest {
                 (m, t, a) -> {
                   if (m.getName().equals(method)) {
                     if (fault == 0) return null;
-                    if (fault == 1) return Integer.valueOf(7);
+                    if (fault == WRONG_TYPE_MODE) return Integer.valueOf(7);
                     throw new IllegalAccessException("PRIVATE_INVOCATION");
                   }
                   return m.invoke(t, a);
@@ -375,8 +376,8 @@ final class FixedNativeCoverageCheckpointTest {
             "header4")) {
       var agent = new Agent("API-" + INV + "-root");
       agent.fault = fault;
-      if (fault.equals("version")) agent.version = "0.8.15.unknown";
-      if (fault.equals("session")) agent.session = "WEB-" + INV + "-root";
+      if (fault.equals("version")) agent.reportedVersion = "0.8.15.unknown";
+      if (fault.equals("session")) agent.reportedSession = "WEB-" + INV + "-root";
       if (fault.equals("null")) agent.bytes = null;
       if (fault.equals("short")) agent.bytes = new byte[4];
       if (fault.equals("large")) agent.bytes = new byte[16 * 1024 * 1024 + 1];
@@ -489,31 +490,31 @@ final class FixedNativeCoverageCheckpointTest {
   }
 
   private static final class Agent implements FixedNativeCoverageCheckpoint.Agent {
-    String version = "0.8.15.202606040825";
-    String session;
+    String reportedVersion = "0.8.15.202606040825";
+    String reportedSession;
     String fault = "";
     byte @Nullable [] bytes = GOLDEN.clone();
     int dataCalls;
 
-    Agent(String session) {
-      this.session = session;
+    Agent(String declaredSession) {
+      reportedSession = declaredSession;
     }
 
     @Override
     public String version() {
-      return version;
+      return reportedVersion;
     }
 
     @Override
     public String session() {
-      return session;
+      return reportedSession;
     }
 
     @Override
     public byte @Nullable [] executionDataWithoutReset() {
       dataCalls++;
-      if (fault.equals("changedSession")) session = "changed";
-      if (fault.equals("changedVersion")) version = "changed";
+      if (fault.equals("changedSession")) reportedSession = "changed";
+      if (fault.equals("changedVersion")) reportedVersion = "changed";
       return bytes;
     }
   }
