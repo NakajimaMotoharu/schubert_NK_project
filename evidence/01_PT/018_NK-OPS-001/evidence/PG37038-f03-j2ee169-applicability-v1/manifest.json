@@ -1,0 +1,52 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-16T22:26:01.230645+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "reviewOnly": true,
+  "productTestsExecuted": 0,
+  "newAnalysisOrRegressionReplayed": false,
+  "totalOriginalRaw": 971,
+  "oldCandidateUnconfirmed": 309,
+  "newSourceMatchedFinalDispositions": 169,
+  "remainingUnmatched": 493,
+  "candidatePlusDispositionPlusUnknownIs971": true,
+  "allSources": 67,
+  "sites": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37038-f03-j2ee169-applicability-v1/site-decisions.json",
+    "sha256": "4d61ab5fa21159bfc650989e07a4a80cdb226ff61466e9efc50ff09da3df2954"
+  },
+  "remaining": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37038-f03-j2ee169-applicability-v1/remaining-unmatched.json",
+    "sha256": "68ec78d942c5d16c8823b43a280f6955863e26a504797245ff7f3b05f631e4f8"
+  },
+  "prior": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36968-current287-pmd971-candidates-v2/manifest.json",
+    "sha256": "0e01b184536537c76b9e6964b5769f05bb30a2d98555d8d0798ec260d1b61d03"
+  },
+  "priorAllSites": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36968-current287-pmd971-candidates-v2/all-site-candidates.json",
+    "sha256": "7981ed87df24a645a8ec96c459b565ce434b51d4280ead91f9e8498c2af74c7a"
+  },
+  "ruleSource": {
+    "jarPath": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar",
+    "jarSha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd",
+    "resource": "category/java/multithreading.xml",
+    "resourceSha256": "a584188485d8da3ca58abf4d80cfd443775a2f9fecdc97ebd6aa4dec33049da3",
+    "rule": "DoNotUseThreads",
+    "description": "The J2EE specification explicitly forbids the use of threads. Threads are resources, that should be managed and monitored by the J2EE server.\nIf the application creates threads on its own or uses own custom thread pools, then these threads are not managed, which could lead to resource exhaustion.\nAlso, EJBs might be moved between machines in a cluster and only managed resources can be moved along."
+  },
+  "canonicalArchitecture": {
+    "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+    "originMain": "51f2f3ba8118782ff2973e171850126d941fb426",
+    "contentSha256": "10ce6fd8fbfad188204ab36be63edbd16b1354078170b1abbf08ac4944d50533"
+  },
+  "owners": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "c6a314a3e791c3d4536ffb158e00d5248aa68918eecdea5d64401d99c931efb6"
+  },
+  "noSourceRuleSuppressionChanges": true,
+  "wholeF03Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null
+}

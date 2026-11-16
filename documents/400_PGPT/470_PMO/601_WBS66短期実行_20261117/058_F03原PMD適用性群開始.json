@@ -1,0 +1,80 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5605",
+  "groupId": "PGPT-WBS66-F03-PMD-APPLICABILITY-20261117",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-PMD-APPLICABILITY-20261117",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-PMD-APPLICABILITY-20261117",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "# F03 既存原PMD指摘の適用性分類\n\n原F03/2-2開始.9/2.4/4.8pp、cap6、未完行の元価格2.4を維持し新規費用を増額しない。Core01cのPG36960/36968にある全Bootstrap87/Batch200の原971siteを使用。原XML/source一致の既分類候補309と未分類662を最終分類と混同しない。旧成功PT/SB/compileは確認再演しない。\n\n各siteのpath/hash/line/column/rule/所属class-method・規約/原SS/owner・元Test又は静的適用根拠を保持する。まずDoNotUseThreads等について、PMD7.28原rule本文とstandalone六module/JDK25構成を照合し、JavaEE container前提と原siteが該当するかを全件判断する。一般的なthread-safe説明だけで全ルールを一括非該当としない。実挙動の適否が必要な指摘は未分類を維持、障害を認定すれば修正前に起票する。\n\nsource/POM/rule/Suppression変更0、反射/4保留型classfile/Root11/native/DB/VM/service/鍵操作0。分類だけで機能PT/並行/native/coverage完了に代替しない。元owner/cost/SS変更は不要、必要な設計不備はSSC等を先行する。終了時に全971の集合一致、分類済/未分類/要是正件数と具体次証拠を返す。全F03/451/190受入は別判定。\n",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4468_F03静的適用性分類仕様.md",
+        "sha256": "aaee2cc3a8b9323bd328328a7f6f337feec0c2208b9a10913b155cb0047df7bb"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36968-current287-pmd971-candidates-v2/manifest.json",
+        "sha256": "0e01b184536537c76b9e6964b5769f05bb30a2d98555d8d0798ec260d1b61d03"
+      }
+    ],
+    "source": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+    "actualUnitSource": "6cc5994cb354226eb4803180f290147332d0ffdc",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.9,
+      "base": 2.4,
+      "high": 4.8
+    },
+    "groupCapPp": 6,
+    "originalRow": {
+      "ID": "WBS-F03/2-2",
+      "元行": "WBS-F03/2",
+      "費目": "C",
+      "主担当": "WBS-F03",
+      "状態": "計画",
+      "作業": "必要かつ既承認の静的品質ゲートの差分を取得",
+      "残pp": "2.4",
+      "着手": "設計352、354・当該source・作業所有・既存成果を照合。元契約の着手依存と個別HOLDを確認",
+      "終了証拠": "既に保全したSSC447静的結果は該当分だけ参照。実施を許可されたmodule単位で結果・不適用を記録。Root11等の保留を保持",
+      "補正根拠": "4.00ppの内訳。元F03/1・既に得たProtocol製造/通常PTの再実施費を含めない",
+      "契約HOLD": "対象6モジュールの静的ゲート・Root11対象の許可",
+      "対象": "6製品moduleと別名義の比較ツール",
+      "範囲": "SS 352、354",
+      "保存証跡": "承認済み設定/規約と当sourceの差、適用範囲、実証結果",
+      "順次": "True",
+      "配賦窓": "2",
+      "楽観pp": "0.9",
+      "慎重pp": "4.8",
+      "要求設計の版差": "PT基準仕様 NK-OPS-001、SS 352、SS 354"
+    },
+    "additionalPricePp": 0,
+    "newAcceptance": 0,
+    "completedOriginalRowPricePp": 0,
+    "originalPmdRule": {
+      "path": "tools/quality/static/pmd.xml",
+      "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+    },
+    "schemaNegativeChecks": 3,
+    "priorEndReplayed": false,
+    "nextCommand": "Read pinned PMD7.28 rule source and current unmatched site closures. Classify original169 DoNotUseThreads by J2EE-container applicability and standalone module/SS owner, retaining all functional/native/QA056 holds. No repeated successful Main477/124/SB/PT."
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T22:23:30.876Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 6,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445752,
+      "remainingPercent": 94
+    },
+    "secondary": null
+  }
+}
