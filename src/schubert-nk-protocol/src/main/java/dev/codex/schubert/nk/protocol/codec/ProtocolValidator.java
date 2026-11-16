@@ -4,14 +4,12 @@ import dev.codex.schubert.nk.protocol.header.CommonHeader;
 import java.util.Objects;
 
 /** Header/JMS/route equality checks. Trace: NK-PRO-002, UI 231 §5, SS 322 §5/§7. */
-public final class ProtocolValidator {
-  public static final int PERSISTENT_DELIVERY_MODE = 2;
-  private static final String PROTOCOL_VERSION = "001";
-
-  private ProtocolValidator() {}
+public interface ProtocolValidator {
+  int PERSISTENT_DELIVERY_MODE = 2;
 
   public static void validateTransport(
       CommonHeader header, TransportMetadata metadata, ExpectedRoute route) {
+    String protocolVersion = "001";
     Objects.requireNonNull(header, "header");
     Objects.requireNonNull(metadata, "metadata");
     Objects.requireNonNull(route, "route");
@@ -21,7 +19,7 @@ public final class ProtocolValidator {
     if (metadata.deliveryMode() != PERSISTENT_DELIVERY_MODE) {
       throw new PermanentProtocolException("transport delivery mode is not persistent");
     }
-    if (!metadata.nkProtocolVersion().equals(PROTOCOL_VERSION)) {
+    if (!metadata.nkProtocolVersion().equals(protocolVersion)) {
       throw new PermanentProtocolException("transport protocol version differs from wire header");
     }
     if (!metadata.nkMessageId().equals(header.messageId())
