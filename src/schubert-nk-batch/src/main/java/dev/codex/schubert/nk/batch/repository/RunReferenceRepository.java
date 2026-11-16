@@ -60,23 +60,13 @@ public final class RunReferenceRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (row != null)
-            try {
-              row.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-            }
+          closeRow(row, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null)
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-          }
+        closeStatement(statement, statementFailure);
       }
       require(!Thread.currentThread().isInterrupted());
       return result;
@@ -85,6 +75,28 @@ public final class RunReferenceRepository {
       // All owned resources have closed. No raw/suppressed provider diagnostics escape.
       throw new BatchRepositoryException();
     }
+  }
+
+  // SSC448/BUG3126: one typed cleanup body, shared by normal and exceptional finally exits.
+  private static void closeRow(@Nullable java.sql.ResultSet row, @Nullable Throwable primary)
+      throws SQLException {
+    if (row != null)
+      try {
+        row.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+      }
+  }
+
+  private static void closeStatement(
+      @Nullable java.sql.PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    if (statement != null)
+      try {
+        statement.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+      }
   }
 
   private static void require(boolean condition) throws SQLDataException {
