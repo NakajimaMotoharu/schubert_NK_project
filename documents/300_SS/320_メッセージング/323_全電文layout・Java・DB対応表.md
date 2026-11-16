@@ -274,3 +274,9 @@ Ownerは検証済actor.userId十進、layout QSBREQ01/version001、target `QUEST
 UI235 §12.2/SS351 §3.3を適用し、Log typeの固定REQUEST一値を必須REQUEST/ACTION二値へ変更する。REQUESTはHTTP_REQUEST_COMPLETED（Action省略補完を維持）、ACTIONはMENU_VIEWED必須に限定し、LOG_SEARCHEDや他ACTIONをこの電文から取り込まない。WebLogEventData・固定field定義・codec・意味検証・API ingestを同じ契約へ合わせる。
 
 既存64 layoutの集合、WLGEVT01 EVENT/INTERNAL、header256/data2080/total2336、全offset/length/type、認証context space、Role/Username表示用途、source_message_id UKを維持する。app_logsは既存category ACTION許容・action64 byte・source UKで収容でき、今回の承認に伴うDDL/index/grant変更は不要。API LOG_SEARCHEDは別の既存app_logs業務監査経路である。独立golden vectorでREQUEST互換・MENU_VIEWED・未知/交差/欠落の拒否を検証する。
+
+## SSC-442 N12非instance validatorと九識別子の値契約（2026-11-16）
+
+BUG3104/YKT2576のN12共通IdValueをpackage-private static-only interfaceへ表現する。非instance責務のfinalclass宣言と空privateconstructorだけを外し、MAXIMUM=999999999999Lとvalidate(long)の全body/固定IllegalArgumentException文言を保持する。interfaceで冗長なfield staticfinalだけを省き暗黙publicstaticfinalとなるが、型自体のpackage-private境界は維持しpackage外へ新型を公開0、private状態やPatternを公開0。static validateもinterfaceで暗黙publicとなる内部flag差を記録し、全Main参照をsource/owner/行で列挙する。九record constructorのinvokestaticはInterfaceMethodrefへ変わるため全九callerを同じRoot/sourceでfreshcompile・実constructor実行し旧class型helperとのbinary混用禁止、全module/release JAR再構築は後続条件。publicProtocolIdと九recordの型/permits/component/constructor/getter/equality/hash/toStringの既ABI・意味を維持する。九IDだけの正値N12であり0許容のcount等generic数値fieldへ適用を広げない。独立new3通常PTは九factory×正常1/123/MAX・異常LongMIN/-1/0/MAX+1/LongMAX、固定診断、全record同値/異値/null/異型/独立signed32 Long hash/既literal表示、全81型対と実HashMap九key保持を確認する。期待MAXをproduction定数から生成0、private反射/空instance/除外/到達不能合格0。Main11/physical11(10Code・ProtocolId Code0自然N/A)/freshRoot/static/current10CRC-initXML/同run3/raw四100を要求する。元120/124やaccepted17全面再資格を行わず、元raw不足PG35880と旧JARは保全・合算0。RD/UI/DIF変更不要のSS内部詳細、SS322323354914をPG前にmainへ反映する。Actual4/Root2/VMDBkeys/native/aru/HOLD・全451/正式/wholeProtocolModule未受入を維持する。
+
+状態:設計確定・main反映前、製造/通常PT3/全module/正式未完。
