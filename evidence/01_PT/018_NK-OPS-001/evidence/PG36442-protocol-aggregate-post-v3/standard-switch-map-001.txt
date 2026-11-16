@@ -1,0 +1,116 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg36434-protocol-aggregate-values-v3/component/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1.class
+  Last modified Nov 16, 2026; size 905 bytes
+  SHA-256 checksum b75fad14ae693285fd2e17dc90e7b68e636e5aaa5d83e4a520cab2df3186acd4
+  Compiled from "MediaDescriptorValidator.java"
+class dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator$1
+  minor version: 0
+  major version: 69
+  flags: (0x1020) ACC_SUPER, ACC_SYNTHETIC
+  this_class: #8                          // dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1
+  super_class: #29                        // java/lang/Object
+  interfaces: 0, fields: 1, methods: 1, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // dev/codex/schubert/nk/protocol/file/MediaType.values:()[Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #2 = Class              #4             // dev/codex/schubert/nk/protocol/file/MediaType
+   #3 = NameAndType        #5:#6          // values:()[Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #4 = Utf8               dev/codex/schubert/nk/protocol/file/MediaType
+   #5 = Utf8               values
+   #6 = Utf8               ()[Ldev/codex/schubert/nk/protocol/file/MediaType;
+   #7 = Fieldref           #8.#9          // dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1.$SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+   #8 = Class              #10            // dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1
+   #9 = NameAndType        #11:#12        // $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+  #10 = Utf8               dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1
+  #11 = Utf8               $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType
+  #12 = Utf8               [I
+  #13 = Fieldref           #2.#14         // dev/codex/schubert/nk/protocol/file/MediaType.AUDIO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #14 = NameAndType        #15:#16        // AUDIO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #15 = Utf8               AUDIO
+  #16 = Utf8               Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #17 = Methodref          #2.#18         // dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+  #18 = NameAndType        #19:#20        // ordinal:()I
+  #19 = Utf8               ordinal
+  #20 = Utf8               ()I
+  #21 = Class              #22            // java/lang/NoSuchFieldError
+  #22 = Utf8               java/lang/NoSuchFieldError
+  #23 = Fieldref           #2.#24         // dev/codex/schubert/nk/protocol/file/MediaType.VIDEO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #24 = NameAndType        #25:#16        // VIDEO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #25 = Utf8               VIDEO
+  #26 = Fieldref           #2.#27         // dev/codex/schubert/nk/protocol/file/MediaType.MUSIC:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #27 = NameAndType        #28:#16        // MUSIC:Ldev/codex/schubert/nk/protocol/file/MediaType;
+  #28 = Utf8               MUSIC
+  #29 = Class              #30            // java/lang/Object
+  #30 = Utf8               java/lang/Object
+  #31 = Utf8               <clinit>
+  #32 = Utf8               ()V
+  #33 = Utf8               Code
+  #34 = Utf8               LineNumberTable
+  #35 = Utf8               LocalVariableTable
+  #36 = Utf8               StackMapTable
+  #37 = Utf8               SourceFile
+  #38 = Utf8               MediaDescriptorValidator.java
+  #39 = Utf8               EnclosingMethod
+  #40 = Class              #41            // dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator
+  #41 = Utf8               dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator
+  #42 = Utf8               NestHost
+  #43 = Utf8               InnerClasses
+{
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=0
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/file/MediaType.values:()[Ldev/codex/schubert/nk/protocol/file/MediaType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/file/MediaType.AUDIO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/file/MediaType.VIDEO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/file/MediaType.MUSIC:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+      LineNumberTable:
+        line 46: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 6
+        frame_type = 87 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+}
+SourceFile: "MediaDescriptorValidator.java"
+EnclosingMethod: #40.#0                 // dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator
+NestHost: class dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator
+InnerClasses:
+  static #8;                              // class dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1

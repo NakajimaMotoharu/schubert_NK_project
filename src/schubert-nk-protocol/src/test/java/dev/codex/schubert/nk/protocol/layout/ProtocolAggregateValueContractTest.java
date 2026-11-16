@@ -76,6 +76,7 @@ class ProtocolAggregateValueContractTest {
             + "], recordFields=[]]");
     assertEquals(new LayoutId(LAYOUT_IDENTIFIER), fields.id());
     assertEquals(1, fields.dataFields().size());
+    assertEquals(first, fields.layout());
     assertEquals(List.of(), fields.recordFields());
     assertThrows(UnsupportedOperationException.class, () -> fields.dataFields().clear());
   }
@@ -95,6 +96,8 @@ class ProtocolAggregateValueContractTest {
             new LayoutId(LAYOUT_IDENTIFIER), values("other"), List.of(values(FIELD_TEXT)));
     assertKeys(first, same, different, "PayloadValues[layoutId=LGNREQ01, recordCount=1]");
     assertEquals(1, first.records().size());
+    assertEquals(new LayoutId(LAYOUT_IDENTIFIER), first.layoutId());
+    assertEquals(values(FIELD_TEXT), first.data());
     assertThrows(UnsupportedOperationException.class, () -> first.records().clear());
     // Retained components are immutable identity values; wrappers are constructed separately.
     PayloadData data = () -> value;
@@ -111,6 +114,7 @@ class ProtocolAggregateValueContractTest {
     assertKeys(
         typed, typedSame, typedDifferent, "TypedPayloadValues[layoutId=LGNREQ01, recordCount=1]");
     assertEquals(value, typed.data().fields());
+    assertEquals(new LayoutId(LAYOUT_IDENTIFIER), typed.layoutId());
     assertEquals(1, typed.records().size());
     assertThrows(UnsupportedOperationException.class, () -> typed.records().clear());
   }
@@ -121,6 +125,16 @@ class ProtocolAggregateValueContractTest {
     CommonHeader same = header(ID_TEXT);
     CommonHeader different = header("123e4567-e89b-12d3-a456-426614174001");
     assertKeys(first, same, different, HEADER_TEXT);
+    assertEquals("SCHBNK01", first.protocolIdentifier());
+    assertEquals(1, first.headerVersion());
+    assertEquals(1, first.layoutVersion());
+    assertEquals(MessageKind.REQUEST, first.messageKind());
+    assertEquals(InteractionKind.SYNCHRONOUS, first.interactionKind());
+    assertEquals(UUID.fromString(ID_TEXT), first.messageId());
+    assertEquals(Instant.parse("2026-09-01T00:00:00Z"), first.sentAt());
+    assertEquals(Optional.empty(), first.authenticationContext());
+    assertEquals(256, first.headerLength());
+    assertEquals(Optional.empty(), first.resultCode());
     FixedPayload immutable = new FixedPayload(new byte[] {0x41, 0x42}, 0, List.of());
     WireMessage<FixedPayload> message = new WireMessage<>(first, immutable);
     WireMessage<FixedPayload> equalMessage = new WireMessage<>(same, immutable);
@@ -134,6 +148,17 @@ class ProtocolAggregateValueContractTest {
             + ", payload=FixedPayload[dataLength=2, recordLength=0, recordCount=0]]");
     assertEquals(immutable, message.payload());
     assertEquals(first, message.header());
+    assertThrows(NullPointerException.class, () -> new WireMessage<FixedPayload>(null, immutable));
+    assertThrows(NullPointerException.class, () -> new WireMessage<FixedPayload>(first, null));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(first, new FixedPayload(new byte[1], 0, List.of())));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(first, new FixedPayload(new byte[2], 1, List.of())));
+    assertThrows(
+        LayoutValidationException.class,
+        () -> new WireMessage<>(first, new FixedPayload(new byte[2], 0, List.of(new byte[0]))));
   }
 
   private static FieldDefinition<String> field(String name) {
