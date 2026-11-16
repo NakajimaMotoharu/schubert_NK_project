@@ -1,0 +1,30 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36010-WIRE-ENUM-CATALOG-WHOLE4",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36004-wire-enum-value4-prepare-v1/manifest.json",
+    "sha256": "6584770fec782f69a2876302a67f77bfb38301f3da6e3d8c8420fd3354ce92e8"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36006-wire-enum-value4-static-v1/manifest.json",
+    "sha256": "45e87e7ff2d9b7811e10c10ff845c3a4c4ea13fb989f43612d797d7849d30871"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "first[0] = null;",
+      "occurrences": 1,
+      "reason": "The array is a caller-owned copy from values(), deliberately corrupted only in this ordinary test to verify that a second copy and subsequent values() retain the immutable catalog. No production null assignment or shared state exists.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnumCatalogValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<WireEnum, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to one ordinary test invocation, is never shared across threads or published, and verifies the actual hash/equality contract for all58 typed singleton keys. There is no concurrent access and no production collection change.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
