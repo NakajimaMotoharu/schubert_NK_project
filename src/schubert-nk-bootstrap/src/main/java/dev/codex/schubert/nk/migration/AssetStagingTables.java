@@ -19,17 +19,36 @@ public final class AssetStagingTables {
   private static final List<Table> TABLES =
       List.of(
           new Table(
-              "audio_files",
-              "id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at",
-              "id"),
+              statement ->
+                  statement.executeUpdate(
+                      "CREATE TEMP TABLE nk_mig_audio_files ON COMMIT DROP AS SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM schubert.audio_files WITH NO DATA"),
+              statement -> statement.executeQuery("SELECT count(*) FROM schubert.audio_files"),
+              statement ->
+                  statement.executeQuery("SELECT count(*) FROM pg_temp.nk_mig_audio_files"),
+              statement ->
+                  statement.executeLargeUpdate(
+                      "INSERT INTO schubert.audio_files (id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at) SELECT id, game_id, storage_relative_path, display_path, file_name, basename, audio_role, container, duration_ms, byte_size, sha256, created_at FROM pg_temp.nk_mig_audio_files ORDER BY id")),
           new Table(
-              "media_assets",
-              "id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at",
-              "id"),
+              statement ->
+                  statement.executeUpdate(
+                      "CREATE TEMP TABLE nk_mig_media_assets ON COMMIT DROP AS SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM schubert.media_assets WITH NO DATA"),
+              statement -> statement.executeQuery("SELECT count(*) FROM schubert.media_assets"),
+              statement ->
+                  statement.executeQuery("SELECT count(*) FROM pg_temp.nk_mig_media_assets"),
+              statement ->
+                  statement.executeLargeUpdate(
+                      "INSERT INTO schubert.media_assets (id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at) SELECT id, logical_id, media_type, title, category, section, storage_relative_path, display_path, file_name, byte_size, sha256, mime_type, parent_logical_id, pair_key, pair_role, display_order, created_at FROM pg_temp.nk_mig_media_assets ORDER BY id")),
           new Table(
-              "entry_audio_links",
-              "entry_id, audio_file_id, game_id, link_type, display_order, created_at",
-              "entry_id, link_type, display_order, audio_file_id"));
+              statement ->
+                  statement.executeUpdate(
+                      "CREATE TEMP TABLE nk_mig_entry_audio_links ON COMMIT DROP AS SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM schubert.entry_audio_links WITH NO DATA"),
+              statement ->
+                  statement.executeQuery("SELECT count(*) FROM schubert.entry_audio_links"),
+              statement ->
+                  statement.executeQuery("SELECT count(*) FROM pg_temp.nk_mig_entry_audio_links"),
+              statement ->
+                  statement.executeLargeUpdate(
+                      "INSERT INTO schubert.entry_audio_links (entry_id, audio_file_id, game_id, link_type, display_order, created_at) SELECT entry_id, audio_file_id, game_id, link_type, display_order, created_at FROM pg_temp.nk_mig_entry_audio_links ORDER BY entry_id, link_type, display_order, audio_file_id")));
 
   public void prepare(@Nullable Connection connection) throws SQLException {
     if (connection == null) throw invalidInput();
@@ -37,17 +56,7 @@ public final class AssetStagingTables {
     @Nullable Throwable primary = null;
     try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
-      for (var table : TABLES) {
-        String sql =
-            "CREATE TEMP TABLE nk_mig_"
-                + table.name
-                + " ON COMMIT DROP AS SELECT "
-                + table.columns
-                + " FROM schubert."
-                + table.name
-                + " WITH NO DATA";
-        if (statement.executeUpdate(sql) != 0) throw invalid();
-      }
+      for (var table : TABLES) if (table.prepareOperation.execute(statement) != 0) throw invalid();
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
       throw failure;
@@ -72,26 +81,14 @@ public final class AssetStagingTables {
     @Nullable Throwable primary = null;
     try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
-      for (var table : TABLES) requireCount(statement, "schubert." + table.name, 0);
+      for (var table : TABLES) requireResult(table.targetCountOperation.execute(statement), 0);
       for (int index = 0; index < TABLES.size(); index++)
-        requireCount(statement, "pg_temp.nk_mig_" + TABLES.get(index).name, expected[index]);
-      for (int index = 0; index < TABLES.size(); index++) {
-        var table = TABLES.get(index);
-        String sql =
-            "INSERT INTO schubert."
-                + table.name
-                + " ("
-                + table.columns
-                + ") SELECT "
-                + table.columns
-                + " FROM pg_temp.nk_mig_"
-                + table.name
-                + " ORDER BY "
-                + table.order;
-        if (statement.executeLargeUpdate(sql) != expected[index]) throw invalid();
-      }
+        requireResult(TABLES.get(index).stageCountOperation.execute(statement), expected[index]);
       for (int index = 0; index < TABLES.size(); index++)
-        requireCount(statement, "schubert." + TABLES.get(index).name, expected[index]);
+        if (TABLES.get(index).insertOperation.execute(statement) != expected[index])
+          throw invalid();
+      for (int index = 0; index < TABLES.size(); index++)
+        requireResult(TABLES.get(index).targetCountOperation.execute(statement), expected[index]);
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
       throw failure;
@@ -113,11 +110,6 @@ public final class AssetStagingTables {
   private static Statement requireStatement(@Nullable Statement created) throws SQLException {
     if (created == null) throw invalid();
     return created;
-  }
-
-  private static void requireCount(Statement statement, String table, long expected)
-      throws SQLException {
-    requireResult(statement.executeQuery("SELECT count(*) FROM " + table), expected);
   }
 
   private static void requireResult(@Nullable ResultSet created, long expected)
@@ -145,16 +137,22 @@ public final class AssetStagingTables {
     return new SQLException("migration asset staging preparation is invalid");
   }
 
-  /** Fixed approved SQL identifiers only, never caller-supplied metadata. */
+  /** SSC450: fixed operations capture no resource and cannot accept external SQL. */
   private static final class Table {
-    private final String name;
-    private final String columns;
-    private final String order;
+    private final SqlMutation prepareOperation;
+    private final SqlQuery targetCountOperation;
+    private final SqlQuery stageCountOperation;
+    private final SqlMutation insertOperation;
 
-    private Table(String name, String columns, String order) {
-      this.name = name;
-      this.columns = columns;
-      this.order = order;
+    private Table(
+        SqlMutation prepareOperation,
+        SqlQuery targetCountOperation,
+        SqlQuery stageCountOperation,
+        SqlMutation insertOperation) {
+      this.prepareOperation = prepareOperation;
+      this.targetCountOperation = targetCountOperation;
+      this.stageCountOperation = stageCountOperation;
+      this.insertOperation = insertOperation;
     }
   }
 
@@ -184,5 +182,15 @@ public final class AssetStagingTables {
     } catch (SQLException | RuntimeException | Error cleanup) {
       if (cleanup != primary) primary.addSuppressed(cleanup);
     }
+  }
+
+  @FunctionalInterface
+  private interface SqlQuery {
+    @Nullable ResultSet execute(Statement statement) throws SQLException;
+  }
+
+  @FunctionalInterface
+  private interface SqlMutation {
+    long execute(Statement statement) throws SQLException;
   }
 }

@@ -29,15 +29,29 @@ public final class MigrationMasterContentVerifier {
   private static final char TYPE_INTEGER = 'I';
   private static final char TYPE_BOOLEAN = 'B';
   private static final char TYPE_TIMESTAMP = 'T';
-  private static final List<String> QUERIES =
+  private static final List<SqlQuery> QUERIES =
       List.of(
-          "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id",
-          "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id",
-          "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id",
-          "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id",
-          "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id",
-          "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\"",
-          "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)");
+          statement ->
+              statement.executeQuery(
+                  "SELECT id,game_id,name,normalized_name,is_protagonist,notes,created_at FROM schubert.speakers ORDER BY id"),
+          statement ->
+              statement.executeQuery(
+                  "SELECT id,game_id,display_order,storage_relative_path,display_path,file_name,section_code,chapter_title,sha256,byte_size,created_at FROM schubert.script_files ORDER BY id"),
+          statement ->
+              statement.executeQuery(
+                  "SELECT id,game_id,script_file_id,display_order,entry_index,line_number,entry_type,speaker_id,speaker_label,body,raw_block,created_at FROM schubert.script_entries ORDER BY id"),
+          statement ->
+              statement.executeQuery(
+                  "SELECT id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,container,duration_ms,byte_size,sha256,created_at FROM schubert.audio_files ORDER BY id"),
+          statement ->
+              statement.executeQuery(
+                  "SELECT id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,parent_logical_id,pair_key,pair_role,display_order,created_at FROM schubert.media_assets ORDER BY id"),
+          statement ->
+              statement.executeQuery(
+                  "SELECT entry_id,audio_file_id,game_id,link_type,display_order,created_at FROM schubert.entry_audio_links ORDER BY entry_id,audio_file_id,link_type COLLATE \"C\""),
+          statement ->
+              statement.executeQuery(
+                  "SELECT count(*) FROM schubert.script_entries WHERE body_search IS DISTINCT FROM pg_catalog.lower(body)"));
   private static final List<String> KINDS =
       List.of(
           "LISSBST",
@@ -60,7 +74,7 @@ public final class MigrationMasterContentVerifier {
       statement.setFetchSize(FETCH_ROWS);
       for (int table = 0; table < QUERIES.size(); table++) {
         var expected = orderedRows(tables.get(table), table);
-        verifyRows(statement.executeQuery(QUERIES.get(table)), expected, KINDS.get(table));
+        verifyRows(QUERIES.get(table).execute(statement), expected, KINDS.get(table));
       }
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
@@ -185,5 +199,10 @@ public final class MigrationMasterContentVerifier {
   @Override
   public String toString() {
     return "MigrationMasterContentVerifier[REDACTED]";
+  }
+
+  @FunctionalInterface
+  private interface SqlQuery {
+    @Nullable ResultSet execute(Statement statement) throws SQLException;
   }
 }

@@ -19,16 +19,42 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class MigrationMasterFinalizer {
   private static final int QUERY_TIMEOUT_SECONDS = 30;
-  private static final List<String> IDENTITY_TABLES =
-      List.of("speakers", "script_files", "script_entries", "audio_files", "media_assets");
-  private static final List<String> ANALYZE_TABLES =
+  private static final List<SqlQuery> MAXIMUM_QUERIES =
       List.of(
-          "speakers",
-          "script_files",
-          "script_entries",
-          "audio_files",
-          "media_assets",
-          "entry_audio_links");
+          statement -> statement.executeQuery("SELECT COALESCE(MAX(id),0) FROM schubert.speakers"),
+          statement ->
+              statement.executeQuery("SELECT COALESCE(MAX(id),0) FROM schubert.script_files"),
+          statement ->
+              statement.executeQuery("SELECT COALESCE(MAX(id),0) FROM schubert.script_entries"),
+          statement ->
+              statement.executeQuery("SELECT COALESCE(MAX(id),0) FROM schubert.audio_files"),
+          statement ->
+              statement.executeQuery("SELECT COALESCE(MAX(id),0) FROM schubert.media_assets"));
+  private static final List<SqlPrepare> SYNCHRONIZERS =
+      List.of(
+          connection ->
+              connection.prepareStatement(
+                  "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.speakers', 'id'), ?, ?)"),
+          connection ->
+              connection.prepareStatement(
+                  "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_files', 'id'), ?, ?)"),
+          connection ->
+              connection.prepareStatement(
+                  "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.script_entries', 'id'), ?, ?)"),
+          connection ->
+              connection.prepareStatement(
+                  "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.audio_files', 'id'), ?, ?)"),
+          connection ->
+              connection.prepareStatement(
+                  "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert.media_assets', 'id'), ?, ?)"));
+  private static final List<SqlMutation> ANALYZE_OPERATIONS =
+      List.of(
+          statement -> statement.executeUpdate("ANALYZE schubert.speakers"),
+          statement -> statement.executeUpdate("ANALYZE schubert.script_files"),
+          statement -> statement.executeUpdate("ANALYZE schubert.script_entries"),
+          statement -> statement.executeUpdate("ANALYZE schubert.audio_files"),
+          statement -> statement.executeUpdate("ANALYZE schubert.media_assets"),
+          statement -> statement.executeUpdate("ANALYZE schubert.entry_audio_links"));
 
   public void finish(@Nullable Connection connection, @Nullable MigrationMasterCopyDataset declared)
       throws SQLException {
@@ -43,16 +69,12 @@ public final class MigrationMasterFinalizer {
               != 0
           || statement.getWarnings() != null) throw invalid();
       // All five checks precede the first nontransactional setval or ANALYZE call.
-      for (int index = 0; index < IDENTITY_TABLES.size(); index++)
-        requireResult(
-            statement.executeQuery(
-                "SELECT COALESCE(MAX(id),0) FROM schubert." + IDENTITY_TABLES.get(index)),
-            expected.get(index));
-      for (int index = 0; index < IDENTITY_TABLES.size(); index++)
-        synchronize(connection, IDENTITY_TABLES.get(index), expected.get(index));
-      for (var table : ANALYZE_TABLES) {
-        if (statement.executeUpdate("ANALYZE schubert." + table) != 0
-            || statement.getWarnings() != null) throw invalid();
+      for (int index = 0; index < MAXIMUM_QUERIES.size(); index++)
+        requireResult(MAXIMUM_QUERIES.get(index).execute(statement), expected.get(index));
+      for (int index = 0; index < MAXIMUM_QUERIES.size(); index++)
+        synchronize(connection, SYNCHRONIZERS.get(index), expected.get(index));
+      for (var operation : ANALYZE_OPERATIONS) {
+        if (operation.execute(statement) != 0 || statement.getWarnings() != null) throw invalid();
       }
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
@@ -89,14 +111,9 @@ public final class MigrationMasterFinalizer {
     return created;
   }
 
-  private static void synchronize(Connection connection, String table, long maximum)
+  private static void synchronize(Connection connection, SqlPrepare operation, long maximum)
       throws SQLException {
-    PreparedStatement statement =
-        requirePrepared(
-            connection.prepareStatement(
-                "SELECT pg_catalog.setval(pg_catalog.pg_get_serial_sequence('schubert."
-                    + table
-                    + "', 'id'), ?, ?)"));
+    PreparedStatement statement = requirePrepared(operation.create(connection));
     @Nullable Throwable primary = null;
     try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
@@ -172,5 +189,20 @@ public final class MigrationMasterFinalizer {
 
   private static SQLException invalid() {
     return new SQLException("migration master finalization is invalid");
+  }
+
+  @FunctionalInterface
+  private interface SqlQuery {
+    @Nullable ResultSet execute(Statement statement) throws SQLException;
+  }
+
+  @FunctionalInterface
+  private interface SqlMutation {
+    long execute(Statement statement) throws SQLException;
+  }
+
+  @FunctionalInterface
+  private interface SqlPrepare {
+    @Nullable PreparedStatement create(Connection connection) throws SQLException;
   }
 }

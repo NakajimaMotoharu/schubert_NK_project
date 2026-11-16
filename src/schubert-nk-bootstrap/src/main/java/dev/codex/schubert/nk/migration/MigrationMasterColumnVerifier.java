@@ -24,14 +24,14 @@ public final class MigrationMasterColumnVerifier {
       "SELECT a.attnum,a.attname,t.typname,pg_catalog.format_type(a.atttypid,a.atttypmod),a.attnotnull,a.attidentity::text,a.attgenerated::text,CASE WHEN a.attnotnull THEN EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS TRUE) AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum] AND (nn.connamespace=c.relnamespace AND nn.conenforced AND nn.convalidated AND NOT nn.condeferrable AND NOT nn.condeferred AND nn.conislocal AND nn.coninhcount=0 AND nn.conparentid=0 AND nn.contypid=0) IS NOT TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_constraint nn WHERE nn.conrelid=c.oid AND nn.contype='n' AND nn.conkey=ARRAY[a.attnum]) END,CASE WHEN a.attidentity='d' THEN (SELECT count(*) FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a'))=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid LEFT JOIN pg_catalog.pg_sequence sq ON sq.seqrelid=sc.oid LEFT JOIN pg_catalog.pg_type st ON st.oid=sq.seqtypid LEFT JOIN pg_catalog.pg_namespace stn ON stn.oid=st.typnamespace WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a') AND (dep.deptype='i' AND sc.relnamespace=c.relnamespace AND sc.relowner=c.relowner AND sc.relpersistence='p' AND stn.nspname='pg_catalog' AND st.typname='int8' AND sq.seqstart=1 AND sq.seqincrement=1 AND sq.seqmin=1 AND sq.seqmax=999999999999 AND sq.seqcache=1 AND NOT sq.seqcycle) IS TRUE) ELSE NOT EXISTS (SELECT 1 FROM pg_catalog.pg_depend dep JOIN pg_catalog.pg_class sc ON sc.oid=dep.objid WHERE dep.classid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.objsubid=0 AND dep.refclassid='pg_catalog.pg_class'::pg_catalog.regclass AND dep.refobjid=c.oid AND dep.refobjsubid=a.attnum AND sc.relkind='S' AND dep.deptype IN ('i','a')) END,pg_catalog.pg_get_userbyid(c.relowner),CASE WHEN (c.relname='speakers' AND a.attname='is_protagonist') OR (c.relname='script_entries' AND a.attname='body_search') THEN a.atthasdef AND (SELECT count(*) FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum)=1 AND EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum AND pg_catalog.pg_get_expr(ad.adbin,ad.adrelid,false)=CASE WHEN c.relname='speakers' THEN 'false' ELSE 'lower(body)' END) ELSE NOT a.atthasdef AND NOT EXISTS (SELECT 1 FROM pg_catalog.pg_attrdef ad WHERE ad.adrelid=c.oid AND ad.adnum=a.attnum) END FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_attribute a ON a.attrelid=c.oid JOIN pg_catalog.pg_type t ON t.oid=a.atttypid JOIN pg_catalog.pg_namespace tn ON tn.oid=t.typnamespace WHERE n.nspname='schubert' AND c.relname='";
   private static final String QUERY_SUFFIX =
       "' AND c.relkind='r' AND c.relpersistence='p' AND tn.nspname='pg_catalog' AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum";
-  private static final List<String> QUERIES =
+  private static final List<SqlQuery> QUERIES =
       List.of(
-          QUERY_PREFIX + "speakers" + QUERY_SUFFIX,
-          QUERY_PREFIX + "script_files" + QUERY_SUFFIX,
-          QUERY_PREFIX + "script_entries" + QUERY_SUFFIX,
-          QUERY_PREFIX + "audio_files" + QUERY_SUFFIX,
-          QUERY_PREFIX + "media_assets" + QUERY_SUFFIX,
-          QUERY_PREFIX + "entry_audio_links" + QUERY_SUFFIX);
+          statement -> statement.executeQuery(QUERY_PREFIX + "speakers" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "script_files" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "script_entries" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "audio_files" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "media_assets" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "entry_audio_links" + QUERY_SUFFIX));
   private static final String IDENTITY_ID_COLUMN = "id\tint8\tbigint\ttrue\td\t";
   private static final String GAME_ID_COLUMN = "game_id\tint2\tsmallint\ttrue\t\t";
   private static final String CREATED_AT_COLUMN =
@@ -120,7 +120,7 @@ public final class MigrationMasterColumnVerifier {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       statement.setFetchSize(FETCH_ROWS);
       for (int table = 0; table < QUERIES.size(); table++) {
-        verifyRows(statement.executeQuery(QUERIES.get(table)), EXPECTED.get(table));
+        verifyRows(QUERIES.get(table).execute(statement), EXPECTED.get(table));
       }
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
@@ -208,5 +208,10 @@ public final class MigrationMasterColumnVerifier {
   @Override
   public String toString() {
     return "MigrationMasterColumnVerifier[REDACTED]";
+  }
+
+  @FunctionalInterface
+  private interface SqlQuery {
+    @Nullable ResultSet execute(Statement statement) throws SQLException;
   }
 }

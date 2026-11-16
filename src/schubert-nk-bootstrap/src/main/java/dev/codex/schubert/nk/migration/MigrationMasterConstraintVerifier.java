@@ -24,14 +24,14 @@ public final class MigrationMasterConstraintVerifier {
       "SELECT (row_number() OVER (ORDER BY k.conname COLLATE \"C\"))::integer,k.conname,k.contype::text,pg_catalog.array_to_string(k.conkey,','),(k.convalidated AND k.conenforced AND NOT k.condeferrable AND NOT k.condeferred AND k.conislocal AND k.coninhcount=0 AND k.conparentid=0 AND k.contypid=0 AND NOT k.conperiod),CASE WHEN k.contype='f' THEN rn.nspname||'.'||rc.relname||'('||pg_catalog.array_to_string(k.confkey,',')||')' ELSE '-' END,CASE WHEN k.contype='f' THEN k.confupdtype::text||'/'||k.confdeltype::text||'/'||k.confmatchtype::text ELSE '-' END FROM pg_catalog.pg_constraint k JOIN pg_catalog.pg_class c ON c.oid=k.conrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_catalog.pg_class rc ON rc.oid=k.confrelid LEFT JOIN pg_catalog.pg_namespace rn ON rn.oid=rc.relnamespace WHERE n.nspname='schubert' AND k.connamespace=n.oid AND c.relname='";
   private static final String QUERY_SUFFIX =
       "' AND c.relkind='r' AND c.relpersistence='p' AND k.contype NOT IN ('n','t') ORDER BY k.conname COLLATE \"C\"";
-  private static final List<String> QUERIES =
+  private static final List<SqlQuery> QUERIES =
       List.of(
-          QUERY_PREFIX + "speakers" + QUERY_SUFFIX,
-          QUERY_PREFIX + "script_files" + QUERY_SUFFIX,
-          QUERY_PREFIX + "script_entries" + QUERY_SUFFIX,
-          QUERY_PREFIX + "audio_files" + QUERY_SUFFIX,
-          QUERY_PREFIX + "media_assets" + QUERY_SUFFIX,
-          QUERY_PREFIX + "entry_audio_links" + QUERY_SUFFIX);
+          statement -> statement.executeQuery(QUERY_PREFIX + "speakers" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "script_files" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "script_entries" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "audio_files" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "media_assets" + QUERY_SUFFIX),
+          statement -> statement.executeQuery(QUERY_PREFIX + "entry_audio_links" + QUERY_SUFFIX));
   private static final List<List<String>> EXPECTED =
       List.of(
           List.of(
@@ -126,7 +126,7 @@ public final class MigrationMasterConstraintVerifier {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       statement.setFetchSize(FETCH_ROWS);
       for (int table = 0; table < QUERIES.size(); table++) {
-        verifyRows(statement.executeQuery(QUERIES.get(table)), EXPECTED.get(table));
+        verifyRows(QUERIES.get(table).execute(statement), EXPECTED.get(table));
       }
     } catch (SQLException | RuntimeException | Error failure) {
       primary = failure;
@@ -207,5 +207,10 @@ public final class MigrationMasterConstraintVerifier {
   @Override
   public String toString() {
     return "MigrationMasterConstraintVerifier[REDACTED]";
+  }
+
+  @FunctionalInterface
+  private interface SqlQuery {
+    @Nullable ResultSet execute(Statement statement) throws SQLException;
   }
 }
