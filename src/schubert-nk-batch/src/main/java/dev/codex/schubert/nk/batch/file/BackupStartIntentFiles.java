@@ -135,10 +135,9 @@ public final class BackupStartIntentFiles implements AutoCloseable {
         morning.service() == RootStartupContext.Service.MORNING
             && issued.state() == StartupPermitRecords.State.ISSUED);
     context.recheck(morning);
+    Path path = Path.of("/run/schubert-nk/startup");
     return ResourceScope.<OwnedTransferDirectory, BackupStartIntentFiles, IOException>handoff(
-        () ->
-            OwnedTransferDirectory.open(
-                LinuxDirectoryCalls.create(), Path.of("/run/schubert-nk/startup")),
+        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), path),
         OwnedTransferDirectory::close,
         directory -> {
           var security = LinuxInodeSecurity.create();
