@@ -1,0 +1,5 @@
+# SnapshotIdentity純AAD値契約通常三結果
+
+Core716595ee/Unitaa95dad4/PG35650 SnapshotIdentity純AAD値契約Main一・独立新全3FES0真正0、製造source不変。PG35628旧publicconfig16の元execと当classのみhash/CRC/実Code13を照合しgeneratedequals/hash2METHOD7I未hitをBUG3097/YKT2569へ修正前起票、元16/工具12再演0。SS3246/35211.2の独立Python struct LP八pieceから102-110-110byte匿名/owner1/MAXの全goldenを生成し、普通のAAD byte配列の全一致/返却独立/変更後再呼出/NN、constructor四NN/8layout3version/N12全境界/factory/四record成分差分/Map/独立signed32 hash-1889273649/固定redactionを確認。PG35652-35653現1physical1CRC-initXML/freshMain1Root/format-CS-PMD-SB全0、35654同singleexec47LINE13METHOD1CLASS14BRANCH230I全miss0。BUG3097/YKT2569当純値対象限定CLOSED、Actual4codec/keyringのclassfile読取-compile-stub-init0/暗号-実鍵-DB-権限操作0、暗号HOLD/広域YKT2431/全P00601未受入維持。追加.35/1.05/3.15限定完了・残397.324/837.386/1643.415、原904.85/SV保持、App237/35897/35831/歴史不成功66、正式1964/53・正本184/625・元17/190・工数null不変。
+
+evidence/01_PT/018_NK-OPS-001/evidence/PG35653-snapshot-identity3-post-join-v1/manifest.json SHA256 6f38b085d5c18babfc4298b4f0ebd5f49b1c90df8c4d7c700098df8d63e77770; evidence/01_PT/018_NK-OPS-001/evidence/PG35654-snapshot-identity3-unfiltered-v1/manifest.json SHA256 074aae60a25bdef8e7904027cc3593121bd3d18a2e590944ec729134f86574ac。
