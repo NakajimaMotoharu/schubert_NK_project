@@ -100,6 +100,8 @@ for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
  if mode=='end':
   d.setdefault('wbs65Results',[]).append(record)
   d['newImplementationAllowed']=bound['newImplementationAllowedByQuota']
+  from pmo_manufacturing_boundary import synchronize_boundary
+  d=synchronize_boundary(d,c,m,event,mode)
  if forecast is not None:d.update(currentWbs65Forecast=forecastRef,currentWbs65RemainingEstimatePp=forecast['revisedRemainingPp'])
  if forecast is not None and 'canonical625Progress' in forecast:d['currentCanonicalWbsProgress']=forecast['canonical625Progress']
  write(S/name,d)
