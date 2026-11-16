@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5580",
+  "groupId": "PGPT-WBS66-SSC448-TYPED-CLOSE-20261117",
+  "values": {
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-16T16:48:04.154Z",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 1,
+        "windowDurationMins": 10080,
+        "resetsAt": 1795445752,
+        "remainingPercent": 99
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "7d829cdd3ce2e214c596df533dc58904ad116ad4d58cbd4f91d8f2de92d8e05e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-16T16:48:04.154Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 1,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752,
+          "remainingPercent": 99
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-16T16:45:10.463542+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "source": "7123bb3bc8319cfadea41e5be38a75e825e5c14c",
+    "actualUnitSource": "341a07a959e4369efd147b0335b11a6cf6e59714",
+    "run": "PG36774-SSC448-PURE8",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-03"
+    ],
+    "workCategory": "SELECTED_TEST",
+    "workAttributionKind": "REWORK",
+    "groupCapPp": 3,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.75,
+      "high": 2.25
+    },
+    "groupBoundary": "END",
+    "managementPlan": "WBS66-58-20261117-SHORTTERM",
+    "managementWorkIds": [
+      "WBS-P004-03/2"
+    ],
+    "supplementaryQualificationOriginalStartPricePp": 1.2,
+    "supplementaryReworkStartPricePp": 0.75,
+    "completedSupplementaryPricePp": 1.95,
+    "originalRowPricePp": 0.423,
+    "originalRowComplete": false,
+    "originalScopeCompletionPp": 0,
+    "acceptedDelta": {
+      "closedIds": [],
+      "reopenedIds": [],
+      "criteriaSatisfied": [],
+      "evidenceRefs": []
+    },
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "sourceEvidenceRefs": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36780-ssc448-public-abi-and-return-v1/manifest.json",
+        "sha256": "02cb3e4683eb9763de464a8e85e6b2b476a7b48a0ca9288b6920d605d0c45d78"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36778-ssc448-pure8-raw-post-v1/manifest.json",
+        "sha256": "19a2f4f0a9da08ad822f3bfe630496ae6a6e19942b52019ed4f999d6b0bce1a8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36782-ssc448-testid-horizontal-current-v1/manifest.json",
+        "sha256": "24903172d3d5b3f377d8cd44d9c444e12cb14fac338a40867ae48b2222f154b7"
+      }
+    ],
+    "technicalMeasurementDelta": {
+      "newDefinitions": 8,
+      "currentRunPassed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "currentTargetRaw": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 230
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 59
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 18
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "samePublicApi": true,
+      "other6BytesEqual": true,
+      "old16Replayed": 0,
+      "oldExecUnion": false,
+      "wholeSevenRaw100": false
+    },
+    "criterionReductions": [
+      "WBS-P004-03 contract: current same-source DAO literal SQL/UTC/null/failure/close ownership independent8 unit now present",
+      "WBS-P004-03 quality: DAO raw5branch4instruction deficit corrected, whole6Code/24branch covered and static/ABI7 physical proof",
+      "WBS-P004-03 scope: one DAO of five owned artifacts is qualified locally; actual DB and other file/native operations and F02/F03 dependencies remain pending"
+    ],
+    "bugsClosed": [
+      "BUG3125",
+      "BUG3126",
+      "BUG3127",
+      "BUG3128"
+    ],
+    "horizontalClosed": [
+      "YKT2598",
+      "YKT2599"
+    ],
+    "horizontalOpen": [
+      "YKT2597"
+    ],
+    "nextCommand": "Publish SSC448 limited914 result to main; commit/push feature source/tests/evidence. Continue WBS-F03/2-2 six-module source-only format/Checkstyle within existing2.4pp; keep QA056 pending only Main-classfile generation/reading. Establish exact F02/F03 gate scope from original contract: gate-operation proof is distinct from each product owner raw/functional closure, do not impose a circular all-product acceptance dependency. Then permitted current haruka baseline metadata and original item-specific evidence."
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-16T16:48:04.154Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 1,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445752,
+      "remainingPercent": 99
+    },
+    "secondary": null
+  },
+  "forecast": {
+    "wbs66AsIssuedDetailPp": "1099.386",
+    "addedDiscoveryAndReworkPp": "1.950",
+    "completedIssuedRowPricePp": "4.300",
+    "completedAddedPricePp": "1.950",
+    "totalCompletedTaskPricePp": "6.250",
+    "remainingDetailBasePp": "1095.086",
+    "oldWbs65ForecastFrozen": true,
+    "conditionalCapacityRecovery1_2NotCompleted": true,
+    "effortCompletionRate": null,
+    "originalAcceptanceNetDelta": 0,
+    "actualDedicatedPp": null,
+    "tokenTotals": null
+  },
+  "nextCommand": "Publish SSC448 limited914 result to main; commit/push feature source/tests/evidence. Continue WBS-F03/2-2 six-module source-only format/Checkstyle within existing2.4pp; keep QA056 pending only Main-classfile generation/reading. Establish exact F02/F03 gate scope from original contract: gate-operation proof is distinct from each product owner raw/functional closure, do not impose a circular all-product acceptance dependency. Then permitted current haruka baseline metadata and original item-specific evidence."
+}
