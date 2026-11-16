@@ -187,7 +187,7 @@ final class IndependentNamedFieldOracle {
     org.junit.jupiter.api.Assertions.assertFalse(constructed.equals(null));
     org.junit.jupiter.api.Assertions.assertFalse(constructed.equals("other-type"));
     Map<Object, String> wireIndex = new HashMap<>();
-    wireIndex.put(input, "wire-fields");
+    wireIndex.put(new FieldValueSet(input), "wire-fields");
     assertEquals("wire-fields", wireIndex.get(fieldsOf(decoded)));
     // PT-PRO-NAMED-RECORD-COLLECTION-END
     for (int n = 0; n < fields.size(); n++) {

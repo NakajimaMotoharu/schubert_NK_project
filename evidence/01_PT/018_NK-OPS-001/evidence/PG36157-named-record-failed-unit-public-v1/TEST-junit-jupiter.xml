@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="6" skipped="0" failures="1" errors="0" time="0.246" hostname="npc1" timestamp="2026-11-16T12:39:00">
+<properties><property name="file.encoding" value="UTF-8" /><property name="java.version" value="25.0.4" /><property name="os.arch" value="amd64" /><property name="os.name" value="Linux" /><property name="user.timezone" value="Asia/Tokyo" /></properties><testcase name="explicitCatalogMatchesIndependentSs323NamedTypeFixture()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.065">
+</testcase>
+<testcase name="allNamedTypesHaveIndependentDirectionalFieldMeaning()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.024">
+<failure message="expected: &lt;wire-fields&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;wire-fields&gt; but was: &lt;null&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at dev.codex.schubert.nk.protocol.layout.IndependentNamedFieldOracle.verifyType(IndependentNamedFieldOracle.java:191)
+	at dev.codex.schubert.nk.protocol.layout.IndependentNamedFieldOracle.verifyAll(IndependentNamedFieldOracle.java:125)
+	at dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest.allNamedTypesHaveIndependentDirectionalFieldMeaning(PayloadTypeCatalogTest.java:31)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+</failure>
+</testcase>
+<testcase name="typedModelsAndHelpersRejectNullMissingAndWrongKinds()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.06">
+</testcase>
+<testcase name="optionalFieldsSupportUnsetAndPresentValuesWithoutLosingWireNames()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0">
+</testcase>
+<testcase name="allSixtyFourLayoutsRoundTripThroughSixtyNineExplicitNamedTypes()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.055">
+</testcase>
+<testcase name="catalogRejectsUnknownLayoutsAndMismatchedDataOrRecordTypes()" classname="dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalogTest" time="0.003">
+</testcase>
+</testsuite>

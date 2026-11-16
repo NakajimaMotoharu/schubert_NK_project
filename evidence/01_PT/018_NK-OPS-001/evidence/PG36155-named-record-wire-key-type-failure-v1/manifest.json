@@ -1,0 +1,25 @@
+{
+  "actualExit": 1,
+  "unitSource": "77449dd6b53ac071b632e2416d0058b33a8cb645",
+  "productionCoreMain": "de22e9c0210bd82702795a7d5d0d96b6e5577128",
+  "unit": "PG36150",
+  "tests": 6,
+  "failed": 1,
+  "success": 5,
+  "expectationLiteral": "wire-fields",
+  "actualLookup": null,
+  "cause": "New test used Map as stored key but queried FieldValueSet; these are intentionally different public value types",
+  "sourcePins": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java",
+      "sha256": "640667e57222c0be0a351bd8dffcd187aef90899020e57c178cd805e102b4956"
+    },
+    {
+      "path": "tools/quality/pgpt_protocol_public_oracle.py",
+      "sha256": "61e600f36434fb48c0f9f5f2390b270400e6d27c9885d151dd2ed259fd429055"
+    }
+  ],
+  "originalOraclesChanged": false,
+  "productionDefect": false,
+  "productReplayAuthorizedOnlyAfterFixtureChange": true
+}
