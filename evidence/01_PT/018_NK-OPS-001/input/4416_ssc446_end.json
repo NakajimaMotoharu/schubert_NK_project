@@ -1,0 +1,124 @@
+{
+  "groupId": "PGPT-WBS65-SSC446-FIELD-PADDING-DISPATCH-20261116",
+  "recordPath": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2457_WBS65SSC446七classraw88限定終了.json",
+  "category": "IMPLEMENTATION",
+  "kind": "REWORK",
+  "scope": "BUG3111/YKT2583のFieldDefinition compact constructor内のpadding選択だけを詳細化する。wireTypeは先行Objects.requireNonNullでnonnullを確立、承認済みWireTypeはTEXT/NUMERIC/BOOLEANの三定数に閉じる。TEXTならSPACE_RIGHT、NUMERICならZERO_LEFT、それ以外の現三値中BOOLEANならNONEという対応を、final local expectedへのif/else-if/else代入で明示する。三入力の対応・不一致時の既存診断・全null/範囲/end検査・両publicconstructor/recordcomponent/全API・独立UI TSV/期待値を変更しない。新enum定数追加はこの既定処理を無審査で流用せずwire型/設計/codec/全対応試験の変更対象とする。javac enum switch由来の理論上のunknown default/補助mapを作る必要がない責務へ整理するもので、列挙値の不正注入や反射、coverage除外、未実行を到達不能PASSに変換しない。型kindはrecordのままで公開ABI javap完全一致、変化Mainはこの一sourceのみ。元switch全byteを逆展開formatted完全一致で証明、他164Main/既全Test/五TSV不変。全165Mainを当sourceでfresh組立、physicalは元176からFieldDefinition$1のみ非生成となる175、親以外174class byte不変を独立照合。新JUnit定義0、現集約4＋必要原14＝同18を当sourceで一回必要再実行し現七class raw全line/method/class/branch100と全physical不足を別保存する。四mapを除外せず三残mapをrawで測定、全module/451/native/正式受入へ昇格しない。RD/UI/DIF変更不要、SSC設計を先にmain反映後PG。全HOLD/枠停止条件/正式1964-53/正本184-625/工数null維持。",
+  "oracleRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4436_SSC446_field三値padding・通常十八仕様.md",
+      "sha256": "d183139398a6ce0d67536887e7e9477e99075936930e0f10922f1ba3b1e3b8ce"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36500-ssc446-field-padding-design-only-v1/design-only-main-patch.json",
+      "sha256": "41dc249c4457ade0b6999a31857f596e229fca4b02030a0cfb93c58932ae747c"
+    }
+  ],
+  "wbsLeafIds": [
+    "WBS-P001-02"
+  ],
+  "implementationArtifactPaths": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java"
+  ],
+  "plannedArtifactOwners": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": "WBS-P001-02"
+  },
+  "implementationOwnerLeafBindings": {
+    "WBS-P001-02": [
+      "WBS-P001-02"
+    ]
+  },
+  "implementationCanonicalPlans": [
+    {
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "d47b3fb683834948e3cf6d1a4f6c65a2035308ffd187838bfcd23ef3ce5b6ed2"
+    },
+    {
+      "path": "documents/400_PGPT/470_PMO/484_WBSコスト枠・細分化.json",
+      "sha256": "7e931d6139d6cd17be240ca9d88a2677e0b7d8828be482b546df1ca00d06e02f"
+    }
+  ],
+  "source": "62f5dc24bb93e414171ae824d052ea7c2e004740",
+  "run": "PG36520-SSC446-FIELD-PADDING-18",
+  "estimate": {
+    "low": 0.25,
+    "base": 0.75,
+    "high": 2.25
+  },
+  "capPp": 2.5,
+  "workIds": [
+    "SSC446_FIELD_PADDING_DISPATCH"
+  ],
+  "forecastRef": {
+    "path": "documents/400_PGPT/470_PMO/600_通常PGPT_20261106/2456_WBS65予実・SSC446七classraw88限定版775.json",
+    "sha256": "a8de961c7b7520312d7a93d76059ec079349443ac589d1ce136b8339c924bb02"
+  },
+  "nextCommand": "Publish only limited914status via ordinary sparse mainPR, commit/push. Continue source review/price coherent remaining six utility constructor responsibilities; preserve cached-state ownership (TypedFieldValues OPTIONAL_ID, JstWireTimestamp formatter/zone/pattern), no meaningless instance or public privatecache exposure. Reuse original whole tests only when actual source changes require it; no same18/3/145 confirmation replay. Other branch methods/three compiler maps remain open; bundle necessary full-module regression after coherent actual fixes rather than repeated diagnosis. AllHOLD/quota<=10/unavailable preservationstop, next hourly15:14:59.",
+  "sourceAfter": "a188e6683c8dcc5c81af43ecaeb9fc3b8f8f4ebd",
+  "manifestPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG36572-ssc446-field-padding-quality-join-v2/manifest.json",
+  "manifestSha256": "7632626ed569e7782b29c8393dcb6dca6908b3f6b9b601d2ba52544f9687cbfc",
+  "terminalAtUTC": "2026-11-16T05:49:30.756636+00:00",
+  "outcome": "SSC446_SEVEN_VALUE_CLASSES_RAW88_ALL_FOUR100",
+  "technical": {
+    "productionCoreMain": "a188e6683c8dcc5c81af43ecaeb9fc3b8f8f4ebd",
+    "actualUnitSource": "d9e28056046ea423080dfb9558f56adeb9a8122b",
+    "tests": 18,
+    "newDefinitions": 0,
+    "necessaryPriorDefinitions": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "mainSources": 165,
+    "physicalClasses": 175,
+    "codeClasses": 162,
+    "positiveCrc": 25,
+    "targetClasses": 7,
+    "rawCounters": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1073
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 128
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 183
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 152
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 88
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 7
+      }
+    },
+    "parentCodeMethods": 17,
+    "pureDispatchBranches": 4,
+    "publicRecordAbiExact": true,
+    "other174PhysicalBytesSame": true,
+    "removedOnlyCompilerMap": "dev/codex/schubert/nk/protocol/layout/FieldDefinition$1.class",
+    "allOther164MainTestsTsvUnchanged": true,
+    "wholeOriginalBodyDiagnosticsInverseByteExact": true,
+    "rawFour100": true,
+    "staticApplicableUnclassified0": true,
+    "pmdRaw": 5,
+    "concretePmdAnchors": 5,
+    "previous47daCompileFailurePreserved": true,
+    "oldPlanned36520ProductNotRun": true,
+    "original1936Or1964NotRequalified": true,
+    "wholeModuleOr451OrNativeAccepted": false,
+    "oldExecUnion": false,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortRate": null,
+    "actualExclusivePp": null
+  },
+  "checkpointText": "Corea188e668/Unitd9e28056/PG36560 SSC446 field padding三値dispatchの同18PT FES0真正0、fresh165Main/175physical/162Code/25positiveCRC-initXML/静的適用未分類0。PR405/main66121613＋補足PR406/main43bdbd35でSS322323354914先反映、三nonnull WireType判定をprivate pure expectedPaddingForへ・final localを戻り値初期化、TEXT SPACE_RIGHT/NUMERIC ZERO_LEFT/BOOLEAN NONEと全null/range/end/diagnosticを保持。元switchへ逆展開全byte完全一致/他164Main・全Test・五TSV不変。36570公開record ABI完全一致、親以外174classbyte完全一致、FieldDefinition$1だけ実非生成で除外0、残三mapは全175rawへ実測。36564当七値class raw183LINE88METHOD7CLASS128BRANCH1073I全miss0、追加purehelper四branch全hit、旧FieldDefinition一branch不足を実是正。全175の未実行/不足counterは保持しModule/451へ昇格0。旧47da/36514 compile失敗BUG3123は元source/logを保全、Root flags不変/private純関数へ是正して新source資格、JDK単体不具合は断定0・旧予定36520製品未実行。ABI工具prepare schema誤認BUG3124は元失敗36567保持/実config+全inputのCore gitbyte照合へ、Root/PT再演0で公開ABI回収。両BUG/YKT2595..2596は限定CLOSED、3111/2583global・六utility/残branch/三compiler mapはOPEN。開始.25/.75/2.25 cap2.5維持・追加scope限定完了、残397.324/837.386/1643.415・原904.85/SV保持、App252/36330/36263/歴史不成功67（mixedsource/必要再試験含みuniqueではない）、正式1964/53・正本184/625・元17/190・工数null・全HOLD維持。"
+}
