@@ -1,0 +1,321 @@
+Compiled from "FixedNativeCoverageCheckpoint.java"
+public final class dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint {
+  static final java.lang.String VERSION;
+
+  static final int MAX_BYTES;
+
+  private final java.lang.Object lock;
+
+  private final dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile profile;
+
+  private final dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Agent agent;
+
+  private final dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Export export;
+
+  private final java.util.EnumSet<dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Point> attempted;
+
+  private boolean terminalCompleted;
+
+  dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint(dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile, dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Agent, dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Export);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class java/lang/Object
+         8: dup
+         9: invokespecial #1                  // Method java/lang/Object."<init>":()V
+        12: putfield      #7                  // Field lock:Ljava/lang/Object;
+        15: aload_0
+        16: ldc           #13                 // class dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point
+        18: invokestatic  #15                 // Method java/util/EnumSet.noneOf:(Ljava/lang/Class;)Ljava/util/EnumSet;
+        21: putfield      #21                 // Field attempted:Ljava/util/EnumSet;
+        24: aload_1
+        25: ifnull        36
+        28: aload_2
+        29: ifnull        36
+        32: aload_3
+        33: ifnonnull     46
+        36: new           #25                 // class java/lang/IllegalArgumentException
+        39: dup
+        40: ldc           #27                 // String fixed PT checkpoint dependencies required
+        42: invokespecial #29                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        45: athrow
+        46: aload_0
+        47: aload_1
+        48: putfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+        51: aload_0
+        52: aload_2
+        53: putfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+        56: aload_0
+        57: aload_3
+        58: putfield      #40                 // Field export:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Export;
+        61: return
+
+  public static java.util.Optional<dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint> fromCurrentJvm(dev.codex.schubert.nk.storage.ServiceConfigFiles$Service, dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile$Phase, java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokestatic  #44                 // Method java/lang/management/ManagementFactory.getRuntimeMXBean:()Ljava/lang/management/RuntimeMXBean;
+         6: invokeinterface #50,  1           // InterfaceMethod java/lang/management/RuntimeMXBean.getInputArguments:()Ljava/util/List;
+        11: invokestatic  #56                 // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.parse:(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile$Phase;Ljava/lang/String;Ljava/util/List;)Ljava/util/Optional;
+        14: astore_3
+        15: goto          24
+        18: astore        4
+        20: invokestatic  #62                 // Method unavailable:()Ljava/io/IOException;
+        23: athrow
+        24: aload_3
+        25: invokestatic  #66                 // Method open:(Ljava/util/Optional;)Ljava/util/Optional;
+        28: areturn
+      Exception table:
+         from    to  target type
+             0    15    18   Class java/lang/IllegalArgumentException
+
+  public static java.util.Optional<dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint> fromCurrentTerminalJvm(dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile$TerminalRole, java.lang.String) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #44                 // Method java/lang/management/ManagementFactory.getRuntimeMXBean:()Ljava/lang/management/RuntimeMXBean;
+         5: invokeinterface #50,  1           // InterfaceMethod java/lang/management/RuntimeMXBean.getInputArguments:()Ljava/util/List;
+        10: invokestatic  #70                 // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.parseTerminal:(Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile$TerminalRole;Ljava/lang/String;Ljava/util/List;)Ljava/util/Optional;
+        13: astore_2
+        14: goto          22
+        17: astore_3
+        18: invokestatic  #62                 // Method unavailable:()Ljava/io/IOException;
+        21: athrow
+        22: aload_2
+        23: invokestatic  #66                 // Method open:(Ljava/util/Optional;)Ljava/util/Optional;
+        26: areturn
+      Exception table:
+         from    to  target type
+             0    14    17   Class java/lang/IllegalArgumentException
+
+  private static java.util.Optional<dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint> open(java.util.Optional<dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile>) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: invokevirtual #74                 // Method java/util/Optional.isEmpty:()Z
+         4: ifeq          11
+         7: invokestatic  #80                 // Method java/util/Optional.empty:()Ljava/util/Optional;
+        10: areturn
+        11: invokestatic  #84                 // Method dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.verifyPinnedAgent:()V
+        14: aload_0
+        15: invokevirtual #89                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        18: checkcast     #57                 // class dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile
+        21: astore_1
+        22: new           #8                  // class dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint
+        25: dup
+        26: aload_1
+        27: new           #93                 // class dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent
+        30: dup
+        31: invokespecial #95                 // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent."<init>":()V
+        34: aload_1
+        35: invokedynamic #96,  0             // InvokeDynamic #0:write:(Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;)Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Export;
+        40: invokespecial #100                // Method "<init>":(Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Export;)V
+        43: invokestatic  #103                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        46: areturn
+
+  public dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile ordinaryProfile();
+    Code:
+         0: aload_0
+         1: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+         4: invokevirtual #107                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.forOrdinary:()Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+         7: areturn
+
+  public void capture(dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint$Point) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field lock:Ljava/lang/Object;
+         4: dup
+         5: astore_2
+         6: monitorenter
+         7: aload_1
+         8: ifnull        48
+        11: aload_1
+        12: getstatic     #111                // Field dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point.BEFORE_EXEC:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point;
+        15: if_acmpne     31
+        18: aload_0
+        19: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+        22: invokevirtual #115                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.phase:()Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile$Phase;
+        25: getstatic     #119                // Field dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile$Phase.ROOT:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile$Phase;
+        28: if_acmpne     48
+        31: aload_1
+        32: getstatic     #125                // Field dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point.CLOSING:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point;
+        35: if_acmpne     58
+        38: aload_0
+        39: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+        42: invokevirtual #128                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.supportsClosing:()Z
+        45: ifne          58
+        48: new           #25                 // class java/lang/IllegalArgumentException
+        51: dup
+        52: ldc           #131                // String fixed PT checkpoint point required
+        54: invokespecial #29                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        57: athrow
+        58: aload_0
+        59: getfield      #21                 // Field attempted:Ljava/util/EnumSet;
+        62: aload_1
+        63: invokevirtual #133                // Method java/util/EnumSet.add:(Ljava/lang/Object;)Z
+        66: ifne          73
+        69: invokestatic  #62                 // Method unavailable:()Ljava/io/IOException;
+        72: athrow
+        73: aload_1
+        74: getstatic     #125                // Field dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point.CLOSING:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point;
+        77: if_acmpne     87
+        80: aload_0
+        81: getfield      #137                // Field terminalCompleted:Z
+        84: invokestatic  #141                // Method require:(Z)V
+        87: ldc           #145                // String 0.8.15.202606040825
+        89: aload_0
+        90: getfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+        93: invokeinterface #147,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent.version:()Ljava/lang/String;
+        98: invokevirtual #153                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       101: ifeq          130
+       104: aload_0
+       105: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+       108: invokevirtual #158                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.sessionId:()Ljava/lang/String;
+       111: aload_0
+       112: getfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+       115: invokeinterface #161,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent.session:()Ljava/lang/String;
+       120: invokevirtual #153                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       123: ifeq          130
+       126: iconst_1
+       127: goto          131
+       130: iconst_0
+       131: invokestatic  #141                // Method require:(Z)V
+       134: aload_0
+       135: getfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+       138: invokeinterface #164,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent.executionDataWithoutReset:()[B
+       143: astore_3
+       144: aload_3
+       145: ifnull        161
+       148: aload_3
+       149: arraylength
+       150: iconst_5
+       151: if_icmplt     161
+       154: aload_3
+       155: arraylength
+       156: ldc           #168                // int 16777216
+       158: if_icmple     165
+       161: invokestatic  #62                 // Method unavailable:()Ljava/io/IOException;
+       164: athrow
+       165: aload_3
+       166: iconst_0
+       167: baload
+       168: iconst_1
+       169: if_icmpne     208
+       172: aload_3
+       173: iconst_1
+       174: baload
+       175: bipush        -64
+       177: if_icmpne     208
+       180: aload_3
+       181: iconst_2
+       182: baload
+       183: bipush        -64
+       185: if_icmpne     208
+       188: aload_3
+       189: iconst_3
+       190: baload
+       191: bipush        16
+       193: if_icmpne     208
+       196: aload_3
+       197: iconst_4
+       198: baload
+       199: bipush        7
+       201: if_icmpne     208
+       204: iconst_1
+       205: goto          209
+       208: iconst_0
+       209: invokestatic  #141                // Method require:(Z)V
+       212: ldc           #145                // String 0.8.15.202606040825
+       214: aload_0
+       215: getfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+       218: invokeinterface #147,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent.version:()Ljava/lang/String;
+       223: invokevirtual #153                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       226: ifeq          255
+       229: aload_0
+       230: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+       233: invokevirtual #158                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.sessionId:()Ljava/lang/String;
+       236: aload_0
+       237: getfield      #36                 // Field agent:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent;
+       240: invokeinterface #161,  1          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Agent.session:()Ljava/lang/String;
+       245: invokevirtual #153                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       248: ifeq          255
+       251: iconst_1
+       252: goto          256
+       255: iconst_0
+       256: invokestatic  #141                // Method require:(Z)V
+       259: aload_1
+       260: invokevirtual #169                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point.ordinal:()I
+       263: tableswitch   { // 0 to 2
+                       0: 298
+                       1: 303
+                       2: 308
+                 default: 288
+            }
+       288: new           #173                // class java/lang/MatchException
+       291: dup
+       292: aconst_null
+       293: aconst_null
+       294: invokespecial #175                // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       297: athrow
+       298: ldc           #178                // String .before-exec.exec
+       300: goto          310
+       303: ldc           #180                // String .terminal.exec
+       305: goto          310
+       308: ldc           #182                // String .closing.exec
+       310: astore        4
+       312: aload_0
+       313: getfield      #40                 // Field export:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Export;
+       316: aload_0
+       317: getfield      #32                 // Field profile:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;
+       320: invokevirtual #184                // Method dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.invocation:()Ljava/lang/String;
+       323: aload         4
+       325: invokedynamic #187,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       330: aload_3
+       331: invokevirtual #191                // Method "[B".clone:()Ljava/lang/Object;
+       334: checkcast     #192                // class "[B"
+       337: invokeinterface #196,  3          // InterfaceMethod dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Export.write:(Ljava/lang/String;[B)V
+       342: aload_1
+       343: getstatic     #201                // Field dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point.TERMINAL:Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$Point;
+       346: if_acmpne     354
+       349: aload_0
+       350: iconst_1
+       351: putfield      #137                // Field terminalCompleted:Z
+       354: aload_2
+       355: monitorexit
+       356: goto          366
+       359: astore        5
+       361: aload_2
+       362: monitorexit
+       363: aload         5
+       365: athrow
+       366: return
+      Exception table:
+         from    to  target type
+             7   356   359   any
+           359   363   359   any
+
+  static void require(boolean) throws java.io.IOException;
+    Code:
+         0: iload_0
+         1: ifne          8
+         4: invokestatic  #62                 // Method unavailable:()Ljava/io/IOException;
+         7: athrow
+         8: return
+
+  static java.io.IOException unavailable();
+    Code:
+         0: new           #204                // class java/io/IOException
+         3: dup
+         4: ldc           #206                // String fixed PT native capture unavailable
+         6: invokespecial #208                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  private static void lambda$open$0(dev.codex.schubert.nk.bootstrap.FixedNativeCoverageProfile, java.lang.String, byte[]) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokestatic  #209                // Method dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.export:(Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile;Ljava/lang/String;[B)V
+         6: return
+}

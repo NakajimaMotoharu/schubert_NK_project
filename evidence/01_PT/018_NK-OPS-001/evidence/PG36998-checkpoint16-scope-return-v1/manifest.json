@@ -1,0 +1,231 @@
+{
+  "actualExit": 0,
+  "source": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "actualUnitSource": "1cd9e93c7b84c2eea2b4ec13364c0bf8c5249dd6",
+  "run": "PG36994-CHECKPOINT-PUBLIC16",
+  "terminalAtUTC": "2026-11-16T21:25:04.365154+00:00",
+  "tests": 16,
+  "success": 16,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36996-checkpoint16-independent-post-v1/manifest.json",
+    "sha256": "41b8a6478394dfde4bd93b3c7c72e2a8ddba0d46d80c24cbb11de1ab172af84e"
+  },
+  "mainRootCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36956-backup-path-four-main-compile-v1/manifest.json",
+    "sha256": "c505de415e7db4196ee5e0c01f66a3785aa859b67d5472a81d3b6eea1975a440"
+  },
+  "fullMainSpotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36958-backup-path-fresh-sibling-spotbugs-v1/manifest.json",
+    "sha256": "882b05c4c62fbc384cefced1f087d52a50321d6c49de90d3b20331ceb54361cc"
+  },
+  "mainPmdSite": {
+    "raw": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "beginline": "117",
+      "endline": "117",
+      "begincolumn": "5",
+      "endcolumn": "17",
+      "rule": "AvoidSynchronizedStatement",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "FixedNativeCoverageCheckpoint",
+      "method": "capture",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+      "priority": "3",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    "sourceSha256": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112",
+    "disposition": "NOT_APPLICABLE",
+    "reason": "SS354 SSC193: private unexposed monitor atomically consumes each point attempt, checks the same profile/version/session and performs the one export. No external monitor, wait/notify or container synchronization protocol. Original32-task fixture proves exactly one winner/data/export in this current16 run. PMD recommends ReentrantLock but this existing direct-Java private monitor is intentional; no runtime performance or broader native completion is inferred."
+  },
+  "testStaticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36992-checkpoint16-static-admission-v1/manifest.json",
+    "sha256": "df544103a0fe8027fc4cd23b92fb93f20d0d11b9d1dc47c1ace8dfa6e61a67fb"
+  },
+  "original12OracleSemanticsInverse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36974-checkpoint-original12-style-before-v1/equivalence.json",
+    "sha256": "02be4b1d5f4c1443a3d7e4c2c82ed8d1c2f28b0638a1da8b6d66ebd49d210dae"
+  },
+  "qualifiedChangedFatalCatalogs": [
+    {
+      "className": "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent",
+      "name": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent$Classes;Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent$Sources;Ldev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent$Invocation;)V",
+      "access": 0,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 91
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 14
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 20
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent",
+      "name": "string",
+      "descriptor": "(Ljava/lang/reflect/Method;)Ljava/lang/String;",
+      "access": 2,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 25
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint$PublicAgent",
+      "name": "executionDataWithoutReset",
+      "descriptor": "()[B",
+      "access": 1,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 31
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 2
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "changedCatalogRawAllMiss0": true,
+  "targetSourcePhysical": 8,
+  "trueNoCodePhysical": 5,
+  "all280HelperCountersRetained": true,
+  "targetRaw": {
+    "LINE": {
+      "missed": 7,
+      "covered": 94
+    },
+    "METHOD": {
+      "missed": 3,
+      "covered": 20
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 3
+    },
+    "BRANCH": {
+      "missed": 2,
+      "covered": 74
+    },
+    "INSTRUCTION": {
+      "missed": 38,
+      "covered": 468
+    }
+  },
+  "targetRawFour100": false,
+  "manualExclusions": [],
+  "oldExecCombined": false,
+  "remainingNative": {
+    "methods": [
+      "PublicAgent default noarg normal-constructor",
+      "PublicAgent.lambda$new$1",
+      "Checkpoint.lambda$open$0"
+    ],
+    "branch": "open active profile branch",
+    "status": "HOLD_NOT_RUN_NOT_PASS"
+  },
+  "remainingCompilerBranch": {
+    "method": "capture",
+    "reason": "javac exhaustive enum tableswitch has MatchException default",
+    "actualRawMissed": 1,
+    "status": "OPEN_REQUIRES_PG_OR_APPLICABLE_EVIDENCE_NOT_EXCLUDED"
+  },
+  "ordinaryClosingAndPointValueOfNowCovered": true,
+  "bytecodeMeasurement": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+      "-p",
+      "-c",
+      "-classpath",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg36990-checkpoint16-prepare-v1/component",
+      "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint"
+    ],
+    "actualExit": 0,
+    "outputSha256": "21c6a7d96c9ab635b2133d0e80d6b5ebe13efe1edf03a52571fe5dedee70b8d1",
+    "productInitialization": 0
+  },
+  "original14ExactFivePhysicalAndThreeTestSource": true,
+  "original14Proof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15278-profile-terminal-fourteen-post-v1/manifest.json",
+    "sha256": "0dde7b7d8ff705d5466522d43072e16f294838a5ec4cbfdc144c7f5e33af79f5"
+  },
+  "original14Reexecuted": 0,
+  "original14RuntimeHelperChangedNeedsExplicitBinding": true,
+  "original14NotAddedToCurrent16": true,
+  "bug2803": "THREE_CATALOGS_LOCALLY_RETESTED",
+  "bug2804": "ACTUAL_NATIVE_FILE_HOLD_UNRESOLVED",
+  "bugs3141to3143": "CORRECTED_AND_RETESTED",
+  "bug3144": "NORMAL_CLOSING_PARTIAL_FIXED_COMPILER_NATIVE_REMAIN_OPEN",
+  "allNineChildCriteriaAccepted": false,
+  "endingDependencies": [
+    "WBS-F02",
+    "WBS-F03"
+  ],
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortCompletionRate": null
+}
