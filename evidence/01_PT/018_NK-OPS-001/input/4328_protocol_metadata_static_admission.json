@@ -1,0 +1,54 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36220-PROTOCOL-METADATA-VALUES-WHOLE6",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36214-protocol-metadata-value-prepare-v1/manifest.json",
+    "sha256": "08eb04a1facc35d621bbc65a1bd9e745d592bbdf3bf2239065ed0100112b8e75"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36216-protocol-metadata-value-static-v1/manifest.json",
+    "sha256": "7140d357b173281b34dfcc98b8bd6e852053b636bb210393bd08a2a3409ff6c4"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<FieldValue.Numeric, String> collisions = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> typed = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(original.equals(null));",
+      "occurrences": 1,
+      "reason": "The assertion directly tests the public immutable value equality contract returns false for null. This is intentional negative test input, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<Object, String> values = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "values[0] = null;",
+      "occurrences": 1,
+      "reason": "A caller-owned values() copy is deliberately corrupted to prove subsequent arrays retain all canonical enum constants. No production field or shared state is assigned null.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

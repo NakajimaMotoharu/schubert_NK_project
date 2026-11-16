@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4325_protocol_metadata_value_profile.json",
+    "sha256": "6e3caf5ac7a5b00c8aa3ba54f5584223f902e474b21f43d2d055974b4094857f"
+  },
+  "inputHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java": "204ca119d0ad946294d03e3fb5d151f3c5ba541e97fe72dce960f024ae72cf50",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java": "e67fe4d4ac4c38b5056b45ba60f481c8d8e77dc354dfe1ea543d220da302d8bb",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java": "222046f9576699922b9e7e0692ace81c43a345f3a7fc1b11c009143b7271b378",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java": "22ac1353bdc960042885401477ad0685849d126d2ecd6786e4ba488a9cb76e6b",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": "6f50d333720aaedf58b714be1f84c298297ae80398e8b8f7afb0ec7341d98041",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.java": "cd23948f05d7b3b3b6b24b8c39f6d7efd6682b61903658d0bcff016b17036b13",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.java": "b55789756f4af3ec1480a1dd7ec123d037efd0d0208a3d9699f06285b1e1b275",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java": "015dc9712c2154698e963852e784983f9e2e2a7de7d6a755f965043616c3fb57",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/BrokerTopologyTest.java": "96e98d5d674681c90c863b7150c9fcfdb17c69e89d63f9462569daa004ab2630",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36214-protocol-metadata-value-prepare-v1/manifest.json",
+    "sha256": "08eb04a1facc35d621bbc65a1bd9e745d592bbdf3bf2239065ed0100112b8e75"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36216-protocol-metadata-value-static-v1/manifest.json",
+    "sha256": "7140d357b173281b34dfcc98b8bd6e852053b636bb210393bd08a2a3409ff6c4"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4328_protocol_metadata_static_admission.json",
+    "sha256": "b6501d40dd7fee4cf71921b43455fa7f44a5e13dbd4be68b766000d241d99f16"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "79",
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "124",
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "165",
+      "reason": "The assertion directly tests the public immutable value equality contract returns false for null. This is intentional negative test input, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "167",
+      "reason": "This map is confined to the one ordinary test invocation, never shared or published, and checks actual immutable-key hash/equality retrieval. The two specific maps validate independent Long MIN/MAX hash collision and different value types sharing hash200; the helper map verifies equal independently constructed keys. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/ProtocolMetadataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "190",
+      "reason": "A caller-owned values() copy is deliberately corrupted to prove subsequent arrays retain all canonical enum constants. No production field or shared state is assigned null.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
