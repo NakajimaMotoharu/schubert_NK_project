@@ -236,7 +236,7 @@ def expected_cases(c):
     cases = []
     for item in c['testSources']:
         text = (R / item['path']).read_text()
-        methods = re.findall(r'@Test\s*(?:@Timeout\([^\n]+\)\s*)?void (\w+)\s*\(', text)
+        methods = re.findall(r'@Test[ \t]*(?://[^\r\n]*)?\s*(?:@Timeout\([^\n]+\)\s*)?void (\w+)\s*\(', text)
         require(len(methods) == item['tests'], 'whole Test method count changed')
         package = re.search(r'package ([A-Za-z0-9_.]+);', text).group(1)
         cases.extend(dict(classname=package + '.' + Path(item['path']).stem, name=n + '()') for n in methods)

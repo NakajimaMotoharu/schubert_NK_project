@@ -1,0 +1,38 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36080-SSC443-PATH-LEXICAL5",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36068-ssc443-path-prepare-v1/manifest.json",
+    "sha256": "2f203e55344261ef7e7ccd01c1053747f2148eb1cd3c47876d348be0d0923f3b"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36070-ssc443-path-static-v1/manifest.json",
+    "sha256": "771e60a264ee5986e32e57fb831e546ec9c283be031198043581dcef10bd5220"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(value.equals(null));",
+      "occurrences": 2,
+      "reason": "Each explicit assertion verifies Object.equals(null) returns false for one of the two public immutable path types. This is the independent negative contract being tested, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<RelativePath, String> stored = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is method-confined, never shared or published, and tests actual immutable key hash/equality lookup by an independently constructed equal value. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<DisplayPath, String> stored = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "This map is method-confined, never shared or published, and tests actual immutable key hash/equality lookup by an independently constructed equal value. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

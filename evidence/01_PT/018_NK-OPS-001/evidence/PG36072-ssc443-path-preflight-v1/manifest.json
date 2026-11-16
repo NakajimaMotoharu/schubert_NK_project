@@ -1,0 +1,74 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4263_ssc443_path_profile.json",
+    "sha256": "1e4920617b24a1b29bb7e008fd09821273e465b4780713ef37ec678630267e51"
+  },
+  "inputHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java": "27ba161b9590a968ee70c8fa4a9983927b415a3fbeefc6e0ba019af33e4884e2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java": "3a4c04729dd6c232f34157dc765180cf1643d7cb8011f51068907e5d5fd5ddf9",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java": "e26f1483749b0426f67df22df854e513f61ecb08569d5616ccd5569ded441d02",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java": "bd014a144a380896902161419a7fa3140d96ccb3e2b6482f8cb6ec4cbac4efa3",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathUnicodeBoundaryTest.java": "6f320895b8c8f765fccef35e2b387d13b143001cb9f92c2f2fea59be176216bb",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36068-ssc443-path-prepare-v1/manifest.json",
+    "sha256": "2f203e55344261ef7e7ccd01c1053747f2148eb1cd3c47876d348be0d0923f3b"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36070-ssc443-path-static-v1/manifest.json",
+    "sha256": "771e60a264ee5986e32e57fb831e546ec9c283be031198043581dcef10bd5220"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4268_ssc443_path_static_admission.json",
+    "sha256": "873dc32a5d945b74aeb23410170917ac6e67daa4783fb926a210cda45a28bedb"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "33",
+      "reason": "Each explicit assertion verifies Object.equals(null) returns false for one of the two public immutable path types. This is the independent negative contract being tested, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "109",
+      "reason": "Each explicit assertion verifies Object.equals(null) returns false for one of the two public immutable path types. This is the independent negative contract being tested, not production null comparison logic.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "37",
+      "reason": "This map is method-confined, never shared or published, and tests actual immutable key hash/equality lookup by an independently constructed equal value. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/PathLexicalValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "113",
+      "reason": "This map is method-confined, never shared or published, and tests actual immutable key hash/equality lookup by an independently constructed equal value. There is no concurrent access.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
