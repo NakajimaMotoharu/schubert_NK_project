@@ -1,0 +1,36 @@
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	87ddf065baea68a9	true	1	49	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRepositoryException	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/BatchRun	7ebe79e62602f09c	true	15	65585	INSTRUCTION:14:38	BRANCH:3:3	LINE:2:8	COMPLEXITY:6:3	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	<init>	(Ljava/util/UUID;Ljava/time/Instant;)V	1	INSTRUCTION:5:32	BRANCH:3:3	LINE:1:7	COMPLEXITY:3:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	id	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/BatchRun	cutoff	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	b46b91ac90f03557	true	9	1536	INSTRUCTION:0:25	BRANCH:0:8	LINE:0:6	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/JdbcResourceFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	9	INSTRUCTION:0:25	BRANCH:0:8	LINE:0:6	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	a4e594d79a3a8444	true	69	49	INSTRUCTION:4:236	BRANCH:5:27	LINE:0:55	COMPLEXITY:5:15	METHOD:0:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	<init>	(Ljava/sql/Connection;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	read	(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ldev/codex/schubert/nk/batch/repository/RunReferences;	1	INSTRUCTION:4:210	BRANCH:5:23	LINE:0:48	COMPLEXITY:5:10	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	require	(Z)V	10	INSTRUCTION:0:8	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferenceRepository	present	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/batch/repository/RunReferences	9718b54b7a517e38	true	20	65585	INSTRUCTION:7:55	BRANCH:0:14	LINE:0:7	COMPLEXITY:2:14	METHOD:2:7	CLASS:0:1
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	<init>	(ZZZZ)V	1	INSTRUCTION:0:28	BRANCH:0:8	LINE:0:4	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	anyReference	()Z	1	INSTRUCTION:0:13	BRANCH:0:6	LINE:0:1	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasBatchHistory	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasInboxProgress	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	hasLogProgress	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/batch/repository/RunReferences	identityConsistent	()Z	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException$Reason	37214ecd32efe326	false	8	16433	INSTRUCTION:50:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:5:0	METHOD:5:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	4106	INSTRUCTION:15:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	8	INSTRUCTION:21:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException	02ab1f0a35f7f9e5	true	21	49	INSTRUCTION:14:64	BRANCH:2:10	LINE:4:16	COMPLEXITY:4:5	METHOD:2:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	1	INSTRUCTION:10:0	BRANCH:0:0	LINE:3:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:1:64	BRANCH:2:10	LINE:0:16	COMPLEXITY:2:5	METHOD:0:1	CLASS:0:0

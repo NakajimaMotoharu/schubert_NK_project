@@ -1,0 +1,20 @@
+{
+  "actualExit": 0,
+  "baseMain": "96fe18b10404f0501271698d01426de9dd567151",
+  "ssc": "SSC448",
+  "sourceBefore": "e4794ddf45487268883334d0f8773d89bd47dcba",
+  "unitBefore": "8129b888490d9ed769b1d505d099796be0a41e7e",
+  "designAppendByPath": {
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md": "\n## SSC-448 参照DAOのtyped JDBC close責務の局所一意化（2026-11-17）\n\nBUG3126/YKT2597。上位RD/UI変更不要。RunReferenceRepository.readのResultSet/PreparedStatement closeを、同Repository内private static closeRow(@Nullable ResultSet,@Nullable Throwable) throws SQLExceptionとcloseStatement(@Nullable PreparedStatement,@Nullable Throwable) throws SQLExceptionへそのまま抽出し、各finallyから一回呼ぶ。各helperは取得済資源がnonnullの時だけ直接close、SQL/RuntimeException/Error secondaryを捕捉して既JdbcResourceFailures.replace(primary,secondary)がtrueなら同一secondaryをthrowする。JdbcResourceFailuresは順位だけを判定し、JDBC closeやtransactionを所有しない。helperへの抽出はnull判定と順位判定を同じCode一箇所で実行できるようにし、javac finally複製のraw branchを測定から除外しない。try本体/primary記録/row→statement順・一回close・成功return前の完了・SQLだけ固定化/未知同一性・borrowed Connection非変更・全SQL/UTC bind/queryTimeout5/投影/NULL/interrupt/publicAPIを不変とする。\n\n独立メモリ内JDBC ProxyのRRF-PURE-001..008は元8定義/全literal期待/SQL呼出順/境界/null/資源counter/32独立fixtureを保持し、row/statement各closeについてSQL/RTE/Error secondaryとSQL/RTE/Error primaryの全組合せを観測する。実DB元8件はHOLDのまま変更・実行免除0。Main一classのfreshRoot/全静的適用・未分類0、同sourceの8PTと未filter四counter100、現公開API一致/他6physical byte一致を確認する。default100や旧exec合算で代用しない。共有型のraw未実行は明示し、当Repository限定完了を元P00403五artifact/F02F03/全451/正式へ昇格しない。他Repositoryの横展開はYKT2597で未完のまま別検証する。品質/権限/HOLD/モデル/元費用・cap条件は不変更。状態:設計確定・main反映前、PG/PT未実施。\n",
+    "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md": "\n## SSC-448 参照DAO typed close一意化\n\nBUG3126/YKT2597。上位RD/UI変更不要。RunReferenceRepository.readのResultSet/PreparedStatement closeを、同Repository内private static closeRow(@Nullable ResultSet,@Nullable Throwable) throws SQLExceptionとcloseStatement(@Nullable PreparedStatement,@Nullable Throwable) throws SQLExceptionへそのまま抽出し、各finallyから一回呼ぶ。各helperは取得済資源がnonnullの時だけ直接close、SQL/RuntimeException/Error secondaryを捕捉して既JdbcResourceFailures.replace(primary,secondary)がtrueなら同一secondaryをthrowする。JdbcResourceFailuresは順位だけを判定し、JDBC closeやtransactionを所有しない。helperへの抽出はnull判定と順位判定を同じCode一箇所で実行できるようにし、javac finally複製のraw branchを測定から除外しない。try本体/primary記録/row→statement順・一回close・成功return前の完了・SQLだけ固定化/未知同一性・borrowed Connection非変更・全SQL/UTC bind/queryTimeout5/投影/NULL/interrupt/publicAPIを不変とする。\n\n独立メモリ内JDBC ProxyのRRF-PURE-001..008は元8定義/全literal期待/SQL呼出順/境界/null/資源counter/32独立fixtureを保持し、row/statement各closeについてSQL/RTE/Error secondaryとSQL/RTE/Error primaryの全組合せを観測する。実DB元8件はHOLDのまま変更・実行免除0。Main一classのfreshRoot/全静的適用・未分類0、同sourceの8PTと未filter四counter100、現公開API一致/他6physical byte一致を確認する。default100や旧exec合算で代用しない。共有型のraw未実行は明示し、当Repository限定完了を元P00403五artifact/F02F03/全451/正式へ昇格しない。他Repositoryの横展開はYKT2597で未完のまま別検証する。品質/権限/HOLD/モデル/元費用・cap条件は不変更。状態:設計確定・main反映前、PG/PT未実施。\n",
+    "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md": "\n## SSC-448 参照DAO純JDBCとraw必須分岐\n\n同sourceのRRF-PURE-001..008はSS332SSC448を正とし、未filter全Codeの四counterを必須判定する。SQL全文/UTC独立literal・全nullable/transaction/interrupt・各呼出例外・row/statementのSQL/RTE/Error primary/secondary全組合せ・owned各一回close・borrowedConnection不変・有限32独立fixtureを照合。原実DB8件はHOLDのまま、実DBlock/visibility/全P00403/F02F03の終了依存は別。default filter/raw両値と未hitを保存し、default100でraw不足を隠さない。共有6classも全物理集合に残し、当DAO100を全closure100へ換算0。元8定義/期待不変、公開API/他6byteと全Root静的を確認する。\n"
+  },
+  "productionNotChangedBeforeDesign": true,
+  "followupEstimatePp": {
+    "low": 0.25,
+    "base": 0.75,
+    "high": 2.25
+  },
+  "followupCapPp": 3,
+  "originalGroupEstimateUnchanged": true
+}

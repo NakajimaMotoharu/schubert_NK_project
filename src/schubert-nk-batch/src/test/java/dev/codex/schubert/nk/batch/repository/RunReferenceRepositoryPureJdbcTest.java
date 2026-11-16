@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-DAT-001; DAT009/OPS009/UI251/SS332; RRF-PURE-001..008; no database or native calls. */
 final class RunReferenceRepositoryPureJdbcTest {
+  private static final String STATEMENT_CLOSE = "statement.close";
   private static final String ROW_GET_OBJECT = "row.getObject";
   private static final String ROW_NEXT = "row.next";
   private static final String STATEMENT_BIND = "statement.setObject";
@@ -75,7 +76,7 @@ final class RunReferenceRepositoryPureJdbcTest {
               ROW_GET_OBJECT,
               ROW_NEXT,
               ROW_CLOSE,
-              "statement.close"),
+              STATEMENT_CLOSE),
           fixture.events);
       fixture.closed();
     }
@@ -168,30 +169,32 @@ final class RunReferenceRepositoryPureJdbcTest {
         fixture.closed();
       }
     }
-    for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
-      for (int secondaryKind = 0; secondaryKind < 3; secondaryKind++) {
-        var fixture = new Fixture();
-        Throwable primary = failure(primaryKind);
-        Throwable secondary = failure(secondaryKind);
-        fixture.fail(ROW_GET_OBJECT, 2, primary);
-        fixture.fail(ROW_CLOSE, 1, secondary);
-        Throwable result = assertThrows(Throwable.class, () -> fixture.read(RUN));
-        if (primaryKind == 0 && secondaryKind == 0) {
-          assertRedacted(result);
-        } else if (primaryKind == 0) {
-          assertSame(secondary, result);
-        } else {
-          assertSame(primary, result);
-          assertEquals(1, result.getSuppressed().length);
-          assertRedacted(result.getSuppressed()[0]);
+    for (String closeScope : List.of(ROW_CLOSE, STATEMENT_CLOSE)) {
+      for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
+        for (int secondaryKind = 0; secondaryKind < 3; secondaryKind++) {
+          var fixture = new Fixture();
+          Throwable primary = failure(primaryKind);
+          Throwable secondary = failure(secondaryKind);
+          fixture.fail(ROW_GET_OBJECT, 2, primary);
+          fixture.fail(closeScope, 1, secondary);
+          Throwable result = assertThrows(Throwable.class, () -> fixture.read(RUN));
+          if (primaryKind == 0 && secondaryKind == 0) {
+            assertRedacted(result);
+          } else if (primaryKind == 0) {
+            assertSame(secondary, result);
+          } else {
+            assertSame(primary, result);
+            assertEquals(1, result.getSuppressed().length);
+            assertRedacted(result.getSuppressed()[0]);
+          }
+          fixture.closed();
         }
-        fixture.closed();
       }
     }
     var both = new Fixture();
     var rowFatal = new AssertionError("first fatal");
     both.fail(ROW_CLOSE, 1, rowFatal);
-    both.fail("statement.close", 1, new SQLException("secondary provider"));
+    both.fail(STATEMENT_CLOSE, 1, new SQLException("secondary provider"));
     assertSame(rowFatal, assertThrows(AssertionError.class, () -> both.read(RUN)));
     assertEquals(1, rowFatal.getSuppressed().length);
     assertRedacted(rowFatal.getSuppressed()[0]);
@@ -252,7 +255,7 @@ final class RunReferenceRepositoryPureJdbcTest {
         new Position(ROW_GET_OBJECT, 4),
         new Position(ROW_NEXT, 2),
         new Position(ROW_CLOSE, 1),
-        new Position("statement.close", 1));
+        new Position(STATEMENT_CLOSE, 1));
   }
 
   private static Throwable failure(int kind) {
