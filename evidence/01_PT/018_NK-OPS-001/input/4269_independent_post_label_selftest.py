@@ -1,0 +1,9 @@
+"""Exercise the separate independent post regex only; do not rerun the successful five application tests."""
+from pathlib import Path
+import ast,hashlib,json,re
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';p=r/'tools/quality/pgpt_closed_host_post_v2.py';text=p.read_text();nodes=[n for n in ast.walk(ast.parse(text)) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and isinstance(n.func.value,ast.Name) and n.func.value.id=='re' and n.func.attr=='finditer' and isinstance(n.args[0],ast.Constant) and str(n.args[0].value).startswith('@Test')];assert len(nodes)==1;pattern=nodes[0].args[0].value;checks=[]
+for body,names in [('@Test\nvoid normal() {}',['normal']),('@Test // ID\nvoid labeled() {}',['labeled']),('@Test // void fake()\nvoid actual() {}',['actual']),('@Test // ID\n@Timeout(1)\nvoid timed() {}',['timed'])]:
+ assert [m.group(1) for m in re.finditer(pattern,body)]==names;checks.append(dict(expected=names,passed=True))
+for name,count in [('PathLexicalValueContractTest',3),('PathUnicodeBoundaryTest',2),('WireEnumCatalogValueContractTest',4)]:
+ path=r/('src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/'+name+'.java');names=[m.group(1) for m in re.finditer(pattern,path.read_text())];assert len(names)==len(set(names))==count;checks.append(dict(fixture=name,exactCount=count,passed=True))
+o=b/'evidence/PG36085-independent-post-label-selftest-v1';o.mkdir();m=dict(actualExit=0,toolChecks=len(checks),checks=checks,postToolSha256=hashlib.sha256(p.read_bytes()).hexdigest(),parserNotSharedWithProfile=True,wholeCountGuardUnchanged=True,applicationTestsExecuted=0,productClassDefinitionOrInitialization=0);(o/'manifest.json').open('x').write(json.dumps(m,indent=2)+'\n');print(json.dumps(dict(actualExit=0,toolChecks=len(checks),applicationTestsExecuted=0)))
