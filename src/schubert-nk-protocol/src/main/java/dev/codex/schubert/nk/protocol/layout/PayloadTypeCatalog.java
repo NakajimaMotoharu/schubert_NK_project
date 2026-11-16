@@ -78,297 +78,210 @@ import java.util.function.Function;
 
 /** Explicit SS 323 layout-to-named-type registry; runtime field-order reflection is forbidden. */
 public final class PayloadTypeCatalog {
-  private static final Map<String, Mapping> STANDARD =
+  private static final PayloadTypeCatalog INSTANCE = new PayloadTypeCatalog();
+
+  private final Map<String, Mapping> standard =
       Map.ofEntries(
-          Map.entry(
-              "LGNREQ01", mapping("LGNREQ01", LoginRequestData.class, LoginRequestData::from)),
-          Map.entry(
-              "LGNRSP01", mapping("LGNRSP01", LoginResponseData.class, LoginResponseData::from)),
-          Map.entry(
-              "LOGREQ01", mapping("LOGREQ01", LogoutRequestData.class, LogoutRequestData::from)),
-          Map.entry(
-              "LOGRSP01", mapping("LOGRSP01", LogoutResponseData.class, LogoutResponseData::from)),
-          Map.entry(
-              "GAMREQ01",
-              mapping("GAMREQ01", GameListRequestData.class, GameListRequestData::from)),
+          Map.entry("LGNREQ01", mapping(LoginRequestData.class, LoginRequestData::from)),
+          Map.entry("LGNRSP01", mapping(LoginResponseData.class, LoginResponseData::from)),
+          Map.entry("LOGREQ01", mapping(LogoutRequestData.class, LogoutRequestData::from)),
+          Map.entry("LOGRSP01", mapping(LogoutResponseData.class, LogoutResponseData::from)),
+          Map.entry("GAMREQ01", mapping(GameListRequestData.class, GameListRequestData::from)),
           Map.entry(
               "GAMRSP01",
               mapping(
-                  "GAMRSP01",
                   GameListResponseData.class,
                   GameListResponseData::from,
                   GameRecord.class,
                   GameRecord::from)),
           Map.entry(
-              "SPKREQ01",
-              mapping("SPKREQ01", SpeakerListRequestData.class, SpeakerListRequestData::from)),
+              "SPKREQ01", mapping(SpeakerListRequestData.class, SpeakerListRequestData::from)),
           Map.entry(
               "SPKRSP01",
               mapping(
-                  "SPKRSP01",
                   SpeakerListResponseData.class,
                   SpeakerListResponseData::from,
                   SpeakerRecord.class,
                   SpeakerRecord::from)),
           Map.entry(
               "SRCREQ01",
-              mapping(
-                  "SRCREQ01", ScenarioSearchRequestData.class, ScenarioSearchRequestData::from)),
+              mapping(ScenarioSearchRequestData.class, ScenarioSearchRequestData::from)),
           Map.entry(
               "SRCRSP01",
               mapping(
-                  "SRCRSP01",
                   PagedResponseData.class,
                   PagedResponseData::from,
                   ScenarioSearchRecord.class,
                   ScenarioSearchRecord::from)),
-          Map.entry(
-              "RTEREQ01",
-              mapping("RTEREQ01", RouteListRequestData.class, RouteListRequestData::from)),
+          Map.entry("RTEREQ01", mapping(RouteListRequestData.class, RouteListRequestData::from)),
           Map.entry(
               "RTERSP01",
               mapping(
-                  "RTERSP01",
                   RouteListResponseData.class,
                   RouteListResponseData::from,
                   RouteRecord.class,
                   RouteRecord::from)),
           Map.entry(
               "SCFREQ01",
-              mapping(
-                  "SCFREQ01",
-                  ScenarioFileListRequestData.class,
-                  ScenarioFileListRequestData::from)),
+              mapping(ScenarioFileListRequestData.class, ScenarioFileListRequestData::from)),
           Map.entry(
               "SCFRSP01",
               mapping(
-                  "SCFRSP01",
                   ScenarioFileListResponseData.class,
                   ScenarioFileListResponseData::from,
                   ScenarioFileRecord.class,
                   ScenarioFileRecord::from)),
           Map.entry(
               "SCNREQ01",
-              mapping(
-                  "SCNREQ01", ScenarioDetailRequestData.class, ScenarioDetailRequestData::from)),
+              mapping(ScenarioDetailRequestData.class, ScenarioDetailRequestData::from)),
           Map.entry(
               "SCNRSP01",
               mapping(
-                  "SCNRSP01",
                   ScenarioDetailResponseData.class,
                   ScenarioDetailResponseData::from,
                   ScenarioEntryRecord.class,
                   ScenarioEntryRecord::from)),
           Map.entry(
               "AUDREQ01",
-              mapping(
-                  "AUDREQ01", AudioDescriptorRequestData.class, AudioDescriptorRequestData::from)),
+              mapping(AudioDescriptorRequestData.class, AudioDescriptorRequestData::from)),
+          Map.entry("AUDRSP01", mapping(MediaDescriptorData.class, MediaDescriptorData::from)),
           Map.entry(
-              "AUDRSP01",
-              mapping("AUDRSP01", MediaDescriptorData.class, MediaDescriptorData::from)),
-          Map.entry(
-              "ANMREQ01",
-              mapping("ANMREQ01", AnimationMenuRequestData.class, AnimationMenuRequestData::from)),
+              "ANMREQ01", mapping(AnimationMenuRequestData.class, AnimationMenuRequestData::from)),
           Map.entry(
               "ANMRSP01",
-              mapping(
-                  "ANMRSP01", AnimationMenuResponseData.class, AnimationMenuResponseData::from)),
+              mapping(AnimationMenuResponseData.class, AnimationMenuResponseData::from)),
           Map.entry(
-              "ANLREQ01",
-              mapping("ANLREQ01", AnimationListRequestData.class, AnimationListRequestData::from)),
+              "ANLREQ01", mapping(AnimationListRequestData.class, AnimationListRequestData::from)),
           Map.entry(
               "ANLRSP01",
               mapping(
-                  "ANLRSP01",
                   AnimationListResponseData.class,
                   AnimationListResponseData::from,
                   AnimationRecord.class,
                   AnimationRecord::from)),
           Map.entry(
               "VIDREQ01",
-              mapping(
-                  "VIDREQ01", VideoDescriptorRequestData.class, VideoDescriptorRequestData::from)),
+              mapping(VideoDescriptorRequestData.class, VideoDescriptorRequestData::from)),
           Map.entry(
               "VIDRSP01",
-              mapping(
-                  "VIDRSP01",
-                  VideoDescriptorResponseData.class,
-                  VideoDescriptorResponseData::from)),
+              mapping(VideoDescriptorResponseData.class, VideoDescriptorResponseData::from)),
           Map.entry(
-              "MCTREQ01",
-              mapping("MCTREQ01", MusicCategoryRequestData.class, MusicCategoryRequestData::from)),
+              "MCTREQ01", mapping(MusicCategoryRequestData.class, MusicCategoryRequestData::from)),
           Map.entry(
               "MCTRSP01",
               mapping(
-                  "MCTRSP01",
                   MusicCategoryResponseData.class,
                   MusicCategoryResponseData::from,
                   MusicCategoryRecord.class,
                   MusicCategoryRecord::from)),
           Map.entry(
-              "MCSREQ01",
-              mapping("MCSREQ01", MusicSectionRequestData.class, MusicSectionRequestData::from)),
+              "MCSREQ01", mapping(MusicSectionRequestData.class, MusicSectionRequestData::from)),
           Map.entry(
               "MCSRSP01",
               mapping(
-                  "MCSRSP01",
                   MusicSectionResponseData.class,
                   MusicSectionResponseData::from,
                   MusicSectionRecord.class,
                   MusicSectionRecord::from)),
-          Map.entry(
-              "MTRREQ01",
-              mapping("MTRREQ01", MusicTrackRequestData.class, MusicTrackRequestData::from)),
+          Map.entry("MTRREQ01", mapping(MusicTrackRequestData.class, MusicTrackRequestData::from)),
           Map.entry(
               "MTRRSP01",
               mapping(
-                  "MTRRSP01",
                   MusicTrackResponseData.class,
                   MusicTrackResponseData::from,
                   MusicTrackRecord.class,
                   MusicTrackRecord::from)),
           Map.entry(
               "MEDREQ01",
-              mapping(
-                  "MEDREQ01", MusicDescriptorRequestData.class, MusicDescriptorRequestData::from)),
-          Map.entry(
-              "MEDRSP01",
-              mapping("MEDRSP01", MediaDescriptorData.class, MediaDescriptorData::from)),
-          Map.entry(
-              "LGSREQ01",
-              mapping("LGSREQ01", LogSearchRequestData.class, LogSearchRequestData::from)),
+              mapping(MusicDescriptorRequestData.class, MusicDescriptorRequestData::from)),
+          Map.entry("MEDRSP01", mapping(MediaDescriptorData.class, MediaDescriptorData::from)),
+          Map.entry("LGSREQ01", mapping(LogSearchRequestData.class, LogSearchRequestData::from)),
           Map.entry(
               "LGSRSP01",
               mapping(
-                  "LGSRSP01",
                   PagedResponseData.class,
                   PagedResponseData::from,
                   LogRecord.class,
                   LogRecord::from)),
-          Map.entry(
-              "USRREQ01",
-              mapping("USRREQ01", UserSearchRequestData.class, UserSearchRequestData::from)),
+          Map.entry("USRREQ01", mapping(UserSearchRequestData.class, UserSearchRequestData::from)),
           Map.entry(
               "USRRSP01",
               mapping(
-                  "USRRSP01",
                   PagedResponseData.class,
                   PagedResponseData::from,
                   UserRecord.class,
                   UserRecord::from)),
+          Map.entry("UCRREQ01", mapping(UserCreateRequestData.class, UserCreateRequestData::from)),
           Map.entry(
-              "UCRREQ01",
-              mapping("UCRREQ01", UserCreateRequestData.class, UserCreateRequestData::from)),
+              "UCRRSP01", mapping(UserMutationResponseData.class, UserMutationResponseData::from)),
+          Map.entry("UDTREQ01", mapping(UserDetailRequestData.class, UserDetailRequestData::from)),
           Map.entry(
-              "UCRRSP01",
-              mapping("UCRRSP01", UserMutationResponseData.class, UserMutationResponseData::from)),
+              "UDTRSP01", mapping(UserDetailResponseData.class, UserDetailResponseData::from)),
+          Map.entry("USTREQ01", mapping(UserStatusRequestData.class, UserStatusRequestData::from)),
           Map.entry(
-              "UDTREQ01",
-              mapping("UDTREQ01", UserDetailRequestData.class, UserDetailRequestData::from)),
+              "USTRSP01", mapping(UserMutationResponseData.class, UserMutationResponseData::from)),
+          Map.entry("URLREQ01", mapping(UserRoleRequestData.class, UserRoleRequestData::from)),
           Map.entry(
-              "UDTRSP01",
-              mapping("UDTRSP01", UserDetailResponseData.class, UserDetailResponseData::from)),
+              "URLRSP01", mapping(UserMutationResponseData.class, UserMutationResponseData::from)),
           Map.entry(
-              "USTREQ01",
-              mapping("USTREQ01", UserStatusRequestData.class, UserStatusRequestData::from)),
+              "UPWREQ01", mapping(PasswordResetRequestData.class, PasswordResetRequestData::from)),
           Map.entry(
-              "USTRSP01",
-              mapping("USTRSP01", UserMutationResponseData.class, UserMutationResponseData::from)),
+              "UPWRSP01", mapping(UserMutationResponseData.class, UserMutationResponseData::from)),
+          Map.entry("ULKREQ01", mapping(UserUnlockRequestData.class, UserUnlockRequestData::from)),
           Map.entry(
-              "URLREQ01",
-              mapping("URLREQ01", UserRoleRequestData.class, UserRoleRequestData::from)),
-          Map.entry(
-              "URLRSP01",
-              mapping("URLRSP01", UserMutationResponseData.class, UserMutationResponseData::from)),
-          Map.entry(
-              "UPWREQ01",
-              mapping("UPWREQ01", PasswordResetRequestData.class, PasswordResetRequestData::from)),
-          Map.entry(
-              "UPWRSP01",
-              mapping("UPWRSP01", UserMutationResponseData.class, UserMutationResponseData::from)),
-          Map.entry(
-              "ULKREQ01",
-              mapping("ULKREQ01", UserUnlockRequestData.class, UserUnlockRequestData::from)),
-          Map.entry(
-              "ULKRSP01",
-              mapping("ULKRSP01", UserMutationResponseData.class, UserMutationResponseData::from)),
+              "ULKRSP01", mapping(UserMutationResponseData.class, UserMutationResponseData::from)),
           Map.entry(
               "QSBREQ01",
-              mapping(
-                  "QSBREQ01", QuestionSubmitRequestData.class, QuestionSubmitRequestData::from)),
+              mapping(QuestionSubmitRequestData.class, QuestionSubmitRequestData::from)),
           Map.entry(
               "QSBRSP01",
-              mapping(
-                  "QSBRSP01", QuestionSubmitResponseData.class, QuestionSubmitResponseData::from)),
+              mapping(QuestionSubmitResponseData.class, QuestionSubmitResponseData::from)),
           Map.entry(
               "NTSREQ01",
-              mapping(
-                  "NTSREQ01",
-                  NotificationSearchRequestData.class,
-                  NotificationSearchRequestData::from)),
+              mapping(NotificationSearchRequestData.class, NotificationSearchRequestData::from)),
           Map.entry(
               "NTSRSP01",
               mapping(
-                  "NTSRSP01",
                   PagedResponseData.class,
                   PagedResponseData::from,
                   NotificationRecord.class,
                   NotificationRecord::from)),
           Map.entry(
               "NTDREQ01",
-              mapping(
-                  "NTDREQ01",
-                  NotificationDetailRequestData.class,
-                  NotificationDetailRequestData::from)),
+              mapping(NotificationDetailRequestData.class, NotificationDetailRequestData::from)),
           Map.entry(
               "NTDRSP01",
-              mapping(
-                  "NTDRSP01",
-                  NotificationDetailResponseData.class,
-                  NotificationDetailResponseData::from)),
+              mapping(NotificationDetailResponseData.class, NotificationDetailResponseData::from)),
           Map.entry(
               "NTCREQ01",
-              mapping(
-                  "NTCREQ01",
-                  NotificationCancelRequestData.class,
-                  NotificationCancelRequestData::from)),
+              mapping(NotificationCancelRequestData.class, NotificationCancelRequestData::from)),
           Map.entry(
               "NTCRSP01",
-              mapping(
-                  "NTCRSP01",
-                  NotificationCancelResponseData.class,
-                  NotificationCancelResponseData::from)),
+              mapping(NotificationCancelResponseData.class, NotificationCancelResponseData::from)),
           Map.entry(
               "QSSREQ01",
-              mapping(
-                  "QSSREQ01", QuestionSearchRequestData.class, QuestionSearchRequestData::from)),
+              mapping(QuestionSearchRequestData.class, QuestionSearchRequestData::from)),
           Map.entry(
               "QSSRSP01",
               mapping(
-                  "QSSRSP01",
                   PagedResponseData.class,
                   PagedResponseData::from,
                   QuestionSummaryRecord.class,
                   QuestionSummaryRecord::from)),
           Map.entry(
               "QSDREQ01",
-              mapping(
-                  "QSDREQ01", QuestionDetailRequestData.class, QuestionDetailRequestData::from)),
+              mapping(QuestionDetailRequestData.class, QuestionDetailRequestData::from)),
           Map.entry(
               "QSDRSP01",
-              mapping(
-                  "QSDRSP01", QuestionDetailResponseData.class, QuestionDetailResponseData::from)),
+              mapping(QuestionDetailResponseData.class, QuestionDetailResponseData::from)),
           Map.entry(
               "QDLREQ01",
-              mapping(
-                  "QDLREQ01", QuestionDeleteRequestData.class, QuestionDeleteRequestData::from)),
+              mapping(QuestionDeleteRequestData.class, QuestionDeleteRequestData::from)),
           Map.entry(
               "QDLRSP01",
-              mapping(
-                  "QDLRSP01", QuestionDeleteResponseData.class, QuestionDeleteResponseData::from)),
-          Map.entry(
-              "QWKREQ01", mapping("QWKREQ01", QuestionWorkData.class, QuestionWorkData::from)),
-          Map.entry("WLGEVT01", mapping("WLGEVT01", WebLogEventData.class, WebLogEventData::from)));
+              mapping(QuestionDeleteResponseData.class, QuestionDeleteResponseData::from)),
+          Map.entry("QWKREQ01", mapping(QuestionWorkData.class, QuestionWorkData::from)),
+          Map.entry("WLGEVT01", mapping(WebLogEventData.class, WebLogEventData::from)));
 
   private PayloadTypeCatalog() {}
 
@@ -436,7 +349,7 @@ public final class PayloadTypeCatalog {
 
   private static Mapping require(LayoutId layoutId) {
     Objects.requireNonNull(layoutId, "layoutId");
-    Mapping mapping = STANDARD.get(layoutId.value());
+    Mapping mapping = INSTANCE.standard.get(layoutId.value());
     if (mapping == null) {
       throw new UnsupportedLayoutException("unsupported named payload layout");
     }
@@ -444,29 +357,66 @@ public final class PayloadTypeCatalog {
   }
 
   private static Mapping mapping(
-      String layoutId,
       Class<? extends PayloadData> dataType,
       Function<FieldValueSet, ? extends PayloadData> dataDecoder) {
-    return new Mapping(layoutId, dataType, dataDecoder, Optional.empty());
+    return new Mapping(dataType, dataDecoder, Optional.empty());
   }
 
   private static Mapping mapping(
-      String layoutId,
       Class<? extends PayloadData> dataType,
       Function<FieldValueSet, ? extends PayloadData> dataDecoder,
       Class<? extends PayloadRecord> recordType,
       Function<FieldValueSet, ? extends PayloadRecord> recordDecoder) {
     return new Mapping(
-        layoutId, dataType, dataDecoder, Optional.of(new RecordMapping(recordType, recordDecoder)));
+        dataType, dataDecoder, Optional.of(new RecordMapping(recordType, recordDecoder)));
   }
 
-  private record Mapping(
-      String layoutId,
-      Class<? extends PayloadData> dataType,
-      Function<FieldValueSet, ? extends PayloadData> dataDecoder,
-      Optional<RecordMapping> recordMapping) {}
+  // SSC445_PRIVATE_BINDINGS_BEGIN
+  private static final class Mapping {
+    private final Class<? extends PayloadData> declaredDataType;
+    private final Function<FieldValueSet, ? extends PayloadData> decoderFunction;
+    private final Optional<RecordMapping> repeatingBinding;
 
-  private record RecordMapping(
-      Class<? extends PayloadRecord> recordType,
-      Function<FieldValueSet, ? extends PayloadRecord> recordDecoder) {}
+    private Mapping(
+        Class<? extends PayloadData> dataType,
+        Function<FieldValueSet, ? extends PayloadData> dataDecoder,
+        Optional<RecordMapping> recordMapping) {
+      this.declaredDataType = dataType;
+      this.decoderFunction = dataDecoder;
+      this.repeatingBinding = recordMapping;
+    }
+
+    private Class<? extends PayloadData> dataType() {
+      return declaredDataType;
+    }
+
+    private Function<FieldValueSet, ? extends PayloadData> dataDecoder() {
+      return decoderFunction;
+    }
+
+    private Optional<RecordMapping> recordMapping() {
+      return repeatingBinding;
+    }
+  }
+
+  private static final class RecordMapping {
+    private final Class<? extends PayloadRecord> declaredRecordType;
+    private final Function<FieldValueSet, ? extends PayloadRecord> decodeRecord;
+
+    private RecordMapping(
+        Class<? extends PayloadRecord> recordType,
+        Function<FieldValueSet, ? extends PayloadRecord> recordDecoder) {
+      this.declaredRecordType = recordType;
+      this.decodeRecord = recordDecoder;
+    }
+
+    private Class<? extends PayloadRecord> recordType() {
+      return declaredRecordType;
+    }
+
+    private Function<FieldValueSet, ? extends PayloadRecord> recordDecoder() {
+      return decodeRecord;
+    }
+  }
+  // SSC445_PRIVATE_BINDINGS_END
 }

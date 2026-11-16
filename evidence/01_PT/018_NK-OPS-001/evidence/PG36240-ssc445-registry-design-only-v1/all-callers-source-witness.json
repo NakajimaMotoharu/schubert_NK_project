@@ -1,0 +1,639 @@
+{
+  "actualExit": 0,
+  "callers": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java",
+      "sha256": "5d83db07d274d09dec72e1cb3524107da107ce8e1431e13f4eca59943b476720",
+      "owner": "WBS-P010-03",
+      "sourceReferences": [
+        {
+          "line": 25,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 152,
+          "text": "(UserMutationResponseData) PayloadTypeCatalog.decode(values).data())"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequest.java",
+      "sha256": "52c686c9484de9f4ddfde527002eef98d135414f84083c41e9b7ee13ac57c036",
+      "owner": "WBS-P010-02",
+      "sourceReferences": [
+        {
+          "line": 17,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 82,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java",
+      "sha256": "83614afabf83dbe26d69d4f48ae3ba32444b4b50b726657c8015d8fd0df2e517",
+      "owner": "WBS-P010-01",
+      "sourceReferences": [
+        {
+          "line": 21,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 88,
+          "text": "PayloadTypeCatalog.encode(response),"
+        },
+        {
+          "line": 162,
+          "text": "request.validateResponse(PayloadTypeCatalog.decode(values));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryRequest.java",
+      "sha256": "c85cf970f232c076bb5514a429388a7638a2bac2b9ffe9319f11a8f427f475fa",
+      "owner": "WBS-P010-01",
+      "sourceReferences": [
+        {
+          "line": 17,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 55,
+          "text": "PayloadTypeCatalog.decode("
+        },
+        {
+          "line": 132,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(response), ResultCode.SUCCESS);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java",
+      "sha256": "662a1fb4e8139bae0628cdce564ad4109041403a08eba641172042ff87fc2d6b",
+      "owner": "WBS-P010-04",
+      "sourceReferences": [
+        {
+          "line": 21,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 88,
+          "text": "PayloadTypeCatalog.encode(response),"
+        },
+        {
+          "line": 161,
+          "text": "request.validateResponse(PayloadTypeCatalog.decode(values));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogRequest.java",
+      "sha256": "df7ec576fc91533d2cc84e6d1217420c42ea6f589d38f73acb96a37dd5fbba30",
+      "owner": "WBS-P018-09",
+      "sourceReferences": [
+        {
+          "line": 16,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 51,
+          "text": "PayloadTypeCatalog.decode("
+        },
+        {
+          "line": 103,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(response), ResultCode.SUCCESS);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaReplayService.java",
+      "sha256": "7ba1ac41162d82cd6aec231dea41bb2a87188f0e3d8425832e78a3c14af12226",
+      "owner": "WBS-P009-02",
+      "sourceReferences": [
+        {
+          "line": 23,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 98,
+          "text": "PayloadValues values = PayloadTypeCatalog.encode(response);"
+        },
+        {
+          "line": 171,
+          "text": "? request.descriptor(PayloadTypeCatalog.decode(values))"
+        },
+        {
+          "line": 206,
+          "text": "request.descriptor(PayloadTypeCatalog.decode(saved.values));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java",
+      "sha256": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+      "owner": "WBS-P009-01",
+      "sourceReferences": [
+        {
+          "line": 19,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 83,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationRequest.java",
+      "sha256": "efcd9884e66c0f5f12dfc3ae1161b1d9b8c7da4259f8f48dc558b5f9dcbcec6a",
+      "owner": "WBS-P013-02",
+      "sourceReferences": [
+        {
+          "line": 17,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 59,
+          "text": "PayloadTypeCatalog.decode("
+        },
+        {
+          "line": 119,
+          "text": "PayloadTypeCatalog.decode(payload);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java",
+      "sha256": "6fb5b1c44dc3a65b6855c842591b47169728935a84878bebd4f796fc41ca6c17",
+      "owner": "WBS-P014-03",
+      "sourceReferences": [
+        {
+          "line": 22,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 103,
+          "text": "PayloadTypeCatalog.encode(response),"
+        },
+        {
+          "line": 184,
+          "text": "request.validateResponse(PayloadTypeCatalog.decode(values));"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequest.java",
+      "sha256": "7e8ed5ca4175bb673a3396612d7cb3e0f7c9aca239bd1ae8f6337155e5201181",
+      "owner": "WBS-P013-01",
+      "sourceReferences": [
+        {
+          "line": 16,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 60,
+          "text": "PayloadTypeCatalog.decode("
+        },
+        {
+          "line": 177,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(response), ResultCode.SUCCESS);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "sha256": "02b5effa37786246afbbbc39997eaae6ed6713723cc51938df8f82dce123aa13",
+      "owner": "WBS-P011-02",
+      "sourceReferences": [
+        {
+          "line": 36,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 455,
+          "text": "PayloadTypeCatalog.decode("
+        },
+        {
+          "line": 642,
+          "text": "PayloadTypeCatalog.encode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequest.java",
+      "sha256": "d9ed41871ca79eddaf323630a938b1d468886a6e3e8b3c9f72203d905ae1ab5d",
+      "owner": "WBS-P011-01",
+      "sourceReferences": [
+        {
+          "line": 11,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 51,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java",
+      "sha256": "e3cf7a1056e03ce46380893697cb2d2faefa02a88ea966a14ff99646763b3c83",
+      "owner": "WBS-P012-03",
+      "sourceReferences": [
+        {
+          "line": 18,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 117,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayService.java",
+      "sha256": "2f9b50c905f5cab8f35aae5df277ad27918ea6912c8f4eebbedba8f0baf958f0",
+      "owner": "WBS-P008-02",
+      "sourceReferences": [
+        {
+          "line": 23,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 112,
+          "text": "PayloadValues values = PayloadTypeCatalog.encode(response);"
+        },
+        {
+          "line": 198,
+          "text": "? detail(request, PayloadTypeCatalog.decode(values))"
+        },
+        {
+          "line": 241,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(typed), ResultCode.SUCCESS);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java",
+      "sha256": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a",
+      "owner": "WBS-P008-01",
+      "sourceReferences": [
+        {
+          "line": 13,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 78,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "sha256": "8ea171d65f2229f41fc033dff6a66078159d9761106d7b1d264a83a421879036",
+      "owner": "WBS-P006-05",
+      "sourceReferences": [
+        {
+          "line": 12,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 85,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspector.java",
+      "sha256": "81a81a306c1edd98f5ec7ec8cd24d7570645b79036fa9072d5c87b282c811f06",
+      "owner": "WBS-P004-04",
+      "sourceReferences": [
+        {
+          "line": 15,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 95,
+          "text": "if (code.usesSuccessProfile()) PayloadTypeCatalog.decode(values);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector.java",
+      "sha256": "d4ce26053d1865997dafbcb41677f2ef5ada7c6c9c1b577a3b9eeca2cbd087fc",
+      "owner": "WBS-P004-04",
+      "sourceReferences": [
+        {
+          "line": 18,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 195,
+          "text": "return PayloadTypeCatalog.decode(values).data();"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector.java",
+      "sha256": "d032d73536286c951cea3c0f4c3d3928163a659e4471b6b5db403e83bfb35ec7",
+      "owner": "WBS-P004-04",
+      "sourceReferences": [
+        {
+          "line": 18,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 109,
+          "text": "var data = PayloadTypeCatalog.decode(decode(header, wire)).data();"
+        },
+        {
+          "line": 218,
+          "text": "var data = (QuestionWorkData) PayloadTypeCatalog.decode(decode(h, wire)).data();"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender.java",
+      "sha256": "b658f0d221ad087390f22f8445abea835743b2223fa7598d32ccff14a39896d7",
+      "owner": "WBS-P006-02",
+      "sourceReferences": [
+        {
+          "line": 8,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 153,
+          "text": "// PayloadTypeCatalog also applies the layout's intrinsic semantic constraints."
+        },
+        {
+          "line": 154,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/LogQueryRepository.java",
+      "sha256": "6ee33c4b5c5ea6d765aa809a3f9a714fe46f5069dfcd1d3b703acaee638c860d",
+      "owner": "WBS-P010-04",
+      "sourceReferences": [
+        {
+          "line": 12,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 209,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(value), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/MediaRepository.java",
+      "sha256": "229fa7d29d001b33323d2fdbf866264c161dba04f876fc29c4f6dce6af7525dc",
+      "owner": "WBS-P009-01",
+      "sourceReferences": [
+        {
+          "line": 14,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 370,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(value), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/QuestionQueryRepository.java",
+      "sha256": "5eece6ce0bfd2e2e7db0f466f4f2806a28ce4182019117d897f5346468f54efd",
+      "owner": "WBS-P014-01",
+      "sourceReferences": [
+        {
+          "line": 13,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 423,
+          "text": "PayloadTypeCatalog.encode("
+        },
+        {
+          "line": 429,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(values), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java",
+      "sha256": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6",
+      "owner": "WBS-P008-05",
+      "sourceReferences": [
+        {
+          "line": 6,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 28,
+          "text": "PayloadTypeCatalog.encode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioRepository.java",
+      "sha256": "f6d626e2de473b6313f544514e6793c255dfbf2d9dc15249e1134ddd90604265",
+      "owner": "WBS-P008-01",
+      "sourceReferences": [
+        {
+          "line": 10,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 471,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(values), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/UserQueryRepository.java",
+      "sha256": "e5fa4a4a646adc7d1a1bbeddc3135fbd90872d4a85c018bd0a06dbf014b5167f",
+      "owner": "WBS-P010-01",
+      "sourceReferences": [
+        {
+          "line": 11,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 276,
+          "text": "PayloadCodec.standard().encode(PayloadTypeCatalog.encode(value), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationResponseMapper.java",
+      "sha256": "50338664a18e23204f238395928749ee9be293161ae6dc88d0cf3db98aaf23a2",
+      "owner": "WBS-P007-04",
+      "sourceReferences": [
+        {
+          "line": 10,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 46,
+          "text": "PayloadTypeCatalog.encode(new TypedPayloadValues(RETAINED_LOGIN, data, List.of())),"
+        },
+        {
+          "line": 65,
+          "text": "PayloadTypeCatalog.encode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginInboxService.java",
+      "sha256": "e18a73cbe4851eac8404d2f24cee823964b89b8183f51a345c719cd61ed63090",
+      "owner": "WBS-P007-04",
+      "sourceReferences": [
+        {
+          "line": 14,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 152,
+          "text": "PayloadTypeCatalog.decode(PayloadCodec.standard().decode(LOGIN, data, List.of(), false))"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LoginReplayService.java",
+      "sha256": "13b3fab309016c671d89c9a7d78cfb46ecaaa142041e01c4867e668b88cfb3c6",
+      "owner": "WBS-P007-04",
+      "sourceReferences": [
+        {
+          "line": 24,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 149,
+          "text": "var typed = (LoginResponseData) PayloadTypeCatalog.decode(values).data();"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/LogoutReplayService.java",
+      "sha256": "8ecc73a652c4bd9c96ed096c55a159a06cc4f62b99eb128f0c1070e6982d3ddf",
+      "owner": "WBS-P007-05",
+      "sourceReferences": [
+        {
+          "line": 26,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 159,
+          "text": "var typed = (LogoutResponseData) PayloadTypeCatalog.decode(values).data();"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java",
+      "sha256": "de6af52682c8203eb132ffb47619e753af207cd8fb0ac68503c4b09f3e49ffca",
+      "owner": "WBS-P006-04",
+      "sourceReferences": [
+        {
+          "line": 8,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 207,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+      "sha256": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00",
+      "owner": "WBS-P006-03",
+      "sourceReferences": [
+        {
+          "line": 10,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 316,
+          "text": "PayloadTypeCatalog.encode(new TypedPayloadValues(layout, data, List.of())), false);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaResponseDecoder.java",
+      "sha256": "2eea32c993a8aa57d4b21c31382e73078459b7a4097249e7a540a4fafc5e7c5f",
+      "owner": "WBS-P009-04",
+      "sourceReferences": [
+        {
+          "line": 13,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 101,
+          "text": "var typed = PayloadTypeCatalog.decode(payload);"
+        },
+        {
+          "line": 168,
+          "text": "PayloadTypeCatalog.decode("
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+      "sha256": "908ce446ac3fe4b2b3c5c2dc3764ed9e51779805d0a967e65a45847c73ae29ec",
+      "owner": "WBS-P005-02",
+      "sourceReferences": [
+        {
+          "line": 14,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 147,
+          "text": "return PayloadCodec.standard().encode(PayloadTypeCatalog.encode(input), false);"
+        },
+        {
+          "line": 179,
+          "text": "? Optional.of(PayloadTypeCatalog.decode(values))"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+      "sha256": "235f3b543f74cd8efe684e12103e69da98e2369c8d6637d2510418fefa80c9a5",
+      "owner": "WBS-P005-02",
+      "sourceReferences": [
+        {
+          "line": 12,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 155,
+          "text": "PayloadTypeCatalog.encode("
+        },
+        {
+          "line": 180,
+          "text": "PayloadTypeCatalog.decode(values);"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginContextProbe.java",
+      "sha256": "9b5d5d350fca0556892aa0bd6c48a6f759c27e1e13179da008d2ccb766e854c9",
+      "owner": "WBS-P007-06",
+      "sourceReferences": [
+        {
+          "line": 12,
+          "text": "import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;"
+        },
+        {
+          "line": 133,
+          "text": "PayloadTypeCatalog.decode(values);"
+        }
+      ]
+    }
+  ],
+  "sourceOnly": true,
+  "allCurrentModuleFreshBinaryRequired": true,
+  "oldClassMethodrefBinaryMixAllowed": false
+}
