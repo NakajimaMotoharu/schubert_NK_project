@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-16T23:04:04.556309+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "operatorHead": "83c9cff5a52a1647a83baeac67fcb6995c4ec153",
+  "python": "3.14.4",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "bug": "BUG3151",
+  "horizontal": "YKT2620",
+  "currentCohortChecked": 144,
+  "currentCohortDefects": 2,
+  "referencedHistoricalProfilesChecked": 57,
+  "referencedHistoricalSelfDefects": 0,
+  "corrections": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37058-manifest-integrity-errata-v1/corrections.json",
+    "sha256": "a330ca94f5dda0f296676afddc02bba357f0332af32cad37934a3db58cf915b0"
+  },
+  "historicalProfiles": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37058-manifest-integrity-errata-v1/referenced-profile-nonapplicability.json",
+    "sha256": "f8b75f3ada5d3e9c558f5d469bc95c59bbf6a31df82f4984acb620a1273c8817"
+  },
+  "toolCasesObserved": 9,
+  "toolObservation": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37058-manifest-integrity-errata-v1/tool-nine-observed-result.json",
+    "sha256": "428c36c9f7f112b5dc710d2e21cb88ab7c4c27b0bc3b83f062b594f8f11575ed"
+  },
+  "futureProducerSourceRepairs": [
+    {
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4532_f03_current287_pmd.py",
+        "sha256": "ccc7c76fe384a73948a4c6e2107319b1e0c02d3d64779b01c55fac6fbc3caa14"
+      },
+      "futureSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4581_f03_current287_pmd_exclude_self.py",
+        "sha256": "bd3fc11940dd2f4999974307a0284ba21eb537a78fe4de69d2cc1049bb566eed"
+      },
+      "change": "Only final file inventory predicate excludes manifest.json, inverse byte-exact",
+      "pythonAstAndCompileExit": 0,
+      "producerExecuted": false,
+      "usedSlotGuardsRetained": true,
+      "executionStatus": "SOURCE_PATCH_ONLY_DO_NOT_REPLAY_ORIGINAL_USED_SLOT"
+    },
+    {
+      "original": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4560_p020_five_main_static.py",
+        "sha256": "0ebc7b8132e6eafcf0f7840563f447381d5d36c424f09e95e67f178b499be19e"
+      },
+      "futureSource": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4582_p020_five_main_static_exclude_self.py",
+        "sha256": "05b2d2cbd3deb14a003f4e35b1d32a322a8e014bbcd1d0e52296bc645a43aef3"
+      },
+      "change": "Only final file inventory predicate excludes manifest.json, inverse byte-exact",
+      "pythonAstAndCompileExit": 0,
+      "producerExecuted": false,
+      "usedSlotGuardsRetained": true,
+      "executionStatus": "SOURCE_PATCH_ONLY_DO_NOT_REPLAY_ORIGINAL_USED_SLOT"
+    }
+  ],
+  "sourceRuleQualityExclusions": 0,
+  "originalsUnchanged": true,
+  "realProductOrStaticTestsReexecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "files": {
+    "corrections.json": "a330ca94f5dda0f296676afddc02bba357f0332af32cad37934a3db58cf915b0",
+    "referenced-profile-nonapplicability.json": "f8b75f3ada5d3e9c558f5d469bc95c59bbf6a31df82f4984acb620a1273c8817",
+    "tool-nine-observed-result.json": "428c36c9f7f112b5dc710d2e21cb88ab7c4c27b0bc3b83f062b594f8f11575ed"
+  }
+}

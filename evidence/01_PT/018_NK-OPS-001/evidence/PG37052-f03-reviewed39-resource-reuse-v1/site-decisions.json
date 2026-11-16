@@ -1,0 +1,1133 @@
+[
+  {
+    "rawFindingIndex": 36,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+    "line": 223,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 41,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+    "line": 233,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 46,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+    "line": 261,
+    "column": 13,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "          } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 51,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java",
+    "sourceSha256": "2bfb3c6d85c880d4e4c321b1f760986f1f2fe9e0d28e87e2b145fddbbb0b6a88",
+    "line": 271,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 54,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+    "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+    "line": 53,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-12",
+    "costOwner": "WBS-P017-12",
+    "actualSourceLine": "      var checked = Objects.requireNonNull(statement, \"timeout statement\");",
+    "priorReason": "These are nonnull aliases of the exact original PreparedStatement/ResultSet already owned by the surrounding two try-with-resources declarations. No new resource is acquired by requireNonNull; the original owner closes it once on every return/throw, including null-provider contract rejection.",
+    "currentReview": "Non-null checked/row references alias exactly the same statement/result owned by enclosing two TWR declarations, so no second owner or missing close is introduced. Current full source exact and typed compilation already qualified.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 55,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java",
+    "sourceSha256": "93e77b1a49c293d53683628f805b1a0047803ce6a2ad101ec27be4142b4a83e6",
+    "line": 57,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-12",
+    "costOwner": "WBS-P017-12",
+    "actualSourceLine": "        var row = Objects.requireNonNull(rows, \"timeout result\");",
+    "priorReason": "These are nonnull aliases of the exact original PreparedStatement/ResultSet already owned by the surrounding two try-with-resources declarations. No new resource is acquired by requireNonNull; the original owner closes it once on every return/throw, including null-provider contract rejection.",
+    "currentReview": "Non-null checked/row references alias exactly the same statement/result owned by enclosing two TWR declarations, so no second owner or missing close is introduced. Current full source exact and typed compilation already qualified.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 483,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 142,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "        var query = present(statement);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 486,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 150,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 489,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 238,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      var query = present(statement);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 490,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 245,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "        var row = present(rows);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 493,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 283,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 498,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 295,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "    } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 501,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 314,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      var query = present(statement);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 504,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 326,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "    } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 507,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 354,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      var query = present(statement);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 508,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 368,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "        var row = present(rows);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 511,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 380,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 516,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 392,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "    } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 519,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 417,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      var query = present(statement);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 520,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 424,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "        var row = present(rows);",
+    "priorReason": "SS332 borrowed parent resources: each aliased PreparedStatement/ResultSet closes directly in the enclosing finally; null is handled before close and JdbcResourceFailures preserves the explicit primary/cleanup type precedence. PMD does not follow present() alias; whole502-line source reviewed, no repository execution in this profile.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 523,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 431,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 528,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "sourceSha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+    "line": 443,
+    "column": 7,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-02",
+    "costOwner": "WBS-P017-02",
+    "actualSourceLine": "    } finally {",
+    "priorReason": "SS332 explicit secondary-versus-primary priority deliberately permits the cleanup exception to replace a SQL primary only when JdbcResourceFailures.replace says so. This finally closes every owned statement/resultset; removing the throw would change the approved error/cleanup priority. Parent methods are not executed by Step8.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28248-batch-step-values8-preflight-v1/manifest.json",
+        "sha256": "94adb23b0848f775dbb64d463dce92540405e35d1990cc1a8651c40b3dd672e2"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28246-batch-step-values8-static-qualification-refresh-v1/manifest.json",
+        "sha256": "c96f66dc8319e2a69e2f8c1edd9449cb089e4c7953b6ed2a4adbbbb4fbab52fb"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2062_step8_static_admission.json",
+        "sha256": "2ba70ba0354663d783554f3f46d6c3628154f1e24294d80699fc3d34414c533f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 553,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "sourceSha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+    "line": 60,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 558,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "sourceSha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+    "line": 70,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 563,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "sourceSha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+    "line": 107,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 568,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "sourceSha256": "9b9429b8074268d59883664688366075271fd62f685dc9b8e3d42900b982be0b",
+    "line": 117,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-07",
+    "costOwner": "WBS-P017-07",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332/341 direct ResultSet/Statement close is once-only in these four exact finally sites. A selected unknown cleanup must supersede known SQL according to the approved matrix; values are returned only after both closes. Replacing this with generic TWR would alter the approved same-Throwable/type priority.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28448-log-classifier-preflight-v1/manifest.json",
+        "sha256": "a1a2471ff0faa1bb91126e598a813a10c728f1e9471a12a9b6c9687e467e6975"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28446-log-classifier-metadata-static-v1/manifest.json",
+        "sha256": "4ace99e1bef92b1c796444279e236ce73bff60a1ab3cd7bfe484e8a728176ba8"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2128_log69_static_admission.json",
+        "sha256": "00936f9820772209df2feab18c37d59ba961344a6fd7fd237847f279b8588afb"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 633,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+    "line": 265,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-11",
+    "costOwner": "WBS-P017-11",
+    "actualSourceLine": "        var query = presentRead(statement);",
+    "priorReason": "These are nonnull aliases of owned Statement/ResultSet already enclosed in explicit typed-close nested try/finally, not new resources requiring another close. JDBC connection is borrowed and must not be closed. Whole Test checks all acquired row/statement counters exactly once for normal, null, provider and compound failures.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28734-expiry4-preflight-v1/manifest.json",
+        "sha256": "a9b4dc9dd2932c2df9fb4b1cd94a3bf7d378ddf97111febfa4d3a101c8ab99d3"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28732-expiry4-static-v1/manifest.json",
+        "sha256": "a1fb5f5ec46fc120643c70b44318705b296b319dc8fe9dfdfac5ea10fdd42886"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2181_expiry4_static_admission.json",
+        "sha256": "96ef670bce6dd56d17bf0a6237a543baa06633536b0ee9cde4b2cfdba0445de6"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 634,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+    "line": 271,
+    "column": 15,
+    "rule": "CloseResource",
+    "owner": "WBS-P017-11",
+    "costOwner": "WBS-P017-11",
+    "actualSourceLine": "          var values = presentRead(rows);",
+    "priorReason": "These are nonnull aliases of owned Statement/ResultSet already enclosed in explicit typed-close nested try/finally, not new resources requiring another close. JDBC connection is borrowed and must not be closed. Whole Test checks all acquired row/statement counters exactly once for normal, null, provider and compound failures.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28734-expiry4-preflight-v1/manifest.json",
+        "sha256": "a9b4dc9dd2932c2df9fb4b1cd94a3bf7d378ddf97111febfa4d3a101c8ab99d3"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28732-expiry4-static-v1/manifest.json",
+        "sha256": "a1fb5f5ec46fc120643c70b44318705b296b319dc8fe9dfdfac5ea10fdd42886"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2181_expiry4_static_admission.json",
+        "sha256": "96ef670bce6dd56d17bf0a6237a543baa06633536b0ee9cde4b2cfdba0445de6"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 637,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+    "line": 299,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-11",
+    "costOwner": "WBS-P017-11",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "SS332 typed read cleanup deliberately allows a stronger fatal/unknown secondary to escape after retaining/safely cataloging the lower-priority primary. Removing the cleanup throw changes approved failure priority. Both resources are attempted independently, and originalError identity/suppression and exact close counters are independently asserted.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28734-expiry4-preflight-v1/manifest.json",
+        "sha256": "a9b4dc9dd2932c2df9fb4b1cd94a3bf7d378ddf97111febfa4d3a101c8ab99d3"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28732-expiry4-static-v1/manifest.json",
+        "sha256": "a1fb5f5ec46fc120643c70b44318705b296b319dc8fe9dfdfac5ea10fdd42886"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2181_expiry4_static_admission.json",
+        "sha256": "96ef670bce6dd56d17bf0a6237a543baa06633536b0ee9cde4b2cfdba0445de6"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 642,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java",
+    "sourceSha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+    "line": 310,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P017-11",
+    "costOwner": "WBS-P017-11",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "SS332 typed read cleanup deliberately allows a stronger fatal/unknown secondary to escape after retaining/safely cataloging the lower-priority primary. Removing the cleanup throw changes approved failure priority. Both resources are attempted independently, and originalError identity/suppression and exact close counters are independently asserted.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28734-expiry4-preflight-v1/manifest.json",
+        "sha256": "a9b4dc9dd2932c2df9fb4b1cd94a3bf7d378ddf97111febfa4d3a101c8ab99d3"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28732-expiry4-static-v1/manifest.json",
+        "sha256": "a1fb5f5ec46fc120643c70b44318705b296b319dc8fe9dfdfac5ea10fdd42886"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2181_expiry4_static_admission.json",
+        "sha256": "96ef670bce6dd56d17bf0a6237a543baa06633536b0ee9cde4b2cfdba0445de6"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 694,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "sourceSha256": "4a0039f14411589b60e6e2ba2309ee090614c49bfbdd2d9606c424eac5352507",
+    "line": 42,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P004-03",
+    "costOwner": "WBS-P004-03",
+    "actualSourceLine": "        var checked = present(statement);",
+    "priorReason": "checked is a non-null alias of the acquired statement. Its original statement reference is closed exactly once in the outer finally after row close; explicit precedence is SS332. RRF-PURE-004/005/006 asserts acquired equals close count.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36772-ssc448-pure8-preflight-v3/manifest.json",
+        "sha256": "ae8e19e5f7561226c0ac828ee0bded4a556e5a86dfb7d2f11bdd0a160548509c"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36770-ssc448-pure8-static-v3/manifest.json",
+        "sha256": "9e7aaf41401112d1d2703f76b415214b755c81883a48e095ed11debb0712ceaf"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4461_ssc448_pure8_static_admission.json",
+        "sha256": "5bb9def73fe03d4f1c828ddde9a2185cffde93e4a0a2e4ae3a2cf744226c2922"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 695,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "sourceSha256": "4a0039f14411589b60e6e2ba2309ee090614c49bfbdd2d9606c424eac5352507",
+    "line": 49,
+    "column": 15,
+    "rule": "CloseResource",
+    "owner": "WBS-P004-03",
+    "costOwner": "WBS-P004-03",
+    "actualSourceLine": "          var values = present(row);",
+    "priorReason": "values is a non-null alias of the acquired ResultSet. The original row reference is closed exactly once in the inner finally, including projection/null/runtime/error failures; statement still closes afterward. RRF-PURE-004/005/006 checks counters.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36772-ssc448-pure8-preflight-v3/manifest.json",
+        "sha256": "ae8e19e5f7561226c0ac828ee0bded4a556e5a86dfb7d2f11bdd0a160548509c"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36770-ssc448-pure8-static-v3/manifest.json",
+        "sha256": "9e7aaf41401112d1d2703f76b415214b755c81883a48e095ed11debb0712ceaf"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/4461_ssc448_pure8_static_admission.json",
+        "sha256": "5bb9def73fe03d4f1c828ddde9a2185cffde93e4a0a2e4ae3a2cf744226c2922"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 708,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "sourceSha256": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "line": 88,
+    "column": 13,
+    "rule": "CloseResource",
+    "owner": "WBS-P019-01",
+    "costOwner": "WBS-P019-01",
+    "actualSourceLine": "        var query = required(statement);",
+    "priorReason": "The statement is captured before the nested resultset scope and every nonnull statement is closed in the outer finally. A null provider return is rejected without manufacturing a resource. JdbcAdmissionFailures applies the independently specified64-case ordinary primary/secondary matrix, with knownSQL fatal graph classification before discard. The borrowed Connection is intentionally never closed by this method.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29186-schema10-preflight-v2/manifest.json",
+        "sha256": "231c5c18f274392274fe706926586791bd44f318a7ce8c3fd9179033b587d229"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29184-schema10-static-v2/manifest.json",
+        "sha256": "1bffdf160598539d695f6c36e2d73d1092cebc6e509f62075ae69d6507cc7507"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2265_schema10_static_admission.json",
+        "sha256": "fb220097cb7a9b0a90c13f645a43aeb7d1ecc6729d1809a72ab8f203ad52287f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 709,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "sourceSha256": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "line": 93,
+    "column": 15,
+    "rule": "CloseResource",
+    "owner": "WBS-P019-01",
+    "costOwner": "WBS-P019-01",
+    "actualSourceLine": "          var values = required(rows);",
+    "priorReason": "Every nonnull ResultSet is closed in the inner finally on successful rows, mismatch, null data, SQL/Runtime/Error and IRQ paths. The outer finally then closes the statement. Null rows are rejected and have no owner to close. This explicit two-scope cleanup preserves the fixed close-priority contract that generic TWR priority would change; original64 matrix plus new fatal graphs check literal closecounts.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29186-schema10-preflight-v2/manifest.json",
+        "sha256": "231c5c18f274392274fe706926586791bd44f318a7ce8c3fd9179033b587d229"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29184-schema10-static-v2/manifest.json",
+        "sha256": "1bffdf160598539d695f6c36e2d73d1092cebc6e509f62075ae69d6507cc7507"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2265_schema10_static_admission.json",
+        "sha256": "fb220097cb7a9b0a90c13f645a43aeb7d1ecc6729d1809a72ab8f203ad52287f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 713,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "sourceSha256": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "line": 116,
+    "column": 11,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P019-01",
+    "costOwner": "WBS-P019-01",
+    "actualSourceLine": "        } finally {",
+    "priorReason": "An owned JDBC close failure may replace an absent/ordinarySQL primary only under the fixed SSC084095 priority, with knownSQL fatal graph preserved. The explicit finally is needed to close rows before statement on every path while leaving the borrowed connection caller-owned. The independent64 matrix does not call the production helper, and SCHEMA010 checks originalError identity and both closecounts. Removing this throw would falsely report uncertain cleanup as success.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29186-schema10-preflight-v2/manifest.json",
+        "sha256": "231c5c18f274392274fe706926586791bd44f318a7ce8c3fd9179033b587d229"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29184-schema10-static-v2/manifest.json",
+        "sha256": "1bffdf160598539d695f6c36e2d73d1092cebc6e509f62075ae69d6507cc7507"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2265_schema10_static_admission.json",
+        "sha256": "fb220097cb7a9b0a90c13f645a43aeb7d1ecc6729d1809a72ab8f203ad52287f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 718,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+    "sourceSha256": "38f8ba4b123bab4c8f781f8e6e18ba29cc7daa34aa87ae33575a25ca46b3fb3e",
+    "line": 127,
+    "column": 9,
+    "rule": "DoNotThrowExceptionInFinally",
+    "owner": "WBS-P019-01",
+    "costOwner": "WBS-P019-01",
+    "actualSourceLine": "      } finally {",
+    "priorReason": "An owned JDBC close failure may replace an absent/ordinarySQL primary only under the fixed SSC084095 priority, with knownSQL fatal graph preserved. The explicit finally is needed to close the statement after rows on every path while leaving the borrowed connection caller-owned. The independent64 matrix does not call the production helper, and SCHEMA010 checks originalError identity and both closecounts. Removing this throw would falsely report uncertain cleanup as success.",
+    "currentReview": "Current source-exact direct nested finally closes each actually acquired row/statement once and applies the explicit SS332/341/343 secondary-vs-primary matrix. Throwing a higher-priority unknown/fatal cleanup is required; generic TWR or swallowing it would change that matrix. Current semantic input is bound; this is static policy applicability only, not a fresh JDBC fault/native PT result.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29186-schema10-preflight-v2/manifest.json",
+        "sha256": "231c5c18f274392274fe706926586791bd44f318a7ce8c3fd9179033b587d229"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29184-schema10-static-v2/manifest.json",
+        "sha256": "1bffdf160598539d695f6c36e2d73d1092cebc6e509f62075ae69d6507cc7507"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2265_schema10_static_admission.json",
+        "sha256": "fb220097cb7a9b0a90c13f645a43aeb7d1ecc6729d1809a72ab8f203ad52287f"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 915,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java",
+    "sourceSha256": "f2b45e3b3af748309a156f4cb76c76a922260caba10faafa4a4c2a858029bdc2",
+    "line": 54,
+    "column": 11,
+    "rule": "CloseResource",
+    "owner": "WBS-P019-03",
+    "costOwner": "WBS-P019-03",
+    "actualSourceLine": "      var sink = sinks.get(index);",
+    "priorReason": "Exact sink is the private final DigestSink created locally with only a pinned-Java SHA256 MessageDigest and long byte counter. It acquires no file/socket/DB/native FD and stores no raw wire. Its inherited OutputStream.close is a no-op, and neither sink nor digest escapes: only immutable table/row/byte/hex metadata is returned. Digest completion is explicit before return; all six independent fixed hash/count vectors and fresh/parallel invocation tests verify owned state isolation. Closing a memory-only sink provides no external cleanup.",
+    "currentReview": "Concrete private in-memory DigestSink uses pinned MessageDigest/counter only and inherits no-op OutputStream.close; no external owner/resource is acquired by the alias. Source/actual source-qualified review exact; database/file/native success is not implied.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31912-master-finger403-preflight-v1/manifest.json",
+        "sha256": "e0dbb5f8ace0f84bd148057b0c41af19bbbd444057e18615601cb6bf34aa8e84"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31910-master-finger403-static-v1/manifest.json",
+        "sha256": "858d3cca586313c2f2666eef3cd2107d3a9442ddae424661e3f6b4f4538fef72"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2833_master_finger403_static_admission.json",
+        "sha256": "1ac6a764bacccd3f5f59ad307dced7e777cdf14714a2a7493409fadea459599a"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 943,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+    "sourceSha256": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "line": 54,
+    "column": 25,
+    "rule": "CloseResource",
+    "owner": "WBS-P019-03",
+    "costOwner": "WBS-P019-03",
+    "actualSourceLine": "    @Nullable Statement created = connection.createStatement();",
+    "priorReason": "Exact nullable JDBC acquisition is checked immediately: null creates no ownership and fails; nonnull is aliased once to statement and enclosed by a finally calling closeStatement(statement, primary). Both normal and all SQL/runtime/Error body exits close that same Statement exactly once with primary/suppressed preservation; connection is borrowed and never closed. The intraprocedural rule does not follow this private typed close helper; whole SQL/fault fixtures and four added dual-fault cases verify the resource postcondition. Revalidated exact current anchor/rule/message after only the independently inverse-token-proven ten identity guards or two approved-primary oracle corrections; formatted repair proof SHA256 3d7dfe0903aab73af7d35e6f3c8985f06d512d630559352857c84dfd2ea50b65.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32022-cleanup-identity553-preflight-v1/manifest.json",
+        "sha256": "062cc1cd2533a11ead0e9ddb7fb081d27ae44020dea2441aed5dbcda1848ddac"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32020-cleanup-identity553-static-v1/manifest.json",
+        "sha256": "1a4aceea0dbf7ccb1a0fc59f9b40d680747e7e3f634d58b9cda4875b871a8561"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2867_cleanup_identity553_static_admission.json",
+        "sha256": "4f9ffc33916169f2ec26e80a6c5da747e3a8bf53d3ad116df6cbedb963eaf2ed"
+      }
+    }
+  },
+  {
+    "rawFindingIndex": 946,
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+    "sourceSha256": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "line": 84,
+    "column": 25,
+    "rule": "CloseResource",
+    "owner": "WBS-P019-03",
+    "costOwner": "WBS-P019-03",
+    "actualSourceLine": "    @Nullable Statement created = connection.createStatement();",
+    "priorReason": "Exact nullable JDBC acquisition is checked immediately: null creates no ownership and fails; nonnull is aliased once to statement and enclosed by a finally calling closeStatement(statement, primary). Both normal and all SQL/runtime/Error body exits close that same Statement exactly once with primary/suppressed preservation; connection is borrowed and never closed. The intraprocedural rule does not follow this private typed close helper; whole SQL/fault fixtures and four added dual-fault cases verify the resource postcondition. Revalidated exact current anchor/rule/message after only the independently inverse-token-proven ten identity guards or two approved-primary oracle corrections; formatted repair proof SHA256 3d7dfe0903aab73af7d35e6f3c8985f06d512d630559352857c84dfd2ea50b65.",
+    "currentReview": "Current whole source exact: nullable acquired JDBC resource is rejected before alias or has its original owner directly closed by nested typed finally/private close helper. Connection is borrowed and deliberately not closed. Intraprocedural alias warning does not account for that owner; original explicit SS332/343 failure priority and actual functional PT remain separate.",
+    "decision": "NOT_APPLICABLE_REVIEWED_CURRENT_RESOURCE_CONTRACT",
+    "oldPtCarriedToCurrent": false,
+    "priorEvidencePins": {
+      "previousQualifiedPreflight": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32022-cleanup-identity553-preflight-v1/manifest.json",
+        "sha256": "062cc1cd2533a11ead0e9ddb7fb081d27ae44020dea2441aed5dbcda1848ddac"
+      },
+      "previousFullRootStatic": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG32020-cleanup-identity553-static-v1/manifest.json",
+        "sha256": "1a4aceea0dbf7ccb1a0fc59f9b40d680747e7e3f634d58b9cda4875b871a8561"
+      },
+      "originalPerSiteAdmission": {
+        "path": "evidence/01_PT/018_NK-OPS-001/input/2867_cleanup_identity553_static_admission.json",
+        "sha256": "4f9ffc33916169f2ec26e80a6c5da747e3a8bf53d3ad116df6cbedb963eaf2ed"
+      }
+    }
+  }
+]
