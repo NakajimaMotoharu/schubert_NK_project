@@ -1,10 +1,8 @@
 package dev.codex.schubert.nk.protocol.layout.semantic;
 
 /** Shared N12 identifier invariant. Trace: NK-PRO-001, SS 323 section 2. */
-final class IdValue {
-  static final long MAXIMUM = 999_999_999_999L;
-
-  private IdValue() {}
+interface IdValue {
+  long MAXIMUM = 999_999_999_999L;
 
   static void validate(long value) {
     if (value < 1 || value > MAXIMUM) {
