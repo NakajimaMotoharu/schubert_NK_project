@@ -1,0 +1,30 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG36340-WIRE-METADATA-VALUES-THREE-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36334-wire-metadata-prepare-v2/manifest.json",
+    "sha256": "38e971d7bf6904170f9b849c25dee8535690c0b60f4a654d6719117be190ece0"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36336-wire-metadata-static-v2/manifest.json",
+    "sha256": "03a424c8e9fddb0735399e9d2764a3f0e38e965c071897971c5373ffb79d74bd"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<T, String> keys = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "Map is method-local and never shared/published; ordinary nonconcurrent key-contract assertions intentionally exercise HashMap equality/hash behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(first.equals(null));",
+      "occurrences": 1,
+      "reason": "Intentional negative public value equality contract; assertion requires false for null rather than comparing production objects to null.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

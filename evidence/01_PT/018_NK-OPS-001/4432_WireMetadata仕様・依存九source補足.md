@@ -1,0 +1,3 @@
+# WireMetadata仕様・依存九source補足
+
+開始時八source見積りを、LayoutIdが例外型LayoutValidationExceptionを参照するため九sourceへ数え直す。業務三class/三case/低標高.25/.75/2.25と上限2.5は不変、必要内部compile closure一sourceだけ補足。Main変更0、compile-time LargeResultDescriptorの未実行counterは未hitで保持、全九をrawへ含む。元開始・仕様の八を上書きせず本補足を追跡する。独立UUID/メッセージ名/hashは全て合成fixtureで実認証情報ではない。

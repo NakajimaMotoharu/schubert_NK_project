@@ -1,0 +1,15 @@
+"""Pin the exact nine-source pure JDK closure and the three independent value cases."""
+from pathlib import Path
+import hashlib,json,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';core='7f04f07fb43c6fac322808fa3251d4f1b95e44ae'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+base='src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/'
+short=['codec/ExpectedRoute','codec/TransportMetadata','codec/TransportBodyType','header/MessageKind','header/InteractionKind','file/LargeResultContent','file/LargeResultDescriptor','layout/LayoutId','layout/LayoutValidationException']
+mains=[base+n+'.java' for n in short];assert all((r/n).read_bytes()==subprocess.check_output(['git','show',core+':'+n]) for n in mains)
+test='src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java';assert (r/test).read_text().count('@Test')==3
+subprocess.run([str(r.parent/'toolchain/jdk-25.0.4/bin/java'),'-jar',str(r.parent/'toolchain/google-java-format-1.36.1-all-deps.jar'),'--skip-reflowing-long-strings','--replace',str(r/test)],check=True,timeout=30)
+inv=json.loads((r/'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json').read_text());owners={n:next(x['owner'] for x in inv['artifacts'] if x['path']==n) for n in mains}
+e=b/'evidence/PG36310-wire-metadata-source-v1';e.mkdir();mp=e/'manifest.json';mp.open('x').write(json.dumps(dict(actualExit=0,productionCoreMain=core,mainSourcesUnchanged=True,mainSources=mains,sourceHashes={n:sha(r/n) for n in mains+[test]},independentExpectedRecordLength=4800,independentMaximumRecords=10000,independentMaximumBytes=48000000,independentFixedUuid='123e4567-e89b-12d3-a456-426614174000',independentExpectedMapValue='retained',privateRealSecretsOrMaster=False,noProductionMethodUsedToGenerateExpected=True,newDefinitions=3,applicationTestsExecuted=0,compileTimeDescriptorOnly=True),indent=2)+'\n')
+c=json.loads((b/'input/4325_protocol_metadata_value_profile.json').read_text());names=[n.split('/src/main/java/')[1].removesuffix('.java') for n in mains];targets=['dev/codex/schubert/nk/protocol/'+n for n in ['codec/ExpectedRoute','codec/TransportMetadata','file/LargeResultContent']]
+c.update(id='PG36320-WIRE-METADATA-VALUES-THREE',productionCoreMain=core,newTestDefinitions=3,mainSources=mains,productOwnerByMainPath=owners,testSources=[dict(path=test,tests=3)],expectedTests=3,physicalClasses=[n+'.class' for n in names],targetClasses=targets,resources=[],oracleSpecs=[ref(b/'4431_WireMetadata値・通常三仕様.md')],closureProofs=[ref(mp)],slots={k:str((b/('evidence/PG'+str(n)+'-wire-metadata-'+k+'-v1')).relative_to(r)) for k,n in [('prestyle',36312),('prepare',36314),('static',36316),('preflight',36318),('unit',36320),('post',36322)]},privateDirs=dict(prepare='pg36314-wire-metadata-values-v1',unit='pg36320-wire-metadata-values-v1'))
+(b/'input/4361_wire_metadata_profile.json').open('x').write(json.dumps(c,indent=2)+'\n');print(json.dumps(dict(actualExit=0,main=9,physical=9,newTests=3,targetClasses=3)))

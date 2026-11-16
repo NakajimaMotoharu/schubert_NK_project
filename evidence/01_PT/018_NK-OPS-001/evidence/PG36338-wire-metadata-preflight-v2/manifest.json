@@ -1,0 +1,65 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4363_wire_metadata_profile_v2.json",
+    "sha256": "6c36605f3748a7d0769b46b02452ef5e3099b40bf69b5d55b666785501d8685e"
+  },
+  "inputHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultContent.java": "0ac268929d38aaa696fcef33a2076d54f4c515235d756f43786571c94ce67130",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java": "6a76635372b373bc7c272b73caf93a2b7a1147303c1a59b3b8351a40578eb398",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java": "85cf31240e29fa3ca632d1a1cc6f3430496da4dab5e20bfa734120c140a638ec",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36334-wire-metadata-prepare-v2/manifest.json",
+    "sha256": "38e971d7bf6904170f9b849c25dee8535690c0b60f4a654d6719117be190ece0"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36336-wire-metadata-static-v2/manifest.json",
+    "sha256": "03a424c8e9fddb0735399e9d2764a3f0e38e965c071897971c5373ffb79d74bd"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/4366_wire_metadata_static_admission.json",
+    "sha256": "270b96a017a4a787aa6e3dd46afd20b28d5567ee501d956c45070afc914ff3d9"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "363",
+      "reason": "Map is method-local and never shared/published; ordinary nonconcurrent key-contract assertions intentionally exercise HashMap equality/hash behavior.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/WireMetadataValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "369",
+      "reason": "Intentional negative public value equality contract; assertion requires false for null rather than comparing production objects to null.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "0f8df81bafa1fa44b1660cc9a540138874a36fa79ecd4c7454eddcf5034599aa"
+  }
+}
