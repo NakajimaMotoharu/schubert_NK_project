@@ -616,3 +616,13 @@ private stateless関数型の実装をclass初期化時に固定Listへ登録し
 旧承認SQL全byteと順序を一対一で照合するSource equivalenceは補助証拠とする。PT期待はproductionを呼んで生成せず、既独立Testのliteral SQL/metadata/rows/固定hash/JDBC後条件と承認SS/DDLから保持する。元Asset32・Column26・Constraint22・Content29・Finalizer30・Reference21のwhole160 Test本文/独立期待値を不変とし、必要なwhole helperをscope確定してから新sourceで一exec、Root NullAway/Werror/全静的/物理CRC-init/XML/当六sourceの未filter四counter/公開API及び不変byteを確認する。private関数型の真のNoCodeを隠さず、共通DTO等の残coverageも全componentに残す。実DB/master/原本/鍵/Backup/Root/VM/native/QA056四型/QA051 finalの保留は解除しない。
 
 既instanceのtoString/redactionと例外診断を維持する。literal化は所有開始後のString組立を除去するが、性能やheap OOME挙動の実測合格を主張しない。追加A .4/1.2/3.6pp cap4を一回だけ計上、元F03 C2.4/SV/原見積りを保持する。元P01903/全F03/正式/ITSTの受入は別。状態:設計確定・main反映前・製造/PT未実施。
+
+## SSC-451 Protocolの非instance namespaceと明示dispatch（2026-11-17）
+
+BUG3111/YKT2583・YKT2647の残る四空privatector/17switchを詳細化する。FieldCodec/LargeResultRecordCodec/MediaDescriptorValidator/PayloadSemanticValidatorをpublic static-only interfaceとし、全public static methodの名前・引数・戻り値・例外・null契約を保持する。private static helperはprivateのまま、既private定数と不変Pattern/Map/Setは同一packageの非公開companion interfaceへ移す。companion型は公開namespaceへextendsせず、publicfieldを公開namespaceに増やさない。class初期化による不変cacheの一回生成・安全公開、matcher毎call分離を維持し、空instance/guard呼出/private反射でcoverageを稼がない。public型kindと呼出constant-poolのInterfaceMethodref差はJava内部ABI変更として記録し、旧class/helper/callerの混在禁止。Protocol全Mainと参照477Mainを当sourceでfreshcompileする。四held型を含むAPI/Webの全再構築はQA056成立後の終了依存として残し、当局所結果を全六module認定にしない。
+
+PayloadCodec四、MediaDescriptorValidator二、LayoutFieldCatalog七、file.ContentDisposition一、PayloadSemanticValidator三の計17switchを、selectorの一回評価とnonnull契約を保つ明示比較へ置換する。Stringは同じcase literalのequals/同じ順序/default body、closed enumは既定数をif/elseで対応し新enum追加時は設計・全対応試験の変更を必須とする。case body/固定diagnostic/先行後続処理/64layout389field/69型/golden byteを保持する。javac専用hash/ordinal map/defaultを生成不要にする責務整理で、仮想enum注入/到達不能扱い/coverage除外/旧exec合算を行わない。変更前17case表と逆展開比較、全公開API差/物理class増減・debug差を記録する。
+
+原35Testsource152と独立TSV/期待値は保持し、namespace四の公開型・publicstatic API集合/非instance契約を新四Testで確認、private memberアクセス無し。必要な変更後whole156を同sourceで一回実施し、全actualCodeのline/method/class/branch100、全例外・境界、NullAway/PMD/Checkstyle/format/SpotBugs・XML/CRC/init/独立postを要求する。新不足は修正前BUG起票、未達を合格へ換算しない。RD/UI/DIF/外部利用者挙動変更不要。SS322323333354/914をPG前にmainへ反映する。全Root/実DB/JMS/VM/native/認証/鍵/intent等HOLD・QA051/056/057・451・正式1964/53・元17/190/工数nullを維持する。
+
+状態:設計確定・main反映前、製造/PT156・全六module・正式未完。変更前source db668dd02b/製品Core0a2b32d0、予定.50/1.80/4.50 cap5、費用F03一回、他program論理owner参照は二重課金0。
