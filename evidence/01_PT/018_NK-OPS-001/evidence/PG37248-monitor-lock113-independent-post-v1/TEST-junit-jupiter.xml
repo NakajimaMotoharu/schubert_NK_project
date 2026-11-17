@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="113" skipped="0" failures="0" errors="0" time="0.447" hostname="npc1" timestamp="2026-11-17T12:47:59">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg37242-monitor-lock-oracle-current-preflight-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg37242-monitor-lock-oracle-current-preflight-v1/component:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/checkerframework/checker-qual/3.55.1/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-core/1.7.0/prometheus-metrics-core-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-config/1.7.0/prometheus-metrics-config-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.7.0/prometheus-metrics-tracer-common-1.7.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jgroups/jgroups/5.3.13.Final/jgroups-5.3.13.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler-proxy/4.1.137.Final/netty-handler-proxy-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-socks/4.1.137.Final/netty-codec-socks-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-resolver/4.1.137.Final/netty-resolver-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/de/dentrassi/crypto/pem-keystore/3.0.0/pem-keystore-3.0.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-selector/2.56.0/artemis-selector-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-databind/3.1.5/jackson-databind-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-core/3.1.5/jackson-core-3.1.5.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-http/4.1.137.Final/netty-codec-http-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler/4.1.137.Final/netty-handler-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-unix-common/4.1.137.Final/netty-transport-native-unix-common-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-epoll/4.1.137.Final/netty-transport-native-epoll-4.1.137.Final-linux-x86_64.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-epoll/4.1.137.Final/netty-transport-classes-epoll-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-kqueue/4.1.137.Final/netty-transport-native-kqueue-4.1.137.Final-osx-x86_64.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-kqueue/4.1.137.Final/netty-transport-classes-kqueue-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec/4.1.137.Final/netty-codec-4.1.137.Final.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-beanutils/commons-beanutils/1.11.0/commons-beanutils-1.11.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar"/>
+<property name="java.class.version" value="69.0"/>
+<property name="java.home" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="25"/>
+<property name="java.vendor" value="Ubuntu"/>
+<property name="java.vendor.url" value="https://ubuntu.com/"/>
+<property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-25"/>
+<property name="java.version" value="25.0.4"/>
+<property name="java.version.date" value="2026-07-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="25"/>
+<property name="java.vm.vendor" value="Ubuntu"/>
+<property name="java.vm.version" value="25.0.4+7-1-26.04-Ubuntu"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="7.0.0-43-generic"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdin.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --disable-banner --details=summary --fail-if-no-tests --reports-dir /home/mini/codex/project1/work/pgpt-runs/PG379/pg37246-monitor-lock113-unit-v1/xml --select-class dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest --select-class dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest --select-class dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest --select-class dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest --select-class dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest --select-class dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/home/mini/codex/project1/work/pgpt-runs/PG379/pg37246-monitor-lock113-unit-v1"/>
+<property name="user.home" value="/home/mini"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="mini"/>
+<property name="user.timezone" value="Asia/Tokyo"/>
+</properties>
+<testcase name="obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts()]
+display-name: obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts()
+]]></system-out>
+</testcase>
+<testcase name="fsInput005MaximumAndSingleByteTotalsDoNotOverflow()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput005MaximumAndSingleByteTotalsDoNotOverflow()]
+display-name: fsInput005MaximumAndSingleByteTotalsDoNotOverflow()
+]]></system-out>
+</testcase>
+<testcase name="transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries()]
+display-name: transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent()]
+display-name: integrityMon005NullNegativeAndReversedTimeRejectWithoutMutatingEvent()
+]]></system-out>
+</testcase>
+<testcase name="batchRec004StandardHasNoCustomSeriesButStillValidatesInputs()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec004StandardHasNoCustomSeriesButStillValidatesInputs()]
+display-name: batchRec004StandardHasNoCustomSeriesButStillValidatesInputs()
+]]></system-out>
+</testcase>
+<testcase name="poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour()]
+display-name: poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour()
+]]></system-out>
+</testcase>
+<testcase name="webLog004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()]
+display-name: webLog004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()
+]]></system-out>
+</testcase>
+<testcase name="heapConn001BeanClockAndKernelNeedExactlyTenWarningMinutes()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn001BeanClockAndKernelNeedExactlyTenWarningMinutes()]
+display-name: heapConn001BeanClockAndKernelNeedExactlyTenWarningMinutes()
+]]></system-out>
+</testcase>
+<testcase name="obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable()]
+display-name: obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner()]
+display-name: integrityMon007ConcurrentCallersKeepExactCountAndIndependentOwner()
+]]></system-out>
+</testcase>
+<testcase name="restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery()]
+display-name: restartMon003MissingOrPartialNormalCannotBridgeFiveMinuteRecovery()
+]]></system-out>
+</testcase>
+<testcase name="batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime()]
+display-name: batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent()]
+display-name: dlqMon005NullNegativeIncoherentAndReversedInputsCannotMutateEvent()
+]]></system-out>
+</testcase>
+<testcase name="webLog002ExactCountAndAgeBoundariesRaiseWithEitherKnownAbnormalInput()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog002ExactCountAndAgeBoundariesRaiseWithEitherKnownAbnormalInput()]
+display-name: webLog002ExactCountAndAgeBoundariesRaiseWithEitherKnownAbnormalInput()
+]]></system-out>
+</testcase>
+<testcase name="poll008ActionFailureThenClockPathRecoversAfterOneGapOnly()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll008ActionFailureThenClockPathRecoversAfterOneGapOnly()]
+display-name: poll008ActionFailureThenClockPathRecoversAfterOneGapOnly()
+]]></system-out>
+</testcase>
+<testcase name="obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis()]
+display-name: obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis()
+]]></system-out>
+</testcase>
+<testcase name="fsInput001FixedIndependentByteTableReadsExactlyTwoValues()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput001FixedIndependentByteTableReadsExactlyTwoValues()]
+display-name: fsInput001FixedIndependentByteTableReadsExactlyTwoValues()
+]]></system-out>
+</testcase>
+<testcase name="obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch()]
+display-name: obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch()
+]]></system-out>
+</testcase>
+<testcase name="fsInput006OneByteBeforeIntegerThresholdNeverRoundsUpAcrossIt()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput006OneByteBeforeIntegerThresholdNeverRoundsUpAcrossIt()]
+display-name: fsInput006OneByteBeforeIntegerThresholdNeverRoundsUpAcrossIt()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()]
+display-name: asyncQueue007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()
+]]></system-out>
+</testcase>
+<testcase name="poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity()]
+display-name: poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity()
+]]></system-out>
+</testcase>
+<testcase name="restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents()]
+display-name: restartMon006ConcurrentSameOwnerAndDifferentOwnerKeepExactEvents()
+]]></system-out>
+</testcase>
+<testcase name="lock406OtherMethodWaitsForOwnedCallbackThenCompletes()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock406OtherMethodWaitsForOwnedCallbackThenCompletes()]
+display-name: lock406OtherMethodWaitsForOwnedCallbackThenCompletes()
+]]></system-out>
+</testcase>
+<testcase name="transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement()]
+display-name: transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement()
+]]></system-out>
+</testcase>
+<testcase name="batchRec008FailedConstructionAndSeparateOwnersRetainRegistryOwnership()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec008FailedConstructionAndSeparateOwnersRetainRegistryOwnership()]
+display-name: batchRec008FailedConstructionAndSeparateOwnersRetainRegistryOwnership()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()]
+display-name: asyncQueue003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey()]
+display-name: integrityMon006EveryClosedServiceUsesItsOwnImmutableLogicalKey()
+]]></system-out>
+</testcase>
+<testcase name="fsInput003CheckedIoFailureIsUnknownAndNeverFormattedOrRetried()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput003CheckedIoFailureIsUnknownAndNeverFormattedOrRetried()]
+display-name: fsInput003CheckedIoFailureIsUnknownAndNeverFormattedOrRetried()
+]]></system-out>
+</testcase>
+<testcase name="heapConn007SeparateOwnersDoNotShareBeansOrAlertState()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn007SeparateOwnersDoNotShareBeansOrAlertState()]
+display-name: heapConn007SeparateOwnersDoNotShareBeansOrAlertState()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys()]
+display-name: dlqMon002CoherentEntryMatrixUsesIndependentSeverityAndAllServiceKeys()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents()]
+display-name: integrityMon001KnownZeroAndMissingDoNotInventOrConflateEvents()
+]]></system-out>
+</testcase>
+<testcase name="webLog006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()]
+display-name: webLog006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents()]
+display-name: dlqMon004UnknownGapAndEscalationPreserveExactHistoricalEvents()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose()]
+display-name: integrityMon003NormalEvenConfirmedAndMaximumElapsedCannotAutoClose()
+]]></system-out>
+</testcase>
+<testcase name="transferConn006StandardStillMaintainsWarningCriticalAndCauseRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn006StandardStillMaintainsWarningCriticalAndCauseRecovery()]
+display-name: transferConn006StandardStillMaintainsWarningCriticalAndCauseRecovery()
+]]></system-out>
+</testcase>
+<testcase name="lock401ObserveFailureReleasesForAnotherThreadAndPreservesOneGap()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock401ObserveFailureReleasesForAnotherThreadAndPreservesOneGap()]
+display-name: lock401ObserveFailureReleasesForAnotherThreadAndPreservesOneGap()
+]]></system-out>
+</testcase>
+<testcase name="transferConn007InvalidInputsAndProviderFailuresPreserveOwnerAndCurrentValues()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn007InvalidInputsAndProviderFailuresPreserveOwnerAndCurrentValues()]
+display-name: transferConn007InvalidInputsAndProviderFailuresPreserveOwnerAndCurrentValues()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles()]
+display-name: dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles()
+]]></system-out>
+</testcase>
+<testcase name="heapConn006NullAndBackwardsBoundariesHaveNoProviderOrStateMutation()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn006NullAndBackwardsBoundariesHaveNoProviderOrStateMutation()]
+display-name: heapConn006NullAndBackwardsBoundariesHaveNoProviderOrStateMutation()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon006NullNegativeAndReversedTimeCannotChangeAcceptedEvent()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon006NullNegativeAndReversedTimeCannotChangeAcceptedEvent()]
+display-name: expiryMon006NullNegativeAndReversedTimeCannotChangeAcceptedEvent()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles()]
+display-name: integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles()
+]]></system-out>
+</testcase>
+<testcase name="restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery()]
+display-name: restartMon005GapNullNegativeAndReversedTimeCannotFakeRecovery()
+]]></system-out>
+</testcase>
+<testcase name="fsInput009MissingIoAndInvalidStatsBreakRecoveryRatherThanClosingAlert()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput009MissingIoAndInvalidStatsBreakRecoveryRatherThanClosingAlert()]
+display-name: fsInput009MissingIoAndInvalidStatsBreakRecoveryRatherThanClosingAlert()
+]]></system-out>
+</testcase>
+<testcase name="transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues()]
+display-name: transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues()
+]]></system-out>
+</testcase>
+<testcase name="transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent()]
+display-name: transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent()
+]]></system-out>
+</testcase>
+<testcase name="backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning()]
+display-name: backupMon004CriticalNeedsTenMinutesAndConfirmedCauseDespiteLowerWarning()
+]]></system-out>
+</testcase>
+<testcase name="obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped()]
+display-name: obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped()
+]]></system-out>
+</testcase>
+<testcase name="restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles()]
+display-name: restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles()
+]]></system-out>
+</testcase>
+<testcase name="heapConn002UnknownMaximumBreaksCriticalNormalRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn002UnknownMaximumBreaksCriticalNormalRecovery()]
+display-name: heapConn002UnknownMaximumBreaksCriticalNormalRecovery()
+]]></system-out>
+</testcase>
+<testcase name="obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()]
+display-name: obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory()]
+display-name: integrityMon004UnknownAndExplicitGapKeepOldEventAndNewViolationHistory()
+]]></system-out>
+</testcase>
+<testcase name="obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos()]
+display-name: obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos()
+]]></system-out>
+</testcase>
+<testcase name="webLog005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()]
+display-name: webLog005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()
+]]></system-out>
+</testcase>
+<testcase name="restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct()]
+display-name: restartMon001KnownNormalUnknownAndPartialFlagsRemainDistinct()
+]]></system-out>
+</testcase>
+<testcase name="transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot()]
+display-name: transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon003MissingBreaksWarningRecoveryWithoutErasingOldEvent()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon003MissingBreaksWarningRecoveryWithoutErasingOldEvent()]
+display-name: expiryMon003MissingBreaksWarningRecoveryWithoutErasingOldEvent()
+]]></system-out>
+</testcase>
+<testcase name="webLog001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()]
+display-name: webLog001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()
+]]></system-out>
+</testcase>
+<testcase name="backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent()]
+display-name: backupMon002FixedSeverityAndPartialAbnormalEvidenceAreIndependent()
+]]></system-out>
+</testcase>
+<testcase name="fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()]
+display-name: fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership()
+]]></system-out>
+</testcase>
+<testcase name="backupMon007CompletionGeneratedContractUsesIndependentBooleanHashAndText()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon007CompletionGeneratedContractUsesIndependentBooleanHashAndText()]
+display-name: backupMon007CompletionGeneratedContractUsesIndependentBooleanHashAndText()
+]]></system-out>
+</testcase>
+<testcase name="heapConn003GetterFailureIsNotRetriedOrConvertedAndBreaksRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn003GetterFailureIsNotRetriedOrConvertedAndBreaksRecovery()]
+display-name: heapConn003GetterFailureIsNotRetriedOrConvertedAndBreaksRecovery()
+]]></system-out>
+</testcase>
+<testcase name="transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput()" classname="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitorTest]/[method:transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput()]
+display-name: transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()]
+display-name: asyncQueue008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()
+]]></system-out>
+</testcase>
+<testcase name="fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()]
+display-name: fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner()
+]]></system-out>
+</testcase>
+<testcase name="webLog008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()]
+display-name: webLog008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles()
+]]></system-out>
+</testcase>
+<testcase name="lock402ObserveNowClockFailureReleasesBothLocksAcrossThreads()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock402ObserveNowClockFailureReleasesBothLocksAcrossThreads()]
+display-name: lock402ObserveNowClockFailureReleasesBothLocksAcrossThreads()
+]]></system-out>
+</testcase>
+<testcase name="batchRec001ActualDebugRegistryHasFortyCountersAndTenUnknownSuccessGauges()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec001ActualDebugRegistryHasFortyCountersAndTenUnknownSuccessGauges()]
+display-name: batchRec001ActualDebugRegistryHasFortyCountersAndTenUnknownSuccessGauges()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()]
+display-name: asyncQueue006InvalidInputsAndReversedElapsedCannotMutatePriorEvent()
+]]></system-out>
+</testcase>
+<testcase name="obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest]/[method:obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes()]
+display-name: obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes()
+]]></system-out>
+</testcase>
+<testcase name="heapConn005ExplicitOomReportWithUnknownUsageIsCriticalNotInventedZero()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn005ExplicitOomReportWithUnknownUsageIsCriticalNotInventedZero()]
+display-name: heapConn005ExplicitOomReportWithUnknownUsageIsCriticalNotInventedZero()
+]]></system-out>
+</testcase>
+<testcase name="batchRec002WholeIndependentMatrixCountsOnceAndOnlySuccessUpdatesTime()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.058">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec002WholeIndependentMatrixCountsOnceAndOnlySuccessUpdatesTime()]
+display-name: batchRec002WholeIndependentMatrixCountsOnceAndOnlySuccessUpdatesTime()
+]]></system-out>
+</testcase>
+<testcase name="batchRec005NullUtcRangeAndMicrosecondPrecisionRejectBeforeSideEffects()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec005NullUtcRangeAndMicrosecondPrecisionRejectBeforeSideEffects()]
+display-name: batchRec005NullUtcRangeAndMicrosecondPrecisionRejectBeforeSideEffects()
+]]></system-out>
+</testcase>
+<testcase name="integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity()" classname="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitorTest]/[method:integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity()]
+display-name: integrityMon002OneOrMaximumFailureIsCriticalWithFixedIdentity()
+]]></system-out>
+</testcase>
+<testcase name="backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles()]
+display-name: backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles()]
+display-name: dlqMon007ObservationGeneratedContractsUseIndependentLongAndBooleanOracles()
+]]></system-out>
+</testcase>
+<testcase name="webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()]
+display-name: webLog007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()
+]]></system-out>
+</testcase>
+<testcase name="poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed()]
+display-name: poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed()
+]]></system-out>
+</testcase>
+<testcase name="fsInput004UncheckedAndFatalRemainTheSameFailureNotNormalData()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput004UncheckedAndFatalRemainTheSameFailureNotNormalData()]
+display-name: fsInput004UncheckedAndFatalRemainTheSameFailureNotNormalData()
+]]></system-out>
+</testcase>
+<testcase name="lock404CounterFailureReleasesWithoutClosingBorrowedRegistry()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock404CounterFailureReleasesWithoutClosingBorrowedRegistry()]
+display-name: lock404CounterFailureReleasesWithoutClosingBorrowedRegistry()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()]
+display-name: asyncQueue001KnownNormalAndMissingRemainDifferentWithoutInventedEvents()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()]
+display-name: asyncQueue004CriticalStaysStickyUntilTenNormalMinutesAndConfirmedCause()
+]]></system-out>
+</testcase>
+<testcase name="fsInput008ActualObservationPortDrivesWarningAndCriticalBoundaries()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput008ActualObservationPortDrivesWarningAndCriticalBoundaries()]
+display-name: fsInput008ActualObservationPortDrivesWarningAndCriticalBoundaries()
+]]></system-out>
+</testcase>
+<testcase name="poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap()]
+display-name: poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap()
+]]></system-out>
+</testcase>
+<testcase name="webLog003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()" classname="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitorTest]/[method:webLog003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()]
+display-name: webLog003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon004CriticalStaysStickyUntilTenNormalMinutesAndCauseConfirmed()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon004CriticalStaysStickyUntilTenNormalMinutesAndCauseConfirmed()]
+display-name: expiryMon004CriticalStaysStickyUntilTenNormalMinutesAndCauseConfirmed()
+]]></system-out>
+</testcase>
+<testcase name="restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation()]
+display-name: restartMon004RateLimitCriticalNeedsTenMinutesAndCauseConfirmation()
+]]></system-out>
+</testcase>
+<testcase name="backupMon001KnownNormalMissingAndPartialStayDistinctWithoutInventedEvents()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon001KnownNormalMissingAndPartialStayDistinctWithoutInventedEvents()]
+display-name: backupMon001KnownNormalMissingAndPartialStayDistinctWithoutInventedEvents()
+]]></system-out>
+</testcase>
+<testcase name="backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()]
+display-name: backupMon005GapInvalidAndNullObservationsCannotFakeRecovery()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts()]
+display-name: dlqMon006ConcurrentSameOwnerAndSeparateOwnerKeepExactCounts()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()]
+display-name: asyncQueue005ExplicitGapCannotBridgeTheFiveMinuteNormalWindow()
+]]></system-out>
+</testcase>
+<testcase name="poll001NormalFlagsContextAndResultHaveNoRetries()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll001NormalFlagsContextAndResultHaveNoRetries()]
+display-name: poll001NormalFlagsContextAndResultHaveNoRetries()
+]]></system-out>
+</testcase>
+<testcase name="heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots()]
+display-name: heapConn008ConcurrentInputsHaveExactReadsAndImmutableCountSnapshots()
+]]></system-out>
+</testcase>
+<testcase name="asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues()]
+display-name: asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues()
+]]></system-out>
+</testcase>
+<testcase name="heapConn004ClockFailureOrNullNeverReadsBeanAndCrossApiRecoveryHasGap()" classname="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitorTest]/[method:heapConn004ClockFailureOrNullNeverReadsBeanAndCrossApiRecoveryHasGap()]
+display-name: heapConn004ClockFailureOrNullNeverReadsBeanAndCrossApiRecoveryHasGap()
+]]></system-out>
+</testcase>
+<testcase name="asyncByte002ByteUsageInvariantsAndGeneratedContractsHaveIndependentOracles()" classname="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitorTest]/[method:asyncByte002ByteUsageInvariantsAndGeneratedContractsHaveIndependentOracles()]
+display-name: asyncByte002ByteUsageInvariantsAndGeneratedContractsHaveIndependentOracles()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon001KnownNormalAndUnknownDoNotInventAnEvent()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon001KnownNormalAndUnknownDoNotInventAnEvent()]
+display-name: expiryMon001KnownNormalAndUnknownDoNotInventAnEvent()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityHashes()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityHashes()]
+display-name: expiryMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityHashes()
+]]></system-out>
+</testcase>
+<testcase name="batchRec003LastSuccessIsMaximumNotLastCallAndNonSuccessCannotReplaceIt()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec003LastSuccessIsMaximumNotLastCallAndNonSuccessCannotReplaceIt()]
+display-name: batchRec003LastSuccessIsMaximumNotLastCallAndNonSuccessCannotReplaceIt()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents()]
+display-name: dlqMon001KnownEmptyAndUnknownRemainDistinctWithoutInventingEvents()
+]]></system-out>
+</testcase>
+<testcase name="restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity()]
+display-name: restartMon007EveryClosedServicePreservesCountAndIndependentFlagIdentity()
+]]></system-out>
+</testcase>
+<testcase name="poll005NullBoundariesDoNotCallOrChangeContinuity()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll005NullBoundariesDoNotCallOrChangeContinuity()]
+display-name: poll005NullBoundariesDoNotCallOrChangeContinuity()
+]]></system-out>
+</testcase>
+<testcase name="lock405SameThreadCrossMethodReentryKeepsCompoundOrder()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock405SameThreadCrossMethodReentryKeepsCompoundOrder()]
+display-name: lock405SameThreadCrossMethodReentryKeepsCompoundOrder()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon002ExactCountBoundariesHaveFixedSeverityAndKey()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon002ExactCountBoundariesHaveFixedSeverityAndKey()]
+display-name: expiryMon002ExactCountBoundariesHaveFixedSeverityAndKey()
+]]></system-out>
+</testcase>
+<testcase name="backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent()]
+display-name: backupMon006ConcurrentSameOwnerKeepsExactCountAndOtherOwnerIndependent()
+]]></system-out>
+</testcase>
+<testcase name="fsInput002InvalidValuesAreUnknownWithoutClampingOrStickyFailure()" classname="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest]/[method:fsInput002InvalidValuesAreUnknownWithoutClampingOrStickyFailure()]
+display-name: fsInput002InvalidValuesAreUnknownWithoutClampingOrStickyFailure()
+]]></system-out>
+</testcase>
+<testcase name="poll006NullResultIsFailureAndDoesNotCommitLaterEpoch()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest]/[method:poll006NullResultIsFailureAndDoesNotCommitLaterEpoch()]
+display-name: poll006NullResultIsFailureAndDoesNotCommitLaterEpoch()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon005ExplicitGapRestartsTheFiveMinuteWarningRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon005ExplicitGapRestartsTheFiveMinuteWarningRecovery()]
+display-name: expiryMon005ExplicitGapRestartsTheFiveMinuteWarningRecovery()
+]]></system-out>
+</testcase>
+<testcase name="backupMon003PartialOrMissingCannotBridgeWarningRecovery()" classname="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitorTest]/[method:backupMon003PartialOrMissingCannotBridgeWarningRecovery()]
+display-name: backupMon003PartialOrMissingCannotBridgeWarningRecovery()
+]]></system-out>
+</testcase>
+<testcase name="lock403UtcFailureReleasesClockAndDoesNotCommitFailedObservation()" classname="dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.MonitoringLockContractTest]/[method:lock403UtcFailureReleasesClockAndDoesNotCommitFailedObservation()]
+display-name: lock403UtcFailureReleasesClockAndDoesNotCommitFailedObservation()
+]]></system-out>
+</testcase>
+<testcase name="dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical()" classname="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitorTest]/[method:dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical()]
+display-name: dlqMon003NormalEvenConfirmedCannotAutoCloseWarningOrCritical()
+]]></system-out>
+</testcase>
+<testcase name="restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix()" classname="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitorTest]/[method:restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix()]
+display-name: restartMon002CountAndRateLimitUseIndependentFixedGoldenMatrix()
+]]></system-out>
+</testcase>
+<testcase name="expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()" classname="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitorTest]/[method:expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()]
+display-name: expiryMon007ConcurrentSameOwnerAndIndependentOwnerHaveExactCounts()
+]]></system-out>
+</testcase>
+<testcase name="batchRec006ProviderFailuresHaveExactIdentityNoRetryAndBorrowedRegistry()" classname="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorderTest]/[method:batchRec006ProviderFailuresHaveExactIdentityNoRetryAndBorrowedRegistry()]
+display-name: batchRec006ProviderFailuresHaveExactIdentityNoRetryAndBorrowedRegistry()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
