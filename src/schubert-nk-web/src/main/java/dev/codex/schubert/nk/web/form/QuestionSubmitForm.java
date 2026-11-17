@@ -27,9 +27,9 @@ public final class QuestionSubmitForm implements AutoCloseable {
   private boolean closed;
 
   private QuestionSubmitForm(String question, UUID token, Map<String, String> issues) {
-    this.question = question.toCharArray();
     retainedOperationToken = token;
     this.issues = Map.copyOf(issues);
+    this.question = question.toCharArray();
   }
 
   /** The security chain owns CSRF; the caller separately verifies token purpose/session. */
@@ -62,12 +62,11 @@ public final class QuestionSubmitForm implements AutoCloseable {
       question = "";
     }
     byte[] encoded = question.getBytes(StandardCharsets.UTF_8);
-    try {
-      if (encoded.length < 1 || encoded.length > 4096 || question.endsWith(" "))
-        issues.put(LITERAL_QUESTION, INVALID);
-    } finally {
-      Arrays.fill(encoded, (byte) 0);
-    }
+    int byteLength = encoded.length;
+    // Consume and wipe this local byte buffer before any later validation (BUG3196).
+    Arrays.fill(encoded, (byte) 0);
+    if (byteLength < 1 || byteLength > 4096 || question.endsWith(" "))
+      issues.put(LITERAL_QUESTION, INVALID);
     UUID token = new UUID(0, 0);
     String text = Objects.requireNonNull(values.get("operation_token"));
     if (!text.matches("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"))

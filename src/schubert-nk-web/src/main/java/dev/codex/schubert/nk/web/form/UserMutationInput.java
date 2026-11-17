@@ -49,15 +49,15 @@ final class UserMutationInput implements AutoCloseable {
       UUID token,
       boolean enabled,
       String role,
-      char[] password,
+      String password,
       Map<String, String> issues) {
     this.id = id;
     this.version = version;
     this.token = token;
     this.enabled = enabled;
     this.role = role;
-    this.retainedPassword = password.clone();
     this.issues = Map.copyOf(issues);
+    this.retainedPassword = this.issues.isEmpty() ? password.toCharArray() : new char[0];
   }
 
   static UserMutationInput bind(
@@ -113,30 +113,26 @@ final class UserMutationInput implements AutoCloseable {
     }
     String normalized =
         Normalizer.normalize(values.getOrDefault("password", ""), Normalizer.Form.NFC);
-    char[] password = normalized.toCharArray();
     byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);
-    try {
-      if (operation.equals("PASSWORD")) {
-        int count = normalized.codePointCount(0, normalized.length());
-        String account = Normalizer.normalize(targetUsername.trim(), Normalizer.Form.NFC);
-        if (count < 12
-            || count > 128
-            || bytes.length > 256
-            || normalized.endsWith(" ")
-            || normalized.codePoints().anyMatch(UserMutationInput::invalidCharacter)
-            || normalized.equalsIgnoreCase(account)) issues.put("password", INVALID);
-        String confirmation =
-            Normalizer.normalize(
-                Objects.requireNonNull(values.get("password_confirmation")), Normalizer.Form.NFC);
-        if (!normalized.equals(confirmation)) issues.put("password_confirmation", INVALID);
-      }
-      if (!issues.isEmpty()) Arrays.fill(password, '\0');
-      return new UserMutationInput(
-          pathId, version, token, flag.equals("true"), role, password, issues);
-    } finally {
-      Arrays.fill(password, '\0');
-      Arrays.fill(bytes, (byte) 0);
+    int byteLength = bytes.length;
+    // No secret byte buffer remains live during validation or construction (BUG3196).
+    Arrays.fill(bytes, (byte) 0);
+    if (operation.equals("PASSWORD")) {
+      int count = normalized.codePointCount(0, normalized.length());
+      String account = Normalizer.normalize(targetUsername.trim(), Normalizer.Form.NFC);
+      if (count < 12
+          || count > 128
+          || byteLength > 256
+          || normalized.endsWith(" ")
+          || normalized.codePoints().anyMatch(UserMutationInput::invalidCharacter)
+          || normalized.equalsIgnoreCase(account)) issues.put("password", INVALID);
+      String confirmation =
+          Normalizer.normalize(
+              Objects.requireNonNull(values.get("password_confirmation")), Normalizer.Form.NFC);
+      if (!normalized.equals(confirmation)) issues.put("password_confirmation", INVALID);
     }
+    return new UserMutationInput(
+        pathId, version, token, flag.equals("true"), role, normalized, issues);
   }
 
   private static boolean invalidCharacter(int value) {

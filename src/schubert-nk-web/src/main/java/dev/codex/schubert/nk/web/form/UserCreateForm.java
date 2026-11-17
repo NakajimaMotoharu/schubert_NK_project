@@ -46,14 +46,14 @@ public final class UserCreateForm implements AutoCloseable {
       String role,
       boolean enabled,
       UUID operationToken,
-      char[] password,
+      String password,
       Map<String, String> issues) {
     this.username = username;
     this.role = role;
     this.enabled = enabled;
     this.operationToken = operationToken;
-    this.password = password.clone();
     this.issues = Map.copyOf(issues);
+    this.password = this.issues.isEmpty() ? password.toCharArray() : new char[0];
   }
 
   /** CSRF is validated by the existing security filter, never retained by this form. */
@@ -103,23 +103,19 @@ public final class UserCreateForm implements AutoCloseable {
     String confirmation =
         Normalizer.normalize(
             Objects.requireNonNull(values.get("password_confirmation")), Normalizer.Form.NFC);
-    char[] password = normalized.toCharArray();
     byte[] bytes = normalized.getBytes(StandardCharsets.UTF_8);
-    try {
-      int count = normalized.codePointCount(0, normalized.length());
-      if (count < 12
-          || count > 128
-          || bytes.length > 256
-          || normalized.endsWith(" ")
-          || normalized.codePoints().anyMatch(UserCreateForm::invalidCharacter)
-          || normalized.equalsIgnoreCase(username)) issues.put("password", INVALID);
-      if (!normalized.equals(confirmation)) issues.put("password_confirmation", INVALID);
-      if (!issues.isEmpty()) Arrays.fill(password, '\0');
-      return new UserCreateForm(username, role, flag.equals("true"), token, password, issues);
-    } finally {
-      Arrays.fill(password, '\0');
-      Arrays.fill(bytes, (byte) 0);
-    }
+    int byteLength = bytes.length;
+    // End temporary byte ownership before validation or construction can fail (BUG3196).
+    Arrays.fill(bytes, (byte) 0);
+    int count = normalized.codePointCount(0, normalized.length());
+    if (count < 12
+        || count > 128
+        || byteLength > 256
+        || normalized.endsWith(" ")
+        || normalized.codePoints().anyMatch(UserCreateForm::invalidCharacter)
+        || normalized.equalsIgnoreCase(username)) issues.put("password", INVALID);
+    if (!normalized.equals(confirmation)) issues.put("password_confirmation", INVALID);
+    return new UserCreateForm(username, role, flag.equals("true"), token, normalized, issues);
   }
 
   private static boolean invalidCharacter(int value) {
