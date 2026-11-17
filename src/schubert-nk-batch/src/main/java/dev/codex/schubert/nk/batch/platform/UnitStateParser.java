@@ -14,7 +14,9 @@ final class UnitStateParser {
   private static final Set<String> KEYS =
       Set.of("Id", "LoadState", "ActiveState", "SubState", "Job", "MainPID", "ControlPID");
 
-  private UnitStateParser() {}
+  private UnitStateParser() {
+    throw new AssertionError("static namespace");
+  }
 
   static void requireStopped(ApplicationUnit expected, byte[] bytes) {
     Objects.requireNonNull(expected, "unit");

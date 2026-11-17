@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -146,7 +147,8 @@ final class UnitStateParserBytePortTest {
   @Test
   void independentMemoryProjectionsDoNotShareIntermediateState() throws Exception {
     var results = new ArrayList<Future<String>>();
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       for (int index = 0; index < 32; index++) {
         boolean web = index % 2 == 0;
         results.add(
@@ -161,6 +163,9 @@ final class UnitStateParserBytePortTest {
       for (int index = 0; index < 32; index++)
         assertEquals(
             index % 2 == 0 ? WEB_ID : API_ID, results.get(index).get(10, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }
