@@ -105,7 +105,8 @@ final class ReleaseInventory {
     try {
       String text = StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(copy)).toString();
       require(!text.startsWith("\ufeff"));
-      try (var reader = new JsonReader(new StringReader(text))) {
+      var reader = new JsonReader(new StringReader(text));
+      try {
         reader.setStrictness(Strictness.STRICT);
         reader.setNestingLimit(4);
         reader.beginObject();
@@ -143,6 +144,9 @@ final class ReleaseInventory {
         reader.peek();
         return new ReleaseInventory(
             release, versions, source, build, platform, artifacts, dependencies, migrations);
+      } finally {
+        // PG-D-1174: fixed nonnull memory reader, no external IO/authority or owner handoff.
+        reader.close();
       }
     } catch (IOException | IllegalArgumentException | IllegalStateException invalid) {
       throw new IOException("release inventory unavailable");
