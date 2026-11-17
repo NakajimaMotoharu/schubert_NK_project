@@ -1,0 +1,177 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5757",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "6406165667de86fb1cb2d889079e11be54c41d62adfadebbca20a7c17af06c9e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:59:19.537000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 24,
+          "remainingPercent": 76,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:58:51.412334+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-REPORT-RETRY-RAW-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-REPORT-RETRY-RAW-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 and P006-02 shared Outbox domain value. Measure currently omitted generated Report equals/hash/toString and RetrySchedule enum protocol from whole admitted existing Count/Policy/Value tests and one enum namespace test. Keep original schedule and test oracles; compile only exact named Main, compare same single exec. No actual send, Redis/DB, service, auth, files, permissions, credential or held types.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38284-outbox-retained-value-independent-v1/manifest.json",
+        "sha256": "d63f355fbf7333eb9e0018b835a1b7ffcefa75d37fdf8ab02017298ea26c65af"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+        "sha256": "c946af25cfe920c79726a3cc4a3d0fb90e4b29420ccef380cf4706c1099b6f16"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38286-outbox-report-retry-current-raw-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02"
+    ],
+    "testIds": [
+      "PT-IDEM-010",
+      "PT-OUTBOX-REPORT-RAW",
+      "PT-IDEM-010-RETRY-CATALOG"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5756",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38294-outbox-report-retry-independent-v1/manifest.json",
+      "sha256": "41be1e3a3d4d6141e90b7442426073e39df0769906781efdab92cd3383e4eda5"
+    },
+    "actualUnitSource": "9af38d8ca50dcc93d53059ddc11c930827065ffc",
+    "actualWorkAttributionKind": "SOURCE_REQUALIFICATION",
+    "firstRunSuccessNumerator": 10,
+    "firstRunDenominator": 10,
+    "productTestReruns": 0,
+    "originallyProposedAdditionalTest": 1,
+    "duplicateDraftNotExecuted": 1,
+    "newTestDefinitions": 0,
+    "completedAdditionalPricePp": 0,
+    "technicalMeasurement": {
+      "tests": 10,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 3,
+      "targetCodeMethods": 15,
+      "targetCoverage": {
+        "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 62
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 10
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 5
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 13
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 8
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 89
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 13
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 15
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 15
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 7
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "criterionReductions": [
+      "Same-exec Report and RetrySchedule closed all 15 Code methods using untouched 10 existing whole fixtures."
+    ],
+    "remainingCriteria": [
+      "Actual outbox runtime/backoff, all six 451 and separate scopes."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "nextCommand": "Continue independently allowed priorities with exact latest source."
+  }
+}

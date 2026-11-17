@@ -1,0 +1,91 @@
+{
+  "eventId": "PGPT-20261008-5756",
+  "groupId": "PGPT-WBS66-OUTBOX-REPORT-RETRY-RAW-20261118",
+  "baseCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T23:56:52.644000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-REPORT-RETRY-RAW-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-REPORT-RETRY-RAW-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 and P006-02 shared Outbox domain value. Measure currently omitted generated Report equals/hash/toString and RetrySchedule enum protocol from whole admitted existing Count/Policy/Value tests and one enum namespace test. Keep original schedule and test oracles; compile only exact named Main, compare same single exec. No actual send, Redis/DB, service, auth, files, permissions, credential or held types.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38284-outbox-retained-value-independent-v1/manifest.json",
+        "sha256": "d63f355fbf7333eb9e0018b835a1b7ffcefa75d37fdf8ab02017298ea26c65af"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+        "sha256": "c946af25cfe920c79726a3cc4a3d0fb90e4b29420ccef380cf4706c1099b6f16"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38286-outbox-report-retry-current-raw-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02"
+    ],
+    "testIds": [
+      "PT-IDEM-010",
+      "PT-OUTBOX-REPORT-RAW",
+      "PT-IDEM-010-RETRY-CATALOG"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "mains": {
+    "OutboxDispatchReport": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    "OutboxRetrySchedule": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetrySchedule.java",
+      "sha256": "f565b0413b5e262907e209f523915e3050beb7062fec3b369d178124c58e8854"
+    },
+    "OutboxDestination": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    }
+  },
+  "tests": {
+    "OutboxPolicyTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxPolicyTest.java",
+      "sha256": "ddd94d17ece3c2ed0861cd21f463920ed5972c39102f60f147ee8c45f2e5abc6"
+    },
+    "OutboxDispatchReportBoundaryTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReportBoundaryTest.java",
+      "sha256": "19d79b9b2d1c49b87b1d56df39f6bd4d37103403cca4311541bfdf741e440ffc"
+    },
+    "OutboxValueContractTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxValueContractTest.java",
+      "sha256": "b194e691797ce0e77608ac357062a8150c064f7ea25a5af0be437edb9396088b"
+    }
+  }
+}

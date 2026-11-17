@@ -1,0 +1,76 @@
+{
+  "source": "9af38d8ca50dcc93d53059ddc11c930827065ffc",
+  "run": "PG38292-OUTBOX-REPORT-RETRY-10",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "branch": "dev-foundation",
+  "startedAtUTC": "2026-11-17T23:58:49.835305+00:00",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38292-outbox-report-retry-unit-v1/tmp",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38292-outbox-report-retry-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38292-outbox-report-retry-unit-v1/jacoco.exec,append=false,sessionid=PG38292-OUTBOX-REPORT-RETRY-10",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38288-outbox-report-retry-prepare-v2/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38288-outbox-report-retry-prepare-v2/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38292-outbox-report-retry-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+    "--select-class",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+    "--select-class",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest"
+  ],
+  "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38292-outbox-report-retry-unit-v1",
+  "javaSha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+  "jacocoAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "admissionSha256": "6eadfee0cb41cada55f7b7bd820c7d0e90991d4a129aa77e63af68d64a5f9089",
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+      "name": "destinationMappingIsClosedToTwoPhysicalAddresses()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+      "name": "retryScheduleUsesOneFiveThirtySixtyAndFiveMinuteCap()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+      "name": "nextAttemptIsCalculatedFromExplicitFailureTime()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxPolicyTest",
+      "name": "retryJitterUsesIndependentExactBoundaryVectorsAfterCappingTheBase()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "name": "acceptsZeroAndExactMaximumWithoutNarrowingValidCounts()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "name": "rejectsWrappedSumsInEveryComponentPosition()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatchReportBoundaryTest",
+      "name": "rejectsEveryNegativeComponentAndNonWrappingMismatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "name": "value001ReportEqualityRetainsEveryConsistentCountAndOrdinaryPublicRendering()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "name": "value002DestinationKeepsExactlyTwoFixedAddressesAndDefensiveClosedEnumFactories()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxValueContractTest",
+      "name": "value003ApplicationRetryUsesIndependentFiveByThreeGoldenOffsetsAndAllHundredAttempts()"
+    }
+  ]
+}
