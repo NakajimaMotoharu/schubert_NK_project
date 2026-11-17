@@ -1,0 +1,3 @@
+# 4522 終了receiptと旧writer整合修正結果
+
+BUG3194/YKT2661。製品Mainはa013不変。純adapterは検証済みreceiptを保全し、legacy writerへ窓値だけ平坦化する。PG37870工具6件成功、製品PT0。PG37872/event5673は原8eventを保持した追記訂正、同窓5件0pp・異marker3件null。PG37874独立照合成功。専有/token/工数はnull、価格と正式1964/53・17/190は不変。再発防止は477の今後producer手順と純adapterのreceipt/負差/marker/型の検証。fixcommitと終了観測は後続記録へ記載する。
