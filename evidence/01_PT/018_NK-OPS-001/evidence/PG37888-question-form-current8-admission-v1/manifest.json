@@ -1,0 +1,83 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T16:37:19.890328+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37888-question-form-current8-admission-v1/normalized-prepare.json",
+    "sha256": "f96efba6fb8923a11d0ae8af3db826f364b84e39aa15de84526ac68d8cbef7fe"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37884-question-form-prepare-v1/manifest.json",
+    "sha256": "11f293daf6500024b94482c2a1e98e0474ac9885bb9c853259ba1b0422ba899d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37886-question-form-static-v1/manifest.json",
+    "sha256": "43025de48acf5a9782b5dbf8ea840dc0af3043d9e9b5ec0862dbde06bf57c0a5"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "CloseResource",
+      "line": "238",
+      "reason": "This exact fixture-local pool is owned by finally shutdownNow and asserted awaitTermination(10seconds). All100 independent task futures use get(30seconds). No managed application executor/server/resource is created; finite cleanup replaces indefinite TWR.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "238",
+      "reason": "Standalone JUnit verifies100 independent request bodies/UUID syntax on8 fixture-owned workers. Every future wait30seconds and finally termination10seconds is finite. This fixture is not a J2EE-managed application component.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "244",
+      "reason": "Standalone JUnit verifies100 independent request bodies/UUID syntax on8 fixture-owned workers. Every future wait30seconds and finally termination10seconds is finite. This fixture is not a J2EE-managed application component.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "265",
+      "reason": "Standalone JUnit verifies100 independent request bodies/UUID syntax on8 fixture-owned workers. Every future wait30seconds and finally termination10seconds is finite. This fixture is not a J2EE-managed application component.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "266",
+      "reason": "Standalone JUnit verifies100 independent request bodies/UUID syntax on8 fixture-owned workers. Every future wait30seconds and finally termination10seconds is finite. This fixture is not a J2EE-managed application component.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/form/QuestionSubmitForm"
+  ],
+  "RootNullAwayMain1": true,
+  "explicitMaxLowMain1": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": 8
+  },
+  "newDefinitions": 0,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

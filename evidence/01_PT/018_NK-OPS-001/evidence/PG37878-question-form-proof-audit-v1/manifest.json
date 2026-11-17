@@ -1,0 +1,183 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T16:34:34.704678+00:00",
+  "productionCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+  "historicalSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "mainSourceUnchanged": true,
+  "testDifferenceOnlyFiniteCleanup": true,
+  "wholeOriginalCases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm007TerminalClosePreservesOtherOwners",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm008ConcurrentIndependentBodiesAndTokens",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm001IndependentGoldenAndNoQuestionTrimming",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm005ClosedBindingMissingDuplicateAndNullContracts",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm002ByteBoundariesAfterNfcWithoutTruncation",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm006ImmutableSnapshotsAndRedaction",
+      "nonPass": [],
+      "result": "PASS"
+    }
+  ],
+  "physicalClassCodeMethods13": [
+    {
+      "codeLength": 26,
+      "descriptor": "(Ljava/lang/String;Ljava/util/UUID;Ljava/util/Map;)V",
+      "flags": 2,
+      "hasCode": true,
+      "name": "<init>"
+    },
+    {
+      "codeLength": 436,
+      "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/QuestionSubmitForm;",
+      "flags": 9,
+      "hasCode": true,
+      "name": "bind"
+    },
+    {
+      "codeLength": 25,
+      "descriptor": "(I)Z",
+      "flags": 10,
+      "hasCode": true,
+      "name": "invalidCharacter"
+    },
+    {
+      "codeLength": 10,
+      "descriptor": "()Z",
+      "flags": 1,
+      "hasCode": true,
+      "name": "isValid"
+    },
+    {
+      "codeLength": 5,
+      "descriptor": "()Ljava/util/Map;",
+      "flags": 1,
+      "hasCode": true,
+      "name": "getIssues"
+    },
+    {
+      "codeLength": 9,
+      "descriptor": "()Ljava/util/UUID;",
+      "flags": 1,
+      "hasCode": true,
+      "name": "operationToken"
+    },
+    {
+      "codeLength": 21,
+      "descriptor": "()Ljava/util/Map;",
+      "flags": 1,
+      "hasCode": true,
+      "name": "displayValues"
+    },
+    {
+      "codeLength": 44,
+      "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData;",
+      "flags": 1,
+      "hasCode": true,
+      "name": "toRequest"
+    },
+    {
+      "codeLength": 18,
+      "descriptor": "()V",
+      "flags": 2,
+      "hasCode": true,
+      "name": "ensureOpen"
+    },
+    {
+      "codeLength": 14,
+      "descriptor": "()V",
+      "flags": 1,
+      "hasCode": true,
+      "name": "close"
+    },
+    {
+      "codeLength": 3,
+      "descriptor": "()Ljava/lang/String;",
+      "flags": 1,
+      "hasCode": true,
+      "name": "toString"
+    },
+    {
+      "codeLength": 19,
+      "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+      "flags": 4106,
+      "hasCode": true,
+      "name": "lambda$bind$0"
+    },
+    {
+      "codeLength": 11,
+      "descriptor": "()V",
+      "flags": 8,
+      "hasCode": true,
+      "name": "<clinit>"
+    }
+  ],
+  "oldStandardMethod13EqualsActualCodeCount": true,
+  "oldStandardRawBranchesNotPromoted": true,
+  "currentMainTestHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java": "725f0fbe38aaec853e50da6eb5ea060eb0a8fe7e4a18faa5ddb9febce3f03b6f",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": "3470a69bb98ee7825309ec48cb30185614c90acbb4e3af35765b079c2563fdff"
+  },
+  "oracle": "Original UI224/236 SS313/323/PT-QST-FORM001..008; literal4144 byte spaces, offset0 body/4096 UUID; fixed NFC and close/ownership/null expectations; production codec only actual side.",
+  "scope": "Pure input validation, synthetic public fixture; UUID syntax only, no key/authorization issuance or persistence.",
+  "necessaryCurrentQualification": "Changed finitecleanup fixture and current Protocol14 physical differences; old exec not transferable. Strict Main1 compiler/static, whole original8, independent current177 CRC/init/raw. No new test definitions required.",
+  "proofs": {
+    "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14270-web-three-forms-whole-twenty-four-pt-v1/manifest.json": "b86d3cc5ef5309104d8dfc85e215c193ac04ae7d054deca89da61e7c2520cadd",
+    "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14272-web-three-forms-whole-twenty-four-post-v1/manifest.json": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/manifest.json": "743cc15a537e5f44edb0ba0c638cf82f662667ac82f0d3d60d92f5b79c5eeca9"
+  },
+  "productTestsExecuted": 0,
+  "oldSuccessConfirmationReplays": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "criterionReductions": [
+    {
+      "originalItem": "WBS-F03",
+      "before": "Question form actualCode/current input status unknown",
+      "after": "Old13Code matches13 standard; current finitecleanup/protocol change explicit and safe closure Main1; required8 next, not PASS yet",
+      "parentCriterionSatisfied": false
+    },
+    {
+      "originalItem": "WBS-P016-18",
+      "before": "Current ordinary question input qualification unresolved",
+      "after": "Existing independent golden8 unchanged except finite cleanup; HTTP/CSRF/session/API persistence/authorization not tested",
+      "parentCriterionSatisfied": false
+    }
+  ]
+}
