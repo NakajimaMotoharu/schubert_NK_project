@@ -1,0 +1,116 @@
+{
+  "actualExit": 0,
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "terminalAtUTC": "2026-11-17T23:23:44.082272+00:00",
+  "run": "PG38242-p01810-local-audit-and-boolean-projection-v1",
+  "groupStart": "PGPT-20261008-5736",
+  "originalCatalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+    "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+  },
+  "local": [
+    {
+      "catalogId": "PT-P01810-CATALOG-037",
+      "sourceStatus": "exact Web source/fixture and direct Protocol class adapters, original runtime result",
+      "originalCore": "bcc6a9b51add77d775e5363906320668af336cf3",
+      "originalUnit": "ff67d51c53f447b34fc4fe370597256e5a3b39b7",
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34652-security-audit11-independent-v1/manifest.json",
+        "sha256": "3138273e3d7b1edb324b01626a64938e6f46a8a0570a396f421ae718902b4d99"
+      },
+      "originalRaw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34654-security-audit11-unfiltered-same-exec-v1/manifest.json",
+        "sha256": "0c4fa6c894b34055ac54dcf8c18d1afa7fc751f70548bba80af41d736cf6aaaf"
+      },
+      "sourceMatches": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditPortTest.java": "3d3832c902c8e60b6d59a71a8c8d2e7360934d68fda556f1011f6a2f3bc3fd04",
+        "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+        "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserRole.java": "b68402e5705ca2ac5093a1b98a44de5a9f45ed69cb9b231658b4903c51e0bf69",
+        "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d"
+      },
+      "exactProtocolDependencies": {
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+        "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae"
+      },
+      "exactExternalDependencyHashes": {
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+      },
+      "negatives": {
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34652-security-audit11-independent-v1/sanitized-TEST-junit-jupiter.xml",
+          "sha256": "c9def68e63c8142225c1d6e5c1b884b1e4f4cce014ac20b92edf9e2c32229848"
+        },
+        "methods": {
+          "actorSeparatorsAreRedactedAndContextNeverAppears()": "dev.codex.schubert.nk.web.logging.WebSecurityAuditPortTest",
+          "invalidMetadataNeverEmitsARecord()": "dev.codex.schubert.nk.web.logging.WebSecurityAuditPortTest",
+          "nullConstructorAndRecordContractsReject()": "dev.codex.schubert.nk.web.logging.WebSecurityAuditPortTest",
+          "literalAddressesCanonicalizeWithoutDnsAndInvalidInputsDoNotLog()": "dev.codex.schubert.nk.web.logging.WebSecurityAuditPortTest",
+          "allFiveRegisteredRoutesAndOptionalFieldsRemainClosed()": "dev.codex.schubert.nk.web.logging.WebSecurityAuditPortTest"
+        },
+        "originalWholeCaseCount": 11
+      },
+      "residual": "actual HTTP/Web producer and durable audit routes, 451"
+    },
+    {
+      "catalogId": "PT-P01810-CATALOG-093",
+      "sourceStatus": "exact four Batch record bytes, original whole4 result",
+      "originalCore": "716595eec955ae02ad4897bc844d75796a53035b",
+      "originalUnit": "0c5d44835185b0810c0254f94c5825ae5380823e",
+      "originalPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35612-observation-value4-post-v1/manifest.json",
+        "sha256": "124d29a26c6792e5af11d90858fc6c6677bf9b51127a8a9507e3d8e6f3e61e81"
+      },
+      "originalRaw": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35614-observation-value4-unfiltered-v1/manifest.json",
+        "sha256": "d39e5683088f43eb27f1e5b279eef8186748feb50399ec04955354ccf93861e6"
+      },
+      "priorPartial": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38204-p01810-observation-negatives-applicability-v1/manifest.json",
+        "sha256": "e88d903e3ba44d0c5d209dcff7a5b5c7ab50d737a6d6681b5dbac55ad66109f9"
+      },
+      "sourceMatches": {
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "9a7504e2b266c3de22ce10dfc8b15dadb0ce04f3a5f05bdd86d151c32d341f19",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa",
+        "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunPureContractTest.java": "7f066c7420896e9948275927ae07a5e1e73387e5bbfb27cc318c42923643b963",
+        "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/ObservationValueContractTest.java": "31eb71072448315e43c992fb3ecb73f90cd6c0c5a9947da9d0f6db16f10d552d"
+      },
+      "exactBatchBytes": {
+        "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+        "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0",
+        "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+        "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2"
+      },
+      "negatives": {
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35612-observation-value4-post-v1/original-TEST-junit-jupiter.xml",
+          "sha256": "081ea17d10f61b51e81d6e0ff53f71ccfbcfef05cbf6450e9224a27846af97a1"
+        },
+        "methods": {
+          "observation002RunReferenceLiteralSixteenRowsAndAllRecordComponents()": "dev.codex.schubert.nk.batch.repository.ObservationValueContractTest"
+        },
+        "originalWholeCaseCount": 4
+      },
+      "truthRows": {
+        "valid": 15,
+        "invalid": 1
+      },
+      "residual": "actual SQL/provider and outer structured log, 451"
+    }
+  ],
+  "reusedHistoricalXmlCases": 15,
+  "explicitlyMappedExistingMethods": 6,
+  "newProductTests": 0,
+  "newCoverage": 0,
+  "wholeP01810Accepted": false,
+  "originalStatusesUnchanged": true,
+  "formalAcceptanceDelta": 0
+}
