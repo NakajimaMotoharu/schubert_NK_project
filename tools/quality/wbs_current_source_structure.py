@@ -127,7 +127,31 @@ def verify(root, master, snapshot, inventory, git_names=None, inventory_path=Non
     require(inventory['source'] == view['preservedLegacyInventorySource']
             and inventory['currentPhysicalCandidate']['source'] == view['preservedLegacyCandidateSource'],
             'legacy source history modified')
-    require(value_digest(inventory['artifacts']) == view['preservedLegacyArtifactRowsDigest'],
+    legacy = inventory['artifacts']
+    registry_result = None
+    if 'legacyArtifactRows' in view:
+        # BUG3190: preserve the exact original table, not a current registry under its hash.
+        # The later registry has its own explicit, unqualified metadata proof and guards.
+        legacy = pinned_public_json(root, view['legacyArtifactRows'])
+        binding = pinned_public_json(root, inventory['currentPreparationRegistryBinding20261117'])
+        require(binding['legacyReference'] == view['legacyArtifactRows'], 'registry legacy reference drift')
+        require(binding['legacySemanticSha256'] == view['preservedLegacyArtifactRowsDigest'],
+                'registry cannot replace the fixed legacy digest')
+        require(binding['retainedRetiredHistoricalPaths'] == view['retiredHistoricalPaths'],
+                'registry retired history mismatch')
+        observed = binding['observedGitHead']
+        require(type(observed) is str and re.fullmatch('[0-9a-f]{40}', observed),
+                'explicit registry filename observation source')
+        current_names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', '-z', observed, '--',
+                                        'src', 'program/characterization/src/main/java'], cwd=root,
+                                       check=True, capture_output=True, timeout=15)
+        separation_proofs = {name: pinned_public_json(root, reference)
+                             for name, reference in binding['costSeparationReferences'].items()}
+        import wbs_preparation_registry
+        registry_result = wbs_preparation_registry.verify(
+            legacy, inventory['artifacts'], binding, master['tasks'],
+            current_names.stdout.decode().rstrip('\0').split('\0'), separation_proofs)
+    require(value_digest(legacy) == view['preservedLegacyArtifactRowsDigest'],
             'legacy artifact history modified')
     require(value_digest(inventory['currentPhysicalCandidate']) == view['preservedLegacyCandidateDigest'],
             'legacy candidate history modified')
@@ -136,7 +160,7 @@ def verify(root, master, snapshot, inventory, git_names=None, inventory_path=Non
                                  'src', 'program/characterization/src/main/java'], cwd=root,
                                 check=True, capture_output=True, timeout=15)
         git_names = result.stdout.decode().rstrip('\0').split('\0')
-    rows = resolve_descriptors(view, base, inventory['artifacts'], master['tasks'], git_names)
+    rows = resolve_descriptors(view, base, legacy, master['tasks'], git_names)
     projection = master[PROJECTION_KEY]
     require(projection['source'] == view['source'] and projection['viewKey'] == VIEW_KEY
             and projection['artifactCount'] == len(rows), 'master current projection binding')
@@ -146,12 +170,17 @@ def verify(root, master, snapshot, inventory, git_names=None, inventory_path=Non
     require(projection['descriptorBase'] == view['descriptorBase'], 'master projection descriptor binding')
     counts = owner_counts(v['owner'] for v in rows)
     require(projection['ownerArtifactCounts'] == counts, 'master current owner projection mismatch')
-    return dict(status='PASS_CURRENT_STATIC_SOURCE_STRUCTURE_ONLY', source=view['source'], artifactCount=len(rows),
+    result = dict(status='PASS_CURRENT_STATIC_SOURCE_STRUCTURE_ONLY', source=view['source'], artifactCount=len(rows),
                 productionArtifacts=view['productionArtifacts'], characterizationArtifacts=view['characterizationArtifacts'],
                 addedComparedToLegacy=len(view['addedComparedToLegacy']), retiredHistoricalPaths=len(view['retiredHistoricalPaths']),
                 ownerKindOverrides=len(view['ownerKindOverrides']), identityRecomputed=False,
                 descriptorBase=view['descriptorBase'], runtimeQualified=False, wholeWbsAccepted=False,
                 formalUpdated=False, newAcceptance=0, effortRate=None)
+    if registry_result is not None:
+        result.update(laterPreparationRegistry=registry_result,
+                      sourceViewPinnedToExactDeclaredSource=True,
+                      laterRegistryDoesNotQualifyLatestProductionSource=True)
+    return result
 
 
 def owner_counts(values):

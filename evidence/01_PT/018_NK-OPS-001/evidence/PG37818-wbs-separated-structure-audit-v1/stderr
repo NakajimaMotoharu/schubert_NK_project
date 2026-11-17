@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_progress_audit.py", line 442, in <module>
+    structure = current_source_structure.verify(ROOT, current_master, current_snapshot,
+                                                current_inventory, inventory_path=current_inventory_path)
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_current_source_structure.py", line 156, in verify
+    require(value_digest(inventory['currentPhysicalCandidate']) == view['preservedLegacyCandidateDigest'],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'legacy candidate history modified')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/wbs_current_source_structure.py", line 16, in require
+    raise ValueError(message)
+ValueError: legacy candidate history modified
