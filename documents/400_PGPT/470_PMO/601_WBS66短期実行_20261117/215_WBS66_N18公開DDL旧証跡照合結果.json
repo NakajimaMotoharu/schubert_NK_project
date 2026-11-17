@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5751",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "017f907f95e27a4fed6d7cd5cd976846695ecf2a29ef6721121da765dc1e3d3e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:47:52.741000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 24,
+          "remainingPercent": 76,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:47:30.901577+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-N18-INDEPENDENT-PUBLIC-MIGRATION-PREP-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-N18-INDEPENDENT-PUBLIC-MIGRATION-PREP-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "WBS-N18/1 independent preparation expressly listed in WBS66 HOLD checklist. Match current immutable V028 migration asset to old public PG490 manifest and SS331/343; list exact unmet WBS dependencies and authority/ending evidence. No actual VM/host access, DB, raw dump, migration, recovery or secrets. Do not interpret old run/owner as current.",
+    "oracleReferences": [
+      {
+        "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+        "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+      },
+      {
+        "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+        "sha256": "3a352f22e2ee28360dfa737adb0cf6bfdb61b7639ac79237bd677eff648d5ae3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG490-schema028-normal-v2/manifest.json",
+        "sha256": "52e052814515479be6902fd13d88aa8d76068e149371eaac283785723d73bd11"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38272-n18-public-ddl-evidence-only-v1",
+    "wbsLeafIds": [
+      "WBS-N18"
+    ],
+    "managementWorkIds": [
+      "WBS-N18/1"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.25,
+      "high": 0.75
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5750",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38272-n18-public-ddl-evidence-only-v1/manifest.json",
+      "sha256": "8cb3c91c207d89ee65920598ec1cc79acfba36c1aa63b510d6507a04f55918b0"
+    },
+    "firstRunSuccessNumerator": 1,
+    "firstRunDenominator": 1,
+    "reruns": 0,
+    "causesOfRerun": [],
+    "technicalMeasurement": {
+      "immutableTarget028Matches": 1,
+      "trackMigrationAssetCount": 30,
+      "vmOrDbOperations": 0
+    },
+    "criterionReductions": [
+      "WBS-N18/1 allowed public evidence prep: exact immutable V028, old PG490限定 terminal scope, current repository V030 distinct; new ownership/post still pending."
+    ],
+    "remainingCriteria": [
+      "current ownership and approved execution environment",
+      "actual scoped identity and source-specific first/last target migrations",
+      "independent former-value and resource postcondition, whole current ending and quality"
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "nextCommand": "Continue safe independent PG/PT, no N18 execution without its own approvals and ending evidence."
+  }
+}
