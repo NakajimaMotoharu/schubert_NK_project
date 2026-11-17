@@ -1,0 +1,98 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5674",
+  "groupId": "PGPT-WBS66-QUOTA-END-SHAPE-20261118",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 17,
+      "remainingPercent": 83,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "02b0b38dfd6f6256ef591fe53828e2557d89e7840a2e68ba6d8e5751f106ffd8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T16:31:18.184Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 17,
+          "remainingPercent": 83,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T16:30:58.854890+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 16,
+      "remainingPercent": 84,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-QUOTA-END-SHAPE-20261118",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-QUOTA-END-SHAPE-20261118",
+    "workAttributionKind": "TOOL_FIX",
+    "workScope": "BUG3194/YKT2661 pure verified quota end receipt→legacy flat primary adapter; retain original events and correction anchors without dedicated/token inference or budget/acceptance changes. No API calls in tests, no product/source/private/runtime operations.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4521_終了receipt旧writer整合修正仕様.md",
+        "sha256": "01da9daeba6b824c50537a17b2c9979a3e0bb971bfe092f6c5680a5ee8611120"
+      }
+    ],
+    "source": "d72c9126ffb48a493dd79484f3dff8355a2870a7",
+    "productionCoreMainBefore": "a013a6d676454082de3c59bc199e87f37fefe159",
+    "wbsLeafIds": [
+      "WBS-G13.01"
+    ],
+    "managementWorkIds": [
+      "TOOLFIX-WBS66-QUOTA-END-SHAPE"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.8
+    },
+    "groupCapPp": 1,
+    "plannedToolFixPp": 0.3,
+    "originalCompletedPriceTotalPp": "9.888",
+    "remainingDetailBasePp": "1089.498",
+    "additionalCompletedPriceTotalPp": "12.750",
+    "completedToolFixSeparateBeforePp": 2.2,
+    "completedSourceRequalificationSeparatePp": 2.4,
+    "nextCommand": "Publish corrected metering proof with exact public scan/push, then admit QuestionSubmitForm existing source/proof and concrete ordinary PT gap; no held runtime/types or successful confirmation replay.",
+    "completedToolFixThisGroupPp": 0.3,
+    "completedToolFixSeparateTotalPp": 2.5,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37874-quota-end-correction-independent-v1/manifest.json",
+      "sha256": "b91f5e1033266966cb6e98b5bb9335a7680efe97d87a48b4295553ddc87c8020"
+    },
+    "criterionReductions": [
+      {
+        "originalItem": "WBS-G13.01",
+        "before": "Verified same-window receipt dropped to unknown by flat legacy schema",
+        "after": "Six pure tests, eight immutable event corrections and independent proof; future producers use strict adapter",
+        "parentCriterionSatisfied": false
+      }
+    ]
+  }
+}
