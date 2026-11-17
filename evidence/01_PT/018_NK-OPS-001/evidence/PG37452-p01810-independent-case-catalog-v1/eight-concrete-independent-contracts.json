@@ -1,0 +1,236 @@
+[
+  {
+    "boundaryId": "WEB-REQUEST-LOCAL",
+    "main": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+      "sha256": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00"
+    },
+    "logicalOwner": [
+      "WBS-P006-03"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+      "sha256": "dc7da2e95a8a072d54d9ddc3e4a813c6f58064e198253ac717dc8c54a42f6aef"
+    },
+    "testIds": [
+      "req010011012IndependentWholeJsonWireAndJceEnvelope",
+      "req007009AllStatusMethodsActorAndNumericBoundaries",
+      "req005009InvalidNumbersAndMissingTrustNeverInventWire",
+      "req012DuplicateKeepsFirstCiphertextAndClosedCodecIsFailedNotSuccess",
+      "req013AllSqlAndUnknownFailuresCloseRollbackAndPreserveSafeOutput",
+      "req013RollbackUnknownAndFatalAreNotNormalizedAsSuccess",
+      "req014LocalSinkFailureMarksOwnerTerminalAndNeverTouchesDb",
+      "req013IdenticalFatalRollbackIsNotSelfSuppressedOrSuccess",
+      "req014ConstructorsAndBoundaryNullNeverBecomeSuccessfulAudit"
+    ],
+    "independentExpected": "SS351 3.1/3.2/3.3: fixed JSON keys, closed route/method, no raw URI/query/headers/body/context; PENDING/FAILED same event; fatal retained",
+    "unresolved": "HOLD: imports WebStartupException; actual producer whole Test has DB/JCE fixture, no execution under this inventory",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00",
+    "currentTestSha256": "dc7da2e95a8a072d54d9ddc3e4a813c6f58064e198253ac717dc8c54a42f6aef",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  },
+  {
+    "boundaryId": "WEB-ROUTE-METADATA",
+    "main": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "sha256": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a"
+    },
+    "logicalOwner": [
+      "WBS-P006-03"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "sha256": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25"
+    },
+    "testIds": [
+      "req004ActualInventoryAndEveryClosedRouteRejectUnknown",
+      "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator",
+      "req006ServerIdentityIsStableAndDoesNotGrantTransport",
+      "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp",
+      "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite",
+      "req006AllNullAndMistypedMetadataAreRejected",
+      "req006AllFourAttributeBoundariesRedactFrameworkFaults",
+      "req008OutOfOrderNestedCloseCannotPublishAClosedTrace"
+    ],
+    "independentExpected": "SS351 3.3: registered template only or /**, first business ID/one request lifetime, safe display actor",
+    "unresolved": "Existing source/whole proof must be located and class/source independently bound before any new test",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a",
+    "currentTestSha256": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  },
+  {
+    "boundaryId": "WEB-SECURITY-LOCAL",
+    "main": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+      "sha256": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3"
+    },
+    "logicalOwner": [
+      "WBS-P006-04"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "sha256": "e77824a9326be0b7c56dbd07558b2fc3f6fdf974a1c684e2020ee8fed082a50b"
+    },
+    "testIds": [
+      "web095AllSecurityEventsUseClosedIndependentJson",
+      "web096InvalidEventMetadataNeverReachesLogger",
+      "web097UnicodeAndSecretCanariesRemainOutsideAudit",
+      "web098ClockAndLoggerFaultsNeverBecomeSuccessfulAudit",
+      "web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention",
+      "web100ConcurrentAuditEventsStayIndependent"
+    ],
+    "independentExpected": "SS351 4/10: closed SECURITY action/reason and fixed literal JSON; password/context/cookie/CSRF/credential values absent",
+    "unresolved": "Whole six source-defined ordinary tests are candidates, not executed/currently qualified here",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "currentTestSha256": "e77824a9326be0b7c56dbd07558b2fc3f6fdf974a1c684e2020ee8fed082a50b",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP",
+    "existingProof": "PG34652/34654: original ordinary11 own three target physical classes raw100, current own Web Java inputs equal; no confirmation replay; original6 not separately added"
+  },
+  {
+    "boundaryId": "WEB-MEDIA-LOCAL",
+    "main": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java",
+      "sha256": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128"
+    },
+    "logicalOwner": [
+      "WBS-P009-05"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "sha256": "6c5b1611e64fceb12d1763832d94e30d4c24f00d33754b83ae888b9b48f5e93a"
+    },
+    "testIds": [
+      "media001ClosedStatusFailureMediaCatalogMatchesIndependentJson",
+      "media002StatusAndByteBoundariesRejectWithoutLogging",
+      "media003ConstructorVersionsAndAllNullsEstablishBoundaryContract",
+      "media004EveryRecordNullAndMissingClockIsRejected",
+      "media005ClockFailuresAndTimezoneNeverBecomeSuccessfulEvents",
+      "media006LoggerRuntimeAndErrorPropagateWithoutRetryOrNormalizing",
+      "media007UnicodeRedactionAndRepeatedImmutableJsonRemainIndependent",
+      "media008OwnConcurrentCallsHaveNoMutableEventRetention"
+    ],
+    "independentExpected": "SS351 3/4: closed media audit metadata, no payload/raw path/provider exception",
+    "unresolved": "Source contract audit, shared media owner; existing qualification before any repeat",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128",
+    "currentTestSha256": "6c5b1611e64fceb12d1763832d94e30d4c24f00d33754b83ae888b9b48f5e93a",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  },
+  {
+    "boundaryId": "API-DETAILS-ALLOWLIST",
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+      "sha256": "96467f5d3475d8e2fe5fe02124ce7d8571403f9141527a87ea880c9640117aa1"
+    },
+    "logicalOwner": [
+      "WBS-P018-09"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsTest.java",
+      "sha256": "c266b46400912485549e57220b73e94cae7ef4304d13871afeee7f7f5248e184"
+    },
+    "testIds": [
+      "allowedScalarsAndRolesMatchLiteralJson",
+      "unsafeMalformedDuplicateAndWrongTypesAreRejected"
+    ],
+    "independentExpected": "SS351 3.3: only responseBytes N12/userAgentFamily ASCII1..32/truncated boolean/PENDING or FAILED; duplicate/unknown/null/trailing/nonobject invalid with fixed safe exception and no cause; role supplied separately",
+    "unresolved": "Candidate pure memory parser: no DB/threads/process or held four class dependency in original two Test methods; inspect actual raw deficits before new PG/PT",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "bf2bf01ac0fe3c0c95be00a79f259ef04f6553e4c0d464be77625e4580e78ac2",
+    "currentTestSha256": "c266b46400912485549e57220b73e94cae7ef4304d13871afeee7f7f5248e184",
+    "sourceAndTestMatchOriginalMapping": false,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP",
+    "existingProof": "PG37346/37348/37350 current Core208d whole5 and full raw5Code100; changed parser evidence not replaced by historical source"
+  },
+  {
+    "boundaryId": "API-LOG-INGEST",
+    "main": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/WebLogIngestService.java",
+      "sha256": "8ea171d65f2229f41fc033dff6a66078159d9761106d7b1d264a83a421879036"
+    },
+    "logicalOwner": [
+      "WBS-P006-05"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java",
+      "sha256": "c184a06cf4e4811ed04db656d98744c6ec039bb34c2d2dd669eaec8f1d45ecf2"
+    },
+    "testIds": [
+      "projectsExplicitColumnsAndDuplicateKeepsFirstRow",
+      "optionalFieldsIpv6AndConcurrentDuplicateAreSafe",
+      "invalidWireAndNullNeverAcquireDatabase",
+      "transactionFailuresNeverReportSuccessAndAlwaysReleaseConnection",
+      "databaseCommitSurvivesAckFailureAndBrokerCacheMiss"
+    ],
+    "independentExpected": "SS351 2/3.3: source_message_id duplicate projection no repeated event; critical audit rollback, screen DB remains truth",
+    "unresolved": "Actual DB/transaction dependent, preserve HOLD; source-only audit not replacement PT",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "8ea171d65f2229f41fc033dff6a66078159d9761106d7b1d264a83a421879036",
+    "currentTestSha256": "c184a06cf4e4811ed04db656d98744c6ec039bb34c2d2dd669eaec8f1d45ecf2",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  },
+  {
+    "boundaryId": "WEB-FATAL-BOUNDARY",
+    "main": {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+      "sha256": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00"
+    },
+    "logicalOwner": [
+      "WBS-P006-03"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test.java",
+      "sha256": "fad882c23c0590c49b1aa7465803297b55bf289b6d2300eda23735c26d5ce33d"
+    },
+    "testIds": [
+      "local331001LoggerGraphSignalsOnceBeforeOriginalFatalWithoutAnyProjection",
+      "local331002TerminalGraphCannotBecomeFixedOrdinaryCatalog",
+      "local331003CallbackThenLoggerGraphPriorityAndAliasesAreIndependent",
+      "local331004OrdinaryCyclesDisabledSuccessAndDirectErrorRulesStayUnchanged"
+    ],
+    "independentExpected": "SSC331: cause/suppressed/SQL/JMS graph, direct Error precedence, ordinary callback fixed catalog no raw throwable text",
+    "unresolved": "HOLD inherited WebStartupException/producer graph; do not extract rejected/unknown operation",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "f5aebc2691f9fe089be0f808962edcf9e639233b89b38a95a062661f43116b00",
+    "currentTestSha256": "fad882c23c0590c49b1aa7465803297b55bf289b6d2300eda23735c26d5ce33d",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  },
+  {
+    "boundaryId": "BATCH-VALUE-DIAGNOSTIC",
+    "main": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootServiceFacts.java",
+      "sha256": "35f12e3f827bafcc0283c6f3064a6ac8f6288475a003cf6ec4fcbc866a555f76"
+    },
+    "logicalOwner": [
+      "WBS-P018-03"
+    ],
+    "testSource": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sha256": "b0659ff613078fd893ca30bf263b3d372d99dde987f5475a14f84c409a76ee77"
+    },
+    "testIds": [
+      "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+      "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+      "obsdata003ConfigurationAndJournalDiagnosticsHideIndependentPublicCanaries",
+      "obsdata004NonNullConfigurationValuesRejectEachMissingFieldBeforeOwnership"
+    ],
+    "independentExpected": "SS351 10.2: configuration/YAML/path/binding/journal data absent from fixed diagnostic, field access retains literal input",
+    "unresolved": "Four public-value source methods exist; actual Root/DB/Broker observation remains held; reuse proven historical exact bytes only",
+    "result": "SOURCE_MAPPING_ONLY_NOT_PT_PASS",
+    "currentSourceSha256": "35f12e3f827bafcc0283c6f3064a6ac8f6288475a003cf6ec4fcbc866a555f76",
+    "currentTestSha256": "b0659ff613078fd893ca30bf263b3d372d99dde987f5475a14f84c409a76ee77",
+    "sourceAndTestMatchOriginalMapping": true,
+    "executionStatus": "SOURCE_SPEC_NOT_EXECUTED_BY_THIS_GROUP"
+  }
+]
