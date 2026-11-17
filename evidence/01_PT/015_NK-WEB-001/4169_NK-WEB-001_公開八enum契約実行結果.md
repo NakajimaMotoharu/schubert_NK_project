@@ -1,0 +1,7 @@
+# Web公開八enum契約実行結果
+
+Corea013不変/Unit1ca7bd2093/PG37700 new8全成功/FESnotrun0、37702独立全194CRC/init/whitelist公開XML。同singleexec対象八enum＋表示親九classはraw100L54M9C12B858I全miss0、正Main10/旧ProtoLogTypeは依存部分だけで全194残counter保持・wholeWeb/六module/451へ昇格0。Main13原RootNullAway/18physicalSB0・CSformat0/PMD1 Testlocal arrayalias poison個別非該当/未分類0。元Principal7classbyte exact・元8成功/Protocol156確認再演0、169ProtoSource/176byteは当CoreRoot/元資格の依存として再利用、旧exec合算0。YKT2645は29中20型の個別資格を対応、残monitoring七とLocalLogout/Retry二=9、検索だけclose0。
+
+固定names/ordinal/arrayclone負probe/未知/null、Menu九表示先、Error九HTTP/messageとnullable factory拒否、HTTP二kind×32maskの独立truth表を一fixture八定義で検証。64観測等をTest数へ増幅0。対象Test IDsはUnit begin.expectedCasesと公開XMLが一意対応。全194rawの依存/親未実行counterを隠さず保存し、旧exec合成0。Main変更0/全Web/正式受入0。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG37704-web-enum-eight-criteria-return-v1/manifest.json SHA256 a7939a3538890f42299202407681b498d6d4d4e5f1ef6c7a7101dedac25e3596。command/環境/JDK/branch/sourceはPG37700 begin、静的13Main/18classはPG37692/96/98、未filter全methodはPG37702を参照。Program間共通run参照の追加費0。

@@ -1,0 +1,5 @@
+# Web公開八enum・当九class結果
+
+Corea013不変/Unit1ca7bd2093/PG37700 new8全成功/FESnotrun0、37702独立全194CRC/init/whitelist公開XML。同singleexec対象八enum＋表示親九classはraw100L54M9C12B858I全miss0、正Main10/旧ProtoLogTypeは依存部分だけで全194残counter保持・wholeWeb/六module/451へ昇格0。Main13原RootNullAway/18physicalSB0・CSformat0/PMD1 Testlocal arrayalias poison個別非該当/未分類0。元Principal7classbyte exact・元8成功/Protocol156確認再演0、169ProtoSource/176byteは当CoreRoot/元資格の依存として再利用、旧exec合算0。YKT2645は29中20型の個別資格を対応、残monitoring七とLocalLogout/Retry二=9、検索だけclose0。
+
+PG37704 SHA256 a7939a3538890f42299202407681b498d6d4d4e5f1ef6c7a7101dedac25e3596。未完9型は同manifestで一意列挙。正式1964/53・17/190・工数nullと全HOLDを維持。
