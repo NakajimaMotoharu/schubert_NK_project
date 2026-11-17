@@ -1,0 +1,19 @@
+"""Current Main/graph10 plus immutable value3 decisions; original quality flags unchanged."""
+from pathlib import Path
+import datetime,hashlib,json
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));pp=b/'evidence/PG37394-summary-test-static-v2/manifest.json';sp=b/'evidence/PG37392-summary-fresh-sibling-spotbugs-v2/manifest.json';ap=b/'evidence/PG37396-summary23-abi-physical-v1/manifest.json';p=ld(pp);s=ld(sp);a=ld(ap);assert p['actualExit']==s['actualExit']==a['actualExit']==0 and p['expectedTests']==23 and p['sourceClosureCount']==5 and p['actualCompileSourceClosureCount']==6
+assert p['sourceCore']==s['sourceCore']==a['sourceCore'];assert not p['processingErrors'];sb=s['reports']['batch'];assert s['stages']['batch']['actualExit']==0 and sb['bugs']==0 and not sb['missingClasses'] and not sb['errors'] and len(sb['classStats'])==646;assert a['publicAbiExact'] and a['allOldPrivateSignaturesPreserved'] and a['privateAdditionCount']==2 and a['changedPhysicalCount']==1 and a['unchangedPhysicalCount']==1100;assert all(sha(r/n)==h for n,h in {**p['mainInputHashes'],**p['testSourceHashes'],**p['helperSourceHashes']}.items());prior=ld(b/'evidence/PG37382-summary-static-admission-v1/pmd-decisions.json');decisions=[]
+for raw in p['rawFindings']:
+ path=r/raw['path'];anchor=path.read_text().splitlines()[int(raw['beginline'])-1].strip();rule=raw['rule'];assert path.name=='InspectionSummaryRepository.java'
+ if rule=='DoNotUseThreads':
+  assert anchor=='require(!Thread.currentThread().isInterrupted());';reason='Required read-only cancellation observation on borrowed caller before/after. Main creates no thread and mutates no flag; original owned-worker get5/finally reset/shutdownNow/await5 fixture preserves parent flag.'
+ else:
+  assert rule=='AvoidCatchingGenericException' and ('failure)' in anchor or 'secondary)' in anchor);reason='One typed close boundary and primary capture: close row then statement, preserve original Runtime/Error identity, apply existing SQL/unknown priority, no normal-success catch. New private close methods provide one policy Code point each; no quality exclusion or suppression. Original9/helper8 exercise body/close SQL/runtime/Error combinations/cycles.'
+ decisions.append(dict(raw=raw,sourceSha256=sha(path),sourceAnchor=anchor,decision='NOT_APPLICABLE',reason=reason))
+assert len(decisions)==10
+retained=[x for x in prior if x['raw']['rule']=='EqualsNull'];assert len(retained)==3
+for x in retained:
+ assert sha(r/x['raw']['path'])==x['sourceSha256'];decisions.append(dict(x,sourceProofReused='PG37382 exact immutable value Test source; no duplicate static process needed'))
+before=ld(b/'evidence/PG37370-summary-source-before-v1/manifest.json');assert all(sha(r/n)==h for n,h in before['originalThreeTestHashes'].items())
+out=b/'evidence/PG37398-summary23-static-admission-v1';assert not out.exists();out.mkdir();(out/'pmd-decisions.json').write_text(json.dumps(decisions,ensure_ascii=False,indent=2)+'\n');v=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),sourceCore=p['sourceCore'],prepare=ref(pp),spotbugs=ref(sp),abi=ref(ap),raw=13,currentFreshRaw10=True,unchangedValue3Reused=True,applicable=0,unclassified=0,expectedTests=23,originalWholeCases=19,retainedValueCases=3,newGraphCases=1,original19SourceOraclePreserved=True,onlyPrivateAdditions=2,publicAbiExact=True,privateReflection=False,qualityRulesOrSuppressionChanges=0,old22ExecCombined=False,productTestsExecuted=0,heldClassfileActions=0,actualNativeRootDbVmActions=0,formalUpdated=False)
+(out/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps(dict(actualExit=0,raw=13,applicable=0,unclassified=0,expected23=True,publicExactPrivateAdded2=True)))

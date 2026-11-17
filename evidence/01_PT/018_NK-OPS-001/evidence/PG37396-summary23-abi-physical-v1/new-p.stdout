@@ -1,0 +1,22 @@
+Compiled from "InspectionSummaryRepository.java"
+public final class dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository {
+  private final java.sql.Connection connection;
+    descriptor: Ljava/sql/Connection;
+  public dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository(java.sql.Connection);
+    descriptor: (Ljava/sql/Connection;)V
+
+  public java.util.Optional<dev.codex.schubert.nk.batch.repository.InspectionSummary> read(dev.codex.schubert.nk.batch.repository.BatchRun);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ljava/util/Optional;
+
+  private static void closeRow(java.sql.ResultSet, java.lang.Throwable) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/ResultSet;Ljava/lang/Throwable;)V
+
+  private static void closeStatement(java.sql.PreparedStatement, java.lang.Throwable) throws java.sql.SQLException;
+    descriptor: (Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V
+
+  private static void require(boolean) throws java.sql.SQLDataException;
+    descriptor: (Z)V
+
+  private static <T> T present(T) throws java.sql.SQLDataException;
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+}
