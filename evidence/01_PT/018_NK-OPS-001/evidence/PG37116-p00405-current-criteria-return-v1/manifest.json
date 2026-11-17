@@ -1,0 +1,49 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T00:51:44.017902+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "actualUnitSource": "1dc8698b03e0674cf7ee5b7cd9f5953c1444c147",
+  "criteria": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37116-p00405-current-criteria-return-v1/criteria.json",
+    "sha256": "6d36be232b5c37ccc4febde48e3a7fa052969eaee1af7062bcd1b0666816be90"
+  },
+  "ownedMainHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPool.java": "81d1ef1dcdd511e2bb7eae1bfdee58e50432edd2bca81ce6085aa344e57ce312",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/database/RequiredColumn.java": "1a2121d84e092a0fae4a973452370cf9ea0aa5d9fb56d023ae7015b0061fae7d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/dispatch/JdbcSyncRequestProcessor.java": "65258747a2876004a921a86841b9bea32cd599a9301d7d6fb9e97c0fcec3db49",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/LogProjectionDatabaseException.java": "dcd291953325f6023c13cc65a096031c910891267080ebe47a1f7d035e85865b"
+  },
+  "sharedMainHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator.java": "f2b26e3f56a3bcce94417f76d10be38058549d3dda778b5fc4979e6324cc4d9e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository.java": "d8603bd5929c107b2711f0d3483adb9299e613994703df7bbb7a57934153f1de"
+  },
+  "originalSixTestHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiJdbcPoolTest.java": "ce356341a6274142f22d51aee0263016403e404b0f116d636b4a03d9809a1b6c",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/WebLogIngestServiceTest.java": "c184a06cf4e4811ed04db656d98744c6ec039bb34c2d2dd669eaec8f1d45ecf2",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionFatal329Test.java": "1eacc40a14c93883c9b52b98248726a2503bcf1d0d5b42e26423cdb0fb05de08",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcTransactionBoundary329Test.java": "303c01bd37a4413c4fdc051c2cc1333133987180c6c3003b3da92d723e36ea00",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/dispatch/JdbcRollbackAttachment330Test.java": "dbef7d258873c41a86442b796fe23b3da06ea43f521538c422b5e6f44fdedab1",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java": "27d0c6689cca24bba7735330ab00b8211a89475a3bc23dae04b77f9ee11f118a"
+  },
+  "originalSourceAndWholeTestBytesUnchanged": true,
+  "newOrdinaryQualifiedMain": 1,
+  "newOrdinaryTests": 1,
+  "missingFixedErrorContractReduced": true,
+  "remaining": [
+    "ApiJdbcPool whole3 requires real PostgreSQL fixture/role/lifetime HOLD",
+    "JdbcSyncRequestProcessor whole transaction tests depend on held TemporaryInfrastructureException.class; no fake alternative",
+    "Actual WebLogIngestService commit/ACK whole DB/broker Test stays HOLD",
+    "Shared Inbox/Outbox current full resource/postcondition quality and all four criteria still incomplete",
+    "F02/F03 six-module/QA056 ending dependencies not accepted"
+  ],
+  "newOriginal190Accepted": 0,
+  "formalUpdated": false,
+  "formalTests": 1964,
+  "formalScopes": 53,
+  "effortCompletionRate": null,
+  "originalP00405AuditPriceUnconsumed": 0.423,
+  "completedAdditionalPricePp": 0.3,
+  "additionalPriceTotalCompletedPp": 3.45,
+  "remainingDetailBasePp": "1092.098",
+  "originalSharedRuntimeSuccessTransferred": false
+}

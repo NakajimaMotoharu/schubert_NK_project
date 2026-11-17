@@ -1,0 +1,18 @@
+"""Fresh post-terminal quota binding for completed ordinary projection contract group."""
+from pathlib import Path
+import datetime,hashlib,json,sys
+r=Path.cwd();sys.path[:0]=[str(r/'tools/quality'),str(r/'tools/quality/vm/050_s1')]
+import pg998_metrics as metrics
+from pmo_quota_binding import digest,end_fields
+b=r/'evidence/01_PT/018_NK-OPS-001';d=r/'documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+s=ld(d/'063_P00405固定投影例外通常PT開始.json');raw=ld(b/'evidence/PG37114-p00405-projection1-unfiltered-v1/manifest.json');out=b/'evidence/PG37116-p00405-current-criteria-return-v1';proof=ld(out/'manifest.json');assert proof['actualExit']==0 and proof['newOriginal190Accepted']==0;now=proof['terminalAtUTC']
+q=ld(Path(sys.argv[1]));when=datetime.datetime.now(datetime.timezone.utc).isoformat();bound=end_fields(s['quota'],q,digest(q),when,now,1);bound['quotaBefore']=s['quota']['primary'];bound['quotaAfter']=q['primary']
+assert not any(x['groupId']==s['groupId'] and x.get('groupBoundary')=='END' for x in map(json.loads,metrics.EVENTS.read_text().splitlines()))
+values=dict(bound,source=raw['sourceCore'],actualUnitSource=raw['actualUnitSource'],groupBoundary='END',wbsLeafIds=['WBS-P004-05','WBS-F03'],workCategory='IMPLEMENTATION',workAttributionKind='ADDITIONAL_FINDING',estimateAtGroupStartPp=s['values']['estimateAtGroupStartPp'],groupCapPp=1,completedOriginalRowPricePp=0,completedAdditionalPricePp=.3,remainingDetailBasePp='1092.098',proof=ref(out/'manifest.json'),newAcceptance=0,formalUpdated=False,effortCompletionRate=None,knownCommandFailure='Initial41-character Unit argument rejected before job; actual canonical Git Unit then executed once, separate guard receipt retained',nextCommand='Proceed short-term P018-07: source-qualified original three readiness/budget whole Tests and existing source/run evidence. Identify missing ordinary whole scope before any execution; actual native/Root/service/held four-type operations remain held. Do not repeat successful current tests. F02/F03 QA056 unresolved; no formal acceptance inferred.')
+event=metrics.append(s['groupId'],'CHECKPOINT',values);record=d/'064_P00405通常1成功・原4条件不足返却.json';record.open('x').write(json.dumps(dict(actualExit=0,eventId=event,values=values,quota=q),ensure_ascii=False,indent=2)+'\n')
+summary='P00405固定投影例外の専用通常1をCore01c/Unit1dc/PG37110で一回成功、FESnotrun0。原compile/format/CS/PMD/SB全1physical指摘0、37112独立post/37114無filter2L1M1C4I全hit・branch0/0。四Main/元六Testは旧準備source全byte一致、元922条件の四判定へ新証拠を返し全体はPARTIAL/未受入。実DB pool/transaction四型/共有Inbox-Outbox資源/QA056及びF02F03を残す。追加.3だけ完了（累計追加3.450）、元価格7.288・原残1092.098pp/元190新0/正式1964-53/工数null維持。'
+for name in ['456_領域別進捗・利用枠・中断再開管理.md','460_基盤残件・再開優先順.md']:
+ p=r/'documents/400_PGPT/450_品質'/name;title,body=p.read_text().split('\n',1);p.write_text(title+'\n\n## WBS66 P00405通常1・四条件の不足返却 '+when+'\n\n'+summary+' own job全真正terminal0・稼働0、外部VM/DB/service操作0・haruka scratch保持、fresh残'+str(q['primary']['remainingPercent'])+'。次 '+values['nextCommand']+'\n'+body)
+for name in ['checkpoint.json','continuation-gate.json','cost-ledger.json']:
+ p=r.parent/'PMO/pgpt-completion-stage-20261102'/name;x=ld(p);x.update(currentQuota=q,lastEventId=event,ordinaryActiveGroup=None,ordinaryGroupNotYetClosed=False,latestWbs66Record=ref(record),remainingDetailBasePp='1092.098',nextCommand=values['nextCommand'],mayFinishTurn=False,currentOwnedStageJobs=[],latestUnitSource=raw['actualUnitSource']);p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(dict(actualExit=0,event=event,tests=1,rawMiss=0,criteria=4,newAcceptance=0,remaining='1092.098')))
