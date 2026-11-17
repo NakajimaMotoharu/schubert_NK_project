@@ -1,0 +1,988 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T21:47:27.380087+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38168-media-context-pure-admission-v1/normalized-prepare.json",
+    "sha256": "b6911ec350ff8553fb14c223d2e4992600ad9560675339030b9722ab76d4d146"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38162-media-context-after-prepare-v1/manifest.json",
+    "sha256": "0e98ada0ef6390c1d8f3564242362993b9428b9c875211d2256cb32e5a1b980e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38164-media-context-after-static-v1/manifest.json",
+    "sha256": "ebd44a10f1eef9df0499709842b0e8caf1e7aa4477e7b53b9305311cae670b57"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+      "rule": "DoNotUseThreads",
+      "line": "80",
+      "reason": "SS321 interruption contract: restore the calling request thread flag immediately after InterruptedException, with registry.cancel and semaphore release in finally. This neither creates a background thread nor interrupts a foreign thread. Removing it would lose cancellation; no thread creation/managed executor here.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "211",
+      "reason": "Fixed external AuthenticationContext wire-width invariant SS312/323, common header offset113 length64. Returned context bytes must be exactly64 before constant-time comparison; rejected owned bytes are erased. Literal is the protocol field size, not a changeable timing/business threshold; source and approved format unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 64 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaDecoderNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "36",
+      "reason": "Exactly the named nonsecret static codec constructor. Finally restores capturedfalse access flag and asserts false after forbidden construction. No arbitrary Result/credential reflection or authority change.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "CloseResource",
+      "line": "219",
+      "reason": "Exact fixture-owned2/8worker pool is shutdownNow in finally and awaitTermination10seconds is asserted on every exit. Every future get is bounded5/10seconds. Original callback/golden assertions retained; no container/server executor or external I/O owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "219",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "225",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "252",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "254",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "435",
+      "reason": "Explicitly nullable heap fault port returns null at first/second acquisition to test the API null contract. Empty array is a distinct wrong-length input also covered separately; replacing null would remove the required negative vector. No Product collection-return contract is weakened.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Return an empty collection rather than null."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "CloseResource",
+      "line": "169",
+      "reason": "Exact fixture-owned2/8worker pool is shutdownNow in finally and awaitTermination10seconds is asserted on every exit. Every future get is bounded5/10seconds. Original callback/golden assertions retained; no container/server executor or external I/O owner.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "169",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "171",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "173",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "182",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "184",
+      "reason": "Standalone JUnit checks100 isolated byte decodes or2 immutable response projections using fixture-local workers. Future get5/10 and finallyshutdownNow/await10 bound ownership; no J2EE background service, broker/socket/Root or foreign process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$JdkContextOperations",
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Result"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException": {
+      "flags": 49,
+      "sourceFile": "MediaDeliveryException.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "httpStatus",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "retryAfterSeconds",
+          "descriptor": "()Ljava/util/OptionalInt;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 21
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$JdkContextOperations": {
+      "flags": 48,
+      "sourceFile": "MediaResponseDecoder.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "encode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)[B",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 11
+        },
+        {
+          "name": "same",
+          "descriptor": "([B[B)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 6
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaDeliveryException$Reason": {
+      "flags": 16433,
+      "sourceFile": "MediaDeliveryException.java",
+      "fields": 4,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/media/MediaDeliveryException$Reason;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 46
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder": {
+      "flags": 49,
+      "sourceFile": "MediaResponseDecoder.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "decode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/WireMessage;[B)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 9
+        },
+        {
+          "name": "decode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/WireMessage;[BLdev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 350
+        },
+        {
+          "name": "decodeVerified",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 111
+        },
+        {
+          "name": "project",
+          "descriptor": "(Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/protocol/header/ResultCode;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Result;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 154
+        },
+        {
+          "name": "binding",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/WireMessage;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 127
+        },
+        {
+          "name": "binding",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 204
+        },
+        {
+          "name": "sameContext",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 59
+        },
+        {
+          "name": "contextBytes",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations;)[B",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 48
+        },
+        {
+          "name": "require",
+          "descriptor": "(Z)V",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 16
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 11
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$ContextOperations": {
+      "flags": 1536,
+      "sourceFile": "MediaResponseDecoder.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "encode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)[B",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "same",
+          "descriptor": "([B[B)Z",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Result": {
+      "flags": 49,
+      "sourceFile": "MediaResponseDecoder.java",
+      "fields": 3,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/ResultCode;Ljava/util/Optional;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "resultCode",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/header/ResultCode;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "descriptor",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "videoMetadata",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/media/MediaResponseDecoder$Binding": {
+      "flags": 48,
+      "sourceFile": "MediaResponseDecoder.java",
+      "fields": 3,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/file/MediaType;Ljava/lang/String;Ldev/codex/schubert/nk/protocol/file/ContentDisposition;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 26
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$JdkContextOperations": {
+      "flags": 48,
+      "sourceFile": "ProtectedReadWireClient.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "encode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)[B",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 11
+        },
+        {
+          "name": "same",
+          "descriptor": "([B[B)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 6
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": {
+      "flags": 49,
+      "sourceFile": "ProtectedReadWireClient.java",
+      "fields": 8,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/Set;Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/Set;Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$ContextOperations;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 132
+        },
+        {
+          "name": "exchange",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 259
+        },
+        {
+          "name": "requestPayload",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;)Ldev/codex/schubert/nk/protocol/layout/FixedPayload;",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 63
+        },
+        {
+          "name": "decode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/LayoutId;[BLjava/util/UUID;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result;",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 318
+        },
+        {
+          "name": "sameContext",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Z",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 62
+        },
+        {
+          "name": "contextBytes",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)[B",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 51
+        },
+        {
+          "name": "lambda$decode$0",
+          "descriptor": "([B)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 6
+        },
+        {
+          "name": "lambda$exchange$0",
+          "descriptor": "(Ljava/util/UUID;[B)V",
+          "flags": 4098,
+          "hasCode": true,
+          "codeLength": 28
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 11
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/PendingReply": {
+      "flags": 49,
+      "sourceFile": "PendingReply.java",
+      "fields": 3,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/UUID;Ljava/time/Instant;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 42
+        },
+        {
+          "name": "correlationId",
+          "descriptor": "()Ljava/util/UUID;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "deadline",
+          "descriptor": "()Ljava/time/Instant;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "completion",
+          "descriptor": "()Ljava/util/concurrent/CompletionStage;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 13
+        },
+        {
+          "name": "complete",
+          "descriptor": "([B)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 16
+        },
+        {
+          "name": "fail",
+          "descriptor": "(Ljava/lang/Throwable;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "lambda$completion$0",
+          "descriptor": "([B)[B",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 8
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason": {
+      "flags": 16433,
+      "sourceFile": "JmsRequestReplyException.java",
+      "fields": 4,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 46
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$ContextOperations": {
+      "flags": 1536,
+      "sourceFile": "ProtectedReadWireClient.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "encode",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)[B",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "same",
+          "descriptor": "([B[B)Z",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient": {
+      "flags": 49,
+      "sourceFile": "MediaDescriptorWireClient.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyClient;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;Ljava/time/Clock;Ljava/util/function/Supplier;Ljava/time/Duration;)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 32
+        },
+        {
+          "name": "exchange",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/TypedPayloadValues;Ldev/codex/schubert/nk/protocol/header/AuthenticationContext;)Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": {
+      "flags": 49,
+      "sourceFile": "ReplyCorrelationRegistry.java",
+      "fields": 5,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(I)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 60
+        },
+        {
+          "name": "register",
+          "descriptor": "(Ljava/util/UUID;Ljava/time/Instant;Ljava/time/Instant;)Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 132
+        },
+        {
+          "name": "complete",
+          "descriptor": "(Ljava/util/UUID;[BLjava/time/Instant;)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 100
+        },
+        {
+          "name": "expire",
+          "descriptor": "(Ljava/util/UUID;Ljava/time/Instant;)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 79
+        },
+        {
+          "name": "cancel",
+          "descriptor": "(Ljava/util/UUID;)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 49
+        },
+        {
+          "name": "pendingCount",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "lateResponseCount",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "lambda$expire$0",
+          "descriptor": "(Ljava/time/Instant;Ljava/util/concurrent/atomic/AtomicReference;Ljava/util/UUID;Ldev/codex/schubert/nk/web/messaging/PendingReply;)Ldev/codex/schubert/nk/web/messaging/PendingReply;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 20
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result": {
+      "flags": 49,
+      "sourceFile": "ProtectedReadWireClient.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/header/ResultCode;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 15
+        },
+        {
+          "name": "resultCode",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/header/ResultCode;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "payload",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException": {
+      "flags": 49,
+      "sourceFile": "JmsRequestReplyException.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 19
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "preserveFatal",
+          "descriptor": "(Ljava/lang/Throwable;)V",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 167
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException": {
+      "flags": 49,
+      "sourceFile": "ProtectedReadWireException.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason;)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": {
+      "flags": 49,
+      "sourceFile": "JmsRequestReplyClient.java",
+      "fields": 5,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry;Ljava/time/Clock;I)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 64
+        },
+        {
+          "name": "exchange",
+          "descriptor": "(Ljava/util/UUID;[BLjava/time/Duration;Ldev/codex/schubert/nk/web/messaging/JmsRequestSender;)[B",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 264
+        },
+        {
+          "name": "onReply",
+          "descriptor": "(Ljava/util/UUID;[B)Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "pendingCount",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "lateReplyCount",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "validateRequest",
+          "descriptor": "([BLjava/time/Duration;)V",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 64
+        },
+        {
+          "name": "failure",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "failure",
+          "descriptor": "(Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/web/messaging/JmsRequestReplyException;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 11
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 10
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason": {
+      "flags": 16433,
+      "sourceFile": "ProtectedReadWireException.java",
+      "fields": 4,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 46
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestSender": {
+      "flags": 1537,
+      "sourceFile": "JmsRequestSender.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "send",
+          "descriptor": "(Ljava/util/UUID;[B)V",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain10": true,
+  "explicitMaxLowPhysical20": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "noJmsOrJdbcProviderDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": [],
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": [],
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar": []
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaResponseDecoderTest.java": 10,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaVerifiedProjectionTest.java": 5,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaDecoderNamespaceContractTest.java": 1
+  },
+  "newDefinitions": 8,
+  "originalDefinitions": 8,
+  "publicAbi18AndOriginal10InverseExact": true,
+  "shared191PhysicalByteExact": true,
+  "actualJmsBrokerSessionConnectionHttpFileRootVmDbNativeKeyAuthorityActions": 0,
+  "privateResultReflectionOrForgery": false,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
