@@ -26,7 +26,9 @@ public final class ArtifactComparator {
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
-  private ArtifactComparator() {}
+  private ArtifactComparator() {
+    throw new AssertionError("ArtifactComparator is a static tool");
+  }
 
   public static ComparisonResult compare(
       Path projectRoot, Path currentArtifacts, Path nkArtifacts, Path observationsFile)
@@ -251,18 +253,21 @@ public final class ArtifactComparator {
   private static Map<String, Path> artifactFiles(Path root, List<String> failures, String target)
       throws IOException {
     Map<String, Path> files = new TreeMap<>();
-    try (Stream<Path> paths = Files.list(root)) {
-      for (Path path : paths.toList()) {
-        if (Files.isSymbolicLink(path)) {
-          failures.add(target + "_SYMLINK:" + path.getFileName());
-        } else if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)
-            && requiredArtifactFileName(path).endsWith(".json")) {
-          String id = requiredArtifactFileName(path).replaceFirst("\\.json$", "");
-          files.put(id, path);
-        }
-      }
-    }
-    return files;
+    return CharacterizationIoScope.acquire(
+        () -> Files.list(root),
+        Stream::close,
+        paths -> {
+          for (Path path : paths.toList()) {
+            if (Files.isSymbolicLink(path)) {
+              failures.add(target + "_SYMLINK:" + path.getFileName());
+            } else if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)
+                && requiredArtifactFileName(path).endsWith(".json")) {
+              String id = requiredArtifactFileName(path).replaceFirst("\\.json$", "");
+              files.put(id, path);
+            }
+          }
+          return files;
+        });
   }
 
   private static void compareSets(

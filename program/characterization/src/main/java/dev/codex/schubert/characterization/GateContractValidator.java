@@ -43,7 +43,9 @@ final class GateContractValidator {
   private static final Set<String> MODES = Set.of("difference", "required", "contract");
   private static final Set<String> SELECTOR_TYPES = Set.of("semantic", "header", "json-pointer");
 
-  private GateContractValidator() {}
+  private GateContractValidator() {
+    throw new AssertionError("GateContractValidator is a static tool");
+  }
 
   static ValidationResult validate(
       Path projectRoot, Path firstRun, Path secondRun, Path comparisonReport)
@@ -802,16 +804,19 @@ final class GateContractValidator {
     if (!Files.isDirectory(artifactRoot)) {
       return List.of();
     }
-    try (Stream<Path> files = Files.list(artifactRoot)) {
-      return files
-          .filter(
-              path ->
-                  ArtifactComparator.requiredArtifactFileName(path)
-                      .matches("CHR-[A-Z][0-9]{2}\\.json"))
-          .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
-          .sorted((left, right) -> Integer.compare(caseOrder(left), caseOrder(right)))
-          .toList();
-    }
+    return CharacterizationIoScope.acquire(
+        () -> Files.list(artifactRoot),
+        Stream::close,
+        files -> {
+          return files
+              .filter(
+                  path ->
+                      ArtifactComparator.requiredArtifactFileName(path)
+                          .matches("CHR-[A-Z][0-9]{2}\\.json"))
+              .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
+              .sorted((left, right) -> Integer.compare(caseOrder(left), caseOrder(right)))
+              .toList();
+        });
   }
 
   private static int caseOrder(String id) {
@@ -823,12 +828,15 @@ final class GateContractValidator {
     if (!Files.isDirectory(root)) {
       return List.of();
     }
-    try (Stream<Path> paths = Files.walk(root)) {
-      return paths
-          .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
-          .filter(filter)
-          .toList();
-    }
+    return CharacterizationIoScope.acquire(
+        () -> Files.walk(root),
+        Stream::close,
+        paths -> {
+          return paths
+              .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
+              .filter(filter)
+              .toList();
+        });
   }
 
   private static String aggregateHash(Path root, List<Path> files)
@@ -857,12 +865,16 @@ final class GateContractValidator {
   static String sha256(Path file) throws IOException, NoSuchAlgorithmException {
     if (file == null) throw new IllegalArgumentException("hash source is required");
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    try (var input = Files.newInputStream(file)) {
-      byte[] buffer = new byte[1024 * 1024];
-      for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
-        digest.update(buffer, 0, read);
-      }
-    }
+    CharacterizationIoScope.acquire(
+        () -> Files.newInputStream(file),
+        java.io.InputStream::close,
+        input -> {
+          byte[] buffer = new byte[1024 * 1024];
+          for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
+            digest.update(buffer, 0, read);
+          }
+          return Boolean.TRUE;
+        });
     return java.util.HexFormat.of().formatHex(digest.digest());
   }
 

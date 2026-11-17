@@ -1,0 +1,191 @@
+[
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "9805509c03e69fa53ae8b2cd4b0b1c8b409ac11820a148168a4013a2f0421124",
+    "line": 76,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> currentByCase = new TreeMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "9805509c03e69fa53ae8b2cd4b0b1c8b409ac11820a148168a4013a2f0421124",
+    "line": 77,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> nkByCase = new TreeMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "9805509c03e69fa53ae8b2cd4b0b1c8b409ac11820a148168a4013a2f0421124",
+    "line": 105,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> rules = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+    "sourceSha256": "9805509c03e69fa53ae8b2cd4b0b1c8b409ac11820a148168a4013a2f0421124",
+    "line": 255,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Path> files = new TreeMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+    "sourceSha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6",
+    "line": 38,
+    "rule": "AvoidCatchingGenericException",
+    "anchor": "} catch (IOException | RuntimeException | Error primary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Resource-owner cleanup boundary, not normal return: catches IO/runtime/Error solely to close once, retain/rethrow identical primary and suppress only a distinct secondary, including Error. New RAW002..006 assert identity/once/ordering/null/secondary semantics."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+    "sourceSha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6",
+    "line": 38,
+    "rule": "AvoidCatchingGenericException",
+    "anchor": "} catch (IOException | RuntimeException | Error primary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Resource-owner cleanup boundary, not normal return: catches IO/runtime/Error solely to close once, retain/rethrow identical primary and suppress only a distinct secondary, including Error. New RAW002..006 assert identity/once/ordering/null/secondary semantics."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+    "sourceSha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6",
+    "line": 41,
+    "rule": "AvoidCatchingGenericException",
+    "anchor": "} catch (IOException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Resource-owner cleanup boundary, not normal return: catches IO/runtime/Error solely to close once, retain/rethrow identical primary and suppress only a distinct secondary, including Error. New RAW002..006 assert identity/once/ordering/null/secondary semantics."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+    "sourceSha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6",
+    "line": 41,
+    "rule": "AvoidCatchingGenericException",
+    "anchor": "} catch (IOException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Resource-owner cleanup boundary, not normal return: catches IO/runtime/Error solely to close once, retain/rethrow identical primary and suppress only a distinct secondary, including Error. New RAW002..006 assert identity/once/ordering/null/secondary semantics."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CharacterizationIoScope.java",
+    "sourceSha256": "da07865268475f3be05f53844367ebfce849a9b8ed5c01e9a6669a0ad72b80d6",
+    "line": 42,
+    "rule": "CompareObjectsWithEquals",
+    "anchor": "if (primary != secondary) primary.addSuppressed(secondary);",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Throwable self-suppression is forbidden by reference identity, independent of equals. Calling equals would be incorrect for distinct equal-looking Throwable. RAW004/005 distinguish same and different instances."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "cd039059a23d502b417d568422a6cc2fd7850474a2d8e68f05dcda0e22d247f8",
+    "line": 102,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> events = new HashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "cd039059a23d502b417d568422a6cc2fd7850474a2d8e68f05dcda0e22d247f8",
+    "line": 169,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> addedEvents = new HashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.java",
+    "sourceSha256": "cd039059a23d502b417d568422a6cc2fd7850474a2d8e68f05dcda0e22d247f8",
+    "line": 190,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, JsonNode> rows = new HashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 163,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> actual = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 249,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 300,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 371,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> result = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 542,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> manifest = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 613,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, String> result = new TreeMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+    "sourceSha256": "bbde5dd9c7944ee16b2f93843aaa5fe268aa01010363be8adef25e70f9f7f02e",
+    "line": 619,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, String> result = new TreeMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateContractValidator.java",
+    "sourceSha256": "d5cbbfac8dfbf958c86b10df59517fcf0389db7322c3962e97a7775fa98c8a61",
+    "line": 126,
+    "rule": "UseConcurrentHashMap",
+    "anchor": "Map<String, Object> metrics = new LinkedHashMap<>();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Fresh method-local ordered/index map, confined to one comparison/report/validator invocation; no shared map mutation. Sequential stream callbacks only. ACTIVE_OUTPUTS shared claims stay ConcurrentHashMap.newKeySet. Retain deterministic iteration; full142 independent concurrent output/tree tests will qualify the changed source before acceptance."
+  },
+  {
+    "path": "program/characterization/tests/java/dev/codex/schubert/characterization/CharacterizationIoScopeTest.java",
+    "sourceSha256": "73135a80267afc50b29088d9da96a43669711dcc2c00572d0075f646a469e5ce",
+    "line": 179,
+    "rule": "AvoidAccessibilityAlteration",
+    "anchor": "constructor.setAccessible(true);",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Narrow whitebox contract for five pure static utility private zero-arg constructors only. Exact class allowlist; TargetAdapter parameterized valid constructor excluded; access flag restored in finally and asserted. No keys/Root/authority/runtime class access."
+  }
+]

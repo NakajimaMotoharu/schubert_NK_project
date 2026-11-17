@@ -62,7 +62,9 @@ public final class CorrelatedLogEvidenceValidator {
           "actorRole");
   private static final List<String> STAGES = List.of("LOCAL", "OUTBOX");
 
-  private CorrelatedLogEvidenceValidator() {}
+  private CorrelatedLogEvidenceValidator() {
+    throw new AssertionError("CorrelatedLogEvidenceValidator is a static tool");
+  }
 
   /** Missing, ambiguous, duplicate or changed evidence is a failure, never an empty success. */
   public static List<String> validate(@Nullable JsonNode evidence) {

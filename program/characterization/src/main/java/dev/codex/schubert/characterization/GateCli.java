@@ -3,7 +3,6 @@ package dev.codex.schubert.characterization;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -46,8 +45,44 @@ public final class GateCli {
           .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
   private static final HexFormat HEX = HexFormat.of();
   private static final Set<Path> ACTIVE_OUTPUTS = ConcurrentHashMap.newKeySet();
+  private static final JsonOutput JSON_OUTPUT = new FileJsonOutput();
 
-  private GateCli() {}
+  interface JsonOutput {
+    void createParent(Path parent) throws IOException;
+
+    void writeTemporary(Path temporary, Object value) throws IOException;
+
+    void publish(Path temporary, Path output) throws IOException;
+
+    void deleteTemporary(Path temporary) throws IOException;
+  }
+
+  private static final class FileJsonOutput implements JsonOutput {
+    @Override
+    public void createParent(Path parent) throws IOException {
+      Files.createDirectories(parent);
+    }
+
+    @Override
+    public void writeTemporary(Path temporary, Object value) throws IOException {
+      JSON.writeValue(temporary.toFile(), value);
+    }
+
+    @Override
+    public void publish(Path temporary, Path output) throws IOException {
+      Files.move(
+          temporary, output, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+    }
+
+    @Override
+    public void deleteTemporary(Path temporary) throws IOException {
+      Files.deleteIfExists(temporary);
+    }
+  }
+
+  private GateCli() {
+    throw new AssertionError("GateCli is a static tool");
+  }
 
   public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
     if (args.length == 0) {
@@ -398,22 +433,29 @@ public final class GateCli {
             .toList();
     List<int[]> prefixes = targets.stream().map(GateCli::prefixes).toList();
     int[] matched = new int[targets.size()];
-    // This method owns the stream. Matching state survives every internal buffer boundary.
-    try (InputStream input = new BufferedInputStream(Files.newInputStream(file))) {
-      for (int next = input.read(); next != -1; next = input.read()) {
-        for (int pattern = 0; pattern < targets.size(); pattern++) {
-          byte[] target = targets.get(pattern);
-          int position = matched[pattern];
-          while (position > 0 && target[position] != (byte) next) {
-            position = prefixes.get(pattern)[position - 1];
+    // Own only the raw stream; KMP state survives each 8 KiB buffer boundary.
+    return CharacterizationIoScope.acquire(
+        () -> Files.newInputStream(file),
+        InputStream::close,
+        input -> {
+          byte[] buffer = new byte[8192];
+          for (int read = input.read(buffer); read != -1; read = input.read(buffer)) {
+            for (int index = 0; index < read; index++) {
+              byte next = buffer[index];
+              for (int pattern = 0; pattern < targets.size(); pattern++) {
+                byte[] target = targets.get(pattern);
+                int position = matched[pattern];
+                while (position > 0 && target[position] != next) {
+                  position = prefixes.get(pattern)[position - 1];
+                }
+                if (target[position] == next) position++;
+                if (position == target.length) return true;
+                matched[pattern] = position;
+              }
+            }
           }
-          if (target[position] == (byte) next) position++;
-          if (position == target.length) return true;
-          matched[pattern] = position;
-        }
-      }
-    }
-    return false;
+          return false;
+        });
   }
 
   private static int[] prefixes(byte[] pattern) {
@@ -471,11 +513,15 @@ public final class GateCli {
           "chr.gateCommit must be a 7 to 40 character lowercase Git commit");
     }
     if (Files.exists(baseline)) {
-      try (Stream<Path> contents = Files.list(baseline)) {
-        if (contents.findAny().isPresent()) {
-          throw new IllegalStateException("baseline already exists and is not empty");
-        }
-      }
+      CharacterizationIoScope.acquire(
+          () -> Files.list(baseline),
+          Stream::close,
+          contents -> {
+            if (contents.findAny().isPresent()) {
+              throw new IllegalStateException("baseline already exists and is not empty");
+            }
+            return Boolean.TRUE;
+          });
     }
     JsonNode expected =
         JSON.readTree(
@@ -524,30 +570,37 @@ public final class GateCli {
   }
 
   private static void copyTree(Path source, Path destination) throws IOException {
-    try (Stream<Path> paths = Files.walk(source)) {
-      for (Path path : paths.sorted().toList()) {
-        if (Files.isSymbolicLink(path)) {
-          throw new IOException("symbolic link is not allowed in baseline source: " + path);
-        }
-        Path target = destination.resolve(source.relativize(path).toString());
-        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) Files.createDirectories(target);
-        else Files.copy(path, target, StandardCopyOption.COPY_ATTRIBUTES);
-      }
-    }
+    CharacterizationIoScope.acquire(
+        () -> Files.walk(source),
+        Stream::close,
+        paths -> {
+          for (Path path : paths.sorted().toList()) {
+            if (Files.isSymbolicLink(path)) {
+              throw new IOException("symbolic link is not allowed in baseline source: " + path);
+            }
+            Path target = destination.resolve(source.relativize(path).toString());
+            if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) Files.createDirectories(target);
+            else Files.copy(path, target, StandardCopyOption.COPY_ATTRIBUTES);
+          }
+          return Boolean.TRUE;
+        });
   }
 
   static List<String> caseIds(Path artifactRoot) throws IOException {
     if (!Files.isDirectory(artifactRoot)) return List.of();
-    try (Stream<Path> files = Files.list(artifactRoot)) {
-      return files
-          .filter(
-              path ->
-                  ArtifactComparator.requiredArtifactFileName(path)
-                      .matches("CHR-[A-Z][0-9]{2}\\.json"))
-          .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
-          .sorted(Comparator.comparingInt(GateCli::caseOrder))
-          .toList();
-    }
+    return CharacterizationIoScope.acquire(
+        () -> Files.list(artifactRoot),
+        Stream::close,
+        files -> {
+          return files
+              .filter(
+                  path ->
+                      ArtifactComparator.requiredArtifactFileName(path)
+                          .matches("CHR-[A-Z][0-9]{2}\\.json"))
+              .map(path -> ArtifactComparator.requiredArtifactFileName(path).replace(".json", ""))
+              .sorted(Comparator.comparingInt(GateCli::caseOrder))
+              .toList();
+        });
   }
 
   private static int caseOrder(String id) {
@@ -574,30 +627,36 @@ public final class GateCli {
   static List<Path> regularFiles(Path root, java.util.function.Predicate<Path> filter)
       throws IOException {
     if (!Files.isDirectory(root)) return new ArrayList<>();
-    try (Stream<Path> paths = Files.walk(root)) {
-      return new ArrayList<>(
-          paths
-              .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
-              .filter(filter)
-              .toList());
-    }
+    return CharacterizationIoScope.acquire(
+        () -> Files.walk(root),
+        Stream::close,
+        paths -> {
+          return new ArrayList<>(
+              paths
+                  .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS))
+                  .filter(filter)
+                  .toList());
+        });
   }
 
   static TreeStats treeStats(Path root) throws IOException {
-    long files = 0;
-    long bytes = 0;
-    List<String> symlinks = new ArrayList<>();
-    try (Stream<Path> paths = Files.walk(root)) {
-      for (Path path : paths.toList()) {
-        if (Files.isSymbolicLink(path)) {
-          symlinks.add(root.relativize(path).toString().replace('\\', '/'));
-        } else if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) {
-          files++;
-          bytes += Files.size(path);
-        }
-      }
-    }
-    return new TreeStats(files, bytes, List.copyOf(symlinks));
+    return CharacterizationIoScope.acquire(
+        () -> Files.walk(root),
+        Stream::close,
+        paths -> {
+          long files = 0;
+          long bytes = 0;
+          List<String> symlinks = new ArrayList<>();
+          for (Path path : paths.toList()) {
+            if (Files.isSymbolicLink(path)) {
+              symlinks.add(root.relativize(path).toString().replace('\\', '/'));
+            } else if (Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) {
+              files++;
+              bytes += Files.size(path);
+            }
+          }
+          return new TreeStats(files, bytes, List.copyOf(symlinks));
+        });
   }
 
   private static String aggregateHash(Path root, List<Path> files)
@@ -626,16 +685,26 @@ public final class GateCli {
   static String sha256(Path file) throws IOException, NoSuchAlgorithmException {
     if (file == null) throw new IllegalArgumentException("hash source is required");
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    try (var input = Files.newInputStream(file)) {
-      byte[] buffer = new byte[1024 * 1024];
-      for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
-        digest.update(buffer, 0, read);
-      }
-    }
+    CharacterizationIoScope.acquire(
+        () -> Files.newInputStream(file),
+        java.io.InputStream::close,
+        input -> {
+          byte[] buffer = new byte[1024 * 1024];
+          for (int read = input.read(buffer); read >= 0; read = input.read(buffer)) {
+            digest.update(buffer, 0, read);
+          }
+          return Boolean.TRUE;
+        });
     return HEX.formatHex(digest.digest());
   }
 
   static void writeJson(Path output, Object value) throws IOException {
+    writeJson(output, value, JSON_OUTPUT);
+  }
+
+  /** Per-operation IO port; no global provider replacement or change in exception precedence. */
+  static void writeJson(Path output, Object value, JsonOutput io) throws IOException {
+    java.util.Objects.requireNonNull(io, "JSON output IO");
     if (output == null) throw new IllegalArgumentException("output is required");
     Path normalized = output.toAbsolutePath().normalize();
     Path parent = normalized.getParent();
@@ -647,16 +716,12 @@ public final class GateCli {
     }
     Path temporary = normalized.resolveSibling(normalized.getFileName() + ".part");
     try {
-      Files.createDirectories(parent);
-      JSON.writeValue(temporary.toFile(), value);
-      Files.move(
-          temporary,
-          normalized,
-          StandardCopyOption.REPLACE_EXISTING,
-          StandardCopyOption.ATOMIC_MOVE);
+      io.createParent(parent);
+      io.writeTemporary(temporary, value);
+      io.publish(temporary, normalized);
     } finally {
       try {
-        Files.deleteIfExists(temporary);
+        io.deleteTemporary(temporary);
       } finally {
         ACTIVE_OUTPUTS.remove(normalized);
       }
