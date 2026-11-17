@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T02:44:09.165240+00:00",
+  "sourceCore": "fefac4b6c8d14df495deacef39eaade275f1348a",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37186-service12-reused-compile-static-v1/manifest.json",
+    "sha256": "50613ecfb6341fac96abf9f6dbdf983e37eded1853ca35d2e60a1ff1e3ddbbd2"
+  },
+  "sourceStaticScope": 3,
+  "raw": 7,
+  "classified": [
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+        "beginline": "251",
+        "endline": "253",
+        "begincolumn": "13",
+        "endcolumn": "12",
+        "rule": "EmptyCatchBlock",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadiness.NativeIo",
+        "method": "sockets",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#emptycatchblock",
+        "priority": "3",
+        "message": "Avoid empty catch blocks"
+      },
+      "sourceSha256": "d02c41aa3d5a8308b34a77e12bb588c5c28caf1950fc564e6e728b71e5b0b3b9",
+      "sourceAnchor": "} catch (NoSuchFileException gone) {",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Existing NativeIo.sockets bounded /proc FD observation: an individual FD link can disappear between directory enumeration and readSymbolicLink. Only this typed NoSuchFileException is skipped; no inode is added, all other IO propagates. A missing observation cannot establish readiness because the owner-inode intersection remains independently mandatory. This unchanged native body is source-reviewed only, not executed or qualified as a live FD proof."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "86",
+        "endline": "91",
+        "begincolumn": "7",
+        "endcolumn": "52",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "status",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "975b3d89ae60544b9e9cc78f3c0b5908caba01f3db4d246bb82918a66b6d38c8",
+      "sourceAnchor": "return nullStatus",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit absent byte-array/socket-set negative fixture for required-provider contracts; replacing null by empty would remove the missing-value test. READY428004 requires propagation, never NPE catch/normal success. Root shared null-deadline source is unselected, so source classification supplies no Root PT PASS."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "96",
+        "endline": "96",
+        "begincolumn": "7",
+        "endcolumn": "84",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "command",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "975b3d89ae60544b9e9cc78f3c0b5908caba01f3db4d246bb82918a66b6d38c8",
+      "sourceAnchor": "return nullCommand ? null : commandValue.getBytes(StandardCharsets.US_ASCII);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit absent byte-array/socket-set negative fixture for required-provider contracts; replacing null by empty would remove the missing-value test. READY428004 requires propagation, never NPE catch/normal success. Root shared null-deadline source is unselected, so source classification supplies no Root PT PASS."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "101",
+        "endline": "101",
+        "begincolumn": "24",
+        "endcolumn": "36",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "sockets",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "975b3d89ae60544b9e9cc78f3c0b5908caba01f3db4d246bb82918a66b6d38c8",
+      "sourceAnchor": "if (nullSockets) return null;",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit absent byte-array/socket-set negative fixture for required-provider contracts; replacing null by empty would remove the missing-value test. READY428004 requires propagation, never NPE catch/normal success. Root shared null-deadline source is unselected, so source classification supplies no Root PT PASS."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "360",
+        "endline": "360",
+        "begincolumn": "17",
+        "endcolumn": "35",
+        "rule": "EqualsNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest",
+        "method": "readyValue001ResponseRetainsBothIndependentValueComponents",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+        "priority": "1",
+        "message": "Avoid using equals() to compare against null"
+      },
+      "sourceSha256": "975b3d89ae60544b9e9cc78f3c0b5908caba01f3db4d246bb82918a66b6d38c8",
+      "sourceAnchor": "assertFalse(first.equals(null));",
+      "decision": "NOT_APPLICABLE",
+      "reason": "READYVALUE001 directly calls immutable Response.equals with null and literal false; object==null would test a different operation. Deliberate value-method argument boundary."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+        "beginline": "560",
+        "endline": "560",
+        "begincolumn": "47",
+        "endcolumn": "59",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "RootStartupContextTest",
+        "method": "unitDeadline",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "1c1f4cc7d54c48a1a80257c12ab9ff1b3a51289682925db1378cd0fe366464ab",
+      "sourceAnchor": "if (selected[0].equals(\"<NULL>\")) return null;",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit absent byte-array/socket-set negative fixture for required-provider contracts; replacing null by empty would remove the missing-value test. READY428004 requires propagation, never NPE catch/normal success. Root shared null-deadline source is unselected, so source classification supplies no Root PT PASS."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+        "beginline": "923",
+        "endline": "923",
+        "begincolumn": "55",
+        "endcolumn": "61",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "RootStartupContextTest",
+        "method": "rootctx006FixedSystemBusQueryAndAllProcessResults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "1c1f4cc7d54c48a1a80257c12ab9ff1b3a51289682925db1378cd0fe366464ab",
+      "sourceAnchor": "if (bad == INTERRUPTED_WAIT_FIXTURE) assertTrue(Thread.interrupted());",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Original unselected Root test checks-and-clears its own interrupt as postcondition, creating no managed application thread. J2EE-container PMD premise is absent; this statement is not executed by selected12."
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "mainSpotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37182-service-command-fresh-sibling-spotbugs-v1/manifest.json",
+    "sha256": "4fa66f4ed61f7b215e6c190ce5c793ecf8b1b12494efae2527ff2ae9aad61716"
+  },
+  "spotbugsPhysical": 646,
+  "missingClassErrors": 0,
+  "publicAbi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37188-service-command-abi-physical-v1/manifest.json",
+    "sha256": "9f4d5f820d7085d5aeeab1bd272d6a60ebc847ab447ae9d7aa8b36bb7182c930"
+  },
+  "originalNinePreserved": true,
+  "newOrdinaryCleanupCases": 3,
+  "productTestsExecuted": 0,
+  "sourceRuleSuppressionExclusionChanges": 0,
+  "actualNativeOrRootQualified": false,
+  "wholeF03Accepted": false,
+  "formalUpdated": false
+}

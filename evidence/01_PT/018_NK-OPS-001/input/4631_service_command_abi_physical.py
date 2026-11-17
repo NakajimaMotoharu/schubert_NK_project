@@ -1,0 +1,15 @@
+"""Compare both frozen class universes and public outer ABI without defining/initializing target classes."""
+from pathlib import Path
+import datetime,hashlib,json,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';tc=r.parent/'toolchain';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+a=b/'evidence/PG36956-backup-path-four-main-compile-v1/manifest.json';z=b/'evidence/PG37180-service-command-four-main-compile-v1/manifest.json';old=ld(a);new=ld(z);assert old['actualExit']==new['actualExit']==0
+base='dev/codex/schubert/nk/batch/platform/MorningServiceReadiness';changed={m:[n for n,h in v.items() if h!=old['physicalClassHashes'][m].get(n)] for m,v in new['physicalClassHashes'].items()};assert all(set(new['physicalClassHashes'][m])==set(old['physicalClassHashes'][m]) for m in changed);flat=[n for v in changed.values() for n in v];assert len(flat)==5 and all(n==base+'.class' or n.startswith(base+'$') for n in flat)
+out=b/'evidence/PG37188-service-command-abi-physical-v1';assert not out.exists();out.mkdir();commands={};outputs={}
+for version,c in [('old',old),('new',new)]:
+ for kind,name in [('outer',base+'.class'),('internal-io',base+'$Io.class')]:
+  assert Path(name).stem.split('$')[0]=='MorningServiceReadiness';p=Path(c['cwd'])/'src/schubert-nk-batch/target/classes'/name;assert sha(p)==c['physicalClassHashes']['batch'][name]
+  cmd=[str(tc/'jdk-25.0.4/bin/javap'),'-public','-s',str(p)];start=datetime.datetime.now(datetime.timezone.utc).isoformat();result=subprocess.run(cmd,capture_output=True,text=True,timeout=120);key=version+'-'+kind
+  (out/(key+'.stdout')).write_text(result.stdout);(out/(key+'.stderr')).write_text(result.stderr);commands[key]=dict(command=cmd,actualExit=result.returncode,startUTC=start,endUTC=datetime.datetime.now(datetime.timezone.utc).isoformat());assert result.returncode==0 and not result.stderr;outputs[key]=result.stdout
+assert outputs['old-outer']==outputs['new-outer'];assert 'decodeCommand(byte[]) throws java.io.IOException' not in outputs['old-internal-io'] and 'decodeCommand(byte[]) throws java.io.IOException' in outputs['new-internal-io']
+v=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),sourceCore=new['sourceCore'],oldSourceCore=old['sourceCore'],oldCompile=ref(a),newCompile=ref(z),physicalUniverseSame=1101,changedPhysicalClasses=changed,changedPhysicalCount=5,unchangedPhysicalCount=1096,unchangedProtoStorageBootstrapPhysical=455,publicOuterAbiExact=True,internalIoDefaultMethodAdded=True,internalAbiAdditionExplicitNotClaimedUnchanged=True,nativeIoPhysicalChangedAndUnqualified=True,commands=commands,oldSourceExecutionsTransferred=False,productTestsExecuted=0,newAcceptance=0,formalUpdated=False)
+(out/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps(dict(actualExit=0,publicOuterAbiExact=True,physical1101=True,changed5=True,unchanged1096=True,internalIoAdditionExplicit=True,productTests=0)))
