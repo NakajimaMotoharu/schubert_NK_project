@@ -1,0 +1,359 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T18:56:04.477273+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38016-scenario-search-view-current8-admission-v1/normalized-prepare.json",
+    "sha256": "de2c6f2c2c2ca043115363d46e518f2f693d5e81994e29904bc3d09aefbddfc4"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38012-scenario-search-view-current8-prepare-v1/manifest.json",
+    "sha256": "52c88b6c2b8c71130f8cbda32858322154d0479b193b7b557df43de656babc3d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38014-scenario-search-view-current8-static-v1/manifest.json",
+    "sha256": "5b8b6d057dca2a437dc9b3bda41eddad644e2403860071aaa81e260f1b3e19e1"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "rule": "CloseResource",
+      "line": "441",
+      "reason": "Exact fixture-owned8worker pool is closed in finally by shutdownNow and asserted awaitTermination10seconds. Each of64/100 futures uses get10seconds. Ownership remains local to standalone JUnit, never managed application infrastructure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "441",
+      "reason": "Standalone JUnit checks64/100 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "447",
+      "reason": "Standalone JUnit checks64/100 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "465",
+      "reason": "Standalone JUnit checks64/100 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "466",
+      "reason": "Standalone JUnit checks64/100 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel",
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$FieldError",
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$Filters"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$Filters": {
+      "flags": 49,
+      "sourceFile": "ScenarioSearchViewModel.java",
+      "fields": 6,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 142
+        },
+        {
+          "name": "getQ",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getGame",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getSpeaker",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getChapter",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getEntryType",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getVoice",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel$FieldError": {
+      "flags": 49,
+      "sourceFile": "ScenarioSearchViewModel.java",
+      "fields": 5,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Code;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 71
+        },
+        {
+          "name": "getName",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getMessage",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 89
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/ScenarioSearchViewModel": {
+      "flags": 49,
+      "sourceFile": "ScenarioSearchViewModel.java",
+      "fields": 8,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;Ljava/util/List;Ljava/util/List;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 118
+        },
+        {
+          "name": "success",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;Ljava/util/List;Ljava/util/List;Ldev/codex/schubert/nk/protocol/layout/common/PagedResponseData;Ljava/util/List;)Ldev/codex/schubert/nk/web/view/ScenarioSearchViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 176
+        },
+        {
+          "name": "invalid",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;)Ldev/codex/schubert/nk/web/view/ScenarioSearchViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 85
+        },
+        {
+          "name": "single",
+          "descriptor": "(Ljava/lang/String;)Ljava/util/List;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 18
+        },
+        {
+          "name": "pageLink",
+          "descriptor": "(Ljava/util/OptionalInt;)Ljava/util/Optional;",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 84
+        },
+        {
+          "name": "encode",
+          "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getTopBar",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/TopBarViewModel;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getFilters",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/ScenarioSearchViewModel$Filters;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getGames",
+          "descriptor": "()Ljava/util/List;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getSpeakers",
+          "descriptor": "()Ljava/util/List;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getErrors",
+          "descriptor": "()Ljava/util/List;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getResults",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPreviousHref",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getNextHref",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "lambda$success$0",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/scenario/GameRecord;)Ljava/lang/String;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "lambda$new$3",
+          "descriptor": "(Ldev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel;)Ljava/util/Optional;",
+          "flags": 4098,
+          "hasCode": true,
+          "codeLength": 12
+        },
+        {
+          "name": "lambda$new$2",
+          "descriptor": "(Ldev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel;)Ljava/util/Optional;",
+          "flags": 4098,
+          "hasCode": true,
+          "codeLength": 12
+        },
+        {
+          "name": "lambda$new$1",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;)Ldev/codex/schubert/nk/web/view/ScenarioSearchViewModel$FieldError;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 28
+        },
+        {
+          "name": "lambda$new$0",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;)Z",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 11
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain1": true,
+  "explicitMaxLowPhysical3": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38010-scenario-view-safe-dependencies-v1/qualified-page-results4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioSearchViewModelTest.java": 8
+  },
+  "newDefinitions": 0,
+  "originalDefinitions": 8,
+  "allBusinessBodiesFiniteCleanupInverseExact": true,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

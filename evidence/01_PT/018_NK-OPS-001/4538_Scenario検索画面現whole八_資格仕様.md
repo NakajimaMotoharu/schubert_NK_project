@@ -1,0 +1,5 @@
+# 4538 Scenario検索画面currentwhole8
+
+F03/SOURCE_REQUALIFICATION low.3/base.8/high2 cap3。Corefda03不変。原2711/2712のうちScenarioSearchViewModelTest全8/WEB222..229をwholefixtureで扱い、成功済みResultsTest8/Page8を再演0。Main1全body+Test全helper/initializerを確認、元source6b53はfixturefinitecleanupだけ逆一致。currentProtocol176旧14physical差/当依存assembly全Code資格不足がtrigger。固定query順/Unicode percentbyte/日本語error順message、pageclamp・game10/speaker500境界、null/immutable/closedBean/redaction/memoryHTMLと64task8worker/future10/finallyawait10の元oracle/TestIDを保持。
+
+Page/Results4byteは直前37980/82/84/88のRootstrict/static/raw/CRC完全一致を再利用しコンパイル/PT再演しない。safe18/Protocol176既資格と必要SDKをexacthash固定。新Main1 physical3/Test1strictcompile・static・Unit固定・必要8一回・全201physical CRC/init/XML/raw対象全Code。未hitsharedcounter保持・exec合成/coverage除外/production期待生成0。実template/browser/HTTP/DB/JMS/VM/Root/cohort/auth/native/key/四heldtype/四HOLDModel等0。F03/P01603の検索画面値部分へ返却、親正式/451/1964-53/17-190新規0・工数null/QA051056057HOLD保持。
