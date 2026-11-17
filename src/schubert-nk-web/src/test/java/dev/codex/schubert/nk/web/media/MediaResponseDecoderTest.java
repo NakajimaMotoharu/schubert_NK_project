@@ -2,7 +2,9 @@ package dev.codex.schubert.nk.web.media;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,6 +19,7 @@ import dev.codex.schubert.nk.protocol.layout.FixedPayload;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +30,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -248,6 +252,203 @@ class MediaResponseDecoderTest {
       executor.shutdownNow();
       assertTrue(
           executor.awaitTermination(10, TimeUnit.SECONDS), "media decoder executor terminated");
+    }
+  }
+
+  // PT-MED-CONTEXT001..006: independent heap fault vectors; no actual OOM or credentials.
+  @Test
+  void context001PositiveAndPortBoundaryPreserveCallerBytes() throws Exception {
+    var request = contextRequest();
+    byte[] body = contextReply(request);
+    byte[] before = body.clone();
+    assertThrows(
+        NullPointerException.class, () -> MediaResponseDecoder.decode(request, body, null));
+    var probe = new ContextProbe(64, 64);
+    assertEquals(
+        "7",
+        MediaResponseDecoder.decode(request, body, probe).descriptor().orElseThrow().logicalId());
+    assertEquals(2, probe.encodeCalls);
+    assertEquals(1, probe.comparisons);
+    assertArrayEquals(new byte[64], probe.first);
+    assertArrayEquals(new byte[64], probe.second);
+    assertArrayEquals(before, body);
+  }
+
+  @Test
+  void context002SecondKnownAcquisitionFailureClearsOnlyOwnedFirst() {
+    var request = contextRequest();
+    byte[] body = contextReply(request);
+    byte[] before = body.clone();
+    var probe = new ContextProbe(64, 64);
+    probe.failAt = 2;
+    probe.encodingFailure = new IllegalStateException("PUBLIC second acquire");
+    byte[] unowned = probe.second.clone();
+    var failure =
+        assertThrows(
+            MediaDeliveryException.class, () -> MediaResponseDecoder.decode(request, body, probe));
+    contextFailure(failure);
+    assertEquals(2, probe.encodeCalls);
+    assertEquals(0, probe.comparisons);
+    assertArrayEquals(new byte[64], probe.first);
+    assertArrayEquals(unowned, probe.second);
+    assertArrayEquals(before, body);
+  }
+
+  @Test
+  void context003ComparisonFailuresClearBothAndKeepFatalIdentity() {
+    for (Throwable sentinel :
+        List.of(
+            new IllegalStateException("PUBLIC compare"), new AssertionError("PUBLIC compare"))) {
+      var request = contextRequest();
+      byte[] body = contextReply(request);
+      byte[] before = body.clone();
+      var probe = new ContextProbe(64, 64);
+      probe.comparisonFailure = sentinel;
+      if (sentinel instanceof Error) {
+        assertSame(
+            sentinel,
+            assertThrows(
+                AssertionError.class, () -> MediaResponseDecoder.decode(request, body, probe)));
+      } else {
+        contextFailure(
+            assertThrows(
+                MediaDeliveryException.class,
+                () -> MediaResponseDecoder.decode(request, body, probe)));
+      }
+      assertEquals(2, probe.encodeCalls);
+      assertEquals(1, probe.comparisons);
+      assertArrayEquals(new byte[64], probe.first);
+      assertArrayEquals(new byte[64], probe.second);
+      assertArrayEquals(before, body);
+    }
+  }
+
+  @Test
+  void context004NullArraysAtEitherAcquisitionNeverCompare() {
+    for (int stage : new int[] {1, 2}) {
+      var request = contextRequest();
+      byte[] body = contextReply(request);
+      byte[] before = body.clone();
+      var probe = new ContextProbe(64, 64);
+      probe.nullAt = stage;
+      byte[] unownedFirst = probe.first.clone();
+      byte[] unownedSecond = probe.second.clone();
+      contextFailure(
+          assertThrows(
+              MediaDeliveryException.class,
+              () -> MediaResponseDecoder.decode(request, body, probe)));
+      assertEquals(stage, probe.encodeCalls);
+      assertEquals(0, probe.comparisons);
+      assertArrayEquals(stage == 2 ? new byte[64] : unownedFirst, probe.first);
+      assertArrayEquals(unownedSecond, probe.second);
+      assertArrayEquals(before, body);
+    }
+  }
+
+  @Test
+  void context005WrongLengthsAreRejectedAndClearedBeforeOwnershipCanEscape() {
+    for (int stage : new int[] {1, 2}) {
+      for (int length : new int[] {0, 63, 65}) {
+        var request = contextRequest();
+        byte[] body = contextReply(request);
+        byte[] before = body.clone();
+        var probe = new ContextProbe(stage == 1 ? length : 64, stage == 2 ? length : 64);
+        byte[] unownedSecond = probe.second.clone();
+        contextFailure(
+            assertThrows(
+                MediaDeliveryException.class,
+                () -> MediaResponseDecoder.decode(request, body, probe)));
+        assertEquals(stage, probe.encodeCalls);
+        assertEquals(0, probe.comparisons);
+        assertArrayEquals(new byte[stage == 1 ? length : 64], probe.first);
+        assertArrayEquals(stage == 2 ? new byte[length] : unownedSecond, probe.second);
+        assertArrayEquals(before, body);
+      }
+    }
+  }
+
+  @Test
+  void context006UnknownSecondAcquisitionFailuresKeepIdentityAndClearOwnedFirst() {
+    for (Throwable sentinel :
+        List.of(
+            new UnsupportedOperationException("PUBLIC unknown acquire"),
+            new AssertionError("PUBLIC fatal acquire"))) {
+      var request = contextRequest();
+      byte[] body = contextReply(request);
+      byte[] before = body.clone();
+      var probe = new ContextProbe(64, 64);
+      probe.failAt = 2;
+      probe.encodingFailure = sentinel;
+      byte[] unownedSecond = probe.second.clone();
+      assertSame(
+          sentinel,
+          assertThrows(
+              sentinel.getClass(), () -> MediaResponseDecoder.decode(request, body, probe)));
+      assertEquals(2, probe.encodeCalls);
+      assertEquals(0, probe.comparisons);
+      assertArrayEquals(new byte[64], probe.first);
+      assertArrayEquals(unownedSecond, probe.second);
+      assertArrayEquals(before, body);
+    }
+  }
+
+  private static WireMessage<FixedPayload> contextRequest() {
+    return request(MediaType.AUDIO, "7", "I");
+  }
+
+  private static byte[] contextReply(WireMessage<FixedPayload> request) {
+    return reply(
+        request,
+        media(MediaType.AUDIO, "7", "scenario/a.ogg", "a.ogg", 3, OGG_AUDIO_MIME, "I"),
+        SUCCESS_RESULT_CODE);
+  }
+
+  private static void contextFailure(MediaDeliveryException failure) {
+    assertEquals(MediaDeliveryException.Reason.INVALID_DESCRIPTOR, failure.reason());
+    assertEquals("media delivery failed", failure.getMessage());
+    assertNull(failure.getCause());
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  private static final class ContextProbe implements MediaResponseDecoder.ContextOperations {
+    private final byte[] first;
+    private final byte[] second;
+    private int encodeCalls;
+    private int comparisons;
+    private int nullAt;
+    private int failAt;
+    private @Nullable Throwable encodingFailure;
+    private @Nullable Throwable comparisonFailure;
+
+    ContextProbe(int firstLength, int secondLength) {
+      first = new byte[firstLength];
+      second = new byte[secondLength];
+      Arrays.fill(first, (byte) '1');
+      Arrays.fill(second, (byte) '1');
+    }
+
+    @Override
+    public byte @Nullable [] encode(AuthenticationContext context) {
+      assertNotNull(context);
+      encodeCalls++;
+      if (encodeCalls == failAt) contextRaise(encodingFailure);
+      if (encodeCalls == nullAt) return null;
+      return encodeCalls == 1 ? first : second;
+    }
+
+    @Override
+    public boolean same(byte[] left, byte[] right) {
+      comparisons++;
+      assertSame(first, left);
+      assertSame(second, right);
+      if (comparisonFailure != null) contextRaise(comparisonFailure);
+      return MessageDigest.isEqual(left, right);
+    }
+
+    private static void contextRaise(@Nullable Throwable sentinel) {
+      assertNotNull(sentinel);
+      if (sentinel instanceof RuntimeException runtime) throw runtime;
+      throw (Error) sentinel;
     }
   }
 

@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Media request/response binding after approved JMS/body/ACL/correlation validation. It does not
@@ -34,6 +35,9 @@ import java.util.Optional;
  * of API HMAC keys.
  */
 public final class MediaResponseDecoder {
+  private static final int CONTEXT_BYTES = 64;
+  private static final ContextOperations JDK_CONTEXT = new JdkContextOperations();
+
   private MediaResponseDecoder() {
     throw new AssertionError("static namespace");
   }
@@ -74,6 +78,14 @@ public final class MediaResponseDecoder {
   /** Decodes owned temporary bytes; caller's input remains unchanged and is never retained. */
   public static Result decode(WireMessage<FixedPayload> request, byte[] response)
       throws MediaDeliveryException {
+    return decode(request, response, JDK_CONTEXT);
+  }
+
+  /** Closed trusted PT boundary; public/runtime callers always use the fixed JDK operations. */
+  static Result decode(
+      WireMessage<FixedPayload> request, byte[] response, ContextOperations contextOperations)
+      throws MediaDeliveryException {
+    Objects.requireNonNull(contextOperations, "context operations");
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(response, "response");
     if (response.length < 256 || response.length > 2064) {
@@ -94,7 +106,8 @@ public final class MediaResponseDecoder {
       require(
           sameContext(
               request.header().authenticationContext().orElseThrow(IllegalArgumentException::new),
-              header.authenticationContext().orElseThrow(IllegalArgumentException::new)));
+              header.authenticationContext().orElseThrow(IllegalArgumentException::new),
+              contextOperations));
       ResultCode code = header.resultCode().orElseThrow(IllegalArgumentException::new);
       byte[] data = Arrays.copyOfRange(body, 256, body.length);
       try {
@@ -200,14 +213,47 @@ public final class MediaResponseDecoder {
         MediaType.MUSIC, music.trackId(), ContentDisposition.valueOf(music.disposition().name()));
   }
 
-  private static boolean sameContext(AuthenticationContext first, AuthenticationContext second) {
-    byte[] left = first.wireValue().getBytes(StandardCharsets.US_ASCII);
-    byte[] right = second.wireValue().getBytes(StandardCharsets.US_ASCII);
+  private static boolean sameContext(
+      AuthenticationContext first, AuthenticationContext second, ContextOperations operations) {
+    byte[] left = contextBytes(first, operations);
     try {
-      return MessageDigest.isEqual(left, right);
+      byte[] right = contextBytes(second, operations);
+      try {
+        return operations.same(left, right);
+      } finally {
+        Arrays.fill(right, (byte) 0);
+      }
     } finally {
       Arrays.fill(left, (byte) 0);
-      Arrays.fill(right, (byte) 0);
+    }
+  }
+
+  private static byte[] contextBytes(AuthenticationContext context, ContextOperations operations) {
+    byte[] bytes = operations.encode(context);
+    if (bytes == null) throw new IllegalStateException("invalid media context buffer");
+    if (bytes.length != CONTEXT_BYTES) {
+      Arrays.fill(bytes, (byte) 0);
+      throw new IllegalStateException("invalid media context buffer");
+    }
+    return bytes;
+  }
+
+  /** Package-only fault port, never an HTTP/session/config-selected authorization capability. */
+  interface ContextOperations {
+    byte @Nullable [] encode(AuthenticationContext context);
+
+    boolean same(byte[] first, byte[] second);
+  }
+
+  private static final class JdkContextOperations implements ContextOperations {
+    @Override
+    public byte[] encode(AuthenticationContext context) {
+      return context.wireValue().getBytes(StandardCharsets.US_ASCII);
+    }
+
+    @Override
+    public boolean same(byte[] first, byte[] second) {
+      return MessageDigest.isEqual(first, second);
     }
   }
 

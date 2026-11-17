@@ -1,0 +1,12 @@
+Compiled from "ReplyCorrelationRegistry.java"
+public final class dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry {
+  public static final int STANDARD_CAPACITY;
+  public dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry();
+  public dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry(int);
+  public java.util.Optional<dev.codex.schubert.nk.web.messaging.PendingReply> register(java.util.UUID, java.time.Instant, java.time.Instant);
+  public boolean complete(java.util.UUID, byte[], java.time.Instant);
+  public boolean expire(java.util.UUID, java.time.Instant);
+  public boolean cancel(java.util.UUID);
+  public int pendingCount();
+  public long lateResponseCount();
+}

@@ -1,0 +1,11 @@
+Compiled from "JmsRequestReplyClient.java"
+public final class dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient {
+  public static final int STANDARD_CONCURRENCY;
+  public static final java.time.Duration MAXIMUM_WAIT;
+  public dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient();
+  public dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient(dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry, java.time.Clock, int);
+  public byte[] exchange(java.util.UUID, byte[], java.time.Duration, dev.codex.schubert.nk.web.messaging.JmsRequestSender) throws jakarta.jms.JMSException;
+  public boolean onReply(java.util.UUID, byte[]);
+  public int pendingCount();
+  public long lateReplyCount();
+}
