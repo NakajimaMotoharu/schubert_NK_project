@@ -13,6 +13,6 @@
 
 CheckstyleはPG38200の同一run・全1,026現行Main。SpotBugsは4moduleの1,102 classを現在の物理class単位で照合し、元run・再解析・未実行を区分した。PG38206の初回2件はMaven解析準備で終了1、BUG-3211/YKT-2671で是正し、再実行で初めて両解析が終端した。
 
-比較工具のPG37322は独立したtool source `fd69f7d62595c021ceff48509ea032a5ff17c5d2` の142成功。元SSC447はPG36620の152成功・失敗0・エラー0・skip 0・未実行0。現Coreの製品PTや実CHRへの加算は0。独立判断証跡は [PG38218 manifest](../../../evidence/01_PT/018_NK-OPS-001/evidence/PG38218-wbs66-f03-current-owner-handoff-v1/manifest.json)。
+比較工具のPG37322は独立したtool source `fd69f7d62595c021ceff48509ea032a5ff17c5d2` の142成功。元SSC447はPG36620の152成功・失敗0・エラー0・skip 0・未実行0。現Coreの製品PTや実CHRへの加算は0。独立判断証跡は [PG38218 manifest](../../../../evidence/01_PT/018_NK-OPS-001/evidence/PG38218-wbs66-f03-current-owner-handoff-v1/manifest.json)。
 
 F02の宣言依存はPG38186、実classfileの4moduleはPG38202。QA056対象を含むAPI/Web全体と実Artemis境界、各SYSのruntime、451、両親の終了依存は継続。正式17/190、1964PT/53scope、当群増0。
