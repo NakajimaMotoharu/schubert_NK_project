@@ -1,0 +1,183 @@
+Compiled from "HttpByteRangeParser.java"
+public final class dev.codex.schubert.nk.web.media.HttpByteRangeParser {
+  private static final long MAX_BODY;
+    descriptor: J
+
+  private dev.codex.schubert.nk.web.media.HttpByteRangeParser();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: new           #7                  // class java/lang/AssertionError
+         7: dup
+         8: ldc           #9                  // String static utility
+        10: invokespecial #11                 // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+        13: athrow
+
+  public static dev.codex.schubert.nk.web.media.HttpByteRangeParser$Selection parseFirst(java.util.Optional<java.lang.String>, long);
+    descriptor: (Ljava/util/Optional;J)Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Selection;
+    Code:
+         0: aload_0
+         1: ldc           #14                 // String header
+         3: invokestatic  #16                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: lload_1
+         8: lconst_0
+         9: lcmp
+        10: ifgt          17
+        13: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+        16: areturn
+        17: aload_0
+        18: invokevirtual #28                 // Method java/util/Optional.isEmpty:()Z
+        21: ifeq          33
+        24: new           #34                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full
+        27: dup
+        28: lload_1
+        29: invokespecial #36                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Full."<init>":(J)V
+        32: areturn
+        33: aload_0
+        34: invokevirtual #39                 // Method java/util/Optional.orElseThrow:()Ljava/lang/Object;
+        37: checkcast     #43                 // class java/lang/String
+        40: astore_3
+        41: aload_3
+        42: iconst_1
+        43: iconst_0
+        44: ldc           #45                 // String bytes=
+        46: iconst_0
+        47: bipush        6
+        49: invokevirtual #47                 // Method java/lang/String.regionMatches:(ZILjava/lang/String;II)Z
+        52: ifne          59
+        55: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+        58: areturn
+        59: aload_3
+        60: bipush        6
+        62: invokevirtual #51                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        65: astore        4
+        67: aload         4
+        69: bipush        44
+        71: invokevirtual #55                 // Method java/lang/String.indexOf:(I)I
+        74: istore        5
+        76: iload         5
+        78: iflt          91
+        81: aload         4
+        83: iconst_0
+        84: iload         5
+        86: invokevirtual #59                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        89: astore        4
+        91: aload         4
+        93: invokevirtual #62                 // Method java/lang/String.trim:()Ljava/lang/String;
+        96: astore        4
+        98: aload         4
+       100: bipush        45
+       102: invokevirtual #55                 // Method java/lang/String.indexOf:(I)I
+       105: istore        6
+       107: iload         6
+       109: iflt          124
+       112: iload         6
+       114: aload         4
+       116: bipush        45
+       118: invokevirtual #66                 // Method java/lang/String.lastIndexOf:(I)I
+       121: if_icmpeq     128
+       124: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       127: areturn
+       128: aload         4
+       130: iconst_0
+       131: iload         6
+       133: invokevirtual #59                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+       136: astore        7
+       138: aload         4
+       140: iload         6
+       142: iconst_1
+       143: iadd
+       144: invokevirtual #51                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+       147: astore        8
+       149: aload         7
+       151: invokevirtual #69                 // Method java/lang/String.isEmpty:()Z
+       154: ifeq          195
+       157: aload         8
+       159: invokestatic  #70                 // Method decimal:(Ljava/lang/String;)J
+       162: lstore        13
+       164: lload         13
+       166: lconst_0
+       167: lcmp
+       168: ifne          175
+       171: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       174: areturn
+       175: lload_1
+       176: lload         13
+       178: invokestatic  #76                 // Method java/lang/Math.subtractExact:(JJ)J
+       181: lconst_0
+       182: invokestatic  #82                 // Method java/lang/Math.max:(JJ)J
+       185: lstore        9
+       187: lload_1
+       188: lconst_1
+       189: lsub
+       190: lstore        11
+       192: goto          223
+       195: aload         7
+       197: invokestatic  #70                 // Method decimal:(Ljava/lang/String;)J
+       200: lstore        9
+       202: aload         8
+       204: invokevirtual #69                 // Method java/lang/String.isEmpty:()Z
+       207: ifeq          216
+       210: lload_1
+       211: lconst_1
+       212: lsub
+       213: goto          221
+       216: aload         8
+       218: invokestatic  #70                 // Method decimal:(Ljava/lang/String;)J
+       221: lstore        11
+       223: lload         9
+       225: lload_1
+       226: lcmp
+       227: ifge          238
+       230: lload         11
+       232: lload         9
+       234: lcmp
+       235: ifge          242
+       238: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       241: areturn
+       242: lload         11
+       244: lload_1
+       245: lconst_1
+       246: lsub
+       247: invokestatic  #85                 // Method java/lang/Math.min:(JJ)J
+       250: lload         9
+       252: ldc2_w        #88                 // long 1048575l
+       255: invokestatic  #90                 // Method java/lang/Math.addExact:(JJ)J
+       258: invokestatic  #85                 // Method java/lang/Math.min:(JJ)J
+       261: lstore        13
+       263: new           #93                 // class dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial
+       266: dup
+       267: lload         9
+       269: lload         13
+       271: invokespecial #95                 // Method dev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial."<init>":(JJ)V
+       274: areturn
+       275: astore        7
+       277: getstatic     #22                 // Field dev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable.INSTANCE:Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Unsatisfiable;
+       280: areturn
+      Exception table:
+         from    to  target type
+           128   174   275   Class java/lang/ArithmeticException
+           128   174   275   Class java/lang/NumberFormatException
+           175   241   275   Class java/lang/ArithmeticException
+           175   241   275   Class java/lang/NumberFormatException
+           242   274   275   Class java/lang/ArithmeticException
+           242   274   275   Class java/lang/NumberFormatException
+
+  private static long decimal(java.lang.String);
+    descriptor: (Ljava/lang/String;)J
+    Code:
+         0: aload_0
+         1: ldc           #102                // String [0-9]+
+         3: invokevirtual #104                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+         6: ifne          19
+         9: new           #100                // class java/lang/NumberFormatException
+        12: dup
+        13: ldc           #108                // String invalid Range decimal
+        15: invokespecial #110                // Method java/lang/NumberFormatException."<init>":(Ljava/lang/String;)V
+        18: athrow
+        19: aload_0
+        20: invokestatic  #113                // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+        23: lreturn
+}

@@ -1,0 +1,88 @@
+Compiled from "HttpByteRangeParser.java"
+public final class dev.codex.schubert.nk.web.media.HttpByteRangeParser$Partial extends java.lang.Record implements dev.codex.schubert.nk.web.media.HttpByteRangeParser$Selection {
+  private final long start;
+    descriptor: J
+
+  private final long end;
+    descriptor: J
+
+  public dev.codex.schubert.nk.web.media.HttpByteRangeParser$Partial(long, long);
+    descriptor: (JJ)V
+    Code:
+         0: aload_0
+         1: invokespecial #3                  // Method java/lang/Record."<init>":()V
+         4: lload_1
+         5: lconst_0
+         6: lcmp
+         7: iflt          26
+        10: lload_3
+        11: lload_1
+        12: lcmp
+        13: iflt          26
+        16: lload_3
+        17: lload_1
+        18: lsub
+        19: ldc2_w        #9                  // long 1048576l
+        22: lcmp
+        23: iflt          36
+        26: new           #11                 // class java/lang/IllegalArgumentException
+        29: dup
+        30: ldc           #13                 // String partial media interval is invalid
+        32: invokespecial #15                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        35: athrow
+        36: aload_0
+        37: lload_1
+        38: putfield      #18                 // Field start:J
+        41: aload_0
+        42: lload_3
+        43: putfield      #24                 // Field end:J
+        46: return
+
+  public long length();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field end:J
+         4: aload_0
+         5: getfield      #18                 // Field start:J
+         8: lsub
+         9: lconst_1
+        10: ladd
+        11: lreturn
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #27,  0             // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #31,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #35,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/web/media/HttpByteRangeParser$Partial;Ljava/lang/Object;)Z
+         7: ireturn
+
+  public long start();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #18                 // Field start:J
+         4: lreturn
+
+  public long end();
+    descriptor: ()J
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field end:J
+         4: lreturn
+}

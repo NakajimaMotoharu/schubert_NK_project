@@ -1,0 +1,102 @@
+[
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeNamespaceContractTest.java",
+    "rule": "AvoidAccessibilityAlteration",
+    "line": "20",
+    "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+    "sourceSha256": "56f12ad9169957a068270b6c2e1de90d6c458b4d21b72972cd550ccd2dd9c04e",
+    "sourceAnchor": "constructor.setAccessible(true);",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Only the pure owned Parser private constructor is tested for non-instantiation; no application/backend credential or native access path. Original accessibility is restored in finally and illegal access is explicitly asserted after restoration. Whitebox internal invariant requires this exact scope; not production reflective access."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeNamespaceContractTest.java",
+    "rule": "AvoidAccessibilityAlteration",
+    "line": "27",
+    "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+    "sourceSha256": "56f12ad9169957a068270b6c2e1de90d6c458b4d21b72972cd550ccd2dd9c04e",
+    "sourceAnchor": "constructor.setAccessible(originalAccess);",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Only the pure owned Parser private constructor is tested for non-instantiation; no application/backend credential or native access path. Original accessibility is restored in finally and illegal access is explicitly asserted after restoration. Whitebox internal invariant requires this exact scope; not production reflective access."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "EqualsNull",
+    "line": "122",
+    "message": "Avoid using equals() to compare against null",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "assertFalse(full.equals(null));",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Direct generated record equality null contract must invoke equals(null); equals result is asserted false with independent Full/Partial fixtures, not a mistaken production null comparison."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "EqualsNull",
+    "line": "135",
+    "message": "Avoid using equals() to compare against null",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "assertFalse(partial.equals(null));",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Direct generated record equality null contract must invoke equals(null); equals result is asserted false with independent Full/Partial fixtures, not a mistaken production null comparison."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "NullAssignment",
+    "line": "144",
+    "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "copy[0] = null;",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Only the returned Test-owned enum array copy is poisoned; independently fixed next values array must retain INSTANCE. No production null state or shared array mutation."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "CloseResource",
+    "line": "164",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Standalone JUnit owns8 workers/100 finite memory-only parse calls, invokeAll10/get10, finally shutdownNow/await10assert. Explicit finite owner cleanup replaces unbounded close. J2EE managed-webapp thread rule does not apply to this exact unit fixture; no product/app request thread or resource."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "164",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(8);",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Standalone JUnit owns8 workers/100 finite memory-only parse calls, invokeAll10/get10, finally shutdownNow/await10assert. Explicit finite owner cleanup replaces unbounded close. J2EE managed-webapp thread rule does not apply to this exact unit fixture; no product/app request thread or resource."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "175",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "var results = workers.invokeAll(tasks, 10, TimeUnit.SECONDS);",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Standalone JUnit owns8 workers/100 finite memory-only parse calls, invokeAll10/get10, finally shutdownNow/await10assert. Explicit finite owner cleanup replaces unbounded close. J2EE managed-webapp thread rule does not apply to this exact unit fixture; no product/app request thread or resource."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "183",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "workers.shutdownNow();",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Standalone JUnit owns8 workers/100 finite memory-only parse calls, invokeAll10/get10, finally shutdownNow/await10assert. Explicit finite owner cleanup replaces unbounded close. J2EE managed-webapp thread rule does not apply to this exact unit fixture; no product/app request thread or resource."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/HttpByteRangeParserTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "184",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "be41709d419d9ef36785c257575fecfc5a837f911210e58ac6de87ccf3af7378",
+    "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+    "decision": "NOT_APPLICABLE_TO_EXACT_TEST_CONTRACT_SITE",
+    "reason": "Standalone JUnit owns8 workers/100 finite memory-only parse calls, invokeAll10/get10, finally shutdownNow/await10assert. Explicit finite owner cleanup replaces unbounded close. J2EE managed-webapp thread rule does not apply to this exact unit fixture; no product/app request thread or resource."
+  }
+]
