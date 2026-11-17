@@ -1,0 +1,5 @@
+# Web監視四family・当41結果
+
+Corea013不変/Unite4f4931a23/PG37736 changed whole41（原30＋new11）全成功/FESnotrun0。37738独立全191CRC/init/whitelist公開XML、対象四family十四Codeclassはraw267L109M14C124B1960I全miss0。正Main15/依存ProtoMediaType一は部分、他191未実行counter保持・oldexecunion0・wholeWeb/六module451昇格0。Source五Mainは変更0、原NullAway compile0/15byte/SDK/SB15を再利用し再演0、Test五sourceだけfreshcompile37730/個別PMD30全非該当/未分類0・CSformat0。二fixtureのfinite pool cleanup(BUG3185)、新registry close型(BUG3186)、Test-private定数三種(BUG3187)是正を当whole41で確認、原失敗/source/元30oracle保持。YKT2645は29中27型確認・残2はLocalLogout/RevocationRetryのheld依存でOPEN。
+
+PG37740 SHA256 897c2d8872000e4bcae3b92b7298cfc5ad2ce6cd65cd7214f647031c02d4eee0。27/29のsource/各判定と未完2型はmanifestへ一意列挙。新正式受入0。
