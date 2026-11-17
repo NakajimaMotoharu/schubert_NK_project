@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HexFormat;
@@ -88,14 +87,6 @@ public interface LargeResultRecordCodec {
   }
 
   private static MessageDigest sha256Digest() {
-    return digestFor("SHA-256");
-  }
-
-  static MessageDigest digestFor(String algorithm) {
-    try {
-      return MessageDigest.getInstance(algorithm);
-    } catch (NoSuchAlgorithmException exception) {
-      throw new IllegalStateException("requested message digest is unavailable", exception);
-    }
+    return LargeResultDigest.digestFor("SHA-256");
   }
 }

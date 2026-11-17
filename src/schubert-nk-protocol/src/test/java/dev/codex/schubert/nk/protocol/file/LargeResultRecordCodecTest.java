@@ -269,8 +269,7 @@ class LargeResultRecordCodecTest {
             PermanentProtocolException.class,
             () -> LargeResultRecordCodec.decode(zeroThenEof, valid));
         assertThrows(
-            IllegalStateException.class,
-            () -> LargeResultRecordCodec.digestFor("not-an-algorithm"));
+            IllegalStateException.class, () -> LargeResultDigest.digestFor("not-an-algorithm"));
       }
     }
   }
