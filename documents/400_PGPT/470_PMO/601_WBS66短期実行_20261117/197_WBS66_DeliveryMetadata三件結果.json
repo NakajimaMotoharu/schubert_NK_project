@@ -1,0 +1,153 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5733",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "acb2af76f788f5825eb976e199681fc340a33734beb71e13d8b7af56617316dc",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:15:43.433000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:15:17.359496+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-DELIVERY-METADATA-VALUE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-DELIVERY-METADATA-VALUE-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 and P018-10.03 CATALOG-020 / P005-03 owner. DeliveryMetadata pure value and diagnostic contract only. Historical whole2 preserved; supplement equal/hash and distinguish every field without leaking the message. Exact compiler, declared source/classpath, same-run method/branch proof. No JMS/network/socket, database, environment, held dependencies, or production change.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14244-delivery-metadata-whole-two-post-v1/manifest.json",
+        "sha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38230-delivery-metadata-value-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P005-03",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-JMS-EVENT-DELIVERY",
+      "PT-JMS-EVENT-DELIVERY-VALUE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5732",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38238-delivery-metadata-independent-v1/manifest.json",
+      "sha256": "37f2f5fa0745d9023ddcf105f55d0b8ebe6d4ecd7b44777085e35129976c8dc2"
+    },
+    "actualUnitSource": "dfcdf44b142064a7497e3d8e87cd38b533d54b77",
+    "firstRunSuccessNumerator": 3,
+    "firstRunDenominator": 3,
+    "productTestReruns": 0,
+    "preUnitCorrections": [
+      "New synthetic test ID literal consolidated after PMD review; both preflight variants preserved."
+    ],
+    "technicalMeasurement": {
+      "tests": 3,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 1,
+      "targetCodeMethods": 8,
+      "targetCoverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 68
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 11
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 14
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "criterionReductions": [
+      "F03/P018-10.03 CATALOG-020: current source DeliveryMetadata value and diagnostic subcases measured in one run."
+    ],
+    "remainingCriteria": [
+      "Actual JMS/redaction producer boundary, whole product F03 / 451, formal end dependencies."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "completedAdditionalPricePp": 0.9,
+    "totalCompletedAdditionalPricePp": 28.25,
+    "nextCommand": "Continue independent normal PG/PT; begin only with exact existing source, oracle, safe ownership and plan criteria."
+  }
+}

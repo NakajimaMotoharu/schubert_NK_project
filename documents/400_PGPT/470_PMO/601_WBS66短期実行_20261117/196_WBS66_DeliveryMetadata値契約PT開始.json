@@ -1,0 +1,75 @@
+{
+  "eventId": "PGPT-20261008-5732",
+  "groupId": "PGPT-WBS66-DELIVERY-METADATA-VALUE-20261118",
+  "baseCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T23:12:26.341000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-DELIVERY-METADATA-VALUE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-DELIVERY-METADATA-VALUE-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 and P018-10.03 CATALOG-020 / P005-03 owner. DeliveryMetadata pure value and diagnostic contract only. Historical whole2 preserved; supplement equal/hash and distinguish every field without leaking the message. Exact compiler, declared source/classpath, same-run method/branch proof. No JMS/network/socket, database, environment, held dependencies, or production change.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14244-delivery-metadata-whole-two-post-v1/manifest.json",
+        "sha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38230-delivery-metadata-value-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P005-03",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-JMS-EVENT-DELIVERY",
+      "PT-JMS-EVENT-DELIVERY-VALUE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "main": {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java",
+    "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+  },
+  "test": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataTest.java",
+    "sha256": "3396be3bb620ccfb7ee9c213abea51fefa35d7b327752ef2b0819b06402b2b94"
+  }
+}
