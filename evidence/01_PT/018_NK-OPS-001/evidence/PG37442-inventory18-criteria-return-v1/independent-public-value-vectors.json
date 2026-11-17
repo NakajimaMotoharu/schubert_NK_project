@@ -1,0 +1,23 @@
+[
+  {
+    "testId": "PT-BOM-RAW001",
+    "input": {
+      "path": "api/VERSION",
+      "size": 3,
+      "sha256Public": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "expectedHashSigned32": 1840924000
+  },
+  {
+    "testId": "PT-BOM-RAW002",
+    "input": {
+      "coordinate": "org.example:demo:1.0",
+      "paths": [
+        "api/lib/demo-1.0.jar",
+        "web/lib/demo-1.0.jar"
+      ]
+    },
+    "expectedListHashSigned32": 732598375,
+    "expectedHashSigned32": 2100783537
+  }
+]

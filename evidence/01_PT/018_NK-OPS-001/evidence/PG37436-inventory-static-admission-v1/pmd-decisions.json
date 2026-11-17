@@ -1,0 +1,65 @@
+[
+  {
+    "raw": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "beginline": "144",
+      "endline": "144",
+      "begincolumn": "9",
+      "endcolumn": "22",
+      "rule": "UnusedReturnValue",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "ReleaseInventory",
+      "method": "parse",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#unusedreturnvalue",
+      "priority": "3",
+      "message": "Result of 'com.google.gson.stream.JsonReader.peek()' is ignored."
+    },
+    "sourceSha256": "96e67eff343695afdbdff4fddb77c2d1cbef0f1e3f7f0f96bfe508ef397c7b0c",
+    "sourceAnchor": "reader.peek();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Pinned Gson STRICT after root endObject: peek is validating EOF/trailing-token rejection, successful result only END_DOCUMENT. Its parser exception is the required check, original source comment and original16 extra-doc/comment/ordering negatives retained. Removing or redundant equality would weaken semantics/add impossible guard."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryRawContractTest.java",
+      "beginline": "33",
+      "endline": "33",
+      "begincolumn": "17",
+      "endcolumn": "35",
+      "rule": "EqualsNull",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "ReleaseInventoryRawContractTest",
+      "method": "raw001ArtifactIdentityIncludesAllThreePublicClaims",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+      "priority": "1",
+      "message": "Avoid using equals() to compare against null"
+    },
+    "sourceSha256": "7c6da325c0d9ef939fbf27ed3411ee61c198d8e98b72c22c1f90a776edbdc94f",
+    "sourceAnchor": "assertFalse(value.equals(null));",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Direct generated record equals(null) contract is intentionally under test. JUnit assertNotEquals(null,value) or value!=null would not test target equality with null. Independent identity/type/all-component/constant hash/diagnostic/copy vectors provide substantive behavior, not filtered-code exclusion."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/ReleaseInventoryRawContractTest.java",
+      "beginline": "60",
+      "endline": "60",
+      "begincolumn": "17",
+      "endcolumn": "35",
+      "rule": "EqualsNull",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.bootstrap",
+      "class": "ReleaseInventoryRawContractTest",
+      "method": "raw002DependencyValueOwnsOrderedPathsAndRetainsNoCallerMutation",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+      "priority": "1",
+      "message": "Avoid using equals() to compare against null"
+    },
+    "sourceSha256": "7c6da325c0d9ef939fbf27ed3411ee61c198d8e98b72c22c1f90a776edbdc94f",
+    "sourceAnchor": "assertFalse(value.equals(null));",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Direct generated record equals(null) contract is intentionally under test. JUnit assertNotEquals(null,value) or value!=null would not test target equality with null. Independent identity/type/all-component/constant hash/diagnostic/copy vectors provide substantive behavior, not filtered-code exclusion."
+  }
+]

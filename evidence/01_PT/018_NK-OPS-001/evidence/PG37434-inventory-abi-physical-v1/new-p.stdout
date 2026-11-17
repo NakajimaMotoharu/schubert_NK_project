@@ -1,0 +1,96 @@
+Compiled from "ReleaseInventory.java"
+final class dev.codex.schubert.nk.bootstrap.ReleaseInventory {
+  private final java.lang.String retainedRelease;
+    descriptor: Ljava/lang/String;
+  private final java.util.Map<java.lang.String, java.lang.String> retainedVersions;
+    descriptor: Ljava/util/Map;
+  private final java.util.Map<java.lang.String, java.lang.String> retainedSource;
+    descriptor: Ljava/util/Map;
+  private final java.util.Map<java.lang.String, java.lang.String> retainedBuild;
+    descriptor: Ljava/util/Map;
+  private final java.util.Map<java.lang.String, java.lang.String> retainedPlatform;
+    descriptor: Ljava/util/Map;
+  private final java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact> retainedArtifacts;
+    descriptor: Ljava/util/List;
+  private final java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency> retainedDependencies;
+    descriptor: Ljava/util/List;
+  private final java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row> retainedMigrations;
+    descriptor: Ljava/util/List;
+  private dev.codex.schubert.nk.bootstrap.ReleaseInventory(java.lang.String, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>, java.util.Map<java.lang.String, java.lang.String>, java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact>, java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency>, java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row>);
+    descriptor: (Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+
+  static dev.codex.schubert.nk.bootstrap.ReleaseInventory parse(byte[]) throws java.io.IOException;
+    descriptor: ([B)Ldev/codex/schubert/nk/bootstrap/ReleaseInventory;
+
+  private static java.util.Map<java.lang.String, java.lang.String> fields(com.google.gson.stream.JsonReader, java.util.List<java.lang.String>) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;Ljava/util/List;)Ljava/util/Map;
+
+  private static java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency> dependencies(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/util/List;
+
+  private static java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact> artifacts(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/util/List;
+
+  private static java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row> migrations(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/util/List;
+
+  private static void key(com.google.gson.stream.JsonReader, java.lang.String) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;Ljava/lang/String;)V
+
+  private static java.lang.String string(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;
+
+  private static java.lang.String nullableString(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;
+
+  private static java.lang.Integer nullableInteger(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/lang/Integer;
+
+  private static int integer(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)I
+
+  private static long number(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)J
+
+  private void inventory();
+    descriptor: ()V
+
+  private static void requireToken(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  private static void requireText(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  private static void requirePath(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  private static void require(boolean);
+    descriptor: (Z)V
+
+  java.lang.String release();
+    descriptor: ()Ljava/lang/String;
+
+  java.util.Map<java.lang.String, java.lang.String> versions();
+    descriptor: ()Ljava/util/Map;
+
+  java.util.Map<java.lang.String, java.lang.String> source();
+    descriptor: ()Ljava/util/Map;
+
+  java.util.Map<java.lang.String, java.lang.String> build();
+    descriptor: ()Ljava/util/Map;
+
+  java.util.Map<java.lang.String, java.lang.String> platform();
+    descriptor: ()Ljava/util/Map;
+
+  java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Artifact> artifacts();
+    descriptor: ()Ljava/util/List;
+
+  java.util.List<dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency> dependencies();
+    descriptor: ()Ljava/util/List;
+
+  java.util.List<dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission$Row> migrations();
+    descriptor: ()Ljava/util/List;
+
+  private static boolean lambda$inventory$0(java.lang.String, dev.codex.schubert.nk.bootstrap.ReleaseInventory$Dependency);
+    descriptor: (Ljava/lang/String;Ldev/codex/schubert/nk/bootstrap/ReleaseInventory$Dependency;)Z
+}
