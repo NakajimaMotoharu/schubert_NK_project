@@ -1,0 +1,31 @@
+
+Failures (1):
+  JUnit Jupiter:GateOutputFailureContractTest:nestedSameOutputIsRejectedWithoutReleasingOuterClaim()
+    MethodSource [className = 'dev.codex.schubert.characterization.GateOutputFailureContractTest', methodName = 'nestedSameOutputIsRejectedWithoutReleasingOuterClaim', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalStateException> but was: <java.lang.IllegalArgumentException>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       dev.codex.schubert.characterization.GateOutputFailureContractTest$1.createParent(GateOutputFailureContractTest.java:102)
+       [...]
+     Caused by: java.lang.IllegalArgumentException: output is required
+       dev.codex.schubert.characterization.GateCli.writeJson(GateCli.java:708)
+       dev.codex.schubert.characterization.GateOutputFailureContractTest$1.lambda$createParent$0(GateOutputFailureContractTest.java:103)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+
+Test run finished after 3012 ms
+[        24 containers found      ]
+[         0 containers skipped    ]
+[        24 containers started    ]
+[         0 containers aborted    ]
+[        24 containers successful ]
+[         0 containers failed     ]
+[       142 tests found           ]
+[         0 tests skipped         ]
+[       142 tests started         ]
+[         0 tests aborted         ]
+[       141 tests successful      ]
+[         1 tests failed          ]
+

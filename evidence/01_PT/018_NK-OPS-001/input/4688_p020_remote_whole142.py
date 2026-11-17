@@ -30,7 +30,7 @@ def step(name,cmd,cwd,env,timeout):
     save(ROOT/(name+'.exit.json'),v);return v
 
 def main():
-    assert ROOT.name=='wbs66-p020-20261117-pg37312' and ROOT.stat().st_uid==os.getuid()!=0
+    assert ROOT.name=='wbs66-p020-20261117-pg37322' and ROOT.stat().st_uid==os.getuid()!=0
     assert not (ROOT/'begin.json').exists() and not (ROOT/'snapshot').exists()
     cfg=json.loads((ROOT/'package.json').read_text());assert sha(ROOT/'snapshot.tar')==cfg['archiveSha256']
     for name,h in cfg['sdkHashes'].items():assert sha(ROOT/'sdk'/name)==h
@@ -54,7 +54,7 @@ def main():
     if stages.get('testcompile',{}).get('actualExit')==0:
         temp=Path('/tmp')/ROOT.name;assert not temp.exists();temp.mkdir(mode=0o700)
         xml=ROOT/'xml';xml.mkdir();agent=sdk/'org.jacoco.agent-0.8.15-runtime.jar'
-        command=[str(jdk/'java'),'-Xmx1g','-Djava.awt.headless=true','-Duser.language=ja','-Duser.country=JP','-Duser.timezone=Asia/Tokyo','-Dchr.unitProjectRoot='+str(snapshot),'-Djava.io.tmpdir='+str(temp),'-Xlog:class+init=info:file='+str(ROOT/'class-init.log'),'-javaagent:'+str(agent)+'=destfile='+str(ROOT/'jacoco.exec')+',sessionid=PG37312-COMMON142,append=false','-jar',str(sdk/'junit-platform-console-standalone-1.13.4.jar'),'execute','--disable-banner','--details=summary','--fail-if-no-tests','--class-path',':'.join([str(classes),str(tests),str(snapshot/'program/characterization/tests/resources'),cp]),'--reports-dir',str(xml),*[x for n in cfg['selectedSuites'] for x in ['--select-class','dev.codex.schubert.characterization.'+n]],'--config=junit.jupiter.execution.parallel.enabled=false']
+        command=[str(jdk/'java'),'-Xmx1g','-Djava.awt.headless=true','-Duser.language=ja','-Duser.country=JP','-Duser.timezone=Asia/Tokyo','-Dchr.unitProjectRoot='+str(snapshot),'-Djava.io.tmpdir='+str(temp),'-Xlog:class+init=info:file='+str(ROOT/'class-init.log'),'-javaagent:'+str(agent)+'=destfile='+str(ROOT/'jacoco.exec')+',sessionid=PG37322-COMMON142,append=false','-jar',str(sdk/'junit-platform-console-standalone-1.13.4.jar'),'execute','--disable-banner','--details=summary','--fail-if-no-tests','--class-path',':'.join([str(classes),str(tests),str(snapshot/'program/characterization/tests/resources'),cp]),'--reports-dir',str(xml),*[x for n in cfg['selectedSuites'] for x in ['--select-class','dev.codex.schubert.characterization.'+n]],'--config=junit.jupiter.execution.parallel.enabled=false']
         stages['unit']=step('unit',command,ROOT,env,180)
         if (ROOT/'jacoco.exec').exists():
             stages['coverage']=step('coverage',[str(jdk/'java'),'-jar',str(sdk/'org.jacoco.cli-0.8.15-nodeps.jar'),'report',str(ROOT/'jacoco.exec'),'--classfiles',str(classes),'--xml',str(ROOT/'coverage.xml')],ROOT,env,120)

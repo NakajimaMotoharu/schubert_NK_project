@@ -9,12 +9,12 @@ import sys
 
 import pexpect
 
-r=Path.cwd();os.umask(0o077);w=r.parent/'pgpt-runs/PG379';slot=w/'pg37310-p020-transport-v1'
+r=Path.cwd();os.umask(0o077);w=r.parent/'pgpt-runs/PG379';slot=w/'pg37320-p020-transport-v1'
 sys.path.insert(0,str(r.parent/'PMO/hourly-monitor/haruka-transition-20261114'))
 import remote_access
 cfg=remote_access.config('haruka');account=cfg['users']['mini'];address=cfg['addr']
 known=r.parent/'PMO/hourly-monitor/haruka_known_hosts'
-remote='/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37312';package=w/'pg37308-p020-public-package-v1/public-package.tar'
+remote='/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37322';package=w/'pg37318-p020-public-package-v1/public-package.tar'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def save(name,value):
  with (slot/name).open('x') as f:json.dump(value,f,ensure_ascii=False,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
@@ -40,7 +40,7 @@ if mode=='place':
  assert not slot.exists();slot.mkdir(mode=0o700)
  admit="""from pathlib import Path
 import os,json
-p=Path('/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37312')
+p=Path('/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37322')
 assert os.uname().nodename=='haruka' and os.getuid()==1000
 assert p.parent.stat().st_uid==os.getuid() and not p.exists()
 assert os.statvfs(p.parent).f_bavail*os.statvfs(p.parent).f_frsize>20*1024**3
@@ -52,7 +52,7 @@ print(json.dumps(dict(actualExit=0,hostname=os.uname().nodename,uid=os.getuid(),
  invoke('copy-public-package',['scp',*flags,str(package),'mini@'+address+':'+remote+'/public-package.tar'],90)
  unpack="""from pathlib import Path
 import hashlib,json,tarfile,os
-p=Path('/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37312');assert p.stat().st_uid==os.getuid()==1000
+p=Path('/home/mini/schubert-nk-pgpt/wbs66-p020-20261117-pg37322');assert p.stat().st_uid==os.getuid()==1000
 f=p/'public-package.tar';assert hashlib.sha256(f.read_bytes()).hexdigest()=='"""+sha(package)+"""'
 assert not (p/'runner.py').exists() and not (p/'begin.json').exists()
 with tarfile.open(f) as t:
@@ -67,6 +67,6 @@ elif mode=='run':
  invoke('ordinary142',['ssh',*flags,'mini@'+address,'cd '+shlex.quote(remote)+' && exec python3 runner.py'],600)
 else:
  assert (slot/'ordinary142.terminal.json').exists() and not (slot/'collect.started.json').exists()
- target=w/'pg37312-p020-remote124-result.tar';assert not target.exists()
+ target=w/'pg37322-p020-remote124-result.tar';assert not target.exists()
  invoke('collect',['scp',*flags,'mini@'+address+':'+remote+'/result.tar',str(target)],90)
  print(json.dumps(dict(resultSha256=sha(target),bytes=target.stat().st_size)),flush=True)

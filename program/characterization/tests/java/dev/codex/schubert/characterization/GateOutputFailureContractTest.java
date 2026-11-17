@@ -91,7 +91,7 @@ class GateOutputFailureContractTest {
 
   @Test
   void nestedSameOutputIsRejectedWithoutReleasingOuterClaim() throws IOException {
-    Path output = root.resolve("nested.json");
+    Path ownedOutput = root.resolve("nested.json");
     FakeOutput outer =
         new FakeOutput(-1, false) {
           @Override
@@ -100,17 +100,18 @@ class GateOutputFailureContractTest {
             FakeOutput inner = new FakeOutput(-1, false);
             IllegalStateException actual =
                 assertThrows(
-                    IllegalStateException.class, () -> GateCli.writeJson(output, "nested", inner));
+                    IllegalStateException.class,
+                    () -> GateCli.writeJson(ownedOutput, "nested", inner));
             assertEquals(
                 "concurrent write to the same output is not allowed: "
-                    + output.toAbsolutePath().normalize(),
+                    + ownedOutput.toAbsolutePath().normalize(),
                 actual.getMessage());
             assertTrue(inner.calls.isEmpty());
           }
         };
-    GateCli.writeJson(output, "outer", outer);
+    GateCli.writeJson(ownedOutput, "outer", outer);
     assertEquals(List.of(PHASE_PARENT, PHASE_WRITE, PHASE_PUBLISH, PHASE_DELETE), outer.calls);
-    GateCli.writeJson(output, "after", new FakeOutput(-1, false));
+    GateCli.writeJson(ownedOutput, "after", new FakeOutput(-1, false));
   }
 
   @Test
