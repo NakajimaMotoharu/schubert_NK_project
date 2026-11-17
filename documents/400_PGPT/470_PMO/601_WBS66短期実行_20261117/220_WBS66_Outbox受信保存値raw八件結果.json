@@ -1,0 +1,205 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5755",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "3049b7350ee127d7bea791deab8e6f18ac0ca815b77e3060c1125efae321ea39",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:54:54.189000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 24,
+          "remainingPercent": 76,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:54:26.990581+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-ENTRY-REQUEST-CURRENT-RAW-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-ENTRY-REQUEST-CURRENT-RAW-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "F03/P018-10.03 CATALOG-022/023, owner P006-02. Previously missed unfiltered OutboxEntry/Request in first narrowed DLQ cohort. Use exact original OutboxModelTest whole4 plus linked destination/profile whole tests as needed for same-exec, and identify remaining quality. Only current named value fixture types, no actual JMS, keys, files, permissions DB or infrastructure. Do not count the A4-03 monitoring 18 or old default-filter proof as newly executed.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+        "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13422-outbox-value-thirteen-post-v1/manifest.json",
+        "sha256": "72953e87f9293715c83bc6eba49a54e4d14509ec9f4e46e0c4ba6e8f129b8c19"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38276-outbox-entry-request-current-raw-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-QST-DLQ-MODEL",
+      "PT-OUTBOX-MODEL",
+      "PT-OUTBOX-VALUE-RAW"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.95,
+      "high": 1.9
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5754",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38284-outbox-retained-value-independent-v1/manifest.json",
+      "sha256": "d63f355fbf7333eb9e0018b835a1b7ffcefa75d37fdf8ab02017298ea26c65af"
+    },
+    "actualUnitSource": "55847b1611d32bceeac0f5ee3a3254bb470f9547",
+    "firstRunSuccessNumerator": 8,
+    "firstRunDenominator": 8,
+    "productTestReruns": 0,
+    "technicalMeasurement": {
+      "tests": 8,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 7,
+      "targetCodeMethods": 40,
+      "targetCoverage": {
+        "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 75
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 13
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 10
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 9
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 223
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 18
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 51
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 28
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 19
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        },
+        "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 118
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 27
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 13
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 12
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 1
+          }
+        }
+      }
+    },
+    "criterionReductions": [
+      "CATALOG-022/023: same-exec OutboxEntry/Request and closure enum, old model/profile and 2 new value tests cover all 40 methods."
+    ],
+    "remainingCriteria": [
+      "Outbox real DB/JMS, other shared scope and all six 451, no coverage merge."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "listedNewFixtureCount": 2,
+    "pricedAsNewNoDoubleCounting": false,
+    "nextCommand": "Continue selected permitted production or ordinary PT at exact current source."
+  }
+}

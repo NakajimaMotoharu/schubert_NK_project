@@ -1,0 +1,108 @@
+{
+  "eventId": "PGPT-20261008-5754",
+  "groupId": "PGPT-WBS66-OUTBOX-ENTRY-REQUEST-CURRENT-RAW-20261118",
+  "baseCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T23:52:28.019000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 24,
+      "remainingPercent": 76,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-ENTRY-REQUEST-CURRENT-RAW-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-ENTRY-REQUEST-CURRENT-RAW-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "F03/P018-10.03 CATALOG-022/023, owner P006-02. Previously missed unfiltered OutboxEntry/Request in first narrowed DLQ cohort. Use exact original OutboxModelTest whole4 plus linked destination/profile whole tests as needed for same-exec, and identify remaining quality. Only current named value fixture types, no actual JMS, keys, files, permissions DB or infrastructure. Do not count the A4-03 monitoring 18 or old default-filter proof as newly executed.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+        "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13422-outbox-value-thirteen-post-v1/manifest.json",
+        "sha256": "72953e87f9293715c83bc6eba49a54e4d14509ec9f4e46e0c4ba6e8f129b8c19"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38276-outbox-entry-request-current-raw-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-QST-DLQ-MODEL",
+      "PT-OUTBOX-MODEL",
+      "PT-OUTBOX-VALUE-RAW"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.95,
+      "high": 1.9
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "mains": {
+    "OutboxDlqMetadata": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+    },
+    "OutboxEntry": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sha256": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4"
+    },
+    "OutboxRequest": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sha256": "564190205500c14866882d60d36d654276562f38593229ef85c14da0ef7ab463"
+    },
+    "OutboxDestination": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    },
+    "OutboxDispatchReport": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatchReport.java",
+      "sha256": "c9ba13a64c580fea33b744134a5534d44142233f72a28c40d5cc0442e2fc472f"
+    },
+    "OutboxIntegrityException": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxIntegrityException.java",
+      "sha256": "56a5f3af8ccf296acef3aa0991920755756862223d6ea1c111e248448d63941a"
+    },
+    "OutboxSendException": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxSendException.java",
+      "sha256": "b2dac8539f303d4b2677bf78369f1bc9c77ad5c37c863633b968f187adb8a210"
+    }
+  },
+  "tests": {
+    "OutboxModelTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxModelTest.java",
+      "sha256": "61827ab290718de21cf8f4c6ec33758d484af5a12638c33efff28d6eaba5fe18"
+    },
+    "OutboxDlqMetadataTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataTest.java",
+      "sha256": "54683e12417a392faffe354584412111e7713da8a17d3b4ac0d4428358c6c47c"
+    }
+  }
+}
