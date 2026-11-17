@@ -1,0 +1,119 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5718",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "b1463f098443e6607c5e1dba0bc27e2619018c4c81865b044811bc5d0d3368bc",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T22:39:01.263000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 22,
+          "remainingPercent": 78,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T22:38:15.877331+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-CURRENT-SIX-CHECKSTYLE-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-CURRENT-SIX-CHECKSTYLE-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "F03/2-2, current six original product Main source-only Checkstyle on existing rules and toolchain. Gate: numeric exit, exact Git source inventory and independent XML, zero errors. No bytecode, no Test, no live or held operations.",
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36792-six-main-source-independent-post-v1/manifest.json",
+        "sha256": "dbe1a06b8e5f8d25344a7504747d7c01fb6d1e8db6b77b6463b36de75878b236"
+      }
+    ],
+    "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "productionCoreMain": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "run": "PG38200-six-main-checkstyle-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.45,
+      "high": 1
+    },
+    "groupCapPp": 1.5,
+    "originalRowPricePp": 2.4,
+    "completedOriginalRowPricePp": 0,
+    "requalificationPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5717",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38200-six-main-checkstyle-v1/manifest.json",
+      "sha256": "8e497dac08822542082c2917dedc291ed1e37c4c4924f6ce89805cc077104499"
+    },
+    "firstRunSuccessNumerator": 1,
+    "firstRunDenominator": 1,
+    "reruns": 0,
+    "causesOfRerun": [],
+    "technicalMeasurement": {
+      "mainSources": 1026,
+      "mainModules": 6,
+      "checkstyleFindings": 0,
+      "checkstyleExit": 0,
+      "productTests": 0
+    },
+    "criterionReductions": [
+      "WBS-F03/2-2 Checkstyle actual exit 0, exact current Core 1026 Main across all six product modules, zero XML findings"
+    ],
+    "remainingCriteria": [
+      "full six-module NullAway/SpotBugs/PMD on the same eligible source",
+      "QA056 classfile and Root11 dispositions",
+      "raw PMD held findings and whole 451",
+      "whole six-module F03 and closure dependencies"
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "nextCommand": "Evaluate ordinary P004-03/P004-05/P018-08 criteria using owned-artifact index and existing receipts. Do not replay or initiate held checks."
+  }
+}
