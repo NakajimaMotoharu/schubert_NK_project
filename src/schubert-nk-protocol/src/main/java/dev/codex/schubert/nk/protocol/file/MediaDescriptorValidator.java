@@ -66,23 +66,26 @@ public interface MediaDescriptorValidator {
     if (!extension.equals(extension(descriptor.storageRelativePath()))) {
       throw new IllegalArgumentException("media storage and display extensions differ");
     }
-    String expectedMime;
-    {
-      final MediaType dispatchValue1 = java.util.Objects.requireNonNull(descriptor.mediaType());
-      if (dispatchValue1 == MediaType.AUDIO) {
-        expectedMime = extension.equals(".ogg") ? "audio/ogg" : null;
-      } else if (dispatchValue1 == MediaType.VIDEO) {
-        expectedMime = extension.equals(".mp4") ? "video/mp4" : null;
-      } else {
-        expectedMime = MUSIC_MIME.get(extension);
-      }
-    }
+    @org.jspecify.annotations.Nullable
+    String expectedMime = expectedMimeFor(descriptor.mediaType(), extension);
     if (expectedMime == null || !expectedMime.equals(descriptor.mimeType())) {
       throw new IllegalArgumentException("media extension and MIME type are not allowlisted");
     }
     if (descriptor.mediaType() == MediaType.VIDEO
         && descriptor.disposition() != ContentDisposition.INLINE) {
       throw new IllegalArgumentException("video descriptor must use inline disposition");
+    }
+  }
+
+  private static @org.jspecify.annotations.Nullable String expectedMimeFor(
+      MediaType mediaType, String extension) {
+    java.util.Objects.requireNonNull(mediaType);
+    if (mediaType == MediaType.AUDIO) {
+      return extension.equals(".ogg") ? "audio/ogg" : null;
+    } else if (mediaType == MediaType.VIDEO) {
+      return extension.equals(".mp4") ? "video/mp4" : null;
+    } else {
+      return MUSIC_MIME.get(extension);
     }
   }
 

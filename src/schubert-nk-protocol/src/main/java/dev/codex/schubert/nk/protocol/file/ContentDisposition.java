@@ -21,9 +21,9 @@ public enum ContentDisposition {
     Objects.requireNonNull(value, "value");
     {
       final String dispatchValue0 = java.util.Objects.requireNonNull(value);
-      if ("I".equals(dispatchValue0)) {
+      if (dispatchValue0.equals("I")) {
         return INLINE;
-      } else if ("A".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("A")) {
         return ATTACHMENT;
       } else {
         throw new IllegalArgumentException("unknown content disposition");

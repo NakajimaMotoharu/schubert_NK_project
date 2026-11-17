@@ -47,67 +47,67 @@ public interface PayloadSemanticValidator {
 
     {
       final String dispatchValue0 = java.util.Objects.requireNonNull(layoutId);
-      if ("LGNREQ01".equals(dispatchValue0)) {
+      if (dispatchValue0.equals("LGNREQ01")) {
         validateLoginRequest(data);
-      } else if ("LGNRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("LGNRSP01")) {
         validateLoginSuccess(data);
-      } else if ("GAMRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("GAMRSP01")) {
         validateAscending(records, "Display order", false);
-      } else if ("SPKRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("SPKRSP01")) {
         records.forEach(record -> requirePositive(record, "出現件数"));
       } else if ("SRCREQ01".equals(dispatchValue0) || "USRREQ01".equals(dispatchValue0)) {
         requirePositive(data, "Page");
-      } else if ("SRCRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("SRCRSP01")) {
         validateScenarioSearchRecords(records);
-      } else if ("RTERSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("RTERSP01")) {
 
         records.forEach(record -> requirePositive(record, "File件数"));
         validateAscending(records, "Prefix", true);
 
-      } else if ("SCNRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("SCNRSP01")) {
         validateScenarioDetail(data, records);
       } else if ("AUDRSP01".equals(dispatchValue0)
           || "MEDRSP01".equals(dispatchValue0)
           || "VIDRSP01".equals(dispatchValue0)) {
         validateMediaDescriptor(data);
-      } else if ("ANMRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("ANMRSP01")) {
         validateAnimationMenu(data);
-      } else if ("ANLRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("ANLRSP01")) {
         validateAnimationRecords(records);
-      } else if ("MTRRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("MTRRSP01")) {
         validateMusicRecords(records);
-      } else if ("LGSREQ01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("LGSREQ01")) {
 
         requirePositive(data, "Page");
         validateDateRange(data, "From日時", "To日時", 31);
 
-      } else if ("UCRREQ01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("UCRREQ01")) {
         validateUserCreation(data);
-      } else if ("UDTRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("UDTRSP01")) {
         requireRange(
             numeric(data, "Active session数"), 0, 2, "active session count is outside 0..2");
-      } else if ("UPWREQ01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("UPWREQ01")) {
         validatePassword(text(data, "New Password"), Optional.empty());
       } else if ("NTSREQ01".equals(dispatchValue0) || "QSSREQ01".equals(dispatchValue0)) {
 
         requirePositive(data, "Page");
         validateDateRange(data, "受付日時From", "受付日時To", 366);
 
-      } else if ("NTDRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("NTDRSP01")) {
         validateNotificationDetail(data);
-      } else if ("NTCRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("NTCRSP01")) {
         validateCancellationSuccess(data);
-      } else if ("QSSRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("QSSRSP01")) {
         records.forEach(PayloadSemanticValidator::validateQuestionSummary);
-      } else if ("QSDRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("QSDRSP01")) {
         validateQuestionDetail(data);
-      } else if ("QSBREQ01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("QSBREQ01")) {
         validateQuestionSubmission(data);
       } else if ("QSBRSP01".equals(dispatchValue0) || "QWKREQ01".equals(dispatchValue0)) {
         validateReceipt(text(data, LITERAL_ID));
-      } else if ("NTSRSP01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("NTSRSP01")) {
         records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));
-      } else if ("WLGEVT01".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("WLGEVT01")) {
         validateWebLog(data);
       } else {
 
@@ -335,15 +335,15 @@ public interface PayloadSemanticValidator {
     int expectedTimestampMask;
     {
       final String dispatchValue2 = java.util.Objects.requireNonNull(state);
-      if ("RECEIVED".equals(dispatchValue2)) {
+      if (dispatchValue2.equals("RECEIVED")) {
         expectedTimestampMask = 0;
-      } else if ("PROCESSING".equals(dispatchValue2)) {
+      } else if (dispatchValue2.equals("PROCESSING")) {
         expectedTimestampMask = 8;
       } else if (LITERAL_COMPLETED.equals(dispatchValue2)) {
         expectedTimestampMask = 12;
       } else if (LITERAL_ERROR.equals(dispatchValue2)) {
         expectedTimestampMask = 10;
-      } else if ("CANCELLED".equals(dispatchValue2)) {
+      } else if (dispatchValue2.equals("CANCELLED")) {
         expectedTimestampMask = 1;
       } else {
         throw new LayoutValidationException(

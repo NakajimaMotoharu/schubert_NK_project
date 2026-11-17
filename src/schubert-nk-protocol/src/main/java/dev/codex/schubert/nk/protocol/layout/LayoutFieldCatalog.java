@@ -527,9 +527,9 @@ public final class LayoutFieldCatalog {
   private static FieldArea parseArea(String value) {
     {
       final String dispatchValue0 = java.util.Objects.requireNonNull(value);
-      if ("DATA".equals(dispatchValue0)) {
+      if (dispatchValue0.equals("DATA")) {
         return FieldArea.DATA;
-      } else if ("RECORD".equals(dispatchValue0)) {
+      } else if (dispatchValue0.equals("RECORD")) {
         return FieldArea.RECORD;
       } else {
         throw new LayoutValidationException("unknown field area");
@@ -540,11 +540,11 @@ public final class LayoutFieldCatalog {
   private static WireType parseWireType(String value) {
     {
       final String dispatchValue1 = java.util.Objects.requireNonNull(value);
-      if ("X".equals(dispatchValue1)) {
+      if (dispatchValue1.equals("X")) {
         return WireType.TEXT;
-      } else if ("N".equals(dispatchValue1)) {
+      } else if (dispatchValue1.equals("N")) {
         return WireType.NUMERIC;
-      } else if ("B".equals(dispatchValue1)) {
+      } else if (dispatchValue1.equals("B")) {
         return WireType.BOOLEAN;
       } else {
         throw new LayoutValidationException("unknown wire type");
@@ -555,13 +555,13 @@ public final class LayoutFieldCatalog {
   private static Presence parsePresence(String value) {
     {
       final String dispatchValue2 = java.util.Objects.requireNonNull(value);
-      if ("M".equals(dispatchValue2)) {
+      if (dispatchValue2.equals("M")) {
         return Presence.MANDATORY;
-      } else if ("C".equals(dispatchValue2)) {
+      } else if (dispatchValue2.equals("C")) {
         return Presence.CONDITIONAL;
-      } else if ("O".equals(dispatchValue2)) {
+      } else if (dispatchValue2.equals("O")) {
         return Presence.OPTIONAL;
-      } else if ("F".equals(dispatchValue2)) {
+      } else if (dispatchValue2.equals("F")) {
         return Presence.FIXED;
       } else {
         throw new LayoutValidationException("unknown presence");
