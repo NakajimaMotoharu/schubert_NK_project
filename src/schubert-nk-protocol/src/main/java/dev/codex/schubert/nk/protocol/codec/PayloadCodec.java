@@ -11,6 +11,7 @@ import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
 import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.Presence;
+import dev.codex.schubert.nk.protocol.layout.WireType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
