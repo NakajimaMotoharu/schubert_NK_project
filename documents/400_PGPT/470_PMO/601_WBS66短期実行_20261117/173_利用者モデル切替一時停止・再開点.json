@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5708",
+  "observedAtUTC": "2026-11-17T22:09:26.142963+00:00",
+  "groupId": "PGPT-WBS66-USER-MODEL-SWITCH-PAUSE-20261118",
+  "headAtCheckpoint": "ea472c0620f39a8f079c0d0fc20befc93e213521",
+  "checkpointCommit": "The subsequent commit containing this immutable record; exact published commit reported separately.",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-USER-MODEL-SWITCH-PAUSE-20261118",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-USER-MODEL-SWITCH-PAUSE-20261118",
+    "workAttributionKind": "MIXED_UNALLOCATED",
+    "workScope": "Explicit user temporary pause conveyed by source chat01a0cddf-246f-7c03-bce4-5dcd4a21d9d0. Stop all new PG/PT/jobs; minimal preservation only. User will switch model; no model/reset/charges changed here. Preserve finalcurrent media16 and unstarted syntheticFS specification/BUG3209, await a new explicit resume.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38174-media-context-whole16-criteria-return-v1/manifest.json",
+        "sha256": "3d1688aa6177b89d30e1da195f0fc15f615cf4142a87623a435cc17c39754ccf"
+      }
+    ],
+    "source": "ea472c0620f39a8f079c0d0fc20befc93e213521",
+    "productionCoreMain": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "branch": "dev-foundation",
+    "stopReason": "EXPLICIT_USER_PAUSE_FOR_USER_CONTROLLED_MODEL_SWITCH",
+    "userResumeRequired": true,
+    "modelChangedByAgent": false,
+    "newPgPtJobsAfterStop": 0,
+    "formalUnit": "PT-WEB-20260925-24",
+    "formalTests": 1964,
+    "formalScopes": 53,
+    "acceptedOriginalItems": 17,
+    "totalOriginalItems": 190,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "originalCompletedPriceTotalPp": "9.888",
+    "remainingDetailBasePp": "1089.498",
+    "additionalCompletedPriceTotalPp": "23.850",
+    "completedToolFixSeparatePp": 2.5,
+    "completedSourceRequalificationSeparatePp": 12.1,
+    "quotaObservation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-17T22:07:19.384Z",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 21,
+        "remainingPercent": 79,
+        "windowDurationMins": 10080,
+        "resetsAt": 1795445752
+      },
+      "secondary": null
+    },
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "latestCompletedGroupEnd": "PGPT-20261008-5707",
+    "currentProof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38174-media-context-whole16-criteria-return-v1/manifest.json",
+      "sha256": "3d1688aa6177b89d30e1da195f0fc15f615cf4142a87623a435cc17c39754ccf"
+    },
+    "qualifiedProductionSource": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "qualifiedUnitSource": "4dbbafafeae4a742119a264d5841947394ef6088",
+    "qualifiedRun": "PG38170-MEDIA-CONTEXT-PURE-WHOLE16",
+    "knownOwnedJobs": {
+      "active": [],
+      "lastUnit": {
+        "toolSession": 75658,
+        "run": "PG38170-MEDIA-CONTEXT-PURE-WHOLE16",
+        "terminalExit": 0,
+        "result": "16PASS_FES_NOTRUN0",
+        "recovery": "No reattach/restart. Refer PG38170 manifest and PG38172-v2 independent proof."
+      },
+      "lastPush": {
+        "toolSession": 40879,
+        "terminalExit": 0,
+        "remoteHead": "ea472c0620f39a8f079c0d0fc20befc93e213521"
+      }
+    },
+    "foreignJobsAndVm": "UNQUERIED_UNKNOWN_NO_OPERATIONS",
+    "nextDraft": {
+      "spec": "evidence/01_PT/018_NK-OPS-001/4556_自己所有合成fileのcopy検証・原五全Code仕様.md",
+      "bug": "BUG3209",
+      "ykt": "YKT2664",
+      "decision": "PRESTART_SPEC_AND_LEDGER_ONLY",
+      "groupStartNotWritten": true,
+      "sourceGuardNotImplemented": true,
+      "newNamespaceTestsNotWritten": true,
+      "rootCompileNotStarted": true,
+      "productTestsNotStarted": true,
+      "plannedOriginal5PlusNamespace2": 7,
+      "proposedEstimatePp": {
+        "low": 0.7,
+        "base": 2,
+        "high": 4
+      },
+      "proposedCapPp": 5
+    },
+    "preserved": [
+      "two protected untracked paths not read/hash/stat/staged",
+      "known stash7 unchanged, contents not re-read",
+      "originalScenario3/Currentbaseline/masterDB/Backup/keys/native and successful/failed evidence untouched",
+      "QA051final/QA056/QA057/individualHOLD unchanged"
+    ],
+    "nextCommand": "WAIT_FOR_EXPLICIT_USER_RESUME_AFTER_USER_MODEL_SWITCH. Then fresh usage, latestHEAD/status/456top/173checkpoint; do not rerun completed media16/tool8. Revalidate spec4556 ownfreshsyntheticFS contract and exact existing whole2/3. Only then new group start and beforeRoot/namespace2/whole7 according to accepted plan; no Root/VM/DB/key/permission/cohort or heldtypes/models operations."
+  }
+}
