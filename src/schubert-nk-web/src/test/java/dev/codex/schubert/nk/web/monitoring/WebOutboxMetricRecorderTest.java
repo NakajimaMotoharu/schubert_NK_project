@@ -317,40 +317,45 @@ class WebOutboxMetricRecorderTest {
   void webObxMet007ConcurrentPublicationKeepsWholeFixtureIdentityAndIndependentGaugeVector()
       throws Exception {
     try (var registry = new Registry();
-        var other = new Registry();
-        var pool = Executors.newFixedThreadPool(8)) {
-      var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
-      var oracle = new IdentityHashMap<Observation, long[]>();
-      var tasks = new ArrayList<Callable<Void>>();
-      for (int i = 1; i <= 64; i++) {
-        long p = i;
-        long s = i + 1L;
-        long e = i + 2L;
-        var sample =
-            new Observation(
-                p, s, e, Duration.ofSeconds(p), Duration.ofSeconds(s), Duration.ofSeconds(e));
-        oracle.put(sample, new long[] {p, s, e});
-        tasks.add(
-            () -> {
-              metrics.record(sample);
-              return null;
-            });
+        var other = new Registry()) {
+      var pool = Executors.newFixedThreadPool(8);
+      try {
+        var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
+        var oracle = new IdentityHashMap<Observation, long[]>();
+        var tasks = new ArrayList<Callable<Void>>();
+        for (int i = 1; i <= 64; i++) {
+          long p = i;
+          long s = i + 1L;
+          long e = i + 2L;
+          var sample =
+              new Observation(
+                  p, s, e, Duration.ofSeconds(p), Duration.ofSeconds(s), Duration.ofSeconds(e));
+          oracle.put(sample, new long[] {p, s, e});
+          tasks.add(
+              () -> {
+                metrics.record(sample);
+                return null;
+              });
+        }
+        for (var f : pool.invokeAll(tasks, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
+        var selected = metrics.snapshot().orElseThrow();
+        assertTrue(oracle.containsKey(selected));
+        var expected = oracle.get(selected);
+        values(
+            registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
+        var independent = new WebOutboxMetricRecorder(other, DEBUG_MODE);
+        assertTrue(independent.snapshot().isEmpty());
+        unknown(other);
+        independent.record(
+            new Observation(7, 0, 0, Duration.ofSeconds(3), Duration.ZERO, Duration.ZERO));
+        values(other, 7, 0, 0, 3, 0, 0);
+        assertSame(selected, metrics.snapshot().orElseThrow());
+        values(
+            registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
+      } finally {
+        pool.shutdownNow();
+        assertTrue(pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));
       }
-      for (var f : pool.invokeAll(tasks, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
-      var selected = metrics.snapshot().orElseThrow();
-      assertTrue(oracle.containsKey(selected));
-      var expected = oracle.get(selected);
-      values(
-          registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
-      var independent = new WebOutboxMetricRecorder(other, DEBUG_MODE);
-      assertTrue(independent.snapshot().isEmpty());
-      unknown(other);
-      independent.record(
-          new Observation(7, 0, 0, Duration.ofSeconds(3), Duration.ZERO, Duration.ZERO));
-      values(other, 7, 0, 0, 3, 0, 0);
-      assertSame(selected, metrics.snapshot().orElseThrow());
-      values(
-          registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
     }
   }
 

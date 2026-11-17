@@ -1,0 +1,300 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T13:33:36.493569+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37734-web-monitoring41-admission-v1/normalized-prepare.json",
+    "sha256": "1c0747ede230caf899a8588b8505d79af988aecad8fb264e3a7d7d1b290bc751"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37730-web-monitoring41-final-prepare-v3/manifest.json",
+    "sha256": "eb434798adc47ebfd12c28e735837e58be4ea509a6f194b19abf1d461799709c"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37732-web-monitoring41-final-static-v3/manifest.json",
+    "sha256": "ade456b267276edfde68c1585d24722a06520d91cf1fb3bea6d96f0a1ae7ffdd"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "CloseResource",
+      "line": "226",
+      "reason": "HttpMetricContractTest: this exact ExecutorService local is owned and closed by the method finally shutdownNow/awaitTermination(10 seconds) plus an explicit termination assertion. ExecutorService.close is intentionally avoided because it waits without a deadline.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "226",
+      "reason": "HttpMetricContractTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "233",
+      "reason": "HttpMetricContractTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "236",
+      "reason": "HttpMetricContractTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "237",
+      "reason": "HttpMetricContractTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "321",
+      "reason": "MediaBytesMetricRecorderTest: this exact ExecutorService local is owned and closed by the method finally shutdownNow/awaitTermination(10 seconds) plus an explicit termination assertion. ExecutorService.close is intentionally avoided because it waits without a deadline.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "321",
+      "reason": "MediaBytesMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "324",
+      "reason": "This expected Map is populated only by the single JUnit owner while constructing the task list, before invokeAll publishes tasks. Workers mutate the recorder, not this oracle; assertions read the map only after every bounded future has completed. No concurrent map writes exist.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "338",
+      "reason": "MediaBytesMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "358",
+      "reason": "MediaBytesMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "359",
+      "reason": "MediaBytesMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": "117",
+      "reason": "This explicit false equals(null) call verifies the public immutable record Object.equals null contract, alongside same/different component and wrong-type cases. It is a negative assertion in a fixture, not production null detection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "223",
+      "reason": "WebDbPoolMetricRecorderTest: this exact ExecutorService local is owned and closed by the method finally shutdownNow/awaitTermination(10 seconds) plus an explicit termination assertion. ExecutorService.close is intentionally avoided because it waits without a deadline.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "223",
+      "reason": "WebDbPoolMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "236",
+      "reason": "The atomic publication fixture requires the reader to observe one of the exact two supplied immutable snapshot objects, not a newly copied or mixed record. Reference identity is the condition under test; value equality would weaken this guarantee.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "236",
+      "reason": "The atomic publication fixture requires the reader to observe one of the exact two supplied immutable snapshot objects, not a newly copied or mixed record. Reference identity is the condition under test; value equality would weaken this guarantee.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "239",
+      "reason": "WebDbPoolMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "245",
+      "reason": "WebDbPoolMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "246",
+      "reason": "WebDbPoolMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "206",
+      "reason": "This explicit false equals(null) call verifies the public immutable record Object.equals null contract, alongside same/different component and wrong-type cases. It is a negative assertion in a fixture, not production null detection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "244",
+      "reason": "This explicit false equals(null) call verifies the public immutable record Object.equals null contract, alongside same/different component and wrong-type cases. It is a negative assertion in a fixture, not production null detection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.java",
+      "rule": "EqualsNull",
+      "line": "280",
+      "reason": "This explicit false equals(null) call verifies the public immutable record Object.equals null contract, alongside same/different component and wrong-type cases. It is a negative assertion in a fixture, not production null detection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "331",
+      "reason": "This assignment deliberately poisons a fixture-owned array: old outbox Duration elements verify null constructor rejection; new values array verifies caller mutation never changes enum storage or another returned array. No application field or shared state receives null.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "NullAssignment",
+      "line": "157",
+      "reason": "This assignment deliberately poisons a fixture-owned array: old outbox Duration elements verify null constructor rejection; new values array verifies caller mutation never changes enum storage or another returned array. No application field or shared state receives null.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": "292",
+      "reason": "This explicit false equals(null) call verifies the public immutable record Object.equals null contract, alongside same/different component and wrong-type cases. It is a negative assertion in a fixture, not production null detection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "321",
+      "reason": "WebOutboxMetricRecorderTest: this exact ExecutorService local is owned and closed by the method finally shutdownNow/awaitTermination(10 seconds) plus an explicit termination assertion. ExecutorService.close is intentionally avoided because it waits without a deadline.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "321",
+      "reason": "WebOutboxMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "340",
+      "reason": "WebOutboxMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "356",
+      "reason": "WebOutboxMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "357",
+      "reason": "WebOutboxMetricRecorderTest: standalone bounded JUnit concurrency fixture, not a J2EE-managed component. Source uses finite invokeAll/get followed by finally shutdownNow and awaitTermination(10 seconds); pool size4/8 and tasks64 are fixed, no app/DB/VM workers.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "originalMainCompileAndSpotbugsReusedNotReplayed": true,
+  "all15ActualMainBytesVerified": true,
+  "all191PhysicalNamesVerified": true,
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route",
+    "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status",
+    "dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder$Mode",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$Counts",
+    "dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder$State",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Observation",
+    "dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder$Status"
+  ],
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar": false
+  },
+  "sources41WholeCases": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContractTest.java": 6,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorderTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorderTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMonitoringValueContractTest.java": 11
+  },
+  "actualRootVmDbNativeKeysAuthorityActions": 0,
+  "newTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
