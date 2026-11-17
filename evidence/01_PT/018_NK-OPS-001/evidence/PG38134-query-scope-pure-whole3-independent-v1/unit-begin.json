@@ -1,0 +1,64 @@
+{
+  "source": "40a2e9ec1338cb60f05f5cebddf23012df38d88b",
+  "sourceCore": "9cb419d7e84bcae6637b203b7b1866e53a9c9149",
+  "branch": "dev-foundation",
+  "run": "PG38132-QUERY-SCOPE-PURE-WHOLE3",
+  "atUTC": "2026-11-17T20:59:12.152305+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38132-query-scope-pure-whole3-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38132-query-scope-pure-whole3-unit-v1/jacoco.exec,append=false,sessionid=PG38132-QUERY-SCOPE-PURE-WHOLE3",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38124-query-scope-after-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38124-query-scope-after-v1/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38132-query-scope-pure-whole3-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+    "--select-class",
+    "dev.codex.schubert.nk.api.idempotency.QuestionScopeFrameNamespaceContractTest"
+  ],
+  "expectedTests": 3,
+  "expectedCases": [
+    [
+      "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+      "scope001LiteralFramesAndInspectionOnlyLegacyAreCallerOwned()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.idempotency.QuestionQueryScopeFrameTest",
+      "scope003NullUnknownScopeTruncationMagicAndCrossRouteAreNeverGranted()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.idempotency.QuestionScopeFrameNamespaceContractTest",
+      "questionScopeFrameCannotBecomeAnInstanceOrRetainInstanceState()"
+    ]
+  ],
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame.java": "b32e54c7f098fe4b5ed5737a7130df263e54f427cc8c5544acfe457e5d123845",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.java": "66e9e45738d02de02e8c0d336e997c2e2878f96e1620d84ae532c663ebd3418c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/domain/Role.java": "e60e607a3f09e860ad7c28c62555672ebdca3e8590d98fcffa45f82b5c2f5fe8",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java": "9a0872ab0b442ec299625c6ec33a6e1ef201d7a4258ce30128f4f2f30c31d7ca",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionScopeFrameNamespaceContractTest.java": "1eb709d5ca6902cf01f9e273f81e856adb58433dd262f901bce0f18c7cf261a4"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38130-query-scope-pure-admission-v1/normalized-prepare.json",
+    "sha256": "3320ab372d3f05945ff8af1c3f72c0164554257f7b3d2d06cff09a789a263e50"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38130-query-scope-pure-admission-v1/manifest.json",
+    "sha256": "a334b6af464b2bcd276a2e21e910ff59f57f9b67cd68bbd7dbb6fd5b5d90489b"
+  },
+  "measurementAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "reservedNativeAgentSelected": false,
+  "knownSourceChange": "BUG3205 QuestionQueryScopeFrame private non-instance guard only; ABI3/Mainguardinverse/originalwhole2byte exact/sharedIdentityRole2 unchanged. Original2 literalhex/legacy/rolevalues/clone/null/unknownscope/routes/versions plusnewnamespace1. RootMain3/Test2 strict/MaxLow3/CSformat0; PMD1 exact privateflagrestore. All3CRC/init/XML/rawframe7Code; no AAD/encryption/keys/currentgrant/DB/Root/VM/native/file/authority/cohort/heldtypes/models or oldheld15 fixture extraction, oldexecunion0."
+}

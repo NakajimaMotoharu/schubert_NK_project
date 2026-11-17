@@ -1,0 +1,3 @@
+# 4114 QuestionQueryScopeFrame pure契約
+
+P01401/SSC157/SS324352/UI224236/AUT002QST008MQ008、PT-QRY-SCOPE001003及び新NAMESPACE001。spec018/4551・結果4552・38134/38136、Core 9cb419d7e84bcae6637b203b7b1866e53a9c9149 Unit 40a2e9ec1338cb60f05f5cebddf23012df38d88b。元2+新1全3正常/全7Code29L21B180I miss0、元whole2byte/ABI3/guardinverse/共有2byte同一。非secretbyte frameだけ/実AAD暗号鍵現在認可DB等0、元002004/関連backend/451と終了依存未受入・正式件数増0。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38134-query-scope-pure-whole3-independent-v1/manifest.json SHA256 53ccfd30813a78bb8bee47fd89e31d849cb06a61536c9e1d0eacdf6d05cd58fc。
