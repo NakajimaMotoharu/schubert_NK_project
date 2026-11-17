@@ -1,0 +1,74 @@
+{
+  "actualExit": 0,
+  "run": "PG38254-p01808-offline-measurement-evidence-v1",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "toolSource": {
+    "path": "tools/quality/jacoco/UnfilteredCodeMeasurement.java",
+    "sha256": "78c634d952e45498d7b9d26b4d0c620bcfc4ac0c56ae63020e40e203469cbaf6"
+  },
+  "terminalAtUTC": "2026-11-17T23:31:27.946092+00:00",
+  "groupStart": "PGPT-20261008-5740",
+  "oldToolProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/manifest.json",
+    "sha256": "238c51f2f71e8377ac66fe7a4b8df411882c73278b733c6122ecf78c14dc5b20"
+  },
+  "supportingCases": [
+    {
+      "toolTestId": "TOOL-CODEMEASURE005",
+      "meaning": "A report without captured fixture execution leaves code missed.",
+      "rawExit": 0,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/measure-missing-execution.json",
+        "sha256": "b0917112a36b12316768f15128725ad08f1adcb528c8a166e996fab40d4b087c"
+      }
+    },
+    {
+      "toolTestId": "TOOL-CODEMEASURE006",
+      "meaning": "Same fixture name with a different CRC is rejected.",
+      "rawExit": 1,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/reject-class-crc-mismatch.json",
+        "sha256": "1383d8311450ee3fa8c88a8544690c41e779983e688bffcfab3d21443e77515e"
+      }
+    },
+    {
+      "toolTestId": "TOOL-CODEMEASURE007",
+      "meaning": "Same CRC with a different fixture name is rejected.",
+      "rawExit": 1,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/reject-exec-name-mismatch.json",
+        "sha256": "8758309c2e71194c5c3baf26ca880e85253e3040043324ff263942ab86a68a13"
+      }
+    },
+    {
+      "toolTestId": "TOOL-CODEMEASURE008",
+      "meaning": "Different probe layout is rejected.",
+      "rawExit": 1,
+      "receipt": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG31434-generated-code-tool-selftest-v1/reject-probe-length-mismatch.json",
+        "sha256": "07205c42d318a03b049c38ce43cd723ef3a2745e2eec7aef775643d7b87df632"
+      }
+    }
+  ],
+  "oldOrdinaryCheckpoint": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/048_P01808通常16部分返却・残条件.json",
+    "sha256": "ad7c00e04850c98a8a1c7e616fefd37e2f93494a47455c8d9d6b2d6c6fabb92a"
+  },
+  "initialAuditExit": 1,
+  "initialAuditCause": "Prior checkpoint stores newAcceptance below values.",
+  "authenticatedLimitedCriteria": [
+    "postprocessor no-match and uncovered behavior on synthetic inputs"
+  ],
+  "requiredRemaining": [
+    "new actual owned role streams and same-session invocation",
+    "same current product source inventory and release BOM",
+    "complete current class set, independent CRC and all four product counters",
+    "native collection end proof and 451"
+  ],
+  "noRealNativeArtifactsOpened": true,
+  "newProductTests": 0,
+  "toolTestReruns": 0,
+  "oldOwnerQualifiedAsCurrent": false,
+  "formalAcceptanceDelta": 0,
+  "newCoverage": 0
+}
