@@ -10,7 +10,10 @@ import java.util.Optional;
 public final class HttpByteRangeParser {
   private static final long MAX_BODY = 1_048_576;
 
-  private HttpByteRangeParser() {}
+  /** PG-D1175/BUG3178: this namespace never owns an instance, including internal misuse. */
+  private HttpByteRangeParser() {
+    throw new AssertionError("static utility");
+  }
 
   public sealed interface Selection permits Full, Partial, Unsatisfiable {}
 
