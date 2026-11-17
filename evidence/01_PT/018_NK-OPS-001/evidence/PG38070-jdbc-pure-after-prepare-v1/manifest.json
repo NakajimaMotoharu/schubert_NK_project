@@ -1,0 +1,170 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T20:27:09.233207+00:00",
+  "phase": "after",
+  "work": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1",
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "9782d9ad81e0346d1b0a1168f9e16555909b7a2b5e0c3f828b6538c66af43a64",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java": "7326b9bc9ba728e500b57cf24aafc8e325bad582d19818d4f83a8e7c62dc966a",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "apiMainSources": [
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "apiTestSources": [
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java"
+  ],
+  "physicalClassHashes": {
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class": "99eb53a2fe59f54fdaf785e3ea6724fc5cc3d2c3e399d26faaca8731049c2778"
+  },
+  "mainClassHashes": {
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class": "99eb53a2fe59f54fdaf785e3ea6724fc5cc3d2c3e399d26faaca8731049c2778"
+  },
+  "testClassHashes": {
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.class": "9092adb31500f8623ce943ab29f682c552384e703061cc730768b317129feaad",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest$UntouchableCause.class": "9a6fd5d3113e5e91f5c5b068e120bf04c38fe2bf8d9f5e1ca982e367fc4ff89b"
+  },
+  "stages": {
+    "nullaway-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-17T20:27:05.597129+00:00",
+      "endUTC": "2026-11-17T20:27:08.068419+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-Dmaven.test.skip=true",
+        "compile"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1",
+      "stdoutSha256": "f99df5f0d0e81ec6370d88e0f51505fed8c2754a50513539fdb78c02b4a03a0c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "abi-StorageIoException$Reason": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-17T20:27:08.069961+00:00",
+      "endUTC": "2026-11-17T20:27:08.235166+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/target/classes",
+        "dev.codex.schubert.nk.storage.StorageIoException$Reason"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1",
+      "stdoutSha256": "3b930d480c56c2a9f648fb921275f739d8031181f5571fda99b17755ea1a6c48",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "abi-StorageIoException": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-17T20:27:08.235517+00:00",
+      "endUTC": "2026-11-17T20:27:08.400592+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/target/classes",
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1",
+      "stdoutSha256": "777e7e63b947ff99702b7d62eb048e028d11b5c6b66301e296c218329f4dc8da",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "abi-JdbcAdmissionFailures": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-17T20:27:08.400949+00:00",
+      "endUTC": "2026-11-17T20:27:08.566133+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/target/classes",
+        "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailures"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1",
+      "stdoutSha256": "b49d407ff703c692ed01255cdf075c616fad095b49112cf8a44bd1f4e72acec5",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "test-compile": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-17T20:27:08.566528+00:00",
+      "endUTC": "2026-11-17T20:27:09.232768+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-g",
+        "-proc:none",
+        "-implicit:none",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/test-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "namespaceCannotBeInstantiatedOrRetainInstanceState()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "missingSecondaryFailsAtBothBoundariesWithoutChangingAnyPrimary()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "literalTwentyCellPriorityTableAndFixedDiagnosticStayIndependentOfProviderText()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "identicalPrimaryAndSecondaryNeverCauseSelfSuppression()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "knownSqlFatalClassificationKeepsCauseSuppressedNextAndPrimaryPrecedence()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "unknownPrimaryDoesNotTraverseProviderGettersOrKnownSecondaryFatal()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "name": "sharedCyclicSqlGraphTerminatesWithoutMutationOrInventedFailure()"
+    }
+  ],
+  "expectedTests": 7,
+  "newDefinitions": 7,
+  "compilerConfiguration": "EXACT_ROOT_RELEASE25_ERRORPRONE2500_NULLAWAY0141_ANNOTATED_PACKAGE_JSPECIFY_JDK",
+  "rootCompilerSha256": "a062ec2cf62ddc0e140d41bed89be7814071f798feac2dd0bcdc297a2d2d00cb",
+  "subsetPomSha256": "f41ac68d2b340a087f2be0b497d0fb9da19cbfe6867fc45c0e0a5ad512e4579c",
+  "productTestsExecuted": 0,
+  "originalBusinessBodyInverseQualificationPending": true,
+  "actualDbRootNativeVmKeyAuthorityActions": 0
+}

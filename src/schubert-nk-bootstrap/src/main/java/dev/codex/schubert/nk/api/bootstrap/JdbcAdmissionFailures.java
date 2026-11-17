@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.bootstrap;
 import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -12,7 +13,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 final class JdbcAdmissionFailures {
-  private JdbcAdmissionFailures() {}
+  private JdbcAdmissionFailures() {
+    throw new AssertionError("static namespace");
+  }
 
   static boolean replace(@Nullable Throwable primary, Throwable secondary) {
     beforeDiscard(primary, secondary);
@@ -26,6 +29,7 @@ final class JdbcAdmissionFailures {
 
   /** Classify only known SQL failures before discarding them; unknown primary identity stays. */
   static void beforeDiscard(@Nullable Throwable primary, Throwable secondary) {
+    Objects.requireNonNull(secondary, "secondary failure");
     if (primary instanceof SQLException) StorageIoException.preserveFatal(primary);
     if ((primary == null || primary instanceof SQLException) && secondary instanceof SQLException)
       StorageIoException.preserveFatal(secondary);

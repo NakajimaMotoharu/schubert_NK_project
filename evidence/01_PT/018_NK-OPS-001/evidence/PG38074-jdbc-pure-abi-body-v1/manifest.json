@@ -1,0 +1,134 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T20:28:08.859068+00:00",
+  "beforeSourceCore": "5d691dcd34aff54f5c67366dd1414ed1ee5b3699",
+  "rows": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "beforeSha256": "571478ad292c963718e8476af06e96f5e3d27d39e8f99b45f8b6ec79eaf4e05e",
+      "afterSha256": "9782d9ad81e0346d1b0a1168f9e16555909b7a2b5e0c3f828b6538c66af43a64",
+      "privateGuardAndNonnullOnlyInverseExact": true,
+      "unchanged": false
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "beforeSha256": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+      "afterSha256": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+      "privateGuardAndNonnullOnlyInverseExact": true,
+      "unchanged": true
+    }
+  ],
+  "allVisibilityAbi3Equal": [
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+      "allVisibilityAbiEqual": true,
+      "unchangedDependencyByteExact": true,
+      "beforeClassSha256": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+      "afterClassSha256": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+      "beforeAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38068-jdbc-pure-before-prepare-v1/abi-StorageIoException$Reason.stdout",
+        "sha256": "3b930d480c56c2a9f648fb921275f739d8031181f5571fda99b17755ea1a6c48"
+      },
+      "afterAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38070-jdbc-pure-after-prepare-v1/abi-StorageIoException$Reason.stdout",
+        "sha256": "3b930d480c56c2a9f648fb921275f739d8031181f5571fda99b17755ea1a6c48"
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/storage/StorageIoException.class",
+      "allVisibilityAbiEqual": true,
+      "unchangedDependencyByteExact": true,
+      "beforeClassSha256": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49",
+      "afterClassSha256": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49",
+      "beforeAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38068-jdbc-pure-before-prepare-v1/abi-StorageIoException.stdout",
+        "sha256": "777e7e63b947ff99702b7d62eb048e028d11b5c6b66301e296c218329f4dc8da"
+      },
+      "afterAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38070-jdbc-pure-after-prepare-v1/abi-StorageIoException.stdout",
+        "sha256": "777e7e63b947ff99702b7d62eb048e028d11b5c6b66301e296c218329f4dc8da"
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+      "allVisibilityAbiEqual": true,
+      "unchangedDependencyByteExact": false,
+      "beforeClassSha256": "36bc8c1356aab4934aade21fc69d3ea77329d7b1afd73469abc7b0d8e090f613",
+      "afterClassSha256": "99eb53a2fe59f54fdaf785e3ea6724fc5cc3d2c3e399d26faaca8731049c2778",
+      "beforeAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38068-jdbc-pure-before-prepare-v1/abi-JdbcAdmissionFailures.stdout",
+        "sha256": "b49d407ff703c692ed01255cdf075c616fad095b49112cf8a44bd1f4e72acec5"
+      },
+      "afterAbi": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38070-jdbc-pure-after-prepare-v1/abi-JdbcAdmissionFailures.stdout",
+        "sha256": "b49d407ff703c692ed01255cdf075c616fad095b49112cf8a44bd1f4e72acec5"
+      }
+    }
+  ],
+  "sharedStorage2PhysicalByteExact": true,
+  "sixCatchBindingCallerWitnesses": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "line": 67,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "line": 79,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "line": 108,
+      "catchTypes": "SQLException",
+      "secondaryBinding": "cleanup",
+      "method": "beforeDiscard",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "line": 111,
+      "catchTypes": "RuntimeException | Error",
+      "secondaryBinding": "cleanup",
+      "method": "beforeDiscard",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "line": 120,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "line": 131,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    }
+  ],
+  "actualCallerDbTestsExecuted": 0,
+  "actualDbRootNativeVmKeyAuthorityActions": 0,
+  "oracle": "PG-D312 fixed knownSQL/unknown identity priorities and SSC095; private invariant only valid callers unchanged",
+  "previous": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38066-jdbc-pure-before-fix-v1/manifest.json",
+    "sha256": "9da2f64904a7d437d1c8e8708007f93aa6bd944ebb69bc9769e6fd8f62c3c701"
+  },
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38068-jdbc-pure-before-prepare-v1/manifest.json",
+    "sha256": "d0dc7d66290aaf7ab5cd1f9a90c85db84ea8c546a068e9edf9f916f37f5f91a0"
+  },
+  "after": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38070-jdbc-pure-after-prepare-v1/manifest.json",
+    "sha256": "74c4fadefbc64e8514df272fc588000324777c04dc48a9a936c1b9f1c0ed26aa"
+  }
+}

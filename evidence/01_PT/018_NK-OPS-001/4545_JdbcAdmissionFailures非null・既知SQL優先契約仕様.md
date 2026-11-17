@@ -1,0 +1,9 @@
+# 4545 JdbcAdmissionFailures purewhole7
+
+ADDITIONAL_FINDING low.6/base1.8/high4 cap5。Main JdbcAdmissionFailures及びStorageIoException/Reason全bodyを確認、後者既pure21/35278のSourceと既ループを保全し再成功確認PTをしない。新Standalone helper whole7を作成し、実SchemaHistory/ServiceDatabase各Testの安全method/fixtureを抽出しない。原6callerのsecondary/cleanupはいずれもcatch bindingでnonnull、src witnessだけを残し実DB/owner/admission受入へ拡張0。
+
+PG-D312/SSC095と既fatal scope方針を独立oracleとする。primary種類null/SQL/Runtime/Error/Plain、secondary SQL/Runtime/Error/Plainの期待replace表はTTTT/FTTT/FFFF/FFFF/FFFF、期待追加suppressed数0000/0000/1111/1111/1111。unknown primary identityを保持、secondary固定SQLNonTransientConnectionException/08001/database admission resource failure/cause無し、provider文言/自己suppressionを追加しない。known SQLを捨てる前だけcause-suppressed-nextの元fatal分類を行い、unknown primary時に勝手にgetterを辿らない。循環/共有SQL graphは原Storage pure実装で有限、Errorは同instance。
+
+nonnull secondaryが欠けてもbeforeDiscard/replaceが通常完了する不足とemptyprivate ctorの全Code不足を修正前BUGへ記録。beforeDiscard入口Objects.requireNonNull(secondary,"secondary failure")、private ctor非instance AssertionErrorのみ。primary nullableは保持、正規6callerはcatch由来で新checkの影響0、元全valid入力の順位を不変更。新PT-DB-ADMISSION-FAIL001..007: namespace private/static/非構築/accessflag復元、nullsecondary両入口×五primary/primary無変異、20真理表/固定診断、自己identity、knownfatal順序/次SQL、未知getter不参照、循環/共有graph有限。禁止nullは固定NPEとして拒否し正常化しない。期待は上記手書き表/固定文字/identity。
+
+Rootstrict Main2/Test1・SDKJSpecify/JUnitのみ、static/ABI/bodyinverse/6nonnullcaller静的witness、Unit固定、全7を一回、全3physical CRC-init-XML/raw targetJdbc全Code。Storage共有依存未hitは保持、全component/実DB/全caller合格にしない。SQL exceptionはmemory objectだけ、connection/driver/DataSource/Process/FS/Root/cohort/VM/native/key/credential/intent/permit/4保留型等操作0。No root/recovery investigation or rejected operation retry。F03/実ownerP01901 SQL失敗方針の不足へ返却、全親/451/正式1964-53/17-190新規0/工数null/QA051056057/各HOLD維持。原費/S-V/別再資格を増減して完成扱いにしない。
