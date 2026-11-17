@@ -1,0 +1,124 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] schubert-nk                                                        [pom]
+[INFO] Schubert NK Protocol                                               [jar]
+[INFO] Schubert NK Storage                                                [jar]
+[INFO] Schubert NK Shared Bootstrap                                       [jar]
+[INFO] Schubert NK Batch                                                  [jar]
+[INFO] 
+[INFO] -------------------< dev.codex.schubert:schubert-nk >-------------------
+[INFO] Building schubert-nk 0.1.0-SNAPSHOT                                [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] 
+[INFO] --------------< dev.codex.schubert:schubert-nk-protocol >---------------
+[INFO] Building Schubert NK Protocol 0.1.0-SNAPSHOT                       [2/5]
+[INFO]   from src/schubert-nk-protocol/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk-protocol ---
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk-protocol ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 169 files clean - 0 needs changes to be clean, 169 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-protocol ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-protocol/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-protocol ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-protocol/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-protocol ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 169 source files with javac [forked debug release 25] to target/classes
+[INFO] 
+[INFO] ---------------< dev.codex.schubert:schubert-nk-storage >---------------
+[INFO] Building Schubert NK Storage 0.1.0-SNAPSHOT                        [3/5]
+[INFO]   from src/schubert-nk-storage/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk-storage ---
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk-storage ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 25 files clean - 0 needs changes to be clean, 25 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-storage ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-storage/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-storage ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-storage/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-storage ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 25 source files with javac [forked debug release 25] to target/classes
+[INFO] 
+[INFO] --------------< dev.codex.schubert:schubert-nk-bootstrap >--------------
+[INFO] Building Schubert NK Shared Bootstrap 0.1.0-SNAPSHOT               [4/5]
+[INFO]   from src/schubert-nk-bootstrap/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk-bootstrap ---
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk-bootstrap ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 87 files clean - 0 needs changes to be clean, 87 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-bootstrap ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-bootstrap/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-bootstrap ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-bootstrap/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-bootstrap ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 87 source files with javac [forked debug release 25] to target/classes
+[INFO] 
+[INFO] ----------------< dev.codex.schubert:schubert-nk-batch >----------------
+[INFO] Building Schubert NK Batch 0.1.0-SNAPSHOT                          [5/5]
+[INFO]   from src/schubert-nk-batch/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- enforcer:3.6.3:enforce (toolchain-and-dependency-contract) @ schubert-nk-batch ---
+[INFO] Rule 2: org.apache.maven.enforcer.rules.dependency.DependencyConvergence passed
+[INFO] 
+[INFO] --- spotless:3.10.2:check (java-format-contract) @ schubert-nk-batch ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 200 files clean - 0 needs changes to be clean, 200 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (prepare-coverage-agent) @ schubert-nk-batch ---
+[INFO] argLine set to -javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-batch/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ schubert-nk-batch ---
+[INFO] skip non existing resourceDirectory /home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-batch/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ schubert-nk-batch ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 200 source files with javac [forked debug release 25] to target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for schubert-nk 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] schubert-nk ........................................ SUCCESS [  0.429 s]
+[INFO] Schubert NK Protocol ............................... SUCCESS [  6.895 s]
+[INFO] Schubert NK Storage ................................ SUCCESS [  2.930 s]
+[INFO] Schubert NK Shared Bootstrap ....................... SUCCESS [  7.062 s]
+[INFO] Schubert NK Batch .................................. SUCCESS [ 13.040 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  30.467 s
+[INFO] Finished at: 2026-11-18T08:33:54+09:00
+[INFO] ------------------------------------------------------------------------
