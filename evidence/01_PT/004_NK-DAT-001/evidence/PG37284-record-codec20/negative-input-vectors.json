@@ -1,0 +1,30 @@
+[
+  {
+    "testId": "PT-BAT-MREC-RAW002",
+    "statusBytes": [
+      1,
+      17
+    ],
+    "independentHash": 48,
+    "inputHex": "4e4b444f4e45310a31323334353637382d396162632d646566302d383132332d3435363738396162636465660a323032362d30392d31325430343a30353a30362e3132333435365a0a66656463626139382d373635342d333231302d386665642d6362613938373635343332310a323032362d30392d31325430353a30363a30372e3233343536375a0a01110a",
+    "inputSha256": "c4eff32da640f32c6c7309b28f9814acc62a5be15f2945e1538a65f319ea5951",
+    "expectedException": "java.io.IOException",
+    "expectedDiagnostic": "maintenance record is invalid",
+    "actualCase": "MaintenanceRecordsRawContractTest.raw002UnknownStatusHashAliasesRemainInvalidAndInputIsBorrowed()",
+    "actualCasePassed": true
+  },
+  {
+    "testId": "PT-BAT-MREC-RAW002",
+    "statusBytes": [
+      48,
+      79
+    ],
+    "independentHash": 1567,
+    "inputHex": "4e4b444f4e45310a31323334353637382d396162632d646566302d383132332d3435363738396162636465660a323032362d30392d31325430343a30353a30362e3132333435365a0a66656463626139382d373635342d333231302d386665642d6362613938373635343332310a323032362d30392d31325430353a30363a30372e3233343536375a0a304f0a",
+    "inputSha256": "f6c99f54f4c30bf367b0526d9ab2852ccdb0bd1f92bf048f3cc6ee50fa08b1ee",
+    "expectedException": "java.io.IOException",
+    "expectedDiagnostic": "maintenance record is invalid",
+    "actualCase": "MaintenanceRecordsRawContractTest.raw002UnknownStatusHashAliasesRemainInvalidAndInputIsBorrowed()",
+    "actualCasePassed": true
+  }
+]
