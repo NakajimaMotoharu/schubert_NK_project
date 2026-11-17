@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T22:30:53.921715+00:00",
+  "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "applicable": 0,
+  "unclassified": 0,
+  "pmdDispositions": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "37",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Single local static namespace constructor; restores original accessibility in finally and checks the restored flag.",
+      "sourceSha256": "7f2c8bc9eecc2275e3a6435ac630499291671745c3bb939bda972c5bfeee7daf"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "37",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Single local static namespace constructor; restores original accessibility in finally and checks the restored flag.",
+      "sourceSha256": "2fddee1639efd0810c0c7954b7022d993fe49a3c6c4ed3ebb866c19e2c75db7d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "33",
+      "message": "Ensure that resources like this Output object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Output owns only ByteArrayOutputStream; observably borrowed along the real FileChannel path.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "44",
+      "message": "Ensure that resources like this Channel object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Synthetic Channel owns an array and a close flag; no acquired OS resource.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "46",
+      "message": "Ensure that resources like this Output object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Output owns only ByteArrayOutputStream; short-read path observes the supplied sink remains open.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "67",
+      "message": "Ensure that resources like this Channel object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Fault-injection Channel owns only synthetic bytes and a close flag.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "69",
+      "message": "Ensure that resources like this Output object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Output fault sink owns only a ByteArrayOutputStream; close is a fixture observation.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "81",
+      "message": "Ensure that resources like this Channel object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Synthetic read-failure Channel holds no external resource; source closure belongs to caller.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "CloseResource",
+      "line": "84",
+      "message": "Ensure that resources like this Output object are closed after use",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Partial-output fixture holds only an array buffer; close is a fixture observation.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+      "rule": "AssignmentInOperand",
+      "line": "136",
+      "message": "Avoid assignment to reads in operand",
+      "disposition": "NOT_APPLICABLE_TO_FIXTURE_OR_INVARIANT",
+      "reason": "Existing fault fixture uses short-circuit order to leave read count unchanged for the immediate read fault; the counter here selects fail-after-one with no external effect.",
+      "sourceSha256": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa"
+    }
+  ],
+  "allVisibilityAbi": {
+    "dev/codex/schubert/nk/api/storage/TransferContentVerifier.class": "fbc82af586060b08339a39f73991a31f22eba2fdd4b5719c8674725284c186aa",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "3b930d480c56c2a9f648fb921275f739d8031181f5571fda99b17755ea1a6c48",
+    "dev/codex/schubert/nk/storage/StorageIoException.class": "777e7e63b947ff99702b7d62eb048e028d11b5c6b66301e296c218329f4dc8da",
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer.class": "90afc89073ad51c2cc3bfa27d5af4a4129615259dc3964c421f29dc2cb8eb74d"
+  },
+  "physicalDelta": [
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer.class",
+    "dev/codex/schubert/nk/api/storage/TransferContentVerifier.class"
+  ],
+  "sharedBytesUnchanged": 178,
+  "declaredTargets": [
+    "dev/codex/schubert/nk/api/storage/TransferContentVerifier",
+    "dev/codex/schubert/nk/web/media/MediaBodyStreamer"
+  ],
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38194-borrowed-file-admission-v1/normalized-prepare.json",
+    "sha256": "9a7fd0ca544bba65130c5d3e0c2750039c909613890c95b02ef730dba6247393"
+  },
+  "before": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38188-borrowed-file-before-prepare-v1/manifest.json",
+    "sha256": "90844c42d9bb9b49c077fcf8da234ab5011e192305a9df73493524c14e5f72d3"
+  },
+  "after": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38190-borrowed-file-after-prepare-v1/manifest.json",
+    "sha256": "4f3d31d1c3be8fb8b80591ea459a8ea80180574f87b850170b56e8a280683cf7"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38192-borrowed-file-static-v1/manifest.json",
+    "sha256": "ee56eef1f6bf8d0da9b7a3312ee8e7ad9e2cb48d090110bb4557cb380b53c7c9"
+  },
+  "actualProductTests": 0,
+  "newAcceptance": 0
+}

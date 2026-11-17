@@ -1,0 +1,137 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5716",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f3ee51a1f806cd0a678198b86b3afe1cdcca1605490ae8c2fe4b833aa6ce25fd",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T22:31:56.420Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 22,
+          "remainingPercent": 78,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T22:31:35.598571+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-BORROWED-SYNTHETIC-FILE-CODEC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-BORROWED-SYNTHETIC-FILE-CODEC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "4556, BUG3209: preserve whole existing 2+3 tests, qualify the two static-only private constructors. JUnit-owned fresh temporary directory and synthetic inputs only. Closed-runtime scope with no backend/permissions/held types.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4556_自己所有合成fileのcopy検証・原五全Code仕様.md",
+        "sha256": "5964d7197037e0607d8db2bb30e434aeaa677cc9b034dd80abbb8fc3e967d1bd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "productionCoreMain": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P008-03",
+      "WBS-P009-04"
+    ],
+    "testIds": [
+      "PT-MED-006/007",
+      "PT-SCN-008-W06",
+      "PT-MED-006-NAMESPACE",
+      "PT-SCN-008-W06-NAMESPACE"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.7,
+      "base": 2,
+      "high": 4
+    },
+    "groupCapPp": 5,
+    "originalCompletedPriceTotalPp": 9.538,
+    "remainingDetailBasePp": 1089.848,
+    "newAcceptance": 0,
+    "run": "PG38196-BORROWED-FILE-WHOLE7",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38198-borrowed-file-whole7-independent-v1/manifest.json",
+      "sha256": "9a43a88185a4cf30dc6746bd2709f06c427cc7321de5fac67382606a619292af"
+    },
+    "firstAttempt": {
+      "passed": 7,
+      "denominator": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0
+    },
+    "retries": 0,
+    "targetRawCounters": {
+      "LINE": {
+        "missed": 0,
+        "covered": 43
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 4
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 22
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 185
+      }
+    },
+    "syntheticFilesystemIo": true,
+    "fixtureTempClean": true,
+    "closedSubconditions": [
+      "BUG-3209: both static utility constructor contracts qualified with complete ordinary five and two new tests",
+      "F03/P008-03/P009-04: exact scoped NullAway, PMD dispositions, ABI and raw coverage returned"
+    ],
+    "closedCanonicalCriteria": [],
+    "completedAdditionalFindingPricePp": 2,
+    "additionalCompletedPriceTotalPp": 25.85,
+    "completedOriginalRowPricePp": 0,
+    "formalUpdated": false,
+    "shortTermPlannedPricePp": 143.371
+  }
+}
