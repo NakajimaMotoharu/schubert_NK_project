@@ -31,24 +31,23 @@ public final class InspectionSummaryRepository {
       require(connection.getTransactionIsolation() == Connection.TRANSACTION_READ_COMMITTED);
       Optional<InspectionSummary> result;
       var statement =
-          connection.prepareStatement(
-              "select inspected_count,deleted_count,protected_count,complete"
-                  + " from schubert.maintenance_read_inbox_summary(?,?)");
+          present(
+              connection.prepareStatement(
+                  "select inspected_count,deleted_count,protected_count,complete"
+                      + " from schubert.maintenance_read_inbox_summary(?,?)"));
       @Nullable Throwable statementFailure = null;
       try {
-        var checked = present(statement);
-        checked.setQueryTimeout(5);
-        checked.setObject(1, run.id());
-        checked.setObject(2, run.cutoff().atOffset(ZoneOffset.UTC));
-        var row = checked.executeQuery();
+        statement.setQueryTimeout(5);
+        statement.setObject(1, run.id());
+        statement.setObject(2, run.cutoff().atOffset(ZoneOffset.UTC));
+        var row = present(statement.executeQuery());
         @Nullable Throwable rowFailure = null;
         try {
-          var values = present(row);
-          if (values.next()) {
-            long inspected = present(values.getObject("inspected_count", Long.class));
-            long deleted = present(values.getObject("deleted_count", Long.class));
-            long protectedCount = present(values.getObject("protected_count", Long.class));
-            boolean complete = present(values.getObject("complete", Boolean.class));
+          if (row.next()) {
+            long inspected = present(row.getObject("inspected_count", Long.class));
+            long deleted = present(row.getObject("deleted_count", Long.class));
+            long protectedCount = present(row.getObject("protected_count", Long.class));
+            boolean complete = present(row.getObject("complete", Boolean.class));
             try {
               result =
                   Optional.of(
@@ -57,7 +56,7 @@ public final class InspectionSummaryRepository {
             } catch (IllegalArgumentException invalidProjection) {
               throw new SQLDataException("inspection summary projection invalid");
             }
-            require(!values.next());
+            require(!row.next());
           } else {
             result = Optional.empty();
           }
@@ -65,23 +64,21 @@ public final class InspectionSummaryRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (row != null)
-            try {
-              row.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-            }
+          try {
+            row.close();
+          } catch (SQLException | RuntimeException | Error secondary) {
+            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
+          }
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        if (statement != null)
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-          }
+        try {
+          statement.close();
+        } catch (SQLException | RuntimeException | Error secondary) {
+          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
+        }
       }
       require(!Thread.currentThread().isInterrupted());
       return result;

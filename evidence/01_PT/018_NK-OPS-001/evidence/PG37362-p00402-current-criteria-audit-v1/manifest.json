@@ -1,0 +1,346 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T07:04:47.348210+00:00",
+  "currentCoreMain": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+  "canonicalSS332": {
+    "originMainCommit": "51f2f3ba8118782ff2973e171850126d941fb426",
+    "gitBlob": "b1f3f8c735741832e847adc2e813b466565d3fc7",
+    "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+    "sha256": "1baa42a2c7be47fae05074446a30184d6248adeaccdfd809ed02be93516637c4"
+  },
+  "localUnrelatedSSC427EditorialDifferencePreserved": true,
+  "canonicalOracleNotChanged": true,
+  "originalRawAudit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37358-summary-old11-raw-corrected-v1/manifest.json",
+    "sha256": "6ba050656841a079c597acec3d9c4b2ec05549eddfb070be7e2511dbd581e86f"
+  },
+  "original11NotReexecuted": true,
+  "currentWholePassNotInferred": true,
+  "criteriaRows": [
+    {
+      "artifact": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InboxCleanup.java",
+      "state": "SOURCE_ONLY_HOLD",
+      "remaining": "QA056 held TemporaryInfrastructureException class dependency, actual SQL/DB/Inbox owner verification; no alternate execution"
+    },
+    {
+      "artifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "state": "OLD_SOURCE_SAME_CURRENT_BYTE_DIFFERENT_NOT_CURRENT_PASS",
+      "byteDifferences": [
+        {
+          "offset": 2209,
+          "before": 10,
+          "after": 11
+        }
+      ],
+      "reason": "Static helper became interface namespace: CP Methodref10->InterfaceMethodref11 at2209, other5796 bytes identical. CRC differs, never rewrite exec IDs or transfer runtime probes.",
+      "required": "Necessary current ordinary closure includes new helper policy, exact SQL/UTC/timeout/resource/null/error/interrupt oracles and unfiltered counters"
+    },
+    {
+      "artifact": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "state": "OLD_SOURCE_BYTE_SAME_PARTIAL_RAW",
+      "required": "Generated value equals/hash with all components, redacted diagnostic/null/accessors and current-source closure"
+    }
+  ],
+  "allThreeOwnedArtifactsAccepted": false,
+  "oldRawCounters": {
+    "LINE": {
+      "missed": 1,
+      "covered": 84
+    },
+    "METHOD": {
+      "missed": 7,
+      "covered": 20
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 6
+    },
+    "BRANCH": {
+      "missed": 4,
+      "covered": 52
+    },
+    "INSTRUCTION": {
+      "missed": 25,
+      "covered": 392
+    }
+  },
+  "oldMissingMethods": [
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository",
+      "name": "read",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ljava/util/Optional;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 214
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 24
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 50
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 11
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/InspectionSummary",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/BatchRun",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/CleanupCounts",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures",
+      "name": "<init>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "initialToolFailures": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37356-summary-old11-raw-v1/failure.json",
+      "sha256": "fbfb9b6c316976143053ef2f7bfc0d3700ad403981e194b0df2690e186d0b824"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37360-p00402-current-criteria-audit-v1/failure.json",
+      "sha256": "face81d2f199398476b1bd6aa1d5972e77b184e5ef405bbb15d10c8895b104d5"
+    }
+  ],
+  "originalCRowPriceCompleted": 0,
+  "remainingCRowPricePp": 0.423,
+  "remainingOriginalDetailPp": "1090.998",
+  "futureAdditionalDependencyEstimate": {
+    "low": 0.3,
+    "base": 0.8,
+    "high": 2,
+    "cap": 3
+  },
+  "futureAdditionalNotStarted": true,
+  "proposedPG": "Move nonnull acquisition check before owning statement/result set; close only known nonnull owned resource exactly once, preserve borrowed connection/SQL/failure policy. Old raw4 nullable duplicate-close guards are not waived. Add3 independent record contracts; original summary11 plus existing JdbcResourceFailures8 plus new3, necessary whole22 after source change.",
+  "currentOriginal11TestDefinitionCounts": {
+    "InspectionSummaryPortTest": 9,
+    "BatchRunBoundaryTest": 2
+  },
+  "currentExistingHelperTests": 8,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null
+}
