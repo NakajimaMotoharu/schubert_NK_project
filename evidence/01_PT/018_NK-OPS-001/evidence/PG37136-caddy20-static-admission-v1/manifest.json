@@ -1,0 +1,223 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T01:03:46.957668+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37134-caddy20-prepare-static-v1/manifest.json",
+    "sha256": "69f8f273e3db8c130cbfc034129c4fbb82cd649a5282a83532c884ec45b6cede"
+  },
+  "testRaw": 9,
+  "classified": [
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "56",
+        "endline": "56",
+        "begincolumn": "9",
+        "endcolumn": "14",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream001SameInputIsClosedOnceWithoutReading",
+        "variable": "input",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this InputStream object are closed after use"
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "var input = stream(closes, null);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM001/004 deliberately transfer this memory InputStream to closeLoginInput/ResourceScope; source requires owned close exactly once on success and injected IO/Runtime/Error. The independent counters assert1; test-side second close would invalidate ownership. No actual HTTP/FS stream."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "105",
+        "endline": "105",
+        "begincolumn": "11",
+        "endcolumn": "16",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream004CloseFailureKeepsFixedIoAndUnknownPriority",
+        "variable": "input",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this InputStream object are closed after use"
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "var input = stream(closes, failure);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM001/004 deliberately transfer this memory InputStream to closeLoginInput/ResourceScope; source requires owned close exactly once on success and injected IO/Runtime/Error. The independent counters assert1; test-side second close would invalidate ownership. No actual HTTP/FS stream."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "136",
+        "endline": "136",
+        "begincolumn": "9",
+        "endcolumn": "17",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "136",
+        "endline": "136",
+        "begincolumn": "20",
+        "endcolumn": "51",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "variable": "executor",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "139",
+        "endline": "147",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "variable": "first",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "executor.submit(",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "149",
+        "endline": "157",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "variable": "second",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "executor.submit(",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "164",
+        "endline": "164",
+        "begincolumn": "7",
+        "endcolumn": "29",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "executor.shutdownNow();",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "165",
+        "endline": "165",
+        "begincolumn": "18",
+        "endcolumn": "65",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "caddyStream006ParallelStreamsKeepSeparateOwnership",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningCaddyReadinessTest.java",
+        "beginline": "174",
+        "endline": "174",
+        "begincolumn": "7",
+        "endcolumn": "13",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningCaddyReadinessTest",
+        "method": "streamBarrier",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "864eed218de23e0eb8d9f85228d5f1d8b1e1f1cab57d518fb7cb6f67f46d263e",
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "decision": "NOT_APPLICABLE",
+      "reason": "CADDYSTREAM006 whole ordinary standalone JUnit: two tasks with separate memory stream ownership, two get5s, finally shutdownNow/asserted await10s, latch10s and whole Test30s/outer JVM120s. Thread interrupt at streamBarrier restores interruption before fixed IO. PMD DoNotUseThreads is a J2EE managed-container restriction; no application thread, actual backend or service owner is created."
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "currentMainPmdSites": 1,
+  "currentMainPmdProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/manifest.json",
+    "sha256": "ce61527bfbc1cc771977c2060a8a19ce8cbdafd690ae84459550e903f8cc93a6"
+  },
+  "currentMainSpotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36958-backup-path-fresh-sibling-spotbugs-v1/manifest.json",
+    "sha256": "882b05c4c62fbc384cefced1f087d52a50321d6c49de90d3b20331ceb54361cc"
+  },
+  "sourceRuleOrSuppressionChanges": 0,
+  "productTestsExecuted": 0,
+  "mainNativeIoActualProof": false,
+  "wholeF03Accepted": false,
+  "formalUpdated": false
+}

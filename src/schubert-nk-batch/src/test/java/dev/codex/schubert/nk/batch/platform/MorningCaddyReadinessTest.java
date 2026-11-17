@@ -23,9 +23,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /** SS342/SSC178/CADDY455: literal manager/kernel/HTTP values, no native authority. */
+@Timeout(30)
 final class MorningCaddyReadinessTest {
+  private static final int POST_TLS_GUARD_OBSERVATION = 4;
+  private static final int SECOND_MANAGER_OBSERVATION = 2;
   private static final String FIXTURE_STATUS_0_0_FCBA6B28 = "status=0/0";
   private static final String FIXTURE_CODE_EXITED_611579B5 = "code=exited";
   private static final String FIXTURE_PID_43_C94D5426 = "pid=43";
@@ -129,7 +133,8 @@ final class MorningCaddyReadinessTest {
     var closedB = new AtomicInteger();
     var a = stream(closedA, null);
     var b = stream(closedB, null);
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       var first =
           executor.submit(
               () -> {
@@ -150,11 +155,14 @@ final class MorningCaddyReadinessTest {
                     });
                 return true;
               });
-      assertTrue(first.get());
-      assertTrue(second.get());
+      assertTrue(first.get(5, TimeUnit.SECONDS));
+      assertTrue(second.get(5, TimeUnit.SECONDS));
       assertNotSame(a, b);
       assertEquals(1, closedA.get());
       assertEquals(1, closedB.get());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -508,18 +516,18 @@ final class MorningCaddyReadinessTest {
                 "1")
             .entrySet()) {
       var mutated = new Fixture();
-      mutated.manager.put(change.getKey(), change.getValue());
+      mutated.managerView.put(change.getKey(), change.getValue());
       assertThrows(IOException.class, () -> mutated.create(), change.getKey());
     }
   }
 
   static final class Fixture implements MorningCaddyReadiness.Io {
-    Map<String, String> manager = values();
-    ChildStartupContext.Observed actor = ACTOR;
+    Map<String, String> managerView = values();
+    ChildStartupContext.Observed actorView = ACTOR;
     Set<String> before = Set.of(FIXTURE_12345_AFC21EDA);
     Set<String> after = Set.of(FIXTURE_12345_AFC21EDA);
     int status = 200;
-    int sockets;
+    int socketReads;
     int guards;
     int failGuard;
     int calls;
@@ -528,31 +536,34 @@ final class MorningCaddyReadinessTest {
 
     void guard() throws IOException {
       events.add(FIXTURE_GUARD_EE044669);
-      if (++guards == failGuard) throw new IOException("fixed fault");
+      guards++;
+      if (guards == failGuard) throw new IOException("fixed fault");
     }
 
     void io() throws IOException {
-      if (++calls == failIo) throw new IOException("fixed fault");
+      calls++;
+      if (calls == failIo) throw new IOException("fixed fault");
     }
 
     public Map<String, String> manager() throws IOException {
       io();
       events.add("manager");
-      return manager;
+      return managerView;
     }
 
     public ChildStartupContext.Observed actor(String invocation) throws IOException {
       io();
       assertEquals(INV, invocation);
       events.add("actor");
-      return actor;
+      return actorView;
     }
 
     public Set<String> sockets(long pid) throws IOException {
       io();
       assertEquals(43, pid);
       events.add("socket");
-      return ++sockets == 1 ? before : after;
+      socketReads++;
+      return socketReads == 1 ? before : after;
     }
 
     public int login() throws IOException {
@@ -576,7 +587,7 @@ final class MorningCaddyReadinessTest {
               .replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=" + status));
       MorningCaddyReadiness.profile(m);
       var f = new Fixture();
-      f.manager = m;
+      f.managerView = m;
       assertTrue(f.create().ready());
     }
     for (String status :
@@ -620,9 +631,9 @@ final class MorningCaddyReadinessTest {
           new MorningCaddyReadiness(
               () -> {
                 f.guard();
-                if (f.guards == 4) {
+                if (f.guards == POST_TLS_GUARD_OBSERVATION) {
                   if (drift.equals("actorAfterTls"))
-                    f.actor =
+                    f.actorView =
                         new ChildStartupContext.Observed(
                             ACTOR.boot(),
                             43,
@@ -634,18 +645,20 @@ final class MorningCaddyReadinessTest {
                             true,
                             true);
                   if (drift.equals("managerAfterTls")) {
-                    f.manager = values();
-                    f.manager.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
+                    f.managerView = values();
+                    f.managerView.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
                   }
                 }
               },
               f);
       if (drift.equals("pidBefore")) {
-        f.manager = values();
-        f.manager.put(FIXTURE_MAINPID_D7C01CF7, "44");
-        f.manager.put(
+        f.managerView = values();
+        f.managerView.put(FIXTURE_MAINPID_D7C01CF7, "44");
+        f.managerView.put(
             FIXTURE_EXECSTART_CFCC28D6,
-            f.manager.get(FIXTURE_EXECSTART_CFCC28D6).replace(FIXTURE_PID_43_C94D5426, "pid=44"));
+            f.managerView
+                .get(FIXTURE_EXECSTART_CFCC28D6)
+                .replace(FIXTURE_PID_43_C94D5426, "pid=44"));
       }
       assertThrows(IOException.class, observer::ready, drift);
       assertEquals(
@@ -657,7 +670,7 @@ final class MorningCaddyReadinessTest {
         new MorningCaddyReadiness.Io() {
           public Map<String, String> manager() throws IOException {
             var copy = new HashMap<>(f.manager());
-            if (reads.incrementAndGet() == 2)
+            if (reads.incrementAndGet() == SECOND_MANAGER_OBSERVATION)
               copy.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
             return copy;
           }
@@ -774,17 +787,17 @@ final class MorningCaddyReadinessTest {
     }
     var f = new Fixture();
     var observer = f.create();
-    f.manager = values();
-    f.manager.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
+    f.managerView = values();
+    f.managerView.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
     assertThrows(IOException.class, observer::ready);
     f = new Fixture();
     observer = f.create();
-    f.actor =
+    f.actorView =
         new ChildStartupContext.Observed(
             ACTOR.boot(), 43, 12346, 200, 201, List.of(201L), ACTOR.cgroup(), true, true);
     assertThrows(IOException.class, observer::ready);
     var wrong = new Fixture();
-    wrong.actor =
+    wrong.actorView =
         new ChildStartupContext.Observed(
             ACTOR.boot(), 44, 12345, 200, 201, List.of(201L), ACTOR.cgroup(), true, true);
     assertThrows(IOException.class, wrong::create);

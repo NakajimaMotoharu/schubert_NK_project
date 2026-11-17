@@ -1,0 +1,14 @@
+"""BUG3154: bound only test-owned waiting; preserve every original assertion/input token."""
+from pathlib import Path
+import hashlib,json,re,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';before=b/'evidence/PG37122-caddy-wait-before-v1';m=json.loads((before/'manifest.json').read_text());p=r/m['testPath'];old=p.read_text();assert hashlib.sha256(p.read_bytes()).hexdigest()==m['testShaBefore']
+new=old.replace('import org.junit.jupiter.api.Test;','import org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Timeout;').replace('final class MorningCaddyReadinessTest {','@Timeout(30)\nfinal class MorningCaddyReadinessTest {').replace('    try (var executor = Executors.newFixedThreadPool(2)) {','    var executor = Executors.newFixedThreadPool(2);\n    try {').replace('assertTrue(first.get());','assertTrue(first.get(5, TimeUnit.SECONDS));').replace('assertTrue(second.get());','assertTrue(second.get(5, TimeUnit.SECONDS));')
+anchor='      assertEquals(1, closedB.get());\n    }\n  }';replacement='      assertEquals(1, closedB.get());\n    } finally {\n      executor.shutdownNow();\n      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));\n    }\n  }';assert new.count(anchor)==1;new=new.replace(anchor,replacement)
+inverse=new.replace(replacement,anchor).replace('assertTrue(first.get(5, TimeUnit.SECONDS));','assertTrue(first.get());').replace('assertTrue(second.get(5, TimeUnit.SECONDS));','assertTrue(second.get());').replace('    var executor = Executors.newFixedThreadPool(2);\n    try {','    try (var executor = Executors.newFixedThreadPool(2)) {').replace('@Timeout(30)\n','').replace('import org.junit.jupiter.api.Timeout;\n','')
+assert inverse==old and len(re.findall(r'@Test\s+void',new))==len(re.findall(r'@Test\s+void',old))==20
+p.write_text(new)
+# The finite-only edit already follows existing indentation and imports; require format, do not silently rewrite or alter expectations.
+q=r.parent/'toolchain';result=subprocess.run([str(q/'jdk-25.0.4/bin/java'),'-jar',str(q/'google-java-format-1.36.1-all-deps.jar'),'--skip-reflowing-long-strings','--dry-run','--set-exit-if-changed',str(p)],capture_output=True,text=True,timeout=120)
+out=b/'evidence/PG37124-caddy-finite-only-source-v1';assert not out.exists();out.mkdir();(out/'format.stdout').write_text(result.stdout);(out/'format.stderr').write_text(result.stderr)
+v=dict(actualExit=result.returncode,testPath=m['testPath'],shaBefore=m['testShaBefore'],shaAfter=hashlib.sha256(p.read_bytes()).hexdigest(),inverseWholeByteExact=True,wholeTests=20,allOriginalOraclesAndInputsPreserved=True,productMainChanged=False,waits=dict(futures='two get5 seconds',owner='shutdownNow + asserted awaitTermination10 seconds',latch='unchanged10 seconds',wholeClass='Timeout30 seconds'),bug='BUG3154',horizontal='YKT2623',productTestsExecuted=0)
+(out/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps(v));assert result.returncode==0
