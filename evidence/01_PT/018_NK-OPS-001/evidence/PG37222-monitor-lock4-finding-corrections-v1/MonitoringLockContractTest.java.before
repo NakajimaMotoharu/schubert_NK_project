@@ -1,0 +1,305 @@
+package dev.codex.schubert.nk.batch.monitoring;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
+import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Status;
+import dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Step;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.MockClock;
+import io.micrometer.core.instrument.simple.SimpleConfig;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+
+/** BUG3161/PG-D364/LOCK401..406: fixed vectors, borrowed pure providers, finite owned workers. */
+@Timeout(30)
+class MonitoringLockContractTest {
+  private static final Instant AT = Instant.parse("2026-11-17T00:00:00Z");
+  private static final long WAIT_SECONDS = 5;
+  private static final long STOP_SECONDS = 10;
+
+  private static final class FailingRegistry extends SimpleMeterRegistry {
+    private final AtomicReference<Optional<Throwable>> injected =
+        new AtomicReference<>(Optional.empty());
+
+    FailingRegistry() {
+      super(SimpleConfig.DEFAULT, new MockClock());
+    }
+
+    @Override
+    protected Counter newCounter(Meter.Id meterId) {
+      Counter delegate = super.newCounter(meterId);
+      return new Counter() {
+        @Override
+        public void increment(double amount) {
+          injected.get().ifPresent(MonitoringLockContractTest::raise);
+          delegate.increment(amount);
+        }
+
+        @Override
+        public double count() {
+          return delegate.count();
+        }
+
+        @Override
+        public Meter.Id getId() {
+          return delegate.getId();
+        }
+      };
+    }
+  }
+
+  private static void raise(Throwable failure) {
+    if (failure instanceof Error fatal) throw fatal;
+    throw (RuntimeException) failure;
+  }
+
+  private static ObservationContext at(long seconds) {
+    return new ObservationContext(CauseClearance.CONFIRMED, AT, Duration.ofSeconds(seconds));
+  }
+
+  private static <T> T anotherThread(Callable<T> operation) throws Exception {
+    var pool = Executors.newSingleThreadExecutor(Thread.ofPlatform().daemon().factory());
+    try {
+      return pool.submit(operation).get(WAIT_SECONDS, TimeUnit.SECONDS);
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(STOP_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+
+  @Test
+  void lock401ObserveFailureReleasesForAnotherThreadAndPreservesOneGap() throws Exception {
+    for (Throwable failure : List.of(new IllegalStateException(), new AssertionError())) {
+      var poll = new MonitoringPoller<Integer>();
+      assertSame(
+          failure,
+          assertThrows(
+              failure.getClass(),
+              () ->
+                  poll.observe(
+                      true,
+                      at(10),
+                      (continuous, context) -> {
+                        raise(failure);
+                        return 0;
+                      })));
+      assertEquals(
+          7,
+          anotherThread(
+              () ->
+                  poll.observe(
+                      true,
+                      at(1),
+                      (continuous, context) -> {
+                        assertFalse(continuous);
+                        return 7;
+                      })));
+      assertEquals(
+          11,
+          poll.observe(
+              true,
+              at(2),
+              (continuous, context) -> {
+                assertTrue(continuous);
+                return 11;
+              }));
+    }
+  }
+
+  @Test
+  void lock402ObserveNowClockFailureReleasesBothLocksAcrossThreads() throws Exception {
+    for (Throwable failure : List.of(new IllegalStateException(), new AssertionError())) {
+      var wall = new MonitoringObservationClockTest.FixtureClock();
+      var clock = new MonitoringObservationClock(wall, () -> 0);
+      var poll = new MonitoringPoller<Integer>();
+      wall.failure = Optional.of(failure);
+      assertSame(
+          failure,
+          assertThrows(
+              failure.getClass(),
+              () ->
+                  poll.observeNow(
+                      true,
+                      CauseClearance.CONFIRMED,
+                      clock,
+                      (continuous, context) -> {
+                        throw new AssertionError("action must not run after failed clock");
+                      })));
+      wall.failure = Optional.empty();
+      assertEquals(
+          7,
+          anotherThread(
+              () ->
+                  poll.observeNow(
+                      true,
+                      CauseClearance.CONFIRMED,
+                      clock,
+                      (continuous, context) -> {
+                        assertFalse(continuous);
+                        assertEquals(Duration.ZERO, context.elapsed());
+                        return 7;
+                      })));
+    }
+  }
+
+  @Test
+  void lock403UtcFailureReleasesClockAndDoesNotCommitFailedObservation() throws Exception {
+    for (Throwable failure : List.of(new IllegalStateException(), new AssertionError())) {
+      var wall = new MonitoringObservationClockTest.FixtureClock();
+      var clock = new MonitoringObservationClock(wall, () -> 0);
+      wall.failure = Optional.of(failure);
+      assertSame(
+          failure, assertThrows(failure.getClass(), () -> clock.context(CauseClearance.CONFIRMED)));
+      wall.failure = Optional.empty();
+      var observed = anotherThread(() -> clock.context(CauseClearance.UNCONFIRMED));
+      assertEquals(Instant.parse("2026-10-23T00:00:00Z"), observed.at());
+      assertEquals(Duration.ZERO, observed.elapsed());
+      assertEquals(CauseClearance.UNCONFIRMED, observed.clearance());
+    }
+  }
+
+  @Test
+  void lock404CounterFailureReleasesWithoutClosingBorrowedRegistry() throws Exception {
+    for (Throwable failure : List.of(new IllegalStateException(), new AssertionError())) {
+      try (var registry = new FailingRegistry()) {
+        var recorder = new BatchMetricRecorder(registry, "DEBUG");
+        registry.injected.set(Optional.of(failure));
+        assertSame(
+            failure,
+            assertThrows(
+                failure.getClass(), () -> recorder.record(Step.BACKUP_DB, Status.SUCCESS, AT)));
+        registry.injected.set(Optional.empty());
+        assertTrue(
+            anotherThread(
+                () -> {
+                  recorder.record(Step.BACKUP_DB, Status.SUCCESS, AT);
+                  return Boolean.TRUE;
+                }));
+        assertEquals(
+            1.0,
+            registry
+                .get("nk_batch_runs_total")
+                .tags("step", "BACKUP_DB", "status", "SUCCESS")
+                .counter()
+                .count());
+        assertEquals(
+            1_794_873_600.0,
+            registry
+                .get("nk_batch_last_success_timestamp_seconds")
+                .tag("step", "BACKUP_DB")
+                .gauge()
+                .value());
+        assertFalse(registry.isClosed());
+      }
+    }
+  }
+
+  @Test
+  void lock405SameThreadCrossMethodReentryKeepsCompoundOrder() {
+    var poll = new MonitoringPoller<Integer>();
+    var clock =
+        new MonitoringObservationClock(new MonitoringObservationClockTest.FixtureClock(), () -> 0);
+    assertEquals(
+        11,
+        poll.observe(
+            false,
+            at(0),
+            (continuous, context) -> {
+              assertFalse(continuous);
+              assertEquals(
+                  7,
+                  poll.observeNow(
+                      true,
+                      CauseClearance.CONFIRMED,
+                      clock,
+                      (nestedContinuous, nestedContext) -> {
+                        assertTrue(nestedContinuous);
+                        assertEquals(Duration.ZERO, nestedContext.elapsed());
+                        return 7;
+                      }));
+              return 11;
+            }));
+    assertEquals(
+        13,
+        poll.observe(
+            true,
+            at(1),
+            (continuous, context) -> {
+              assertTrue(continuous);
+              return 13;
+            }));
+  }
+
+  @Test
+  void lock406OtherMethodWaitsForOwnedCallbackThenCompletes() throws Exception {
+    var poll = new MonitoringPoller<Integer>();
+    var clock =
+        new MonitoringObservationClock(new MonitoringObservationClockTest.FixtureClock(), () -> 0);
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var secondStarted = new CountDownLatch(1);
+    var secondThread = new AtomicReference<Optional<Thread>>(Optional.empty());
+    var pool = Executors.newFixedThreadPool(2, Thread.ofPlatform().daemon().factory());
+    try {
+      Future<Integer> first =
+          pool.submit(
+              () ->
+                  poll.observe(
+                      false,
+                      at(0),
+                      (continuous, context) -> {
+                        entered.countDown();
+                        try {
+                          assertTrue(release.await(WAIT_SECONDS, TimeUnit.SECONDS));
+                        } catch (InterruptedException interrupted) {
+                          Thread.currentThread().interrupt();
+                          throw new AssertionError("callback interrupted", interrupted);
+                        }
+                        return 7;
+                      }));
+      assertTrue(entered.await(WAIT_SECONDS, TimeUnit.SECONDS));
+      Future<Integer> second =
+          pool.submit(
+              () -> {
+                secondThread.set(Optional.of(Thread.currentThread()));
+                secondStarted.countDown();
+                return poll.observeNow(
+                    true, CauseClearance.CONFIRMED, clock, (continuous, context) -> 11);
+              });
+      assertTrue(secondStarted.await(WAIT_SECONDS, TimeUnit.SECONDS));
+      var waiter = secondThread.get().orElseThrow();
+      long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(WAIT_SECONDS);
+      while (!second.isDone()
+          && waiter.getState() != Thread.State.WAITING
+          && waiter.getState() != Thread.State.BLOCKED
+          && System.nanoTime() - deadline < 0) Thread.onSpinWait();
+      assertFalse(second.isDone());
+      assertTrue(
+          waiter.getState() == Thread.State.WAITING || waiter.getState() == Thread.State.BLOCKED);
+      release.countDown();
+      assertEquals(7, first.get(WAIT_SECONDS, TimeUnit.SECONDS));
+      assertEquals(11, second.get(WAIT_SECONDS, TimeUnit.SECONDS));
+    } finally {
+      release.countDown();
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(STOP_SECONDS, TimeUnit.SECONDS));
+    }
+  }
+}

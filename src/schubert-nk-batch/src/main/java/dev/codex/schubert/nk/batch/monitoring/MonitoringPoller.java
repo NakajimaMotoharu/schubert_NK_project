@@ -19,12 +19,15 @@ final class MonitoringPoller<R> {
       BiFunction<Boolean, ObservationContext, R> action) {
     Objects.requireNonNull(context, "observation context");
     Objects.requireNonNull(action, "observation action");
-    lock.lock();
+    R completed;
+    final ReentrantLock held = lock;
+    held.lock();
     try {
-      return observeLocked(consecutive, context, action);
+      completed = observeLocked(consecutive, context, action);
     } finally {
-      lock.unlock();
+      held.unlock();
     }
+    return completed;
   }
 
   R observeNow(
@@ -35,7 +38,9 @@ final class MonitoringPoller<R> {
     Objects.requireNonNull(clearance, "cause clearance");
     Objects.requireNonNull(clock, "observation clock");
     Objects.requireNonNull(action, "observation action");
-    lock.lock();
+    R completed;
+    final ReentrantLock held = lock;
+    held.lock();
     try {
       final ObservationContext context;
       try {
@@ -44,10 +49,11 @@ final class MonitoringPoller<R> {
         interrupted = true;
         throw unavailableClock;
       }
-      return observeLocked(consecutive, context, action);
+      completed = observeLocked(consecutive, context, action);
     } finally {
-      lock.unlock();
+      held.unlock();
     }
+    return completed;
   }
 
   private R observeLocked(

@@ -34,7 +34,7 @@ class MonitoringLockContractTest {
   private static final long WAIT_SECONDS = 5;
   private static final long STOP_SECONDS = 10;
 
-  private static final class FailingRegistry extends SimpleMeterRegistry {
+  private static final class FailingRegistry extends SimpleMeterRegistry implements AutoCloseable {
     private final AtomicReference<Optional<Throwable>> injected =
         new AtomicReference<>(Optional.empty());
 
