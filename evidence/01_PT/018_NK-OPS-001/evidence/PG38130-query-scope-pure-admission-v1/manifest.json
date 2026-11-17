@@ -1,0 +1,249 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T20:59:01.269699+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38130-query-scope-pure-admission-v1/normalized-prepare.json",
+    "sha256": "3320ab372d3f05945ff8af1c3f72c0164554257f7b3d2d06cff09a789a263e50"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38124-query-scope-after-prepare-v1/manifest.json",
+    "sha256": "15d669b965e5581715737ca27bfc85a52c07d668cbce4a9cd032d25e43fc0078"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38126-query-scope-after-static-v1/manifest.json",
+    "sha256": "29459a0940c3dea8c549f54146fd4b0aa46c7179c597b162abdf52de1489b895"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionScopeFrameNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "36",
+      "reason": "Exactly the one nonsecret purebyte frame namespace constructor; finally restores capturedfalse flag and asserts false. No arbitrary reflection, app/OS authority or secret/key type.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrame": {
+      "flags": 49,
+      "sourceFile": "QuestionQueryScopeFrame.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "wrap",
+          "descriptor": "(Ldev/codex/schubert/nk/api/domain/Role;[B)[B",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 82
+        },
+        {
+          "name": "capturedScope",
+          "descriptor": "([B)Ldev/codex/schubert/nk/api/domain/Role;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 83
+        },
+        {
+          "name": "wireForInspection",
+          "descriptor": "(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity;[B)[B",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 87
+        },
+        {
+          "name": "prefixed",
+          "descriptor": "([B)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "require",
+          "descriptor": "(Z)V",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 15
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 43
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity": {
+      "flags": 49,
+      "sourceFile": "ResponseSnapshotIdentity.java",
+      "fields": 7,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;Ljava/util/OptionalLong;)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 133
+        },
+        {
+          "name": "authenticated",
+          "descriptor": "(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;J)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 15
+        },
+        {
+          "name": "anonymous",
+          "descriptor": "(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "aad",
+          "descriptor": "(BLjava/lang/String;)[B",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 214
+        },
+        {
+          "name": "putLengthPrefixed",
+          "descriptor": "(Ljava/nio/ByteBuffer;[B)V",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "hashCode",
+          "descriptor": "()I",
+          "flags": 17,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "equals",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "flags": 17,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "requestMessageId",
+          "descriptor": "()Ljava/util/UUID;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "responseLayoutId",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "responseVersion",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "ownerUserId",
+          "descriptor": "()Ljava/util/OptionalLong;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 23
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/domain/Role": {
+      "flags": 16433,
+      "sourceFile": "Role.java",
+      "fields": 3,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/api/domain/Role;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/api/domain/Role;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/api/domain/Role;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 33
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain3": true,
+  "explicitMaxLowPhysical3": true,
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java": 2,
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionScopeFrameNamespaceContractTest.java": 1
+  },
+  "newDefinitions": 1,
+  "originalDefinitions": 2,
+  "allVisibilityAbi3Equal": true,
+  "sharedIdentityRole2PhysicalByteExact": true,
+  "originalWhole2TestByteExact": true,
+  "actualDbRootNativeVmKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
