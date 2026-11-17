@@ -12,7 +12,9 @@ import java.util.Objects;
  * FUN-005..007/PER-004..006; UI237; SS333 §10/11; PT-MED-006/007.
  */
 public final class MediaBodyStreamer {
-  private MediaBodyStreamer() {}
+  private MediaBodyStreamer() {
+    throw new AssertionError("static namespace");
+  }
 
   public static void copy(SeekableByteChannel source, OutputStream target, long start, long length)
       throws IOException {

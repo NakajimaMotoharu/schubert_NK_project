@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-5715",
+  "groupId": "PGPT-WBS66-BORROWED-SYNTHETIC-FILE-CODEC-20261118",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-BORROWED-SYNTHETIC-FILE-CODEC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-BORROWED-SYNTHETIC-FILE-CODEC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "4556, BUG3209: preserve whole existing 2+3 tests, qualify the two static-only private constructors. JUnit-owned fresh temporary directory and synthetic inputs only. Closed-runtime scope with no backend/permissions/held types.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4556_自己所有合成fileのcopy検証・原五全Code仕様.md",
+        "sha256": "5964d7197037e0607d8db2bb30e434aeaa677cc9b034dd80abbb8fc3e967d1bd"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "source": "79d23857c7a34079ae2b9c7cef70dee3310e3c39",
+    "productionCoreMain": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P008-03",
+      "WBS-P009-04"
+    ],
+    "testIds": [
+      "PT-MED-006/007",
+      "PT-SCN-008-W06",
+      "PT-MED-006-NAMESPACE",
+      "PT-SCN-008-W06-NAMESPACE"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.7,
+      "base": 2,
+      "high": 4
+    },
+    "groupCapPp": 5,
+    "originalCompletedPriceTotalPp": 9.538,
+    "remainingDetailBasePp": 1089.848,
+    "newAcceptance": 0
+  },
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T22:28:47.366Z",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445753
+    },
+    "secondary": null
+  },
+  "freeBytes": 2314457088,
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java"
+  ],
+  "testSources": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java"
+  ],
+  "beforeHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaBodyStreamer.java": "5d5869e2c2edeafcfcd1251a9b5ea0f7eb2ebe31e79a89544e799bd5dd9976a6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java": "472eff17a1faef0e9b66c980d57f3cab97895bdff73077373af3a1a44726f61d",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/MediaBodyStreamerTest.java": "28a2c1f1f66e23da72e4cde4c0090ea73afd5675708b2a1474075895ce82d4aa",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java": "c3d0d849079e2a16a01a6d7518ba3c670b73c2102ddf2b18a69aa9f8b50ba431"
+  },
+  "expectedOriginalTests": 5,
+  "expectedTests": 7
+}

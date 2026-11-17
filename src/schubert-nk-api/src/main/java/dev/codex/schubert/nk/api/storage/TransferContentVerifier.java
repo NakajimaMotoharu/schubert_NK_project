@@ -15,7 +15,9 @@ import java.util.Objects;
  * NK-SCN-001; RD FIL-001..009; UI237; SS333 §5..7; PG-D-059; PT-SCN-008-W06.
  */
 final class TransferContentVerifier {
-  private TransferContentVerifier() {}
+  private TransferContentVerifier() {
+    throw new AssertionError("static namespace");
+  }
 
   static void verify(ReadableByteChannel channel, LargeResultContent expected)
       throws StorageIoException, NoSuchAlgorithmException {
