@@ -1,0 +1,337 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T17:31:29.923546+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37946-search-three-current38-admission-v1/normalized-prepare.json",
+    "sha256": "9f05b2a24489c29200a67e6e7ba0c88361400ffaa1dec7035f984ac4667a91bc"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37942-search-three-current38-prepare-v1/manifest.json",
+    "sha256": "fd8add3d8450640a0762ff8faf6fb2f01d3950a79a35c3c325c3bbd67d5ca9db"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37944-search-three-current38-static-v1/manifest.json",
+    "sha256": "835e333ecc5b12865197d8e52b204b82b29df4f44c787a539efb9a3a1ab37cef"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/form/NotificationSearchForm",
+    "dev/codex/schubert/nk/web/form/QuestionSearchForm",
+    "dev/codex/schubert/nk/web/form/UserSearchForm"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/form/UserSearchForm": {
+      "flags": 49,
+      "sourceFile": "UserSearchForm.java",
+      "fields": 12,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/Map;Ljava/util/Map;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 26
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/UserSearchForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 425
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 25
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "getUsername",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 21
+        },
+        {
+          "name": "getRole",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 21
+        },
+        {
+          "name": "getState",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 21
+        },
+        {
+          "name": "getPage",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 106
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 15
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/QuestionSearchForm": {
+      "flags": 49,
+      "sourceFile": "QuestionSearchForm.java",
+      "fields": 16,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/Map;Ljava/util/Map;ZILjava/util/Optional;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 44
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/util/Map;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;)Ldev/codex/schubert/nk/web/form/QuestionSearchForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 595
+        },
+        {
+          "name": "date",
+          "descriptor": "(Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;)Ljava/util/Optional;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 159
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 27
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "isAdmin",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPage",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 157
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 19
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/NotificationSearchForm": {
+      "flags": 49,
+      "sourceFile": "NotificationSearchForm.java",
+      "fields": 11,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/util/Map;Ljava/util/Map;ILjava/util/Optional;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 38
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/NotificationSearchForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 443
+        },
+        {
+          "name": "date",
+          "descriptor": "(Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;)Ljava/util/Optional;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 158
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 27
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "getValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPage",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 81
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 15
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain3": true,
+  "explicitMaxLowMain3": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "tools/quality/architecture/QuestionSearchInputContractTest.java": 14,
+    "tools/quality/architecture/NotificationSearchInputContractTest.java": 12,
+    "tools/quality/architecture/UserSearchInputContractTest.java": 12
+  },
+  "newDefinitions": 0,
+  "originalDefinitions": 38,
+  "allBusinessBodyTokensInverseEqual": true,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
