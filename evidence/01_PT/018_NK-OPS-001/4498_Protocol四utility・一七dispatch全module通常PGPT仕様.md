@@ -7,3 +7,7 @@ BUG3111/YKT2583の既存未完とYKT2647、SS323/324/333/354。現165Main/175phy
 Expectedはproductionから生成しない。原152 source/独立golden/389offset/64layout/69named types・全public null/negative/concurrency/factory契約は保持し、新namespace4は唯一の対象privatector/固定AssertionError/アクセスfinally復元を検証する。原152＋新4=156を、変更した全Protocol sourceの必要な一回whole-moduleで実行する。oldexec合成/標準filter除外/到達不能扱いなし、自然NoCodeのみ0/0を保存。全Main actualCode・全条件/例外・CRC/init/XML/独立post/staticが満たされるまで完了しない。追加の具体的不足があれば原結果を保持して修正前起票し、当群cap/終了条件と再見積を守る。
 
 Source差はProtocolの7Main候補（FieldCodec, LargeResultRecordCodec, MediaDescriptorValidator, PayloadSemanticValidator, PayloadCodec, LayoutFieldCatalog, ContentDisposition）を対象に、変更前の17dispatchを先に全件一覧化してoracle/bodyを固定する。ScopeはJDK-only codec/value domain、ActualJMS/DB/Root/FS/VM/認証/鍵/permit/四held classfileへの経路を増やさない。原POMJava25/NullAway、全modulePMD/CS/format/SB、全public/privateABI・物理/debug/生成classの増減を対応させ、全scopeを同source/runへ固定する。意味不明の数値補完/期待緩和なし。Formal1964/53・17/190・工数nullとIT/ST未実施を維持。
+
+## 着手前訂正（2026-11-17、未実装案のみ）
+
+原予定のguard/privatector白箱四件はYKT2583のprivate反射・無意味instance禁止に抵触するため採用しない。元案はGit db668dd02bに保存。SSC451として四utilityをstatic-only interfaceへ整理し、private literal/immutable cacheは非公開のpackage-private companion interfaceへ移す。private補助methodは維持し、public静的signatureは維持、型kind/呼出constant-pool差は明示して全callerをfreshcompileする。新四件は公開namespace型・public静的API集合・非instance契約だけを確認しprivateアクセス0。原152と併せ必要な変更後156を一回、全actualCode/原静的規則/ABI差・64layout389field独立oracleを確認。既定見積.5/1.8/4.5cap5は変更なし、費用F03一回、実装/PT未着手。

@@ -1,0 +1,350 @@
+diff --git a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java
+index e4badef5e9..c8d9cfd110 100644
+--- a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java
++++ b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java
+@@ -205,28 +205,35 @@ public final class PayloadCodec {
+       }
+       return FieldCodec.encodeText(null, field.length(), false);
+     }
+-    return switch (field.wireType()) {
+-      case TEXT -> {
++    {
++final WireType dispatchValue0 = java.util.Objects.requireNonNull(field.wireType());
++if (dispatchValue0 == WireType.TEXT) {
++
+         if (!(value instanceof FieldValue.Text text)) {
+           throw new MessageEncodingException("text payload field has the wrong Java type");
+         }
+-        yield FieldCodec.encodeText(
++        return FieldCodec.encodeText(
+             text.value(), field.length(), field.presence() == Presence.MANDATORY);
+-      }
+-      case NUMERIC -> {
++      
++}
++else if (dispatchValue0 == WireType.NUMERIC) {
++
+         if (!(value instanceof FieldValue.Numeric numeric)) {
+           throw new MessageEncodingException("numeric payload field has the wrong Java type");
+         }
+-        yield FieldCodec.encodeNumeric(
++        return FieldCodec.encodeNumeric(
+             numeric.value(), field.length(), 0, maximumForDigits(field.length()));
+-      }
+-      case BOOLEAN -> {
++      
++}
++else {
++
+         if (!(value instanceof FieldValue.Flag flag)) {
+           throw new MessageEncodingException("boolean payload field has the wrong Java type");
+         }
+-        yield FieldCodec.encodeBoolean(flag.value(), false);
+-      }
+-    };
++        return FieldCodec.encodeBoolean(flag.value(), false);
++      
++}
++}
+   }
+ 
+   private static FieldValue decodeField(
+@@ -235,37 +242,54 @@ public final class PayloadCodec {
+       validateErrorFiller(field, encoded);
+       return FieldValue.Unset.INSTANCE;
+     }
+-    return switch (field.wireType()) {
+-      case TEXT ->
+-          FieldCodec.decodeText(encoded, field.presence() == Presence.MANDATORY)
++    {
++final WireType dispatchValue1 = java.util.Objects.requireNonNull(field.wireType());
++if (dispatchValue1 == WireType.TEXT) {
++return FieldCodec.decodeText(encoded, field.presence() == Presence.MANDATORY)
+               .<FieldValue>map(FieldValue.Text::new)
+               .orElse(FieldValue.Unset.INSTANCE);
+-      case NUMERIC ->
+-          new FieldValue.Numeric(
++}
++else if (dispatchValue1 == WireType.NUMERIC) {
++return new FieldValue.Numeric(
+               FieldCodec.decodeNumeric(encoded, 0, maximumForDigits(field.length())));
+-      case BOOLEAN -> new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
+-    };
++}
++else {
++return new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
++}
++}
+   }
+ 
+   private static byte[] errorFiller(FieldDefinition<?> field) {
+-    return switch (field.wireType()) {
+-      case TEXT -> FieldCodec.encodeText(null, field.length(), false);
+-      case NUMERIC ->
+-          FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
+-      case BOOLEAN -> FieldCodec.encodeBoolean(null, true);
+-    };
++    {
++final WireType dispatchValue2 = java.util.Objects.requireNonNull(field.wireType());
++if (dispatchValue2 == WireType.TEXT) {
++return FieldCodec.encodeText(null, field.length(), false);
++}
++else if (dispatchValue2 == WireType.NUMERIC) {
++return FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
++}
++else {
++return FieldCodec.encodeBoolean(null, true);
++}
++}
+   }
+ 
+   private static void validateErrorFiller(FieldDefinition<?> field, byte[] encoded) {
+-    boolean valid =
+-        switch (field.wireType()) {
+-          case TEXT -> FieldCodec.decodeText(encoded, false).isEmpty();
+-          case NUMERIC ->
+-              FieldCodec.decodeNumericOrErrorFiller(
++    boolean valid;
++{
++final WireType dispatchValue3 = java.util.Objects.requireNonNull(field.wireType());
++if (dispatchValue3 == WireType.TEXT) {
++valid = FieldCodec.decodeText(encoded, false).isEmpty();
++}
++else if (dispatchValue3 == WireType.NUMERIC) {
++valid = FieldCodec.decodeNumericOrErrorFiller(
+                       encoded, 0, maximumForDigits(field.length()), true)
+                   .isEmpty();
+-          case BOOLEAN -> FieldCodec.decodeBoolean(encoded, true).isEmpty();
+-        };
++}
++else {
++valid = FieldCodec.decodeBoolean(encoded, true).isEmpty();
++}
++}
+     if (!valid) {
+       throw new PermanentProtocolException("payload field does not use its error filler");
+     }
+diff --git a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java
+index 9dc5c609f4..f7d87ff31e 100644
+--- a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java
++++ b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java
+@@ -42,12 +42,19 @@ public final class MediaDescriptorValidator {
+         || hasDotSegment(path)) {
+       throw new IllegalArgumentException("storage path is not a canonical relative path");
+     }
+-    String requiredPrefix =
+-        switch (mediaType) {
+-          case AUDIO -> "scenario/";
+-          case VIDEO -> "video/";
+-          case MUSIC -> "music/";
+-        };
++    String requiredPrefix;
++{
++final MediaType dispatchValue0 = java.util.Objects.requireNonNull(mediaType);
++if (dispatchValue0 == MediaType.AUDIO) {
++requiredPrefix = "scenario/";
++}
++else if (dispatchValue0 == MediaType.VIDEO) {
++requiredPrefix = "video/";
++}
++else {
++requiredPrefix = "music/";
++}
++}
+     if (!path.startsWith(requiredPrefix)) {
+       throw new IllegalArgumentException("storage path does not match its media type");
+     }
+@@ -70,12 +77,19 @@ public final class MediaDescriptorValidator {
+     if (!extension.equals(extension(descriptor.storageRelativePath()))) {
+       throw new IllegalArgumentException("media storage and display extensions differ");
+     }
+-    String expectedMime =
+-        switch (descriptor.mediaType()) {
+-          case AUDIO -> extension.equals(".ogg") ? "audio/ogg" : null;
+-          case VIDEO -> extension.equals(".mp4") ? "video/mp4" : null;
+-          case MUSIC -> MUSIC_MIME.get(extension);
+-        };
++    String expectedMime;
++{
++final MediaType dispatchValue1 = java.util.Objects.requireNonNull(descriptor.mediaType());
++if (dispatchValue1 == MediaType.AUDIO) {
++expectedMime = extension.equals(".ogg") ? "audio/ogg" : null;
++}
++else if (dispatchValue1 == MediaType.VIDEO) {
++expectedMime = extension.equals(".mp4") ? "video/mp4" : null;
++}
++else {
++expectedMime = MUSIC_MIME.get(extension);
++}
++}
+     if (expectedMime == null || !expectedMime.equals(descriptor.mimeType())) {
+       throw new IllegalArgumentException("media extension and MIME type are not allowlisted");
+     }
+diff --git a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java
+index ae9f978124..bff6e416d8 100644
+--- a/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java
++++ b/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java
+@@ -525,38 +525,72 @@ public final class LayoutFieldCatalog {
+   }
+ 
+   private static FieldArea parseArea(String value) {
+-    return switch (value) {
+-      case "DATA" -> FieldArea.DATA;
+-      case "RECORD" -> FieldArea.RECORD;
+-      default -> throw new LayoutValidationException("unknown field area");
+-    };
++    {
++final String dispatchValue0 = java.util.Objects.requireNonNull(value);
++if ("DATA".equals(dispatchValue0)) {
++return FieldArea.DATA;
++}
++else if ("RECORD".equals(dispatchValue0)) {
++return FieldArea.RECORD;
++}
++else {
++throw new LayoutValidationException("unknown field area");
++}
++}
+   }
+ 
+   private static WireType parseWireType(String value) {
+-    return switch (value) {
+-      case "X" -> WireType.TEXT;
+-      case "N" -> WireType.NUMERIC;
+-      case "B" -> WireType.BOOLEAN;
+-      default -> throw new LayoutValidationException("unknown wire type");
+-    };
++    {
++final String dispatchValue1 = java.util.Objects.requireNonNull(value);
++if ("X".equals(dispatchValue1)) {
++return WireType.TEXT;
++}
++else if ("N".equals(dispatchValue1)) {
++return WireType.NUMERIC;
++}
++else if ("B".equals(dispatchValue1)) {
++return WireType.BOOLEAN;
++}
++else {
++throw new LayoutValidationException("unknown wire type");
++}
++}
+   }
+ 
+   private static Presence parsePresence(String value) {
+-    return switch (value) {
+-      case "M" -> Presence.MANDATORY;
+-      case "C" -> Presence.CONDITIONAL;
+-      case "O" -> Presence.OPTIONAL;
+-      case "F" -> Presence.FIXED;
+-      default -> throw new LayoutValidationException("unknown presence");
+-    };
++    {
++final String dispatchValue2 = java.util.Objects.requireNonNull(value);
++if ("M".equals(dispatchValue2)) {
++return Presence.MANDATORY;
++}
++else if ("C".equals(dispatchValue2)) {
++return Presence.CONDITIONAL;
++}
++else if ("O".equals(dispatchValue2)) {
++return Presence.OPTIONAL;
++}
++else if ("F".equals(dispatchValue2)) {
++return Presence.FIXED;
++}
++else {
++throw new LayoutValidationException("unknown presence");
++}
++}
+   }
+ 
+   private static Padding paddingFor(WireType type) {
+-    return switch (type) {
+-      case TEXT -> Padding.SPACE_RIGHT;
+-      case NUMERIC -> Padding.ZERO_LEFT;
+-      case BOOLEAN -> Padding.NONE;
+-    };
++    {
++final WireType dispatchValue3 = java.util.Objects.requireNonNull(type);
++if (dispatchValue3 == WireType.TEXT) {
++return Padding.SPACE_RIGHT;
++}
++else if (dispatchValue3 == WireType.NUMERIC) {
++return Padding.ZERO_LEFT;
++}
++else {
++return Padding.NONE;
++}
++}
+   }
+ 
+   private static void validateFixedField(LayoutId layoutId, String name, Presence presence) {
+@@ -566,28 +600,51 @@ public final class LayoutFieldCatalog {
+   }
+ 
+   private static Class<?> javaTypeFor(WireType type) {
+-    return switch (type) {
+-      case TEXT -> String.class;
+-      case NUMERIC -> Long.class;
+-      case BOOLEAN -> Boolean.class;
+-    };
++    {
++final WireType dispatchValue4 = java.util.Objects.requireNonNull(type);
++if (dispatchValue4 == WireType.TEXT) {
++return String.class;
++}
++else if (dispatchValue4 == WireType.NUMERIC) {
++return Long.class;
++}
++else {
++return Boolean.class;
++}
++}
+   }
+ 
+   private static String wireCode(WireType type) {
+-    return switch (type) {
+-      case TEXT -> "X";
+-      case NUMERIC -> "N";
+-      case BOOLEAN -> "B";
+-    };
++    {
++final WireType dispatchValue5 = java.util.Objects.requireNonNull(type);
++if (dispatchValue5 == WireType.TEXT) {
++return "X";
++}
++else if (dispatchValue5 == WireType.NUMERIC) {
++return "N";
++}
++else {
++return "B";
++}
++}
+   }
+ 
+   private static String presenceCode(Presence presence) {
+-    return switch (presence) {
+-      case MANDATORY -> "M";
+-      case CONDITIONAL -> "C";
+-      case OPTIONAL -> "O";
+-      case FIXED -> "F";
+-    };
++    {
++final Presence dispatchValue6 = java.util.Objects.requireNonNull(presence);
++if (dispatchValue6 == Presence.MANDATORY) {
++return "M";
++}
++else if (dispatchValue6 == Presence.CONDITIONAL) {
++return "C";
++}
++else if (dispatchValue6 == Presence.OPTIONAL) {
++return "O";
++}
++else {
++return "F";
++}
++}
+   }
+ 
+   private static int parsePositiveInt(String value, String label) {

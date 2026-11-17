@@ -283,9 +283,9 @@ def prestyle(c, config):
     rules.write_text('<ruleset name="Preliminary only" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"><description>Full Root rules remain mandatory.</description><rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals"/><rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingMethodName"/></ruleset>\n')
     libs = [sg / 'record-fix-v1/pmd-record-1298.jar', *sorted((sg / 'pmd-bin-7.28.0/lib').glob('*.jar'))]
     stages = {'style-pmd': steps.step('style-pmd', [str(JAVA), '-cp', ':'.join(map(str, libs)), 'net.sourceforge.pmd.cli.PmdCli', 'check', '--file-list', str(listing), '--rulesets', str(rules), '--use-version', 'java-25', '--no-cache', '--format', 'xml', '--report-file', str(out / 'pmd.xml')], R)}
-    for i, p in enumerate(paths):
-        label = f'format-{i:03d}'
-        stages[label] = steps.step(label, [str(JAVA), '-jar', str(TC / 'google-java-format-1.36.1-all-deps.jar'), '--skip-reflowing-long-strings', '--dry-run', '--set-exit-if-changed', str(R / p)], R)
+    # One invocation checks exactly the same finite path list and original formatter flags.
+    # Each file is still checked; this avoids one JVM startup per source (204 for SSC451).
+    stages['format-batch'] = steps.step('format-batch', [str(JAVA), '-jar', str(TC / 'google-java-format-1.36.1-all-deps.jar'), '--skip-reflowing-long-strings', '--dry-run', '--set-exit-if-changed', *[str(R / p) for p in paths]], R)
     stages['checkstyle'] = steps.step('checkstyle', [str(JAVA), '-jar', str(sg / 'checkstyle-14.3.0-all.jar'), '-c', str(R / 'tools/quality/static/checkstyle.xml'), '-f', 'xml', '-o', str(out / 'checkstyle.xml'), '@' + str(listing)], R)
     issues = [x for x in ET.parse(out / 'pmd.xml').iter() if x.tag.rpartition('}')[2] in ['violation', 'error', 'configerror']]
     okay = not issues and not ET.parse(out / 'checkstyle.xml').findall('.//error') and all(x['actualExit'] == 0 and not x['timedOut'] for x in stages.values())

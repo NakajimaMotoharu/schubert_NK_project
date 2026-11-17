@@ -19,8 +19,12 @@ def syntax(c):
  v=c.get('reviewedProtocolPublicOracle')
  if v is None:return
  p.require(isinstance(v,dict) and set(v)=={'closureProof'} and v['closureProof'] in c['closureProofs'],'explicit independent public-oracle closure')
- p.require(len(c['mainSources'])==165,'reviewed complete Protocol Main closure only')
- module=(len(c['testSources']),c['expectedTests']) in [(31,140),(32,144),(33,145),(35,152)]
+ namespace=c.get('reviewedProtocolNamespace451')
+ if namespace is not None:
+  p.require(set(namespace)=={'proof'} and namespace['proof'] in c['closureProofs'],'SSC451 explicit bounded source proof')
+  p.require(len(c['mainSources']) in (168,169) and (len(c['testSources']),c['expectedTests'])==(36,156),'SSC451/452 exact168-or169/36/156 closure')
+ else:p.require(len(c['mainSources'])==165,'reviewed complete Protocol Main closure only')
+ module=(len(c['testSources']),c['expectedTests']) in [(31,140),(32,144),(33,145),(35,152)] or namespace is not None
  record=len(c['testSources'])==2 and c['expectedTests']==6 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java'}
  legacy=len(c['testSources'])==3 and c['expectedTests']==19 and {x['path'] for x in c['testSources']}=={HELPER,PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java',PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/layout/WebLogActionContractTest.java'}
  p.require(module or record or legacy,'reviewed complete140 or exact record caller whole6/19 only')
@@ -53,6 +57,25 @@ def checked(c):
  p.require(len(proof['resourcePins'])==5,'five independent literal fixtures')
  for pin in proof['resourcePins']:
   p.require(pin['path'] in [x['path'] for x in c['resources']] and p.digest(p.R/pin['path'])==pin['sha256'],'same fixed independent resource')
+ namespace=c.get('reviewedProtocolNamespace451')
+ if namespace is not None:
+  pin=namespace['proof'];value=json.loads((p.R/pin['path']).read_text())
+  p.require(p.digest(p.R/pin['path'])==pin['sha256'] and value['actualExit']==0,'SSC451 source proof identity')
+  companions={PREFIX+'src/main/java/dev/codex/schubert/nk/protocol/'+name for name in ['codec/FieldCodecRules.java','file/MediaDescriptorValidatorRules.java','layout/PayloadSemanticValidatorRules.java']}
+  if len(c['mainSources'])==169:companions.add(PREFIX+'src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDigest.java')
+  test=PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/ProtocolNamespaceContractTest.java'
+  p.require(set(value['companionHashes'])==companions and companions<=set(c['mainSources']),'only three grammar companions')
+  p.require(value['namespaceTest']['path']==test and sum(t['path']==test and t['tests']==4 for t in c['testSources'])==1,'exact whole public namespace fixture')
+  for name,h in value['companionHashes'].items():p.require(p.digest(p.R/name)==h,'immutable grammar source pin')
+  p.require(p.digest(p.R/test)==value['namespaceTest']['sha256'],'public namespace source pin')
+  p.require(value['privateReflection'] is False and value['heldClassActions']==0,'no private or HOLD expansion')
+  if len(c['mainSources'])==169:
+   relocation=value['digestRelocation'];fixture=PREFIX+'src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java'
+   import hashlib
+   text=(p.R/fixture).read_text()
+   p.require(value['original152OraclesUnchanged'] and relocation['path']==fixture and p.digest(p.R/fixture)==relocation['sha256'],'SSC452 exact fixture pin')
+   p.require(text.count('LargeResultDigest.digestFor')==1 and hashlib.sha256(text.replace('IllegalStateException.class, () -> LargeResultDigest.digestFor("not-an-algorithm")','IllegalStateException.class,\n            () -> LargeResultRecordCodec.digestFor("not-an-algorithm")').encode()).hexdigest()==relocation['originalSha256'],'only one target type rebind; all original input/assertions retained')
+  else:p.require(value['original152Unchanged'],'original152 source unchanged')
 
 def reviewed_text(c,path,text):
  if c.get('reviewedProtocolPublicOracle') is None or path!=HELPER:return text

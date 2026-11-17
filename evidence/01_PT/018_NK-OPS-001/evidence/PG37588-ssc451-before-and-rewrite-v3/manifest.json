@@ -1,0 +1,754 @@
+{
+  "actualExit": 0,
+  "operation": "SOURCE_REWRITE_NOT_TEST_PASS",
+  "sourceBefore": "db668dd02b08de82bb6e8d0b31671adcdbe4ed86",
+  "switches": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "start": 8925,
+      "end": 9849,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(field.wireType())",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        if (!(value instanceof FieldValue.Text text)) {\n          throw new MessageEncodingException(\"text payload field has the wrong Java type\");\n        }\n        yield FieldCodec.encodeText(\n            text.value(), field.length(), field.presence() == Presence.MANDATORY);\n      }"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        if (!(value instanceof FieldValue.Numeric numeric)) {\n          throw new MessageEncodingException(\"numeric payload field has the wrong Java type\");\n        }\n        yield FieldCodec.encodeNumeric(\n            numeric.value(), field.length(), 0, maximumForDigits(field.length()));\n      }"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        if (!(value instanceof FieldValue.Flag flag)) {\n          throw new MessageEncodingException(\"boolean payload field has the wrong Java type\");\n        }\n        yield FieldCodec.encodeBoolean(flag.value(), false);\n      }"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "start": 10085,
+      "end": 10571,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(field.wireType())",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.decodeText(encoded, field.presence() == Presence.MANDATORY)\n              .<FieldValue>map(FieldValue.Text::new)\n              .orElse(FieldValue.Unset.INSTANCE)"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "NEW_CLASS",
+          "body": "new FieldValue.Numeric(\n              FieldCodec.decodeNumeric(encoded, 0, maximumForDigits(field.length())))"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "NEW_CLASS",
+          "body": "new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow())"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "start": 10645,
+      "end": 10931,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(field.wireType())",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.encodeText(null, field.length(), false)"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()))"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.encodeBoolean(null, true)"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "start": 11027,
+      "end": 11421,
+      "parent": "VARIABLE",
+      "variable": "boolean valid",
+      "selector": "(field.wireType())",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.decodeText(encoded, false).isEmpty()"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.decodeNumericOrErrorFiller(\n                      encoded, 0, maximumForDigits(field.length()), true)\n                  .isEmpty()"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "FieldCodec.decodeBoolean(encoded, true).isEmpty()"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "start": 1758,
+      "end": 1926,
+      "parent": "VARIABLE",
+      "variable": "String requiredPrefix",
+      "selector": "(mediaType)",
+      "cases": [
+        {
+          "labels": [
+            "AUDIO"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"scenario/\""
+        },
+        {
+          "labels": [
+            "VIDEO"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"video/\""
+        },
+        {
+          "labels": [
+            "MUSIC"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"music/\""
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+      "start": 2853,
+      "end": 3120,
+      "parent": "VARIABLE",
+      "variable": "String expectedMime",
+      "selector": "(descriptor.mediaType())",
+      "cases": [
+        {
+          "labels": [
+            "AUDIO"
+          ],
+          "kind": "CONDITIONAL_EXPRESSION",
+          "body": "extension.equals(\".ogg\") ? \"audio/ogg\" : null"
+        },
+        {
+          "labels": [
+            "VIDEO"
+          ],
+          "kind": "CONDITIONAL_EXPRESSION",
+          "body": "extension.equals(\".mp4\") ? \"video/mp4\" : null"
+        },
+        {
+          "labels": [
+            "MUSIC"
+          ],
+          "kind": "METHOD_INVOCATION",
+          "body": "MUSIC_MIME.get(extension)"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+      "start": 474,
+      "end": 644,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(value)",
+      "cases": [
+        {
+          "labels": [
+            "\"I\""
+          ],
+          "kind": "IDENTIFIER",
+          "body": "INLINE"
+        },
+        {
+          "labels": [
+            "\"A\""
+          ],
+          "kind": "IDENTIFIER",
+          "body": "ATTACHMENT"
+        },
+        {
+          "labels": [],
+          "kind": "THROW",
+          "body": "throw new IllegalArgumentException(\"unknown content disposition\");"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 29230,
+      "end": 29414,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(value)",
+      "cases": [
+        {
+          "labels": [
+            "\"DATA\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "FieldArea.DATA"
+        },
+        {
+          "labels": [
+            "\"RECORD\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "FieldArea.RECORD"
+        },
+        {
+          "labels": [],
+          "kind": "THROW",
+          "body": "throw new LayoutValidationException(\"unknown field area\");"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 29480,
+      "end": 29690,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(value)",
+      "cases": [
+        {
+          "labels": [
+            "\"X\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "WireType.TEXT"
+        },
+        {
+          "labels": [
+            "\"N\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "WireType.NUMERIC"
+        },
+        {
+          "labels": [
+            "\"B\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "WireType.BOOLEAN"
+        },
+        {
+          "labels": [],
+          "kind": "THROW",
+          "body": "throw new LayoutValidationException(\"unknown wire type\");"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 29756,
+      "end": 30009,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(value)",
+      "cases": [
+        {
+          "labels": [
+            "\"M\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Presence.MANDATORY"
+        },
+        {
+          "labels": [
+            "\"C\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Presence.CONDITIONAL"
+        },
+        {
+          "labels": [
+            "\"O\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Presence.OPTIONAL"
+        },
+        {
+          "labels": [
+            "\"F\""
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Presence.FIXED"
+        },
+        {
+          "labels": [],
+          "kind": "THROW",
+          "body": "throw new LayoutValidationException(\"unknown presence\");"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 30072,
+      "end": 30218,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(type)",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Padding.SPACE_RIGHT"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Padding.ZERO_LEFT"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Padding.NONE"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 30528,
+      "end": 30661,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(type)",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "String.class"
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Long.class"
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "MEMBER_SELECT",
+          "body": "Boolean.class"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 30721,
+      "end": 30828,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(type)",
+      "cases": [
+        {
+          "labels": [
+            "TEXT"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"X\""
+        },
+        {
+          "labels": [
+            "NUMERIC"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"N\""
+        },
+        {
+          "labels": [
+            "BOOLEAN"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"B\""
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+      "start": 30896,
+      "end": 31042,
+      "parent": "RETURN",
+      "variable": "",
+      "selector": "(presence)",
+      "cases": [
+        {
+          "labels": [
+            "MANDATORY"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"M\""
+        },
+        {
+          "labels": [
+            "CONDITIONAL"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"C\""
+        },
+        {
+          "labels": [
+            "OPTIONAL"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"O\""
+        },
+        {
+          "labels": [
+            "FIXED"
+          ],
+          "kind": "STRING_LITERAL",
+          "body": "\"F\""
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "start": 2731,
+      "end": 4858,
+      "parent": "BLOCK",
+      "variable": "",
+      "selector": "(layoutId)",
+      "cases": [
+        {
+          "labels": [
+            "\"LGNREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateLoginRequest(data);"
+        },
+        {
+          "labels": [
+            "\"LGNRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateLoginSuccess(data);"
+        },
+        {
+          "labels": [
+            "\"GAMRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateAscending(records, \"Display order\", false);"
+        },
+        {
+          "labels": [
+            "\"SPKRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "records.forEach(record -> requirePositive(record, \"出現件数\"));"
+        },
+        {
+          "labels": [
+            "\"SRCREQ01\"",
+            "\"USRREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "requirePositive(data, \"Page\");"
+        },
+        {
+          "labels": [
+            "\"SRCRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateScenarioSearchRecords(records);"
+        },
+        {
+          "labels": [
+            "\"RTERSP01\""
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        records.forEach(record -> requirePositive(record, \"File件数\"));\n        validateAscending(records, \"Prefix\", true);\n      }"
+        },
+        {
+          "labels": [
+            "\"SCNRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateScenarioDetail(data, records);"
+        },
+        {
+          "labels": [
+            "\"AUDRSP01\"",
+            "\"MEDRSP01\"",
+            "\"VIDRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateMediaDescriptor(data);"
+        },
+        {
+          "labels": [
+            "\"ANMRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateAnimationMenu(data);"
+        },
+        {
+          "labels": [
+            "\"ANLRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateAnimationRecords(records);"
+        },
+        {
+          "labels": [
+            "\"MTRRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateMusicRecords(records);"
+        },
+        {
+          "labels": [
+            "\"LGSREQ01\""
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        requirePositive(data, \"Page\");\n        validateDateRange(data, \"From日時\", \"To日時\", 31);\n      }"
+        },
+        {
+          "labels": [
+            "\"UCRREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateUserCreation(data);"
+        },
+        {
+          "labels": [
+            "\"UDTRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "requireRange(\n              numeric(data, \"Active session数\"), 0, 2, \"active session count is outside 0..2\");"
+        },
+        {
+          "labels": [
+            "\"UPWREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validatePassword(text(data, \"New Password\"), Optional.empty());"
+        },
+        {
+          "labels": [
+            "\"NTSREQ01\"",
+            "\"QSSREQ01\""
+          ],
+          "kind": "BLOCK",
+          "body": "{\n        requirePositive(data, \"Page\");\n        validateDateRange(data, \"受付日時From\", \"受付日時To\", 366);\n      }"
+        },
+        {
+          "labels": [
+            "\"NTDRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateNotificationDetail(data);"
+        },
+        {
+          "labels": [
+            "\"NTCRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateCancellationSuccess(data);"
+        },
+        {
+          "labels": [
+            "\"QSSRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "records.forEach(PayloadSemanticValidator::validateQuestionSummary);"
+        },
+        {
+          "labels": [
+            "\"QSDRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateQuestionDetail(data);"
+        },
+        {
+          "labels": [
+            "\"QSBREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateQuestionSubmission(data);"
+        },
+        {
+          "labels": [
+            "\"QSBRSP01\"",
+            "\"QWKREQ01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateReceipt(text(data, LITERAL_ID));"
+        },
+        {
+          "labels": [
+            "\"NTSRSP01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));"
+        },
+        {
+          "labels": [
+            "\"WLGEVT01\""
+          ],
+          "kind": "EXPRESSION_STATEMENT",
+          "body": "validateWebLog(data);"
+        },
+        {
+          "labels": [],
+          "kind": "BLOCK",
+          "body": "{\n        // All remaining layouts have only invariants already established by their named types.\n      }"
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "start": 14316,
+      "end": 14508,
+      "parent": "VARIABLE",
+      "variable": "String expectedType",
+      "selector": "(state)",
+      "cases": [
+        {
+          "labels": [
+            "LITERAL_COMPLETED"
+          ],
+          "kind": "IDENTIFIER",
+          "body": "LITERAL_COMPLETED"
+        },
+        {
+          "labels": [
+            "LITERAL_ERROR"
+          ],
+          "kind": "IDENTIFIER",
+          "body": "LITERAL_ERROR"
+        },
+        {
+          "labels": [],
+          "kind": "STRING_LITERAL",
+          "body": "\"ACCEPTED\""
+        }
+      ]
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+      "start": 15074,
+      "end": 15460,
+      "parent": "VARIABLE",
+      "variable": "int expectedTimestampMask",
+      "selector": "(state)",
+      "cases": [
+        {
+          "labels": [
+            "\"RECEIVED\""
+          ],
+          "kind": "INT_LITERAL",
+          "body": "0"
+        },
+        {
+          "labels": [
+            "\"PROCESSING\""
+          ],
+          "kind": "INT_LITERAL",
+          "body": "8"
+        },
+        {
+          "labels": [
+            "LITERAL_COMPLETED"
+          ],
+          "kind": "INT_LITERAL",
+          "body": "12"
+        },
+        {
+          "labels": [
+            "LITERAL_ERROR"
+          ],
+          "kind": "INT_LITERAL",
+          "body": "10"
+        },
+        {
+          "labels": [
+            "\"CANCELLED\""
+          ],
+          "kind": "INT_LITERAL",
+          "body": "1"
+        },
+        {
+          "labels": [],
+          "kind": "THROW",
+          "body": "throw new LayoutValidationException(\n                  \"layout semantic violation: unknown notification state\");"
+        }
+      ]
+    }
+  ],
+  "originalSources": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java": "687e584880dc5feec5e8a44e5a71834cc4a60ca7e80655ad402a283712ecbff0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": "3146b6c3d044f3191fcfa4e8687afbb0d57ee7645ff233ec4a0f02bdeb5421a2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": "fd024359248f91a8914f150c0c08a693471d9fbc1598f1814128cbc018d88853",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": "017a222b4b91b48c450336f21ea5efd46ac444dbbee7274c56f5c7559d63893f",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java": "d48090054661c31083cfc359d177c49d59b37db0c00acb367c305d783ab0c500",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java": "5860289eecdf5fc5619f2f7a6f83974cc9a581073ecc067ada0e01d9919150cd",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513"
+  },
+  "companionSources": [
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodecRules.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorRules.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules.java"
+  ],
+  "privateReflection": false,
+  "meaningfulInstanceCreated": false,
+  "original152ExpectedChanged": false,
+  "testsExecuted": 0,
+  "newAcceptance": 0
+}
