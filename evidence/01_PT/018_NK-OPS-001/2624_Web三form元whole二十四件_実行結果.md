@@ -11,3 +11,5 @@ NFC期待é/明示Optional/enum/既定page1-size100、JST入力と固定UTC対/3
 日時/OS/JDK25.0.4/JUnit/JaCoCo0.8.15/実command/終了code/原source・入力/期待actual・各XML/exec/counter hashは元public manifestとown host slot pg14270/pg14272。実HTTP/DOM/CSRF認証・token発行消費/session/DB/broker/VM/Root/cohort/鍵/permit/native/配備・停止操作0、UI画面受入や依存先全域のcoverageへ拡張しない。元graph9等HOLD/BUG2092-93-YKT1840動的OPEN/原本保全・二held工具metadata前除外を維持。
 
 現source技術測定は4exec39method7suite、完全Source測定7のうち四100六Source十physical・未達Inbound一Source一physical（L10/M2miss）。元3exec15/4suite WBS registry14260は正しい先行履歴で、新24は当postの別参照、WBS側へ未結合。旧0061の25exec400method59suite/四100は歴史別で現sourceへ合算0。正式1964-53/個別17-190/工数null/QA051final/全F03-451を更新しない。次は残既存Web form群の全body/独立期待/副作用/必要依存から別groupを選び、通常PG/PTを続ける。
+
+2026-11-18追補（BUG3192/YKT2659、PG37834/37836）：原24成功と標準四counter100は保持するが、二検索form六byte（current251と全SHA一致）の標準method36に対し実Codeは52（親32/enum20）。原記載を実Code全100へ拡張しない。元Fixtureからの差は既に実施されたfinite pool cleanup二箇所だけで、逆変換が旧Source6b53へ完全一致。旧execをその変更後Fixtureのcurrent資格にしない。別publicenum8の成功を旧execへ合成せず、未実施のcoherent current16form＋wholeenum8=24を次群で資格化する。QuestionSubmit原8は無関係な成功確認として再演しない。

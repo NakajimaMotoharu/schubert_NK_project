@@ -1,0 +1,1751 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T15:25:02.084853+00:00",
+  "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+  "oldWhole24": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14272-web-three-forms-whole-twenty-four-post-v1/manifest.json",
+    "sha256": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b"
+  },
+  "currentPublicEnum8": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37702-web-enum-eight-independent-v1/manifest.json",
+    "sha256": "5c9d58149e00968c7cfdc9c2a01662be7940a8663b728db698e841f6a5f21440"
+  },
+  "currentByteUnion251": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37782-pure-protocol-web-maxlow-prepare-v1/manifest.json",
+    "sha256": "e84a874a12cd3e6fed643dc4ac60e46f835ffbf4cc65ae99f1636815557a5dc7"
+  },
+  "sourceInputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java",
+      "sha256": "ce70478c3c11c49ae841e849a6e9d81064cbda1f590c956d3cfe48f751c2ac78",
+      "imports": [
+        "import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData;",
+        "import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;",
+        "import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;",
+        "import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;",
+        "import java.nio.charset.StandardCharsets;",
+        "import java.text.Normalizer;",
+        "import java.util.EnumMap;",
+        "import java.util.HashMap;",
+        "import java.util.List;",
+        "import java.util.Locale;",
+        "import java.util.Map;",
+        "import java.util.Objects;",
+        "import java.util.Optional;",
+        "import java.util.Set;",
+        "import org.jspecify.annotations.NullMarked;"
+      ]
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java",
+      "sha256": "d3022a7ea6ac2e00f14d5719f9d9b00bce3b509f4dac7d66091444d818d8c642",
+      "imports": [
+        "import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;",
+        "import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;",
+        "import dev.codex.schubert.nk.protocol.layout.semantic.LogType;",
+        "import java.nio.charset.StandardCharsets;",
+        "import java.text.Normalizer;",
+        "import java.time.DateTimeException;",
+        "import java.time.Duration;",
+        "import java.time.Instant;",
+        "import java.time.LocalDateTime;",
+        "import java.time.ZoneOffset;",
+        "import java.time.format.DateTimeFormatter;",
+        "import java.time.format.ResolverStyle;",
+        "import java.util.EnumMap;",
+        "import java.util.HashMap;",
+        "import java.util.List;",
+        "import java.util.Map;",
+        "import java.util.Objects;",
+        "import java.util.Optional;",
+        "import java.util.Set;",
+        "import org.jspecify.annotations.NullMarked;"
+      ]
+    }
+  ],
+  "wholeFixtures": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "sha256": "3665616b51d865a781784277df0a842e0d34108f45244be6f4f5db5df34afa29",
+      "wholeTestIds": [
+        "web214CanonicalRequest",
+        "web215ByteBoundaries",
+        "web216UnicodeAndEnums",
+        "web217BindingAllowlist",
+        "web218PageBoundaries",
+        "web219InvalidCannotRequest",
+        "web220NullOwnershipRedaction",
+        "web221ConcurrentValidation"
+      ],
+      "count": 8,
+      "finiteCleanupVerified": true
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "sha256": "631f6ed36f7bd9445df72efdab0635fd8f67b851ed054213ae69cf434d6986be",
+      "wholeTestIds": [
+        "web278DefaultsAndFilters",
+        "web279TextAndBinding",
+        "web280Characters",
+        "web281PageAndEnums",
+        "web282Dates",
+        "web283DateRange",
+        "web284NullOwnershipAndRedaction",
+        "web285ConcurrentBinding"
+      ],
+      "count": 8,
+      "finiteCleanupVerified": true
+    }
+  ],
+  "oldSource": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sixCurrentByteHashesExactOld": true,
+  "physicalClasses6": [
+    "dev/codex/schubert/nk/web/form/LogSearchForm",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field"
+  ],
+  "oldStandardMethodCovered": 36,
+  "actualJvmCodeMethods": 52,
+  "filteredMethodDifference": 16,
+  "methodMetadata": [
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/Map;Ljava/util/Map;ILjava/util/Optional;Ljava/util/Optional;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 20,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 7,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "bind",
+      "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/LogSearchForm;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 136,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 16,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 25,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 9,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "date",
+      "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;Ljava/util/Map;Ljava/util/Map;)Ljava/util/Optional;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 56,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 8,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 13,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "invalidCharacters",
+      "descriptor": "(Ljava/lang/String;)Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 52,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 18,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 8,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 10,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "getIssues",
+      "descriptor": "()Ljava/util/Map;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "getValues",
+      "descriptor": "()Ljava/util/Map;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "isValid",
+      "descriptor": "()Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "getPage",
+      "descriptor": "()I",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "toRequest",
+      "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/log/LogSearchRequestData;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 38,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 7,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "optional",
+      "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;)Ljava/util/Optional;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 17,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "lambda$bind$2",
+      "descriptor": "(Ljava/util/EnumMap;Ljava/util/EnumMap;Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;Ljava/util/Set;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "lambda$bind$1",
+      "descriptor": "(Ljava/util/HashMap;Ljava/util/EnumMap;Ljava/util/EnumMap;Ljava/lang/String;Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 70,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 14,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "lambda$bind$0",
+      "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 47,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 8,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/LogSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/form/LogSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/LogSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 23
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 33
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 39
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 57
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 10
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/Map;Ljava/util/Map;I)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 14,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 5,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "bind",
+      "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/ScenarioSearchForm;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 97,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 8,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 19,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "invalidCharacters",
+      "descriptor": "(Ljava/lang/String;)Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 52,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 18,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 8,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 10,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "getIssues",
+      "descriptor": "()Ljava/util/Map;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "getValues",
+      "descriptor": "()Ljava/util/Map;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "isValid",
+      "descriptor": "()Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "getPage",
+      "descriptor": "()I",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 3,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "toRequest",
+      "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/scenario/ScenarioSearchRequestData;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 39,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 10,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "optional",
+      "descriptor": "(Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;)Ljava/util/Optional;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 17,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$toRequest$2",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/VoiceCondition;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$toRequest$1",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/EntryType;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 5,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$toRequest$0",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/protocol/layout/semantic/GameCode;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 8,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$bind$2",
+      "descriptor": "(Ljava/util/EnumMap;Ljava/util/EnumMap;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;Ljava/util/Set;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 15,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 2,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 3,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$bind$1",
+      "descriptor": "(Ljava/util/HashMap;Ljava/util/EnumMap;Ljava/util/EnumMap;Ljava/lang/String;Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 70,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 6,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 14,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "lambda$bind$0",
+      "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 10,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 1,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 45,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 9,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Code;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 19
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 27
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+      "name": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+      "name": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+      "name": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/web/form/ScenarioSearchForm$Field;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 35
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 51
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 9
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "completeCurrent52SingleRunNotYetQualified": true,
+  "separateEnumExecCannotBeMerged": true,
+  "necessaryNextWhole": {
+    "originalTwoFixtures16": 16,
+    "existingPublicEnumWhole8": 8,
+    "total": 24,
+    "newDefinitions": 0,
+    "sourceClasses": 3,
+    "QuestionOld8NotRepeated": true
+  },
+  "independentOracles": [
+    "UI222223225234235/SS313352: input parameter allowlist/count, originalNFC é andUTF8 limits, page1..999999/default1, request size100",
+    "UI235/SS313: JST→fixedUTC,31days±1ms,strict leap/year/time format, no producer/DB operation",
+    "Originalfixtures: null key/list/item rejection, immutable defensive copies, fixed redacted string;64tasks each with finite get/cleanup"
+  ],
+  "newCompileOrProductRunOrAnalyzer": false,
+  "heldSourceOrBinaryActions": 0,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "effortCompletionRate": null,
+  "bug": "BUG3192",
+  "crossDeployment": "YKT2659",
+  "metadataRecovery": "Bare14272 dirname absent; rg filename index identified actual provisional path, no job reissued."
+}
