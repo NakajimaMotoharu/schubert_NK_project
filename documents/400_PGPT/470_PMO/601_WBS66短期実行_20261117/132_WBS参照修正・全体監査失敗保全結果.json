@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5665",
+  "groupId": "PGPT-WBS66-WBS-REFERENCE-REPAIR-20261117",
+  "values": {
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-17T14:47:52.911Z",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 15,
+        "remainingPercent": 85,
+        "windowDurationMins": 10080,
+        "resetsAt": 1795445752
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "6ff4afa50fbd11b68afb8b4d4b0e4dd6fe08aaab2974d3d0101caa11b0304153",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T14:47:52.911Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 15,
+          "remainingPercent": 85,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T14:47:21.851860+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 15,
+      "remainingPercent": 85,
+      "windowDurationMins": 10080,
+      "resetsAt": 1795445752
+    },
+    "source": "82eb205899cfc814c8b7ac66eef74483fd155b6d",
+    "productionCoreMain": "a013a6d676454082de3c59bc199e87f37fefe159",
+    "wbsLeafIds": [
+      "WBS-G13.01"
+    ],
+    "managementWorkIds": [
+      "TOOLFIX-WBS66-WBS-REFERENCE-REPAIR"
+    ],
+    "workCategory": "ADMIN",
+    "workAttributionKind": "TOOL_FIX",
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.3,
+      "high": 0.8
+    },
+    "groupCapPp": 1,
+    "completedOriginalRowPricePp": 0,
+    "originalCompletedPriceTotalPp": "9.888",
+    "remainingDetailBasePp": "1089.498",
+    "additionalCompletedPriceTotalPp": "12.350",
+    "completedToolFixThisGroupPp": 0.3,
+    "completedToolFixSeparateTotalPp": 1.7,
+    "completedSourceRequalificationSeparatePp": 1.4,
+    "remainingPendingAdditionalPp": 0,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37806-wbs-reference-limited-result-v1/manifest.json",
+      "sha256": "0b86310efdb0c123e1f32f4140f8678e9476a86346ffca9a6662defd829ec70f"
+    },
+    "wholeAuditActualExit": 1,
+    "wholeAuditAccepted": false,
+    "criterionReductions": [
+      {
+        "originalItem": "WBS-G13.01",
+        "criterion": "current485/486 reference consistency",
+        "before": "inventorySha256 does not match current485",
+        "after": "Only reference rebound, 190rows/otherfields/originalbudget exact; defaultcheck0. Metadata structureaudit failslegacyhistory and staysnotaccepted.",
+        "parentCriterionSatisfied": false,
+        "remaining": "BUG3190/YKT2658 legacy registry/current projection split and other G13 final gates"
+      }
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "nextCommand": "Commit/push negative15 mappings, QA418 canonical proof and limited WBS-reference correction with current pair check and scoped scan. Then investigate BUG3190 using only public JSON/Git ledger history to locate the exact legacy row differences; preserve new artifact registrations and old snapshots, no source/private/held reads or relaxed verifier."
+  }
+}
