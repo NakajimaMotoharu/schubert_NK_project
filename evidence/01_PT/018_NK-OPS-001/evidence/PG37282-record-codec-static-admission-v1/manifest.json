@@ -1,0 +1,55 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T04:55:36.489523+00:00",
+  "sourceCore": "91c55386a79a59b9766fb1cc9447d7451c71c083",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37278-record-codec-test-static-v1/manifest.json",
+    "sha256": "fcef0c3b0698144ed5c6ffd2f7875346011d93ce694ff117b87b98282a5324d0"
+  },
+  "spotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37276-record-codec-fresh-sibling-spotbugs-v1/manifest.json",
+    "sha256": "cb361586e1b34451e434c3be06f1826caf64e4f92b547d3dd66c97669571142d"
+  },
+  "abi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37280-record-codec-abi-physical-v1/manifest.json",
+    "sha256": "85baefdc3eb044f2060f238446fc27e75f795c00712b51763b5439b3a4e82bf1"
+  },
+  "raw": 0,
+  "applicable": 0,
+  "unclassified": 0,
+  "expectedTests": 20,
+  "originalWholeCases": 16,
+  "newWholeCases": 4,
+  "reflectionReview": {
+    "onlyTarget": "dev.codex.schubert.nk.batch.file.MaintenanceRecords",
+    "member": "private constructor ()V",
+    "accessFlagRestoredFinally": true,
+    "noOtherPrivateMembers": true,
+    "osOrApplicationPermissionChanges": false
+  },
+  "independentHashVectors": [
+    {
+      "bytes": [
+        1,
+        17
+      ],
+      "hash": 48,
+      "expected": "IOException canonical status rejection"
+    },
+    {
+      "bytes": [
+        48,
+        79
+      ],
+      "hash": 1567,
+      "expected": "IOException canonical status rejection"
+    }
+  ],
+  "guardExpected": "AssertionError: MaintenanceRecords is a static codec",
+  "old16ExecCombined": false,
+  "qualityRuleOrSuppressionChanges": 0,
+  "productTestsExecuted": 0,
+  "heldClassfileActions": 0,
+  "actualNativeRootDbVmActions": 0,
+  "formalUpdated": false
+}

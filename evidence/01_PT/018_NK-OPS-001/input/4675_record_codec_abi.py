@@ -1,0 +1,15 @@
+"""Only the static codec's private constructor implementation changes; all signatures remain exact."""
+from pathlib import Path
+import datetime,hashlib,json,subprocess
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';tc=r.parent/'toolchain';ld=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+oldp=b/'evidence/PG37224-monitor-lock4-four-main-compile-v2/manifest.json';newp=b/'evidence/PG37274-record-codec-four-main-compile-v1/manifest.json';old=ld(oldp);new=ld(newp);assert old['actualExit']==new['actualExit']==0
+changed={m:[n for n,h in rows.items() if h!=old['physicalClassHashes'][m].get(n)] for m,rows in new['physicalClassHashes'].items()};flat=[n for rows in changed.values() for n in rows];target='dev/codex/schubert/nk/batch/file/MaintenanceRecords.class';assert flat==[target]
+assert all(set(new['physicalClassHashes'][m])==set(old['physicalClassHashes'][m]) for m in changed)
+out=b/'evidence/PG37280-record-codec-abi-physical-v1';assert not out.exists();out.mkdir();texts={};stages={}
+for label,c in [('old',old),('new',new)]:
+ p=Path(c['cwd'])/'src/schubert-nk-batch/target/classes'/target;assert sha(p)==c['physicalClassHashes']['batch'][target]
+ for flag in ['-public','-p']:
+  key=label+flag;cmd=[str(tc/'jdk-25.0.4/bin/javap'),flag,'-s',str(p)];run=subprocess.run(cmd,capture_output=True,text=True,timeout=60);(out/(key+'.stdout')).write_text(run.stdout);(out/(key+'.stderr')).write_text(run.stderr);assert run.returncode==0 and not run.stderr;texts[(label,flag)]=run.stdout;stages[key]=dict(command=cmd,actualExit=run.returncode)
+assert all(texts[('old',flag)]==texts[('new',flag)] for flag in ['-public','-p'])
+v=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),sourceCore=new['sourceCore'],oldSourceCore=old['sourceCore'],oldCompile=ref(oldp),newCompile=ref(newp),physicalUniverse=1101,changedPhysical=changed,changedPhysicalCount=1,unchangedPhysicalCount=1100,publicAbiExact=True,allPrivateSignaturesExact=True,privateConstructorImplementationChanged=True,stages=stages,productTestsExecuted=0,oldSourceExecTransferred=False,formalUpdated=False)
+(out/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps(dict(actualExit=0,changed1=True,unchanged1100=True,allSignaturesExact=True,productTests=0)))

@@ -1,0 +1,52 @@
+Compiled from "MaintenanceRecords.java"
+public final class dev.codex.schubert.nk.batch.file.MaintenanceRecords {
+  private static final java.time.format.DateTimeFormatter TIME;
+    descriptor: Ljava/time/format/DateTimeFormatter;
+  private dev.codex.schubert.nk.batch.file.MaintenanceRecords();
+    descriptor: ()V
+
+  public static byte[] anchor(dev.codex.schubert.nk.batch.repository.BatchRun);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/BatchRun;)[B
+
+  public static byte[] activation(dev.codex.schubert.nk.batch.repository.MaintenanceActivation);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;)[B
+
+  public static byte[] completion(dev.codex.schubert.nk.batch.repository.MaintenanceCompletion);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion;)[B
+
+  public static byte[] retirement(dev.codex.schubert.nk.batch.repository.MaintenanceRetirement);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/MaintenanceRetirement;)[B
+
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceRetirement readRetirement(byte[]) throws java.io.IOException;
+    descriptor: ([B)Ldev/codex/schubert/nk/batch/repository/MaintenanceRetirement;
+
+  public static dev.codex.schubert.nk.batch.repository.BatchRun readAnchor(byte[]) throws java.io.IOException;
+    descriptor: ([B)Ldev/codex/schubert/nk/batch/repository/BatchRun;
+
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceActivation readActivation(byte[]) throws java.io.IOException;
+    descriptor: ([B)Ldev/codex/schubert/nk/batch/repository/MaintenanceActivation;
+
+  public static dev.codex.schubert.nk.batch.repository.MaintenanceCompletion readCompletion(byte[]) throws java.io.IOException;
+    descriptor: ([B)Ldev/codex/schubert/nk/batch/repository/MaintenanceCompletion;
+
+  private static java.lang.String[] lines(byte[], java.lang.String, int, int, int) throws java.io.IOException;
+    descriptor: ([BLjava/lang/String;III)[Ljava/lang/String;
+
+  private static dev.codex.schubert.nk.batch.repository.BatchRun run(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)Ldev/codex/schubert/nk/batch/repository/BatchRun;
+
+  private static java.lang.String identity(dev.codex.schubert.nk.batch.repository.BatchRun);
+    descriptor: (Ldev/codex/schubert/nk/batch/repository/BatchRun;)Ljava/lang/String;
+
+  private static byte[] ascii(java.lang.String);
+    descriptor: (Ljava/lang/String;)[B
+
+  private static void require(boolean) throws java.io.IOException;
+    descriptor: (Z)V
+
+  private static java.io.IOException invalid();
+    descriptor: ()Ljava/io/IOException;
+
+  static {};
+    descriptor: ()V
+}
