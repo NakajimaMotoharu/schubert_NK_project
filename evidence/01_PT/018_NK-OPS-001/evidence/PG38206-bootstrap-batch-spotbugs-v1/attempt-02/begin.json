@@ -1,0 +1,38 @@
+{
+  "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "attempt": 2,
+  "startedAtUTC": "2026-11-17T22:52:06.711246+00:00",
+  "commands": {
+    "bootstrap": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-f",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38206-bootstrap-batch-spotbugs-v1/bootstrap-analysis-v2.pom.xml",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ],
+    "batch": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-f",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38206-bootstrap-batch-spotbugs-v1/batch-analysis-v2.pom.xml",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ]
+  },
+  "original": {
+    "bootstrap": "8c6c3999a38746e46424a2602146ee301512c474c350a97e6e9c0ae6ea9e3a35",
+    "batch": "0591328d54f977d3696b424086837254f07f83c9b47d68fcdd712392445dabe2"
+  },
+  "corrected": {
+    "bootstrap": "a1d01a1b2d7483ee5ca4835450b2abb05edca29553c67d2276e9b0c2ddb84a6b",
+    "batch": "a3d7f1d4ce8b84d895c345279068b37b154dc23909c25691612d17c969f04384"
+  },
+  "treeSemanticallyIdentical": true,
+  "bug": "BUG-3211",
+  "horizontal": "YKT-2671"
+}
