@@ -1,0 +1,7 @@
+# 4550 AnimationWatch immutable navigation結果
+
+Core 2d38efd344b548896e1161ff7d93f05135e832f5 / Unit 94ea056d77cfdca1f037090afb9af08974733574 / PG38112-ANIMATION-WATCH-IMMUTABLE4。BUG3204/YKT2667/PG-D1180先行後、4categoryのprivate immutable navigation表へ実装変更、元全4Testbyte/公開API/表化以外のMainは逆変換exact・共有194byte同一。38102は既38088compiler outputsからbeforeABI取得し確認compile再演0、38104RootstrictMain1/Test1、38106MaxLow1/PMDCSGJF全0、38108 publicABI/Source/全shared差を独立照合。
+
+38112修正後whole元4FESnotrun0、38114全195CRC/init/XML/単一exec、対象1class全5Code25L6B101I miss0・line/method/class/branch/instruction全100/除外0。staticinit含む現全Codeを測定、消えるcompiler$1は実装変更によるphysical差で測定filterではない。共有未hitは保持・全component資格へ拡張0、前38094whole4PASS/38096raw1Bmiss/38098NOT_QUALIFIEDを保全。元独立4category×2role・固定UTF8vector/null/invalidID/closedimmutablemapの全期待/順序を変更0。元switchmapを偽造enum/任意例外/到達不能補完で埋めない。
+
+38116でF03/P01610の通常表示部品不足減、BUG3204限定CLOSED、YKT2667は当Watchのみ検証済み・他3heldmodelはsource検索名と行のみ/変更classfile動的実行0/全体OPEN。実HTTP/Controller/session/DB/VM/Root/native/key/permission等0、全六module/全関連PT/451と終了依存未完。正式1964PT/53scope・17/190新規0・工数null・QA051final056057維持。本追加群.5/1.4/3cap4、価格1.4に修正後資格を含む。前群.8の原見積/未完結果は保持し追加完了へ二重加算せずSUPERSEDED、既再資格12.1は不変。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/manifest.json SHA256 94654a36037889f98b9d479163c36fb6cf663c4eb771ceab07642837865eb0cb。

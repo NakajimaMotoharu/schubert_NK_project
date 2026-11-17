@@ -1,0 +1,3 @@
+# 4203 AnimationWatch pure表示資格
+
+Program所有P01610、PT-ANIMATION-WATCH-PUBLIC001..004/SS313323/SCR010/UI223235。正本spec018/4549・結果4550、独立38114/criteria38116。Core 2d38efd344b548896e1161ff7d93f05135e832f5 Unit 94ea056d77cfdca1f037090afb9af08974733574、whole元4成功・全5Code25L6B101I全miss0。公開API/元Testbyte/表化以外inverse exact・共有194不変。旧38096raw1branch不足を保持し修正後必要再試験と区別。実HTTP/Controller/auth/session/Backendと元項目の全関連PT/451/終了依存は未受入、正式件数増0。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38114-animation-watch-immutable4-independent-v1/manifest.json SHA256 94654a36037889f98b9d479163c36fb6cf663c4eb771ceab07642837865eb0cb。
