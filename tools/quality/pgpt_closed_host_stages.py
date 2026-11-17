@@ -36,6 +36,7 @@ def findings(path):
 
 
 def static(c, config, extra):
+    from pgpt_spotbugs_contract import FLAGS, checked_command
     h.require(not extra, 'static arguments')
     pp, m, work = prepared(c, config)
     out = h.environment(c, 'static')
@@ -52,7 +53,7 @@ def static(c, config, extra):
     analyzer_pom = ['-f', str(work / 'spotbugs-analysis-only-context.pom.xml')] if c.get('reviewedAnalysisOnlyContext') is not None else []
     if c.get('reviewedUnstartedProcess') is not None:
         analyzer_pom = ['-f', str(work / 'spotbugs-no-outer.pom.xml')]
-    stages['spotbugs'] = h.steps.step('spotbugs', [str(h.MAVEN), '-o', '--no-transfer-progress', *analyzer_pom, '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check'], work)
+    stages['spotbugs'] = h.steps.step('spotbugs', checked_command([str(h.MAVEN), '-o', '--no-transfer-progress', *analyzer_pom, '-Dmaven.repo.local=' + str(h.TC / 'm2/repository'), '-Dmaven.test.skip=true', *FLAGS, 'com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check']), work)
     shutil.copyfile(work / 'target/spotbugsXml.xml', out / 'spotbugs.xml')
     sb = ET.parse(out / 'spotbugs.xml').getroot()
     raw, errors = findings(out / 'pmd.xml')

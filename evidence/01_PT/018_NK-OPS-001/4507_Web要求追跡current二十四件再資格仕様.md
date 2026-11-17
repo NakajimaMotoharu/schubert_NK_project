@@ -1,0 +1,5 @@
+# Web要求追跡current24再資格
+PG37746で確定したcurrent206入力差18（Protocol14、readonly controller4）への必要な再資格。原whole24のassertion/固定期待/5fixture・24TestIDは変更せず、一つの現sourceで実行する。Main20/安全なServlet memory metadataと純Throwable graphだけ、旧Protocol156/Principal8/監視41の確認再演はしない。関連RD MON/AUT・UI235/252・SS312/314/351/352・REQ004/006/007/008・F03/P00603/P01810。
+群見積low .3/base .8/high2 cap3。SOURCE_REQUALIFICATIONとして原行完了費/追加発見費から分離。Main20はoriginal Root Java25/ErrorProne/NullAway/Werrorで現Protocol176と実POM依存を用いてcompile。Main実byte全classのSpotBugs、原PMD/Checkstyle/GJFを適用し、個別非該当は根拠とrawを保持。事前source closureとoracleはPG37746/旧27620/27632に拘束する。
+旧10+Port5+graph4+fatal5=24の単一JUnit/単一exec・有限timeout、全XML/終了/CRC/initと全物理クラスを独立照合。raw CodeはTrace/Scope、Context/Caddy等の実対象を未達も含め保存。期待値はSS固定route、37 annotation/34pattern、serverUUID、public IP/role/redacted文字列、cause優先とfatal identity。productionを呼んでexpectedを生成しない。DB実接続・認証発行・network・Root/native/VM/鍵/四held/failedcohortなし。
+PGは省略せず現実装をsource/静的/同source通常PTで検証する。正規の機能不備を見つけた場合は修正前915/916へ起票。新規PT、生成coverage、正式受入/六module/全451の範囲を混ぜない。親終了依存/HOLDは維持し、current proofだけを個別criteriaへ返す。

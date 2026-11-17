@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-11-17T23:11:52.378">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java">
+<violation beginline="64" endline="64" begincolumn="46" endcolumn="59" rule="AvoidUsingVolatile" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace" variable="retainedActor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile" priority="2">
+Use of modifier volatile is not recommended.
+</violation>
+<violation beginline="137" endline="137" begincolumn="11" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace" method="markMenuViewed" variable="scope" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Scope object are closed after use
+</violation>
+<violation beginline="188" endline="188" begincolumn="19" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace.Scope" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="194" endline="194" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace.Scope" method="Scope" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="202" endline="202" begincolumn="11" endcolumn="42" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace.Scope" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="202" endline="202" begincolumn="20" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace.Scope" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="205" endline="205" begincolumn="11" endcolumn="32" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebRequestTrace.Scope" method="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java">
+<violation beginline="280" endline="280" begincolumn="11" endcolumn="15" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="280" endline="280" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="282" endline="282" begincolumn="39" endcolumn="60" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="286" endline="290" begincolumn="17" endcolumn="27" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="293" endline="293" begincolumn="9" endcolumn="27" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="294" endline="294" begincolumn="20" endcolumn="63" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="309" endline="309" begincolumn="9" endcolumn="13" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008HundredConcurrentRequestsDoNotCrossContaminate" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ExecutorService object are closed after use
+</violation>
+<violation beginline="309" endline="309" begincolumn="16" endcolumn="59" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008HundredConcurrentRequestsDoNotCrossContaminate" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="315" endline="329" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008HundredConcurrentRequestsDoNotCrossContaminate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="334" endline="334" begincolumn="7" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008HundredConcurrentRequestsDoNotCrossContaminate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="335" endline="335" begincolumn="18" endcolumn="61" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.logging" class="WebRequestTraceTest" method="req008HundredConcurrentRequestsDoNotCrossContaminate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java">
+<violation beginline="196" endline="196" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest" method="emptyProxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="204" endline="204" begincolumn="31" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" variable="attributes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="205" endline="205" begincolumn="37" endcolumn="62" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" variable="headers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="224" endline="224" begincolumn="19" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="245" endline="245" begincolumn="42" endcolumn="58" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="253" endline="253" begincolumn="19" endcolumn="61" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="268" endline="268" begincolumn="42" endcolumn="58" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.security" class="CaddyTransportPortTest.Fixture" method="Fixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+</pmd>

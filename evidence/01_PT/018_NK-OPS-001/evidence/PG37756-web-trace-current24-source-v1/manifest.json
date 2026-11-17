@@ -1,0 +1,217 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T14:10:38.764042+00:00",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "tests": 5,
+      "sha256": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "tests": 10,
+      "sha256": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java",
+      "tests": 1,
+      "sha256": "3ab62c90af53ffb1e6fd9f01e650324bb16e201fd4eeecc7a5ba21f2127d7a10"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java",
+      "tests": 3,
+      "sha256": "a946c07a2cd3b6c28d0ee244c42dd41de4706e03378418ec4462ae53c72551c0"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyContextFatalContractTest.java",
+      "tests": 5,
+      "sha256": "3e41bc4c1a006ea7647fb7ce31578477321dc91b0f382a99a67dbb16d97e8076"
+    }
+  ],
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyTransportPortTest",
+      "name": "trustedDispatchAndRedispatchKeepOneIdentityAndSameContext()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyTransportPortTest",
+      "name": "nonHttpRequestAndResponseAreRejectedBeforeAnyDispatchOrAudit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyTransportPortTest",
+      "name": "deniedPeerEnds403OncePerDispatchWithoutErrorRedispatchOrTrustedContext()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyTransportPortTest",
+      "name": "existingContextCannotBeReboundToAnotherClientEvenWithSameServerId()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyTransportPortTest",
+      "name": "contextSaveFailuresAndNullContractsStopBeforeDownstreamWithoutUnsafeFallback()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004ActualInventoryAndEveryClosedRouteRejectUnknown()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006ServerIdentityIsStableAndDoesNotGrantTransport()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008HundredConcurrentRequestsDoNotCrossContaminate()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006AllNullAndMistypedMetadataAreRejected()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req006AllFourAttributeBoundariesRedactFrameworkFaults()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.logging.WebRequestTraceTest",
+      "name": "req008OutOfOrderNestedCloseCannotPublishAClosedTrace()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionFailureGraphTest",
+      "name": "mixedCauseAndSuppressedCyclesTerminateAndReachableFatalRetainsIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328001SqlNextFatalCannotBecomeAnOrdinaryCatalog()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328002MixedCyclesAreFiniteAndLateFatalRetainsIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328003ExistingCausePriorityNullAndRedactionRemainFixed()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest",
+      "name": "fatal001ResolverClosedForwardingVectorsAndProviderGraph()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest",
+      "name": "fatal002FilterContextSaveKeepsFatalAndNeverDispatches()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest",
+      "name": "fatal003ExistingContextReadGraphAndForeignMetadataNeverStringifies()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest",
+      "name": "fatal004IdentifyIdReadGraphAndStableServerIdentity()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.security.CaddyContextFatalContractTest",
+      "name": "fatal005IdentifyIdWriteGraphAndNoFallbackAfterFailure()"
+    }
+  ],
+  "sdkHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar": "8f114c1461692c5e534e82b27de23b7fb23370db8dee7ce0c92d5106906c9555",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar": "6ce8fc116f5d309b9ac50a6738bd1b15ea4012a4a5563c0ee89b795bfc9af0dc",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+  },
+  "sourceHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": "5fec6396eb39b7a598a9b0addfc9ce2da64a85052cdf55912fbb0a270c1d145a",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebHttpLogKind.java": "9ce1a469cbe242ba480fb6cc474bea4842b84466ef35d5ff4cf7cfca3f16e5e2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java": "cca61d521d8e4bf246f63e0821aa5a134d853f2240161707d947cf9f4071878f",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/WebRequestContext.java": "09758f7eb669d78245636629df215e1d3ce0345be0532385f4b27b2244df4f48",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LoginClientAddress.java": "4e6cfb538744d81daf4c5e132b729b6800b1ee3f3aa6682ad06e46c9aabb56c5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java": "d6c50441cde4887be9a0d9585bb41512ee5228042419b78d48437a1f88620967",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java": "0155cbc7173d6da7e16627213f82688fa5d599935f3e4bc8ce3bb1b74959c558",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java": "ac57a64eba043fd8e4efc3e23d1d359f5bb53347eda1444df2e3387ddc118107",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/package-info.java": "2b2c6b1d5f75a5744f5910035f91dcb04135507c6f3a1a06b6c3ad04bec12dda",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/InvalidSessionRowException.java": "e3c592ebb82effd50447c356629695def2af5f05e90137de57fe908d4310a853",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/TopBarViewModel.java": "16afe37089d96cb31e7849e5bf5e289196588c6f4b8e1d4732fd402887e24a09",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuViewModel.java": "892c36828ff005248b7d62b593124f9d853c583caf80a3e3e3bef142841057a3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/view/MenuCard.java": "7fa6583a49c37dedd196d696a2c0d7c45f2e7b7097044d63aa2aef5ef2915ad3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java": "a07d0f37eaca52eb2037816617c9a9d4fab82386ddb67af1310f9208291c3238",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java": "57a78155f162e62428fbe44c8bf8777e98555dbef15e3dc42c17e02074e0cc40",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java": "0845288c5c80ba7136a7b2c8072a4814a6f119f2e1cb47afcaa7eb102f76fc25",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java": "3ab62c90af53ffb1e6fd9f01e650324bb16e201fd4eeecc7a5ba21f2127d7a10",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "a946c07a2cd3b6c28d0ee244c42dd41de4706e03378418ec4462ae53c72551c0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyContextFatalContractTest.java": "3e41bc4c1a006ea7647fb7ce31578477321dc91b0f382a99a67dbb16d97e8076"
+  },
+  "readonlyFixtureHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MenuController.java": "f26a85c85d5ee4ed11e548d25a684956d2349a6ed1c43c0e021f6d4745c8acce",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/AnimationController.java": "e300e90c29d74117905de30f3e64dc99b5044a6bc5100648cdc1d5c2dc987e12",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ContentDetailController.java": "0e451bdb4428305a835307256f3bbc8b1a5665680f160441b6b6f951286c0de6",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ErrorController.java": "ccc4587c76195542436f708aa6f87ee93b2d32e14d3d81350417c3f4e7b07fd5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogController.java": "918e32335e79eb0f7d093e4fdb3c08f093d92ecfcfcaa8d853caf3ee53d41eb7",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LoginController.java": "ef9bbc81c79799528840f70f65f55056d08fd1ea0f9fd1a93d8212b946f4e630",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/LogoutController.java": "93f164a1a35e675de653bf1d2638647482cc21332a8dca7bf2b72d8cf321e0f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MediaController.java": "e3d5ab3db698c38d1b825a09b5197dea8e490ef6bef1cc1f8a394b658b081d34",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/MusicController.java": "43714d9f59017f118ec095eacedc852b8b850a7282ce5df0847db70405a973f9",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/NotificationController.java": "6f507bdd12f8a37dbeafdc0f58183ffe1b46ae2113b9d96f7bc01b0fe40aa366",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/QuestionController.java": "3d3b723dd80f038dea4d74f44830eb760585919c703c0354f8a139b15b126ece",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/ScenarioController.java": "f0ad9e4805f46f1ac0dca0d3fee940eda4a060bb540ba16d71748406b40335b2",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/controller/UserAdminController.java": "88412d5abb9f239a50160da79f03d88ea52f541a4c4d772dc2d2847428d5d727",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java": "72ac4fcc161a85182e17d6167640cb18c93faed174fdd142225eaf1d84912d30"
+  },
+  "readonlySourceInventoryNotExecutablePermission": true,
+  "wholeOriginal24OracleUnchanged": true,
+  "commonsLoggingCurrentVersion": "1.4.0",
+  "actualRootVmDbNativeKeysAuthorityActions": 0,
+  "heldClassfileActions": 0,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false
+}

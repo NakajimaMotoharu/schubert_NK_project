@@ -1,0 +1,272 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T14:13:49.049402+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37766-web-trace-current24-admission-v1/normalized-prepare.json",
+    "sha256": "fd3d3d0d53d510f05641f8a777f2a281e5069bb00102caaa6a23ec9e40fa635e"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37758-web-trace-current24-prepare-v1/manifest.json",
+    "sha256": "893c1bcca32029d922827a5485a89763a3ace4c5a45a382392f712939880ee26"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37760-web-trace-current24-static-v1/manifest.json",
+    "sha256": "789f53735369db331ba17e51f0870648ad1664b7c5df51ebda01b291e2da1a87"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "AvoidUsingVolatile",
+      "line": "64",
+      "reason": "Immutable Optional<TopBar> snapshot requires servlet dispatch publication visibility; single read/write, no compound volatile state. Atomic flags own independent CAS.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use of modifier volatile is not recommended."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CloseResource",
+      "line": "137",
+      "reason": "businessIdentifiers borrows CURRENT.get scope. It must notclose caller-owned lexical scope; enter/owner finally owns close.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Scope object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "line": "188",
+      "reason": "Only records Thread.currentThread identity and compares it; no thread creation/start/server worker inside product.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "line": "194",
+      "reason": "Only records Thread.currentThread identity and compares it; no thread creation/start/server worker inside product.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "202",
+      "reason": "Thread owner and active Scope must be same object identity; logical equality would weaken lexical owner/order invariant.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "DoNotUseThreads",
+      "line": "202",
+      "reason": "Only records Thread.currentThread identity and compares it; no thread creation/start/server worker inside product.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "205",
+      "reason": "Thread owner and active Scope must be same object identity; logical equality would weaken lexical owner/order invariant.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "CloseResource",
+      "line": "280",
+      "reason": "OwnedJUnit executor explicitlyfinallyshutdownNow/actualawait10 asserted; TWR wouldreintroduceunboundedclose.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "280",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "282",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "286",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "293",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "294",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "CloseResource",
+      "line": "309",
+      "reason": "OwnedJUnit executor explicitlyfinallyshutdownNow/actualawait10 asserted; TWR wouldreintroduceunboundedclose.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "309",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "315",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "334",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "335",
+      "reason": "StandaloneJUnit private worker fixtures, Future5/10 andfinallyactualawait10; no server/DB/native threads or inheritable scope.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "196",
+      "reason": "StandaloneJUnit JDK Servlet interface Proxy usesexactdeclaringSDK loader, not J2EEcontainer.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "204",
+      "reason": "EachFixture maps confined toone synchronousUnit invocation; no sharedworkers or productionDB/HTTP runtime.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "UseConcurrentHashMap",
+      "line": "205",
+      "reason": "EachFixture maps confined toone synchronousUnit invocation; no sharedworkers or productionDB/HTTP runtime.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "224",
+      "reason": "StandaloneJUnit JDK Servlet interface Proxy usesexactdeclaringSDK loader, not J2EEcontainer.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "245",
+      "reason": "Proxy.equals deliberatelyimplements referenceidentity; logicaldomaincomparison wouldalterfixturecontract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "UseProperClassLoader",
+      "line": "253",
+      "reason": "StandaloneJUnit JDK Servlet interface Proxy usesexactdeclaringSDK loader, not J2EEcontainer.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "line": "268",
+      "reason": "Proxy.equals deliberatelyimplements referenceidentity; logicaldomaincomparison wouldalterfixturecontract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    }
+  ],
+  "priorPerSiteReasons": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27608-trace-menu24-preflight-v1/manifest.json",
+      "sha256": "bc88868e59da158d5b47680733bd2e1e03aa3d159f219d32921bdbe1200d305a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27628-caddy-context24-preflight-v1/manifest.json",
+      "sha256": "a6c6f3ae2b2a060cb866aab6e7511c6a635aa2d1ee182cde2a312357e39e1f02"
+    }
+  ],
+  "sourceExactAll5OriginalFixtures": true,
+  "all199PhysicalNamesVerified": true,
+  "spotbugsSettingsExplicitMaxLow": true,
+  "originalWebPluginExact": true,
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+    "dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope",
+    "dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor",
+    "dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration",
+    "dev/codex/schubert/nk/web/security/WebRequestContext",
+    "dev/codex/schubert/nk/web/security/CaddyTransportContextFilter",
+    "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver"
+  ],
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-test/7.0.9/spring-test-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": false
+  },
+  "sources24WholeCases": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyTransportPortTest.java": 5,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java": 10,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java": 1,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": 3,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/CaddyContextFatalContractTest.java": 5
+  },
+  "actualRootVmDbNativeKeysAuthorityActions": 0,
+  "newTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
