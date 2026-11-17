@@ -1,0 +1,667 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T18:36:47.436642+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37968-log-view-current16-admission-v1/normalized-prepare.json",
+    "sha256": "f6b535be3b93b8003ee7a1a2fe6e3d89ffdafa2315d3a59637f783c9cc7b9e4b"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37964-log-view-current16-prepare-v1/manifest.json",
+    "sha256": "96de5b8968a98931e61f18d94ff6552fd915bdd0958ea3d665802c20e732e0b8"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37966-log-view-current16-static-v1/manifest.json",
+    "sha256": "ee7ad192cc71c4d125f0d046d78f493cdf132d5fa5592d9b0fd4e9435e8ee5d6"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "rule": "CloseResource",
+      "line": "332",
+      "reason": "Exact fixture-owned8worker pool is closed in finally by shutdownNow and asserted awaitTermination10seconds. Each of64 futures uses get10seconds. Ownership remains local to standalone JUnit, never managed application infrastructure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "332",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "338",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "352",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "353",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "rule": "CloseResource",
+      "line": "357",
+      "reason": "Exact fixture-owned8worker pool is closed in finally by shutdownNow and asserted awaitTermination10seconds. Each of64 futures uses get10seconds. Ownership remains local to standalone JUnit, never managed application infrastructure.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "357",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "363",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "385",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "386",
+      "reason": "Standalone JUnit checks64 independent literal display projections using8 local fixture workers. No J2EE component/server starts. Each future wait and finally executor termination is finite10seconds. No DB/network/Root/native/service process.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel",
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel$Row",
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel",
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel$FieldError",
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel$Filters"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel$Filters": {
+      "flags": 49,
+      "sourceFile": "LogSearchViewModel.java",
+      "fields": 7,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 164
+        },
+        {
+          "name": "getQ",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLogType",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getAction",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPath",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLevel",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getFrom",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getTo",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel$Row": {
+      "flags": 49,
+      "sourceFile": "LogSearchResultsViewModel.java",
+      "fields": 15,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/log/LogRecord;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 247
+        },
+        {
+          "name": "getId",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLoggedAt",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLogType",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLevel",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getAction",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getMessage",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getRequestId",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getMessageId",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getCorrelationId",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getMethod",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPath",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getStatus",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getElapsedMs",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getRemoteAddr",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getDetails",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "lambda$new$1",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds;)Ljava/lang/Integer;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "lambda$new$0",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode;)Ljava/lang/Integer;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 8
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel": {
+      "flags": 49,
+      "sourceFile": "LogSearchViewModel.java",
+      "fields": 6,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/LogSearchForm;Ljava/util/Optional;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 125
+        },
+        {
+          "name": "success",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/LogSearchForm;Ldev/codex/schubert/nk/protocol/layout/common/PagedResponseData;Ljava/util/List;)Ldev/codex/schubert/nk/web/view/LogSearchViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 83
+        },
+        {
+          "name": "invalid",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/form/LogSearchForm;)Ldev/codex/schubert/nk/web/view/LogSearchViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 37
+        },
+        {
+          "name": "pageLink",
+          "descriptor": "(Ljava/util/OptionalInt;)Ljava/util/Optional;",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 94
+        },
+        {
+          "name": "encode",
+          "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getTopBar",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/TopBarViewModel;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getFilters",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/LogSearchViewModel$Filters;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getErrors",
+          "descriptor": "()Ljava/util/List;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getResults",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPreviousHref",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getNextHref",
+          "descriptor": "()Ljava/util/Optional;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "lambda$new$3",
+          "descriptor": "(Ldev/codex/schubert/nk/web/view/LogSearchResultsViewModel;)Ljava/util/Optional;",
+          "flags": 4098,
+          "hasCode": true,
+          "codeLength": 12
+        },
+        {
+          "name": "lambda$new$2",
+          "descriptor": "(Ldev/codex/schubert/nk/web/view/LogSearchResultsViewModel;)Ljava/util/Optional;",
+          "flags": 4098,
+          "hasCode": true,
+          "codeLength": 12
+        },
+        {
+          "name": "lambda$new$1",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm;Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;)Ldev/codex/schubert/nk/web/view/LogSearchViewModel$FieldError;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 28
+        },
+        {
+          "name": "lambda$new$0",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm;Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;)Z",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 11
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/PageViewModel": {
+      "flags": 49,
+      "sourceFile": "PageViewModel.java",
+      "fields": 6,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/common/PagedResponseData;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 53
+        },
+        {
+          "name": "from",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/layout/common/PagedResponseData;I)Ldev/codex/schubert/nk/web/view/PageViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 175
+        },
+        {
+          "name": "getEffectivePage",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPageSize",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getTotalCount",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getTotalPages",
+          "descriptor": "()I",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getFirstResult",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getLastResult",
+          "descriptor": "()J",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "isEmpty",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 15
+        },
+        {
+          "name": "isPaginated",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "getPreviousPage",
+          "descriptor": "()Ljava/util/OptionalInt;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 24
+        },
+        {
+          "name": "getNextPage",
+          "descriptor": "()Ljava/util/OptionalInt;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 27
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/LogSearchResultsViewModel": {
+      "flags": 49,
+      "sourceFile": "LogSearchResultsViewModel.java",
+      "fields": 3,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/web/view/PageViewModel;Ljava/util/List;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 46
+        },
+        {
+          "name": "from",
+          "descriptor": "(Ldev/codex/schubert/nk/web/session/SessionPrincipal;Ldev/codex/schubert/nk/protocol/layout/common/PagedResponseData;Ljava/util/List;)Ldev/codex/schubert/nk/web/view/LogSearchResultsViewModel;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 249
+        },
+        {
+          "name": "getTopBar",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/TopBarViewModel;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getPage",
+          "descriptor": "()Ldev/codex/schubert/nk/web/view/PageViewModel;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getRows",
+          "descriptor": "()Ljava/util/List;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/view/LogSearchViewModel$FieldError": {
+      "flags": 49,
+      "sourceFile": "LogSearchViewModel.java",
+      "fields": 5,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/LogSearchForm$Field;Ldev/codex/schubert/nk/web/form/LogSearchForm$Code;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 71
+        },
+        {
+          "name": "getName",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "getMessage",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 99
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain3": true,
+  "explicitMaxLowPhysical6": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg37962-log-view-safe-dependencies-v1/qualified-web-safe18.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchViewModelTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/LogSearchResultsViewModelTest.java": 8
+  },
+  "newDefinitions": 0,
+  "originalDefinitions": 16,
+  "allBusinessBodiesFiniteCleanupInverseExact": true,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
