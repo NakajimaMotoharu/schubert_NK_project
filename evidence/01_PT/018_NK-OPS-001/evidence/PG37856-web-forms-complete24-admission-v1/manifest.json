@@ -1,0 +1,150 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T15:55:15.794179+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37856-web-forms-complete24-admission-v1/normalized-prepare.json",
+    "sha256": "659be0128c7e8ce435652eeb8d38f7a7a35b200707b72016061995efabed60f1"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37852-web-forms-complete24-prepare-v2/manifest.json",
+    "sha256": "991d8f2a1fd0a411a112f49c1b12bc5bbc07a8bcb630654a8919016b2042bbf3"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37854-web-forms-complete24-static-v1/manifest.json",
+    "sha256": "f89087b495609661348508e18a6eb7ccb854e2a1457e0d8116abd3c81079c47e"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "rule": "CloseResource",
+      "line": "279",
+      "reason": "This exact fixture-local pool is owned by finally shutdownNow and awaitTermination(10 seconds) with termination assertion. All64 task futures use get(10 seconds); TWR indefinite close was already replaced, no application worker or shared pool is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "279",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "285",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "303",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "304",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "rule": "CloseResource",
+      "line": "267",
+      "reason": "This exact fixture-local pool is owned by finally shutdownNow and awaitTermination(10 seconds) with termination assertion. All64 task futures use get(10 seconds); TWR indefinite close was already replaced, no application worker or shared pool is created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "267",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "273",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "285",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "286",
+      "reason": "Standalone JUnit exercises64 independent binds on8 fixture-owned workers and validates exact per-request values. It is not a J2EE-managed component; every future wait and final executor termination is finite10seconds, no production server/background job is started.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.java",
+      "rule": "NullAssignment",
+      "line": "191",
+      "reason": "The caller-owned returned values array is deliberately poisoned to prove enum backing storage and future returned arrays are unchanged. This is an explicit independent copy-isolation negative contract, not a production null assignment.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/form/LogSearchForm",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+    "dev/codex/schubert/nk/web/logging/WebHttpLogKind",
+    "dev/codex/schubert/nk/web/revocation/RevocationFailureCode",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel$Status",
+    "dev/codex/schubert/nk/web/view/MenuCard"
+  ],
+  "formSixTargets": [
+    "dev/codex/schubert/nk/web/form/LogSearchForm",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field"
+  ],
+  "MainCompileAndMaxLow195ReusedNotReplayed": true,
+  "Main14Source19BytesQualified": true,
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.java": 8
+  },
+  "newDefinitions": 0,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
