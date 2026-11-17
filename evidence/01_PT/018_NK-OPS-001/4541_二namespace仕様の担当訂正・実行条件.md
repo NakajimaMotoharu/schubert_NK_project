@@ -1,0 +1,7 @@
+# 4541 二namespace仕様の担当trace訂正
+
+4540開始時の末尾P01613は担当表記の誤り。485実担当はRequiredColumn=WBS-P004-05、ContentDispositionFactory=WBS-P009-04。元費/担当の付替えや追加費配賦0、開始event5693と4540原byte/hashを保持し本追補で訂正する。SQLNULL/headerの入力・期待・TestID・品質・HOLDは不変更。
+
+MainCore6a2259e1d6245af4c720a52001487f67fb28b2ba、beforeCorefda03。private ctor二箇所以外のSourceは逆変換byte exact、公開ABI2一致、元wholeTest2byte同一。PG38028 before/38030 after Rootstrict0・同compilerflag、38032 MaxLow2/CSformat0・PMD2各Testのfinally accessflag復元非該当・適用未分類0、38034 ABI/逆変換0、38036実行前資格0。
+
+Testは元RequiredColumnTest1/ContentDispositionFactoryTest1と新NamespaceContractTest各1、全4を固定Unitで一回実行後に全178CRC/init/XML/無filterCode4を独立照合。実DB/FS/Root/VM/native/key/認証権限等0。旧2の確認再演目的ではなくMain2物理変更による必要回帰、業務oracleから禁止構築のnegative内部契約を区別し、結果未実行を合格にしない。

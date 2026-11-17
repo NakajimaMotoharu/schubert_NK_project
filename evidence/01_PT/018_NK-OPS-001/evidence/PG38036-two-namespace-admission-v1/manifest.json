@@ -1,0 +1,109 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T19:25:00.746818+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38036-two-namespace-admission-v1/normalized-prepare.json",
+    "sha256": "00bc7c03e3408b7452b1ee0f895ff20ada1d7c94da9485af8547f923e792d7cd"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38030-two-namespace-after-prepare-v1/manifest.json",
+    "sha256": "5a2f1674e063ea08b6f09da8ecbe571c3133ee6b9ac40eedd50b2a29a89818a7"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38032-two-namespace-after-static-v1/manifest.json",
+    "sha256": "8ef3bba80509eb2500fd9809e886ed25ba62bcc521215a474050c7d44c651949"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "36",
+      "reason": "Exactly one named non-secret static namespace constructor per test. The private noarg was deliberately opened only to check its forbidden construction contract; this finally statement restores the exact captured false access flag. No OS/app authorization/key/credential/other private type or arbitrary class-name reflection is involved. Test subsequently asserts private access restored; no rule suppression.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "36",
+      "reason": "Exactly one named non-secret static namespace constructor per test. The private noarg was deliberately opened only to check its forbidden construction contract; this finally statement restores the exact captured false access flag. No OS/app authorization/key/credential/other private type or arbitrary class-name reflection is involved. Test subsequently asserts private access restored; no rule suppression.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/api/database/RequiredColumn",
+    "dev/codex/schubert/nk/web/media/ContentDispositionFactory"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/media/ContentDispositionFactory": {
+      "flags": 49,
+      "sourceFile": "ContentDispositionFactory.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "create",
+          "descriptor": "(Ldev/codex/schubert/nk/protocol/file/MediaDescriptor;)Ljava/lang/String;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 58
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/database/RequiredColumn": {
+      "flags": 49,
+      "sourceFile": "RequiredColumn.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "requireValue",
+          "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 18
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain2": true,
+  "explicitMaxLowPhysical2": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnTest.java": 1,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionFactoryTest.java": 1,
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/RequiredColumnNamespaceContractTest.java": 1,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/media/ContentDispositionNamespaceContractTest.java": 1
+  },
+  "newDefinitions": 2,
+  "originalDefinitions": 2,
+  "originalTwoBusinessFixturesByteExact": true,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
