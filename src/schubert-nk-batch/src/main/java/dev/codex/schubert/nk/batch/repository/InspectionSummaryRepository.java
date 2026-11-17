@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.repository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.time.ZoneOffset;
@@ -64,27 +66,37 @@ public final class InspectionSummaryRepository {
           rowFailure = failure;
           throw failure;
         } finally {
-          try {
-            row.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcResourceFailures.replace(rowFailure, secondary)) throw secondary;
-          }
+          closeRow(row, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (JdbcResourceFailures.replace(statementFailure, secondary)) throw secondary;
-        }
+        closeStatement(statement, statementFailure);
       }
       require(!Thread.currentThread().isInterrupted());
       return result;
     } catch (SQLException failure) {
       // Owned resources have closed; no provider diagnostics/cause/suppressed escape.
       throw new BatchRepositoryException();
+    }
+  }
+
+  // PG-D-1173: one policy Code point, reached from both normal and exceptional cleanup.
+  private static void closeRow(ResultSet row, @Nullable Throwable primary) throws SQLException {
+    try {
+      row.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      statement.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcResourceFailures.replace(primary, secondary)) throw secondary;
     }
   }
 

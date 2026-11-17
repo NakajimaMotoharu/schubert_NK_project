@@ -1,0 +1,317 @@
+[
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "28",
+      "endline": "28",
+      "begincolumn": "16",
+      "endcolumn": "22",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Reads the borrowed caller cancellation flag before/after observation as required SS341. No application thread creation/execution/interrupt mutation by Main. Original owned-worker fixture checks parent flag unchanged and clears only its own worker in finally/get5/await5."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "63",
+      "endline": "63",
+      "begincolumn": "33",
+      "endcolumn": "49",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "63",
+      "endline": "63",
+      "begincolumn": "52",
+      "endcolumn": "57",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "66",
+      "endline": "72",
+      "begincolumn": "11",
+      "endcolumn": "10",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally",
+      "priority": "4",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} finally {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Finally closes exactly one nonnull acquired resource; existing policy permits a cleanup failure to replace only when no prior failure or unknown cleanup supersedes known SQL. Preserving this throw is needed to avoid returning false success. Borrowed parent never closed or transaction-mutated; literal callback order and error identity tested."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "69",
+      "endline": "69",
+      "begincolumn": "35",
+      "endcolumn": "51",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "69",
+      "endline": "69",
+      "begincolumn": "54",
+      "endcolumn": "59",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "73",
+      "endline": "73",
+      "begincolumn": "31",
+      "endcolumn": "47",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "73",
+      "endline": "73",
+      "begincolumn": "50",
+      "endcolumn": "55",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "76",
+      "endline": "82",
+      "begincolumn": "9",
+      "endcolumn": "8",
+      "rule": "DoNotThrowExceptionInFinally",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#donotthrowexceptioninfinally",
+      "priority": "4",
+      "message": "A throw statement in a finally block makes the control flow hard to understand."
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} finally {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Finally closes exactly one nonnull acquired resource; existing policy permits a cleanup failure to replace only when no prior failure or unknown cleanup supersedes known SQL. Preserving this throw is needed to avoid returning false success. Borrowed parent never closed or transaction-mutated; literal callback order and error identity tested."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "79",
+      "endline": "79",
+      "begincolumn": "33",
+      "endcolumn": "49",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "79",
+      "endline": "79",
+      "begincolumn": "52",
+      "endcolumn": "57",
+      "rule": "AvoidCatchingGenericException",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+      "priority": "3",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact acquired-resource boundary: capture/rethrow primary Runtime/Error to close owned row then statement, never successful normalization. Current JdbcResourceFailures preserves unknown identity, fixed secondary diagnostics and known SQL fatal graph precedence. Whole original Port9/helper8 cover all body/close pair kinds, cyclic aliases and fatal priority without real DB."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "beginline": "83",
+      "endline": "83",
+      "begincolumn": "16",
+      "endcolumn": "22",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryRepository",
+      "method": "read",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "priority": "3",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    "sourceSha256": "6651189ad8a46997b02488975018d39eb20ae2cb78554fd001cb2cfc92cb4e0f",
+    "sourceAnchor": "require(!Thread.currentThread().isInterrupted());",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Reads the borrowed caller cancellation flag before/after observation as required SS341. No application thread creation/execution/interrupt mutation by Main. Original owned-worker fixture checks parent flag unchanged and clears only its own worker in finally/get5/await5."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.java",
+      "beginline": "33",
+      "endline": "33",
+      "begincolumn": "17",
+      "endcolumn": "35",
+      "rule": "EqualsNull",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryValueContractTest",
+      "method": "raw001SummaryIdentityIncludesEachComponentAndDiagnosticStaysRedacted",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+      "priority": "1",
+      "message": "Avoid using equals() to compare against null"
+    },
+    "sourceSha256": "703488090a0514f9d5f7cc0bd81bf30afa537557f5c2f35cf51a4f14d3a51dec",
+    "sourceAnchor": "assertFalse(value.equals(null));",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Intentional direct generated record equals(null) contract invocation. Replacing with value!=null or assertNotEquals(null,value) would test JUnit/null checks instead of the target equals implementation. Null result false is an independent specified condition, alongside identity/type/every-component/hash vectors."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.java",
+      "beginline": "55",
+      "endline": "55",
+      "begincolumn": "17",
+      "endcolumn": "35",
+      "rule": "EqualsNull",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryValueContractTest",
+      "method": "raw002RunIdentityIncludesBothFieldsWithIndependentJdkHashVector",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+      "priority": "1",
+      "message": "Avoid using equals() to compare against null"
+    },
+    "sourceSha256": "703488090a0514f9d5f7cc0bd81bf30afa537557f5c2f35cf51a4f14d3a51dec",
+    "sourceAnchor": "assertFalse(value.equals(null));",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Intentional direct generated record equals(null) contract invocation. Replacing with value!=null or assertNotEquals(null,value) would test JUnit/null checks instead of the target equals implementation. Null result false is an independent specified condition, alongside identity/type/every-component/hash vectors."
+  },
+  {
+    "raw": {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryValueContractTest.java",
+      "beginline": "71",
+      "endline": "71",
+      "begincolumn": "17",
+      "endcolumn": "35",
+      "rule": "EqualsNull",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.repository",
+      "class": "InspectionSummaryValueContractTest",
+      "method": "raw003CountsRetainAllFieldsAndLiteralDiagnosticWithoutMutableState",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+      "priority": "1",
+      "message": "Avoid using equals() to compare against null"
+    },
+    "sourceSha256": "703488090a0514f9d5f7cc0bd81bf30afa537557f5c2f35cf51a4f14d3a51dec",
+    "sourceAnchor": "assertFalse(value.equals(null));",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Intentional direct generated record equals(null) contract invocation. Replacing with value!=null or assertNotEquals(null,value) would test JUnit/null checks instead of the target equals implementation. Null result false is an independent specified condition, alongside identity/type/every-component/hash vectors."
+  }
+]
