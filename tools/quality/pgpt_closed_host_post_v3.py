@@ -237,7 +237,8 @@ def verify(c, config, source):
         reader = classes['dev/codex/schubert/nk/batch/platform/InspectorUnitProbe$NativeReader']
         streaming = [x for x in reader.findall('method') if x.get('name') in ['executeStreaming', 'queryFailure'] or x.get('name', '').startswith('lambda$executeStreaming$')]
         require(len(streaming) >= 2 and all(all(row['covered'] == 0 for row in counters(x).values()) for x in streaming), 'unqualified streaming lifetime path never executed or credited')
-    targets = {n: counters(classes[n]) for n in c['targetClasses']}
+    from pgpt_natural_nocode_targets import target_counters
+    targets = target_counters(c['targetClasses'], classes, no_code, counters)
     component = {key: dict(covered=sum(v.get(key, {}).get('covered', 0) for v in targets.values()), missed=sum(v.get(key, {}).get('missed', 0) for v in targets.values())) for key in set().union(*(set(v) for v in targets.values()))}
     component100 = all(component.get(k, {}).get('covered', 0) > 0 and component[k]['missed'] == 0 for k in ['LINE', 'METHOD', 'CLASS', 'BRANCH'])
     out = policy.environment(c, 'post'); files = {}; original_unit_xml_hashes = {}
