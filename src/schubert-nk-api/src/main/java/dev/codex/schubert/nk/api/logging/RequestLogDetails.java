@@ -17,7 +17,9 @@ import java.util.Optional;
 final class RequestLogDetails {
   private static final int MAXIMUM_REQUEST_DETAILS_UTF8_BYTES = 1024;
 
-  private RequestLogDetails() {}
+  private RequestLogDetails() {
+    throw new AssertionError("RequestLogDetails is a static codec");
+  }
 
   static String normalize(Optional<String> input, Optional<UserRole> role) {
     Objects.requireNonNull(input, "input");
@@ -27,49 +29,55 @@ final class RequestLogDetails {
       throw invalid();
     }
     JsonObject output = new JsonObject();
-    try (JsonReader reader = new JsonReader(new StringReader(text))) {
-      reader.setStrictness(Strictness.STRICT);
-      reader.setNestingLimit(2);
-      reader.beginObject();
-      var keys = new HashSet<String>();
-      while (reader.hasNext()) {
-        String key = reader.nextName();
-        if (!keys.add(key)) {
-          throw invalid();
+    JsonReader reader = new JsonReader(new StringReader(text));
+    try {
+      try {
+        reader.setStrictness(Strictness.STRICT);
+        reader.setNestingLimit(2);
+        reader.beginObject();
+        var keys = new HashSet<String>();
+        while (reader.hasNext()) {
+          String key = reader.nextName();
+          if (!keys.add(key)) {
+            throw invalid();
+          }
+          switch (key) {
+            case "responseBytes" -> {
+              if (reader.peek() != JsonToken.NUMBER) {
+                throw invalid();
+              }
+              String digits = reader.nextString();
+              if (!digits.matches("0|[1-9][0-9]{0,11}")) {
+                throw invalid();
+              }
+              output.addProperty(key, Long.parseLong(digits));
+            }
+            case "userAgentFamily" -> {
+              String family = string(reader);
+              if (!family.matches("[A-Za-z0-9 ._-]{1,32}")) {
+                throw invalid();
+              }
+              output.addProperty(key, family);
+            }
+            case "truncated" -> output.addProperty(key, reader.nextBoolean());
+            case "projectionStatus" -> {
+              String status = string(reader);
+              if (!status.equals("PENDING") && !status.equals("FAILED")) {
+                throw invalid();
+              }
+              output.addProperty(key, status);
+            }
+            default -> throw invalid();
+          }
         }
-        switch (key) {
-          case "responseBytes" -> {
-            if (reader.peek() != JsonToken.NUMBER) {
-              throw invalid();
-            }
-            String digits = reader.nextString();
-            if (!digits.matches("0|[1-9][0-9]{0,11}")) {
-              throw invalid();
-            }
-            output.addProperty(key, Long.parseLong(digits));
-          }
-          case "userAgentFamily" -> {
-            String family = string(reader);
-            if (!family.matches("[A-Za-z0-9 ._-]{1,32}")) {
-              throw invalid();
-            }
-            output.addProperty(key, family);
-          }
-          case "truncated" -> output.addProperty(key, reader.nextBoolean());
-          case "projectionStatus" -> {
-            String status = string(reader);
-            if (!status.equals("PENDING") && !status.equals("FAILED")) {
-              throw invalid();
-            }
-            output.addProperty(key, status);
-          }
-          default -> throw invalid();
-        }
+        reader.endObject();
+        // STRICT peek after the root consumes whitespace and throws for every trailing value.
+        // Its only successful outcome here is END_DOCUMENT; no second parser/oracle is needed.
+        reader.peek();
+      } finally {
+        // PG-D-1172: this nonnull memory reader is owned here, including parser rejection.
+        reader.close();
       }
-      reader.endObject();
-      // STRICT peek after the root consumes whitespace and throws for every trailing value.
-      // Its only successful outcome here is END_DOCUMENT; no second parser/oracle is needed.
-      reader.peek();
     } catch (IOException | IllegalStateException failure) {
       // Parser diagnostics may contain untrusted JSON. Do not attach them to the safe error.
       throw invalid();

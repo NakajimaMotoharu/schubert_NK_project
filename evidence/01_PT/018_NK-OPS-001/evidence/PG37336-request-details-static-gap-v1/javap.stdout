@@ -1,0 +1,252 @@
+Compiled from "RequestLogDetails.java"
+final class dev.codex.schubert.nk.api.logging.RequestLogDetails {
+  private static final int MAXIMUM_REQUEST_DETAILS_UTF8_BYTES;
+    descriptor: I
+
+  private dev.codex.schubert.nk.api.logging.RequestLogDetails();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  static java.lang.String normalize(java.util.Optional<java.lang.String>, java.util.Optional<dev.codex.schubert.nk.protocol.layout.semantic.UserRole>);
+    descriptor: (Ljava/util/Optional;Ljava/util/Optional;)Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: ldc           #7                  // String input
+         3: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_1
+         8: ldc           #15                 // String role
+        10: invokestatic  #9                  // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload_0
+        15: ldc           #17                 // String {}
+        17: invokevirtual #19                 // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+        20: checkcast     #25                 // class java/lang/String
+        23: astore_2
+        24: aload_2
+        25: getstatic     #27                 // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+        28: invokevirtual #33                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+        31: arraylength
+        32: sipush        1024
+        35: if_icmple     42
+        38: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+        41: athrow
+        42: new           #43                 // class com/google/gson/JsonObject
+        45: dup
+        46: invokespecial #45                 // Method com/google/gson/JsonObject."<init>":()V
+        49: astore_3
+        50: new           #46                 // class com/google/gson/stream/JsonReader
+        53: dup
+        54: new           #48                 // class java/io/StringReader
+        57: dup
+        58: aload_2
+        59: invokespecial #50                 // Method java/io/StringReader."<init>":(Ljava/lang/String;)V
+        62: invokespecial #53                 // Method com/google/gson/stream/JsonReader."<init>":(Ljava/io/Reader;)V
+        65: astore        4
+        67: aload         4
+        69: getstatic     #56                 // Field com/google/gson/Strictness.STRICT:Lcom/google/gson/Strictness;
+        72: invokevirtual #62                 // Method com/google/gson/stream/JsonReader.setStrictness:(Lcom/google/gson/Strictness;)V
+        75: aload         4
+        77: iconst_2
+        78: invokevirtual #66                 // Method com/google/gson/stream/JsonReader.setNestingLimit:(I)V
+        81: aload         4
+        83: invokevirtual #70                 // Method com/google/gson/stream/JsonReader.beginObject:()V
+        86: new           #73                 // class java/util/HashSet
+        89: dup
+        90: invokespecial #75                 // Method java/util/HashSet."<init>":()V
+        93: astore        5
+        95: aload         4
+        97: invokevirtual #76                 // Method com/google/gson/stream/JsonReader.hasNext:()Z
+       100: ifeq          423
+       103: aload         4
+       105: invokevirtual #80                 // Method com/google/gson/stream/JsonReader.nextName:()Ljava/lang/String;
+       108: astore        6
+       110: aload         5
+       112: aload         6
+       114: invokevirtual #84                 // Method java/util/HashSet.add:(Ljava/lang/Object;)Z
+       117: ifne          124
+       120: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       123: athrow
+       124: aload         6
+       126: astore        7
+       128: iconst_m1
+       129: istore        8
+       131: aload         7
+       133: invokevirtual #88                 // Method java/lang/String.hashCode:()I
+       136: lookupswitch  { // 4
+             -1117425154: 196
+              -577482975: 228
+              1607950270: 212
+              1650146474: 180
+                 default: 241
+            }
+       180: aload         7
+       182: ldc           #92                 // String responseBytes
+       184: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       187: ifeq          241
+       190: iconst_0
+       191: istore        8
+       193: goto          241
+       196: aload         7
+       198: ldc           #97                 // String userAgentFamily
+       200: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       203: ifeq          241
+       206: iconst_1
+       207: istore        8
+       209: goto          241
+       212: aload         7
+       214: ldc           #99                 // String truncated
+       216: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       219: ifeq          241
+       222: iconst_2
+       223: istore        8
+       225: goto          241
+       228: aload         7
+       230: ldc           #101                // String projectionStatus
+       232: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       235: ifeq          241
+       238: iconst_3
+       239: istore        8
+       241: iload         8
+       243: tableswitch   { // 0 to 3
+                       0: 272
+                       1: 325
+                       2: 357
+                       3: 374
+                 default: 416
+            }
+       272: aload         4
+       274: invokevirtual #103                // Method com/google/gson/stream/JsonReader.peek:()Lcom/google/gson/stream/JsonToken;
+       277: getstatic     #107                // Field com/google/gson/stream/JsonToken.NUMBER:Lcom/google/gson/stream/JsonToken;
+       280: if_acmpeq     287
+       283: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       286: athrow
+       287: aload         4
+       289: invokevirtual #113                // Method com/google/gson/stream/JsonReader.nextString:()Ljava/lang/String;
+       292: astore        9
+       294: aload         9
+       296: ldc           #116                // String 0|[1-9][0-9]{0,11}
+       298: invokevirtual #118                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       301: ifne          308
+       304: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       307: athrow
+       308: aload_3
+       309: aload         6
+       311: aload         9
+       313: invokestatic  #122                // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+       316: invokestatic  #128                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+       319: invokevirtual #132                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Number;)V
+       322: goto          420
+       325: aload         4
+       327: invokestatic  #136                // Method string:(Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;
+       330: astore        9
+       332: aload         9
+       334: ldc           #140                // String [A-Za-z0-9 ._-]{1,32}
+       336: invokevirtual #118                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       339: ifne          346
+       342: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       345: athrow
+       346: aload_3
+       347: aload         6
+       349: aload         9
+       351: invokevirtual #142                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       354: goto          420
+       357: aload_3
+       358: aload         6
+       360: aload         4
+       362: invokevirtual #145                // Method com/google/gson/stream/JsonReader.nextBoolean:()Z
+       365: invokestatic  #148                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+       368: invokevirtual #153                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Boolean;)V
+       371: goto          420
+       374: aload         4
+       376: invokestatic  #136                // Method string:(Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;
+       379: astore        9
+       381: aload         9
+       383: ldc           #156                // String PENDING
+       385: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       388: ifne          405
+       391: aload         9
+       393: ldc           #158                // String FAILED
+       395: invokevirtual #94                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       398: ifne          405
+       401: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       404: athrow
+       405: aload_3
+       406: aload         6
+       408: aload         9
+       410: invokevirtual #142                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+       413: goto          420
+       416: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       419: athrow
+       420: goto          95
+       423: aload         4
+       425: invokevirtual #160                // Method com/google/gson/stream/JsonReader.endObject:()V
+       428: aload         4
+       430: invokevirtual #103                // Method com/google/gson/stream/JsonReader.peek:()Lcom/google/gson/stream/JsonToken;
+       433: pop
+       434: aload         4
+       436: invokevirtual #163                // Method com/google/gson/stream/JsonReader.close:()V
+       439: goto          464
+       442: astore        5
+       444: aload         4
+       446: invokevirtual #163                // Method com/google/gson/stream/JsonReader.close:()V
+       449: goto          461
+       452: astore        6
+       454: aload         5
+       456: aload         6
+       458: invokevirtual #168                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       461: aload         5
+       463: athrow
+       464: goto          473
+       467: astore        4
+       469: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+       472: athrow
+       473: aload_1
+       474: aload_3
+       475: invokedynamic #176,  0            // InvokeDynamic #0:accept:(Lcom/google/gson/JsonObject;)Ljava/util/function/Consumer;
+       480: invokevirtual #180                // Method java/util/Optional.ifPresent:(Ljava/util/function/Consumer;)V
+       483: aload_3
+       484: invokevirtual #184                // Method com/google/gson/JsonObject.toString:()Ljava/lang/String;
+       487: areturn
+      Exception table:
+         from    to  target type
+            67   434   442   Class java/lang/Throwable
+           444   449   452   Class java/lang/Throwable
+            50   464   467   Class java/io/IOException
+            50   464   467   Class java/lang/IllegalStateException
+
+  private static java.lang.String string(com.google.gson.stream.JsonReader) throws java.io.IOException;
+    descriptor: (Lcom/google/gson/stream/JsonReader;)Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokevirtual #103                // Method com/google/gson/stream/JsonReader.peek:()Lcom/google/gson/stream/JsonToken;
+         4: getstatic     #187                // Field com/google/gson/stream/JsonToken.STRING:Lcom/google/gson/stream/JsonToken;
+         7: if_acmpeq     14
+        10: invokestatic  #39                 // Method invalid:()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+        13: athrow
+        14: aload_0
+        15: invokevirtual #113                // Method com/google/gson/stream/JsonReader.nextString:()Ljava/lang/String;
+        18: areturn
+
+  private static dev.codex.schubert.nk.protocol.codec.PermanentProtocolException invalid();
+    descriptor: ()Ldev/codex/schubert/nk/protocol/codec/PermanentProtocolException;
+    Code:
+         0: new           #190                // class dev/codex/schubert/nk/protocol/codec/PermanentProtocolException
+         3: dup
+         4: ldc           #192                // String REQUEST log details violate the safe projection contract
+         6: invokespecial #194                // Method dev/codex/schubert/nk/protocol/codec/PermanentProtocolException."<init>":(Ljava/lang/String;)V
+         9: areturn
+
+  private static void lambda$normalize$0(com.google.gson.JsonObject, dev.codex.schubert.nk.protocol.layout.semantic.UserRole);
+    descriptor: (Lcom/google/gson/JsonObject;Ldev/codex/schubert/nk/protocol/layout/semantic/UserRole;)V
+    Code:
+         0: aload_0
+         1: ldc           #195                // String actorRole
+         3: aload_1
+         4: invokevirtual #197                // Method dev/codex/schubert/nk/protocol/layout/semantic/UserRole.name:()Ljava/lang/String;
+         7: invokevirtual #142                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/String;)V
+        10: return
+}
