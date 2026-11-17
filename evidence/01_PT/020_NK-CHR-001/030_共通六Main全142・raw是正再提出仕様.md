@@ -1,0 +1,5 @@
+# NK-CHR-001 共通工具六Main・全142仕様
+
+事前仕様は018/4481、PG-D1171、source4fa8979fに固定済み。SS355/RD SCP004・TST001～005/UI223・264/451、原124whole17＋既value5＋新13の20wholeクラスを対象とする。期待値は元独立golden/byte/JSON/固定case集合を保持し、新13は例外identity、一回close、literal順序、固定hash衝突vector、出力claim・finally優先順位から独立に作成した。詳細Test IDはclass.method(Path又はparam variant)で一意にmatrixへ結合する。
+
+BUG3171初回141成功1失敗は保全し、匿名fixture内の継承field shadowだけをownedOutput localに修正した。Java token逆変換一致で期待文字列も不変。修正後sourceで必要なwhole142を一回実測し、旧execを合算しない。実Current/NKアプリや原baselineをfixture書込み先へ使わず、所有haruka scratchの公開copyだけを使う。全16physicalを保持し、Codeのない4interfaceは自然0/0を一覧に残す。
