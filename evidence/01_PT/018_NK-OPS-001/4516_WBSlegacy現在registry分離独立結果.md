@@ -1,0 +1,5 @@
+# WBS legacy/current registry分離結果
+
+修正commit 4b865bb6bb2df7eef4e41ba62c631d587ef4e295、PG37828独立結果。正規b1c68a0cからlegacy1061を元semantic digest1f950…のまま固定し、現1123・追加62・hash/basis更新11を未受入の別層へ保全。元owner/cost/kindに変更0、二DDLのlogical/cost分離は既存公開PG32654へ拘束。古いcandidateへ混入した後発二行（V029 DDL/MorningSqlFailures Main）は原945とsidecar・現registryに保持し、固定candidate943を元digest38247…へ正しく修復。Source/oldHEAD/reset・実source/DB/private/鍵等の操作なし。
+
+原whole判定を保護する新8工具checkと既存20reader/projection check0。PG37804/37818の元失敗1は保全、37822所定structure監査0は旧source7aed/1068構造だけ。37824全監査actual1/HOLD、現MainCorea013のSource全体・G13/451/正式受入ではない。486参照hash現一致、他全snapshot/元190row/481484価格byte不変。BUG3190/3191/YKT2658 metadata限定close、正式1964/53・17/190・新受入0・工数null。

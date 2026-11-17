@@ -1,5 +1,9 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-18 legacy履歴と現在preparation登録を分離（BUG3190/3191・YKT2658）
+
+固定viewのlegacy1061/originalcandidate943はimmutable proof/digestを保護する。現在artifacts1123は未受入preparation registryで、追加名/sha-basis差分/論理・費用分離根拠をcurrentPreparationRegistryBinding20261117の公開sidecarへ明示する。新登録時は既存の所有/費用/型と元行不変を確認し、当該bindingも再生成・pinする。旧digestをcurrentへ書換えず、既存成果は消さない。PG37822のstructure0は7aed/1068の固定構造、PG37824全監査はHOLDであり、最新a013全trace/451/親受入へ昇格しない。新8＋変更reader既存20工具checkは製品PTではない。485保存末尾は前節の参照hash再結合/checkと所定監査真正結果保存を行う。
+
 ## 2026-11-17 WBS参照hashを保存単位で再結合（BUG3189/YKT2657）
 
 - 485/486の補足overlayを更新した保存単位では、最後に `python3 -B tools/quality/pmo_inventory_reference.py --rebind` で486の485参照hashだけを再結合し、引数なしの同toolが0になることを確認する。190項目の受入・元価格・旧snapshot意味は変更しない。
