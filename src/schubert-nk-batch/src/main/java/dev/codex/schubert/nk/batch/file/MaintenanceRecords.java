@@ -26,7 +26,10 @@ public final class MaintenanceRecords {
   private static final DateTimeFormatter TIME =
       new DateTimeFormatterBuilder().appendInstant(6).toFormatter(Locale.ROOT);
 
-  private MaintenanceRecords() {}
+  // PG-D-1170/PT-BAT-MREC-RAW001: a pure static codec has no instance lifecycle.
+  private MaintenanceRecords() {
+    throw new AssertionError("MaintenanceRecords is a static codec");
+  }
 
   public static byte[] anchor(BatchRun run) {
     return ascii("NKRUN1\n" + identity(Objects.requireNonNull(run, "run")));
