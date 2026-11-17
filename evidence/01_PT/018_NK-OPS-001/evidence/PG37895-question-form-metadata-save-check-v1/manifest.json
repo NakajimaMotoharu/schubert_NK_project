@@ -1,0 +1,28 @@
+{
+  "terminalAtUTC": "2026-11-17T16:40:14.064208+00:00",
+  "stages": [
+    {
+      "label": "structure",
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py",
+        "--current-source-structure-only"
+      ],
+      "actualExit": 0
+    },
+    {
+      "label": "full",
+      "command": [
+        "python3",
+        "-B",
+        "tools/quality/wbs_progress_audit.py"
+      ],
+      "actualExit": 1
+    }
+  ],
+  "old7aedStructureOnly": true,
+  "currentA013WholeTraceNotQualified": true,
+  "productTestsExecuted": 0,
+  "newAcceptance": 0
+}

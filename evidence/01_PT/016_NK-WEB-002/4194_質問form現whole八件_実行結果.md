@@ -1,0 +1,3 @@
+# 4194 QuestionSubmitForm現whole8結果
+
+PG37890 whole8 FESnotrun0、37892独立177 CRC/init/公開XML、37894条件返却。Source 1cda3a6a3789f0cf8870824272b37ae43d716bf0。required四指標56L13M1C32B全100、instruction281covered/6missは保持。4526と37894の限界・未観測exceptioncleanupを維持。全HTTP画面/全module/451/親P01618正式受入へ拡張0。
