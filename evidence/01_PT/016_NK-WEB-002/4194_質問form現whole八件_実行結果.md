@@ -1,3 +1,5 @@
 # 4194 QuestionSubmitForm現whole8結果
 
 PG37890 whole8 FESnotrun0、37892独立177 CRC/init/公開XML、37894条件返却。Source 1cda3a6a3789f0cf8870824272b37ae43d716bf0。required四指標56L13M1C32B全100、instruction281covered/6missは保持。4526と37894の限界・未観測exceptioncleanupを維持。全HTTP画面/全module/451/親P01618正式受入へ拡張0。
+
+2026-11-18後続：BUG3196/YKT2662によりCorefda03/Unit82beeaの変更scope whole33（質問原8含む）を37928/30/32で別資格化した。旧本記録1cda/sourcea013のinstruction6未観測は保持、新sourceには4196/4529を参照し旧exec合算0。

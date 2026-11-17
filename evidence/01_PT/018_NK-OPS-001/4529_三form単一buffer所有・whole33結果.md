@@ -1,0 +1,9 @@
+# 4529 三form単一buffer所有・必要whole33結果
+
+修正Core `fda03f9f80e13cc81b96ff0da52a43bc83828413`、Unit `82beea0ba2eafbc0ed5957235f7f22b24dbccf4b`。PG37928=UserCreate8/Mutation17/Question8の33件・F/E/S/notrun0/timeoutfalse。PG37930独立全184CRC/init/公開XMLとraw、37932条件返却。Code7全284L72M7C150B1423I miss0、bridge4も全実行。UserChangeForm五abstractは自然NoCode0/0として保持し、全184依存/全Web/全六moduleの100や全451へ拡張しない。旧37912の別33（Target8含む）と37914 raw2L/18I未達、旧Question37892 I6未観測は原source/runのまま保存し、新sourceへ合算0。
+
+BUG3195/YKT2659: 実controllerと同じsealedinterface callの独立golden一件を元Testへ追加、元32bodyは追加diff以外完全保持。BUG3196/YKT2662: 一時byte即消去とconstructor最後のownedchar一回割当、invalidpassword保持無し/Questioninvalid再表示維持。全16form sourceのownedcharはこの三型だけ、他13は非該当/委譲を照合し全三型を当33で再試験。publicAPI3同一、製品RootNullAwayMain8/strictTest3/MaxLow8全classStats0/CSformat0、PMD19個別非該当/適用未分類0、Protocol176は現同byte/MaxLow251から参照して再演0。
+
+独立bytecode所有順37925v3はpublicABI/field数同一・metadatacopy先/char生成最後、secretgetBytesの次invokeがArrays.fill、closefill維持を確認。元draft37924はusername/passwordのgetBytes仮定違い、37925v2はjavap記法仮定違いのguard1で、原出力を保存し製品試験/拒否扱い0。具体検証は4528及び各manifestの日時/OS/JDK/source/command/exit/input/oracle/hash。whole33は一source/一exec、旧exec合成/手動除外/特殊Error人工注入なし。
+
+PG/PT個別部分の不足はF03/P01616/P01617/P01618へ返却。実controller/API/HTTP/DB/認可/session/token永続化・Root/cohort/VM/native/鍵/四held等は未実行HOLD。元190新規正式0・正式1964/53・工数nullを維持。元群開始.6/1.8/4.5cap5内の是正、Source再資格とprivatePG手戻りを混同せず実費配賦null、元価格/各S/V上限不変。
