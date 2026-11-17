@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.media;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -189,6 +190,29 @@ final class MediaVerifiedProjectionTest {
             .descriptor()
             .orElseThrow()
             .logicalId());
+  }
+
+  @Test
+  void hashCollisionLayoutsNeverAcquireAProjectionFromALegitimateResult() throws Exception {
+    MediaType[] types = {MediaType.AUDIO, MediaType.VIDEO, MediaType.MUSIC};
+    String[][] vectors = {
+      {"AUDREQ01", "B6DREQ01"}, {"VIDREQ01", "VIDRF201"}, {"MEDREQ01", "MEDRF201"}
+    };
+    for (int index = 0; index < vectors.length; index++) {
+      assertNotEquals(vectors[index][0], vectors[index][1]);
+      assertEquals(vectors[index][0].hashCode(), vectors[index][1].hashCode());
+      var valid = request(types[index], LOGICAL_ID, ContentDisposition.INLINE);
+      var response = exchange(valid, types[index], LOGICAL_ID, ContentDisposition.INLINE, SUCCESS);
+      var invalid =
+          new TypedPayloadValues(new LayoutId(vectors[index][1]), valid.data(), List.of());
+      reject(invalid, response);
+      assertEquals(
+          LOGICAL_ID,
+          MediaResponseDecoder.decodeVerified(valid, response)
+              .descriptor()
+              .orElseThrow()
+              .logicalId());
+    }
   }
 
   private static void reject(TypedPayloadValues request, ProtectedReadWireClient.Result response) {

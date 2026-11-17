@@ -1,0 +1,25 @@
+Compiled from "MediaResponseDecoder.java"
+final class dev.codex.schubert.nk.web.media.MediaResponseDecoder$Binding {
+  private final dev.codex.schubert.nk.protocol.file.MediaType type;
+
+  private final java.lang.String id;
+
+  private final dev.codex.schubert.nk.protocol.file.ContentDisposition disposition;
+
+  private dev.codex.schubert.nk.web.media.MediaResponseDecoder$Binding(dev.codex.schubert.nk.protocol.file.MediaType, java.lang.String, dev.codex.schubert.nk.protocol.file.ContentDisposition);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field type:Ldev/codex/schubert/nk/protocol/file/MediaType;
+         9: aload_0
+        10: aload_2
+        11: getstatic     #13                 // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+        14: invokestatic  #19                 // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+        17: putfield      #25                 // Field id:Ljava/lang/String;
+        20: aload_0
+        21: aload_3
+        22: putfield      #29                 // Field disposition:Ldev/codex/schubert/nk/protocol/file/ContentDisposition;
+        25: return
+}

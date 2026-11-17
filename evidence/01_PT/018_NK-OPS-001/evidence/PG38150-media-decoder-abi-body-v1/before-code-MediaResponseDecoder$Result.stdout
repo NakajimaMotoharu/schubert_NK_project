@@ -1,0 +1,46 @@
+Compiled from "MediaResponseDecoder.java"
+public final class dev.codex.schubert.nk.web.media.MediaResponseDecoder$Result {
+  private final dev.codex.schubert.nk.protocol.header.ResultCode code;
+
+  private final java.util.Optional<dev.codex.schubert.nk.protocol.file.MediaDescriptor> retainedDescriptor;
+
+  private final java.util.Optional<dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData> video;
+
+  private dev.codex.schubert.nk.web.media.MediaResponseDecoder$Result(dev.codex.schubert.nk.protocol.header.ResultCode, java.util.Optional<dev.codex.schubert.nk.protocol.file.MediaDescriptor>, java.util.Optional<dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData>);
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #7                  // Field code:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         9: aload_0
+        10: aload_2
+        11: putfield      #13                 // Field retainedDescriptor:Ljava/util/Optional;
+        14: aload_0
+        15: aload_3
+        16: putfield      #17                 // Field video:Ljava/util/Optional;
+        19: return
+
+  public dev.codex.schubert.nk.protocol.header.ResultCode resultCode();
+    Code:
+         0: aload_0
+         1: getfield      #7                  // Field code:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         4: areturn
+
+  public java.util.Optional<dev.codex.schubert.nk.protocol.file.MediaDescriptor> descriptor();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field retainedDescriptor:Ljava/util/Optional;
+         4: areturn
+
+  public java.util.Optional<dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData> videoMetadata();
+    Code:
+         0: aload_0
+         1: getfield      #17                 // Field video:Ljava/util/Optional;
+         4: areturn
+
+  public java.lang.String toString();
+    Code:
+         0: ldc           #20                 // String MediaResponse[REDACTED]
+         2: areturn
+}

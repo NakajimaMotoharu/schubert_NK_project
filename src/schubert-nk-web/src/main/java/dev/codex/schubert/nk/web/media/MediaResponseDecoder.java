@@ -34,7 +34,9 @@ import java.util.Optional;
  * of API HMAC keys.
  */
 public final class MediaResponseDecoder {
-  private MediaResponseDecoder() {}
+  private MediaResponseDecoder() {
+    throw new AssertionError("static namespace");
+  }
 
   /** Validated projection only; error responses contain neither descriptor nor video metadata. */
   public static final class Result {
@@ -177,31 +179,25 @@ public final class MediaResponseDecoder {
     require(typed.records().isEmpty());
     String layout = typed.layoutId().value();
     require(layout.equals("AUDREQ01") || layout.equals("VIDREQ01") || layout.equals("MEDREQ01"));
-    return switch (layout) {
-      case "AUDREQ01" -> {
-        require(typed.data() instanceof AudioDescriptorRequestData);
-        var audio = (AudioDescriptorRequestData) typed.data();
-        yield new Binding(
-            MediaType.AUDIO,
-            Long.toString(audio.audioId().value()),
-            ContentDisposition.valueOf(audio.disposition().name()));
-      }
-      case "VIDREQ01" -> {
-        require(typed.data() instanceof VideoDescriptorRequestData);
-        yield new Binding(
-            MediaType.VIDEO,
-            ((VideoDescriptorRequestData) typed.data()).videoId(),
-            ContentDisposition.INLINE);
-      }
-      default -> {
-        require(typed.data() instanceof MusicDescriptorRequestData);
-        var music = (MusicDescriptorRequestData) typed.data();
-        yield new Binding(
-            MediaType.MUSIC,
-            music.trackId(),
-            ContentDisposition.valueOf(music.disposition().name()));
-      }
-    };
+    if (layout.equals("AUDREQ01")) {
+      require(typed.data() instanceof AudioDescriptorRequestData);
+      var audio = (AudioDescriptorRequestData) typed.data();
+      return new Binding(
+          MediaType.AUDIO,
+          Long.toString(audio.audioId().value()),
+          ContentDisposition.valueOf(audio.disposition().name()));
+    }
+    if (layout.equals("VIDREQ01")) {
+      require(typed.data() instanceof VideoDescriptorRequestData);
+      return new Binding(
+          MediaType.VIDEO,
+          ((VideoDescriptorRequestData) typed.data()).videoId(),
+          ContentDisposition.INLINE);
+    }
+    require(typed.data() instanceof MusicDescriptorRequestData);
+    var music = (MusicDescriptorRequestData) typed.data();
+    return new Binding(
+        MediaType.MUSIC, music.trackId(), ContentDisposition.valueOf(music.disposition().name()));
   }
 
   private static boolean sameContext(AuthenticationContext first, AuthenticationContext second) {
