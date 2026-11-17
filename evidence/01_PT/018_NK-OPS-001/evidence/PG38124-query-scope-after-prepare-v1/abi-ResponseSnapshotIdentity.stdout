@@ -1,0 +1,23 @@
+Compiled from "ResponseSnapshotIdentity.java"
+public final class dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity extends java.lang.Record {
+  private final java.util.UUID requestMessageId;
+  private final java.lang.String responseLayoutId;
+  private final java.lang.String responseVersion;
+  private final java.util.OptionalLong ownerUserId;
+  private static final byte[] AAD_PURPOSE;
+  private static final byte[] AAD_TABLE;
+  private static final long MAXIMUM_OWNER_ID;
+  public dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity(java.util.UUID, java.lang.String, java.lang.String, java.util.OptionalLong);
+  public static dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity authenticated(java.util.UUID, java.lang.String, java.lang.String, long);
+  public static dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity anonymous(java.util.UUID, java.lang.String, java.lang.String);
+  byte[] aad(byte, java.lang.String);
+  private static void putLengthPrefixed(java.nio.ByteBuffer, byte[]);
+  public java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.UUID requestMessageId();
+  public java.lang.String responseLayoutId();
+  public java.lang.String responseVersion();
+  public java.util.OptionalLong ownerUserId();
+  static {};
+}

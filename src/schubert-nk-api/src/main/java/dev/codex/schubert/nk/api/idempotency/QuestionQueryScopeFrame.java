@@ -13,7 +13,9 @@ import java.util.Objects;
 public final class QuestionQueryScopeFrame {
   private static final byte[] MAGIC = {'N', 'K', 'Q', 'R', 'Y', '1', 0};
 
-  private QuestionQueryScopeFrame() {}
+  private QuestionQueryScopeFrame() {
+    throw new AssertionError("static namespace");
+  }
 
   public static byte[] wrap(Role capturedScope, byte[] wire) {
     Objects.requireNonNull(capturedScope, "captured scope");
