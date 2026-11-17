@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5739",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "af0648bc43dc8d5018803424c9bdc7f7c7697e357fadee9df50a953fc75bc887",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:28:25.027000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:28:01.318663+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-RECEIPT-REFERENCE-VALUE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-RECEIPT-REFERENCE-VALUE-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03/P018-10.03 CATALOG-040, owner P011-04. Standalone ReceiptReference immutable value lexical identity and redacted diagnostic, same approved SS331 format. Literal min/max, unknown/null/precision and hash/equals against independent expectation, no change to production. Separate small synthetic value test class with no HTTP, authentication, real DB, provider fixture, backend, held classes, permission changes or extraction/replay of earlier fixtures.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG27930-question-pure18-independent-v1/manifest.json",
+        "sha256": "488dd15315f46f9e34f876e910fba7f77f8fe4201e7685c0a47dd2c1f35c7d29"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+        "sha256": "f57d908ade963d03a7f1dd12dc93e0bd89fefa27223c674c3d363014913c64de"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38244-receipt-reference-value-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P011-04",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "RCPT001-VALUE",
+      "RCPT001-BOUNDARY",
+      "RCPT001-NEGATIVE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5738",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38252-receipt-reference-independent-v1/manifest.json",
+      "sha256": "3a6ffd82f5bde619a2a4dcc5159c74ea0986e0f318428919f19f7caffa940767"
+    },
+    "actualUnitSource": "543cea61d313e06eb7a3dd5106e376a4a8bb0662",
+    "firstRunSuccessNumerator": 3,
+    "firstRunDenominator": 3,
+    "productTestReruns": 0,
+    "technicalMeasurement": {
+      "tests": 3,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 1,
+      "targetCodeMethods": 8,
+      "targetCoverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 68
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "criterionReductions": [
+      "F03/P018-10.03 CATALOG-040: exact ReceiptReference value-only accepted lexical bounds, precision, full generated methods and redaction."
+    ],
+    "remainingCriteria": [
+      "Repository and HTTP/authorization behavior, outer redaction failure, F03 / 451, formal end dependencies."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "completedAdditionalPricePp": 0.9,
+    "totalCompletedAdditionalPricePp": 29.15,
+    "nextCommand": "Preserve this subset, continue independent permitted work and update quality on any new source."
+  }
+}
