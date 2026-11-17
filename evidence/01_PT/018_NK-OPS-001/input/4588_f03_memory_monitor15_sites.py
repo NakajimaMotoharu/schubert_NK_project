@@ -1,0 +1,18 @@
+"""Review15 memory-only monitor sections; leave callback/clock/IO monitor sections unresolved."""
+from pathlib import Path
+import datetime
+import hashlib
+import json
+
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';w=r.parent/'pgpt-runs/PG379';load=lambda p:json.loads(p.read_text());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p))
+prior=b/'evidence/PG37072-f03-opaque-unknown16-applicability-v1';previous=load(prior/'manifest.json');left=load(prior/'remaining-unmatched.json');blocks=load(w/'pg37074-sync54-structural-facts.json');names={'AlertLifecycle.java','ContinuousConditionWindow.java','TimedDbPoolMonitor.java','TimedFilesystemMonitor.java','TimedJvmHeapMonitor.java','TimedSyncLatencyMonitor.java'}
+selected=[x for x in blocks if Path(x['path']).name in names or x['method'] in ['status','invalidate'] and not x['calls']];assert len(selected)==15
+lookup={x['rawFindingIndex']:x for x in left};owners={x['path']:x for x in load(next((r/'documents/400_PGPT/470_PMO').glob('485_*.json')))['artifacts']};sites=[]
+for x in selected:
+ i=x['rawFindingIndex'];raw=lookup[i]['raw'];path=r/x['path'];assert raw['rule']=='AvoidSynchronizedStatement' and sha(path)==x['sourceSha256'] and raw['path']==x['path'] and int(raw['beginline'])==x['line']
+ assert not any(c in x['calls'] for c in ['getAsLong','instant','apply','increment','read','write','force','waitFor','open','verify'])
+ owner=owners[x['path']];sites.append(dict(rawFindingIndex=i,path=x['path'],sourceSha256=x['sourceSha256'],line=x['line'],column=int(raw['begincolumn']),rule=raw['rule'],method=x['method'],owner=owner['owner'],costOwner=owner['costOwner'],monitor=x['monitor'],fullSynchronizedBody=x['fullBody'],calls=x['calls'],decision='NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY',reason='Java25/JEP491 monitor acquisition/ordinary blocking is unpinned; pinned PMD7.28 rule still warns every synchronized statement. This entire section and its closed supplied-value/lifecycle callees only update/check immutable observations and primitive/Optional alert state, or return/invalidate an existing in-memory status. It performs no native/FD/DB/network IO or arbitrary callback/clock/registry call. Private monitor atomicity is required for consistent monotonic/alert/lifetime state; replacing with unsynchronized fields would violate that contract. IO/callback/native monitor sites remain separately unresolved, and no actual performance or IT/ST claim is made.',performanceOrFunctionalPtReplaced=False))
+indices={x['rawFindingIndex'] for x in sites};assert len(indices)==15;remaining=[x for x in left if x['rawFindingIndex'] not in indices];assert len(remaining)==192
+out=b/'evidence/PG37076-f03-memory-monitor15-applicability-v1';assert not out.exists();out.mkdir();(out/'site-decisions.json').write_text(json.dumps(sites,ensure_ascii=False,indent=2)+'\n');(out/'remaining-unmatched.json').write_text(json.dumps(remaining,ensure_ascii=False,indent=2)+'\n')
+v=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),sourceCore=previous['sourceCore'],reviewOnly=True,newFinalDispositions=15,finalWithPrior=779,remainingUnmatched=192,unconfirmedReuseCandidates=0,totalOriginalRaw=971,all971Reconciled=779+192==971,prior=ref(prior/'manifest.json'),sites=ref(out/'site-decisions.json'),remaining=ref(out/'remaining-unmatched.json'),sourceRuleSuppressionChanges=0,productTestsExecuted=0,actualRootNativeOrRecoveryOperations=0,newAcceptance=0,wholeF03Accepted=False,formalUpdated=False,effortCompletionRate=None)
+(out/'manifest.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(actualExit=0,memoryMonitorSites=15,final=779,remaining=192,newAcceptance=0)))

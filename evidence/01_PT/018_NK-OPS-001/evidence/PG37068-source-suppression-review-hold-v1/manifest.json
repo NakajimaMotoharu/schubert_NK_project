@@ -1,0 +1,48 @@
+{
+  "actualExit": 0,
+  "atUTC": "2026-11-16T23:35:58.137029+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "reviewOnly": true,
+  "bug": "BUG3152",
+  "horizontal": "YKT2621",
+  "rootSites": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java",
+      "line": 173,
+      "sourceLine": "failure.addSuppressed(uncertain);",
+      "sourceSha256": "5018386f09b4e29ed51e94c1784bd87f257f80fdbd78257eac305d600c7efa04"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java",
+      "line": 218,
+      "sourceLine": "failure.addSuppressed(uncertain);",
+      "sourceSha256": "5018386f09b4e29ed51e94c1784bd87f257f80fdbd78257eac305d600c7efa04"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java",
+      "line": 322,
+      "sourceLine": "failure.addSuppressed(uncertain);",
+      "sourceSha256": "5018386f09b4e29ed51e94c1784bd87f257f80fdbd78257eac305d600c7efa04"
+    }
+  ],
+  "sourceUniverse": 86,
+  "sourceUniverseIncludesSafeGuardsFreshFactoriesAndDisjointTypes": true,
+  "requiresReviewNotAllDefects": true,
+  "actualRootOrFailedCohortRecoveryExecuted": false,
+  "targetReproductionExecuted": false,
+  "productionChanged": false,
+  "individualHoldMaintained": true,
+  "staticFinding": "Root three catch cleanup sites directly add uncertain to failure. Java prohibits throwable self-suppression. If both callbacks deliver the same allowed Throwable object, this expression raises IllegalArgumentException instead of the explicitly outgoing original failure. No operation/reachability is demonstrated by this source scan.",
+  "status": "OPEN_STATIC_FINDING_HOLD_REPRODUCTION_AND_FIX_SCOPE_REVIEW",
+  "fixScopeForecastOnly": {
+    "low": 0.15,
+    "base": 0.45,
+    "high": 1.2,
+    "cap": 2,
+    "scope": "Source guard plus permitted review/static only; actual held recovery PT excluded and not zeroed",
+    "started": false,
+    "notCharged": true
+  },
+  "newAcceptance": 0,
+  "formalUpdated": false
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "rawFindingIndex": 680,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 671,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "active",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 509,
+        "sourceLine": "session.active = false;"
+      },
+      {
+        "line": 671,
+        "sourceLine": "private volatile boolean active = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "Owner-lifetime tombstone: constructor true, outer owned release writes false only. Visibility is needed so a stale capability refuses work; there is no read-modify-write operation or counter. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 681,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 672,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "backupCommitted",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 905,
+        "sourceLine": "backupCommitted = true;"
+      },
+      {
+        "line": 1020,
+        "sourceLine": "backupCommitted = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "One-owner committed-state publication. It becomes true only on accepted commit/completion paths and is never reset; source contract admits no competing transaction writers. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 682,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 673,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "handoffStarted",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 1290,
+        "sourceLine": "handoffStarted = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "One-way same-owner cleanup handoff admission flag. Captured-thread guard plus inHandoff reentry refusal supplies operation exclusivity; volatile is visibility, not a substitute for concurrent compare-and-set. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 683,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 674,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "inHandoff",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 1291,
+        "sourceLine": "inHandoff = true;"
+      },
+      {
+        "line": 1299,
+        "sourceLine": "inHandoff = false;"
+      },
+      {
+        "line": 1306,
+        "sourceLine": "inHandoff = false;"
+      },
+      {
+        "line": 1399,
+        "sourceLine": "inHandoff = true;"
+      },
+      {
+        "line": 1407,
+        "sourceLine": "inHandoff = false;"
+      },
+      {
+        "line": 1414,
+        "sourceLine": "inHandoff = false;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "Captured owner thread enters/exits the scoped borrowed-connection handoff; guard rejects ordinary reentry. True/false writes are plain publication and finally restoration, not a contested compound update. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 684,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 676,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "backupFinished",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 1049,
+        "sourceLine": "backupFinished = true;"
+      },
+      {
+        "line": 1181,
+        "sourceLine": "backupFinished = true;"
+      },
+      {
+        "line": 1220,
+        "sourceLine": "backupFinished = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "One-owner published Backup completion condition. Mutually exclusive approved paths only set true; actual Backup/DB postconditions are not supplied by this field or static review. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 685,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 679,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "cleanupVerified",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 1653,
+        "sourceLine": "cleanupVerified = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "One-way publication after the owner verifies cleanup sequence. Plain boolean visibility is needed, no arithmetic/collection mutation or RMW atomicity is claimed. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  },
+  {
+    "rawFindingIndex": 686,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java",
+    "sourceSha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+    "line": 680,
+    "column": 30,
+    "rule": "AvoidUsingVolatile",
+    "field": "expiryHandoffStarted",
+    "owner": "WBS-P017-01",
+    "costOwner": "WBS-P017-01",
+    "writes": [
+      {
+        "line": 1398,
+        "sourceLine": "expiryHandoffStarted = true;"
+      }
+    ],
+    "decision": "NOT_APPLICABLE_SINGLE_OWNER_VISIBILITY_FLAG",
+    "reason": "One-way owner-thread Expiry handoff admission, guarded by prior cleanup state and existing single-owner/reentry contract. CAS would not establish transaction/authority ownership and is not required for a plain publication flag. JMM volatile provides primitive read/write visibility/order; this use does not depend on unsupported atomic counter/compound update semantics. SS341/343 current session contract is one captured actor with borrowed JDBC ownership, not a concurrently shared transaction object. All actual concurrent/lifetime/DB/native owner tests and before/after authority remain separate obligations.",
+    "runtimeOrConcurrentTestsReplaced": false
+  }
+]
