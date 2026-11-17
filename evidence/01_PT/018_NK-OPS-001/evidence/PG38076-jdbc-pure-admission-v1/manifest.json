@@ -1,0 +1,223 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T20:29:07.713797+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38076-jdbc-pure-admission-v1/normalized-prepare.json",
+    "sha256": "f010161067535c987e2f2cf581b73125a8e448e7f60a731d7a797fdc3e971466"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38070-jdbc-pure-after-prepare-v1/manifest.json",
+    "sha256": "74c4fadefbc64e8514df272fc588000324777c04dc48a9a936c1b9f1c0ed26aa"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38072-jdbc-pure-after-static-v1/manifest.json",
+    "sha256": "e3b2a6d312b4836b4dfe7fa5ab085e5d14934366ab4097357c95bbff0edf7f53"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "40",
+      "reason": "Exactly the named nonsecret static namespace constructor; finally restores captured false accessibility and asserts false afterward. No arbitrary reflection, authority or credential types.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "110",
+      "reason": "Independent hand-written truth table count1 selects the expected single fixed marker assertion, count0 asserts no marker. This literal is the specified observable cardinality oracle, not an application control threshold. Keeping it explicit prevents deriving expected output from Product.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "139",
+      "reason": "Independent hand-written truth table count1 selects the expected single fixed marker assertion, count0 asserts no marker. This literal is the specified observable cardinality oracle, not an application control threshold. Keeping it explicit prevents deriving expected output from Product.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java",
+      "rule": "AvoidSynchronizedAtMethodLevel",
+      "line": "238",
+      "reason": "Single test-only Throwable.getCause override intentionally preserves the inherited synchronized getter contract and records unexpected traversal before failing. No Product monitor change or concurrent shared fixture; unknown primary must never invoke it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use block level locking rather than method level synchronization"
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "flags": 16433,
+      "sourceFile": "StorageIoException.java",
+      "fields": 4,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 23
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 46
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "flags": 49,
+      "sourceFile": "StorageIoException.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "preserveFatal",
+          "descriptor": "(Ljava/lang/Throwable;)V",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 135
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures": {
+      "flags": 48,
+      "sourceFile": "JdbcAdmissionFailures.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "replace",
+          "descriptor": "(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 49
+        },
+        {
+          "name": "beforeDiscard",
+          "descriptor": "(Ljava/lang/Throwable;Ljava/lang/Throwable;)V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 41
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain2": true,
+  "explicitMaxLowPhysical3": true,
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java": 7
+  },
+  "newDefinitions": 7,
+  "originalDefinitions": 0,
+  "allVisibilityAbi3Equal": true,
+  "sharedStorage2PhysicalByteExact": true,
+  "sixCatchBindingCallerWitnesses": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "line": 67,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "line": 79,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "line": 108,
+      "catchTypes": "SQLException",
+      "secondaryBinding": "cleanup",
+      "method": "beforeDiscard",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "line": 111,
+      "catchTypes": "RuntimeException | Error",
+      "secondaryBinding": "cleanup",
+      "method": "beforeDiscard",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "line": 120,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "line": 131,
+      "catchTypes": "SQLException | RuntimeException | Error",
+      "secondaryBinding": "secondary",
+      "method": "replace",
+      "bindingNonNullByJavaCatchContract": true
+    }
+  ],
+  "actualDbRootNativeVmKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
