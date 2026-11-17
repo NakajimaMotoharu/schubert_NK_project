@@ -1,0 +1,66 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T12:24:25.683315+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37698-web-enum-eight-admission-v1/normalized-prepare.json",
+    "sha256": "ae932f01c1f53e9ce0e0bb143199e2a92f0ae57b0af57d45b534a5792274fab6"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37692-web-enum-eight-prepare-v1/manifest.json",
+    "sha256": "f323a42ee66ae15e9604454c2ef30a6b2af8b3149f79833543823d913d58a9f9"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37696-web-enum-eight-static-v2/manifest.json",
+    "sha256": "3d9fb2e49b88554d6ed4ff394ae3e29e29a1e1a117266b0a2cdf317cc48d690a"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/WebPublicEnumContractTest.java",
+      "rule": "NullAssignment",
+      "line": "191",
+      "reason": "This test intentionally poisons its caller-owned values array, then checks both a prior independent array and a newly returned array retain the original constant. Null is a deliberate negative alias probe in a test-local array, never application state or a production assignment.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ],
+  "spotbugsFullMainPhysical18": true,
+  "originalRootNullAwayConfiguration": true,
+  "previousPrincipal7ClassBytesExact": {
+    "dev/codex/schubert/nk/web/security/package-info.class": true,
+    "dev/codex/schubert/nk/web/security/ClosedWebAuthentication.class": true,
+    "dev/codex/schubert/nk/web/session/package-info.class": true,
+    "dev/codex/schubert/nk/web/session/InvalidSessionRowException.class": true,
+    "dev/codex/schubert/nk/web/session/SessionPrincipal.class": true,
+    "dev/codex/schubert/nk/web/session/SessionStoreException.class": true,
+    "dev/codex/schubert/nk/web/view/TopBarViewModel.class": true
+  },
+  "previousPrincipal8Replayed": false,
+  "previousProtocol156Replayed": false,
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field",
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Field",
+    "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+    "dev/codex/schubert/nk/web/revocation/RevocationFailureCode",
+    "dev/codex/schubert/nk/web/logging/WebHttpLogKind",
+    "dev/codex/schubert/nk/web/view/MenuCard",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel$Status",
+    "dev/codex/schubert/nk/web/view/ErrorViewModel"
+  ],
+  "all194PhysicalClassnamesAdmitted": true,
+  "currentClasspathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar": false
+  },
+  "wholeWebOrSixModuleAccepted": false,
+  "actualDbRootVmNativeKeyAuthorityActions": 0,
+  "newTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

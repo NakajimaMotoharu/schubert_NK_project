@@ -1,0 +1,11 @@
+# Web八enum公開契約・source/既存証拠照合と必要PT仕様
+
+YKT2645の残17のうち、ScenarioSearchForm.Field/Code、LogSearchForm.Field/Code、RevocationFailureCode、WebHttpLogKind、MenuCard、ErrorViewModel.Statusの八型を対象とする。既存source六つは変更せずPGとして全定数/getter/dispatch/利用callerを設計とレビューし、独立固定names/ordinal/attributes/array clone/unknown/nullの新public enum契約を八JUnit定義で作る。private反射/無意味instance/既成功の確認再演なし。必要な当source compile閉包と既存ordinary Test/rawをhash照合し、依存が実際に変わった場合にだけ必要whole fixtureを追加する。compile-only親/依存全physicalの未実行counterは未達のまま残し、八enumのraw全Code100だけを限定計上する。旧exec合成/coverage除外/全Web合格なし。
+
+事前見積.25/.65/2.00 cap3、追加発見、主費用F03一回・各論理owner参照費0。MainCorea013不変を予定、実際変更が要る障害は修正前起票しSS分類に従う。期中に対象をLocalLogout/RevocationRetry/WebStartupException・他四held/Root/VM/DB/native/鍵/権限へ拡張しない。監視enum七は次の別source審査待ちとし今回新scopeに含めない。
+
+前提:正式1964/53・17/190・工数null、全六module451/F02/F03/実NK/CHR等未完。既存Protocol156/全1432Code成功は再演せず別source/run証跡を保持する。独立期待は関連RD/UIとSSの明示画面/ログ/例外契約と固定定数表で定め、production methodでexpectedを計算しない。primitive/static-only/JDK value/protocol DTOだけの閉包を先に審査し、未確定安全条件は該当部を保留する。
+
+## 着手後の必要compile依存確定
+
+ErrorViewModelの公開表示経路にはTopBarViewModel型があり、既に資格済みのPrincipal五Main＋二package-infoと同じ閉包/同じSpring compile SDKを参照する。新六Main/元七Mainの計13Mainを原Root NullAwayでfresh compileし、Protocol176はPG37656の当source実byteだけを固定jarで再利用する（従来4733/4734方式、偽carrierなし・Proto再compile/156再演なし）。全194見込physical counterを残し、八enumと表示vectorを実行するErrorViewModel親一つ以外は全合格へ昇格しない。SDK/runtime/held型初期化は独立CRC-initで確認、実認証/DB/鍵/権限操作は行わない。enum期待は固定names/ordinal/array別体/unknown/null、Menu九label-description-href、HTTP二種のcategory-action-messageと二種×32入力maskの独立truth表、Error九status/message/固定公開UUID/redactionと三null契約。親表示APIを使いprivate field反射0。単一Testsource八定義で64観測等を件数増幅0。
