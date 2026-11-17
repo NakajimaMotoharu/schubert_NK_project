@@ -1,0 +1,5 @@
+# Protocol/Web251静的設定横展開結果
+
+BUG3188/YKT2656。MainCore a013不変、既済7whole Web postから同一source/byteの75class＋current Protocol176を一つの新analysis-only contextへ集約。PG37782に全226 source/251byte/SDK/原Web plugin設定・POM、PG37784真正Max/Low/failOnError終了0と全251ClassStats/bug0/missing0/error0、PG37786独立postを保存。Maincompile/PT/exec再演・exec合算・除外0。旧PT/coverageのsource/runは変更せず、静的設定の追加証拠としてだけ返却する。
+
+対象ModuleはProtocol169Main/176physicalとWeb57Main/75physical。残4moduleとWebの他Main/HOLDはこの解析の対象外。元scopeの弱い設定・失敗37762/37764partialは保持。共通stageはFLAGS/checked_commandとguard自体のtool hashを固定し、新sourceにも設定欠落を再発させない。工具自己検査6は製品PTに算入0。globalYKT2656は他subset未確認のためOPEN、六module/F03/全451/元190受入は未成立。独立証拠 evidence/01_PT/018_NK-OPS-001/evidence/PG37786-pure-protocol-web-maxlow-independent-v1/manifest.json SHA256 255bd790fce87929e169b7763eeed2410b80ce29357a3e37a47630bdef706c4d。
