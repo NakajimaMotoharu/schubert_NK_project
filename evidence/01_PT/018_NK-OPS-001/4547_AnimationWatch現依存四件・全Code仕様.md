@@ -1,0 +1,7 @@
+# 4547 AnimationWatch current dependency qualification
+
+SOURCE_REQUALIFICATION low.3/base.8/high2 cap3、元費/追加発見と別。Corebc3ab/Mainは不変更、旧27724/26のwhole4成功を保全し確認目的の再演をしない。既公開execinfoと現Protocol176の物理SHA比較で、旧runがpositiveに実行したPathSyntax/DisplayPath/TypedFieldValues/RelativePathの4byteが現候補と異なることを確認。この具体差と旧target外のAnimationWatchViewModel$1全Code1未測定を必要triggerとし、元whole4の入力/assertion/TestID/bodyを一byteも変えず現依存で必要な一回を実施する。旧成功を現Coreへ改名/合成0。
+
+Program現ownerは485から取得、SCR010/FUN006/UI223235/SS313323/PT-ANIMATION-WATCH-PUBLIC001..004。独立oracleは4category×USER/ADMINの手書きnavigation表、UTF8映像/a+b?の固定percentvector、null/空/dot/dotdotの明示例外、closed immutable mapのkey集合とstorage/path/hash非公開。Main全body及び元whole4全bodyを読取り、型DTO/SessionPrincipal/TopBarと事前資格safe18/現Protocol176、SpringUriUtils SDKだけ。元Controller/Root/Testからの安全method抽出なし、実HTTP/auth/session/backend/file/DB/VM/native/key/authority/permission/intent/cohort/四保留型/model操作0。
+
+RootexactMain1/Test1strict、Main2physical MaxLow/PMD/CS/GJF、SDK役割と全Source SHAを拘束、Unitを固定しwhole4一回、全component196CRC/init/XML/単一exec、対象outerとcompiler switchmap2class全Code5を無filterで測定。line/method/class/branch100を個別表示、instruction未hitも隠さず全共有依存未hit保持。異常があれば修正前BUG起票しoracleは不変、Product再実行は必要な是正後のみ。現在whole六module/451/enddependencies未完をこのwhole4で補完しない、正式1964PT/53scope/17-190新規0/工数null/QA051final056057と各HOLD保持。
