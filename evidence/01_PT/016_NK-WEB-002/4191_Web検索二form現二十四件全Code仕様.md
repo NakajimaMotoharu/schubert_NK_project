@@ -1,0 +1,3 @@
+# NK-WEB-002 two search forms current24
+
+仕様正本018/4519、source/proof audit4517/18、関連UI222223225234235/SS313351352354。originalScenario8/Log8/wholeWebPublicEnum8の24TestIDはPG37856 normalized expectedCasesへ一意対応。固定NFC/UTF8/page/JST/31day/null/collection/finite64workerとclosed dictionary/error literalsは原3sourceの独立oracleで、expectedにproduction呼出しを使わない。新定義0、原6b53へのcleanup逆変換exact、same-run実Code52を11class86とともに確認。例外/初期closure失敗は4192、共通F03費一回/参照追加費0。

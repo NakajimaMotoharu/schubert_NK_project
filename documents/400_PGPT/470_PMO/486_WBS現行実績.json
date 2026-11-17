@@ -8634,7 +8634,7 @@
   },
   "beforeSsc261InventorySha256": "443af5012e6a3d2a9088bb38d4a28ae3f7ff7645e6e4689fde2bea543fe19b9b",
   "beforeStrictReferenceCandidateInventorySha256": "44976d5ce11f24a89ea7db68c4d5ce1674f9a72032b6a96e453adc461a850968",
-  "inventorySha256": "e8d556d3f030c8fa5ac5dca940c808102f22d02134b9d9ae2930afcbef6bd1c2",
+  "inventorySha256": "ca0abf5a4c7c19f5d277270df6fb48ea39445ca303a76cf40d3fc1294bf1cb92",
   "expiryCandidateObservation": {
     "source": "1ec19782a1afe22d1de75b05f4cd12b8a8a8a172",
     "run": "PG713/714+PG715/717/719+PG722/725/728/729/730+PG737/738/739",
@@ -46360,5 +46360,92 @@
     "laterAcceptanceStillPending": "WBS-P018-10.03/2",
     "formalUpdated": false,
     "newAcceptance": 0
+  },
+  "currentWebFormsRaw24PG37858": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37862-web-forms-current24-criteria-return-v1/manifest.json",
+      "sha256": "cc18a2a1e5eb91c376e9e8d769119a6b0b09f3ca06d494567e6134747db96e56"
+    },
+    "source": "ecf8f988e7dc955f3818c8e716fb311c0e756f69",
+    "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+    "run": "PG37858-WEB-FORMS-CURRENT24",
+    "tests": 24,
+    "targetRawCounters": {
+      "LINE": {
+        "missed": 0,
+        "covered": 269
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 86
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 11
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 108
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1729
+      }
+    },
+    "formRawCounters": {
+      "LINE": {
+        "missed": 0,
+        "covered": 199
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 52
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 6
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 96
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 1211
+      }
+    },
+    "targetCode86": true,
+    "formCode52": true,
+    "wholeComponentRawAll100": false,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "criterionReductions": [
+      {
+        "originalItem": "WBS-F03",
+        "criterion": "actual Code whole-source scope for two search forms",
+        "before": "Old filtered36 vsactual52, enum20 separate exec, current finitefixture/source closure unqualified",
+        "after": "One current24 whole3 fixtures/11classes86Code108branches raw100, form6classes52Code96branches raw100, current195CRC/init/XML and Root14/static195 exact bindings",
+        "parentCriterionSatisfied": false,
+        "remaining": "Other forms/module scopes,QA056/057/four held/native/whole451/exit dependencies"
+      },
+      {
+        "originalItem": "WBS-P016-03",
+        "criterion": "ScenarioSearchForm pure input validation PT",
+        "before": "Whole old filtered counters/current finitecleanup notcoherent actualCode qualification",
+        "after": "All original8 plus shared enumcontracts same-run;closed fields/Unicode/UTF8/page/defaults/null/defensivecopies/64concurrent verified",
+        "parentCriterionSatisfied": false,
+        "additionalCostPp": 0,
+        "remaining": "Fullscreen/controller/service/HTTP/DOM/authorization and parentdependencies"
+      },
+      {
+        "originalItem": "WBS-P016-14",
+        "criterion": "LogSearchForm pure input validation PT",
+        "before": "Whole old filtered counters/current finitecleanup notcoherent actualCode qualification",
+        "after": "All original8 plus shared enumcontracts same-run;closed types/JST→UTC/strictdate/31day range/precision/null/copy/64concurrent verified",
+        "parentCriterionSatisfied": false,
+        "additionalCostPp": 0,
+        "remaining": "Fullscreen/controller/API/backend/HTTP/DOM/authorization and parentdependencies"
+      }
+    ]
   }
 }
