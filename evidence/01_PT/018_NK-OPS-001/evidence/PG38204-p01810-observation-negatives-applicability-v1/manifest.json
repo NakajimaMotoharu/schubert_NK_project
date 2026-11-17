@@ -1,0 +1,163 @@
+{
+  "actualExit": 0,
+  "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "run": "PG38204-p01810-observation-negatives-applicability-v1",
+  "groupStart": "PGPT-20261008-5721",
+  "terminalAtUTC": "2026-11-17T22:48:15.042407+00:00",
+  "approvedSs351": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "commit": "88e6d70cfdccb3318cd079dc5379e8748bc2cc8d",
+    "sha256": "30e2774f9863f58d199bd6682176ed0057c110c9f59830a4a3fd26beb271e916"
+  },
+  "originalCatalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+    "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+  },
+  "permittedClassInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38182-wbs66-current-four-main-independent-v1/manifest.json",
+    "sha256": "6d3ad150e51e6741807913821d96ac3f0ed6dabedb5f30bc0638f6d39c2e8345"
+  },
+  "currentInputsApplicability": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38202-four-module-bytecode-edges-v1/manifest.json",
+    "sha256": "36da646026bda6f5d184417d3fd375a66eef77be14ca4a26caa7526a13d31119"
+  },
+  "currentSourceMatches": [
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-087",
+      "originalExecutionStatus": "NOT_RUN_SPECIFICATION_ONLY",
+      "localEvidence": "EXISTING_SYNTHETIC_VALUE_SUBCASE_EXACT",
+      "testId": "dev.codex.schubert.nk.batch.repository.InspectionSummaryPortTest.summaryValueNullsAndLiteralGettersAreIndependentOfTheDatabaseFixture()",
+      "literalOracle": "Null run/counts are rejected. Literals 3/2/1 and both completion values are preserved, diagnostic exactly InspectionSummary[observation=<redacted>].",
+      "remaining": "Live producer output and outer failure propagation.",
+      "testSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java",
+        "sha256": "4eb8ddba3c5758cd4410c40bbf8692e5354e37b20dcb22a0b0a57218c69a4c6f"
+      },
+      "targetSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+        "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+      },
+      "originalUnitSource": "c529fd5634e5489ae75b7e5f0e4380dd18557bdd",
+      "originalProductionSource": "c529fd5634e5489ae75b7e5f0e4380dd18557bdd",
+      "originalRun": "PG37400-SUMMARY-WHOLE23",
+      "originalUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37400-summary-whole23-unit-v1/manifest.json",
+        "sha256": "7d2d71d7b3443ac27212061ee136a4d58a4cfa13ca3683533410de7e9a62f88b"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/manifest.json",
+        "sha256": "606478465b75ba56fd3d4299b43b9917728761e0ba385a80407e4ad7889dc94f"
+      },
+      "publicJupiterXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37402-summary23-independent-v1/xml/TEST-junit-jupiter.xml",
+        "sha256": "11e64945a1c7c148380450f36d550fe9f39cd816ef089d4dfe68f3193e6b9e48"
+      },
+      "matchingCurrentPhysicalSha256": {
+        "dev/codex/schubert/nk/batch/repository/InspectionSummary.class": "19c6fbf30f92ee694c9ada985f1309851ffaa157474b4b1483e8d337edd3bd03",
+        "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+        "dev/codex/schubert/nk/batch/repository/CleanupCounts.class": "09355389bf26d39779e3184b7dd995978314ae00b833e468fbd5078408265af0"
+      },
+      "newExecution": false
+    },
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-090",
+      "originalExecutionStatus": "NOT_RUN_SPECIFICATION_ONLY",
+      "localEvidence": "EXISTING_SYNTHETIC_VALUE_SUBCASE_EXACT",
+      "testId": "dev.codex.schubert.nk.batch.repository.MaintenanceRetirementValueCodecTest.nullContractsAndRedactedDiagnostics()",
+      "literalOracle": "Four null record inputs and two null codec inputs throw NullPointerException. Diagnostic exactly MaintenanceRetirement[identity/time/plan=<redacted>].",
+      "remaining": "Actual retirement, directory/DB authority, and outer operation logs.",
+      "testSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirementValueCodecTest.java",
+        "sha256": "f412bed95f0b0671199594c199fa9d040243092ec28bee8ead268e3dab1ee68d"
+      },
+      "targetSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java",
+        "sha256": "8e9020955933dde695b79965d5cf61014b9a7ba919b96e88bf253a76357a42fb"
+      },
+      "originalUnitSource": "c65fb1fc5decc9f3d6ef773a81317173e8de267d",
+      "originalProductionSource": "91c55386a79a59b9766fb1cc9447d7451c71c083",
+      "originalRun": "PG37284-RECORD-CODEC-WHOLE20",
+      "originalUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37284-record-codec-whole20-unit-v1/manifest.json",
+        "sha256": "b66c6e0fee680983d3d8527462e434796b7d9014c143ffdfd22b0b104fc45b81"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/manifest.json",
+        "sha256": "c2269267060f533316c3b158cfc9724d7f1929fc3fa5a30ff3e2bb52c7e24d70"
+      },
+      "publicJupiterXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/TEST-junit-jupiter.xml",
+        "sha256": "cf71dc39b12e3bdbb1ccee3b29b738795eed5208fc07c082d64c1442e7e18c56"
+      },
+      "matchingCurrentPhysicalSha256": {
+        "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.class": "8fdc817a2c446af11b241f97fd5146d8ca9c706e9c4fa1d612496624c09da269",
+        "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRecords.class": "548c5a0a2dbd9baf991a79e63472184142a4d26b621a122a05a403903ed02bb8"
+      },
+      "newExecution": false
+    },
+    {
+      "plannedCaseId": "PT-P01810-CATALOG-093",
+      "originalExecutionStatus": "NOT_RUN_SPECIFICATION_ONLY",
+      "localEvidence": "EXISTING_SYNTHETIC_VALUE_SUBCASE_EXACT",
+      "testId": "dev.codex.schubert.nk.batch.repository.RunReferenceRepositoryPureJdbcTest.independentBooleanProjections()",
+      "literalOracle": "All 15 nonzero four-bit synthetic projections preserve the independent expected booleans and RunReferences[observation=<redacted>].",
+      "remaining": "Live DB, provider/failure diagnostics and consumer output.",
+      "testSource": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java",
+        "sha256": "d34ce497a39a8d4226003fa8aaf6533bfdd73a7c15466dcd63a4f3e5d3a52898"
+      },
+      "targetSource": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+        "sha256": "dacc345b826e86682036df2e94f8e5300cb75435f4cdcd1de6ece4165eac5884"
+      },
+      "originalUnitSource": "341a07a959e4369efd147b0335b11a6cf6e59714",
+      "originalProductionSource": "7123bb3bc8319cfadea41e5be38a75e825e5c14c",
+      "originalRun": "PG36774-SSC448-PURE8",
+      "originalUnit": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36776-ssc448-pure8-post-v3/manifest.json",
+        "sha256": "51688be75beccbb2b0cfce0fd8908a6d3fed773455c1abd0c0651601a0c74478"
+      },
+      "independentPost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36778-ssc448-pure8-raw-post-v1/manifest.json",
+        "sha256": "19a2f4f0a9da08ad822f3bfe630496ae6a6e19942b52019ed4f999d6b0bce1a8"
+      },
+      "publicJupiterXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36776-ssc448-pure8-post-v3/original-TEST-junit-jupiter.xml",
+        "sha256": "ae7ac06464200011fa2a038c6f469d5025463aa9086180147943a45ccd79a7ee"
+      },
+      "matchingCurrentPhysicalSha256": {
+        "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+        "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+        "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "95bbbd6d705c375f32a85c20fb260fcb2eb781913455543673b98f69c72dbf04",
+        "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "5ba5c6bba095b8177539585a31af5f6fc3fc6b7b4f352e76cb815767963e866a",
+        "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "8508ca85bfbca22e66b27d20020a96078f9fbb4662c686a48300b4361dbb61f7",
+        "dev/codex/schubert/nk/storage/StorageIoException.class": "34893281af2c4468b155f83ca0e2df48248338ed776bbd6387e939306e111e49"
+      },
+      "newExecution": false
+    }
+  ],
+  "allOriginalCatalogStatusesRetained": true,
+  "plannedOriginalTotal": 93,
+  "originalHeldTotal": 26,
+  "localSubcaseBindings": 3,
+  "wholeBoundaryPasses": 0,
+  "testsExecuted": 0,
+  "newCoverage": 0,
+  "formalAcceptanceDelta": 0,
+  "attempts": [
+    {
+      "exit": 1,
+      "reason": "Used the original XML hash for the published sanitized PG36776 XML."
+    },
+    {
+      "exit": 1,
+      "reason": "Assumed all seven PG36778 classes were in Batch; one used Storage and failed closed."
+    },
+    {
+      "exit": 0,
+      "reason": "Used the published XML digest and actual class ownership across the four qualified inventories."
+    }
+  ]
+}
