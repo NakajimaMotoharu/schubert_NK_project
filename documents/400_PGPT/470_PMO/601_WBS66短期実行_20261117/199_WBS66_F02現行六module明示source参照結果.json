@@ -1,0 +1,119 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5735",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "314ec8086722944dfeaa77e257ab3f5cbc441a708ab9923bbcf249281c0ac2e7",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:20:52.276000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:19:53.453291+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CURRENT-EXPLICIT-SOURCE-EDGES-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-CURRENT-EXPLICIT-SOURCE-EDGES-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "F02-b / SS311 / SYS-005. Java source syntax parser only on 1,026 tracked Main. Resolve explicit imports and canonical fully qualified references by physical top-level declaration owner, separate compat aliases, compare direct edges with independent SS311 allowlist. Record ambiguities/unsupported dynamic links. Review synthetic positive and negative controls. No Main class generation, runtime linkage, product PT or held classfile access.",
+    "oracleReferences": [
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "d42091c0f419fab98233766eb8f7ce13b25c0500c252f582d2c64f009775b583"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+        "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38202-four-module-bytecode-edges-v1/manifest.json",
+        "sha256": "36da646026bda6f5d184417d3fd375a66eef77be14ca4a26caa7526a13d31119"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38240-current-six-source-reference-edges-v1",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.6,
+      "high": 1.25
+    },
+    "groupCapPp": 1.6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5734",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38240-current-six-source-reference-edges-v1/manifest.json",
+      "sha256": "62dfcbbfdf393b0a7895c2f09fcf546be99d5f4ef4702fbf0e536c8f4947800a"
+    },
+    "firstRunSuccessNumerator": 2,
+    "firstRunDenominator": 2,
+    "reruns": 0,
+    "causesOfRerun": [],
+    "technicalMeasurement": {
+      "sourceFiles": 1026,
+      "modules": 6,
+      "explicitReferences": 3462,
+      "forbidden": 0,
+      "unresolved": 0,
+      "productTests": 0
+    },
+    "criterionReductions": [
+      "F02-b / SYS-005: observed declaration and explicit source dependencies match SS311, including actual owner of the Bootstrap compatibility aliases."
+    ],
+    "remainingCriteria": [
+      "Implicit type/runtime edges, complete API/Web ArchUnit, actual Artemis path and SYS/451/exit dependencies."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "nextCommand": "Proceed to the next independently admissible WBS66 criterion. Do not rerun this proof or held binary/operation."
+  }
+}
