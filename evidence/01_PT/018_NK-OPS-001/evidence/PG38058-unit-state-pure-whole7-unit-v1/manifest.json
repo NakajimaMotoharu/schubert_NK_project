@@ -1,0 +1,170 @@
+{
+  "source": "0352890bcbc4b23dc6ee358901a37d65de160928",
+  "sourceCore": "5d691dcd34aff54f5c67366dd1414ed1ee5b3699",
+  "branch": "dev-foundation",
+  "run": "PG38058-UNIT-STATE-PURE-WHOLE7",
+  "atUTC": "2026-11-17T19:48:25.910539+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/jacoco.exec,append=false,sessionid=PG38058-UNIT-STATE-PURE-WHOLE7",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38050-unit-state-pure-after-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38050-unit-state-pure-after-v1/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+    "--select-class",
+    "dev.codex.schubert.nk.batch.platform.UnitStateParserNamespaceContractTest"
+  ],
+  "expectedTests": 7,
+  "expectedCases": [
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "exactSevenFieldsForBothUnitsInRotatedAndReversedOrders()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "byteLengthAsciiAndNullBoundariesRejectWithoutChangingInput()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "framingEqualsUniquenessKeysAndIdentityAreStrict()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "eachNonStoppedValueIsRejectedWithFixedReason()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "failedProjectionDoesNotPoisonSubsequentIndependentBytes()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "independentMemoryProjectionsDoNotShareIntermediateState()"
+    ],
+    [
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserNamespaceContractTest",
+      "unitStateParserCannotBecomeAnInstanceOrRetainInstanceState()"
+    ]
+  ],
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java": "f70876aaa7f506d2ba597e95a7dd1dcf34c7c81b245033e86d629c5fc1268956",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ApplicationUnit.java": "7b48b4c6626835710c612ef868904fa2e10cc7487b24919d9a4141129fbf38f3",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java": "854c8e57deb1e58b294d7e90b2f50d501d8f0b455593d96d80db038ceefe9a52",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserNamespaceContractTest.java": "7df161d06ccbc55685a4cf4f457c953fd5332eb4deac9a07cc63ac57d43b981c"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38056-unit-state-pure-admission-v1/normalized-prepare.json",
+    "sha256": "46565ef1f1f8544b111bdf1536abc13cf7107255c732b1766a82a3054afe77dd"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38056-unit-state-pure-admission-v1/manifest.json",
+    "sha256": "12517d07e723b801bcba4f7fc0b0100289bcf8a8461c67de4d721c37ab69abdb"
+  },
+  "measurementAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "reservedNativeAgentSelected": false,
+  "knownSourceChange": "BUG3199/3200 private parser non-instance invariant and existing byteport6 executor finitecleanup only; ABI4 same/allbusinessbody inverse exact, puredependency3 identicalbytes. Wholeoriginal6 plusnew namespacecontract1. RootMain4/Test2 strict/MaxLow4/CSformat0; PMD6 per-sitefiniteworkers/privateflagrestore. Component4 JSpecify/JUnit only, no actual state acquisition/stop/Root/process/VM/DB/native/keys/authority/heldtypes/models or RootTest extraction, oldexecunion0.",
+  "actualExit": 0,
+  "timedOut": false,
+  "terminalAtUTC": "2026-11-17T19:48:27.082069+00:00",
+  "tests": 7,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "framingEqualsUniquenessKeysAndIdentityAreStrict()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserNamespaceContractTest",
+      "name": "unitStateParserCannotBecomeAnInstanceOrRetainInstanceState()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "byteLengthAsciiAndNullBoundariesRejectWithoutChangingInput()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "independentMemoryProjectionsDoNotShareIntermediateState()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "failedProjectionDoesNotPoisonSubsequentIndependentBytes()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "eachNonStoppedValueIsRejectedWithFixedReason()",
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "name": "exactSevenFieldsForBothUnitsInRotatedAndReversedOrders()",
+      "result": "PASS"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "stage": {
+    "actualExit": 0,
+    "timedOut": false,
+    "startUTC": "2026-11-17T19:48:25.914223+00:00",
+    "endUTC": "2026-11-17T19:48:27.082069+00:00",
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Dfile.encoding=UTF-8",
+      "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+      "-Duser.timezone=Asia/Tokyo",
+      "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/class-init.log",
+      "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/jacoco.exec,append=false,sessionid=PG38058-UNIT-STATE-PURE-WHOLE7",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38050-unit-state-pure-after-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38050-unit-state-pure-after-v1/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+      "org.junit.platform.console.ConsoleLauncher",
+      "execute",
+      "--disable-banner",
+      "--details=summary",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1/xml",
+      "--select-class",
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserBytePortTest",
+      "--select-class",
+      "dev.codex.schubert.nk.batch.platform.UnitStateParserNamespaceContractTest"
+    ],
+    "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38058-unit-state-pure-whole7-unit-v1",
+    "stdoutSha256": "8b172b8f9b848ba6348493dcc37ee76d813a36bdbbd754c1b57f6ba990d7de30",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "execSha256": "4b1654a2533c7a3c6f850e3ad807dd23b253a574e1afbb23a3cb0461c272bcff",
+  "classInitLogSha256": "113cafbadac485281c5cdec1606bca2c455eab1ce092236e7771c8779c21cf6f",
+  "xmlHashes": {
+    "TEST-junit-platform-suite.xml": "851fd2fd4ed5c45d412103d3423224cb1b8beff1509fa989c6f6fe6ffff2a16a",
+    "TEST-junit-vintage.xml": "62b4ae2d53b2aaeb875a7261b1b21b1d7fef740e629fc10652d2b9e55d87ff10",
+    "TEST-junit-jupiter.xml": "6432321a8cd774cf48b86e813b1d9a7193acfa483169890682af81e1c6f28349"
+  },
+  "applicationStartupEntryPointsInvoked": false,
+  "productionPublicContractMethodsInvoked": true,
+  "actualDbNetworkVmRootKeyIntentOperations": 0,
+  "nativeBoundaryAbsence": "INDEPENDENT_POST_PENDING",
+  "oldExecCombined": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
