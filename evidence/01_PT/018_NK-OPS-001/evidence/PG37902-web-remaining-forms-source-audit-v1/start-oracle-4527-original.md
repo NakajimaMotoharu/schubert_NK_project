@@ -1,0 +1,7 @@
+# 4527 Web残form 原32件の現source資格
+
+群PGPT-WBS66-WEB-REMAINING-FORMS-CURRENT32-20261118。F03/SOURCE_REQUALIFICATION、開始low.6/base1.8/high4.5pp cap5。MainCorea013不変。既存2627/2629/3874及び2628/2630/PG24396を正本に旧原whole32（UserCreate8・TargetOperation8・UserMutation16）を確認する。全Main/helper/initializer/Fixtureと現在Protocol176の依存差をsource-onlyで入場判定し、許可成立後にstrict Main/Test compile/static→source固定→必要whole32を一回→全physicalCRC/init/XML/raw実Codeを独立照合する。原業務assert/input/goldenは保持、成功確認だけの再演を行わない。現在Protocol14byte差とfinitefixture/当source不足を明示し、旧成功やexecを新sourceへ移植しない。
+
+SCR016017021023/FUN009010013/AUT002003/UI224225236/SS313314323。PT-USER-CREATE001..008/PT-TARGET001..008/PT-USER-CHANGE001..016。期待は既存固定372byte、48byte及び60/68/60/324byte配列のoffset0/12/13/17/64/268/320/325/326とN12/N9/UUID36・ASCIIspaceの独立golden。正常/境界/null/missing/duplicate/Unicode/NFC/byte/closed input/防御copy/所有消去/100並行、既finitefuture5/10/30sとfinallyawait10、timedinvokeAll30sを維持。実create/delete/role/password変更、認可/token発行消費、HTTP/DB/MQ/Root/cohort/VM/native/鍵/permit/配備は対象外。四held型とHOLD ViewModelへclassfile依存する場合は当部分HOLD。
+
+元Main10（UserCreate、TargetOperationInput/Cancel/QuestionDelete、UserMutationInput/4wrapper/UserChange抽象）の実closureを全sourceで確定し、generic signature/pkg/Sdk不足を推測で切らない。要追加依存/生成Codeの未達は明記し、BUGは実装違反発見時修正前起票。PG/PT仕様と公開result/manifestへsource/command/environment/exit/coverage/hash/TestIDを保存。rawの未観測命令/自然NoCode・0branchは保持し、required四counterと全命令を分ける。正式1964/53・17/190/工数null維持、F03/P01616/P01617/P01621/P01623/P01507へ同じ結果を費用一回で返す。

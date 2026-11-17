@@ -550,4 +550,37 @@ class UserMutationFormTest {
       }
     }
   }
+
+  /** Real UserAdminController dispatches through this interface (UI225/236, BUG3195). */
+  @Test
+  void change017SealedInterfacePreservesWireAndLifetime() {
+    for (String operation : OPERATIONS) {
+      var parameters = input(operation, 42);
+      UserChangeForm form =
+          switch (operation) {
+            case STATUS_OPERATION -> UserStatusForm.bind(42, parameters);
+            case ROLE_OPERATION -> UserRoleForm.bind(42, parameters);
+            case PASSWORD_OPERATION ->
+                PasswordResetForm.bind(42, SYNTHETIC_TARGET_USERNAME, parameters);
+            case UNLOCK_OPERATION -> UserUnlockForm.bind(42, parameters);
+            default -> throw new AssertionError(operation);
+          };
+      String expectedValue =
+          switch (operation) {
+            case STATUS_OPERATION -> TRUE_TEXT;
+            case ROLE_OPERATION -> USER_ROLE_TEXT;
+            case PASSWORD_OPERATION -> PASSWORD;
+            default -> "";
+          };
+      try (form) {
+        assertTrue(form.isValid());
+        assertTrue(form.getIssues().isEmpty());
+        assertArrayEquals(
+            golden(operation, 42, 7, expectedValue, TOKEN), wire(operation, form.toRequest()));
+        assertEquals(42L, form.displayValues().get("id"));
+        assertEquals(7L, form.displayValues().get(EXPECTED_VERSION_FIELD));
+      }
+      assertThrows(IllegalStateException.class, form::toRequest);
+    }
+  }
 }
