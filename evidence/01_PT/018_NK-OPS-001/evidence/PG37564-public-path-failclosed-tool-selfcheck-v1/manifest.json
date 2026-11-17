@@ -1,0 +1,177 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T10:31:48.327042+00:00",
+  "toolTests": 23,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "PATH001-ordinary",
+      "result": "PASS",
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "PATH002-pinned-candidate-name",
+      "result": "PASS",
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "PATH003-protected",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH004-protected",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH005-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH006-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH007-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH008-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH009-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH010-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "PATH011-forbidden",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META001-known-pinned-public",
+      "result": "PASS",
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "META002-mismatched-sha",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-extra-key",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-bool-zero",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-private-row-path",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-sha-shape",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-line-bool",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "META-unknown-status",
+      "result": "PASS",
+      "expected": "REJECT"
+    },
+    {
+      "id": "CHAIN-0",
+      "result": "PASS",
+      "expectedStages": [
+        "scan"
+      ],
+      "actualStages": [
+        "scan"
+      ],
+      "actualExit": 1,
+      "realGitOrRemoteActions": false
+    },
+    {
+      "id": "CHAIN-1",
+      "result": "PASS",
+      "expectedStages": [
+        "scan",
+        "stage"
+      ],
+      "actualStages": [
+        "scan",
+        "stage"
+      ],
+      "actualExit": 1,
+      "realGitOrRemoteActions": false
+    },
+    {
+      "id": "CHAIN-2",
+      "result": "PASS",
+      "expectedStages": [
+        "scan",
+        "stage",
+        "commit"
+      ],
+      "actualStages": [
+        "scan",
+        "stage",
+        "commit"
+      ],
+      "actualExit": 1,
+      "realGitOrRemoteActions": false
+    },
+    {
+      "id": "CHAIN-None",
+      "result": "PASS",
+      "expectedStages": [
+        "scan",
+        "stage",
+        "commit",
+        "push"
+      ],
+      "actualStages": [
+        "scan",
+        "stage",
+        "commit",
+        "push"
+      ],
+      "actualExit": 0,
+      "realGitOrRemoteActions": false
+    }
+  ],
+  "binding": {
+    "publicPath": "evidence/01_PT/018_NK-OPS-001/evidence/PG37538-range-namespace5-source-v1/private-noarg-source-candidates.json",
+    "sourceCommit": "38e25bc904d8739fa84d345382cfa05e93d48e35",
+    "sha256": "4f08aa97237235088c5bbc58e78faa6bc48fa071e111750dd17b7a2705b4cf19",
+    "schema": "PUBLIC_SOURCE_NAMESPACE_CANDIDATE63_EXACT_KEYS_NOT_RAW",
+    "protectedExceptionsAllowed": false
+  },
+  "pathPolicySha256": "71d1755a07cfb21d5c57dc5e915ada7bac308b80300efda9e61b76bb05c37fb9",
+  "protectedOrPrivateInputsRead": false,
+  "allSchemaNegativesReject": true,
+  "realGitRemoteProductRootVmDbOrAuthorityActions": 0,
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
