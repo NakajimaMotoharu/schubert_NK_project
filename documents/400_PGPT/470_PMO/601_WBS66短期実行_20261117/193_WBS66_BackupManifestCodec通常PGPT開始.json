@@ -1,0 +1,81 @@
+{
+  "eventId": "PGPT-20261008-5729",
+  "groupId": "PGPT-WBS66-ORDINARY-BACKUP-MANIFEST-CODEC-20261118",
+  "baseCore": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T23:04:17.654000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-ORDINARY-BACKUP-MANIFEST-CODEC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-ORDINARY-BACKUP-MANIFEST-CODEC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 / original synthetic backup codec. Independent unfiltered gap 7 actual Code vs 6 previous filtered methods in BackupManifestCodec. Only private static namespace invariant. Retain old 16 whole expected cases and golden input, one new contract. CWD is freshly owned scratch so the existing relative public trace cannot touch actual Backup, permission, service, key or live environments. Run normal current compiler, static, ABI and raw exact same run.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+        "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38182-wbs66-current-four-main-independent-v1/manifest.json",
+        "sha256": "6d3ad150e51e6741807913821d96ac3f0ed6dabedb5f30bc0638f6d39c2e8345"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "productionCoreMain": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "run": "PG38220-backup-manifest-codec-namespace-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P017-04"
+    ],
+    "testIds": [
+      "PT-BAT-186",
+      "PT-BAT-186-NAMESPACE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3.2
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "mainSources": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java": "4edbbd1ad918c5222a534cf6d9330aecd40f9e76118c555a529374cb04bfe6ac",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java": "49fc0ea957098ae3f5d0dc40fbbbbf28abfed7353c4e46a0ccea7593951f9dc2",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java": "5cc172c91118403e73b9b562d8c0286ba6716391b8dd156181ad5e3d0b1bfd65",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java": "7e9fdc5ea08e7616d3a8b5e77c5d3d194fbe61872d738ff5281419bcb6eb1d12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "f736e4cf0f251df6b0d0579996b0353e6a757b0def2777a4528ee976c8384285",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "a37a929c6f7f01ccdd2facf7b6f74a72eea2f8927739b38c0ff998f3ec1015fe"
+  },
+  "testSources": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java": "a0d65624548980afe6b1ee8db83d7ca7f0e67ac9d2aeab9721ab3dce04aa3c61",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java": "28cd4108dea7e349f51328bf35070c4388b5f23c9c9a1486c8c42a5c12ebc0fb",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestFixture.java": "dc52d8ad7f4cc73b2947257e458bb8e36f10221789218812c44010c72951e976",
+    "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e"
+  }
+}

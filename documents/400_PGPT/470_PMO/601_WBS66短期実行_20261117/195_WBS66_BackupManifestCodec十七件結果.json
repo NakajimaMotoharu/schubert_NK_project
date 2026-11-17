@@ -1,0 +1,154 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5731",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "dbe837ae188a2ed51cc407b1af5d0d20e402cf9e8886b144622942ee04deadef",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:09:56.325000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:09:33.821417+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-ORDINARY-BACKUP-MANIFEST-CODEC-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-ORDINARY-BACKUP-MANIFEST-CODEC-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 / original synthetic backup codec. Independent unfiltered gap 7 actual Code vs 6 previous filtered methods in BackupManifestCodec. Only private static namespace invariant. Retain old 16 whole expected cases and golden input, one new contract. CWD is freshly owned scratch so the existing relative public trace cannot touch actual Backup, permission, service, key or live environments. Run normal current compiler, static, ABI and raw exact same run.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28166-backup-manifest16-independent-v1/manifest.json",
+        "sha256": "5ec9531bce5b1ba5d8b5436621c44585d8aafdafa27785e836a59ef4c24ffd2a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38182-wbs66-current-four-main-independent-v1/manifest.json",
+        "sha256": "6d3ad150e51e6741807913821d96ac3f0ed6dabedb5f30bc0638f6d39c2e8345"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38220-backup-manifest-codec-namespace-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P017-05"
+    ],
+    "testIds": [
+      "PT-BAT-186",
+      "PT-BAT-186-NAMESPACE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3.2
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5729",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38228-backup-manifest17-independent-v1/manifest.json",
+      "sha256": "6b01141de2d64078a30492a635d088b0933521722737572638e8317762748a22"
+    },
+    "ownerCorrection": "PGPT-20261008-5730",
+    "firstRunSuccessNumerator": 17,
+    "firstRunDenominator": 17,
+    "productTestReruns": 0,
+    "toolingPreflightOrReportingCorrections": 3,
+    "causesOfRerun": [
+      "BUG-3214 stale style reference in compilation wrapper, wrong static source count, wrong PMD JSON field at admission. Only affected tooling steps corrected."
+    ],
+    "technicalMeasurement": {
+      "tests": 17,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 7,
+      "targetCodeMethods": 7,
+      "targetCoverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 393
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 79
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 13
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 7
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "criterionReductions": [
+      "F03/P017-05: BackupManifestCodec all 7 Code methods and exact canonical bytes on one new source, 17 unit successes."
+    ],
+    "remainingCriteria": [
+      "Independent full product 451 and current F03 body",
+      "All actual Backup, C02, actual CHR, and formal parent exit dependencies"
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "completedAdditionalPricePp": 1.5,
+    "totalCompletedAdditionalPricePp": 27.35,
+    "nextCommand": "Continue authorized independent PG/PT using latest evidence, preserve held actual Backup and QA056/057."
+  }
+}

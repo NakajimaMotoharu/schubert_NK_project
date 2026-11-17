@@ -1,0 +1,322 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T23:09:33.821417+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "sourceCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "run": "PG38226-BACKUP-MANIFEST17",
+  "tests": 17,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "jdk": "25.0.4",
+  "jacoco": "0.8.15",
+  "actualUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38226-backup-manifest17-unit-v1/begin.json",
+    "sha256": "df7fe3e70130abb64d7cf824b328dab0c6fc579b6086767062c1ac0d4ec22d46"
+  },
+  "exitReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38226-backup-manifest17-unit-v1/exit.json",
+    "sha256": "c7deabe78ad8f008289958a10ddc1bcc3e14456576903a79a14e34b0d67d5ff9"
+  },
+  "currentClassCRCs": {
+    "dev/codex/schubert/nk/batch/backup/BackupVersions": "d72d425c0126a55b",
+    "dev/codex/schubert/nk/batch/backup/BackupManifest": "807ef6402ca1a160",
+    "dev/codex/schubert/nk/batch/backup/BackupFileDigest": "87bdd8b9dc4e26a9",
+    "dev/codex/schubert/nk/batch/file/BackupManifestCodec": "5bf2ec4079a2b4af",
+    "dev/codex/schubert/nk/batch/repository/BatchStep": "3a814d328e8e73bf",
+    "dev/codex/schubert/nk/batch/repository/BatchRun": "7ebe79e62602f09c",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": "96690498395317f3"
+  },
+  "initializedHeld": 0,
+  "allCodesReport": 7,
+  "targetCode": [
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "<init>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "encode",
+      "descriptor": "(Ldev/codex/schubert/nk/batch/backup/BackupManifest;)[B",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 173
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 32
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "decode",
+      "descriptor": "([B)Ldev/codex/schubert/nk/batch/backup/BackupManifest;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 167
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 12
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 35
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "field",
+      "descriptor": "(Ljava/util/regex/Matcher;I)Ljava/lang/String;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 7
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "digest",
+      "descriptor": "(Ljava/util/regex/Matcher;I)Ldev/codex/schubert/nk/batch/backup/BackupFileDigest;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 13
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "invalid",
+      "descriptor": "()Ljava/lang/IllegalArgumentException;",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 5
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/batch/file/BackupManifestCodec",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 21
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 0,
+      "covered": 393
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 12
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 79
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 13
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 7
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "targetFour100": true,
+  "manualExclusions": 0,
+  "oldExecCombined": false,
+  "original16CasesRetained": true,
+  "independentGolden": {
+    "path": "src/schubert-nk-batch/src/test/resources/backup/manifest-golden.json",
+    "sha256": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e"
+  },
+  "goldenActualSHA256": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e",
+  "ownSyntheticTraceOnly": true,
+  "rawCommands": [
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+      "execinfo",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38226-backup-manifest17-unit-v1/jacoco.exec"
+    ],
+    [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38226-backup-manifest17-unit-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/backup/BackupManifest.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/backup/BackupFileDigest.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/file/BackupManifestCodec.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchStep.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38222-backup-manifest17-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class"
+    ]
+  ],
+  "formalAcceptanceDelta": 0,
+  "files": {
+    "unfiltered.stdout": "f9050c46ee659e8b627a3570663567f8636ff3e026474da9f09e808650ed71c3",
+    "actual-synthetic-manifest.json": "733939f4daa4dcb642e6b9a4433c92daf3d42e8ac73a15b0aee914b58571289e",
+    "jacoco.exec": "23cb85d595462fab096b500217c03fdd3f4dd54c44eb8ec8ac5c1ed7b0c5dc97",
+    "execinfo.stdout": "945c565bcc972c44a9fba42e6a54b65b9146533789bc454aefc9320b65c130d2",
+    "class-init.log.gz": "85acb4b4b6944fb9e7184c3d9cd5df1f7dd7c1e3d9c316b9b33f00ab20844b0a",
+    "xml/TEST-junit-platform-suite.xml": "4f5c84031e9a0b1a280816f2448b01b7d18c73fceeeddc4e4af812f8139e3e45",
+    "xml/TEST-junit-vintage.xml": "784621ab1bb491b8173b5b0cec75cef3531b0a8b1ae24e89e051354a2ec9d969",
+    "xml/TEST-junit-jupiter.xml": "5ddcaea0319818ffd030ff630455c99c454b7e3d6e2107fb740afa49aa88c169"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "actualExit": 0,
+  "prepareSha256": "b7f56187c5e3c085be9706cc4f5cc1d50c6e3d43ff19ff9b31314c580a4b23fb",
+  "staticSha256": "8eccc4bd021448a35cd2a56c3e3b5de07104ffda999f7eaf14dea29f64cce640",
+  "abiFullDeclarationEqual": true,
+  "unchangedSharedClasses": 6,
+  "expectedCases": 17,
+  "rawPmd": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "89",
+      "message": "Avoid using literals such as 2 in if statements",
+      "applicable": false,
+      "disposition": "Index 2 is the literal schema-column oracle, while other positions are version strings."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "CloseResource",
+      "line": "258",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "applicable": false,
+      "disposition": "Owned test pool always shutdownNow and awaitTermination in finally."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "258",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Eight workers are deliberate for finite immutable value concurrency."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "263",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Finite submissions exercise the independent value invariants only."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "275",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Owned test pool is cancelled in finally on every exit."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/backup/BackupManifestValuesTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "276",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Finite await proves workers terminate before test exit."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "37",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()",
+      "applicable": false,
+      "disposition": "Only the current static namespace constructor is opened for its invariant, and finally restores access."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "CloseResource",
+      "line": "256",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "applicable": false,
+      "disposition": "Owned codec fixture pool always shutdownNow and awaitTermination in finally."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "256",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Eight workers are deliberate to distinguish array ownership."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "261",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Finite submissions exercise the original independent golden roundtrip."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "274",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Owned codec fixture pool is cancelled in finally on every exit."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/BackupManifestCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "275",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "applicable": false,
+      "disposition": "Finite await proves worker termination."
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "originalProductTests": 16,
+  "priorAdmissionWrapperExit": 1,
+  "priorAdmissionCause": "PMD record field name mismatch"
+}
