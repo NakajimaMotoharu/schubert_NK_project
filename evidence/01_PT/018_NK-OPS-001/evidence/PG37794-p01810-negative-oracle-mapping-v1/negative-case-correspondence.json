@@ -1,0 +1,659 @@
+[
+  {
+    "id": "PT-P01810-NEGATIVE-001",
+    "family": "REQUEST_DETAILS",
+    "caseName": "MalformedMissingAndUnknownJson",
+    "existingTestMethod": "unsafeMalformedDuplicateAndWrongTypesAreRejected",
+    "input": {
+      "values": [
+        "",
+        "null",
+        "[]",
+        "1",
+        "{",
+        "{} {}",
+        "{} true",
+        "{}/*comment*/",
+        "{\"unknown\":1}",
+        "{\"truncated\":true,\"truncated\":false}",
+        "{truncated:true}"
+      ]
+    },
+    "independentExpected": {
+      "exception": "PermanentProtocolException",
+      "message": "REQUEST log details violate the safe projection contract",
+      "cause": null
+    },
+    "independentBasis": "SS3513.3 strict JSON object/closed keys/duplicates/trailing/finite diagnostic, existing literal oracle",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-002",
+    "family": "REQUEST_DETAILS",
+    "caseName": "CollectionNestedAndWrongTypes",
+    "existingTestMethod": "unsafeMalformedDuplicateAndWrongTypesAreRejected",
+    "input": {
+      "values": [
+        "{\"userAgentFamily\":null}",
+        "{\"userAgentFamily\":1}",
+        "{\"responseBytes\":null}",
+        "{\"truncated\":null}",
+        "{\"truncated\":{\"a\":{\"b\":1}}}"
+      ]
+    },
+    "independentExpected": {
+      "exception": "PermanentProtocolException",
+      "message": "REQUEST log details violate the safe projection contract",
+      "cause": null
+    },
+    "independentBasis": "SS3513.3 scalar-only schema, null/object/array are not allowed scalar values",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-003",
+    "family": "REQUEST_DETAILS",
+    "caseName": "Utf8AndDecimalBoundary",
+    "existingTestMethod": "unsafeMalformedDuplicateAndWrongTypesAreRejected",
+    "input": {
+      "values": [
+        "{\"responseBytes\":-1}",
+        "{\"responseBytes\":1.0}",
+        "{\"responseBytes\":1e2}",
+        "{\"responseBytes\":1000000000000}"
+      ],
+      "utf8Oversized": {
+        "text": "あ",
+        "repeat": 342,
+        "bytes": 1026
+      },
+      "oversizedWhitespace": {
+        "spaces": 1023,
+        "object": "{}",
+        "bytes": 1025
+      },
+      "acceptedBoundary": {
+        "spaces": 1022,
+        "object": "{}",
+        "bytes": 1024
+      }
+    },
+    "independentExpected": {
+      "invalidException": "PermanentProtocolException",
+      "invalidMessage": "REQUEST log details violate the safe projection contract",
+      "cause": null,
+      "acceptedLiteral": "{}"
+    },
+    "independentBasis": "Independent UTF8: あ is3bytes; braces2 ASCII bytes. SS351 wire/display1024, responseBytes0..999999999999 exact decimal",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-004",
+    "family": "REQUEST_DETAILS",
+    "caseName": "ApiNullPreconditions",
+    "existingTestMethod": "unsafeMalformedDuplicateAndWrongTypesAreRejected",
+    "input": {
+      "detailsOptional": null,
+      "roleOptional": null,
+      "independentSingleNullCalls": 2
+    },
+    "independentExpected": {
+      "exception": "NullPointerException",
+      "normalEvent": false
+    },
+    "independentBasis": "Explicit API nonnull preconditions from fixed negative fixture, not NPE recovery/catch-normalization",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-005",
+    "family": "REQUEST_DETAILS",
+    "caseName": "UnknownHashAliasesFailClosed",
+    "existingTestMethod": "raw002FourFixedHashCollisionsRemainUnknownKeys",
+    "input": [
+      {
+        "known": "responseBytes",
+        "unknown": "sFsponseBytes",
+        "independentJavaHash": 1650146474
+      },
+      {
+        "known": "userAgentFamily",
+        "unknown": "vTerAgentFamily",
+        "independentJavaHash": -1117425154
+      },
+      {
+        "known": "truncated",
+        "unknown": "uSuncated",
+        "independentJavaHash": 1607950270
+      },
+      {
+        "known": "projectionStatus",
+        "unknown": "qSojectionStatus",
+        "independentJavaHash": -577482975
+      }
+    ],
+    "independentExpected": {
+      "exception": "PermanentProtocolException",
+      "message": "REQUEST log details violate the safe projection contract",
+      "cause": null,
+      "suppressedCount": 0
+    },
+    "independentBasis": "Independent31-fold signed32-bit Java String hash; lexical identity still differs so SS351 unknown key must be rejected",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-006",
+    "family": "REQUEST_DETAILS",
+    "caseName": "PublicCanaryAcrossThreeRoles",
+    "existingTestMethod": "raw003ForbiddenPublicCanariesNeverEscapeThroughAnyRoleOrParserDiagnostic",
+    "input": {
+      "marker": "PUBLIC-JSON-CANARY",
+      "roles": [
+        "absent",
+        "USER",
+        "ADMIN"
+      ],
+      "fields": [
+        "password",
+        "cookie",
+        "userAgentFamily escaped LF",
+        "unknown",
+        "trailing document"
+      ]
+    },
+    "independentExpected": {
+      "exception": "PermanentProtocolException",
+      "message": "REQUEST log details violate the safe projection contract",
+      "cause": null,
+      "suppressedCount": 0,
+      "diagnosticContainsCanary": false
+    },
+    "independentBasis": "SS35110/12 forbid secret/body/raw provider diagnostics in every role; fixed exception message independent of parser payload",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37348-request-details5-independent-v1/manifest.json",
+        "sha256": "d65b38f4465490aafdf15e54a257e530fa5254691063193e303f0c437d391d84"
+      },
+      "source": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "sourceCore": "208d9483135c2d13298e2511a9945dcd524c5cd7",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-007",
+    "family": "WEB_TRACE",
+    "caseName": "UnknownRawRoutesRemainClosed",
+    "existingTestMethod": "req004ActualInventoryAndEveryClosedRouteRejectUnknown",
+    "input": {
+      "patterns": [
+        "",
+        "/questions/new?question=canary",
+        "/music/secret-id",
+        "/login?password=canary",
+        "/canary\r\n"
+      ]
+    },
+    "independentExpected": {
+      "route": "/**"
+    },
+    "independentBasis": "SS351 allowlisted route pattern; raw URI/query never a log label",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37772-web-trace-current24-independent-v1/manifest.json",
+        "sha256": "f6029050e306d91496f8d50b38b61d28bab9fe7b98ecd2831f36eaa5b67e91ca"
+      },
+      "source": "c8f8985f0804b62f773a20a91a8ba88c811d847b",
+      "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": true,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-036"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-008",
+    "family": "WEB_TRACE",
+    "caseName": "MissingWrongTypeAndNullMetadata",
+    "existingTestMethod": "req006AllNullAndMistypedMetadataAreRejected",
+    "input": {
+      "wrongContext": "not-context",
+      "wrongTrace": "not-trace",
+      "nullArgs": [
+        "request",
+        "identifiers",
+        "actor",
+        "pattern",
+        "businessIdentifiers"
+      ]
+    },
+    "independentExpected": {
+      "wrongContextException": "IllegalStateException",
+      "wrongContextMessage": "web request context is unavailable",
+      "cause": null,
+      "suppressedCount": 0,
+      "nullPreconditionException": "NullPointerException"
+    },
+    "independentBasis": "SS351/SS312 fixed diagnostics and explicit nonnull boundary contract",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37772-web-trace-current24-independent-v1/manifest.json",
+        "sha256": "f6029050e306d91496f8d50b38b61d28bab9fe7b98ecd2831f36eaa5b67e91ca"
+      },
+      "source": "c8f8985f0804b62f773a20a91a8ba88c811d847b",
+      "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": true,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-036"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-009",
+    "family": "WEB_TRACE",
+    "caseName": "AllFrameworkAttributeExceptionsRedacted",
+    "existingTestMethod": "req006AllFourAttributeBoundariesRedactFrameworkFaults",
+    "input": {
+      "attributes": [
+        "trace",
+        "request ID"
+      ],
+      "operations": [
+        "get",
+        "set"
+      ],
+      "faultTypes": [
+        "IllegalArgumentException",
+        "IllegalStateException"
+      ],
+      "canary": "synthetic-private-attribute-canary"
+    },
+    "independentExpected": {
+      "exception": "IllegalStateException",
+      "messages": [
+        "request audit metadata is unavailable",
+        "web request context is unavailable"
+      ],
+      "cause": null,
+      "suppressedCount": 0
+    },
+    "independentBasis": "SS351 fixed metadata failures; 2attributes×2operations×2faulttypes, no raw exception retained",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37772-web-trace-current24-independent-v1/manifest.json",
+        "sha256": "f6029050e306d91496f8d50b38b61d28bab9fe7b98ecd2831f36eaa5b67e91ca"
+      },
+      "source": "c8f8985f0804b62f773a20a91a8ba88c811d847b",
+      "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": true,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-036"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-010",
+    "family": "WEB_TRACE",
+    "caseName": "MissingActorAndCollectionProjection",
+    "existingTestMethod": "req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp",
+    "input": {
+      "actorOptional": "empty",
+      "missingTrace": true,
+      "displayUsername": "équipe",
+      "roles": [
+        "USER",
+        "ADMIN"
+      ]
+    },
+    "independentExpected": {
+      "missingActor": "Optional.empty",
+      "missingTrace": "no-op",
+      "username": "équipe",
+      "actorDiagnostic": "TopBarViewModel[REDACTED]",
+      "traceDiagnostic": "WebRequestTrace[REDACTED]"
+    },
+    "independentBasis": "Independent Unicode NFC and finite public view literals; authentication principal/context not retained",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37772-web-trace-current24-independent-v1/manifest.json",
+        "sha256": "f6029050e306d91496f8d50b38b61d28bab9fe7b98ecd2831f36eaa5b67e91ca"
+      },
+      "source": "c8f8985f0804b62f773a20a91a8ba88c811d847b",
+      "sourceCore": "a013a6d676454082de3c59bc199e87f37fefe159",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": true,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-036"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-011",
+    "family": "MEDIA_AUDIT",
+    "caseName": "UnknownStatusesAndByteOverflowNeverLog",
+    "existingTestMethod": "media002StatusAndByteBoundariesRejectWithoutLogging",
+    "input": {
+      "statuses": [
+        -2147483648,
+        199,
+        201,
+        205,
+        207,
+        415,
+        417,
+        502,
+        504,
+        2147483647
+      ],
+      "bytes": [
+        -9223372036854775808,
+        -1,
+        101,
+        9223372036854775807
+      ],
+      "descriptorSize": 100
+    },
+    "independentExpected": {
+      "exception": "IllegalArgumentException",
+      "loggedEvents": 0
+    },
+    "independentBasis": "SS333/351 closed status200/206/416/503 and0<=bytes<=descriptor size, no invalid success log",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+        "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+      },
+      "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+      "sourceCore": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-035"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-012",
+    "family": "MEDIA_AUDIT",
+    "caseName": "ConstructorMissingAndVersionInputs",
+    "existingTestMethod": "media003ConstructorVersionsAndAllNullsEstablishBoundaryContract",
+    "input": {
+      "nullFields": [
+        "logger",
+        "clock",
+        "app",
+        "config"
+      ],
+      "versions": [
+        "",
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        ".bad",
+        "space bad",
+        "日本語",
+        "a\n",
+        "a/b",
+        "a "
+      ]
+    },
+    "independentExpected": {
+      "nullException": "NullPointerException",
+      "badVersionException": "IllegalArgumentException",
+      "loggedEvents": 0
+    },
+    "independentBasis": "SS351 closed ASCII app/config version length1..64 and mandatory inputs",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+        "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+      },
+      "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+      "sourceCore": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-035"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-013",
+    "family": "MEDIA_AUDIT",
+    "caseName": "RecordNullAndMissingClock",
+    "existingTestMethod": "media004EveryRecordNullAndMissingClockIsRejected",
+    "input": {
+      "nullFields": [
+        "requestId",
+        "principal",
+        "descriptor",
+        "failure",
+        "clock.instant"
+      ]
+    },
+    "independentExpected": {
+      "exception": "NullPointerException",
+      "loggedEvents": 0
+    },
+    "independentBasis": "SS351 mandatory record fields/clock; no successful event from missing input",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+        "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+      },
+      "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+      "sourceCore": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-035"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-014",
+    "family": "MEDIA_AUDIT",
+    "caseName": "ProviderErrorIdentityAndNoRetry",
+    "existingTestMethod": "media006LoggerRuntimeAndErrorPropagateWithoutRetryOrNormalizing",
+    "input": {
+      "faults": [
+        "IllegalStateException",
+        "AssertionError"
+      ],
+      "afterCapture": [
+        false,
+        true
+      ],
+      "fixedPublicMessage": "public logger fixture"
+    },
+    "independentExpected": {
+      "thrownSameInstance": true,
+      "loggerCallCount": 1,
+      "eventsBeforeFailure": [
+        0,
+        1
+      ]
+    },
+    "independentBasis": "SS351 failure remains failure; independent before/after capture modes, no retry/success normalization",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+        "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+      },
+      "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+      "sourceCore": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-035"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  },
+  {
+    "id": "PT-P01810-NEGATIVE-015",
+    "family": "MEDIA_AUDIT",
+    "caseName": "UnicodeAndIndependentCollectionCopy",
+    "existingTestMethod": "media007UnicodeRedactionAndRepeatedImmutableJsonRemainIndependent",
+    "input": {
+      "displayName": "é x y",
+      "forbidden": [
+        "\n",
+        "\r",
+        " ",
+        " ",
+        "authenticationContext",
+        "storageRelativePath",
+        "sha256",
+        "fileName"
+      ],
+      "mutatedCopyProperty": "changed"
+    },
+    "independentExpected": {
+      "displayName": "é x y",
+      "role": "ADMIN",
+      "forbiddenPresent": false,
+      "storedJsonHasChanged": false,
+      "firstBytes": 3,
+      "secondBytes": 5
+    },
+    "independentBasis": "Independent NFC/U+2028/U+2029-to-space rule and fixed JSON keys/copy mutation expectation; SS35110/12",
+    "wholeProof": {
+      "independentWholePost": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+        "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+      },
+      "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+      "sourceCore": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+      "targetSourceStillExact": true,
+      "wholeCurrentSourceQualified": false,
+      "wholeOtherScopesNotRequalified": true,
+      "originalExpectedAndActualNotChanged": true,
+      "newTestExecution": false
+    },
+    "planned93Refs": [
+      "PT-P01810-CATALOG-035"
+    ],
+    "newExecution": false,
+    "notNewPassOrCoverage": true
+  }
+]

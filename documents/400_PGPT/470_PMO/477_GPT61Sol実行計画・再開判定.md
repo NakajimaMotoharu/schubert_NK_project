@@ -1,5 +1,10 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## 2026-11-17 WBS参照hashを保存単位で再結合（BUG3189/YKT2657）
+
+- 485/486の補足overlayを更新した保存単位では、最後に `python3 -B tools/quality/pmo_inventory_reference.py --rebind` で486の485参照hashだけを再結合し、引数なしの同toolが0になることを確認する。190項目の受入・元価格・旧snapshot意味は変更しない。
+- 所定のWBS前後監査が失敗/HOLDならその真正結果と不足を保存し、参照hashの一致を全体WBS/trace/451の合格と扱わない。HOLD/private/保護未追跡ファイルへ監査範囲を広げない。BUG3189/YKT2657、477の既存規約の実施手順。
+
 ## 2026-11-09 最小SDKでもclassfile annotation依存を閉じる（BUG2622/YKT2305）
 
 Gson2.14のpublic APIはErrorProne InlineMe注釈を持ち、strict javacは注釈jar欠落も警告として拒否する。runtime codeだけをSDK closureとせず、公開POM/既qualified exactSHAのannotation依存を含める。初25958 compile1/0Test/6warningsを保全し、-Xlint:all/Werrorを維持した新source9f/別25982で警告0と未実行原6を初検証した。SDK2jar（code1/annotation1）とSDK26class identity、元三target/五metadata反例を別記し、旧成功の確認再演・抑制・品質/モデル/枠/HOLD変更なし。
