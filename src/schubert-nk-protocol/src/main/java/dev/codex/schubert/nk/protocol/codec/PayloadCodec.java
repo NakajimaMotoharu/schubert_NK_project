@@ -205,28 +205,32 @@ public final class PayloadCodec {
       }
       return FieldCodec.encodeText(null, field.length(), false);
     }
-    return switch (field.wireType()) {
-      case TEXT -> {
+    {
+      final WireType dispatchValue0 = java.util.Objects.requireNonNull(field.wireType());
+      if (dispatchValue0 == WireType.TEXT) {
+
         if (!(value instanceof FieldValue.Text text)) {
           throw new MessageEncodingException("text payload field has the wrong Java type");
         }
-        yield FieldCodec.encodeText(
+        return FieldCodec.encodeText(
             text.value(), field.length(), field.presence() == Presence.MANDATORY);
-      }
-      case NUMERIC -> {
+
+      } else if (dispatchValue0 == WireType.NUMERIC) {
+
         if (!(value instanceof FieldValue.Numeric numeric)) {
           throw new MessageEncodingException("numeric payload field has the wrong Java type");
         }
-        yield FieldCodec.encodeNumeric(
+        return FieldCodec.encodeNumeric(
             numeric.value(), field.length(), 0, maximumForDigits(field.length()));
-      }
-      case BOOLEAN -> {
+
+      } else {
+
         if (!(value instanceof FieldValue.Flag flag)) {
           throw new MessageEncodingException("boolean payload field has the wrong Java type");
         }
-        yield FieldCodec.encodeBoolean(flag.value(), false);
+        return FieldCodec.encodeBoolean(flag.value(), false);
       }
-    };
+    }
   }
 
   private static FieldValue decodeField(
@@ -235,37 +239,49 @@ public final class PayloadCodec {
       validateErrorFiller(field, encoded);
       return FieldValue.Unset.INSTANCE;
     }
-    return switch (field.wireType()) {
-      case TEXT ->
-          FieldCodec.decodeText(encoded, field.presence() == Presence.MANDATORY)
-              .<FieldValue>map(FieldValue.Text::new)
-              .orElse(FieldValue.Unset.INSTANCE);
-      case NUMERIC ->
-          new FieldValue.Numeric(
-              FieldCodec.decodeNumeric(encoded, 0, maximumForDigits(field.length())));
-      case BOOLEAN -> new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
-    };
+    {
+      final WireType dispatchValue1 = java.util.Objects.requireNonNull(field.wireType());
+      if (dispatchValue1 == WireType.TEXT) {
+        return FieldCodec.decodeText(encoded, field.presence() == Presence.MANDATORY)
+            .<FieldValue>map(FieldValue.Text::new)
+            .orElse(FieldValue.Unset.INSTANCE);
+      } else if (dispatchValue1 == WireType.NUMERIC) {
+        return new FieldValue.Numeric(
+            FieldCodec.decodeNumeric(encoded, 0, maximumForDigits(field.length())));
+      } else {
+        return new FieldValue.Flag(FieldCodec.decodeBoolean(encoded, false).orElseThrow());
+      }
+    }
   }
 
   private static byte[] errorFiller(FieldDefinition<?> field) {
-    return switch (field.wireType()) {
-      case TEXT -> FieldCodec.encodeText(null, field.length(), false);
-      case NUMERIC ->
-          FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
-      case BOOLEAN -> FieldCodec.encodeBoolean(null, true);
-    };
+    {
+      final WireType dispatchValue2 = java.util.Objects.requireNonNull(field.wireType());
+      if (dispatchValue2 == WireType.TEXT) {
+        return FieldCodec.encodeText(null, field.length(), false);
+      } else if (dispatchValue2 == WireType.NUMERIC) {
+        return FieldCodec.encodeNumeric(0, field.length(), 0, maximumForDigits(field.length()));
+      } else {
+        return FieldCodec.encodeBoolean(null, true);
+      }
+    }
   }
 
   private static void validateErrorFiller(FieldDefinition<?> field, byte[] encoded) {
-    boolean valid =
-        switch (field.wireType()) {
-          case TEXT -> FieldCodec.decodeText(encoded, false).isEmpty();
-          case NUMERIC ->
-              FieldCodec.decodeNumericOrErrorFiller(
-                      encoded, 0, maximumForDigits(field.length()), true)
-                  .isEmpty();
-          case BOOLEAN -> FieldCodec.decodeBoolean(encoded, true).isEmpty();
-        };
+    boolean valid;
+    {
+      final WireType dispatchValue3 = java.util.Objects.requireNonNull(field.wireType());
+      if (dispatchValue3 == WireType.TEXT) {
+        valid = FieldCodec.decodeText(encoded, false).isEmpty();
+      } else if (dispatchValue3 == WireType.NUMERIC) {
+        valid =
+            FieldCodec.decodeNumericOrErrorFiller(
+                    encoded, 0, maximumForDigits(field.length()), true)
+                .isEmpty();
+      } else {
+        valid = FieldCodec.decodeBoolean(encoded, true).isEmpty();
+      }
+    }
     if (!valid) {
       throw new PermanentProtocolException("payload field does not use its error filler");
     }

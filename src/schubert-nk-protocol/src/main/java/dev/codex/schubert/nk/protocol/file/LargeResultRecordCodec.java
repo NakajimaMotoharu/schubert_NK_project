@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /** Headerless 4,800-byte large-result stream codec. Trace: NK-PRO-003, UI 237 §4～§6. */
-public final class LargeResultRecordCodec {
-  private LargeResultRecordCodec() {}
+public interface LargeResultRecordCodec {
 
   public static LargeResultContent write(OutputStream output, List<byte[]> records) {
     Objects.requireNonNull(output, "output");

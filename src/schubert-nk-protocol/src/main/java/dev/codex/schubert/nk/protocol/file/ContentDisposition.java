@@ -19,10 +19,15 @@ public enum ContentDisposition {
 
   public static ContentDisposition fromWire(String value) {
     Objects.requireNonNull(value, "value");
-    return switch (value) {
-      case "I" -> INLINE;
-      case "A" -> ATTACHMENT;
-      default -> throw new IllegalArgumentException("unknown content disposition");
-    };
+    {
+      final String dispatchValue0 = java.util.Objects.requireNonNull(value);
+      if ("I".equals(dispatchValue0)) {
+        return INLINE;
+      } else if ("A".equals(dispatchValue0)) {
+        return ATTACHMENT;
+      } else {
+        throw new IllegalArgumentException("unknown content disposition");
+      }
+    }
   }
 }

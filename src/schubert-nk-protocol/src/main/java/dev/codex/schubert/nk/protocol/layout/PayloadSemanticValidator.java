@@ -1,59 +1,31 @@
 package dev.codex.schubert.nk.protocol.layout;
 
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.HTTP_METHOD;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.LITERAL_COMPLETED;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.LITERAL_ERROR;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.LITERAL_FILE_BYTE;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.LITERAL_ID;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.PAGED_RESPONSES;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.PAGE_SIZES;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.RECEIPT_ID;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.RECORD_COUNT_LAYOUTS;
+import static dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidatorRules.USERNAME;
+
 import dev.codex.schubert.nk.protocol.time.JstWireTimestamp;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * Intrinsic layout and cross-field validation performed after named-type conversion. Trace:
  * NK-PRO-002, UI 234-236, SS 322 sections 5 and 9.
  */
-public final class PayloadSemanticValidator {
-  private static final java.lang.String LITERAL_ID = "受付ID";
-
-  private static final java.lang.String LITERAL_FILE_BYTE = "File byte長";
-
-  private static final java.lang.String LITERAL_COMPLETED = "COMPLETED";
-
-  private static final java.lang.String LITERAL_ERROR = "ERROR";
-
-  private static final Pattern USERNAME = Pattern.compile("[A-Za-z0-9._-]+");
-  private static final Pattern RECEIPT_ID = Pattern.compile("[0-9A-HJKMNP-TV-Z]{26}");
-  private static final Pattern HTTP_METHOD = Pattern.compile("[A-Z]{3,8}");
-  private static final Set<String> RECORD_COUNT_LAYOUTS =
-      Set.of(
-          "GAMRSP01",
-          "SPKRSP01",
-          "RTERSP01",
-          "SCFRSP01",
-          "ANLRSP01",
-          "MCTRSP01",
-          "MCSRSP01",
-          "MTRRSP01");
-  private static final Map<String, Integer> PAGE_SIZES =
-      Map.ofEntries(
-          Map.entry("SRCREQ01", 100),
-          Map.entry("SRCRSP01", 100),
-          Map.entry("LGSREQ01", 100),
-          Map.entry("LGSRSP01", 100),
-          Map.entry("USRREQ01", 50),
-          Map.entry("USRRSP01", 50),
-          Map.entry("NTSREQ01", 50),
-          Map.entry("NTSRSP01", 50),
-          Map.entry("QSSREQ01", 50),
-          Map.entry("QSSRSP01", 50));
-  private static final Set<String> PAGED_RESPONSES =
-      Set.of("SRCRSP01", "LGSRSP01", "USRRSP01", "NTSRSP01", "QSSRSP01");
-
-  private PayloadSemanticValidator() {}
+public interface PayloadSemanticValidator {
 
   public static void validate(TypedPayloadValues values) {
     Objects.requireNonNull(values, "values");
@@ -73,45 +45,74 @@ public final class PayloadSemanticValidator {
           numeric(data, "Total count"), records.size(), "total count differs from record count");
     }
 
-    switch (layoutId) {
-      case "LGNREQ01" -> validateLoginRequest(data);
-      case "LGNRSP01" -> validateLoginSuccess(data);
-      case "GAMRSP01" -> validateAscending(records, "Display order", false);
-      case "SPKRSP01" -> records.forEach(record -> requirePositive(record, "出現件数"));
-      case "SRCREQ01", "USRREQ01" -> requirePositive(data, "Page");
-      case "SRCRSP01" -> validateScenarioSearchRecords(records);
-      case "RTERSP01" -> {
+    {
+      final String dispatchValue0 = java.util.Objects.requireNonNull(layoutId);
+      if ("LGNREQ01".equals(dispatchValue0)) {
+        validateLoginRequest(data);
+      } else if ("LGNRSP01".equals(dispatchValue0)) {
+        validateLoginSuccess(data);
+      } else if ("GAMRSP01".equals(dispatchValue0)) {
+        validateAscending(records, "Display order", false);
+      } else if ("SPKRSP01".equals(dispatchValue0)) {
+        records.forEach(record -> requirePositive(record, "出現件数"));
+      } else if ("SRCREQ01".equals(dispatchValue0) || "USRREQ01".equals(dispatchValue0)) {
+        requirePositive(data, "Page");
+      } else if ("SRCRSP01".equals(dispatchValue0)) {
+        validateScenarioSearchRecords(records);
+      } else if ("RTERSP01".equals(dispatchValue0)) {
+
         records.forEach(record -> requirePositive(record, "File件数"));
         validateAscending(records, "Prefix", true);
-      }
-      case "SCNRSP01" -> validateScenarioDetail(data, records);
-      case "AUDRSP01", "MEDRSP01", "VIDRSP01" -> validateMediaDescriptor(data);
-      case "ANMRSP01" -> validateAnimationMenu(data);
-      case "ANLRSP01" -> validateAnimationRecords(records);
-      case "MTRRSP01" -> validateMusicRecords(records);
-      case "LGSREQ01" -> {
+
+      } else if ("SCNRSP01".equals(dispatchValue0)) {
+        validateScenarioDetail(data, records);
+      } else if ("AUDRSP01".equals(dispatchValue0)
+          || "MEDRSP01".equals(dispatchValue0)
+          || "VIDRSP01".equals(dispatchValue0)) {
+        validateMediaDescriptor(data);
+      } else if ("ANMRSP01".equals(dispatchValue0)) {
+        validateAnimationMenu(data);
+      } else if ("ANLRSP01".equals(dispatchValue0)) {
+        validateAnimationRecords(records);
+      } else if ("MTRRSP01".equals(dispatchValue0)) {
+        validateMusicRecords(records);
+      } else if ("LGSREQ01".equals(dispatchValue0)) {
+
         requirePositive(data, "Page");
         validateDateRange(data, "From日時", "To日時", 31);
-      }
-      case "UCRREQ01" -> validateUserCreation(data);
-      case "UDTRSP01" ->
-          requireRange(
-              numeric(data, "Active session数"), 0, 2, "active session count is outside 0..2");
-      case "UPWREQ01" -> validatePassword(text(data, "New Password"), Optional.empty());
-      case "NTSREQ01", "QSSREQ01" -> {
+
+      } else if ("UCRREQ01".equals(dispatchValue0)) {
+        validateUserCreation(data);
+      } else if ("UDTRSP01".equals(dispatchValue0)) {
+        requireRange(
+            numeric(data, "Active session数"), 0, 2, "active session count is outside 0..2");
+      } else if ("UPWREQ01".equals(dispatchValue0)) {
+        validatePassword(text(data, "New Password"), Optional.empty());
+      } else if ("NTSREQ01".equals(dispatchValue0) || "QSSREQ01".equals(dispatchValue0)) {
+
         requirePositive(data, "Page");
         validateDateRange(data, "受付日時From", "受付日時To", 366);
-      }
-      case "NTDRSP01" -> validateNotificationDetail(data);
-      case "NTCRSP01" -> validateCancellationSuccess(data);
-      case "QSSRSP01" -> records.forEach(PayloadSemanticValidator::validateQuestionSummary);
-      case "QSDRSP01" -> validateQuestionDetail(data);
-      case "QSBREQ01" -> validateQuestionSubmission(data);
-      case "QSBRSP01", "QWKREQ01" -> validateReceipt(text(data, LITERAL_ID));
-      case "NTSRSP01" -> records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));
-      case "WLGEVT01" -> validateWebLog(data);
-      default -> {
+
+      } else if ("NTDRSP01".equals(dispatchValue0)) {
+        validateNotificationDetail(data);
+      } else if ("NTCRSP01".equals(dispatchValue0)) {
+        validateCancellationSuccess(data);
+      } else if ("QSSRSP01".equals(dispatchValue0)) {
+        records.forEach(PayloadSemanticValidator::validateQuestionSummary);
+      } else if ("QSDRSP01".equals(dispatchValue0)) {
+        validateQuestionDetail(data);
+      } else if ("QSBREQ01".equals(dispatchValue0)) {
+        validateQuestionSubmission(data);
+      } else if ("QSBRSP01".equals(dispatchValue0) || "QWKREQ01".equals(dispatchValue0)) {
+        validateReceipt(text(data, LITERAL_ID));
+      } else if ("NTSRSP01".equals(dispatchValue0)) {
+        records.forEach(record -> validateReceipt(text(record, LITERAL_ID)));
+      } else if ("WLGEVT01".equals(dispatchValue0)) {
+        validateWebLog(data);
+      } else {
+
         // All remaining layouts have only invariants already established by their named types.
+
       }
     }
   }
@@ -309,12 +310,17 @@ public final class PayloadSemanticValidator {
 
   private static void validateNotificationDetail(FieldValueSet data) {
     String state = text(data, "内部状態");
-    String expectedType =
-        switch (state) {
-          case LITERAL_COMPLETED -> LITERAL_COMPLETED;
-          case LITERAL_ERROR -> LITERAL_ERROR;
-          default -> "ACCEPTED";
-        };
+    String expectedType;
+    {
+      final String dispatchValue1 = java.util.Objects.requireNonNull(state);
+      if (LITERAL_COMPLETED.equals(dispatchValue1)) {
+        expectedType = LITERAL_COMPLETED;
+      } else if (LITERAL_ERROR.equals(dispatchValue1)) {
+        expectedType = LITERAL_ERROR;
+      } else {
+        expectedType = "ACCEPTED";
+      }
+    }
     require(
         text(data, "通知区分").equals(expectedType),
         "notification type disagrees with its internal state");
@@ -326,17 +332,24 @@ public final class PayloadSemanticValidator {
     boolean errorFields = present(data, "Error code") && present(data, "利用者向けerror");
     int timestampMask =
         (started ? 8 : 0) | (completed ? 4 : 0) | (failed ? 2 : 0) | (cancelled ? 1 : 0);
-    int expectedTimestampMask =
-        switch (state) {
-          case "RECEIVED" -> 0;
-          case "PROCESSING" -> 8;
-          case LITERAL_COMPLETED -> 12;
-          case LITERAL_ERROR -> 10;
-          case "CANCELLED" -> 1;
-          default ->
-              throw new LayoutValidationException(
-                  "layout semantic violation: unknown notification state");
-        };
+    int expectedTimestampMask;
+    {
+      final String dispatchValue2 = java.util.Objects.requireNonNull(state);
+      if ("RECEIVED".equals(dispatchValue2)) {
+        expectedTimestampMask = 0;
+      } else if ("PROCESSING".equals(dispatchValue2)) {
+        expectedTimestampMask = 8;
+      } else if (LITERAL_COMPLETED.equals(dispatchValue2)) {
+        expectedTimestampMask = 12;
+      } else if (LITERAL_ERROR.equals(dispatchValue2)) {
+        expectedTimestampMask = 10;
+      } else if ("CANCELLED".equals(dispatchValue2)) {
+        expectedTimestampMask = 1;
+      } else {
+        throw new LayoutValidationException(
+            "layout semantic violation: unknown notification state");
+      }
+    }
     require(timestampMask == expectedTimestampMask, state + " timestamps are inconsistent");
     if (state.equals(LITERAL_ERROR)) {
       require(errorFields, "ERROR notification does not contain both error fields");

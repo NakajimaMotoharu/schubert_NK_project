@@ -1,23 +1,14 @@
 package dev.codex.schubert.nk.protocol.file;
 
+import static dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorRules.HASH;
+import static dev.codex.schubert.nk.protocol.file.MediaDescriptorValidatorRules.MUSIC_MIME;
+
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /** MEDIA1024 structure and SSC-004 MIME allowlist. Trace: NK-PRO-003, SS 323/333. */
-public final class MediaDescriptorValidator {
-  private static final Pattern HASH = Pattern.compile("[0-9a-f]{64}");
-  private static final Map<String, String> MUSIC_MIME =
-      Map.of(
-          ".m4a", "audio/mp4",
-          ".mp3", "audio/mpeg",
-          ".ogg", "audio/ogg",
-          ".wav", "audio/wav",
-          ".flac", "audio/flac");
-
-  private MediaDescriptorValidator() {}
+public interface MediaDescriptorValidator {
 
   public static void validate(MediaDescriptor descriptor) {
     Objects.requireNonNull(descriptor, "descriptor");
@@ -42,12 +33,17 @@ public final class MediaDescriptorValidator {
         || hasDotSegment(path)) {
       throw new IllegalArgumentException("storage path is not a canonical relative path");
     }
-    String requiredPrefix =
-        switch (mediaType) {
-          case AUDIO -> "scenario/";
-          case VIDEO -> "video/";
-          case MUSIC -> "music/";
-        };
+    String requiredPrefix;
+    {
+      final MediaType dispatchValue0 = java.util.Objects.requireNonNull(mediaType);
+      if (dispatchValue0 == MediaType.AUDIO) {
+        requiredPrefix = "scenario/";
+      } else if (dispatchValue0 == MediaType.VIDEO) {
+        requiredPrefix = "video/";
+      } else {
+        requiredPrefix = "music/";
+      }
+    }
     if (!path.startsWith(requiredPrefix)) {
       throw new IllegalArgumentException("storage path does not match its media type");
     }
@@ -70,12 +66,17 @@ public final class MediaDescriptorValidator {
     if (!extension.equals(extension(descriptor.storageRelativePath()))) {
       throw new IllegalArgumentException("media storage and display extensions differ");
     }
-    String expectedMime =
-        switch (descriptor.mediaType()) {
-          case AUDIO -> extension.equals(".ogg") ? "audio/ogg" : null;
-          case VIDEO -> extension.equals(".mp4") ? "video/mp4" : null;
-          case MUSIC -> MUSIC_MIME.get(extension);
-        };
+    String expectedMime;
+    {
+      final MediaType dispatchValue1 = java.util.Objects.requireNonNull(descriptor.mediaType());
+      if (dispatchValue1 == MediaType.AUDIO) {
+        expectedMime = extension.equals(".ogg") ? "audio/ogg" : null;
+      } else if (dispatchValue1 == MediaType.VIDEO) {
+        expectedMime = extension.equals(".mp4") ? "video/mp4" : null;
+      } else {
+        expectedMime = MUSIC_MIME.get(extension);
+      }
+    }
     if (expectedMime == null || !expectedMime.equals(descriptor.mimeType())) {
       throw new IllegalArgumentException("media extension and MIME type are not allowlisted");
     }

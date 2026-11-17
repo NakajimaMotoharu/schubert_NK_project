@@ -525,38 +525,61 @@ public final class LayoutFieldCatalog {
   }
 
   private static FieldArea parseArea(String value) {
-    return switch (value) {
-      case "DATA" -> FieldArea.DATA;
-      case "RECORD" -> FieldArea.RECORD;
-      default -> throw new LayoutValidationException("unknown field area");
-    };
+    {
+      final String dispatchValue0 = java.util.Objects.requireNonNull(value);
+      if ("DATA".equals(dispatchValue0)) {
+        return FieldArea.DATA;
+      } else if ("RECORD".equals(dispatchValue0)) {
+        return FieldArea.RECORD;
+      } else {
+        throw new LayoutValidationException("unknown field area");
+      }
+    }
   }
 
   private static WireType parseWireType(String value) {
-    return switch (value) {
-      case "X" -> WireType.TEXT;
-      case "N" -> WireType.NUMERIC;
-      case "B" -> WireType.BOOLEAN;
-      default -> throw new LayoutValidationException("unknown wire type");
-    };
+    {
+      final String dispatchValue1 = java.util.Objects.requireNonNull(value);
+      if ("X".equals(dispatchValue1)) {
+        return WireType.TEXT;
+      } else if ("N".equals(dispatchValue1)) {
+        return WireType.NUMERIC;
+      } else if ("B".equals(dispatchValue1)) {
+        return WireType.BOOLEAN;
+      } else {
+        throw new LayoutValidationException("unknown wire type");
+      }
+    }
   }
 
   private static Presence parsePresence(String value) {
-    return switch (value) {
-      case "M" -> Presence.MANDATORY;
-      case "C" -> Presence.CONDITIONAL;
-      case "O" -> Presence.OPTIONAL;
-      case "F" -> Presence.FIXED;
-      default -> throw new LayoutValidationException("unknown presence");
-    };
+    {
+      final String dispatchValue2 = java.util.Objects.requireNonNull(value);
+      if ("M".equals(dispatchValue2)) {
+        return Presence.MANDATORY;
+      } else if ("C".equals(dispatchValue2)) {
+        return Presence.CONDITIONAL;
+      } else if ("O".equals(dispatchValue2)) {
+        return Presence.OPTIONAL;
+      } else if ("F".equals(dispatchValue2)) {
+        return Presence.FIXED;
+      } else {
+        throw new LayoutValidationException("unknown presence");
+      }
+    }
   }
 
   private static Padding paddingFor(WireType type) {
-    return switch (type) {
-      case TEXT -> Padding.SPACE_RIGHT;
-      case NUMERIC -> Padding.ZERO_LEFT;
-      case BOOLEAN -> Padding.NONE;
-    };
+    {
+      final WireType dispatchValue3 = java.util.Objects.requireNonNull(type);
+      if (dispatchValue3 == WireType.TEXT) {
+        return Padding.SPACE_RIGHT;
+      } else if (dispatchValue3 == WireType.NUMERIC) {
+        return Padding.ZERO_LEFT;
+      } else {
+        return Padding.NONE;
+      }
+    }
   }
 
   private static void validateFixedField(LayoutId layoutId, String name, Presence presence) {
@@ -566,28 +589,44 @@ public final class LayoutFieldCatalog {
   }
 
   private static Class<?> javaTypeFor(WireType type) {
-    return switch (type) {
-      case TEXT -> String.class;
-      case NUMERIC -> Long.class;
-      case BOOLEAN -> Boolean.class;
-    };
+    {
+      final WireType dispatchValue4 = java.util.Objects.requireNonNull(type);
+      if (dispatchValue4 == WireType.TEXT) {
+        return String.class;
+      } else if (dispatchValue4 == WireType.NUMERIC) {
+        return Long.class;
+      } else {
+        return Boolean.class;
+      }
+    }
   }
 
   private static String wireCode(WireType type) {
-    return switch (type) {
-      case TEXT -> "X";
-      case NUMERIC -> "N";
-      case BOOLEAN -> "B";
-    };
+    {
+      final WireType dispatchValue5 = java.util.Objects.requireNonNull(type);
+      if (dispatchValue5 == WireType.TEXT) {
+        return "X";
+      } else if (dispatchValue5 == WireType.NUMERIC) {
+        return "N";
+      } else {
+        return "B";
+      }
+    }
   }
 
   private static String presenceCode(Presence presence) {
-    return switch (presence) {
-      case MANDATORY -> "M";
-      case CONDITIONAL -> "C";
-      case OPTIONAL -> "O";
-      case FIXED -> "F";
-    };
+    {
+      final Presence dispatchValue6 = java.util.Objects.requireNonNull(presence);
+      if (dispatchValue6 == Presence.MANDATORY) {
+        return "M";
+      } else if (dispatchValue6 == Presence.CONDITIONAL) {
+        return "C";
+      } else if (dispatchValue6 == Presence.OPTIONAL) {
+        return "O";
+      } else {
+        return "F";
+      }
+    }
   }
 
   private static int parsePositiveInt(String value, String label) {

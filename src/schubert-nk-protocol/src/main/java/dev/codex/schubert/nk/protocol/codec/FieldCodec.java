@@ -1,5 +1,11 @@
 package dev.codex.schubert.nk.protocol.codec;
 
+import static dev.codex.schubert.nk.protocol.codec.FieldCodecRules.ASCII_SPACE;
+import static dev.codex.schubert.nk.protocol.codec.FieldCodecRules.ASCII_ZERO;
+import static dev.codex.schubert.nk.protocol.codec.FieldCodecRules.BOOLEAN_FIELD_LENGTH;
+import static dev.codex.schubert.nk.protocol.codec.FieldCodecRules.LITERAL_FIELD;
+import static dev.codex.schubert.nk.protocol.codec.FieldCodecRules.MINIMUM_FIELD_LENGTH;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.CodingErrorAction;
@@ -12,16 +18,7 @@ import java.util.OptionalLong;
 import org.jspecify.annotations.Nullable;
 
 /** Strict X/N/B field codec. Trace: NK-PRO-002, UI 232 §4, SS 322 §4～§6. */
-public final class FieldCodec {
-  private static final int BOOLEAN_FIELD_LENGTH = 1;
-  private static final int MINIMUM_FIELD_LENGTH = 1;
-
-  private static final java.lang.String LITERAL_FIELD = "field";
-
-  private static final byte ASCII_SPACE = 0x20;
-  private static final byte ASCII_ZERO = 0x30;
-
-  private FieldCodec() {}
+public interface FieldCodec {
 
   public static byte[] encodeText(@Nullable String value, int length, boolean mandatory) {
     requirePositiveLength(length);
