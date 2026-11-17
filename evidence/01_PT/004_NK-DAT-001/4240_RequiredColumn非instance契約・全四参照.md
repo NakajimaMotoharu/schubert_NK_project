@@ -1,0 +1,3 @@
+# RequiredColumn非instance契約・全四参照
+
+4540/4541仕様・4542結果、PG38042 Core 6a2259e1d6245af4c720a52001487f67fb28b2ba / Unit d661c779d3a098e4e416d45cc63670e11d40e172。担当P00405のみ、全4は二programを跨ぐ単一runで費用再配賦0、元2+新2・FESnotrun0・対象2SourceCode4の14L4M4B51I miss0。private非構築契約と元SQLNULL/header業務期待を区別、publicABI2/bodyinverse/元fixture不変。実DB/FS/HTTP/Root/native/全451/親受入へ拡張0。
