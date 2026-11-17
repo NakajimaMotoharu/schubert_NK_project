@@ -1,0 +1,9 @@
+# 4546 JdbcAdmissionFailures purewhole7結果
+
+Core bc3ab1abf8e4423bbe9712362f963be070d32b79 / Unit 1d35fdb2fc3c7c71dd1c36f3c33acdaa5d2bc59d / PG38078-JDBC-PURE-WHOLE7。BUG3201/3202/YKT2665/2664先行後、secondary Objects.requireNonNull入口とprivatector固定AssertionErrorだけ。38068before/38070after RootstrictMain2/Test1、38072MaxLow3/CSformat0・PMD4各独立表literal/元getter契約/privateflag復元のsource根拠で適用未分類0。38074全可視性ABI3/両Main逆変換exact/Storage依存2byte一致/原6catch-binding呼出元は不変・nonnullのsource証明。
+
+38078新独立whole7exit0、F/E/S/notrun0。38080-v2は全3CRC/init/XML/単一exec、対象helper1class13L3M16B52I miss0・constructor含む無除外全Code3。primary5×secondary4手書き真理表・固定診断08001/非raw文言・identity/既知fatal順序/未知getter非参照・共有循環・両入口nullsecondary×5・privateaccessflag finally復元を確認。共有Storage未hit保持、実DB/caller/Root等の成功へ拡張0。
+
+38080-v1工具guard1を保全、BUG3203/YKT2666先行後、固定Testbinary直下の正規hiddenlambdaだけを識別し独立postをv2で是正、5synthetic識別check/他未知init拒否を維持。製品試験の再演0。修正commit ebf6e78bbc132dcc3a527a906b1f19197abb49ab。38082でF03/P01901のhelper不足のみ減、BUG3201/3202/3203当範囲closed、YKT2665/2666当範囲closed・YKT2664全体OPEN。他sixmodule/実DB/451/終了依存/QA051056057は未完HOLD、正式1964PT/53scope・17/190新規0・工数nullを維持。開始見積.6/1.8/4 cap5・追加発見価格1.8（工具是正実費の専有配賦null）を元費/再資格費と分離。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38080-jdbc-pure-whole7-independent-v2/manifest.json SHA256 7df2ace252d76de923431e81d5f64672deb89791cfe232d3fd422a219a69a964。
