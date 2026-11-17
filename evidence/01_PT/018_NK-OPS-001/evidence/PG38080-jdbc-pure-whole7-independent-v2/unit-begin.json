@@ -1,0 +1,77 @@
+{
+  "source": "1d35fdb2fc3c7c71dd1c36f3c33acdaa5d2bc59d",
+  "sourceCore": "bc3ab1abf8e4423bbe9712362f963be070d32b79",
+  "branch": "dev-foundation",
+  "run": "PG38078-JDBC-PURE-WHOLE7",
+  "atUTC": "2026-11-17T20:29:13.399699+00:00",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Dnk.pt.repository=/home/mini/codex/project1/work/pgpt-foundation",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38078-jdbc-pure-whole7-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38078-jdbc-pure-whole7-unit-v1/jacoco.exec,append=false,sessionid=PG38078-JDBC-PURE-WHOLE7",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38070-jdbc-pure-after-v1/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38078-jdbc-pure-whole7-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest"
+  ],
+  "expectedTests": 7,
+  "expectedCases": [
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "namespaceCannotBeInstantiatedOrRetainInstanceState()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "missingSecondaryFailsAtBothBoundariesWithoutChangingAnyPrimary()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "literalTwentyCellPriorityTableAndFixedDiagnosticStayIndependentOfProviderText()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "identicalPrimaryAndSecondaryNeverCauseSelfSuppression()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "knownSqlFatalClassificationKeepsCauseSuppressedNextAndPrimaryPrecedence()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "unknownPrimaryDoesNotTraverseProviderGettersOrKnownSecondaryFatal()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailuresContractTest",
+      "sharedCyclicSqlGraphTerminatesWithoutMutationOrInventedFailure()"
+    ]
+  ],
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "9782d9ad81e0346d1b0a1168f9e16555909b7a2b5e0c3f828b6538c66af43a64",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "65a266f1a575db5f7116394a2dda0bca9a076a0340ada0a4b77cf68d70f32ed0",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailuresContractTest.java": "7326b9bc9ba728e500b57cf24aafc8e325bad582d19818d4f83a8e7c62dc966a"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38076-jdbc-pure-admission-v1/normalized-prepare.json",
+    "sha256": "f010161067535c987e2f2cf581b73125a8e448e7f60a731d7a797fdc3e971466"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38076-jdbc-pure-admission-v1/manifest.json",
+    "sha256": "332889c4cd087948908c4f195ae055a4669383fd8e65ca3720bfd892928aba5c"
+  },
+  "measurementAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "reservedNativeAgentSelected": false,
+  "knownSourceChange": "BUG3201/3202 secondary nonnull and private namespace guards only. ABI3/body inverse and sharedStorage2 byte exact, sixcaller catch bindings unchanged. New standalonewhole7 on heap Throwable/SQL graphs; independent literal20cell priority and fixeddiagnostic/null/identity/fatal/cycle oracles. RootMain2/Test1 strict/MaxLow3; PMD4 per-site deliberate test oracles/getter/privateflagrestore. No DB connections/providers/Root/cohort/VM/native/key/credential/intent/authority, heldtypes or heldTest extraction, oldexecunion0."
+}
