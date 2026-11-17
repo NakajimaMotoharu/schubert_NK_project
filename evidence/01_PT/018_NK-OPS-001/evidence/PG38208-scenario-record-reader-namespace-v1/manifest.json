@@ -1,0 +1,38 @@
+{
+  "actualExit": 0,
+  "run": "PG38208-scenario-record-reader-namespace-v1",
+  "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "terminalAtUTC": "2026-11-17T22:58:11.540955+00:00",
+  "groupStart": "PGPT-20261008-5725",
+  "outcome": "HOLD_FIXTURE_SCOPE",
+  "failureClassification": "LOCAL_ADMISSION_GUARD",
+  "admissionGuardExit": 1,
+  "productRunStarted": false,
+  "productTests": 0,
+  "affectedWholeSpecs": 4,
+  "proposedNewTestsDormant": 1,
+  "beforeCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38210-scenario-reader-before-prepare-v1/manifest.json",
+    "sha256": "7f9b8fb7682a51944fbb112c27f04957fa9331c1abb2abcf1ff937e59da0172f",
+    "mainClasses": 2
+  },
+  "block": {
+    "fixture": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioFileFixture.java",
+    "line": 34,
+    "operation": "Files.setPosixFilePermissions",
+    "scope": "Original complete fixture includes a POSIX mode change. Current group did not admit permission changes."
+  },
+  "toolCapUnchanged": true,
+  "guardChanged": false,
+  "bypasses": 0,
+  "modifiedProductCommitted": false,
+  "preservedDraft": {
+    "ScenarioRecordReaderNamespaceContractTest.java": "002784c6c0f3c5b597a241b5c6231a0094a125d50e9e940df707439549b0bef5",
+    "source.diff": "60860caa9c1977ac5af9187676d67898a954f299110108715f24cc079ba34682"
+  },
+  "draftDir": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38208-scenario-reader-hold-draft",
+  "beforeInputsRestoredExact": true,
+  "formalAcceptanceDelta": 0,
+  "newCoverage": 0,
+  "relatedBug": "BUG-3212"
+}

@@ -1,0 +1,81 @@
+{
+  "eventId": "PGPT-20261008-5725",
+  "groupId": "PGPT-WBS66-SCENARIO-RECORD-READER-ORDINARY-20261118",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T22:56:01.325000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SCENARIO-RECORD-READER-ORDINARY-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-SCENARIO-RECORD-READER-ORDINARY-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03 / P008-06. ScenarioRecordReader closed static byte decoder, replace empty private constructor by explicit non-instantiation invariant. Retain original four whole ordinary ScenarioRecordReaderTest methods and hand-written golden fixture; add one orthogonal contract test, current NullAway/ABI, Max/Low/static, fresh single-run unfiltered XML/CRC. Only self-owned JUnit temp files, no actual retained paths, permission changes, keys, DB/VM/network/native or held binary. User-visible outcome and SS333 unchanged.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/008_NK-SCN-001/001_NK-SCN-001_単体テスト仕様書.md",
+        "sha256": "41758c35f64e7616233b5ad3b745e2dff0281514630d45b929be66a459352e53"
+      },
+      {
+        "path": "evidence/01_PT/008_NK-SCN-001/4079_P00806保持reader本文delivery原四source契約対応.md",
+        "sha256": "29864366b34e67f9916348b6a35011a4759bc87ef256e7589868a46ee9c1f692"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG15856-scenario-record-reader-four-post-v1/manifest.json",
+        "sha256": "d6f4922e2f6096a34a4e0dbe0a533c029960978dcf5e11c18ceb4a5fc40f8913"
+      }
+    ],
+    "source": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "productionCoreMain": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+    "run": "PG38208-scenario-record-reader-namespace-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P008-06"
+    ],
+    "testIds": [
+      "PT-SCN-008-RD03",
+      "PT-SCN-008-RD04",
+      "PT-SCN-008-NAMESPACE"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.5,
+      "base": 1.5,
+      "high": 3.5
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "baseCore": "b00f871804b6d25f1c3e5e6d3b77d7bcca340923",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReader.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/FileIntegrityException.java"
+  ],
+  "testSources": [
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReaderTest.java",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioFileFixture.java"
+  ],
+  "beforeHashes": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReader.java": "39d4882340526f647f73b93669b45fc2e6570be220c23bd5aaf45a3012c1b359",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/FileIntegrityException.java": "0ae4adadc3ba54aa98aa352a39a174a9b776e8240f442d7f1f43704e394a4854",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioRecordReaderTest.java": "34211a24be4ae7bc625c3ee4270a0cc359daf2ae6aea0627deaf39c1d9fe0626",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/storage/ScenarioFileFixture.java": "bab03337af5d15eb5b1ec8855dac3816043a3b22788ed152a5a34fc85ea59b80"
+  }
+}
