@@ -5,3 +5,7 @@ BUG3176/YKT2645、RD FUN005～007/MON004・UI252・SS333351352354。追加発見
 元8の全closed status×failure×media、byte境界、Unicode/canary、省略field、clock/logger例外、繰返し・並行の期待値を維持し、現Protocol/SessionPrincipalと一つの必要whole9にまとめる。固定memoryLogger/Clock/公開未発行synthetic値のみ、実配信・ファイル・認証・DB・JMS・Root/native/VM/鍵/permit操作なし。
 
 Java25/原POMNullAwayの限定安全MainとSDKを固定し、PMD/Checkstyle/format/全physicalSB、source同一性・全Code単一exec/raw・CRC/init・XML/FES/notrunを独立postで確認。現WebSecurityAudit enum2の同じcompiledbyte/既存rawは比較して再利用可だが、旧whole依存資格へ拡大しない。Web29enum横展開は別scopeの未確認/保留を保持する。旧8実測が未回収なら「未確認」と明記し、新9へ算術加算しない。新規元190受入0/全451未完/正式1964-53不変。
+
+## 実行前のfixture是正追記
+
+BUG3177/YKT2646を修正前登録し、元8のID/独立業務oracleを保持してmedia008のTWR Executor.closeだけをfinally shutdownNow/awaitTermination5s＋assertへ是正した。初回Main/旧fixture静的37482/84と修正前source37486は保存。修正後はMain8physical/既存SBの同byteを再利用し、Test2sourceだけstrict再compileとPMD/CS/formatを再実施（37490/94）。Main再compile/SBや旧成功の確認再演はしていない。群初期見積.8/cap3は保持し、追加fixture是正をその範囲に含めて再価格0。原8source exact保持との旧記述はfixture機構の当1差分に限り更新し、独立期待値は変更しない。
