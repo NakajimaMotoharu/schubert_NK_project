@@ -1,0 +1,3 @@
+# NK-WEB-002要求追跡current24結果
+
+結果正本018_NK-OPS-001/4508とPG37774。全24成功、対象raw7class/41Code/70branch全100。JUnit実Unit c8f8985f0804b62f773a20a91a8ba88c811d847b、MainCore a013a6d676454082de3c59bc199e87f37fefe159。全199CRC/init/XMLとinput/source/expectedCasesはPG37772/37766。BUG3188/YKT2656の限定三static scope是正とglobal未完を区別、親formal受入0・共通参照費0。
