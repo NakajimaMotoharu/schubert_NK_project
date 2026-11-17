@@ -1,0 +1,7 @@
+# 4540 RequiredColumn/ContentDispositionFactory 非instance契約
+
+CONTRACT_AUDIT→IMPLEMENTATION/PT、ADDITIONAL_FINDING low.4/base1.3/high3 cap4、元価格/S-V不変。原PG15307/09/10のrequiredSQLNULL全1と元ContentDispositionFactoryTest全1を保全。static only二Mainの空private noargは旧標準filterの対象で、無filterCode全対象では資格不足。公共静的API/SQLSTATE22004と返却identity/固定診断/UTF8ヘッダー/ファイル名検証結果は不変更、private staticnamespaceの非instance不変条件だけを明示する。oldstandard結果を偽装失敗へ変換せず、品質不足BUG/YKTを修正前に登録。
+
+新Test2は指定の非secret utility二型だけ、private/noarg/static-method責務を明示確認し、不正構築で固定AssertionErrorとcause/suppressed無しを検証。限定reflectionはConstructorのaccess状態をfinally復元、OS/app権限/鍵/他private型へアクセス0。元whole二Test本文/入力/期待/annotationは保持、新whole二Test追加。元SQLNULLとheaderの正常・null・UTF8/予約文字/長さの独立literaloracleに結合、productionmethodでexpected生成0。
+
+新Main2をRootstrict・静的/ABI・SDK固定、元2+新2全4を一回、同source/byte/CRC/init/XML/raw全二SourceCodeを独立確認。ContentDisposition/MediaDescriptor/MediaTypeのProtocol176は現資格を再利用、DB/JDBC driver/FS/backend/Root/VM/native/keys/fourheldtype/heldmodels操作0。StorageAttributeGuardのwholeは実filesystem fixtureを含むためこの二pure契約へ抽出/代替0。PG判断根拠はSS311static責務/SS332requiredSQL/SS333header/411constructorinvariant/451と既3169/Rangeprivate-namespace方針、外部仕様/上位oracle変更0。F03/P00405/P01613の不足へ返却し全親/451/正式1964-53/17-190新規0・工数null/QA051056057全HOLD維持。

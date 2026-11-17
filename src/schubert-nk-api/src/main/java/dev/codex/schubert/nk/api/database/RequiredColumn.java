@@ -9,7 +9,9 @@ import org.jspecify.annotations.Nullable;
  * NULL is an integrity failure, never a default value.
  */
 public final class RequiredColumn {
-  private RequiredColumn() {}
+  private RequiredColumn() {
+    throw new AssertionError("static namespace");
+  }
 
   /** Returns the required value or a redacted SQLSTATE 22004 integrity failure. */
   public static <T> T requireValue(@Nullable T value) throws SQLDataException {

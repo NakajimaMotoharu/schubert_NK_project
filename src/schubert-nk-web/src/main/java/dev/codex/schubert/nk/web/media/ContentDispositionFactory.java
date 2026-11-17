@@ -8,7 +8,9 @@ import java.util.Objects;
 
 /** Safe header only. NK-MED-001; FUN-005/007; UI235/237; SS333 §9; PT-MED-005. */
 public final class ContentDispositionFactory {
-  private ContentDispositionFactory() {}
+  private ContentDispositionFactory() {
+    throw new AssertionError("static namespace");
+  }
 
   public static String create(MediaDescriptor descriptor) {
     Objects.requireNonNull(descriptor, "descriptor");
