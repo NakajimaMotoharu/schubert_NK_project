@@ -1,0 +1,3 @@
+# 4089 P00904 media memory-route current qualification
+
+正本018/4553/4554/4555、Core 5fcdbe49fcb10644f580eee05234df39912ee125 / Unit 4dbbafafeae4a742119a264d5841947394ef6088。38170実whole16FESnotrun0、38172-v2全196CRC/init/XML、target5physical/4Codeclass/20methods120L36B553I miss0、interfaceNoCode0/0保持・除外0。原SSoffsetwire4＋正規facadeverified4の元全8期待は不変、新namespace1/hashcollision1/contextfault6。公開既ABI18/元10body inverse/共有191byte同一、Maindefaultconstanttime固定/取得順ownedzero。旧standard成功/oldraw不足/途中10未資格は歴史保全。実JMS/HTTP/認可/session/file/Range等と全関連PT/451/終了依存は未受入、正式件数増0。38174proof b56c0087a96758402927618cf7500ebe55516b8c5d241c2320c77e0b61f942b0。
