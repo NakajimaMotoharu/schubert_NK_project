@@ -1,0 +1,9 @@
+# 4531 検索三form 現whole38実行結果
+
+Corefda03不変、Unit97b5b8c686be8c19f1abe499bc3907ae7504c7b4。PG37948 wholeQ14/N12/User12全38・FESnotrun0/timeoutfalse、37950全179CRC/init/公開XML独立とraw3class204L38M138B1126I全miss0。37954個別条件返却。RootMain3NullAway/Test3strictcompile0、PMD0/CS0/GJF0、SpotBugsMaxLow全3classStats/bugMissingError0、currentProtocol176は251byte静的証拠から厳密再利用。
+
+Main3は旧6b53とbyteSourceexact、ToolFixtureQ/Nは実Gitce284/旧26のSHAへ結合しprivatefieldliteral/format差をexpanded tokenで完全逆照合。User12はBUG3197修正前GJF1を保持しprivate定数8/明示staticimport/GJFのみ是正、1,868token/12body/全期待literalを逆照合。38新定義0/入力期待変更0。旧manifest名仮定37936/古いfixtureSHA仮定37937のguard1、4865最初syntaxdraft1を保持、いずれも製品job/拒否/旧成功再試行に計上0。正しい37938で現在の実source/依存/独立oracleを確認後にcompile/PTを実施。
+
+37952の全form16source/20physical/19Code/180methodは技術分母。現Core直接資格は10Code/110method（当3/38＋37930の7/72）、別Coreの過去9Code/70methodは過去source/runを保持し現Coreの成功へ変換0。集計exec/coverage合成/全form現singleRun合格を主張しない。YKT2659は現bridge4等限定完了・歴史9再資格をglobalOPENで保持し、単にCoreラベルを更新するための無変更成功再演は行わない。
+
+BUG3197/YKT2663当三fixture限定close、F03とWBS-P016-22,WBS-P016-20,WBS-P016-15のpureinput部分だけ返却。HTTP/DB/JMS/実認可/Root/cohort/VM/native/鍵/四held等未実行HOLD。正式1964PT53scope・元17/190新規0・工数null。実command/日時/環境/source/入力/期待/実際/counter/hashは37938/40/42/44/46/48/50/52/54。元開始.4/1.2/3cap4不変、source再資格とfixture手戻りの実費配賦null、元費用とS/V保持。
