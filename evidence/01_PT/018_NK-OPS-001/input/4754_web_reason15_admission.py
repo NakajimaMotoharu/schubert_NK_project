@@ -1,0 +1,23 @@
+"""Admit corrected current15 with exact original8 oracles and unchanged Main23 analysis."""
+from pathlib import Path
+import json,hashlib,datetime,subprocess,zipfile
+r=Path.cwd();b=r/'evidence/01_PT/018_NK-OPS-001';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ld=lambda p:json.loads(p.read_text());ref=lambda p:dict(path=str(p.relative_to(r)),sha256=sha(p));pp=b/'evidence/PG37516-web-reason15-test-static-v1/normalized-prepare.json';sp=pp.parent/'manifest.json';p=ld(pp);s=ld(sp);mainstatic=ld(r/p['mainStatic']['path']);orig=ld(r/p['originalPrepare']['path']);source=ld(b/'evidence/PG37508-web-reason15-source-v1/manifest.json');assert p['actualExit']==s['actualExit']==mainstatic['actualExit']==orig['actualExit']==0 and p['expectedTests']==15
+assert all(sha(r/n)==h for n,h in {**p['mainInputHashes'],**p['testSourceHashes']}.items());assert all(v['actualExit']==0 and not v['timedOut'] for v in [*orig['stages'].values(),*s['stages'].values()]);assert s['rawFindings']==s['processingErrors']==[] and s['checkstyleFindings']==0
+assert all(mainstatic['spotbugs'][k]==0 for k in ['bugs','missing','errors']) and {x.replace('.','/')+'.class' for x in mainstatic['spotbugs']['classStats']}==set(orig['mainClassHashes']) and len(orig['mainClassHashes'])==23
+assert len(mainstatic['rawFindings'])==1 and mainstatic['rawFindings'][0]['rule']=='AvoidDuplicateLiterals' and mainstatic['rawFindings'][0]['path'].endswith('/WebExceptionReasonCatalogTest.java');assert all(x['actualExit']==0 and not x['timedOut'] for k,x in mainstatic['stages'].items() if k!='pmd');assert mainstatic['processingErrors']==[] and mainstatic['checkstyleFindings']==0
+start=ld(next((r/'documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117').glob('109_*')));before=start['values']['source'];originals=[x for x in source['testSources'] if x['tests']!=7];assert len(originals)==6 and sum(x['tests'] for x in originals)==8
+for row in originals:assert sha(r/row['path'])==hashlib.sha256(subprocess.check_output(['git','show',before+':'+row['path']])).hexdigest()
+for name in source['mainSources']:assert sha(r/name)==hashlib.sha256(subprocess.check_output(['git','show',before+':'+name])).hexdigest()
+work=Path(p['work']);assert len(p['physicalClassHashes'])==198 and all(sha(work/'component'/n)==h for n,h in p['physicalClassHashes'].items());assert all(sha(Path(n))==h for n,h in p['toolDependencyHashes'].items());assert len(p['wholeTestSourceCounts'])==7 and sum(p['wholeTestSourceCounts'].values())==15
+old=b/'evidence/PG34914-jms-scope19-unfiltered-same-exec-v1/manifest.json';j=ld(old);name='dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason';assert j['actualExit']==0 and j['classFileHashes'][name+'.class']==p['physicalClassHashes'][name+'.class'];counters=j['classes'][name]['counters'];assert all(v['missed']==0 for v in counters.values());binding=dict(className=name,classSha256=p['physicalClassHashes'][name+'.class'],originalRaw=ref(old),originalClassId=j['classes'][name]['id'],rawCounters=counters,scope='EXACT_UNCHANGED_ENUM_ONLY_JDK_DEPENDENCIES_NOT_OLD_CLIENT_OR_WHOLE_CLOSURE')
+providers={}
+for n in p['toolDependencyHashes']:
+ with zipfile.ZipFile(n) as z:providers[n]=[x for x in z.namelist() if x.startswith('META-INF/services/') and ('java.sql.Driver' in x or 'jms' in x)]
+assert all(not x for x in providers.values());out=b/'evidence/PG37518-web-reason15-admission-v1';assert not out.exists();out.mkdir();targets=[]
+for name in source['mainSources']:
+ if name.endswith('/package-info.java') or name.endswith('/JmsRequestReplyException.java'):continue
+ n=name.split('/src/main/java/')[1][:-5];targets.append(n)
+ if not name.endswith('/MqLoginLockedException.java'):targets.append(n+'$Reason')
+assert len(targets)==15 and all(n+'.class' in p['physicalClassHashes'] for n in targets)
+v=dict(actualExit=0,terminalAtUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),prepare=ref(pp),testStatic=ref(sp),mainStatic=p['mainStatic'],styleCorrection=p['fixtureCorrection'],sourceCore=p['sourceCore'],applicable=0,unclassified=0,processingErrors=0,correctedCurrentRawPmd0=True,spotbugsActualMain23All0=True,originalRootNullAwayFreshWithinGroup=True,original8SixWholeTestSourcesExact=True,all15MainSourcesExactStartCommit=True,oldJmsGraph2NotReplayed=True,jmsEnumExistingRawByteBinding=binding,sharedJmsOuterNotWholeAccepted=True,targetClasses=targets,currentClasspathProviderDescriptors=providers,heldFourClassfileActions=0,actualRootNativeDbVmKeysAuthBrokerDeliveryActions=0,testsExecuted=0,newAcceptance=0,formalUpdated=False)
+(out/'manifest.json').write_text(json.dumps(v,indent=2)+'\n');print(dict(actualExit=0,applicable=0,physical198=True,target15=True,old8Exact=True,new7=True,jmsEnumRawByteExact=True))

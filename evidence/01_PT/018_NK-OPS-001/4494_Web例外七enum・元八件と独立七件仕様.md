@@ -1,0 +1,9 @@
+# Web公開例外七enum whole15仕様
+
+BUG3176/YKT2645追加横展開。RD AUT/FUN/MQ/MON、UI226232234235252、SS311312314321324333352354。追加発見.25/.70/1.60 cap3、費用主担当F03（主担当一回、各論理programは参照費0）。元messaging.ExceptionValueContractTest3、revocation/logging/session/media/security各ExceptionValueContractTest1の計8・whole6classを保持し、新七enum固定catalog7件でwhole15を必要同source一回実行する。
+
+対象七Reason: ScenarioWireException、ProtectedReadWireException、RevocationPayloadException、WebLogPayloadException、SessionPayloadException、MediaDeliveryException、MqLoginExchangeException。各独立固定names/ordinals/valueOf identity/防御配列/空・未知・小文字・nullを直接契約として作成し、expectedをproduction valuesから作らない。既存JmsRequestReplyException.ReasonはJmsExceptionGraphValueTestの既存直接契約があるため新しい重複caseや旧Graph2の確認再演を作らない。元messaging3の依存JmsExceptionの一部counterは共有のまま保持し、その全classPASSへ拡大しない。
+
+Main閉包は8例外＋MqLoginLockedExceptionと存在するpackage-info6、JMS API型・既知Spring exception3SDK・JSpecify/JUnit、現Protocol175byte参照に限定する。JMSExceptionは公開synthetic Throwable型と既存Message例外ctorのみで、provider/broker/clientは使用しない。新targetは七outer＋七Reason＋MqLoginLocked=15physicalの全Code。共有Jms2/Protocol依存は全範囲資格と別に記録する。実暗号/鍵/再送/認証/HTTP/配信/FS/DB/JMS送受信/Root/native/VM/permit操作なし、四held classfile生成/読取なし。
+
+原POMJava25/NullAway限定Main再compile、全physicalSB、全対象source PMD/CS/format、strict Test compile、全source/class/hash、単一execとactualCRC/init/XML/FESnotrunを独立検証する。coverageは生成Codeを除外せず、自然NoCode metadataの0/0を保持。元8の固定diagnostic/cause/suppressed/null/mediaHTTP/retry/lock境界は変更しない。個別不足・未解決・scope逸脱はPASSにせず、修正前に台帳へ起票。YKT2645他19は別の既存証拠/個別HOLDを保持し、単なるTest候補で完了扱いしない。正式1964PT/53scope、17/190、工数null維持。
