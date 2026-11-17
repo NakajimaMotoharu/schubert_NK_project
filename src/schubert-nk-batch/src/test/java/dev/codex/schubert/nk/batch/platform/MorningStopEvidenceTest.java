@@ -24,7 +24,7 @@ final class MorningStopEvidenceTest {
   static MorningUnitTerminals.Snapshot snapshot(boolean present) throws Exception {
     var f = new RootStartupContextTest.Fixture();
     f.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-    f.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    f.unitValues = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
     var context = f.context();
     var parent = context.capture(RootStartupContext.Service.MORNING);
     return MorningUnitTerminals.capture(

@@ -397,7 +397,7 @@ final class MaintenanceUnitTerminationTest {
   void mterm008NativeFactoryAndOrdinaryHostRefusal() throws Exception {
     var root = new RootStartupContextTest.Fixture();
     root.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-    root.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    root.unitValues = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
     var context = root.context();
     var expected = context.capture(RootStartupContext.Service.MORNING);
     assertThrows(
@@ -432,7 +432,7 @@ final class MaintenanceUnitTerminationTest {
   void mterm009CleanupActorCanObserveOnlyWebAndApi() throws Exception {
     var root = new RootStartupContextTest.Fixture();
     root.group = "0::/system.slice/schubert-nk-cleanup.service\n";
-    root.unit = RootStartupContextTest.unit(RootStartupContext.Service.CLEANUP);
+    root.unitValues = RootStartupContextTest.unit(RootStartupContext.Service.CLEANUP);
     var context = root.context();
     var expected = context.capture(RootStartupContext.Service.CLEANUP);
     int baselineReads = root.reads;

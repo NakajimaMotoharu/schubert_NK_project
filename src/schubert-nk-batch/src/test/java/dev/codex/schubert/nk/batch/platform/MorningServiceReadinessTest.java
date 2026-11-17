@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC164; explicit kernel/HTTP golden vectors independent of production serialization. */
 final class MorningServiceReadinessTest {
+  private static final String READY_VALUE_UP = "{\"status\":\"UP\"}";
   private static final String FIXTURE_12345_AFC21EDA = "12345";
   private static final String FIXTURE_999_A90868B2 = "999";
   static final String MAIN = "dev.codex.schubert.nk.api.bootstrap.ApiProcessMain";
@@ -43,8 +44,8 @@ final class MorningServiceReadinessTest {
           + "CapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\n";
 
   static final class Fixture implements MorningServiceReadiness.Io {
-    String status = STATUS;
-    String command =
+    String statusText = STATUS;
+    String commandValue =
         "/usr/bin/java\u0000--enable-native-access=ALL-UNNAMED\u0000" + MAIN + "\u0000";
     MorningServiceReadiness.Response health =
         new MorningServiceReadiness.Response(200, "{\"status\":\"UP\"}");
@@ -53,7 +54,7 @@ final class MorningServiceReadinessTest {
     Set<String> after = Set.of(FIXTURE_12345_AFC21EDA);
     int guards;
     int statusReads;
-    int sockets;
+    int socketReads;
     int requests;
     int failGuard;
     int failIo;
@@ -65,11 +66,13 @@ final class MorningServiceReadinessTest {
     boolean rawHighBitStatus;
 
     void guard() throws IOException {
-      if (++guards == failGuard) throw new IOException("generation drift");
+      guards++;
+      if (guards == failGuard) throw new IOException("generation drift");
     }
 
     void check() throws IOException {
-      if (++requests == failIo) throw new IOException("IO unavailable");
+      requests++;
+      if (requests == failIo) throw new IOException("IO unavailable");
     }
 
     public byte[] status() throws IOException {
@@ -78,18 +81,22 @@ final class MorningServiceReadinessTest {
       if (rawHighBitStatus) return new byte[] {(byte) 0xff};
       return nullStatus
           ? null
-          : (driftStatus && statusReads > 1 ? STATUS.replace(FIXTURE_999_A90868B2, "998") : status)
+          : (driftStatus && statusReads > 1
+                  ? STATUS.replace(FIXTURE_999_A90868B2, "998")
+                  : statusText)
               .getBytes(StandardCharsets.US_ASCII);
     }
 
     public byte[] command() throws IOException {
       check();
-      return nullCommand ? null : command.getBytes(StandardCharsets.US_ASCII);
+      return nullCommand ? null : commandValue.getBytes(StandardCharsets.US_ASCII);
     }
 
     public Set<String> sockets() throws IOException {
       check();
-      return nullSockets ? null : (++sockets == 1 ? before : after);
+      if (nullSockets) return null;
+      socketReads++;
+      return socketReads == 1 ? before : after;
     }
 
     public MorningServiceReadiness.Response get(String path) throws IOException {
@@ -116,7 +123,7 @@ final class MorningServiceReadinessTest {
     assertThrows(IOException.class, f.observer()::ready);
     assertEquals(1, f.statusReads);
     assertEquals(1, f.requests);
-    assertEquals(0, f.sockets);
+    assertEquals(0, f.socketReads);
   }
 
   /** PT-OPS-EXECGEN309003: a generation retained through exec cannot short-circuit readiness. */
@@ -129,7 +136,7 @@ final class MorningServiceReadinessTest {
     kernel.targetStat =
         RootStartupContextTest.stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
     var f = new Fixture();
-    f.command = "";
+    f.commandValue = "";
     var observer =
         new MorningServiceReadiness(
             () -> root.recheckServiceGeneration(morning, child),
@@ -138,13 +145,13 @@ final class MorningServiceReadinessTest {
             MAIN,
             INFO);
     assertFalse(assertDoesNotThrow(observer::ready));
-    assertEquals(0, f.sockets);
+    assertEquals(0, f.socketReads);
     assertEquals(2, f.requests); // status and empty cmdline, no HTTP.
     assertFalse(root.serviceGenerationExited(morning, child));
     kernel.targetStat = RootStartupContextTest.stat(200, FIXTURE_999_A90868B2);
-    f.command = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
+    f.commandValue = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
     assertTrue(observer.ready());
-    assertEquals(2, f.sockets);
+    assertEquals(2, f.socketReads);
     f.health = new MorningServiceReadiness.Response(503, "{\"status\":\"DOWN\"}");
     assertFalse(observer.ready());
   }
@@ -155,14 +162,14 @@ final class MorningServiceReadinessTest {
     assertTrue(f.observer().ready());
     assertEquals(3, f.guards);
     assertEquals(2, f.statusReads);
-    assertEquals(2, f.sockets);
+    assertEquals(2, f.socketReads);
     f = new Fixture();
     f.after = Set.of("other");
     assertFalse(f.observer().ready());
     f = new Fixture();
     f.before = Set.of();
     assertFalse(f.observer().ready());
-    assertEquals(0, f.sockets - 1);
+    assertEquals(0, f.socketReads - 1);
     f = new Fixture();
     f.driftStatus = true;
     assertFalse(f.observer().ready());
@@ -182,25 +189,25 @@ final class MorningServiceReadinessTest {
             "CapBnd",
             "CapAmb")) {
       var f = new Fixture();
-      f.status = STATUS.replaceAll("(?m)^" + field + ":.*\\n", field + ":\twrong\n");
+      f.statusText = STATUS.replaceAll("(?m)^" + field + ":.*\\n", field + ":\twrong\n");
       assertFalse(f.observer().ready(), field);
-      assertEquals(0, f.sockets);
+      assertEquals(0, f.socketReads);
       f = new Fixture();
-      f.status = STATUS.replaceAll("(?m)^" + field + ":.*\\n", "");
+      f.statusText = STATUS.replaceAll("(?m)^" + field + ":.*\\n", "");
       assertFalse(f.observer().ready(), field);
     }
     var f = new Fixture();
-    f.status += "Uid:\t999 999 999 999\n";
+    f.statusText += "Uid:\t999 999 999 999\n";
     assertFalse(f.observer().ready());
     for (String command :
         List.of("", MAIN, "other\0", MAIN + "\0" + MAIN + "\0", "x".repeat(16385) + "\0")) {
       f = new Fixture();
-      f.command = command;
+      f.commandValue = command;
       assertFalse(f.observer().ready());
     }
     for (String invalid : List.of("x".repeat(16385), "\0", "\u00ff")) {
       f = new Fixture();
-      f.status = invalid;
+      f.statusText = invalid;
       if (invalid.equals("\u00ff")) {
         // US_ASCII conversion is replacement; missing mandatory fields still rejects.
         assertFalse(f.observer().ready());
@@ -335,5 +342,22 @@ final class MorningServiceReadinessTest {
                     wrong));
       }
     }
+  }
+
+  /** READYVALUE001: literal independent record identity, never a live HTTP response. */
+  @Test
+  void readyValue001ResponseRetainsBothIndependentValueComponents() {
+    var first = new MorningServiceReadiness.Response(200, READY_VALUE_UP);
+    var same = new MorningServiceReadiness.Response(200, READY_VALUE_UP);
+    assertEquals(200, first.status());
+    assertEquals(READY_VALUE_UP, first.body());
+    assertTrue(first.equals(first));
+    assertTrue(first.equals(same));
+    assertFalse(first.equals(null));
+    assertFalse(first.equals(new Object()));
+    assertFalse(first.equals(new MorningServiceReadiness.Response(201, READY_VALUE_UP)));
+    assertFalse(first.equals(new MorningServiceReadiness.Response(200, "{\"status\":\"DOWN\"}")));
+    assertEquals(-1037267297, first.hashCode());
+    assertEquals("Response[status=200, body={\"status\":\"UP\"}]", first.toString());
   }
 }

@@ -25,6 +25,12 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
+  private static final int FIRST_FIXTURE_SLOT = 1;
+  private static final int SECOND_FIXTURE_SLOT = 2;
+  private static final int THIRD_FIXTURE_SLOT = 3;
+  private static final int NOT_DONE_FIXTURE = 1;
+  private static final int NONZERO_EXIT_FIXTURE = 2;
+  private static final int INTERRUPTED_WAIT_FIXTURE = 3;
   private static final String FIXTURE_MAINPID_42_0075A51F = "MainPID=42";
   private static final String FIXTURE_MAINPID_200_B6F3F218 = "MainPID=200";
   private static final String FIXTURE_IO_A0EA7E0E = "<IO>";
@@ -52,7 +58,7 @@ final class RootStartupContextTest {
         var process =
             new FakeProcess() {
               public InputStream getInputStream() {
-                if (at == 1) {
+                if (at == FIRST_FIXTURE_SLOT) {
                   if (failure != null) throwGetter(failure);
                   return null;
                 }
@@ -60,7 +66,7 @@ final class RootStartupContextTest {
               }
 
               public OutputStream getOutputStream() {
-                if (at == 2) {
+                if (at == SECOND_FIXTURE_SLOT) {
                   if (failure != null) throwGetter(failure);
                   return null;
                 }
@@ -68,7 +74,7 @@ final class RootStartupContextTest {
               }
 
               public InputStream getErrorStream() {
-                if (at == 3) {
+                if (at == THIRD_FIXTURE_SLOT) {
                   if (failure != null) throwGetter(failure);
                   return null;
                 }
@@ -164,7 +170,7 @@ final class RootStartupContextTest {
 
     LaunchFixture() {
       group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-      unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+      unitValues = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
       targetUnit =
           RootStartupContextTest.unit(target)
               .replace(FIXTURE_MAINPID_42_0075A51F, FIXTURE_MAINPID_200_B6F3F218)
@@ -470,15 +476,15 @@ final class RootStartupContextTest {
 
   static class Fixture implements RootStartupContext.Io {
     long uid = 0;
-    long pid = 42;
+    long processId = 42;
     String fs = "proc";
     String exe = "/usr/lib/systemd/systemd";
-    String boot = BOOT;
+    String bootValue = BOOT;
     String inv = INV;
     String own = RootStartupContextTest.stat(42, FIXTURE_12345_AFC21EDA);
     String init = RootStartupContextTest.stat(1, "5");
     String group = "0::/system.slice/schubert-nk-api.service\n";
-    String unit = RootStartupContextTest.unit(RootStartupContext.Service.API);
+    String unitValues = RootStartupContextTest.unit(RootStartupContext.Service.API);
     int reads;
     boolean drift;
     String fail = "";
@@ -492,7 +498,7 @@ final class RootStartupContextTest {
     }
 
     public long pid() {
-      return pid;
+      return processId;
     }
 
     public String procFilesystem() throws IOException {
@@ -507,7 +513,7 @@ final class RootStartupContextTest {
 
     public byte[] boot() throws IOException {
       check("boot");
-      return bytes(boot);
+      return bytes(bootValue);
     }
 
     public byte[] stat(long p) throws IOException {
@@ -517,7 +523,7 @@ final class RootStartupContextTest {
 
     public byte[] cgroup(long p) throws IOException {
       check("group");
-      assertEquals(pid, p);
+      assertEquals(processId, p);
       return bytes(group);
     }
 
@@ -528,7 +534,7 @@ final class RootStartupContextTest {
     public byte[] unit(RootStartupContext.Service s) throws IOException {
       check("unit");
       reads++;
-      return bytes(drift && reads > 1 ? unit.replace(INV, "2".repeat(32)) : unit);
+      return bytes(drift && reads > 1 ? unitValues.replace(INV, "2".repeat(32)) : unitValues);
     }
 
     RootStartupContext context() {
@@ -557,7 +563,7 @@ final class RootStartupContextTest {
           }
         };
     f.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-    f.unit = unit(RootStartupContext.Service.MORNING);
+    f.unitValues = unit(RootStartupContext.Service.MORNING);
     var context = f.context();
     var morning = context.capture(RootStartupContext.Service.MORNING);
     assertEquals(1_812_345_678_000L, context.maintenanceDeadline(morning, 1_900_000_000_000L));
@@ -605,7 +611,7 @@ final class RootStartupContextTest {
         NullPointerException.class, () -> context.maintenanceDeadline(null, Long.MAX_VALUE));
     var unavailable = new Fixture();
     unavailable.group = f.group;
-    unavailable.unit = f.unit;
+    unavailable.unitValues = f.unitValues;
     var noPort = unavailable.context();
     var observed = noPort.capture(RootStartupContext.Service.MORNING);
     assertThrows(IOException.class, () -> noPort.maintenanceDeadline(observed, Long.MAX_VALUE));
@@ -622,7 +628,7 @@ final class RootStartupContextTest {
   void rootctx009CleanupOwnUnitNotMorningOrApi() throws Exception {
     var f = new Fixture();
     f.group = "0::/system.slice/schubert-nk-cleanup.service\n";
-    f.unit =
+    f.unitValues =
         "Id=schubert-nk-cleanup.service\nLoadState=loaded\nActiveState=active\n"
             + "SubState=running\nMainPID=42\nInvocationID="
             + INV
@@ -634,7 +640,7 @@ final class RootStartupContextTest {
     context.recheck(snapshot);
     assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.MORNING));
     assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.API));
-    f.unit = f.unit.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=43");
+    f.unitValues = f.unitValues.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=43");
     assertThrows(IOException.class, () -> context.recheck(snapshot));
     assertEquals(
         FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0,
@@ -659,13 +665,13 @@ final class RootStartupContextTest {
     assertEquals("RootStartupContext.Snapshot[REDACTED]", s.toString());
     assertDoesNotThrow(() -> f.context().recheck(s));
     assertEquals(4, f.reads);
-    f.unit =
-        f.unit
+    f.unitValues =
+        f.unitValues
             .replace("ActiveState=active", "ActiveState=activating")
             .replace("SubState=running", "SubState=start");
     assertEquals(s, assertDoesNotThrow(() -> f.context().capture(RootStartupContext.Service.API)));
     f.group = "0::/system.slice/schubert-nk-web.service\n";
-    f.unit = unit(RootStartupContext.Service.WEB);
+    f.unitValues = unit(RootStartupContext.Service.WEB);
     assertEquals(
         RootStartupContext.Service.WEB,
         assertDoesNotThrow(() -> f.context().capture(RootStartupContext.Service.WEB)).service());
@@ -698,7 +704,7 @@ final class RootStartupContextTest {
             BOOT + "\n",
             BOOT.replace("\n", "\r\n"))) {
       var f = new Fixture();
-      f.boot = boot;
+      f.bootValue = boot;
       rejected(f);
     }
     for (String inv : List.of("", "0".repeat(32), "A".repeat(32), INV + "\n", INV.substring(1))) {
@@ -712,13 +718,14 @@ final class RootStartupContextTest {
   void rootctx003StatStartBoundaryAndPidNamespaceBinding() {
     for (long p : List.of(-1L, 0L, 1L, 2147483648L)) {
       var f = new Fixture();
-      f.pid = p;
+      f.processId = p;
       rejected(f);
     }
     var max = new Fixture();
-    max.pid = 2147483647;
-    max.own = stat(max.pid, "9223372036854775807");
-    max.unit = max.unit.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=" + max.pid);
+    max.processId = 2147483647;
+    max.own = stat(max.processId, "9223372036854775807");
+    max.unitValues =
+        max.unitValues.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=" + max.processId);
     assertEquals(
         Long.MAX_VALUE,
         assertDoesNotThrow(() -> max.context().capture(RootStartupContext.Service.API))
@@ -758,27 +765,27 @@ final class RootStartupContextTest {
             "ControlGroup")) {
       var f = new Fixture();
       String line =
-          Arrays.stream(f.unit.split("\n"))
+          Arrays.stream(f.unitValues.split("\n"))
                   .filter(x -> x.startsWith(key + "="))
                   .findFirst()
                   .orElseThrow()
               + "\n";
-      f.unit = f.unit.replace(line, "");
+      f.unitValues = f.unitValues.replace(line, "");
       rejected(f);
       f = new Fixture();
-      f.unit = f.unit + line;
+      f.unitValues = f.unitValues + line;
       rejected(f);
       f = new Fixture();
-      f.unit = f.unit.replace(line, key + "=invalid\n");
+      f.unitValues = f.unitValues.replace(line, key + "=invalid\n");
       rejected(f);
     }
     for (String extra : List.of("Extra=x\n", "\n", "badrow\n", "=value\n")) {
       var f = new Fixture();
-      f.unit += extra;
+      f.unitValues += extra;
       rejected(f);
     }
     var f = new Fixture();
-    f.unit = f.unit.trim();
+    f.unitValues = f.unitValues.trim();
     rejected(f);
     for (String g :
         List.of(
@@ -805,7 +812,7 @@ final class RootStartupContextTest {
     f = new Fixture();
     var c = f.context();
     var s = assertDoesNotThrow(() -> c.capture(RootStartupContext.Service.API));
-    f.boot = BOOT.replace('1', '2');
+    f.bootValue = BOOT.replace('1', '2');
     assertThrows(IOException.class, () -> c.recheck(s));
     assertThrows(NullPointerException.class, () -> new RootStartupContext(null));
     assertThrows(NullPointerException.class, () -> c.capture(null));
@@ -906,14 +913,14 @@ final class RootStartupContextTest {
     for (int bad : List.of(1, 2, 3)) {
       var q = new FakeProcess();
       q.alive = true;
-      if (bad == 1) q.done = false;
-      if (bad == 2) q.exit = 1;
-      if (bad == 3) q.interrupt = true;
+      if (bad == NOT_DONE_FIXTURE) q.done = false;
+      if (bad == NONZERO_EXIT_FIXTURE) q.exit = 1;
+      if (bad == INTERRUPTED_WAIT_FIXTURE) q.interrupt = true;
       assertThrows(
           IOException.class,
           () -> new RootStartupContext.NativeIo(cmd -> q).unit(RootStartupContext.Service.WEB));
       assertEquals(1, q.destroyed);
-      if (bad == 3) assertTrue(Thread.interrupted());
+      if (bad == INTERRUPTED_WAIT_FIXTURE) assertTrue(Thread.interrupted());
     }
     assertThrows(
         IOException.class,
@@ -935,7 +942,7 @@ final class RootStartupContextTest {
       var p = new FakeProcess();
       p.alive = true;
       IOException failure = new IOException("PRIVATE");
-      if (position == 1)
+      if (position == FIRST_FIXTURE_SLOT)
         p.output =
             new ByteArrayInputStream(bytes("PUBLIC")) {
               @Override
@@ -943,7 +950,7 @@ final class RootStartupContextTest {
                 throw failure;
               }
             };
-      if (position == 2)
+      if (position == SECOND_FIXTURE_SLOT)
         p.input =
             new ByteArrayOutputStream() {
               @Override
@@ -951,7 +958,7 @@ final class RootStartupContextTest {
                 throw failure;
               }
             };
-      if (position == 3)
+      if (position == THIRD_FIXTURE_SLOT)
         p.error =
             new ByteArrayInputStream(new byte[0]) {
               @Override

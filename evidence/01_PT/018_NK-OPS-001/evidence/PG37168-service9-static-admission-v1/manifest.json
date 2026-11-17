@@ -1,0 +1,159 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T01:49:41.688733+00:00",
+  "sourceCore": "01c3b1a34ee01f4a43fcfd1eaa4cc945010675c9",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37166-service9-reused-compile-static-v1/manifest.json",
+    "sha256": "7cd224e79ff19d131956554bd9f821b288039ed0d27cbd422ae4f61d1f250451"
+  },
+  "testSourceStaticScope": 2,
+  "raw": 6,
+  "classified": [
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "82",
+        "endline": "87",
+        "begincolumn": "7",
+        "endcolumn": "52",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "status",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "f90c7eefc3e0f110013c82d7b329733e9c833d2df4a07b8960cd24a9dbb49617",
+      "sourceAnchor": "return nullStatus",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit missing byte-array/socket-set negative input, not a successful empty collection. READY428004 requires NPE propagation for missing provider values, never NPE catch/normal success. Root shared source rootctx010 null Unit-deadline vector likewise declares negative input; that Root Test is unselected and no dynamic PASS is claimed. Empty instead of null would remove the independently required missing-value boundary."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "92",
+        "endline": "92",
+        "begincolumn": "7",
+        "endcolumn": "84",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "command",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "f90c7eefc3e0f110013c82d7b329733e9c833d2df4a07b8960cd24a9dbb49617",
+      "sourceAnchor": "return nullCommand ? null : commandValue.getBytes(StandardCharsets.US_ASCII);",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit missing byte-array/socket-set negative input, not a successful empty collection. READY428004 requires NPE propagation for missing provider values, never NPE catch/normal success. Root shared source rootctx010 null Unit-deadline vector likewise declares negative input; that Root Test is unselected and no dynamic PASS is claimed. Empty instead of null would remove the independently required missing-value boundary."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "97",
+        "endline": "97",
+        "begincolumn": "24",
+        "endcolumn": "36",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest.Fixture",
+        "method": "sockets",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "f90c7eefc3e0f110013c82d7b329733e9c833d2df4a07b8960cd24a9dbb49617",
+      "sourceAnchor": "if (nullSockets) return null;",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit missing byte-array/socket-set negative input, not a successful empty collection. READY428004 requires NPE propagation for missing provider values, never NPE catch/normal success. Root shared source rootctx010 null Unit-deadline vector likewise declares negative input; that Root Test is unselected and no dynamic PASS is claimed. Empty instead of null would remove the independently required missing-value boundary."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadinessTest.java",
+        "beginline": "356",
+        "endline": "356",
+        "begincolumn": "17",
+        "endcolumn": "35",
+        "rule": "EqualsNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "MorningServiceReadinessTest",
+        "method": "readyValue001ResponseRetainsBothIndependentValueComponents",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+        "priority": "1",
+        "message": "Avoid using equals() to compare against null"
+      },
+      "sourceSha256": "f90c7eefc3e0f110013c82d7b329733e9c833d2df4a07b8960cd24a9dbb49617",
+      "sourceAnchor": "assertFalse(first.equals(null));",
+      "decision": "NOT_APPLICABLE",
+      "reason": "READYVALUE001 directly tests generated immutable Response.equals(Object) with null and literal expected false. Replacing it with first==null would stop exercising the public value method; this is a negative method argument, not a production variable null-check."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+        "beginline": "560",
+        "endline": "560",
+        "begincolumn": "47",
+        "endcolumn": "59",
+        "rule": "ReturnEmptyCollectionRatherThanNull",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "RootStartupContextTest",
+        "method": "unitDeadline",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#returnemptycollectionratherthannull",
+        "priority": "1",
+        "message": "Return an empty collection rather than null."
+      },
+      "sourceSha256": "1c1f4cc7d54c48a1a80257c12ab9ff1b3a51289682925db1378cd0fe366464ab",
+      "sourceAnchor": "if (selected[0].equals(\"<NULL>\")) return null;",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Explicit missing byte-array/socket-set negative input, not a successful empty collection. READY428004 requires NPE propagation for missing provider values, never NPE catch/normal success. Root shared source rootctx010 null Unit-deadline vector likewise declares negative input; that Root Test is unselected and no dynamic PASS is claimed. Empty instead of null would remove the independently required missing-value boundary."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java",
+        "beginline": "923",
+        "endline": "923",
+        "begincolumn": "55",
+        "endcolumn": "61",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "class": "RootStartupContextTest",
+        "method": "rootctx006FixedSystemBusQueryAndAllProcessResults",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "sourceSha256": "1c1f4cc7d54c48a1a80257c12ab9ff1b3a51289682925db1378cd0fe366464ab",
+      "sourceAnchor": "if (bad == INTERRUPTED_WAIT_FIXTURE) assertTrue(Thread.interrupted());",
+      "decision": "NOT_APPLICABLE",
+      "reason": "Original unselected Root fixture inspects-and-clears the current test-thread interrupt as its required postcondition; it starts no application/managed thread. PMD rule explicitly assumes a J2EE managed container. Source applicability only; neither this Root Test nor the interrupt action is run by the selected9."
+    }
+  ],
+  "applicable": 0,
+  "unclassified": 0,
+  "allChangedTestCallerCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37164-root-fixture-caller-compile-v2/manifest.json",
+    "sha256": "fe8b1fe28383ce6cbed5c4547fff6dcfe8bc64747747ad06c726d087fbf51a97"
+  },
+  "callerWholeTestsSelected": 0,
+  "mainSpotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36958-backup-path-fresh-sibling-spotbugs-v1/manifest.json",
+    "sha256": "882b05c4c62fbc384cefced1f087d52a50321d6c49de90d3b20331ceb54361cc"
+  },
+  "currentMainPmdProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/manifest.json",
+    "sha256": "ce61527bfbc1cc771977c2060a8a19ce8cbdafd690ae84459550e903f8cc93a6"
+  },
+  "productTestsExecuted": 0,
+  "sourceRuleSuppressionExclusionChanges": 0,
+  "wholeRootTestQualityOrRuntimeAccepted": false,
+  "wholeF03Accepted": false,
+  "formalUpdated": false
+}

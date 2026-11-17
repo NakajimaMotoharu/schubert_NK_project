@@ -153,7 +153,7 @@ public final class RootReleaseAdmissionTest {
 
     Fixture(RootStartupContext.Service service) throws IOException {
       kernel.group = "0::/system.slice/" + service.unit() + "\n";
-      kernel.unit = RootStartupContextTest.unit(service);
+      kernel.unitValues = RootStartupContextTest.unit(service);
       context = new RootStartupContext(kernel);
       expected = context.capture(service);
     }
@@ -292,7 +292,7 @@ public final class RootReleaseAdmissionTest {
     assertThrows(NullPointerException.class, () -> subject.verifyCleanup(null, f.expected));
     assertThrows(
         NullPointerException.class, () -> subject.verifyCleanup(connection(f.events, false), null));
-    f.kernel.unit = f.kernel.unit.replace("MainPID=42", "MainPID=43");
+    f.kernel.unitValues = f.kernel.unitValues.replace("MainPID=42", "MainPID=43");
     assertThrows(
         IOException.class, () -> subject.verifyCleanup(connection(f.events, false), f.expected));
     assertEquals(events, f.events.size());

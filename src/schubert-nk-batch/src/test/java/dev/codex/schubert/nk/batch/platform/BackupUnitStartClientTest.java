@@ -618,7 +618,7 @@ final class BackupUnitStartClientTest {
         NullPointerException.class, () -> new BackupUnitStartClient(() -> {}, () -> {}, null));
     var root = new RootStartupContextTest.Fixture();
     root.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-    root.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    root.unitValues = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
     var context = root.context();
     var expected = context.capture(RootStartupContext.Service.MORNING);
     var safePolicy =

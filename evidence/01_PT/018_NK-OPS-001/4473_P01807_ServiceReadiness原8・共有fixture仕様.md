@@ -1,0 +1,13 @@
+# P01807 ServiceReadiness原8と共有fixture
+
+P018-07 original A2-25.02: current whole MorningServiceReadinessTest8 plus original RootStartupContextTest shared LaunchFixture/Fixture/static literal helpers. Qualify complete source before runtime: helper is compiled whole, its own Tests never selected/extracted/replayed. RootStartupContext receives the original memory Io only; its real NativeIo/factory/manager/process/FS/native methods must remain unexecuted. Snapshot is a memory value, never permission or live Root authority. Existing target Main/Test and helper differ from old e7d64 full4222, which cannot supply current runtime success. Use exact frozen four-module Main1101 without held four types; static source/Test/helper applicability and compile first, preserve issues before any correction. If admitted, one whole8 JVM selected by exact class only, independent literal HTTP/status/caps/command/inode/version/null/drift oracle; class-init/probe negative fences, single exec/all physical/raw. No real Root/Caddy/HTTP/socket/service/DB/VM/clock/credential/permit/recovery operation or refused operation retry. ParentBudget3 and actual route/native stay HOLD; source/helper qualification is not global Root/Test acceptance.
+
+NK-OPS-001 / SS342343354 / SSC164 / READY428001..006、READY1413001、EXECGEN309003。独立oracleは既TestのHTTP200/503、status UP/DOWN固定JSON、五public info値/順序、固定uid/gid/caps/groups/NoNewPrivs、single Main cmdline、8091/IPv4/IPv6 kernel literal、same owned inode、raw非ASCII/null、観測順/回数と世代driftの全8。実TLS/CA/hostname/network/property/Root ownershipをこのfake IOへ代替0。
+
+RootTestのshared helperは元sourceを全体compileし、Fixture/LaunchFixtureとliteral bytes/stat/unitだけを当呼出へ使用する。独自の実nativeを含むRootTest全体は選択0・未認定。helperのunit名組立にService.unitを使うため、RootService enum mappingの独立oracleとして認めず、この共有補助をRootの全契約受入へ算入しない。固有のready条件expectedは上記固定値。四保留classfileの読取/生成/init0を維持。
+
+原A2-25.02 1.5/3/7.7pp cap8、追加価格0、S/V/元原価不変更。既/1契約準備を再演/重複課金せず、不足source/static/shared fixtureを具体化する。元190/全P01807/F02F03/451受入は個別に別判定。
+
+実施前追補: 元8の全期待/fixtureを逆変換保持し、新READYVALUE001を一件追加して初回whole9を計画する。Response(status,body)の値契約を、固定200/201・UP/DOWN・同値/同一/null/異型、固定toString、独立31-fold UTF16 string hashからのrecord hash `-1037267297`で検証。production methodでexpectedを生成しない。製品8は未実施のまま新9へ進め、成功確認の二重実行を避ける。
+
+BUG3156のsource静的19site是正、3157のformatter入力/診断保存、3158のpackage-private fixture field全caller反映、3159の別module Test helper不足を元失敗のまま保持。SourceMain不変。全14consumerのうち変更8source/11参照は元whole byte逆変換、残6は旧fieldアクセスなし、別fixture busy.unitは保持。元RootTestの全既存期待を逆変換保持し、そのwholeTestは選択0。現17source/57Test physicalをstrict compile0で参照解決、同byteをPG37166へ再利用して再compile0。Main current1101も元compileから同byte再利用、PT9前にsource/tool/byteを固定する。最終source静的は対象Test＋共有RootTestの全2source/raw6を個別非該当、他callerのwholeTest/全静的/実Root資格まで認定するものではない。

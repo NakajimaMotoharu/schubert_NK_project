@@ -675,7 +675,7 @@ final class BackupUnitTerminationTest {
         "schubert-nk-morning-controller.service", RootStartupContext.Service.MORNING.unit());
     var f = new RootStartupContextTest.Fixture();
     f.group = "0::/system.slice/schubert-nk-morning-controller.service\n";
-    f.unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
+    f.unitValues = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
     var context = f.context();
     var expected = context.capture(RootStartupContext.Service.MORNING);
     assertEquals(RootStartupContext.Service.MORNING, expected.service());

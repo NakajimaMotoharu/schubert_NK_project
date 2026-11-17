@@ -1,0 +1,339 @@
+package dev.codex.schubert.nk.batch.platform;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.junit.jupiter.api.Test;
+
+/** SSC164; explicit kernel/HTTP golden vectors independent of production serialization. */
+final class MorningServiceReadinessTest {
+  private static final String FIXTURE_12345_AFC21EDA = "12345";
+  private static final String FIXTURE_999_A90868B2 = "999";
+  static final String MAIN = "dev.codex.schubert.nk.api.bootstrap.ApiProcessMain";
+  static final Map<String, String> INFO =
+      Map.of(
+          "commit",
+          "a".repeat(40),
+          "app",
+          "0.1.0-SNAPSHOT",
+          "config",
+          "1",
+          "schema",
+          "025",
+          "protocol",
+          "0.1.0-SNAPSHOT");
+  static final String GOLDEN =
+      "{\"commit\":\""
+          + "a".repeat(40)
+          + "\",\"app\":\"0.1.0-SNAPSHOT\",\"config\":\"1\",\"schema\":\"025\",\"protocol\":\"0.1.0-SNAPSHOT\"}";
+  static final String STATUS =
+      "Name:\tjava\nUid:\t999\t999\t999\t999\nGid:\t981\t981\t981\t981\n"
+          + "Groups:\t980 981 982 986\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\n"
+          + "CapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\n";
+
+  static final class Fixture implements MorningServiceReadiness.Io {
+    String status = STATUS;
+    String command =
+        "/usr/bin/java\u0000--enable-native-access=ALL-UNNAMED\u0000" + MAIN + "\u0000";
+    MorningServiceReadiness.Response health =
+        new MorningServiceReadiness.Response(200, "{\"status\":\"UP\"}");
+    MorningServiceReadiness.Response info = new MorningServiceReadiness.Response(200, GOLDEN);
+    Set<String> before = Set.of(FIXTURE_12345_AFC21EDA);
+    Set<String> after = Set.of(FIXTURE_12345_AFC21EDA);
+    int guards;
+    int statusReads;
+    int sockets;
+    int requests;
+    int failGuard;
+    int failIo;
+    boolean driftStatus;
+    boolean nullStatus;
+    boolean nullCommand;
+    boolean nullSockets;
+    boolean nullResponse;
+    boolean rawHighBitStatus;
+
+    void guard() throws IOException {
+      if (++guards == failGuard) throw new IOException("generation drift");
+    }
+
+    void check() throws IOException {
+      if (++requests == failIo) throw new IOException("IO unavailable");
+    }
+
+    public byte[] status() throws IOException {
+      check();
+      statusReads++;
+      if (rawHighBitStatus) return new byte[] {(byte) 0xff};
+      return nullStatus
+          ? null
+          : (driftStatus && statusReads > 1 ? STATUS.replace(FIXTURE_999_A90868B2, "998") : status)
+              .getBytes(StandardCharsets.US_ASCII);
+    }
+
+    public byte[] command() throws IOException {
+      check();
+      return nullCommand ? null : command.getBytes(StandardCharsets.US_ASCII);
+    }
+
+    public Set<String> sockets() throws IOException {
+      check();
+      return nullSockets ? null : (++sockets == 1 ? before : after);
+    }
+
+    public MorningServiceReadiness.Response get(String path) throws IOException {
+      check();
+      assertTrue(Set.of("/actuator/health/readiness", "/actuator/info").contains(path));
+      return nullResponse ? null : path.endsWith("info") ? info : health;
+    }
+
+    MorningServiceReadiness observer() {
+      return new MorningServiceReadiness(
+          this::guard,
+          this,
+          new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L)),
+          MAIN,
+          INFO);
+    }
+  }
+
+  @Test
+  void ready1413001RawNonAsciiStatusRejectsBeforeCommandSocketsOrHttp() {
+    // SS341: test raw bytes, not String's US_ASCII replacement character.
+    var f = new Fixture();
+    f.rawHighBitStatus = true;
+    assertThrows(IOException.class, f.observer()::ready);
+    assertEquals(1, f.statusReads);
+    assertEquals(1, f.requests);
+    assertEquals(0, f.sockets);
+  }
+
+  /** PT-OPS-EXECGEN309003: a generation retained through exec cannot short-circuit readiness. */
+  @Test
+  void execgen309003PendingGenerationNeedsOrdinaryCommandSocketAndHttp() throws Exception {
+    var kernel = new RootStartupContextTest.LaunchFixture();
+    var root = kernel.context();
+    var morning = root.capture(RootStartupContext.Service.MORNING);
+    var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
+    kernel.targetStat =
+        RootStartupContextTest.stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
+    var f = new Fixture();
+    f.command = "";
+    var observer =
+        new MorningServiceReadiness(
+            () -> root.recheckServiceGeneration(morning, child),
+            f,
+            new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L)),
+            MAIN,
+            INFO);
+    assertFalse(assertDoesNotThrow(observer::ready));
+    assertEquals(0, f.sockets);
+    assertEquals(2, f.requests); // status and empty cmdline, no HTTP.
+    assertFalse(root.serviceGenerationExited(morning, child));
+    kernel.targetStat = RootStartupContextTest.stat(200, FIXTURE_999_A90868B2);
+    f.command = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
+    assertTrue(observer.ready());
+    assertEquals(2, f.sockets);
+    f.health = new MorningServiceReadiness.Response(503, "{\"status\":\"DOWN\"}");
+    assertFalse(observer.ready());
+  }
+
+  @Test
+  void ready428001IndependentGoldenAndSameInodeRequired() throws Exception {
+    var f = new Fixture();
+    assertTrue(f.observer().ready());
+    assertEquals(3, f.guards);
+    assertEquals(2, f.statusReads);
+    assertEquals(2, f.sockets);
+    f = new Fixture();
+    f.after = Set.of("other");
+    assertFalse(f.observer().ready());
+    f = new Fixture();
+    f.before = Set.of();
+    assertFalse(f.observer().ready());
+    assertEquals(0, f.sockets - 1);
+    f = new Fixture();
+    f.driftStatus = true;
+    assertFalse(f.observer().ready());
+  }
+
+  @Test
+  void ready428002EveryIdentityAndCapFieldIsMandatory() throws Exception {
+    for (String field :
+        List.of(
+            "Uid",
+            "Gid",
+            "Groups",
+            "NoNewPrivs",
+            "CapInh",
+            "CapPrm",
+            "CapEff",
+            "CapBnd",
+            "CapAmb")) {
+      var f = new Fixture();
+      f.status = STATUS.replaceAll("(?m)^" + field + ":.*\\n", field + ":\twrong\n");
+      assertFalse(f.observer().ready(), field);
+      assertEquals(0, f.sockets);
+      f = new Fixture();
+      f.status = STATUS.replaceAll("(?m)^" + field + ":.*\\n", "");
+      assertFalse(f.observer().ready(), field);
+    }
+    var f = new Fixture();
+    f.status += "Uid:\t999 999 999 999\n";
+    assertFalse(f.observer().ready());
+    for (String command :
+        List.of("", MAIN, "other\0", MAIN + "\0" + MAIN + "\0", "x".repeat(16385) + "\0")) {
+      f = new Fixture();
+      f.command = command;
+      assertFalse(f.observer().ready());
+    }
+    for (String invalid : List.of("x".repeat(16385), "\0", "\u00ff")) {
+      f = new Fixture();
+      f.status = invalid;
+      if (invalid.equals("\u00ff")) {
+        // US_ASCII conversion is replacement; missing mandatory fields still rejects.
+        assertFalse(f.observer().ready());
+      } else assertThrows(IOException.class, f.observer()::ready);
+    }
+  }
+
+  @Test
+  void ready428003HttpLiteralVersionAndStatusNegative() throws Exception {
+    for (var response :
+        List.of(
+            new MorningServiceReadiness.Response(503, "{\"status\":\"UP\"}"),
+            new MorningServiceReadiness.Response(200, "{\"status\":\"DOWN\"}"),
+            new MorningServiceReadiness.Response(200, "{\"status\":\"UP\",\"extra\":true}"))) {
+      var f = new Fixture();
+      f.health = response;
+      assertFalse(f.observer().ready());
+    }
+    for (var response :
+        List.of(
+            new MorningServiceReadiness.Response(301, GOLDEN),
+            new MorningServiceReadiness.Response(200, GOLDEN.replace("\"1\"", "\"001\"")),
+            new MorningServiceReadiness.Response(200, GOLDEN.replace("\"025\"", "\"023\"")),
+            new MorningServiceReadiness.Response(200, "{}"))) {
+      var f = new Fixture();
+      f.info = response;
+      assertFalse(f.observer().ready());
+    }
+  }
+
+  @Test
+  void ready428004NullIoAndEveryBeforeAfterFailurePropagate() throws Exception {
+    for (int call = 1; call <= 8; call++) {
+      var f = new Fixture();
+      f.failIo = call;
+      assertThrows(IOException.class, f.observer()::ready);
+    }
+    for (int call = 1; call <= 3; call++) {
+      var f = new Fixture();
+      f.failGuard = call;
+      assertThrows(IOException.class, f.observer()::ready);
+    }
+    for (int field = 0; field < 4; field++) {
+      var f = new Fixture();
+      f.nullStatus = field == 0;
+      f.nullCommand = field == 1;
+      f.nullSockets = field == 2;
+      f.nullResponse = field == 3;
+      assertThrows(NullPointerException.class, f.observer()::ready);
+    }
+    assertThrows(NullPointerException.class, () -> new MorningServiceReadiness.Response(200, null));
+  }
+
+  @Test
+  void ready428005ExactLinuxTcpAddressesAndOwnedDescriptors() {
+    for (boolean ipv6 : List.of(false, true)) {
+      String address = ipv6 ? "0000000000000000FFFF00000100007F:1F9B" : "0100007F:1F9B";
+      String[] row = {
+        "0:",
+        address,
+        "00000000:0000",
+        "0A",
+        "0:0",
+        "00:0",
+        "0",
+        FIXTURE_999_A90868B2,
+        "0",
+        FIXTURE_12345_AFC21EDA
+      };
+      assertEquals(
+          Set.of(FIXTURE_12345_AFC21EDA),
+          MorningServiceReadiness.listeners(
+              String.join(" ", row), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
+      assertEquals(
+          Set.of(),
+          MorningServiceReadiness.listeners(String.join(" ", row), Set.of("12346"), 8091, ipv6));
+      for (String other :
+          List.of(
+              "00000000:1F9B",
+              "00000000000000000000000000000000:1F9B",
+              "00000000000000000000000001000000:1F9B",
+              "0100007F:1F9A",
+              "0200007F:1F9B")) {
+        var changed = row.clone();
+        changed[1] = other;
+        assertEquals(
+            Set.of(),
+            MorningServiceReadiness.listeners(
+                String.join(" ", changed), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
+      }
+      for (int index : List.of(3, 9)) {
+        var changed = row.clone();
+        changed[index] = "invalid";
+        assertEquals(
+            Set.of(),
+            MorningServiceReadiness.listeners(
+                String.join(" ", changed), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
+      }
+      for (String invalid : List.of("", "malformed", String.join(" ", Arrays.copyOf(row, 9))))
+        assertEquals(
+            Set.of(),
+            MorningServiceReadiness.listeners(invalid, Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
+    }
+  }
+
+  @Test
+  void ready428006ExpectedMapCannotBeMalformedOrUseWireVersionAsOracle() {
+    var f = new Fixture();
+    for (String key : INFO.keySet()) {
+      var missing = new HashMap<>(INFO);
+      missing.remove(key);
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new MorningServiceReadiness(
+                  f::guard,
+                  f,
+                  new FixedServiceIdentity.Value(999, 981, List.of(981L)),
+                  MAIN,
+                  missing));
+      for (String invalid : List.of("", "\"", "x".repeat(129))) {
+        var wrong = new HashMap<>(INFO);
+        wrong.put(key, invalid);
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                new MorningServiceReadiness(
+                    f::guard,
+                    f,
+                    new FixedServiceIdentity.Value(999, 981, List.of(981L)),
+                    MAIN,
+                    wrong));
+      }
+    }
+  }
+}
