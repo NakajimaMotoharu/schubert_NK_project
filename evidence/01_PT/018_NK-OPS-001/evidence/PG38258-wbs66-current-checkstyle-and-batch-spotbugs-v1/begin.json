@@ -1,0 +1,51 @@
+{
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "groupStart": "PGPT-20261008-5744",
+  "startedAtUTC": "2026-11-17T23:36:32.906984+00:00",
+  "commands": {
+    "checkstyle": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx768m",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "-f",
+      "xml",
+      "-o",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG38258-wbs66-current-checkstyle-and-batch-spotbugs-v1/checkstyle.xml",
+      "@/home/mini/codex/project1/work/pgpt-runs/PG379/pg38258-wbs66-current-static-v1/main-sources.txt"
+    ],
+    "batch-spotbugs": [
+      "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-f",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38258-wbs66-current-static-v1/analysis.pom.xml",
+      "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+      "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+    ]
+  },
+  "sourceInventory": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38240-current-six-source-reference-edges-v1/begin.json",
+    "sha256": "06044baa75f12807441278b39ed5b8d6047e19d95f85369c05d158308207f44f"
+  },
+  "previousMain": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38200-six-main-checkstyle-v1/begin.json",
+    "sha256": "a020cc04924dbb1550731edb18166a4455c5f275624453e5bb3cf73e57374873"
+  },
+  "compile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/compile/manifest.json",
+    "sha256": "12154ad780501aaa8caad123e7ea11faa1ed418cdad2ed61c5ef5f39da3ab472"
+  },
+  "previousSpotBugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38206-bootstrap-batch-spotbugs-v1/begin.json",
+    "sha256": "50551c465ba20f82eeb2a5e3c4243ac61aea86ea8462802a82b318a282d10ad9"
+  },
+  "newInput": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+  "freshCurrentBatchClassCount": 646,
+  "unchangedAuxBytes": true,
+  "mainListSha256": "5989ddea4085c96c244dd435f34d5b2526beeec9a80231a95dbf984416d5ceca",
+  "noProductTests": true
+}
