@@ -1,0 +1,238 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T19:47:32.515336+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38056-unit-state-pure-admission-v1/normalized-prepare.json",
+    "sha256": "46565ef1f1f8544b111bdf1536abc13cf7107255c732b1766a82a3054afe77dd"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38050-unit-state-pure-after-prepare-v1/manifest.json",
+    "sha256": "cc1fe5a4d20007abc32a4fb50bce73a8a58a7af5812f37d312607f6ff6ce8c97"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38052-unit-state-pure-after-static-v1/manifest.json",
+    "sha256": "92abac481046982006e83b6fcb0be9fe5e2542d97e13feb546a5a6097023cd84"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "rule": "CloseResource",
+      "line": "150",
+      "reason": "Fixture-owned2worker/32task memory byte projections, every Future.get10seconds and finally shutdownNow/awaitTermination10seconds assertion. Exact owned executor is closed after all exits, no server/Root/native resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "150",
+      "reason": "Standalone JUnit checks32 independent literal byte projections with2 local workers. Future10/finallyshutdownNow/await10 are finite, not a J2EE component or actual state acquisition. No external process/command/Root/authority actions.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "155",
+      "reason": "Standalone JUnit checks32 independent literal byte projections with2 local workers. Future10/finallyshutdownNow/await10 are finite, not a J2EE component or actual state acquisition. No external process/command/Root/authority actions.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "167",
+      "reason": "Standalone JUnit checks32 independent literal byte projections with2 local workers. Future10/finallyshutdownNow/await10 are finite, not a J2EE component or actual state acquisition. No external process/command/Root/authority actions.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "168",
+      "reason": "Standalone JUnit checks32 independent literal byte projections with2 local workers. Future10/finallyshutdownNow/await10 are finite, not a J2EE component or actual state acquisition. No external process/command/Root/authority actions.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserNamespaceContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "36",
+      "reason": "Exactly one non-secret byteparser namespace constructor. This finally restores the exact captured false flag after asserting forbidden construction. No arbitrary type, key, OS/app authority or actual stop operation. Subsequent assertion verifies access false, no rule suppression.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/batch/platform/UnitStateParser"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/batch/platform/UnitStateParser": {
+      "flags": 48,
+      "sourceFile": "UnitStateParser.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "requireStopped",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/platform/ApplicationUnit;[B)V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 367
+        },
+        {
+          "name": "valid",
+          "descriptor": "(Z)V",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 16
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 21
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/batch/platform/StopGateFailure": {
+      "flags": 16433,
+      "sourceFile": "StopGateFailure.java",
+      "fields": 6,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/batch/platform/StopGateFailure;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/platform/StopGateFailure;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 7
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/batch/platform/StopGateFailure;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 35
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 72
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/batch/platform/StopGateException": {
+      "flags": 49,
+      "sourceFile": "StopGateException.java",
+      "fields": 2,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/batch/platform/StopGateFailure;)V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "reason",
+          "descriptor": "()Ldev/codex/schubert/nk/batch/platform/StopGateFailure;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/batch/platform/ApplicationUnit": {
+      "flags": 16432,
+      "sourceFile": "ApplicationUnit.java",
+      "fields": 4,
+      "methods": [
+        {
+          "name": "values",
+          "descriptor": "()[Ldev/codex/schubert/nk/batch/platform/ApplicationUnit;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "valueOf",
+          "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/batch/platform/ApplicationUnit;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;ILjava/lang/String;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 12
+        },
+        {
+          "name": "serviceName",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "$values",
+          "descriptor": "()[Ldev/codex/schubert/nk/batch/platform/ApplicationUnit;",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 37
+        }
+      ]
+    }
+  },
+  "RootNullAwayMain4": true,
+  "explicitMaxLowPhysical4": true,
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserBytePortTest.java": 6,
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/UnitStateParserNamespaceContractTest.java": 1
+  },
+  "newDefinitions": 1,
+  "originalDefinitions": 6,
+  "originalWhole6BusinessBodyInverseExact": true,
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
