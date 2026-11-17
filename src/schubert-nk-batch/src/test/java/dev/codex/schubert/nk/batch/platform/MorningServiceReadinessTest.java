@@ -1,14 +1,18 @@
 package dev.codex.schubert.nk.batch.platform;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +47,7 @@ final class MorningServiceReadinessTest {
           + "Groups:\t980 981 982 986\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\n"
           + "CapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\n";
 
-  static final class Fixture implements MorningServiceReadiness.Io {
+  static class Fixture implements MorningServiceReadiness.Io {
     String statusText = STATUS;
     String commandValue =
         "/usr/bin/java\u0000--enable-native-access=ALL-UNNAMED\u0000" + MAIN + "\u0000";
@@ -359,5 +363,87 @@ final class MorningServiceReadinessTest {
     assertFalse(first.equals(new MorningServiceReadiness.Response(200, "{\"status\":\"DOWN\"}")));
     assertEquals(-1037267297, first.hashCode());
     assertEquals("Response[status=200, body={\"status\":\"UP\"}]", first.toString());
+  }
+
+  /** READYDATA001: each independent successful sample discards its own command bytes. */
+  @Test
+  void readyData001DefaultConversionErasesBothIndependentCommandSamples() throws Exception {
+    var captured = new ArrayList<byte[]>();
+    var fixture =
+        new Fixture() {
+          @Override
+          public byte[] command() throws IOException {
+            byte[] bytes = super.command();
+            captured.add(bytes);
+            return bytes;
+          }
+        };
+    assertTrue(fixture.observer().ready());
+    assertEquals(2, captured.size());
+    assertNotSame(captured.get(0), captured.get(1));
+    for (byte[] bytes : captured) assertArrayEquals(new byte[bytes.length], bytes);
+    assertEquals(8, fixture.requests);
+    assertEquals(3, fixture.guards);
+  }
+
+  /** READYDATA002: independent checked, runtime and fatal providers retain identity after erase. */
+  @Test
+  void readyData002DecoderFailureErasesCapturedCommandBeforePropagation() {
+    for (Throwable failure :
+        List.of(
+            new IOException("PUBLIC_DECODE"),
+            new IllegalStateException("PUBLIC_DECODE"),
+            new AssertionError("PUBLIC_DECODE"))) {
+      var captured = new ArrayList<byte[]>();
+      var fixture =
+          new Fixture() {
+            @Override
+            public byte[] command() throws IOException {
+              byte[] bytes = super.command();
+              captured.add(bytes);
+              return bytes;
+            }
+
+            @Override
+            public String decodeCommand(byte[] bytes) throws IOException {
+              assertSame(captured.get(0), bytes);
+              if (failure instanceof IOException io) throw io;
+              if (failure instanceof RuntimeException runtime) throw runtime;
+              throw (Error) failure;
+            }
+          };
+      assertSame(failure, assertThrows(Throwable.class, fixture.observer()::ready));
+      assertEquals(1, captured.size());
+      assertArrayEquals(new byte[captured.get(0).length], captured.get(0));
+      assertEquals(0, fixture.socketReads);
+      assertEquals(2, fixture.requests);
+    }
+  }
+
+  /** READYDATA003: a missing converter result cannot skip owner erase or become ready. */
+  @Test
+  void readyData003MissingCommandTextFailsAndErasesBeforeAnySocketOrHttp() {
+    var captured = new ArrayList<byte[]>();
+    var fixture =
+        new Fixture() {
+          @Override
+          public byte[] command() throws IOException {
+            byte[] bytes = super.command();
+            captured.add(bytes);
+            return bytes;
+          }
+
+          @Override
+          public String decodeCommand(byte[] bytes) {
+            assertSame(captured.get(0), bytes);
+            return null;
+          }
+        };
+    var failure = assertThrows(NullPointerException.class, fixture.observer()::ready);
+    assertEquals("service command text", failure.getMessage());
+    assertEquals(1, captured.size());
+    assertArrayEquals(new byte[captured.get(0).length], captured.get(0));
+    assertEquals(0, fixture.socketReads);
+    assertEquals(2, fixture.requests);
   }
 }

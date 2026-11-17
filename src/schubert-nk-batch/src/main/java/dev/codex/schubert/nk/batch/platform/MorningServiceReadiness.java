@@ -50,6 +50,14 @@ public final class MorningServiceReadiness {
     Set<String> sockets() throws IOException;
 
     Response get(String path) throws IOException;
+
+    /**
+     * Pure command conversion; the caller retains byte ownership and erases on every exit.
+     * SS342/343/354, PG-D363, READYDATA001..003: this port grants no process authority.
+     */
+    default String decodeCommand(byte[] command) throws IOException {
+      return new String(command, StandardCharsets.US_ASCII);
+    }
   }
 
   record Response(int status, String body) {
@@ -160,7 +168,7 @@ public final class MorningServiceReadiness {
     try {
       if (command.length == 0 || command.length > 16384 || command[command.length - 1] != 0)
         return false;
-      String text = new String(command, StandardCharsets.US_ASCII);
+      String text = Objects.requireNonNull(io.decodeCommand(command), "service command text");
       return Arrays.stream(text.split("\u0000", -1)).filter(main::equals).count() == 1;
     } finally {
       Arrays.fill(command, (byte) 0);
