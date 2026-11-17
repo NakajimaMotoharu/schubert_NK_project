@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "run": "PG38270-chr-a01-public-oracle-handoff-v1",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "terminalAtUTC": "2026-11-17T23:45:22.836419+00:00",
+  "groupStart": "PGPT-20261008-5748",
+  "approvedDesignCommit": "88e6d70cfdccb3318cd079dc5379e8748bc2cc8d",
+  "baselineSource": "843de94906c0cd01a30641e7a6d542e3df794e45",
+  "frozenCurrent": {
+    "path": "program/characterization/baseline/current/artifacts/CHR-A01.json",
+    "sha256": "df68edfbd59d60fc0d87fcce818401788740153c8b630f790d785f6414001993"
+  },
+  "preservedBaseline": true,
+  "requirements": {
+    "path": "program/characterization/tests/resources/cases/case-requirements.json",
+    "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569"
+  },
+  "approvedDifference": {
+    "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+    "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6"
+  },
+  "caseRequiredFields": [
+    "caseId",
+    "status",
+    "statusCode",
+    "title",
+    "usernameAutocomplete",
+    "usernameAutofocus",
+    "passwordAutocomplete",
+    "passwordValue",
+    "csrf",
+    "securityHeaders"
+  ],
+  "registeredCaseRules": {
+    "DIF-001": {
+      "field": "brand",
+      "mode": "difference"
+    },
+    "DIF-004": {
+      "field": "authentication.backend",
+      "mode": "difference"
+    },
+    "DIF-015": {
+      "field": "http.path",
+      "mode": "contract"
+    }
+  },
+  "brandDifference": {
+    "id": "DIF-001",
+    "currentTitle": "schubert - ログイン",
+    "nkExpectedTitle": "schubert NK - ログイン"
+  },
+  "staticTemplate": {
+    "path": "src/schubert-nk-web/src/main/resources/templates/login.html",
+    "sha256": "ba814efffec4be98d17338cacd63927d50aa552958188ba3fb7db0b77171443a"
+  },
+  "lockTextFixedByQa055": true,
+  "loginHandlerRetryAfterSource": {
+    "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java",
+    "sha256": "af105883d5126b38d01ff4e0d851c98c1f61d3329854776b8955592013c0da92"
+  },
+  "design": [
+    {
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+    },
+    {
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+    }
+  ],
+  "expectedObservedLater": {
+    "httpStatus": 200,
+    "usernameAutocomplete": "username",
+    "usernameAutofocus": true,
+    "passwordAutocomplete": "current-password",
+    "passwordEmpty": true,
+    "currentSecurityHeaderNames": [
+      "content-security-policy",
+      "permissions-policy",
+      "referrer-policy",
+      "server",
+      "strict-transport-security",
+      "x-content-type-options",
+      "x-frame-options"
+    ],
+    "csrfPresenceRequired": true,
+    "qa055LockText": "ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。",
+    "qa055RetryAfter": "admitted API value separately"
+  },
+  "ownerHandoff": {
+    "criteria": [
+      "WBS-N09",
+      "WBS-P020-01",
+      "WBS-CHR-A01"
+    ],
+    "receiptNeeded": "fresh authorized current source Browser/HTTP using product route; independent diff and true ending metadata"
+  },
+  "initialAuditExit": 1,
+  "initialAuditCause": "DIF-001 is the sole title difference, while A01 has three registered rules overall.",
+  "productTests": 0,
+  "browserRuns": 0,
+  "environmentOperations": 0,
+  "credentialsRead": 0,
+  "baselineModified": 0,
+  "currentChrPass": false,
+  "formalAcceptanceDelta": 0
+}

@@ -1,0 +1,123 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5749",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5ee0733d65ef7fe51ea25eda82980cfde5a09e8c51eaf12a1c91e725eb3bbf4f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:45:49.120000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:45:22.836419+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-CHR-A01-INDEPENDENT-ORACLE-PREP-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-CHR-A01-INDEPENDENT-ORACLE-PREP-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "WBS-CHR-A01 independent preparation expressly permitted by WBS66 HOLD checklist. Read frozen public Current A01 and its name/negative assertions. Join approved QA045/055/DIF001/SS355, exact current template and case requirement. Record owner handoff and required observed Browser/HTTP conditions. Do not run Browser/driver/VM/backend, replay any captured operation, change baseline/oracle or handle private material.",
+    "oracleReferences": [
+      {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      },
+      {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      {
+        "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+        "sha256": "cd49519be74514f228f8cc7e84a448d4d5218fff0c6af896e2e85920aed0e052"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38270-chr-a01-public-oracle-handoff-v1",
+    "wbsLeafIds": [
+      "WBS-CHR-A01"
+    ],
+    "managementWorkIds": [
+      "WBS-CHR-A01"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.35,
+      "high": 0.8
+    },
+    "groupCapPp": 1.2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5748",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38270-chr-a01-public-oracle-handoff-v1/manifest.json",
+      "sha256": "1fcf4b1466331da98f452b7fddb24d5b3df663d94175407d57214149aa4811a9"
+    },
+    "firstRunSuccessNumerator": 0,
+    "firstRunDenominator": 1,
+    "reruns": 1,
+    "causesOfRerun": [
+      "DIF-001 is the sole title difference, while A01 has three registered rules overall."
+    ],
+    "technicalMeasurement": {
+      "baselineFields": 10,
+      "registeredCaseRules": 3,
+      "titleDif": 1,
+      "newProductTests": 0,
+      "actualBrowserRuns": 0
+    },
+    "criterionReductions": [
+      "WBS-CHR-A01 independent allowed pre-receipt. Current baseline hash, QA045 title with DIF-001, QA055 fixed DOM plus distinct Retry-After, actual source and residual ready."
+    ],
+    "remainingCriteria": [
+      "WBS-N09",
+      "WBS-P020-01",
+      "WBS-CHR-A01",
+      "Fresh authorized same-source Browser/HTTP and current ending metadata"
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "nextCommand": "Continue permitted independent PG/PT while the actual CHR route remains held."
+  }
+}
