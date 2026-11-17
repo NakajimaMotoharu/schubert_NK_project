@@ -1,0 +1,22 @@
+[
+  {
+    "file": "WebLogActionContractTest",
+    "classification": "PUBLIC_CANONICAL_CONSTRUCTOR_NEGATIVE",
+    "basis": "getDeclaredConstructor targets compiled protocol WebLogEventData only with14 public synthetic arguments; each null contract independently expected, no secret/header/backend access"
+  },
+  {
+    "file": "IndependentNamedFieldOracle",
+    "classification": "CLOSED_PROTOCOL_VALUE_TYPE_REFLECTION",
+    "basis": "Class.forName is bounded by SEMANTIC=dev.codex.schubert.nk.protocol.layout.semantic., whitelisted names derived from independent fixed field catalog. Values only; application classpath Protocol175+JUnit/JSpecify, no backend/client/Root classes."
+  },
+  {
+    "file": "Three existing concurrent fixtures",
+    "classification": "FINITE_OWNED_MEMORY_WORK",
+    "basis": "WebLogActionContractTest and PayloadTypeCatalogStateContractTest own2 workers, get10, finally shutdownNow/await10assert. PayloadGoldenVectorTest owns8 workers, get10, finally shutdownNow/await10assert. No unbounded close or external I/O."
+  },
+  {
+    "file": "Remaining Protocol source fixtures",
+    "classification": "PURE_BYTE_TEXT_VALUE_FIXTURES",
+    "basis": "No Files/Path/network/process/DriverManager/DataSource/real crypto/JMS provider/native calls or special TestFactory/parameterized/disabled/beforeAll/tempdir/nested declarations found. Existing152 actual success/source and all175 bytes exact, no replay."
+  }
+]

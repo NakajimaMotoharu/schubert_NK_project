@@ -1,0 +1,9 @@
+# Protocol module全Code閉鎖の製造・通常PT仕様
+
+BUG3111/YKT2583の既存未完とYKT2647、SS323/324/333/354。現165Main/175physical/162Codeclass/1438Code、既存35source152PTはCoree479/Unit0601086e・PG36623/24と現在全input/byteが一致（37574）。原152の確認再演なし。現在未達はprivate utility4methodと16methodの58branchで、default filterだけの合格は禁止。
+
+次群の事前見積 .50/1.80/4.50 cap5、追加発見・費用主担当F03一回（各Main論理ownerは追跡、二重費用なし）。PGは省略しない。private utility FieldCodec/LargeResultRecordCodec/MediaDescriptorValidator/PayloadSemanticValidatorは非構築guard、factory用途の3classは維持する。PayloadCodec/MediaDescriptorValidator/LayoutFieldCatalogのenum dispatchとContentDisposition/LayoutFieldCatalog/PayloadSemanticValidatorのString dispatch、計17 switch/16 methodを検討し、compiler専用のhash/ordinal fallbackを隠さず、closed protocol grammarの明示比較へ置き換える。case body・順序・先行後続処理・例外・Null契約・全public/private署名・golden bytesは維持する。意味のない不可能値やUnsafe enum改造でCodeを実行せず、source上の意図に対応する分岐へ整理する。既存FieldDefinition等の先行是正を再変更しない。
+
+Expectedはproductionから生成しない。原152 source/独立golden/389offset/64layout/69named types・全public null/negative/concurrency/factory契約は保持し、新namespace4は唯一の対象privatector/固定AssertionError/アクセスfinally復元を検証する。原152＋新4=156を、変更した全Protocol sourceの必要な一回whole-moduleで実行する。oldexec合成/標準filter除外/到達不能扱いなし、自然NoCodeのみ0/0を保存。全Main actualCode・全条件/例外・CRC/init/XML/独立post/staticが満たされるまで完了しない。追加の具体的不足があれば原結果を保持して修正前起票し、当群cap/終了条件と再見積を守る。
+
+Source差はProtocolの7Main候補（FieldCodec, LargeResultRecordCodec, MediaDescriptorValidator, PayloadSemanticValidator, PayloadCodec, LayoutFieldCatalog, ContentDisposition）を対象に、変更前の17dispatchを先に全件一覧化してoracle/bodyを固定する。ScopeはJDK-only codec/value domain、ActualJMS/DB/Root/FS/VM/認証/鍵/permit/四held classfileへの経路を増やさない。原POMJava25/NullAway、全modulePMD/CS/format/SB、全public/privateABI・物理/debug/生成classの増減を対応させ、全scopeを同source/runへ固定する。意味不明の数値補完/期待緩和なし。Formal1964/53・17/190・工数nullとIT/ST未実施を維持。

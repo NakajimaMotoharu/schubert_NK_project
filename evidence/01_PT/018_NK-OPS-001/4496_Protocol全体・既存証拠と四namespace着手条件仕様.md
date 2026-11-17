@@ -1,0 +1,7 @@
+# NK-PRO Protocol module統合資格の着手条件
+
+RD固定長/文字コード/認証header/Media/large result各要件、UI232235、SS323/324/333/354。YKT2647のProtocol七private無引数ctorを、factory3（JstWireTimestamp/PayloadTypeCatalog/TypedFieldValues）と非factory候補utility4（PayloadSemanticValidator/MediaDescriptorValidator/LargeResultRecordCodec/FieldCodec）へ区別する。事前source/既存proof照合 .15/.40/.90 cap1.5、F03一回費用。元190正式受入やテスト実行ではない。
+
+現35Test source/152@Test（parameterized/factory/repeated/disabled/beforeAll/tempdir宣言なし）と、原POM/現Root477中のProtocol175physicalを正確に対応する。source-only安全分類と既存公開whole-run/raw/各input hashesを確認し、元成功を確認目的で再演せず、現在のfull-module候補の差だけを明示する。Class/module countsは実物から求め、SourceCodeCurrentCore0a2bと元ProtoCoref6等を混同しない。現protoSDKを含むprivate無引数でない各constructorへ規則を乱適用しない。
+
+次のPG/PT群を開始する前に、4utilityの責務・caller・独立既存oracle/既存scope/runtime条件を確定し、必要なMain/Test差分と数・見積/targetを別記する。Root/実DB/JMS/VM/FS/credential/native/四held classfileに依存する処理は実行せず、Test内synthetic stream等も実物sourceから分類して未知は未知とする。過去の130や170を152へ算術合算しない。Module全175の全Code/全条件が成立するまでdefault filterだけでModule100としない。元見積/追加発見/再資格/再試行を分ける。独立な通常codec workはHOLD範囲を解除せず継続し、品質・Model・scope・課金条件は維持する。
