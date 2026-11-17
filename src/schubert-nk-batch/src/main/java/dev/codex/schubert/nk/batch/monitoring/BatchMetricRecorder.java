@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Borrowed dedicated registry, no actual Batch/DB/persistent-source operations. RD171/UI252/SS351;
@@ -21,7 +22,7 @@ public final class BatchMetricRecorder {
   private static final int NANOS_PER_MICROSECOND = 1000;
   private static final Instant MIN = Instant.parse("0001-01-01T00:00:00Z");
   private static final Instant MAX = Instant.parse("9999-12-31T23:59:59.999999Z");
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final boolean collectDetailed;
   private final Map<Step, Map<Status, Counter>> counters;
   private final Map<Step, AtomicReference<Optional<Instant>>> lastSuccess;
@@ -64,7 +65,8 @@ public final class BatchMetricRecorder {
         || endedAt.getNano() % NANOS_PER_MICROSECOND != 0)
       throw new IllegalArgumentException("invalid batch metric timestamp");
     if (!collectDetailed) return;
-    synchronized (lock) {
+    lock.lock();
+    try {
       Objects.requireNonNull(
               Objects.requireNonNull(counters.get(step), "closed batch step").get(status),
               "closed batch status")
@@ -75,6 +77,8 @@ public final class BatchMetricRecorder {
         if (previous.isEmpty() || endedAt.isAfter(previous.orElseThrow()))
           state.set(Optional.of(endedAt));
       }
+    } finally {
+      lock.unlock();
     }
   }
 

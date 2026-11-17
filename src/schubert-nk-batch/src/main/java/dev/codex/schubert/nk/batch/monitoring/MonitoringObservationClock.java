@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.LongSupplier;
 
 /**
@@ -11,7 +12,7 @@ import java.util.function.LongSupplier;
  * NK-OPS-001/P018-09; RD171/UI252/SS351; PG-D530/OBSCLOCK001..008/spec1586.
  */
 public final class MonitoringObservationClock {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final Clock utc;
   private final LongSupplier ticks;
   private final long origin;
@@ -28,7 +29,8 @@ public final class MonitoringObservationClock {
   /** Clock rollback is not fabricated away; only elapsed monotonic time controls alert periods. */
   public ObservationContext context(CauseClearance clearance) {
     Objects.requireNonNull(clearance, "cause clearance");
-    synchronized (lock) {
+    lock.lock();
+    try {
       long now = ticks.getAsLong();
       long elapsed = now - origin;
       if (now - last < 0 || elapsed < 0)
@@ -37,6 +39,8 @@ public final class MonitoringObservationClock {
       var context = new ObservationContext(clearance, at, Duration.ofNanos(elapsed));
       last = now;
       return context;
+    } finally {
+      lock.unlock();
     }
   }
 }

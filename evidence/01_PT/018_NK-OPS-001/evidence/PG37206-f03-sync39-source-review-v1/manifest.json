@@ -1,0 +1,65 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T03:25:36.631701+00:00",
+  "sourceCore": "fefac4b6c8d14df495deacef39eaade275f1348a",
+  "sourceHead": "24e940d05272b1029351d5fdffdd9ef6be4d463a",
+  "rawOriginal": null,
+  "selectedOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37084-f03-specific-lifetime83-applicability-v1/remaining-unmatched.json",
+    "sha256": "cec832c92d296df9bd59c35037a607662dd6320f6cf5c8e228ef047779cf347a"
+  },
+  "independentRows": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37206-f03-sync39-source-review-v1/site-decisions.json",
+    "sha256": "397bf08a9d695f7832036e02b558695d373250d67ba3c844ab47b121fb511b94"
+  },
+  "structuralFactsSha256": "848311df64260b96455a42970e72466469efd829f61d6162f207338748924c22",
+  "reviewedSites": 39,
+  "reviewedClasses": 12,
+  "applicableOrdinarySites": 4,
+  "unresolvedNativeCallbackSites": 35,
+  "newNotApplicableDispositions": 0,
+  "prior922NotApplicableUnchanged": true,
+  "original49NotYetClosed": true,
+  "canonicalMainSs343Sha256": "3a352f22e2ee28360dfa737adb0cf6bfdb61b7639ac79237bd677eff648d5ae3",
+  "codingStandard": {
+    "path": "documents/400_PGPT/410_工程標準/411_コーディング規約.md",
+    "sha256": "c598f51482da52e35b06515bab36b674adec6a704765e9fdece1cd6fe5fa7e51"
+  },
+  "threadSourceFacts": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java",
+      "sha256": "da4f331f230ab0bbb66f0f63451b9e7d164be6a73bc9bb6bcdb5a13597b903cb",
+      "sites": [
+        {
+          "line": 71,
+          "text": "var readers = Executors.newVirtualThreadPerTaskExecutor();"
+        }
+      ],
+      "limitation": "The visible task drains a bounded stream. This is not a whole-program no-virtual-caller proof."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java",
+      "sha256": "f9609e88a54aaeb5151e50d6b245be7d69bfbaebda72cb92a51e812498dd0db5",
+      "sites": [
+        {
+          "line": 216,
+          "text": "var reader = Thread.startVirtualThread(drain);"
+        }
+      ],
+      "limitation": "The visible task drains a bounded stream. This is not a whole-program no-virtual-caller proof."
+    }
+  ],
+  "officialRule": "https://docs.pmd-code.org/pmd-doc-7.28.0/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+  "changedProductionSources": 0,
+  "executedProductTests": 0,
+  "nativeOperations": 0,
+  "changedRulesOrSuppressions": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "retainedHolds": [
+    "BUG3152 recovery ten catches",
+    "QA056 four classfiles",
+    "Root/native/recovery/VM/DB/permit/intent operations"
+  ],
+  "nextProof": "Four ordinary synchronization sites: original whole monitoring tests, finite two-thread exclusion and exception-release postconditions, fresh Main compile/static/ABI/raw CRC. Keep35 native/callback sites and recovery10 unresolved."
+}

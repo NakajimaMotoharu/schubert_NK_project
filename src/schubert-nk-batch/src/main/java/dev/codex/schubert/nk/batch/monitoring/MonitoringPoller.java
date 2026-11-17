@@ -4,11 +4,12 @@ import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
 
 /** Internal one-owner sequence/gap guard, not a scheduler or timeout/control authority. PG-D533. */
 final class MonitoringPoller<R> {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private Optional<Duration> lastCompleted = Optional.empty();
   private boolean interrupted;
 
@@ -18,8 +19,11 @@ final class MonitoringPoller<R> {
       BiFunction<Boolean, ObservationContext, R> action) {
     Objects.requireNonNull(context, "observation context");
     Objects.requireNonNull(action, "observation action");
-    synchronized (lock) {
+    lock.lock();
+    try {
       return observeLocked(consecutive, context, action);
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -31,7 +35,8 @@ final class MonitoringPoller<R> {
     Objects.requireNonNull(clearance, "cause clearance");
     Objects.requireNonNull(clock, "observation clock");
     Objects.requireNonNull(action, "observation action");
-    synchronized (lock) {
+    lock.lock();
+    try {
       final ObservationContext context;
       try {
         context = clock.context(clearance);
@@ -40,6 +45,8 @@ final class MonitoringPoller<R> {
         throw unavailableClock;
       }
       return observeLocked(consecutive, context, action);
+    } finally {
+      lock.unlock();
     }
   }
 
