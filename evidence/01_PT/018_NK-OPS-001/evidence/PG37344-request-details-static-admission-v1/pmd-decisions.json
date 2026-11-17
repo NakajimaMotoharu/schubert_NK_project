@@ -1,0 +1,20 @@
+[
+  {
+    "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/logging/RequestLogDetails.java",
+    "sourceSha256": "bf2bf01ac0fe3c0c95be00a79f259ef04f6553e4c0d464be77625e4580e78ac2",
+    "line": 76,
+    "rule": "UnusedReturnValue",
+    "anchor": "reader.peek();",
+    "decision": "NOT_APPLICABLE",
+    "reason": "STRICT Gson reader peek after endObject is an intentional trailing-document rejection: only successful value is END_DOCUMENT. Its checked parse exception is the contract, not token consumption. Original source comment and PT-IDEM012 independent {} {},{}true,comments plus RAW003 trailing canary prove rejection/fixed exception. Keeping the old parser behavior avoids relaxing oracle."
+  },
+  {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/logging/RequestLogDetailsRawContractTest.java",
+    "sourceSha256": "10f1a8682fef859d3d003e050f8ac6646aa5f70b7b7ccbabe900d398d4a1e9e4",
+    "line": 27,
+    "rule": "AvoidAccessibilityAlteration",
+    "anchor": "constructor.setAccessible(true);",
+    "decision": "NOT_APPLICABLE",
+    "reason": "Exact pure RequestLogDetails zero-arg private ctor only, restore flag in finally and assert false. No arbitrary type lookup/Root/private key/runtime/authority access. RAW001 verifies non-instantiation invariant; no broad reflection helper."
+  }
+]
