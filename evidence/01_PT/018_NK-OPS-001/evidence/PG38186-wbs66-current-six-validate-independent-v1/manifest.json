@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "run": "PG38184-WBS66-CURRENT-SIX-VALIDATE",
+  "source": "5fcdbe49fcb10644f580eee05234df39912ee125",
+  "terminalAtUTC": "2026-11-17T22:26:42.790559+00:00",
+  "mainSources": 1026,
+  "productModules": 6,
+  "mavenNumericExit": 0,
+  "gates": {
+    "enforcer": [
+      "schubert-nk",
+      "schubert-nk-protocol",
+      "schubert-nk-storage",
+      "schubert-nk-bootstrap",
+      "schubert-nk-api",
+      "schubert-nk-web",
+      "schubert-nk-batch"
+    ],
+    "spotless": [
+      "schubert-nk",
+      "schubert-nk-protocol",
+      "schubert-nk-storage",
+      "schubert-nk-bootstrap",
+      "schubert-nk-api",
+      "schubert-nk-web",
+      "schubert-nk-batch"
+    ]
+  },
+  "declaredProductionAndTestGraph": {
+    "protocol": {
+      "pomSha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "productionEdges": [],
+      "testEdges": []
+    },
+    "storage": {
+      "pomSha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "productionEdges": [],
+      "testEdges": []
+    },
+    "bootstrap": {
+      "pomSha256": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "productionEdges": [
+        "storage"
+      ],
+      "testEdges": []
+    },
+    "api": {
+      "pomSha256": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+      "productionEdges": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "testEdges": [
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    },
+    "web": {
+      "pomSha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "productionEdges": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "testEdges": [
+        [
+          "api",
+          "jar"
+        ],
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    },
+    "batch": {
+      "pomSha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "productionEdges": [
+        "bootstrap",
+        "storage"
+      ],
+      "testEdges": [
+        [
+          "bootstrap",
+          "test-jar"
+        ]
+      ]
+    }
+  },
+  "requirements": [
+    "SYS-002",
+    "SYS-005"
+  ],
+  "projectDeclaredBoundaryVerified": true,
+  "dependencyConvergencePassed": 7,
+  "productClassfilesGenerated": 0,
+  "productTestsExecuted": 0,
+  "fullArchUnitBytecodeBoundaryVerified": false,
+  "newAcceptance": 0,
+  "producer": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38184-wbs66-current-six-validate-v1/manifest.json",
+    "sha256": "77ea9343f0fe88045e95792bbc76c7e15c67f5fe039d4bbbc1e61170db2f530f"
+  }
+}

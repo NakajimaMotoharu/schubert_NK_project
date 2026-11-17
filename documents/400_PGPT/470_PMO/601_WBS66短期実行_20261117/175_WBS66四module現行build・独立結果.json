@@ -1,0 +1,140 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5712",
+  "groupId": "PGPT-WBS66-CURRENT-FOUR-MAIN-20261118",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "646431a126975640b0b045f106b1ccd297abac53470863c774445d98b6913987",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T22:24:59.762Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 22,
+          "remainingPercent": 78,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T22:24:34.630547+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-CURRENT-FOUR-MAIN-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-CURRENT-FOUR-MAIN-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "WBS-F03/2-2 current four admitted modules with two changed Main paths using unchanged original POMs. Supports F02/SYS-002 build and convergence. Same-source compiler terminal and complete physical hash delta, plus links for exact applicable earlier targeted results. API and Web Main classfile gates await QA056.",
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/009_F03_六module静的品質引渡し.md",
+        "sha256": "751790cc4fd728d94d7cf1a27c3593f8faba6f5a10f3c16970aea1075b65457a"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/118_Protocol全Code・一五六件結果と群終了.json",
+        "sha256": "7180706d576009b7c7ee7397e9f91d9cdadfe407ab7bf0c70abe005bde99a032"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/173_利用者モデル切替一時停止・再開点.json",
+        "sha256": "9b0a6267f12fa3aafb4d6ec9f531a963f324b456e1228b242d91881cf1e3114a"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "modelVerificationMethod": "Runtime model declaration; reasoning and speed user-reported, independent telemetry unavailable",
+    "source": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "productionCoreMain": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "criteria": [
+      "WBS-F03/criterion/quality",
+      "WBS-F02/criterion/contract"
+    ],
+    "testIds": [
+      "PT-QUALITY build and dependency convergence (static, product PT 0)"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.6,
+      "high": 1.2
+    },
+    "groupCapPp": 2,
+    "originalRowPricePp": 2.4,
+    "startedWithinOriginalRow": true,
+    "noAdditionalOriginalCharge": true,
+    "originalCompletedPriceTotalPp": 9.538,
+    "remainingDetailBasePp": 1089.848,
+    "shortTermPlannedPricePp": 143.371,
+    "precedents": [
+      "WBS-F03/1",
+      "WBS-F03/2-1",
+      "W66-HANDOFF-F03-20261117-01",
+      "PG37656"
+    ],
+    "buildRun": "PG38180-WBS66-CURRENT-FOUR-MAIN-V1",
+    "firstAttempt": {
+      "reactorModulesSuccessfulInLog": 4,
+      "moduleDenominator": 4,
+      "rootAlsoSuccessful": true,
+      "wrapperExit": 1,
+      "mavenNumericExit": null,
+      "productTests": 0
+    },
+    "retry": {
+      "builds": 0,
+      "independentRecoveryRuns": 1,
+      "reason": "BUG-3210 wrapper used str instead of Path when verifying input hashes"
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38182-wbs66-current-four-main-independent-v1/manifest.json",
+      "sha256": "6d3ad150e51e6741807913821d96ac3f0ed6dabedb5f30bc0638f6d39c2e8345"
+    },
+    "closedSubconditions": [
+      "Current 4/6 Main compile reported BUILD SUCCESS with 481 sources and 1102 class files independently checked",
+      "Current 4/6 dependency convergence and Main Spotless plus root",
+      "Both changed physical class hashes match their respective existing limited static proofs"
+    ],
+    "remainingConditions": [
+      "F02: API/Web Main build and full ArchUnit bytecode scope pending QA056; runtime proof and signed terminal judgment pending",
+      "F03: API/Web classfile gates, unresolved applicability and held Root/native paths, whole 451 and terminal decision"
+    ],
+    "closedCanonicalCriteria": [],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "completedOriginalRowPricePp": 0,
+    "remainingOriginalRowPricePp": 2.4
+  }
+}

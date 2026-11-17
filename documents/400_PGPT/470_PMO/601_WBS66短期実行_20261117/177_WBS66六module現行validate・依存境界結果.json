@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5714",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4a17722a41d7a6216c73f4ab5826263c86ead66ad2a37b5eea97625e04d8474b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T22:27:02.836Z",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 22,
+          "remainingPercent": 78,
+          "windowDurationMins": 10080,
+          "resetsAt": 1795445752
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T22:26:42.790559+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 22,
+      "remainingPercent": 78,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-CURRENT-SIX-VALIDATE-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-CURRENT-SIX-VALIDATE-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "F02/SYS002 and F03 current Main validate with original six-module Maven reactor: dependency convergence and declared graph checks. Existing QA056 classfile restrictions maintained.",
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/175_WBS66四module現行build・独立結果.json",
+        "sha256": "9d888830ee9a36360796b2974975aca7e721cb037ceb9b1168eb24ad3ae62c1b"
+      }
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "modelVerificationMethod": "Runtime model declaration; reasoning and speed user-reported, independent telemetry unavailable",
+    "source": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "productionCoreMain": "5fcdbe49fcb10644f580eee05234df39912ee125",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-b"
+    ],
+    "criteria": [
+      "WBS-F02/criterion/contract",
+      "WBS-F03/criterion/quality"
+    ],
+    "testIds": [
+      "PT-QUALITY-001 configuration and Maven validate only"
+    ],
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.4,
+      "high": 0.8
+    },
+    "groupCapPp": 1.2,
+    "noAdditionalOriginalCharge": true,
+    "originalRowPricePp": 0.4,
+    "run": "PG38184-WBS66-CURRENT-SIX-VALIDATE",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38186-wbs66-current-six-validate-independent-v1/manifest.json",
+      "sha256": "03f52c8a4d469d19d5357625d179fcd5fbd38ce0f659bfb1d3422574d381fb8d"
+    },
+    "firstAttempt": {
+      "productModulePass": 6,
+      "productModuleCount": 6,
+      "rootPass": true,
+      "exit": 0,
+      "productTests": 0
+    },
+    "retries": 0,
+    "closedSubconditions": [
+      "F02/SYS-002 current original Maven validate passed Java 25/Maven 3.9.12 enforcer and dependency convergence across all six production modules plus root",
+      "F02/SYS-005 declared production DAG for six modules verified against SS311; Web-to-API edge test scope only",
+      "F03 current six-module Main Spotless check produced success with 1026 input files and no classfile generation"
+    ],
+    "closedCanonicalCriteria": [],
+    "completedOriginalRowPricePp": 0,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "originalCompletedPriceTotalPp": 9.538,
+    "remainingDetailBasePp": 1089.848,
+    "shortTermPlannedPricePp": 143.371,
+    "remainingConditions": [
+      "F02 actual API/Web classfile build and full bytecode dependency proof require QA056 scope resolution. SYS runtime receipts, 451, and signature still required.",
+      "F03 actual API/Web compiler and bytecode static gates, applicable remaining native/recovery findings, 451 and terminal decision still required."
+    ]
+  }
+}
