@@ -1,0 +1,89 @@
+{
+  "eventId": "PGPT-20261008-5746",
+  "groupId": "PGPT-WBS66-OUTBOX-METADATA-SYNTHETIC-VALUE-20261118",
+  "baseCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-17T23:40:13.634000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-METADATA-SYNTHETIC-VALUE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-METADATA-SYNTHETIC-VALUE-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03/P018-10.03 CATALOG-021, owner P006-02. Whole existing 2 OutboxDlqMetadata unit methods and one independent value/redaction contract. Only direct domain values and closed product types, no message dispatch, JMS, native, permissions, keys, cohort, server or held classes. Keep current product source byte-exact and each actual original test expected unmodified.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/001_NK-MSG-002_単体テスト仕様書.md",
+        "sha256": "192163ec89904d7453f1987d4837251873c588b28d3d982db7e23f83643025a3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38260-outbox-dlq-metadata-value-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-QST-DLQ-MODEL",
+      "PT-QST-DLQ-VALUES"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "mains": {
+    "OutboxDlqMetadata": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+      "sha256": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53"
+    },
+    "OutboxEntry": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+      "sha256": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4"
+    },
+    "OutboxRequest": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+      "sha256": "564190205500c14866882d60d36d654276562f38593229ef85c14da0ef7ab463"
+    },
+    "OutboxDestination": {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+      "sha256": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80"
+    }
+  },
+  "test": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadataTest.java",
+    "sha256": "54683e12417a392faffe354584412111e7713da8a17d3b4ac0d4428358c6c47c"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5747",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "4d9c778b1f688d502849db0f64314f63bf5ff0cb3635435b62c358316199d5e4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-17T23:42:10.394000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 23,
+          "remainingPercent": 77,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-17T23:41:45.134394+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 23,
+      "remainingPercent": 77,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-OUTBOX-METADATA-SYNTHETIC-VALUE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-OUTBOX-METADATA-SYNTHETIC-VALUE-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "F03/P018-10.03 CATALOG-021, owner P006-02. Whole existing 2 OutboxDlqMetadata unit methods and one independent value/redaction contract. Only direct domain values and closed product types, no message dispatch, JMS, native, permissions, keys, cohort, server or held classes. Keep current product source byte-exact and each actual original test expected unmodified.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/006_NK-MSG-002/001_NK-MSG-002_単体テスト仕様書.md",
+        "sha256": "192163ec89904d7453f1987d4837251873c588b28d3d982db7e23f83643025a3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+        "sha256": "f789dede5de4ad4eba9c67aea260504fb8a4493c528391e2b40b1350ddce6d47"
+      }
+    ],
+    "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "productionCoreMain": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+    "run": "PG38260-outbox-dlq-metadata-value-v1",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "ownerReferences": [
+      "WBS-P006-02",
+      "WBS-P018-10.03"
+    ],
+    "testIds": [
+      "PT-QST-DLQ-MODEL",
+      "PT-QST-DLQ-VALUES"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 0.9,
+      "high": 1.8
+    },
+    "groupCapPp": 2.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5746",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38268-outbox-dlq-metadata-independent-v1/manifest.json",
+      "sha256": "a7ea935ca501b5d02ce4ab006185c331d80e75947c85d0e21971fe81964523be"
+    },
+    "actualUnitSource": "dcf6c9be86d610701bff23c7aef518527ccc3d37",
+    "firstRunSuccessNumerator": 3,
+    "firstRunDenominator": 3,
+    "productTestReruns": 0,
+    "technicalMeasurement": {
+      "tests": 3,
+      "F/E/S/notRun": 0,
+      "physicalCRC": 4,
+      "targetCodeMethods": 12,
+      "targetCoverage": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 173
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 34
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 31
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 29
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "criterionReductions": [
+      "F03/P018-10.03 CATALOG-021: old profile/boundary and new OutboxDlqMetadata value/redaction ordinary on one exec."
+    ],
+    "remainingCriteria": [
+      "Outbox real DB/JMS, all six quality and 451."
+    ],
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "completedAdditionalPricePp": 0.9,
+    "totalCompletedAdditionalPricePp": 30.05,
+    "nextCommand": "Continue the next genuinely missing authorized production or ordinary test scope."
+  }
+}

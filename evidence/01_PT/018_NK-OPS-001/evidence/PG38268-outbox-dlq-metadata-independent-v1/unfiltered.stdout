@@ -1,0 +1,56 @@
+CLASS	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	8bec88efd6cbcd2d	true	50	49	INSTRUCTION:86:137	BRANCH:9:9	LINE:21:30	COMPLEXITY:22:6	METHOD:13:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	<init>	(JLjava/util/UUID;Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;[BILjava/time/Instant;Ljava/time/Instant;Ljava/lang/String;Ljava/time/Instant;)V	1	INSTRUCTION:16:0	BRANCH:0:0	LINE:3:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	<init>	(JLjava/util/UUID;Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;[BILjava/time/Instant;Ljava/time/Instant;Ljava/lang/String;Ljava/time/Instant;Ljava/util/Optional;)V	1	INSTRUCTION:15:96	BRANCH:5:5	LINE:3:19	COMPLEXITY:5:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	id	()J	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	messageId	()Ljava/util/UUID;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	correlationId	()Ljava/util/UUID;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	destination	()Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	layoutId	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	layoutVersion	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	body	()[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	attemptCount	()I	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	nextAttemptAt	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	createdAt	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	leaseOwner	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	leaseUntil	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	dlqMetadata	()Ljava/util/Optional;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	toString	()Ljava/lang/String;	1	INSTRUCTION:7:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	requireLayoutId	(Ljava/lang/String;)Ljava/lang/String;	8	INSTRUCTION:5:10	BRANCH:1:1	LINE:1:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	requireLayoutVersion	(Ljava/lang/String;)Ljava/lang/String;	8	INSTRUCTION:5:10	BRANCH:1:1	LINE:1:3	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry	requireLeaseOwner	(Ljava/lang/String;)Ljava/lang/String;	8	INSTRUCTION:5:13	BRANCH:2:2	LINE:1:3	COMPLEXITY:2:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	9e5357f71c963062	true	53	65585	INSTRUCTION:0:173	BRANCH:0:34	LINE:0:31	COMPLEXITY:0:29	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	<init>	(Ljava/util/UUID;Ljava/lang/String;ILjava/lang/String;Ljava/time/Instant;)V	1	INSTRUCTION:0:86	BRANCH:0:16	LINE:0:18	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	requireProfile	(Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;ILjava/util/Optional;)Ljava/util/Optional;	8	INSTRUCTION:0:46	BRANCH:0:14	LINE:0:9	COMPLEXITY:0:8	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	hashCode	()I	17	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	originalMessageId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	originalTransportId	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	deliveryCount	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	errorCode	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	detectedAt	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	lambda$new$0	(I)Z	4106	INSTRUCTION:0:10	BRANCH:0:4	LINE:0:1	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata	<clinit>	()V	8	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	f335df72f09e3b86	true	16	16433	INSTRUCTION:39:36	BRANCH:2:0	LINE:7:6	COMPLEXITY:7:3	METHOD:6:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	values	()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	<init>	(Ljava/lang/String;ILjava/lang/String;)V	2	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	address	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	fromAddress	(Ljava/lang/String;)Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	9	INSTRUCTION:17:0	BRANCH:2:0	LINE:6:0	COMPLEXITY:2:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	$values	()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	4106	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	lambda$fromAddress$1	()Ljava/lang/IllegalArgumentException;	4106	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	lambda$fromAddress$0	(Ljava/lang/String;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;)Z	4106	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination	<clinit>	()V	8	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	796df426f76008c2	true	24	49	INSTRUCTION:43:75	BRANCH:1:1	LINE:12:15	COMPLEXITY:10:3	METHOD:9:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	<init>	(Ljava/util/UUID;Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;[BLjava/time/Instant;Ljava/time/Instant;)V	1	INSTRUCTION:12:0	BRANCH:0:0	LINE:3:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	<init>	(Ljava/util/UUID;Ljava/util/UUID;Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;Ljava/lang/String;Ljava/lang/String;[BLjava/time/Instant;Ljava/time/Instant;Ljava/util/Optional;)V	1	INSTRUCTION:5:67	BRANCH:1:1	LINE:1:13	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	messageId	()Ljava/util/UUID;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	correlationId	()Ljava/util/UUID;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	destination	()Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	layoutId	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	layoutVersion	()Ljava/lang/String;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	body	()[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	nextAttemptAt	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	createdAt	()Ljava/time/Instant;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	dlqMetadata	()Ljava/util/Optional;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest	toString	()Ljava/lang/String;	1	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0

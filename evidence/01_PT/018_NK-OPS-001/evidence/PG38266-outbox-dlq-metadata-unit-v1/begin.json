@@ -1,0 +1,46 @@
+{
+  "source": "dcf6c9be86d610701bff23c7aef518527ccc3d37",
+  "run": "PG38266-OUTBOX-METADATA-3",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "branch": "dev-foundation",
+  "startedAtUTC": "2026-11-17T23:41:43.728969+00:00",
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38266-outbox-dlq-metadata-unit-v1/tmp",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38266-outbox-dlq-metadata-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38266-outbox-dlq-metadata-unit-v1/jacoco.exec,append=false,sessionid=PG38266-OUTBOX-METADATA-3",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38262-outbox-dlq-metadata-prepare-v1/test-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38262-outbox-dlq-metadata-prepare-v1/component:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38266-outbox-dlq-metadata-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest",
+    "--select-class",
+    "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataValueContractTest"
+  ],
+  "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38266-outbox-dlq-metadata-unit-v1",
+  "javaSha256": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+  "jacocoAgentSha256": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+  "admissionSha256": "9e071aa67530909584d92887e6e7ff155221a54862078355d484f2005ff8f094",
+  "expectedCases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest",
+      "name": "boundsActualCountAndUtcMicrosecondsAreImmutableAndRedacted()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataTest",
+      "name": "exactDestinationSpecificProfileOwnsBodyAndRequiresOriginalDifferentFromDispatch()"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.outbound.OutboxDlqMetadataValueContractTest",
+      "name": "originalDeliveryFieldsDetermineValueAndStayOutOfDiagnostics()"
+    }
+  ]
+}
