@@ -345,7 +345,8 @@ final class MediaAuditContractTest {
   void media008OwnConcurrentCallsHaveNoMutableEventRetention() throws Exception {
     var logger = new CapturingLogger();
     var audit = new WebMediaAudit(logger, CLOCK, APP, CONFIG);
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first =
           workers.submit(
               () ->
@@ -368,6 +369,10 @@ final class MediaAuditContractTest {
                       Failure.IO));
       first.get(5, TimeUnit.SECONDS);
       second.get(5, TimeUnit.SECONDS);
+    } finally {
+      // BUG3177: Future deadlines must also bound the owned executor cleanup.
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));
     }
     assertEquals(2, logger.callCount.get());
     assertEquals(2, logger.entries.size());

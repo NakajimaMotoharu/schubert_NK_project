@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "CloseResource",
+    "line": "348",
+    "message": "Ensure that resources like this ExecutorService object are closed after use",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Standalone JUnit owns one executor; explicit finally shutdownNow then 5s await+assert establishes finite release. AutoCloseable.close uses unbounded wait and is deliberately replaced under BUG3177; exact two finite get5/tasks and cleanup postcondition retained, no application resource or container thread."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "348",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Rule is J2EE managed-webapp thread restriction. This exact source site belongs to standalone JUnit synthetic logger concurrency fixture, outside application/container; owner creates2 workers, submits2 finite memory calls, get5 both, finally shutdownNow/await5assert. No new product threads/backend/live request."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "351",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "workers.submit(",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Rule is J2EE managed-webapp thread restriction. This exact source site belongs to standalone JUnit synthetic logger concurrency fixture, outside application/container; owner creates2 workers, submits2 finite memory calls, get5 both, finally shutdownNow/await5assert. No new product threads/backend/live request."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "361",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "workers.submit(",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Rule is J2EE managed-webapp thread restriction. This exact source site belongs to standalone JUnit synthetic logger concurrency fixture, outside application/container; owner creates2 workers, submits2 finite memory calls, get5 both, finally shutdownNow/await5assert. No new product threads/backend/live request."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "374",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "workers.shutdownNow();",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Rule is J2EE managed-webapp thread restriction. This exact source site belongs to standalone JUnit synthetic logger concurrency fixture, outside application/container; owner creates2 workers, submits2 finite memory calls, get5 both, finally shutdownNow/await5assert. No new product threads/backend/live request."
+  },
+  {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+    "rule": "DoNotUseThreads",
+    "line": "375",
+    "message": "To be compliant to J2EE, a webapp should not use any thread.",
+    "sourceSha256": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "sourceAnchor": "assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+    "decision": "NOT_APPLICABLE_TO_THIS_EXACT_STANDALONE_TEST_SITE",
+    "reason": "Rule is J2EE managed-webapp thread restriction. This exact source site belongs to standalone JUnit synthetic logger concurrency fixture, outside application/container; owner creates2 workers, submits2 finite memory calls, get5 both, finally shutdownNow/await5assert. No new product threads/backend/live request."
+  }
+]
