@@ -35,7 +35,9 @@ public final class BackupManifestCodec {
               "([^\"{},\\s]{1,128})",
               Arrays.stream((FORMAT + "\n").split("%s", -1)).map(Pattern::quote).toList()));
 
-  private BackupManifestCodec() {}
+  private BackupManifestCodec() {
+    throw new AssertionError("static namespace");
+  }
 
   public static byte[] encode(BackupManifest value) {
     Objects.requireNonNull(value, "manifest");
