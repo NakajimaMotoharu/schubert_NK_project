@@ -1,0 +1,850 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T17:06:27.236653+00:00",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37926-web-form-owned-buffer33-admission-v1/normalized-prepare.json",
+    "sha256": "d5d3d78811d7eac26dac435fc76b2b8a7970cbed7cf9f1663d34f2796fe413df"
+  },
+  "originalPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37920-web-form-owned-buffer33-prepare-v1/manifest.json",
+    "sha256": "aec6bbe49d56fb88a9112559627703e7261a6d87993023f589ded3142f7e40db"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37922-web-form-owned-buffer33-static-v1/manifest.json",
+    "sha256": "6a4309283293588dc4f1e5e85e503981feda1f65ec96561c974c5c583d77cb91"
+  },
+  "applicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "classified": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "CloseResource",
+      "line": "238",
+      "reason": "This exact fixture-owned8worker pool has finally shutdownNow and asserted awaitTermination10seconds. Its100 tasks are recovered with finite Future.get5/10/30seconds; UserMutation additionally invokes all with30second timeout. No server/managed application executor is allocated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "238",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "244",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "265",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "266",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "rule": "CloseResource",
+      "line": "279",
+      "reason": "This exact fixture-owned8worker pool has finally shutdownNow and asserted awaitTermination10seconds. Its100 tasks are recovered with finite Future.get5/10/30seconds; UserMutation additionally invokes all with30second timeout. No server/managed application executor is allocated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "279",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "285",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "307",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "308",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "CloseResource",
+      "line": "68",
+      "reason": "Ownership of this exact pure form is returned through the local AutoCloseable Form record with f::close. Form.close invokes its owned closer; each caller in this entire whole fixture uses try-with-resources or explicit finally. No resource escapes the fixture or application request, and close is tested twice/after-close/other-owner preserved. PMD cannot follow the returned close callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this UserStatusForm object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "CloseResource",
+      "line": "72",
+      "reason": "Ownership of this exact pure form is returned through the local AutoCloseable Form record with f::close. Form.close invokes its owned closer; each caller in this entire whole fixture uses try-with-resources or explicit finally. No resource escapes the fixture or application request, and close is tested twice/after-close/other-owner preserved. PMD cannot follow the returned close callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this UserRoleForm object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "CloseResource",
+      "line": "76",
+      "reason": "Ownership of this exact pure form is returned through the local AutoCloseable Form record with f::close. Form.close invokes its owned closer; each caller in this entire whole fixture uses try-with-resources or explicit finally. No resource escapes the fixture or application request, and close is tested twice/after-close/other-owner preserved. PMD cannot follow the returned close callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this PasswordResetForm object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "CloseResource",
+      "line": "80",
+      "reason": "Ownership of this exact pure form is returned through the local AutoCloseable Form record with f::close. Form.close invokes its owned closer; each caller in this entire whole fixture uses try-with-resources or explicit finally. No resource escapes the fixture or application request, and close is tested twice/after-close/other-owner preserved. PMD cannot follow the returned close callback.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this UserUnlockForm object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "CloseResource",
+      "line": "489",
+      "reason": "This exact fixture-owned8worker pool has finally shutdownNow and asserted awaitTermination10seconds. Its100 tasks are recovered with finite Future.get5/10/30seconds; UserMutation additionally invokes all with30second timeout. No server/managed application executor is allocated.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "489",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "516",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "519",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "520",
+      "reason": "Standalone JUnit validates100 independent literal input/wire requests with8 local fixture workers. It is not a J2EE-managed component. Every future wait and finally executor termination has explicit finite5/10/30second limits; invokeAll in Mutation is also30seconds. No Root/background/service/DB/network process is launched.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "declaredTargets": [
+    "dev/codex/schubert/nk/web/form/PasswordResetForm",
+    "dev/codex/schubert/nk/web/form/QuestionSubmitForm",
+    "dev/codex/schubert/nk/web/form/UserCreateForm",
+    "dev/codex/schubert/nk/web/form/UserMutationInput",
+    "dev/codex/schubert/nk/web/form/UserRoleForm",
+    "dev/codex/schubert/nk/web/form/UserStatusForm",
+    "dev/codex/schubert/nk/web/form/UserUnlockForm"
+  ],
+  "naturalNoCodeMain": [
+    "dev/codex/schubert/nk/web/form/UserChangeForm"
+  ],
+  "mainMethodInventory": {
+    "dev/codex/schubert/nk/web/form/UserUnlockForm": {
+      "flags": 49,
+      "sourceFile": "UserUnlockForm.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/UserMutationInput;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "bind",
+          "descriptor": "(JLjava/util/Map;)Ldev/codex/schubert/nk/web/form/UserUnlockForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 43
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+          "flags": 4161,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/UserCreateForm": {
+      "flags": 49,
+      "sourceFile": "UserCreateForm.java",
+      "fields": 13,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/UUID;Ljava/lang/String;Ljava/util/Map;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 62
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/UserCreateForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 653
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 25
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 25
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 74
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 20
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 19
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/PasswordResetForm": {
+      "flags": 49,
+      "sourceFile": "PasswordResetForm.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/UserMutationInput;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "bind",
+          "descriptor": "(JLjava/lang/String;Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/PasswordResetForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 16
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 50
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+          "flags": 4161,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/UserRoleForm": {
+      "flags": 49,
+      "sourceFile": "UserRoleForm.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/UserMutationInput;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "bind",
+          "descriptor": "(JLjava/util/Map;)Ldev/codex/schubert/nk/web/form/UserRoleForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 34
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 53
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+          "flags": 4161,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/UserMutationInput": {
+      "flags": 48,
+      "sourceFile": "UserMutationInput.java",
+      "fields": 14,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(JJLjava/util/UUID;ZLjava/lang/String;Ljava/lang/String;Ljava/util/Map;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 69
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/lang/String;JLjava/lang/String;Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/UserMutationInput;",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 748
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 27
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "requireUsable",
+          "descriptor": "()V",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 37
+        },
+        {
+          "name": "password",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 16
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 0,
+          "hasCode": true,
+          "codeLength": 26
+        },
+        {
+          "name": "requireOpen",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 19
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 4
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashSet;Ljava/util/HashMap;Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 84
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 53
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/UserChangeForm": {
+      "flags": 1537,
+      "sourceFile": "UserChangeForm.java",
+      "fields": 0,
+      "methods": [
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1025,
+          "hasCode": false,
+          "codeLength": 0
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/QuestionSubmitForm": {
+      "flags": 49,
+      "sourceFile": "QuestionSubmitForm.java",
+      "fields": 8,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;Ljava/util/UUID;Ljava/util/Map;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 26
+        },
+        {
+          "name": "bind",
+          "descriptor": "(Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/QuestionSubmitForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 425
+        },
+        {
+          "name": "invalidCharacter",
+          "descriptor": "(I)Z",
+          "flags": 10,
+          "hasCode": true,
+          "codeLength": 25
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 5
+        },
+        {
+          "name": "operationToken",
+          "descriptor": "()Ljava/util/UUID;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 9
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 21
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 44
+        },
+        {
+          "name": "ensureOpen",
+          "descriptor": "()V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 18
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 14
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "lambda$bind$0",
+          "descriptor": "(Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V",
+          "flags": 4106,
+          "hasCode": true,
+          "codeLength": 19
+        },
+        {
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "flags": 8,
+          "hasCode": true,
+          "codeLength": 11
+        }
+      ]
+    },
+    "dev/codex/schubert/nk/web/form/UserStatusForm": {
+      "flags": 49,
+      "sourceFile": "UserStatusForm.java",
+      "fields": 1,
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "(Ldev/codex/schubert/nk/web/form/UserMutationInput;)V",
+          "flags": 2,
+          "hasCode": true,
+          "codeLength": 10
+        },
+        {
+          "name": "bind",
+          "descriptor": "(JLjava/util/Map;)Ldev/codex/schubert/nk/web/form/UserStatusForm;",
+          "flags": 9,
+          "hasCode": true,
+          "codeLength": 17
+        },
+        {
+          "name": "isValid",
+          "descriptor": "()Z",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "getIssues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "displayValues",
+          "descriptor": "()Ljava/util/Map;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 37
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 50
+        },
+        {
+          "name": "close",
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 8
+        },
+        {
+          "name": "toString",
+          "descriptor": "()Ljava/lang/String;",
+          "flags": 1,
+          "hasCode": true,
+          "codeLength": 3
+        },
+        {
+          "name": "toRequest",
+          "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+          "flags": 4161,
+          "hasCode": true,
+          "codeLength": 5
+        }
+      ]
+    }
+  },
+  "interfaceBridgeMethods": [
+    {
+      "className": "dev/codex/schubert/nk/web/form/UserUnlockForm",
+      "method": {
+        "name": "toRequest",
+        "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+        "flags": 4161,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/PasswordResetForm",
+      "method": {
+        "name": "toRequest",
+        "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+        "flags": 4161,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/UserRoleForm",
+      "method": {
+        "name": "toRequest",
+        "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+        "flags": 4161,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    },
+    {
+      "className": "dev/codex/schubert/nk/web/form/UserStatusForm",
+      "method": {
+        "name": "toRequest",
+        "descriptor": "()Ldev/codex/schubert/nk/protocol/layout/PayloadData;",
+        "flags": 4161,
+        "hasCode": true,
+        "codeLength": 5
+      }
+    }
+  ],
+  "RootNullAwayMain8": true,
+  "explicitMaxLowMain8": true,
+  "currentProtocol176MaxLowReuse": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37784-pure-protocol-web-maxlow-static-v1/manifest.json",
+    "sha256": "b54d738bcb59170f788c4b711a50100f52e186d1c125422aab9e4b1c535d743e"
+  },
+  "classpathSqlDriverDescriptors": {
+    "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG37688-web-enum-current-protocol176-v1/current-protocol176.jar": false,
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": false,
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": false
+  },
+  "wholeFixtureCounts": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": 8,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": 17,
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": 8
+  },
+  "newDefinitions": 1,
+  "originalDefinitions": 32,
+  "ownershipBytecodeReview": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37925-form-buffer-bytecode-review-v3/manifest.json",
+    "sha256": "b1d6603b242505a3cf0b51e42caa5e6d0005a3007f5156624e5d9f91f8573e19"
+  },
+  "actualRootVmDbNativeKeyAuthorityActions": 0,
+  "newProductTests": 0,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}

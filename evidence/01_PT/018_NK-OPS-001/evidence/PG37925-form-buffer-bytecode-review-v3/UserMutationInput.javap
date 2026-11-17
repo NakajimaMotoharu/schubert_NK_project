@@ -1,0 +1,581 @@
+Compiled from "UserMutationInput.java"
+final class dev.codex.schubert.nk.web.form.UserMutationInput implements java.lang.AutoCloseable {
+  private static final int SINGLE_PARAMETER_VALUE_COUNT;
+    descriptor: I
+
+  private static final java.lang.String LITERAL_OPERATION;
+    descriptor: Ljava/lang/String;
+
+  private static final java.lang.String LITERAL_EXPECTED_VERSION;
+    descriptor: Ljava/lang/String;
+
+  private static final java.lang.String INVALID;
+    descriptor: Ljava/lang/String;
+
+  private static final java.util.Set<java.lang.String> COMMON;
+    descriptor: Ljava/util/Set;
+
+  private static final java.util.Map<java.lang.String, java.util.Set<java.lang.String>> EXTRA;
+    descriptor: Ljava/util/Map;
+
+  final long id;
+    descriptor: J
+
+  final long version;
+    descriptor: J
+
+  final java.util.UUID token;
+    descriptor: Ljava/util/UUID;
+
+  final boolean enabled;
+    descriptor: Z
+
+  final java.lang.String role;
+    descriptor: Ljava/lang/String;
+
+  private final char[] retainedPassword;
+    descriptor: [C
+
+  final java.util.Map<java.lang.String, java.lang.String> issues;
+    descriptor: Ljava/util/Map;
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.web.form.UserMutationInput(long, long, java.util.UUID, boolean, java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.String>);
+    descriptor: (JJLjava/util/UUID;ZLjava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: lload_1
+         6: putfield      #7                  // Field id:J
+         9: aload_0
+        10: lload_3
+        11: putfield      #13                 // Field version:J
+        14: aload_0
+        15: aload         5
+        17: putfield      #16                 // Field token:Ljava/util/UUID;
+        20: aload_0
+        21: iload         6
+        23: putfield      #20                 // Field enabled:Z
+        26: aload_0
+        27: aload         7
+        29: putfield      #24                 // Field role:Ljava/lang/String;
+        32: aload_0
+        33: aload         9
+        35: invokestatic  #28                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        38: putfield      #34                 // Field issues:Ljava/util/Map;
+        41: aload_0
+        42: aload_0
+        43: getfield      #34                 // Field issues:Ljava/util/Map;
+        46: invokeinterface #38,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+        51: ifeq          62
+        54: aload         8
+        56: invokevirtual #42                 // Method java/lang/String.toCharArray:()[C
+        59: goto          65
+        62: iconst_0
+        63: newarray       char
+        65: putfield      #48                 // Field retainedPassword:[C
+        68: return
+
+  static dev.codex.schubert.nk.web.form.UserMutationInput bind(java.lang.String, long, java.lang.String, java.util.Map<java.lang.String, java.util.List<java.lang.String>>);
+    descriptor: (Ljava/lang/String;JLjava/lang/String;Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/UserMutationInput;
+    Code:
+         0: aload_0
+         1: ldc           #52                 // String operation
+         3: invokestatic  #54                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: aload_3
+         8: ldc           #60                 // String targetUsername
+        10: invokestatic  #54                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        13: pop
+        14: aload         4
+        16: ldc           #62                 // String parameters
+        18: invokestatic  #54                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        21: pop
+        22: getstatic     #64                 // Field EXTRA:Ljava/util/Map;
+        25: aload_0
+        26: invokeinterface #67,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        31: checkcast     #71                 // class java/util/Set
+        34: astore        5
+        36: aload         5
+        38: ifnonnull     51
+        41: new           #73                 // class java/lang/IllegalArgumentException
+        44: dup
+        45: ldc           #75                 // String unsupported user operation
+        47: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        50: athrow
+        51: lload_1
+        52: lconst_1
+        53: lcmp
+        54: iflt          65
+        57: lload_1
+        58: ldc2_w        #80                 // long 999999999999l
+        61: lcmp
+        62: ifle          75
+        65: new           #73                 // class java/lang/IllegalArgumentException
+        68: dup
+        69: ldc           #82                 // String invalid user path identifier
+        71: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        74: athrow
+        75: aload_0
+        76: ldc           #84                 // String PASSWORD
+        78: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        81: ifeq          101
+        84: aload_3
+        85: invokevirtual #90                 // Method java/lang/String.isBlank:()Z
+        88: ifeq          101
+        91: new           #73                 // class java/lang/IllegalArgumentException
+        94: dup
+        95: ldc           #93                 // String missing verified target username
+        97: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       100: athrow
+       101: new           #95                 // class java/util/HashSet
+       104: dup
+       105: getstatic     #97                 // Field COMMON:Ljava/util/Set;
+       108: invokespecial #101                // Method java/util/HashSet."<init>":(Ljava/util/Collection;)V
+       111: astore        6
+       113: aload         6
+       115: aload         5
+       117: invokevirtual #104                // Method java/util/HashSet.addAll:(Ljava/util/Collection;)Z
+       120: pop
+       121: new           #108                // class java/util/HashMap
+       124: dup
+       125: invokespecial #110                // Method java/util/HashMap."<init>":()V
+       128: astore        7
+       130: new           #108                // class java/util/HashMap
+       133: dup
+       134: invokespecial #110                // Method java/util/HashMap."<init>":()V
+       137: astore        8
+       139: aload         4
+       141: aload         6
+       143: aload         7
+       145: aload         8
+       147: invokedynamic #111,  0            // InvokeDynamic #0:accept:(Ljava/util/HashSet;Ljava/util/HashMap;Ljava/util/HashMap;)Ljava/util/function/BiConsumer;
+       152: invokeinterface #115,  2          // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+       157: aload         6
+       159: invokevirtual #119                // Method java/util/HashSet.iterator:()Ljava/util/Iterator;
+       162: astore        9
+       164: aload         9
+       166: invokeinterface #123,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+       171: ifeq          219
+       174: aload         9
+       176: invokeinterface #128,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       181: checkcast     #43                 // class java/lang/String
+       184: astore        10
+       186: aload         8
+       188: aload         10
+       190: invokevirtual #132                // Method java/util/HashMap.containsKey:(Ljava/lang/Object;)Z
+       193: ifne          216
+       196: aload         8
+       198: aload         10
+       200: ldc           #135                // String
+       202: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       205: pop
+       206: aload         7
+       208: aload         10
+       210: ldc           #141                // String 入力項目を確認してください。
+       212: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       215: pop
+       216: goto          164
+       219: aload_0
+       220: aload         8
+       222: ldc           #52                 // String operation
+       224: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       227: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       230: ifne          243
+       233: aload         7
+       235: ldc           #52                 // String operation
+       237: ldc           #141                // String 入力項目を確認してください。
+       239: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       242: pop
+       243: aload         8
+       245: ldc           #144                // String id
+       247: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       250: checkcast     #43                 // class java/lang/String
+       253: invokestatic  #145                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       256: checkcast     #43                 // class java/lang/String
+       259: astore        9
+       261: aload         9
+       263: ldc           #147                // String [0-9]{1,12}
+       265: invokevirtual #149                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       268: ifeq          281
+       271: aload         9
+       273: invokestatic  #153                // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+       276: lload_1
+       277: lcmp
+       278: ifeq          291
+       281: aload         7
+       283: ldc           #144                // String id
+       285: ldc           #141                // String 入力項目を確認してください。
+       287: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       290: pop
+       291: aload         8
+       293: ldc           #159                // String expected_version
+       295: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       298: checkcast     #43                 // class java/lang/String
+       301: invokestatic  #145                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       304: checkcast     #43                 // class java/lang/String
+       307: astore        10
+       309: lconst_0
+       310: lstore        11
+       312: aload         10
+       314: ldc           #161                // String [0-9]{1,9}
+       316: invokevirtual #149                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       319: ifne          335
+       322: aload         7
+       324: ldc           #159                // String expected_version
+       326: ldc           #141                // String 入力項目を確認してください。
+       328: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       331: pop
+       332: goto          342
+       335: aload         10
+       337: invokestatic  #153                // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+       340: lstore        11
+       342: ldc           #163                // String true
+       344: aload         8
+       346: ldc           #165                // String confirm
+       348: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       351: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       354: ifne          367
+       357: aload         7
+       359: ldc           #165                // String confirm
+       361: ldc           #141                // String 入力項目を確認してください。
+       363: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       366: pop
+       367: new           #167                // class java/util/UUID
+       370: dup
+       371: lconst_0
+       372: lconst_0
+       373: invokespecial #169                // Method java/util/UUID."<init>":(JJ)V
+       376: astore        13
+       378: aload         8
+       380: ldc           #172                // String operation_token
+       382: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       385: checkcast     #43                 // class java/lang/String
+       388: invokestatic  #145                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       391: checkcast     #43                 // class java/lang/String
+       394: astore        14
+       396: aload         14
+       398: ldc           #174                // String [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+       400: invokevirtual #149                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       403: ifne          419
+       406: aload         7
+       408: ldc           #172                // String operation_token
+       410: ldc           #141                // String 入力項目を確認してください。
+       412: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       415: pop
+       416: goto          426
+       419: aload         14
+       421: invokestatic  #176                // Method java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+       424: astore        13
+       426: aload         8
+       428: ldc           #180                // String enabled
+       430: ldc           #181                // String false
+       432: invokevirtual #183                // Method java/util/HashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       435: checkcast     #43                 // class java/lang/String
+       438: astore        15
+       440: aload_0
+       441: ldc           #186                // String STATUS
+       443: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       446: ifeq          476
+       449: ldc           #163                // String true
+       451: ldc           #181                // String false
+       453: invokestatic  #188                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+       456: aload         15
+       458: invokeinterface #192,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       463: ifne          476
+       466: aload         7
+       468: ldc           #180                // String enabled
+       470: ldc           #141                // String 入力項目を確認してください。
+       472: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       475: pop
+       476: aload         8
+       478: ldc           #195                // String role
+       480: ldc           #196                // String USER
+       482: invokevirtual #183                // Method java/util/HashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       485: checkcast     #43                 // class java/lang/String
+       488: astore        16
+       490: aload_0
+       491: ldc           #198                // String ROLE
+       493: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       496: ifeq          530
+       499: ldc           #196                // String USER
+       501: ldc           #200                // String ADMIN
+       503: invokestatic  #188                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+       506: aload         16
+       508: invokeinterface #192,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+       513: ifne          530
+       516: aload         7
+       518: ldc           #195                // String role
+       520: ldc           #141                // String 入力項目を確認してください。
+       522: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       525: pop
+       526: ldc           #196                // String USER
+       528: astore        16
+       530: aload         8
+       532: ldc           #202                // String password
+       534: ldc           #135                // String
+       536: invokevirtual #183                // Method java/util/HashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       539: checkcast     #204                // class java/lang/CharSequence
+       542: getstatic     #206                // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+       545: invokestatic  #212                // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+       548: astore        17
+       550: aload         17
+       552: getstatic     #218                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       555: invokevirtual #224                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       558: astore        18
+       560: aload         18
+       562: arraylength
+       563: istore        19
+       565: aload         18
+       567: iconst_0
+       568: invokestatic  #228                // Method java/util/Arrays.fill:([BB)V
+       571: aload_0
+       572: ldc           #84                 // String PASSWORD
+       574: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       577: ifeq          722
+       580: aload         17
+       582: iconst_0
+       583: aload         17
+       585: invokevirtual #234                // Method java/lang/String.length:()I
+       588: invokevirtual #238                // Method java/lang/String.codePointCount:(II)I
+       591: istore        20
+       593: aload_3
+       594: invokevirtual #242                // Method java/lang/String.trim:()Ljava/lang/String;
+       597: getstatic     #206                // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+       600: invokestatic  #212                // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+       603: astore        21
+       605: iload         20
+       607: bipush        12
+       609: if_icmplt     666
+       612: iload         20
+       614: sipush        128
+       617: if_icmpgt     666
+       620: iload         19
+       622: sipush        256
+       625: if_icmpgt     666
+       628: aload         17
+       630: ldc           #246                // String
+       632: invokevirtual #248                // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+       635: ifne          666
+       638: aload         17
+       640: invokevirtual #251                // Method java/lang/String.codePoints:()Ljava/util/stream/IntStream;
+       643: invokedynamic #255,  0            // InvokeDynamic #1:test:()Ljava/util/function/IntPredicate;
+       648: invokeinterface #259,  2          // InterfaceMethod java/util/stream/IntStream.anyMatch:(Ljava/util/function/IntPredicate;)Z
+       653: ifne          666
+       656: aload         17
+       658: aload         21
+       660: invokevirtual #265                // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+       663: ifeq          676
+       666: aload         7
+       668: ldc           #202                // String password
+       670: ldc           #141                // String 入力項目を確認してください。
+       672: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       675: pop
+       676: aload         8
+       678: ldc_w         #268                // String password_confirmation
+       681: invokevirtual #143                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       684: checkcast     #43                 // class java/lang/String
+       687: invokestatic  #145                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       690: checkcast     #204                // class java/lang/CharSequence
+       693: getstatic     #206                // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+       696: invokestatic  #212                // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+       699: astore        22
+       701: aload         17
+       703: aload         22
+       705: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       708: ifne          722
+       711: aload         7
+       713: ldc_w         #268                // String password_confirmation
+       716: ldc           #141                // String 入力項目を確認してください。
+       718: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       721: pop
+       722: new           #8                  // class dev/codex/schubert/nk/web/form/UserMutationInput
+       725: dup
+       726: lload_1
+       727: lload         11
+       729: aload         13
+       731: aload         15
+       733: ldc           #163                // String true
+       735: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       738: aload         16
+       740: aload         17
+       742: aload         7
+       744: invokespecial #270                // Method "<init>":(JJLjava/util/UUID;ZLjava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+       747: areturn
+
+  private static boolean invalidCharacter(int);
+    descriptor: (I)Z
+    Code:
+         0: iload_0
+         1: invokestatic  #273                // Method java/lang/Character.isISOControl:(I)Z
+         4: ifne          21
+         7: iload_0
+         8: ldc_w         #279                // int 55296
+        11: if_icmplt     25
+        14: iload_0
+        15: ldc_w         #280                // int 57343
+        18: if_icmpgt     25
+        21: iconst_1
+        22: goto          26
+        25: iconst_0
+        26: ireturn
+
+  boolean isValid();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #34                 // Field issues:Ljava/util/Map;
+         4: invokeinterface #38,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+         9: ireturn
+
+  void requireUsable();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #281                // Field closed:Z
+         4: ifeq          18
+         7: new           #284                // class java/lang/IllegalStateException
+        10: dup
+        11: ldc_w         #286                // String user mutation form is closed
+        14: invokespecial #288                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        17: athrow
+        18: aload_0
+        19: invokevirtual #289                // Method isValid:()Z
+        22: ifne          36
+        25: new           #73                 // class java/lang/IllegalArgumentException
+        28: dup
+        29: ldc_w         #292                // String invalid user mutation form
+        32: invokespecial #77                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        35: athrow
+        36: return
+
+  java.lang.String password();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokevirtual #294                // Method requireUsable:()V
+         4: new           #43                 // class java/lang/String
+         7: dup
+         8: aload_0
+         9: getfield      #48                 // Field retainedPassword:[C
+        12: invokespecial #297                // Method java/lang/String."<init>":([C)V
+        15: areturn
+
+  java.util.Map<java.lang.String, java.lang.Object> displayValues();
+    descriptor: ()Ljava/util/Map;
+    Code:
+         0: aload_0
+         1: invokevirtual #300                // Method requireOpen:()V
+         4: ldc           #144                // String id
+         6: aload_0
+         7: getfield      #7                  // Field id:J
+        10: invokestatic  #303                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        13: ldc           #159                // String expected_version
+        15: aload_0
+        16: getfield      #13                 // Field version:J
+        19: invokestatic  #303                // Method java/lang/Long.valueOf:(J)Ljava/lang/Long;
+        22: invokestatic  #307                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+        25: areturn
+
+  private void requireOpen();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #281                // Field closed:Z
+         4: ifeq          18
+         7: new           #284                // class java/lang/IllegalStateException
+        10: dup
+        11: ldc_w         #286                // String user mutation form is closed
+        14: invokespecial #288                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        17: athrow
+        18: return
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #48                 // Field retainedPassword:[C
+         4: iconst_0
+         5: invokestatic  #310                // Method java/util/Arrays.fill:([CC)V
+         8: aload_0
+         9: iconst_1
+        10: putfield      #281                // Field closed:Z
+        13: return
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: ldc_w         #313                // String UserMutationInput[REDACTED]
+         3: areturn
+
+  private static void lambda$bind$0(java.util.HashSet, java.util.HashMap, java.util.HashMap, java.lang.String, java.util.List);
+    descriptor: (Ljava/util/HashSet;Ljava/util/HashMap;Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V
+    Code:
+         0: aload_3
+         1: ldc_w         #315                // String name
+         4: invokestatic  #54                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: pop
+         8: aload         4
+        10: invokestatic  #317                // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+        13: astore        5
+        15: aload_0
+        16: aload_3
+        17: invokevirtual #322                // Method java/util/HashSet.contains:(Ljava/lang/Object;)Z
+        20: ifne          43
+        23: aload_3
+        24: ldc_w         #323                // String _csrf
+        27: invokevirtual #86                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        30: ifne          43
+        33: aload_1
+        34: ldc_w         #325                // String form
+        37: ldc           #141                // String 入力項目を確認してください。
+        39: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        42: pop
+        43: aload         5
+        45: invokeinterface #327,  1          // InterfaceMethod java/util/List.size:()I
+        50: iconst_1
+        51: if_icmpeq     67
+        54: aload_1
+        55: ldc_w         #325                // String form
+        58: ldc           #141                // String 入力項目を確認してください。
+        60: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        63: pop
+        64: goto          83
+        67: aload_2
+        68: aload_3
+        69: aload         5
+        71: invokeinterface #330,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+        76: checkcast     #43                 // class java/lang/String
+        79: invokevirtual #137                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        82: pop
+        83: return
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: ldc           #52                 // String operation
+         2: ldc           #144                // String id
+         4: ldc           #159                // String expected_version
+         6: ldc           #165                // String confirm
+         8: ldc           #172                // String operation_token
+        10: invokestatic  #333                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        13: putstatic     #97                 // Field COMMON:Ljava/util/Set;
+        16: ldc           #186                // String STATUS
+        18: ldc           #180                // String enabled
+        20: invokestatic  #336                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;)Ljava/util/Set;
+        23: ldc           #198                // String ROLE
+        25: ldc           #195                // String role
+        27: invokestatic  #336                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;)Ljava/util/Set;
+        30: ldc           #84                 // String PASSWORD
+        32: ldc           #202                // String password
+        34: ldc_w         #268                // String password_confirmation
+        37: invokestatic  #188                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+        40: ldc_w         #339                // String UNLOCK
+        43: invokestatic  #341                // InterfaceMethod java/util/Set.of:()Ljava/util/Set;
+        46: invokestatic  #344                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+        49: putstatic     #64                 // Field EXTRA:Ljava/util/Map;
+        52: return
+}

@@ -1,0 +1,359 @@
+Compiled from "QuestionSubmitForm.java"
+public final class dev.codex.schubert.nk.web.form.QuestionSubmitForm implements java.lang.AutoCloseable {
+  private static final int SINGLE_PARAMETER_VALUE_COUNT;
+    descriptor: I
+
+  private static final java.lang.String LITERAL_QUESTION;
+    descriptor: Ljava/lang/String;
+
+  private static final java.util.Set<java.lang.String> FIELDS;
+    descriptor: Ljava/util/Set;
+
+  private static final java.lang.String INVALID;
+    descriptor: Ljava/lang/String;
+
+  private final char[] question;
+    descriptor: [C
+
+  private final java.util.UUID retainedOperationToken;
+    descriptor: Ljava/util/UUID;
+
+  private final java.util.Map<java.lang.String, java.lang.String> issues;
+    descriptor: Ljava/util/Map;
+
+  private boolean closed;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.web.form.QuestionSubmitForm(java.lang.String, java.util.UUID, java.util.Map<java.lang.String, java.lang.String>);
+    descriptor: (Ljava/lang/String;Ljava/util/UUID;Ljava/util/Map;)V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_2
+         6: putfield      #7                  // Field retainedOperationToken:Ljava/util/UUID;
+         9: aload_0
+        10: aload_3
+        11: invokestatic  #13                 // InterfaceMethod java/util/Map.copyOf:(Ljava/util/Map;)Ljava/util/Map;
+        14: putfield      #19                 // Field issues:Ljava/util/Map;
+        17: aload_0
+        18: aload_1
+        19: invokevirtual #23                 // Method java/lang/String.toCharArray:()[C
+        22: putfield      #29                 // Field question:[C
+        25: return
+
+  public static dev.codex.schubert.nk.web.form.QuestionSubmitForm bind(java.util.Map<java.lang.String, java.util.List<java.lang.String>>);
+    descriptor: (Ljava/util/Map;)Ldev/codex/schubert/nk/web/form/QuestionSubmitForm;
+    Code:
+         0: aload_0
+         1: ldc           #33                 // String parameters
+         3: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         6: pop
+         7: new           #41                 // class java/util/HashMap
+        10: dup
+        11: invokespecial #43                 // Method java/util/HashMap."<init>":()V
+        14: astore_1
+        15: aload_0
+        16: aload_1
+        17: invokedynamic #44,  0             // InvokeDynamic #0:accept:(Ljava/util/HashMap;)Ljava/util/function/BiConsumer;
+        22: invokeinterface #48,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+        27: new           #41                 // class java/util/HashMap
+        30: dup
+        31: invokespecial #43                 // Method java/util/HashMap."<init>":()V
+        34: astore_2
+        35: aload_1
+        36: invokevirtual #52                 // Method java/util/HashMap.entrySet:()Ljava/util/Set;
+        39: invokeinterface #56,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        44: astore_3
+        45: aload_3
+        46: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        51: ifeq          141
+        54: aload_3
+        55: invokeinterface #68,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        60: checkcast     #72                 // class java/util/Map$Entry
+        63: astore        4
+        65: getstatic     #74                 // Field FIELDS:Ljava/util/Set;
+        68: aload         4
+        70: invokeinterface #78,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+        75: invokeinterface #81,  2           // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+        80: ifne          110
+        83: aload         4
+        85: invokeinterface #78,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+        90: checkcast     #24                 // class java/lang/String
+        93: ldc           #85                 // String _csrf
+        95: invokevirtual #87                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        98: ifne          110
+       101: aload_2
+       102: ldc           #90                 // String form
+       104: ldc           #92                 // String 入力項目を確認してください。
+       106: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       109: pop
+       110: aload         4
+       112: invokeinterface #98,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+       117: checkcast     #101                // class java/util/List
+       120: invokeinterface #103,  1          // InterfaceMethod java/util/List.size:()I
+       125: iconst_1
+       126: if_icmpeq     138
+       129: aload_2
+       130: ldc           #90                 // String form
+       132: ldc           #92                 // String 入力項目を確認してください。
+       134: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       137: pop
+       138: goto          45
+       141: new           #41                 // class java/util/HashMap
+       144: dup
+       145: invokespecial #43                 // Method java/util/HashMap."<init>":()V
+       148: astore_3
+       149: getstatic     #74                 // Field FIELDS:Ljava/util/Set;
+       152: invokeinterface #56,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+       157: astore        4
+       159: aload         4
+       161: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       166: ifeq          247
+       169: aload         4
+       171: invokeinterface #68,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       176: checkcast     #24                 // class java/lang/String
+       179: astore        5
+       181: aload_1
+       182: aload         5
+       184: invokestatic  #107                // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       187: invokevirtual #111                // Method java/util/HashMap.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       190: checkcast     #101                // class java/util/List
+       193: astore        6
+       195: aload         6
+       197: invokeinterface #103,  1          // InterfaceMethod java/util/List.size:()I
+       202: iconst_1
+       203: if_icmpne     226
+       206: aload_3
+       207: aload         5
+       209: aload         6
+       211: invokeinterface #114,  1          // InterfaceMethod java/util/List.getFirst:()Ljava/lang/Object;
+       216: checkcast     #24                 // class java/lang/String
+       219: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       222: pop
+       223: goto          244
+       226: aload_3
+       227: aload         5
+       229: ldc           #117                // String
+       231: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       234: pop
+       235: aload_2
+       236: aload         5
+       238: ldc           #92                 // String 入力項目を確認してください。
+       240: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       243: pop
+       244: goto          159
+       247: aload_3
+       248: ldc           #119                // String question
+       250: invokevirtual #120                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       253: checkcast     #24                 // class java/lang/String
+       256: invokestatic  #124                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       259: checkcast     #126                // class java/lang/CharSequence
+       262: getstatic     #128                // Field java/text/Normalizer$Form.NFC:Ljava/text/Normalizer$Form;
+       265: invokestatic  #134                // Method java/text/Normalizer.normalize:(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;
+       268: astore        4
+       270: aload         4
+       272: invokevirtual #140                // Method java/lang/String.codePoints:()Ljava/util/stream/IntStream;
+       275: invokedynamic #144,  0            // InvokeDynamic #1:test:()Ljava/util/function/IntPredicate;
+       280: invokeinterface #148,  2          // InterfaceMethod java/util/stream/IntStream.anyMatch:(Ljava/util/function/IntPredicate;)Z
+       285: ifeq          301
+       288: aload_2
+       289: ldc           #119                // String question
+       291: ldc           #92                 // String 入力項目を確認してください。
+       293: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       296: pop
+       297: ldc           #117                // String
+       299: astore        4
+       301: aload         4
+       303: getstatic     #154                // Field java/nio/charset/StandardCharsets.UTF_8:Ljava/nio/charset/Charset;
+       306: invokevirtual #160                // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+       309: astore        5
+       311: aload         5
+       313: arraylength
+       314: istore        6
+       316: aload         5
+       318: iconst_0
+       319: invokestatic  #164                // Method java/util/Arrays.fill:([BB)V
+       322: iload         6
+       324: iconst_1
+       325: if_icmplt     346
+       328: iload         6
+       330: sipush        4096
+       333: if_icmpgt     346
+       336: aload         4
+       338: ldc           #170                // String
+       340: invokevirtual #172                // Method java/lang/String.endsWith:(Ljava/lang/String;)Z
+       343: ifeq          355
+       346: aload_2
+       347: ldc           #119                // String question
+       349: ldc           #92                 // String 入力項目を確認してください。
+       351: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       354: pop
+       355: new           #176                // class java/util/UUID
+       358: dup
+       359: lconst_0
+       360: lconst_0
+       361: invokespecial #178                // Method java/util/UUID."<init>":(JJ)V
+       364: astore        7
+       366: aload_3
+       367: ldc           #181                // String operation_token
+       369: invokevirtual #120                // Method java/util/HashMap.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       372: checkcast     #24                 // class java/lang/String
+       375: invokestatic  #124                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+       378: checkcast     #24                 // class java/lang/String
+       381: astore        8
+       383: aload         8
+       385: ldc           #183                // String [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+       387: invokevirtual #185                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       390: ifne          405
+       393: aload_2
+       394: ldc           #181                // String operation_token
+       396: ldc           #92                 // String 入力項目を確認してください。
+       398: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       401: pop
+       402: goto          412
+       405: aload         8
+       407: invokestatic  #188                // Method java/util/UUID.fromString:(Ljava/lang/String;)Ljava/util/UUID;
+       410: astore        7
+       412: new           #8                  // class dev/codex/schubert/nk/web/form/QuestionSubmitForm
+       415: dup
+       416: aload         4
+       418: aload         7
+       420: aload_2
+       421: invokespecial #192                // Method "<init>":(Ljava/lang/String;Ljava/util/UUID;Ljava/util/Map;)V
+       424: areturn
+
+  private static boolean invalidCharacter(int);
+    descriptor: (I)Z
+    Code:
+         0: iload_0
+         1: invokestatic  #195                // Method java/lang/Character.isISOControl:(I)Z
+         4: ifne          19
+         7: iload_0
+         8: ldc           #201                // int 55296
+        10: if_icmplt     23
+        13: iload_0
+        14: ldc           #202                // int 57343
+        16: if_icmpgt     23
+        19: iconst_1
+        20: goto          24
+        23: iconst_0
+        24: ireturn
+
+  public boolean isValid();
+    descriptor: ()Z
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field issues:Ljava/util/Map;
+         4: invokeinterface #203,  1          // InterfaceMethod java/util/Map.isEmpty:()Z
+         9: ireturn
+
+  public java.util.Map<java.lang.String, java.lang.String> getIssues();
+    descriptor: ()Ljava/util/Map;
+    Code:
+         0: aload_0
+         1: getfield      #19                 // Field issues:Ljava/util/Map;
+         4: areturn
+
+  public java.util.UUID operationToken();
+    descriptor: ()Ljava/util/UUID;
+    Code:
+         0: aload_0
+         1: invokevirtual #206                // Method ensureOpen:()V
+         4: aload_0
+         5: getfield      #7                  // Field retainedOperationToken:Ljava/util/UUID;
+         8: areturn
+
+  public java.util.Map<java.lang.String, java.lang.Object> displayValues();
+    descriptor: ()Ljava/util/Map;
+    Code:
+         0: aload_0
+         1: invokevirtual #206                // Method ensureOpen:()V
+         4: ldc           #119                // String question
+         6: new           #24                 // class java/lang/String
+         9: dup
+        10: aload_0
+        11: getfield      #29                 // Field question:[C
+        14: invokespecial #209                // Method java/lang/String."<init>":([C)V
+        17: invokestatic  #212                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+        20: areturn
+
+  public dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData toRequest();
+    descriptor: ()Ldev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData;
+    Code:
+         0: aload_0
+         1: invokevirtual #206                // Method ensureOpen:()V
+         4: aload_0
+         5: invokevirtual #215                // Method isValid:()Z
+         8: ifne          21
+        11: new           #218                // class java/lang/IllegalArgumentException
+        14: dup
+        15: ldc           #220                // String invalid question submit form
+        17: invokespecial #222                // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        20: athrow
+        21: new           #225                // class dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData
+        24: dup
+        25: new           #24                 // class java/lang/String
+        28: dup
+        29: aload_0
+        30: getfield      #29                 // Field question:[C
+        33: invokespecial #209                // Method java/lang/String."<init>":([C)V
+        36: aload_0
+        37: getfield      #7                  // Field retainedOperationToken:Ljava/util/UUID;
+        40: invokespecial #227                // Method dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData."<init>":(Ljava/lang/String;Ljava/util/UUID;)V
+        43: areturn
+
+  private void ensureOpen();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #230                // Field closed:Z
+         4: ifeq          17
+         7: new           #234                // class java/lang/IllegalStateException
+        10: dup
+        11: ldc           #236                // String question submit form is closed
+        13: invokespecial #238                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        16: athrow
+        17: return
+
+  public void close();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field question:[C
+         4: iconst_0
+         5: invokestatic  #239                // Method java/util/Arrays.fill:([CC)V
+         8: aload_0
+         9: iconst_1
+        10: putfield      #230                // Field closed:Z
+        13: return
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: ldc           #242                // String QuestionSubmitForm[REDACTED]
+         2: areturn
+
+  private static void lambda$bind$0(java.util.HashMap, java.lang.String, java.util.List);
+    descriptor: (Ljava/util/HashMap;Ljava/lang/String;Ljava/util/List;)V
+    Code:
+         0: aload_0
+         1: aload_1
+         2: ldc           #244                // String name
+         4: invokestatic  #35                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         7: checkcast     #24                 // class java/lang/String
+        10: aload_2
+        11: invokestatic  #246                // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+        14: invokevirtual #94                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        17: pop
+        18: return
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: ldc           #119                // String question
+         2: ldc           #181                // String operation_token
+         4: invokestatic  #249                // InterfaceMethod java/util/Set.of:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Set;
+         7: putstatic     #74                 // Field FIELDS:Ljava/util/Set;
+        10: return
+}
