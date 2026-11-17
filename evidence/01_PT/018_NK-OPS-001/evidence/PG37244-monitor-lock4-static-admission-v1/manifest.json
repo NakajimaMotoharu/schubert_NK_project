@@ -1,0 +1,498 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-17T03:45:37.221833+00:00",
+  "sourceCore": "7e6cb3cc9711c12b4a68f2f05711a06f582bfe9b",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/manifest.json",
+    "sha256": "b06b2861563688cfe4d3ecc8105afefa321ad1ff600585cddee932efd5b4fcf8"
+  },
+  "spotbugs": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37226-monitor-lock4-fresh-sibling-spotbugs-v2/manifest.json",
+    "sha256": "a845bbfaa40fc4bdd4a418b210546243d8b85098458843ce6a65819058001699"
+  },
+  "abi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37232-monitor-lock4-abi-physical-v1/manifest.json",
+    "sha256": "7f258e158ab4dab8029deda65e379e8aac8f47b773e114d14461e8690c039069"
+  },
+  "raw": 24,
+  "applicable": 0,
+  "unclassified": 0,
+  "dispositions": [
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "79",
+        "endline": "79",
+        "begincolumn": "9",
+        "endcolumn": "13",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "79",
+        "endline": "79",
+        "begincolumn": "16",
+        "endcolumn": "89",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "79",
+        "endline": "79",
+        "begincolumn": "50",
+        "endcolumn": "56",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "81",
+        "endline": "81",
+        "begincolumn": "14",
+        "endcolumn": "36",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "83",
+        "endline": "83",
+        "begincolumn": "7",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "84",
+        "endline": "84",
+        "begincolumn": "18",
+        "endcolumn": "71",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "anotherThread",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "260",
+        "endline": "260",
+        "begincolumn": "53",
+        "endcolumn": "59",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "261",
+        "endline": "261",
+        "begincolumn": "9",
+        "endcolumn": "13",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "priority": "3",
+        "message": "Ensure that resources like this ExecutorService object are closed after use"
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "261",
+        "endline": "261",
+        "begincolumn": "16",
+        "endcolumn": "87",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "variable": "pool",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "261",
+        "endline": "261",
+        "begincolumn": "48",
+        "endcolumn": "54",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "264",
+        "endline": "278",
+        "begincolumn": "11",
+        "endcolumn": "26",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "variable": "first",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "274",
+        "endline": "274",
+        "begincolumn": "27",
+        "endcolumn": "33",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "281",
+        "endline": "287",
+        "begincolumn": "11",
+        "endcolumn": "17",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "variable": "second",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "283",
+        "endline": "283",
+        "begincolumn": "46",
+        "endcolumn": "52",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "292",
+        "endline": "292",
+        "begincolumn": "35",
+        "endcolumn": "41",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "293",
+        "endline": "293",
+        "begincolumn": "35",
+        "endcolumn": "41",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "297",
+        "endline": "297",
+        "begincolumn": "32",
+        "endcolumn": "38",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "297",
+        "endline": "297",
+        "begincolumn": "77",
+        "endcolumn": "83",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "304",
+        "endline": "304",
+        "begincolumn": "7",
+        "endcolumn": "25",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringLockContractTest.java",
+        "beginline": "305",
+        "endline": "305",
+        "begincolumn": "18",
+        "endcolumn": "71",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringLockContractTest",
+        "method": "lock406OtherMethodWaitsForOwnedCallbackThenCompletes",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "priority": "3",
+        "message": "To be compliant to J2EE, a webapp should not use any thread."
+      },
+      "applicable": false,
+      "basis": "Standalone JUnit owns finite daemon workers. Future/latch waits5s, finally shutdownNow/await10s, class30s; release before join. Unknown/nonterminal workers fail assertions. No webapp scheduling or product runtime authority."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "beginline": "48",
+        "endline": "48",
+        "begincolumn": "16",
+        "endcolumn": "32",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringPoller",
+        "method": "observeNow",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3",
+        "message": "Avoid catching RuntimeException in try-catch block"
+      },
+      "applicable": false,
+      "basis": "Exactly two unchanged callback/clock boundaries mark the next observation discontinuous and rethrow the identical RuntimeException/Error. No swallow/translation/normal success/NPE handling. Whole ordinary tests and LOCK401/402 cover failure and the next gap."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "beginline": "48",
+        "endline": "48",
+        "begincolumn": "35",
+        "endcolumn": "40",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringPoller",
+        "method": "observeNow",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3",
+        "message": "Avoid catching Error in try-catch block"
+      },
+      "applicable": false,
+      "basis": "Exactly two unchanged callback/clock boundaries mark the next observation discontinuous and rethrow the identical RuntimeException/Error. No swallow/translation/normal success/NPE handling. Whole ordinary tests and LOCK401/402 cover failure and the next gap."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "beginline": "72",
+        "endline": "72",
+        "begincolumn": "14",
+        "endcolumn": "30",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringPoller",
+        "method": "observeLocked",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3",
+        "message": "Avoid catching RuntimeException in try-catch block"
+      },
+      "applicable": false,
+      "basis": "Exactly two unchanged callback/clock boundaries mark the next observation discontinuous and rethrow the identical RuntimeException/Error. No swallow/translation/normal success/NPE handling. Whole ordinary tests and LOCK401/402 cover failure and the next gap."
+    },
+    {
+      "raw": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+        "beginline": "72",
+        "endline": "72",
+        "begincolumn": "33",
+        "endcolumn": "38",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "class": "MonitoringPoller",
+        "method": "observeLocked",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "priority": "3",
+        "message": "Avoid catching Error in try-catch block"
+      },
+      "applicable": false,
+      "basis": "Exactly two unchanged callback/clock boundaries mark the next observation discontinuous and rethrow the identical RuntimeException/Error. No swallow/translation/normal success/NPE handling. Whole ordinary tests and LOCK401/402 cover failure and the next gap."
+    }
+  ],
+  "changedMainAvoidSynchronizedFindings": 0,
+  "staticRuleOrSuppressionChanges": 0,
+  "independentOracle": {
+    "fixedUtc": "2026-11-17T00:00:00Z",
+    "gregorianCalendarEpochSeconds": 1794873600,
+    "productionCodeUsedForExpected": false,
+    "waiterIdleRaceRejectedByPostStateNotDone": true
+  },
+  "expectedTests": 113,
+  "originalWholeTests": 107,
+  "newWholeTests": 6,
+  "productTestsExecuted": 0,
+  "heldNativeActions": 0,
+  "formalUpdated": false
+}

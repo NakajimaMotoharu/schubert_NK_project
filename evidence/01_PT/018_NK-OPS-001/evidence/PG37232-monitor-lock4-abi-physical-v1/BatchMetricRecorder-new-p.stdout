@@ -1,0 +1,37 @@
+Compiled from "BatchMetricRecorder.java"
+public final class dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorder {
+  private static final int NANOS_PER_MICROSECOND;
+    descriptor: I
+  private static final java.time.Instant MIN;
+    descriptor: Ljava/time/Instant;
+  private static final java.time.Instant MAX;
+    descriptor: Ljava/time/Instant;
+  private final java.util.concurrent.locks.ReentrantLock lock;
+    descriptor: Ljava/util/concurrent/locks/ReentrantLock;
+  private final boolean collectDetailed;
+    descriptor: Z
+  private final java.util.Map<dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Step, java.util.Map<dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Status, io.micrometer.core.instrument.Counter>> counters;
+    descriptor: Ljava/util/Map;
+  private final java.util.Map<dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Step, java.util.concurrent.atomic.AtomicReference<java.util.Optional<java.time.Instant>>> lastSuccess;
+    descriptor: Ljava/util/Map;
+  public dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorder(io.micrometer.core.instrument.MeterRegistry, java.lang.String);
+    descriptor: (Lio/micrometer/core/instrument/MeterRegistry;Ljava/lang/String;)V
+
+  public void record(dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Step, dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Status, java.time.Instant);
+    descriptor: (Ldev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Step;Ldev/codex/schubert/nk/batch/monitoring/BatchMetricContract$Status;Ljava/time/Instant;)V
+
+  public boolean detailedMetricsRequested();
+    descriptor: ()Z
+
+  private static double seconds(java.util.concurrent.atomic.AtomicReference<java.util.Optional<java.time.Instant>>);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicReference;)D
+
+  private static io.micrometer.core.instrument.Tags tags(java.util.Map<java.lang.String, java.lang.String>);
+    descriptor: (Ljava/util/Map;)Lio/micrometer/core/instrument/Tags;
+
+  private static java.lang.Double lambda$seconds$0(java.time.Instant);
+    descriptor: (Ljava/time/Instant;)Ljava/lang/Double;
+
+  static {};
+    descriptor: ()V
+}

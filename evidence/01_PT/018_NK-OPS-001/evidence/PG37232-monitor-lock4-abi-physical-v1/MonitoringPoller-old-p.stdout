@@ -1,0 +1,20 @@
+Compiled from "MonitoringPoller.java"
+final class dev.codex.schubert.nk.batch.monitoring.MonitoringPoller<R> {
+  private final java.lang.Object lock;
+    descriptor: Ljava/lang/Object;
+  private java.util.Optional<java.time.Duration> lastCompleted;
+    descriptor: Ljava/util/Optional;
+  private boolean interrupted;
+    descriptor: Z
+  dev.codex.schubert.nk.batch.monitoring.MonitoringPoller();
+    descriptor: ()V
+
+  R observe(boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext, java.util.function.BiFunction<java.lang.Boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext, R>);
+    descriptor: (ZLdev/codex/schubert/nk/batch/monitoring/ObservationContext;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+
+  R observeNow(boolean, dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$CauseClearance, dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClock, java.util.function.BiFunction<java.lang.Boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext, R>);
+    descriptor: (ZLdev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance;Ldev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+
+  private R observeLocked(boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext, java.util.function.BiFunction<java.lang.Boolean, dev.codex.schubert.nk.batch.monitoring.ObservationContext, R>);
+    descriptor: (ZLdev/codex/schubert/nk/batch/monitoring/ObservationContext;Ljava/util/function/BiFunction;)Ljava/lang/Object;
+}

@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Timeout;
 /** BUG3161/PG-D364/LOCK401..406: fixed vectors, borrowed pure providers, finite owned workers. */
 @Timeout(30)
 class MonitoringLockContractTest {
-  private static final Instant AT = Instant.parse("2026-11-17T00:00:00Z");
+  private static final Instant FIXED_INSTANT = Instant.parse("2026-11-17T00:00:00Z");
   private static final long WAIT_SECONDS = 5;
   private static final long STOP_SECONDS = 10;
 
@@ -71,7 +71,8 @@ class MonitoringLockContractTest {
   }
 
   private static ObservationContext at(long seconds) {
-    return new ObservationContext(CauseClearance.CONFIRMED, AT, Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        CauseClearance.CONFIRMED, FIXED_INSTANT, Duration.ofSeconds(seconds));
   }
 
   private static <T> T anotherThread(Callable<T> operation) throws Exception {
@@ -184,12 +185,13 @@ class MonitoringLockContractTest {
         assertSame(
             failure,
             assertThrows(
-                failure.getClass(), () -> recorder.record(Step.BACKUP_DB, Status.SUCCESS, AT)));
+                failure.getClass(),
+                () -> recorder.record(Step.BACKUP_DB, Status.SUCCESS, FIXED_INSTANT)));
         registry.injected.set(Optional.empty());
         assertTrue(
             anotherThread(
                 () -> {
-                  recorder.record(Step.BACKUP_DB, Status.SUCCESS, AT);
+                  recorder.record(Step.BACKUP_DB, Status.SUCCESS, FIXED_INSTANT);
                   return Boolean.TRUE;
                 }));
         assertEquals(
@@ -293,6 +295,7 @@ class MonitoringLockContractTest {
       assertFalse(second.isDone());
       assertTrue(
           waiter.getState() == Thread.State.WAITING || waiter.getState() == Thread.State.BLOCKED);
+      assertFalse(second.isDone());
       release.countDown();
       assertEquals(7, first.get(WAIT_SECONDS, TimeUnit.SECONDS));
       assertEquals(11, second.get(WAIT_SECONDS, TimeUnit.SECONDS));
