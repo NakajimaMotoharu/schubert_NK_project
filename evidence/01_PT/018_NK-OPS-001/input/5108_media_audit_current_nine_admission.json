@@ -1,0 +1,74 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39186-P01810-MEDIA-AUDIT-CURRENT-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39174-media-audit-current-nine-prepare-v1/manifest.json",
+    "sha256": "489a0ed5b7ef413d7844f883099f4f560a33232f754d81c9067dddb755dbafc6"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39178-media-audit-current-nine-static-v1/manifest.json",
+    "sha256": "3395b6127c25ea1ace96ef609d61f6b9311e60a429fd0bb46b2774626c3cda9b"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 348,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The fixture has unconditional shutdownNow and requires termination within five seconds in finally. ExecutorService.close would wait indefinitely."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 348,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit workers and joins only, no J2EE service. Each independent audit has its own closed JSON output, with explicit bounds and ownership."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 351,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit workers and joins only, no J2EE service. Each independent audit has its own closed JSON output, with explicit bounds and ownership."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 361,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit workers and joins only, no J2EE service. Each independent audit has its own closed JSON output, with explicit bounds and ownership."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 374,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit workers and joins only, no J2EE service. Each independent audit has its own closed JSON output, with explicit bounds and ownership."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 375,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "JUnit workers and joins only, no J2EE service. Each independent audit has its own closed JSON output, with explicit bounds and ownership."
+    }
+  ]
+}
