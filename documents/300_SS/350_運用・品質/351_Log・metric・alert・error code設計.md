@@ -307,6 +307,8 @@ SSC-463。InboxResultReference.toStringは「InboxResultReference[<redacted>]」
 
 SSC-464。OutboxEntry.toStringは「OutboxEntry[<redacted>]」、OutboxRequest.toStringは「OutboxRequest[<redacted>]」を返す。実id、宛先、本文を一般診断へ連結しない。本書§3で許可する構造化欄、明示アクセサー、配送・再送の責務は維持する。
 
+SSC-465。InspectionStep.toStringは「InspectionStep[<redacted>]」を返す。outcomeとcursorの実値を一般診断へ連結しない。明示outcome/cursor、既終了条件及び本書の許可済み構造化結果欄は既契約。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
