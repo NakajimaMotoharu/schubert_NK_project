@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6079",
+  "groupId": "PGPT-WBS66-P01808-BINARY-SESSION-SIGNED-LONG-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T18:04:53.339000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 45,
+      "remainingPercent": 55,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01808-BINARY-SESSION-SIGNED-LONG-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01808-BINARY-SESSION-SIGNED-LONG-20261119",
+    "workAttributionKind": "TOOL_FIX",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2"
+    ],
+    "source": "dc94c1aaa4195a26f45d7f4edcf28517cf7eb232",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40024-p01808-binary-session-signed-green-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.05,
+      "high": 2.75
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38254-p01808-offline-measurement-evidence-v1/manifest.json",
+        "sha256": "273c49de6b2d0bb94c3cb7553691804ad8349b27cffa992b181b5bbf8e1df963"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/manifest.json",
+        "sha256": "1a20dd261bda65d669cf844fad6bd5470256e35e1ac5c21da11249da5a2ca585"
+      },
+      {
+        "path": "tools/quality/jacoco_readonly_exec_subset.py",
+        "sha256": "22b40fabf37fd222fd64fa30297a5e2b1817cfd31d5f6f3abb43cba373c90849"
+      }
+    ],
+    "workScope": "Pure read-only declared JaCoCo stream checker. Signed Java long and nonnegative ordered timestamps; preserve original12 vectors, add independently encoded boundary vectors, prove earlier mismatch before fix. No actual coverage collection, native/Root, or owner actions."
+  }
+}
