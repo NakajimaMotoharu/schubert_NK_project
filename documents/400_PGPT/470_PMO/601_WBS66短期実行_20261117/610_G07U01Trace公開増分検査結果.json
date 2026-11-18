@@ -1,0 +1,116 @@
+{
+  "eventId": "PGPT-20261008-6130",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-U01-TRACE-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-U01-TRACE-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "8c5b148d8fd62856f0d783ccf3c41302ce7aa0d0",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "d7cac2ce428ce4167cd16409190e2322bbfa8f65",
+    "run": "PG40112-g07-u01-trace-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40112-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.85
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40096-g07-s08-c02-public-delta-v1/scan/manifest.json",
+        "sha256": "b7682d072022c467a4504a5d62bddd1ff5ccd29ee3e0ba2a8817e13e31823d78"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40108-p020-u01-menu-independent-v1/manifest.json",
+        "sha256": "5975c52044ca3c0712ca87618ead68072b7bcd3efa4fffcccbe0102754100c94"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40110-g08-journal-o01-s08-u01-trace-v1/manifest.json",
+        "sha256": "5050c41538df146f668730271adaeb7d04f238d4e154267c9ad677307dcd2b6e"
+      }
+    ],
+    "workScope": "Scan only new published tracked versions; retain separate U01 failed/interim/final binary identity and the 19-test trace. No PT rerun or runtime operation.",
+    "durableAvailableBytesAtStart": 868405248,
+    "tmpfsAvailableBytesAtStart": 7948283904,
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T20:04:32.676000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 48,
+        "remainingPercent": 52,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "6da648a77e9a53d5e15142693520cb0d59ed7d37d49707dafb7b5fa1ed42f57f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T20:04:32.676000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T20:04:04.314252+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40112-g07-u01-trace-public-delta-v1/scan/manifest.json",
+        "sha256": "540a2768975edd60a81e3522832fa9b81be859fe8a87287717406ac5081c2a83"
+      }
+    ],
+    "commitments": 13,
+    "trackedVersions": 150,
+    "scannerCandidates": 55,
+    "qualifiedBinaries": 3,
+    "originalRejectedBinaryTestSuccess": false,
+    "confirmedSecrets": 0,
+    "unresolved": 0,
+    "newTestExecutions": 0,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "result": "Fixed public delta only. No scanner rerun or PT replay. Preserve U01 exit1 with 152 successful, 51 failures, 1 error; interim static failure; final separate 204 success.",
+    "setupAndClassifierRetries": [
+      "Start receipt already written; recovered local record without duplicate start",
+      "Rejected archive path representation normalized",
+      "One unchanged old planning count separately qualified",
+      "Retained cached classifier receipts before final write; no rescan"
+    ]
+  }
+}
