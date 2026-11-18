@@ -31,6 +31,6 @@ public record EncryptedResponseSnapshot(String keyVersion, byte[] ciphertext) {
 
   @Override
   public String toString() {
-    return "EncryptedResponseSnapshot[keyVersion=" + keyVersion + ", ciphertext=<redacted>]";
+    return "EncryptedResponseSnapshot[keyVersion/ciphertext=<redacted>]";
   }
 }
