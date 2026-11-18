@@ -215,6 +215,8 @@ UIC-006で承認された非公開検査processだけに、必要なAPI Inbox re
 
 SSC-454。EncryptedWebLogPayloadの一般診断は鍵versionラベルと暗号文を固定表示で伏せる（SS351 §12）。暗号化・検証・正規永続化に必要なkeyVersionのaccessorと保存列の値は維持する。鍵素材、鍵ファイル、運用権限や鍵回転契約を変更しない。
 
+SSC-455。EncryptedAuthContextの一般診断は鍵versionラベル・暗号文を伏せる（SS351 §12）。暗号検証の現在／過去version、実値accessor・防御コピー・業務保存列に変更はない。
+
 
 | Event | DB audit | 必須field | 除外 |
 |---|:---:|---|---|

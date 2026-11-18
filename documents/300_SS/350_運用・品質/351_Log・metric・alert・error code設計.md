@@ -293,6 +293,8 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 
 SSC-454。Webの値型の一般診断では、EncryptedWebLogPayload.toStringは「EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]」、ValidatedReply.toStringは「ValidatedReply[correlationId/body=<redacted>]」の固定文字列とする。内部idや鍵versionラベルの値を一般診断へ連結しない。§3.1に従う構造化相関IDのフィールド、JMS相関に使うUUID、暗号処理と保存に使う鍵version、値取得methodと型の比較契約に変更はない。実Logのfield allowlist及びmetricsのlabel禁止は従来どおり適用する。
 
+SSC-455。EncryptedAuthContext.toStringは「EncryptedAuthContext[keyVersion/ciphertext=<redacted>]」の固定値とし、鍵versionや暗号文の実値を一般診断へ連結しない。認証・再送の構造化ログやmetricのallowlist、値取得、保存列、暗号key選択の契約を維持する。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
