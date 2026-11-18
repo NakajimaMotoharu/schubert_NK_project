@@ -1,0 +1,378 @@
+{
+  "actualExit": 0,
+  "run": "PG39102-f03-six-test-source-checkstyle-delta-v1",
+  "source": "2ed5c3a75e1cb19ed83d3d1eff217fc021395438",
+  "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "previousAudit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38504-f03-current-test-source-delta-v1/manifest.json",
+    "sha256": "0a33f850576813ff014ada3969c20506fe8ec964ab49d4ab81a321bc33792b0c"
+  },
+  "policy": {
+    "path": "tools/quality/static/checkstyle.xml",
+    "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "baseFiles": 1126,
+  "currentFiles": 1132,
+  "filesChanged": 24,
+  "eligibleChanged": 22,
+  "untouchedHeldCount": 32,
+  "heldChangeNamesOnly": [
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/FingerprintKeyRingTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodecTest.java"
+  ],
+  "confirmedCheckstyleFiles": 1095,
+  "previousConfirmed": 1094,
+  "missingEligible": [
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxModelTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest.java",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthorizationServiceTest.java",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupTerminalObservationTest.java"
+  ],
+  "expiryOrExecutionControlsChanged": 0,
+  "staticReexecution": 0,
+  "productTestsStarted": 0,
+  "changedEligibleProof": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java": {
+      "sha256": "4f82f83938dc0ef254756c3f38bbfe78b792620045d840cc15bb01535740d1f3",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/manifest.json",
+          "sha256": "55f10479151369b97daefd6d2a159d88c857e2f3a97434b6070a9ec96c44aa18"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle-exit.safe.json",
+          "sha256": "5c7326c2777e273e1abee31dbf6bffdcd2a3715c1c32115f3f729f125d469161"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle.xml",
+          "sha256": "a0591c1b18c02b723fd594d9888c6be530944e7274fb8982d7fdb8958b79ad68"
+        },
+        "originalTerminalAlreadyTracked": false
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalValueDiagnosticTest.java": {
+      "sha256": "502c9de0c2d62d5bce7e81696dfddf2aeccc196ee8d0db58f5e345a90be6bc8a",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/manifest.json",
+          "sha256": "55f10479151369b97daefd6d2a159d88c857e2f3a97434b6070a9ec96c44aa18"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle-exit.safe.json",
+          "sha256": "5c7326c2777e273e1abee31dbf6bffdcd2a3715c1c32115f3f729f125d469161"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle.xml",
+          "sha256": "a0591c1b18c02b723fd594d9888c6be530944e7274fb8982d7fdb8958b79ad68"
+        },
+        "originalTerminalAlreadyTracked": false
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java": {
+      "sha256": "0e2de4066d8fef755334ecdc6418cf552737984627257e0cf989acab57ade0be",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38778-ssc462-encrypted-response-static-v1/manifest.json",
+          "sha256": "f80960e9b5b6ad4b82d7cf6b0538e53be03f85af6369ff119ee01012dbe7cda3"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38778-ssc462-encrypted-response-static-v1/checkstyle-exit.safe.json",
+          "sha256": "ad2e960b9128f262034ea2e3ae70fd3dd9f9c6cf55505d3d141642a8449f3f9e"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38778-ssc462-encrypted-response-static-v1/checkstyle.xml",
+          "sha256": "322e3fd10753ac900187d9f07c26fd8b65b6a7f0edf419e7c2c19576588febbc"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java": {
+      "sha256": "b07dbccdd5bed05ede5ef380efb670fab3834c26f95f1d5a265e7654c8f65c58",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/manifest.json",
+          "sha256": "dd44bcd238e61e061cacbd5b9143af6a09909c54f666ff1eb84b1736053de738"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/checkstyle-exit.safe.json",
+          "sha256": "1c29eb932eba0dfb878242213f592932b18df82d112f506edc123fb176d5c686"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/checkstyle.xml",
+          "sha256": "d480440bc70b36c5a2b0c5eb527ed80f00ed23e484ea5a1a28cdb7bcd0f0169a"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunStepValueContractTest.java": {
+      "sha256": "c5e26c2e000c10df1d74c04adc57bd71e56d7af5de695913fbd6724ab17144d7",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38844-ssc465-inspection-step-static-v1/manifest.json",
+          "sha256": "3939c4cb99cd82a1926ad49b841d775e226fa9b5042898314d8973ece6761d06"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38844-ssc465-inspection-step-static-v1/checkstyle-exit.safe.json",
+          "sha256": "bdb865c926c6d04af5cf68aa6660aa54322aa473812ed760cb6e5425cb848a73"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38844-ssc465-inspection-step-static-v1/checkstyle.xml",
+          "sha256": "3a6bba95f4bf290bd779c9dccea728b96aad3c001b7c199dbb09a8c4e4e8c796"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java": {
+      "sha256": "1712c51387bdf0946af192b21a7b88164a8d48de6d31d01f30e66bee72c3442b",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/manifest.json",
+          "sha256": "f530b0fd396651af3ea7369c826d938f6bb8e64ac0929c38db2bb8e06f06c2ce"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/checkstyle-exit.safe.json",
+          "sha256": "1cdc1c2187f3060c768fc8e25fceea11c66f0de8784d5e5d5eee6bb1b9a06a03"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/checkstyle.xml",
+          "sha256": "9b17573d77c94662780943b617e617c5fc08382c6ccbac54c1b3b739e5dbaea7"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetainedValueContractTest.java": {
+      "sha256": "639e6ffc34125ec5ae0e24e479b81bd2234cc61ff0a932b6189cec2e166203d5",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/manifest.json",
+          "sha256": "f530b0fd396651af3ea7369c826d938f6bb8e64ac0929c38db2bb8e06f06c2ce"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/checkstyle-exit.safe.json",
+          "sha256": "1cdc1c2187f3060c768fc8e25fceea11c66f0de8784d5e5d5eee6bb1b9a06a03"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/checkstyle.xml",
+          "sha256": "9b17573d77c94662780943b617e617c5fc08382c6ccbac54c1b3b739e5dbaea7"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java": {
+      "sha256": "a5c4e11a1056b78864921bcdb2f8b9cd4d507d13389d50ad704104e922bdeccb",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/manifest.json",
+          "sha256": "55f10479151369b97daefd6d2a159d88c857e2f3a97434b6070a9ec96c44aa18"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle-exit.safe.json",
+          "sha256": "5c7326c2777e273e1abee31dbf6bffdcd2a3715c1c32115f3f729f125d469161"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38568-ssc460-actor-boundary-static-v2/checkstyle.xml",
+          "sha256": "a0591c1b18c02b723fd594d9888c6be530944e7274fb8982d7fdb8958b79ad68"
+        },
+        "originalTerminalAlreadyTracked": false
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupTransactionPortTest.java": {
+      "sha256": "4fb0735a1e6a7daeb491a2ee075cd8923fbaeee4b1b3198636872e1652fabd7b",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/manifest.json",
+          "sha256": "43838b31cacd58c6ffc85ed47067a08028bf3f3ed28628222da7408db1393c48"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/checkstyle-exit.safe.json",
+          "sha256": "8e6fb8a9719b74ef7e51e4880995c424c8e531277bf7289ddaefe3652c33b6ad"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38936-bug3248-step-cleanup-static-v1/checkstyle.xml",
+          "sha256": "137ace0a512f0185242003b23897ac7ec42c20242344b3c6e6e4ec4b4542864b"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java": {
+      "sha256": "941dd27e6e184dd451df1847ff8a5b8c73a287caee9000b82c972cd56bed5a42",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/manifest.json",
+          "sha256": "482351bce16174f9209a43294d7bafb32c75d9f51d3c61e5373ad0facc2ec863"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/checkstyle-exit.safe.json",
+          "sha256": "9c85488ff3228aa643084b679a9acf742dfa1c5a8ec096b900be8d0f3a431006"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/checkstyle.xml",
+          "sha256": "263f6ca393b92559308280b7b4db8ad577a80a8b6ae06340f65c57396334ddd0"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupTerminalRows.java": {
+      "sha256": "40e4c0eb80847e1a3f492dbf1c6ca71e15fb23819ae8f0d97432ba5e8fd6aa39",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/manifest.json",
+          "sha256": "482351bce16174f9209a43294d7bafb32c75d9f51d3c61e5373ad0facc2ec863"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/checkstyle-exit.safe.json",
+          "sha256": "9c85488ff3228aa643084b679a9acf742dfa1c5a8ec096b900be8d0f3a431006"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2/checkstyle.xml",
+          "sha256": "263f6ca393b92559308280b7b4db8ad577a80a8b6ae06340f65c57396334ddd0"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java": {
+      "sha256": "aa5360d31446a0e1839c1b5c6241d440fa1a17c4edfb2ef52d9fac5233e8a35b",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39092-inspection-summary-jdbc-static-v2/manifest.json",
+          "sha256": "e59eb1b81792ef6035c99ce668e057b364282be7dc858d649a3589ab5c54e4df"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39092-inspection-summary-jdbc-static-v2/checkstyle-exit.safe.json",
+          "sha256": "224b63f0d476017be9550f687f1723c91fc5f48cab3f77ffc60eb8717ad26e6a"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39092-inspection-summary-jdbc-static-v2/checkstyle.xml",
+          "sha256": "dc02d7120b0b3b2b949edd968f903ac117b0fa061696ba03c6cf698c4424dfd3"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphContractTest.java": {
+      "sha256": "b2c0e42b36142368ed390a426e9d06d95ccb78eb42822b8e545b67054633e3a8",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38588-ssc461-jdbcgraph-static-v1/manifest.json",
+          "sha256": "60db1fec3763c3f4abd6b16c2215dc8652203866ef15368b2b3af01cb2591713"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38588-ssc461-jdbcgraph-static-v1/checkstyle-exit.safe.json",
+          "sha256": "e5ff9b5c74211a4bd3fa2320ea0a18824d9020e668293bdd147a64f1e0b1fe85"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38588-ssc461-jdbcgraph-static-v1/checkstyle.xml",
+          "sha256": "8ae3e5b3b28b44569226ea63e6d62add0edeaf508c64cdf3c5de9b9a35d97203"
+        },
+        "originalTerminalAlreadyTracked": false
+      }
+    },
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/SchemaHistoryRowValueTest.java": {
+      "sha256": "372188cd5538b3208f4220957a47f4a668258c7d78093243cd8e8a746e8bc888",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38664-bug3235-schema-owner-static-v3/manifest.json",
+          "sha256": "34a412de34954b647c3a4eb0b5fbec04ed6f11c907a71683b6be11a9883a9a53"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38664-bug3235-schema-owner-static-v3/checkstyle-exit.safe.json",
+          "sha256": "a96af6ef47080ddcb1ccf00522365f3a4e488cc89e21e6506a5b8e0fcf1a09c3"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38664-bug3235-schema-owner-static-v3/checkstyle.xml",
+          "sha256": "5b212a95266c531be41257ff5f9f040d5b4d2decb7a9a735aefff0cea0596eaa"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/PendingReplyDiagnosticTest.java": {
+      "sha256": "0a53df0545b54ba0c4b7183bda4efb183065f00b3d62c82e0741765107d3d3a6",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38532-ssc459-pending-reply-static-v2/manifest.json",
+          "sha256": "d0ce7c047f27c626def23b02a3f39395a16da0c10394eb399f6bf7b28d00690d"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38532-ssc459-pending-reply-static-v2/checkstyle-exit.safe.json",
+          "sha256": "e4d726efac9ea5aac7acba1df856265e9ce666d6a6bccb909437fc67bcc26f32"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38532-ssc459-pending-reply-static-v2/checkstyle.xml",
+          "sha256": "f5534c058d535fafd1d44e2ac1637dc2c9ee78ff66cbce137c994c2d956ff58e"
+        },
+        "originalTerminalAlreadyTracked": false
+      }
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java": {
+      "sha256": "10e4589a8af2eb58eb3c3105c33c4dbcef57eaf48a154ade05fb8dddf175c1fc",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39009-bug3251-web-metric-captured-static-v2/manifest.json",
+          "sha256": "c946b7491d9034bd5372cdde568362bb6aea2c71aae6470bb52b0df47d0fb8c5"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39009-bug3251-web-metric-captured-static-v2/checkstyle-exit.safe.json",
+          "sha256": "7e873b8c4c4a4ca27d1030aeef9737bf2564d91a6ed884aaba9847c383bc88ca"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39009-bug3251-web-metric-captured-static-v2/checkstyle.xml",
+          "sha256": "794b9f9e06d38a011add8435ba6c6afaababd312c53d6992894f2526a8e7a2a2"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java": {
+      "sha256": "8f315db995d661cefe890313af615a48fbefde51306b35e4a47a8b6ea4f8d516",
+      "proof": {
+        "manifest": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39060-bug3254-web-standard-finite-static-v2/manifest.json",
+          "sha256": "5ea944e5904a34418e9d750c2816e2c866caa907a5e147058a13d2c2d4bfe83c"
+        },
+        "terminal": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39060-bug3254-web-standard-finite-static-v2/checkstyle-exit.safe.json",
+          "sha256": "b85e36e153d68f5e3691a8a89709351b9ff58b785c40e4c6d8d7ee6fb537d20c"
+        },
+        "xml": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39060-bug3254-web-standard-finite-static-v2/checkstyle.xml",
+          "sha256": "30b9c9cfc48a0df212c6b50a1fb733c73707f637ac516e020276ca8cfc7a623c"
+        },
+        "originalTerminalAlreadyTracked": true
+      }
+    }
+  },
+  "moduleCounts": [
+    {
+      "module": "schubert-nk-api",
+      "total": 338,
+      "checkstyleConfirmed": 330
+    },
+    {
+      "module": "schubert-nk-batch",
+      "total": 306,
+      "checkstyleConfirmed": 279
+    },
+    {
+      "module": "schubert-nk-bootstrap",
+      "total": 120,
+      "checkstyleConfirmed": 120
+    },
+    {
+      "module": "schubert-nk-protocol",
+      "total": 36,
+      "checkstyleConfirmed": 36
+    },
+    {
+      "module": "schubert-nk-storage",
+      "total": 37,
+      "checkstyleConfirmed": 35
+    },
+    {
+      "module": "schubert-nk-web",
+      "total": 295,
+      "checkstyleConfirmed": 295
+    }
+  ],
+  "terminalAtUTC": "2026-11-18T09:21:43.052630+00:00",
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
