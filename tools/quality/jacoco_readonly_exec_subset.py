@@ -39,8 +39,10 @@ def decode(raw,wanted):
     while offset < len(raw):
         tag = number(1)
         if tag == 0x10:
-            label,start,end = utf_bytes(),number(8),number(8)
-            if sessions or start > end:
+            label = utf_bytes()
+            start = int.from_bytes(take(8), 'big', signed=True)
+            end = int.from_bytes(take(8), 'big', signed=True)
+            if sessions or not 0 <= start <= end:
                 raise ValueError('one ordered original session only')
             sessions.append(dict(labelBytesHex=label.hex(),startMillis=start,endMillis=end))
         elif tag == 0x11:

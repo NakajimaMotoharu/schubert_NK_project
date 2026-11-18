@@ -1,0 +1,62 @@
+{
+  "actualExit": 1,
+  "source": "4f708cd949f89f58f0cd7cb049f8457dc9c9a901",
+  "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "phase": "red",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/quality",
+    "-p",
+    "jacoco_readonly_exec_subset_test.py",
+    "-v"
+  ],
+  "python": "3.14.4",
+  "os": "Linux-7.0.0-43-generic-x86_64-with-glibc2.43",
+  "run": "PG40022-p01808-binary-session-signed-red-v1",
+  "inputs": [
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset.py",
+      "sha256": "22b40fabf37fd222fd64fa30297a5e2b1817cfd31d5f6f3abb43cba373c90849"
+    },
+    {
+      "path": "tools/quality/jacoco_readonly_exec_subset_test.py",
+      "sha256": "f6659bbabdc5b002aae5a9024b684a8c3e1057070ab81229146452b27a70a65d"
+    }
+  ],
+  "log": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40022-p01808-binary-session-signed-red-v1/unittest-output.txt",
+    "sha256": "7ebb3f54e9a1e77b1bbf0e851845a632e0370d0eda0983586515f80ea46445cb"
+  },
+  "harness": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5259_p01808_binary_session_signed.py",
+    "sha256": "1bd2ed67e62bd0eca9fa436f472bf40bbb3b4aa0e0eeb94cceda08946f9191bf"
+  },
+  "firstVerificationDenominator": 9,
+  "originalEmbeddedVectors": 12,
+  "newVectors": 8,
+  "namedTests": 9,
+  "passed": 5,
+  "failures": 4,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "failedMethods": [
+    "test_negative_end_cannot_be_greater_than_latest_java_long",
+    "test_negative_end_is_rejected",
+    "test_two_minimum_java_longs_are_rejected",
+    "test_two_negative_ones_are_rejected"
+  ],
+  "productTests": 0,
+  "actualCoverage": 0,
+  "protectedOperations": 0,
+  "earlierRed": null,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "startedAtUTC": "2026-11-18T18:06:13.930532+00:00",
+  "terminalAtUTC": "2026-11-18T18:06:14.108022+00:00"
+}
