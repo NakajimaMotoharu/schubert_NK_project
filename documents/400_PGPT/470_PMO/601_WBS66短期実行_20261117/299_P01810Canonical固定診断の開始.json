@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-5833",
+  "groupId": "PGPT-WBS66-P01810-CANONICAL-DIAGNOSTICS-20261118",
+  "baseCore": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T03:54:46.751000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-CANONICAL-DIAGNOSTICS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-CANONICAL-DIAGNOSTICS-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "WBS-P018-10.03/2 CATALOG-006/007. Compare generic CanonicalField and CanonicalRequest diagnostics with independently specified fixed value and structured log separation. Record BUG3228/YKT2677 before correction and SSC458 on main. Then fixed text only, unchanged canonical field/header data and ownership. Existing ordinary CanonicalDataValueContractTest plus directed differential fixture in approved isolated closure; OperationFingerprintTest requires held KeyRing and no dynamic action on that fixture. Exit source-fixed JDK25 ordinary, independent CRC/XML/raw and exact unresolved scope.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "1f46054a5f85ba0208e4a08dfa675dae1092add58d26773222cbbf5b9e77a03d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+        "sha256": "c8715c7a911a1f5b0ef08eff5554d430835d578166ed5470be44cc08f264298d"
+      }
+    ],
+    "productionCoreMain": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+    "source": "280d6181d166eefc48adcfecda24df36bd4f3c95",
+    "wbsLeafIds": [
+      "WBS-P018-10.03",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "CATALOG-006",
+      "CATALOG-007"
+    ],
+    "run": "PG38520-p01810-canonical-value-diagnostics-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1.25,
+      "high": 2.8
+    },
+    "groupCapPp": 3.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3228",
+    "relatedYkt": "YKT-2677"
+  }
+}
