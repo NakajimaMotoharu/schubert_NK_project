@@ -1,0 +1,7 @@
+# SSC461 Cleanup JDBC二経路の単体結果
+
+Core 1d04874a68ea51db48a80604943a6203b9150ca4、固定試験source 617af24e64105232677d9375374540a631a96b2f。PG38706のCLNQUERY001～009とCLNPORT001～009は初回18/18成功。F/E/skip/選定内未実行0。全SQL・値・JDBC借用・解放後条件の独立oracleは原703/705。公開ABI差0、独立21物理／19陽性CRC。NullAway／Checkstyle／SpotBugs0、PMD54適用0。元admissionのCleanupRepository.execute行73の2理由で記したrow/bodyはstatement解放時に訂正し、当anchorと同じ非適用判断は保持した。
+
+未フィルタの残りはCleanupRepositoryの5B／6I、CleanupStepRepositoryの4B／2I、コンパイラ生成SwitchMapの9I。行・method・classは変更2型で満たした。既成功測定との合算、除外、実DB、VM、実削除なし。正式受入0。既sourceの最初のcompile手前でCLNPORT005のformatter改行を見落とした工具BUG-3236を修正し、元ソースのまま全件実行した。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/manifest.json SHA256 61feb8b3c256ddb9274d58255c2dfdb55f7e04ffd60e13494e982c024e7c7616。

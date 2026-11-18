@@ -1,0 +1,181 @@
+{
+  "eventId": "PGPT-20261008-5866",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CLEANUP-JDBC-OWNERS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-CLEANUP-JDBC-OWNERS-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F02-a/P017-07.02 independent subset. Migrate three SQL exception sites in two Batch repositories to the existing Bootstrap adapter. Beginnings: current RunReference proof, current owned closure, original synthetic 9+9; P017-07.01 formal dependency remains open. End: exact local 18 and static, independent raw classes; no DB/DELETE, Root, native, or authority. First accounting validation rejected owner parent as a leaf before event or product action; retained original observation and bind new observed quota to the actual leaf.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/703_Cleanupステップ_単体テスト仕様書.md",
+        "sha256": "bff1c9db2908cd62228991285976b86039a3f5594339c5758dee518e43683006"
+      },
+      {
+        "path": "evidence/01_PT/017_NK-BAT-001/705_Cleanup基底query_単体テスト仕様書.md",
+        "sha256": "c73a4622fff04e4d8271038c36255b0078fbbbdfc7e578e7e0764c79c0a11d88"
+      }
+    ],
+    "productionCoreMain": "1d04874a68ea51db48a80604943a6203b9150ca4",
+    "source": "617af24e64105232677d9375374540a631a96b2f",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461"
+    ],
+    "run": "PG38710-f02-cleanup-jdbc-owner-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.45,
+      "high": 4.0
+    },
+    "groupCapPp": 5.1,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680",
+    "priorIntakeReceipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/quota-first-rejected-parent.json",
+      "sha256": "6c5db17758649d2479639a11eb5064f96ea7b1377155c029018f977dd5f4a0f1"
+    },
+    "quotaAfter": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ae61a3525d5e3b0370967fe03cc8e749533fb2ce1daaf6a77463e84240eff833",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T05:24:51.292000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 29,
+          "remainingPercent": 71,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T05:24:16.633934+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5865",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "61feb8b3c256ddb9274d58255c2dfdb55f7e04ffd60e13494e982c024e7c7616"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": false,
+    "productTestsExecuted": 18,
+    "newDefinitions": 0,
+    "caseDenominator": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "targetRaw": {
+      "dev/codex/schubert/nk/batch/repository/CleanupRepository": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 419
+        },
+        "BRANCH": {
+          "missed": 5,
+          "covered": 39
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 105
+        },
+        "COMPLEXITY": {
+          "missed": 5,
+          "covered": 29
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": {
+        "INSTRUCTION": {
+          "missed": 2,
+          "covered": 331
+        },
+        "BRANCH": {
+          "missed": 4,
+          "covered": 32
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 71
+        },
+        "COMPLEXITY": {
+          "missed": 4,
+          "covered": 19
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 5
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    "transferredThis": 3,
+    "migratedUpperSites": 10,
+    "upperInitialSites": 104,
+    "toolRegressionTests": 1,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "CleanupRepository has 5B/6I raw misses including javac enum default, CleanupStepRepository 4B/2I, generated switch map 9I",
+      "94 upper callers, Storage own legacy graph, F02 whole; P017-07.01 formal dependency remains open",
+      "QA056/057/058 and exact same-source formal 451 remain open."
+    ]
+  }
+}
