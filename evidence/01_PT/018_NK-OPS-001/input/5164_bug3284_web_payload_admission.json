@@ -1,0 +1,184 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39486-BUG3284-WEB-CUSTOM-PAYLOAD-FINITE-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39481-bug3284-web-payload-prepare-v2/manifest.json",
+    "sha256": "cd1ebe1bec44c815fe15f5fe66cd1ce1fccc2bc5b8f450c88a8e3f7af3f81f5d"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39482-bug3284-web-payload-static-v1/manifest.json",
+    "sha256": "5bfbf14f64737b6b02a49db4b30627dbf70d2f52d00996d5ee34ecf7b6517815"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Borrowed object are closed after use",
+      "sourceLine": 239,
+      "sourceAnchor": "var source = new Borrowed();",
+      "occurrences": 1,
+      "reason": "WEBPAY011 explicitly closes this owned in-memory source before calling render. The exact close count of one and retained closed state are explicit checks.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 261,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "reason": "The unit fixture owns this Executor and deliberately avoids implicit unbounded close. Each site calls shutdownNow and checks its actual finite termination in finally.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 261,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 268,
+      "sourceAnchor": "workers.submit(",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 284,
+      "sourceAnchor": "workers.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 285,
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 583,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "reason": "The unit fixture owns this Executor and deliberately avoids implicit unbounded close. Each site calls shutdownNow and checks its actual finite termination in finally.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 583,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(4);",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 588,
+      "sourceAnchor": "for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 595,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 596,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 609,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "The unit fixture owns this Executor and deliberately avoids implicit unbounded close. Each site calls shutdownNow and checks its actual finite termination in finally.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 609,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 612,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 636,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 637,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayloadTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 648,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "reason": "This site is confined to the owned original unit fixture, with its worker deadlines and deliberate interrupt propagation. No executor or worker is deployed.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

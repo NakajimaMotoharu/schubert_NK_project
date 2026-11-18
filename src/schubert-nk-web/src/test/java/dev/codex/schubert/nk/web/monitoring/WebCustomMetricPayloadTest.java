@@ -604,8 +604,8 @@ class WebCustomMetricPayloadTest {
     var entered = new java.util.concurrent.CountDownLatch(1);
     var release = new java.util.concurrent.CountDownLatch(1);
     var probe = new FullProbe();
-    try (var standard = fullOwner(probe);
-        var bundle = new Bundle()) {
+    var standard = fullOwner(probe);
+    try (var bundle = new Bundle()) {
       var executor = Executors.newSingleThreadExecutor();
       try {
         var future =
@@ -636,6 +636,8 @@ class WebCustomMetricPayloadTest {
         executor.shutdownNow();
         assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
+    } finally {
+      standard.close();
     }
   }
 
