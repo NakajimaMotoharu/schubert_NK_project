@@ -80,8 +80,10 @@ final class WebLogValueContractTest {
       assertNotEquals(value, new EncryptedWebLogPayload("v2", value.ciphertext()));
       assertNotEquals(value, null);
       assertNotEquals(value, VERSION);
+      assertEquals("EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]", value.toString());
       assertEquals(
-          "EncryptedWebLogPayload[keyVersion=v1, ciphertext=<redacted>]", value.toString());
+          "EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]",
+          new EncryptedWebLogPayload("v2", value.ciphertext()).toString());
     }
     for (String version : List.of("A", "A".repeat(16), "A._-09"))
       assertEquals(version, new EncryptedWebLogPayload(version, new byte[29]).keyVersion());

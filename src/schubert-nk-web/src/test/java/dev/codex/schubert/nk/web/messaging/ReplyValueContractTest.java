@@ -38,9 +38,10 @@ final class ReplyValueContractTest {
     assertNotEquals(value, new ValidatedReply(new UUID(0, 2), new byte[] {1, 2, 3, 4}));
     assertNotEquals(value, null);
     assertNotEquals(value, CAUSE_TEXT);
+    assertEquals("ValidatedReply[correlationId/body=<redacted>]", value.toString());
     assertEquals(
-        "ValidatedReply[correlationId=00000000-0000-0000-0000-000000000001, body=<redacted>]",
-        value.toString());
+        "ValidatedReply[correlationId/body=<redacted>]",
+        new ValidatedReply(new UUID(0, 2), new byte[] {1}).toString());
     assertThrows(NullPointerException.class, () -> new ValidatedReply(null, new byte[0]));
     assertThrows(NullPointerException.class, () -> new ValidatedReply(ID, null));
   }

@@ -94,7 +94,7 @@ final class WebLogPayloadCodecTest {
       EncryptedWebLogPayload copy = new EncryptedWebLogPayload("v2", expected);
       expected[0] ^= 1;
       assertArrayEquals(plaintext, codec.decrypt(IDENTITY, copy));
-      assertEquals("EncryptedWebLogPayload[keyVersion=v2, ciphertext=<redacted>]", copy.toString());
+      assertEquals("EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]", copy.toString());
       assertEquals("WebLogPayloadIdentity[message/correlation=<redacted>]", IDENTITY.toString());
       assertEquals(MESSAGE, IDENTITY.messageId());
       assertEquals(CORRELATION, IDENTITY.correlationId());

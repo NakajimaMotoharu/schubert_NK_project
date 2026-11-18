@@ -32,6 +32,6 @@ public record EncryptedWebLogPayload(String keyVersion, byte[] ciphertext) {
 
   @Override
   public String toString() {
-    return "EncryptedWebLogPayload[keyVersion=" + keyVersion + ", ciphertext=<redacted>]";
+    return "EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]";
   }
 }

@@ -22,6 +22,6 @@ public record ValidatedReply(UUID correlationId, byte[] body) {
 
   @Override
   public String toString() {
-    return "ValidatedReply[correlationId=" + correlationId + ", body=<redacted>]";
+    return "ValidatedReply[correlationId/body=<redacted>]";
   }
 }
