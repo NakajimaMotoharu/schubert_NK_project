@@ -1,11 +1,14 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -81,15 +84,13 @@ public final class SchemaHistoryAdmission {
     var observed = new ArrayList<Row>();
     try {
       require(!Thread.currentThread().isInterrupted());
-      var statement = connection.prepareStatement(SQL);
+      var query = required(connection.prepareStatement(SQL));
       @Nullable Throwable primary = null;
       try {
-        var query = required(statement);
         query.setQueryTimeout(5);
-        var rows = query.executeQuery();
+        var values = required(query.executeQuery());
         @Nullable Throwable rowFailure = null;
         try {
-          var values = required(rows);
           for (Row row : expected) {
             require(values.next());
             int rank = required(values.getObject("installed_rank", Integer.class));
@@ -113,28 +114,37 @@ public final class SchemaHistoryAdmission {
           rowFailure = failure;
           throw failure;
         } finally {
-          if (rows != null)
-            try {
-              rows.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (JdbcAdmissionFailures.replace(rowFailure, secondary)) throw secondary;
-            }
+          closeRows(values, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         primary = failure;
         throw failure;
       } finally {
-        if (statement != null)
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
-          }
+        closeStatement(query, primary);
       }
       return List.copyOf(observed);
     } catch (SQLException known) {
       JdbcFailureGraph.preserveFatal(known);
       throw unavailable();
+    }
+  }
+
+  // BUG-3234: each established owner closes through one typed, auditable decision.
+  private static void closeRows(@WillClose ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      rows.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
+    }
+  }
+
+  private static void closeStatement(
+      @WillClose PreparedStatement query, @Nullable Throwable primary) throws SQLException {
+    try {
+      query.close();
+    } catch (SQLException | RuntimeException | Error secondary) {
+      if (JdbcAdmissionFailures.replace(primary, secondary)) throw secondary;
     }
   }
 
