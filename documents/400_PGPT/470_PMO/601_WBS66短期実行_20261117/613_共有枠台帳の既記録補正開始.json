@@ -1,0 +1,57 @@
+{
+  "eventId": "PGPT-20261008-6133",
+  "groupId": "PGPT-WBS66-SHARED-LIMIT-LEDGER-REPAIR-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T20:12:49.006000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-SHARED-LIMIT-LEDGER-REPAIR-20261119",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-SHARED-LIMIT-LEDGER-REPAIR-20261119",
+    "workAttributionKind": "TOOL_FIX",
+    "wbsLeafIds": [
+      "WBS-G13.01"
+    ],
+    "managementWorkIds": [
+      "WBS-G13.01"
+    ],
+    "source": "b3d462707bef62bf5707b5fc99255a19eee490c0",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40120-wbs66-shared-limit-ledger-repair-v1",
+    "workScope": "Append-only comparable shared quota correction. Use only sanitized saved start/end receipts 5709–6132. Do not change bills, prices, PG/PT coverage/acceptance or historic rows.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.42,
+      "high": 1.2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "tools/quality/pmo_quota_legacy_end.py",
+        "sha256": "acf77d0d857c35375dc8f48b9cdbd845af14813cc2a690983b8b73140b6ecdee"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37872-quota-end-append-only-correction-v1/manifest.json",
+        "sha256": "054760e9b10e3e124591a0060562192917f04f3d0f5bed829e7ba1773881007f"
+      }
+    ]
+  }
+}
