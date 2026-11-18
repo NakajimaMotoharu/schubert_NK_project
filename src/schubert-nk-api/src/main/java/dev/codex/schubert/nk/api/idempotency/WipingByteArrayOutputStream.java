@@ -56,6 +56,6 @@ class WipingByteArrayOutputStream extends ByteArrayOutputStream {
 
   @Override
   public synchronized String toString() {
-    return "WipingByteArrayOutputStream[size=" + count + ", content=<redacted>]";
+    return "WipingByteArrayOutputStream[<redacted>]";
   }
 }
