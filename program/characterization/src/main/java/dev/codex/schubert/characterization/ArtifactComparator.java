@@ -318,7 +318,8 @@ public final class ArtifactComparator {
         valid = false;
       }
       // L01 has its own log projection. N01 has independent role/menu acceptance evidence.
-      Map<String, List<JsonNode>> fixed = fixedForCase(id, caseId);
+      Map<String, List<JsonNode>> fixed =
+          hasSeparateEvidence(id, caseId) ? null : FIXED_EXPECTATIONS.get(id);
       if (fixed != null) {
         valid &=
             checkFixed(id, caseId, fixed.get(differenceKey), actualCurrent, actualNk, failures);
@@ -396,10 +397,9 @@ public final class ArtifactComparator {
     return list;
   }
 
-  private static @Nullable Map<String, List<JsonNode>> fixedForCase(String id, String caseId) {
-    if (EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId)) return null;
-    if (MENU_DIFF.equals(id) && !MENU_CASE.equals(caseId)) return null;
-    return FIXED_EXPECTATIONS.get(id);
+  private static boolean hasSeparateEvidence(String id, String caseId) {
+    return (EMPTY_MESSAGE_DIFFERENCE.equals(id) && !EMPTY_SEARCH_CASE.equals(caseId))
+        || (MENU_DIFF.equals(id) && !MENU_CASE.equals(caseId));
   }
 
   private static JsonNode multipleVoiceProjection(int rows) {
