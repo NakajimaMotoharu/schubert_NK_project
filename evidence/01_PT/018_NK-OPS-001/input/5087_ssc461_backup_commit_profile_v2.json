@@ -1,0 +1,160 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "resources": [],
+  "systemProperties": {},
+  "id": "PG38972-SSC461-BACKUP-COMMIT-V2",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4601_SSC461BackupペアJDBC所有の単体仕様.md",
+      "sha256": "132a0bf4733f299a4682472f33c2220cc3763ebf222cc1607b19216fbfa96a86"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/699_Backup監査ペア_単体テスト仕様書.md",
+      "sha256": "65b0466fecf6447d5eb99dc493c382d6db34e28795ccb04bf142895b4c1748cb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4626_SSC461BackupCommitJDBC伝播単体仕様.md",
+      "sha256": "f909d2ba3176ef59f7ebaba2bb9616e48f34f23f42f6cce1e732a7ac68837204"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38744-bug3239-backup-shared-fixture-closure-v2/manifest.json",
+      "sha256": "b388351d468cd846c3f95f9fe47857254cc9e2a325ee476209591fa35de7eae9"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38736-ssc461-backup-pair-closure-v1/manifest.json",
+      "sha256": "f1655f57f481b8a50f9eb302803bff1360780265cecc7d42d99ad11b3205ddb2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+      "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+    },
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/evidence/PG19052-backup-pair-thirteen-v1/manifest.json",
+      "sha256": "cbc5930180d196de075666562144d3cbcf48987afe7689745481b7f824fe7d64"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+      "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38960-ssc461-backup-commit-prestyle-v1/manifest.json",
+      "sha256": "b67a70718d41b9827534f25214bac50fbc7d069f9c0c0de9e4e2799d90ec9f0f"
+    }
+  ],
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "tests": 16
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupTerminalRows.java",
+      "tests": 0
+    }
+  ],
+  "expectedTests": 16,
+  "newTestDefinitions": 6,
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "WBS-P004-03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "WBS-P017-12",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "WBS-P004-05",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-P003-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BackupStepRepository.java": "WBS-P017-06",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRunRepository.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepResult.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupManifest.java": "WBS-P017-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupFileDigest.java": "WBS-P017-03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupVersions.java": "WBS-P017-05",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java": "WBS-P017-05"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "dev/codex/schubert/nk/storage/package-info.class",
+    "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/backup/BackupManifest.class",
+    "dev/codex/schubert/nk/batch/backup/BackupFileDigest.class",
+    "dev/codex/schubert/nk/batch/backup/BackupVersions.class",
+    "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRunRepository$History.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Reason.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepResult$Status.class",
+    "dev/codex/schubert/nk/batch/backup/BackupCommitService.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/backup/BackupCommitService"
+  ],
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38965-ssc461-backup-commit-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38967-ssc461-backup-commit-prepare-v2",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38969-ssc461-backup-commit-static-v2",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38970-ssc461-backup-commit-preflight-v2",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38972-ssc461-backup-commit-unit-v2",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38974-ssc461-backup-commit-post-v2"
+  },
+  "privateDirs": {
+    "prepare": "pg38967-ssc461-backup-commit-prepare-v2",
+    "unit": "pg38972-ssc461-backup-commit-unit-v2"
+  }
+}
