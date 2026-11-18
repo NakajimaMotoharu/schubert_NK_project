@@ -20,7 +20,7 @@ REPOSITORY = 'dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservation
 
 def verify_fixtures(config, source):
     targets = {'COUNT_READ_POINT': 'count', 'ROWS_CLOSE_POINT': 'RSclose', 'STATEMENT_CLOSE_POINT': 'PSclose'}
-    method = re.compile(r'^  void\s+(outboxDb\d{3})\b', re.M)
+    method = re.compile(r'^  void\s+(outboxDb\d{3})(?=[A-Z])', re.M)
     for row in config['testSources']:
         path = row['path']
         current = h.git('show', f'{source}:{path}')
@@ -89,9 +89,10 @@ def main():
     assert all(m['actualExit'] == 0 for m in data.values())
     unit, post = data['unit'], data['post']
     source = post['source']
-    assert unit['source'] == source and unit['tests'] == post['tests'] == 19
+    assert unit['begin']['source'] == source and unit['tests'] == post['tests'] == 19
     assert all(unit[k] == 0 for k in ('failures', 'errors', 'skipped'))
-    assert data['preflight']['staticApplicable'] == 0 and post['wholeScopeFour100']
+    assert data['preflight']['staticApplicable'] == 0 and post['completeSourceComponentFour100']
+    assert not post['wholeScopeFour100'] and post['uncoveredFullSourceClasses']
     assert not h.git('diff', '--name-only', config['productionCoreMain'], source,
                      '--', ':(glob)src/*/src/main/java/**/*.java')
     assert not h.git('diff', '--name-only', source, 'HEAD', '--', 'src')
@@ -102,6 +103,10 @@ def main():
     verify_fixtures(config, source)
     compiled = (Path('../pgpt-runs/PG379') / config['privateDirs']['prepare'] / 'component').resolve()
     verify_abi(config, data['prepare'], compiled)
+    verifier_failure = E / 'PG39602-bug3294-api-outbox-verifier-original-v1/manifest.json'
+    assert h.load(verifier_failure)['actualExit'] == 1
+    name_failure = E / 'PG39604-bug3294-api-outbox-verifier-name-v1/manifest.json'
+    assert h.load(name_failure)['actualExit'] == 1
     before = E / 'PG39582-p00405-api-outbox-raw-before-v1/manifest.json'
     assert h.load(before)['rawBranches'] == {'missed': 4, 'covered': 28}
     initial = E / 'PG39586-bug3292-api-outbox-prestyle-v1/manifest.json'
@@ -136,9 +141,12 @@ def main():
                   twoIndependentSelfSuppressionCases=True, oneChangedPhysicalClassWithPublicAbiStable=True,
                   unchangedFileAndClassOrderProof=True, rawTargets=total, rawPerClass=counters,
                   supportDeficits=residual, rawCoverageExclusions=0, oldExecCombined=False,
-                  standardTargets=post['coverage'], standardSupportingClassesComplete=post['completeSourceComponentFour100'],
+                  standardTargets=post['targetCounters'], standardAllPhysical=post['coverage'],
+                  standardSupportingClassesComplete=post['wholeScopeFour100'],
                   actualPhysicalClasses=post['physicalClasses'], positiveMainCrc=post['positiveMainCrc'],
                   staticApplicable=0, staticRawPmd=len(data['static']['rawFindings']),
+                  firstSupplementalVerifierSuccess=False, initialSupplementalFailure=h.ref(verifier_failure),
+                  supplementalNameFixtureFailure=h.ref(name_failure),
                   initialBeforeCorrectionPmd=h.ref(initial), previousRawCoverage=h.ref(before),
                   prepMetadataIssues=['Qualification profile requires F03 as sole certification cost owner; fixed separately from multi-leaf WBS relevance.',
                                       'Git design-only patch context includes a development completion note; used exact standalone SSC-470 sections on main.'],

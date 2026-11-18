@@ -1,0 +1,131 @@
+{
+  "eventId": "PGPT-20261008-5994",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-API-OUTBOX-RAW-SQL-SUPPRESSION-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-API-OUTBOX-RAW-SQL-SUPPRESSION-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P004-05/2 and F03/2-2: API borrowed OutboxObservationRepository. Four old unfiltered null-close branches confirmed on old exact class/run. Preserve JDBC borrow, snapshot and all suppression including self, original whole 18 and new one. Independent identical compiler and actual ABI, class/branch/method/line. No held type, real DB or QA authority.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1664_APIOutbox観測Repository_単体テスト仕様書.md",
+        "sha256": "99ba734001504833c6c18c2d24336f1e9b6af0a48100c9bd7ee4c0deece09ba8"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/3963_API Outbox借用JDBC原十八_有限owner仕様.md",
+        "sha256": "b5dcfedc4d2bb43af0928876a40ec362d97bb5a2efa6363a9b5f4cda506749dc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25454-api-outbox-jdbc-whole18-independent-v1/manifest.json",
+        "sha256": "66ac318ff158abf1b95330988401f42e8424f6a9ff590a62791fed978b6a5ee7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39578-p00405-web-outbox-typed-close-independent-v1/manifest.json",
+        "sha256": "5996db206a76880d07ee015e862d666a087ecf43c4beb6ddada8ec72dfd4c1ea"
+      }
+    ],
+    "productionCoreMain": "5e0b5575cf14416389a30be0175b52f7ec685983",
+    "source": "a02a3bf2e9a0daf282d47dffd48e42753daf078a",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-05",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "F03/2-2",
+      "YKT-2597",
+      "BUG-3292",
+      "SSC-470"
+    ],
+    "run": "PG39606-p00405-api-outbox-typed-close-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.8,
+      "base": 2.7,
+      "high": 6.2
+    },
+    "groupCapPp": 8,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 40,
+      "remainingPercent": 60,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "978e18ca1fea15c9b4356af47bc42c6b57b23fc3edf4d620eda8b1306d793fb0",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T13:21:24.595000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 40,
+          "remainingPercent": 60,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T13:20:08.611153+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 39,
+      "remainingPercent": 61,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "priorProductionCore": "f8b668a320e091ce8ebb6c8835aac47366d8ca70",
+    "result": "SSC470_ORIGINAL18_PLUS_ONE_TWO_SELF_SUPPRESSION_CASES_RAW_REPOSITORY_AND_COLLECTOR_ALL",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39606-p00405-api-outbox-typed-close-independent-v1/manifest.json",
+        "sha256": "1e3b26551a7f121e31b6afedfe7a562a557e02d6f2fd59dd1ce9bfbb71348424"
+      }
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 19,
+    "distinctTestCasesAddedToExecutionCount": 1,
+    "newTestDefinitions": 1,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL_TARGET_RAW_ALL",
+    "firstIndependentSuccess": 19,
+    "firstIndependentDenominator": 19,
+    "executedProductRetries": 0,
+    "toolPreparationFailures": [
+      "Profile owner schema corrected before product work.",
+      "Three initial PMD fault labels ticketed and corrected.",
+      "Supplemental verifier source JSON nesting and fixture method prefix corrected on retained inputs; no PT replay."
+    ],
+    "unaccepted": [
+      "Support recorder raw deficits retained.",
+      "P004-05 live owner and DB; QA056–058; formal whole451."
+    ],
+    "nextCommand": "Perform exact F02 four-module source-bound build/ABI receipt rebind or another eligible short intake criterion; no prior API19 replay."
+  }
+}
