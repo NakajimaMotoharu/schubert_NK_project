@@ -1,0 +1,79 @@
+{
+  "actualProbeExit": 0,
+  "sourceBefore": "bd3e7302148c642e7f7349dd2b0cd507f5851d5c",
+  "parserBeforeSha256": "adab5be5a8d549ed307d34a156acf9ece45dd59364321f8a6e1900899a2f9c6e",
+  "scannedParser": "tools/quality/coverage_session_schema.py",
+  "pinnedJaCoCo": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+  "pinnedJaCoCoSha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+  "exactAbiCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+    "-classpath",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+    "org.jacoco.core.data.SessionInfo"
+  ],
+  "exactAbiExit": 0,
+  "noNativeExecInputsOpened": true,
+  "noProductTestsExecuted": true,
+  "originalFourWrongAcceptances": [
+    {
+      "syntheticInput": [
+        "SESSION",
+        "fixture",
+        "0",
+        "9223372036854775808"
+      ],
+      "expected": "ValueError",
+      "actual": "ACCEPTED",
+      "observed": {
+        "sessionId": "fixture",
+        "startMillis": 0,
+        "endMillis": 9223372036854775808
+      }
+    },
+    {
+      "syntheticInput": [
+        "SESSION",
+        "fixture",
+        "9223372036854775808",
+        "9223372036854775808"
+      ],
+      "expected": "ValueError",
+      "actual": "ACCEPTED",
+      "observed": {
+        "sessionId": "fixture",
+        "startMillis": 9223372036854775808,
+        "endMillis": 9223372036854775808
+      }
+    },
+    {
+      "syntheticInput": [
+        "SESSION",
+        "",
+        "0",
+        "1"
+      ],
+      "expected": "ValueError",
+      "actual": "ACCEPTED",
+      "observed": {
+        "sessionId": "",
+        "startMillis": 0,
+        "endMillis": 1
+      }
+    },
+    {
+      "syntheticInput": [
+        "SESSION",
+        null,
+        "0",
+        "1"
+      ],
+      "expected": "ValueError",
+      "actual": "ACCEPTED",
+      "observed": {
+        "sessionId": null,
+        "startMillis": 0,
+        "endMillis": 1
+      }
+    }
+  ]
+}
