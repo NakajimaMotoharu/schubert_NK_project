@@ -452,4 +452,37 @@ class OutboxObservationRepositoryTest {
     assertThrows(NullPointerException.class, () -> new Snapshot(null, ages));
     assertThrows(NullPointerException.class, () -> new Snapshot(counts, null));
   }
+
+  @Test
+  void outboxDb011SameReadAndCloseThrowablePreservesJdkSelfSuppressionAndReverseClose() {
+    var repository = new OutboxObservationRepository();
+    var rowFailure = new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2);
+    var statementSecondary = new SQLException("owned fixture statement secondary");
+    var rows = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
+    rows.faults.put("count", rowFailure);
+    rows.faults.put("RSclose", rowFailure);
+    rows.faults.put("PSclose", statementSecondary);
+    var failedRows =
+        assertThrows(IllegalArgumentException.class, () -> repository.read(rows.connection(), AS_OF));
+    assertSame(rowFailure, failedRows.getCause());
+    assertEquals(List.of(statementSecondary), List.of(failedRows.getSuppressed()));
+    assertEquals(List.of(), List.of(rowFailure.getSuppressed()));
+    rows.complete();
+
+    var statementFailure = new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2);
+    var statement = new Fixture();
+    statement.faults.put("timeout", statementFailure);
+    statement.faults.put("PSclose", statementFailure);
+    var failedStatement =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> repository.read(statement.connection(), AS_OF));
+    assertSame(statementFailure, failedStatement.getCause());
+    assertEquals(List.of(), List.of(failedStatement.getSuppressed()));
+    assertEquals(List.of(), List.of(statementFailure.getSuppressed()));
+    assertEquals(1, statement.prepared);
+    assertEquals(0, statement.executed);
+    assertEquals(1, statement.timeout);
+    assertEquals(List.of("PS"), statement.closes);
+  }
 }

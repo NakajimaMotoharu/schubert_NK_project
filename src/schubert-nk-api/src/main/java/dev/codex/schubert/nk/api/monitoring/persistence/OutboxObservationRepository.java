@@ -46,11 +46,13 @@ public final class OutboxObservationRepository {
     var ages = new EnumMap<Status, Duration>(Status.class);
     @Nullable PreparedStatement statement = connection.prepareStatement(SQL);
     if (statement == null) throw new SQLException(INVALID);
-    try (statement) {
+    @Nullable Throwable statementFailure = null;
+    try {
       statement.setQueryTimeout(QUERY_TIMEOUT_SECONDS);
       @Nullable ResultSet rows = statement.executeQuery();
       if (rows == null) throw new SQLException(INVALID);
-      try (rows) {
+      @Nullable Throwable rowFailure = null;
+      try {
         while (rows.next()) {
           Status status = status(rows.getString("status"));
           long count = rows.getLong("row_count");
@@ -62,7 +64,17 @@ public final class OutboxObservationRepository {
           counts.put(status, count);
           ages.put(status, Duration.between(created.toInstant(), asOf));
         }
+      } catch (Throwable failure) {
+        rowFailure = failure;
+        throw failure;
+      } finally {
+        closeRows(rows, rowFailure);
       }
+    } catch (Throwable failure) {
+      statementFailure = failure;
+      throw failure;
+    } finally {
+      closeStatement(statement, statementFailure);
     }
     return new Snapshot(
         new Counts(
@@ -73,6 +85,26 @@ public final class OutboxObservationRepository {
             ages.getOrDefault(Status.PENDING, Duration.ZERO),
             ages.getOrDefault(Status.SENT, Duration.ZERO),
             ages.getOrDefault(Status.ERROR, Duration.ZERO)));
+  }
+
+  // SSC-470: preserve the exact try-with-resources primary and suppression rules.
+  private static void closeRows(ResultSet rows, @Nullable Throwable primary) throws SQLException {
+    try {
+      rows.close();
+    } catch (Throwable secondary) {
+      if (primary == null) throw secondary;
+      primary.addSuppressed(secondary);
+    }
+  }
+
+  private static void closeStatement(PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    try {
+      statement.close();
+    } catch (Throwable secondary) {
+      if (primary == null) throw secondary;
+      primary.addSuppressed(secondary);
+    }
   }
 
   private static Status status(@Nullable String value) throws SQLException {
