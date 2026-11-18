@@ -1,0 +1,148 @@
+{
+  "eventId": "PGPT-20261008-5862",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-SCHEMA-OWNED-CLOSE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-SCHEMA-OWNED-CLOSE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03 / P004-05 related schema readiness / BUG3234. Establish query/resultset non-null at ownership acquisition and coalesce duplicated finally decisions into type-specific direct close helpers; preserve old identical SQL, borrowed connection, close order and established error selection. Add independently specified exact Row record value check. Whole original ten + new one against fixed source; bindings, static, exact XML and raw. No exclusions or real services.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/manifest.json",
+        "sha256": "908e76dfc9015947bfbc1b000fb44cf720c29c4136d53ee8b69ed15771c75e28"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38640-f02-schema-history-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "ec173e2018f0dadf7883fa6ea988a34b6206935a0d4cd4e75dac9394fb70b3a7"
+      },
+      {
+        "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+        "sha256": "7c5a6ba0c5ee191a18a6ba1b928c13af1b8b540f749246e9edb0e8ad857b8ab7"
+      }
+    ],
+    "productionCoreMain": "9ad70c3fa00bb45010767fab382fd334352c2763",
+    "source": "380a0369e42ad8fa0ed093f3368d335f53c93721",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P004-05"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "BUG-3234"
+    ],
+    "run": "PG38670-f03-schema-owner-raw-independent-v3",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1.35,
+      "high": 3.5
+    },
+    "groupCapPp": 4.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3234",
+    "quotaAfter": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c9da94ff730cb834a57f2a59306b65bebe267d8ed3baedf93b39327be72b222c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T05:11:13.735000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 29,
+          "remainingPercent": 71,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T05:11:05.188798+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5861",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38670-f03-schema-owner-raw-independent-v3/manifest.json",
+      "sha256": "7f55734dd7bc0adcaf0cb5506c2f543da117d9a75aeb1d4e58b0ab2ec56ec643"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 11,
+    "newDefinitions": 1,
+    "caseDenominator": 11,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": false,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "relatedBugs": [
+      "BUG-3234",
+      "BUG-3235"
+    ],
+    "relatedYkt": "YKT-2681",
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 421
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 70
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 92
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 53
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 18
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "Legacy Storage SQL boundary and remaining 98 upper callers",
+      "Full six-module F02/F03 and 451, exact original item acceptance, full Web/API/VM remain held"
+    ]
+  }
+}
