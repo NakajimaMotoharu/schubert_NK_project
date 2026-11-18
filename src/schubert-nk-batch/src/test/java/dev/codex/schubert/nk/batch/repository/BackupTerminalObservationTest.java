@@ -1,5 +1,11 @@
 package dev.codex.schubert.nk.batch.repository;
 
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.DB;
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.END;
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.RUN;
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.START;
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.literal;
+import static dev.codex.schubert.nk.batch.repository.BackupTerminalRows.row;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -9,11 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Proxy;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -244,46 +248,6 @@ final class BackupTerminalObservationTest {
         () ->
             new MorningDatabaseSession.BackupObservation(
                 List.of(wrongEnd, wrongEndConfig), List.of(d, c)));
-  }
-
-  static final BatchRun RUN =
-      new BatchRun(
-          UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
-          Instant.parse("2026-09-12T15:00:00Z"));
-  static final Instant START = Instant.parse("2026-09-13T02:00:00Z");
-  static final Instant END = Instant.parse("2026-09-13T02:00:01Z");
-  static final BatchStepAttempt DB =
-      new BatchStepAttempt(1, RUN, BatchStep.BACKUP_DB, 2, START, false);
-
-  static Map<String, Object> literal() {
-    var m = new HashMap<String, Object>();
-    m.put("id", 1L);
-    m.put("run_id", RUN.id());
-    m.put("business_date", LocalDate.of(2026, 9, 13));
-    m.put("step", "BACKUP_DB");
-    m.put("attempt", 2);
-    m.put("started_at", START.atOffset(ZoneOffset.UTC));
-    m.put(FIXTURE_ENDED_AT_E151E393, END.atOffset(ZoneOffset.UTC));
-    m.put(FIXTURE_STATUS_CFC31BCC, "SUCCESS");
-    m.put(FIXTURE_TARGET_COUNT_5B6567D4, 1L);
-    m.put(FIXTURE_SUCCESS_COUNT_716E5185, 1L);
-    m.put(FIXTURE_FAILURE_COUNT_C7E67F21, 0L);
-    m.put(FIXTURE_BYTE_COUNT_6D76E237, 26L);
-    m.put(FIXTURE_ERROR_CODE_B886CCEF, null);
-    m.put(FIXTURE_ERROR_SUMMARY_3F58BF23, null);
-    return m;
-  }
-
-  static ResultSet row(Map<String, Object> input) {
-    return (ResultSet)
-        Proxy.newProxyInstance(
-            ResultSet.class.getClassLoader(),
-            new Class<?>[] {ResultSet.class},
-            (p, m, args) -> {
-              if (m.getName().equals("getObject") || m.getName().equals("getString"))
-                return input.get(args[0]);
-              throw new AssertionError("unexpected JDBC operation " + m.getName());
-            });
   }
 
   @Test

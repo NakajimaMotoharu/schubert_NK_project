@@ -334,9 +334,9 @@ final class BackupPairPortTest {
 
   @Test
   void terminalFalseSkipBranchAndTypedColumnFailuresDoNotCreateCapabilities() throws Exception {
-    var input = BackupTerminalObservationTest.literal();
+    var input = BackupTerminalRows.literal();
     input.put(LITERAL_STATUS, "SKIPPED");
-    input.put(LITERAL_ENDED_AT, BackupTerminalObservationTest.START.atOffset(ZoneOffset.UTC));
+    input.put(LITERAL_ENDED_AT, BackupTerminalRows.START.atOffset(ZoneOffset.UTC));
     input.put(LITERAL_ERROR_CODE, "ALREADY_SUCCESSFUL");
     input.put(LITERAL_ERROR_SUMMARY, "step already successful for business date");
     for (String key :
@@ -347,7 +347,7 @@ final class BackupPairPortTest {
         SQLException.class,
         () ->
             BackupStepRepository.readTerminal(
-                BackupTerminalObservationTest.row(input), BackupTerminalObservationTest.DB, END));
+                BackupTerminalRows.row(input), BackupTerminalRows.DB, END));
     for (Throwable expected : failures()) {
       ResultSet driver =
           (ResultSet)
@@ -361,9 +361,7 @@ final class BackupPairPortTest {
           expected,
           assertThrows(
               expected.getClass(),
-              () ->
-                  BackupStepRepository.readTerminal(
-                      driver, BackupTerminalObservationTest.DB, END)));
+              () -> BackupStepRepository.readTerminal(driver, BackupTerminalRows.DB, END)));
     }
   }
 
