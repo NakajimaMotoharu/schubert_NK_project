@@ -20,6 +20,6 @@ public record AuthenticatedActor(long userId, String username, Role role) {
 
   @Override
   public String toString() {
-    return "AuthenticatedActor[identity=<redacted>, role=" + role + "]";
+    return "AuthenticatedActor[<redacted>]";
   }
 }

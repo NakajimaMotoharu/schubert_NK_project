@@ -33,6 +33,6 @@ public record InboxCompletion(
 
   @Override
   public String toString() {
-    return "InboxCompletion[state=" + state + ", response metadata/result=<redacted>]";
+    return "InboxCompletion[<redacted>]";
   }
 }

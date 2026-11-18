@@ -31,6 +31,6 @@ public record InboxExecution(InboxExecutionStatus status, Optional<InboxCompleti
 
   @Override
   public String toString() {
-    return "InboxExecution[status=" + status + ", completion=<redacted>]";
+    return "InboxExecution[<redacted>]";
   }
 }

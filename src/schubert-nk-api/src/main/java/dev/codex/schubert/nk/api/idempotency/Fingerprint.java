@@ -20,6 +20,6 @@ public record Fingerprint(String keyVersion, byte[] digest) {
 
   @Override
   public String toString() {
-    return "Fingerprint[keyVersion=" + keyVersion + ", digest=<redacted>]";
+    return "Fingerprint[<redacted>]";
   }
 }
