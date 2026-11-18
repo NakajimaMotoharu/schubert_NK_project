@@ -270,6 +270,49 @@ class ArtifactComparatorTest {
   }
 
   @Test
+  void rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare() throws Exception {
+    Fixture fixture = fixture("duplicate-case-definition");
+    appendDuplicateDefinition(fixture, "catalog.json", "cases");
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertEquals(List.of("CATALOG_DUPLICATE:CHR-A01"), result.failures());
+    assertEquals(24, result.expectedCaseCount());
+    assertEquals(24, result.comparedCaseCount());
+  }
+
+  @Test
+  void rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch() throws Exception {
+    Fixture fixture = fixture("duplicate-difference-definition");
+    appendDuplicateDefinition(fixture, "dif-allowlist.json", "differences");
+
+    ArtifactComparator.ComparisonResult result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+
+    assertFalse(result.passed());
+    assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
+    assertEquals(16, result.observationCount());
+    assertEquals(16, result.usedDifferences().size());
+  }
+
+  private static void appendDuplicateDefinition(Fixture fixture, String fileName, String array)
+      throws IOException {
+    Path file =
+        fixture
+            .project()
+            .resolve("program/characterization/tests/resources/cases")
+            .resolve(fileName);
+    JsonNode document = JSON.readTree(file.toFile());
+    ArrayNode definitions = (ArrayNode) document.path(array);
+    definitions.add(definitions.get(0).deepCopy());
+    writeJson(file, document);
+  }
+
+  @Test
   void rejectsNullMissingAndWrongInputTypesWithoutNpe() throws Exception {
     Fixture fixture = fixture("input-boundary");
     assertThrows(
