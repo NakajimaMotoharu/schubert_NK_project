@@ -1,0 +1,156 @@
+{
+  "actualExit": 0,
+  "source": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "groupStart": "PGPT-20261008-6041",
+  "currentTypedEdges": {
+    "total": 17867,
+    "internal": 6009,
+    "edges": {
+      "batch->bootstrap": 213,
+      "batch->storage": 678,
+      "bootstrap->storage": 133
+    },
+    "internalUnresolved": [],
+    "externalUnresolved": 385
+  },
+  "fromTypedEdges": {
+    "total": 17861,
+    "internal": 6007,
+    "edges": {
+      "batch->bootstrap": 213,
+      "batch->storage": 678,
+      "bootstrap->storage": 133
+    },
+    "internalUnresolved": [],
+    "externalUnresolved": 385
+  },
+  "unchangedPhysical": 1100,
+  "changedOldPhysical": 1,
+  "addedNoCodePhysical": 1,
+  "checked": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/jdeps-command.json",
+    "sha256": "e75dab582c1dda8ac13b6065f17ab35a70f442255ba4942a6ed069c5cd703f82"
+  },
+  "changedRowsAdded": [
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailures",
+      "not found"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "not found"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission",
+      "not found"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction",
+      "ServiceDatabaseSource$StateAction.class"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "java.lang.Exception",
+      "java.base"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "ServiceDatabaseSource.class"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction",
+      "java.lang.Exception",
+      "java.base"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction",
+      "java.lang.FunctionalInterface",
+      "java.base"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource$StateAction",
+      "java.lang.Object",
+      "java.base"
+    ]
+  ],
+  "changedRowsRemoved": [
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.JdbcAdmissionFailures",
+      "JdbcAdmissionFailures.class"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+      "JdbcFailureGraph.class"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSource",
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission",
+      "ServiceDatabaseAdmission.class"
+    ]
+  ],
+  "exactExternal385": true,
+  "actualHostTests": 0,
+  "newCoverage": 0,
+  "productTestReplay0": true,
+  "storageSqlBlockOpen": true,
+  "wholeSixBoundaryAccepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "reusableRefs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39806-f02-cleanup-fixed-sql-edge-delta-v1/manifest.json",
+      "sha256": "662e10070d2a9e9413dbd2304eba7d08050d71d79cb461b52c6ca6c8aa0f1272"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39868-p00405-service-db-state-lock-independent-v1/manifest.json",
+      "sha256": "5aa80f04cdef294762b856adb9acd95b1079f7105d90f0042ec6ee499b476c5d"
+    }
+  ],
+  "trace": {
+    "id": "PT-OPS-DBSRCPORT-016",
+    "member": "dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread",
+    "test": {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "sha256": "8bbaf8bbc0970347f13225121d3d445fc718b220aac8ba5c3eb5a85ac80cb62c"
+    },
+    "source": {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "sha256": "bb803935da6a638fb3589b481acc1bfe25c7e9f644036d781646f22b692977b9"
+    },
+    "spec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/4697_ServiceDatabaseSource同一lockの単体仕様.md",
+      "sha256": "a98cc7fe3da04baccef14d14fbda492cb93545671f766d7a9beea278f1de42f5"
+    },
+    "caseXml": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "bf61d266c7185b79955c109ebc7c240ffd9da7c8af9808017e26d349da95a18e"
+    },
+    "latestUnitSource": "73e0eae9be642e30e4a84694a4aede3f38cdc9f8",
+    "singleExec": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39866-service-db-state-lock-unit-v1/jacoco.exec",
+      "sha256": "704875f2f86b64a4158416e7a41db4b72f7023f72b4f8c8bbfae0714c4a87c8b"
+    },
+    "classCRC": "a09b41c18a855e68",
+    "owner": "WBS-P018-05",
+    "costOwner": "WBS-P018-05",
+    "recordedMonitor": "PG-D-1189",
+    "linkedBug": "BUG-3312",
+    "g08ReferenceCostPp": 0
+  },
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5239_f02_jdbc_state_lock_delta.py",
+    "sha256": "82465445d0eb72cc44d0a9902db9cacf58c2329dad4d08caa976c7af4b74bddf"
+  },
+  "terminalAtUTC": "2026-11-18T16:19:50.247013+00:00"
+}
