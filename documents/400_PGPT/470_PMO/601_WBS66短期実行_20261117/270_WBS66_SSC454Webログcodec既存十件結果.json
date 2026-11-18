@@ -1,0 +1,148 @@
+{
+  "eventId": "PGPT-20261008-5804",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-SSC454-WEB-LOG-CODEC-NINE-20261118",
+    "workCategory": "SELECTED_TEST",
+    "workDetailCategory": "PGPT-WBS66-P01810-SSC454-WEB-LOG-CODEC-NINE-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-P018-10.02/.03 SSC-454 exact affected regression. Full existing nine WebLogPayloadCodecTest tests with independently fixed local synthetic inputs, updated toString literal only; no transport/storage/real key or OS target. Same Core exact Protocol artifact version/physical class inventory, strict compile/known scope static findings, controlled standalone JVM, independent XML and target raw. Do not combine earlier PG38402 exec. YKT remaining other owners separate.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38408-p01810-web-value-privacy-independent-v1/manifest.json",
+        "sha256": "c5b8c9387986e3d489e1cc11d983610e5c5a9870a3329fb36a08791550da5669"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33792-ssc420-encrypt27-independent-v1/manifest.json",
+        "sha256": "e857fc7058788406db9db94cc8830dc462a864e6bf2be96dcad13d6fad95c692"
+      }
+    ],
+    "source": "6ac12a450d60268cee795a9f1d9f38b7142783c4",
+    "productionCoreMain": "1224e04183d4f291e97cdb52832c3004bbe41289",
+    "run": "PG38414-p01810-ssc454-web-log-codec-nine-v1",
+    "wbsLeafIds": [
+      "WBS-P018-10.02",
+      "WBS-P018-10.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.02/2",
+      "WBS-P018-10.03/2"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.85,
+      "high": 2.2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3224",
+    "relatedYkt": "YKT-2674",
+    "quotaAfter": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "eaaeff0d58bc805de26034cc617903780f49f1f7aa4833f2609edf21f412bc1f",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T02:21:03.421000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 26,
+          "remainingPercent": 74,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T02:19:28.501502+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 26,
+      "remainingPercent": 74,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5803",
+    "productRuns": 1,
+    "productTestsExecuted": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "firstProductRunSuccess": {
+      "passed": 10,
+      "executed": 10
+    },
+    "newDefinitions": 0,
+    "scopeCodeCoverage": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 564
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 50
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 136
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 37
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 12
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/manifest.json",
+      "sha256": "1a4d901085e4a5d5bc24f46ca46ed80f1ae9012329e2927b8b1f68716efdf1b9"
+    },
+    "additionalCompletedPriceTotalPp": 34.15,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "estimateCorrection": {
+      "previousDenominator": 9,
+      "verifiedDenominator": 10,
+      "reason": "existing weblogOwn001 was already in PG33790; correct count before fixture compile and preserve immutable group START",
+      "estimateAtGroupStartPpUnchanged": true
+    },
+    "remainingCriteria": [
+      "Legacy close finally exception path, six unexecuted raw instructions match old PG33794, no coverage exception granted",
+      "YKT2674 adjacent API owner subjects and actual sinks",
+      "whole451 and original parent acceptance"
+    ]
+  }
+}

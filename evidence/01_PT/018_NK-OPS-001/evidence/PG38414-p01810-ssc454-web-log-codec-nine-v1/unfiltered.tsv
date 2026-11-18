@@ -1,0 +1,39 @@
+CLASS	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	2051a9a29a9104c7	true	14	65585	INSTRUCTION:7:53	BRANCH:0:6	LINE:0:12	COMPLEXITY:2:7	METHOD:2:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	<init>	(Ljava/lang/String;[B)V	1	INSTRUCTION:0:43	BRANCH:0:6	LINE:0:9	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	ciphertext	()[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	keyVersion	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	f1ce084f40cf0a6f	true	139	49	INSTRUCTION:6:564	BRANCH:0:50	LINE:0:136	COMPLEXITY:0:37	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	<init>	(Ljava/lang/String;[BLjava/lang/String;[B)V	1	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	<init>	(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V	0	INSTRUCTION:0:65	BRANCH:0:12	LINE:0:12	COMPLEXITY:0:7	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	encrypt	(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;[B)Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;	1	INSTRUCTION:0:159	BRANCH:0:0	LINE:0:39	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	decrypt	(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;)[B	1	INSTRUCTION:0:183	BRANCH:0:16	LINE:0:40	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	selectKey	(Ljava/lang/String;)[B	2	INSTRUCTION:0:27	BRANCH:0:6	LINE:0:5	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	validatePlaintext	(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;[B)V	10	INSTRUCTION:0:47	BRANCH:0:8	LINE:0:17	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	invalidPayload	()Ldev/codex/schubert/nk/web/logging/WebLogPayloadException;	10	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	requireVersion	(Ljava/lang/String;)Ljava/lang/String;	10	INSTRUCTION:0:15	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	requireKey	([B)[B	10	INSTRUCTION:0:17	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	ensureOpen	()V	2	INSTRUCTION:0:9	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	close	()V	1	INSTRUCTION:6:22	BRANCH:0:2	LINE:0:8	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadCodec	<clinit>	()V	8	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	8c1545b4d5bf4b5b	true	8	16433	INSTRUCTION:9:41	BRANCH:0:0	LINE:0:4	COMPLEXITY:2:3	METHOD:2:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	values	()[Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	$values	()[Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;	4106	INSTRUCTION:0:15	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason	<clinit>	()V	8	INSTRUCTION:0:21	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/WebLogPayloadException	b138140ccee484bd	true	2	49	INSTRUCTION:0:14	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException	<init>	(Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;)V	0	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadException	reason	()Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	71e8fe832e362116	true	25	65585	INSTRUCTION:7:148	BRANCH:0:4	LINE:0:26	COMPLEXITY:2:8	METHOD:2:6	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	<init>	(Ljava/util/UUID;Ljava/util/UUID;)V	1	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	0	INSTRUCTION:0:113	BRANCH:0:4	LINE:0:16	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	10	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	messageId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	correlationId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/package-info	56ddad915bddf6fa	false	0	5632	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0

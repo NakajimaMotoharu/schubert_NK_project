@@ -1,0 +1,1269 @@
+{
+  "run": "PG38414-p01810-ssc454-web-log-codec-nine-v1",
+  "actualExit": 0,
+  "productionCore": "1224e04183d4f291e97cdb52832c3004bbe41289",
+  "source": "6ac12a450d60268cee795a9f1d9f38b7142783c4",
+  "terminalAtUTC": "2026-11-18T02:19:28.501502+00:00",
+  "tests": 10,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "cases": [
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "exact2336ByteWireHeaderIdentityAndPayloadSemanticsAreCheckedBeforeStorageAndAfterAuth"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "bug036CallerMonitorCannotBlockEncryptionDecryptionOrClose"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "malformedEnvelopeMagicVersionKeyIdLengthNonceCiphertextAndTagAreRejected"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "unavailableCipherProviderHasBoundedFailureAndNoRawProviderCause"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "concurrentProductionNonceGenerationKeepsEveryMessageAuthenticAndDistinct"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "weblogOwn001NonceErrorThenOtherWorkerMatchesIndependentGolden"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "canonicalAadAndFullEnvelopeMatchIndependentVectorAndCopiesAreDefensive"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "modelBoundsConfigurationNullAndClosedLifecycleFailExplicitly"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "currentWritesPreviousReadsAndUnknownKeyDenyClosed"
+    ],
+    [
+      "dev.codex.schubert.nk.web.logging.WebLogPayloadCodecTest",
+      "everyAadFieldMutationAndCrossRowMoveFailAuthenticationBeforeAnyPlaintext"
+    ]
+  ],
+  "xml": [
+    {
+      "originalSha256": "f79932c16fc9d087437f1df7ed0b33b95f858d91e4b81a4e1845a143bf5db6dd",
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/TEST-junit-jupiter.xml",
+        "sha256": "fd1d9655e45858acafa80f08ee59200f1dc1a9dd0b219c86b9ac6bcb339cc777"
+      }
+    },
+    {
+      "originalSha256": "440b9b250061686812be582237f6c96daac035cc30fcb6f9449bcdd4367813a2",
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/TEST-junit-platform-suite.xml",
+        "sha256": "c6523243c17f440c738b1ea0cfa253d63a89b192b6433a52168b2e7accfb7a79"
+      }
+    },
+    {
+      "originalSha256": "b225faffbbbbad7b3779bf5311e1c396270c3475f10d47ea58d67c49c60e9106",
+      "public": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/TEST-junit-vintage.xml",
+        "sha256": "015c470d6a776f0b7dacb995dbbdbd9c48cd5639e8b85d9a38033873a352ef10"
+      }
+    }
+  ],
+  "scope": "WebLogPayloadCodecTest original ten, no rear mixed fixtures, no fit to production oracle",
+  "heldInitializations": 0,
+  "realEnvironmentOperations": false,
+  "initEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/class-init.log.gz",
+    "sha256": "4ceb49ceaf0796f55dafd638cd166afa47871311aaff3f12517a844b50760fd7"
+  },
+  "initializedProductTypeNames": [
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec",
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+    "dev/codex/schubert/nk/protocol/header/CommonHeader",
+    "dev/codex/schubert/nk/protocol/header/InteractionKind",
+    "dev/codex/schubert/nk/protocol/header/MessageKind",
+    "dev/codex/schubert/nk/protocol/layout/FieldArea",
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Numeric",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Text",
+    "dev/codex/schubert/nk/protocol/layout/FieldValue$Unset",
+    "dev/codex/schubert/nk/protocol/layout/FieldValueSet",
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields",
+    "dev/codex/schubert/nk/protocol/layout/LayoutFields",
+    "dev/codex/schubert/nk/protocol/layout/LayoutId",
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry",
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException",
+    "dev/codex/schubert/nk/protocol/layout/Padding",
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator",
+    "dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorRules",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$Mapping",
+    "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog$RecordMapping",
+    "dev/codex/schubert/nk/protocol/layout/PayloadValues",
+    "dev/codex/schubert/nk/protocol/layout/Presence",
+    "dev/codex/schubert/nk/protocol/layout/TypedFieldValues",
+    "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+    "dev/codex/schubert/nk/protocol/layout/WireType",
+    "dev/codex/schubert/nk/protocol/layout/log/WebLogEventData",
+    "dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds",
+    "dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode",
+    "dev/codex/schubert/nk/protocol/layout/semantic/LogLevel",
+    "dev/codex/schubert/nk/protocol/layout/semantic/LogType",
+    "dev/codex/schubert/nk/protocol/time/JstWireTimestamp",
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$1",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$FixedNonceRandom",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity"
+  ],
+  "protocolProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/compile/manifest.json",
+    "sha256": "12154ad780501aaa8caad123e7ea11faa1ed418cdad2ed61c5ef5f39da3ab472"
+  },
+  "coverageExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/jacoco.exec",
+    "sha256": "9e422d300d132d08a0291de7ed27a7aa29abe460e1a39cc64dc806bcf257d072"
+  },
+  "rawEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/unfiltered.tsv",
+    "sha256": "476539ce6af91338304e1f057a81a50a519ef9f7f534e2adf9c323fe7ac6fccb"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/package-info.class"
+  ],
+  "classFiles": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class",
+      "sha256": "f506601c92c034e091d7c42ec324e09c5d48b446d5393e2eada973138641d8fe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.class",
+      "sha256": "7b3e4a2658bc11a792d74e78ffa636fbfa7a3274d5857d880b6edcb614bb2b12"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason.class",
+      "sha256": "204f3926bad8585b57bad582518540b8bb7fefc9c401f6046d3de830f387fe42"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadException.class",
+      "sha256": "a6077bd40b366050bf40f93f91b1cf9859292c06be767b94f9752d05ca267799"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class",
+      "sha256": "4434658b9840f794697863ad69277453db865e1ebcf7cd978f5da65402bc166b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38412-weblog-codec-nine-prep-v1/main/dev/codex/schubert/nk/web/logging/package-info.class",
+      "sha256": "594fc1c1d366c85ccf868c0b6cb2b221738e869f6088a829c6b11c1c616465fd"
+    }
+  ],
+  "classResults": {
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload": {
+      "crc": "2051a9a29a9104c7",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 53
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 7
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 4
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/lang/String;[B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 43
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 9
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "ciphertext()[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 2
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "keyVersion()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec": {
+      "crc": "f1ce084f40cf0a6f",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 6,
+          "covered": 564
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 50
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 136
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 37
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 12
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/lang/String;[BLjava/lang/String;[B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 10
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 2
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<init>(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 65
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 12
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 12
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 7
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "encrypt(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;[B)Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 159
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 39
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "decrypt(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 183
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 16
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 40
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 9
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "selectKey(Ljava/lang/String;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 27
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 6
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 5
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 4
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "validatePlaintext(Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;[B)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 47
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 8
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 17
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 5
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "invalidPayload()Ldev/codex/schubert/nk/web/logging/WebLogPayloadException;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "requireVersion(Ljava/lang/String;)Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 15
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "requireKey([B)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 17
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "ensureOpen()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 9
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "close()V": {
+          "INSTRUCTION": {
+            "missed": 6,
+            "covered": 22
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 2
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 8
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 2
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason": {
+      "crc": "8c1545b4d5bf4b5b",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 9,
+          "covered": 41
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 3
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "values()[Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "valueOf(Ljava/lang/String;)Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 5,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<init>(Ljava/lang/String;I)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 5
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "$values()[Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 15
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "<clinit>()V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 21
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException": {
+      "crc": "b138140ccee484bd",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 14
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 4
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 2
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 2
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 11
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 3
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "reason()Ldev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity": {
+      "crc": "71e8fe832e362116",
+      "positive": true,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 7,
+          "covered": 148
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 26
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 8
+        },
+        "METHOD": {
+          "missed": 2,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "methods": {
+        "<init>(Ljava/util/UUID;Ljava/util/UUID;)V": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 17
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "aad(Ljava/lang/String;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 113
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 4
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 16
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 3
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "uuidBytes(Ljava/util/UUID;)[B": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 10
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 4
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "toString()Ljava/lang/String;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 2
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "hashCode()I": {
+          "INSTRUCTION": {
+            "missed": 3,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "equals(Ljava/lang/Object;)Z": {
+          "INSTRUCTION": {
+            "missed": 4,
+            "covered": 0
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 1,
+            "covered": 0
+          },
+          "COMPLEXITY": {
+            "missed": 1,
+            "covered": 0
+          },
+          "METHOD": {
+            "missed": 1,
+            "covered": 0
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "messageId()Ljava/util/UUID;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        },
+        "correlationId()Ljava/util/UUID;": {
+          "INSTRUCTION": {
+            "missed": 0,
+            "covered": 3
+          },
+          "BRANCH": {
+            "missed": 0,
+            "covered": 0
+          },
+          "LINE": {
+            "missed": 0,
+            "covered": 1
+          },
+          "COMPLEXITY": {
+            "missed": 0,
+            "covered": 1
+          },
+          "METHOD": {
+            "missed": 0,
+            "covered": 1
+          },
+          "CLASS": {
+            "missed": 0,
+            "covered": 0
+          }
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/logging/package-info": {
+      "crc": "56ddad915bddf6fa",
+      "positive": false,
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  },
+  "targetRawCounters": {
+    "INSTRUCTION": {
+      "missed": 6,
+      "covered": 564
+    },
+    "BRANCH": {
+      "missed": 0,
+      "covered": 50
+    },
+    "LINE": {
+      "missed": 0,
+      "covered": 136
+    },
+    "COMPLEXITY": {
+      "missed": 0,
+      "covered": 37
+    },
+    "METHOD": {
+      "missed": 0,
+      "covered": 12
+    },
+    "CLASS": {
+      "missed": 0,
+      "covered": 1
+    }
+  },
+  "allRawTarget": false,
+  "oldCodecCrcMatches": true,
+  "scopeRawUnion": false,
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38414-p01810-ssc454-web-log-codec-nine-v1/static-admission.json",
+    "sha256": "dc57ba06803cabde877a645101d88c6594a754c634cde64fced6177aa7c66b39"
+  },
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false
+}
