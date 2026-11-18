@@ -36,6 +36,8 @@ final class StepCleanupTransactionPortTest {
   private static final String ROLLBACK = "rollback";
   private static final String STOPS = "cleanup did not complete";
   private static final String FIXTURE = "synthetic failure";
+  private static final String TIMEOUT =
+      "select pg_catalog.set_config('statement_timeout', ?, true) as bound_timeout";
   private static final String REFERENCES =
       "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent"
           + " from schubert.maintenance_read_run_references(?,?)";
@@ -206,6 +208,30 @@ final class StepCleanupTransactionPortTest {
     committed.closedExactly(3);
   }
 
+  @Test
+  void steptx461007OwnedTimeoutIsFlooredAndVerifiedBeforeBorrowedMutation() {
+    var fixture = new Fixture();
+    fixture.chunks.add(new Projection(0, 5L, true, "OK"));
+    var service = StepCleanupService.withOwner(() -> 2_900_000_000L);
+    StepCleanupSummary result = service.execute(fixture.borrowed, ATTEMPT, CleanupKind.QUESTIONS);
+    assertTrue(result.complete());
+    assertEquals(1, fixture.timeoutRows);
+    assertEquals(List.of(BEGIN, COMMIT, RESTORE), fixture.events);
+    fixture.closedExactly(4);
+
+    var drift = new Fixture();
+    drift.timeoutReadback = "3s";
+    CleanupStoppedException failure =
+        assertThrows(
+            CleanupStoppedException.class,
+            () -> service.execute(drift.borrowed, ATTEMPT, CleanupKind.QUESTIONS));
+    assertEquals(DB, failure.reason().name());
+    assertNull(failure.getCause());
+    assertEquals(1, drift.timeoutRows);
+    assertEquals(List.of(BEGIN, ROLLBACK, RESTORE), drift.events);
+    drift.closedExactly(1);
+  }
+
   private static StepCleanupSummary run(Fixture f) {
     return new StepCleanupService(() -> 0).execute(f.borrowed, ATTEMPT, CleanupKind.QUESTIONS);
   }
@@ -253,6 +279,8 @@ final class StepCleanupTransactionPortTest {
     private boolean autoCommit = true;
     private boolean readOnly;
     private int isolation = 2;
+    private int timeoutRows;
+    private String timeoutReadback = "2s";
     private int closedStatements;
     private int closedRows;
     @Nullable private Throwable beforeBeginFailure;
@@ -296,26 +324,32 @@ final class StepCleanupTransactionPortTest {
 
     private PreparedStatement statement(String sql) {
       boolean lookup = REFERENCES.equals(sql);
-      if (!lookup) assertEquals(CHUNK, sql);
+      boolean timeout = TIMEOUT.equals(sql);
+      if (!lookup && !timeout) assertEquals(CHUNK, sql);
       List<Object> binds = new ArrayList<>();
       return proxy(
           PreparedStatement.class,
           (ignored, call, args) -> {
             switch (call.getName()) {
               case "setQueryTimeout":
-                assertEquals(5, args[0]);
+                assertEquals(timeout ? 2 : 5, args[0]);
                 return null;
               case "setObject", "setInt", "setLong", "setString":
                 assertEquals(binds.size() + 1, args[0]);
                 binds.add(args[1]);
                 return null;
               case "executeQuery":
+                if (timeout) {
+                  assertEquals(List.of("2000"), binds);
+                  timeoutRows++;
+                  return rows(null, true);
+                }
                 assertEquals(
                     lookup
                         ? List.of(ID, CUTOFF)
                         : List.of(ID, CUTOFF, 31L, 2, START, "QUESTIONS", 1000),
                     binds);
-                return rows(lookup ? null : chunks.removeFirst());
+                return rows(lookup ? null : chunks.removeFirst(), false);
               case "close":
                 closedStatements++;
                 return null;
@@ -325,7 +359,7 @@ final class StepCleanupTransactionPortTest {
           });
     }
 
-    private ResultSet rows(@Nullable Projection projection) {
+    private ResultSet rows(@Nullable Projection projection, boolean timeout) {
       int[] next = {0};
       return proxy(
           ResultSet.class,
@@ -337,6 +371,11 @@ final class StepCleanupTransactionPortTest {
               case "getObject", "getString":
                 assertEquals(1, next[0]);
                 String column = (String) args[0];
+                if (timeout) {
+                  assertEquals("getString", call.getName());
+                  assertEquals("bound_timeout", column);
+                  return timeoutReadback;
+                }
                 if (projection != null) return projection.read(column);
                 return switch (column) {
                   case "has_batch_history", "identity_consistent" -> true;
