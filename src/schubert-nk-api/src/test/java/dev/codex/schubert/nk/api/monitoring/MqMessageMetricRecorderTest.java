@@ -368,7 +368,7 @@ class MqMessageMetricRecorderTest {
                 new MqMessageMetricRecorder(
                     registry, mode, new LayoutId("UNKNOWN1"), BrokerTopology.SYNC_REQUEST));
       }
-      for (String mode : List.of("", "debug", "unknown"))
+      for (String mode : List.of("", "debug", "unknown", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(
@@ -465,9 +465,10 @@ class MqMessageMetricRecorderTest {
   @Test
   void mqEvent007ConcurrentCountsUsePrecomputedStageOwnerVectorsAndSeparateRegistry()
       throws Exception {
-    try (var registry = new Registry();
-        var other = new Registry();
-        var executor = Executors.newFixedThreadPool(8)) {
+    var registry = new Registry();
+    var other = new Registry();
+    var executor = Executors.newFixedThreadPool(8);
+    try {
       var a =
           new MqMessageMetricRecorder(
               registry, DEBUG_MODE, new LayoutId("QSBREQ01"), BrokerTopology.SYNC_REQUEST);
@@ -504,6 +505,14 @@ class MqMessageMetricRecorderTest {
       independent.record(Stage.DLQ);
       assertEquals(1, counter(other, QUESTION_WORK_LAYOUT, "nk.async.work", 6).count());
       assertEquals(64, registry.increments.get());
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      try {
+        other.close();
+      } finally {
+        registry.close();
+      }
     }
   }
 

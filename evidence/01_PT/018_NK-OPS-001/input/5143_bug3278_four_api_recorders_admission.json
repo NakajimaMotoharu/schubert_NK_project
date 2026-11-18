@@ -1,0 +1,274 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39410-BUG3278-FOUR-API-RECORDERS-MODE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39404-bug3278-four-api-recorders-prepare-v1/manifest.json",
+    "sha256": "9f7b7bf6101858f823e9c56dd118de9e60faf731929e78f41cf4276c88ac7d4b"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39406-bug3278-four-api-recorders-static-v1/manifest.json",
+    "sha256": "fa83d9172ece02fa98163ad0bfc5a5a3e1cac9d47746edd4bb116915443d73be"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceLine": 83,
+      "sourceAnchor": "synchronized (stateLock) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same private stateLock atomically updates count, sum, maximum and all five buckets in a bounded numeric loop without I/O or callbacks."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceLine": 108,
+      "sourceAnchor": "synchronized (stateLock) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Same private stateLock creates a defensive snapshot of the coherent count, sum, maximum and all five buckets, with no I/O or foreign callbacks. It pairs with the independently proved update in 2384."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceLine": 235,
+      "sourceAnchor": "Map<Double, Double> counts = new HashMap<>();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The expected bucket count lookup is created, populated and read locally by a single test thread, with no publication."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 398,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor and requires completion in finally within ten seconds after shutdownNow. Registries are retained for the workers until shutdown is verified in the affected fixture."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 398,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceLine": 401,
+      "sourceAnchor": "Map<String, Long> counts = new HashMap<>();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the test caller builds and reads this independent expected-value map; the lambdas capture query, outcome, numeric input and recorder, never the maps."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceLine": 402,
+      "sourceAnchor": "Map<String, Long> sums = new HashMap<>();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the test caller builds and reads this independent expected-value map; the lambdas capture query, outcome, numeric input and recorder, never the maps."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceLine": 403,
+      "sourceAnchor": "Map<String, Long> maxima = new HashMap<>();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the test caller builds and reads this independent expected-value map; the lambdas capture query, outcome, numeric input and recorder, never the maps."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 419,
+      "sourceAnchor": "for (var result : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 440,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 441,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 352,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor and requires completion in finally within ten seconds after shutdownNow. Registries are retained for the workers until shutdown is verified in the affected fixture."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 352,
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 354,
+      "sourceAnchor": "for (var result : pool.invokeAll(tasks, 10, TimeUnit.SECONDS))",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 357,
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 358,
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 470,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor and requires completion in finally within ten seconds after shutdownNow. Registries are retained for the workers until shutdown is verified in the affected fixture."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 470,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 493,
+      "sourceAnchor": "for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 509,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 510,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 456,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This fixture owns the executor and requires completion in finally within ten seconds after shutdownNow. Registries are retained for the workers until shutdown is verified in the affected fixture."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 456,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 483,
+      "sourceAnchor": "for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 499,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 500,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to bounded local unit fixture use with owned workers and explicit maximum wait. It never starts an application or backend worker."
+    }
+  ]
+}

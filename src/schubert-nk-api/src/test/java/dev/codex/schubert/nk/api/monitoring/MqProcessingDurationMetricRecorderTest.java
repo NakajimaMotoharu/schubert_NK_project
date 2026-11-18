@@ -366,7 +366,7 @@ class MqProcessingDurationMetricRecorderTest {
           () ->
               new MqProcessingDurationMetricRecorder(
                   registry, null, new LayoutId(LOGIN_REQUEST_LAYOUT)));
-      for (String mode : List.of("", "debug", "unknown"))
+      for (String mode : List.of("", "debug", "unknown", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(

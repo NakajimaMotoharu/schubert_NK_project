@@ -245,7 +245,7 @@ class InboxReplayMetricRecorderTest {
       assertThrows(
           NullPointerException.class, () -> new InboxReplayMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new InboxReplayMetricRecorder(registry, null));
-      for (String mode : List.of("", "debug", "unknown-mode"))
+      for (String mode : List.of("", "debug", "unknown-mode", "DEBTf", "STANDAQc"))
         assertEquals(
             "CONFIG_INVALID",
             assertThrows(
