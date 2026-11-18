@@ -1347,9 +1347,8 @@ class ArtifactComparatorTest {
 
   @Test
   void rejectsEveryPositiveLeakOnEachSide() throws Exception {
-    int variant = 0;
     for (String field : FIXTURE_ERROR_FLAGS) {
-      Fixture fixture = fixture("positive-disclosure-" + variant++);
+      Fixture fixture = fixture("positive-disclosure-" + field);
       for (Path artifacts : List.of(fixture.current(), fixture.nk())) {
         Path projection = errorProjection(artifacts);
         mutate(projection, root -> root.put(field, true));

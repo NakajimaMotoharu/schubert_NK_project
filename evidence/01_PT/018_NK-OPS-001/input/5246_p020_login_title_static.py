@@ -28,7 +28,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (165,'PG39964-p020-invalid-range165-v1'),(165,'PG39965-p020-invalid-range165-v2'),
         (170,'PG39990-p020-search-empty170-v1'),
         (176,'PG40014-p020-game-onchange176-v1'),
-        (182,'PG40034-p020-l01-required-actions-v1'),(182,'PG40035-p020-l01-required-actions-v2')}
+        (182,'PG40034-p020-l01-required-actions-v1'),(182,'PG40035-p020-l01-required-actions-v2'),
+        (187,'PG40056-p020-error-disclosure187-v1'),(187,'PG40057-p020-error-disclosure187-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
@@ -55,7 +56,8 @@ def main(unit_name, out_name, prior_same_main=None):
     if prior_same_main:
         assert (unit_name,prior_same_main) in {
             ('PG39965-p020-invalid-range165-v2','PG39968-p020-invalid-range-static-v1'),
-            ('PG40035-p020-l01-required-actions-v2','PG40036-p020-l01-required-actions-static-v1')}
+            ('PG40035-p020-l01-required-actions-v2','PG40036-p020-l01-required-actions-static-v1'),
+            ('PG40057-p020-error-disclosure187-v2','PG40058-p020-error-disclosure-static-v1')}
         receipt=E/prior_same_main/'manifest.json'
         before=read(receipt)
         prior_manifest=Path(before['unit']['path'])
