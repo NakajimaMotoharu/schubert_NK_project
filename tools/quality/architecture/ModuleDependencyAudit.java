@@ -87,6 +87,10 @@ public final class ModuleDependencyAudit {
         String origin = type.getName();
         String module = owners.get(origin);
         boolean controller = module.equals("web") && isController(type);
+        boolean apiRepository =
+            module.equals("api")
+                && (origin.startsWith(INTERNAL + "api.persistence.")
+                    || origin.startsWith(INTERNAL + "api.monitoring.persistence."));
         for (var dependency : type.getDirectDependenciesFromSelf()) {
           dependencies++;
           String target = component(dependency.getTargetClass().getName());
@@ -105,8 +109,7 @@ public final class ModuleDependencyAudit {
           String target = access.getTargetOwner().getName();
           if (controller && filesystem(target))
             violations.get("CONTROLLER_BOUNDARY").add(origin + "\t" + target);
-          if (module.equals("api") && origin.startsWith(INTERNAL + "api.persistence.")
-              && target.startsWith(INTERNAL + "api.application."))
+          if (apiRepository && target.startsWith(INTERNAL + "api.application."))
             violations.get("REPOSITORY_DIRECTION").add(origin + "\t" + target);
         }
       }
