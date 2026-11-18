@@ -1,0 +1,65 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5058_ssc462_encrypted_response_profile.json",
+    "sha256": "41ce66f3c36dbc57b01cf709ae496269c3e0017193a48e117e0ce066e01508b1"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java": "09e9911b5f5418013364fadeb3f70e9dae33cc0b2df8c06016ce8972a953ec20",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java": "7f6747c6b267b81647554aa021ad95959a80dde08501e33b3488f14794c25568",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.java": "2843826b1e47fce4ce2c15307a4b8f64bb3652c2579b065d40ce369dbdd1ac6e",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletionState.java": "fb20f0fda776d5ccfde69dd75e52b5bc5c6cc1d0e4ada0f2b04df99ffe6267b0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxCompletion.java": "91237c32fb903bd8accd96886bdd8772a3432c177bafe1b76f1ac855023b5e37",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecutionStatus.java": "349b9813318d93b15eb334a5ea5de8bd24f5cbfde96cec8114eafa8150aec7bb",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxExecution.java": "af0812e731e445582f88bd311204b4edfe834f9c97fb6acf4367517cddeaf85f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/BoundInboxExecution.java": "03914a804c99f24c16010075bf9854199049d4026a5e180c8fcc5d686fae8caa",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java": "0e2de4066d8fef755334ecdc6418cf552737984627257e0cf989acab57ade0be",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38776-ssc462-encrypted-response-prepare-v1/manifest.json",
+    "sha256": "d60d13198ab2e8c787db3ee4ea449bf2e806d395ae4f9093e7dc582120d73c47"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38778-ssc462-encrypted-response-static-v1/manifest.json",
+    "sha256": "f80960e9b5b6ad4b82d7cf6b0538e53be03f85af6369ff119ee01012dbe7cda3"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5059_ssc462_encrypted_response_admission.json",
+    "sha256": "50ad41b2f8b0f8c77a99b0d302e11c09f854e89165ed571ba28e981262e0f57f"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "113",
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "294",
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38784-SSC462-ENCRYPTED-RESPONSE",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38776-ssc462-encrypted-response-prepare-v1/manifest.json",
+    "sha256": "d60d13198ab2e8c787db3ee4ea449bf2e806d395ae4f9093e7dc582120d73c47"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38778-ssc462-encrypted-response-static-v1/manifest.json",
+    "sha256": "f80960e9b5b6ad4b82d7cf6b0538e53be03f85af6369ff119ee01012dbe7cda3"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 113,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 294,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ]
+}
