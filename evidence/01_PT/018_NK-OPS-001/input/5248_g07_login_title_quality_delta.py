@@ -63,7 +63,45 @@ CONFIG = {
         'post': 'PG40038-p020-l01-required-actions-independent-v1',
         'firstPmdCount': 13,
     },
+    '580': {
+        'history': ('PG40046-g07-l01-handoff-public-delta-v1',
+                    'PG40028-g07-value-onchange-signed-delta-v1',
+                    'PG39998-g07-jars-batch-empty-public-delta-v1',
+                    'PG39730-g07-weblog-session-and-comparator-public-delta-v1'),
+        'units': {'PG40056-p020-error-disclosure187-v1': ('firstUnit', 187),
+                  'PG40057-p020-error-disclosure187-v2': ('unit', 187)},
+        'post': 'PG40060-p020-error-disclosure-independent-v1',
+        'firstPmdCount': 7,
+    },
 }
+
+
+def historical_repository_digest(B, line, start, end):
+    digest_line = re.fullmatch(rb' {14}"methodTokenSha256": "([0-9a-f]{64})",', line)
+    if digest_line is None or (start, end) != (17, 102):
+        return None
+    project = 'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json'
+    old = B.git('show', f"{V['fromCommit']}:{project}").splitlines()
+    if old.count(line) != 4:
+        return None
+    original = E/'provisional/PG13640-repository-resource-trace-v1/manifest.json'
+    independent = E/'provisional/PG13642-repository-resource-trace-post-v1/manifest.json'
+    proof = B.load(independent)
+    archived = B.load(original)
+    assert proof['actualExit'] == archived['actualExit'] == 0
+    assert proof['traceManifestSha256'] == B.ref(original)['sha256']
+    assert proof['source'] == archived['source']
+    rows = [row for row in archived['currentMainRepositoryStaticContexts']['rows']
+            if row['ownership']['methodTokenSha256'] == digest_line[1].decode()]
+    if len(rows) != 2 or any(row['ownership']['method'] != 'read' for row in rows):
+        return None
+    path, = {row['path'] for row in rows}
+    assert Path(path).name in {'AsyncJobCountRepository.java', 'OutboxObservationRepository.java'}
+    assert {B.sha(B.git('show', f"{proof['source']}:{path}"))} == {r['sourceSha256'] for r in rows}
+    return dict(kind='Exact preserved Java method-token digest', proof=B.ref(independent),
+                path=path, historicalSource=proof['source'], currentQualificationTransferred=False)
+
+
 GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
 settings=CONFIG[GROUP]
 START=next(Path('documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117').glob(GROUP+'_G07*'))
@@ -198,6 +236,8 @@ def classify():
     p.t.extra_binary=all_binary
     def current_content(line, start, end, digests, reachable):
         normal=before_ref(line,start,end,digests,reachable)
+        if not normal and GROUP=='580':
+            return historical_repository_digest(B,line,start,end)
         if normal or GROUP!='559':
             return normal
         known_line='2407d662eeca6d2478a97780e1a71fdb2194e38e34255f22a41671e0c88ad520'
@@ -222,9 +262,9 @@ def retain():
     set_worker(p.w)
     value=p.p.load(OUT/'qualified-cached-initial.json')
     assert value['unresolvedCandidates']==value['unqualifiedBinary']==0
-    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP in ('551','559') else None
+    original=p.p.load(RETAIN/'initial-classification'/'qualified-cached-initial.json') if GROUP in ('551','559','580') else None
     if original:
-        assert original['unresolvedCandidates']==1 and original['unqualifiedBinary']==0
+        assert original['unresolvedCandidates']==(8 if GROUP=='580' else 1) and original['unqualifiedBinary']==0
     p.p.write(OUT/'qualified-final-private-detail.json',dict(
         value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP in ('532','559')),
         initialIssue='Exact archived path was relative instead of absolute' if GROUP in ('532','559') else None,

@@ -1,0 +1,122 @@
+{
+  "eventId": "PGPT-20261008-6102",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-E01-F02-TRACE-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-E01-F02-TRACE-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "36a0ebd7dc0f266cce16dbde4981b967484f48a4",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "0641b3e3f78c4f3530d3c0d5355283fa22ee3d8e",
+    "run": "PG40072-g07-e01-f02-trace-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40072-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.9,
+      "high": 2.4
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40046-g07-l01-handoff-public-delta-v1/scan/manifest.json",
+        "sha256": "b79ea6d771721e45529d3bc39b3f7d73b235af7acdc18cee4cc7574766f1385a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40060-p020-error-disclosure-independent-v1/manifest.json",
+        "sha256": "ba602b60c05f18e38a8dc93c160321ce09f6849fa024d1cd10e28d88064d54aa"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40068-f02-controller-fences-independent-v1/manifest.json",
+        "sha256": "14561ac6e542dcf01dd06165d2360586e51ad8ffd0e1e9c6d175b7258d171ef7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40070-g07-packed-duplicate-capacity-v1/independent.json",
+        "sha256": "3fe0ecc10cccfbdd102f104af8007c58a1bbabf1fd9e934fb3a847acfd63efe1"
+      }
+    ],
+    "workScope": "Scan once the newly pushed exact public interval, verify E01 evaluation binary with both original and corrected units, retain classified findings and avoid re-reading older secret-related unsupported paths or rerunning unit evidence.",
+    "durableAvailableBytesAtStart": 905355264,
+    "tmpfsAvailableBytesAtStart": 7948283904,
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:07:06.648000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 46,
+        "remainingPercent": 54,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "d8db39d36be1ee92be7b16cfd33da41fc515f09fea8f5527e18609a35978bc9a",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:07:06.648000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 46,
+          "remainingPercent": 54,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:06:15.764809+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40072-g07-e01-f02-trace-public-delta-v1/scan/manifest.json",
+        "sha256": "291d62e136c3cdd6687e1cf2009c976874641042f0ba00ec579e0e44b5385b19"
+      }
+    ],
+    "sourceThrough": "36a0ebd7dc0f266cce16dbde4981b967484f48a4",
+    "versions": 157,
+    "staticScannerExecutions": 1,
+    "rawScannerExit": 1,
+    "observedCandidates": 72,
+    "confirmedSecrets": 0,
+    "unresolved": 0,
+    "binaryRuns": 2,
+    "initialUnresolved": 8,
+    "secondUnresolved": 8,
+    "secondAdjudicationIssue": "Exact method-token JSON line has 14-space indent; initial classification matcher had 18",
+    "secondClassifierArchive": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40072-g07-e01-f02-trace-public-delta-v1/second-classification/qualified-cached-initial.json",
+      "sha256": "64a9028e4bd01c2704bd3973fe1e197101d189aaaa01327c040e14f1454e0c1f"
+    },
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "One redacted tracked interval scan, 157 versions. All 72 coordinates were adjudicated, including eight identical older Java method-token digests. Two binary artifacts are individually bound to their exact offline tests. No product test repeated; full G07 remains open."
+  }
+}
