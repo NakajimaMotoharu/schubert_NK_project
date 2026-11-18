@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "applicable": 0,
+  "unclassified": 0,
+  "pmdRaw": 18,
+  "source": "1224e04183d4f291e97cdb52832c3004bbe41289",
+  "predecessorDisposition": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG33788-ssc420-encrypt27-preflight-v1/manifest.json",
+    "sha256": "09f263d45c0119c03ae274f174c311548205161706010c1912cdacbd42dec259"
+  },
+  "classified": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "CloseResource",
+      "line": "50",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "verifiedSourceLine": "    var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "50",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "    var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "line": "52",
+      "message": "Use ReentrantLock rather than synchronization",
+      "verifiedSourceLine": "      synchronized (codec) {",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Intentional caller-monitor regression fixture holds the caller codec monitor while an independent worker uses only private ReentrantLock. Future5s and exact independent envelope prove that external monitor cannot control the codec; standalone Test only."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "53",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "        executor",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "68",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      executor.shutdownNow();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "69",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "CloseResource",
+      "line": "321",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "verifiedSourceLine": "    var executor = Executors.newFixedThreadPool(4);",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "321",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "    var executor = Executors.newFixedThreadPool(4);",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "328",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      for (var future : executor.invokeAll(jobs, 10, TimeUnit.SECONDS)) {",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "337",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      executor.shutdownNow();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "338",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "line": "491",
+      "message": "Avoid using literals such as 1 in if statements",
+      "verifiedSourceLine": "            if (calls.incrementAndGet() == 1) throw fatal;",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Two-phase independent nonce fault fixture: literal1 selects first synthetic directError, second call runs on owned other worker. This is fixed test-case dispatch, not business or cryptographic policy."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "CloseResource",
+      "line": "498",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "verifiedSourceLine": "    var executor = Executors.newSingleThreadExecutor();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "498",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "    var executor = Executors.newSingleThreadExecutor();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "506",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "          executor.submit(() -> codec.encrypt(IDENTITY, plaintext)).get(5, TimeUnit.SECONDS);",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "line": "513",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "verifiedSourceLine": "    } finally {",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Unconfirmed owned-worker termination must fail Test and leave codec ownership unclaimed, rather than pass or call a potentially blocking close while worker owns lock. shutdownNow precedes await10, original boundedFuture/latches retained."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "514",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      executor.shutdownNow();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "515",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "verifiedSourceLine": "      if (executor.awaitTermination(10, TimeUnit.SECONDS)) codec.close();",
+      "disposition": "NOT_APPLICABLE_CONCRETE_STANDALONE_FINITE_FIXTURE_AFTER_BUG3019_CORRECTION",
+      "basis": "Standalone wholeJUnit owns all pools/codecs. WebLog caller-monitor Future5s; old100jobs invokeAll10/Future10, each finally shutdownNow/assert await10 before codec.close. New other-worker Future5s then shutdownNow/await10 before close. Revocation original100 Futures20/two-worker bounded latch20 and finally release/shutdownNow/await10 before close. Codec resource sites are in explicit finally and close only after worker termination; false/interrupt remains failed/unconfirmed, never PASS. No managed application thread, real key, external service or process is created."
+    }
+  ],
+  "productionMainFindings": 0,
+  "scopeWhole451": false,
+  "testChangedOnlyFixedDiagnostic": true,
+  "manualSuppression": false
+}
