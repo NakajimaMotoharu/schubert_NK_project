@@ -9,15 +9,31 @@ from xml.etree import ElementTree as ET
 HERE=Path(__file__).resolve()
 P=runpy.run_path(str(HERE.with_name('5216_g07_scope_build_delta.py')))
 E=HERE.parent.parent/'evidence'
-START=next(Path('documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117').glob('532_G07*'))
+CONFIG = {
+    '532': {
+        'history': ('PG39880-g07-service-state-lock-public-delta-v1',
+                    'PG39840-g07-cleanup-static-and-characterization-delta-v1'),
+        'units': {'PG39904-p020-approved-login-title148-v1': ('unit', 148)},
+        'post': 'PG39910-p020-login-title-independent-v1',
+    },
+    '536': {
+        'history': ('PG39914-g07-approved-login-title-and-quality-delta-v1',
+                    'PG39880-g07-service-state-lock-public-delta-v1',
+                    'PG39840-g07-cleanup-static-and-characterization-delta-v1'),
+        'units': {'PG39922-p020-approved-all-brand153-v1': ('firstUnit', 153),
+                  'PG39923-p020-approved-all-brand153-v2': ('unit', 153)},
+        'post': 'PG39928-p020-approved-all-brand-independent-v1',
+    },
+}
+GROUP=sys.argv[2] if len(sys.argv)==3 else '532'
+settings=CONFIG[GROUP]
+START=next(Path('documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117').glob(GROUP+'_G07*'))
 V=json.loads(START.read_bytes())['values']
 OUT=E/V['run']/'scan'
 WORK=Path(V['volatileStaging'])
 RETAIN=Path.cwd().parent/'pgpt-runs/PG379'/V['run'].lower()
-HISTORY=('PG39880-g07-service-state-lock-public-delta-v1',
-         'PG39840-g07-cleanup-static-and-characterization-delta-v1')
-UNIT=E/'PG39904-p020-approved-login-title148-v1'
-POST=E/'PG39910-p020-login-title-independent-v1/manifest.json'
+HISTORY=settings['history']
+POST=E/settings['post']/'manifest.json'
 
 
 def set_worker(worker):
@@ -54,25 +70,36 @@ def classify():
         verified=[]
         for row in original:
             path=Path(row['path'])
-            if row.get('actualExit')==0 or path.resolve()!=UNIT/'jacoco.exec':
+            name=path.parent.name
+            if row.get('actualExit')==0 or name not in settings['units'] or path.name!='jacoco.exec':
                 continue
+            unit_folder=E/name
+            assert path.resolve()==unit_folder/'jacoco.exec'
+            ticket,expected=settings['units'][name]
             meta=by_key[row['path'],row['blob']]
-            unit=B.load(UNIT/'manifest.json')
-            start=B.load(UNIT/'begin.json')
+            unit=B.load(unit_folder/'manifest.json')
+            start=B.load(unit_folder/'begin.json')
             finished=B.load(POST)
-            assert start['source']==unit['source']==finished['source']
-            assert Path(finished['unit']['path']).resolve()==UNIT/'manifest.json'
-            assert finished['unit']['sha256']==B.ref(UNIT/'manifest.json')['sha256']
-            assert finished['tests']==unit['expected']==148
+            assert start['source']==unit['source']
+            assert Path(finished[ticket]['path']).resolve()==unit_folder/'manifest.json'
+            assert finished[ticket]['sha256']==B.ref(unit_folder/'manifest.json')['sha256']
+            assert finished['tests']==unit['expected']==expected
+            if ticket=='unit':
+                assert unit['source']==finished['source']
+            else:
+                assert unit['source']!=finished['source']
+                prior_static=Path(finished['firstStaticNonzero']['path'])
+                assert B.ref(prior_static)==finished['firstStaticNonzero']
+                assert B.load(prior_static)['stageExits']['spotbugs']==1
             terminal=unit['stages']['execinfo']
-            assert terminal==B.load(UNIT/'execinfo-exit.json') and terminal['actualExit']==0
+            assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
             decoded=Path(terminal['log']['path'])
-            assert decoded==UNIT.relative_to(Path.cwd())/'execinfo.log' or decoded==UNIT/'execinfo.log'
+            assert decoded==unit_folder.relative_to(Path.cwd())/'execinfo.log' or decoded==unit_folder/'execinfo.log'
             assert B.ref(decoded)==terminal['log']
-            assert terminal['command'][-2:]==['execinfo',str((UNIT/'jacoco.exec').resolve())]
+            assert terminal['command'][-2:]==['execinfo',str((unit_folder/'jacoco.exec').resolve())]
             assert meta['blobSha256']==B.ref(WORK/meta['relativeProjection'])['sha256']==B.ref(path)['sha256']
-            root=ET.parse(UNIT/'xml/TEST-junit-jupiter.xml').getroot()
-            assert len(list(root.iter('testcase')))==148
+            root=ET.parse(unit_folder/'xml/TEST-junit-jupiter.xml').getroot()
+            assert len(list(root.iter('testcase')))==expected
             assert not any(n.tag in ('failure','error','skipped') for n in root.iter())
             text=decoded.read_text()
             assert re.findall(r'^Session "([^"]+)":',text,re.M)==[unit['session']]
@@ -81,7 +108,8 @@ def classify():
             assert not any(n.startswith(('dev/codex/schubert/nk/','org/postgresql/','com/microsoft/playwright/')) for _,_,_,n in rows)
             verified.append(dict(row,actualExit=0,originalUnitExit=0,ordinaryProbeDataOnly=True,
                                  decodedOrigin=terminal['log'],qualifiedOriginal=B.ref(POST),
-                                 session=unit['session'],decodedRows=len(rows),toolExecutionRepeated=False))
+                                 session=unit['session'],decodedRows=len(rows),toolExecutionRepeated=False,
+                                 priorStaticFailureRemains=ticket!='unit'))
         return verified
 
     p.exact_previous=old_rows
@@ -95,7 +123,8 @@ def retain():
     set_worker(p.w)
     value=p.p.load(OUT/'qualified-cached-initial.json')
     assert value['unresolvedCandidates']==value['unqualifiedBinary']==0
-    p.p.write(OUT/'qualified-final-private-detail.json',dict(value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=1,initialIssue='Exact archived path was relative instead of absolute'))
+    p.p.write(OUT/'qualified-final-private-detail.json',dict(value,verifier=p.p.ref(HERE),scannerExecutionCount=1,initialClassificationExit=int(GROUP=='532'),
+                   initialIssue='Exact archived path was relative instead of absolute' if GROUP=='532' else None))
     p.DETAILS=('scan-terminal.json','qualified-cached-initial.json','qualified-final-private-detail.json',
                'classified-findings.json','remaining-origins.json','binary-qualification.json')
     p.main()
