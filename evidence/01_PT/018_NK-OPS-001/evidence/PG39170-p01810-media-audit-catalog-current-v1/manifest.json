@@ -1,0 +1,122 @@
+{
+  "actualExit": 0,
+  "initialComparisonsExit": [
+    1,
+    1
+  ],
+  "initialResults": "MISMATCH_THEN_ABSENT_OLD_SWITCH_MAP_REQUIRES_EXPLICIT_REMOVAL_CATEGORY",
+  "source": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "inputHead": "30539fb0f8b41505530b6505609dbbab8b1a3269",
+  "run": "PG39170-p01810-media-audit-catalog-current-v1",
+  "catalogCase": "PT-P01810-CATALOG-035",
+  "proofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/manifest.json",
+      "sha256": "f0afe6032786855edfa7dd0be8037968fd9cfbb6955872c6c6f1bc1410b1f4ff"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37496-media-audit9-unit-v1/manifest.json",
+      "sha256": "2bc488340baa6cb67a9e8a52df5c3f38ef730292f952d29ed90d3e470a2c0ccb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39122-four-backup-candidate-build-v1/compile/manifest.json",
+      "sha256": "00234fd51933c1e9fb4589147992c723083a71ea89b6b64a387bc479c327befb"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37498-media-audit9-independent-v1/xml/TEST-junit-jupiter.xml",
+      "sha256": "d228e42e62d0079e2775415833d2019a5fd268655e496c23450cbd7dd9738808"
+    }
+  ],
+  "historicalDistinctRun": {
+    "source": "a03795510c3e52c88c6b0d4e990c73393d068b60",
+    "production": "f6bfae014bc6b185f193d644ae31d30c8ef97d86",
+    "tests": 9,
+    "cases": [
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media007UnicodeRedactionAndRepeatedImmutableJsonRemainIndependent()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media005ClockFailuresAndTimezoneNeverBecomeSuccessfulEvents()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media006LoggerRuntimeAndErrorPropagateWithoutRetryOrNormalizing()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media004EveryRecordNullAndMissingClockIsRejected()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media008OwnConcurrentCallsHaveNoMutableEventRetention()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media001ClosedStatusFailureMediaCatalogMatchesIndependentJson()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media003ConstructorVersionsAndAllNullsEstablishBoundaryContract()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditGeneratedContractTest.raw001ClosedFailureNamesOrdinalsAndDefensiveArrayAreIndependent()",
+      "dev.codex.schubert.nk.web.logging.MediaAuditContractTest.media002StatusAndByteBoundariesRejectWithoutLogging()"
+    ],
+    "targetRaw": {
+      "LINE": {
+        "missed": 0,
+        "covered": 56
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 9
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 36
+      },
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 310
+      }
+    }
+  },
+  "sameDirectClasses": {
+    "dev/codex/schubert/nk/protocol/file/MediaType.class": {
+      "old": "15ce86cdab59803ecf830b224ab891aa20be7689bc2831a8a751e103bc2f9694",
+      "current": "15ce86cdab59803ecf830b224ab891aa20be7689bc2831a8a751e103bc2f9694"
+    },
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class": {
+      "old": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793",
+      "current": "6fbe0a9f9e9bc939e5545015608690b5af86b8368cf42e07771999ebd9e95793"
+    },
+    "dev/codex/schubert/nk/protocol/layout/semantic/UserRole.class": {
+      "old": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae",
+      "current": "97544c0f619535bd68981e891048ac289edda544f03dddbab9110c70aaa69bae"
+    }
+  },
+  "changedDirectClasses": {
+    "dev/codex/schubert/nk/protocol/file/ContentDisposition.class": {
+      "old": "feaaab5ac703b53ff78cd25779bdb28cb76789a4cb7e7a02aed06a1ddbe6a7bf",
+      "current": "58c65a0f735c3a8347f122a49eedacd2bc4e10be362bc3b8f3d47ff38cc1c446"
+    },
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptor.class": {
+      "old": "9a3b6d8185bd5b8f3194d9557a33b6fc6a4763e968bf38854aab9842847e3557",
+      "current": "d62f55f9cc23862b2f95bd683b3ad12211a750ded7c07925da661ea8c7caa8a4"
+    },
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.class": {
+      "old": "57bae1514c00bbfedf56419b8f5fee15220ecf93876e748d1f0b145e160345b5",
+      "current": "feda029924e725616bf5424d361475759f246719f9ee366c209d559fb25ad20e"
+    }
+  },
+  "removedLegacyCompilerMap": {
+    "dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator$1.class": {
+      "old": "b75fad14ae693285fd2e17dc90e7b68e636e5aaa5d83e4a520cab2df3186acd4",
+      "current": null
+    }
+  },
+  "trackedWebInputs": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPrincipal.java": "29af626632ac4c2727f9d0963c3967cb0be7eda57daf762a482268c467dc9232",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/package-info.java": "24641c16e2937e6fdb40acd9c3f86139fb9b54588aaf5931c240d74471d93277",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditContractTest.java": "7ba603e528b39d1d2540f62bfa9070168eb0c5d6b9f4e6b06442391355ac6ae2",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/MediaAuditGeneratedContractTest.java": "28e80931673234558162abe50078c81ffdb5ffd3f839ee27c322b24767b6accf"
+  },
+  "webSourceOrPomDifferences": {},
+  "currentWholeEvidenceAccepted": false,
+  "noCurrentRuntimeOrCoverageClaim": true,
+  "upcoming": "Fresh exact Protocol plus in-memory Web logger ordinary nine, with new group start and current source; do not rerun older broad source.",
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "newProductTests": 0,
+  "terminalAtUTC": "2026-11-18T09:55:55.383734+00:00"
+}
