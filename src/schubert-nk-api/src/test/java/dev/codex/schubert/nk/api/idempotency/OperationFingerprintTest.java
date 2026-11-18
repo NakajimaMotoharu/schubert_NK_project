@@ -48,7 +48,7 @@ class OperationFingerprintTest {
       assertEquals(
           GOLDEN_HMAC, HEX.formatHex(OperationFingerprint.INSTANCE.calculate(request, key)));
       assertEquals(
-          "CanonicalRequest[layoutId=QSTREQ01, layoutVersion=001, owner/target/fields=<redacted>]",
+          "CanonicalRequest[<redacted>]",
           request.toString());
     }
   }
@@ -117,7 +117,7 @@ class OperationFingerprintTest {
         assertArrayEquals(new byte[] {1, 2, 3}, field.value());
         assertEquals(1, request.fields().size());
         assertEquals(
-            "CanonicalField[name=body, typeVersion=X1, value=<redacted>]", field.toString());
+            "CanonicalField[<redacted>]", field.toString());
         assertTrue(new CanonicalField("body", "X1", null).value() == null);
       }
     }

@@ -1,0 +1,70 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5023_ssc458_canonical_profile.json",
+    "sha256": "8e9e08a04a1aefd97bd6843b0dec3f04ee0410d7feb607fdf2ba102b191e3640"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java": "0b10a762ba66659b57aa3ae924030faa75f5a4cab1cbf7a06cc1b65002e05661",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java": "c0746d7c6a9ac27abdba6521352523ef2aa0ec693929eff8e1ab41cbe46eaf53",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalValueDiagnosticTest.java": "502c9de0c2d62d5bce7e81696dfddf2aeccc196ee8d0db58f5e345a90be6bc8a",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38508-ssc458-canonical-prepare-v1/manifest.json",
+    "sha256": "d1dc661979113146483861523fa874c59b340ea079a7c27d52e41d8a2ba5b8c2"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38510-ssc458-canonical-static-v1/manifest.json",
+    "sha256": "b8af1185edd3351cf272ef778827bf9eb6b68b337221b0164e10cb3cd7026f2f"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5024_ssc458_canonical_admission.json",
+    "sha256": "493d7613bf00c3e0d46cca1ea72186f3f23b68a4412d6691b1d3ea9c32277e49"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "line": "22",
+      "reason": "SS324 section 3 and independent original value case 001 distinguish an absent field from an explicitly empty field. Nullable byte array is an intentional tagged absence, not a collection convention. Copies and terminal ownership remain unchanged. The new fixed diagnostic observes neither branch.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "line": "27",
+      "reason": "The independently verified canonical value encodes null distinctly from an empty byte sequence. Replacing null with empty would change the encoding contract and the fingerprint input. The existing null-aware return annotation and byte cloning remain unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Return an empty collection rather than null."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "264",
+      "reason": "The array returned by enum values is caller-owned. The original negative fixture mutates its copy to null and independently verifies the enum canonical values remain intact. This assignment belongs only to the fixture.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

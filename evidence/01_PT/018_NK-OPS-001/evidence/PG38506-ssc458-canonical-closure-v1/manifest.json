@@ -1,0 +1,43 @@
+{
+  "actualExit": 0,
+  "source": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+  "terminalAtUTC": "2026-11-18T03:56:59.862036+00:00",
+  "designMain": "277e291e9e04b58ec68186496227c828b74470da",
+  "design": "SSC-458",
+  "inputs": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "sha256": "e86a86a77aad33c5629a5724f21d421e1ca0f359247122abf63538586d8ace89"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalRequest.java",
+      "sha256": "cb8244f32401bd7e2336c08bf76353fb5b388b59541ef426711bfcb38d29ca9b"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/Fingerprint.java",
+      "sha256": "0b10a762ba66659b57aa3ae924030faa75f5a4cab1cbf7a06cc1b65002e05661"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/FingerprintVerification.java",
+      "sha256": "cfa87222c236a4629d1556f081b073b0b2a99578dbc5db476372243d955f1110"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "sha256": "c0746d7c6a9ac27abdba6521352523ef2aa0ec693929eff8e1ab41cbe46eaf53"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalValueDiagnosticTest.java",
+      "sha256": "502c9de0c2d62d5bce7e81696dfddf2aeccc196ee8d0db58f5e345a90be6bc8a"
+    }
+  ],
+  "profileBoundary": "Four ordinary value types and two entire test classes, seven methods. In-memory canonical inputs and enum only. No keys, HMAC, DB, JMS, processes, or service state. Named OperationFingerprintTest excluded from this fixed run.",
+  "relatedUnrunTestPath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+  "oldProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35430-canonical-data6-source-v1/manifest.json",
+      "sha256": "4a718d59a46fe00efd0b89bf24e457f691a4729b4add92e4a878ee05de73b301"
+    }
+  ],
+  "expectedTests": 7,
+  "newDefinitions": 1
+}

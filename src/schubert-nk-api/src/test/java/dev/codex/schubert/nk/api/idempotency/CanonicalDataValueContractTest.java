@@ -41,8 +41,7 @@ final class CanonicalDataValueContractTest {
       assertArrayEquals(new byte[] {65, 0, -1}, owned.value());
       assertEquals(FIELD, owned.name());
       assertEquals(RAW_TYPE, owned.typeVersion());
-      assertEquals(
-          "CanonicalField[name=field, typeVersion=B1, value=<redacted>]", owned.toString());
+      assertEquals("CanonicalField[<redacted>]", owned.toString());
     }
     assertArrayEquals(new byte[] {0, 0, 0}, owned.value());
     assertArrayEquals(new byte[] {99, 0, -1}, input);
@@ -193,9 +192,7 @@ final class CanonicalDataValueContractTest {
         assertSame(first, request.fields().get(0));
         assertSame(second, request.fields().get(1));
         assertThrows(UnsupportedOperationException.class, () -> request.fields().add(first));
-        assertEquals(
-            "CanonicalRequest[layoutId=QRYREQ01, layoutVersion=001, owner/target/fields=<redacted>]",
-            request.toString());
+        assertEquals("CanonicalRequest[<redacted>]", request.toString());
       }
       assertArrayEquals(new byte[] {0, 0}, first.value());
       assertArrayEquals(new byte[] {0}, second.value());

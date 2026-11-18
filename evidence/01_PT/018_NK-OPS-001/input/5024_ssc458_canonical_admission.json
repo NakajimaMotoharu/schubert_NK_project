@@ -1,0 +1,47 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38516-SSC458-CANONICAL-DIAGNOSTICS",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38508-ssc458-canonical-prepare-v1/manifest.json",
+    "sha256": "d1dc661979113146483861523fa874c59b340ea079a7c27d52e41d8a2ba5b8c2"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38510-ssc458-canonical-static-v1/manifest.json",
+    "sha256": "b8af1185edd3351cf272ef778827bf9eb6b68b337221b0164e10cb3cd7026f2f"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "value = value == null ? null : value.clone();",
+      "sourceLine": 22,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "SS324 section 3 and independent original value case 001 distinguish an absent field from an explicitly empty field. Nullable byte array is an intentional tagged absence, not a collection convention. Copies and terminal ownership remain unchanged. The new fixed diagnostic observes neither branch.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "sourceAnchor": "return value == null ? null : value.clone();",
+      "sourceLine": 27,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The independently verified canonical value encodes null distinctly from an empty byte sequence. Replacing null with empty would change the encoding contract and the fingerprint input. The existing null-aware return annotation and byte cloning remain unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Return an empty collection rather than null."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 264,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The array returned by enum values is caller-owned. The original negative fixture mutates its copy to null and independently verifies the enum canonical values remain intact. This assignment belongs only to the fixture.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ]
+}
