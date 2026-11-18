@@ -1,0 +1,328 @@
+{
+  "actualExit": 0,
+  "run": "PG38392-p01810-four-web-redaction-catalog-rows-v1",
+  "source": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+  "terminalAtUTC": "2026-11-18T01:59:44.185881+00:00",
+  "catalog": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+    "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+  },
+  "rows": [
+    {
+      "catalogId": "PT-P01810-CATALOG-032",
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "oracle": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "exactSourceAndTest": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java": "8d1ce7abd62df2f2be4f02c68348455608c512a767eb0f5d64bb7ab07abf5222"
+      },
+      "methodPrefix": "value003ClaimedRow",
+      "literalExpectedInOldPassingTest": "ClaimedWebLog[identity/payload/lease=<redacted>]",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34670-web-log-value5-unit-v1/manifest.json",
+          "sha256": "bdcfe51a54af2ca99988e586d19d4414203dd8efa7c2985903d2a7cb7bf9c11b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34672-web-log-value5-independent-v1/manifest.json",
+          "sha256": "ac2ef4fe2feb7b3b9ff4f51e9815cf69625110bd668d0e8eb67a100939ef36aa"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34674-web-log-value5-unfiltered-same-exec-v1/manifest.json",
+          "sha256": "88bab9475cf658a550a7cabd14068a52fac12a0b8b433c649fd86f2fac3cead1"
+        }
+      ],
+      "historicalScopeCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 121
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 18
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 18
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 13
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "historicalTargetCRC": "081b68d292a4db3d",
+      "currentClosureMixedProtocolFiles": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "narrowBodyRedactionProven": true,
+      "exactGenericLiteralPropositionMet": true,
+      "disposition": "REUSE_NARROW_VALUE_DIAGNOSTIC",
+      "observedExtraDiagnosticField": null,
+      "targetAndTestSameBytes": true,
+      "subjectSourcePairAttribution": "retain original single run, direct value contract only"
+    },
+    {
+      "catalogId": "PT-P01810-CATALOG-033",
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "oracle": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "exactSourceAndTest": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java": "98cd13d71d07dadf4bb2a65b2d40f9222c0ee1f7d35bc6dfcd46abd1724c9956",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java": "8d1ce7abd62df2f2be4f02c68348455608c512a767eb0f5d64bb7ab07abf5222"
+      },
+      "methodPrefix": "value002Ciphertext",
+      "literalExpectedInOldPassingTest": "EncryptedWebLogPayload[keyVersion=v1, ciphertext=<redacted>]",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34670-web-log-value5-unit-v1/manifest.json",
+          "sha256": "bdcfe51a54af2ca99988e586d19d4414203dd8efa7c2985903d2a7cb7bf9c11b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34672-web-log-value5-independent-v1/manifest.json",
+          "sha256": "ac2ef4fe2feb7b3b9ff4f51e9815cf69625110bd668d0e8eb67a100939ef36aa"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34674-web-log-value5-unfiltered-same-exec-v1/manifest.json",
+          "sha256": "88bab9475cf658a550a7cabd14068a52fac12a0b8b433c649fd86f2fac3cead1"
+        }
+      ],
+      "historicalScopeCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 62
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 6
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 12
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 9
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "historicalTargetCRC": "3b6a6fbc6f0fb621",
+      "currentClosureMixedProtocolFiles": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "narrowBodyRedactionProven": true,
+      "exactGenericLiteralPropositionMet": false,
+      "disposition": "ORACLE_FIELD_DIFF_RECORDED_PENDING_RESOLUTION",
+      "observedExtraDiagnosticField": "keyVersion",
+      "targetAndTestSameBytes": true,
+      "subjectSourcePairAttribution": "retain original single run, direct value contract only"
+    },
+    {
+      "catalogId": "PT-P01810-CATALOG-034",
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "oracle": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "exactSourceAndTest": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java": "8d1ce7abd62df2f2be4f02c68348455608c512a767eb0f5d64bb7ab07abf5222"
+      },
+      "methodPrefix": "value001Identity",
+      "literalExpectedInOldPassingTest": "WebLogPayloadIdentity[message/correlation=<redacted>]",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34670-web-log-value5-unit-v1/manifest.json",
+          "sha256": "bdcfe51a54af2ca99988e586d19d4414203dd8efa7c2985903d2a7cb7bf9c11b"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34672-web-log-value5-independent-v1/manifest.json",
+          "sha256": "ac2ef4fe2feb7b3b9ff4f51e9815cf69625110bd668d0e8eb67a100939ef36aa"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34674-web-log-value5-unfiltered-same-exec-v1/manifest.json",
+          "sha256": "88bab9475cf658a550a7cabd14068a52fac12a0b8b433c649fd86f2fac3cead1"
+        }
+      ],
+      "historicalScopeCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 155
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 4
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 26
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 10
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 8
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "historicalTargetCRC": "71e8fe832e362116",
+      "currentClosureMixedProtocolFiles": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "narrowBodyRedactionProven": true,
+      "exactGenericLiteralPropositionMet": true,
+      "disposition": "REUSE_NARROW_VALUE_DIAGNOSTIC",
+      "observedExtraDiagnosticField": null,
+      "targetAndTestSameBytes": true,
+      "subjectSourcePairAttribution": "retain original single run, direct value contract only"
+    },
+    {
+      "catalogId": "PT-P01810-CATALOG-039",
+      "target": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+      "oracle": [
+        "Only the declared type marker and REDACTED are allowed; raw record components, key/context/absolute paths and Throwable diagnostic text must not be rendered."
+      ],
+      "exactSourceAndTest": {
+        "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java": "5003b09aff1093dab0f672518d1962d5b2a9f0b95698d11d0295639ebe3b3a54",
+        "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyValueContractTest.java": "ddf0bf8a6ade52ce250059fedc18ec4cf35030b919a0fcea7955324b1462aa07"
+      },
+      "methodPrefix": "replyvalue001OpaqueBytes",
+      "literalExpectedInOldPassingTest": "ValidatedReply[correlationId=00000000-0000-0000-0000-000000000001, body=<redacted>]",
+      "evidence": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34950-reply-values-unit-v1/manifest.json",
+          "sha256": "5a0f60861d58a8541db542234d4d4c17389d6491650c5d9b5212e620198acd86"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34952-reply-values-independent-v1/manifest.json",
+          "sha256": "526951a75be6b736458ad4d22a3b2892dbf4f086eadb482fc9eea645fa628d30"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG34954-reply-values-unfiltered-same-exec-v1/manifest.json",
+          "sha256": "e4ba0e93d8fa3e9cbc2e63d1a120dfaf59e094b6146f9d92c7522c3a7fd75bbc"
+        }
+      ],
+      "historicalScopeCounters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 41
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 8
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 6
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "historicalTargetCRC": "585568aabac20ad6",
+      "currentClosureMixedProtocolFiles": [
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/ContentDisposition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodec.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java",
+        "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java"
+      ],
+      "narrowBodyRedactionProven": true,
+      "exactGenericLiteralPropositionMet": false,
+      "disposition": "ORACLE_FIELD_DIFF_RECORDED_PENDING_RESOLUTION",
+      "observedExtraDiagnosticField": "correlationId",
+      "targetAndTestSameBytes": true,
+      "subjectSourcePairAttribution": "retain original single run, direct value contract only"
+    }
+  ],
+  "matchingNarrowCatalogClauses": 2,
+  "unresolvedOracleRows": 2,
+  "newProductTests": 0,
+  "newStaticProcesses": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "scopeNoInheritedRuntimeCoverage": true,
+  "remaining": [
+    "SS351 permits conditional correlationId only as structured audit field; view DTO generic toString independently from actual logged events and metric label boundary",
+    "Limited keyVersion raw field is a version label, no key material was read or exposed. Determine contract classification before any test or production change.",
+    "Resolve discrepancies with canonical detailed design and retain both previous oracles; no F03 full source credit."
+  ]
+}
