@@ -12,11 +12,17 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public record InspectionExecution(Status status, Optional<InspectionProgress> lastConfirmed) {
   public enum Status {
-    SUCCESS,
-    WARNING,
-    TIME_LIMIT,
-    INTERRUPTED,
-    STORAGE_FAILURE
+    SUCCESS(0),
+    WARNING(10),
+    TIME_LIMIT(50),
+    INTERRUPTED(50),
+    STORAGE_FAILURE(50);
+
+    private final int exitCode;
+
+    Status(int exitCode) {
+      this.exitCode = exitCode;
+    }
   }
 
   public InspectionExecution {
@@ -37,11 +43,7 @@ public record InspectionExecution(Status status, Optional<InspectionProgress> la
    * Final resource closure and parent gates must also pass before a process uses this exit code.
    */
   public int exitCode() {
-    return switch (status) {
-      case SUCCESS -> 0;
-      case WARNING -> 10;
-      case TIME_LIMIT, INTERRUPTED, STORAGE_FAILURE -> 50;
-    };
+    return status.exitCode;
   }
 
   @Override
