@@ -1,0 +1,251 @@
+{
+  "actualExit": 0,
+  "run": "PG38522-f02-six-resolved-maven-dependency-model-v1",
+  "source": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+  "terminalAtUTC": "2026-11-18T04:02:15.083227+00:00",
+  "modelGoalTerminal": "2026-11-18T04:01:26.530409+00:00",
+  "begin": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/begin.json",
+    "sha256": "1380549f240acc16cc0f0764652c6785eb3ab3cd1a06a358fff965c253b36b06"
+  },
+  "terminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/terminal.json",
+    "sha256": "63861ff46546f91976d881be3bd03fb51d4d41f37db15b9006c7931acc9f5778"
+  },
+  "stdout": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/maven.stdout",
+    "sha256": "e1593c551692e13974abc4faa29c3e32dfbdbc2add78f765156085d722f686fd"
+  },
+  "modules": [
+    {
+      "module": "protocol",
+      "nodeCount": 9,
+      "productionInternalReachable": [],
+      "internalCoordinates": [],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/protocol-tree.json",
+        "sha256": "5e67c7bb0e2629a9e59df8444a19dd294a4e15895885f26a7c704c16a53a97d7"
+      }
+    },
+    {
+      "module": "storage",
+      "nodeCount": 9,
+      "productionInternalReachable": [],
+      "internalCoordinates": [],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/storage-tree.json",
+        "sha256": "f7edddd76a4f0636bf6bd17fb0182768a1e732b666455e132622abd1ec5ddb9f"
+      }
+    },
+    {
+      "module": "bootstrap",
+      "nodeCount": 25,
+      "productionInternalReachable": [
+        "storage"
+      ],
+      "internalCoordinates": [
+        {
+          "module": "storage",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        }
+      ],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/bootstrap-tree.json",
+        "sha256": "ce43de61282aebfd8622642eb68355fff8144c6b9ec60eca684933cfb9b93720"
+      }
+    },
+    {
+      "module": "api",
+      "nodeCount": 83,
+      "productionInternalReachable": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "internalCoordinates": [
+        {
+          "module": "bootstrap",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "bootstrap",
+          "scope": "test",
+          "type": "test-jar",
+          "classifier": "tests",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "storage",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "protocol",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        }
+      ],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/api-tree.json",
+        "sha256": "2d32db592eaa9a3614ef3a19e09425c83e4aadd63a926e448d977bcb2bd4442b"
+      }
+    },
+    {
+      "module": "web",
+      "nodeCount": 102,
+      "productionInternalReachable": [
+        "bootstrap",
+        "protocol",
+        "storage"
+      ],
+      "internalCoordinates": [
+        {
+          "module": "bootstrap",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "bootstrap",
+          "scope": "test",
+          "type": "test-jar",
+          "classifier": "tests",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "storage",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "protocol",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "api",
+          "scope": "test",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        }
+      ],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/web-tree.json",
+        "sha256": "b89e6298a7b20ed9355839e1ebef57511a94e16edf0532cf8d31baeeed3df3ce"
+      }
+    },
+    {
+      "module": "batch",
+      "nodeCount": 81,
+      "productionInternalReachable": [
+        "bootstrap",
+        "storage"
+      ],
+      "internalCoordinates": [
+        {
+          "module": "bootstrap",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "bootstrap",
+          "scope": "test",
+          "type": "test-jar",
+          "classifier": "tests",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        },
+        {
+          "module": "storage",
+          "scope": "compile",
+          "type": "jar",
+          "classifier": "",
+          "depth": 1,
+          "version": "0.1.0-SNAPSHOT"
+        }
+      ],
+      "model": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/batch-tree.json",
+        "sha256": "20b7b05834679b69cfd5a1e32a2ac7ccf507fe978cb0a4098473c1ff6ce2f1ed"
+      }
+    }
+  ],
+  "expectedProductionInternalDirections": 9,
+  "forbiddenProductionDirections": 0,
+  "characterizationProductDependencyCount": 0,
+  "webApiRelation": "TEST_SCOPE_ONLY",
+  "apiWebRelation": "NO_PRODUCTION_DEPENDENCY",
+  "pinnedDirectExternal": {
+    "api": {
+      "artemis-jakarta-client": [
+        "2.56.0",
+        "compile"
+      ],
+      "postgresql": [
+        "42.7.13",
+        "compile"
+      ]
+    },
+    "web": {
+      "artemis-jakarta-client": [
+        "2.56.0",
+        "compile"
+      ],
+      "postgresql": [
+        "42.7.13",
+        "runtime"
+      ]
+    },
+    "batch": {
+      "artemis-jakarta-client": [
+        "2.56.0",
+        "compile"
+      ],
+      "postgresql": [
+        "42.7.13",
+        "runtime"
+      ]
+    }
+  },
+  "mavenPhase": "DIRECT_DEPENDENCY_METADATA_COLLECTION",
+  "actualBuilds": 0,
+  "productTestsExecuted": 0,
+  "productionClassBodiesRead": 0,
+  "remaining": [
+    "Reactor compile API/Web and full artifact ArchUnit including QA056 scope",
+    "Protocol exact same physical JAR at runtime",
+    "Current real Web-to-API Artemis and final 451"
+  ],
+  "wholeF02Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
