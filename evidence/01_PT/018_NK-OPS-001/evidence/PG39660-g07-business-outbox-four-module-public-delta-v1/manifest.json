@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T13:57:14.144637+00:00",
+  "fromCommit": "537233ed1381ece73fa892a48e0dee007b4e83e4",
+  "throughCommit": "07be91ef394434032d027e3016ca78ecc71c371c",
+  "source": "07be91ef394434032d027e3016ca78ecc71c371c",
+  "commits": 19,
+  "trackedBlobVersions": 458,
+  "text": 456,
+  "binary": 2,
+  "heldMetadataOnly": 0,
+  "scannerCommand": [
+    "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+    "dir",
+    "--no-banner",
+    "--no-color",
+    "--redact=100",
+    "--ignore-gitleaks-allow",
+    "--gitleaks-ignore-path",
+    "/dev/shm/schubert-nk-pg39660-1000/text",
+    "--report-format=json",
+    "--report-path",
+    "/dev/shm/schubert-nk-pg39660-1000/scanner-redacted.json",
+    "--timeout",
+    "75",
+    "/dev/shm/schubert-nk-pg39660-1000/text"
+  ],
+  "scannerSha256": "88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509",
+  "scannerExit": 1,
+  "scannerStartUTC": "2026-11-18T13:54:55.299537+00:00",
+  "scannerTerminalUTC": "2026-11-18T13:54:59.957968+00:00",
+  "findingsCount": 68,
+  "confirmedSecrets": 0,
+  "unresolvedCandidates": 0,
+  "unqualifiedBinary": 0,
+  "grounds": {
+    "Exact prior adjudicated line and scanner coordinate": 64,
+    "Exact published file digest at scanner coordinate": 3,
+    "Exact path and content in reachable Git history": 1
+  },
+  "exactPrivateProjectionReceipts": {
+    "projection.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/projection.json",
+      "sha256": "7804e106775b445d12243dfc0e2fe10d4fcecd2ee1cc100a8715a6528291a61f"
+    },
+    "scanner-redacted.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/scanner-redacted.json",
+      "sha256": "0c9e89b217e4a6fa722feff220327dfbdfa63ec970786c5ec29f37760df9f9ce"
+    }
+  },
+  "exactPrivateProofFiles": {
+    "scan-terminal.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/scan-terminal.json",
+      "sha256": "6c68b79397e38e2dd350faf71845e6ffc8e831654a40fe8c759f5e120845f7e4"
+    },
+    "qualified-cached-initial.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/qualified-cached-initial.json",
+      "sha256": "ec088928b7f1016bdc152f261c06ad94d8aeb0520e414fcc4e8f8cda4a979536"
+    },
+    "qualified-final-private-detail.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/qualified-final-private-detail.json",
+      "sha256": "78e237651b95c7f48c28f24e2e5f713db242a9ab630ad23373b51fd4859df4e4"
+    },
+    "classified-findings.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/classified-findings.json",
+      "sha256": "56e2d83c239475c6ad3f6f5ec447546efbbccace7508208e4c73ab8a6d42a6a2"
+    },
+    "remaining-origins.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/remaining-origins.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "binary-qualification.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/binary-qualification.json",
+      "sha256": "624908775190e46bb8758ea12e35e9a301a9328004184a21a8d292b31a934c6f"
+    },
+    "first-origin-tool-failure.json": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39660-g07-business-outbox-four-module-public-delta-v1/qualification-detail/first-origin-tool-failure.json",
+      "sha256": "ba11bf136d37161f9de5388c57e525d455b7b5efb15667e1a91c2d7eff102f86"
+    }
+  },
+  "projectionPersistedAsVolatileDuplicateOnly": true,
+  "releasedProjectionFiles": 458,
+  "allReleasedFilesIndividuallyHashChecked": true,
+  "originalGitBlobsPreserved": true,
+  "projectionReconstructionBasis": "Exact Git blob and gzip-decoded SHA per retained projection index",
+  "compactPublicReceipt": true,
+  "secretCandidateOutput": [
+    "scanner match strings",
+    "credential values",
+    "private runtime content",
+    "raw HTTP or database output"
+  ],
+  "retainedReportHasValuesRedacted": true,
+  "activeRemoteBusinessWork": 0,
+  "productTests": 0,
+  "localFreeBeforeCleanup": 1743761408,
+  "localFreeAfterCleanup": 1743757312,
+  "tmpFreeBeforeCleanup": 7809785856,
+  "tmpFreeAfterCleanup": 7948283904,
+  "sameRangeScannerRepeated": false,
+  "qualifiedRangeOnly": true,
+  "wholeG07Accepted": false,
+  "whole451Accepted": false
+}

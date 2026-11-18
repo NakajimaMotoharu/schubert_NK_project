@@ -98,10 +98,39 @@ def proven_content(line, first, last, digests, reachable):
     return p_content(line, first, last, digests | explicit_origins, reachable)
 
 
+def exact_prepared_class_index():
+    result = {}
+    sources = {'PG39588': None, 'PG39638': 'PG39640',
+               'PG39642': 'PG39643', 'PG39647': None}
+    for prefix, variant in sources.items():
+        [receipt] = list(E.glob(prefix + '*/manifest.json'))
+        data = B.load(receipt)
+        assert data['actualExit'] == 0
+        config = Path(data['config']['path'])
+        if variant is not None:
+            [config] = list(E.glob(variant + '*/original-profile-exact.json'))
+        assert B.ref(config)['sha256'] == data['config']['sha256']
+        build = r.RETAIN.parent / receipt.parent.name.lower()
+        for key, folder in [('physicalClassHashes', 'component'), ('testClassHashes', 'test-classes')]:
+            for file, sha in data[key].items():
+                relative = Path(file)
+                assert relative.parts[:4] == ('dev', 'codex', 'schubert', 'nk')
+                assert relative.parts[4] == 'api'
+                assert not any(part == '..' for part in relative.parts)
+                assert relative.stem.split('$')[0] not in B.HELD
+                path = build / folder / relative
+                assert path.is_file() and path.resolve() == path and B.ref(path)['sha256'] == sha
+                result[(file, sha)] = dict(kind='Exact compiled closed-host class bytes',
+                                          classPath=file, archiveFolder=folder, compile=B.ref(receipt),
+                                          compileProfile=B.ref(config))
+    return result
+
+
 p_previous = p.exact_previous
 p_content = p.proven_content
 p.exact_previous = known_coordinate_lines
 p.t.checked_run_id = current_crc
+p.t.prepare_index = exact_prepared_class_index
 explicit_origins = {}
 if __name__ == '__main__':
     explicit_origins.update({k.encode(): v for k, v in (resolved_type_origins() | current_class_digests()).items()})
