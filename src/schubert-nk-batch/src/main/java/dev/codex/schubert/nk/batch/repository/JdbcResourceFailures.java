@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.sql.SQLException;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -16,8 +16,8 @@ interface JdbcResourceFailures {
         || (primary instanceof SQLException && !(secondary instanceof SQLException))) return true;
     if (!(primary instanceof SQLException)) primary.addSuppressed(new BatchRepositoryException());
     else {
-      StorageIoException.preserveFatal(primary);
-      StorageIoException.preserveFatal(secondary);
+      JdbcFailureGraph.preserveFatal(primary);
+      JdbcFailureGraph.preserveFatal(secondary);
     }
     return false;
   }

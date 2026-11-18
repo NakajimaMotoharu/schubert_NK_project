@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -17,7 +17,7 @@ interface MorningSqlFailures {
   static void preserveCatalogFatal(Throwable failure) {
     Objects.requireNonNull(failure, "known catalog failure");
     if (failure instanceof SQLException || failure instanceof BatchRepositoryException) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
     }
   }
 
