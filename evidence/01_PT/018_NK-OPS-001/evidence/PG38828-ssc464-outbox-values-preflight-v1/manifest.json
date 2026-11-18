@@ -1,0 +1,64 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5067_ssc464_outbox_values_profile.json",
+    "sha256": "25ed083cc5c6a683cdee34891c04026c05e5734dae0710f0bb045eea5c89ae87"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "8ab0216109c17c6d5cf96039b6ac968dd2cb6fc401c2f93b0f92cc08c3ed8e80",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java": "ef0be1f11629947394710ce2f537567c19401737e2329a3d54719471ea5b7f53",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "ecb1f660cd83fbc28c7133e38f1ea1a67ef47f7bf46085e220b810047d963efc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java": "1712c51387bdf0946af192b21a7b88164a8d48de6d31d01f30e66bee72c3442b",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetainedValueContractTest.java": "639e6ffc34125ec5ae0e24e479b81bd2234cc61ff0a932b6189cec2e166203d5",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38824-ssc464-outbox-values-prepare-v1/manifest.json",
+    "sha256": "d6fb2f752788eb640a2d70e122861eb4ba637ba9358a26859600f0971d70b9ed"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/manifest.json",
+    "sha256": "f530b0fd396651af3ea7369c826d938f6bb8e64ac0929c38db2bb8e06f06c2ce"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5068_ssc464_outbox_values_admission.json",
+    "sha256": "3949881ea87b8b4723d9e56323439c553c7f146dbdff9472df927d07db71dedb"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "238",
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "253",
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

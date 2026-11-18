@@ -1,0 +1,36 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38830-SSC464-OUTBOX-VALUES",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38824-ssc464-outbox-values-prepare-v1/manifest.json",
+    "sha256": "d6fb2f752788eb640a2d70e122861eb4ba637ba9358a26859600f0971d70b9ed"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1/manifest.json",
+    "sha256": "f530b0fd396651af3ea7369c826d938f6bb8e64ac0929c38db2bb8e06f06c2ce"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "destinationsCopy[0] = null;",
+      "occurrences": 1,
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceLine": 238,
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "rawMultiplicity": 1
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "detectedCopy[0] = null;",
+      "occurrences": 1,
+      "reason": "Mutate only the independent caller-owned enum values array, then assert fresh values retains its fixed first constant; no production null enum or state is accepted.",
+      "disposition": "NOT_APPLICABLE",
+      "sourceLine": 253,
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "rawMultiplicity": 1
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38830-SSC464-OUTBOX-VALUES",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java": "WBS-P006-02",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java": "WBS-P005-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": "WBS-P005-03"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4610_SSC464Outbox\u4e8c\u5024\u56fa\u5b9a\u8a3a\u65ad\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "17eac7bb4ba7f55726c99d28c760d30fa09d99fd8709243adfe6556852415579"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4389_DLQ\u914d\u9001Outbox\u7d14\u5024\u4e03class\u30fb\u901a\u5e38\u516b\u4ed5\u69d8.md",
+      "sha256": "3a0387c042f519f22df78e8f2b63d542d88eab0e3297aaaaebea5570958dddd7"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38820-ssc464-outbox-values-closure-v1/manifest.json",
+      "sha256": "9a113ac6c2baa8706c7cfbff037dd22476a26ce5d39a15bee9c6d8e0c0e2e713"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35492-dlq-delivery8-post-v1/manifest.json",
+      "sha256": "374be278bcef843b957d5ebcd7370526a6bad1adc07fc9a0db399e936344678a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/manifest.json",
+      "sha256": "d4d8b337bdab8275e8b9a06757f7fa1df16cded935617313a505f567c124d0d1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35480-dlq-delivery8-source-v1/manifest.json",
+      "sha256": "31376e2b95dbfaddb79f718f1212049c9b7107186a1f1d9ce0b3e1ffae74a401"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "be2e2d12a0e533a7ed28ad28d1a5b1a2f10458a7",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxDataValueContractTest.java",
+      "tests": 3
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRetainedValueContractTest.java",
+      "tests": 2
+    }
+  ],
+  "expectedTests": 5,
+  "newTestDefinitions": 0,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxDlqMetadata.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata.class",
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.class",
+    "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest",
+    "dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38822-ssc464-outbox-values-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38824-ssc464-outbox-values-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38826-ssc464-outbox-values-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38828-ssc464-outbox-values-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38830-ssc464-outbox-values-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38832-ssc464-outbox-values-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38824-ssc464-outbox-values-prepare-v1",
+    "unit": "pg38830-ssc464-outbox-values-unit-v1"
+  }
+}
