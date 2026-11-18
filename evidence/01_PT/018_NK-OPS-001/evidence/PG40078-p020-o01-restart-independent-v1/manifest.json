@@ -1,0 +1,202 @@
+{
+  "actualExit": 0,
+  "source": "33a195a0d943608709c12a220848e941609a78d4",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40075-p020-o01-restart192-v2/manifest.json",
+    "sha256": "d68723b43262e12c9752a7c7a262d5dde0d769f9c56150affa242015ac148c76"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40076-p020-o01-restart-static-v1/manifest.json",
+    "sha256": "d66a7994d9643bb852337975a0c59cde3abd1f387ea9622ee10372eea956b714"
+  },
+  "firstCompileFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40074-p020-o01-restart192-v1/manifest.json",
+    "sha256": "53235cdd2666f6f02a8ed0dc40be80289267026606e82a2c31b452514d21939e"
+  },
+  "firstIndependentSetupExit": 1,
+  "firstIndependentSetupCause": "File digest helper was called with bytes",
+  "firstPreparationUnitTestsExecuted": 0,
+  "firstDynamicCompleted": 192,
+  "tests": 192,
+  "suites": 20,
+  "originalTests": 187,
+  "newDefinitions": 5,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "testIds": {
+    "PT-CHR-DEF060": "acceptsTheApprovedRestartSessionOutcomeAndInvalidationEvidence",
+    "PT-CHR-DEF061": "requiresTheRestartInvalidationObservationSeparatelyFromOutcome",
+    "PT-CHR-DEF062": "rejectsASelfReportedNewLoginAfterRestart",
+    "PT-CHR-DEF063": "rejectsTextualAndNullInvalidationValuesEvenWhenSelfReported",
+    "PT-CHR-DEF064": "rejectsRestartDifferenceClaimsAgainstAnUnrelatedField"
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1552,
+    "BRANCH": 150,
+    "LINE": 298,
+    "COMPLEXITY": 119,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40075-p020-o01-restart192-v2/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40075-p020-o01-restart192-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/raw.tsv",
+      "sha256": "7988bd3bf6a50818659bf9acc8c577a6ff7d6b26fc14560dd52d523cfcbe1004"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1569
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 242
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 962
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8303
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/pmd-per-site.json",
+    "sha256": "79b36dcae457a331fc4fc7510b5bc36425537e15536ddd52dd0fedcbcf9576fb"
+  },
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "baseline": {
+    "path": "program/characterization/baseline/current/artifacts/CHR-O01.json",
+    "sha256": "76731f9ce334fd6aed892363d680054d2697ace54a138e370528bae107fe42e2"
+  },
+  "originalBaselineUnchanged": true,
+  "currentExpected": {
+    "sessionAfterRestart": "redirect-login",
+    "sessionInvalidated": true
+  },
+  "nkProjectionExpected": {
+    "sessionAfterRestart": "authenticated",
+    "sessionInvalidated": false
+  },
+  "nkRealSameSessionWitness": false,
+  "actualNkChr": false,
+  "actualBackendActions": 0,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40078-p020-o01-restart-independent-v1/class-init.log.gz",
+    "sha256": "0b360ca48dadc763373884c3b8d6f7da74384f8f79abdbe1ae1cea4900945b91"
+  },
+  "productTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T19:12:42.414687+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5270_p020_o01_restart_post.py",
+    "sha256": "529a1658afb7dd18c8788599875abb319f00c3997d72db17f8ae5a0a148a58a5"
+  }
+}
