@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-5965",
+  "groupId": "PGPT-WBS66-F03-API-CUSTOM-PAYLOAD-FINITE-20261118",
+  "baseCore": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T11:24:00.122000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-API-CUSTOM-PAYLOAD-FINITE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-API-CUSTOM-PAYLOAD-FINITE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/P018-09 original 26 API Custom Metric Payload Tests. Ensure only fixed finite owned waits then cleanup, reject malformed mode by both fixed hash domains without either provider. Keep original 26 test IDs, concurrency/golden/owner and full independent XML/direct raw. Exact public SDK11 reuse; no OS process/backend/held scope.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/manifest.json",
+        "sha256": "2c224be355a8face8c1be2af922877f952d6bd5b187a6c87e533be57d2e396b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4647_BUG3261APIGC固定mode不正値仕様.md",
+        "sha256": "6bdae917374fc36e5f323c25d96ef5fab850dee876b3c9a2642457e697241439"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "d01ed0c20a080052dac1ec29cf5c054177ab11f8",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2691",
+      "YKT-2387",
+      "BUG-3276",
+      "WBS-F02-a"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "run": "PG39400-f03-api-custom-payload-finite-independent-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.65,
+      "high": 3.9
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  },
+  "eligibility": {
+    "F02ExpiryAuditGuardCandidate": "HOLD",
+    "reason": "Current JdbcResourceFailures compiles against JdbcFailureGraph, which is outside the previous exact 11 Main input list for the sole approved Guard-type-only test. No runtime or capability modification attempted.",
+    "independentChosen": "API CustomMetricPayload"
+  }
+}
