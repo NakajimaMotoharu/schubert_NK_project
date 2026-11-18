@@ -1,0 +1,76 @@
+CLASS	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	2d4376c967ca14f1	true	130	49	INSTRUCTION:0:560	BRANCH:0:39	LINE:0:144	COMPLEXITY:0:33	METHOD:0:12	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	<init>	()V	1	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	<init>	(Ljava/util/function/IntSupplier;)V	1	INSTRUCTION:0:9	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	enqueue	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;Ljava/time/Instant;)Z	1	INSTRUCTION:0:80	BRANCH:0:2	LINE:0:20	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	claim	(Ljava/sql/Connection;Ljava/lang/String;Ljava/time/Instant;I)Ljava/util/List;	1	INSTRUCTION:0:121	BRANCH:0:6	LINE:0:34	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	markSent	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;Ljava/time/Instant;)Z	1	INSTRUCTION:0:60	BRANCH:0:2	LINE:0:16	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	markFailure	(Ljava/sql/Connection;Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;Ljava/time/Instant;Ljava/lang/String;)Z	1	INSTRUCTION:0:131	BRANCH:0:13	LINE:0:34	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	closeRows	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:15	BRANCH:0:4	LINE:0:7	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:15	BRANCH:0:4	LINE:0:7	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	read	(Ljava/sql/ResultSet;)Ldev/codex/schubert/nk/web/logging/ClaimedWebLog;	8	INSTRUCTION:0:97	BRANCH:0:4	LINE:0:14	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	required	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:0:10	BRANCH:0:2	LINE:0:3	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	requireTransaction	(Ljava/sql/Connection;)V	10	INSTRUCTION:0:13	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogOutboxRepository	lambda$new$0	()I	4106	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/ClaimedWebLog	081b68d292a4db3d	true	27	65585	INSTRUCTION:9:112	BRANCH:2:8	LINE:1:17	COMPLEXITY:5:13	METHOD:3:10	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	<init>	(JLdev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;ILjava/time/Instant;Ljava/time/Instant;Ljava/lang/String;Ljava/time/Instant;)V	1	INSTRUCTION:0:73	BRANCH:2:6	LINE:0:12	COMPLEXITY:2:3	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/ClaimedWebLog	<init>	(JLdev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;ILjava/time/Instant;Ljava/time/Instant;Ljava/lang/String;Ljava/time/Instant;)V	20	INSTRUCTION:0:8	BRANCH:1:3
+DEFICIT	dev/codex/schubert/nk/web/logging/ClaimedWebLog	<init>	(JLdev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;ILjava/time/Instant;Ljava/time/Instant;Ljava/lang/String;Ljava/time/Instant;)V	23	INSTRUCTION:0:5	BRANCH:1:3
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	requireWorker	(Ljava/lang/String;)Ljava/lang/String;	8	INSTRUCTION:0:15	BRANCH:0:2	LINE:0:4	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/ClaimedWebLog	toString	()Ljava/lang/String;	44	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/ClaimedWebLog	hashCode	()I	10	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/ClaimedWebLog	equals	(Ljava/lang/Object;)Z	10	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	id	()J	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	identity	()Ldev/codex/schubert/nk/web/logging/WebLogPayloadIdentity;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	payload	()Ldev/codex/schubert/nk/web/logging/EncryptedWebLogPayload;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	attemptCount	()I	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	nextAttemptAt	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	createdAt	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	leaseOwner	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/ClaimedWebLog	leaseUntil	()Ljava/time/Instant;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	2051a9a29a9104c7	true	14	65585	INSTRUCTION:9:51	BRANCH:1:5	LINE:1:11	COMPLEXITY:4:5	METHOD:3:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	<init>	(Ljava/lang/String;[B)V	1	INSTRUCTION:0:43	BRANCH:1:5	LINE:0:9	COMPLEXITY:1:3	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	<init>	(Ljava/lang/String;[B)V	21	INSTRUCTION:0:8	BRANCH:1:3
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	ciphertext	()[B	1	INSTRUCTION:0:5	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	toString	()Ljava/lang/String;	35	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	hashCode	()I	11	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	equals	(Ljava/lang/Object;)Z	11	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload	keyVersion	()Ljava/lang/String;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	71e8fe832e362116	true	25	65585	INSTRUCTION:132:23	BRANCH:4:0	LINE:21:5	COMPLEXITY:7:3	METHOD:5:3	CLASS:0:1
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	<init>	(Ljava/util/UUID;Ljava/util/UUID;)V	1	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	0	INSTRUCTION:113:0	BRANCH:4:0	LINE:16:0	COMPLEXITY:3:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	22	INSTRUCTION:4:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	23	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	24	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	25	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	26	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	27	INSTRUCTION:15:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	29	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	30	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	31	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	33	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	34	INSTRUCTION:16:0	BRANCH:2:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	35	INSTRUCTION:5:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	37	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	38	INSTRUCTION:16:0	BRANCH:2:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	39	INSTRUCTION:7:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	aad	(Ljava/lang/String;)[B	41	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	10	INSTRUCTION:10:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	45	INSTRUCTION:4:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	46	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	47	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	uuidBytes	(Ljava/util/UUID;)[B	48	INSTRUCTION:1:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	toString	()Ljava/lang/String;	1	INSTRUCTION:2:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	toString	()Ljava/lang/String;	53	INSTRUCTION:2:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	hashCode	()I	17	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	hashCode	()I	14	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	equals	(Ljava/lang/Object;)Z	17	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	equals	(Ljava/lang/Object;)Z	14	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	messageId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity	correlationId	()Ljava/util/UUID;	1	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/web/logging/package-info	56ddad915bddf6fa	false	0	5632	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
