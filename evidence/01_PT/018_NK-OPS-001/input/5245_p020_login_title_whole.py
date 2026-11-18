@@ -54,6 +54,8 @@ PHASES = {
         '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
     'PG40124-p020-path-contract-green206-v1': (
         '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
+    'PG40128-p020-path-contract-green206-v2': (
+        '615_P020*', E/'PG40107-p020-u01-menu204-v3', 204, 206),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))

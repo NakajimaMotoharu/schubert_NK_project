@@ -30,6 +30,9 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_DIFF_ALLOWLIST_PATH =
       "program/characterization/tests/resources/cases/dif-allowlist.json";
   private static final String FIXTURE_DIF015 = "DIF-015";
+  private static final String FIXTURE_MODE_FIELD = "mode";
+  private static final String FIXTURE_DIFFERENCE_FIELD = "dif";
+  private static final String FIXTURE_CHANGED_PATH = "/changed-path";
   private static final String FIXTURE_OBSERVATIONS = "observations";
   private static final String FIXTURE_EXPECTED_NK = "expectedNk";
   private static final String FIXTURE_EXPECTED_CURRENT = "expectedCurrent";
@@ -656,7 +659,9 @@ class ArtifactComparatorTest {
             "nk"));
     mutate(
         fixture.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
-        root -> ((ObjectNode) root.path(FIXTURE_DIFFERENCES_ARRAY).get(1)).put("mode", "wildcard"));
+        root ->
+            ((ObjectNode) root.path(FIXTURE_DIFFERENCES_ARRAY).get(1))
+                .put(FIXTURE_MODE_FIELD, "wildcard"));
     observations.add(
         observation(
             "DIF-002",
@@ -798,20 +803,22 @@ class ArtifactComparatorTest {
     Fixture sample = fixture("legacy-path-definition");
     mutate(
         sample.nk().resolve(FIXTURE_CHR_A01_JSON),
-        root -> ((ObjectNode) root.path("dif")).put(FIXTURE_DIF015, "/changed-path"));
+        root ->
+            ((ObjectNode) root.path(FIXTURE_DIFFERENCE_FIELD))
+                .put(FIXTURE_DIF015, FIXTURE_CHANGED_PATH));
     mutate(
         sample.project().resolve(FIXTURE_DIFF_ALLOWLIST_PATH),
         root ->
             ((ObjectNode) root.path(FIXTURE_DIFFERENCES_ARRAY).get(14))
-                .put("mode", FIXTURE_DIFFERENCE));
+                .put(FIXTURE_MODE_FIELD, FIXTURE_DIFFERENCE));
     mutate(
         sample.observations(),
         root -> {
           for (JsonNode item : root.path(FIXTURE_OBSERVATIONS)) {
             if (FIXTURE_DIF015.equals(item.path("id").asText())) {
               ((ObjectNode) item)
-                  .put("mode", FIXTURE_DIFFERENCE)
-                  .put(FIXTURE_EXPECTED_NK, "/changed-path");
+                  .put(FIXTURE_MODE_FIELD, FIXTURE_DIFFERENCE)
+                  .put(FIXTURE_EXPECTED_NK, FIXTURE_CHANGED_PATH);
             }
           }
         });
@@ -829,13 +836,15 @@ class ArtifactComparatorTest {
     Fixture contract = fixture("isolated-contract-change");
     mutate(
         contract.nk().resolve(FIXTURE_CHR_A01_JSON),
-        root -> ((ObjectNode) root.path("dif")).put(FIXTURE_DIF015, "/changed-path"));
+        root ->
+            ((ObjectNode) root.path(FIXTURE_DIFFERENCE_FIELD))
+                .put(FIXTURE_DIF015, FIXTURE_CHANGED_PATH));
     mutate(
         contract.observations(),
         root -> {
           for (JsonNode item : root.path(FIXTURE_OBSERVATIONS)) {
             if (FIXTURE_DIF015.equals(item.path("id").asText())) {
-              ((ObjectNode) item).put(FIXTURE_EXPECTED_NK, "/changed-path");
+              ((ObjectNode) item).put(FIXTURE_EXPECTED_NK, FIXTURE_CHANGED_PATH);
             }
           }
         });
@@ -1812,8 +1821,8 @@ class ArtifactComparatorTest {
     for (Oracle oracle : ORACLES) {
       ObjectNode currentArtifact = currentArtifacts.get(oracle.caseId());
       ObjectNode nkArtifact = nkArtifacts.get(oracle.caseId());
-      ObjectNode currentDif = object(currentArtifact, "dif");
-      ObjectNode nkDif = object(nkArtifact, "dif");
+      ObjectNode currentDif = object(currentArtifact, FIXTURE_DIFFERENCE_FIELD);
+      ObjectNode nkDif = object(nkArtifact, FIXTURE_DIFFERENCE_FIELD);
       String pointer = "/dif/" + oracle.id();
       JsonNode currentValue = TextNode.valueOf(oracle.currentValue());
       JsonNode nkValue = TextNode.valueOf(oracle.nkValue());
@@ -2119,7 +2128,7 @@ class ArtifactComparatorTest {
         .put("id", id)
         .put(FIXTURE_CASEID, caseId)
         .put("field", field)
-        .put("mode", mode)
+        .put(FIXTURE_MODE_FIELD, mode)
         .put("selectorType", selectorType)
         .put("selector", selector)
         .put(FIXTURE_POINTER, pointer)

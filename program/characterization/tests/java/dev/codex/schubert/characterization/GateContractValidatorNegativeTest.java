@@ -199,7 +199,8 @@ class GateContractValidatorNegativeTest {
             List.of(SELECTORS, "other.path"));
     int index = 0;
     for (List<String> change : changes) {
-      Fixture sample = fixture("path-contract-" + ++index);
+      index++;
+      Fixture sample = fixture("path-contract-" + index);
       sample.mutate(
           "program/characterization/tests/resources/cases/dif-allowlist.json",
           root -> {

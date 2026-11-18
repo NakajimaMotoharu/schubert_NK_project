@@ -33,7 +33,7 @@ def main(unit_name, out_name, prior_same_main=None):
         (192,'PG40074-p020-o01-restart192-v1'),(192,'PG40075-p020-o01-restart192-v2'),
         (198,'PG40088-p020-s08-voice198-v1'),(198,'PG40089-p020-s08-voice198-v2'),
         (204,'PG40104-p020-u01-menu204-v1'),(204,'PG40105-p020-u01-menu204-v2'),(204,'PG40107-p020-u01-menu204-v3'),
-        (206,'PG40124-p020-path-contract-green206-v1')}
+        (206,'PG40124-p020-path-contract-green206-v1'), (206,'PG40128-p020-path-contract-green206-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
@@ -61,7 +61,8 @@ def main(unit_name, out_name, prior_same_main=None):
         assert (unit_name,prior_same_main) in {
             ('PG39965-p020-invalid-range165-v2','PG39968-p020-invalid-range-static-v1'),
             ('PG40035-p020-l01-required-actions-v2','PG40036-p020-l01-required-actions-static-v1'),
-            ('PG40057-p020-error-disclosure187-v2','PG40058-p020-error-disclosure-static-v1')}
+            ('PG40057-p020-error-disclosure187-v2','PG40058-p020-error-disclosure-static-v1'),
+            ('PG40128-p020-path-contract-green206-v2','PG40126-p020-path-contract-static-v1')}
         receipt=E/prior_same_main/'manifest.json'
         before=read(receipt)
         prior_manifest=Path(before['unit']['path'])
