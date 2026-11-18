@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-5897",
+  "groupId": "PGPT-WBS66-F03-LOG-CLEANUP-OWNED-RAW-20261118",
+  "baseCore": "a6b7a248aa84570fd49ac2069f6b847e220429b1",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T07:34:43.767000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-LOG-CLEANUP-OWNED-RAW-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-LOG-CLEANUP-OWNED-RAW-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "WBS-F03/P017-07.02, pre-filed BUG3245/YKT2683. Remove the four compiled duplicate result and statement close decisions via top-level typed ownership helpers and use a private holder without unused record value methods. Keep borrowed transaction, null contract and every synthetic known/unknown case (whole 21). Same source public ABI and raw targeted counters. No actual DB, deletion, environment, credentials or HOLD operation.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4616_SSC461ログ削除JDBC例外伝播単体仕様.md",
+        "sha256": "902420335a9a45589efd5ad96ebeea860f584c592ab53d3a56c8b70edac1cd3f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38879-f02-log-cleanup-independent-v1/manifest.json",
+        "sha256": "9955367f7e6c69ed508312b3ebf6f1c85ab7684541f5b2bb7889d5d705e30c31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+        "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+      }
+    ],
+    "productionCoreMain": "a6b7a248aa84570fd49ac2069f6b847e220429b1",
+    "source": "7c0ca247ebcbda9d63e6d5b5879325294c7deef0",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-1",
+      "BUG-3245",
+      "YKT-2683"
+    ],
+    "run": "PG38899-f03-log-lease-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.4,
+      "high": 3.4
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3245",
+    "relatedYkt": "YKT-2683"
+  }
+}

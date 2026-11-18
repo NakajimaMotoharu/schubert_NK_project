@@ -9,11 +9,14 @@ import dev.codex.schubert.nk.batch.repository.CleanupReason;
 import dev.codex.schubert.nk.batch.repository.CleanupRepository;
 import dev.codex.schubert.nk.batch.repository.LogCleanupProgress;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.LongSupplier;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -63,13 +66,13 @@ public final class LogCleanupService {
             lease.acquire();
             var initial = transaction(connection, run, Optional.empty());
             check(start);
-            var progress = initial.progress();
+            var progress = initial.progress;
             while (!progress.complete()) {
               check(start);
-              progress = transaction(connection, run, Optional.of(progress.counts())).progress();
+              progress = transaction(connection, run, Optional.of(progress.counts())).progress;
               check(start);
             }
-            return new LogCleanupSummary(run, initial.before(), progress);
+            return new LogCleanupSummary(run, initial.before, progress);
           });
     } catch (CleanupStoppedException failure) {
       JdbcFailureGraph.preserveFatal(failure);
@@ -93,7 +96,15 @@ public final class LogCleanupService {
       throw new CleanupStoppedException(CleanupStopReason.TIME_LIMIT);
   }
 
-  private record ChunkProgress(CleanupCounts before, LogCleanupProgress progress) {}
+  private static final class ChunkProgress {
+    private final CleanupCounts before;
+    private final LogCleanupProgress progress;
+
+    ChunkProgress(CleanupCounts before, LogCleanupProgress progress) {
+      this.before = before;
+      this.progress = progress;
+    }
+  }
 
   @FunctionalInterface
   private interface SqlRelease {
@@ -221,21 +232,31 @@ public final class LogCleanupService {
           rowFailure = failure;
           throw failure;
         } finally {
-          try {
-            row.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (replace(rowFailure, secondary)) throw secondary;
-          }
+          closeRow(row, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         statementFailure = failure;
         throw failure;
       } finally {
-        try {
-          statement.close();
-        } catch (SQLException | RuntimeException | Error secondary) {
-          if (replace(statementFailure, secondary)) throw secondary;
-        }
+        closeStatement(statement, statementFailure);
+      }
+    }
+
+    private static void closeRow(@WillClose ResultSet row, @Nullable Throwable primary)
+        throws SQLException {
+      try {
+        row.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (replace(primary, secondary)) throw secondary;
+      }
+    }
+
+    private static void closeStatement(
+        @WillClose PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
+      try {
+        statement.close();
+      } catch (SQLException | RuntimeException | Error secondary) {
+        if (replace(primary, secondary)) throw secondary;
       }
     }
 
@@ -259,21 +280,13 @@ public final class LogCleanupService {
             rowFailure = failure;
             throw failure;
           } finally {
-            try {
-              row.close();
-            } catch (SQLException | RuntimeException | Error secondary) {
-              if (replace(rowFailure, secondary)) throw secondary;
-            }
+            closeRow(row, rowFailure);
           }
         } catch (SQLException | RuntimeException | Error failure) {
           statementFailure = failure;
           throw failure;
         } finally {
-          try {
-            statement.close();
-          } catch (SQLException | RuntimeException | Error secondary) {
-            if (replace(statementFailure, secondary)) throw secondary;
-          }
+          closeStatement(statement, statementFailure);
         }
       } catch (SQLException failure) {
         JdbcFailureGraph.preserveFatal(failure);
