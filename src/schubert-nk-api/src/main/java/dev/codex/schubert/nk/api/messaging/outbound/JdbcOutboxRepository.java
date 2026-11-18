@@ -58,9 +58,10 @@ public final class JdbcOutboxRepository {
             + "layout_version,body,status,attempt_count,next_attempt_at,created_at,"
             + "dlq_original_message_id,dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at) "
             + "values(?,?,?,?,?,?,'PENDING',0,?,?,?,?,?,?,?) returning id";
-    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable PreparedStatement acquiredStatement = connection.prepareStatement(sql);
     @Nullable Throwable statementFailure = null;
     try {
+      PreparedStatement statement = requireValue(acquiredStatement);
       statement.setObject(1, request.messageId());
       statement.setObject(2, request.correlationId());
       statement.setString(3, request.destination().address());
@@ -83,9 +84,10 @@ public final class JdbcOutboxRepository {
         statement.setNull(12, java.sql.Types.VARCHAR);
         statement.setNull(13, java.sql.Types.TIMESTAMP_WITH_TIMEZONE);
       }
-      ResultSet result = requireValue(statement.executeQuery());
+      @Nullable ResultSet acquiredRows = statement.executeQuery();
       @Nullable Throwable resultFailure = null;
       try {
+        ResultSet result = requireValue(acquiredRows);
         if (!result.next()) {
           throw new OutboxIntegrityException("outbox insert returned no identifier");
         }
@@ -95,13 +97,13 @@ public final class JdbcOutboxRepository {
         resultFailure = failure;
         throw failure;
       } finally {
-        closeRows(result, resultFailure);
+        closeRows(acquiredRows, resultFailure);
       }
     } catch (Throwable failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      closeStatement(statement, statementFailure);
+      closeStatement(acquiredStatement, statementFailure);
     }
   }
 
@@ -114,17 +116,19 @@ public final class JdbcOutboxRepository {
       throw new IllegalArgumentException("claim limit must be between 1 and 100");
     }
     Instant leaseUntil = now.plusSeconds(10);
-    PreparedStatement statement = requireValue(connection.prepareStatement(CLAIM_SQL));
+    @Nullable PreparedStatement acquiredStatement = connection.prepareStatement(CLAIM_SQL);
     @Nullable Throwable statementFailure = null;
     try {
+      PreparedStatement statement = requireValue(acquiredStatement);
       statement.setObject(1, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(2, now.atOffset(java.time.ZoneOffset.UTC));
       statement.setInt(3, limit);
       statement.setString(4, owner);
       statement.setObject(5, leaseUntil.atOffset(java.time.ZoneOffset.UTC));
-      ResultSet result = requireValue(statement.executeQuery());
+      @Nullable ResultSet acquiredRows = statement.executeQuery();
       @Nullable Throwable resultFailure = null;
       try {
+        ResultSet result = requireValue(acquiredRows);
         List<OutboxEntry> entries = new ArrayList<>();
         while (result.next()) {
           entries.add(read(result));
@@ -136,13 +140,13 @@ public final class JdbcOutboxRepository {
         resultFailure = failure;
         throw failure;
       } finally {
-        closeRows(result, resultFailure);
+        closeRows(acquiredRows, resultFailure);
       }
     } catch (Throwable failure) {
       statementFailure = failure;
       throw failure;
     } finally {
-      closeStatement(statement, statementFailure);
+      closeStatement(acquiredStatement, statementFailure);
     }
   }
 
@@ -155,9 +159,10 @@ public final class JdbcOutboxRepository {
         "update schubert.mq_outbox set status='SENT',sent_at=?,lease_owner=null,"
             + "lease_until=null,last_error_code=null,last_error_detail=null "
             + "where id=? and lease_owner=? and status in ('PENDING','ERROR')";
-    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable PreparedStatement acquiredStatement = connection.prepareStatement(sql);
     @Nullable Throwable statementFailure = null;
     try {
+      PreparedStatement statement = requireValue(acquiredStatement);
       statement.setObject(1, sentAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setLong(2, entry.id());
       statement.setString(3, entry.leaseOwner());
@@ -166,7 +171,7 @@ public final class JdbcOutboxRepository {
       statementFailure = failure;
       throw failure;
     } finally {
-      closeStatement(statement, statementFailure);
+      closeStatement(acquiredStatement, statementFailure);
     }
   }
 
@@ -191,9 +196,10 @@ public final class JdbcOutboxRepository {
             + "lease_owner=null,lease_until=null,sent_at=null,last_error_code=?,"
             + "last_error_detail=? where id=? and lease_owner=? and attempt_count=? "
             + "and status in ('PENDING','ERROR')";
-    PreparedStatement statement = requireValue(connection.prepareStatement(sql));
+    @Nullable PreparedStatement acquiredStatement = connection.prepareStatement(sql);
     @Nullable Throwable statementFailure = null;
     try {
+      PreparedStatement statement = requireValue(acquiredStatement);
       statement.setInt(1, nextAttempt);
       statement.setObject(2, dueAt.atOffset(java.time.ZoneOffset.UTC));
       statement.setString(3, code);
@@ -206,13 +212,14 @@ public final class JdbcOutboxRepository {
       statementFailure = failure;
       throw failure;
     } finally {
-      closeStatement(statement, statementFailure);
+      closeStatement(acquiredStatement, statementFailure);
     }
   }
 
   // SSC-471: preserve the exact try-with-resources primary and suppression rules.
-  private static void closeRows(@WillClose ResultSet rows, @Nullable Throwable primary)
+  private static void closeRows(@WillClose @Nullable ResultSet rows, @Nullable Throwable primary)
       throws SQLException {
+    if (rows == null) return;
     try {
       rows.close();
     } catch (Throwable secondary) {
@@ -222,7 +229,9 @@ public final class JdbcOutboxRepository {
   }
 
   private static void closeStatement(
-      @WillClose PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
+      @WillClose @Nullable PreparedStatement statement, @Nullable Throwable primary)
+      throws SQLException {
+    if (statement == null) return;
     try {
       statement.close();
     } catch (Throwable secondary) {
