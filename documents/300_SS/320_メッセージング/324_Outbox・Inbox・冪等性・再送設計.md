@@ -430,3 +430,8 @@ BUG3100/YKT2572のInboxException.sqlState閉enum switchを、Reason五定数が�
 ### SSC-462 応答snapshotの一般診断（2026-11-18）
 
 EncryptedResponseSnapshotの一般診断はSS351の固定文字列を返す。keyVersion()とciphertext()は既保存・復号の値契約を維持する。DBの列、暗号の形式、キー選択、応答の再送、byte配列の防御的copyに変更はない。PT-IDEM-007/008、PT-P01810-CATALOG-008は固定診断と、合成値に対する明示取得・既処理期待を別々に照合する。
+
+
+### SSC-463 Inbox結果参照の一般診断（2026-11-18）
+
+InboxResultReferenceはSS351で定めた固定診断を返す。type()、numericId()、uuid()の値と、種別別の妥当性、保存・再送、既電文と一般診断を区別する。PT-IDEM-REFERENCE001～003とCATALOG-013で全種別と独立値を照合する。

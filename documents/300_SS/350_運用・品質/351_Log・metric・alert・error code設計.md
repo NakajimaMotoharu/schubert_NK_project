@@ -303,6 +303,8 @@ SSC-460。一般診断のFingerprint／InboxCompletion／InboxExecution／Authen
 
 SSC-462。EncryptedResponseSnapshot.toStringは「EncryptedResponseSnapshot[keyVersion/ciphertext=<redacted>]」の固定値を返す。鍵versionラベルと暗号文本体を一般診断へ連結しない。SS324の保存と鍵選択、明示アクセサー、記録を許可された構造化フィールドは既契約に従う。
 
+SSC-463。InboxResultReference.toStringは「InboxResultReference[<redacted>]」の固定値を返す。内部enum種別と識別値を一般診断へ連結しない。必要なtype()・参照値と明示の構造化種別欄はSS324と本書§3の契約に従う。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
