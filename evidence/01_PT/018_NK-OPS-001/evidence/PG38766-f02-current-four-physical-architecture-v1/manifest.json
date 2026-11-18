@@ -1,0 +1,49 @@
+{
+  "actualExit": 1,
+  "terminalAtUTC": "2026-11-18T05:48:35.717970+00:00",
+  "source": "d0b8ee6057132d73f0234becf9fdef3073308f87",
+  "physical": {
+    "batch": 646,
+    "bootstrap": 201,
+    "protocol": 176,
+    "storage": 79
+  },
+  "total": 1102,
+  "dependencies": 49830,
+  "accesses": 36719,
+  "findings": [
+    [
+      "FRAMEWORK_FENCE",
+      "dev.codex.schubert.nk.storage.StorageIoException",
+      "java.sql.SQLException"
+    ]
+  ],
+  "edges": {
+    "batch->bootstrap": 715,
+    "batch->storage": 1664,
+    "bootstrap->storage": 324
+  },
+  "productClassInit": 0,
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38766-f02-current-four-physical-architecture-v1/archunit.tsv",
+    "sha256": "6b4184b6e1bd825da8b9728042e4000667525ccf9380211590a7a81f6a612120"
+  },
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38766-f02-current-four-physical-architecture-v1/class-init.stdout.gz",
+    "sha256": "376a304ab5694b67165f75231897213bb0d06ad94b7be3151eb5a15ac00a20c5"
+  },
+  "originalClassInitSha256": "ee11e1a0a024420062589d7f675ccc4a8465d4b440fc58ddb60c3d10692f954f",
+  "priorThree": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38580-f02-three-physical-library-boundaries-v1/manifest.json",
+    "sha256": "da44983bc855891dcb04a7ee6425627b9fc311c00b793dee1b7909ede05dd61a"
+  },
+  "terminal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38766-f02-current-four-physical-architecture-v1/terminal.json",
+    "sha256": "4798c8d3fad257917cb1907b5b7def530a27a30334472b303061977a2d3c3710"
+  },
+  "exactPhysicalBeforeAfter": true,
+  "productTestsExecuted": 0,
+  "wholeF02Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
