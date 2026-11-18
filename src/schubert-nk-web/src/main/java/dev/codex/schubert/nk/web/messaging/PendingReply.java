@@ -6,7 +6,10 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-/** One redacted in-flight response promise owned by {@link ReplyCorrelationRegistry}. */
+/**
+ * One redacted in-flight response promise owned by {@link ReplyCorrelationRegistry}.
+ * NK-MSG-001, SS321/351, SSC-459, PT-JMS-008/PT-P01810-CATALOG-038.
+ */
 public final class PendingReply {
   private final UUID retainedCorrelationId;
   private final Instant retainedDeadline;
@@ -40,10 +43,6 @@ public final class PendingReply {
 
   @Override
   public String toString() {
-    return "PendingReply[correlationId="
-        + retainedCorrelationId
-        + ", deadline="
-        + retainedDeadline
-        + ", body=<redacted>]";
+    return "PendingReply[correlationId/deadline/body=<redacted>]";
   }
 }
