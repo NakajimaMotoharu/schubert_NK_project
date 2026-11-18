@@ -1,0 +1,7 @@
+# SSC461 Backup監査ペアのJDBC所有 実行結果
+
+Core d0b8ee6057132d73f0234becf9fdef3073308f87、固定試験source 9304ce334ad409a36290ef14cdeac847784c8abf、PG38753。原BKPPORT001～010は初回10/10成功。F/E/skip/選定内未実行0。別の既ISSCOMP001～003はMorningの現閉包に追加せず未実行3。初回はfixtureの結合によりTest compile終了1。共通の固定合成入力を一箇所へ移し、両既Test本体のトークンと合成値同一性をPG38744で確認した。
+
+inspectの12B、completeの4B、型付きrow/statementの各4Bと全命令を測定した。readTerminalは群外8B/21I、Terminal型は未到達。現Coreの同21物理／17陽性CRC、対象2型の公開ABI差0。NullAway・Checkstyle・SpotBugs0、PMD77を個別適用0と判定。実DB、実Backup、原本・鍵・native／Rootなし。原成功13と合算しない。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json SHA256 6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932。F02／F03／P017-06正式未受入。BUG3239の10範囲を是正、3範囲はYKT2684で継続。
