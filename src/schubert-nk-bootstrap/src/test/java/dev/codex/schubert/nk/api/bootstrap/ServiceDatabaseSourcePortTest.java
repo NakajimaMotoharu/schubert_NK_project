@@ -608,4 +608,40 @@ final class ServiceDatabaseSourcePortTest {
       assertTrue(captured.get().isEmpty());
     }
   }
+
+  @Test
+  void dbSource016ConnectorFailureReleasesTheStateLockForAnotherThread() throws Exception {
+    var firstFailure = new IllegalStateException(FIXTURE);
+    var captured = new AtomicReference<Properties>();
+    var calls = new AtomicInteger();
+    var fixture = new Fixture(API_ROLE);
+    try (var source =
+        source(
+            (url, properties) -> {
+              if (calls.incrementAndGet() == 1) {
+                captured.set(properties);
+                throw firstFailure;
+              }
+              return fixture.connection;
+            })) {
+      assertSame(firstFailure, assertThrows(IllegalStateException.class, source::getConnection));
+      assertTrue(captured.get().isEmpty());
+      var worker = Executors.newVirtualThreadPerTaskExecutor();
+      try {
+        var retry =
+            worker.submit(
+                () -> {
+                  return source.getConnection();
+                });
+        assertSame(fixture.connection, retry.get(5, TimeUnit.SECONDS));
+        assertEquals(2, calls.get());
+        assertEquals(0, fixture.connectionCloses);
+        fixture.connection.close();
+        assertEquals(1, fixture.connectionCloses);
+      } finally {
+        worker.shutdownNow();
+        assertTrue(worker.awaitTermination(5, TimeUnit.SECONDS));
+      }
+    }
+  }
 }
