@@ -1,0 +1,84 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5020_ssc457_location_profile.json",
+    "sha256": "04ea56e48f5b3870739d4003ad0d9051d94700bce0b134fe34fe7520071e16fb"
+  },
+  "inputHashes": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java": "fad1b3c44ba57b7e00ae2052bc8830c4ec12f05dddd07984843a362ea2fe3591",
+    "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationDiagnosticTest.java": "49248c4f86cb8c0250e676c8bc47a4fdf1d067007eae86f2306d5eebd6ea21cf",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38484-ssc457-location-prepare-v1/manifest.json",
+    "sha256": "9f441c223f9507eebb7de7a9177dcbbbc06f03144f101ca9de1d2013c49a4cca"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38486-ssc457-location-static-v1/manifest.json",
+    "sha256": "e9236252257facae6529cfd90aa53fb4ce8f9e3afe4c5ac6b2251a41ad46fba2"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5021_ssc457_location_admission.json",
+    "sha256": "bfd882b992d07d9342642661058ad5c7f540b94b93cb6f02f89f80ac5a66afad"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "CloseResource",
+      "line": "68",
+      "reason": "The whole JDK25 JUnit fixture owns the executor. Finally triggers shutdownNow, then asserts bounded awaitTermination. Get has a ten-second timeout per Future and the test cannot pass while a worker remains. No production executor or fixture code is excluded.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "68",
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "72",
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "75",
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "76",
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

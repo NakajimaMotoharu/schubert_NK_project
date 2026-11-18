@@ -1,0 +1,69 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38490-SSC457-LOCATION-DIAGNOSTIC",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38484-ssc457-location-prepare-v1/manifest.json",
+    "sha256": "9f441c223f9507eebb7de7a9177dcbbbc06f03144f101ca9de1d2013c49a4cca"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38486-ssc457-location-static-v1/manifest.json",
+    "sha256": "e9236252257facae6529cfd90aa53fb4ce8f9e3afe4c5ac6b2251a41ad46fba2"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 68,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The whole JDK25 JUnit fixture owns the executor. Finally triggers shutdownNow, then asserts bounded awaitTermination. Get has a ten-second timeout per Future and the test cannot pass while a worker remains. No production executor or fixture code is excluded.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "sourceLine": 68,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "tasks.add(pool.submit(() -> ServiceCredentialLocation.read(Map.of(KEY, ROOT)).directory()));",
+      "sourceLine": 72,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "pool.shutdownNow();",
+      "sourceLine": 75,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ServiceCredentialLocationTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS), \"fixture workers not stopped\");",
+      "sourceLine": 76,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The JDK25 console process owns the fixed eight-worker JUnit fixture with bounded Future/termination methods and unconditional cleanup. This site exercises the specified independent-reader result; it is not inside a web application or a container thread contract.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ]
+}
