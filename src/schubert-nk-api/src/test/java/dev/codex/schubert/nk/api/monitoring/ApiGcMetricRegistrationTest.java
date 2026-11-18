@@ -223,6 +223,37 @@ class ApiGcMetricRegistrationTest {
   }
 
   @Test
+  void apigc017SameHashAsAnAllowedModeDoesNotGrantRegistration() {
+    String collidingWithDebug = "DEBTf";
+    String collidingWithStandard = "STANDAQc";
+    assertEquals(64_921_139, collidingWithDebug.hashCode());
+    assertEquals(2_095_255_229, collidingWithStandard.hashCode());
+    assertFalse(DEBUG_MODE.equals(collidingWithDebug));
+    assertFalse(STANDARD_MODE.equals(collidingWithStandard));
+
+    try (var source = new Registry()) {
+      for (String mode : List.of(collidingWithDebug, collidingWithStandard)) {
+        var failure =
+            assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                    ApiGcMetricRegistration.install(
+                        source,
+                        mode,
+                        resource -> {
+                          throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
+                        },
+                        () -> {
+                          throw new AssertionError("unexpected GC construction");
+                        }));
+        assertEquals("CONFIG_INVALID", failure.getMessage());
+      }
+      assertEquals(0, source.reads.get());
+      assertEquals(0, source.closeInvocations.get());
+    }
+  }
+
+  @Test
   void apigc006ClosedDebugFailsBeforeFactoryAndOwner() {
     var source = new Registry();
     source.close();
