@@ -36,7 +36,7 @@ class FingerprintKeyRingTest {
       assertFalse(ring.matches(unknown, request));
       assertFalse(ring.matches(new Fingerprint("k2", changed), request));
       assertFalse(ring.matches(currentFingerprint, request("different")));
-      assertEquals("Fingerprint[keyVersion=k2, digest=<redacted>]", currentFingerprint.toString());
+      assertEquals("Fingerprint[<redacted>]", currentFingerprint.toString());
     }
     assertNotEquals(0, current[0]);
     assertNotEquals(0, previous[0]);

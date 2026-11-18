@@ -102,9 +102,7 @@ final class InboxOutcomeValueContractTest {
           assertEquals(version, actual.responseVersion());
           assertEquals(Optional.empty(), actual.responseSnapshot());
           assertEquals(Instant.EPOCH, actual.completedAt());
-          assertEquals(
-              "InboxCompletion[state=" + stateNames[i] + ", response metadata/result=<redacted>]",
-              actual.toString());
+          assertEquals("InboxCompletion[<redacted>]", actual.toString());
         }
       }
     }
@@ -275,8 +273,7 @@ final class InboxOutcomeValueContractTest {
           InboxExecution actual = new InboxExecution(status, optional);
           assertSame(status, actual.status());
           assertEquals(optional, actual.completion());
-          assertEquals(
-              "InboxExecution[status=" + names[i] + ", completion=<redacted>]", actual.toString());
+          assertEquals("InboxExecution[<redacted>]", actual.toString());
           allowed++;
         } else {
           IllegalArgumentException failure =

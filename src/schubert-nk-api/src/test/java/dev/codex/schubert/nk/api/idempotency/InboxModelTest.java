@@ -237,15 +237,11 @@ class InboxModelTest {
     InboxCompletion completion = completion(InboxCompletionState.COMPLETED);
     InboxCompletion error = completion(InboxCompletionState.ERROR);
     assertEquals(InboxCompletionState.ERROR, error.state());
-    assertEquals(
-        "InboxCompletion[state=COMPLETED, response metadata/result=<redacted>]",
-        completion.toString());
+    assertEquals("InboxCompletion[<redacted>]", completion.toString());
     assertEquals(InboxExecutionStatus.EXECUTED, InboxExecution.executed(completion).status());
     assertEquals(InboxExecutionStatus.REPLAY, InboxExecution.replay(error).status());
     assertEquals(InboxExecutionStatus.IN_PROGRESS, InboxExecution.inProgress().status());
-    assertEquals(
-        "InboxExecution[status=EXECUTED, completion=<redacted>]",
-        InboxExecution.executed(completion).toString());
+    assertEquals("InboxExecution[<redacted>]", InboxExecution.executed(completion).toString());
     assertThrows(NullPointerException.class, () -> InboxExecution.executed(null));
     assertThrows(NullPointerException.class, () -> InboxExecution.replay(null));
     assertThrows(NullPointerException.class, () -> new InboxExecution(null, Optional.empty()));

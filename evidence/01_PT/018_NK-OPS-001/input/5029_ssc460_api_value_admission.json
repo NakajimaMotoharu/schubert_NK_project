@@ -1,0 +1,91 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38558-SSC460-API-VALUE-DIAGNOSTICS",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38546-ssc460-value-diagnostics-prepare-v1/manifest.json",
+    "sha256": "78ef6c251f4c92ac8181422d4d7972d641b16395a6bd5faa08cd3255d661dea0"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38548-ssc460-value-diagnostics-static-v1/manifest.json",
+    "sha256": "1a7b40039bb26f3a8bf70c640ad90264a70b62a273e4080e605017d652c54934"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "value = value == null ? null : value.clone();",
+      "sourceLine": 22,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "SS324 canonical byte value contract keeps absent distinct from present empty. Both were independently specified in the original full JUnit case. Storage and clone semantics remain unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/CanonicalField.java",
+      "rule": "ReturnEmptyCollectionRatherThanNull",
+      "sourceAnchor": "return value == null ? null : value.clone();",
+      "sourceLine": 27,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "SS324 canonical byte value contract keeps absent distinct from present empty. Both were independently specified in the original full JUnit case. Storage and clone semantics remain unchanged.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Return an empty collection rather than null."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/CanonicalDataValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 265,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 111,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxOutcomeValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 292,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 160,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticatedActorValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(first.equals(null));",
+      "sourceLine": 55,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Null is the independent argument of the ordinary record equality negative test. The result is the explicit boolean false; replacing the invocation with null identity would cease testing equality.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    }
+  ]
+}

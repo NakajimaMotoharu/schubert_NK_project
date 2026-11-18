@@ -27,7 +27,7 @@ final class AuthenticatedActorValueContractTest {
       assertEquals(999_999_999_999L, actor.userId());
       assertEquals(username, actor.username());
       assertEquals(Role.ADMIN, actor.role());
-      assertEquals("AuthenticatedActor[identity=<redacted>, role=ADMIN]", actor.toString());
+      assertEquals("AuthenticatedActor[<redacted>]", actor.toString());
     }
     for (String username :
         List.of(
@@ -64,6 +64,6 @@ final class AuthenticatedActorValueContractTest {
     assertEquals(2, owners.size());
     assertEquals("admin-owner", owners.get(otherRole));
     assertEquals("owner", owners.get(equal));
-    assertEquals("AuthenticatedActor[identity=<redacted>, role=USER]", first.toString());
+    assertEquals("AuthenticatedActor[<redacted>]", first.toString());
   }
 }

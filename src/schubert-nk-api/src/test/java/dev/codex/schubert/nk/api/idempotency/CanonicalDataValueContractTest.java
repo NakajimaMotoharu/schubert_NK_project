@@ -227,7 +227,8 @@ final class CanonicalDataValueContractTest {
     assertEquals(MARKER, retained.get(value));
     assertEquals(hashBefore, value.hashCode());
     assertEquals(FP_VERSION, value.keyVersion());
-    assertEquals("Fingerprint[keyVersion=v1, digest=<redacted>]", value.toString());
+    assertEquals("Fingerprint[<redacted>]", value.toString());
+    assertEquals("Fingerprint[<redacted>]", new Fingerprint("v2", expected).toString());
     assertEquals(value, value);
     assertNotEquals(value, null);
     assertNotEquals(value, VERSION);

@@ -41,7 +41,7 @@ final class AuthorizationServiceTest {
             assertThrows(AuthorizationException.class, () -> service.requireQuestionOwner(actor, 8))
                 .resultCode());
       }
-      assertEquals("AuthenticatedActor[identity=<redacted>, role=" + role + "]", actor.toString());
+      assertEquals("AuthenticatedActor[<redacted>]", actor.toString());
     }
   }
 
