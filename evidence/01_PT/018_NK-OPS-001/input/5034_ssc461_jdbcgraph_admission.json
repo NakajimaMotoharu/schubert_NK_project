@@ -1,0 +1,25 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38594-SSC461-JDBCGRAPH-TRANSFER",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38586-ssc461-jdbcgraph-prepare-v1/manifest.json",
+    "sha256": "6249f5308d19a0e75f4fc25011f03165a14a5819c7d3952094e8be383483ed81"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38588-ssc461-jdbcgraph-static-v1/manifest.json",
+    "sha256": "60db1fec3763c3f4abd6b16c2215dc8652203866ef15368b2b3af01cb2591713"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraphContractTest.java",
+      "rule": "CompareObjectsWithEquals",
+      "sourceAnchor": "return node == direct ? extra : null;",
+      "sourceLine": 32,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "SSC-461 and the independent oracle treat Throwable graph vertices by identity. Exactly the original root object supplies the synthetic optional edge. Invoking equals would change the test contract for user subtype identity, not provide a safer equivalent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use equals() to compare object references."
+    }
+  ]
+}
