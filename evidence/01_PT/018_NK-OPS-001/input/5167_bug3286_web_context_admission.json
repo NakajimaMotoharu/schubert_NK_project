@@ -1,0 +1,244 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39510-BUG3286-WEB-CONTEXT-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39504-bug3286-web-context-prepare-v1/manifest.json",
+    "sha256": "3a399cb8d4c518cbedce9ad5c3ad63bc952194876cf991a0282be310f1dc0603"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39506-bug3286-web-context-static-v1/manifest.json",
+    "sha256": "d320b40de9bca97eb5d95f2432a773dab0e1e98249ef4c7e76525ee7697dd201"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 48,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this WebStandardMetricSource object are closed after use",
+      "sourceLine": 127,
+      "sourceAnchor": "var standardOwner = new WebStandardMetricSource(this::standard, (registry, gc) -> {});",
+      "occurrences": 1,
+      "reason": "Harness passes the standard owner to exactly one WebMetricContext that owns and closes it. The harness itself is closed by the original test fixture.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 494,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "The fixture owns the worker and performs explicit cancellation and finite await in finally. There is no implicit close outside the bounded check.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 494,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 496,
+      "sourceAnchor": "var active = executor.submit(() -> h.context.render(true));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 511,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 512,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 553,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "The fixture owns the worker and performs explicit cancellation and finite await in finally. There is no implicit close outside the bounded check.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 553,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 555,
+      "sourceAnchor": "var init = executor.submit(h.context::initialize);",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 571,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 572,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 589,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "The fixture owns the worker and performs explicit cancellation and finite await in finally. There is no implicit close outside the bounded check.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 589,
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 591,
+      "sourceAnchor": "var init = executor.submit(h.context::initialize);",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 605,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 606,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this WebMetricContext object are closed after use",
+      "sourceLine": 767,
+      "sourceAnchor": "var context =",
+      "occurrences": 1,
+      "reason": "WEBMCTX032 explicitly closes this exact local context in finally. AtomicReference is borrowed briefly for the reentrant callback, and the local registry closed state is asserted.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 812,
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "The fixture owns the worker and performs explicit cancellation and finite await in finally. There is no implicit close outside the bounded check.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 812,
+      "sourceAnchor": "var worker = Executors.newSingleThreadExecutor();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 815,
+      "sourceAnchor": "var future = worker.submit(() -> context.render(true));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 830,
+      "sourceAnchor": "worker.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 832,
+      "sourceAnchor": "assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This site operates on an explicitly owned, deadline-bounded test worker or test-thread interrupt only. No application reference owns this thread.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
