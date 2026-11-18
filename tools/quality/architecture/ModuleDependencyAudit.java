@@ -131,7 +131,9 @@ public final class ModuleDependencyAudit {
   }
 
   private static boolean jdbc(String target) {
-    return target.startsWith("java.sql.") || target.startsWith("javax.sql.");
+    return target.startsWith("java.sql.")
+        || target.startsWith("javax.sql.")
+        || target.startsWith("org.springframework.jdbc.");
   }
 
   private static boolean isController(JavaClass type) {

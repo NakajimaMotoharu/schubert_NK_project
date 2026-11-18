@@ -1,0 +1,154 @@
+{
+  "actualExit": 0,
+  "phase": "before",
+  "source": "8d62ccf2bcecaf4f734242885888168fcf5dbebb",
+  "currentCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "design": {
+    "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+    "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+  },
+  "toolSha256": "29d3f28ff3f2fa2e35a364f4a8fc6e8e36bbe5515cb3bc8fcd100bab138f02ed",
+  "physical": {
+    "protocol": {
+      "dev.codex.schubert.nk.protocol.OwnedCanary": "d07c42d792f7d50ddf00bc2d64937d45c2f8108360e647c5ec39bd1ba85ad3a1"
+    },
+    "storage": {
+      "dev.codex.schubert.nk.storage.OwnedCanary": "1fc45dd6ae5e158c0a019351386e3693d8e2aebf742daf058da96d90f0b1091d"
+    },
+    "bootstrap": {
+      "dev.codex.schubert.nk.bootstrap.OwnedCanary": "5115c8410d6bd8ba395bf604c7574beb7150c2bc42b4d800879437fad2e94a3c"
+    },
+    "api": {
+      "dev.codex.schubert.nk.api.OwnedCanary": "9be91bcbf56e3b29d77f019df24d56b9838b54c93fbb6f629a0fc00125d7b620"
+    },
+    "web": {
+      "dev.codex.schubert.nk.web.OwnedCanary": "0882d498565d9070910d96119377c8552a2db7dafa4b05e2cbb79b422feb6b54",
+      "dev.codex.schubert.nk.web.canary.JdbcOperationsEndpoint": "b3e918aa2c8ec34482ea8193a7bf7fde2b3f6eb9a4f31deb14085184b18b906c",
+      "dev.codex.schubert.nk.web.canary.JdbcTemplateController": "03a8739018a2c3c6ee2a338f03e9a1ed91a0b82f95ee896f96bee9426b3433de",
+      "dev.codex.schubert.nk.web.canary.ReadFacadeController": "76547a3b3ac4b3968d6c4322e81ba0226da32316566da2f0198b40741c34b357",
+      "dev.codex.schubert.nk.web.canary.TechnicalReadFacade": "6d26a047dbd2f14c6fad3ec722d32843246152a4e79c1e0b3f99d7bab50179d0"
+    },
+    "batch": {
+      "dev.codex.schubert.nk.batch.OwnedCanary": "ba7edac74ab2c52eb5677e3f604a97b52a245257417c70dfeda5b8be4081cb15"
+    }
+  },
+  "receipts": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/tool",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixture-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/fixture-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/fixture-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/fixtures",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/api/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/batch/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/bootstrap/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/protocol/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/storage/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/web/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/web/canary/JdbcOperationsEndpoint.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/web/canary/JdbcTemplateController.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/web/canary/ReadFacadeController.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/dev/codex/schubert/nk/web/canary/TechnicalReadFacade.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/org/springframework/jdbc/core/JdbcOperations.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/org/springframework/jdbc/core/JdbcTemplate.java",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/source/org/springframework/web/bind/annotation/RestController.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/audit.stdout.txt",
+        "sha256": "e2faacfe09e837be306623d05eee9ef2030060290b9378ec40a0be9c6ab81cf5"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40142-f02-controller-spring-jdbc-before-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-jdbc-re0ct3q0/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-jdbc-re0ct3q0/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-jdbc-re0ct3q0/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-jdbc-re0ct3q0/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-jdbc-re0ct3q0/api.jar",
+        "web=/dev/shm/pgpt-f02-jdbc-re0ct3q0/web.jar",
+        "batch=/dev/shm/pgpt-f02-jdbc-re0ct3q0/batch.jar"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "testId": "PT-F02-ARCH-023",
+      "origin": "dev.codex.schubert.nk.web.canary.JdbcTemplateController",
+      "target": "org.springframework.jdbc.core.JdbcTemplate",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-024",
+      "origin": "dev.codex.schubert.nk.web.canary.JdbcOperationsEndpoint",
+      "target": "org.springframework.jdbc.core.JdbcOperations",
+      "expected": true,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-025",
+      "origin": "dev.codex.schubert.nk.web.canary.TechnicalReadFacade",
+      "target": "org.springframework.jdbc.core.JdbcTemplate",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-026",
+      "origin": "dev.codex.schubert.nk.web.canary.ReadFacadeController",
+      "target": "dev.codex.schubert.nk.web.canary.TechnicalReadFacade",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 2,
+  "productTests": 0,
+  "productionClassesLoaded": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-18T22:23:08.055929+00:00"
+}
