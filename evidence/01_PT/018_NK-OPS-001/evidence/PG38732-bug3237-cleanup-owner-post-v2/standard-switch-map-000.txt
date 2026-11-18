@@ -1,0 +1,200 @@
+Classfile /home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class
+  Last modified Nov 18, 2026; size 1233 bytes
+  SHA-256 checksum 290d6e45771040ccf3410f845316d77706eb8eb667ddddef6fc3263c82aa0bfe
+  Compiled from "CleanupRepository.java"
+class dev.codex.schubert.nk.batch.repository.CleanupRepository$1
+  minor version: 0
+  major version: 69
+  flags: (0x1020) ACC_SUPER, ACC_SYNTHETIC
+  this_class: #8                          // dev/codex/schubert/nk/batch/repository/CleanupRepository$1
+  super_class: #47                        // java/lang/Object
+  interfaces: 0, fields: 1, methods: 1, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // dev/codex/schubert/nk/batch/repository/CleanupKind.values:()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+   #2 = Class              #4             // dev/codex/schubert/nk/batch/repository/CleanupKind
+   #3 = NameAndType        #5:#6          // values:()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+   #4 = Utf8               dev/codex/schubert/nk/batch/repository/CleanupKind
+   #5 = Utf8               values
+   #6 = Utf8               ()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+   #7 = Fieldref           #8.#9          // dev/codex/schubert/nk/batch/repository/CleanupRepository$1.$SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+   #8 = Class              #10            // dev/codex/schubert/nk/batch/repository/CleanupRepository$1
+   #9 = NameAndType        #11:#12        // $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+  #10 = Utf8               dev/codex/schubert/nk/batch/repository/CleanupRepository$1
+  #11 = Utf8               $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind
+  #12 = Utf8               [I
+  #13 = Fieldref           #2.#14         // dev/codex/schubert/nk/batch/repository/CleanupKind.NOTIFICATIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #14 = NameAndType        #15:#16        // NOTIFICATIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #15 = Utf8               NOTIFICATIONS
+  #16 = Utf8               Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #17 = Methodref          #2.#18         // dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+  #18 = NameAndType        #19:#20        // ordinal:()I
+  #19 = Utf8               ordinal
+  #20 = Utf8               ()I
+  #21 = Class              #22            // java/lang/NoSuchFieldError
+  #22 = Utf8               java/lang/NoSuchFieldError
+  #23 = Fieldref           #2.#24         // dev/codex/schubert/nk/batch/repository/CleanupKind.QUESTIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #24 = NameAndType        #25:#16        // QUESTIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #25 = Utf8               QUESTIONS
+  #26 = Fieldref           #2.#27         // dev/codex/schubert/nk/batch/repository/CleanupKind.SESSIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #27 = NameAndType        #28:#16        // SESSIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #28 = Utf8               SESSIONS
+  #29 = Fieldref           #2.#30         // dev/codex/schubert/nk/batch/repository/CleanupKind.OUTBOX:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #30 = NameAndType        #31:#16        // OUTBOX:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #31 = Utf8               OUTBOX
+  #32 = Fieldref           #2.#33         // dev/codex/schubert/nk/batch/repository/CleanupKind.LOGS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #33 = NameAndType        #34:#16        // LOGS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #34 = Utf8               LOGS
+  #35 = Fieldref           #2.#36         // dev/codex/schubert/nk/batch/repository/CleanupKind.WEB_RECEIPTS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #36 = NameAndType        #37:#16        // WEB_RECEIPTS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #37 = Utf8               WEB_RECEIPTS
+  #38 = Fieldref           #2.#39         // dev/codex/schubert/nk/batch/repository/CleanupKind.BATCH_RUNS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #39 = NameAndType        #40:#16        // BATCH_RUNS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #40 = Utf8               BATCH_RUNS
+  #41 = Fieldref           #2.#42         // dev/codex/schubert/nk/batch/repository/CleanupKind.INBOX_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #42 = NameAndType        #43:#16        // INBOX_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #43 = Utf8               INBOX_PROGRESS
+  #44 = Fieldref           #2.#45         // dev/codex/schubert/nk/batch/repository/CleanupKind.LOG_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #45 = NameAndType        #46:#16        // LOG_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+  #46 = Utf8               LOG_PROGRESS
+  #47 = Class              #48            // java/lang/Object
+  #48 = Utf8               java/lang/Object
+  #49 = Utf8               <clinit>
+  #50 = Utf8               ()V
+  #51 = Utf8               Code
+  #52 = Utf8               LineNumberTable
+  #53 = Utf8               LocalVariableTable
+  #54 = Utf8               StackMapTable
+  #55 = Utf8               SourceFile
+  #56 = Utf8               CleanupRepository.java
+  #57 = Utf8               EnclosingMethod
+  #58 = Class              #59            // dev/codex/schubert/nk/batch/repository/CleanupRepository
+  #59 = Utf8               dev/codex/schubert/nk/batch/repository/CleanupRepository
+  #60 = Utf8               NestHost
+  #61 = Utf8               InnerClasses
+{
+  static final int[] $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=0
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/batch/repository/CleanupKind.values:()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.NOTIFICATIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.QUESTIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.SESSIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.OUTBOX:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.LOGS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.WEB_RECEIPTS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.BATCH_RUNS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       119: getstatic     #41                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.INBOX_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       122: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       125: bipush        8
+       127: iastore
+       128: goto          132
+       131: astore_0
+       132: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       135: getstatic     #44                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.LOG_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       138: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       141: bipush        9
+       143: iastore
+       144: goto          148
+       147: astore_0
+       148: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+           116   128   131   Class java/lang/NoSuchFieldError
+           132   144   147   Class java/lang/NoSuchFieldError
+      LineNumberTable:
+        line 116: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 18
+        frame_type = 87 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 78 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+}
+SourceFile: "CleanupRepository.java"
+EnclosingMethod: #58.#0                 // dev.codex.schubert.nk.batch.repository.CleanupRepository
+NestHost: class dev/codex/schubert/nk/batch/repository/CleanupRepository
+InnerClasses:
+  static #8;                              // class dev/codex/schubert/nk/batch/repository/CleanupRepository$1

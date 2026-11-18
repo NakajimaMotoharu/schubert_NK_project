@@ -1,0 +1,318 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T05:30:46.154658+00:00",
+  "run": "PG38729-BUG3237-CLEANUP-CLOSE",
+  "source": "56ae8c9dc3b831c286c3b4f43c1fffc465408fd2",
+  "productionCoreMain": "ba13ded812907d1b60a2110ec88fbf8076101133",
+  "tests": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "foreignBackendActions": 0,
+  "targetCounters": {
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository": {
+      "INSTRUCTION": {
+        "missed": 6,
+        "covered": 385
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 31
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 99
+      },
+      "COMPLEXITY": {
+        "missed": 1,
+        "covered": 29
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 10
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 325
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 28
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 75
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 21
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 7
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "generatedSwitch": {
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository$1": {
+      "INSTRUCTION": {
+        "missed": 9,
+        "covered": 59
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 1
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 1
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 1
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "rawDeficits": [
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupRepository",
+      "prepare",
+      "(Ldev/codex/schubert/nk/batch/repository/CleanupKind;)Ljava/sql/PreparedStatement;",
+      "116",
+      "INSTRUCTION:6:6",
+      "BRANCH:1:9"
+    ],
+    [
+      "dev/codex/schubert/nk/batch/repository/CleanupRepository$1",
+      "<clinit>",
+      "()V",
+      "116",
+      "INSTRUCTION:9:59",
+      "BRANCH:0:0"
+    ]
+  ],
+  "publicAbi": {
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository": "07ce9c5726a40e3ac64e35e79c2531cff0c51ccae81dc94a4b854622616c20d4",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository": "02f23f4ee21e2968013f7984e83347de4402107d447e9f705cc0f4c4b5dd3ab8"
+  },
+  "sameFixedSqlDispatchBytes": true,
+  "horizontalInitialCandidates": {
+    "BackupStepRepository": {
+      "calls": 2,
+      "sha256": "a46d8a7712245f915dfa55dbaded65911d1984dedf575250bcfac891d050393b",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "BatchRunRepository": {
+      "calls": 8,
+      "sha256": "47d12d03590932d7df11681d0c663cd1a75e59b4b32cff72ee5c7aea8318d876",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "CleanupDatabaseSession": {
+      "calls": 2,
+      "sha256": "bff361d269816f14ce62da0a945c668b0bb14f7cc7c28018613b56369aface97",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "CleanupRepository": {
+      "calls": 2,
+      "sha256": "b7a918a20a19b0e687d09a50da2186cdca2d8b8d740474edb12c2e395b146118",
+      "status": "scope-tested"
+    },
+    "CleanupStepRepository": {
+      "calls": 2,
+      "sha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c",
+      "status": "scope-tested"
+    },
+    "CleanupTerminalRepository": {
+      "calls": 8,
+      "sha256": "49afbd29fafc5c9e762f88a8c452b4926d22e1e1cc9d8b8eae81ef08ebbcafd3",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "ExpiryAuditRepository": {
+      "calls": 2,
+      "sha256": "25c64d75bc37274c1cc27cbca5ddf64af35983a43605c323456f007bfdfdacda",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "InspectionSummaryRepository": {
+      "calls": 2,
+      "sha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "MorningDatabaseSession": {
+      "calls": 3,
+      "sha256": "4c422e239427b7c83cd1ac65f6266053aef3271fe37719262986c6024e77ec39",
+      "status": "requires exact opening, bytecode or role-specific contract proof; no eligibility inferred"
+    },
+    "RunReferenceRepository": {
+      "calls": 2,
+      "sha256": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "status": "scope-tested"
+    }
+  },
+  "horizontalComplete": false,
+  "physical": 21,
+  "positiveMainCrc": 19,
+  "supportRemaining": {
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt": {
+      "INSTRUCTION": 20,
+      "BRANCH": 7,
+      "LINE": 4,
+      "COMPLEXITY": 9,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository": {
+      "INSTRUCTION": 38,
+      "BRANCH": 10,
+      "LINE": 12,
+      "COMPLEXITY": 8
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupKind": {
+      "INSTRUCTION": 3,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk": {
+      "INSTRUCTION": 25,
+      "BRANCH": 1,
+      "LINE": 4,
+      "COMPLEXITY": 4,
+      "METHOD": 3
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchRun": {
+      "INSTRUCTION": 7,
+      "BRANCH": 3,
+      "LINE": 2,
+      "COMPLEXITY": 4,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/batch/repository/RunReferences": {
+      "INSTRUCTION": 26,
+      "BRANCH": 13,
+      "LINE": 3,
+      "COMPLEXITY": 9,
+      "METHOD": 2
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchStep": {
+      "INSTRUCTION": 3,
+      "LINE": 1,
+      "COMPLEXITY": 1,
+      "METHOD": 1
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": {
+      "INSTRUCTION": 21,
+      "LINE": 4,
+      "COMPLEXITY": 1,
+      "METHOD": 1,
+      "CLASS": 1
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException": {
+      "INSTRUCTION": 42,
+      "BRANCH": 6,
+      "LINE": 7,
+      "COMPLEXITY": 9,
+      "METHOD": 4
+    },
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": {
+      "INSTRUCTION": 1,
+      "BRANCH": 1,
+      "COMPLEXITY": 1
+    }
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/unfiltered.tsv",
+    "sha256": "2cbf4d36b9fb9cb51240bbfe88db7a82c2bf39be16a8e78f4d3744f9612f1081"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/storage/StorageIoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/storage/package-info.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupChunk.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupReason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38721-bug3237-cleanup-owner-prepare-v2/component/dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class"
+  ],
+  "oldRun": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38710-f02-cleanup-jdbc-owner-independent-v1/manifest.json",
+    "sha256": "61feb8b3c256ddb9274d58255c2dfdb55f7e04ffd60e13494e982c024e7c7616"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38723-bug3237-cleanup-owner-static-v2/manifest.json",
+    "sha256": "444f0cd966a6c9ae4b04f88f15734b1a185776b9062ecea0a73e72b09f2e4e44"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38729-bug3237-cleanup-owner-unit-v2/manifest.json",
+    "sha256": "60bdf876dd087f0771cbed508196bfa476ba0365d2cacf14db6a086d23a6baf4"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/manifest.json",
+    "sha256": "f8e518e0ff7b69fbbeb4c84ca51831f18d4cdc1c483f185b843f52ddcd7d3b3c"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/jacoco.exec",
+    "sha256": "fa44b1be8b74137aa1bd0d43bead6cda64ca24f642cab45c4509a133407a56a0"
+  },
+  "xml": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/original-TEST-junit-jupiter.xml",
+      "sha256": "d9551e6422045fcf5ef3ddc959df51ca99b01dd0d4d5ab2ee8cd8afcf855158f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/original-TEST-junit-platform-suite.xml",
+      "sha256": "e1fcc1254ff86e4ef9b13d05be22aeba43f70c24129a5187ddca8ebc92e3ae0f"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38732-bug3237-cleanup-owner-post-v2/original-TEST-junit-vintage.xml",
+      "sha256": "fbd034f8f855123dc2b176eff74dacfbe0c0f05885c97f55683e3d2720a29cff"
+    }
+  ],
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/class-init.stdout.gz",
+    "sha256": "bb4533fc639fd066e5e4a1c54b9f9caf0239be903240b985cfbfc338a10f6cd7"
+  },
+  "originalClassInitSha256": "d41f1e14c8d162af35493bc052a2698d023a56a1c7dc228386fdc8b0bf07be9d",
+  "manualExclusions": [],
+  "oldExecCombined": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
