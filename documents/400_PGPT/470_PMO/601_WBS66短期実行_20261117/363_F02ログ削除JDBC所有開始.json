@@ -1,0 +1,67 @@
+{
+  "eventId": "PGPT-20261008-5895",
+  "groupId": "PGPT-WBS66-F02-LOG-CLEANUP-GRAPH-20261118",
+  "baseCore": "8f9372fafc3c4e8fbd5ce3d3419429676c0408d7",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T07:28:33.215000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-LOG-CLEANUP-GRAPH-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-LOG-CLEANUP-GRAPH-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "WBS-F02-a and P017-07.02, SSC461 BUG3233/YKT2680. Move seven LogCleanupService JDBC failure graph calls to Bootstrap; preserve SQL, borrowed transaction, rollback and restoration order, Error identity and redaction. Exact existing 21 stand-alone proxy cases include cause/suppressed/SQL-next graphs; bounded existing Guard signature and six symbols analysis only, no external DB, filesystem delete commands, secrets, runtime authority. End same-source static/ABI/raw scope plus independent terminal and scope gaps.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4210_Log現在十九原試験と追加二例外単体仕様.md",
+        "sha256": "ecf99f0a805bee939193d4d5f9844b2dda1fca4cbf2cd629e4a542b47d587834"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG28456-log-analysis-context-post-v1/manifest.json",
+        "sha256": "3c423d5172314d3a5962e8f13397f14c99a4ba7e7a8d41fe06cb211e0f524c31"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38734-f03-cleanup-raw-owner-proof-v1/manifest.json",
+        "sha256": "06b502f2f7b0d0941bacb52bbb8b03fdc7c866dac5ec621a8cb0147292b87d0e"
+      }
+    ],
+    "productionCoreMain": "8f9372fafc3c4e8fbd5ce3d3419429676c0408d7",
+    "source": "4bdb5e8cb8ecf7d2ec39240764761283bbfa9b4b",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P017-07.02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461",
+      "YKT-2680"
+    ],
+    "run": "PG38879-f02-log-cleanup-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.35,
+      "high": 3.4
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680"
+  }
+}

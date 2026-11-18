@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.CleanupCounts;
@@ -7,7 +8,6 @@ import dev.codex.schubert.nk.batch.repository.CleanupKind;
 import dev.codex.schubert.nk.batch.repository.CleanupReason;
 import dev.codex.schubert.nk.batch.repository.CleanupRepository;
 import dev.codex.schubert.nk.batch.repository.LogCleanupProgress;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -72,11 +72,11 @@ public final class LogCleanupService {
             return new LogCleanupSummary(run, initial.before(), progress);
           });
     } catch (CleanupStoppedException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       // BUG-145/YKT-113: resource closure can append raw JDBC suppressed diagnostics.
       throw new CleanupStoppedException(failure.reason());
     } catch (SQLException | BatchRepositoryException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
     }
   }
@@ -128,8 +128,8 @@ public final class LogCleanupService {
     if (!known(primary))
       primary.addSuppressed(new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE));
     else {
-      StorageIoException.preserveFatal(primary);
-      StorageIoException.preserveFatal(secondary);
+      JdbcFailureGraph.preserveFatal(primary);
+      JdbcFailureGraph.preserveFatal(secondary);
     }
     return false;
   }
@@ -186,8 +186,8 @@ public final class LogCleanupService {
           throw failure;
         }
         if (!known(cleanupFailure)) throw cleanupFailure;
-        StorageIoException.preserveFatal(failure);
-        StorageIoException.preserveFatal(cleanupFailure);
+        JdbcFailureGraph.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(cleanupFailure);
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
       throw failure;
@@ -276,7 +276,7 @@ public final class LogCleanupService {
           }
         }
       } catch (SQLException failure) {
-        StorageIoException.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(failure);
         throw new CleanupStoppedException(CleanupStopReason.DATABASE_FAILURE);
       }
     }
