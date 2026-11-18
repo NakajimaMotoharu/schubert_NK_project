@@ -551,7 +551,7 @@ final class NonAuthenticationInboxInspectorTest {
       for (int i = 0; i < 100; i++)
         assertTrue(inspector.isConsistent(c, id(FIXTURE_UDTRSP01_F1EA7F6A), saved));
       assertEquals(
-          "InboxResultReference[type=NONE, value=<redacted>]", saved.resultReference().toString());
+          "InboxResultReference[<redacted>]", saved.resultReference().toString());
       // No .ready is created. Synthetic raw master hash 'a' differs from generated descriptor 'b'.
       assertTrue(
           check(f, c, FIXTURE_SCNRSP01_DD42C8D5, FIXTURE_0000_876EEFE0, SCRIPT, fileValues(1), 0));

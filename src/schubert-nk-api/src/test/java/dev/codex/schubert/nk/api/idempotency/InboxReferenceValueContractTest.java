@@ -58,9 +58,7 @@ final class InboxReferenceValueContractTest {
             assertSame(type, actual.type());
             assertEquals(numeric, actual.numericId());
             assertEquals(uuid, actual.uuid());
-            assertEquals(
-                "InboxResultReference[type=" + type.name() + ", value=<redacted>]",
-                actual.toString());
+            assertEquals("InboxResultReference[<redacted>]", actual.toString());
             permitted++;
           } else {
             IllegalArgumentException failure =

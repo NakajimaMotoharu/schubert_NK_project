@@ -204,7 +204,7 @@ class InboxModelTest {
           InboxResultReference.numeric(type, 999_999_999_999L).numericId());
     }
     assertEquals(
-        "InboxResultReference[type=NONE, value=<redacted>]",
+        "InboxResultReference[<redacted>]",
         InboxResultReference.none().toString());
     assertThrows(NullPointerException.class, () -> InboxResultReference.authSession(null));
     assertThrows(NullPointerException.class, () -> InboxResultReference.numeric(null, 1));
