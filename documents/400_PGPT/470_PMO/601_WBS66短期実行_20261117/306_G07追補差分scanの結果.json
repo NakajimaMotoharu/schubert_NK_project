@@ -1,0 +1,112 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5840",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-TRACKED-DELTA-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-TRACKED-DELTA-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "WBS-G07 incremental tracked commits after prior exact delta. Bounded full redaction scan of tracked text only and separately inspect changed evidence archives. No untracked/private files, historical replays, actual credentials or raw path logs. Exit actual tool terminal, per finding adjudication with independent digest provenance, explicit remaining G07/451.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38434-f03-g07-tracked-resume-delta-scan-v1/manifest.json",
+        "sha256": "67857c9c9df19b5eb6e4b24247a49e20ba31ac22374c4ce000a534fcc1cad710"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38438-g07-incremental-binary-evidence-review-v1/manifest.json",
+        "sha256": "a5ca6d1ff371ea9246fe67eda5257128ef027c3fdcca4478bb4dfe5aeaf73753"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "productionCoreMain": "a5ee838b8170749ac162051b17390c98de9a6a5e",
+    "source": "b4a63fd12e65cf1b11eda00cad138be68d94dfe0",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07"
+    ],
+    "run": "PG38542-g07-tracked-source-and-artifact-delta-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.5,
+      "high": 1.4
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "startEvent": "PGPT-20261008-5839",
+    "terminalAtUTC": "2026-11-18T04:15:21.773116+00:00",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38542-g07-tracked-source-and-artifact-delta-v1/manifest.json",
+      "sha256": "56b470d9c0b53e45d5ea1928d1a31c5b828e067caf7fe464f51db7106e149452"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 0,
+    "changedTrackedPaths": 225,
+    "commitsExamined": 34,
+    "unresolvedTextFindings": 0,
+    "binaryVersions": 11,
+    "expandedScanFindings": 0,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 40.4,
+    "remainingCriteria": [
+      "Whole candidate history and all evidence need G07 gate; this batch is exact tracked delta only.",
+      "F02/F03 runtime and candidate acceptance."
+    ],
+    "firstBinaryScannerActualSuccess": true,
+    "initialInventoryAssertionExit": 1,
+    "quotaAfter": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "97b315367b2c6169dd8d84433ec7bce2f1fa444413b70a00c7b6e68b5114c275",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T04:15:35.681000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 28,
+          "remainingPercent": 72,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true
+  }
+}
