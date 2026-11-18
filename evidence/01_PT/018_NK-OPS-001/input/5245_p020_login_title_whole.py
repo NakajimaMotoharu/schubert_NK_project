@@ -16,6 +16,10 @@ PHASES = {
         '534_P020*', E/'PG39904-p020-approved-login-title148-v1', 148, 153),
     'PG39923-p020-approved-all-brand153-v2': (
         '534_P020*', E/'PG39904-p020-approved-login-title148-v1', 148, 153),
+    'PG39944-p020-cache-and-session161-v1': (
+        '538_P020*', E/'PG39923-p020-approved-all-brand153-v2', 153, 161),
+    'PG39946-p020-cache-and-session161-v2': (
+        '538_P020*', E/'PG39923-p020-approved-all-brand153-v2', 153, 161),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
@@ -70,7 +74,7 @@ def main(name):
     for path in (tests,temp,xml):
         path.mkdir(mode=0o700)
     main_classes=snapshot/B/'target/classes'
-    session=name.split('-')[0]+'-APPROVED-BRAND-'+str(expected)
+    session=name.split('-')[0]+'-FIXED-OBSERVATIONS-'+str(expected)
     cp=':'.join(str(p) for label,p in sdk.items() if 'jacoco' not in label)
     mv=[str(R['MAVEN']),'-o','-B','-ntp','-N',f'-Dmaven.repo.local={TC}/m2/repository',
         '-f',str(snapshot/B/'pom.xml'),'compile']

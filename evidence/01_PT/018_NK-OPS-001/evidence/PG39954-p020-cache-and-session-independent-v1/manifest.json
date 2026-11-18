@@ -1,0 +1,249 @@
+{
+  "actualExit": 0,
+  "source": "01cdc3b0bc94b5c5fafed0566169c81ad1df9df9",
+  "run": "PG39944-p020-cache-and-session161-v1",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39944-p020-cache-and-session161-v1/manifest.json",
+    "sha256": "a6ac44a62345746b1319f51b3989583283ba28d756cc41e560b46e20d6b23d5e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39948-p020-cache-and-session-static-v1/manifest.json",
+    "sha256": "321ea0e13894c0cc4f58d512d74d9ba28f020adf1f6db464abeaf87239657ffc"
+  },
+  "originalTests": 153,
+  "newDefinitions": 8,
+  "tests": 161,
+  "suites": 20,
+  "firstSuccess": 161,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "independentOracle": {
+    "design": {
+      "UI222": {
+        "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+        "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c"
+      },
+      "UI226": {
+        "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+        "sha256": "d7eb13b99b60ebba451c429f67f7a32cb5618999645b428ebd5a447c90413528"
+      },
+      "UI264": {
+        "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+        "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781"
+      },
+      "SS314": {
+        "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+        "sha256": "c1f0269c8ee59173cf41419cc2166156be2712b7b1316a2eea81b9b53a504b41"
+      },
+      "SS355": {
+        "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+        "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45"
+      }
+    },
+    "artifacts": [
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-O01.json",
+        "sha256": "76731f9ce334fd6aed892363d680054d2697ace54a138e370528bae107fe42e2"
+      },
+      {
+        "path": "program/characterization/baseline/current/artifacts/CHR-A02.json",
+        "sha256": "8af1ba4d2381bebe7ce52f74992e5dabc728841b996779a2f90ded043001ce75"
+      }
+    ],
+    "currentAndNk": {
+      "CHR-O01:/cacheControl": [
+        "no-cache, no-store, max-age=0, must-revalidate",
+        "no-store"
+      ],
+      "CHR-A02:/observedActiveSessionCount": [
+        3,
+        2
+      ],
+      "CHR-A02:/oldestSessionInvalidated": [
+        false,
+        true
+      ],
+      "CHR-A02:/sessionActiveOldestToNewest/0": [
+        true,
+        false
+      ],
+      "CHR-A02:/sessionRedirectsOldestToNewest/0": [
+        "/",
+        "/login?session-expired"
+      ]
+    },
+    "configuredMaximumSessionsEach": 2
+  },
+  "testIds": {
+    "PT-CHR-DEF026": "requiresCacheObservationEvenWhenTheOldHeaderWasUnchanged",
+    "PT-CHR-DEF027": "rejectsCacheControlOtherThanApprovedNoStore",
+    "PT-CHR-DEF028": "rejectsCacheObservationForADifferentField",
+    "PT-CHR-DEF029": "rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber",
+    "PT-CHR-DEF030": "requiresOldestInvalidationEvidenceAlongsideTheCorrectCount",
+    "PT-CHR-DEF031": "leavesAnAdditionalSessionLossUnregistered",
+    "PT-CHR-DEF032": "rejectsAnUnapprovedConfiguredMaximum",
+    "PT-CHR-DEF033": "requiresTheOldestSessionsObservedRedirect"
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39944-p020-cache-and-session161-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39944-p020-cache-and-session161-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/raw.tsv",
+      "sha256": "1284dc8810f8fb7adecd6d0ca5c762a94211b0d6b5587c12dc0e924bb4d064e7"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1506
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 234
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 924
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8004
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1399,
+    "BRANCH": 132,
+    "LINE": 264,
+    "COMPLEXITY": 110,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/pmd-per-site.json",
+    "sha256": "c41c8c4cb5f7d1278dc8a351e9388d4a28cc904b96e63f20fa2a558d80452e07"
+  },
+  "remainingRuntimePreflight": "BUG-3311",
+  "closedLocal": [
+    "BUG-3317"
+  ],
+  "horizontalOpen": "YKT-2699",
+  "actualNkChr": false,
+  "actualAuthenticationOrBackendActions": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "productTests": 0,
+  "formalUpdated": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39954-p020-cache-and-session-independent-v1/class-init.log.gz",
+    "sha256": "751710c29c12a108443bcadb448ed2a51caeb962f8cc79629bb605a45303f37c"
+  },
+  "terminalAtUTC": "2026-11-18T17:14:48.988271+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5250_p020_cache_and_session_independent.py",
+    "sha256": "709995d2e61f541cb8d65bf9c6f5b1d6b2e653a2e54c1925874c00c6fa79abd1"
+  }
+}
