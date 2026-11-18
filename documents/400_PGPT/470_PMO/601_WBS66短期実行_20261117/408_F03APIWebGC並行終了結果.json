@@ -1,0 +1,122 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5938",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "756ba55c12015cddf74acafc6a8354db4786ecd8b84880c2f8dd8b7992991f7e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T10:15:24.732000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 33,
+          "remainingPercent": 67,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T10:13:34.204094+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-API-WEB-GC-OWNED-FIXTURES-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-API-WEB-GC-OWNED-FIXTURES-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/2-2/P018-09 YKT2387; API and Web GC owner fixture 013 workers both with unbounded implicit close. Preserve existing independent snapshot, counters order, ownership and failure contract, enforce finite thread termination and run both existing 16 when permitted with own heap/SDK only. No forced GC, external JVM, logging sink, live monitoring, service or actual device.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2837_Web標準SDK五whole73_単体テスト仕様.md",
+        "sha256": "bbd7e2eb1d7f678d5c1a054c6c2c6c0372bda9ce5632222ba846704e22016569"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2841_API標準SDK三whole44_単体テスト仕様.md",
+        "sha256": "33f8513689cb36610b1e5a98fa112dcd9e500509e93978aa3f6c1c9ab63d31b9"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39120-f03-web-jvm-system-finite-independent-v1/manifest.json",
+        "sha256": "0fb8c113b430b6bd31cd0d67c4bbc3425ea5b52fcbbb91f08e2ccf9e0920afc6"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "bf672e92c42163fd4a07a12c78948106adf00cea",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2387",
+      "BUG-3260"
+    ],
+    "run": "PG39214-f03-api-web-gc-finite-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.2,
+      "high": 2.7
+    },
+    "groupCapPp": 3.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5937",
+    "fixedTestSource": "e27c0b0be816719370ae9f9ac5305550a51aae2c",
+    "quotaBefore": {
+      "usedPercent": 33,
+      "remainingPercent": 67,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39214-f03-api-web-gc-finite-independent-v1/manifest.json",
+      "sha256": "90a0e4d4e17197373ec49023e4bf31567a781db63b8039b3a65fda7697e7e726"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "technical": {
+      "tests": 32,
+      "successful": 32,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 32,
+      "firstProductSuccessful": 32,
+      "newTestDefinitions": 0,
+      "physical": 10,
+      "positiveCrc": 3,
+      "staticApplicable": 0,
+      "apiRawBranchMiss": 2
+    },
+    "remainingCriteria": [
+      "API GC raw branches 2 and new independent invalid-value cases",
+      "F03 actual full six and 451"
+    ]
+  }
+}

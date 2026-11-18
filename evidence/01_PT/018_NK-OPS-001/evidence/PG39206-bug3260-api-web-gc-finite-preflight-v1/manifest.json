@@ -1,0 +1,288 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5113_bug3260_api_web_gc_finite_profile.json",
+    "sha256": "86463c084b7cf335173b6a1aa77d7ac4153ba43a29a0532ccdddb0ca53f7c6c9"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java": "27a271cea99362ade6c502759c74d579184f788d7309403126e1ba5a5e62aec0",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java": "ad5afeaed34720b9453cbf4625b7f80e09c3e4e84ac578b88fd19274e00c2107",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39202-bug3260-api-web-gc-finite-prepare-v1/manifest.json",
+    "sha256": "8d2727de084734534ce9ac46bbc7ef19f163fccc704c9bde5377c47af71e7d0a"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39204-bug3260-api-web-gc-finite-static-v1/manifest.json",
+    "sha256": "8399a8970afbb84933eaaf9b0061c168208a94f3fe852f6fdc2b7b4928295f57"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5114_bug3260_api_web_gc_finite_admission.json",
+    "sha256": "26614c4296f7190ef283214bad97225d3c8ab3224b9b29a196444cf42023ae9c"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "102",
+      "reason": "List holds caller-retained GC handles; the immediately enclosing finally explicitly closes every recorded handle before releasing the caller-owned Registry.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this JvmGcMetrics object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "227",
+      "reason": "This test requires an already closed Registry. The immediately following statement closes it before any assertion or lookup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Registry object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "308",
+      "reason": "Receiver rejection leaves cleanup with the caller. The inner finally closes the Fake if no confirmation was recorded.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "345",
+      "reason": "Faulted owner callback is intentionally injected. The inner finally closes this Fake if cleanup is still unconfirmed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "373",
+      "reason": "Bind failure keeps the handle in the approved owner. The finally closes the same Fake when the owner has not already confirmed it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "409",
+      "reason": "First independent Fake has its own enclosing finally checking its closeConfirmed state. The second owner uses a different resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "412",
+      "reason": "Second independently owned Fake closes in its inner finally unless already confirmed. The outer branch separately releases the first.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "443",
+      "reason": "An unconditional finally requests shutdownNow and asserts 10-second termination of the fixed test-only executor.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "443",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "449",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "478",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "479",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "487",
+      "reason": "The Fake remains directly owned after acknowledgement/rejection. The fixture finally closes it unless that owner has already done so.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "523",
+      "reason": "The test exercises and preserves one confirmed close. The separate finally closes only as a fallback when confirmation is absent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "542",
+      "reason": "The injected close failure is removed before retry and on the fallback path. The fixture finally checks confirmation and releases only if needed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "102",
+      "reason": "List holds caller-retained GC handles; the immediately enclosing finally explicitly closes every recorded handle before releasing the caller-owned Registry.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this JvmGcMetrics object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "227",
+      "reason": "This test requires an already closed Registry. The immediately following statement closes it before any assertion or lookup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Registry object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "308",
+      "reason": "Receiver rejection leaves cleanup with the caller. The inner finally closes the Fake if no confirmation was recorded.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "345",
+      "reason": "Faulted owner callback is intentionally injected. The inner finally closes this Fake if cleanup is still unconfirmed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "373",
+      "reason": "Bind failure keeps the handle in the approved owner. The finally closes the same Fake when the owner has not already confirmed it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "409",
+      "reason": "First independent Fake has its own enclosing finally checking its closeConfirmed state. The second owner uses a different resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "412",
+      "reason": "Second independently owned Fake closes in its inner finally unless already confirmed. The outer branch separately releases the first.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "443",
+      "reason": "An unconditional finally requests shutdownNow and asserts 10-second termination of the fixed test-only executor.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "443",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "449",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "478",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "479",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "487",
+      "reason": "The Fake remains directly owned after acknowledgement/rejection. The fixture finally closes it unless that owner has already done so.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "523",
+      "reason": "The test exercises and preserves one confirmed close. The separate finally closes only as a fallback when confirmation is absent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "542",
+      "reason": "The injected close failure is removed before retry and on the fallback path. The fixture finally checks confirmation and releases only if needed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

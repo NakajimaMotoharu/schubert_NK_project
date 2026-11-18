@@ -1,0 +1,552 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "e27c0b0be816719370ae9f9ac5305550a51aae2c",
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "config": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5113_bug3260_api_web_gc_finite_profile.json",
+      "sha256": "86463c084b7cf335173b6a1aa77d7ac4153ba43a29a0532ccdddb0ca53f7c6c9"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39202-bug3260-api-web-gc-finite-prepare-v1/manifest.json",
+      "sha256": "8d2727de084734534ce9ac46bbc7ef19f163fccc704c9bde5377c47af71e7d0a"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39206-bug3260-api-web-gc-finite-preflight-v1/manifest.json",
+      "sha256": "54ffa4d9922b00bd3d9ceeaed175c56d369367b66cb7f3e1c0aca2c6d8723919"
+    },
+    "inputHashes": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java": "27a271cea99362ade6c502759c74d579184f788d7309403126e1ba5a5e62aec0",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java": "ad5afeaed34720b9453cbf4625b7f80e09c3e4e84ac578b88fd19274e00c2107",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+      "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    "metadataPins": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java": "2f75b4bd051580a5a5420b481ffb8beb5f00ef5707bbfc9ec8102cfd78e76af8",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/package-info.java": "d59b108c0d1da342135c1536f8151986cb87cc8b58a919acb9e095c9be295b9d",
+      "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java": "019f126d38fdfbfd60baf8f38c254201db2427e7a0c2087e052712812a889c03",
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java": "27a271cea99362ade6c502759c74d579184f788d7309403126e1ba5a5e62aec0",
+      "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.java": "ad5afeaed34720b9453cbf4625b7f80e09c3e4e84ac578b88fd19274e00c2107",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+      "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75",
+      "tools/quality/pgpt_closed_host_profile.py": "0645d453b22a5ab2a4432fb388b187c64cf360eafa1a6c929e1670d7c3f5791e",
+      "tools/quality/pgpt_closed_host_stages.py": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b",
+      "tools/quality/pgpt_closed_host_post.py": "1313c29788f650eee74e1bb622c960d54e5b87bda10418fbbe8810d51acbdc15",
+      "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+      "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+      "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+      "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173",
+      "tools/quality/pgpt_public_unit_xml.py": "08270c1a6add3f8adf75f46e9ce88c557084d3ac3e6c0ad612360ceefaf50619",
+      "tools/quality/pgpt_protocol_public_oracle.py": "e559e9bb071a9ed24b5846ad3f6aa1b5cb80f2afd218131f01a1f2b053e2e30b",
+      "tools/quality/pgpt_spotbugs_contract.py": "f05ecdb4599528ced8753e95c66db2ee361867b1918fda7e69ad39e43c44674b",
+      "evidence/01_PT/018_NK-OPS-001/input/5113_bug3260_api_web_gc_finite_profile.json": "86463c084b7cf335173b6a1aa77d7ac4153ba43a29a0532ccdddb0ca53f7c6c9",
+      "evidence/01_PT/018_NK-OPS-001/input/5114_bug3260_api_web_gc_finite_admission.json": "26614c4296f7190ef283214bad97225d3c8ab3224b9b29a196444cf42023ae9c",
+      "evidence/01_PT/018_NK-OPS-001/4645_BUG3260APIWebGC有限実行仕様.md": "4ad05505fa2f3df91e91c66b64eb4a42298c859edb8b29e801312550d74ce438",
+      "evidence/01_PT/018_NK-OPS-001/2837_Web標準SDK五whole73_単体テスト仕様.md": "bbd7e2eb1d7f678d5c1a054c6c2c6c0372bda9ce5632222ba846704e22016569",
+      "evidence/01_PT/018_NK-OPS-001/2841_API標準SDK三whole44_単体テスト仕様.md": "33f8513689cb36610b1e5a98fa112dcd9e500509e93978aa3f6c1c9ab63d31b9",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39120-f03-web-jvm-system-finite-independent-v1/manifest.json": "0fb8c113b430b6bd31cd0d67c4bbc3425ea5b52fcbbb91f08e2ccf9e0920afc6"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract.class": "75d77ef38c7733b739c54098d58f915d0c6992d2bcaaec2429c51e461b8d0cec",
+      "dev/codex/schubert/nk/web/monitoring/package-info.class": "7334c9f1dec9e978b793bc29b27709ec5871138508d8fd0056374aa1cc4cd9f8",
+      "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.class": "14a476a06777a4773c9fff4d6ca01c1f678def73a08fbb8b75497eb3255151cd",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Method.class": "295b08827d1342f21a403f93478f96f41524b4cd8bf9c6357c05c0cca7b795b1",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Route.class": "84a897107a84c6cf18686887fc910bb1c79546ae2c6f756614e91dd22729dc55",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Status.class": "9c4f6916d4fe1dfe592dc05b1468a7e177ee72d6a730045befa5d177f217265c",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Labels.class": "027eebec184d100c8e2ce1d77e0255fdf373caa70667a55ef8f3d36d71366093",
+      "dev/codex/schubert/nk/web/monitoring/HttpMetricContract$Metric.class": "bd0fab310b53f0cde5dcde5eb9f2d3eb411ba184fba0402c6c22616093a9b481",
+      "dev/codex/schubert/nk/api/monitoring/package-info.class": "2c267c3a7f4cb2eb0e04e2e459ad4658735b02d04c64967861f7f1ba8b39eaae",
+      "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.class": "ea4e284e32af664d5b665b81102ba713c386ad4364515d5963963a6c81fa7770"
+    },
+    "testClassHashes": {
+      "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest$Registry.class": "700343a0c0c1b953ccfad00f0b6229320f989d033ed3880395630a4c7019a6b2",
+      "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest.class": "e4134603e156421fc6f67b3c6d39f48e12c7742460397f91d47c7758dd665ed3",
+      "dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistrationTest$Fake.class": "8d32dde16dd5d16447e88abc5ba96f5b7743d1aff434ac45e962222b1a14c82f",
+      "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.class": "65f4aeebb35920da54feee5811d1b76349072024a332dc647c1dcae08cb1f472",
+      "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest$Registry.class": "ae4b9ec4e804d85c51d1dafe76167e11ae2fe2d6d5d1fee38ff23874c1a74580",
+      "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest$Fake.class": "4b4a78468319ad7d21350005041f60d8aea3632ec81d60470004966601378481"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc002StandardIsLazyForSourceFactoryAndOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc003FactoryOwnerBindOrderAndSameHandle()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc004NullBoundariesFailBeforeActivation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc005UnknownModesNeverInspectSourceOrCallbacks()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc006ClosedDebugFailsBeforeFactoryAndOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc007NullFactoryResultIsNeverAcknowledged()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc008FactoryRuntimeAndErrorIdentityRetained()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc009OwnerRejectMeansNoBindOrImplicitClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc010OwnerRuntimeAndErrorNeverActivateOrAutoClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc011BindFailureLeavesExactHandleInAcknowledgedOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc012SameInstallerDoesNotMixTwoOwnerScopes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc013FiniteIndependentConcurrentOwnerScopes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "name": "apigc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc002StandardIsLazyForSourceFactoryAndOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc003FactoryOwnerBindOrderAndSameHandle()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc004NullBoundariesFailBeforeActivation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc005UnknownModesNeverInspectSourceOrCallbacks()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc006ClosedDebugFailsBeforeFactoryAndOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc007NullFactoryResultIsNeverAcknowledged()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc008FactoryRuntimeAndErrorIdentityRetained()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc009OwnerRejectMeansNoBindOrImplicitClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc011BindFailureLeavesExactHandleInAcknowledgedOwner()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc012SameInstallerDoesNotMixTwoOwnerScopes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc013FiniteIndependentConcurrentOwnerScopes()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "name": "webgc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry()"
+      }
+    ],
+    "selectedClasses": [
+      "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest"
+    ],
+    "session": "PG39208-BUG3260-API-WEB-GC-FINITE-V1",
+    "expectedTests": 32,
+    "oldExecUnion": false,
+    "coverageExclusions": [],
+    "backendOrHeldClassActions": 0,
+    "guardSignature": null,
+    "unstartedProcess": null
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:13:01.169403+00:00",
+      "endUTC": "2026-11-18T10:13:02.436648+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/jacoco.exec,sessionid=PG39208-BUG3260-API-WEB-GC-FINITE-V1,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39202-bug3260-api-web-gc-finite-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39202-bug3260-api-web-gc-finite-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+        "--select-class",
+        "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1",
+      "stdoutSha256": "1d9ba51ec5c23f6d46bde3e78045d052db7faef05165e22f804e2eee971cb788",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:13:02.437000+00:00",
+      "endUTC": "2026-11-18T10:13:02.602239+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39202-bug3260-api-web-gc-finite-prepare-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "f6653890bc1e239717314e00a0b73c46876ce11677fdb907242151ebb91e699a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:13:02.602523+00:00",
+      "endUTC": "2026-11-18T10:13:02.717019+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39202-bug3260-api-web-gc-finite-prepare-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "8437dad3bfffebdfa64f53d3cbdfeb4629c3bf014bcb9779e66c2f26b7d39c39",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T10:13:02.717334+00:00",
+      "endUTC": "2026-11-18T10:13:02.831830+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39208-bug3260-api-web-gc-finite-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "4c018f55ea09a4dfd7d6761e96b42f93e84b5112b5ec0060dceac9d95bb16164",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 32,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc002StandardIsLazyForSourceFactoryAndOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc014RetainThenRejectOrThrowKeepsCallerCleanupWithoutActivation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc009OwnerRejectMeansNoBindOrImplicitClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc008FactoryRuntimeAndErrorIdentityRetained()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc003FactoryOwnerBindOrderAndSameHandle()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc006ClosedDebugFailsBeforeFactoryAndOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc007NullFactoryResultIsNeverAcknowledged()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc011BindFailureLeavesExactHandleInAcknowledgedOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc004NullBoundariesFailBeforeActivation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc013FiniteIndependentConcurrentOwnerScopes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc006ClosedDebugFailsBeforeFactoryAndOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc011BindFailureLeavesExactHandleInAcknowledgedOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc001DefaultSdkIsOwnedAndClosedBeforeBorrowedRegistry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc005UnknownModesNeverInspectSourceOrCallbacks()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc009OwnerRejectMeansNoBindOrImplicitClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc012SameInstallerDoesNotMixTwoOwnerScopes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc012SameInstallerDoesNotMixTwoOwnerScopes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc002StandardIsLazyForSourceFactoryAndOwner()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc005UnknownModesNeverInspectSourceOrCallbacks()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc013FiniteIndependentConcurrentOwnerScopes()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc004NullBoundariesFailBeforeActivation()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc008FactoryRuntimeAndErrorIdentityRetained()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistrationTest",
+      "name": "webgc003FactoryOwnerBindOrderAndSameHandle()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc007NullFactoryResultIsNeverAcknowledged()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.monitoring.ApiGcMetricRegistrationTest",
+      "name": "apigc010OwnerRuntimeAndErrorNeverActivateOrAutoClose()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "productTestsExecuted": 32,
+  "formalUpdated": false,
+  "whole451Accepted": false
+}
