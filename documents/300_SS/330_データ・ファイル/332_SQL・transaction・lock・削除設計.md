@@ -482,3 +482,7 @@ WebOutboxObservationRepository.readの借用Connectionでは、取得済ResultSe
 ## SSC-470 API Outbox借用読取の型付き単一解放
 
 `OutboxObservationRepository.read`は借用Connectionに対し、非null取得済みのResultSetとPreparedStatementを各finallyから型付き解放へ一回渡す。SQL例外、RuntimeException、Errorを含む一次失敗と解放失敗の優先・抑制は標準try-with-resources契約に従う。一次失敗があれば解放失敗を元順でその失敗へ追加し、一次なしなら解放失敗をそのまま伝播する。同じThrowableの自己抑制はJDKのIllegalArgumentExceptionを維持し、文も解放する。行→文の順序、未取得資源の扱い、借用Connectionの所有・transaction境界、既SQL・列・timeout1・UTC・Snapshot・公開APIは維持する。
+
+## SSC-471 業務OutboxのJDBC必須資源と逆順終了
+
+`JdbcOutboxRepository`のenqueue、claim、markSent、markFailureは借用Connectionから獲得する各PreparedStatementを既RequiredColumnのrequired-value契約で直ちに確認する。enqueue、claimのResultSetにも適用する。JDBC資源の欠落は固定SQLDataException・SQLSTATE22004。未取得資源は終了せず、取得済文と行は該当の型付き解放をfinallyで一回、行→文の順に行う。標準try-with-resourcesの元Throwable、二次例外の順・同一性、自己抑制時のJDK例外を維持し、一次失敗の正常化はしない。呼出元のConnection/transaction、SQL・bind、行順、UTC、識別子、再送、リース、状態更新条件及び公開APIは維持する。DB・JMSの実経路は別確認。
