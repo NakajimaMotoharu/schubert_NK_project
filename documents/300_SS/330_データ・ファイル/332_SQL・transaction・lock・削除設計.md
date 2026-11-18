@@ -465,3 +465,8 @@ MorningSqlFailuresとJdbcResourceFailuresは例外優先順位だけを扱う非
 BUG3126/YKT2597。上位RD/UI変更不要。RunReferenceRepository.readのResultSet/PreparedStatement closeを、同Repository内private static closeRow(@Nullable ResultSet,@Nullable Throwable) throws SQLExceptionとcloseStatement(@Nullable PreparedStatement,@Nullable Throwable) throws SQLExceptionへそのまま抽出し、各finallyから一回呼ぶ。各helperは取得済資源がnonnullの時だけ直接close、SQL/RuntimeException/Error secondaryを捕捉して既JdbcResourceFailures.replace(primary,secondary)がtrueなら同一secondaryをthrowする。JdbcResourceFailuresは順位だけを判定し、JDBC closeやtransactionを所有しない。helperへの抽出はnull判定と順位判定を同じCode一箇所で実行できるようにし、javac finally複製のraw branchを測定から除外しない。try本体/primary記録/row→statement順・一回close・成功return前の完了・SQLだけ固定化/未知同一性・borrowed Connection非変更・全SQL/UTC bind/queryTimeout5/投影/NULL/interrupt/publicAPIを不変とする。
 
 独立メモリ内JDBC ProxyのRRF-PURE-001..008は元8定義/全literal期待/SQL呼出順/境界/null/資源counter/32独立fixtureを保持し、row/statement各closeについてSQL/RTE/Error secondaryとSQL/RTE/Error primaryの全組合せを観測する。実DB元8件はHOLDのまま変更・実行免除0。Main一classのfreshRoot/全静的適用・未分類0、同sourceの8PTと未filter四counter100、現公開API一致/他6physical byte一致を確認する。default100や旧exec合算で代用しない。共有型のraw未実行は明示し、当Repository限定完了を元P00403五artifact/F02F03/全451/正式へ昇格しない。他Repositoryの横展開はYKT2597で未完のまま別検証する。品質/権限/HOLD/モデル/元費用・cap条件は不変更。状態:設計確定・main反映前、PG/PT未実施。
+
+
+## SSC-461 SQL例外graphの取得境界と順位
+
+JdbcFailureGraph.preserveFatalはjava.sql.SQLExceptionからnextを取得する唯一の新共通adapter。Throwableの元Error、cause、そのsuppressed配列順、最後のSQL nextの各辺を同じ幅優先キューで扱い、nodeはidentityで一度だけ探索する。JDBC admissionの既primary/secondary適用条件、固定診断・close優先・SQLstateは変更しない。旧入口の結果も移管期間中は保持。実DB・Root・全451は別検証。
