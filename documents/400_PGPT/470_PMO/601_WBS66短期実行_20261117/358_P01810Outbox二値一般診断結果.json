@@ -1,0 +1,147 @@
+{
+  "eventId": "PGPT-20261008-5890",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-OUTBOX-VALUE-DIAGNOSTICS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-OUTBOX-VALUE-DIAGNOSTICS-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "P018-10.03 CATALOG-022/023, F03. OutboxEntry/Request general diagnostics currently include record id or destination values. From PG38818 exact syntax and existing value fixtures, publish SSC464 design-only, pre-entry BUG3243/YKT2687, change only generic diagnostic and two pure case expectations. End ordinary all 5 in selected exact files, fixed source raw counts and ABI/retained constructor/accessors/structured behavior. No input payload logs, real JMS/DB/send or actual placement. Outbox lifecycle and held caller proof remains separate.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/manifest.json",
+        "sha256": "d4d8b337bdab8275e8b9a06757f7fa1df16cded935617313a505f567c124d0d1"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG35492-dlq-delivery8-post-v1/manifest.json",
+        "sha256": "374be278bcef843b957d5ebcd7370526a6bad1adc07fc9a0db399e936344678a"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "bb1063ec5d898ab803b2d8436758563928646094be39799ebc0cfe68e1bb19c9"
+      }
+    ],
+    "productionCoreMain": "be2e2d12a0e533a7ed28ad28d1a5b1a2f10458a7",
+    "source": "5b592e942782fd9426eee52fa8a79ea6169b830d",
+    "wbsLeafIds": [
+      "WBS-P018-10.03",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "CATALOG-022",
+      "CATALOG-023"
+    ],
+    "run": "PG38836-p01810-outbox-value-diagnostic-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.7,
+      "high": 4.3
+    },
+    "groupCapPp": 6.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3243",
+    "relatedYkt": "YKT-2687",
+    "quotaAfter": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "d282ac945f25005420840208a319651c0553b9c4a34bf8250faf537e5844a5dc",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T06:53:49.550000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 31,
+          "remainingPercent": 69,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T06:53:20.388660+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 30,
+      "remainingPercent": 70,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5889",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38836-p01810-outbox-value-diagnostic-independent-v1/manifest.json",
+      "sha256": "1258e214ba3d60a1c673aa19217334a4d7b7589862f4a322cb6043fc9c399b0d"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 5,
+    "newDefinitions": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 333
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 20
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 78
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 41
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 31
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 2
+      }
+    },
+    "designPR": 431,
+    "designMain": "ce5ce923b1912beebeabc97abfc6c95ea2dab4be",
+    "authoritativeDesignMerged": true,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "Remaining catalog017 InspectionStep until current ordinary verification",
+      "Structured/actual delivery and full WBS/451 pending"
+    ]
+  }
+}
