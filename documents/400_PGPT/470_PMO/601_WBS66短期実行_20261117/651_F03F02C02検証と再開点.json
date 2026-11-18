@@ -1,0 +1,109 @@
+{
+  "eventId": "PGPT-20261008-6172",
+  "actualExit": 0,
+  "kind": "WBS66_CONTINUATION_PENDING_QUALIFIED_RUNTIME_EVIDENCE",
+  "source": "b130f389675440976588c89ef43627a8453332b9",
+  "headAtCheckpoint": "b130f389675440976588c89ef43627a8453332b9",
+  "originDevelopment": "b130f389675440976588c89ef43627a8453332b9",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "resumedFrom": {
+    "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/642_haruka実行条件・再開点.json",
+    "sha256": "f52deb1dac093ec173c940a70623be3fffaa1c16d74b50f342f0a2d40cd612d3"
+  },
+  "resumedFromEvent": "PGPT-20261008-6163",
+  "lastWorkEvent": "PGPT-20261008-6171",
+  "evidence": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40168-f03-ready-retirement-monitor-328-v1/manifest.json",
+      "sha256": "a23f8f5913a42165db3be74de7c8d68ff5a19dee024b276672062a24f824099a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40174-f02-monitoring-repository-independent-v1/manifest.json",
+      "sha256": "d56e097bf7f80357ac4609534666c3f745dec384558fcb9a41bf23134aef9904"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40176-f03-parent-retirement-monitor-330-v1/manifest.json",
+      "sha256": "5b74099dc07275b262392a2bdc01dea09e3b1cc6a77c41dedb499b219123a0b2"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40182-c02-source-killmode-independent-v1/manifest.json",
+      "sha256": "a00fd714e1971cb0426f7ffd7af4d3b7498f7e920a63e8584ad561d4b09a713a"
+    }
+  ],
+  "f03OriginalSubset": {
+    "total": 45,
+    "applicableOpen": 16,
+    "unclassified": 29,
+    "classifiedThisResume": [
+      328,
+      330
+    ]
+  },
+  "testedToolScopes": {
+    "f02MonitoringRepository": {
+      "first": 3,
+      "after": 4,
+      "total": 4
+    },
+    "c02TextShutdown": {
+      "first": 2,
+      "after": 6,
+      "total": 6
+    }
+  },
+  "formalAccepted": 17,
+  "formalDenominator": 190,
+  "formalIncrement": 0,
+  "coreAccepted": 0,
+  "coreDenominator": 5,
+  "officialTests": 1964,
+  "officialScopes": 53,
+  "effortCompletionRate": null,
+  "productTestsThisResume": 0,
+  "pendingHolds": [
+    "QA-056",
+    "QA-057",
+    "QA-058",
+    "actual DB/native/Root",
+    "451"
+  ],
+  "actualRetirementOperations": 0,
+  "sshAttemptsThisResume": 0,
+  "harukaAuthModePriorPmo": "Password with fixed host key",
+  "harukaExecutionSideEstablished": false,
+  "harukaRunAllocated": false,
+  "gateCliActualCapacityNotRun": true,
+  "ioriUsed": false,
+  "ioriOverflowOnly": true,
+  "nextHostProof": "Establish the approved execution-side authentication, same boot and owner; use frozen GateCli evidence PG40162 only after start conditions.",
+  "nextLocalScope": "Find an unheld ordinary condition independent of held Root, intent, permit and Backup request paths. Remaining 29 PMD rows not reclassified.",
+  "postStopRule": "No replay of inherited test or connection; preserve source and continue admitted independent work when there is a meaningful next condition.",
+  "ownedLocalJobs": 0,
+  "preservedStashes": 7,
+  "preservedUntrackedCount": 1537,
+  "availableLocalBytes": 2117709824,
+  "quotaReceipt": {
+    "sha256": "677480574a18f30ef20c43f9f7079a233bc8d7082a344c75854f56032db24743",
+    "observation": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T23:33:41.357000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 49,
+        "remainingPercent": 51,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    }
+  },
+  "actualAllocatedPp": null,
+  "tokenTotals": null,
+  "originalShortPlanPp": 143.371,
+  "originalRemainingDetailBasePp": 1089.848,
+  "nextSafeCommand": "git status -sb --untracked-files=no && git rev-parse HEAD origin/dev-foundation origin/main",
+  "pgptAllComplete": false,
+  "stopReason": "NEXT_REQUIRED_RUNTIME_EVIDENCE_NOT_AUTHENTICATED_OR_ADMITTED",
+  "plannedHarukaRun": "PG40160-p020-haruka-real-filestore-v1"
+}
