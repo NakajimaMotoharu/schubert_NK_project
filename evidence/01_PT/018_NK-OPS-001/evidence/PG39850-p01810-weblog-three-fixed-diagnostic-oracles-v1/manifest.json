@@ -1,0 +1,193 @@
+{
+  "actualExit": 0,
+  "head": "7663bb3b5acc86fb05733dd13dc9c15d30dd06da",
+  "sourceByteScope": 15,
+  "currentProductionCore": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "originalActualSource": "53bc17dc565728561f9fa9e2c1713301c679d8a5",
+  "sameRun": "PG38402-SSC454-WEB-VALUE-PRIVACY",
+  "fixedDiagnosticRows": [
+    {
+      "id": "PT-P01810-CATALOG-032",
+      "testId": "PT-WLOG-VALUE003",
+      "method": "value003ClaimedRowHasAllEightComponentsAndRejectsEachInvalidBoundary",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+        "sha256": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb"
+      },
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+        "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+      },
+      "independentExpected": "ClaimedWebLog[identity/payload/lease=<redacted>]",
+      "oldDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38392-p01810-four-web-redaction-catalog-rows-v1/manifest.json",
+        "sha256": "024397c202a115fc37e4d5afaf0d92db02ccea706936fc20c74c1b4839a82738"
+      },
+      "oldRunScopeQualified": false,
+      "rawMethod": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      },
+      "physicalCrc": "081b68d292a4db3d",
+      "approvedDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "id": "PT-P01810-CATALOG-033",
+      "testId": "PT-WLOG-VALUE002",
+      "method": "value002CiphertextOwnershipBoundsAndArrayReferenceEqualityRemainExplicit",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+        "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+      },
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+        "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+      },
+      "independentExpected": "EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]",
+      "oldDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38392-p01810-four-web-redaction-catalog-rows-v1/manifest.json",
+        "sha256": "024397c202a115fc37e4d5afaf0d92db02ccea706936fc20c74c1b4839a82738"
+      },
+      "oldRunScopeQualified": false,
+      "rawMethod": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      },
+      "physicalCrc": "2051a9a29a9104c7",
+      "approvedDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    },
+    {
+      "id": "PT-P01810-CATALOG-034",
+      "testId": "PT-WLOG-VALUE001",
+      "method": "value001IdentityIsCompleteAndAadMatchesIndependentEightFieldGolden",
+      "main": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+        "sha256": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca"
+      },
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+        "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+      },
+      "independentExpected": "WebLogPayloadIdentity[message/correlation=<redacted>]",
+      "oldDecision": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38392-p01810-four-web-redaction-catalog-rows-v1/manifest.json",
+        "sha256": "024397c202a115fc37e4d5afaf0d92db02ccea706936fc20c74c1b4839a82738"
+      },
+      "oldRunScopeQualified": false,
+      "rawMethod": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 2
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 1
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      },
+      "physicalCrc": "71e8fe832e362116",
+      "approvedDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+    }
+  ],
+  "design": {
+    "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+    "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "860f584a2f032e9b06112907f8ec138a12d0b69b94546f7e17ad7dfb9b65414c"
+  },
+  "approvedPlainFixture": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4569_SSC454Web値診断固定化・単体テスト仕様書.md",
+      "sha256": "4f391dd6176a64f747cb73fc99aa1b10eb08c2a5fcffc024605188c8f4a9aa28"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4339_WebLog値契約通常五仕様.md",
+      "sha256": "89176693d3e75486b368dcd3d6b9a90b916ead208dedd6cb2d7603e698c6485e"
+    }
+  ],
+  "currentApplicableRows": 3,
+  "originalWholeTests": 7,
+  "originalIndependent": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38408-p01810-web-value-privacy-independent-v1/manifest.json",
+    "sha256": "c5b8c9387986e3d489e1cc11d983610e5c5a9870a3329fb36a08791550da5669"
+  },
+  "originalXml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "3c2d92ba1ee6b8a82db72280189d01d1b3301ee5f821099b71f4c033d4fdddc5"
+  },
+  "originalExec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1/jacoco.exec",
+    "sha256": "4fa76918580e7bdffb209477fded3d4d220650e5420861ce12612be20468a350"
+  },
+  "newProductTests": 0,
+  "codeChanges": 0,
+  "oldFiveUnion": false,
+  "rawCounterUnion": false,
+  "actualSinkOrKeyActions": 0,
+  "whole451Accepted": false,
+  "wholeP01810Accepted": false,
+  "newAcceptance": 0,
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5234_p01810_weblog_three_value_diagnostics.py",
+    "sha256": "0b5a79fdd26c1103e823b48ef5b13091352a5d876698ba706fe045c2f9bbde8a"
+  },
+  "terminalAtUTC": "2026-11-18T16:05:42.485995+00:00"
+}
