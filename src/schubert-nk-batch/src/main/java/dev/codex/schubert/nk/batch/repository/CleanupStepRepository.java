@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.sql.Connection;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
@@ -97,7 +97,7 @@ public final class CleanupStepRepository {
       require(references.read(attempt.run()).identityConsistent());
       return result;
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }

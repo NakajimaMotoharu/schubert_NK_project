@@ -2,7 +2,7 @@ package dev.codex.schubert.nk.batch.repository;
 
 // PG-D-160/SSC056/BUG167/YKT128: SS332 JDBC4.2 UTC; existing Program/PT trace remains applicable.
 
-import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,7 +75,7 @@ public final class CleanupRepository {
         }
       }
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }
@@ -122,7 +122,7 @@ public final class CleanupRepository {
         }
       }
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw new BatchRepositoryException();
     }
   }
