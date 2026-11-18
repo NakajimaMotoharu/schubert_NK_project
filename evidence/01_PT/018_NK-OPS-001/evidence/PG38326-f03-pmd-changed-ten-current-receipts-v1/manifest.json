@@ -1,0 +1,318 @@
+{
+  "actualExit": 0,
+  "run": "PG38326-f03-pmd-changed-ten-current-receipts-v1",
+  "terminalAtUTC": "2026-11-18T00:53:19.919221+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "original": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38296-f03-pmd-published-disposition-applicability-v1/manifest.json",
+    "sha256": "f788d8c7b23bb4a95ffe00b75c05be64eb6d50d0f393face58b7b43adf72d148"
+  },
+  "changedPathCount": 10,
+  "separatelyAdjudicatedExactSourceInputs": 9,
+  "separatelyCheckedFindingsOnChangedPaths": 15,
+  "needsLaterCurrentVerification": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java"
+  ],
+  "historicUnresolved45Unchanged": 45,
+  "individualRows": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupManifestCodec.java",
+      "sourceSha256": "be52607e0993e41a73b31cb28e9a7084201f658a763fee8fbe7549c30b065b8f",
+      "olderRawReported": 0,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Unit receipt binds independent adjudication of the current PMD and prepared source; separate earlier failed static v1 retained.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38224-backup-manifest17-static-v2/manifest.json",
+        "sha256": "8eccc4bd021448a35cd2a56c3e3b5de07104ffda999f7eaf14dea29f64cce640"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38220-backup-manifest-codec-namespace-v1/admission.json",
+        "sha256": "a2be982b73ec009a5cc719c42180b57af71a9a41b031be18aeb09722e49fa72e"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38224-backup-manifest17-static-v2/sources.txt",
+        "sha256": "72f7e74aeff6a35616dc88fa8b43de4bc26b464fd891716dbcfa49d2a66bca8e"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38224-backup-manifest17-static-v2/pmd.xml",
+        "sha256": "3110dac692e7df4dbe488da11825cd47d24697653a3e8305173668fbf85ff25a"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java",
+      "sourceSha256": "5e4ccf1787533ac1ba06a44a19278b72ecf72e7d04df480df08ac386261c2ada",
+      "olderRawReported": 0,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 0,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37278-record-codec-test-static-v1/manifest.json",
+        "sha256": "fcef0c3b0698144ed5c6ffd2f7875346011d93ce694ff117b87b98282a5324d0"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37282-record-codec-static-admission-v1/manifest.json",
+        "sha256": "9eb9c2705b0681769996661793ef44115b17b96d18d3905201c8e3eefda4eb5c"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37278-record-codec-test-static-v1/sources.txt",
+        "sha256": "16675d936b8ef9e79700f0c1eca77fc071713a3a8284a9cd4033b50854324b79"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37278-record-codec-test-static-v1/pmd.xml",
+        "sha256": "63e2e983b8f8ff1fe7362d7d14a07d75c91d077737b66c713dda7b4af61fe131"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "sourceSha256": "1fa8f26f772155bd4fb5698bf0dac4375f9382201b43235540070fa975ad5c38",
+      "olderRawReported": 1,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Scoped PMD report is bound to the later whole test preparation by exact hash, with identical source and individual decisions.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/manifest.json",
+        "sha256": "bb07582cad38d2a47bcf6fc8ee9c7d24148213ca069655f55c922fb5ddd038c4"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37244-monitor-lock4-static-admission-v1/manifest.json",
+        "sha256": "9a596875049f3aee1a47208222afac014e82b005be027d10cbcdef8e7762e212"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/sources.txt",
+        "sha256": "88f4b72aaee66fa1bcc89891fb653db40100779c2c975e683e46e227cfcdbd36"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/pmd.xml",
+        "sha256": "83e08b583082a72b995babec3a5b3bdf9aa2990094fa572187f0702c8a72c7c8"
+      },
+      "lookupBridge": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/manifest.json",
+        "sha256": "b06b2861563688cfe4d3ecc8105afefa321ad1ff600585cddee932efd5b4fcf8"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "sourceSha256": "0cb35d7ad440546bb2d182c2c339849b57e1cd1dca6b0d981080cbec24a5c946",
+      "olderRawReported": 1,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Scoped PMD report is bound to the later whole test preparation by exact hash, with identical source and individual decisions.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/manifest.json",
+        "sha256": "bb07582cad38d2a47bcf6fc8ee9c7d24148213ca069655f55c922fb5ddd038c4"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37244-monitor-lock4-static-admission-v1/manifest.json",
+        "sha256": "9a596875049f3aee1a47208222afac014e82b005be027d10cbcdef8e7762e212"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/sources.txt",
+        "sha256": "88f4b72aaee66fa1bcc89891fb653db40100779c2c975e683e46e227cfcdbd36"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/pmd.xml",
+        "sha256": "83e08b583082a72b995babec3a5b3bdf9aa2990094fa572187f0702c8a72c7c8"
+      },
+      "lookupBridge": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/manifest.json",
+        "sha256": "b06b2861563688cfe4d3ecc8105afefa321ad1ff600585cddee932efd5b4fcf8"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "sourceSha256": "d62e74e15d87f8532047167cb5e051f43f00992ae4284cbccc3a3eb12015c271",
+      "olderRawReported": 6,
+      "currentByteSeparateReportRows": 4,
+      "rules": {
+        "AvoidCatchingGenericException": 4
+      },
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Scoped PMD report is bound to the later whole test preparation by exact hash, with identical source and individual decisions.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/manifest.json",
+        "sha256": "bb07582cad38d2a47bcf6fc8ee9c7d24148213ca069655f55c922fb5ddd038c4"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37244-monitor-lock4-static-admission-v1/manifest.json",
+        "sha256": "9a596875049f3aee1a47208222afac014e82b005be027d10cbcdef8e7762e212"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/sources.txt",
+        "sha256": "88f4b72aaee66fa1bcc89891fb653db40100779c2c975e683e46e227cfcdbd36"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37228-monitor-lock4-test-static-v2/pmd.xml",
+        "sha256": "83e08b583082a72b995babec3a5b3bdf9aa2990094fa572187f0702c8a72c7c8"
+      },
+      "lookupBridge": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/manifest.json",
+        "sha256": "b06b2861563688cfe4d3ecc8105afefa321ad1ff600585cddee932efd5b4fcf8"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "sourceSha256": "d02c41aa3d5a8308b34a77e12bb588c5c28caf1950fc564e6e728b71e5b0b3b9",
+      "olderRawReported": 1,
+      "currentByteSeparateReportRows": null,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": false,
+      "adjudicatedAtScopedProducer": false,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/manifest.json",
+        "sha256": "b06b2861563688cfe4d3ecc8105afefa321ad1ff600585cddee932efd5b4fcf8"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37244-monitor-lock4-static-admission-v1/manifest.json",
+        "sha256": "9a596875049f3aee1a47208222afac014e82b005be027d10cbcdef8e7762e212"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/sources.txt",
+        "sha256": "3747582986bdf7d5768b72b3ceef30849e935522c7d71005f863f4dd8391b718"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37242-monitor-lock-oracle-current-preflight-v1/pmd.xml",
+        "sha256": "b9499fcd50d54d16ee6993aa167450d38112b6122f42ec4485d2853e7f9c1844"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/UnitStateParser.java",
+      "sourceSha256": "f70876aaa7f506d2ba597e95a7dd1dcf34c7c81b245033e86d629c5fc1268956",
+      "olderRawReported": 0,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38052-unit-state-pure-after-static-v1/manifest.json",
+        "sha256": "92abac481046982006e83b6fcb0be9fe5e2542d97e13feb546a5a6097023cd84"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38056-unit-state-pure-admission-v1/manifest.json",
+        "sha256": "12517d07e723b801bcba4f7fc0b0100289bcf8a8461c67de4d721c37ab69abdb"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38052-unit-state-pure-after-static-v1/sources.txt",
+        "sha256": "91066360d57ba90892cec4664d7bee4b69cff63a6f85e06bdba30a1d48ff2f8e"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38052-unit-state-pure-after-static-v1/pmd.xml",
+        "sha256": "84656cf98e24df4739b6c04d16e5ed3016d8174312b0f7590d5482bde3b92d99"
+      }
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java",
+      "sourceSha256": "fe6aacb6e84e4edcaee4bd8033b36e235f0575180f35e9060908a4c0eda34822",
+      "olderRawReported": 14,
+      "currentByteSeparateReportRows": 10,
+      "rules": {
+        "DoNotUseThreads": 2,
+        "AvoidCatchingGenericException": 8
+      },
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37394-summary-test-static-v2/manifest.json",
+        "sha256": "e392c656e123de88c61ce58ed89648c4447b5058dbcfdf79f17dfc8c18a293b4"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37398-summary23-static-admission-v1/manifest.json",
+        "sha256": "a42a2ab3177a6c994a98c5f90ce6030de61959aff77229e29146fd1875ae0327"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37394-summary-test-static-v2/sources.txt",
+        "sha256": "b18cfb83abbf2bc705bda674340e7ae28571adfe455b96491c0cf1983637db15"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37394-summary-test-static-v2/pmd.xml",
+        "sha256": "afb579e9272a135354a774040d2c71dfbbc049b86b61742844cca87fb34e9111"
+      }
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "sourceSha256": "9782d9ad81e0346d1b0a1168f9e16555909b7a2b5e0c3f828b6538c66af43a64",
+      "olderRawReported": 0,
+      "currentByteSeparateReportRows": 0,
+      "rules": {},
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38072-jdbc-pure-after-static-v1/manifest.json",
+        "sha256": "e3b2a6d312b4836b4dfe7fa5ab085e5d14934366ab4097357c95bbff0edf7f53"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38076-jdbc-pure-admission-v1/manifest.json",
+        "sha256": "332889c4cd087948908c4f195ae055a4669383fd8e65ca3720bfd892928aba5c"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38072-jdbc-pure-after-static-v1/sources.txt",
+        "sha256": "fb517e04c1bdbca2b669db50d143c2a0f2d8c1997e3d1dce5dca5215dd5dc98f"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38072-jdbc-pure-after-static-v1/pmd.xml",
+        "sha256": "956a345a6a0d082f3724bb767d59586d759ef0f6bbc8b95993a7e14e39457813"
+      }
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "sourceSha256": "96e67eff343695afdbdff4fddb77c2d1cbef0f1e3f7f0f96bfe508ef397c7b0c",
+      "olderRawReported": 1,
+      "currentByteSeparateReportRows": 1,
+      "rules": {
+        "UnusedReturnValue": 1
+      },
+      "numericPmdExit": 4,
+      "memberOfSelectedPmdInput": true,
+      "adjudicatedAtScopedProducer": true,
+      "assumptions": "Manifest binds exact producer hash.",
+      "producer": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37432-inventory-test-static-v1/manifest.json",
+        "sha256": "46229db3057a454cc198bb016028c50a3522178f7e6c7fbb17d1d86d69342db1"
+      },
+      "adjudication": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37436-inventory-static-admission-v1/manifest.json",
+        "sha256": "b606ef9debf7b3c793a2f7f3bec8ab5f765c2d0b2df91196f3247d46c75e0ddb"
+      },
+      "selectedList": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37432-inventory-test-static-v1/sources.txt",
+        "sha256": "6f6d390934c5ed226925d452236e4a8821b358f759a8759ca6be9f1be98ff178"
+      },
+      "pmdXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37432-inventory-test-static-v1/pmd.xml",
+        "sha256": "34af83d6a25ca60630fdecff33eed7ea820a7d833a32718474b9419673689bae"
+      }
+    }
+  ],
+  "newStaticProcesses": 0,
+  "newProductTests": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "priorDirectOnlyProof": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38326-f03-pmd-changed-ten-current-receipts-v1/direct-preflight-only.json",
+    "sha256": "772d2021d17aacb5d360dc6557d928f6a04994c5b712ed2279028e2b487d76a1"
+  }
+}
