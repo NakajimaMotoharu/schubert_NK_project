@@ -1,0 +1,176 @@
+{
+  "eventId": "PGPT-20261008-5902",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-STEP-CLEANUP-RAW-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-STEP-CLEANUP-RAW-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P004-05/2 and F03, BUG3248. Independent ordinary PT additions for constructor, both known and unknown compound failures, durable commit with later owner IOException and after-clock interruption. Current StepCleanupService is unchanged; retain the seven existing authored expectations and previous raw misses. Release only named type after same-source raw zero, XML terminal and static/ABI; real DB suite/HOLD as before.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4620_SSC461ステップ削除JDBC伝播単体仕様.md",
+        "sha256": "898e55203ce5c3c1b0b379785e688756e7d6c21d114ae2add555f86979d727b7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4621_BUG3247ステップ削除timeout結合追補仕様.md",
+        "sha256": "e0dbf582e2cca04a3d5a92e7d4763c52cdaeddabf4b2ba809164ff095347ef7a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38930-f02-step-cleanup-independent-v1/manifest.json",
+        "sha256": "750abae5df3dc3540519a1a88ff4b8b00fcfed9e51008253acf78b09dea60563"
+      }
+    ],
+    "productionCoreMain": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+    "source": "4e53915b3bca07e4c6815370c0eb5ac19c2ce9ea",
+    "wbsLeafIds": [
+      "WBS-P004-05",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "WBS-F03/2-1",
+      "BUG-3248"
+    ],
+    "run": "PG38948-p00405-step-cleanup-raw-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.6,
+      "base": 1.35,
+      "high": 3.1
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3248",
+    "quotaAfter": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "45f38bf6c37da5547fd4762262fcdfd3ce776a0186c3f64efb95a359ed077494",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T08:03:05.730000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 31,
+          "remainingPercent": 69,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T08:02:37.969465+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 31,
+      "remainingPercent": 69,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5901",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38948-p00405-step-cleanup-raw-independent-v1/manifest.json",
+      "sha256": "0b7ceca574e6333bcda34317a6714053bbfa1cedd5c7f0a1bae79e438e90db63"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstIndependentPostSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 11,
+    "newDefinitions": 4,
+    "caseDenominator": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "migratedUpperSites": 26,
+    "upperInitialSites": 104,
+    "relatedBugs": [
+      "BUG-3248"
+    ],
+    "targetRaw": {
+      "INSTRUCTION": [
+        0,
+        314
+      ],
+      "BRANCH": [
+        0,
+        48
+      ],
+      "LINE": [
+        0,
+        82
+      ],
+      "COMPLEXITY": [
+        0,
+        31
+      ],
+      "METHOD": [
+        0,
+        7
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "priorRaw": {
+      "INSTRUCTION": [
+        18,
+        296
+      ],
+      "BRANCH": [
+        7,
+        41
+      ],
+      "LINE": [
+        5,
+        77
+      ],
+      "COMPLEXITY": [
+        8,
+        23
+      ],
+      "METHOD": [
+        1,
+        6
+      ],
+      "CLASS": [
+        0,
+        1
+      ]
+    },
+    "completedAdditionalPricePp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "originalCompletedPriceTotalPp": 9.538,
+    "shortTermTwelvePlanPp": 143.371,
+    "reviewStatus": "STEP_CLEANUP_NAMED_SCOPE_RAW_FOUR_MET_CURRENT_DB_AND_F03_NOT_ACCEPTED",
+    "nextCondition": "Check new committed public evidence and source hashes, and select the next authorized short-term scope from F02/F03 and QAs."
+  }
+}
