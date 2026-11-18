@@ -92,6 +92,7 @@ class WebStandardMetricSourceTest {
 
   @Test
   void webhost004NullAndUnknownModesFailBeforeAcquisition() {
+    String invalidModeExpected = "invalid monitoring mode";
     var count = new AtomicInteger();
     var owner =
         new WebStandardMetricSource(
@@ -104,11 +105,19 @@ class WebStandardMetricSourceTest {
       assertThrows(NullPointerException.class, () -> owner.bind(null));
       assertThrows(NullPointerException.class, () -> owner.scrape(null));
       assertEquals(
-          "invalid monitoring mode",
+          invalidModeExpected,
           assertThrows(IllegalArgumentException.class, () -> owner.bind("unknown")).getMessage());
       assertEquals(
-          "invalid monitoring mode",
+          invalidModeExpected,
           assertThrows(IllegalArgumentException.class, () -> owner.scrape("")).getMessage());
+      for (String mode : List.of("DEBTf", "STANDAQc")) {
+        assertEquals(
+            invalidModeExpected,
+            assertThrows(IllegalArgumentException.class, () -> owner.bind(mode)).getMessage());
+        assertEquals(
+            invalidModeExpected,
+            assertThrows(IllegalArgumentException.class, () -> owner.scrape(mode)).getMessage());
+      }
       assertEquals(0, count.get());
       owner.close();
     } finally {
@@ -337,30 +346,29 @@ class WebStandardMetricSourceTest {
     var owner = new WebStandardMetricSource(() -> source, (value, ack) -> {});
     try {
       owner.bind(DEBUG_MODE);
-      try (var executor = Executors.newFixedThreadPool(2)) {
-        try {
-          var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
-          assertTrue(entered.await(10, TimeUnit.SECONDS));
-          var attemptedClose = new CountDownLatch(1);
-          var close =
-              executor.submit(
-                  () -> {
-                    attemptedClose.countDown();
-                    owner.close();
-                  });
-          assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
-          assertFalse(source.isClosed());
-          release.countDown();
-          assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
-          close.get(10, TimeUnit.SECONDS);
-          assertTrue(source.isClosed());
-          assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
-          owner.close();
-        }
+      var executor = Executors.newFixedThreadPool(2);
+      try {
+        var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
+        assertTrue(entered.await(10, TimeUnit.SECONDS));
+        var attemptedClose = new CountDownLatch(1);
+        var close =
+            executor.submit(
+                () -> {
+                  attemptedClose.countDown();
+                  owner.close();
+                });
+        assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
+        assertFalse(source.isClosed());
+        release.countDown();
+        assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
+        close.get(10, TimeUnit.SECONDS);
+        assertTrue(source.isClosed());
+        assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      } finally {
+        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+        owner.close();
       }
     } finally {
       owner.close();

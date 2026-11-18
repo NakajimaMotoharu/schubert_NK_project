@@ -1,0 +1,104 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39528-BUG3287-WEB-STANDARD-SOURCE-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39522-bug3287-web-standard-prepare-v1/manifest.json",
+    "sha256": "995bfcb229ced3e86632ea8fe856d1b2ff69fe5126ac53fc15008ba77645f65e"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39524-bug3287-web-standard-static-v1/manifest.json",
+    "sha256": "3ec94e2dac1795364068d946f659b49a4a0199c839c3e2629bc3985ca4723df8"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ProbeGc object are closed after use",
+      "sourceLine": 241,
+      "sourceAnchor": "var gc = new ProbeGc(order);",
+      "occurrences": 1,
+      "reason": "The factory acknowledgement transfers this exact in-memory GC fixture into the standard owner. Caller finally closes that owner; independent assertions verify GC first, the registry after it, and preserved ownership on failed close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ProbeGc object are closed after use",
+      "sourceLine": 265,
+      "sourceAnchor": "var gc = new ProbeGc(order);",
+      "occurrences": 1,
+      "reason": "The factory acknowledgement transfers this exact in-memory GC fixture into the standard owner. Caller finally closes that owner; independent assertions verify GC first, the registry after it, and preserved ownership on failed close.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 349,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "The owned unit executor has an explicit shutdownNow and ten-second await in the only exit finally. There is no implicit outer asynchronous lifecycle.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 349,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 351,
+      "sourceAnchor": "var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 355,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 369,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 370,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricSourceTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 397,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "reason": "This exact occurrence is inside bounded independent unit worker, latch, or test interrupt handling. No application or external resource worker is created or invoked.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}
