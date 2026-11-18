@@ -371,7 +371,7 @@ class WebMetricCatalogTest {
     input.add(mutable);
     input.add(Tag.of(SERVICE_LABEL, WEB_SERVICE_VALUE));
     Labels checked = catalog.labels(POOL, input);
-    mutable.key = "actor";
+    mutable.key = "unexpected-captured-label";
     mutable.value = "INVALID_CAPTURED_STATE";
     input.clear();
     labels(Map.of(SERVICE_LABEL, WEB_SERVICE_VALUE, STATE_LABEL, ACTIVE_POOL_STATE), checked);
