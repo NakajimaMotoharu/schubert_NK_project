@@ -440,3 +440,7 @@ InboxResultReferenceはSS351で定めた固定診断を返す。type()、numeric
 ### SSC-464 Outbox値の一般診断（2026-11-18）
 
 OutboxEntry／OutboxRequestの一般診断はSS351の固定文言とする。宛先、ID、DLQ、本文copy、retry時間・SQL行、電文・順序と各明示取得の契約を維持する。CATALOG-022/023は閉じた合成値の独立試験で確認し、実送達と監査は別条件。
+
+## SSC-466 一時バッファの通常診断
+
+`WipingByteArrayOutputStream.toString()` の出力は `WipingByteArrayOutputStream[<redacted>]` に固定する。byte数、容量、内容を通常診断へ連結しない。既 `size()`、書込みの境界検査、戻りbyteの所有、消去、正規化とHMACの処理は維持する。PT-IDEM-WIPE-001〜004、PT-P01810-CATALOG-015、SS351。
