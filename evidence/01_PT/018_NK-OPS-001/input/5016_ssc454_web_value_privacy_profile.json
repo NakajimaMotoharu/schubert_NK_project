@@ -1,0 +1,102 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38402-SSC454-WEB-VALUE-PRIVACY",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java": "WBS-P006-04",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java": "WBS-P005-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java": "WBS-P005-02",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java": "WBS-P005-02"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4569_SSC454Web値診断固定化・単体テスト仕様書.md",
+      "sha256": "4f391dd6176a64f747cb73fc99aa1b10eb08c2a5fcffc024605188c8f4a9aa28"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38394-ssc454-web-value-privacy-closure-v1/manifest.json",
+      "sha256": "5ad0f8c7186f30cc5dc664158050aafc81f10d5779ed77b7ea91e4d1043b3277"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "1224e04183d4f291e97cdb52832c3004bbe41289",
+  "mainSources": [
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/ExceptionValueContractTest.java",
+      "tests": 1
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+      "tests": 4
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyValueContractTest.java",
+      "tests": 2
+    }
+  ],
+  "expectedTests": 7,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/web/logging/ClaimedWebLog.class",
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.class",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException.class",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason.class",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.class",
+    "dev/codex/schubert/nk/web/logging/package-info.class",
+    "dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.class",
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply.class",
+    "dev/codex/schubert/nk/web/messaging/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/web/logging/ClaimedWebLog",
+    "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason",
+    "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity",
+    "dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException",
+    "dev/codex/schubert/nk/web/messaging/ValidatedReply"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-web/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38395-ssc454-web-value-privacy-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38396-ssc454-web-value-privacy-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38398-ssc454-web-value-privacy-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38400-ssc454-web-value-privacy-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38402-ssc454-web-value-privacy-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38404-ssc454-web-value-privacy-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38396-ssc454-web-value-privacy-prepare-v1",
+    "unit": "pg38402-ssc454-web-value-privacy-unit-v1"
+  },
+  "newTestDefinitions": 0
+}

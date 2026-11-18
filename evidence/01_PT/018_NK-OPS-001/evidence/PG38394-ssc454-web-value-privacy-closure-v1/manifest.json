@@ -1,0 +1,73 @@
+{
+  "actualExit": 0,
+  "source": "1224e04183d4f291e97cdb52832c3004bbe41289",
+  "design": "106aba1a3766e86b70869aa97e0d70e5591c100f",
+  "testCounts": [
+    {
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/ExceptionValueContractTest.java",
+        "sha256": "d8c183c953e82790dfa4faf59f0876c455030d21dbae2c3ab138058a619a942c"
+      },
+      "tests": 1
+    },
+    {
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogValueContractTest.java",
+        "sha256": "7655700a868614ea23120398ce90bb0eeaaec0ba24567d0094854b569cf4ba2f"
+      },
+      "tests": 4
+    },
+    {
+      "test": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyValueContractTest.java",
+        "sha256": "3715e988f993ec10e5774b2b2801dd00782595106f9aee9c440f857f945a3908"
+      },
+      "tests": 2
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/ClaimedWebLog.java",
+      "sha256": "5aad3ffe6cf9fa219708a27b04a58d98fb67c0e16a4f44561296d34cc87acdfb"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java",
+      "sha256": "9318b03aefff1e169886a4c274236bb2ca1a7fd722b6fddc1dc25cc3e738f014"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java",
+      "sha256": "b8279f85ba0b8f52466f28c8908f03cb0420556722d9711e4e11168c078c80ca"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogPayloadException.java",
+      "sha256": "a040ed22b820dccdb7da66a7af28dcdc1ea0a43c295aae150202090daac127df"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/package-info.java",
+      "sha256": "aff885116b242f5aebd8c386981d4d73d4a93286fcff36f7a6f09ee1a1ee33d5"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java",
+      "sha256": "0d2a1a7c5eceda3627e62e6d3f87a1868653fc7328a2d69e15c1ecc7ec605c12"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ValidatedReply.java",
+      "sha256": "1d54367bc3065f294a34c128faab57d29b3ade2491f8ba4dde17c02e4010f1ec"
+    },
+    {
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/package-info.java",
+      "sha256": "5b3d0f04dff20d2e3b538f4dfcd89c479ec2feea7cb1743e0a009cf2256e6ad1"
+    }
+  ],
+  "historicalCatalogEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38392-p01810-four-web-redaction-catalog-rows-v1/manifest.json",
+    "sha256": "024397c202a115fc37e4d5afaf0d92db02ccea706936fc20c74c1b4839a82738"
+  },
+  "onlyProductChanges": [
+    "EncryptedWebLogPayload.toString",
+    "ValidatedReply.toString"
+  ],
+  "existingCodecTestOracleUpdatedButNotExecutedByThisProfile": true,
+  "noActualKeyCryptoJmsProviderDbRootNative": true,
+  "terminalAtUTC": "2026-11-18T02:10:46.820669+00:00"
+}
