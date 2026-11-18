@@ -30,6 +30,8 @@ PHASES = {
         '555_P020*', E/'PG39990-p020-search-empty170-v1', 170, 176),
     'PG40034-p020-l01-required-actions-v1': (
         '561_P020*', E/'PG40014-p020-game-onchange176-v1', 176, 182),
+    'PG40035-p020-l01-required-actions-v2': (
+        '561_P020*', E/'PG40014-p020-game-onchange176-v1', 176, 182),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
@@ -80,7 +82,7 @@ def main(name):
     out.mkdir()
     owned.mkdir(mode=0o700)
     snapshot=owned/'snapshot'
-    changed_paths=L01_CHANGES if name=='PG40034-p020-l01-required-actions-v1' else CHANGES
+    changed_paths=L01_CHANGES if 'l01-required-actions' in name else CHANGES
     inputs=frozen_source(snapshot,source,previous,plan,changed_paths)
     tests=owned/'testclasses'
     temp=owned/'tmp'

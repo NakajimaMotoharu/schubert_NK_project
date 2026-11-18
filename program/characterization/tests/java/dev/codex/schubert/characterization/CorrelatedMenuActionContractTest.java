@@ -17,6 +17,11 @@ final class CorrelatedMenuActionContractTest {
   private static final String LOCAL_STAGE = "LOCAL";
   private static final String STAGE_FIELD = "stage";
   private static final String HTTP_PATH = "/http";
+  private static final String HTTP_METHOD_FIELD = "method";
+  private static final String HTTP_PATH_FIELD = "path";
+  private static final String HTTP_STATUS_FIELD = "status";
+  private static final String LOG_PAGE = "/logs";
+  private static final String CURRENT_MENU_EVENT = "C_MENU";
   private static final String RESPONSE_BYTES_FIELD = "responseBytes";
   private static final String PAYLOAD_FIELD = "payload";
   private static final String SEARCH_OPERATION = "OP_SEARCH";
@@ -83,14 +88,14 @@ final class CorrelatedMenuActionContractTest {
   void qa054log003MenuKeepsHttpContractAndApiSearchNeverUsesWebWitness() {
     for (Consumer<ObjectNode> mutation :
         List.<Consumer<ObjectNode>>of(
-            x -> object(x, HTTP_PATH).remove("method"),
-            x -> object(x, HTTP_PATH).put("method", "POST"),
-            x -> object(x, HTTP_PATH).put("path", "/logs"),
-            x -> object(x, HTTP_PATH).put("path", "/?raw"),
-            x -> object(x, HTTP_PATH).put("status", 201),
+            x -> object(x, HTTP_PATH).remove(HTTP_METHOD_FIELD),
+            x -> object(x, HTTP_PATH).put(HTTP_METHOD_FIELD, "POST"),
+            x -> object(x, HTTP_PATH).put(HTTP_PATH_FIELD, LOG_PAGE),
+            x -> object(x, HTTP_PATH).put(HTTP_PATH_FIELD, "/?raw"),
+            x -> object(x, HTTP_PATH).put(HTTP_STATUS_FIELD, 201),
             x -> object(x, HTTP_PATH).put("elapsedMs", -1),
             x -> object(x, HTTP_PATH).put("elapsedMs", "1"),
-            x -> object(x, HTTP_PATH).put("status", 0))) {
+            x -> object(x, HTTP_PATH).put(HTTP_STATUS_FIELD, 0))) {
       var input = fixture();
       update(input, NK, MENU_EVENT, mutation);
       assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(EXPECTED_ERROR));
@@ -111,7 +116,7 @@ final class CorrelatedMenuActionContractTest {
   void qa054log004OnlyExactActionCategoryAliasesAreApproved() {
     for (String alias : List.of("MENU", "menu ", "other")) {
       var input = fixture();
-      update(input, CURRENT, "C_MENU", x -> x.put(ACTION, alias));
+      update(input, CURRENT, CURRENT_MENU_EVENT, x -> x.put(ACTION, alias));
       assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(PAIR_ERROR));
     }
     for (String replacement : List.of("menu", "LOG_SEARCHED", "HTTP_REQUEST_COMPLETED")) {
@@ -120,7 +125,7 @@ final class CorrelatedMenuActionContractTest {
       assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(PAIR_ERROR));
     }
     var input = fixture();
-    update(input, CURRENT, "C_MENU", x -> x.put(CATEGORY, "SECURITY"));
+    update(input, CURRENT, CURRENT_MENU_EVENT, x -> x.put(CATEGORY, "SECURITY"));
     assertTrue(CorrelatedLogEvidenceValidator.validate(input).contains(PAIR_ERROR));
   }
 
@@ -195,7 +200,7 @@ final class CorrelatedMenuActionContractTest {
   @Test
   void completeL01DoesNotAcceptBothSidesOmittingTheMenuAction() {
     var input = fixture();
-    removeEvent(input, CURRENT, "C_MENU");
+    removeEvent(input, CURRENT, CURRENT_MENU_EVENT);
     removeEvent(input, NK, MENU_EVENT);
 
     assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
@@ -231,9 +236,9 @@ final class CorrelatedMenuActionContractTest {
 
     for (Consumer<ObjectNode> wrong :
         List.<Consumer<ObjectNode>>of(
-            http -> http.put("method", "POST"),
-            http -> http.put("path", "/other"),
-            http -> http.put("status", 404))) {
+            http -> http.put(HTTP_METHOD_FIELD, "POST"),
+            http -> http.put(HTTP_PATH_FIELD, "/other"),
+            http -> http.put(HTTP_STATUS_FIELD, 404))) {
       var input = fixture();
       update(input, NK, SEARCH_REQUEST_EVENT, row -> wrong.accept(object(row, HTTP_PATH)));
       assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
@@ -258,12 +263,13 @@ final class CorrelatedMenuActionContractTest {
     var current = expected.putArray(CURRENT);
     var nk = expected.putArray(NK);
     current.add(
-        payload(MENU_OPERATION, "C_MENU", ACTION_CATEGORY, "menu", JSON.createObjectNode()));
+        payload(
+            MENU_OPERATION, CURRENT_MENU_EVENT, ACTION_CATEGORY, "menu", JSON.createObjectNode()));
     current.add(
         payload(
             SEARCH_OPERATION, "C_SEARCH", ACTION_CATEGORY, "log_search", JSON.createObjectNode()));
     current.add(payload(MENU_OPERATION, "C_HTTP_MENU", REQUEST_CATEGORY, "", http("/")));
-    current.add(payload(SEARCH_OPERATION, "C_HTTP_SEARCH", REQUEST_CATEGORY, "", http("/logs")));
+    current.add(payload(SEARCH_OPERATION, "C_HTTP_SEARCH", REQUEST_CATEGORY, "", http(LOG_PAGE)));
     nk.add(payload(MENU_OPERATION, MENU_EVENT, ACTION_CATEGORY, "MENU_VIEWED", http("/")));
     nk.add(
         payload(
@@ -285,7 +291,7 @@ final class CorrelatedMenuActionContractTest {
             SEARCH_REQUEST_EVENT,
             REQUEST_CATEGORY,
             "HTTP_REQUEST_COMPLETED",
-            http("/logs")));
+            http(LOG_PAGE)));
     var observed = input.putObject("observed").put("oracleSha256", "a".repeat(64));
     for (String side : List.of(CURRENT, NK)) {
       var snapshot = observed.putObject(side);
@@ -318,9 +324,9 @@ final class CorrelatedMenuActionContractTest {
 
   private static ObjectNode http(String path) {
     return JSON.createObjectNode()
-        .put("method", "GET")
-        .put("path", path)
-        .put("status", 200)
+        .put(HTTP_METHOD_FIELD, "GET")
+        .put(HTTP_PATH_FIELD, path)
+        .put(HTTP_STATUS_FIELD, 200)
         .put("elapsedMs", 1);
   }
 

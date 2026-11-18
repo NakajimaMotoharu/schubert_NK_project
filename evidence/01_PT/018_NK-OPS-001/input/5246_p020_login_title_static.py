@@ -27,7 +27,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (161,'PG39944-p020-cache-and-session161-v1'),(161,'PG39946-p020-cache-and-session161-v2'),
         (165,'PG39964-p020-invalid-range165-v1'),(165,'PG39965-p020-invalid-range165-v2'),
         (170,'PG39990-p020-search-empty170-v1'),
-        (176,'PG40014-p020-game-onchange176-v1')}
+        (176,'PG40014-p020-game-onchange176-v1'),
+        (182,'PG40034-p020-l01-required-actions-v1'),(182,'PG40035-p020-l01-required-actions-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])
@@ -36,7 +37,7 @@ def main(unit_name, out_name, prior_same_main=None):
     assert read(BASE/'manifest.json')['stageExits']['spotbugs']==0
     out.mkdir()
     src={name:begin['inputHashes'][name] for name in begin['sourceInputsUnchangedOutside']}
-    assert len(src)==2
+    assert len(src)==(4 if 'l01-required-actions' in unit_name else 2)
     for name,digest in src.items():
         assert ref(snapshot/name)['sha256']==digest
     listing=out/'sources.txt'
@@ -52,7 +53,9 @@ def main(unit_name, out_name, prior_same_main=None):
           priorToolRecipe=ref(BASE/'begin.json'),toolAndRulePins=previous['toolAndRulePins'],sourceInputs=src,productActions=0))
     old_typed=None
     if prior_same_main:
-        assert unit_name=='PG39965-p020-invalid-range165-v2' and prior_same_main=='PG39968-p020-invalid-range-static-v1'
+        assert (unit_name,prior_same_main) in {
+            ('PG39965-p020-invalid-range165-v2','PG39968-p020-invalid-range-static-v1'),
+            ('PG40035-p020-l01-required-actions-v2','PG40036-p020-l01-required-actions-static-v1')}
         receipt=E/prior_same_main/'manifest.json'
         before=read(receipt)
         prior_manifest=Path(before['unit']['path'])
