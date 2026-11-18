@@ -1,0 +1,384 @@
+{
+  "actualExit": 0,
+  "source": "9bca83b0fae3715e09b42e265132d04c90606614",
+  "canonicalDesign": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "currentCore": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "startEvent": "PGPT-20261008-6035",
+  "ownerRegistry": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "61dd93caab9c0911a0d087524f46255813a121e1d2e96cc130bd4e839bcea4c2"
+  },
+  "mappedMain": 4,
+  "mappedTestIds": 21,
+  "distinctOriginalExecs": 2,
+  "rows": [
+    {
+      "main": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+        "sha256": "021f37f96635be99f99306c2fec1dd5ae2d68a6d43f51210de9e079ac6306d50"
+      },
+      "test": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+        "sha256": "b7517573044d2ba929a57914956194b2db053cf189d464af443932619eba7387"
+      },
+      "owner": {
+        "owner": "WBS-P017-07",
+        "costOwner": "WBS-P017-07",
+        "qualifiedClass": "dev.codex.schubert.nk.batch.repository.CleanupRepository"
+      },
+      "spec": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/705_Cleanup基底query_単体テスト仕様書.md",
+          "sha256": "c73a4622fff04e4d8271038c36255b0078fbbbdfc7e578e7e0764c79c0a11d88"
+        },
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/4695_CleanupRepository固定statement表の単体仕様.md",
+          "sha256": "168f9eb2651e29b6f73416c1511b36b0e56a4900bd63afe26b08975abfc26c49"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": false
+        }
+      ],
+      "decision": "PG-D-1186",
+      "related": [
+        "BUG-3237",
+        "YKT-2683"
+      ],
+      "currentXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "79fe7b7a62a1b44fdc642eda9778f480674f9d82a3e4d0f3d5833df6c037e3ee"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/jacoco.exec",
+        "sha256": "09891942a41ab957830e6ced3216236fddfecb2299d11f81320a3439ae094663"
+      },
+      "scopeEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      "run": "PG39798-CLEANUP-FIXED-STATEMENT-TABLE",
+      "unitSource": "d6860ce65eaf09863bc416dd66ab47f635f254be",
+      "crc": "c61516e7aae20080",
+      "tests": [
+        {
+          "testId": "CLNQUERY001",
+          "method": "allNineFixedQueriesBindOnlyLiteralUuidUtcCutoffAndIntegerLimit"
+        },
+        {
+          "testId": "CLNQUERY002",
+          "method": "okMayRetainProtectedRowsWhileBusyAndBackupGateReturnOnlyTrueZeroObservations"
+        },
+        {
+          "testId": "CLNQUERY003",
+          "method": "progressKeepsActualThreeCountsAndBothCompleteValuesWithTheOriginalRun"
+        },
+        {
+          "testId": "CLNQUERY004",
+          "method": "eachRequiredColumnInvalidCountAndUnknownOrContradictoryReasonIsRejectedIndependently"
+        },
+        {
+          "testId": "CLNQUERY005",
+          "method": "eachKindLimitOneAndMaximumAreAcceptedButZeroAndMaximumPlusOneAcquireNothing"
+        },
+        {
+          "testId": "CLNQUERY006",
+          "method": "publicNullsMissingDuplicateRowsAndIllegalNullJdbcResultsNeverBecomeNormalValues"
+        },
+        {
+          "testId": "CLNQUERY007",
+          "method": "bothEntryProviderFaultMatricesVerifyActualPointReachAndOriginalUnknownIdentity"
+        },
+        {
+          "testId": "CLNQUERY008",
+          "method": "independentPrimaryClosePrecedenceAndExactSafeSuppressedCountsHoldForBothEntries"
+        },
+        {
+          "testId": "CLNQUERY009",
+          "method": "zeroCountsAndMaximumLongCountsRemainDataAndCallerTransactionIsNeverCommitted"
+        }
+      ]
+    },
+    {
+      "main": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+        "sha256": "674adb1842cb28a6ac911b249d0d78e74bc500fb3e229efd42c1ddcb8d2da27c"
+      },
+      "test": {
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+        "sha256": "64711edddb85a9862ebfd892a27d03582847bad648759025185babbb00e77e52"
+      },
+      "owner": {
+        "owner": "WBS-P017-07",
+        "costOwner": "WBS-P017-07",
+        "qualifiedClass": "dev.codex.schubert.nk.batch.repository.CleanupStepRepository"
+      },
+      "spec": [
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/703_Cleanupステップ_単体テスト仕様書.md",
+          "sha256": "bff1c9db2908cd62228991285976b86039a3f5594339c5758dee518e43683006"
+        },
+        {
+          "path": "evidence/01_PT/017_NK-BAT-001/4695_CleanupRepository固定statement表の単体仕様.md",
+          "sha256": "168f9eb2651e29b6f73416c1511b36b0e56a4900bd63afe26b08975abfc26c49"
+        },
+        {
+          "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+          "sha256": "4c09a2f66d9cb4def976c24d2952953aa5a287a0d545548dc4feda4968ff5bef",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": false
+        }
+      ],
+      "decision": "PG-D-1186",
+      "related": [
+        "BUG-3237",
+        "YKT-2683"
+      ],
+      "currentXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "79fe7b7a62a1b44fdc642eda9778f480674f9d82a3e4d0f3d5833df6c037e3ee"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1/jacoco.exec",
+        "sha256": "09891942a41ab957830e6ced3216236fddfecb2299d11f81320a3439ae094663"
+      },
+      "scopeEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      "run": "PG39798-CLEANUP-FIXED-STATEMENT-TABLE",
+      "unitSource": "d6860ce65eaf09863bc416dd66ab47f635f254be",
+      "crc": "71ffc9533da5a3c7",
+      "tests": [
+        {
+          "testId": "CLNPORT001",
+          "method": "literalSevenColumnSqlAndTypedBindingsKeepAllEightApprovedMappingsBorrowed"
+        },
+        {
+          "testId": "CLNPORT002",
+          "method": "literalOkEmptyBusyBackupGateAndQuestionConflictKeepKnownTotalsDistinctFromUnknown"
+        },
+        {
+          "testId": "CLNPORT003",
+          "method": "eachRequiredNullAndCounterOrPairedTotalViolationRejectsTheProjection"
+        },
+        {
+          "testId": "CLNPORT004",
+          "method": "unknownReasonsWrongCompletionAndIncompatibleKindCannotBecomeSuccessfulCounts"
+        },
+        {
+          "testId": "CLNPORT005",
+          "method": "everyNullMappingAndLimitViolationRejectsBeforeAcquisitionAndRowsCannotBeMissingOrDuplicate"
+        },
+        {
+          "testId": "CLNPORT006",
+          "method": "allProviderPointsReallyReachedKeepUnknownIdentityAndCatalogOnlySql"
+        },
+        {
+          "testId": "CLNPORT007",
+          "method": "bodyAndEachClosingFailureUseIndependentPriorityAndSafeSecondaryWithoutSkippingClose"
+        },
+        {
+          "testId": "CLNPORT008",
+          "method": "parentIdentityBeforeAndAfterAndInvalidBorrowedTransactionNeverReturnAResult"
+        },
+        {
+          "testId": "CLNPORT009",
+          "method": "exactLimitsOneAndThousandAcceptOnlyTheirBoundedCountsAndNeverCommitTheBorrowedConnection"
+        }
+      ]
+    },
+    {
+      "main": {
+        "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/ArtifactComparator.java",
+        "sha256": "c00224625010f4b3907da5ffb90fe8141d84b2cc4180334638e2cf244b46f46a"
+      },
+      "test": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/ArtifactComparatorTest.java",
+        "sha256": "64eb3ac628169ca74953d0c3179ef2b795ae7ffea5e0e77e6f465b20fb09f6fe"
+      },
+      "owner": {
+        "owner": "WBS-P020-01",
+        "costOwner": "WBS-P020-01",
+        "qualifiedClass": "dev.codex.schubert.characterization.ArtifactComparator"
+      },
+      "spec": [
+        {
+          "path": "evidence/01_PT/020_NK-CHR-001/032_比較定義一意性の単体仕様.md",
+          "sha256": "f1259d88b96d92a1b2daecf0bf716f7a5668a2bd371f1fce5618846a91c1925b"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": true
+        },
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": true
+        }
+      ],
+      "decision": "PG-D-1187",
+      "related": [
+        "BUG-3308",
+        "YKT-2696"
+      ],
+      "currentXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39830-p020-definition-green144-v3/xml/TEST-junit-jupiter.xml",
+        "sha256": "1049f7befbdab8fc60fd484ea40c9a940c87b66fba18274ce2c66c7c371c02f1"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39830-p020-definition-green144-v3/jacoco.exec",
+        "sha256": "74ba2d1a5695d3b6d21b69552d4879fb63e215ec7d5dbe79e7ffb70cbc56b8ac"
+      },
+      "scopeEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      },
+      "run": "PG39830-p020-definition-green144-v3",
+      "unitSource": "c02f33718c628f1e935ea98df93230334eb3c832",
+      "crc": "88bf95ce6394eb93",
+      "tests": [
+        {
+          "testId": "PT-CHR-DEF015",
+          "method": "rejectsRepeatedCaseDefinitionEvenWhenTwentyFourCasesStillCompare"
+        },
+        {
+          "testId": "PT-CHR-DEF016",
+          "method": "rejectsRepeatedDifferenceDefinitionEvenWhenSixteenRulesStillMatch"
+        }
+      ],
+      "rawTarget": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 1107
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 106
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 211
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 80
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 27
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    },
+    {
+      "main": {
+        "path": "program/characterization/src/main/java/dev/codex/schubert/characterization/GateCli.java",
+        "sha256": "a58a7ae66a4e2c95ff02c2b8493ca75ca091f75235e17f246865039121a7b0ba"
+      },
+      "test": {
+        "path": "program/characterization/tests/java/dev/codex/schubert/characterization/GateCliTest.java",
+        "sha256": "2e477dd5cd1b3af2f11606738c382907e8da8fd422cff59f1f5d9f29fe611518"
+      },
+      "owner": {
+        "owner": "WBS-P020-01",
+        "costOwner": "WBS-P020-01",
+        "qualifiedClass": "dev.codex.schubert.characterization.GateCli"
+      },
+      "spec": [
+        {
+          "path": "evidence/01_PT/020_NK-CHR-001/032_比較定義一意性の単体仕様.md",
+          "sha256": "f1259d88b96d92a1b2daecf0bf716f7a5668a2bd371f1fce5618846a91c1925b"
+        },
+        {
+          "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+          "sha256": "aff2aafe8f952de073e6dd2e7f5840152539f348f9816c6fa31e84ced93bef45",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": true
+        },
+        {
+          "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+          "sha256": "0b0973e6e1e94858e840bc1b85df1daff35e3a0fe9f28ea12331823c2cbcf781",
+          "commit": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+          "sameLocalBytes": true
+        }
+      ],
+      "decision": "PG-D-1188",
+      "related": [
+        "BUG-3309",
+        "BUG-3310",
+        "BUG-3311",
+        "YKT-2697"
+      ],
+      "currentXml": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39830-p020-definition-green144-v3/xml/TEST-junit-jupiter.xml",
+        "sha256": "1049f7befbdab8fc60fd484ea40c9a940c87b66fba18274ce2c66c7c371c02f1"
+      },
+      "singleExec": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39830-p020-definition-green144-v3/jacoco.exec",
+        "sha256": "74ba2d1a5695d3b6d21b69552d4879fb63e215ec7d5dbe79e7ffb70cbc56b8ac"
+      },
+      "scopeEvidence": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      },
+      "run": "PG39830-p020-definition-green144-v3",
+      "unitSource": "c02f33718c628f1e935ea98df93230334eb3c832",
+      "crc": "6cc2c6ccc7716d40",
+      "tests": [
+        {
+          "testId": "PT-CHR-PRE001",
+          "method": "preflightValidatesFilesPermissionsStorageNetworkAndPorts"
+        }
+      ],
+      "rawTarget": {
+        "INSTRUCTION": {
+          "missed": 12,
+          "covered": 2301
+        },
+        "BRANCH": {
+          "missed": 1,
+          "covered": 217
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 443
+        },
+        "COMPLEXITY": {
+          "missed": 2,
+          "covered": 183
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 70
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      }
+    }
+  ],
+  "oldDefinitionsMapped": 19,
+  "newDefinitionsMapped": 2,
+  "reusedOriginalJdbc18": true,
+  "actualTestInvocations": 0,
+  "coverageAdded": 0,
+  "execUnion": false,
+  "productOrBusinessActions": 0,
+  "wholeG08Accepted": false,
+  "newAcceptance": 0,
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5233_g08_cleanup_and_characterization_trace.py",
+    "sha256": "73a3e5833ce1180d13507e3cf4316a0585e67037da2bbf67f564e15c995b3cb3"
+  },
+  "terminalAtUTC": "2026-11-18T15:59:21.127211+00:00"
+}
