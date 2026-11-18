@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.storage;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
@@ -36,6 +37,8 @@ public enum ServiceCredentialId {
           OPERATION_HMAC_CURRENT);
   private static final List<ServiceCredentialId> WEB =
       List.of(DB_WEB, MQ_WEB, WEB_SESSION_AES_CURRENT, WEB_REVOKE_AES_CURRENT, WEB_LOG_AES_CURRENT);
+  private static final Map<ServiceConfigFiles.Service, List<ServiceCredentialId>> BY_SERVICE =
+      Map.of(ServiceConfigFiles.Service.API, API, ServiceConfigFiles.Service.WEB, WEB);
 
   private final ServiceConfigFiles.Service owningService;
   private final String credentialFileName;
@@ -48,10 +51,9 @@ public enum ServiceCredentialId {
   }
 
   public static List<ServiceCredentialId> forService(ServiceConfigFiles.Service service) {
-    return switch (Objects.requireNonNull(service, "service")) {
-      case API -> API;
-      case WEB -> WEB;
-    };
+    Objects.requireNonNull(service, "service");
+    return Objects.requireNonNull(
+        BY_SERVICE.get(service), "service credential IDs are unconfigured");
   }
 
   public ServiceConfigFiles.Service service() {
