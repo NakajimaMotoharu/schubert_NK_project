@@ -1,0 +1,109 @@
+{
+  "eventId": "PGPT-20261008-6112",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-OBSERVED-END-AND-CLIENT-WAIT-MONITORS-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-OBSERVED-END-AND-CLIENT-WAIT-MONITORS-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "7fad13f33a2388936674a44bd6f3d213b379f9e5",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40086-f03-two-unit-monitor-reviews-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.16,
+      "base": 0.45,
+      "high": 1.2
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+        "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40082-f03-cleanup-request-monitor-source-v1/manifest.json",
+        "sha256": "4fce316b3d3c6aaf1ed1610e33fb0534fc4877d84ede23d36b38451c1ca0ed7e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      }
+    ],
+    "workScope": "Classify original monitor sites 343,387 and clarify companion 386 on existing public source and bound static results. Never execute shutdown, wait, invoke or native read. No permission or approval change.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:24:49.666000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 47,
+        "remainingPercent": 53,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "f382ec4baa2564fce4ff1e9f2ce70cf8bc7b951a01333001f3d3111df4bd26c8",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:24:49.666000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 47,
+          "remainingPercent": 53,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:23:52.521765+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40086-f03-two-unit-monitor-reviews-v1/manifest.json",
+        "sha256": "6090e1d0d3f72d9a6691cb99a663791e80874d2312ef128958488ecee1d2e74c"
+      }
+    ],
+    "initialUnclassifiedInSubset": 36,
+    "finalUnclassifiedInSubset": 34,
+    "newApplicableOpen": 2,
+    "formallyAcceptedAdded": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "343 and 387 assessed against exact current observations/finite wait inside monitors. 386 stays pure immediate status read. No operational change or formal completion."
+  }
+}

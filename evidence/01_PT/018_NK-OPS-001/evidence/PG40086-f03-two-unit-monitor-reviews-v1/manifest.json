@@ -1,0 +1,107 @@
+{
+  "actualExit": 0,
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "decisions": [
+    {
+      "index": 343,
+      "method": "quiescent",
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java",
+        "sha256": "e3c8c4eebb3f1d4ac53f3b32f3f497ccaebea609a0821bd9aeaabe61fe64b6f9"
+      },
+      "spanSha256": "087f79ba4cac6eeedf5e2cd39d896ba19e0014721d36f0c4491f4c68938872c8",
+      "line": 118,
+      "decision": "APPLICABLE_OPEN",
+      "reason": "The monitor encloses borrowed read and repeated same-ownership namespace observations.",
+      "physical": {
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Context.class": "d473dac3d6aa2109a13db53f1e1fcfa075d337f87579123ff5d442c571f6d1bb",
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Io.class": "eeebe565feb367f3cfe5c7927ca2c469f7a433c697a93107b339acc0108320e5",
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NativeObservations.class": "aeb0daf19ba933670a90a68d97c4726cc7671829635056951cf9dcb44549146d",
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$NioIo.class": "bb4d3324a53e3669c3a4fe970660a77b705271d2c435345207ec9b89a3a8a9d7",
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination$Observations.class": "3862daa4e9b56a7947f90a0b094d7e59759b177c02b15d4461cd227c663e495c",
+        "dev/codex/schubert/nk/batch/platform/BackupUnitTermination.class": "cca961a96ceb75d116e3ae24f4ecf4f8de27b8a2a583f9e03e0b31ebf0e41df7"
+      }
+    },
+    {
+      "index": 387,
+      "method": "awaitClient",
+      "source": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+        "sha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2"
+      },
+      "spanSha256": "73f2f69f18e5170f2e42c142bb5635560cf25c1b63c6901228836bd26b5ab786",
+      "line": 177,
+      "decision": "APPLICABLE_OPEN",
+      "reason": "Finite process wait and owned stream closing remain inside the same monitor.",
+      "physical": {
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Attempt.class": "e265458e18b6122af29f82dee30defdd9ff9d2cb97da4641ce5de984bda48d8c",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Context.class": "5716789b4d081ac2fcd30d21018bfbbecd5fc12c5edd70918c8b548dbe0174b7",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$NativeStart.class": "a0a7b0e82ccfc3e2cc1874d984a74545bf3b59d46f3f7c327f029ee77580932a",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Policy.class": "6c99f2590f19dc92e65138ce84057bbb6960ae8a9aad53e1bd11aecc8d34b407",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Start.class": "2c4a9e59f06c877ecb9caff33d4a76bb505635f8df0671d63c1490b8d0070044",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient$Status.class": "e5905329ee97fc417ea4f8941312bfc63e06dd9e3cab133908b7fc417349679e",
+        "dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.class": "8fc056f4be8f4e8477b5144e4181931e357023e82b92a8159f77607e3f383c8b"
+      }
+    }
+  ],
+  "originalRawRetained": true,
+  "priorUnclassified": 36,
+  "unclassifiedAfter": 34,
+  "cumulativeApplicableInOriginal45": 11,
+  "unchangedCompanion386": {
+    "rawFindingIndex": 386,
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java",
+    "sourceSha256": "ae53eb1a23d05cadb270554222d74c84d64a29adedab5666f15b2e20135470c2",
+    "line": 170,
+    "column": 7,
+    "rule": "AvoidSynchronizedStatement",
+    "method": "status",
+    "owner": "WBS-P018-04",
+    "costOwner": "WBS-P018-04",
+    "monitor": "stateLock",
+    "fullSynchronizedBody": "{\n        return retainedStatus;\n      }",
+    "calls": [],
+    "decision": "NOT_APPLICABLE_JAVA25_NONBLOCKING_MEMORY_ATOMICITY",
+    "reason": "Java25/JEP491 monitor acquisition/ordinary blocking is unpinned; pinned PMD7.28 rule still warns every synchronized statement. This entire section and its closed supplied-value/lifecycle callees only update/check immutable observations and primitive/Optional alert state, or return/invalidate an existing in-memory status. It performs no native/FD/DB/network IO or arbitrary callback/clock/registry call. Private monitor atomicity is required for consistent monotonic/alert/lifetime state; replacing with unsynchronized fields would violate that contract. IO/callback/native monitor sites remain separately unresolved, and no actual performance or IT/ST claim is made.",
+    "performanceOrFunctionalPtReplaced": false
+  },
+  "protectedOriginalCountersUntouched": true,
+  "canonicalDesign": {
+    "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399"
+  },
+  "references": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+      "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+      "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40082-f03-cleanup-request-monitor-source-v1/manifest.json",
+      "sha256": "4fce316b3d3c6aaf1ed1610e33fb0534fc4877d84ede23d36b38451c1ca0ed7e"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    }
+  ],
+  "actualRuntimeOperations": 0,
+  "productTests": 0,
+  "actualStaticToolReplayed": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T19:23:52.521765+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5274_f03_two_unit_monitor_reviews.py",
+    "sha256": "098b3c1917065ed9b773f6b44a95a1d3eaef89143a76b1c0ced7aa30f68ec5c2"
+  }
+}
