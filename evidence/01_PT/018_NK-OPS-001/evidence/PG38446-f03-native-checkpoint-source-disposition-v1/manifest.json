@@ -1,0 +1,59 @@
+{
+  "actualExit": 0,
+  "run": "PG38446-f03-native-checkpoint-source-disposition-v1",
+  "source": "713885ee295be89b2c2362594c67879827cfba50",
+  "terminalAtUTC": "2026-11-18T02:54:25.366666+00:00",
+  "currentSource": {
+    "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+    "sha256": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112"
+  },
+  "historicalFinding": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+    "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+  },
+  "index": 763,
+  "rule": "AvoidSynchronizedStatement",
+  "sourceAnchor": "    synchronized (lock) {",
+  "disposition": "APPLICABLE_PRODUCTION_SYNCHRONIZATION_PENDING_NATIVE_GATE",
+  "reason": "The production monitor covers the attempt set, terminal confirmation, and agent/export callbacks. It is neither a constructor-local map nor a standalone test. The current MR shows same contract and no readiness to attest equivalence after a lock change.",
+  "design": {
+    "file": {
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "368781e746c35cd35f1e13aa6aa8a20d1213ae496c34525c652904a5d4f448f3"
+    },
+    "line": 257,
+    "criteria": [
+      "no-agent I/O 0",
+      "terminal complete before closing",
+      "foreign, duplicate and partial refusal",
+      "owner and postconditions"
+    ]
+  },
+  "ordinaryEvidence": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38390-p01808-terminal-profile-four-v1/manifest.json",
+      "sha256": "c788e17dece60a22628289d6e598e8576a9c8b4bc1617c1b3d851af1736a350a"
+    },
+    "cases": 4,
+    "checkpointBranchMissed": 27,
+    "actualNativeCapture": false
+  },
+  "endDependency": [
+    "admit exact lock change and test envelope",
+    "same-owner current real terminal-to-closing completion and failure behavior",
+    "same source rule and raw closure"
+  ],
+  "newApplicable": 1,
+  "nativeOriginalUnclassified": 34,
+  "unrelatedRootUnclassified": 10,
+  "warningStillOpen": true,
+  "originalRawPreserved": true,
+  "newStaticProcesses": 0,
+  "productTestsExecuted": 0,
+  "productionSourceChanged": false,
+  "coverageExceptionGranted": false,
+  "wholeF03Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "reviewPreparationCorrection": "anchor export.write corrected after prior name mismatch; no product or analyzer invoked"
+}
