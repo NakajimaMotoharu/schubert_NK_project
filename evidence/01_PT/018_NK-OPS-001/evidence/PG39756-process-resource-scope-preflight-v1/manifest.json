@@ -1,0 +1,464 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5210_process_resource_scope_local_profile.json",
+    "sha256": "c210c3c91d74c637e8754d1c399ac7dcb74496833294568b3ed7d97b047bd462"
+  },
+  "inputHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java": "2dcbb6a8d2f2e1e7bbb1705ffe182a8493ca0407101a9ad261460fb2d95604c9",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateException.java": "a3edce9d305b127863271fb0757a403ebfcb1e6e973261db3dede83fda1a7758",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/StopGateFailure.java": "e62e08a9ba6be579d39a92d420e2c9f0b1067644d735bd4533252890c9227d8e",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java": "c29479971e9f7e1385ce7c00ff3e1f4268a5e2c16ec4dd43f689eb2b476868e1",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39752-process-resource-scope-prepare-v1/manifest.json",
+    "sha256": "5f54834d44811bc84968928adf07a1a8a7afe81aa5124067da2d725dcec53807"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39754-process-resource-scope-static-v1/manifest.json",
+    "sha256": "4e33847876102431ab27c1177ec5e0f2e2483d91d078aeb52d6d61216c68af30"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5211_process_resource_scope_static_admission.json",
+    "sha256": "03cef63472b49f508dc12aec3f4b37310912cd1ae980fbb0f62eb23683142e5c"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "46",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "46",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "50",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "50",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "70",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "70",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "73",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "73",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "51",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "51",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "52",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "52",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "53",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "53",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "54",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "54",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "55",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "55",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "74",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "74",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "75",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "75",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "76",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "76",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "77",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "77",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StopGateException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "79",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "79",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for InterruptedException."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "DoNotUseThreads",
+      "line": "55",
+      "reason": "Inspects, preserves, or clears an interrupt on the current calling thread for the documented cancellation contract; this site never creates or starts a thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java",
+      "rule": "DoNotUseThreads",
+      "line": "79",
+      "reason": "Inspects, preserves, or clears an interrupt on the current calling thread for the documented cancellation contract; this site never creates or starts a thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "30",
+      "reason": "Single explicitly named package utility constructor negative test, with original access flag captured and restored in finally. No other reflective target, no external access or module visibility change.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+      "rule": "AvoidAccessibilityAlteration",
+      "line": "37",
+      "reason": "Single explicitly named package utility constructor negative test, with original access flag captured and restored in finally. No other reflective target, no external access or module visibility change.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "You should not modify visibility of constructors, methods or fields using setAccessible()"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "179",
+      "reason": "Inspects, preserves, or clears an interrupt on the current calling thread for the documented cancellation contract; this site never creates or starts a thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ProcessResourceScopeValueContractTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "199",
+      "reason": "Inspects, preserves, or clears an interrupt on the current calling thread for the documented cancellation contract; this site never creates or starts a thread.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "81",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "81",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "85",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "85",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "111",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "111",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching Error in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "line": "114",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 local owned-resource compound failure contract. This catch retains failure identity or emits the specified fixed secondary while completing the owned cleanup once, with no blanket success.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid catching RuntimeException in try-catch block"
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "86",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "86",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "86",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "86",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "97",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "115",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "115",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "115",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "115",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "line": "125",
+      "reason": "Approved SS343 SSC063/308 or SS333 SSC063/308 compound precedence depends on both the body and cleanup failure types and, for interruption, on the original caller flag. A separate catch for one failure would not express the paired decision.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}
