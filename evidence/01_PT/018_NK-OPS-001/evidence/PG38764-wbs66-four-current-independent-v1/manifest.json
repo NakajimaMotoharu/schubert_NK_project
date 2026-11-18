@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T05:46:16.716876+00:00",
+  "source": "d0b8ee6057132d73f0234becf9fdef3073308f87",
+  "build": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38760-wbs66-four-own-main-current-v1/compile/manifest.json",
+    "sha256": "9150e6f095658478a0b371b38a680871bba0831b50bd4e12ed8d13e5ace154f5"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38762-wbs66-four-current-static-v1/manifest.json",
+    "sha256": "427c95d702cc13b9722f903d69c7dcb111492c900752d214e7a475df4fb9890a"
+  },
+  "priorProtocolPrepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37646-ssc452-grammar-prepare-v2/manifest.json",
+    "sha256": "7c7711c8349b7b712d368c157885f940ea1f11c9589b0835448cbe95117c812a"
+  },
+  "priorProtocolStatic": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37648-ssc452-grammar-static-v2/manifest.json",
+    "sha256": "0f4ef6909b481f9e9c2bcfb4e3eef9cbde39d00dcb5f6ed6cdf5e06d807e2531"
+  },
+  "currentMavenAndNullAway": true,
+  "exactInputBytes": 490,
+  "mainSources": {
+    "protocol": 169,
+    "storage": 25,
+    "bootstrap": 88,
+    "batch": 200
+  },
+  "physical": {
+    "protocol": 176,
+    "storage": 79,
+    "bootstrap": 201,
+    "batch": 646
+  },
+  "fourAdmittedPhysicalTotal": 1102,
+  "physicalDifferences": {
+    "protocol": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "storage": {
+      "added": [],
+      "removed": [
+        "dev/codex/schubert/nk/storage/ServiceCredentialId$1.class"
+      ],
+      "changed": [
+        "dev/codex/schubert/nk/storage/ServiceCredentialId$Kind.class",
+        "dev/codex/schubert/nk/storage/ServiceCredentialId.class",
+        "dev/codex/schubert/nk/storage/ServiceCredentialLocation.class",
+        "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+        "dev/codex/schubert/nk/storage/StorageIoException.class"
+      ]
+    },
+    "bootstrap": {
+      "added": [
+        "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class"
+      ],
+      "removed": [],
+      "changed": [
+        "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class",
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission$Row.class",
+        "dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.class"
+      ]
+    },
+    "batch": {
+      "added": [],
+      "removed": [],
+      "changed": [
+        "dev/codex/schubert/nk/batch/repository/BackupStepRepository$Terminal.class",
+        "dev/codex/schubert/nk/batch/repository/BackupStepRepository.class",
+        "dev/codex/schubert/nk/batch/repository/CleanupRepository$1.class",
+        "dev/codex/schubert/nk/batch/repository/CleanupRepository.class",
+        "dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+        "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+        "dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class",
+        "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class"
+      ]
+    }
+  },
+  "spotbugsFresh": 926,
+  "spotbugsViaExactBytes": 176,
+  "spotbugsBugs0": true,
+  "checkstyleFiles": 482,
+  "checkstyleErrors": 0,
+  "formatterNewFiles": 12,
+  "pmdWholeFourRun": false,
+  "holdApiWebNamesTypedActions": 0,
+  "qa057SourceChanges": 0,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "firstIndependentReaderExit": 1,
+  "firstIndependentReaderCause": "Maven release display is forked debug release 25; the reader expected a CLI spelling. Verified existing log without rerunning compilation or static analysis."
+}

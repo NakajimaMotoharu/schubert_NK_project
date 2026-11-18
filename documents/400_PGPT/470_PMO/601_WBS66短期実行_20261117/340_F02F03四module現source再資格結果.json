@@ -1,0 +1,128 @@
+{
+  "eventId": "PGPT-20261008-5872",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-FOUR-ALLOWED-MODULE-REQUALIFICATION-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-FOUR-ALLOWED-MODULE-REQUALIFICATION-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "F02-a/SYS-002 and F03/2-2: four admitted Maven Main module compile using the existing offline protocol/storage/bootstrap/batch-only contract. Baseline PG38256 has 481 approved Main paths and 1102 classes. Current product hash differs in one added adapter and 11 body/type files. Fix exact input allowlist diff before execution, no POM differences, unchanged QA057/Root paths, no API/Web Main tests or four held types. End genuine numeric compile and source/physical delta, unchanged body proof and nonconflation with six-module results. No service, database, Root, native or read of held class files.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38256-wbs66-four-current-compile-v1/compile/manifest.json",
+        "sha256": "12154ad780501aaa8caad123e7ea11faa1ed418cdad2ed61c5ef5f39da3ab472"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38756-f02-backup-pair-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "6eef723f66a03e442111fdcb31ef91c9ec695b8aaa4ff426a1c5e7456f684932"
+      },
+      {
+        "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+        "sha256": "7980a204c02574b235d588e3a05ae8fb7b26ecb18313f4f000918c9135da6f4c"
+      }
+    ],
+    "productionCoreMain": "d0b8ee6057132d73f0234becf9fdef3073308f87",
+    "source": "d0b8ee6057132d73f0234becf9fdef3073308f87",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F03/2-2"
+    ],
+    "run": "PG38764-wbs66-four-current-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.75,
+      "high": 4.0
+    },
+    "groupCapPp": 5.25,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 30,
+      "remainingPercent": 70,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "32bfba0a6f928b02de55b2ad90c86f16eaca47bae2bff4795ab4d9ac9d08e942",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T05:46:29.834000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 30,
+          "remainingPercent": 70,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T05:46:16.716876+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 30,
+      "remainingPercent": 70,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5871",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38764-wbs66-four-current-independent-v1/manifest.json",
+      "sha256": "16291db6b23b38b02224e53e2a6d632b6676378b735009c0955605144540dd4a"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": null,
+    "buildFirstSuccess": true,
+    "productTestsExecuted": 0,
+    "newDefinitions": 0,
+    "mainSources": {
+      "protocol": 169,
+      "storage": 25,
+      "bootstrap": 88,
+      "batch": 200
+    },
+    "physical": {
+      "protocol": 176,
+      "storage": 79,
+      "bootstrap": 201,
+      "batch": 646
+    },
+    "formatterDeltaFiles": 12,
+    "checkstyleFiles": 482,
+    "spotbugsFresh": 926,
+    "spotbugsIdentical": 176,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "PMD further dispositions and F03 full gates, API/Web QA056 held path",
+      "Next physical dependency metadata for all four, known Storage JDBC owner edge unresolved",
+      "No formal retest or production entrypoint executed"
+    ]
+  }
+}
