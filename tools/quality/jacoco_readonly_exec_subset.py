@@ -28,6 +28,8 @@ def decode(raw,wanted):
             if not byte & 128:
                 if value > 0x7fffffff:
                     raise ValueError('nonnegative Java int count required')
+                if shift and byte == 0:
+                    raise ValueError('nonminimal compact count')
                 return value
         raise ValueError('overlong compact integer')
 
@@ -52,6 +54,9 @@ def decode(raw,wanted):
             identities.add(identity)
             count = varint()
             packed = take((count + 7) // 8)
+            final_bits = count % 8
+            if final_bits and packed[-1] >> final_bits:
+                raise ValueError('nonzero final probe padding')
             records += 1
             if name in wanted_bytes:
                 key = wanted_bytes[name]

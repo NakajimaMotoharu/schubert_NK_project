@@ -1,0 +1,85 @@
+Compiled from "CompactDataOutput.java"
+public class org.jacoco.cli.internal.core.internal.data.CompactDataOutput extends java.io.DataOutputStream {
+  public org.jacoco.cli.internal.core.internal.data.CompactDataOutput(java.io.OutputStream);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #9                  // Method java/io/DataOutputStream."<init>":(Ljava/io/OutputStream;)V
+         5: return
+
+  public void writeVarInt(int) throws java.io.IOException;
+    Code:
+         0: iload_1
+         1: bipush        -128
+         3: iand
+         4: ifne          15
+         7: aload_0
+         8: iload_1
+         9: invokevirtual #20                 // Method writeByte:(I)V
+        12: goto          35
+        15: aload_0
+        16: sipush        128
+        19: iload_1
+        20: bipush        127
+        22: iand
+        23: ior
+        24: invokevirtual #20                 // Method writeByte:(I)V
+        27: aload_0
+        28: iload_1
+        29: bipush        7
+        31: iushr
+        32: invokevirtual #22                 // Method writeVarInt:(I)V
+        35: return
+
+  public void writeBooleanArray(boolean[]) throws java.io.IOException;
+    Code:
+         0: aload_0
+         1: aload_1
+         2: arraylength
+         3: invokevirtual #22                 // Method writeVarInt:(I)V
+         6: iconst_0
+         7: istore_2
+         8: iconst_0
+         9: istore_3
+        10: aload_1
+        11: astore        4
+        13: aload         4
+        15: arraylength
+        16: istore        5
+        18: iconst_0
+        19: istore        6
+        21: iload         6
+        23: iload         5
+        25: if_icmpge     70
+        28: aload         4
+        30: iload         6
+        32: baload
+        33: istore        7
+        35: iload         7
+        37: ifeq          46
+        40: iload_2
+        41: iconst_1
+        42: iload_3
+        43: ishl
+        44: ior
+        45: istore_2
+        46: iinc          3, 1
+        49: iload_3
+        50: bipush        8
+        52: if_icmpne     64
+        55: aload_0
+        56: iload_2
+        57: invokevirtual #20                 // Method writeByte:(I)V
+        60: iconst_0
+        61: istore_2
+        62: iconst_0
+        63: istore_3
+        64: iinc          6, 1
+        67: goto          21
+        70: iload_3
+        71: ifle          79
+        74: aload_0
+        75: iload_2
+        76: invokevirtual #20                 // Method writeByte:(I)V
+        79: return
+}
