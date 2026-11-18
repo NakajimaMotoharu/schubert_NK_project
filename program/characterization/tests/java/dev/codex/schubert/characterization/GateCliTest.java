@@ -52,6 +52,8 @@ class GateCliTest {
   private static final String ORACLE_REPEAT_REPORT =
       "program/characterization/reports/current-repeat-comparison.json";
   private static final String ORACLE_USERS_PROPERTY = "chr.usersFile";
+  private static final String ORACLE_DB_URL_PROPERTY = "chr.dbUrl";
+  private static final String ORACLE_DB_URL_FAILURE = "dbUrl must target loopback allowlist";
   private static final String ORACLE_GATES = "gates";
   private static final String ORACLE_COMMIT_PROPERTY = "chr.gateCommit";
   private static final String ORACLE_COMMIT = "abcdef1";
@@ -214,7 +216,7 @@ class GateCliTest {
         "chr.caddyExecutable", temporaryDirectory.resolve("missing-caddy").toString());
     invalidProperties.put("chr.pgCtl", temporaryDirectory.resolve("missing-pgctl").toString());
     invalidProperties.put("chr.pgData", notPgDirectory.toString());
-    invalidProperties.put("chr.dbUrl", "jdbc:postgresql://external.example:5432/db");
+    invalidProperties.put(ORACLE_DB_URL_PROPERTY, "jdbc:postgresql://external.example:5432/db");
     invalidProperties.put("chr.appPort", "1");
     invalidProperties.put("chr.proxyPort", "1025");
     Path invalidOutput = temporaryDirectory.resolve("preflight-invalid.json");
@@ -236,8 +238,9 @@ class GateCliTest {
     assertTrue(failures.contains("current source root escapes currentRoot"));
     assertTrue(failures.contains("usersFile permission must be 0600"));
     assertTrue(failures.contains("evidence storage must have at least 20GiB free"));
-    assertTrue(failures.contains("dbUrl must target loopback allowlist"));
+    assertTrue(failures.contains(ORACLE_DB_URL_FAILURE));
 
+    assertMissingDatabaseUrlFailure(valid);
     assertPortFailure(valid, 1025, 1, "proxy-privileged");
     assertPortFailure(valid, 1025, 1025, "ports-equal");
   }
@@ -591,6 +594,25 @@ class GateCliTest {
     assertThrows(IllegalArgumentException.class, () -> GateCli.writeJson(null, Map.of()));
   }
 
+  private void assertMissingDatabaseUrlFailure(PreflightFixture fixture) throws Exception {
+    Map<String, String> properties = new LinkedHashMap<>(fixture.properties());
+    properties.put(ORACLE_DB_URL_PROPERTY, null);
+    Path output = temporaryDirectory.resolve("missing-db-url.json");
+    withProperties(
+        properties,
+        () ->
+            assertThrows(
+                IllegalStateException.class,
+                () ->
+                    GateCli.preflight(
+                        fixture.projectRoot(),
+                        output,
+                        directory -> ORACLE_MINIMUM_EVIDENCE_BYTES)));
+    assertEquals(
+        List.of(ORACLE_DB_URL_FAILURE),
+        strings(JSON.readTree(output.toFile()).path(ORACLE_FAILURES)));
+  }
+
   private void assertPortFailure(PreflightFixture fixture, int appPort, int proxyPort, String name)
       throws Exception {
     Map<String, String> properties = new LinkedHashMap<>(fixture.properties());
@@ -634,7 +656,7 @@ class GateCliTest {
     properties.put("chr.pgData", pgData.toString());
     properties.put("chr.pgLog", pgLog.toString());
     properties.put("chr.pgSocket", pgSocket.toString());
-    properties.put("chr.dbUrl", "jdbc:postgresql://localhost:55432/test_db");
+    properties.put(ORACLE_DB_URL_PROPERTY, "jdbc:postgresql://localhost:55432/test_db");
     properties.put("chr.appPort", "1024");
     properties.put("chr.proxyPort", "1025");
     return new PreflightFixture(project, current, users, Map.copyOf(properties));

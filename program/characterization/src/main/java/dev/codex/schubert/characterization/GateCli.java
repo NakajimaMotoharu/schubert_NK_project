@@ -20,6 +20,7 @@ import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -246,7 +247,7 @@ public final class GateCli {
     if (usableBytes < 20L * 1024 * 1024 * 1024) {
       failures.add("evidence storage must have at least 20GiB free");
     }
-    String dbUrl = System.getProperty("chr.dbUrl", "");
+    String dbUrl = Objects.requireNonNullElse(System.getProperty("chr.dbUrl"), "");
     if (!dbUrl.matches("jdbc:postgresql://(127\\.0\\.0\\.1|localhost):[0-9]+/[A-Za-z0-9_]+")) {
       failures.add("dbUrl must target loopback allowlist");
     }

@@ -22,7 +22,8 @@ TEST_PATH=B/'tests/java'/P/'ArtifactComparatorTest.java'
 GATE_SOURCE=B/'src/main/java'/P/'GateCli.java'
 GATE_TEST=B/'tests/java'/P/'GateCliTest.java'
 PHASE_CHANGES={'red':{TEST_PATH},'green':{TEST_PATH,MAIN_PATH},
-               'corrected':{TEST_PATH,MAIN_PATH,GATE_SOURCE,GATE_TEST}}
+               'corrected':{TEST_PATH,MAIN_PATH,GATE_SOURCE,GATE_TEST},
+               'qualified':{TEST_PATH,MAIN_PATH,GATE_SOURCE,GATE_TEST}}
 MAVEN=TC/'m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn'
 
 
@@ -127,7 +128,8 @@ def main(phase):
     assert not git('diff','--name-only','HEAD','--',str(B))
     data,inputs,srcs,selected=collect_inputs(source,original,selection,audit['helperReferences'],phase)
     name={'red':'PG39822-p020-definition-red-v1','green':'PG39826-p020-definition-green144-v1',
-          'corrected':'PG39828-p020-definition-green144-v2'}[phase]
+          'corrected':'PG39828-p020-definition-green144-v2',
+          'qualified':'PG39830-p020-definition-green144-v3'}[phase]
     out=E/name
     work=ROOT.parent/'pgpt-runs/PG379'/name.lower()
     assert not out.exists() and not work.exists()
