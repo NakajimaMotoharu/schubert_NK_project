@@ -1,0 +1,412 @@
+{
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39436-service-jdbc-ports-static-v1/manifest.json",
+    "sha256": "55c480c54a97404473e431b096c789e8a461afb7b8c78dfa3d4c4527ac52d571"
+  },
+  "freshPeers": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39440-service-jdbc-spotbugs-current-peers-v1/manifest.json",
+    "sha256": "454c1e9144b1a9560f61361fa7aabf9f80c8f8a9e7c4903401881447762b176a"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceLine": 52,
+      "sourceAnchor": "var values = required(rows);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The verified alias returned by required(rows) is a null-checked reference to rows. It is the same object closed on all paths by the owning rows finally and cannot represent an extra acquisition."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 59,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 59,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceLine": 62,
+      "sourceAnchor": "} finally {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SSC095 cleanup may replace an SQL primary with an unknown close failure, and must reject a successful return on a release failure. Vanilla finally suppression or skipping release would violate the tested contract."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 66,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 66,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 71,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 71,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "DoNotThrowExceptionInFinally",
+      "message": "A throw statement in a finally block makes the control flow hard to understand.",
+      "sourceLine": 74,
+      "sourceAnchor": "} finally {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SSC095 cleanup may replace an SQL primary with an unknown close failure, and must reject a successful return on a release failure. Vanilla finally suppression or skipping release would violate the tested contract."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 78,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 78,
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 89,
+      "sourceAnchor": "} catch (RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 89,
+      "sourceAnchor": "} catch (RuntimeException | Error failure) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 110,
+      "sourceAnchor": "} catch (RuntimeException | Error cleanup) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 110,
+      "sourceAnchor": "} catch (RuntimeException | Error cleanup) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS342/343 and SSC095 require closing acquired resources on SQL, Runtime and Error with their separate documented precedence. The catch preserves or propagates the corresponding identity and never discards unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 280,
+      "sourceAnchor": "f -> f.effectiveRole = null,",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "A null SQL projection is an intentional negative database port input; each optional fixture field is declared Nullable and the product must reject it through the documented SQLSTATE."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 282,
+      "sourceAnchor": "f -> f.loginRole = null,",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "A null SQL projection is an intentional negative database port input; each optional fixture field is declared Nullable and the product must reject it through the documented SQLSTATE."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 284,
+      "sourceAnchor": "f -> f.database = null,",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "A null SQL projection is an intentional negative database port input; each optional fixture field is declared Nullable and the product must reject it through the documented SQLSTATE."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "NullAssignment",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring.",
+      "sourceLine": 286,
+      "sourceAnchor": "f -> f.recovery = null);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "A null SQL projection is an intentional negative database port input; each optional fixture field is declared Nullable and the product must reject it through the documented SQLSTATE."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 442,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the unit fixture owns this worker. The fixture explicitly cancels in finally and asserts termination within five seconds; the build exercises no actual database, native capability or deployed worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 442,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 447,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 456,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 457,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "sourceLine": 247,
+      "sourceAnchor": "var first = source.getConnection();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The object is a JDK proxy that records counters on this memory fixture. The fixture invokes close exactly once on the normal path and tests caller ownership. The other alias is kept only for equality and owns no native or database resource."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "sourceLine": 248,
+      "sourceAnchor": "var second = source.getConnection();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The object is a JDK proxy that records counters on this memory fixture. The fixture invokes close exactly once on the normal path and tests caller ownership. The other alias is kept only for equality and owns no native or database resource."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 521,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the unit fixture owns this worker. The fixture explicitly cancels in finally and asserts termination within five seconds; the build exercises no actual database, native capability or deployed worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 521,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 526,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "sourceLine": 532,
+      "sourceAnchor": "var connection = task.get(5, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The object is a JDK proxy that records counters on this memory fixture. The fixture invokes close exactly once on the normal path and tests caller ownership. The other alias is kept only for equality and owns no native or database resource."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "sourceLine": 533,
+      "sourceAnchor": "for (var previous : returned) assertNotSame(previous, connection);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The object is a JDK proxy that records counters on this memory fixture. The fixture invokes close exactly once on the normal path and tests caller ownership. The other alias is kept only for equality and owns no native or database resource."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 539,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 540,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 561,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 566,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Only the unit fixture owns this worker. The fixture explicitly cancels in finally and asserts termination within five seconds; the build exercises no actual database, native capability or deployed worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 566,
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 569,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 575,
+      "sourceAnchor": "var closing = executor.submit(source::close);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 589,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    },
+    {
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 590,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site uses an owned synthetic JUnit worker and a scheduled fixture. It does not create, observe or communicate with an application or database worker."
+    }
+  ]
+}
