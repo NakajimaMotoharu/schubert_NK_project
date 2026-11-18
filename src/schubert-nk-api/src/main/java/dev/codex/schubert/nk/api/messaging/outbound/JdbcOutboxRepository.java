@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntSupplier;
+import javax.annotation.WillClose;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -210,7 +211,8 @@ public final class JdbcOutboxRepository {
   }
 
   // SSC-471: preserve the exact try-with-resources primary and suppression rules.
-  private static void closeRows(ResultSet rows, @Nullable Throwable primary) throws SQLException {
+  private static void closeRows(@WillClose ResultSet rows, @Nullable Throwable primary)
+      throws SQLException {
     try {
       rows.close();
     } catch (Throwable secondary) {
@@ -219,8 +221,8 @@ public final class JdbcOutboxRepository {
     }
   }
 
-  private static void closeStatement(PreparedStatement statement, @Nullable Throwable primary)
-      throws SQLException {
+  private static void closeStatement(
+      @WillClose PreparedStatement statement, @Nullable Throwable primary) throws SQLException {
     try {
       statement.close();
     } catch (Throwable secondary) {
