@@ -1,0 +1,97 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6009",
+  "terminalAtUTC": "2026-11-18T14:20:19.667038+00:00",
+  "source": "26f128852f454dcd13b4b22d937213a7e3916ca9",
+  "productionCoreMain": "0e93b5a35d126bdf2500d0820082d7c2e4ff5db7",
+  "parser": {
+    "path": "tools/quality/coverage_session_schema.py",
+    "sha256": "b2ffb52dd65f092ed73a62f7c8abd1a33e41e91c8b54fa5668b105b9c4f8d456"
+  },
+  "toolTest": {
+    "path": "tools/quality/coverage_session_schema_test.py",
+    "sha256": "9bfbf66c731ecda8837a3c229460a33319414c44ac47ed8d8192be1b4e85331c"
+  },
+  "historicalCallerValidation": {
+    "files": 96,
+    "parse": 95,
+    "selftest": 95,
+    "importOrRunHistoricalTools": 0,
+    "compileSourceOnly": true,
+    "exactFileList": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/public-call-shapes.json",
+      "sha256": "dc35ae8d3184b070ffb88e782c603862ef3740af58419aa4d856ad96c8947153"
+    }
+  },
+  "originalFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/raw-before.json",
+    "sha256": "62cbf3243569fd2de3db87eaf3af19c38bcddee4c1ec0f41c764b035e2150d9e"
+  },
+  "javaAbi": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/jacoco-session-abi.txt",
+    "sha256": "99b7dc4252cb4e8c8f431e21306dcb770d877e44110a17b5c3d0748a81798dee"
+  },
+  "toolPython": "3.14.4",
+  "originalToolVectors": 7,
+  "addedToolTests": 7,
+  "additionalFirstExecuted": 7,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "nativeStreamsOpened": 0,
+  "productTests": 0,
+  "currentMeasuredProductCoverage": 0,
+  "newAcceptance": 0,
+  "whole451Accepted": false,
+  "originalRuntimeOwnerNotQualified": true,
+  "executions": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "from coverage_session_schema import selftest; assert selftest() == 7; print(7)"
+      ],
+      "startedAtUTC": "2026-11-18T14:20:19.645217+00:00",
+      "terminalAtUTC": "2026-11-18T14:20:19.666746+00:00",
+      "actualExit": 0,
+      "files": {
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/original-seven.stdout",
+          "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/original-seven.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "coverage_session_schema_test"
+      ],
+      "startedAtUTC": "2026-11-18T14:20:19.591711+00:00",
+      "terminalAtUTC": "2026-11-18T14:20:19.644920+00:00",
+      "actualExit": 0,
+      "files": {
+        "stdout": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/additional-seven.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/additional-seven.stderr",
+          "sha256": "661e7aa6f499853f097e3e55ac8d9d8206d9892d9a05aa8f1968c218d59a43f4"
+        }
+      }
+    }
+  ],
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5204_p01808_session_schema_proof.py",
+    "sha256": "e9b9546de02b53e489b4ff9d0bca46013e6462a3dc7c98784d08a943a7030c80"
+  }
+}

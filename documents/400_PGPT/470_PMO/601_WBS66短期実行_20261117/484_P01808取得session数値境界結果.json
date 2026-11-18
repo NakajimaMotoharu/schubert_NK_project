@@ -1,0 +1,130 @@
+{
+  "eventId": "PGPT-20261008-6010",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P0180803-NAMED-SESSION-TIMESTAMP-BOUNDARY-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P0180803-NAMED-SESSION-TIMESTAMP-BOUNDARY-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P018-08.03/2: bounded offline named SESSION receipt parser accepts timestamps above JaCoCo signed-long domain and unnamed synthetic expected identities. Reproduce with literal host-only data, preserve old source/current seven-case interface, reject invalid values and verify max/zero branch, distinct new tool tests. No stream/backend, no authority change or actual product coverage credit.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38254-p01808-offline-measurement-evidence-v1/manifest.json",
+        "sha256": "273c49de6b2d0bb94c3cb7553691804ad8349b27cffa992b181b5bbf8e1df963"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38390-p01808-terminal-profile-four-v1/manifest.json",
+        "sha256": "c788e17dece60a22628289d6e598e8576a9c8b4bc1617c1b3d851af1736a350a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+        "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+      },
+      {
+        "path": "tools/quality/coverage_session_schema.py",
+        "sha256": "adab5be5a8d549ed307d34a156acf9ece45dd59364321f8a6e1900899a2f9c6e"
+      },
+      {
+        "path": "tools/quality/architecture/PublicJacocoFormatMetadataV1.java",
+        "sha256": "5042f1732f0b1e2741f8331ca789fd4139cad063cfda10f94e64fb3267fd47aa"
+      }
+    ],
+    "productionCoreMain": "0e93b5a35d126bdf2500d0820082d7c2e4ff5db7",
+    "source": "bd3e7302148c642e7f7349dd2b0cd507f5851d5c",
+    "wbsLeafIds": [
+      "WBS-P018-08.03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-08.03/2",
+      "TOOL-COVERAGE-SESSION-SCHEMA",
+      "BUG-3303"
+    ],
+    "run": "PG39710-p01808-session-long-boundary-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.8,
+      "high": 1.9
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaBefore": {
+      "usedPercent": 41,
+      "remainingPercent": 59,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "7807be07771998e849982275fc9d961ced1bdcc318795112bfe76bcd64b478b5",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T14:25:25.029000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 41,
+          "remainingPercent": 59,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "qualificationToolSource": "26f128852f454dcd13b4b22d937213a7e3916ca9",
+    "result": "P01808_SESSION_SCHEMA_TOOL_CLOSED_NATIVE_AND_WHOLE_NOT_ACCEPTED",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39710-p01808-session-long-boundary-v1/manifest.json",
+        "sha256": "1a20dd261bda65d669cf844fad6bd5470256e35e1ac5c21da11249da5a2ca585"
+      }
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 0,
+    "distinctTestCasesAddedToExecutionCount": 0,
+    "newTestDefinitions": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "attempt": 1,
+    "attemptResult": "EXPECTED_NEGATIVE_BEFORE_FIX_THEN_ALL_TOOL_VECTORS_FIRST_PASS",
+    "firstVerificationSuccess": 14,
+    "firstVerificationDenominator": 14,
+    "executedProductRetries": 0,
+    "toolOriginalVectors": 7,
+    "toolAddedVectors": 7,
+    "callersStaticallyMatched": 96,
+    "productionCoverageUpdated": false,
+    "unaccepted": [
+      "Current source native physical CRC/session/owner/terminal and full 451",
+      "Formal P018-08 remains unaccepted"
+    ],
+    "nextCommand": "Compare P020-01 open individual clauses against PG37322 / prior 142,124,5 results, then implement and verify a specific independent gap only if authorized.",
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T14:20:19.667038+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false
+  }
+}
