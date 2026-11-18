@@ -1,0 +1,46 @@
+{
+  "run": "PG38338-TERMINAL-CURRENT-FIVE",
+  "startAtUTC": "2026-11-18T01:12:03.679279+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "testSnapshot": "9ba2851987a48f16f16f0867ccf65aabd8ab091a",
+  "args": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38338-terminal-current-five-unit-v1/tmp",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38338-terminal-current-five-unit-v1/class-init.log",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38338-terminal-current-five-unit-v1/jacoco.exec,append=false,sessionid=PG38338-TERMINAL-CURRENT-FIVE",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38336-terminal-current-five-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-protocol/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-storage/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38256-wbs66-four-current-compile-v1/src/schubert-nk-bootstrap/target/classes",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38338-terminal-current-five-unit-v1/xml",
+    "--select-class",
+    "dev.codex.schubert.nk.bootstrap.FixedNativeCoverageTerminalTest"
+  ],
+  "expectedMethods": [
+    "close743001SameOwnerTerminalReturnPrecedesOneClosingAndEachIndependentExport",
+    "close743002NoAgentIsExplicitlyInactiveWithoutNativeIo",
+    "close743003BeforeTerminalFailureMissingAndRepeatedAttemptsNeverFallback",
+    "close743004ForeignThreadCannotConsumeOwnersAttempts",
+    "close743005CheckpointMustHaveNormallyCompletedTerminalAndCannotRetryClosing"
+  ],
+  "prep": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38336-p01808-terminal-current-five-prepare-v1/manifest.json",
+    "sha256": "2609dc6b837f5539bc49988effa300463dbc9eae61f69739acc110f12bad0722"
+  },
+  "admission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38336-p01808-terminal-current-five-prepare-v1/admission.json",
+    "sha256": "2ae04bd2d0646bc950d77bc7716040dcf7e21f3e48f91c07ca803b87bd417556"
+  },
+  "configuredTestJvmEnvironmentKeys": [
+    "LANG",
+    "PATH",
+    "TZ"
+  ],
+  "guard": "exact nonreserved own test-JVM measurement agent; no injected runtime flags or external resources; whole original Test"
+}
