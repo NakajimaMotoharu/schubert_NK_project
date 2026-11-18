@@ -1,0 +1,61 @@
+{
+  "eventId": "PGPT-20261008-6067",
+  "groupId": "PGPT-WBS66-F02-FOUR-PRODUCTION-JARS-CURRENT-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T17:27:20.370000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 44,
+      "remainingPercent": 56,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-FOUR-PRODUCTION-JARS-CURRENT-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F02-FOUR-PRODUCTION-JARS-CURRENT-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a"
+    ],
+    "source": "cd3919cdb28993f86a4976fb189b65ef03829188",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG39980-f02-current-four-production-jars-v1",
+    "workScope": "Package the exact current four ordinary modules using the pinned Maven Jar plugin only. Reuse already-qualified PG39862 Main class bytes and verified POM; compare generated JAR contents with the exact 1102 physical class and resource inventory. No application execution, test compile or repeat of Main compile; no API/Web, deployment or live operations.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.85,
+      "high": 2.45
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39870-f02-service-state-lock-edges-and-trace-v1/manifest.json",
+        "sha256": "e95cdfc8954261ea392f89bd53bee2ed01d188a5b2e74e3cbf415444cf123d62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38522-f02-six-resolved-maven-dependency-model-v1/manifest.json",
+        "sha256": "dd478111437fdd65aeefe3dae47bebe556ff4a9eee54d851dd34018ba1db1a5a"
+      }
+    ]
+  }
+}

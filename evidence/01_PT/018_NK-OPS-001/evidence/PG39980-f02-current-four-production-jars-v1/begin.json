@@ -1,0 +1,44 @@
+{
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "gitHead": "cd3919cdb28993f86a4976fb189b65ef03829188",
+  "priorCompile": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+    "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+  },
+  "plugin": {
+    "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/maven/plugins/maven-jar-plugin/3.4.1/maven-jar-plugin-3.4.1.jar",
+    "sha256": "25e0a5b55b872d95e3a09a5d825bc1061f5ce25ee81f147e623405d8ebedfa5f"
+  },
+  "poms": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "program/characterization/pom.xml": "e945f851958317aa2a80c4f1b06bcb310d789f69abd12ce38785c6bfb55d491b",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-web/pom.xml": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+    "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495"
+  },
+  "selectedModules": [
+    "protocol",
+    "storage",
+    "bootstrap",
+    "batch"
+  ],
+  "command": [
+    "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+    "-pl",
+    "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-batch",
+    "org.apache.maven.plugins:maven-jar-plugin:3.4.1:jar"
+  ],
+  "classes": 1102,
+  "coreToHeadTestOnly": [
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java"
+  ],
+  "applicationExecuted": false,
+  "testsExecuted": 0
+}
