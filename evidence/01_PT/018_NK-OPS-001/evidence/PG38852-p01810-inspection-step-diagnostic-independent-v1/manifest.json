@@ -1,0 +1,196 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T07:00:35.310669+00:00",
+  "run": "PG38848-SSC465-INSPECTION-STEP",
+  "source": "161b20e50a6356d291e309278163edec15bb48cb",
+  "productionCoreMain": "dae6f9fe218e43560a3c36fb49e13bb299422754",
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "firstProductRunSuccess": true,
+  "targetCounters": {
+    "dev/codex/schubert/nk/api/maintenance/InspectionRun": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 52
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 6
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 10
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 9
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 46
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 4
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 8
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 8
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 50
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 0
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 4
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 5
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 5
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    }
+  },
+  "totalCovered": {
+    "INSTRUCTION": 148,
+    "BRANCH": 10,
+    "LINE": 22,
+    "COMPLEXITY": 22,
+    "METHOD": 17,
+    "CLASS": 3
+  },
+  "publicABI": {
+    "dev/codex/schubert/nk/api/maintenance/InspectionRun": "ca29d8ddcfc4d320bf45b92b241944c9bc80d25a8957a98dc9e291a263ae31df",
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep": "09c09d3e3340eaa2e09cea3e34835366c703793abf698869412de9831c6386c7",
+    "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome": "8dd69aa4cfff13464a6a0166274302547b065bfbcd2f2857ab3b81bbc7d881d4"
+  },
+  "physical": 3,
+  "positiveMainCrc": 3,
+  "catalogSubset": {
+    "totalReviewed": 35,
+    "unchangedFixed": 32,
+    "changedToday": {
+      "InspectionStep": {
+        "currentSource": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionStep.java",
+          "sha256": "836d977e800c43bc27e8d844fc1def103b70ea074c9407d180fec92d87bb4f98"
+        },
+        "initialCatalogSha256": "a1f815151a650c7fd50422585f5cf08d187c1ce7f6c114324e023d0a70155abb"
+      },
+      "OutboxEntry": {
+        "currentSource": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxEntry.java",
+          "sha256": "0c2baec34188b2781764560e36bbb0629fdb0d55504f6f79b50d0149a94f458c"
+        },
+        "initialCatalogSha256": "09bb3b7767c6c09c5c8685088a7ef0494898aedc478307cbd44a14cfa7dd0ef4"
+      },
+      "OutboxRequest": {
+        "currentSource": {
+          "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OutboxRequest.java",
+          "sha256": "841e7bb6bdbd5fb9a9d7d08f3588f3abbf0d112cbd4c2c4d92f5610c2d3aa9bd"
+        },
+        "initialCatalogSha256": "564190205500c14866882d60d36d654276562f38593229ef85c14da0ef7ab463"
+      }
+    },
+    "remainingInSubset": 0,
+    "outside": 58,
+    "prior": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38818-p01810-ordinary-diagnostic-catalog-current-v1/attempt-02/catalog-evidence.json",
+      "sha256": "12bbd6119a32f4bfeedf30505bf7e74f3e19c474ad662c86b2e5bb0f3cbd40e5"
+    }
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38852-p01810-inspection-step-diagnostic-independent-v1/unfiltered.tsv",
+    "sha256": "8e64220e47fe94d10d6e3f5f1283e38f29dab54917cd1629b27ed8053490595b"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "--line-deficits",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38842-ssc465-inspection-step-prepare-v1/component/dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38842-ssc465-inspection-step-prepare-v1/component/dev/codex/schubert/nk/api/maintenance/InspectionStep.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38842-ssc465-inspection-step-prepare-v1/component/dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome.class"
+  ],
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38844-ssc465-inspection-step-static-v1/manifest.json",
+    "sha256": "3939c4cb99cd82a1926ad49b841d775e226fa9b5042898314d8973ece6761d06"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38848-ssc465-inspection-step-unit-v1/manifest.json",
+    "sha256": "0700e62d856c9795b222ae542857542ffa2063bf8e5f596882870ac1deca9686"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/manifest.json",
+    "sha256": "5a370260f8a84878eaf2c3b203699a704691769a842fac410a71b8fac08829b7"
+  },
+  "exec": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/jacoco.exec",
+    "sha256": "4815734a43f6df8b17546fc35d3c5e425fc21489ccfe806f0b25d37929b617f3"
+  },
+  "xml": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/original-TEST-junit-jupiter.xml",
+      "sha256": "de264b201016a3489712b5f6949869306c895f22feefd4db35018c5ffa9bb999"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/original-TEST-junit-platform-suite.xml",
+      "sha256": "3b854037a6144a31f84ed38c64c46dc462d93d88143e88e8124346bbc1063924"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38850-ssc465-inspection-step-post-v1/original-TEST-junit-vintage.xml",
+      "sha256": "269fc61271d98732661fdeb005710ee44507ac84bf2be0aae1de60516d0744d7"
+    }
+  ],
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38852-p01810-inspection-step-diagnostic-independent-v1/class-init.stdout.gz",
+    "sha256": "bdefd50b759cae6018c14fbbf512cd80902504fde7a2c851394974bef63f3628"
+  },
+  "originalClassInitSha256": "8690c6822ac800bcc51faedee19b883b364ca47686c6c7443e41c747d390f2c1",
+  "manualExclusions": [],
+  "oldExecCombined": false,
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0
+}
