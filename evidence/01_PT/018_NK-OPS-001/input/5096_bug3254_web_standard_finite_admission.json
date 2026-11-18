@@ -1,0 +1,84 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39064-BUG3254-WEB-STANDARD-FINITE-V2",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39058-bug3254-web-standard-finite-prepare-v2/manifest.json",
+    "sha256": "469adec7b225c964dddf372dc6eb2314e4978acc4cb8c5c9effff61b533c4648"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39060-bug3254-web-standard-finite-static-v2/manifest.json",
+    "sha256": "5ea944e5904a34418e9d750c2816e2c866caa907a5e147058a13d2c2d4bfe83c"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 213,
+      "sourceAnchor": "var source = new Registry();",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test requires an already-closed distinct Registry; source.close() is the immediately following statement before any assertion or invocation."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 330,
+      "sourceAnchor": "var source = new Registry();",
+      "message": "Ensure that resources like this Registry object are closed after use",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The test requires an already-closed distinct Registry; source.close() is the immediately following statement before any assertion or invocation."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "CloseResource",
+      "sourceLine": 365,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Unconditional finally requests shutdownNow and asserts termination within ten seconds; infinite close does not satisfy the fixture deadline."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 365,
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned JUnit-only thread fixture, distinct borrowed SDK registries and explicit bounded join; no J2EE request or service thread usage."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 371,
+      "sourceAnchor": "workers.submit(",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned JUnit-only thread fixture, distinct borrowed SDK registries and explicit bounded join; no J2EE request or service thread usage."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 390,
+      "sourceAnchor": "workers.shutdownNow();",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned JUnit-only thread fixture, distinct borrowed SDK registries and explicit bounded join; no J2EE request or service thread usage."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceLine": 392,
+      "sourceAnchor": "workers.awaitTermination(10, TimeUnit.SECONDS), \"standard metric workers remained\");",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "Owned JUnit-only thread fixture, distinct borrowed SDK registries and explicit bounded join; no J2EE request or service thread usage."
+    }
+  ]
+}

@@ -388,7 +388,8 @@ class WebStandardMetricsTest {
       assertEquals(192, total.get());
     } finally {
       workers.shutdownNow();
-      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS), "standard metric workers remained");
+      assertTrue(
+          workers.awaitTermination(10, TimeUnit.SECONDS), "standard metric workers remained");
     }
   }
 }
