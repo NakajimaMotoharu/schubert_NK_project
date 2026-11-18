@@ -10,9 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-/** PT-IDEM-WIPE-001..003; synthetic buffers only, no reflection or actual heap/credential dump. */
+/** PT-IDEM-WIPE-001..004; synthetic buffers only, no reflection or actual heap/credential dump. */
 final class SecretBufferTest {
   private static final int MAXIMUM_FIXTURE_CAPACITY = 1_050_000;
+  private static final String REDACTED = "WipingByteArrayOutputStream[<redacted>]";
   private static final String ANONYMOUS_OWNER = "ANONYMOUS";
   private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
   private static final String LAYOUT_VERSION = "001";
@@ -37,7 +38,7 @@ final class SecretBufferTest {
       assertEquals(0, stream.size());
       stream.write(new byte[] {8, 9, 10, 11}, 1, 2);
       assertArrayEquals(new byte[] {9, 10}, stream.toByteArray());
-      assertEquals("WipingByteArrayOutputStream[size=2, content=<redacted>]", stream.toString());
+      assertEquals(REDACTED, stream.toString());
       byte[] returnedCopy = stream.toByteArray();
       assertDoesNotThrow(stream::close);
       assertDoesNotThrow(stream::close);
@@ -46,6 +47,22 @@ final class SecretBufferTest {
           new byte[] {9, 10}, returnedCopy); // Explicit caller ownership, not an alias.
       assertEquals(0, stream.size());
       Arrays.fill(returnedCopy, (byte) 0);
+    }
+  }
+
+  @Test
+  void diagnosticIsIdenticalAcrossDifferentSizesAndAfterWiping() {
+    try (var stream = new Inspectable()) {
+      assertEquals(REDACTED, String.valueOf(stream));
+      stream.writeBytes(new byte[] {71, 82, 93});
+      assertEquals(3, stream.size());
+      assertEquals(REDACTED, String.valueOf(stream));
+      stream.write(104);
+      assertEquals(4, stream.size());
+      assertEquals(REDACTED, String.valueOf(stream));
+      stream.reset();
+      assertEquals(0, stream.size());
+      assertEquals(REDACTED, String.valueOf(stream));
     }
   }
 
