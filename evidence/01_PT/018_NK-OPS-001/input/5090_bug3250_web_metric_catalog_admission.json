@@ -1,0 +1,74 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38992-BUG3250-WEB-METRIC-CATALOG",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38982-bug3250-web-metric-catalog-prepare-v1/manifest.json",
+    "sha256": "a5c77754e2736bb493f941228d96ee2e7880a2dc226b6e9cb3d7a788dba1c603"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38984-bug3250-web-metric-catalog-static-v1/manifest.json",
+    "sha256": "5876df873a27323c7b203b4b94e609abcfb86cc5ed75ca10ec4d7291e31d9328"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "OverrideBothEqualsAndHashCodeOnComparable",
+      "message": "When implementing Comparable, both equals() and hashCode() should be overridden",
+      "sourceAnchor": "public int compareTo(Tag other) {",
+      "sourceLine": 116,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "MutableTag intentionally models a driver alias and invalid null values for WEBCAT010-011. It is only an ordered input to read-and-copy, never a stable object or hash key, and equality by mutable fields would undermine the independent alias oracle."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "sourceLine": 339,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The exact test-owned executor is stopped in an unconditional finally using shutdownNow, and awaitTermination10s must pass. Java25 ExecutorService.close has no finite end and is deliberately replaced, retaining the old 64 tasks and each get10s."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var workers = Executors.newFixedThreadPool(4);",
+      "sourceLine": 339,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "workers.submit(",
+      "sourceLine": 344,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "workers.shutdownNow();",
+      "sourceLine": 355,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects."
+    },
+    {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricCatalogTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));",
+      "sourceLine": 356,
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "The servlet scheduling rule does not govern this isolated JUnit worker fixture. Four owned worker threads, exact literal catalog tasks, per-task deadlines and asserted unconditional termination have no external service effects."
+    }
+  ]
+}
