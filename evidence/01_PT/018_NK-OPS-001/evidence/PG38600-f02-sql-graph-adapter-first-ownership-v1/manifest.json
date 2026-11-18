@@ -1,0 +1,337 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T04:44:35.244472+00:00",
+  "run": "PG38600-f02-sql-graph-adapter-first-ownership-v1",
+  "source": "327c1ec79702ef136b7b0e7a580f3dd2a5282e49",
+  "productionCoreMain": "e151fd2953748248dddf6a126eecfc538a390a8f",
+  "ordinaryTests": 5,
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38594-ssc461-jdbcgraph-unit-v1/manifest.json",
+    "sha256": "06271a101899a6598900e6a91166e07fc9b71e9d8285ec81b56385a528be8467"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38596-ssc461-jdbcgraph-post-v1/manifest.json",
+    "sha256": "21b2d5f32132c742b6b4f26fdc2cce3d316e7411e1fe1a6f9f7ceb94424ec314"
+  },
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38600-f02-sql-graph-adapter-first-ownership-v1/unfiltered.tsv",
+    "sha256": "7a148d9f71a8d8f1294ce5b4172db35f036869aa764dfd3cdc27aaee93376da1"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38596-ssc461-jdbcgraph-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38586-ssc461-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38586-ssc461-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38586-ssc461-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38586-ssc461-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.class"
+  ],
+  "scopeMethods": [
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 4,
+          "covered": 0
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 2,
+          "covered": 0
+        },
+        "COMPLEXITY": {
+          "missed": 1,
+          "covered": 0
+        },
+        "METHOD": {
+          "missed": 1,
+          "covered": 0
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/util/function/Function;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 65
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 10
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 16
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 6
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph",
+      "method": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 4
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 0
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 2
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 1
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "method": "replace",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 25
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 6
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "method": "beforeDiscard",
+      "descriptor": "(Ljava/lang/Throwable;Ljava/lang/Throwable;)V",
+      "counters": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 20
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 8
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 5
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 5
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 1
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 0
+        }
+      }
+    }
+  ],
+  "methodsWithMiss": [
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "<init>",
+      "descriptor": "(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V",
+      "missed": {
+        "INSTRUCTION": 10,
+        "LINE": 3,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "reason",
+      "descriptor": "()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "missed": {
+        "INSTRUCTION": 3,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "missed": {
+        "INSTRUCTION": 4,
+        "LINE": 2,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "lambda$preserveFatal$0",
+      "descriptor": "(Ljava/lang/Throwable;)Ljava/lang/Throwable;",
+      "missed": {
+        "INSTRUCTION": 1,
+        "BRANCH": 1,
+        "COMPLEXITY": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "method": "values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "missed": {
+        "INSTRUCTION": 4,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "method": "valueOf",
+      "descriptor": "(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "missed": {
+        "INSTRUCTION": 5,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "method": "<init>",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "missed": {
+        "INSTRUCTION": 5,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "method": "$values",
+      "descriptor": "()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;",
+      "missed": {
+        "INSTRUCTION": 15,
+        "LINE": 1,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/storage/StorageIoException$Reason",
+      "method": "<clinit>",
+      "descriptor": "()V",
+      "missed": {
+        "INSTRUCTION": 21,
+        "LINE": 4,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "owner": "dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures",
+      "method": "<init>",
+      "descriptor": "()V",
+      "missed": {
+        "INSTRUCTION": 7,
+        "LINE": 2,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    }
+  ],
+  "wholeScopeCoverage": {
+    "INSTRUCTION": {
+      "covered": 135,
+      "missed": 46
+    },
+    "BRANCH": {
+      "covered": 29,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 31,
+      "missed": 12
+    },
+    "COMPLEXITY": {
+      "covered": 20,
+      "missed": 6
+    },
+    "METHOD": {
+      "covered": 6,
+      "missed": 5
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 1
+    }
+  },
+  "wholeScopeFour100": false,
+  "newOverloadRawFullyCovered": true,
+  "firstAdapterAttachedTo": "JdbcAdmissionFailures",
+  "priorFrameworkFailureStillOpen": true,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38600-f02-sql-graph-adapter-first-ownership-v1/class-init.stdout.gz",
+    "sha256": "3b4d5c5847d5dcc506cc720b917d336679a8f8250a860f6fb26c53f01a279554"
+  },
+  "originalClassInitSha256": "7d3b0f0558da8dfc8b3e15406c1a8f8ecc72b442c2172047b665b93b98565de6",
+  "noOldExecUnion": true,
+  "newAcceptance": 0,
+  "formalUpdated": false
+}
