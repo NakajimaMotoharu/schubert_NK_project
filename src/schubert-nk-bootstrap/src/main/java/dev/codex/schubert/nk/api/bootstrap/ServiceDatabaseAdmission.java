@@ -1,7 +1,6 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
@@ -82,7 +81,7 @@ public final class ServiceDatabaseAdmission {
         }
       }
     } catch (SQLException failure) {
-      StorageIoException.preserveFatal(failure);
+      JdbcFailureGraph.preserveFatal(failure);
       throw unavailable();
     }
   }

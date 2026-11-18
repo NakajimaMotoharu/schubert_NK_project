@@ -512,28 +512,33 @@ final class ServiceDatabaseSourcePortTest {
   void dbSource013ParallelIndependentConnectionsAndPropertiesClear() throws Exception {
     var created = new AtomicInteger();
     try (var source =
-            source(
-                (u, p) -> {
-                  created.incrementAndGet();
-                  assertEquals("x", p.getProperty(PASSWORD));
-                  return new Fixture(API_ROLE).connection;
-                });
-        var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      var tasks = new ArrayList<java.util.concurrent.Future<Connection>>();
-      for (int i = 0; i < 8; i++)
-        tasks.add(
-            executor.submit(
-                () -> {
-                  return source.getConnection();
-                }));
-      var returned = new ArrayList<Connection>();
-      for (var task : tasks) {
-        var connection = task.get(5, TimeUnit.SECONDS);
-        for (var previous : returned) assertNotSame(previous, connection);
-        returned.add(connection);
-        connection.close();
+        source(
+            (u, p) -> {
+              created.incrementAndGet();
+              assertEquals("x", p.getProperty(PASSWORD));
+              return new Fixture(API_ROLE).connection;
+            })) {
+      var executor = Executors.newVirtualThreadPerTaskExecutor();
+      try {
+        var tasks = new ArrayList<java.util.concurrent.Future<Connection>>();
+        for (int i = 0; i < 8; i++)
+          tasks.add(
+              executor.submit(
+                  () -> {
+                    return source.getConnection();
+                  }));
+        var returned = new ArrayList<Connection>();
+        for (var task : tasks) {
+          var connection = task.get(5, TimeUnit.SECONDS);
+          for (var previous : returned) assertNotSame(previous, connection);
+          returned.add(connection);
+          connection.close();
+        }
+        assertEquals(8, created.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
-      assertEquals(8, created.get());
     }
   }
 
@@ -545,40 +550,62 @@ final class ServiceDatabaseSourcePortTest {
     var fixture = new Fixture(API_ROLE);
     var captured = new AtomicReference<Properties>();
     try (var source =
-            source(
-                (u, p) -> {
-                  created.incrementAndGet();
-                  captured.set(p);
-                  entered.countDown();
-                  try {
-                    assertTrue(release.await(5, TimeUnit.SECONDS));
-                  } catch (InterruptedException interrupted) {
-                    Thread.currentThread().interrupt();
-                    throw new SQLException(FIXTURE);
-                  }
-                  return fixture.connection;
-                });
-        var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      var acquiring =
-          executor.submit(
-              () -> {
-                return source.getConnection();
-              });
+        source(
+            (u, p) -> {
+              created.incrementAndGet();
+              captured.set(p);
+              entered.countDown();
+              try {
+                assertTrue(release.await(5, TimeUnit.SECONDS));
+              } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw new SQLException(FIXTURE);
+              }
+              return fixture.connection;
+            })) {
+      var executor = Executors.newVirtualThreadPerTaskExecutor();
       try {
-        assertTrue(entered.await(5, TimeUnit.SECONDS));
-        var closing = executor.submit(source::close);
-        release.countDown();
-        assertSame(fixture.connection, acquiring.get(5, TimeUnit.SECONDS));
-        closing.get(5, TimeUnit.SECONDS);
+        var acquiring =
+            executor.submit(
+                () -> {
+                  return source.getConnection();
+                });
+        try {
+          assertTrue(entered.await(5, TimeUnit.SECONDS));
+          var closing = executor.submit(source::close);
+          release.countDown();
+          assertSame(fixture.connection, acquiring.get(5, TimeUnit.SECONDS));
+          closing.get(5, TimeUnit.SECONDS);
+        } finally {
+          release.countDown();
+        }
+        fixedUnavailable(source);
+        assertEquals(1, created.get());
+        assertEquals(0, fixture.connectionCloses);
+        assertTrue(captured.get().isEmpty());
+        fixture.connection.close();
+        assertEquals(1, fixture.connectionCloses);
       } finally {
-        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
       }
-      fixedUnavailable(source);
-      assertEquals(1, created.get());
-      assertEquals(0, fixture.connectionCloses);
+    }
+  }
+
+  @Test
+  void dbSource015FatalConnectorGraphRetainsIdentityAndClearsProperties() {
+    var fatal = new AssertionError(FIXTURE);
+    var failure = new SQLException(FIXTURE);
+    failure.setNextException(new SQLException(FIXTURE, fatal));
+    var captured = new AtomicReference<Properties>();
+    try (var source =
+        source(
+            (url, properties) -> {
+              captured.set(properties);
+              throw failure;
+            })) {
+      assertSame(fatal, assertThrows(AssertionError.class, source::getConnection));
       assertTrue(captured.get().isEmpty());
-      fixture.connection.close();
-      assertEquals(1, fixture.connectionCloses);
     }
   }
 }

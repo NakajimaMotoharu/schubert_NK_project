@@ -1,7 +1,6 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -85,14 +84,14 @@ public final class ServiceDatabaseSource implements DataSource, AutoCloseable {
           return connection;
         } catch (SQLException failure) {
           discard(connection, failure);
-          StorageIoException.preserveFatal(failure);
+          JdbcFailureGraph.preserveFatal(failure);
           throw unavailable();
         } catch (RuntimeException | Error failure) {
           discard(connection, failure);
           throw failure;
         }
       } catch (SQLException failure) {
-        StorageIoException.preserveFatal(failure);
+        JdbcFailureGraph.preserveFatal(failure);
         throw unavailable();
       } finally {
         properties.clear();

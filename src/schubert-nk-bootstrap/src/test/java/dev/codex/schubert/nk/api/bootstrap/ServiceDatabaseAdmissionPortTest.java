@@ -439,7 +439,8 @@ final class ServiceDatabaseAdmissionPortTest {
   @Test
   void dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts() throws Exception {
     var admission = api();
-    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    var executor = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       var tasks = new ArrayList<java.util.concurrent.Future<List<Phase>>>();
       for (int i = 0; i < 8; i++) {
         tasks.add(
@@ -451,10 +452,25 @@ final class ServiceDatabaseAdmissionPortTest {
                 }));
       }
       for (var task : tasks) assertEquals(SUCCESS, task.get(5, TimeUnit.SECONDS));
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS));
     }
     var after = new Fixture();
     admission.verify(after.connection);
     assertEquals(SUCCESS, after.calls);
     assertFalse(after.calls.isEmpty());
+  }
+
+  @Test
+  void dbAdmission016FatalNextExceptionSurvivesOrderedRelease() {
+    var fixture = new Fixture();
+    var fatal = new AssertionError(FIXTURE_MESSAGE);
+    var failure = new SQLException(FIXTURE_MESSAGE);
+    failure.setNextException(new SQLException(FIXTURE_MESSAGE, fatal));
+    fixture.fault(Phase.FIRST_ROW, failure);
+
+    assertSame(fatal, assertThrows(AssertionError.class, () -> api().verify(fixture.connection)));
+    fixture.assertCloses(1, 1);
   }
 }
