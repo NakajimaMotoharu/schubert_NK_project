@@ -1,0 +1,52 @@
+{
+  "actualExit": 0,
+  "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+  "productionCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "artifacts": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40170-f02-monitoring-repository-before-v1/manifest.json",
+      "sha256": "eb2bc228427c8b5797ba67d071b55b58a80ecaf95c8c012cc87e4320840ac882"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/manifest.json",
+      "sha256": "8bb9b66d41b4c321584af167b96f82b713de341f101b13917e64baf71aac6829"
+    }
+  ],
+  "tests": [
+    {
+      "testId": "PT-F02-ARCH-027",
+      "origin": "dev.codex.schubert.nk.api.persistence.DummyRepository",
+      "target": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-028",
+      "origin": "dev.codex.schubert.nk.api.monitoring.persistence.MonitoringRepository",
+      "target": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-029",
+      "origin": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "target": "dev.codex.schubert.nk.api.persistence.DummyRepository",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-030",
+      "origin": "dev.codex.schubert.nk.api.monitoring.persistence.LocalRepository",
+      "target": "java.time.Clock",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "beforeMatched": 3,
+  "afterMatched": 4,
+  "wholeF02Accepted": false,
+  "productTests": 0,
+  "productJars": 0,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T23:27:47.618241+00:00"
+}

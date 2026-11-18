@@ -141,3 +141,7 @@ SS354、WBS-P018-08.03/2、jacoco_readonly_exec_subset.decode。固定0.8.15 wri
 ## PT-CHR-PREFLIGHT-FS-001 実FileStoreの正常入口
 
 SS355、WBS-P020-01.01/2-b、BUG3311。GateCli.mainのpreflight分岐と二引数preflightを、実行先の専有run・JDK25で確認する。PG40162のMain 6とSDK pinを用い、compileの17物理を再照合する。引数は通常の `preflight <owned-output.json>`。Runtime rootを実行先の承認済みlocal実FS上に置き、独立したstatvfsと真正FileStoreの双方で20GiB以上。Current source形状、asset、0600の非秘密fixture、Caddy/pgCtl等の非実行placeholder、閉じたloopback URLと別非特権portは全て専有run下の合成物とする。期待はexit0、JSONのPASS、空failures、実測freeBytes、0600、既定allowlistと当runのpath。GateCliが起動する対象は当Java工具のみ。実DB／Current／NK／Caddy／nativeは起動しない。開始PID／boot、各入力SHA、probe独立sessionと終了codeを記録し、実行前の準備や低容量での未実行は成功へ算入しない。
+
+## PT-F02-ARCH-027〜030 APIのrepository方向
+
+SS311 §3、WBS-F02-a。JDK25／ArchUnit1.4.2の合成6 JAR。027は通常persistence、028は監視persistenceのrepositoryからapplicationへの直接呼出しを禁止。029は順方向、030はJDKの局所補助呼出しを許可。input/5302_f02_monitoring_repository_canaries.pyのbefore/afterを、input/5303_f02_monitoring_repository_post.pyで独立照合。製品JAR・実DBは対象外。

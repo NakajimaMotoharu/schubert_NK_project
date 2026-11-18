@@ -1,0 +1,146 @@
+{
+  "actualExit": 0,
+  "source": "5d1c465d0d4e387638e8f9fedbf78c3ef0091ea7",
+  "core": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "canonical": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+  "toolSha256": "880b1e5fc43b518d2c354cfb29ed2ccaa7e1a693fc36426f04984cc45d74826d",
+  "physical": {
+    "protocol": {
+      "dev.codex.schubert.nk.protocol.OwnedCanary": "d07c42d792f7d50ddf00bc2d64937d45c2f8108360e647c5ec39bd1ba85ad3a1"
+    },
+    "storage": {
+      "dev.codex.schubert.nk.storage.OwnedCanary": "1fc45dd6ae5e158c0a019351386e3693d8e2aebf742daf058da96d90f0b1091d"
+    },
+    "bootstrap": {
+      "dev.codex.schubert.nk.bootstrap.OwnedCanary": "5115c8410d6bd8ba395bf604c7574beb7150c2bc42b4d800879437fad2e94a3c"
+    },
+    "api": {
+      "dev.codex.schubert.nk.api.OwnedCanary": "9be91bcbf56e3b29d77f019df24d56b9838b54c93fbb6f629a0fc00125d7b620",
+      "dev.codex.schubert.nk.api.application.log.DummyService": "bbd4569a10f0318afe3c9b33d9b787a316850a0d1da01a7921ed8644a259a2ca",
+      "dev.codex.schubert.nk.api.persistence.DummyRepository": "4edb10a1d797a4ffbd0f786b5af4fb0ac0fe102b92d7c34c73da59cf14196a2a",
+      "dev.codex.schubert.nk.api.monitoring.persistence.MonitoringRepository": "2ac3942a92acb1062b9cff1b1a0ba1a6318c4e77494bc4742e3116faa6851849",
+      "dev.codex.schubert.nk.api.monitoring.persistence.LocalRepository": "013f83654ffe87b629c32c1b7d66a47076a6517f55893e894727512cda60a891"
+    },
+    "web": {
+      "dev.codex.schubert.nk.web.OwnedCanary": "0882d498565d9070910d96119377c8552a2db7dafa4b05e2cbb79b422feb6b54"
+    },
+    "batch": {
+      "dev.codex.schubert.nk.batch.OwnedCanary": "ba7edac74ab2c52eb5677e3f604a97b52a245257417c70dfeda5b8be4081cb15"
+    }
+  },
+  "receipts": {
+    "tool-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/tool-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/tool-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "-d",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/tool",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/ModuleDependencyAudit.java"
+      ]
+    },
+    "fixture-compile": {
+      "actualExit": 0,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/fixture-compile.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/fixture-compile.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-d",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/classes",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/api/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/api/application/log/DummyService.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/api/monitoring/persistence/LocalRepository.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/api/monitoring/persistence/MonitoringRepository.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/api/persistence/DummyRepository.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/batch/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/bootstrap/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/protocol/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/storage/OwnedCanary.java",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/source/dev/codex/schubert/nk/web/OwnedCanary.java"
+      ]
+    },
+    "audit": {
+      "actualExit": 1,
+      "stdout": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/audit.stdout.txt",
+        "sha256": "b8ad084f04c09d5fc5c54016b86058eb3e1fa1619615a89c89bc8576ed4e74a6"
+      },
+      "stderr": {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40172-f02-monitoring-repository-after-v1/audit.stderr.txt",
+        "sha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58"
+      },
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/dev/shm/pgpt-f02-repository-uogqjugp/tool:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/dev/shm/pgpt-f02-repository-uogqjugp/protocol.jar",
+        "storage=/dev/shm/pgpt-f02-repository-uogqjugp/storage.jar",
+        "bootstrap=/dev/shm/pgpt-f02-repository-uogqjugp/bootstrap.jar",
+        "api=/dev/shm/pgpt-f02-repository-uogqjugp/api.jar",
+        "web=/dev/shm/pgpt-f02-repository-uogqjugp/web.jar",
+        "batch=/dev/shm/pgpt-f02-repository-uogqjugp/batch.jar"
+      ]
+    }
+  },
+  "tests": [
+    {
+      "testId": "PT-F02-ARCH-027",
+      "origin": "dev.codex.schubert.nk.api.persistence.DummyRepository",
+      "target": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-028",
+      "origin": "dev.codex.schubert.nk.api.monitoring.persistence.MonitoringRepository",
+      "target": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "testId": "PT-F02-ARCH-029",
+      "origin": "dev.codex.schubert.nk.api.application.log.DummyService",
+      "target": "dev.codex.schubert.nk.api.persistence.DummyRepository",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "testId": "PT-F02-ARCH-030",
+      "origin": "dev.codex.schubert.nk.api.monitoring.persistence.LocalRepository",
+      "target": "java.time.Clock",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "matched": 4,
+  "productTests": 0,
+  "productJars": 0,
+  "wholeF02Accepted": false,
+  "terminalAtUTC": "2026-11-18T23:27:19.872236+00:00"
+}

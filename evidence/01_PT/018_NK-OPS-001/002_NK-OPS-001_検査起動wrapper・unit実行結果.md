@@ -97,3 +97,7 @@ PG40142で2/4、修正e7e26f88baのPG40144で4/4。禁止2・許可2、実クラ
 ## PT-P01808-BIN-018〜023 固定JaCoCo writerの長さ・padding（2026-11-19 JST）
 
 PG40148旧2成功・4失敗、修正c800a4c8f3のPG40150は6成功、失敗・エラー・未実行0。独立PG40152 SHA-256 590abba3c27c02115265323ce1806f439e8f700c4ba7ab8d7a9f01c154e3d9bb。旧offline binaryの407 probeは読取検証のみ。
+
+## PT-F02-ARCH-027〜030 APIのrepository方向（2026-11-19 JST）
+
+PG40170で3/4、PG40172で4/4。通常persistence／監視persistenceの禁止2、順方向／JDKの許可2。独立PG40174 SHA-256 d56e097bf7f80357ac4609534666c3f745dec384558fcb9a41bf23134aef9904。
