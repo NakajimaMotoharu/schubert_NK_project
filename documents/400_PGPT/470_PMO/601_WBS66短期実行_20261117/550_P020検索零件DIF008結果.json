@@ -1,0 +1,129 @@
+{
+  "eventId": "PGPT-20261008-6072",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-SEARCH-EMPTY-DIF008-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-SEARCH-EMPTY-DIF008-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "008dbb8fe7b45c69628d592c858aa7a7f9732047",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "fb7318d2933be50e899db7fd30a23614e3aeddd0",
+    "run": "PG39990-p020-search-empty170-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.3,
+      "high": 3.0
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39965-p020-invalid-range165-v2/begin.json",
+        "sha256": "4c6df479dca3d5b33573cea9329de0c376bfd688c044abc4250b3ba79d93630f"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39970-p020-invalid-range-independent-v1/manifest.json",
+        "sha256": "6f55d07f90b0fda668c7dc607258cf4c5223eee68ab48c9b33fa24dd66df7a12"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39892-wbs66-short12-current-handoff-v1/manifest.json",
+        "sha256": "879ba2fb251b347ab4553bd669bf21a06e6722759723cc3d7a17b35f1d4c2c5e"
+      }
+    ],
+    "workScope": "DIF008 CHR-S04 exact emptyVisibleText only, immutable baseline and UI264 value. Source and independent tests, whole offline toolkit and static + unfiltered coverage. CHR-L01 separate evidence, no historical baseline changes, no operational driver.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T17:45:50.566000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 45,
+        "remainingPercent": 55,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "ffa7e6f9e1d978c3b0ab500feeeba4496a4c81d78e2b53f8982b443326f67f8e",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T17:45:50.566000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 45,
+          "remainingPercent": 55,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T17:45:38.986219+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/manifest.json",
+        "sha256": "3f252e8bac345079192d4523d08ae78dd1fc57038297bd5662acc28859947192"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39990-p020-search-empty170-v1/manifest.json",
+        "sha256": "cc93baad541c5907fa21985502d2361514d682dfd3b97229e8015dd9582b50bc"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39992-p020-search-empty-static-v1/manifest.json",
+        "sha256": "f62985446c6a800959a20c45b4076335ac7eab1c669db9cb8ffe8375dd90ccf5"
+      }
+    ],
+    "result": "Approved S04 empty text field fixed; first whole170; independent CRC and exact source; L01 actual projection remains open",
+    "toolSource": "cd8df4e856834cd9de3d258d8a816a6b802fce93",
+    "toolTests": 170,
+    "toolTestDefinitions": 5,
+    "firstVerificationDenominator": 170,
+    "firstVerificationSuccess": 170,
+    "productTests": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "pmdApplicable": 0,
+    "pmdUnclassified": 0,
+    "comparatorCounters": {
+      "INSTRUCTION": 1456,
+      "BRANCH": 140,
+      "LINE": 275,
+      "COMPLEXITY": 114,
+      "METHOD": 44,
+      "CLASS": 2
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "nextCommand": "Run exact incremental G07 from ecc875c54e for F02/F03 and P020 evidence excluding preexisting private files"
+  }
+}

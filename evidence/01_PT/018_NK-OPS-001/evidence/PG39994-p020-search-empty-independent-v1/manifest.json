@@ -1,0 +1,197 @@
+{
+  "actualExit": 0,
+  "source": "cd8df4e856834cd9de3d258d8a816a6b802fce93",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39990-p020-search-empty170-v1/manifest.json",
+    "sha256": "cc93baad541c5907fa21985502d2361514d682dfd3b97229e8015dd9582b50bc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39992-p020-search-empty-static-v1/manifest.json",
+    "sha256": "f62985446c6a800959a20c45b4076335ac7eab1c669db9cb8ffe8375dd90ccf5"
+  },
+  "run": "PG39990-p020-search-empty170-v1",
+  "firstSuccess": 170,
+  "tests": 170,
+  "suites": 20,
+  "originalTests": 165,
+  "newDefinitions": 5,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "testIds": {
+    "PT-CHR-DEF038": "acceptsTheExactEmptySearchMessageAtItsVisibleField",
+    "PT-CHR-DEF039": "requiresAnExplicitEmptySearchObservation",
+    "PT-CHR-DEF040": "rejectsASelfReportedDifferentNkEmptySearchLabel",
+    "PT-CHR-DEF041": "rejectsAnEmptySearchClaimOnAnUnrelatedField",
+    "PT-CHR-DEF042": "doesNotTreatAnL01ClaimAsTheRequiredS04Observation"
+  },
+  "independentOracle": {
+    "current": "",
+    "nk": "該当するデータはありません",
+    "caseId": "CHR-S04",
+    "pointer": "/emptyVisibleText",
+    "currentRef": {
+      "path": "program/characterization/baseline/current/artifacts/CHR-S04.json",
+      "sha256": "da0d34b73adaadde9826210d6eb21aeff8f3ae16c613457adafad04fc1c30fbe"
+    },
+    "design": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+    "logProjectionPending": true
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39990-p020-search-empty170-v1/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39990-p020-search-empty170-v1/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/raw.tsv",
+      "sha256": "491c6c854c5793e51d1cd6f86636937af97029134abc4cd182e5c50d7b749b5f"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1517
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 234
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 932
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8061
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1456,
+    "BRANCH": 140,
+    "LINE": 275,
+    "COMPLEXITY": 114,
+    "METHOD": 44,
+    "CLASS": 2
+  },
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/pmd-per-site.json",
+    "sha256": "95e36401cd3f84691d76bdd465ab3b12476b7739283401ae4ef763beb2a4092e"
+  },
+  "originalBaselineUnchanged": true,
+  "oldCoverageTransferred": false,
+  "actualNkChr": false,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39994-p020-search-empty-independent-v1/class-init.log.gz",
+    "sha256": "9b5225799c990bbe1e63720a4eb6738eab6ab96b24572854a38c8bd01addbb9b"
+  },
+  "productTests": 0,
+  "remainingRuntimePreflight": "BUG-3311",
+  "horizontalOpen": "YKT-2699",
+  "whole451Accepted": false,
+  "formalUpdated": false,
+  "newAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T17:45:38.986219+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5255_p020_search_empty_independent.py",
+    "sha256": "a317fc059c2d78739d8b91662d40d6036a9da00f696283656f5125e81190b29c"
+  }
+}
