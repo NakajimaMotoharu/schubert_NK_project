@@ -1,0 +1,431 @@
+{
+  "actualExit": 0,
+  "startEvent": "PGPT-20261008-6007",
+  "terminalAtUTC": "2026-11-18T14:13:32.899393+00:00",
+  "source": "0e93b5a35d126bdf2500d0820082d7c2e4ff5db7",
+  "inspectedHead": "67ad7d86325084348ce5549097e95388c2bd8228",
+  "plan": {
+    "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+    "sha256": "5cc6e11307a2c4f6a9717dfcc0b5cf5a99cc7ada7449fd231edef9fa2b196e71"
+  },
+  "ownerInventory": {
+    "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+    "sha256": "61dd93caab9c0911a0d087524f46255813a121e1d2e96cc130bd4e839bcea4c2"
+  },
+  "compileOriginal": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39462-admission-single-cleanup-four-build-v2/compile/manifest.json",
+    "sha256": "a0f43f0a627675879bb8f6b67710cac6ef726a1797085a920eb77377307644ed"
+  },
+  "requiredOwnedArtifacts": 5,
+  "currentScopeArtifactTrace": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+      "currentSourceSha": "411726e5d96ccda9e8fa83c6861e8f1d5957aba39118e5aca8ffc6b3f962cbc5",
+      "canonicalOwner": "WBS-P004-03",
+      "physicalClassPins": {
+        "dev/codex/schubert/nk/batch/file/DurableRecordFiles.class": "5b7efbc1f30cc010eed35098ece9e3e1c65d496c93c6741b328a30e6794a9c11"
+      },
+      "directKnownProductTypeReferences": [
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Io",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$NioIo",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRecords",
+        "dev.codex.schubert.nk.batch.repository.BatchRun",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceActivation",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceRetirement",
+        "dev.codex.schubert.nk.storage.InodeSecurityCalls",
+        "dev.codex.schubert.nk.storage.OwnedTransferDirectory",
+        "dev.codex.schubert.nk.storage.OwnedTransferDirectory$FileOperation",
+        "dev.codex.schubert.nk.storage.ResourceScope",
+        "dev.codex.schubert.nk.storage.ResourceScope$Acquire",
+        "dev.codex.schubert.nk.storage.ResourceScope$OwnedAction",
+        "dev.codex.schubert.nk.storage.ResourceScope$Release",
+        "dev.codex.schubert.nk.storage.StorageIoException",
+        "dev.codex.schubert.nk.storage.StorageIoException$Reason"
+      ],
+      "linkedScope": "HELD"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRecords.java",
+      "currentSourceSha": "5e4ccf1787533ac1ba06a44a19278b72ecf72e7d04df480df08ac386261c2ada",
+      "canonicalOwner": "WBS-P004-03",
+      "physicalClassPins": {
+        "dev/codex/schubert/nk/batch/file/MaintenanceRecords.class": "548c5a0a2dbd9baf991a79e63472184142a4d26b621a122a05a403903ed02bb8"
+      },
+      "directKnownProductTypeReferences": [
+        "dev.codex.schubert.nk.batch.repository.BatchRun",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceActivation",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion$Outcome",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceRetirement"
+      ],
+      "linkedScope": "VALUE_CODEC_ONLY"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+      "currentSourceSha": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+      "canonicalOwner": "WBS-P004-03",
+      "physicalClassPins": {
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "5f3862af8b08fe133a52d79939fb8c547a6912733dea73bcb49b17accb1d3e20",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+        "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "2dc3999210e981f4b22743549d9ea4c676ab45da4646020b1feeadb3f0a5c33c"
+      },
+      "directKnownProductTypeReferences": [
+        "dev.codex.schubert.nk.batch.file.DurableRecordFiles",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot",
+        "dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Io",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$NioIo",
+        "dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRecords",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$CapturedFile",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Decoder",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Digests",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Graph",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Inventory",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Io",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Mutation",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$NioIo",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Operation",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$RetirementResult",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Session",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$StartupOriginal",
+        "dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Work",
+        "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest",
+        "dev.codex.schubert.nk.batch.platform.RootStartupContext",
+        "dev.codex.schubert.nk.batch.platform.RootStartupContext$Service",
+        "dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot",
+        "dev.codex.schubert.nk.batch.repository.BatchRun",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceActivation",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceCompletion",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceRetirement",
+        "dev.codex.schubert.nk.batch.repository.MaintenanceRunState",
+        "dev.codex.schubert.nk.batch.repository.RunReferenceRepository",
+        "dev.codex.schubert.nk.batch.repository.RunReferences",
+        "dev.codex.schubert.nk.storage.DirectoryCalls",
+        "dev.codex.schubert.nk.storage.InodeSecurityCalls",
+        "dev.codex.schubert.nk.storage.LinuxDirectoryCalls",
+        "dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls",
+        "dev.codex.schubert.nk.storage.LinuxInodeSecurity",
+        "dev.codex.schubert.nk.storage.OwnedTransferDirectory",
+        "dev.codex.schubert.nk.storage.OwnedTransferDirectory$FileOperation",
+        "dev.codex.schubert.nk.storage.ResourceScope",
+        "dev.codex.schubert.nk.storage.ResourceScope$Acquire",
+        "dev.codex.schubert.nk.storage.ResourceScope$OwnedAction",
+        "dev.codex.schubert.nk.storage.ResourceScope$Release",
+        "dev.codex.schubert.nk.storage.StorageIoException"
+      ],
+      "linkedScope": "HELD"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java",
+      "currentSourceSha": "8e9020955933dde695b79965d5cf61014b9a7ba919b96e88bf253a76357a42fb",
+      "canonicalOwner": "WBS-P004-03",
+      "physicalClassPins": {
+        "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.class": "8fdc817a2c446af11b241f97fd5146d8ca9c706e9c4fa1d612496624c09da269"
+      },
+      "directKnownProductTypeReferences": [
+        "dev.codex.schubert.nk.batch.repository.BatchRun"
+      ],
+      "linkedScope": "VALUE_CODEC_ONLY"
+    },
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+      "currentSourceSha": "389d41ce3928ac25a5001a08fc5a4562ba44df84144721b2f3a8f36f16747edb",
+      "canonicalOwner": "WBS-P004-03",
+      "physicalClassPins": {
+        "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb"
+      },
+      "directKnownProductTypeReferences": [
+        "dev.codex.schubert.nk.api.bootstrap.JdbcFailureGraph",
+        "dev.codex.schubert.nk.batch.repository.BatchRepositoryException",
+        "dev.codex.schubert.nk.batch.repository.BatchRun",
+        "dev.codex.schubert.nk.batch.repository.JdbcResourceFailures",
+        "dev.codex.schubert.nk.batch.repository.RunReferences"
+      ],
+      "linkedScope": "JDBC_PORT_ONLY"
+    }
+  ],
+  "declaredSharedClassRefs": [],
+  "physicalReferenceEvidence": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39616-wbs66-four-module-edge-and-handoff-v1/manifest.json",
+    "sha256": "16f1a493a1f284c0476454b645ce96be9d845df19cabc1c96d914863fbd2afe3"
+  },
+  "localValueEvidence": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37288-record-codec20-criteria-return-v1/manifest.json",
+      "sha256": "b9b97505ab87fdac1d4f230769095b21822a6ddfe7ddfe94d32dde23c8f59e44"
+    },
+    "originalPost": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/manifest.json",
+      "sha256": "c2269267060f533316c3b158cfc9724d7f1929fc3fa5a30ff3e2bb52c7e24d70"
+    },
+    "testCases": 20,
+    "originalLiveExecution": false,
+    "unitSource": "c65fb1fc5decc9f3d6ef773a81317173e8de267d",
+    "coreSource": "91c55386a79a59b9766fb1cc9447d7451c71c083",
+    "testPins": {
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsTest.java": "86b1750c00970b0ac06710b363e12657ef1797822db776ae91a7a90752a822c5",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MaintenanceRetirementValueCodecTest.java": "f412bed95f0b0671199594c199fa9d040243092ec28bee8ead268e3dab1ee68d",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRecordsRawContractTest.java": "5976a95d4d4399718042069a853bbc604b54b451abd91c931cf4a43147b68eb3"
+    },
+    "physicalPins": {
+      "dev/codex/schubert/nk/batch/repository/MaintenanceRetirement": "8fdc817a2c446af11b241f97fd5146d8ca9c706e9c4fa1d612496624c09da269",
+      "dev/codex/schubert/nk/batch/file/MaintenanceRecords": "548c5a0a2dbd9baf991a79e63472184142a4d26b621a122a05a403903ed02bb8",
+      "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion": "876b2a03fc51c860acf7efe94b6287e9e5c87218d42e24bee995b0aee69444ba",
+      "dev/codex/schubert/nk/batch/repository/MaintenanceCompletion$Outcome": "a5e9c7c1005bb63c72d4d950f6f628fcb0831f3dcd0881c3be002736189b8c13",
+      "dev/codex/schubert/nk/batch/repository/BatchRun": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "dev/codex/schubert/nk/batch/repository/MaintenanceActivation": "4a62469824f074982351f4f7016fff4e38fcb3825a5af54c77ae86babe9e05ae"
+    },
+    "usefulScopes": [
+      "Public MaintenanceRecords and MaintenanceRetirement value codec"
+    ],
+    "trace": [
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37284-record-codec20/wire/PT-BAT-038-anchor.txt",
+        "sha256": "8c4f9b67405754df66eccf8a111aed2770b8c1ba32437fcbcc5fd548eca9c639"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37284-record-codec20/wire/PT-BAT-038-activation.txt",
+        "sha256": "f13f9d68e35c5b4fc1a5f12555a612b559d1956f33d647da874c007efe7a2c13"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37284-record-codec20/wire/PT-BAT-038-completion-0.txt",
+        "sha256": "0e5b2051407651e487d77bb99b2e31a94a95e07dfe548e85b644f9b327eafe40"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/evidence/PG37284-record-codec20/wire/PT-BAT-038-completion-10.txt",
+        "sha256": "21b74d8bdf8ddfceeb4cf3019ef87eb897e0eb3f06bbbaf72518e1fb3fda4651"
+      }
+    ],
+    "measurements": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/TEST-junit-jupiter.xml",
+        "sha256": "cf71dc39b12e3bdbb1ccee3b29b738795eed5208fc07c082d64c1442e7e18c56"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/jacoco.exec",
+        "sha256": "d20bf4c132c3250f045760f7af87abf1da5bc13f57d51538316f12c37b7d84ff"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37286-record-codec20-independent-post-v1/unfiltered.stdout",
+        "sha256": "7c9eb0b634ac370fe0f37b53f22d798eecba1670d4f8fdc2070102ce45750818"
+      }
+    ],
+    "usableCurrentTarget": "LOCAL_ARTIFACT_BYTE_IDENTICAL_NO_NEW_EXEC_OR_WHOLE_RECOGNITION"
+  },
+  "localJdbcEvidence": {
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "originalPost": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/manifest.json",
+      "sha256": "d189bb0633453cab96e0f2090947e7d59dab432b848b98b159b1084a16dc1888"
+    },
+    "originalCaseCount": 8,
+    "unitSource": "bdea127fb2ef4959c47c04c73ed065acfdd0cbfd",
+    "coreSource": "9179ca302fdfba5d7cee9e2b68b5c5fff00acd6f",
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 230
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "testPins": {
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryPureJdbcTest.java": "d34ce497a39a8d4226003fa8aaf6533bfdd73a7c15466dcd63a4f3e5d3a52898"
+    },
+    "physicalPins": {
+      "dev/codex/schubert/nk/storage/package-info.class": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class": "dc394e1d15ba729bbecd4f895c264b3adb042233f8ac7d603cab68d6e91682bb",
+      "dev/codex/schubert/nk/batch/repository/BatchRun.class": "5cb0c42832ea17425dbf60da6025f2c4783d687e665b18f6cd8e88abc399c909",
+      "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "dev/codex/schubert/nk/batch/repository/RunReferences.class": "9cd7197824647e7ad066678a66a54bfdf196f0251027bebeb765b6babd8d8fe2",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    "coverage": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/jacoco.exec",
+      "sha256": "09e057490d27008f86735a7807d3b5bc8e48091e950aa963a63b6fd09b0fd494"
+    },
+    "xml": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-jupiter.xml",
+        "sha256": "6d142d3fc511ef5afd20a91379aa21338bac0d0b41727a7151667682dce9ce64"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-platform-suite.xml",
+        "sha256": "9e7c7ea148fee74507692aac3d38454f526ae629f43b4591148157944bc4d23e"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38686-ssc461-run-reference-post-v1/original-TEST-junit-vintage.xml",
+        "sha256": "e72eac01fdb2aa81db947c0fa7a15048287e5b9a13c7189dcbf18a52ffd17118"
+      }
+    ],
+    "nativeOrPolicyUsed": false,
+    "scope": "RRF-PURE-001..008, SS332 closed borrowed Jdbc/UTC",
+    "actualDbFunctionOrAuthorizationQualified": false
+  },
+  "nativeOrActualFileEvidence": {
+    "priorAssessment": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38304-p00403-a115-retained-file-evidence-v1/manifest.json",
+      "sha256": "fd26de3ac5b5b77a8500893cab82b7f7300a5f09398eca058b6f972f13390637"
+    },
+    "targets": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java": {
+        "currentInputHashes": [
+          {
+            "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/DurableRecordFiles.java",
+            "historicalSourceSha256": "060a7efee45f6cbfa89ac8b130f24de6ea17a3c4a6fda17bf0b3eadea4c388cf",
+            "currentSourceSha256": "411726e5d96ccda9e8fa83c6861e8f1d5957aba39118e5aca8ffc6b3f962cbc5",
+            "sameBytes": false,
+            "pathChangesAfterOldEvidence": [
+              "288062f3960a0a50ec82685da3b407f0c9e2934e"
+            ]
+          },
+          {
+            "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/DurableRecordFilesTest.java",
+            "historicalSourceSha256": "c390f59ece86b1bd0eeef3c5706185a75bc88865ab195800a5b6afd95aa1c790",
+            "currentSourceSha256": "8e3324f27c7fbe7d16beed9e10d180c92238a8e9d98b1f6b7f3d2314f54a57bd",
+            "sameBytes": false,
+            "pathChangesAfterOldEvidence": [
+              "6d7f55c22a3ffec8a9013e706282ac845c595492",
+              "5012c53265d8d8d789ea2a3edf0b63fa45853a6a"
+            ]
+          }
+        ],
+        "pastResult": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/pg5192-durable-worker-scopes-green-v1-metadata-v2/manifest.json",
+          "sha256": "7e1a53ece151abbb32a4f0f5cb522ef1e3e857d0e0ed106215dbbe0f3154331d"
+        },
+        "pastCases": 12,
+        "pastCoverageMiss": {
+          "line": 2,
+          "method": 0,
+          "class": 0,
+          "branch": 3
+        },
+        "originalPlanRow": "A1-15.03",
+        "originalPlanRowPrice": 1.65,
+        "currentProductTests": null,
+        "currentNativeCoverage": null,
+        "verificationStatus": "HOLD_EXACT_CURRENT_RUN_MISSING"
+      },
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java": {
+        "currentInputHashes": [
+          {
+            "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+            "historicalSourceSha256": "e7deb620524c494326491ccdada2364c112ec736a9ad9e5ee5fbbdbab5a0cc9d",
+            "currentSourceSha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82",
+            "sameBytes": false,
+            "pathChangesAfterOldEvidence": [
+              "8c869d7cea21d587b859b3e72e3516d9d2deb5c8"
+            ]
+          },
+          {
+            "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java",
+            "historicalSourceSha256": "26b85d3f14e8c24ff6d1ddaef52ed1327c058f88067dc5ca7f4206f0605f08a8",
+            "currentSourceSha256": "b8bad141acc659bb30120e99493322ac6d71620ce5339417aa3dc84a3bad1844",
+            "sameBytes": false,
+            "pathChangesAfterOldEvidence": [
+              "ff8149dd27decbe683b48d1cbb5f2cb59ecca83a",
+              "6d7f55c22a3ffec8a9013e706282ac845c595492",
+              "5012c53265d8d8d789ea2a3edf0b63fa45853a6a"
+            ]
+          }
+        ],
+        "pastResult": {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/pg5208-maintenance-run-green-v1-metadata-v2/manifest.json",
+          "sha256": "9594ac94f29634b676099166191641abd67f51056dd605b75210cc7b61ebd04c"
+        },
+        "pastCases": 39,
+        "pastCoverageMiss": {
+          "outer": {
+            "line": 55,
+            "method": 12,
+            "class": 0,
+            "branch": 11
+          },
+          "session": {
+            "line": 263,
+            "method": 35,
+            "class": 0,
+            "branch": 126
+          }
+        },
+        "originalPlanRow": "A1-15.05",
+        "originalPlanRowPrice": 1.65,
+        "currentProductTests": null,
+        "currentNativeCoverage": null,
+        "verificationStatus": "HOLD_EXACT_CURRENT_RUN_MISSING"
+      }
+    }
+  },
+  "newProductTests": 0,
+  "oldExecCombined": 0,
+  "currentWholeRawCoverage": null,
+  "liveDb": 0,
+  "actualOwnedFileOperations": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortRate": null,
+  "requiredEnding": [
+    "Current native file open/held/terminal state for the two filesystem owners",
+    "Authorized PostgreSQL function TABLE evidence and committed postconditions",
+    "Current whole build/type gates F02/F03 and 451 with no actual trace gaps"
+  ],
+  "currentTechnicalVerdict": "FIVE_ARTIFACTS_BOUND_THREE_LOCAL_COMPONENTS_TWO_OPERATING_HOLDS",
+  "initialToolFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/first-proof-read-failure.json",
+    "sha256": "96615a60005d25862f83e90167c1902eb62500810dfaf3e240f68d60d0e2298a"
+  },
+  "verifier": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5203_p00403_five_artifacts_current.py",
+    "sha256": "36c93cf92bfaee94346af097b0a95466146c32627a6a418ef9efff7aca9f0571"
+  }
+}

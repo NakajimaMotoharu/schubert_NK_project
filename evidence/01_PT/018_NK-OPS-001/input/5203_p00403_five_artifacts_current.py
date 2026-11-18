@@ -58,7 +58,8 @@ def codec_proof(current, head, compiled):
     post = h['revalidate_reference'](source['post'])
     assert source['actualExit'] == post['actualExit'] == 0 and source['allRawCounters100']
     assert post['tests'] == source['tests'] == 20 and not any(post[k] for k in ('failed','errors','skipped','notRun'))
-    inputs = h['revalidate_reference'](post['prepare'])['inputHashes']
+    preparation = h['revalidate_reference'](post['prepare'])
+    inputs = preparation['inputHashes']
     bound = {p: value for p, value in inputs.items() if '/src/test/' in p}
     assert len(bound) == 4 and all(sha_git(head, p) == v for p, v in bound.items())
     qualified = source['completeClassSha256']
@@ -69,8 +70,9 @@ def codec_proof(current, head, compiled):
     observed = exact_xml(Path(raw['path']), 20)
     assert set(observed) == {tuple(row) for row in post['actualExpectedCases']}
     assert all(h['ref'](Path(r['path']))['sha256'] == r['sha256'] for r in source['wire'])
-    exact_main = [p for p in inputs if p.endswith('/MaintenanceRecords.java') or p.endswith('/MaintenanceRetirement.java')]
-    assert len(exact_main) == 2 and all(sha_git(current, p) == inputs[p] for p in exact_main)
+    main_pins = preparation['mainInputHashes']
+    exact_main = [p for p in main_pins if p.endswith('/MaintenanceRecords.java') or p.endswith('/MaintenanceRetirement.java')]
+    assert len(exact_main) == 2 and all(sha_git(current, p) == main_pins[p] for p in exact_main)
     return dict(proof=h['ref'](criteria), originalPost=source['post'], testCases=20, originalLiveExecution=False,
                 unitSource=post['source'], coreSource=post['sourceCore'], testPins=bound, physicalPins=qualified,
                 usefulScopes=['Public MaintenanceRecords and MaintenanceRetirement value codec'],
@@ -153,7 +155,8 @@ def main():
     start = h['load'](next(D.glob('480_*')))
     values = start['values']
     core, head = values['productionCoreMain'], values['source']
-    assert h['git']('rev-parse','HEAD').decode().strip() == head
+    assert h['git']('merge-base', head, 'HEAD').decode().strip() == head
+    assert not h['git']('diff','--name-only',head,'HEAD','--','src')
     assert h['git']('rev-parse','origin/dev-foundation').decode().strip() == head
     assert all(h['ref'](Path(v['path'])) == v for v in values['oracleReferences'])
     plan = next(PMO.glob('481_*'))
@@ -198,6 +201,7 @@ def main():
                                   'Authorized PostgreSQL function TABLE evidence and committed postconditions',
                                   'Current whole build/type gates F02/F03 and 451 with no actual trace gaps'],
                   currentTechnicalVerdict='FIVE_ARTIFACTS_BOUND_THREE_LOCAL_COMPONENTS_TWO_OPERATING_HOLDS',
+                  initialToolFailure=h['ref'](OUT / 'first-proof-read-failure.json'),
                   verifier=h['ref'](ENTRY.relative_to(Path.cwd())))
     p = OUT / 'manifest.json'
     h['write'](p, result)
