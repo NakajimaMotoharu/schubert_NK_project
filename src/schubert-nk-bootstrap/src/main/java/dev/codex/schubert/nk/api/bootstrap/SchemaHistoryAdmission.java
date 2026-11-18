@@ -1,6 +1,5 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import dev.codex.schubert.nk.storage.StorageIoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
@@ -134,7 +133,7 @@ public final class SchemaHistoryAdmission {
       }
       return List.copyOf(observed);
     } catch (SQLException known) {
-      StorageIoException.preserveFatal(known);
+      JdbcFailureGraph.preserveFatal(known);
       throw unavailable();
     }
   }
