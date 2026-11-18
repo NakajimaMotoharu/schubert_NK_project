@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-/** PT-AUT-ACTORVALUE001/002; SS314/331/451; synthetic verified-row value contracts only. */
+/** PT-AUT-ACTORVALUE001..003; SS314/331/451; synthetic verified-row value contracts only. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class AuthenticatedActorValueContractTest {
   private static final String OWNER_NAME = "synthetic-owner";
@@ -65,5 +65,30 @@ final class AuthenticatedActorValueContractTest {
     assertEquals("admin-owner", owners.get(otherRole));
     assertEquals("owner", owners.get(equal));
     assertEquals("AuthenticatedActor[<redacted>]", first.toString());
+  }
+
+  @Test
+  void actorValue003RejectsOutOfRangeRowsAndKeepsTheDeclaredRoleNames() {
+    for (long id : new long[] {0, 1_000_000_000_000L}) {
+      var failure =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> new AuthenticatedActor(id, OWNER_NAME, Role.USER));
+      assertEquals("actor ID is outside N12", failure.getMessage());
+    }
+    var empty =
+        assertThrows(
+            IllegalArgumentException.class, () -> new AuthenticatedActor(1, "", Role.USER));
+    assertEquals("actor username length is invalid", empty.getMessage());
+    assertThrows(NullPointerException.class, () -> new AuthenticatedActor(1, null, Role.USER));
+    assertThrows(NullPointerException.class, () -> new AuthenticatedActor(1, OWNER_NAME, null));
+
+    var roles = Role.values();
+    assertEquals(List.of(Role.USER, Role.ADMIN), List.of(roles));
+    roles[0] = Role.ADMIN;
+    assertEquals(List.of(Role.USER, Role.ADMIN), List.of(Role.values()));
+    assertEquals(Role.USER, Role.valueOf("USER"));
+    assertEquals(Role.ADMIN, Role.valueOf("ADMIN"));
+    assertThrows(IllegalArgumentException.class, () -> Role.valueOf("user"));
   }
 }
