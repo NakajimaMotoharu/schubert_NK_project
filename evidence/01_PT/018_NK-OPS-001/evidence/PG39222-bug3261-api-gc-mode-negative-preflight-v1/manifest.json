@@ -1,0 +1,163 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5115_bug3261_api_gc_mode_negative_profile.json",
+    "sha256": "8891b8c8e58b4d90859c6410c0f11c3fc3ce9ea5a10f894e55fa471d2fb03287"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java": "150db44084ed3c1fb5ea7bffe80d7fd05bd4d98aa5bf1723ea185c491efc5e74",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39218-bug3261-api-gc-mode-negative-prepare-v1/manifest.json",
+    "sha256": "ca567a8a36780c692a443225bfb3e426ad540b082eaed66e4fa9a473bc3a022b"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39220-bug3261-api-gc-mode-negative-static-v1/manifest.json",
+    "sha256": "a4b21819bf2c685b80f9c209ac911b2c3eb99b5a6cfe5a6b5508604ab5ffc9ec"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5116_bug3261_api_gc_mode_negative_admission.json",
+    "sha256": "30f2a8d099d4dd04ad938ef38a43de0b45289050b68c53c27bea586b41a1f67e"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "102",
+      "reason": "List holds caller-retained GC handles; the immediately enclosing finally explicitly closes every recorded handle before releasing the caller-owned Registry.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this JvmGcMetrics object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "258",
+      "reason": "This test requires an already closed Registry. The immediately following statement closes it before any assertion or lookup.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Registry object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "339",
+      "reason": "Receiver rejection leaves cleanup with the caller. The inner finally closes the Fake if no confirmation was recorded.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "376",
+      "reason": "Faulted owner callback is intentionally injected. The inner finally closes this Fake if cleanup is still unconfirmed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "404",
+      "reason": "Bind failure keeps the handle in the approved owner. The finally closes the same Fake when the owner has not already confirmed it.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "440",
+      "reason": "First independent Fake has its own enclosing finally checking its closeConfirmed state. The second owner uses a different resource.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "443",
+      "reason": "Second independently owned Fake closes in its inner finally unless already confirmed. The outer branch separately releases the first.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "474",
+      "reason": "An unconditional finally requests shutdownNow and asserts 10-second termination of the fixed test-only executor.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "474",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "480",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "509",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "510",
+      "reason": "Own JUnit-only executor; exact 64 independent GC registry exercises, finite future waits and bounded unconditional cleanup, with no application thread management.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "518",
+      "reason": "The Fake remains directly owned after acknowledgement/rejection. The fixture finally closes it unless that owner has already done so.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "554",
+      "reason": "The test exercises and preserves one confirmed close. The separate finally closes only as a fallback when confirmation is absent.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java",
+      "rule": "CloseResource",
+      "line": "573",
+      "reason": "The injected close failure is removed before retry and on the fallback path. The fixture finally checks confirmation and releases only if needed.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this Fake object are closed after use"
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}

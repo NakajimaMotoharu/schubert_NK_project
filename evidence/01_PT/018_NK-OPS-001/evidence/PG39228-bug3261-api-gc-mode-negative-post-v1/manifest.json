@@ -1,0 +1,205 @@
+{
+  "actualExit": 0,
+  "source": "f936fdc9ea92bdaa01743800ad4a847d9d3d03c5",
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5115_bug3261_api_gc_mode_negative_profile.json",
+    "sha256": "8891b8c8e58b4d90859c6410c0f11c3fc3ce9ea5a10f894e55fa471d2fb03287"
+  },
+  "run": "PG39224-BUG3261-API-GC-EXACT-MODE-V1",
+  "tests": 17,
+  "newTestDefinitions": 1,
+  "physicalClasses": 2,
+  "positiveMainCrc": 1,
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 83,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 9,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 18,
+      "missed": 0
+    },
+    "COMPLEXITY": {
+      "covered": 10,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    }
+  },
+  "targetCounters": {
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration": {
+      "INSTRUCTION": {
+        "covered": 83,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 18,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 10,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      }
+    }
+  },
+  "completeSourceComponentCounters": {
+    "COMPLEXITY": {
+      "covered": 10,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 0
+    },
+    "INSTRUCTION": {
+      "covered": 83,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "BRANCH": {
+      "covered": 9,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 18,
+      "missed": 0
+    }
+  },
+  "completeSourceComponentFour100": true,
+  "wholeScopeFour100": true,
+  "uncoveredFullSourceClasses": {},
+  "naturalNoCodeClasses": [
+    "dev/codex/schubert/nk/api/monitoring/package-info"
+  ],
+  "naturalNoBranchClasses": [],
+  "classIds": {
+    "dev/codex/schubert/nk/api/monitoring/package-info": "5d45268da150ec06",
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration": "b1da7ede3f6a3368"
+  },
+  "actualJvmCodeMethodCounts": {
+    "dev/codex/schubert/nk/api/monitoring/package-info": 0,
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration": 5
+  },
+  "hiddenJvmAdapters": {
+    "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration$$Lambda+0x000000001918e838": "dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration"
+  },
+  "manualCoverageExclusions": [],
+  "oldExecCombined": false,
+  "preflight": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39222-bug3261-api-gc-mode-negative-preflight-v1/manifest.json",
+    "sha256": "bf3215ddc3e351b01f64db4361a9cb0c24512384816cdc535e0fd84ed806a400"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistration.java": "392d9c500076bb4898a859ee03f63990ca73b923508a2fc8a79f4454c8252e3b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiGcMetricRegistrationTest.java": "150db44084ed3c1fb5ea7bffe80d7fd05bd4d98aa5bf1723ea185c491efc5e74",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "dependencies": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+  },
+  "environment": {
+    "file.encoding": "UTF-8",
+    "java.version": "25.0.4",
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "user.timezone": "Asia/Tokyo"
+  },
+  "productTestsExecuted": 17,
+  "actualBackendNativeFsRootOrHeldClassActions": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "effortRate": null,
+  "files": {
+    "unit-classinfo-begin.safe.json": "f88469fd0a511f7feeae6dcb42a9f059e9e86c0e33148f9870f6a139aed42dbd",
+    "unit-coverage.stdout": "6820f4f47135348ed3efef8daf366dd21785d73071993a38009c772de9c42554",
+    "unit-execinfo-begin.safe.json": "0e09e3324fd6882c25414eb9cfa94a0bacd1c463998710188e4062e64f76679c",
+    "unit-coverage-exit.safe.json": "bc098579044460c1d523a9093b6d3a5951dbcebfdcb299bedf259f88756f8ae8",
+    "unit-classinfo-exit.safe.json": "ffc6dc7c9b777f6ec5bbfdec3b1cd863edea48bc33db59a71dc93c537948990d",
+    "unit-unit-begin.safe.json": "bc1f4038f32fc4814bed09075672735d50e4f1ec5964e143614ea22fcfe096fe",
+    "unit-unit-process.safe.json": "506b5b882450862a8d9b1450241b0024a886ba381ef478fd2ad9da2a292651d9",
+    "unit-coverage-begin.safe.json": "ce5acdcff1199aee7b0fb02a85357ffd96ea6346e0221913d58876ea93a437b3",
+    "unit-classinfo.stdout": "c2b4710fc0df3aedfa4b721af46dfc1f3c4ee2ad77bbbfc3829e6888b3fa3904",
+    "unit-execinfo-process.safe.json": "35cd41a8dbbf522cab8fb09d9135565e236ec570d2abeb2b08927d0d8b959d91",
+    "unit-coverage-process.safe.json": "922f795a9719a2da1aec6ca0e669b342caf986a0605e67f602acc747e1475a32",
+    "unit-execinfo-exit.safe.json": "8656c049d1ee420a7c82c955ba0f9b95261b936bff312c6405c0a24a189c4f8b",
+    "unit-execinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-execinfo.stdout": "0790d876bb62bce93a111896ce027b36a5736aabc189c9a88bfa42e0343f1a1d",
+    "unit-begin.json": "f4a131c13416a81b48f46f4176f12695bea75f86dc75e362fe38f64838eec88a",
+    "unit-unit-exit.safe.json": "ddd1d7cbb07687768fa64e46656d7a02dbce7f9f5cc6b2050ee2a08af9180af1",
+    "unit-classinfo-process.safe.json": "c1065f856024dd7e19d5067e887ad981bdc8ba338c5647488a58f8e26bd3dcdd",
+    "unit-unit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-manifest.json": "4c0dd49f9f0bdd2132c330660b0711a571af9bfcae0ab041606224a94881ca57",
+    "unit-classinfo.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-coverage.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unit-unit.stdout": "b53cc11a7555c865964021dbe7b12c1627f042973766a525947e860e2a24b7e9",
+    "original-coverage.xml": "bcc053ec39498705d5c87c5fc64c84d246f76277b07585b72576fc706415725c",
+    "jacoco.exec": "f4e761564d6dd25e473061c6444d98c472efd81087aac73f4eef5be142a41a0a",
+    "original-class-init.stdout": "e4b9463b9fc6dccab6d31843ad8a434caf4a6b239125e3424060941471b2a72b",
+    "original-TEST-junit-platform-suite.xml": "916320fc77b136351d60c96e3478e4e368db6b1885c18f960af1d60dae53543a",
+    "original-TEST-junit-vintage.xml": "57e0098ad087cec4eba8737a9abd69c3cd05f5446554ffbb777642290254a1f0",
+    "original-TEST-junit-jupiter.xml": "b472632911d77c43f3537c83f8d82c1808952370ae0cbca1fa90b627fc52c5b1"
+  },
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_post_v3.py",
+    "sha256": "e85ddceaf23f84d14bca013629d97857804402b89c9ca825ead5ec5e967dfd36"
+  },
+  "defaultStandardFilteredSwitchMaps": {},
+  "forbiddenInitializedClasses": [],
+  "forbiddenInitializedClassesObserved": [],
+  "reviewedReflection": [],
+  "originalUnitXmlHashes": {
+    "original-TEST-junit-platform-suite.xml": "3c73bd783233712214d2803871e2c253fe78321cd16498719a7a573869928151",
+    "original-TEST-junit-vintage.xml": "363ef437bb5785d77a408930e7ce0893ac6a3c9596d728113ae6c5549360edcf",
+    "original-TEST-junit-jupiter.xml": "1723d4346cd159350471f2167ec5e3cbf706e12db1682859f91bcc14217e2e17"
+  },
+  "publicUnitXmlPropertyNames": [
+    "file.encoding",
+    "java.version",
+    "os.arch",
+    "os.name",
+    "user.timezone"
+  ],
+  "unitXmlSystemOutErrExported": false,
+  "unstartedProcess": null,
+  "unstartedProcessInitializationObserved": [],
+  "unqualifiedStreamingExecutionObserved": false,
+  "guardSignature": null,
+  "guardExecutionMode": null,
+  "analysisOnlyContext": null,
+  "reviewedArtemisSdk": null
+}
