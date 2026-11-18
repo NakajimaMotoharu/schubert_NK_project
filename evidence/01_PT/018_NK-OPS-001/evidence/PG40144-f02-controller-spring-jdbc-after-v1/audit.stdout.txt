@@ -1,0 +1,15 @@
+ARCHUNIT	1.4.2	10	10
+MODULE	api	1
+MODULE	batch	1
+MODULE	bootstrap	1
+MODULE	protocol	1
+MODULE	storage	1
+MODULE	web	5
+RULE	CONTROLLER_BOUNDARY	2
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JdbcOperationsEndpoint	org.springframework.jdbc.core.JdbcOperations
+FINDING	CONTROLLER_BOUNDARY	dev.codex.schubert.nk.web.canary.JdbcTemplateController	org.springframework.jdbc.core.JdbcTemplate
+RULE	FRAMEWORK_FENCES	0
+RULE	INTERNAL_OWNER	0
+RULE	MODULE_EDGES	0
+RULE	REPOSITORY_DIRECTION	0
+INSPECTED	30	17

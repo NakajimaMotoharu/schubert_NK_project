@@ -89,3 +89,7 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 ## PT-F02-ARCH-013〜022 Framework所有（PG40115〜118）
 
 開始sourceで期待一致4/10、修正工具 de82086a7d で10/10。正例3と禁止7を分離。PG40114の誤ownerを含むfixtureは準備失敗として保存。独立 `evidence/PG40118-f02-framework-fences-independent-v1/manifest.json`、SHA-256 `e089d163ffefb776d7fa14158b1285d939ac37774aaafe4be2e70e868f6c356a`。製品Core ecf8a00fbd37720b80f8e107d59727723c706a12 を更新していない。BUG3338／YKT2704工具範囲完了、全F02と全451は未受入。
+
+## PT-F02-ARCH-023〜026 ControllerのSpring JDBC直接依存（2026-11-19 JST）
+
+PG40142で2/4、修正e7e26f88baのPG40144で4/4。禁止2・許可2、実クラスの初期化・実製品検査なし。独立 evidence/PG40146-f02-controller-spring-jdbc-independent-v1/manifest.json、SHA-256 0063e08dee0f27f0d1d950aec2c172e0136c43dbda5fb0ccfc52077d181e450d。

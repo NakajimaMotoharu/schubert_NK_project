@@ -1,0 +1,104 @@
+{
+  "eventId": "PGPT-20261008-6148",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-CONTROLLER-SPRING-JDBC-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-CONTROLLER-SPRING-JDBC-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02/criterion/contract"
+    ],
+    "source": "8d62ccf2bcecaf4f734242885888168fcf5dbebb",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40142-f02-controller-spring-jdbc-before-v1",
+    "workScope": "WBS-F02-a: verify SS311 §5.2 Spring JDBC typed edge and permitted non-controller/facade with four javac canaries. All compiler output in tmpfs, no product compile or test replay.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.2,
+      "base": 0.65,
+      "high": 1.8
+    },
+    "groupCapPp": 3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "29d3f28ff3f2fa2e35a364f4a8fc6e8e36bbe5515cb3bc8fcd100bab138f02ed"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+      }
+    ],
+    "testIds": "PT-F02-ARCH-023–026",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "quotaAfter": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "cf35a7396df86a3177ce2de1f165a045908492092b5949f8283e0d539dec75e4",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T22:24:52.378000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 48,
+          "remainingPercent": 52,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T22:24:11.005738+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40146-f02-controller-spring-jdbc-independent-v1/manifest.json",
+        "sha256": "0063e08dee0f27f0d1d950aec2c172e0136c43dbda5fb0ccfc52077d181e450d"
+      }
+    ],
+    "toolSource": "e7e26f88bab321f89ac552612555d5c3a85435eb",
+    "correctBefore": 2,
+    "correctAfter": 4,
+    "denominator": 4,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "initialMisses": 2,
+    "result": "The architecture audit now detects direct Spring JDBC Controller dependencies and keeps permitted facade/technical access unchanged. Synthetic four only."
+  }
+}

@@ -129,3 +129,7 @@ WBS-P018-04.01,WBS-P018-04.02,WBS-P018-04.03公開source契約/独立期待値/T
 - 020〜022でBootstrap JDBC、API業務JMS、Batch Artemis管理を許可。
 
 走行は `python3 -B evidence/01_PT/018_NK-OPS-001/input/5283_f02_framework_fences.py before|after`（いずれか一回用ディレクトリ）、独立照合は `5284_f02_framework_fences_post.py`。手書きownerと型の期待対を終了receipt、監査stdout、class SHAと照合。禁止fixtureの監査exit1は想定。実行結果、sourceとhashはPG40118へ。動的製品PT・coverage対象外。
+
+## PT-F02-ARCH-023〜026 ControllerのSpring JDBC直接依存
+
+SS311 §5.2、WBS-F02-a、ModuleDependencyAudit.jdbc。JDK25.0.4／ArchUnit1.4.2。合成JAR6・10物理、外部fixture型はcompile専用。023はJdbcTemplateの生成と直接呼出し、024は名前がControllerでないRestController注釈付クラスからのJdbcOperations呼出しを禁止。025はControllerでない技術取得、026はControllerからのfacade呼出しを許可。手書きの型対と生監査stdoutをPG40146で独立照合。実行は input/5290_f02_controller_spring_jdbc.py の before/after、検証は input/5291_f02_controller_spring_jdbc_post.py。
