@@ -1,0 +1,40 @@
+{
+  "actualExit": 0,
+  "actualToolExit": 4,
+  "terminalAtUTC": "2026-11-18T00:55:25.764054+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "numberOfSources": 1,
+  "originalRules": {
+    "path": "tools/quality/static/pmd.xml",
+    "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+  },
+  "rawReport": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38328-f03-morning-readiness-current-pmd-v1/pmd.xml",
+    "sha256": "3f0abbfc7f7d598fc20a414afa9b2e18e64ddb4b9a39fc9077c583ab6f7776c3"
+  },
+  "begin": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38328-f03-morning-readiness-current-pmd-v1/begin.json",
+    "sha256": "2c6c966c38885bc5c098c2f917f05147195a833d8620acc92690cd7b76639205"
+  },
+  "rawFindings": [
+    {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java",
+      "beginline": "251",
+      "endline": "253",
+      "begincolumn": "13",
+      "endcolumn": "12",
+      "rule": "EmptyCatchBlock",
+      "ruleset": "Error Prone",
+      "package": "dev.codex.schubert.nk.batch.platform",
+      "class": "MorningServiceReadiness.NativeIo",
+      "method": "sockets",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#emptycatchblock",
+      "priority": "3",
+      "message": "Avoid empty catch blocks"
+    }
+  ],
+  "processingErrors": 0,
+  "productTestsExecuted": 0,
+  "runtimeOperations": 0,
+  "noCurrentQualityAcceptanceYet": true
+}
