@@ -1,0 +1,111 @@
+{
+  "eventId": "PGPT-20261008-6118",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-S08-C02-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-S08-C02-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "d7cac2ce428ce4167cd16409190e2322bbfa8f65",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "fromCommit": "106aec8a6e10b55f4cabadd5c8f361d576b9ded3",
+    "run": "PG40096-g07-s08-c02-public-delta-v1",
+    "volatileStaging": "/dev/shm/schubert-nk-pg40096-1000",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.85
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40084-g07-o01-journal-public-delta-v1/scan/manifest.json",
+        "sha256": "33d6a00d34af956e7f43eb9360df83d78dfb88806f1d878916b1f6e19e8ab0c0"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/manifest.json",
+        "sha256": "5550ab27000561ec095ee75e3f1439646ee2b1ad396fa88eee8e2517f203ef51"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40094-c02-current-unit-text-order-v1/independent.json",
+        "sha256": "1dc491f2029ad44e47829d1ed005de94bfac1a4a90a8eaa5506018f332072676"
+      }
+    ],
+    "workScope": "One fixed publicly tracked interval, S08 two exact offline XML/raw execs and C02 independent text verification. Preserve earlier static defect; no product rerun or runtime operation.",
+    "durableAvailableBytesAtStart": 816570368,
+    "tmpfsAvailableBytesAtStart": 7948283904,
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:39:57.124000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 47,
+        "remainingPercent": 53,
+        "resetsAt": 1795445752,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "7a814d204e73230e7f284f24dd1ffe1d3df540df944fa7f7b0f6db9305fd5e71",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:39:57.124000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 47,
+          "remainingPercent": 53,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:39:25.587509+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40096-g07-s08-c02-public-delta-v1/scan/manifest.json",
+        "sha256": "b7682d072022c467a4504a5d62bddd1ff5ccd29ee3e0ba2a8817e13e31823d78"
+      }
+    ],
+    "sourceThrough": "d7cac2ce428ce4167cd16409190e2322bbfa8f65",
+    "versions": 118,
+    "scannerExecutions": 1,
+    "rawScannerExit": 1,
+    "candidates": 36,
+    "confirmedSecrets": 0,
+    "unresolved": 0,
+    "binaryRuns": 2,
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0,
+    "result": "Current S08 and C02 public interval only, 118 versions, all 36 coordinates grounded and two distinct probes with first static failure retained."
+  }
+}

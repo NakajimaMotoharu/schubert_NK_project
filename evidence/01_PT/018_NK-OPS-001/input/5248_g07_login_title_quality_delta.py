@@ -82,6 +82,17 @@ CONFIG = {
         'post': 'PG40078-p020-o01-restart-independent-v1',
         'journalValue': 'PG40080-p01810-detached-journal-values-v1',
     },
+    '596': {
+        'history': ('PG40084-g07-o01-journal-public-delta-v1',
+                    'PG40072-g07-e01-f02-trace-public-delta-v1',
+                    'PG40046-g07-l01-handoff-public-delta-v1',
+                    'PG40028-g07-value-onchange-signed-delta-v1'),
+        'units': {'PG40088-p020-s08-voice198-v1': ('firstUnit', 198),
+                  'PG40089-p020-s08-voice198-v2': ('unit', 198)},
+        'post': 'PG40092-p020-s08-voice-independent-v1',
+        'firstPmdCount': 8,
+        'firstSpotBugsExit': 1,
+    },
 }
 
 
@@ -258,6 +269,8 @@ def classify():
                 else:
                     assert static_result['stageExits']['pmd']==4
                     assert static_result['reports']['pmd']['findings']==settings.get('firstPmdCount',8)
+                    if 'firstSpotBugsExit' in settings:
+                        assert static_result['stageExits']['spotbugs']==settings['firstSpotBugsExit']
             terminal=unit['stages']['execinfo']
             assert terminal==B.load(unit_folder/'execinfo-exit.json') and terminal['actualExit']==0
             decoded=Path(terminal['log']['path'])
