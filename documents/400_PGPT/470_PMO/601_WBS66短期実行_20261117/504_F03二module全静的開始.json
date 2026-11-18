@@ -1,0 +1,79 @@
+{
+  "eventId": "PGPT-20261008-6029",
+  "groupId": "PGPT-WBS66-F03-STORAGE-BOOTSTRAP-WHOLE-STATIC-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T15:24:48.788000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-STORAGE-BOOTSTRAP-WHOLE-STATIC-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-STORAGE-BOOTSTRAP-WHOLE-STATIC-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "WBS-F03/criterion/scope",
+      "WBS-F03/criterion/quality"
+    ],
+    "source": "f749be5ea9f676c0d2fe2d24bae0a435d6263745",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39810-f03-storage-bootstrap-whole-static-v1",
+    "workScope": "Obtain fresh permitted static quality for full Storage and Bootstrap Main only: 113 input files and 279 exact physical classes from PG39804. Use its existing Werror/NullAway build and independently run root PMD/Checkstyle/formatter and SpotBugs with exact peers and SDK inputs. Root11, cohort, batch analysis, API/Web, native, protected type reads, and runnable test sources remain excluded. Record actual rules and failures without editing configuration or converting raw exits.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.3,
+      "high": 3.6
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39804-cleanup-fixed-statement-four-main-v1/compile/manifest.json",
+        "sha256": "f9ff6fdbb0300c821fbecfb348fe58c00855ee7ed96fb48a45d06132f5090d29"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39806-f02-cleanup-fixed-sql-edge-delta-v1/manifest.json",
+        "sha256": "662e10070d2a9e9413dbd2304eba7d08050d71d79cb461b52c6ca6c8aa0f1272"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39622-f02-four-module-external-origins-delta-v1/manifest.json",
+        "sha256": "3154c4a69db949a14f725ea516fb22c08c41df33e173928b94567637ea293593"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38762-wbs66-four-current-static-v1/manifest.json",
+        "sha256": "427c95d702cc13b9722f903d69c7dcb111492c900752d214e7a475df4fb9890a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+        "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39463-ssc468-admission-ports-static-v2/manifest.json",
+        "sha256": "243b35ba0fb416c2d1894da5b212f79cc2ddfe8f1ca1f5b168898de10aed8f56"
+      }
+    ]
+  },
+  "setupAttempt": {
+    "unboundReceipt": "evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/fresh-quota-start.json",
+    "cause": "Internal event writer rejected unregistered work-category name before append; no analyzer/build started. Corrected to registered REVIEW."
+  }
+}

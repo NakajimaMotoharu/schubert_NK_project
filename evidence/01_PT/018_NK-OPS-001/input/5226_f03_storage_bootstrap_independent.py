@@ -1,0 +1,191 @@
+"""Reconcile full raw PMD and accepted analyzer scope without rerunning successful phases."""
+from collections import Counter, defaultdict
+from pathlib import Path
+import gzip
+import runpy
+
+HERE=Path(__file__)
+M=runpy.run_path(str(HERE.with_name('5224_f03_storage_bootstrap_module_static.py')))
+E,H,G=M['E'],M['H'],M['G']
+ref,read,save=M['ref'],M['load'],M['save']
+EXACT=('path','beginline','endline','begincolumn','endcolumn','rule','method','message')
+NARROW=('path','beginline','rule','message')
+
+
+def key(row,fields=EXACT):
+    return tuple(row.get(field) for field in fields)
+
+
+def current_rows(report,workspace):
+    root=M['ET'].parse(report).getroot()
+    n=root.tag.split('}')[0]+'}'
+    assert root.get('version')=='7.28.0' and not root.findall(n+'error')
+    rows=[]
+    for source in root.findall(n+'file'):
+        name=str(Path(source.get('name')).relative_to(workspace))
+        rows.extend(dict(violation.attrib,path=name,message=(violation.text or '').strip())
+                    for violation in source.findall(n+'violation'))
+    assert len(rows)==280 and len({key(row) for row in rows})==276
+    return rows
+
+
+def proven_original(inputs,old):
+    result=defaultdict(list)
+    original=G['matching_path']('PG36960*/raw-findings.json')
+    history=read(original)
+    assert ref(original)['sha256']==old['files']['raw-findings.json']
+    proof=read(G['matching_path']('PG37092*/manifest.json'))
+    disp=Path(proof['dispositions']['path'])
+    assert ref(disp)==proof['dispositions']
+    for item in read(disp):
+        row=history[item['rawFindingIndex']]
+        assert row['path']==item['path'] and row['rule']==item['rule']
+        if inputs.get(row['path'])==item['sourceSha256']:
+            assert item['decision'].startswith('NOT_APPLICABLE')
+            reason=item.get('reason') or item['priorReason']
+            result[key(row)].append((item['decision'],reason,ref_for(disp),item['rawFindingIndex']))
+    for num,entry in (('PG36824','pmd18-site-dispositions.json'),('PG37436','pmd-decisions.json')):
+        disp=G['matching_path'](num+'*/'+entry)
+        p=ref_for(disp)
+        already=set(result)
+        for idx,item in enumerate(read(disp)):
+            row=item['raw']
+            if inputs.get(row['path'])!=item['sourceSha256'] or key(row) in already:
+                continue
+            status=item.get('decision') or item['disposition']
+            assert status=='NOT_APPLICABLE'
+            result[key(row)].append((status,item['reason'],p,idx))
+    return result
+
+
+REFS={}
+def ref_for(path):
+    if path not in REFS:
+        REFS[path]=ref(path)
+    return REFS[path]
+
+
+def narrow_prior(inputs,workspace):
+    result=defaultdict(list)
+    for prefix in ('PG38665','PG38860'):
+        proof=G['matching_path'](prefix+'*/manifest.json')
+        d=read(proof)
+        assert not any(d[x] for x in ('staticApplicable','unclassified','processingErrors'))
+        for idx,row in enumerate(d['classified']):
+            path=row['path']
+            if inputs.get(path) is None or d['inputHashes'].get(path)!=inputs[path]:
+                continue
+            assert row['disposition']=='NOT_APPLICABLE'
+            normalized=dict(row,beginline=row['line'])
+            result[key(normalized,NARROW)].append((row['disposition'],row['reason'],ref_for(proof),idx))
+    definition=HERE.with_name('5158_ssc468_admission_source_applicability.json')
+    d=read(definition)
+    proof=G['matching_path']('PG39463*/manifest.json')
+    p=read(proof)
+    pfile=G['matching_path']('PG39464*/manifest.json')
+    assert read(pfile)['staticApplicable']==0 and d['static']==ref(proof)
+    original=Counter(key(dict(row,path=str(Path(row['path']).relative_to(M['ROOT'])),beginline=row['line']),NARROW)
+                     for row in p['pmdRaw'])
+    for idx,row in enumerate(d['sourceAnchors']):
+        path=row['path']
+        if path not in inputs or p['inputHashes'].get(path)!=inputs[path]:
+            continue
+        assert (workspace/path).read_text().splitlines()[row['sourceLine']-1].strip()==row['sourceAnchor']
+        k=key(dict(row,beginline=str(row['sourceLine'])),NARROW)
+        if row['occurrences']==1 and original[k]==1:
+            assert row['disposition']=='NOT_APPLICABLE'
+            result[k].append((row['disposition'],row['reason'],ref_for(definition),idx))
+    return result
+
+
+def validate_streams(out,stages):
+    for name in stages:
+        d=read(out/(name+'-exit.json'))
+        assert d['actualExit']==stages[name]
+        for label in ('stdout','stderr'):
+            pin=d[label]
+            archive=Path(pin['archive']['path'])
+            assert ref(archive)==pin['archive']
+            data=gzip.decompress(archive.read_bytes())
+            assert len(data)==pin['size'] and M['sha'](data)==pin['exactSha256']
+
+
+def main():
+    start=read(next(H.glob('504_*')))
+    v=start['values']
+    run=E/v['run']
+    origin_path=run/'manifest.json'
+    original=read(origin_path)
+    corrected_path=G['matching_path']('PG39812*/manifest.json')
+    corrected=read(corrected_path)
+    assert corrected['achieved'] and corrected['actualExit']==0 and corrected['startedFrom']==ref(origin_path.resolve())
+    assert original['actualProcessExits']==dict(pmd=4,checkstyle=0,formatter=0,spotbugs=2)
+    validate_streams(run,original['actualProcessExits'])
+    validate_streams(corrected_path.parent,{'spotbugs':0})
+    build=G['revalidate_reference'](v['oracleReferences'][0])
+    workspace,inputs,peers,poms=M['verify_build'](build)
+    assert original['source']==corrected['source']==build['sourceCore']
+    assert inputs==read(run/'begin.json')['inputs']
+    physical=set().union(*(build['physicalClassHashes'][m] for m in M['MODULES']))
+    raw=M['parse_report']('checkstyle',(run/'checkstyle.xml').resolve(),workspace,inputs,physical)
+    assert raw==original['reports']['checkstyle'] and not raw['findings'] and raw['hasAllInputRows']
+    sb=M['parse_report']('spotbugs',(corrected_path.parent/'spotbugs.xml').resolve(),workspace,inputs,physical)
+    assert sb==corrected['staticReport'] and sb['exactPhysical'] and sb['physical']==279
+    assert not any(sb[k] for k in ('errors','missingClasses','findings'))
+    current_report=run/'pmd.xml'
+    assert ref(current_report.resolve())==original['reports']['pmd']['raw']
+    rows=current_rows(current_report,workspace)
+    exact=proven_original(inputs,G['revalidate_reference'](v['oracleReferences'][4]))
+    narrow=narrow_prior(inputs,workspace)
+    current_counts=Counter(key(row,NARROW) for row in rows)
+    native_file=G['matching_path']('PG38446*/manifest.json')
+    native=read(native_file)
+    p=native['currentSource']
+    assert p['sha256']==inputs[p['path']] and native['warningStillOpen']
+    native_line=(workspace/p['path']).read_text().splitlines()
+    decisions=[]
+    exact_counts=Counter(key(row) for row in rows)
+    sightings=Counter()
+    for idx,row in enumerate(rows):
+        k=key(row,NARROW)
+        exact_key=key(row)
+        position=sightings[exact_key]
+        sightings[exact_key]+=1
+        qualified=exact.get(exact_key,[])
+        decision=qualified[position] if len(qualified)==exact_counts[exact_key] else None
+        if decision is None and current_counts[k]==1 and len(narrow[k])==1:
+            decision,=narrow[k]
+        if decision is None and row['path']==p['path'] and row['rule']==native['rule']:
+            assert native_line[int(row['beginline'])-1]==native['sourceAnchor']
+            decision=(native['disposition'],native['reason'],ref(native_file),native['index'])
+        if decision is None:
+            decision=('UNCLASSIFIED_CURRENT_NO_EXACT_PRIOR',None,None,None)
+        state,reason,proof,proof_index=decision
+        decisions.append(dict(index=idx,raw=row,coordinateOccurrence=position+1,
+                              coordinateMultiplicity=exact_counts[exact_key],sourceSha256=inputs[row['path']],disposition=state,
+                              reason=reason,priorProof=proof,priorRow=proof_index))
+    count=Counter(row['disposition'].split('_')[0] for row in decisions)
+    not_app=sum(row['disposition'].startswith('NOT_APPLICABLE') for row in decisions)
+    waiting=[dict(path=x['raw']['path'],rule=x['raw']['rule'],line=x['raw']['beginline'])
+             for x in decisions if x['disposition'].startswith('UNCLASSIFIED')]
+    assert count['APPLICABLE']==1 and len(waiting)==count['UNCLASSIFIED']
+    assert not_app+count['APPLICABLE']+len(waiting)==280
+    out=E/'PG39814-f03-storage-bootstrap-static-independent-v1'
+    out.mkdir()
+    detail=out/'pmd-site-decisions.json'
+    save(detail,decisions)
+    m=dict(actualExit=0,source=build['sourceCore'],groupStart=start['eventId'],
+       currentStatic=ref(origin_path),correctedSpotBugs=ref(corrected_path),targets=list(M['MODULES']),
+       allSources=113,allPhysical=279,completeCheckstyleAndFormatter=True,completeSpotBugs=True,
+       spotBugsFirstExit=2,spotBugsCorrectedExit=0,staticFirstVerificationSuccess=2,staticFirstVerificationDenominator=4,
+       originalPmdExit=4,pmdRaw=280,pmdDistinctCoordinates=276,pmdProcessingErrors=0,pmdNotApplicable=not_app,pmdApplicable=1,
+       pmdUnclassified=len(waiting),unclassifiedSites=waiting,pmdDecisions=ref(detail),
+       appTrials=0,actualRuntimeActions=0,sourceOrQualityChanges=0,wholeF03Accepted=False,
+       currentProductCoverageClaim=False,whole451Accepted=False,newAcceptance=0,
+       terminalAtUTC=M['utc'](),verifier=ref(HERE))
+    save(out/'manifest.json',m)
+    print(not_app,waiting,ref(out/'manifest.json'))
+
+
+if __name__=='__main__':
+    main()

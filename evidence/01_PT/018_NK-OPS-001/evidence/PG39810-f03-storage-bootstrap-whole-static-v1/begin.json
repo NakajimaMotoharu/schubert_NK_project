@@ -1,0 +1,889 @@
+{
+  "event": "PGPT-20261008-6029",
+  "scope": [
+    "storage",
+    "bootstrap"
+  ],
+  "source": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "inputs": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java": "5e3bfa74453c1f250adefbad4c97ea3670933b3ddcd01c12bea63ead58d388a0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java": "c29504c77d98c9b287cdc1b2e6cd4ffc5e5869af43634da0a8459cef94d46f06",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java": "353029ce353dde7628d64c7b9fb20e541f2387f1912391838d8835b571f7e8e6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java": "0d89d9a2cd78560731882bff49d38a1d48515a4739b25e04cbca0fcd0655d3ed",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java": "b9f8d3425dd94e3481e7f88c1b4c25070a4410b37c07fdfc9c7b92aec436fd94",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java": "7e7854e40a04437d262a102518e9e41a2dedc8ff06f9919b758b8dbda8cd3178",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java": "717fc4f3c2afd1019cbc0912b56f7288a8cfdedfa87e747df2d396000da21057",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java": "0bbc59214a3793b3a964bb32fd2369f4216f633fa6bd7d13fc8625fb5fb1465f",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java": "73b35bb21ae6d801563680541c5b3984faa23f33434f8ca8cfca078abd71f3a0",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java": "009b87f24bdcb9c2c592992d150f869afa51a3844c04fb4ba378dbe68e4f251b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java": "bec3eda194f903fff992c1b6301ee128a878e35b883d19beb2b3b17b71871a6b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java": "319e6cc5885f7aded8b475e874265261480b0fafb966ea62bb5290f02282345b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java": "73583455f354f5ae42f573b8d13c9b98b708b59b133b9aa8c1cf2514a885344e",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "99a598b5e08bf426c72b85775b4ed21ae7b4544d9f631b3a3b87254abd543850",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java": "3d387695776875913e476596f5f3e6b9761acd56b277d4fc4acf9c1a76d11740",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java": "76c542380895c6064f666717dcfa9d601d209b1ded6c82b44b2428f7af1e5bc3",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java": "d4752c82283b4ab0fc11b5ba738b32b5ce43045bab4576bc210fe4c4d50c635b",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java": "92d522c3789d511cd908cf184856840b3b366b071545fe857bc6ddf8826df4ba",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java": "4aebd6b8a4af029ed7040a530bd30e9bd51de04da9fb3a2091726b518a1c6c08",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java": "5bc27f0fddf5098f96a094b092598655baf517edc396cb70a0d11bcaeb8e3b22",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "6d871af1d619b414d7d6c56d83ac97ff583ea9a6aa36c6f263362cc6389cae92",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java": "3952e261ed57274a3cfe9dfa183e0d79848e6011c37570f0150d52bea79595b7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "61727a7d93d080662c8aa14bdbb621bbe7e74916794fb288b70457686fc494c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java": "2e997f3fd7ff7c0075b51333682b3e02b254461326ffe0f92f407aa53716a2f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialException.java": "316e8b5aa67665f816fb51f54b217f873b9c1b1df284393dcbb2aad1f397ad10",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java": "8ed9f8bb81adb2e7bfb48e94f4e981ca0fd0da526fea0b4f92e72f6490025219",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialException.java": "3fcb0a3417ddf3e02ed0076ff99b6911c373b80574c6630b1a86294e3b7d48c0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialReader.java": "30a67be43a07e95e2ab4d5854ec234c72c36816be202861f021eec956f4a1159",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java": "e7d2f7b92faebadf6133baeb407d6352d6362cee087b89a8f2959515322e3aca",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java": "71c271ca7886d079b70d1d5e870317bd9dcfb13d5d0ab297399d8508a400abb4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java": "653122ba99e00ebd2b29eb2d1d406f79e370d1f577b4cc212a411535439c7bf8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java": "34d7683b52bf6f75f9881324618a56160c110c3de0646b91fc5dc337776e5c34",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": "68f7c253171f2245f0b238f7c4481eaf5495acca9330aa750947f2ff1cd67ae0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java": "1064a82f50f9614a5469277543e584d687408e8d2bc07d9dc97558e07563d0fb",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java": "2bcf68e2b9b0a54e91c6c53635471c1febcec591116c42eee50d6ab7fed7c112",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java": "b07dec9433f1259f1f3269f0c74a158357d422977d60906e37070899e421bddd",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java": "f8cfb9a9565c3ce4d2c9582bb595046a715d1b55506435afa53b944c6623b9ce",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java": "c7795f515153a7597d882a60bcc9cb68ade3851b219944c4f64a642355e7730f",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java": "2c09eebf305c537bf18c00ae38774ada72269b94529c2c6f749e55cc953cfaab",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java": "d459337184c187b8d37a97989b8b9791d6a41fe549b8361d1c22055ee37a9607",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java": "48645538321f59775ceca14b6c4ee201db6cbad142e7ca7551e35145f886f4e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java": "aaba456dd60171f1c2530f62cff3366e90514364f6f0a2b4cde1f3bdbaeeb711",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java": "5c535995426d4e18179189259e8ef12d08d7ac2d1a6e068bb164454f5e8f0c2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java": "96e67eff343695afdbdff4fddb77c2d1cbef0f1e3f7f0f96bfe508ef397c7b0c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java": "01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java": "9b0d4b1fe6fbacf20c0cee5e0eea725514a54205200c7ad53c2a4991200f8a65",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java": "22ea6cf3eeff49c4d70899b5b6d0e91c0b585515e3ec8a794b43caa79d9e506e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupProofFrame.java": "54f06205d273eb7bc60edaec6a1e532f206b73c13565c23a9dd04807a32848e7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java": "54bb4bf244047c02ab70cf9c55faf916897127817c1d4e15d65fb3ab284def62",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java": "6affd57005221db2b1d112da3449f8c26085edf21ed132d8abfc9fdb3a5afacb",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java": "8e22a0c8da9b500d0213c8550eacfc4527e1839b4fb4b09c7acd40bfa808a547",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java": "6ccdd31966cf0674e762d52c9cd9731c167bcc4f75b5305f3fee95e16dcd815e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java": "ebd96476529a8583c15683f89442fe848bfab2d0643f83b0ddfaf44a675a97f2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java": "45f55dd1ce4c01329f9f9e6c10f7efa38483f76c1be7c46d30d91c1028966d21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java": "44f69f9c9a08c2a7b15018cb4840307f6ca68577a6df1f2d5daad07fff1fe341",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java": "e1f9f8ff3160bf5f5ba13bbfdff0ac63e91753d9d647b82ae36b0c889e625ffd",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java": "fe4d7988dae688fb589d47a4056c7ab82077b2565e6dc3ffa8a3d71d1a7aeec2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java": "fbd5388c58212b11d1492e42624130f019ff4ea4d1b332bd95596e96764f4f2c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java": "4af1c5dbd38f07f53e58dc7c293d0981071ccc98834048c39fa744b1e7e7f964",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java": "512950dd87dd65bda553724928839256d23fe75e4edd6eb73e36b8d2f6325b54",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java": "86fa917f56ddbe06dbddeac8f6ae8157c57627f75657995e328d8c48862bffa0",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java": "b1defeb746f70baf41b840e35da8eaaf312dc5fa323f04dfc4af8ecca2410f52",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java": "0d3ccea6313fd02ef9130d8b52f0261d79da887c1c5fe457f260749a2a50c14a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java": "63e3a32d69491fee9cc86fd41479c5fdf7480d2860a944b3d241c0f4552f8f45",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java": "652bf8c557d37c57ddaddb1fa1690d0c7f80a184ae8770b28c88c4edc607c74e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java": "0a927338f752332269cab8b221d001b95f780b2504b19b7ecf277024359f4660",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java": "9bf74db29e26b5ead8a7dfc0e9b996fd01d09df5bf695ac6aa7bf2b0e3995ca1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java": "607d81ec04cdaa56d9b7f67386a06933cb26d2da626d3d1096fb7b7181e70fea",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java": "31e39c3419cb7f380787a76a38cdbd05d5eb7e671d395a4febb85afb1cb4f343",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java": "f6983274026e86f7860b4cec6cd79ec458c96ebaf25770a326753b71050271e8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java": "e0d582885ce1d17971208da40f1466b9da730ca72977ba7e151238b7b46061a4",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java": "852aa946ab564a4a5610cffb44fd8e8cc14090c960e7caf36de0d2c19e6cc302",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java": "e6fd5c324585f2ac7435b8d701d27795b594462f6893af2ee66102773fdae2a5",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java": "8dca6551545b05ce5090093c7e1e24f93657be4658a45d0b78f654a1b0a9ec57",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java": "cc632eea4d299c3b98bae4d413431c238bc8f7ca6946fafabdc4c767b5c594b8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java": "5202a8eeb5a1f2fc8f02220ab18b49c5d4e6c6c11344b54da1df281f6aa7c409",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java": "3299ff40a3eef6ea67f0428950e835339a673e741ddac8493f8cc4aed3aef180",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java": "087c49bbb56bb77b0ae2c509bc648f4161e3e7c977a242323616d3dfc6e83d89",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java": "f2b45e3b3af748309a156f4cb76c76a922260caba10faafa4a4c2a858029bdc2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java": "02add010a85af786dc783967587d7873028c68787f87b83696109fa2c994bd60",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java": "745f41fafe37d522a0a039f040bf6c9b6299d722a532b06a128835e54e2100d6",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java": "f35b20476ab4e13512ac2a86cb30ab42c1e08d522fb7fa3ab3255b8ede11c825",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java": "a68c7bf896b659151e1eadfb80273bee54051b77b18ddcde9a0fa490a484332b",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java": "a1edd16c1d88d7a703c7ec11f03f7fda3e9aa7772ccf90f8f637f66bc9c2d55e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java": "b437c8529a7f92a8ef3748a8ec93398eafd03d5a28c0cc83cf9475aaa8161a37",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java": "d6bd196fd63313d3b7221043dea7982e324255002ca26385af3c896eb313c994",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java": "ec7cb8ad7f74896b4d5fceee8ce4beb75f4dc4d0b91e65cc6a0bcd4f74d0304d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java": "43af38a386bb4c676bd0da64e53348088a74390e96f17fd098734b863879a75e",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java": "85e4fc7789155422bfb3cd98304494e936e4f0b5e8e04bcb15fc1f0ee83808f7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java": "de4abd8135de77d6d59dd7424a5980e894a17b67e853bdcf9125157b0fbd93a8",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java": "a5fdd75da571926cd44d5e581d9fcbd317ed9b41f6c3a6513ce6672af9e309bc",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java": "99ae9254cbf0de8f01ff8390a9ef751f2d6cb526780c629a83238af13355a56a",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java": "011d66ec491400e61c872fe506b91fe780c26f44e3875dcf61914bc75d2c866d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java": "02156c50dd7e69ce1c5b318bad8c7bfe800efdfb1d0242c38d5ce88b5e519e9c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java": "23b1ac588950bec8f79e35553b0e2e1c93bff2593ac59c7fb3a8799a626a694d",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java": "a3d806645c57008ceed394e75b4ca5561e8c8cfdd8d7291619262abce942be59",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java": "90a27291fd868d80896cfcae280978ebbf409bba6c906c73bfbab45d79024ad7",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java": "6a121e85333cd89ea7dcb2f43c1540d7004d464451e9efc8410717b5d5040479",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java": "a6fe0a96272fe8679d7da1fb013338c219d0d02a5707b879513b985cf7094360",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java": "0dbf9ce9e9d97710ec6924988af4afaa988250372abf94a336b6ad3b7b51e9d9",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java": "52922f18ff3969243cceb6d8599645321f087fd4a1aea7d170164546934c6e21",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java": "451c5a97d09b5eacb2e33e2b4c931906663252bb916e3acf3fe30127ec86fa8c",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java": "1a5edd17c1a600155cc63af9a35302eb2106d9214b9b17b36a974d5b5380d4c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java": "612d92a60eb5c2ccb23992768f795d5ccc9f7b93eacd18eb2aa6ee370023aaf3"
+  },
+  "rootAndPeerPoms": {
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+    "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c"
+  },
+  "exactCommands": {
+    "pmd": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+      "net.sourceforge.pmd.cli.PmdCli",
+      "check",
+      "--file-list",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/sources.txt",
+      "--rulesets",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+      "--use-version",
+      "java-25",
+      "--aux-classpath",
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/lib/jrt-fs.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-protocol/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar",
+      "--no-cache",
+      "--format",
+      "xml",
+      "--report-file",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/pmd.xml"
+    ],
+    "checkstyle": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "-c",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "-f",
+      "xml",
+      "-o",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/checkstyle.xml",
+      "@/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/sources.txt"
+    ],
+    "formatter": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-jar",
+      "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "--skip-reflowing-long-strings",
+      "--dry-run",
+      "--set-exit-if-changed",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/SchemaHistoryAdmission.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/AesCredentialFile.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialException.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialException.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceProcessResources.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorAesCredential.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorCredentialAccess.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ChildStartupContext.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfile.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageStopHold.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceExecArguments.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedServiceIdentity.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseApproval.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseInventory.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleaseSignatureVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupProofFrame.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/StartupReleaseManifest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/SystemManagerObservation.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetMigrationManifest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AssetStagingTables.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioCopyDataset.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioFileCopyRow.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/AudioMigrationMap.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkMapper.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioLinkProjectionReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentAudioProjectionReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationAssembler.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingManifest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationMappingVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationProjection.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentMigrationTransfer.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryMapper.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioEntryProjectionReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileMapper.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentScenarioFileProjectionReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/CurrentSpeakerProjectionReader.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyBatch.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MediaAssetCopyRow.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyDataset.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationCopyPort.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationGamesVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterColumnVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterConstraintVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterContentVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyCoordinator.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyDataset.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyFingerprint.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyManifest.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterCopyVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterFinalizer.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterReferenceVerifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MigrationMasterTargetPublisher.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicLogicalId.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationCatalogue.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/MusicMigrationPairing.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextEncoder.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresCopyTextWriter.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/PostgresMigrationCopyPort.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioCopyDataset.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyBatch.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryCopyRow.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryMigrationMap.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioEntryPlacementMap.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileCopyBatch.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioFileMigrationMap.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/ScenarioStagingTables.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyBatch.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerCopyRow.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerMigrationMap.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/SpeakerStagingTable.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/migration/VideoMigrationCatalogue.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ExistingFileAccess.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/InodeSecurityCalls.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxExecDescriptors.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFileLock.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxFilesystemClassifier.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxHostDirectoryCalls.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxInodeSecurity.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxMonotonicClock.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxProcessExec.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxSealedProof.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxStartupAdmission.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/NonSecretConfigSource.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialId.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceCredentialLocation.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootInspection.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageRootLayout.java",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+    ],
+    "spotbugs": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-Xmx2g",
+      "-cp",
+      "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar:/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar:/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar:/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "edu.umd.cs.findbugs.FindBugs2",
+      "-effort:max",
+      "-low",
+      "-xml:withMessages",
+      "-exitcode",
+      "-auxclasspathFromFile",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/spotbugs-aux.txt",
+      "-output",
+      "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/PG39810-f03-storage-bootstrap-whole-static-v1/spotbugs.xml",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-storage/target/classes",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1/src/schubert-nk-bootstrap/target/classes"
+    ]
+  },
+  "toolAndRulePins": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/checkstyle.xml",
+      "sha256": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/static/pmd.xml",
+      "sha256": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/google-java-format-1.36.1-all-deps.jar",
+      "sha256": "25b400f003089d23cc5320cdaf1a16cabee19b8aa3434d0ff021b3d9f42154b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/checkstyle-14.3.0-all.jar",
+      "sha256": "754e218ab1fcabb1e1c5f8530e9d3aa37636806c22987bb279dd907a6ee749b2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/record-fix-v1/pmd-record-1298.jar",
+      "sha256": "4859fb956de018a843abe55ddb92b0a98921878b80525aaa2a77c5b5d8c2820c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/Saxon-HE-12.10.jar",
+      "sha256": "b571af282f25d7301059f788b9a149aab8b5cdc14ef3d212dc5425d3dcbb9a97"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/antlr4-runtime-4.13.2.jar",
+      "sha256": "dd3e8a13a2d669bf84fb8d834de35ce4875f27157698d206241ec8488aadcaf7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-ls_2.13-6.2.0.jar",
+      "sha256": "758d8fcd26eb0c837b66d4fade9260f506e048da14ad9d3a1957143cae7735e9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/apex-parser-5.2.0.jar",
+      "sha256": "e8088eb304fbb05717eacdc83d3a23d0fa1c83b9b18432447b300f66ed315e53"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/better-files_2.13-3.9.2.jar",
+      "sha256": "ba44cdde78320ea3800a8e99b5b3d0f3fc3bab0a9e9962c653b016d06e396022"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/checker-qual-3.55.1.jar",
+      "sha256": "857658c8bdcbff794949a8d9922f88d63ee3751c203c7cd7d21ea97f9e745288"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common2_2.13-4.17.4.jar",
+      "sha256": "07ce41f35fcdb910c9c846ee65313993702138ab9653010bf49f28945bf3fe9a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/common_2.13-4.17.4.jar",
+      "sha256": "e8acfb37a2b538d083d649a91bd31db9d62c699890204f7d2310effa05ea190c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/commons-lang3-3.20.0.jar",
+      "sha256": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-0.18.0.jar",
+      "sha256": "18f67869b0d31d39512623226220abeedd6bde486d5599e6256eab7975110754"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/directory-watcher-better-files_2.13-0.18.0.jar",
+      "sha256": "839d3d970babacb606bb2f2e8461c2d7c40f6e36920753c41bf9561ba638d128"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/error_prone_annotations-2.48.0.jar",
+      "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/failureaccess-1.0.3.jar",
+      "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/geny_2.13-0.6.2.jar",
+      "sha256": "26017fa73ec7fa3cd2d44a4f5d3462c58cd6ddebf7d42d40123768edf7dee43c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/groovy-5.1.2.jar",
+      "sha256": "30aa747e57031b3936f8fb873919f828583c9edd74a997e984bfba87d7d7e84d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/gson-extras-3.3.0.jar",
+      "sha256": "54be55d601de31867daa1e22f25ee75219a78f9132c747dcc90f6c4b29aaf674"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/guava-33.7.1-jre.jar",
+      "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/io_2.13-4.17.4.jar",
+      "sha256": "c0b4bb7b99f11b3b34bee658624fbea839da7f94310d2b2075dbbf4d1283594e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/j2objc-annotations-3.1.jar",
+      "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/java-diff-utils-4.16.jar",
+      "sha256": "620403030d676a4a27f780a3acec7438dee1b1651a1c804fa6bb11bb07399a6f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-native-3.29.0.jar",
+      "sha256": "19cfcc9d3c78a1c6cfe4c6c9599f16a657e4bf8da43940fc4b875373236dc258"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jline-terminal-3.29.0.jar",
+      "sha256": "fd68a98b32b1132035c62102e5df0b0fdc358e7c87a9f876ce7071450b4d10da"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jna-5.12.1.jar",
+      "sha256": "91a814ac4f40d60dee91d842e1a8ad874c62197984403d0e3c30d39e55cf53b3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsoup-1.23.2.jar",
+      "sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jspecify-1.0.1.jar",
+      "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jsr250-api-1.0.jar",
+      "sha256": "a1a922d0d9b6d183ed3800dfac01d1e1eb159f0e8c6f94736931c1def54a941f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/jul-to-slf4j-1.7.36.jar",
+      "sha256": "9e641fb142c5f0b0623d6222c09ea87523a41bf6bed48ac79940724010b989de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-build-tools-api-2.4.0.jar",
+      "sha256": "66917335497f9ab75a36c34b3d90bad2bc8dc256c34b2413ecd0c9467fcf597d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-compiler-embeddable-2.4.0.jar",
+      "sha256": "c2b25e8c1c93ec416ba4327f5e31eaec0f0c8847241b9353e294b8db9dce564f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-daemon-embeddable-2.4.0.jar",
+      "sha256": "383093af5e078435b60043d19bfa83eb6191be0f4d13a28fb1c8a0f3ab24fe66"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-script-runtime-2.4.0.jar",
+      "sha256": "196e8ecbf63daf477e34e67c2f871ee232ae7bf8b377432d876d1bbf9d273de3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-common-2.4.0.jar",
+      "sha256": "5902e5cd0104f9a3bd65aa03679c5898d1ceb36ce01651a48a3db606bb97ada3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-embeddable-2.4.0.jar",
+      "sha256": "c7d1afbedc0fb4e367316f7ab535d9162b14143b3d2fb6a624b431e142b70c7e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-compiler-impl-embeddable-2.4.0.jar",
+      "sha256": "63efa9dfeec5a7ebd239f643dba142548e182c1425b039eb97aa1b03fc9551de"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-scripting-jvm-2.4.0.jar",
+      "sha256": "72638e2c43ef0a08981863017780b133212193fbb0bfd0f5f35a24321764105f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-2.2.10.jar",
+      "sha256": "9c67cc79efd6b9215b49d2a4308f5f3433537376c7c88e89bdd6729bd096e61a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk7-2.2.10.jar",
+      "sha256": "cf95eccc6cc784dff479dee0b8834f3584b93292cc5d91972e82f5d7b9e13e3b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-stdlib-jdk8-2.2.10.jar",
+      "sha256": "8974bfdd08b1d81843fe8d11f0729ab6e5b3c1f88d671ebe0c006358129ce149"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-analyzer-0.7.1.jar",
+      "sha256": "2635bd44388b748286d9e3fb7b6925846a9ea17a045c94699247cbd78850e0e5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlin-type-mapper-model-0.7.1.jar",
+      "sha256": "e082e53ee368cbef83473bf19171ec9ba6a15f70fd8ee49f1f5c227b99fde87f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-coroutines-core-jvm-1.8.0.jar",
+      "sha256": "9860906a1937490bf5f3b06d2f0e10ef451e65b95b269f22daf68a3d1f5065c5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-core-jvm-1.11.0.jar",
+      "sha256": "f4a801c647d4351327cd9e1ac4113e2be9ea37a64ab0abae269c25a52e28f35d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/kotlinx-serialization-json-jvm-1.11.0.jar",
+      "sha256": "563a25b4eb5c9128ae9c2479f3d1a5c44dcd176112b91cf03682e906eba5c935"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/mainargs_2.13-0.5.4.jar",
+      "sha256": "f22a85b990fc68747b8caa51394a308c2778e9b230d69a3cdd79bb8bd7d1b562"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/nice-xml-messages-3.1.jar",
+      "sha256": "0b4ceb5b8362d43c9c6c49b1bd57f1c5da54d3c5c7c305fa39c0a04462bb4799"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/outline-parser_2.13-2.0.0.jar",
+      "sha256": "aae993a5a383829644ee0288ff57cba2efda17da45bdec7357116118f4d9fa37"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/parsers_2.13-4.17.4.jar",
+      "sha256": "e9cb0563567563e9736cbde50e6e8887b4d3d131174b5d5c2ab094152b9f14f7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pcollections-4.0.2.jar",
+      "sha256": "2bbeef5797a241300c4f7513cd546239629ed7deda4fc0c31df90bb95f5f13ef"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/picocli-4.7.7.jar",
+      "sha256": "f86e30fffd10d2b13b8caa8d4b237a7ee61f2ffccf5b1941de718b765d235bf8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ant-7.28.0.jar",
+      "sha256": "8cdb9807ab0666339284868def100b157818b3207a848a92d30160c0b10081a0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-apex-7.28.0.jar",
+      "sha256": "4a2c83c116de6eec385827b91930d85f7c03ce9c659e54df360f8b3d107af815"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cli-7.28.0.jar",
+      "sha256": "fbcbb4984aaac8214a1cfa4492e0d81764ed15bf964a35c47b25ee484562b50a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-coco-7.28.0.jar",
+      "sha256": "c12e1c7b9cbae744aa96a53dc94279e494eef2717df327dee2f9c9ec41455b11"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-core-7.28.0.jar",
+      "sha256": "6bfcd22b89b85589ade100545202e2eaf881e1ce664e5c7c0c21d06d9c1dc673"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cpp-7.28.0.jar",
+      "sha256": "e6e538409d19f6e4499d58ab7135059253804bfd8a2232e24ad1f1abbcf3186b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-cs-7.28.0.jar",
+      "sha256": "6c4c90d6d2eaa8c7e28409736721ddce0601718d39b20be960fc320d11778b9a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-css-7.28.0.jar",
+      "sha256": "5f10446c467cd5c9789b1983043b0e1ee52932e23f1ff08a1bada6ab26a7ca28"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-dart-7.28.0.jar",
+      "sha256": "ec6fe633428371997b485882fc04bb15053bb116bf5c6a5beff72770edd2f826"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-designer-7.19.3.jar",
+      "sha256": "4a0e0569413ab62f1c6feef6a6243dcbbeb9f095fd4a990b528d4acfb90641b4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-fortran-7.28.0.jar",
+      "sha256": "315482fd5580201c443bb1c199c7902d601fcfc3995004699aad91a8b7d142db"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-gherkin-7.28.0.jar",
+      "sha256": "8cadb0d62fbaf3b7e661f0e865f0691acd66afa50f6ca8cad5f60ea0e1332284"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-go-7.28.0.jar",
+      "sha256": "bc5b6f2de93a6139df1e1ff562392b2856fc7db3748e0d7a0ee75b03513cf7f3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-groovy-7.28.0.jar",
+      "sha256": "d7a0db0bc00791a2ad460f1eb265470afdfe4595b29799e5660822c1b4fb6267"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-html-7.28.0.jar",
+      "sha256": "5fc9bbff02a83b2a2e5af6db1f83e49213d41f348b21d280d3190c70e98f584e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-java-7.28.0.jar",
+      "sha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-javascript-7.28.0.jar",
+      "sha256": "947adf77f46ea611b5015526c34911c18e48eaa3ef89081defe35f1a6420040c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-jsp-7.28.0.jar",
+      "sha256": "95460ee24e9264ae21dd5bcba70ea83fce9329cfbb524aa499a4bc7f39eabb28"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-julia-7.28.0.jar",
+      "sha256": "0af678159fd1fb8ec0ce683416618e8cd7f6cdce96c919e7459f12db2ab9b911"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-kotlin-7.28.0.jar",
+      "sha256": "54d329aec5e89f4a69fae3abc4fed7ca603bb171d3a05a27f2846d725a967b4a"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-lua-7.28.0.jar",
+      "sha256": "eda3c6d70d39986b00d68368d18e4350853cb2a96748927b0b89119a7ed79cc9"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-matlab-7.28.0.jar",
+      "sha256": "93a752e7d9a961e57f771c9c9b5049cc44b20745c0680664182d6f81504e3892"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-modelica-7.28.0.jar",
+      "sha256": "b5c97d6ea813cdad7f41210276a7385ff3741daec004fb140af44ad4e93649fe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-objectivec-7.28.0.jar",
+      "sha256": "90c228bc473d264ffa9000146b1af3b7b1a5f01d0bb533e828d4ddc6af0e3cbe"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-perl-7.28.0.jar",
+      "sha256": "22c210b102ff2f571941924aea2b503e9cffb57b218964bc302f8084366a0064"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-php-7.28.0.jar",
+      "sha256": "da84c1afc21d14533ccfa6a821c63862099944811b4b57e17c3eeea3ae7448c5"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-plsql-7.28.0.jar",
+      "sha256": "ac2f4cbe6ac19cab1f145e6727b7665c0a54558c3fec5ead4d9b65349cdb8947"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-python-7.28.0.jar",
+      "sha256": "95a5d2c2b322d4cd14bd5f2989f31df45ea6aa5e71f8a3293cf7b5ae71ed2568"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-ruby-7.28.0.jar",
+      "sha256": "e5e0b7d2f4ea338bc225fab34cf270b1d759a53c8e8c9a364a5fddcea2cb29c8"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-rust-7.28.0.jar",
+      "sha256": "734766da6f675a0efa8d446d77927fd9cdcd5141cecb45d4995581aa833627a6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-scala_2.13-7.28.0.jar",
+      "sha256": "35ecd821536eef6fc69a9de78a6eaf805a0b6cdbb980dbe7cfaa148a92bacefb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-swift-7.28.0.jar",
+      "sha256": "3e619ff93eca3e01ae0d090b9b1375dcf754ec7e41f08504931e6e5a17d06e36"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-tsql-7.28.0.jar",
+      "sha256": "7f4d364d724269f571416d321d960cadfad941cbad168ef95972802b27ce0f47"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-velocity-7.28.0.jar",
+      "sha256": "6f9d2417b6db0412724ec80c32dd275d374af164d12334576ec29539e6128c3f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-visualforce-7.28.0.jar",
+      "sha256": "28625fea468b90f448c75fcab85fbd7a3691461eac5fcf5e9cfe4e0c2d0ba86c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/pmd-xml-7.28.0.jar",
+      "sha256": "f543b004163eea64c0f53d72256581894926300a7079db6a2ccf9de243fdad70"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/portable-scala-reflect_2.13-1.1.3.jar",
+      "sha256": "920f62979293069cf721865f931e42f9f7b0b2720ee9f6a9ddff76a19ecf8d4e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/progressbar-0.10.2.jar",
+      "sha256": "9979afcfc1967bacd98b3afc74499501028d294aa65fb3f9139cd79742111e81"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/rhino-1.7.15.1.jar",
+      "sha256": "f3520a0e2e22d550f1216a456be233eb5385bf08e3219407dece7a16369eb38f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-collection-compat_2.13-2.8.1.jar",
+      "sha256": "9b8cc6028dab5813fe751950382499d655fe8777e2c4b07368eaa9d1116e049c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc-upickle-json-serializer_2.13-1.1.0.jar",
+      "sha256": "4ce9d100d26080a7b8813b6c3c6bc568c7c33b500b2b42120862c3f9fda926ff"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-json-rpc_2.13-1.1.0.jar",
+      "sha256": "0fcac451d102a687a1be2d8cb3ad4854a0beb9a26398f01db03d95f9851fa3e1"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-library-2.13.18.jar",
+      "sha256": "4e85d96ff7bc7dc627985523c3541b9917aaa08e956391380c42db21a2c4e5a0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-parallel-collections_2.13-1.0.0.jar",
+      "sha256": "fc08be49e91db44d7fe5c1ff95a322ad4500805a525cc2c4b1b91693f041c8e4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-reflect-2.13.18.jar",
+      "sha256": "6935ff1982b2ac93d695f15aa66921be2f602921277afe002f018fd8c7d6e29b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scala-xml_2.13-1.3.0.jar",
+      "sha256": "6d96d45a7fc6fc7ab69bdbac841b48cf67ab109f048c8db375ae4effae524f39"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/scalajs-stubs_2.13-1.0.0.jar",
+      "sha256": "60a58e75030081111da2e96e70140e6e370f2d1db7a353fe065b62eb757f82e3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-api-1.7.36.jar",
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/slf4j-simple-1.7.36.jar",
+      "sha256": "2f39bed943d624dfa8f4102d0571283a10870b6aa36f197a8a506f147010c10f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sobject-types-67.0.0.jar",
+      "sha256": "4c83965b6f943a2de5123578ba7b82665b0592d79d5ccd4479ccf9c6b03b2fb7"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/sourcecode_2.13-0.4.4.jar",
+      "sha256": "bd4e99aef8267a410b6ed716c487cf5256f801425f158a8c9cbd056eb032d80d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/standard-types-67.0.1.jar",
+      "sha256": "f16c39b7229b4ddc0d09811beec777024155010d7092f6f121f7ba0ca41da8a4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/summit-ast-3.1.0.jar",
+      "sha256": "4bcba676ccc05fdd3e330dc0768671c635c50860187d0da27e8f39eaea2b57f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees2_2.13-4.17.4.jar",
+      "sha256": "78609de08420be3a7a55708e40095d48a380b4ec074b5ee86f94a6c737f4ff0e"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/trees_2.13-4.17.4.jar",
+      "sha256": "c573aacf0c77babf3717b47209e9c6a0c37935c4b022609045705698fe62fc44"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/ujson_2.13-1.2.0.jar",
+      "sha256": "68474183a6ff657f97a91488e294cbe977b2a439fec216d5167700c72471f358"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upack_2.13-1.2.0.jar",
+      "sha256": "1ed89d975c11ca0c87398f57e29ace72ff00835ba87b504a83c4190d17416c26"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-core_2.13-1.2.0.jar",
+      "sha256": "503d9d2687053a401f974e902ed095e7534f11f9b06448e03543f72c02f4e6bd"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle-implicits_2.13-1.2.0.jar",
+      "sha256": "31d16e260f6eae6c4172f430f2c0711f669cd9dff576aadd1370b8bc5472f8d4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/upickle_2.13-1.2.0.jar",
+      "sha256": "eba8ec18d8284cfcb10395842c254280b46f97ea2aca7f48b2b3db20205bae6f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/vf-parser-2.0.0.jar",
+      "sha256": "643ec98e0500dcb9f7388426deaef1664f83b7b68774c43fe370d5571f695569"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3-data.jar",
+      "sha256": "b0c487ad2f3e558be8d829c916d2458d10aca6a5bafa7a4d0524b70845e48a5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/static-gates-20261015/pmd-bin-7.28.0/lib/xmlresolver-5.3.3.jar",
+      "sha256": "1fe4d5b92f708dcdb82dbce12919e0171e6b5ca62c6dca6220483625098feb5f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs/4.10.4/spotbugs-4.10.4.jar",
+      "sha256": "a88cad2e0ea9bb74b908ce82ae89416c61fa8f8ea5cfcc9368b1baac2da878d2"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+      "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar",
+      "sha256": "dede75a21306b65974ecd8f87114ff6970f09fb794157a4ca09ab25c888c2bfc"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+      "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar",
+      "sha256": "1bb99d091fba2597dc6d51193e9bbcf0d8447e7ed96bd8f0198b18152f09655c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/bcel/bcel/6.12.0/bcel-6.12.0.jar",
+      "sha256": "012639e3d2a3079f4c9c1350f18202cea83a7112ef210e50c93b0b771ad5d3af"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar",
+      "sha256": "4fccff8382aafc589962c4edb262f6aa595e34f1e11e61057d1c6a96e8fc7323"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/dom4j/dom4j/2.2.0/dom4j-2.2.0.jar",
+      "sha256": "3fae79e081096e1410645eb3557c63b79ca266d510ab479889511109becd1690"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-lang3/3.20.0/commons-lang3-3.20.0.jar",
+      "sha256": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/commons/commons-text/1.15.0/commons-text-1.15.0.jar",
+      "sha256": "58d2da30f058512a1e7f914e39241deca4dff5c27a085b4ed2faa9e7208067f6"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+      "sha256": "44508fd1576500688c790b190acdd16fec4f8c79a3e0b900afd70503cf055f55"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar",
+      "sha256": "28fa4befaddce5d7b79b07c68e7c12fa27c5d9282c4229528717971606661ea3"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/jaxen/jaxen/2.0.6/jaxen-2.0.6.jar",
+      "sha256": "3e2a755b283fd492fa4be204294c7abb7cd63ac94fb366baab9c7bb9afb00b6d"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/net/sf/saxon/Saxon-HE/12.10/Saxon-HE-12.10.jar",
+      "sha256": "b571af282f25d7301059f788b9a149aab8b5cdc14ef3d212dc5425d3dcbb9a97"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-api/2.26.1/log4j-api-2.26.1.jar",
+      "sha256": "f1810a4704ccce019d02bba029dc02a4f2ac0c997f647b465e7d409c1927f822"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.26.1/log4j-to-slf4j-2.26.1.jar",
+      "sha256": "6b10bc838a3c773b3fd02979c7ef4e7a443371fa89bda4415d89099bbee224df"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-simple/2.0.18/slf4j-simple-2.0.18.jar",
+      "sha256": "8268bd018a5709b07209e0d8ca6221a37584ba1bc12ba985b8335a82c648bdd0"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar",
+      "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3.jar",
+      "sha256": "1fe4d5b92f708dcdb82dbce12919e0171e6b5ca62c6dca6220483625098feb5f"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/org/xmlresolver/xmlresolver/5.3.3/xmlresolver-5.3.3-data.jar",
+      "sha256": "b0c487ad2f3e558be8d829c916d2458d10aca6a5bafa7a4d0524b70845e48a5c"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    }
+  ],
+  "sdkJars": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar": "2be45c641b841e81df87292e181f2c203500c5f0e9a1676f135927387f3cf40b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar": "ac24d43f123e103828a23a86f092a8709d87d309ad3212e798305654e951a8ce",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar": "02b43c47403dd0ef6dcd4573d0744bc6bae935edae016eb19f2d4ebb5eb33722",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar": "111cbc7a359b5597085b5328ab74c2f81dd40e7211d07bd12e6ffa83d9de99d9",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar": "59d73655cf077f154137e2d6f6f92c041a954c0b1c534c63800047a0d70a6947"
+  },
+  "actualCwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39804-cleanup-fixed-statement-four-main-v1",
+  "startedAtUTC": "2026-11-18T15:26:05.226292+00:00"
+}
