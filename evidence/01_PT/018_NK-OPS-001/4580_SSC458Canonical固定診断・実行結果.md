@@ -1,0 +1,5 @@
+# SSC-458 Canonical field／requestの固定診断結果
+
+Core 56afd159dc6919c1c2647730d9f17401defaf2d1、Unit source 34960a2c6d9db53c2cc82fa3242ead8ff7b9ab10、PG38516の旧6＋新1は全7件が初回成功・真正終了0。失敗・エラー・skip・選定内未実行0。PG38518でJDK25の元XML、全物理4、同一execの実行CRCを独立照合。PG38520の未フィルタは358命令、32分岐、62行、35メソッド、4クラスで未到達0。公開ABIは4型で一致し、class bytes変更は固定診断2型のみ。元HMACのwire・業務期待は保持した。
+
+PG38508/10 strict/NullAway、Checkstyle、format、SpotBugsを確認。PMD生3はSS324の欠落・empty区別2箇所と、元Testのcaller-owned配列破壊一箇所を個別非該当。BUG3228当該純値はCLOSED。古いOperationFingerprintTestの二期待はSS351へ横断反映済みでwhole動的PTはQA-056保留。構造化log、HMACとの接続、全451、P018-10正式受入は未成立。証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38520-p01810-canonical-value-diagnostics-independent-v1/manifest.json SHA256 3773b2fafddd62ae2308499197d0055c154ea6666cd5314448ab0c76b59140fd。

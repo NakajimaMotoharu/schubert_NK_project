@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5834",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P01810-CANONICAL-DIAGNOSTICS-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P01810-CANONICAL-DIAGNOSTICS-20261118",
+    "workAttributionKind": "ADDITIONAL_FINDING",
+    "workScope": "WBS-P018-10.03/2 CATALOG-006/007. Compare generic CanonicalField and CanonicalRequest diagnostics with independently specified fixed value and structured log separation. Record BUG3228/YKT2677 before correction and SSC458 on main. Then fixed text only, unchanged canonical field/header data and ownership. Existing ordinary CanonicalDataValueContractTest plus directed differential fixture in approved isolated closure; OperationFingerprintTest requires held KeyRing and no dynamic action on that fixture. Exit source-fixed JDK25 ordinary, independent CRC/XML/raw and exact unresolved scope.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37452-p01810-independent-case-catalog-v1/planned93-independent-cases.json",
+        "sha256": "b830c7bbbbb1375f5d11e1a67c22608e0ccf8f829febfa1b24fe12194471d54c"
+      },
+      {
+        "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+        "sha256": "1f46054a5f85ba0208e4a08dfa675dae1092add58d26773222cbbf5b9e77a03d"
+      },
+      {
+        "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+        "sha256": "c8715c7a911a1f5b0ef08eff5554d430835d578166ed5470be44cc08f264298d"
+      }
+    ],
+    "productionCoreMain": "56afd159dc6919c1c2647730d9f17401defaf2d1",
+    "source": "34960a2c6d9db53c2cc82fa3242ead8ff7b9ab10",
+    "wbsLeafIds": [
+      "WBS-P018-10.03",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P018-10.03/2",
+      "CATALOG-006",
+      "CATALOG-007"
+    ],
+    "run": "PG38520-p01810-canonical-value-diagnostics-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 1.25,
+      "high": 2.8
+    },
+    "groupCapPp": 3.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3228",
+    "relatedYkt": "YKT-2677",
+    "startEvent": "PGPT-20261008-5833",
+    "terminalAtUTC": "2026-11-18T03:58:34.696264+00:00",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38520-p01810-canonical-value-diagnostics-independent-v1/manifest.json",
+      "sha256": "3773b2fafddd62ae2308499197d0055c154ea6666cd5314448ab0c76b59140fd"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "productTestsExecuted": 7,
+    "newDefinitions": 1,
+    "scopeCodeCoverage": {
+      "INSTRUCTION": {
+        "covered": 358,
+        "missed": 0
+      },
+      "BRANCH": {
+        "covered": 32,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 62,
+        "missed": 0
+      },
+      "COMPLEXITY": {
+        "covered": 51,
+        "missed": 0
+      },
+      "METHOD": {
+        "covered": 35,
+        "missed": 0
+      },
+      "CLASS": {
+        "covered": 4,
+        "missed": 0
+      }
+    },
+    "firstProductRunSuccess": true,
+    "productRuns": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "caseDenominator": 7,
+    "completedAdditionalPriceForGroupPp": 1.25,
+    "additionalCompletedPriceTotalPp": 39.05,
+    "remainingCriteria": [
+      "QA056 original OperationFingerprintTest whole still not run; only approved expected literal source updated",
+      "Structured event callers and remaining redaction catalogue require their own evidence",
+      "Whole F03, whole 451, P018-10 formal acceptance"
+    ],
+    "quotaAfter": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "55afcb0df4312f997a14f219759927e2e56052ffab3a357ae6404e0e9e56394b",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T03:58:42.961000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 28,
+          "remainingPercent": 72,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 28,
+      "remainingPercent": 72,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true
+  }
+}
