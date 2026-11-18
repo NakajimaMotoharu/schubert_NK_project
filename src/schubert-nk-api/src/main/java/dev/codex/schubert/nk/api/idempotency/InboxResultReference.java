@@ -49,6 +49,6 @@ public record InboxResultReference(
 
   @Override
   public String toString() {
-    return "InboxResultReference[type=" + type + ", value=<redacted>]";
+    return "InboxResultReference[<redacted>]";
   }
 }
