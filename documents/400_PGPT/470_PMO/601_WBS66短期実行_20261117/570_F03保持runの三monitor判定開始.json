@@ -1,0 +1,73 @@
+{
+  "eventId": "PGPT-20261008-6091",
+  "groupId": "PGPT-WBS66-F03-MAINTENANCE-RUN-MONITORS-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T18:34:19.692000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 46,
+      "remainingPercent": 54,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-MAINTENANCE-RUN-MONITORS-20261119",
+    "workCategory": "REVIEW",
+    "workDetailCategory": "PGPT-WBS66-F03-MAINTENANCE-RUN-MONITORS-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2"
+    ],
+    "source": "7fdeb39ebcec6d53a1c80999fbec35e486f15896",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40050-f03-maintenance-run-monitors-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.3,
+      "base": 0.85,
+      "high": 2.2
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+        "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+        "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+        "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+        "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+        "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38446-f03-native-checkpoint-source-disposition-v1/manifest.json",
+        "sha256": "412559f07f307a1186cfe2735fd4621a1e746d7f0282f94ff0d573c0f70dfa93"
+      }
+    ],
+    "workScope": "Resolve three exactly archived MaintenanceRunFiles PMD source dispositions and fourth shared same-lock context. Verify exact source and class receipts, retain native owner guard and no live operation, source changes or PMD replay. Cross-reference P004-03 without double fee."
+  }
+}

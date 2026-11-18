@@ -1,0 +1,112 @@
+{
+  "actualExit": 0,
+  "toolSource": "7fdeb39ebcec6d53a1c80999fbec35e486f15896",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "source": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java",
+    "sha256": "5518c763e1ee78863d9071106b14f15e875b86ad7feac5bf504ffa446e22dc82"
+  },
+  "startEvent": "PGPT-20261008-6091",
+  "binding": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37254-monitor-lock113-criteria-return-v2/remaining-source-findings.json",
+      "sha256": "bae7ed79012520486991581a379ca89a792b8875252b84c8cc28d6eee31aecd5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36960-current287-root-pmd-v1/manifest.json",
+      "sha256": "33cabcf09b2ba0e6f996759cae2592771920828e637d78ea24a782380abc77a5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG37092-f03-971-independent-reconcile-v2/all-current-dispositions.json",
+      "sha256": "4f36a7f29feda4d9b0e66a31b68a1babc7efe1144af93dcbf2889e9500e1d0c4"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39862-service-db-state-lock-four-main-v1/manifest.json",
+      "sha256": "9433dae6e53e1d97a1b942175e930c315c118da9dea870cdffb0b26072e6a035"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39700-p00403-five-artifacts-current-lineage-v1/manifest.json",
+      "sha256": "3330f615bf9ba231d66eb5a2e89689a990aec2f6753ca7a4f99d1d252a21c7ab"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38446-f03-native-checkpoint-source-disposition-v1/manifest.json",
+      "sha256": "412559f07f307a1186cfe2735fd4621a1e746d7f0282f94ff0d573c0f70dfa93"
+    }
+  ],
+  "previousExactRawWithoutReplay": true,
+  "decisions": [
+    {
+      "historicalIndex": 149,
+      "rule": "AvoidSynchronizedStatement",
+      "line": 311,
+      "method": "execute",
+      "monitor": "scopeLock",
+      "decision": "APPLICABLE_OPEN_REQUIRES_SAME_OWNER_NATIVE_PROOF",
+      "reason": "Owns six nested directory references and callback lifetime through reverse releases. The outer monitor is held during I/O and callback."
+    },
+    {
+      "historicalIndex": 158,
+      "rule": "AvoidSynchronizedStatement",
+      "line": 1098,
+      "method": "perform",
+      "monitor": "stateLock",
+      "decision": "APPLICABLE_OPEN_REQUIRES_SAME_OWNER_NATIVE_PROOF",
+      "reason": "Checks active ownership, inspects begin state and runs the supplied work before return. The same monitor prevents terminal state changing during borrowed work."
+    },
+    {
+      "historicalIndex": 164,
+      "rule": "AvoidSynchronizedStatement",
+      "line": 1249,
+      "method": "finish",
+      "monitor": "stateLock",
+      "decision": "APPLICABLE_OPEN_REQUIRES_SAME_OWNER_NATIVE_PROOF",
+      "reason": "Performs real namespace verification, then marks the Session closed in finally. State lock is shared by work and terminal invalidation."
+    }
+  ],
+  "effect": {
+    "historicalUnclassifiedTotal": 45,
+    "previousApplicableOpen": 1,
+    "newApplicableOpen": 3,
+    "unclassifiedAfterReviewedSubset": 41,
+    "unrelatedRootStillUnclassified": 10
+  },
+  "physicalReceipt": {
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$CapturedFile.class": "6ad5f8b475484bba5a6fa11e208ee378b60b313d52c411c12299091636faab6f",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Decoder.class": "bdd19ee9295c6e149c88394b103feed5f683c3a24bb6f1e1e9ed40888b188dda",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Digests.class": "05ed020ed90a7a527f16537ff2000a0fe590ca604815cdf27f75340ce36e13e6",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Graph.class": "8f0b90b4d31058a331af6d09c4245026c833349dd5e328d5d1f4ee13f4c053af",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Inventory.class": "1f9d1479d25ba1e281b420b6a02554c1657fc2e56be5afa49e2d06b2a428e84f",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Io.class": "4f9cac78b481f4e1f5fc9059a142d662faeb13de451ae9d73c735096210019fa",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Mutation.class": "ccc01680ff8b1c77a351d4e312f1e5c3075ac2705cdb16cc07a7d19bf00b0256",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$NioIo.class": "fa14830e830ffa85bc430f87de9c64b9e445cb6ed2e7a37309c1c757a62747e6",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Operation.class": "03b84a05752d325cc13af9bc9f657a93e382053065f190361628a622efcc0ed0",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$RetirementResult.class": "c43411986df68060b30d92a3eef745a33387b6bd2d713df2bfda7314720a5477",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Session.class": "5f3862af8b08fe133a52d79939fb8c547a6912733dea73bcb49b17accb1d3e20",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$StartupOriginal.class": "0ef3b216ba4aa919df4cb7be63240f26e782cbefc1c61ac6e09d384d2b2782f5",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles$Work.class": "1014f0726e8f616857a5cb1b2cd9d78c392aac35c9f1b4ab22d0c6fcc412cec7",
+    "dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.class": "2dc3999210e981f4b22743549d9ea4c676ab45da4646020b1feeadb3f0a5c33c"
+  },
+  "p004ReferenceSource": "0e93b5a35d126bdf2500d0820082d7c2e4ff5db7",
+  "limitedSourceEqualityProven": true,
+  "preparationGuardExit1": "P004-03 receipt has an older Core; verify the exact target SHA independently",
+  "sharedMonitorCompanion": {
+    "method": "invalidate",
+    "oldIndex": 165,
+    "localStatementDecisionUnchanged": true,
+    "futureChangeCohort": "perform/finish/invalidate"
+  },
+  "design": {
+    "path": "documents/300_SS/340_batch\u30fb\u57fa\u76e4/343_\u8a2d\u5b9afile\u30fbdirectory\u30fb\u521d\u671fdata\u30fbmigration\u30fb\u5207\u623b\u3057\u8a2d\u8a08.md",
+    "source": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774",
+    "sha256": "ac1968b36bdc90e5892bb9239eff49868b4bf977945724e02abe2876db6c7399"
+  },
+  "nativeOperations": 0,
+  "productTests": 0,
+  "staticExecutions": 0,
+  "coverageMeasured": 0,
+  "finalP00403Accepted": false,
+  "formalUpdated": false,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T18:35:23.810258+00:00"
+}
