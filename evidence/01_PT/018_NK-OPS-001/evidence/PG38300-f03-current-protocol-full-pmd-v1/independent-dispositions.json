@@ -1,0 +1,79 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T00:14:54.685576+00:00",
+  "source": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "rawManifest": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38300-f03-current-protocol-full-pmd-v1/manifest.json",
+    "sha256": "75bf158ae41ec8557cc03edcd19730a416c356f701f8b08b556bb8e93b04bd2b"
+  },
+  "exactReportXmlMatched": true,
+  "originalToolExit": 4,
+  "rawFindings": 3,
+  "individualNotApplicable": 3,
+  "applicable": 0,
+  "unclassified": 0,
+  "suppressionAndRuleEdits": 0,
+  "productTestsExecuted": 0,
+  "review": [
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+      "line": 170,
+      "column": 29,
+      "rule": "UseConcurrentHashMap",
+      "method": "decodeArea",
+      "sourceSha256": "41521248b2ad34c0d21fe00f75d9b7982fb023d9e9ae29ad6f87650b3bd559e9",
+      "decision": "NOT_APPLICABLE_AT_EXACT_SITE",
+      "basis": "Invocation-local allocation. Only the invoking loop changes it. FieldValueSet copies entries in encounter order to its private LinkedHashMap and wraps that defensive copy; the original mutable map does not escape. Concurrent access is absent and changing to ConcurrentHashMap would drop the order guarantee.",
+      "proof": [
+        {
+          "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java",
+          "sha256": "2c292124a30ee4ed275ad2d43818b46c73c8f5648edd60914992da786e6f555b"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+      "line": 22,
+      "column": 9,
+      "rule": "CompareObjectsWithEquals",
+      "method": "FailedJmsIsolationException",
+      "sourceSha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb",
+      "decision": "NOT_APPLICABLE_AT_EXACT_SITE",
+      "basis": "Exception payload equality is irrelevant to the contract: the identity guard records a distinct protocol failure exactly once, even if distinct objects compare equal. The result follows PT-JMS-ISO009–012.",
+      "proof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2619_Protocol例外carrier元whole八件_単体テスト仕様書.md",
+          "sha256": "d303ab9c202901bb3925d0f29640bc4e07b4bffcba6cf588fba83388d949b65e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14258-protocol-carrier-whole-eight-post-v1/manifest.json",
+          "sha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a"
+        }
+      ]
+    },
+    {
+      "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+      "line": 18,
+      "column": 9,
+      "rule": "CompareObjectsWithEquals",
+      "method": "UnconfirmedJmsRollbackException",
+      "sourceSha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938",
+      "decision": "NOT_APPLICABLE_AT_EXACT_SITE",
+      "basis": "The guard compares object identity for the two failure roles; equals could incorrectly discard a distinct rollback failure. PT-JMS-UNC005–008 explicitly fixes this independent outcome.",
+      "proof": [
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/2619_Protocol例外carrier元whole八件_単体テスト仕様書.md",
+          "sha256": "d303ab9c202901bb3925d0f29640bc4e07b4bffcba6cf588fba83388d949b65e"
+        },
+        {
+          "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG14258-protocol-carrier-whole-eight-post-v1/manifest.json",
+          "sha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a"
+        }
+      ]
+    }
+  ],
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newAcceptance": 0,
+  "formalUpdated": false
+}

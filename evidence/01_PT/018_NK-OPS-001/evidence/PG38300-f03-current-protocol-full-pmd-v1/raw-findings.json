@@ -1,0 +1,48 @@
+[
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java",
+    "beginline": "170",
+    "endline": "170",
+    "begincolumn": "29",
+    "endcolumn": "59",
+    "rule": "UseConcurrentHashMap",
+    "ruleset": "Multithreading",
+    "package": "dev.codex.schubert.nk.protocol.codec",
+    "class": "PayloadCodec",
+    "method": "decodeArea",
+    "variable": "values",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+    "priority": "3",
+    "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java",
+    "beginline": "22",
+    "endline": "22",
+    "begincolumn": "9",
+    "endcolumn": "35",
+    "rule": "CompareObjectsWithEquals",
+    "ruleset": "Error Prone",
+    "package": "dev.codex.schubert.nk.protocol.transport",
+    "class": "FailedJmsIsolationException",
+    "method": "FailedJmsIsolationException",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+    "priority": "3",
+    "message": "Use equals() to compare object references."
+  },
+  {
+    "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java",
+    "beginline": "18",
+    "endline": "18",
+    "begincolumn": "9",
+    "endcolumn": "35",
+    "rule": "CompareObjectsWithEquals",
+    "ruleset": "Error Prone",
+    "package": "dev.codex.schubert.nk.protocol.transport",
+    "class": "UnconfirmedJmsRollbackException",
+    "method": "UnconfirmedJmsRollbackException",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+    "priority": "3",
+    "message": "Use equals() to compare object references."
+  }
+]
