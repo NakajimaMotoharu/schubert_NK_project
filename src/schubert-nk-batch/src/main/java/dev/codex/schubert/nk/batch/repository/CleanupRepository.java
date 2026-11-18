@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Objects;
 import javax.annotation.WillClose;
 import org.jspecify.annotations.NullMarked;
@@ -21,6 +22,45 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class CleanupRepository {
+  private static final String CLEANUP_COUNTS =
+      "select target_count,deleted_count,skipped_count,reason_code from ";
+  private static final Map<CleanupKind, StatementFactory> FIXED_QUERIES =
+      Map.of(
+          CleanupKind.NOTIFICATIONS,
+          c ->
+              c.prepareStatement(
+                  CLEANUP_COUNTS + "schubert.maintenance_cleanup_notifications(?,?,?)"),
+          CleanupKind.QUESTIONS,
+          c -> c.prepareStatement(CLEANUP_COUNTS + "schubert.maintenance_cleanup_questions(?,?,?)"),
+          CleanupKind.SESSIONS,
+          c -> c.prepareStatement(CLEANUP_COUNTS + "schubert.maintenance_cleanup_sessions(?,?,?)"),
+          CleanupKind.OUTBOX,
+          c ->
+              c.prepareStatement(
+                  CLEANUP_COUNTS + "schubert.maintenance_cleanup_message_stores(?,?,?)"),
+          CleanupKind.LOGS,
+          c -> c.prepareStatement(CLEANUP_COUNTS + "schubert.maintenance_cleanup_logs(?,?,?)"),
+          CleanupKind.WEB_RECEIPTS,
+          c ->
+              c.prepareStatement(
+                  CLEANUP_COUNTS + "schubert.maintenance_cleanup_web_receipt_references(?,?,?)"),
+          CleanupKind.BATCH_RUNS,
+          c ->
+              c.prepareStatement(CLEANUP_COUNTS + "schubert.maintenance_cleanup_batch_runs(?,?,?)"),
+          CleanupKind.INBOX_PROGRESS,
+          c ->
+              c.prepareStatement(
+                  CLEANUP_COUNTS + "schubert.maintenance_cleanup_inbox_progress(?,?,?)"),
+          CleanupKind.LOG_PROGRESS,
+          c ->
+              c.prepareStatement(
+                  CLEANUP_COUNTS + "schubert.maintenance_cleanup_log_progress(?,?,?)"));
+
+  @FunctionalInterface
+  private interface StatementFactory {
+    PreparedStatement prepare(Connection connection) throws SQLException;
+  }
+
   private final Connection connection;
 
   public CleanupRepository(Connection connection) {
@@ -113,35 +153,8 @@ public final class CleanupRepository {
   }
 
   private PreparedStatement prepare(CleanupKind kind) throws SQLException {
-    return switch (kind) {
-      case NOTIFICATIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_notifications(?,?,?)");
-      case QUESTIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_questions(?,?,?)");
-      case SESSIONS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_sessions(?,?,?)");
-      case OUTBOX ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_message_stores(?,?,?)");
-      case LOGS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_logs(?,?,?)");
-      case WEB_RECEIPTS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_web_receipt_references(?,?,?)");
-      case BATCH_RUNS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_batch_runs(?,?,?)");
-      case INBOX_PROGRESS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_inbox_progress(?,?,?)");
-      case LOG_PROGRESS ->
-          connection.prepareStatement(
-              "select target_count,deleted_count,skipped_count,reason_code from schubert.maintenance_cleanup_log_progress(?,?,?)");
-    };
+    return Objects.requireNonNull(FIXED_QUERIES.get(kind), "fixed cleanup query")
+        .prepare(connection);
   }
 
   private static void closeRow(@WillClose ResultSet row, @Nullable Throwable primary)
