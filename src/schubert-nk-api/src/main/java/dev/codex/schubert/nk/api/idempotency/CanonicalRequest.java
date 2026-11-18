@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Redacted NKOP1 request input, immutable during use; owner closes secret fields after all lookups.
  *
- * <p>Trace: NK-MSG-002, SS 324 §3, PT-IDEM-001/002.
+ * <p>Trace: NK-MSG-002, SS 324 §3, SS351/SSC-458, PT-IDEM-001/002.
  */
 public record CanonicalRequest(
     String ownerScope,
@@ -53,10 +53,6 @@ public record CanonicalRequest(
 
   @Override
   public String toString() {
-    return "CanonicalRequest[layoutId="
-        + layoutId
-        + ", layoutVersion="
-        + layoutVersion
-        + ", owner/target/fields=<redacted>]";
+    return "CanonicalRequest[<redacted>]";
   }
 }

@@ -9,7 +9,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * One layout-ordered field in the NKOP1 fingerprint input.
  *
- * <p>Trace: NK-MSG-002, SS 324 §3, PT-IDEM-001/002.
+ * <p>Trace: NK-MSG-002, SS 324 §3, SS351/SSC-458, PT-IDEM-001/002.
  */
 public record CanonicalField(String name, String typeVersion, byte @Nullable [] value)
     implements AutoCloseable {
@@ -57,7 +57,7 @@ public record CanonicalField(String name, String typeVersion, byte @Nullable [] 
 
   @Override
   public String toString() {
-    return "CanonicalField[name=" + name + ", typeVersion=" + typeVersion + ", value=<redacted>]";
+    return "CanonicalField[<redacted>]";
   }
 
   /** Terminal owner cleanup; do not use this field in a new fingerprint after close. BUG-027. */
