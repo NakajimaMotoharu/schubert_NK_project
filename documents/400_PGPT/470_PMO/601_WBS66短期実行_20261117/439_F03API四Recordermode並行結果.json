@@ -1,0 +1,145 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5968",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "1446286379d6d88a2444516d9ffce308615d69e82a5dcd65cdc0ae5d8bc0fc0c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T11:33:45.023000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 35,
+          "remainingPercent": 65,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T11:32:48.874034+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-FOUR-API-RECORDERS-EXACT-MODE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-FOUR-API-RECORDERS-EXACT-MODE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "Four original in-memory recorders (MQ Message/MQ Duration/InboxReplay/DB Query Duration) whole34. Fixed literal independent mode collisions in existing negative cases, one MqMessage finite executor with ownership after end; none of DB/JMS/native or held kind. Exact first-run and class/raw evidence; support leaves remain separate.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1712_DbQueryDurationMetric_単体テスト仕様書.md",
+        "sha256": "9688f9465c36013e30bb67db40a1dd82e0a1c6d79803ff1d9e5b62d3ebb2d45d"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1718_MqMessageMetric_単体テスト仕様書.md",
+        "sha256": "cd5f3470a75aad312d0746b3b278bec105df0d691842bc161c73a25b606480c6"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2671_供給イベントcounter原whole32_単体テスト仕様.md",
+        "sha256": "90fdbd91b6dde9b658a45d84bbb84c41a2604ad4f15f3e28acae915c9feade62"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4647_BUG3261APIGC固定mode不正値仕様.md",
+        "sha256": "6bdae917374fc36e5f323c25d96ef5fab850dee876b3c9a2642457e697241439"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39328-f03-mq-recorder-mode-independent-v1/manifest.json",
+        "sha256": "c5d579048b8a4bbe3b1f8ba302dac5de8f657d6a0a6facfa580c5c244f892f83"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "3035affac8346094e485f2573704add4659c2939",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2691",
+      "YKT-2387",
+      "BUG-3278"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "run": "PG39418-f03-four-api-recorder-mode-independent-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 2.1,
+      "high": 4.4
+    },
+    "groupCapPp": 6.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaBefore": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5967",
+    "fixedTestSource": "56c16517777ee2af66d27e11a809a4165cdd6bfc",
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39418-f03-four-api-recorder-mode-independent-v1/manifest.json",
+      "sha256": "d171dab4bc27902c99b6e57b264057fbfedf40bef708f3b4fbc653a137b82b21"
+    },
+    "technical": {
+      "tests": 34,
+      "successful": 34,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 34,
+      "firstProductSuccessful": 34,
+      "newTestDefinitions": 0,
+      "newlyExecutedDistinct": 34,
+      "physical": 24,
+      "positiveCrc": 18,
+      "staticApplicable": 0,
+      "staticRawPmd": 26,
+      "unfilteredTargetModeBranchCounts": [
+        14,
+        16,
+        16,
+        18
+      ],
+      "remainingHelperRawSites": 105,
+      "ordinaryModeHorizontal": 18,
+      "ordinaryModeHorizontalTotal": 20,
+      "cumulativeOrdinarySuccess": 773,
+      "cumulativeDistinct": 588,
+      "cumulativeNewDefinitions": 56
+    },
+    "remainingCriteria": [
+      "exact offline eligible whole closure not present for two observation types",
+      "F03 six modules / 451",
+      "related generated/helper counters in this exec"
+    ]
+  }
+}
