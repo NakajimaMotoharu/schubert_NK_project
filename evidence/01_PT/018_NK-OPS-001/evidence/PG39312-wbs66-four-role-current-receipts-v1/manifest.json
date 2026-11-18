@@ -1,0 +1,179 @@
+{
+  "actualExit": 0,
+  "run": "PG39312-wbs66-four-role-current-receipts-v1",
+  "id": "W66-HANDOFF-20261118-05",
+  "source": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "inspectionHead": "ebb9f93e0e9dd704af87d8467a8fda5e7f135e0f",
+  "startEvent": "PGPT-20261008-5955",
+  "deadlineJST": "2026-11-25T23:29:00+09:00",
+  "criteriaByRole": {
+    "WBS-F02": [
+      "WBS-F02/reuse",
+      "WBS-F02/criterion/contract",
+      "WBS-F02/criterion/scope",
+      "WBS-F02/criterion/quality"
+    ],
+    "WBS-F03": [
+      "WBS-F03/reuse",
+      "WBS-F03/criterion/contract",
+      "WBS-F03/criterion/scope",
+      "WBS-F03/criterion/quality"
+    ],
+    "WBS-C02": [
+      "WBS-C02/reuse",
+      "WBS-C02/criterion/contract",
+      "WBS-C02/criterion/scope",
+      "WBS-C02/criterion/quality"
+    ],
+    "WBS-F04": [
+      "WBS-F04/reuse",
+      "WBS-F04/criterion/contract",
+      "WBS-F04/criterion/scope",
+      "WBS-F04/criterion/quality"
+    ]
+  },
+  "previousReceipt": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39018-wbs66-four-role-current-delta-v1/manifest.json",
+    "sha256": "c607b37636baf62db1cae18501adbc00d323adacfa90eae296c9e46b9886c233"
+  },
+  "f02": {
+    "fourModules": [
+      "protocol",
+      "storage",
+      "bootstrap",
+      "batch"
+    ],
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39126-f02-current-four-backup-independent-v1/manifest.json",
+      "sha256": "6ec0f964aed1265fb40a953d54cbb3ff0b94d72b524e129d35eedf2f50dd83b5"
+    },
+    "fourModulesMainAndPomInputsExact": true,
+    "checkedGitPaths": [
+      "src/schubert-nk-protocol/src/main",
+      "src/schubert-nk-protocol/pom.xml",
+      "src/schubert-nk-storage/src/main",
+      "src/schubert-nk-storage/pom.xml",
+      "src/schubert-nk-bootstrap/src/main",
+      "src/schubert-nk-bootstrap/pom.xml",
+      "src/schubert-nk-batch/src/main",
+      "src/schubert-nk-batch/pom.xml",
+      "pom.xml",
+      "tools/quality/static/checkstyle.xml",
+      "tools/quality/static/pmd.xml"
+    ],
+    "onlyApiMainChanges": [
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.java",
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage.java"
+    ],
+    "fourModuleTestDeltasKeptSeparate": [
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BackupPairPortTest.java",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryPortTest.java"
+    ],
+    "mainCount": 482,
+    "physicalCount": 1102,
+    "buildActualExit": 0,
+    "architectureActualExit": 1,
+    "knownFrameworkFence": [
+      [
+        "FRAMEWORK_FENCE",
+        "dev.codex.schubert.nk.storage.StorageIoException",
+        "java.sql.SQLException"
+      ]
+    ],
+    "migratedUpperSites": 29,
+    "remainingUpperSites": 75,
+    "remaining": "Six typed build and boundary require QA056. Storage direct three and old entrance stay open. Actual runtime/451 missing."
+  },
+  "f03": {
+    "receipt": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39310-f03-current-source-lint-join-v3/manifest.json",
+      "sha256": "dbaa8869cb19a769ca8caae9957f3f74299856cac642eb8d532aac78a4380f9a"
+    },
+    "main": {
+      "total": 1027,
+      "sameEligible": 992,
+      "storedIndependentStorageDelta": 2,
+      "existingIndividual": 29,
+      "newRequired": 0,
+      "qa056Hold": 4,
+      "currentEligibleConfirmed": 1023
+    },
+    "test": {
+      "total": 1133,
+      "confirmed": 1101,
+      "baselineHeld": 32,
+      "revisedInputs": 15,
+      "existingIndividual": 14,
+      "legacySourceOnly": 1,
+      "newRequired": 0
+    },
+    "remaining": "Six full typed quality, PMD45 and Root11, actual 451. Source-only evidence is scoped. QA056/057/058 remain."
+  },
+  "c02": {
+    "templateCount": 14,
+    "templateHashes": {
+      "src/deployment/systemd/artemis.service": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266",
+      "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e",
+      "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc",
+      "src/deployment/systemd/optional/inbox-inspector-context-previous.conf": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13",
+      "src/deployment/systemd/optional/inbox-inspector-response-previous.conf": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4",
+      "src/deployment/systemd/schubert-nk-api.service.template": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "src/deployment/systemd/schubert-nk-backup.service.template": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+      "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+      "src/deployment/systemd/schubert-nk-cleanup.service.template": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+      "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+      "src/deployment/systemd/schubert-nk-inbox-inspector.service": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8",
+      "src/deployment/systemd/schubert-nk-morning-controller.service.template": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+      "src/deployment/systemd/schubert-nk-morning.target.template": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+      "src/deployment/systemd/schubert-nk-web.service.template": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+    },
+    "actualRuntimeConfirmed": false,
+    "remaining": "Effective units and Inspector terminal with native ownership, correct host and required 451."
+  },
+  "f04": {
+    "authenticated": false,
+    "previousAuthBodyDidNotRun": true,
+    "previousActualExit": 255,
+    "remaining": "QA058 access or approved independently attested current source, boot, capacity, owner and terminal."
+  },
+  "ssc447Historical": {
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "unitSource": "0601086e6ae95ba09c4fc137cff45ffa7a9ba239",
+    "tests": 152,
+    "success": 152,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "physical": 175,
+    "wholeRawMiss": {
+      "line": 4,
+      "method": 4,
+      "class": 0,
+      "branch": 58,
+      "instruction": 85
+    },
+    "rawTargetParentsFull": true,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    "laterProtocolSeparate": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+      "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+    }
+  },
+  "externalAcknowledgement": null,
+  "externalActions": 0,
+  "productTestsStarted": 0,
+  "newStaticActions": 0,
+  "preparatoryEvidenceQueryPriorExit": 1,
+  "preparatoryEvidenceQueryAction": "Narrowed comparison from whole module source plus tests to Main and POM after identifying two test-only differences. Tests remain separate.",
+  "formalAcceptance": 17,
+  "formalDenominator": 190,
+  "formalAcceptanceDelta": 0,
+  "officialPt": 1964,
+  "officialScope": 53,
+  "effortCompletionRate": null,
+  "terminalAtUTC": "2026-11-18T10:58:52.971870+00:00"
+}
