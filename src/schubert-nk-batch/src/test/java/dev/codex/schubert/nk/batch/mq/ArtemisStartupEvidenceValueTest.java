@@ -29,7 +29,7 @@ final class ArtemisStartupEvidenceValueTest {
     var broker = new HashMap<>(EXPECTED_FIELDS);
     var acceptor = new HashMap<>(EXPECTED_FIELDS);
     var permissions = new HashMap<>(Map.of(PERMISSION, true));
-    var roles = new HashMap<>(Map.of(ROLE, permissions));
+    var roles = new HashMap<String, Map<String, Boolean>>(Map.of(ROLE, permissions));
     var pressure = new HashMap<>(Map.of(ADDRESS, PRESSURE));
     var evidence =
         new Evidence(
