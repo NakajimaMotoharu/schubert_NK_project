@@ -36,6 +36,10 @@ PHASES = {
         '572_P020*', E/'PG40035-p020-l01-required-actions-v2', 182, 187),
     'PG40057-p020-error-disclosure187-v2': (
         '572_P020*', E/'PG40035-p020-l01-required-actions-v2', 182, 187),
+    'PG40074-p020-o01-restart192-v1': (
+        '582_P020*', E/'PG40057-p020-error-disclosure187-v2', 187, 192),
+    'PG40075-p020-o01-restart192-v2': (
+        '582_P020*', E/'PG40057-p020-error-disclosure187-v2', 187, 192),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))

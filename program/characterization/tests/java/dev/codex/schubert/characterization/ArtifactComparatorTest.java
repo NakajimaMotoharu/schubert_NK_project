@@ -75,6 +75,16 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_CACHE_BEFORE =
       "no-cache, no-store, max-age=0, must-revalidate";
   private static final String FIXTURE_CACHE_AFTER = "no-store";
+  private static final String FIXTURE_DIF_014 = "DIF-014";
+  private static final String FIXTURE_RESTART_FIELD = "session.restart";
+  private static final String FIXTURE_RESTART_STATE = "sessionAfterRestart";
+  private static final String FIXTURE_RESTART_STATE_POINTER = "/" + FIXTURE_RESTART_STATE;
+  private static final String FIXTURE_RESTART_INVALIDATED = "sessionInvalidated";
+  private static final String FIXTURE_RESTART_INVALIDATED_POINTER =
+      "/" + FIXTURE_RESTART_INVALIDATED;
+  private static final String FIXTURE_RESTART_CURRENT = "redirect-login";
+  private static final String FIXTURE_RESTART_NK = "authenticated";
+  private static final String FIXTURE_RESTART_REQUIRED = "FIXED_DIF_REQUIRED:CHR-O01:";
   private static final String FIXTURE_COUNT = "observedActiveSessionCount";
   private static final String FIXTURE_COUNT_POINTER = "/observedActiveSessionCount";
   private static final String FIXTURE_OLDEST = "oldestSessionInvalidated";
@@ -257,15 +267,6 @@ class ArtifactComparatorTest {
               "limited",
               "WARN date MQ SYSTEM BATCH"),
           new Oracle(
-              "DIF-014",
-              "CHR-O01",
-              "session.restart",
-              FIXTURE_DIFFERENCE,
-              FIXTURE_SEMANTIC,
-              "session.restart",
-              "in-memory invalidated",
-              "encrypted persistent continuation"),
-          new Oracle(
               FIXTURE_DIF015,
               FIXTURE_CHR_A01,
               FIXTURE_HTTP_PATH,
@@ -296,8 +297,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(24, report.path("rawDifferenceCount").asInt());
-    assertEquals(25, report.path("observationCount").asInt());
+    assertEquals(25, report.path("rawDifferenceCount").asInt());
+    assertEquals(26, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -311,8 +312,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(24, direct.rawDifferenceCount());
-    assertEquals(25, direct.observationCount());
+    assertEquals(25, direct.rawDifferenceCount());
+    assertEquals(26, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -345,7 +346,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(25, result.observationCount());
+    assertEquals(26, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -491,7 +492,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(24, result.unregisteredDifferences().size());
+    assertEquals(25, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -1025,6 +1026,89 @@ class ArtifactComparatorTest {
   }
 
   @Test
+  void acceptsTheApprovedRestartSessionOutcomeAndInvalidationEvidence() throws Exception {
+    var result = compare(fixture("valid-restart-session"));
+    assertTrue(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_014));
+    assertTrue(result.unregisteredDifferences().isEmpty());
+  }
+
+  @Test
+  void requiresTheRestartInvalidationObservationSeparatelyFromOutcome() throws Exception {
+    Fixture fixture = fixture("missing-restart-invalidation-observation");
+    removeObservation(fixture, FIXTURE_CHR_O01, FIXTURE_RESTART_INVALIDATED_POINTER);
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(
+        result.failures(), FIXTURE_RESTART_REQUIRED + FIXTURE_RESTART_INVALIDATED_POINTER);
+    assertEquals(
+        List.of(FIXTURE_CHR_O01 + ":" + FIXTURE_RESTART_INVALIDATED_POINTER),
+        result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsASelfReportedNewLoginAfterRestart() throws Exception {
+    Fixture fixture = fixture("restart-required-a-new-login");
+    String requiresLogin = "new-login-required";
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_O01_JSON),
+        root -> root.put(FIXTURE_RESTART_STATE, requiresLogin));
+    reviseRestartClaim(fixture, FIXTURE_RESTART_STATE_POINTER, TextNode.valueOf(requiresLogin));
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_NK);
+    assertEquals(
+        List.of(FIXTURE_CHR_O01 + ":" + FIXTURE_RESTART_STATE_POINTER),
+        result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsTextualAndNullInvalidationValuesEvenWhenSelfReported() throws Exception {
+    for (JsonNode invalid : List.of(TextNode.valueOf("false"), NullNode.getInstance())) {
+      Fixture fixture = fixture("invalid-restart-boolean-" + invalid.getNodeType());
+      mutate(
+          fixture.nk().resolve(FIXTURE_CHR_O01_JSON),
+          root -> root.set(FIXTURE_RESTART_INVALIDATED, invalid));
+      reviseRestartClaim(fixture, FIXTURE_RESTART_INVALIDATED_POINTER, invalid);
+      var result = compare(fixture);
+      assertFalse(result.passed());
+      assertContains(result.failures(), FIXTURE_FIXED_NK);
+      assertEquals(
+          List.of(FIXTURE_CHR_O01 + ":" + FIXTURE_RESTART_INVALIDATED_POINTER),
+          result.unregisteredDifferences());
+    }
+  }
+
+  @Test
+  void rejectsRestartDifferenceClaimsAgainstAnUnrelatedField() throws Exception {
+    Fixture fixture = fixture("restart-approval-for-other-field");
+    String field = "restartUnrelatedFlag";
+    String pointer = "/" + field;
+    mutate(fixture.current().resolve(FIXTURE_CHR_O01_JSON), root -> root.put(field, true));
+    mutate(fixture.nk().resolve(FIXTURE_CHR_O01_JSON), root -> root.put(field, false));
+    mutate(
+        fixture.observations(),
+        root ->
+            ((ArrayNode) root.path(FIXTURE_OBSERVATIONS))
+                .add(restartObservation(pointer, BooleanNode.TRUE, BooleanNode.FALSE)));
+    var result = compare(fixture);
+    assertFalse(result.passed());
+    assertContains(result.failures(), FIXTURE_FIXED_POINTER);
+    assertEquals(List.of(FIXTURE_CHR_O01 + ":" + pointer), result.unregisteredDifferences());
+  }
+
+  private static void reviseRestartClaim(Fixture fixture, String pointer, JsonNode value)
+      throws IOException {
+    mutate(
+        fixture.observations(),
+        root -> {
+          var claims = (ArrayNode) root.path(FIXTURE_OBSERVATIONS);
+          ((ObjectNode) claims.get(findObservation(claims, FIXTURE_CHR_O01, pointer)))
+              .set("expectedNk", value);
+        });
+  }
+
+  @Test
   void rejectsStringCountEvenWhenItsCharactersMatchTheApprovedNumber() throws Exception {
     Fixture fixture = fixture("session-count-is-not-numeric");
     mutate(fixture.nk().resolve(FIXTURE_CHR_A02_JSON), root -> root.put(FIXTURE_COUNT, "2"));
@@ -1554,6 +1638,8 @@ class ArtifactComparatorTest {
             FIXTURE_NK_SEARCH_TITLE));
     addCacheObservation(
         currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
+    addRestartObservations(
+        currentArtifacts.get(FIXTURE_CHR_O01), nkArtifacts.get(FIXTURE_CHR_O01), observationItems);
     ObjectNode currentGame = currentArtifacts.get(FIXTURE_CHR_S02);
     ObjectNode nkGame = nkArtifacts.get(FIXTURE_CHR_S02);
     currentGame
@@ -1632,6 +1718,35 @@ class ArtifactComparatorTest {
             FIXTURE_CACHE_POINTER,
             FIXTURE_CACHE_BEFORE,
             FIXTURE_CACHE_AFTER));
+  }
+
+  private static void addRestartObservations(
+      ObjectNode current, ObjectNode nk, ArrayNode observations) {
+    current
+        .put(FIXTURE_RESTART_STATE, FIXTURE_RESTART_CURRENT)
+        .put(FIXTURE_RESTART_INVALIDATED, true);
+    nk.put(FIXTURE_RESTART_STATE, FIXTURE_RESTART_NK).put(FIXTURE_RESTART_INVALIDATED, false);
+    observations.add(
+        restartObservation(
+            FIXTURE_RESTART_STATE_POINTER,
+            TextNode.valueOf(FIXTURE_RESTART_CURRENT),
+            TextNode.valueOf(FIXTURE_RESTART_NK)));
+    observations.add(
+        restartObservation(
+            FIXTURE_RESTART_INVALIDATED_POINTER, BooleanNode.TRUE, BooleanNode.FALSE));
+  }
+
+  private static ObjectNode restartObservation(String pointer, JsonNode current, JsonNode nk) {
+    return observation(
+        FIXTURE_DIF_014,
+        FIXTURE_CHR_O01,
+        FIXTURE_RESTART_FIELD,
+        FIXTURE_DIFFERENCE,
+        FIXTURE_SEMANTIC,
+        FIXTURE_RESTART_FIELD,
+        pointer,
+        current,
+        nk);
   }
 
   private static void addSessionObservations(

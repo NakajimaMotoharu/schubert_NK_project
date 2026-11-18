@@ -29,7 +29,8 @@ def main(unit_name, out_name, prior_same_main=None):
         (170,'PG39990-p020-search-empty170-v1'),
         (176,'PG40014-p020-game-onchange176-v1'),
         (182,'PG40034-p020-l01-required-actions-v1'),(182,'PG40035-p020-l01-required-actions-v2'),
-        (187,'PG40056-p020-error-disclosure187-v1'),(187,'PG40057-p020-error-disclosure187-v2')}
+        (187,'PG40056-p020-error-disclosure187-v1'),(187,'PG40057-p020-error-disclosure187-v2'),
+        (192,'PG40074-p020-o01-restart192-v1'),(192,'PG40075-p020-o01-restart192-v2')}
     assert actual['stages']['unit']['actualExit']==0
     snapshot=Path(begin['snapshot'])
     classes=Path(actual['classesDir'])

@@ -41,6 +41,7 @@ public final class ArtifactComparator {
   private static final String ERROR_CASE = "CHR-E01";
   private static final List<String> ERROR_NON_DISCLOSURE =
       List.of("secretLeak", "absolutePathLeak", "exceptionClassLeak");
+  private static final String RESTART_DIFFERENCE = "DIF-014";
   private static final String SESSION_DIFFERENCE = "DIF-016";
   private static final String SESSION_CASE = "CHR-A02";
   private static final String LOGIN_TITLE = "CHR-A01:/title";
@@ -83,6 +84,10 @@ public final class ArtifactComparator {
           Map.of(
               GAME_CHANGE_CASE + ":/gameOnchange",
               List.of(TextNode.valueOf("this.form.submit()"), NullNode.getInstance())),
+          RESTART_DIFFERENCE,
+          Map.of(
+              "CHR-O01:/sessionAfterRestart", textPair("redirect-login", "authenticated"),
+              "CHR-O01:/sessionInvalidated", List.of(BooleanNode.TRUE, BooleanNode.FALSE)),
           SESSION_DIFFERENCE,
           Map.of(
               "CHR-A02:/observedActiveSessionCount",
