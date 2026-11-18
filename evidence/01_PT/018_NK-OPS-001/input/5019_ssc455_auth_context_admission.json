@@ -1,0 +1,300 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38424-SSC455-AUTH-CONTEXT",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38418-ssc455-auth-context-prepare-v1/manifest.json",
+    "sha256": "0065d298ee3f9bbb5e350602e5e2af6aac94241f5c846cd2daf8241e33d19755"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38420-ssc455-auth-context-static-v1/manifest.json",
+    "sha256": "d6e81f3b7b4d7ef7497f753812301faa55e594c80e74864bf091ff7e51d2b021"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+      "rule": "UseConcurrentHashMap",
+      "sourceAnchor": "Map<String, byte[]> copies = new HashMap<>();",
+      "sourceLine": 82,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Constructor-confined HashMap never escapes: all key/version validation precedes copying, final keys stores Map.copyOf and local copies is not retained. Mutable key arrays are private and every encrypt/decrypt/close is guarded by private stateLock. ConcurrentHashMap would not add safety or enforce that lock. New factory is only stored, not invoked in the constructor, so the constructor-local map still never escapes and nullable factory is rejected before copying.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 43,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 43,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "AvoidSynchronizedStatement",
+      "sourceAnchor": "synchronized (codec) {",
+      "sourceLine": 45,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Explicit caller-monitor regression test, deliberately holds the caller-visible monitor while another worker uses private ReentrantLock. Future5s and independent golden are required; this source construct is the test trigger, not production synchronization.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Use ReentrantLock rather than synchronization"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor",
+      "sourceLine": 46,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 59,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "sourceLine": 60,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 257,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newVirtualThreadPerTaskExecutor();",
+      "sourceLine": 257,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "results.add(executor.submit(() -> codec.encrypt(IDENTITY, RAW)));",
+      "sourceLine": 261,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 271,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "sourceLine": 272,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "sourceAnchor": "if (calls.incrementAndGet() == 1) throw fatal;",
+      "sourceLine": 357,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Fixed two-phase AUTHCTX-OWN001 public nonce fault: first call throws exact synthetic Error, second other-worker call succeeds. Literal1 is test-case dispatch, no business/crypto policy.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "sourceLine": 365,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "sourceLine": 365,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor",
+      "sourceLine": 372,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 383,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "sourceLine": 384,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "AvoidLiteralsInIfCondition",
+      "sourceAnchor": "if (calls.incrementAndGet() == 1) {",
+      "sourceLine": 449,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "First of exactly two independent construction attempts injects directError/RTE/null; second other-worker attempt must equal independent public JCA envelope. Literal1 selects a closed fixture phase, not any production threshold.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using literals such as 1 in if statements"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "CloseResource",
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "sourceLine": 456,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "var executor = Executors.newSingleThreadExecutor();",
+      "sourceLine": 456,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor",
+      "sourceLine": 470,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "executor.shutdownNow();",
+      "sourceLine": 480,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "rule": "DoNotUseThreads",
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS));",
+      "sourceLine": 481,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Standalone wholeJUnit owns virtual/single-worker pool. Caller monitor/new recovery Future5s and all100 original futures now get5s, unconditional shutdownNow/assert await10 before codec.close; false/interrupt fails without unconfirmed blocking close. All independent golden/count100/null/mutation assertions retained, no private key/service/process. This J2EE thread restriction does not apply to local Test workers and explicit finally owns all resource sites.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(first.equals(null));",
+      "sourceLine": 36,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The null operand is the independent negative input to the Java record value contract, and false is the literal expected value. This is not a production null-check idiom and cannot be replaced by receiver==null without ceasing to test equals. No suppression or private reflection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextValueContractTest.java",
+      "rule": "EqualsNull",
+      "sourceAnchor": "assertFalse(cipherA.equals(null));",
+      "sourceLine": 61,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "The null operand is the independent negative input to the Java record value contract, and false is the literal expected value. This is not a production null-check idiom and cannot be replaced by receiver==null without ceasing to test equals. No suppression or private reflection.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    }
+  ]
+}

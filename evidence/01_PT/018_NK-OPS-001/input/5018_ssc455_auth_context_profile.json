@@ -1,0 +1,95 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38424-SSC455-AUTH-CONTEXT",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java": "WBS-P007-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java": "WBS-P007-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java": "WBS-P007-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java": "WBS-P007-03",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java": "WBS-P007-03",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": "WBS-P001-01",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java": "WBS-P001-01"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4573_SSC455認証コンテキスト診断・単体テスト仕様書.md",
+      "sha256": "9281316697312f2e78beabad37552460b9a595895b890a7840b10ea80de1723f"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38416-ssc455-auth-context-closure-v1/manifest.json",
+      "sha256": "554fba7b86f42c0e39acc303fc6c03c0665bca4573995e4aab0f2ef0696e9a59"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "713885ee295be89b2c2362594c67879827cfba50",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCodec.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextIdentity.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthContextCryptoException.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/EncryptedAuthContext.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/package-info.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextValueContractTest.java",
+      "tests": 2
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthContextCodecTest.java",
+      "tests": 11
+    }
+  ],
+  "expectedTests": 13,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/security/AuthContextCodec.class",
+    "dev/codex/schubert/nk/api/security/AuthContextCodec$EnvelopeFactory.class",
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException.class",
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason.class",
+    "dev/codex/schubert/nk/api/security/AuthContextIdentity.class",
+    "dev/codex/schubert/nk/api/security/EncryptedAuthContext.class",
+    "dev/codex/schubert/nk/api/security/package-info.class",
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext.class",
+    "dev/codex/schubert/nk/protocol/header/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/security/AuthContextCodec",
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+    "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+    "dev/codex/schubert/nk/api/security/AuthContextIdentity",
+    "dev/codex/schubert/nk/api/security/EncryptedAuthContext"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml",
+    "src/schubert-nk-protocol/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38417-ssc455-auth-context-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38418-ssc455-auth-context-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38420-ssc455-auth-context-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38422-ssc455-auth-context-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38424-ssc455-auth-context-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38426-ssc455-auth-context-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38418-ssc455-auth-context-prepare-v1",
+    "unit": "pg38424-ssc455-auth-context-unit-v1"
+  },
+  "newTestDefinitions": 0
+}
