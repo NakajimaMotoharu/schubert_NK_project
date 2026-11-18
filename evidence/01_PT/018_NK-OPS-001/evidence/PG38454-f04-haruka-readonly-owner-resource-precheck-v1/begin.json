@@ -1,0 +1,43 @@
+{
+  "run": "PG38454-f04-haruka-readonly-owner-resource-precheck-v1",
+  "source": "713885ee295be89b2c2362594c67879827cfba50",
+  "remoteTarget": "approved dedicated haruka",
+  "identity": "mini",
+  "allowlistedBaselineScript": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38454-f04-haruka-readonly-owner-resource-precheck-v1/readonly-baseline.sh",
+    "sha256": "25f7a099a5ee3cbb4a6d030ecd2c37aa3eccd3045026dc9d2c9be957d8239247"
+  },
+  "expectedHostKeyFingerprint": "SHA256:KcSdSPsgElLnotxkJ1R6zdPf0UBpuXkgfeGhANPXaz0",
+  "knownHostsSha256": "3506c5b517f50693c3da073aa330568a61fc39c37e4f50b916dcef23838596bb",
+  "command": [
+    "/usr/bin/ssh",
+    "-F",
+    "/dev/null",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "UserKnownHostsFile=/home/mini/codex/project1/work/PMO/hourly-monitor/haruka_known_hosts",
+    "-o",
+    "GlobalKnownHostsFile=/dev/null",
+    "-o",
+    "HostKeyAlgorithms=ssh-ed25519",
+    "-o",
+    "ClearAllForwardings=yes",
+    "-o",
+    "ForwardAgent=no",
+    "-o",
+    "ForwardX11=no",
+    "-o",
+    "ConnectionAttempts=1",
+    "-o",
+    "ConnectTimeout=8",
+    "-T",
+    "mini@192.168.1.128",
+    "/bin/sh",
+    "-s"
+  ],
+  "scope": "existing ordinary key authentication, read-only host resource facts without app or DB, no forward",
+  "startedAtUTC": "2026-11-18T03:02:34.675614+00:00"
+}

@@ -1,0 +1,111 @@
+{
+  "eventId": "PGPT-20261008-5818",
+  "actualExit": 255,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F04-HARUKA-READONLY-PRECHECK-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F04-HARUKA-READONLY-PRECHECK-20261118",
+    "workAttributionKind": "ORIGINAL_PLAN",
+    "workScope": "WBS-F04 direct OS read-only candidate environment facts under the approved mini ordinary user. Use the existing haruka pinned host key plus exact server.info address, only OS identity, command readability, workspace ownership, CPU/memory/available disk and boot hash. No application or DB inspection, runtime probing, live jobs, permissions change, privilege escalation, service, business data, secret, Root, deployment, role/schema or new PT. Transport/authentication unavailable => record exact terminal without inferring acceptance.",
+    "oracleReferences": [
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+        "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+      },
+      {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/251_11月25日四担当レビュー用現行証拠一覧.md",
+        "sha256": "667663d0b52c990f33ead7047b35403afe8f53cebf95c2451ebfe5b20926a3ed"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36650-wbs66-foundation-four-handoff-v1/f04-haruka-existing-baseline.json",
+        "sha256": "59f02a5b7131db13db833094cb957af5d7443b88be5c7e2bf4c9e467cd340a1e"
+      }
+    ],
+    "source": "713885ee295be89b2c2362594c67879827cfba50",
+    "productionCoreMain": "713885ee295be89b2c2362594c67879827cfba50",
+    "run": "PG38454-f04-haruka-readonly-owner-resource-precheck-v1",
+    "wbsLeafIds": [
+      "WBS-F04"
+    ],
+    "managementWorkIds": [
+      "WBS-F04-既存環境",
+      "WBS-F04/criterion/contract"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.1,
+      "base": 0.4,
+      "high": 1.0
+    },
+    "groupCapPp": 1.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "137db583ed6b21b5cc8b043dba0ea1b18e767d4fda82e75790f377a751eca4dd",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T03:03:43.033000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 27,
+          "remainingPercent": 73,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T03:02:34.760334+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 27,
+      "remainingPercent": 73,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5817",
+    "productRuns": 0,
+    "productTestsExecuted": 0,
+    "remoteAttempts": 1,
+    "remoteStartedWork": 0,
+    "sshActualExit": 255,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38454-f04-haruka-readonly-owner-resource-precheck-v1/manifest.json",
+      "sha256": "6050957e80dbbe1e0bf70e3fc0d5152b2103c4cc55dfbd72b1e45307433239cc"
+    },
+    "additionalCompletedPriceTotalPp": 35.45,
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "actualDedicatedPp": null,
+    "remainingCriteria": [
+      "working authorized mini user SSH authentication on existing pinned haruka, or current approval-bound baseline receipt",
+      "current source/role/owner/provision, tests not started",
+      "F04 ending/effective environment and all other existing holds"
+    ]
+  }
+}
