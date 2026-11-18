@@ -452,7 +452,8 @@ final class WebLogOutboxPortTest {
 
   @Test
   void port020SharedRepositoryHasIndependentConcurrentJdbcState() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(2)) {
+    var workers = Executors.newFixedThreadPool(2);
+    try {
       var first = workers.submit(() -> readWorker(1));
       var second = workers.submit(() -> readWorker(2));
       var a = first.get(5, TimeUnit.SECONDS);
@@ -461,7 +462,56 @@ final class WebLogOutboxPortTest {
       assertEquals(2L, b.id());
       assertEquals(new UUID(0, 1), a.identity().messageId());
       assertEquals(new UUID(0, 2), b.identity().messageId());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
+  }
+
+  @Test
+  void port021AllFourMissingStatementsAreRejectedBeforeBind() {
+    for (int operation = 0; operation < 4; operation++) {
+      var fixture = new Jdbc();
+      fixture.missingStatement = true;
+      int selected = operation;
+      var failure =
+          assertThrows(SQLDataException.class, () -> operate(fixture.connection(), selected));
+      assertEquals("22004", failure.getSQLState());
+      assertEquals(STORED_ERROR, failure.getMessage());
+      assertEquals(List.of(AUTO, PREPARE), fixture.operations);
+      assertTrue(fixture.binds.isEmpty());
+      assertEquals(0, failure.getSuppressed().length);
+    }
+  }
+
+  @Test
+  void port022MissingRowsCloseOnlyTheAcquiredStatementOnce() {
+    var fixture = new Jdbc();
+    fixture.missingRows = true;
+    var failure =
+        assertThrows(
+            SQLDataException.class, () -> REPO.claim(fixture.connection(), WORKER, NOW, 1));
+    assertEquals("22004", failure.getSQLState());
+    assertEquals(STORED_ERROR, failure.getMessage());
+    assertEquals(List.of(AUTO, PREPARE, QUERY, PS_CLOSE), fixture.operations);
+    assertEquals(0, failure.getSuppressed().length);
+  }
+
+  @Test
+  void port023AliasedRowsFailureKeepsPrimaryCauseAndStatementSuppression() {
+    var fixture = new Jdbc();
+    var same = new SQLException(SAFE_ERROR);
+    var closingStatement = new SQLException("public statement cleanup fixture");
+    fixture.faults.put(NEXT, same);
+    fixture.faults.put(RS_CLOSE, same);
+    fixture.faults.put(PS_CLOSE, closingStatement);
+    var observed =
+        assertThrows(
+            IllegalArgumentException.class, () -> REPO.claim(fixture.connection(), WORKER, NOW, 1));
+    assertSame(same, observed.getCause());
+    assertEquals(List.of(closingStatement), List.of(observed.getSuppressed()));
+    assertEquals(0, same.getSuppressed().length);
+    assertEquals(List.of(AUTO, PREPARE, QUERY, NEXT, RS_CLOSE, PS_CLOSE), fixture.operations);
   }
 
   private static ClaimedWebLog readWorker(long id) throws SQLException {
@@ -536,6 +586,8 @@ final class WebLogOutboxPortTest {
     final Map<String, Throwable> faults = new HashMap<>();
     String sql = "";
     boolean autoCommit;
+    boolean missingStatement;
+    boolean missingRows;
     int updated = 1;
     int cursor = -1;
 
@@ -557,7 +609,7 @@ final class WebLogOutboxPortTest {
               operations.add(PREPARE);
               fail(PREPARE);
               sql = (String) args[0];
-              return statement();
+              return missingStatement ? null : statement();
             }
             throw new AssertionError("borrowed connection method forbidden: " + name);
           });
@@ -581,7 +633,7 @@ final class WebLogOutboxPortTest {
             if (name.equals(QUERY)) {
               operations.add(QUERY);
               fail(QUERY);
-              return result();
+              return missingRows ? null : result();
             }
             if (name.equals(CLOSE_METHOD)) {
               operations.add(PS_CLOSE);
