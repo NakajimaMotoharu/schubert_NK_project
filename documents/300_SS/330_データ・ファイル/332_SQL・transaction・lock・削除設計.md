@@ -486,3 +486,7 @@ WebOutboxObservationRepository.readの借用Connectionでは、取得済ResultSe
 ## SSC-471 業務OutboxのJDBC必須資源と逆順終了
 
 `JdbcOutboxRepository`のenqueue、claim、markSent、markFailureは借用Connectionから獲得する各PreparedStatementを既RequiredColumnのrequired-value契約で直ちに確認する。enqueue、claimのResultSetにも適用する。JDBC資源の欠落は固定SQLDataException・SQLSTATE22004。未取得資源は終了せず、取得済文と行は該当の型付き解放をfinallyで一回、行→文の順に行う。標準try-with-resourcesの元Throwable、二次例外の順・同一性、自己抑制時のJDK例外を維持し、一次失敗の正常化はしない。呼出元のConnection/transaction、SQL・bind、行順、UTC、識別子、再送、リース、状態更新条件及び公開APIは維持する。DB・JMSの実経路は別確認。
+
+## SSC-472 WebLog OutboxのJDBC必須資源と取得逆順終了
+
+`WebLogOutboxRepository`のenqueue、claim、markSent、markFailureの各PreparedStatementと、claimのResultSetは取得直後に既WebLog必須DB値契約を適用する。欠損は既固定SQLDataException（22004）。取得できた資源だけを型付きfinallyで一回、行→文の順で解放する。既try-with-resourcesの一次Throwable identity、二次例外の順・抑制・同一でのJDK自己抑制エラーを保持する。借用Connectionの取引・close、SQL・bind・UTC・順序、送受電文、既WebLog再送及びleaseを変更しない。QA050のLogout再試行規則は独立。実DB/JMS・暗号は別検証。
