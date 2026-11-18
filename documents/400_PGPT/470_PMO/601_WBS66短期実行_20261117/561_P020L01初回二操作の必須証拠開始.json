@@ -1,0 +1,58 @@
+{
+  "eventId": "PGPT-20261008-6083",
+  "groupId": "PGPT-WBS66-P020-L01-REQUIRED-INITIAL-ACTIONS-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T18:16:50.169000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 45,
+      "remainingPercent": 55,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P020-L01-REQUIRED-INITIAL-ACTIONS-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P020-L01-REQUIRED-INITIAL-ACTIONS-20261119",
+    "workAttributionKind": "PLANNED_SUBSET",
+    "wbsLeafIds": [
+      "WBS-P020-01.02"
+    ],
+    "managementWorkIds": [
+      "WBS-P020-01.02/2"
+    ],
+    "source": "bc382e43916aeeb24d50575e16a3d1bb1dcd8d1a",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "characterizationBase": "ee86a8c647860d0bf22e8620d83d67f68521b74e",
+    "run": "PG40034-p020-l01-required-actions-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.55,
+      "base": 1.65,
+      "high": 3.75
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40014-p020-game-onchange176-v1/begin.json",
+        "sha256": "23051f7bc0e67268dd1d472960bb17e60ccb12f17580adc7cf92ced1873b6d73"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40018-p020-game-onchange-independent-v1/manifest.json",
+        "sha256": "2c1c576c46ea8cbac99e89b9ce0b2158e4d8df17717f365b836834b0dd1f4d1f"
+      }
+    ],
+    "workScope": "QA054 SS355 8.1.1 full L01 comparison must include MENU_VIEWED and LOG_SEARCHED initial operations and their distinct correlated REQUEST. Missing symmetric actions or only partial login must fail full comparator. Preserve existing partial validator, product/log behavior and baseline. Whole offline tool, no real log/DB/runtime/auth/native."
+  }
+}
