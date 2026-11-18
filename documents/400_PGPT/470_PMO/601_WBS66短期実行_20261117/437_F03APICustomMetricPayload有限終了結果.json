@@ -1,0 +1,156 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5966",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 35,
+      "remainingPercent": 65,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "5459582e13d27600ee35e381a3932b32670c35ccd7209a5b69e15d5cee73a215",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T11:28:33.778000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 35,
+          "remainingPercent": 65,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T11:27:45.146211+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-API-CUSTOM-PAYLOAD-FINITE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-API-CUSTOM-PAYLOAD-FINITE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/P018-09 original 26 API Custom Metric Payload Tests. Ensure only fixed finite owned waits then cleanup, reject malformed mode by both fixed hash domains without either provider. Keep original 26 test IDs, concurrency/golden/owner and full independent XML/direct raw. Exact public SDK11 reuse; no OS process/backend/held scope.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/manifest.json",
+        "sha256": "2c224be355a8face8c1be2af922877f952d6bd5b187a6c87e533be57d2e396b3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/4647_BUG3261APIGC固定mode不正値仕様.md",
+        "sha256": "6bdae917374fc36e5f323c25d96ef5fab850dee876b3c9a2642457e697241439"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "d01ed0c20a080052dac1ec29cf5c054177ab11f8",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2691",
+      "YKT-2387",
+      "BUG-3276",
+      "WBS-F02-a"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "run": "PG39400-f03-api-custom-payload-finite-independent-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.65,
+      "high": 3.9
+    },
+    "groupCapPp": 5.5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaBefore": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5965",
+    "fixedTestSource": "dece06244977095fcf87245f2050dc5a507d94bf",
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39400-f03-api-custom-payload-finite-independent-v1/manifest.json",
+      "sha256": "71d1194bd1bf71025ba8a5de40c17a50c98e5c897d50cf69ab5debcac072ba0d"
+    },
+    "technical": {
+      "tests": 26,
+      "successful": 26,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 26,
+      "firstProductSuccessful": 26,
+      "newTestDefinitions": 0,
+      "newlyExecutedDistinct": 26,
+      "physical": 26,
+      "positiveCrc": 18,
+      "staticApplicable": 0,
+      "staticRawPmd": 19,
+      "unfilteredTargetType": {
+        "INSTRUCTION": {
+          "missed": 0,
+          "covered": 94
+        },
+        "BRANCH": {
+          "missed": 0,
+          "covered": 16
+        },
+        "LINE": {
+          "missed": 0,
+          "covered": 14
+        },
+        "COMPLEXITY": {
+          "missed": 0,
+          "covered": 12
+        },
+        "METHOD": {
+          "missed": 0,
+          "covered": 3
+        },
+        "CLASS": {
+          "missed": 0,
+          "covered": 1
+        }
+      },
+      "sameMainBytes": 26,
+      "remainingHelperRawSites": 278,
+      "prelaunchExtraFinding": "BUG-3277",
+      "preliminaryMetadataHandCountCorrection": 1,
+      "cumulativeOrdinarySuccess": 739,
+      "cumulativeDistinct": 554,
+      "cumulativeNewDefinitions": 56
+    },
+    "remainingCriteria": [
+      "Full supporting counter scope",
+      "F02 exact Guard-type-only old closure and new adapter mismatch",
+      "F03 six modules / 451",
+      "YKT2387/2691 other scopes"
+    ]
+  }
+}
