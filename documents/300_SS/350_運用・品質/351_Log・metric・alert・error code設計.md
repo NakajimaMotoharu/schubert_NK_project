@@ -291,6 +291,9 @@ service daemon-reload/restartが必要な場合は計画停止内に行う。
 
 ## 12. 禁止事項
 
+SSC-454。Webの値型の一般診断では、EncryptedWebLogPayload.toStringは「EncryptedWebLogPayload[keyVersion/ciphertext=<redacted>]」、ValidatedReply.toStringは「ValidatedReply[correlationId/body=<redacted>]」の固定文字列とする。内部idや鍵versionラベルの値を一般診断へ連結しない。§3.1に従う構造化相関IDのフィールド、JMS相関に使うUUID、暗号処理と保存に使う鍵version、値取得methodと型の比較契約に変更はない。実Logのfield allowlist及びmetricsのlabel禁止は従来どおり適用する。
+
+
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
 - REQUEST投影失敗で利用者の成功responseを503へ変更、またはcritical auditをbest-effort投影だけにすること。
