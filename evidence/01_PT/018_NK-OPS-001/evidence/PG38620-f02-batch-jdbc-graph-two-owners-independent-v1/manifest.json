@@ -1,0 +1,133 @@
+{
+  "actualExit": 0,
+  "terminalAtUTC": "2026-11-18T04:48:48.953668+00:00",
+  "run": "PG38620-f02-batch-jdbc-graph-two-owners-independent-v1",
+  "source": "dcea88287dde71a677ce9b68d97fdcb939d884d0",
+  "productionCoreMain": "15ecf4bd1daa3da62a9f62ea288f51846c6cb6b6",
+  "tests": 21,
+  "newDefinitions": 0,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "declaredWholeScope": {
+    "INSTRUCTION": {
+      "covered": 207,
+      "missed": 10
+    },
+    "BRANCH": {
+      "covered": 43,
+      "missed": 1
+    },
+    "LINE": {
+      "covered": 48,
+      "missed": 2
+    },
+    "COMPLEXITY": {
+      "covered": 32,
+      "missed": 2
+    },
+    "METHOD": {
+      "covered": 11,
+      "missed": 1
+    },
+    "CLASS": {
+      "covered": 6,
+      "missed": 0
+    }
+  },
+  "rawMissing": [
+    {
+      "kind": "CLASS",
+      "name": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": null,
+      "descriptor": null,
+      "counters": {
+        "INSTRUCTION": 10,
+        "BRANCH": 1,
+        "LINE": 2,
+        "COMPLEXITY": 2,
+        "METHOD": 1
+      }
+    },
+    {
+      "kind": "METHOD",
+      "name": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "preserveFatal",
+      "descriptor": "(Ljava/lang/Throwable;)V",
+      "counters": {
+        "INSTRUCTION": 4,
+        "LINE": 2,
+        "COMPLEXITY": 1,
+        "METHOD": 1
+      }
+    },
+    {
+      "kind": "METHOD",
+      "name": "dev/codex/schubert/nk/storage/StorageIoException",
+      "method": "lambda$preserveFatal$0",
+      "descriptor": "(Ljava/lang/Throwable;)Ljava/lang/Throwable;",
+      "counters": {
+        "INSTRUCTION": 6,
+        "BRANCH": 1,
+        "COMPLEXITY": 1
+      }
+    }
+  ],
+  "allThreeCaseSourceBytesRetained": true,
+  "changedProductionDeclarations": [
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures"
+  ],
+  "ordinaryTargetClassCrc": {
+    "dev/codex/schubert/nk/storage/package-info": "422653fb36e474e9",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason": "a64b044af8a34f92",
+    "dev/codex/schubert/nk/storage/StorageIoException": "1271c02831786cbb",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph": "0b299811c9b7ad33",
+    "dev/codex/schubert/nk/batch/repository/MorningSqlFailures": "c3ce2267152a84d6",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException": "87ddf065baea68a9",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures": "ce7471ab69e0bcf6"
+  },
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38614-ssc461-batch-jdbcgraph-unit-v1/manifest.json",
+    "sha256": "82093a2074d2b772023e38531a356d822a8b7b6d26d5acc0d58698e15540b9f9"
+  },
+  "post": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38616-ssc461-batch-jdbcgraph-post-v1/manifest.json",
+    "sha256": "d5bc1a0f8bf7fc486ced4544b9adee69359104fc2bcf30fff98daf123dfa5772"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38606-ssc461-batch-jdbcgraph-static-v1/manifest.json",
+    "sha256": "c2016b10231e901d52088524923286cfc972419e133a750ef04ba08a7aa26c97"
+  },
+  "rawCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-cp",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg31432-generated-code-supplemental-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+    "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+    "evidence/01_PT/018_NK-OPS-001/evidence/PG38616-ssc461-batch-jdbcgraph-post-v1/jacoco.exec",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class"
+  ],
+  "raw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38620-f02-batch-jdbc-graph-two-owners-independent-v1/unfiltered.tsv",
+    "sha256": "d74f4320273096d6c6fc25d3ac5850e96711f7121b22bd168f527b00cf90e7e7"
+  },
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38620-f02-batch-jdbc-graph-two-owners-independent-v1/class-init.stdout.gz",
+    "sha256": "cff8917410f88202559b1457e2c0960b18ebd96ce1a373ac0df86da6c13e8057"
+  },
+  "originalClassInitSha256": "d9e5e0f86c49fb040b19a8cb81e856fa86c92fbffe9ea1b2e3fbce516637c20f",
+  "xml": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38616-ssc461-batch-jdbcgraph-post-v1/original-TEST-junit-jupiter.xml",
+    "sha256": "4fc7c5a227c2cc80571d0c5dc8e047ad08d67c1b62f7b9cfe007b42b8b615212"
+  },
+  "wholeCoverageAccepted": false,
+  "priorWholeArchFindingOpen": true,
+  "newAcceptance": 0,
+  "formalUpdated": false
+}

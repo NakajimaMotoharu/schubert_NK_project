@@ -1,0 +1,436 @@
+{
+  "actualExit": 0,
+  "begin": {
+    "source": "dcea88287dde71a677ce9b68d97fdcb939d884d0",
+    "productionCoreMain": "15ecf4bd1daa3da62a9f62ea288f51846c6cb6b6",
+    "config": {
+      "path": "evidence/01_PT/018_NK-OPS-001/input/5035_ssc461_batch_jdbcgraph_profile.json",
+      "sha256": "ba3e72e31bd80659f1ee3158ad7a02f02067ef24eb6d762d018ab30e8ed393c4"
+    },
+    "prepare": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38604-ssc461-batch-jdbcgraph-prepare-v1/manifest.json",
+      "sha256": "dd58a8415c8622ac0bce71eb338e2961a297b0a316b0b30ad44ce213b2569557"
+    },
+    "preflight": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38608-ssc461-batch-jdbcgraph-preflight-v1/manifest.json",
+      "sha256": "e8b63d500a413180668c1d8b0df078aa60818173a07be6f2df425ed0ec9627f7"
+    },
+    "inputHashes": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": "7fa3b68ce5beac06082e6b993cc5a1a91093c802821f617d5cdf7d525554a972",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java": "95e6b836793434461ea17d1e527020cb7772aca782fbbd0dac5b6e8822f40ea2",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java": "269d5384508a877d55814f880efdb6b2081553b53839773b99daa0db42ea6c7d",
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java": "352483829274800db29d48ca4892395d9afd89b9d26cd639b2d38bfbc20109fe",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+    },
+    "metadataPins": {
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java": "7fa3b68ce5beac06082e6b993cc5a1a91093c802821f617d5cdf7d525554a972",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "5f4f8273a29dc2b89d6cf8fbc566b067480c0c7338f1444d5b14a9a878b1debd",
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "d59870fcf8d4f7bf9ff4e0abc2e052efddd9a08e9e93efa39d1f15a97f7063cf",
+      "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+      "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "64e8bb6e4ebe10b606244200eec59e677465215d210c686aefd9da22c9a7bf6e",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.java": "95e6b836793434461ea17d1e527020cb7772aca782fbbd0dac5b6e8822f40ea2",
+      "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.java": "269d5384508a877d55814f880efdb6b2081553b53839773b99daa0db42ea6c7d",
+      "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java": "352483829274800db29d48ca4892395d9afd89b9d26cd639b2d38bfbc20109fe",
+      "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+      "src/schubert-nk-batch/pom.xml": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "src/schubert-nk-storage/pom.xml": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "src/schubert-nk-bootstrap/pom.xml": "174e3974a5fe17a226c8c43a0cd49ae70d395cb4f236168da07cd7482a67908c",
+      "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+      "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75",
+      "tools/quality/pgpt_closed_host_profile.py": "2a5c2db2d29bb05a26703fa3f116fead1540722e381cdd15fe7e5df128edfd13",
+      "tools/quality/pgpt_closed_host_stages.py": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b",
+      "tools/quality/pgpt_closed_host_post.py": "1313c29788f650eee74e1bb622c960d54e5b87bda10418fbbe8810d51acbdc15",
+      "tools/quality/pgpt_guard_signature.py": "e0210a12cf229df0d438fc543c572fa6ec4fb7cb5d833b10f98c2c2159dd4590",
+      "tools/quality/pgpt_analysis_symbols.py": "0aba31d0a781e38449a237bd3934e2bfd0a9588bd0e1412bc8642691cdca982e",
+      "tools/quality/pgpt_artemis_sdk.py": "46edc9ecc28825b14af120522935ffb15c5810bd7b62fed4461b44a8956bd12a",
+      "tools/quality/pgpt_unstarted_process.py": "bdff8d1faaa00975b4264686e22386b7cdb3f7f9322c167447d3ddbc03689173",
+      "tools/quality/pgpt_public_unit_xml.py": "08270c1a6add3f8adf75f46e9ce88c557084d3ac3e6c0ad612360ceefaf50619",
+      "tools/quality/pgpt_protocol_public_oracle.py": "e559e9bb071a9ed24b5846ad3f6aa1b5cb80f2afd218131f01a1f2b053e2e30b",
+      "tools/quality/pgpt_spotbugs_contract.py": "f05ecdb4599528ced8753e95c66db2ee361867b1918fda7e69ad39e43c44674b",
+      "evidence/01_PT/018_NK-OPS-001/input/5035_ssc461_batch_jdbcgraph_profile.json": "ba3e72e31bd80659f1ee3158ad7a02f02067ef24eb6d762d018ab30e8ed393c4",
+      "evidence/01_PT/018_NK-OPS-001/input/5036_ssc461_batch_jdbcgraph_admission.json": "e4328244acedc6c62394e5f3ef9ee7e0448c73d6aad4ff220a64fcfaa40eab37",
+      "evidence/01_PT/018_NK-OPS-001/4588_SSC461Batch二JDBC境界・単体テスト仕様書.md": "12d3585ee6c4f22309d79b865b0ad7f4c423ba6117cb52fe4859d5408aa742de",
+      "evidence/01_PT/018_NK-OPS-001/4375_SSC439_純例外全二十一仕様.md": "a114e1d5e0fe44b92afde1d3dd14c44015bfc1f447bb80fb24a9d3c83744b459",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG38602-ssc461-batch-jdbcgraph-closure-v1/manifest.json": "d6abd9dcb66b9b686189940fde6bd08604fb25b06ca8ec2b88983ca97e08b64e",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG35254-ssc439-pure-exception-source-v1/manifest.json": "bc77a42ea3bbfb57c006ab95b0655badf5ca4565c0d3b47ca5a19a261a0b61cf"
+    },
+    "dependencies": {
+      "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+      "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+    },
+    "physicalClassHashes": {
+      "dev/codex/schubert/nk/storage/package-info.class": "b9c4509338ea3545a2ee90fee9391cc4b356ef7f60309562a752596d05c81583",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": "a113bd839666ee3a4038dd3703af0cfb772282278cc6fbfe1e3cccf98286ffec",
+      "dev/codex/schubert/nk/storage/StorageIoException.class": "85f86d702a139f126afdd72ca8e221583db824f159351ecd9f07b15fcc569c88",
+      "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class": "cc8265242a1cd41cc7c77b8e12185cbc387fb583d70e1d1171ba467cb0f3d552",
+      "dev/codex/schubert/nk/batch/repository/MorningSqlFailures.class": "b6a48094215f1b1ceafa5e9d696c8a1b5b7f49f19915b6a357fca5625364a0a0",
+      "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class": "391b1aac7be2dd58cf9c3dee11cdd12941417fa7d029513475dfffbe4a3d2cb1",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class": "f181015412f1f293e91c0eea24a3ac33127d5ef5015f3dc9fb73ac732e0cc009"
+    },
+    "testClassHashes": {
+      "dev/codex/schubert/nk/storage/StorageReasonValueContractTest.class": "5e14b3e5c3f1e71bf527985c6e4a4e6596552e7c96287326566e5474ef8b38d6",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest.class": "dc086d569af749aab3caa371811af772ebe63de63e730bfb2760251235bed250",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest$SqlCycle.class": "36d1d4a291348990d0f72d6de3c4b348a2d8b65567340618e2cea6dcfc1ecf90",
+      "dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest.class": "8f6b3c36d16c509da0e3cfaf9fad4bbe1aca7e82e78326cb333a8b828121e259",
+      "dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest$SqlCycle.class": "638f2147f2d3952cf9f488f7f92e94eaeff25749a5757ebf6e7d71d03469dd64",
+      "dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest$NoSupp.class": "e86476d6af4635c9d6d9706c157b80ad82a6c9fef495afc45794dbee332bdca9",
+      "dev/codex/schubert/nk/batch/repository/MorningSqlFailuresTest$EqualSql.class": "e6dc9c72106cb37188b5346c014886d07809e07f3bb0e1955d618de986b71417",
+      "dev/codex/schubert/nk/batch/repository/JdbcResourceFailuresTest$SuppressionDisabled.class": "9252d6647cd9298bbd01c07dc3b95695631239b36fb0bdb089e63c2aed4d82b1"
+    },
+    "expectedCases": [
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "absentPrimarySelectsTheNonnullCleanup()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "knownPrimarySelectsNonSqlCleanupBeforeCatalogClassification()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "unknownPrimaryReceivesFreshFixedSecondaryWithoutProviderGraph()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "checkedIoPrimaryKeepsTheExistingSqlCleanupPolicy()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "sqlPairClassifiesThePrimaryGraphFirst()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "sqlPairClassifiesSecondaryAfterNonfatalPrimary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "nonfatalSqlAndBatchCyclesReturnFinitely()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "catalogGuardDoesNotGeneralizeTheCheckedIoOrUnknownPolicy()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "internalNonnullBoundariesRejectMissingFailureValues()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "sharedStorageFailureReasonsAndDiagnosticAreFixed()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "sharedFiniteGraphsPreserveIndependentErrorIdentity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "name": "disabledSuppressionRetainsUnknownPolicyWithoutRawCleanup()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "absentPrimarySelectsCleanup()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "nonfatalSqlPairAndCyclesRemainKnown()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "unknownCleanupSelectionPrecedesKnownGraphClassification()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "unknownPrimaryKeepsIdentityWithFreshFixedSecondary()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "fatalPrimaryCauseSuppressedAndNextRetainIdentity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "fatalCleanupCauseSuppressedAndNextRetainIdentity()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "knownPairPrimaryGraphPriorityIsStableAcrossCalls()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "name": "repeatedIdentityAndSuppressionDisabledStayNonSuccessful()"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.StorageReasonValueContractTest",
+        "name": "reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract()"
+      }
+    ],
+    "selectedClasses": [
+      "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "dev.codex.schubert.nk.storage.StorageReasonValueContractTest"
+    ],
+    "session": "PG38614-SSC461-BATCH-JDBCGRAPH-TRANSFER",
+    "expectedTests": 21,
+    "oldExecUnion": false,
+    "coverageExclusions": [],
+    "backendOrHeldClassActions": 0,
+    "guardSignature": null,
+    "unstartedProcess": null
+  },
+  "stages": {
+    "unit": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T04:48:18.254856+00:00",
+      "endUTC": "2026-11-18T04:48:19.422143+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/tmp",
+        "-Dfile.encoding=UTF-8",
+        "-Duser.timezone=Asia/Tokyo",
+        "-Djunit.jupiter.execution.parallel.enabled=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=false",
+        "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/jacoco.exec,sessionid=PG38614-SSC461-BATCH-JDBCGRAPH-TRANSFER,append=false",
+        "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/class-init.log",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--disable-banner",
+        "--class-path",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/test-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+        "--select-class",
+        "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+        "--select-class",
+        "dev.codex.schubert.nk.storage.StorageReasonValueContractTest",
+        "--reports-dir",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/xml",
+        "--fail-if-no-tests",
+        "--details",
+        "summary"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1",
+      "stdoutSha256": "b79e49503e83f6359faa6c38fa7613a01b9e33fd5360a52322c5e93a9b766f3b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "coverage": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T04:48:19.422650+00:00",
+      "endUTC": "2026-11-18T04:48:19.588094+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "report",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/jacoco.exec",
+        "--classfiles",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component",
+        "--xml",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/coverage.xml"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "c120ff58a9fef27ce433ad1976e61fa49081cdaf8f3c6562ab3ae97f64708a29",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "classinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T04:48:19.588419+00:00",
+      "endUTC": "2026-11-18T04:48:19.703187+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "classinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38604-ssc461-batch-jdbcgraph-prepare-v1/component"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "4f0e83bb5634b3f6b33007f2d999418ab92356d2f98c77d1e3fe084f04fdc3bf",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "execinfo": {
+      "actualExit": 0,
+      "timedOut": false,
+      "startUTC": "2026-11-18T04:48:19.703517+00:00",
+      "endUTC": "2026-11-18T04:48:19.818384+00:00",
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-jar",
+        "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar",
+        "execinfo",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38614-ssc461-batch-jdbcgraph-unit-v1/jacoco.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-foundation",
+      "stdoutSha256": "364e3420cbe375e7aa781c2d43071b4e026537a46cc0f59e8c5d1d09280483c9",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": 21,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "knownPrimarySelectsNonSqlCleanupBeforeCatalogClassification()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "absentPrimarySelectsTheNonnullCleanup()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "catalogGuardDoesNotGeneralizeTheCheckedIoOrUnknownPolicy()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "fatalCleanupCauseSuppressedAndNextRetainIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "disabledSuppressionRetainsUnknownPolicyWithoutRawCleanup()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "sqlPairClassifiesThePrimaryGraphFirst()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "unknownCleanupSelectionPrecedesKnownGraphClassification()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "fatalPrimaryCauseSuppressedAndNextRetainIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "sharedStorageFailureReasonsAndDiagnosticAreFixed()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "nonfatalSqlAndBatchCyclesReturnFinitely()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "unknownPrimaryReceivesFreshFixedSecondaryWithoutProviderGraph()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "sharedFiniteGraphsPreserveIndependentErrorIdentity()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "repeatedIdentityAndSuppressionDisabledStayNonSuccessful()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "nonfatalSqlPairAndCyclesRemainKnown()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "internalNonnullBoundariesRejectMissingFailureValues()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.storage.StorageReasonValueContractTest",
+      "name": "reason001ClosedCatalogFactoryAndRedactedFailureKeepTheirIndependentLiteralContract()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "checkedIoPrimaryKeepsTheExistingSqlCleanupPolicy()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "unknownPrimaryKeepsIdentityWithFreshFixedSecondary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.MorningSqlFailuresTest",
+      "name": "sqlPairClassifiesSecondaryAfterNonfatalPrimary()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "absentPrimarySelectsCleanup()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "classname": "dev.codex.schubert.nk.batch.repository.JdbcResourceFailuresTest",
+      "name": "knownPairPrimaryGraphPriorityIsStableAcrossCalls()",
+      "failure": false,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "productTestsExecuted": 21,
+  "formalUpdated": false,
+  "whole451Accepted": false
+}
