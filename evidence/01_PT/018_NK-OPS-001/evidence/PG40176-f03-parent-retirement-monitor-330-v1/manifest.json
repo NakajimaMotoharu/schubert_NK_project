@@ -1,0 +1,35 @@
+{
+  "actualExit": 0,
+  "source": "45d7c88932721f61120489f5a060842f72456bc9",
+  "sourceCore": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+  "findingId": 330,
+  "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java",
+  "line": 598,
+  "method": "BackupUnitStartClient.Attempt.retireAfter",
+  "rule": "AvoidSynchronizedStatement",
+  "sourceSha256": "5701431aeaea563ada90e518817d0e7d339a63b48625e975c99bb2fbaada1934",
+  "spanSha256": "3a4baba613ed0e4e9e955335c63dbea60121f494ac7eb3c6c82780ecb4a55c6a",
+  "caller": {
+    "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+    "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+    "callLines": [
+      229,
+      373,
+      488
+    ]
+  },
+  "decision": "APPLICABLE_OPEN",
+  "basis": "The separate parent backup caller can reach owner/proof callbacks and resource retirement under the monitor.",
+  "nextEvidence": "Independent authorized proof of admission, callback/retirement rejection and preservation at concurrent or uncertain terminal boundaries.",
+  "priorUnclassified": 30,
+  "unclassifiedAfter": 29,
+  "applicableOpenInOriginal45": 16,
+  "runtimeReachabilityMeasured": false,
+  "productTests": 0,
+  "retirementOperations": 0,
+  "externalOperations": 0,
+  "wholeF03Accepted": false,
+  "whole451Accepted": false,
+  "newFormalAcceptance": 0,
+  "terminalAtUTC": "2026-11-18T23:29:14.401704+00:00"
+}
