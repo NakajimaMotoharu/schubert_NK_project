@@ -1,0 +1,25 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38812-SSC463-INBOX-REFERENCE",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38804-ssc463-inbox-reference-prepare-v1/manifest.json",
+    "sha256": "99f0b3f9083a5518e2834ab89d023094878e7bb9e6d225167e0419b0af6930cc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/manifest.json",
+    "sha256": "dd44bcd238e61e061cacbd5b9143af6a09909c54f666ff1eb84b1736053de738"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 158,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ]
+}

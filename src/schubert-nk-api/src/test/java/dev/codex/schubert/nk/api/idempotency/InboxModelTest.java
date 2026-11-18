@@ -203,9 +203,7 @@ class InboxModelTest {
           OptionalLong.of(999_999_999_999L),
           InboxResultReference.numeric(type, 999_999_999_999L).numericId());
     }
-    assertEquals(
-        "InboxResultReference[<redacted>]",
-        InboxResultReference.none().toString());
+    assertEquals("InboxResultReference[<redacted>]", InboxResultReference.none().toString());
     assertThrows(NullPointerException.class, () -> InboxResultReference.authSession(null));
     assertThrows(NullPointerException.class, () -> InboxResultReference.numeric(null, 1));
     assertThrows(

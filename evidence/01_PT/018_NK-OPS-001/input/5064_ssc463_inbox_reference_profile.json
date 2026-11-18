@@ -1,0 +1,86 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38812-SSC463-INBOX-REFERENCE",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java": "WBS-P006-01",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java": "WBS-P006-01"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4608_SSC463Inbox\u53c2\u7167\u56fa\u5b9a\u8a3a\u65ad\u5358\u4f53\u4ed5\u69d8.md",
+      "sha256": "291cb56233258b775cc22b84d3fe018ef55d3f24cfee051c3a9739749714747c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4583_SSC460API\u56db\u5024\u56fa\u5b9a\u8a3a\u65ad\u30fb\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+      "sha256": "f54890477950534b4d140ad99277e038d5e8671a0b73ebe74c58b74665d3a126"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4584_SSC460Actor\u5883\u754c\u3068role\u8ffd\u52a0\u5358\u4f53\u4ed5\u69d8\u66f8.md",
+      "sha256": "14575819db233201d8f58f92af26c8a7803bb28a7aa0a63f87673879646f555d"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38800-ssc463-inbox-reference-closure-v1/manifest.json",
+      "sha256": "6599d8230260f47db4e073de0f704bad2b3a852c08816000bef24bb5294014a1"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38574-ssc460-actor-boundary-post-v2/manifest.json",
+      "sha256": "0ff625fed17b8337c59a695dab4451a76490a2b876f6654a7fa53c8ac0add2d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38564-ssc460-actor-boundary-closure-v2/manifest.json",
+      "sha256": "dc2afea7ab2c185c2d9757a025432165aa8e79d6daf0871746b1e68bc9083583"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "3c29148a57770f7b8fbfdfb35d9d99fade46b7c9",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "tests": 3
+    }
+  ],
+  "expectedTests": 3,
+  "newTestDefinitions": 0,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReference.class",
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+    "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38802-ssc463-inbox-reference-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38804-ssc463-inbox-reference-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38810-ssc463-inbox-reference-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38812-ssc463-inbox-reference-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38814-ssc463-inbox-reference-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38804-ssc463-inbox-reference-prepare-v1",
+    "unit": "pg38812-ssc463-inbox-reference-unit-v1"
+  }
+}

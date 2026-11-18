@@ -1,0 +1,51 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5064_ssc463_inbox_reference_profile.json",
+    "sha256": "80b8db27e8f22c792ccdff72932592a5b448256659dba51fcc7d17052a4a8959"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReference.java": "325b3228612a68be33a5b4d5e08105d0e142fb93b7845d8775f9e12311d4d1d5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType.java": "7f6747c6b267b81647554aa021ad95959a80dde08501e33b3488f14794c25568",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java": "b07dbccdd5bed05ede5ef380efb670fab3834c26f95f1d5a265e7654c8f65c58",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38804-ssc463-inbox-reference-prepare-v1/manifest.json",
+    "sha256": "99f0b3f9083a5518e2834ab89d023094878e7bb9e6d225167e0419b0af6930cc"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38806-ssc463-inbox-reference-static-v1/manifest.json",
+    "sha256": "dd44bcd238e61e061cacbd5b9143af6a09909c54f666ff1eb84b1736053de738"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5065_ssc463_inbox_reference_admission.json",
+    "sha256": "df71a5b26a7e845adade4ff946d5ee7db57419a64ac84e1b565dcc6d8ab4d935"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxReferenceValueContractTest.java",
+      "rule": "NullAssignment",
+      "line": "158",
+      "reason": "Test-only defensive enum values array ownership check. Mutating an element of the returned copy to null is intentional; subsequent fresh array and ordinary canonical enum constant must be intact.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}
