@@ -1,0 +1,209 @@
+{
+  "actualExit": 0,
+  "source": "2fbb130c23901265d0a54f02f73d4d449c783232",
+  "unit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40089-p020-s08-voice198-v2/manifest.json",
+    "sha256": "db5513058505cb060e24e4deed750d83a8cce220da777e5c0991eabfc56cfce1"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40091-p020-s08-voice-static-v2/manifest.json",
+    "sha256": "8b66ebf84ede0a1e1336a82ab5aec3192e849328d05d7d29992151313e69a98a"
+  },
+  "firstUnit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40088-p020-s08-voice198-v1/manifest.json",
+    "sha256": "d21fdb9a34c24cef6b1fe5cf59285699109c795653ec38ba59790b2b2f56ac37"
+  },
+  "firstStaticFailure": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40090-p020-s08-voice-static-v1/manifest.json",
+    "sha256": "99d757b9b73f0d2577a77459f95be8704d4e39e4065accafa4caabc9993f2aab"
+  },
+  "firstSuccess": 198,
+  "tests": 198,
+  "suites": 20,
+  "originalTests": 192,
+  "newDefinitions": 6,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "notRun": 0,
+  "testIds": {
+    "PT-CHR-DEF065": "comparesMultipleVoicesWithoutConvertingTheNormalScenarioProjection",
+    "PT-CHR-DEF066": "requiresBothMultipleVoiceSidesAndTheNamedApproval",
+    "PT-CHR-DEF067": "rejectsDuplicatedRowsOrBodiesWithTheCorrectPlayerCount",
+    "PT-CHR-DEF068": "rejectsLostPlayersLostLinksAndStringCounts",
+    "PT-CHR-DEF069": "rejectsWrongCurrentGroupingEvenWithCorrectNkGrouping",
+    "PT-CHR-DEF070": "rejectsUsingTheVoiceApprovalToConsumeAnOrdinaryArtifactDrift"
+  },
+  "comparatorCounters": {
+    "INSTRUCTION": 1645,
+    "BRANCH": 160,
+    "LINE": 320,
+    "COMPLEXITY": 126,
+    "METHOD": 46,
+    "CLASS": 2
+  },
+  "currentSupplemental": {
+    "path": "program/characterization/reports/current/pgpt-gate-20260901-06/supplemental.json",
+    "sha256": "200e2de0f71508169ab226fe041439dfaaaa64e2a7d174246c750cd82bec48f2"
+  },
+  "independentExpected": {
+    "current": {
+      "linkedVoiceCount": 2,
+      "renderedEntryRows": 2,
+      "renderedBodies": 2,
+      "renderedAudioPlayers": 2
+    },
+    "nk": {
+      "linkedVoiceCount": 2,
+      "renderedEntryRows": 1,
+      "renderedBodies": 1,
+      "renderedAudioPlayers": 2
+    }
+  },
+  "raw": {
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+      "-cp",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg38642-schema-raw-line-tool-v1/toolclasses:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar",
+      "org.jacoco.core.internal.analysis.UnfilteredCodeMeasurement",
+      "--line-deficits",
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG40089-p020-s08-voice198-v2/jacoco.exec",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator$ComparisonResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/ArtifactComparator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Open.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Release.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope$Work.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CharacterizationIoScope.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/CorrelatedLogEvidenceValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$BaselineNumbers.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$FileJsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$JsonOutput.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$TreeStats.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli$UsableSpace.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateCli.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator$ValidationResult.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/GateContractValidator.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter$Target.class",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg40089-p020-s08-voice198-v2/snapshot/program/characterization/target/classes/dev/codex/schubert/characterization/TargetAdapter.class"
+    ],
+    "evidence": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/raw.tsv",
+      "sha256": "1d2e0ef334202b3d70656d4c266da211741dbf8170b78503dfe2f0ad046bd70c"
+    },
+    "actualExit": 0,
+    "noCode": [
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Open",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Release",
+      "dev/codex/schubert/characterization/CharacterizationIoScope$Work",
+      "dev/codex/schubert/characterization/GateCli$JsonOutput",
+      "dev/codex/schubert/characterization/GateCli$UsableSpace"
+    ],
+    "tool": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38642-f03-schema-raw-line-deficits-v1/begin.json",
+      "sha256": "7f91863199af3f9ce301b3b3eeefc24ff34fb8825524669fe8469bee1ccf8786"
+    },
+    "lineDeficits": [
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "92",
+        "INSTRUCTION:0:52",
+        "BRANCH:1:25"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "main",
+        "([Ljava/lang/String;)V",
+        "98",
+        "INSTRUCTION:7:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "202",
+        "INSTRUCTION:4:0",
+        "BRANCH:0:0"
+      ],
+      [
+        "dev/codex/schubert/characterization/GateCli",
+        "preflight",
+        "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "203",
+        "INSTRUCTION:1:0",
+        "BRANCH:0:0"
+      ]
+    ],
+    "rawTotals": {
+      "LINE": {
+        "missed": 2,
+        "covered": 1591
+      },
+      "METHOD": {
+        "missed": 1,
+        "covered": 244
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 12
+      },
+      "BRANCH": {
+        "missed": 1,
+        "covered": 972
+      },
+      "INSTRUCTION": {
+        "missed": 12,
+        "covered": 8396
+      }
+    },
+    "missedMethods": [
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "main",
+        "descriptor": "([Ljava/lang/String;)V",
+        "misses": [
+          "INSTRUCTION:7:141",
+          "BRANCH:1:27",
+          "LINE:1:27",
+          "COMPLEXITY:1:19"
+        ]
+      },
+      {
+        "className": "dev/codex/schubert/characterization/GateCli",
+        "method": "preflight",
+        "descriptor": "(Ljava/nio/file/Path;Ljava/nio/file/Path;)V",
+        "misses": [
+          "INSTRUCTION:5:0",
+          "LINE:2:0",
+          "COMPLEXITY:1:0",
+          "METHOD:1:0"
+        ]
+      }
+    ]
+  },
+  "pmdReviews": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/pmd-per-site.json",
+    "sha256": "4d0b9eef6778e1d1e3ce8d20345b2fd04059b011f5f14585296313235edc6dbb"
+  },
+  "pmdRaw": 6,
+  "pmdApplicable": 0,
+  "pmdUnclassified": 0,
+  "actualNkChr": false,
+  "actualBackendActions": 0,
+  "originalBaselineUnchanged": true,
+  "classInit": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40092-p020-s08-voice-independent-v1/class-init.log.gz",
+    "sha256": "a7a262d51ac553670439eff6601db8d69a356ee2e2d5957e6f97b12050c8c603"
+  },
+  "productTests": 0,
+  "newAcceptance": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "terminalAtUTC": "2026-11-18T19:32:57.201255+00:00",
+  "verifier": {
+    "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/input/5275_p020_s08_voice_post.py",
+    "sha256": "3b01dd803125be1cb9f3915e0973b5255e6b4609911053919860f86b27131349"
+  }
+}
