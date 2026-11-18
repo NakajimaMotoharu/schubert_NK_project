@@ -1,0 +1,74 @@
+CLASS	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	c11bb7227d1b8c5c	true	56	49	INSTRUCTION:0:202	BRANCH:0:30	LINE:0:57	COMPLEXITY:0:23	METHOD:0:8	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	<init>	(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;)V	1	INSTRUCTION:0:44	BRANCH:0:4	LINE:0:9	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	verify	(Ljava/sql/Connection;)V	1	INSTRUCTION:0:107	BRANCH:0:16	LINE:0:28	COMPLEXITY:0:9	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	expectedRole	()Ljava/lang/String;	0	INSTRUCTION:0:3	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	closeRows	(Ljava/sql/ResultSet;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:13	BRANCH:0:4	LINE:0:6	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	closeStatement	(Ljava/sql/PreparedStatement;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:13	BRANCH:0:4	LINE:0:6	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	unavailable	()Ljava/sql/SQLException;	10	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	required	(Ljava/lang/Object;)Ljava/lang/Object;	10	INSTRUCTION:0:6	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission	<clinit>	()V	8	INSTRUCTION:0:10	BRANCH:0:0	LINE:0:4	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	1135e8454a46d6c8	true	70	49	INSTRUCTION:6:273	BRANCH:0:22	LINE:0:74	COMPLEXITY:0:27	METHOD:0:16	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	<init>	(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[C)V	1	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	<init>	(Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;Ljava/lang/String;[CLdev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector;)V	0	INSTRUCTION:0:76	BRANCH:0:6	LINE:0:16	COMPLEXITY:0:4	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	getConnection	()Ljava/sql/Connection;	1	INSTRUCTION:0:92	BRANCH:0:4	LINE:0:25	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	discard	(Ljava/sql/Connection;Ljava/lang/Throwable;)V	10	INSTRUCTION:0:27	BRANCH:0:4	LINE:0:10	COMPLEXITY:0:3	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	getConnection	(Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	getLogWriter	()Ljava/io/PrintWriter;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	setLogWriter	(Ljava/io/PrintWriter;)V	1	INSTRUCTION:0:5	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	setLoginTimeout	(I)V	1	INSTRUCTION:0:6	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	getLoginTimeout	()I	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	getParentLogger	()Ljava/util/logging/Logger;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	unwrap	(Ljava/lang/Class;)Ljava/lang/Object;	1	INSTRUCTION:0:13	BRANCH:0:2	LINE:0:2	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	isWrapperFor	(Ljava/lang/Class;)Z	1	INSTRUCTION:0:7	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	close	()V	1	INSTRUCTION:6:18	BRANCH:0:2	LINE:0:7	COMPLEXITY:0:2	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	close	()V	168	INSTRUCTION:4:3	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	close	()V	169	INSTRUCTION:2:1	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	toString	()Ljava/lang/String;	1	INSTRUCTION:0:2	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	unavailable	()Ljava/sql/SQLException;	10	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource	unsupported	()Ljava/sql/SQLFeatureNotSupportedException;	10	INSTRUCTION:0:6	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource$Connector	e205dee73edbf935	false	0	1536	INSTRUCTION:0:0	BRANCH:0:0	LINE:0:0	COMPLEXITY:0:0	METHOD:0:0	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	da8baea11f64c98d	true	21	48	INSTRUCTION:7:45	BRANCH:0:16	LINE:2:11	COMPLEXITY:1:10	METHOD:1:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	<init>	()V	2	INSTRUCTION:7:0	BRANCH:0:0	LINE:2:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	<init>	()V	15	INSTRUCTION:2:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	<init>	()V	16	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	replace	(Ljava/lang/Throwable;Ljava/lang/Throwable;)Z	8	INSTRUCTION:0:25	BRANCH:0:8	LINE:0:6	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures	beforeDiscard	(Ljava/lang/Throwable;Ljava/lang/Throwable;)V	8	INSTRUCTION:0:20	BRANCH:0:8	LINE:0:5	COMPLEXITY:0:5	METHOD:0:1	CLASS:0:0
+CLASS	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	0b299811c9b7ad33	true	4	1537	INSTRUCTION:1:14	BRANCH:1:1	LINE:0:3	COMPLEXITY:1:2	METHOD:0:2	CLASS:0:1
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:2	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	4106	INSTRUCTION:1:10	BRANCH:1:1	LINE:0:1	COMPLEXITY:1:1	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	14	INSTRUCTION:1:10	BRANCH:1:1
+CLASS	dev/codex/schubert/nk/storage/StorageIoException	1271c02831786cbb	true	25	49	INSTRUCTION:29:64	BRANCH:3:9	LINE:7:16	COMPLEXITY:6:5	METHOD:4:1	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	1	INSTRUCTION:10:0	BRANCH:0:0	LINE:3:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	21	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	22	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	<init>	(Ldev/codex/schubert/nk/storage/StorageIoException$Reason;)V	23	INSTRUCTION:1:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	1	INSTRUCTION:3:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	reason	()Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	26	INSTRUCTION:3:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:2:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	31	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;)V	35	INSTRUCTION:1:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;Ljava/util/function/Function;)V	9	INSTRUCTION:1:64	BRANCH:1:9	LINE:0:16	COMPLEXITY:1:5	METHOD:0:1	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	preserveFatal	(Ljava/lang/Throwable;Ljava/util/function/Function;)V	47	INSTRUCTION:1:4	BRANCH:1:1
+METHOD	dev/codex/schubert/nk/storage/StorageIoException	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	4106	INSTRUCTION:11:0	BRANCH:2:0	LINE:1:0	COMPLEXITY:2:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException	lambda$preserveFatal$0	(Ljava/lang/Throwable;)Ljava/lang/Throwable;	34	INSTRUCTION:11:0	BRANCH:2:0
+CLASS	dev/codex/schubert/nk/storage/StorageIoException$Reason	a64b044af8a34f92	false	8	16433	INSTRUCTION:50:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:5:0	METHOD:5:0	CLASS:1:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:4:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:4:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	2	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<init>	(Ljava/lang/String;I)V	12	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	4106	INSTRUCTION:15:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	$values	()[Ldev/codex/schubert/nk/storage/StorageIoException$Reason;	12	INSTRUCTION:15:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	8	INSTRUCTION:21:0	BRANCH:0:0	LINE:4:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	12	INSTRUCTION:3:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	13	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	14	INSTRUCTION:6:0	BRANCH:0:0
+DEFICIT	dev/codex/schubert/nk/storage/StorageIoException$Reason	<clinit>	()V	15	INSTRUCTION:6:0	BRANCH:0:0
+CLASS	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	b6da8fae75d6f6c6	true	7	16433	INSTRUCTION:5:40	BRANCH:0:0	LINE:0:6	COMPLEXITY:1:4	METHOD:1:4	CLASS:0:1
+METHOD	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	values	()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;	9	INSTRUCTION:0:4	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;	9	INSTRUCTION:5:0	BRANCH:0:0	LINE:1:0	COMPLEXITY:1:0	METHOD:1:0	CLASS:0:0
+DEFICIT	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	valueOf	(Ljava/lang/String;)Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;	59	INSTRUCTION:5:0	BRANCH:0:0
+METHOD	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	<init>	(Ljava/lang/String;ILjava/lang/String;)V	2	INSTRUCTION:0:8	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	$values	()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;	4106	INSTRUCTION:0:11	BRANCH:0:0	LINE:0:1	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0
+METHOD	dev/codex/schubert/nk/storage/ServiceConfigFiles$Service	<clinit>	()V	8	INSTRUCTION:0:17	BRANCH:0:0	LINE:0:3	COMPLEXITY:0:1	METHOD:0:1	CLASS:0:0

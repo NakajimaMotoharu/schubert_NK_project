@@ -1,0 +1,182 @@
+{
+  "build": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39462-admission-single-cleanup-four-build-v2/compile/manifest.json",
+    "sha256": "a0f43f0a627675879bb8f6b67710cac6ef726a1797085a920eb77377307644ed"
+  },
+  "source": "28465379638bfee7fe6d13c7974f57ba087255ac",
+  "inputHashes": {
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmission.java": "1131dc9f22baf374d616ebc11458ca9c8bbee8ac2f8cf7d5defaaf00076f6d78",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSource.java": "61727a7d93d080662c8aa14bdbb621bbe7e74916794fb288b70457686fc494c2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcAdmissionFailures.java": "6d871af1d619b414d7d6c56d83ac97ff583ea9a6aa36c6f263362cc6389cae92",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "305e82607cfc8acf9656547c5eee663cc9edee55c0381da96d6860b5a98d0d75",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseAdmissionPortTest.java": "7f2d2a2b09110efcc85c6bfaae7c8ceea7bf29fd6f1e8588e2a2aef2ad8eb265",
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ServiceDatabaseSourcePortTest.java": "0a208a3ed62346b3e4bc143899be1a2aba5d4dbac97fc27c875ac531de0dd3e6"
+  },
+  "toolHashes": {
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java": "c324471f8b7933a3cb401eafbc35a7055443779b438a3ab928bda3867a1b8ab1",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar": "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
+    "/home/mini/codex/project1/work/toolchain/org.jacoco.cli-0.8.15-nodeps.jar": "d2b74b20b415163c1f53261e7c5ef4445b788327094208ff821e0c2baf9bc8f1"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39463-ssc468-admission-ports-static-v2/manifest.json",
+    "sha256": "243b35ba0fb416c2d1894da5b212f79cc2ddfe8f1ca1f5b168898de10aed8f56"
+  },
+  "admission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5158_ssc468_admission_source_applicability.json",
+    "sha256": "5f8993023bdcf7634eabf351cf1af313c8f47cd33b6595818932a9155bc8119d"
+  },
+  "registeredExpectedCases": [
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission001UrlBoundsAndBothRoles()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission002InvalidUrlsAndNullConstructorInputs()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission003FixedProjectionAndBorrowedConnection()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission004ConnectionSettingsAndNullContract()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission005EachProjectionInvariantFailsClosed()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission006MissingStatementAndRowsCloseOnlyAcquiredPorts()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission007EachSqlFaultIsFixedAndSanitized()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission008SqlCloseFaultCannotReturnSuccess()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission009RuntimeFaultIdentityAndCleanup()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission010ErrorFaultIdentityAndCleanup()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission011KnownSqlBodyYieldsToUnknownClose()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission012UnknownPrimaryRetainsOnlyFixedSecondary()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission013ErrorPrimaryAndBothCloseFaultsRetainIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission014TwoCloseFaultsAlwaysAttemptReverseOrder()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission015RepeatAndParallelUseIndependentBorrowedPorts()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+      "dbAdmission016FatalNextExceptionSurvivesOrderedRelease()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource001PublicConstructionErasesInputWithoutConnecting()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource002BothRolesFixedPropertiesAndEachPhysicalAdmission()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource003InvalidConstructionStillConsumesOwnedInput()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource004MaterialBoundsAndConstructorCloneAreIndependent()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource005ConnectorFaultsClearPropertiesAndKeepUnknownIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource006NullConnectionCannotEscapeAsSuccess()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource007FailedIdentityAdmissionDiscardsExactlyOnce()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource008AdmissionRuntimeAndErrorRetainOriginalIdentity()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource009DiscardSqlRuntimeErrorMatrixAndSameThrowable()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource010UnsupportedOptionsAndMemoryWriterOnly()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource011WrapperTypeContractAndNullBoundary()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource012CloseIsIdempotentAndPreservesCallerOwnedConnection()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource013ParallelIndependentConnectionsAndPropertiesClear()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource014CloseRaceHasFiniteCallerOwnershipPostcondition()"
+    ],
+    [
+      "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest",
+      "dbSource015FatalConnectorGraphRetainsIdentityAndClearsProperties()"
+    ]
+  ],
+  "run": "PG39464-SSC468-SERVICE-JDBC-PORT31",
+  "actualCommand": [
+    "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+    "-Djava.io.tmpdir=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39464-ssc468-admission-ports-unit-v1/tmp",
+    "-Dfile.encoding=UTF-8",
+    "-Duser.timezone=Asia/Tokyo",
+    "-Djunit.jupiter.extensions.autodetection.enabled=false",
+    "-Djunit.jupiter.execution.parallel.enabled=false",
+    "-javaagent:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39464-ssc468-admission-ports-unit-v1/jacoco.exec,sessionid=PG39464-SSC468-SERVICE-JDBC-PORT31,append=false",
+    "-Xlog:class+init=info:file=/home/mini/codex/project1/work/pgpt-runs/PG379/pg39464-ssc468-admission-ports-unit-v1/class-init.log",
+    "-jar",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar",
+    "execute",
+    "--disable-banner",
+    "--class-path",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39464-ssc468-admission-ports-unit-v1/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39462-admission-single-cleanup-four-build-v2/src/schubert-nk-storage/target/classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg39462-admission-single-cleanup-four-build-v2/src/schubert-nk-bootstrap/target/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "--reports-dir",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg39464-ssc468-admission-ports-unit-v1/xml",
+    "--fail-if-no-tests",
+    "--details",
+    "summary",
+    "--select-class",
+    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmissionPortTest",
+    "--select-class",
+    "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseSourcePortTest"
+  ]
+}

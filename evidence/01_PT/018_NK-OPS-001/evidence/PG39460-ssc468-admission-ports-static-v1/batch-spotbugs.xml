@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1795004152192" analysisTimestamp="1795004182936" release="">
+  <Project projectName="">
+    <Jar>/home/mini/codex/project1/work/pgpt-runs/PG379/pg39458-admission-single-cleanup-four-build-v1/src/schubert-nk-batch/target/classes</Jar>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg39458-admission-single-cleanup-four-build-v1/src/schubert-nk-batch/target/classes</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg39458-admission-single-cleanup-four-build-v1/src/schubert-nk-bootstrap/target/classes</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg39458-admission-single-cleanup-four-build-v1/src/schubert-nk-protocol/target/classes</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg39458-admission-single-cleanup-four-build-v1/src/schubert-nk-storage/target/classes</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-beanutils/commons-beanutils/1.11.0/commons-beanutils-1.11.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/de/dentrassi/crypto/pem-keystore/3.0.0/pem-keystore-3.0.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-http/4.1.137.Final/netty-codec-http-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-socks/4.1.137.Final/netty-codec-socks-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec/4.1.137.Final/netty-codec-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler-proxy/4.1.137.Final/netty-handler-proxy-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler/4.1.137.Final/netty-handler-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-resolver/4.1.137.Final/netty-resolver-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-epoll/4.1.137.Final/netty-transport-classes-epoll-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-kqueue/4.1.137.Final/netty-transport-classes-kqueue-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-epoll/4.1.137.Final/netty-transport-native-epoll-4.1.137.Final-linux-x86_64.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-kqueue/4.1.137.Final/netty-transport-native-kqueue-4.1.137.Final-osx-x86_64.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-unix-common/4.1.137.Final/netty-transport-native-unix-common-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-config/1.7.0/prometheus-metrics-config-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-core/1.7.0/prometheus-metrics-core-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-textformats/1.7.0/prometheus-metrics-exposition-textformats-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.7.0/prometheus-metrics-tracer-common-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-selector/2.56.0/artemis-selector-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/tomcat-annotations-api/11.0.25/tomcat-annotations-api-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jgroups/jgroups/5.3.13.Final/jgroups-5.3.13.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-core/3.1.5/jackson-core-3.1.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-databind/3.1.5/jackson-databind-3.1.5.jar</AuxClasspathEntry>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Wed, 18 Nov 2026 21:15:52 +0900" total_classes="646" referenced_classes="966" total_bugs="0" total_size="25715" num_packages="7" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="71.49" clock_seconds="16.72" peak_mbytes="554.94" alloc_mbytes="2048.00" gc_seconds="0.35">
+    <FileStats path="dev/codex/schubert/nk/batch/backup/BackupCommitService.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/batch/backup/BackupFileDigest.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/backup/BackupManifest.java" bugCount="0" size="74"/>
+    <FileStats path="dev/codex/schubert/nk/batch/backup/BackupProfile.java" bugCount="0" size="78"/>
+    <FileStats path="dev/codex/schubert/nk/batch/backup/BackupVersions.java" bugCount="0" size="32"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/CleanupStopReason.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/CleanupStoppedException.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/InspectionAttempt.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/InspectorLockHandoff.java" bugCount="0" size="60"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/LogCleanupService.java" bugCount="0" size="199"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/LogCleanupSummary.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/MaintenanceMutationGuard.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/StepCleanupService.java" bugCount="0" size="93"/>
+    <FileStats path="dev/codex/schubert/nk/batch/cleanup/StepCleanupSummary.java" bugCount="0" size="31"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java" bugCount="0" size="552"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupBundleCompletion.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupBundlePublisher.java" bugCount="0" size="90"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupDatabaseCopy.java" bugCount="0" size="136"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupDatabaseWorker.java" bugCount="0" size="246"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupManifestCodec.java" bugCount="0" size="90"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupManifestPublisher.java" bugCount="0" size="212"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupManifestReader.java" bugCount="0" size="307"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java" bugCount="0" size="223"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/BackupWorkerRequestFiles.java" bugCount="0" size="197"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CaddyPublicConfiguration.java" bugCount="0" size="162"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupBackupAdmission.java" bugCount="0" size="69"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupExpiryExecution.java" bugCount="0" size="263"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupMaintenanceWork.java" bugCount="0" size="261"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupNativeExecution.java" bugCount="0" size="136"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupNativePreflight.java" bugCount="0" size="71"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupPreflight.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupProcessMain.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/CleanupWorkerRequestFiles.java" bugCount="0" size="358"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/DurableRecordFiles.java" bugCount="0" size="231"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/EnvironmentInodePolicy.java" bugCount="0" size="133"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/InspectorEnvironmentFiles.java" bugCount="0" size="199"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/InspectorEnvironmentPublisher.java" bugCount="0" size="212"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/InspectorEnvironmentReader.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MaintenanceFileLock.java" bugCount="0" size="176"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MaintenanceRecords.java" bugCount="0" size="86"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MaintenanceRunFiles.java" bugCount="0" size="993"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java" bugCount="0" size="359"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupCompletion.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupPreparation.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupRequestPublication.java" bugCount="0" size="87"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupRetention.java" bugCount="0" size="214"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupReuse.java" bugCount="0" size="58"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBackupStage.java" bugCount="0" size="152"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningBrokerExecution.java" bugCount="0" size="178"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningCleanupExecution.java" bugCount="0" size="197"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningCompletionChecks.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java" bugCount="0" size="134"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningControlScope.java" bugCount="0" size="381"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningCurrentInvalidation.java" bugCount="0" size="58"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningExpiryExecution.java" bugCount="0" size="117"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningGateEvidence.java" bugCount="0" size="419"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningNewRunAdmission.java" bugCount="0" size="248"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningPermitPublication.java" bugCount="0" size="215"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningPrestartEvidence.java" bugCount="0" size="184"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningProcessMain.java" bugCount="0" size="353"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningResumeAdmission.java" bugCount="0" size="144"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningRootScope.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningStartupLaunchOwner.java" bugCount="0" size="532"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/MorningStartupRoots.java" bugCount="0" size="235"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootBatchCredentialReader.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflight.java" bugCount="0" size="55"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootFailedStartRecovery.java" bugCount="0" size="219"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootReleaseApprovalReader.java" bugCount="0" size="152"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootServiceAdmissionScope.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootServiceCredentialSource.java" bugCount="0" size="137"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootServiceExecutableAdmission.java" bugCount="0" size="275"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootServiceFacts.java" bugCount="0" size="113"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootServiceLauncher.java" bugCount="0" size="159"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/RootStartupPending.java" bugCount="0" size="119"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/StartupAdmissionFile.java" bugCount="0" size="253"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/StartupLaunchFiles.java" bugCount="0" size="156"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/StartupLaunchRecord.java" bugCount="0" size="82"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/StartupPermitFiles.java" bugCount="0" size="341"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/StartupPermitRecords.java" bugCount="0" size="197"/>
+    <FileStats path="dev/codex/schubert/nk/batch/file/TransferCleanup.java" bugCount="0" size="229"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java" bugCount="0" size="185"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java" bugCount="0" size="28"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java" bugCount="0" size="94"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/AsyncQueueMonitor.java" bugCount="0" size="54"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitor.java" bugCount="0" size="51"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchGcMetricRegistration.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchJvmMetrics.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java" bugCount="0" size="67"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchMetricLabelPolicy.java" bugCount="0" size="57"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java" bugCount="0" size="69"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchMetricText.java" bugCount="0" size="71"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSource.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchStandardMetrics.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/BatchSystemMetrics.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitor.java" bugCount="0" size="52"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/ExpiryBacklogMonitor.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/FilesystemHealthMonitor.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservation.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/HealthUsageRatio.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/IntegrityFailureMetricRecorder.java" bugCount="0" size="47"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitor.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthMonitor.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/JvmHeapHealthObservation.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MetricContract.java" bugCount="0" size="102"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java" bugCount="0" size="78"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java" bugCount="0" size="27"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java" bugCount="0" size="52"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java" bugCount="0" size="44"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/MonitoringStatusText.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/ObservationContext.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/ProcessRestartMetricRecorder.java" bugCount="0" size="49"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitor.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TimedDbPoolMonitor.java" bugCount="0" size="55"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TimedJvmHeapMonitor.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TimedSyncLatencyMonitor.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TransferHealthMonitor.java" bugCount="0" size="48"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java" bugCount="0" size="94"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/WebLogBacklogMonitor.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/batch/monitoring/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisAcceptorReadinessClient.java" bugCount="0" size="74"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisAddressSettingsReadinessClient.java" bugCount="0" size="98"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeClient.java" bugCount="0" size="138"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisExpiryPurgeException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessClient.java" bugCount="0" size="182"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisManagementReadinessException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java" bugCount="0" size="104"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisReadinessClient.java" bugCount="0" size="59"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisReadinessException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisRoleReadinessClient.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/batch/mq/ArtemisStartupObservation.java" bugCount="0" size="113"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/ApplicationStopGate.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/ApplicationUnit.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BackupArchiveProcess.java" bugCount="0" size="354"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java" bugCount="0" size="166"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BackupUnitStartClient.java" bugCount="0" size="421"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BackupUnitTermination.java" bugCount="0" size="153"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BackupWorkerRequest.java" bugCount="0" size="94"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/BrokerJournalEvidence.java" bugCount="0" size="239"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/CleanupFailedBackupRequest.java" bugCount="0" size="131"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/CleanupProfile.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/CleanupWorkerRequest.java" bugCount="0" size="227"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/ConfigurationGroupResolver.java" bugCount="0" size="153"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/FixedUnitCgroupNamespace.java" bugCount="0" size="184"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment.java" bugCount="0" size="10"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/InspectorStaticEnvironment.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/InspectorUnitProbe.java" bugCount="0" size="254"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/InspectorUnitSnapshot.java" bugCount="0" size="294"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MaintenanceStopSnapshot.java" bugCount="0" size="78"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MaintenanceUnit.java" bugCount="0" size="32"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopClient.java" bugCount="0" size="164"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MaintenanceUnitStopPolicy.java" bugCount="0" size="59"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MaintenanceUnitTermination.java" bugCount="0" size="145"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java" bugCount="0" size="391"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle.java" bugCount="0" size="181"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningCaddyReadiness.java" bugCount="0" size="299"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningParentBudget.java" bugCount="0" size="52"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningPreviousBroker.java" bugCount="0" size="250"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningServiceReadiness.java" bugCount="0" size="200"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningStopPass.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/MorningUnitTerminals.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/ProcessResourceScope.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/RootReleaseAdmission.java" bugCount="0" size="299"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/RootStartupContext.java" bugCount="0" size="400"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/StopGateException.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/StopGateFailure.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/SystemctlStateSource.java" bugCount="0" size="95"/>
+    <FileStats path="dev/codex/schubert/nk/batch/platform/UnitStateParser.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BackupFailureSnapshot.java" bugCount="0" size="79"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BackupStepRepository.java" bugCount="0" size="190"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchRun.java" bugCount="0" size="19"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchRunRepository.java" bugCount="0" size="339"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchStep.java" bugCount="0" size="34"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/BatchStepResult.java" bugCount="0" size="87"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupChunk.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupCounts.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java" bugCount="0" size="206"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupKind.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupReason.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupRepository.java" bugCount="0" size="115"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java" bugCount="0" size="85"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/CleanupTerminalRepository.java" bugCount="0" size="492"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/ExpiryAuditRepository.java" bugCount="0" size="339"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/InspectionSummary.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/InspectionSummaryRepository.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MaintenanceActivation.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MaintenanceCompletion.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MaintenanceRetirement.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MaintenanceRunState.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java" bugCount="0" size="1166"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/MorningSqlFailures.java" bugCount="0" size="15"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java" bugCount="0" size="67"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/RunReferences.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/batch/repository/SuccessRunLookup.java" bugCount="0" size="2"/>
+    <PackageStats package="dev.codex.schubert.nk.batch.backup" total_bugs="0" total_types="5" total_size="241">
+      <ClassStats class="dev.codex.schubert.nk.batch.backup.BackupCommitService" sourceFile="BackupCommitService.java" interface="false" size="41" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.backup.BackupFileDigest" sourceFile="BackupFileDigest.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.backup.BackupManifest" sourceFile="BackupManifest.java" interface="false" size="74" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.backup.BackupProfile" sourceFile="BackupProfile.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.backup.BackupVersions" sourceFile="BackupVersions.java" interface="false" size="32" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.cleanup" total_bugs="0" total_types="15" total_size="536">
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.CleanupStopReason" sourceFile="CleanupStopReason.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.CleanupStoppedException" sourceFile="CleanupStoppedException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.InspectionAttempt" sourceFile="InspectionAttempt.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff" sourceFile="InspectorLockHandoff.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff$Failure" sourceFile="InspectorLockHandoff.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.InspectorLockHandoff$Operation" sourceFile="InspectorLockHandoff.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupService" sourceFile="LogCleanupService.java" interface="false" size="119" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupService$ChunkProgress" sourceFile="LogCleanupService.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupService$SessionLease" sourceFile="LogCleanupService.java" interface="false" size="68" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupService$SqlAction" sourceFile="LogCleanupService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupService$SqlRelease" sourceFile="LogCleanupService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.LogCleanupSummary" sourceFile="LogCleanupSummary.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.MaintenanceMutationGuard" sourceFile="MaintenanceMutationGuard.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.StepCleanupService" sourceFile="StepCleanupService.java" interface="false" size="93" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.cleanup.StepCleanupSummary" sourceFile="StepCleanupSummary.java" interface="false" size="31" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.file" total_bugs="0" total_types="284" total_size="12738">
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier" sourceFile="BackupArtifactVerifier.java" interface="false" size="475" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$BundleSnapshot" sourceFile="BackupArtifactVerifier.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$Digests" sourceFile="BackupArtifactVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$FileClaim" sourceFile="BackupArtifactVerifier.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$Force" sourceFile="BackupArtifactVerifier.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$Io" sourceFile="BackupArtifactVerifier.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$NioIo" sourceFile="BackupArtifactVerifier.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupArtifactVerifier$PendingDigests" sourceFile="BackupArtifactVerifier.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupBundleCompletion" sourceFile="BackupBundleCompletion.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupBundlePublisher" sourceFile="BackupBundlePublisher.java" interface="false" size="73" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupBundlePublisher$Io" sourceFile="BackupBundlePublisher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupBundlePublisher$NioIo" sourceFile="BackupBundlePublisher.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupDatabaseCopy" sourceFile="BackupDatabaseCopy.java" interface="false" size="134" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupDatabaseCopy$Dump" sourceFile="BackupDatabaseCopy.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupDatabaseWorker" sourceFile="BackupDatabaseWorker.java" interface="false" size="185" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupDatabaseWorker$NativePorts" sourceFile="BackupDatabaseWorker.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupDatabaseWorker$Ports" sourceFile="BackupDatabaseWorker.java" interface="true" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestCodec" sourceFile="BackupManifestCodec.java" interface="false" size="90" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestPublisher" sourceFile="BackupManifestPublisher.java" interface="false" size="212" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestReader" sourceFile="BackupManifestReader.java" interface="false" size="292" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestReader$Digests" sourceFile="BackupManifestReader.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestReader$Io" sourceFile="BackupManifestReader.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupManifestReader$NioIo" sourceFile="BackupManifestReader.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupStartIntentFiles" sourceFile="BackupStartIntentFiles.java" interface="false" size="213" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Gate" sourceFile="BackupStartIntentFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupStartIntentFiles$Intent" sourceFile="BackupStartIntentFiles.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupWorkerRequestFiles" sourceFile="BackupWorkerRequestFiles.java" interface="false" size="195" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.BackupWorkerRequestFiles$ResumeProof" sourceFile="BackupWorkerRequestFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CaddyPublicConfiguration" sourceFile="CaddyPublicConfiguration.java" interface="false" size="162" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupBackupAdmission" sourceFile="CleanupBackupAdmission.java" interface="false" size="69" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupExpiryExecution" sourceFile="CleanupExpiryExecution.java" interface="false" size="243" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupExpiryExecution$1" sourceFile="CleanupExpiryExecution.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupExpiryExecution$ExpiryWork" sourceFile="CleanupExpiryExecution.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupMaintenanceWork" sourceFile="CleanupMaintenanceWork.java" interface="false" size="255" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupMaintenanceWork$AfterInspection" sourceFile="CleanupMaintenanceWork.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupMaintenanceWork$Inbox" sourceFile="CleanupMaintenanceWork.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupMaintenanceWork$Transfer" sourceFile="CleanupMaintenanceWork.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupNativeExecution" sourceFile="CleanupNativeExecution.java" interface="false" size="136" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupNativePreflight" sourceFile="CleanupNativePreflight.java" interface="false" size="69" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupNativePreflight$StopObservation" sourceFile="CleanupNativePreflight.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupPreflight" sourceFile="CleanupPreflight.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupPreflight$Database" sourceFile="CleanupPreflight.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupPreflight$Gate" sourceFile="CleanupPreflight.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupPreflight$Original" sourceFile="CleanupPreflight.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupPreflight$Request" sourceFile="CleanupPreflight.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupProcessMain" sourceFile="CleanupProcessMain.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupProcessMain$ExpiryWork" sourceFile="CleanupProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupProcessMain$Preflight" sourceFile="CleanupProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles" sourceFile="CleanupWorkerRequestFiles.java" interface="false" size="320" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$OwnerSource" sourceFile="CleanupWorkerRequestFiles.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$StartupName" sourceFile="CleanupWorkerRequestFiles.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.CleanupWorkerRequestFiles$StartupSource" sourceFile="CleanupWorkerRequestFiles.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.DurableRecordFiles" sourceFile="DurableRecordFiles.java" interface="false" size="231" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy" sourceFile="EnvironmentInodePolicy.java" interface="false" size="82" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Metadata" sourceFile="EnvironmentInodePolicy.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Snapshot" sourceFile="EnvironmentInodePolicy.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy$Source" sourceFile="EnvironmentInodePolicy.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles" sourceFile="InspectorEnvironmentFiles.java" interface="false" size="175" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles$GroupLookup" sourceFile="InspectorEnvironmentFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles$Operation" sourceFile="InspectorEnvironmentFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles$OwnedOperation" sourceFile="InspectorEnvironmentFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles$Retirement" sourceFile="InspectorEnvironmentFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentFiles$Roots" sourceFile="InspectorEnvironmentFiles.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher" sourceFile="InspectorEnvironmentPublisher.java" interface="false" size="176" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Io" sourceFile="InspectorEnvironmentPublisher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$NioIo" sourceFile="InspectorEnvironmentPublisher.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$NioWriter" sourceFile="InspectorEnvironmentPublisher.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentPublisher$Writer" sourceFile="InspectorEnvironmentPublisher.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentReader" sourceFile="InspectorEnvironmentReader.java" interface="false" size="96" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentReader$Io" sourceFile="InspectorEnvironmentReader.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.InspectorEnvironmentReader$NioIo" sourceFile="InspectorEnvironmentReader.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock" sourceFile="MaintenanceFileLock.java" interface="false" size="113" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$Identity" sourceFile="MaintenanceFileLock.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$Io" sourceFile="MaintenanceFileLock.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$Metadata" sourceFile="MaintenanceFileLock.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$NioIo" sourceFile="MaintenanceFileLock.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$Snapshot" sourceFile="MaintenanceFileLock.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceFileLock$ViewOperation" sourceFile="MaintenanceFileLock.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRecords" sourceFile="MaintenanceRecords.java" interface="false" size="86" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles" sourceFile="MaintenanceRunFiles.java" interface="false" size="261" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$CapturedFile" sourceFile="MaintenanceRunFiles.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Decoder" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Digests" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Graph" sourceFile="MaintenanceRunFiles.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Inventory" sourceFile="MaintenanceRunFiles.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Io" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Mutation" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$NioIo" sourceFile="MaintenanceRunFiles.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Operation" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$RetirementResult" sourceFile="MaintenanceRunFiles.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Session" sourceFile="MaintenanceRunFiles.java" interface="false" size="610" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$StartupOriginal" sourceFile="MaintenanceRunFiles.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MaintenanceRunFiles$Work" sourceFile="MaintenanceRunFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupArtifacts" sourceFile="MorningBackupArtifacts.java" interface="false" size="355" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupArtifacts$Work" sourceFile="MorningBackupArtifacts.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupArtifacts$Writer" sourceFile="MorningBackupArtifacts.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupCompletion" sourceFile="MorningBackupCompletion.java" interface="false" size="66" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupPreparation" sourceFile="MorningBackupPreparation.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupPreparation$Continuation" sourceFile="MorningBackupPreparation.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupPreparation$Publisher" sourceFile="MorningBackupPreparation.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRequestPublication" sourceFile="MorningBackupRequestPublication.java" interface="false" size="67" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRequestPublication$1" sourceFile="MorningBackupRequestPublication.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRequestPublication$Gate" sourceFile="MorningBackupRequestPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRequestPublication$Open" sourceFile="MorningBackupRequestPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRequestPublication$Owner" sourceFile="MorningBackupRequestPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRetention" sourceFile="MorningBackupRetention.java" interface="false" size="170" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRetention$Mode" sourceFile="MorningBackupRetention.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRetention$Result" sourceFile="MorningBackupRetention.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupRetention$Work" sourceFile="MorningBackupRetention.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupReuse" sourceFile="MorningBackupReuse.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupReuse$Continuation" sourceFile="MorningBackupReuse.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage" sourceFile="MorningBackupStage.java" interface="false" size="134" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$1" sourceFile="MorningBackupStage.java" interface="false" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$EpochScope" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$OwnedEpochWork" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$OwnedWork" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$Scope" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$VerifiedEpochWork" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBackupStage$VerifiedResultScope" sourceFile="MorningBackupStage.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBrokerExecution" sourceFile="MorningBrokerExecution.java" interface="false" size="120" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBrokerExecution$Completion" sourceFile="MorningBrokerExecution.java" interface="false" size="41" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBrokerExecution$ExpectedCurrent" sourceFile="MorningBrokerExecution.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningBrokerExecution$Observations" sourceFile="MorningBrokerExecution.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCleanupExecution" sourceFile="MorningCleanupExecution.java" interface="false" size="175" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCleanupExecution$Completion" sourceFile="MorningCleanupExecution.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCompletionChecks" sourceFile="MorningCompletionChecks.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCompletionEvidence" sourceFile="MorningCompletionEvidence.java" interface="false" size="132" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCompletionEvidence$Read" sourceFile="MorningCompletionEvidence.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope" sourceFile="MorningControlScope.java" interface="false" size="317" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$1" sourceFile="MorningControlScope.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$2" sourceFile="MorningControlScope.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$3" sourceFile="MorningControlScope.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$4" sourceFile="MorningControlScope.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$5" sourceFile="MorningControlScope.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$AfterPublication" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$EpochInvalidation" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$Exclusive" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$Gate" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$IntentClear" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$Invalidation" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$Original" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$OwnedEpochWork" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$OwnedOriginal" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$StartupExclusive" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$StopPass" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$Terminals" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningControlScope$VerifiedEpochWork" sourceFile="MorningControlScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCurrentInvalidation" sourceFile="MorningCurrentInvalidation.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCurrentInvalidation$1" sourceFile="MorningCurrentInvalidation.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCurrentInvalidation$Gate" sourceFile="MorningCurrentInvalidation.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningCurrentInvalidation$Store" sourceFile="MorningCurrentInvalidation.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningExpiryExecution" sourceFile="MorningExpiryExecution.java" interface="false" size="117" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningGateEvidence" sourceFile="MorningGateEvidence.java" interface="false" size="419" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission" sourceFile="MorningNewRunAdmission.java" interface="false" size="85" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$1" sourceFile="MorningNewRunAdmission.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$2" sourceFile="MorningNewRunAdmission.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$2$1" sourceFile="MorningNewRunAdmission.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$3" sourceFile="MorningNewRunAdmission.java" interface="false" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$Continuation" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$Database" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$DatabaseWork" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$FileWork" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$Files" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$Gate" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$OriginalFiles" sourceFile="MorningNewRunAdmission.java" interface="true" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$OriginalProof" sourceFile="MorningNewRunAdmission.java" interface="true" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$Originals" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$OwnedContinuation" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningNewRunAdmission$VerifiedContinuation" sourceFile="MorningNewRunAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication" sourceFile="MorningPermitPublication.java" interface="false" size="167" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$1" sourceFile="MorningPermitPublication.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$2" sourceFile="MorningPermitPublication.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$Gate" sourceFile="MorningPermitPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$Intents" sourceFile="MorningPermitPublication.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$OpenIntent" sourceFile="MorningPermitPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$OpenStore" sourceFile="MorningPermitPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$Retain" sourceFile="MorningPermitPublication.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPermitPublication$Store" sourceFile="MorningPermitPublication.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningPrestartEvidence" sourceFile="MorningPrestartEvidence.java" interface="false" size="184" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain" sourceFile="MorningProcessMain.java" interface="false" size="320" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$1" sourceFile="MorningProcessMain.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$Admission" sourceFile="MorningProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$Archive" sourceFile="MorningProcessMain.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$CompletedAdmission" sourceFile="MorningProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$ResumeAdmission" sourceFile="MorningProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningProcessMain$VerifiedArchive" sourceFile="MorningProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission" sourceFile="MorningResumeAdmission.java" interface="false" size="66" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$1" sourceFile="MorningResumeAdmission.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$2" sourceFile="MorningResumeAdmission.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$2$1" sourceFile="MorningResumeAdmission.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$Database" sourceFile="MorningResumeAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$DatabaseWork" sourceFile="MorningResumeAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$FileWork" sourceFile="MorningResumeAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$Files" sourceFile="MorningResumeAdmission.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$Gate" sourceFile="MorningResumeAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningResumeAdmission$Originals" sourceFile="MorningResumeAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningRootScope" sourceFile="MorningRootScope.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningRootScope$Exclusive" sourceFile="MorningRootScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningRootScope$Gate" sourceFile="MorningRootScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningRootScope$Policy" sourceFile="MorningRootScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner" sourceFile="MorningStartupLaunchOwner.java" interface="false" size="449" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$ApiRetained" sourceFile="MorningStartupLaunchOwner.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$Completion" sourceFile="MorningStartupLaunchOwner.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$CompletionPhase" sourceFile="MorningStartupLaunchOwner.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$CompletionProgress" sourceFile="MorningStartupLaunchOwner.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$CompletionRetirement" sourceFile="MorningStartupLaunchOwner.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$Launch" sourceFile="MorningStartupLaunchOwner.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$Started" sourceFile="MorningStartupLaunchOwner.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupLaunchOwner$Stop" sourceFile="MorningStartupLaunchOwner.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots" sourceFile="MorningStartupRoots.java" interface="false" size="129" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots$Entry" sourceFile="MorningStartupRoots.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots$Gate" sourceFile="MorningStartupRoots.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots$Observation" sourceFile="MorningStartupRoots.java" interface="false" size="64" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots$Profile" sourceFile="MorningStartupRoots.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.MorningStartupRoots$Profiles" sourceFile="MorningStartupRoots.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootBatchCredentialReader" sourceFile="RootBatchCredentialReader.java" interface="false" size="88" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$Io" sourceFile="RootBatchCredentialReader.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootBatchCredentialReader$NativeIo" sourceFile="RootBatchCredentialReader.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflight" sourceFile="RootCurrentPermitPreflight.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootCurrentPermitPreflight$Observed" sourceFile="RootCurrentPermitPreflight.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootFailedStartRecovery" sourceFile="RootFailedStartRecovery.java" interface="false" size="163" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootFailedStartRecovery$Evidence" sourceFile="RootFailedStartRecovery.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootFailedStartRecovery$PairEvidence" sourceFile="RootFailedStartRecovery.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootFailedStartRecovery$PairProof" sourceFile="RootFailedStartRecovery.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootFailedStartRecovery$Proof" sourceFile="RootFailedStartRecovery.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader" sourceFile="RootReleaseApprovalReader.java" interface="false" size="138" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Gate" sourceFile="RootReleaseApprovalReader.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Io" sourceFile="RootReleaseApprovalReader.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$NativeIo" sourceFile="RootReleaseApprovalReader.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootReleaseApprovalReader$Operation" sourceFile="RootReleaseApprovalReader.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceAdmissionScope" sourceFile="RootServiceAdmissionScope.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceAdmissionScope$Exclusive" sourceFile="RootServiceAdmissionScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceAdmissionScope$Gate" sourceFile="RootServiceAdmissionScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceAdmissionScope$Work" sourceFile="RootServiceAdmissionScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceCredentialSource" sourceFile="RootServiceCredentialSource.java" interface="false" size="127" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceCredentialSource$1" sourceFile="RootServiceCredentialSource.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceCredentialSource$Work" sourceFile="RootServiceCredentialSource.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmission" sourceFile="RootServiceExecutableAdmission.java" interface="false" size="256" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmission$Capability" sourceFile="RootServiceExecutableAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmission$DigestFactory" sourceFile="RootServiceExecutableAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmission$RootDescriptor" sourceFile="RootServiceExecutableAdmission.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceExecutableAdmission$Work" sourceFile="RootServiceExecutableAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceFacts" sourceFile="RootServiceFacts.java" interface="false" size="98" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceFacts$Facts" sourceFile="RootServiceFacts.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceLauncher" sourceFile="RootServiceLauncher.java" interface="false" size="149" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceLauncher$1" sourceFile="RootServiceLauncher.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceLauncher$Admission" sourceFile="RootServiceLauncher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceLauncher$Measurement" sourceFile="RootServiceLauncher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootServiceLauncher$NativeAdmission" sourceFile="RootServiceLauncher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootStartupPending" sourceFile="RootStartupPending.java" interface="false" size="84" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootStartupPending$1" sourceFile="RootStartupPending.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootStartupPending$LaunchRead" sourceFile="RootStartupPending.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.RootStartupPending$WaitIo" sourceFile="RootStartupPending.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile" sourceFile="StartupAdmissionFile.java" interface="false" size="106" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Admission" sourceFile="StartupAdmissionFile.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$AdmittedOperation" sourceFile="StartupAdmissionFile.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Identity" sourceFile="StartupAdmissionFile.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Io" sourceFile="StartupAdmissionFile.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$NioIo" sourceFile="StartupAdmissionFile.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$Snapshot" sourceFile="StartupAdmissionFile.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$ViewOperation" sourceFile="StartupAdmissionFile.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupAdmissionFile$ViewOwner" sourceFile="StartupAdmissionFile.java" interface="false" size="93" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupLaunchFiles" sourceFile="StartupLaunchFiles.java" interface="false" size="152" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupLaunchFiles$1" sourceFile="StartupLaunchFiles.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupLaunchRecord" sourceFile="StartupLaunchRecord.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupLaunchRecord$DigestFactory" sourceFile="StartupLaunchRecord.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles" sourceFile="StartupPermitFiles.java" interface="false" size="291" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$Io" sourceFile="StartupPermitFiles.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$IssuePhase" sourceFile="StartupPermitFiles.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$IssueProof" sourceFile="StartupPermitFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$NioIo" sourceFile="StartupPermitFiles.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$Parts" sourceFile="StartupPermitFiles.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitFiles$Revoked" sourceFile="StartupPermitFiles.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitRecords" sourceFile="StartupPermitRecords.java" interface="false" size="116" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitRecords$DigestFactory" sourceFile="StartupPermitRecords.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitRecords$Epoch" sourceFile="StartupPermitRecords.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitRecords$Permit" sourceFile="StartupPermitRecords.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.StartupPermitRecords$State" sourceFile="StartupPermitRecords.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup" sourceFile="TransferCleanup.java" interface="false" size="161" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup$Counts" sourceFile="TransferCleanup.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup$Guard" sourceFile="TransferCleanup.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup$Io" sourceFile="TransferCleanup.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup$NioIo" sourceFile="TransferCleanup.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.file.TransferCleanup$Outcome" sourceFile="TransferCleanup.java" interface="false" size="31" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.monitoring" total_bugs="0" total_types="72" total_size="1978">
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle" sourceFile="AlertLifecycle.java" interface="false" size="75" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$CauseClearance" sourceFile="AlertLifecycle.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Condition" sourceFile="AlertLifecycle.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event" sourceFile="AlertLifecycle.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Service" sourceFile="AlertLifecycle.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Severity" sourceFile="AlertLifecycle.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertRegistry" sourceFile="AlertRegistry.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AlertThresholds" sourceFile="AlertThresholds.java" interface="false" size="94" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitor" sourceFile="AsyncQueueMonitor.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitor$ByteUsage" sourceFile="AsyncQueueMonitor.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitor$Evaluation" sourceFile="AsyncQueueMonitor.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitor" sourceFile="BackupHealthMonitor.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitor$Completion" sourceFile="BackupHealthMonitor.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BackupHealthMonitor$Evaluation" sourceFile="BackupHealthMonitor.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchGcMetricRegistration" sourceFile="BatchGcMetricRegistration.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchJvmMetrics" sourceFile="BatchJvmMetrics.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricContract" sourceFile="BatchMetricContract.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Status" sourceFile="BatchMetricContract.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricContract$Step" sourceFile="BatchMetricContract.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricLabelPolicy" sourceFile="BatchMetricLabelPolicy.java" interface="false" size="57" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricRecorder" sourceFile="BatchMetricRecorder.java" interface="false" size="69" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchMetricText" sourceFile="BatchMetricText.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchStandardMetricSource" sourceFile="BatchStandardMetricSource.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchStandardMetrics" sourceFile="BatchStandardMetrics.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.BatchSystemMetrics" sourceFile="BatchSystemMetrics.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindow" sourceFile="ContinuousConditionWindow.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindow$State" sourceFile="ContinuousConditionWindow.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitor" sourceFile="DlqHealthMonitor.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitor$Evaluation" sourceFile="DlqHealthMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.DlqHealthMonitor$Observation" sourceFile="DlqHealthMonitor.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitor" sourceFile="ExpiryBacklogMonitor.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ExpiryBacklogMonitor$Evaluation" sourceFile="ExpiryBacklogMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthMonitor" sourceFile="FilesystemHealthMonitor.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservation" sourceFile="FilesystemHealthObservation.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.HealthUsageRatio" sourceFile="HealthUsageRatio.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorder" sourceFile="IntegrityFailureMetricRecorder.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.IntegrityFailureMetricRecorder$Area" sourceFile="IntegrityFailureMetricRecorder.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitor" sourceFile="IntegrityHealthMonitor.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.IntegrityHealthMonitor$Evaluation" sourceFile="IntegrityHealthMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthMonitor" sourceFile="JvmHeapHealthMonitor.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.JvmHeapHealthObservation" sourceFile="JvmHeapHealthObservation.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MetricContract" sourceFile="MetricContract.java" interface="false" size="88" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MetricContract$Kind" sourceFile="MetricContract.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy" sourceFile="MonitoringModePolicy.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy$DetailService" sourceFile="MonitoringModePolicy.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringModePolicy$RetentionConfiguration" sourceFile="MonitoringModePolicy.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClock" sourceFile="MonitoringObservationClock.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringPolicyEngine" sourceFile="MonitoringPolicyEngine.java" interface="false" size="52" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringPoller" sourceFile="MonitoringPoller.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.MonitoringStatusText" sourceFile="MonitoringStatusText.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ObservationContext" sourceFile="ObservationContext.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorder" sourceFile="ProcessRestartMetricRecorder.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.ProcessRestartMetricRecorder$Reason" sourceFile="ProcessRestartMetricRecorder.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitor" sourceFile="RestartHealthMonitor.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.RestartHealthMonitor$Evaluation" sourceFile="RestartHealthMonitor.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitor" sourceFile="TimedDbPoolMonitor.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedDbPoolMonitor$Evaluation" sourceFile="TimedDbPoolMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitor" sourceFile="TimedFilesystemMonitor.java" interface="false" size="49" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitor$Evaluation" sourceFile="TimedFilesystemMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitor" sourceFile="TimedJvmHeapMonitor.java" interface="false" size="43" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedJvmHeapMonitor$Evaluation" sourceFile="TimedJvmHeapMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitor" sourceFile="TimedSyncLatencyMonitor.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TimedSyncLatencyMonitor$Evaluation" sourceFile="TimedSyncLatencyMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitor" sourceFile="TransferHealthMonitor.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferHealthMonitor$Evaluation" sourceFile="TransferHealthMonitor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder" sourceFile="TransferMetricRecorder.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder$Counts" sourceFile="TransferMetricRecorder.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder$Suffix" sourceFile="TransferMetricRecorder.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorder$Usage" sourceFile="TransferMetricRecorder.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitor" sourceFile="WebLogBacklogMonitor.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.WebLogBacklogMonitor$Evaluation" sourceFile="WebLogBacklogMonitor.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.monitoring.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.mq" total_bugs="0" total_types="29" total_size="895">
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient" sourceFile="ArtemisAcceptorReadinessClient.java" interface="false" size="72" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisAcceptorReadinessClient$Reader" sourceFile="ArtemisAcceptorReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient" sourceFile="ArtemisAddressSettingsReadinessClient.java" interface="false" size="82" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient$Capacity" sourceFile="ArtemisAddressSettingsReadinessClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisAddressSettingsReadinessClient$Reader" sourceFile="ArtemisAddressSettingsReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient" sourceFile="ArtemisExpiryPurgeClient.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient$ManagementOperations" sourceFile="ArtemisExpiryPurgeClient.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient$Observation" sourceFile="ArtemisExpiryPurgeClient.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient$Operations" sourceFile="ArtemisExpiryPurgeClient.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient$Result" sourceFile="ArtemisExpiryPurgeClient.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeException" sourceFile="ArtemisExpiryPurgeException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient" sourceFile="ArtemisManagementReadinessClient.java" interface="false" size="172" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient$Exchange" sourceFile="ArtemisManagementReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient$MessageWriter" sourceFile="ArtemisManagementReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient$OperationEncoder" sourceFile="ArtemisManagementReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient$OwnedOperation" sourceFile="ArtemisManagementReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessClient$Reader" sourceFile="ArtemisManagementReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessException" sourceFile="ArtemisManagementReadinessException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient" sourceFile="ArtemisQueuePressureClient.java" interface="false" size="55" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient$Limits" sourceFile="ArtemisQueuePressureClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient$Pressure" sourceFile="ArtemisQueuePressureClient.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient$Reader" sourceFile="ArtemisQueuePressureClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisQueuePressureClient$Value" sourceFile="ArtemisQueuePressureClient.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisReadinessClient" sourceFile="ArtemisReadinessClient.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisReadinessException" sourceFile="ArtemisReadinessException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient" sourceFile="ArtemisRoleReadinessClient.java" interface="false" size="110" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisRoleReadinessClient$Reader" sourceFile="ArtemisRoleReadinessClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation" sourceFile="ArtemisStartupObservation.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.mq.ArtemisStartupObservation$Evidence" sourceFile="ArtemisStartupObservation.java" interface="false" size="42" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.platform" total_bugs="0" total_types="170" total_size="5663">
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ApplicationStopGate" sourceFile="ApplicationStopGate.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ApplicationStopGate$StateSource" sourceFile="ApplicationStopGate.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ApplicationUnit" sourceFile="ApplicationUnit.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess" sourceFile="BackupArchiveProcess.java" interface="false" size="183" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart" sourceFile="BackupArchiveProcess.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart$Pending" sourceFile="BackupArchiveProcess.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart$PendingHold" sourceFile="BackupArchiveProcess.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$NativeStart$Pipeline" sourceFile="BackupArchiveProcess.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$Start" sourceFile="BackupArchiveProcess.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$StdIoOwner" sourceFile="BackupArchiveProcess.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$TerminalPlan" sourceFile="BackupArchiveProcess.java" interface="false" size="99" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupArchiveProcess$Work" sourceFile="BackupArchiveProcess.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate" sourceFile="BackupUnitReceiptGate.java" interface="false" size="127" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate$Baseline" sourceFile="BackupUnitReceiptGate.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate$Context" sourceFile="BackupUnitReceiptGate.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate$Probe" sourceFile="BackupUnitReceiptGate.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate$Terminal" sourceFile="BackupUnitReceiptGate.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate$TerminalReceipt" sourceFile="BackupUnitReceiptGate.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient" sourceFile="BackupUnitStartClient.java" interface="false" size="201" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$1" sourceFile="BackupUnitStartClient.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$2" sourceFile="BackupUnitStartClient.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Attempt" sourceFile="BackupUnitStartClient.java" interface="false" size="121" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Context" sourceFile="BackupUnitStartClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Intent" sourceFile="BackupUnitStartClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$MarkerLease" sourceFile="BackupUnitStartClient.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Policy" sourceFile="BackupUnitStartClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$RetirementGate" sourceFile="BackupUnitStartClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Start" sourceFile="BackupUnitStartClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Status" sourceFile="BackupUnitStartClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitStartClient$Target" sourceFile="BackupUnitStartClient.java" interface="false" size="41" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination" sourceFile="BackupUnitTermination.java" interface="false" size="108" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination$Context" sourceFile="BackupUnitTermination.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination$Io" sourceFile="BackupUnitTermination.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination$NativeObservations" sourceFile="BackupUnitTermination.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination$NioIo" sourceFile="BackupUnitTermination.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupUnitTermination$Observations" sourceFile="BackupUnitTermination.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupWorkerRequest" sourceFile="BackupWorkerRequest.java" interface="false" size="76" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BackupWorkerRequest$Verification" sourceFile="BackupWorkerRequest.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BrokerJournalEvidence" sourceFile="BrokerJournalEvidence.java" interface="false" size="213" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BrokerJournalEvidence$Anchor" sourceFile="BrokerJournalEvidence.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.BrokerJournalEvidence$Summary" sourceFile="BrokerJournalEvidence.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest" sourceFile="CleanupFailedBackupRequest.java" interface="false" size="121" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest$Row" sourceFile="CleanupFailedBackupRequest.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupProfile" sourceFile="CleanupProfile.java" interface="true" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest" sourceFile="CleanupWorkerRequest.java" interface="false" size="59" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest$Expiry" sourceFile="CleanupWorkerRequest.java" interface="false" size="139" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest$Expiry$PriorExpiry" sourceFile="CleanupWorkerRequest.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver" sourceFile="ConfigurationGroupResolver.java" interface="false" size="142" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver$NativeProcess" sourceFile="ConfigurationGroupResolver.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ConfigurationGroupResolver$Start" sourceFile="ConfigurationGroupResolver.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace" sourceFile="FixedUnitCgroupNamespace.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Context" sourceFile="FixedUnitCgroupNamespace.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Identity" sourceFile="FixedUnitCgroupNamespace.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Io" sourceFile="FixedUnitCgroupNamespace.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Owner" sourceFile="FixedUnitCgroupNamespace.java" interface="false" size="82" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.FixedUnitCgroupNamespace$Snapshot" sourceFile="FixedUnitCgroupNamespace.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorRunEnvironment" sourceFile="InspectorRunEnvironment.java" interface="true" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorStaticEnvironment" sourceFile="InspectorStaticEnvironment.java" interface="true" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe" sourceFile="InspectorUnitProbe.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe$NativeReader" sourceFile="InspectorUnitProbe.java" interface="false" size="168" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe$NativeReader$Start" sourceFile="InspectorUnitProbe.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe$QueryProcess" sourceFile="InspectorUnitProbe.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe$Reader" sourceFile="InspectorUnitProbe.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitProbe$SafeStream" sourceFile="InspectorUnitProbe.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshot" sourceFile="InspectorUnitSnapshot.java" interface="false" size="264" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshot$Target" sourceFile="InspectorUnitSnapshot.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceStopSnapshot" sourceFile="MaintenanceStopSnapshot.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnit" sourceFile="MaintenanceUnit.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient" sourceFile="MaintenanceUnitStopClient.java" interface="false" size="70" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$Attempt" sourceFile="MaintenanceUnitStopClient.java" interface="false" size="62" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$Context" sourceFile="MaintenanceUnitStopClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$NativeStart" sourceFile="MaintenanceUnitStopClient.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$Policy" sourceFile="MaintenanceUnitStopClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$Start" sourceFile="MaintenanceUnitStopClient.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopClient$Status" sourceFile="MaintenanceUnitStopClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicy" sourceFile="MaintenanceUnitStopPolicy.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicy$NativeSource" sourceFile="MaintenanceUnitStopPolicy.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitStopPolicy$Source" sourceFile="MaintenanceUnitStopPolicy.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination" sourceFile="MaintenanceUnitTermination.java" interface="false" size="83" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination$KernelDirectory" sourceFile="MaintenanceUnitTermination.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination$NativeObservations" sourceFile="MaintenanceUnitTermination.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination$Observation" sourceFile="MaintenanceUnitTermination.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MaintenanceUnitTermination$Observations" sourceFile="MaintenanceUnitTermination.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle" sourceFile="MorningBackupUnitCycle.java" interface="false" size="269" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$1" sourceFile="MorningBackupUnitCycle.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$2" sourceFile="MorningBackupUnitCycle.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$3" sourceFile="MorningBackupUnitCycle.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$BackupCompletion" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$BackupResult" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Completion" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Gate" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Handoff" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$ObservedCompletion" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$ObservedWork" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Outcome" sourceFile="MorningBackupUnitCycle.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$ParentProof" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Receipt" sourceFile="MorningBackupUnitCycle.java" interface="true" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Retain" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Start" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$StartAttempt" sourceFile="MorningBackupUnitCycle.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Started" sourceFile="MorningBackupUnitCycle.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Stop" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$StopAttempt" sourceFile="MorningBackupUnitCycle.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Terminal" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Unresolved" sourceFile="MorningBackupUnitCycle.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Wait" sourceFile="MorningBackupUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle" sourceFile="MorningBrokerUnitCycle.java" interface="false" size="103" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$1" sourceFile="MorningBrokerUnitCycle.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Baseline" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Live" sourceFile="MorningBrokerUnitCycle.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Observation" sourceFile="MorningBrokerUnitCycle.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$ParentProof" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Projection" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Readiness" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Retain" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningBrokerUnitCycle$Start" sourceFile="MorningBrokerUnitCycle.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningCaddyReadiness" sourceFile="MorningCaddyReadiness.java" interface="false" size="209" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningCaddyReadiness$Guard" sourceFile="MorningCaddyReadiness.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningCaddyReadiness$Io" sourceFile="MorningCaddyReadiness.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningCaddyReadiness$NativeIo" sourceFile="MorningCaddyReadiness.java" interface="false" size="83" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningParentBudget" sourceFile="MorningParentBudget.java" interface="false" size="50" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningParentBudget$Clock" sourceFile="MorningParentBudget.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningPreviousBroker" sourceFile="MorningPreviousBroker.java" interface="false" size="146" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningPreviousBroker$Closed" sourceFile="MorningPreviousBroker.java" interface="false" size="66" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningPreviousBroker$Evidence" sourceFile="MorningPreviousBroker.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningPreviousBroker$NoPrior" sourceFile="MorningPreviousBroker.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningPreviousBroker$Query" sourceFile="MorningPreviousBroker.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness" sourceFile="MorningServiceReadiness.java" interface="false" size="113" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$1" sourceFile="MorningServiceReadiness.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$Guard" sourceFile="MorningServiceReadiness.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$Io" sourceFile="MorningServiceReadiness.java" interface="true" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$NativeIo" sourceFile="MorningServiceReadiness.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$Response" sourceFile="MorningServiceReadiness.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass" sourceFile="MorningStopPass.java" interface="false" size="60" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$1" sourceFile="MorningStopPass.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$1$1" sourceFile="MorningStopPass.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$2" sourceFile="MorningStopPass.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$Attempt" sourceFile="MorningStopPass.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$Gate" sourceFile="MorningStopPass.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$Stop" sourceFile="MorningStopPass.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningStopPass$Terminals" sourceFile="MorningStopPass.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningUnitTerminals" sourceFile="MorningUnitTerminals.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningUnitTerminals$DetailedObservation" sourceFile="MorningUnitTerminals.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningUnitTerminals$Observation" sourceFile="MorningUnitTerminals.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.MorningUnitTerminals$Snapshot" sourceFile="MorningUnitTerminals.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ProcessResourceScope" sourceFile="ProcessResourceScope.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ProcessResourceScope$OwnedQuery" sourceFile="ProcessResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.ProcessResourceScope$QueryWork" sourceFile="ProcessResourceScope.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission" sourceFile="RootReleaseAdmission.java" interface="false" size="243" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$DatabaseInspection" sourceFile="RootReleaseAdmission.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$EffectiveConfigurations" sourceFile="RootReleaseAdmission.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$Loader" sourceFile="RootReleaseAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$NativeOsIo" sourceFile="RootReleaseAdmission.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$OsIo" sourceFile="RootReleaseAdmission.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootReleaseAdmission$Platform" sourceFile="RootReleaseAdmission.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext" sourceFile="RootStartupContext.java" interface="false" size="238" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$Io" sourceFile="RootStartupContext.java" interface="true" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$NativeIo" sourceFile="RootStartupContext.java" interface="false" size="91" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$NativeIo$LinkRead" sourceFile="RootStartupContext.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$NativeIo$UnitQuery" sourceFile="RootStartupContext.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$Service" sourceFile="RootStartupContext.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$Snapshot" sourceFile="RootStartupContext.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.RootStartupContext$Verification" sourceFile="RootStartupContext.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.StopGateException" sourceFile="StopGateException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.StopGateFailure" sourceFile="StopGateFailure.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.SystemctlStateSource" sourceFile="SystemctlStateSource.java" interface="false" size="72" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.SystemctlStateSource$NativeProcess" sourceFile="SystemctlStateSource.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.SystemctlStateSource$Start" sourceFile="SystemctlStateSource.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.SystemctlStateSource$StdIo" sourceFile="SystemctlStateSource.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.platform.UnitStateParser" sourceFile="UnitStateParser.java" interface="false" size="36" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.batch.repository" total_bugs="0" total_types="71" total_size="3664">
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BackupFailureSnapshot" sourceFile="BackupFailureSnapshot.java" interface="false" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BackupStepRepository" sourceFile="BackupStepRepository.java" interface="false" size="159" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BackupStepRepository$Terminal" sourceFile="BackupStepRepository.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRepositoryException" sourceFile="BatchRepositoryException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRun" sourceFile="BatchRun.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRunRepository" sourceFile="BatchRunRepository.java" interface="false" size="322" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchRunRepository$History" sourceFile="BatchRunRepository.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchStep" sourceFile="BatchStep.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchStepAttempt" sourceFile="BatchStepAttempt.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchStepResult" sourceFile="BatchStepResult.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchStepResult$Reason" sourceFile="BatchStepResult.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.BatchStepResult$Status" sourceFile="BatchStepResult.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupChunk" sourceFile="CleanupChunk.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupCounts" sourceFile="CleanupCounts.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession" sourceFile="CleanupDatabaseSession.java" interface="false" size="185" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$CleanupSchema" sourceFile="CleanupDatabaseSession.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$Connect" sourceFile="CleanupDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$Gate" sourceFile="CleanupDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$Operation" sourceFile="CleanupDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$Rows" sourceFile="CleanupDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupDatabaseSession$Schema" sourceFile="CleanupDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupKind" sourceFile="CleanupKind.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupReason" sourceFile="CleanupReason.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupRepository" sourceFile="CleanupRepository.java" interface="false" size="111" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupRepository$1" sourceFile="CleanupRepository.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupStepChunk" sourceFile="CleanupStepChunk.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupStepChunk$Reason" sourceFile="CleanupStepChunk.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupStepRepository" sourceFile="CleanupStepRepository.java" interface="false" size="85" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository" sourceFile="CleanupTerminalRepository.java" interface="false" size="341" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository$Entry" sourceFile="CleanupTerminalRepository.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository$Projection" sourceFile="CleanupTerminalRepository.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository$RejectedEntry" sourceFile="CleanupTerminalRepository.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository$RejectedSnapshot" sourceFile="CleanupTerminalRepository.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository$Snapshot" sourceFile="CleanupTerminalRepository.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository" sourceFile="ExpiryAuditRepository.java" interface="false" size="270" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcAcquire" sourceFile="ExpiryAuditRepository.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcRead" sourceFile="ExpiryAuditRepository.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$JdbcRelease" sourceFile="ExpiryAuditRepository.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Prior" sourceFile="ExpiryAuditRepository.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Snapshot" sourceFile="ExpiryAuditRepository.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository$Stage" sourceFile="ExpiryAuditRepository.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.InspectionSummary" sourceFile="InspectionSummary.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.InspectionSummaryRepository" sourceFile="InspectionSummaryRepository.java" interface="false" size="66" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.JdbcResourceFailures" sourceFile="JdbcResourceFailures.java" interface="true" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.LogCleanupProgress" sourceFile="LogCleanupProgress.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MaintenanceActivation" sourceFile="MaintenanceActivation.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MaintenanceCompletion" sourceFile="MaintenanceCompletion.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MaintenanceCompletion$Outcome" sourceFile="MaintenanceCompletion.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MaintenanceRetirement" sourceFile="MaintenanceRetirement.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MaintenanceRunState" sourceFile="MaintenanceRunState.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession" sourceFile="MorningDatabaseSession.java" interface="false" size="178" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$1" sourceFile="MorningDatabaseSession.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Access" sourceFile="MorningDatabaseSession.java" interface="true" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupBegins" sourceFile="MorningDatabaseSession.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$BackupObservation" sourceFile="MorningDatabaseSession.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Bind" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$CleanupHandoff" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Connect" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$DatabaseObservation" sourceFile="MorningDatabaseSession.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$ExpiryBegins" sourceFile="MorningDatabaseSession.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$ExpiryObservation" sourceFile="MorningDatabaseSession.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Gate" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Operation" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$RoleObservation" sourceFile="MorningDatabaseSession.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Rows" sourceFile="MorningDatabaseSession.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Schema" sourceFile="MorningDatabaseSession.java" interface="true" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningDatabaseSession$Session" sourceFile="MorningDatabaseSession.java" interface="false" size="720" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.MorningSqlFailures" sourceFile="MorningSqlFailures.java" interface="true" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.RunReferenceRepository" sourceFile="RunReferenceRepository.java" interface="false" size="67" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.RunReferences" sourceFile="RunReferences.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.batch.repository.SuccessRunLookup" sourceFile="SuccessRunLookup.java" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="1003" invocations="2642" avgMicrosecondsPerInvocation="379" maxMicrosecondsPerInvocation="18459" standardDeviationMicrosecondsPerInvocation="897"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="802" invocations="4146" avgMicrosecondsPerInvocation="193" maxMicrosecondsPerInvocation="14052" standardDeviationMicrosecondsPerInvocation="576"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="749" invocations="4561" avgMicrosecondsPerInvocation="164" maxMicrosecondsPerInvocation="14583" standardDeviationMicrosecondsPerInvocation="536"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="640" invocations="4146" avgMicrosecondsPerInvocation="154" maxMicrosecondsPerInvocation="10112" standardDeviationMicrosecondsPerInvocation="372"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="639" invocations="4586" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="15042" standardDeviationMicrosecondsPerInvocation="473"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="616" invocations="4146" avgMicrosecondsPerInvocation="148" maxMicrosecondsPerInvocation="14789" standardDeviationMicrosecondsPerInvocation="456"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="462" invocations="966" avgMicrosecondsPerInvocation="478" maxMicrosecondsPerInvocation="13901" standardDeviationMicrosecondsPerInvocation="1118"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="446" invocations="966" avgMicrosecondsPerInvocation="462" maxMicrosecondsPerInvocation="13891" standardDeviationMicrosecondsPerInvocation="972"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="441" invocations="3218" avgMicrosecondsPerInvocation="137" maxMicrosecondsPerInvocation="9220" standardDeviationMicrosecondsPerInvocation="382"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="438" invocations="4649" avgMicrosecondsPerInvocation="94" maxMicrosecondsPerInvocation="7098" standardDeviationMicrosecondsPerInvocation="190"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="359" invocations="5042" avgMicrosecondsPerInvocation="71" maxMicrosecondsPerInvocation="6811" standardDeviationMicrosecondsPerInvocation="208"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="276" invocations="2650" avgMicrosecondsPerInvocation="104" maxMicrosecondsPerInvocation="2348" standardDeviationMicrosecondsPerInvocation="104"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindImproperSynchronization" totalMilliseconds="245" invocations="646" avgMicrosecondsPerInvocation="380" maxMicrosecondsPerInvocation="13029" standardDeviationMicrosecondsPerInvocation="818"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SharedVariableAtomicityDetector" totalMilliseconds="222" invocations="646" avgMicrosecondsPerInvocation="343" maxMicrosecondsPerInvocation="33283" standardDeviationMicrosecondsPerInvocation="1774"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="210" invocations="646" avgMicrosecondsPerInvocation="326" maxMicrosecondsPerInvocation="12615" standardDeviationMicrosecondsPerInvocation="1053"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ResourceInMultipleThreadsDetector" totalMilliseconds="194" invocations="646" avgMicrosecondsPerInvocation="300" maxMicrosecondsPerInvocation="8886" standardDeviationMicrosecondsPerInvocation="668"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="192" invocations="646" avgMicrosecondsPerInvocation="298" maxMicrosecondsPerInvocation="19383" standardDeviationMicrosecondsPerInvocation="973"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="179" invocations="1083" avgMicrosecondsPerInvocation="166" maxMicrosecondsPerInvocation="23015" standardDeviationMicrosecondsPerInvocation="725"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="179" invocations="4146" avgMicrosecondsPerInvocation="43" maxMicrosecondsPerInvocation="18508" standardDeviationMicrosecondsPerInvocation="300"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="179" invocations="966" avgMicrosecondsPerInvocation="185" maxMicrosecondsPerInvocation="19957" standardDeviationMicrosecondsPerInvocation="719"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="156" invocations="646" avgMicrosecondsPerInvocation="242" maxMicrosecondsPerInvocation="4054" standardDeviationMicrosecondsPerInvocation="507"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="153" invocations="4649" avgMicrosecondsPerInvocation="32" maxMicrosecondsPerInvocation="14928" standardDeviationMicrosecondsPerInvocation="235"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUncalledPrivateMethods" totalMilliseconds="152" invocations="646" avgMicrosecondsPerInvocation="235" maxMicrosecondsPerInvocation="2649" standardDeviationMicrosecondsPerInvocation="213"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="150" invocations="646" avgMicrosecondsPerInvocation="232" maxMicrosecondsPerInvocation="3457" standardDeviationMicrosecondsPerInvocation="329"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="122" invocations="966" avgMicrosecondsPerInvocation="126" maxMicrosecondsPerInvocation="7489" standardDeviationMicrosecondsPerInvocation="380"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="121" invocations="646" avgMicrosecondsPerInvocation="188" maxMicrosecondsPerInvocation="11163" standardDeviationMicrosecondsPerInvocation="577"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="120" invocations="966" avgMicrosecondsPerInvocation="124" maxMicrosecondsPerInvocation="3144" standardDeviationMicrosecondsPerInvocation="259"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="116" invocations="646" avgMicrosecondsPerInvocation="180" maxMicrosecondsPerInvocation="2936" standardDeviationMicrosecondsPerInvocation="320"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MethodReturnCheck" totalMilliseconds="116" invocations="646" avgMicrosecondsPerInvocation="180" maxMicrosecondsPerInvocation="4866" standardDeviationMicrosecondsPerInvocation="361"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="112" invocations="966" avgMicrosecondsPerInvocation="116" maxMicrosecondsPerInvocation="1842" standardDeviationMicrosecondsPerInvocation="195"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="109" invocations="646" avgMicrosecondsPerInvocation="170" maxMicrosecondsPerInvocation="5098" standardDeviationMicrosecondsPerInvocation="413"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="109" invocations="87761" avgMicrosecondsPerInvocation="1" maxMicrosecondsPerInvocation="991" standardDeviationMicrosecondsPerInvocation="6"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="107" invocations="966" avgMicrosecondsPerInvocation="111" maxMicrosecondsPerInvocation="13121" standardDeviationMicrosecondsPerInvocation="484"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RuntimeExceptionCapture" totalMilliseconds="90" invocations="646" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="2305" standardDeviationMicrosecondsPerInvocation="286"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPublicAttributes" totalMilliseconds="90" invocations="646" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="2606" standardDeviationMicrosecondsPerInvocation="283"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="89" invocations="966" avgMicrosecondsPerInvocation="92" maxMicrosecondsPerInvocation="2571" standardDeviationMicrosecondsPerInvocation="239"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref$CheckCallSitesAndReturnInstructions" totalMilliseconds="88" invocations="4146" avgMicrosecondsPerInvocation="21" maxMicrosecondsPerInvocation="1863" standardDeviationMicrosecondsPerInvocation="45"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindHEmismatch" totalMilliseconds="88" invocations="646" avgMicrosecondsPerInvocation="136" maxMicrosecondsPerInvocation="2730" standardDeviationMicrosecondsPerInvocation="235"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="87" invocations="646" avgMicrosecondsPerInvocation="135" maxMicrosecondsPerInvocation="4159" standardDeviationMicrosecondsPerInvocation="248"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MultipleInstantiationsOfSingletons" totalMilliseconds="84" invocations="646" avgMicrosecondsPerInvocation="131" maxMicrosecondsPerInvocation="2683" standardDeviationMicrosecondsPerInvocation="239"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SwitchFallthrough" totalMilliseconds="83" invocations="646" avgMicrosecondsPerInvocation="129" maxMicrosecondsPerInvocation="5266" standardDeviationMicrosecondsPerInvocation="327"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LiveLocalStoreDataflowFactory" totalMilliseconds="83" invocations="3164" avgMicrosecondsPerInvocation="26" maxMicrosecondsPerInvocation="1312" standardDeviationMicrosecondsPerInvocation="61"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueRangeAnalysisFactory" totalMilliseconds="82" invocations="4460" avgMicrosecondsPerInvocation="18" maxMicrosecondsPerInvocation="9558" standardDeviationMicrosecondsPerInvocation="170"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPuzzlers" totalMilliseconds="81" invocations="646" avgMicrosecondsPerInvocation="126" maxMicrosecondsPerInvocation="2892" standardDeviationMicrosecondsPerInvocation="267"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="79" invocations="2489" avgMicrosecondsPerInvocation="31" maxMicrosecondsPerInvocation="2365" standardDeviationMicrosecondsPerInvocation="67"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref" totalMilliseconds="78" invocations="646" avgMicrosecondsPerInvocation="120" maxMicrosecondsPerInvocation="2144" standardDeviationMicrosecondsPerInvocation="207"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildAccessMethodsDatabase" totalMilliseconds="77" invocations="966" avgMicrosecondsPerInvocation="80" maxMicrosecondsPerInvocation="2678" standardDeviationMicrosecondsPerInvocation="194"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadCast2" totalMilliseconds="75" invocations="646" avgMicrosecondsPerInvocation="117" maxMicrosecondsPerInvocation="2953" standardDeviationMicrosecondsPerInvocation="285"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.IncompatMask" totalMilliseconds="74" invocations="646" avgMicrosecondsPerInvocation="114" maxMicrosecondsPerInvocation="2070" standardDeviationMicrosecondsPerInvocation="224"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="73" invocations="966" avgMicrosecondsPerInvocation="76" maxMicrosecondsPerInvocation="2620" standardDeviationMicrosecondsPerInvocation="180"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.obl.ObligationAnalysis" totalMilliseconds="73" invocations="633" avgMicrosecondsPerInvocation="116" maxMicrosecondsPerInvocation="1532" standardDeviationMicrosecondsPerInvocation="197"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ConstructorThrow" totalMilliseconds="72" invocations="646" avgMicrosecondsPerInvocation="112" maxMicrosecondsPerInvocation="3645" standardDeviationMicrosecondsPerInvocation="238"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindSelfComparison" totalMilliseconds="72" invocations="646" avgMicrosecondsPerInvocation="112" maxMicrosecondsPerInvocation="1933" standardDeviationMicrosecondsPerInvocation="219"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="72" invocations="966" avgMicrosecondsPerInvocation="74" maxMicrosecondsPerInvocation="15668" standardDeviationMicrosecondsPerInvocation="515"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReadReturnShouldBeChecked" totalMilliseconds="72" invocations="646" avgMicrosecondsPerInvocation="111" maxMicrosecondsPerInvocation="2666" standardDeviationMicrosecondsPerInvocation="221"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RepeatedConditionals" totalMilliseconds="72" invocations="646" avgMicrosecondsPerInvocation="111" maxMicrosecondsPerInvocation="2238" standardDeviationMicrosecondsPerInvocation="217"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

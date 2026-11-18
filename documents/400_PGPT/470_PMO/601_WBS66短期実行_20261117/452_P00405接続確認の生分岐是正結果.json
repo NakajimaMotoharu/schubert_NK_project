@@ -1,0 +1,123 @@
+{
+  "eventId": "PGPT-20261008-5980",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-P00405-SERVICE-DB-ADMISSION-RAW-CLEANUP-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-P00405-SERVICE-DB-ADMISSION-RAW-CLEANUP-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "P004-05 and F03 current raw Admission five branches. Validate exact byte sites, record BUG/YKT/SSC; use typed owned close helpers and one closed role map reused from checked Admission, preserving JDBC diagnostics and order. Confirm source, ABI, independent whole31, one coverage exec; Source.close exceptional six instructions stay open with byte reason. No DB, role authorization change, Root or held operations.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39452-f02-service-db-port-graph-independent-v1/manifest.json",
+        "sha256": "c4b3228a74c2b89d64388807764898e1a500d62aea0c40fd23d48e2d22b5d92c"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39454-wbs66-four-role-service-jdbc-handoff-v1/manifest.json",
+        "sha256": "ae1bce8911046fe94f3ceab29d3a98e0527ec874b0dbda8e44b7d36f1fd3adce"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+        "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+      }
+    ],
+    "productionCoreMain": "28465379638bfee7fe6d13c7974f57ba087255ac",
+    "source": "28465379638bfee7fe6d13c7974f57ba087255ac",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-05",
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-P004-05/2",
+      "F03/2-2",
+      "YKT-2597",
+      "BUG-3282",
+      "SSC-468"
+    ],
+    "run": "PG39476-p00405-admission-single-cleanup-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.8,
+      "base": 3.0,
+      "high": 6.5
+    },
+    "groupCapPp": 8.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 37,
+      "remainingPercent": 63,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "ca3d65d505babd3eb849885fc478cb5febcfbbe682086e649415f529364a360a",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T12:18:59.351000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 37,
+          "remainingPercent": 63,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 1,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T12:18:45.750328+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 36,
+      "remainingPercent": 64,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "initialCore": "6a77bba460dfb8304d63357bd173302dd1c29436",
+    "result": "ADMISSION_SSC468_31_PASS_FOUR_COUNTERS_TARGET_ALL",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json"
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 31,
+    "distinctTestCasesAddedToExecutionCount": 0,
+    "newTestDefinitions": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39476-p00405-admission-single-cleanup-independent-v1/manifest.json",
+        "sha256": "0c2fac616d225b0e12b3ecc551fc4833186b8e38a96741ba2c7162a1c607db82"
+      }
+    ],
+    "attempt": 1,
+    "attemptResult": "PASS_ADMISSION_LOCAL",
+    "firstIndependentSuccess": 31,
+    "firstIndependentDenominator": 31,
+    "toolPreparationFailures": [
+      "Earlier source passed compile but had one applicable PMD name collision. No product PT was run on the first candidate."
+    ],
+    "unaccepted": [
+      "F02 72 upper, Storage3 and legacy edge; full 6/451 and real route still pending.",
+      "The independent Source.close path retains six raw instructions in exceptional lock release. Supporting raw misses also retained."
+    ]
+  }
+}
