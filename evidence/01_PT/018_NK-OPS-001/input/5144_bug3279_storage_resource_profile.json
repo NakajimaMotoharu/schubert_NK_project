@@ -1,0 +1,97 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39426-BUG3279-STORAGE-RESOURCE-FINITE-V1",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java": "WBS-P003-08",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-P003-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4670_StorageResourceScope並行終了_単体テスト仕様.md",
+      "sha256": "74a07bc5b002fa56eb8dfc5d80754c7dcc10edeba396346922f1c3662258ee8d"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/2733_ResourceScope元whole26_単体テスト仕様書.md",
+      "sha256": "471036c22cc1ab64269ee435fab72654e9d33fdd5a386ce8f466babb46a0a50a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3706_PureResourceScope五Future_元whole26再資格仕様.md",
+      "sha256": "fab4165f721ce29c128bce0491507da2b9f5b21cb1786d399046c263a33a3454"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG22970-pure-resource-independent-v1/manifest.json",
+      "sha256": "8a4b286fcdeb02e97c82c4649cbda91fb66c19364aeaba262231a84d017c3105"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG29316-p00308-owner-original26-lineage-v1/manifest.json",
+      "sha256": "a4ad160868c133ca4a68d831f0ef34738f437c9a7d584f2789868bd62ef00401"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "mainSources": [
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "tests": 8
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "tests": 18
+    }
+  ],
+  "expectedTests": 26,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Acquire.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Action.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction.class",
+    "dev/codex/schubert/nk/storage/ResourceScope$Release.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/storage/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/storage/ResourceScope",
+    "dev/codex/schubert/nk/storage/StorageIoException",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-storage/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39422-bug3279-resource-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39423-bug3279-resource-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39424-bug3279-resource-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39425-bug3279-resource-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39426-bug3279-resource-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39428-bug3279-resource-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39423-bug3279-resource-prepare-v1",
+    "unit": "pg39426-bug3279-resource-unit-v1"
+  },
+  "newTestDefinitions": 0,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}

@@ -1,0 +1,316 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39426-BUG3279-STORAGE-RESOURCE-FINITE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39423-bug3279-resource-prepare-v1/manifest.json",
+    "sha256": "a935eab32725ecc82ddae70e8d79c5fa7fac161304aa06b36184c1dcef9dd3c9"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39424-bug3279-resource-static-v1/manifest.json",
+    "sha256": "cb78c7e492424643aa13f9dda1b87795e5c73792f0029c673c63960bec171a04"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 81,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 81,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 85,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 85,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "sourceLine": 86,
+      "sourceAnchor": "if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "occurrences": 1,
+      "rawMultiplicity": 4,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 explicitly uses the pair of primary and secondary I/O classifications. The check selects the required identity winner and retains safe suppression; ordinary TWR priority would not implement the same contract."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "sourceLine": 97,
+      "sourceAnchor": "failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 preserves a known Storage reason only for an unaccompanied typed I/O failure. The negative compound and unknown class use the fixed redacted reason, with no provider detail."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 111,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 111,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error primary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceLine": 114,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceLine": 114,
+      "sourceAnchor": "} catch (IOException | RuntimeException | Error secondary) {",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 ownership arbitration must close on all Java checked I/O, RuntimeException and Error paths. Winners leave by their original identity except the fixed redaction of I/O. The catch does not consume an unexpected failure."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "sourceLine": 115,
+      "sourceAnchor": "if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "occurrences": 1,
+      "rawMultiplicity": 4,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 explicitly uses the pair of primary and secondary I/O classifications. The check selects the required identity winner and retains safe suppression; ordinary TWR priority would not implement the same contract."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "sourceLine": 125,
+      "sourceAnchor": "failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "SS333 preserves a known Storage reason only for an unaccompanied typed I/O failure. The negative compound and unknown class use the fixed redacted reason, with no provider detail."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 318,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This test executor has a verified shutdownNow and bounded awaitTermination in finally. An implicit unbounded ExecutorService.close would violate the fixture termination requirement."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 318,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 322,
+      "sourceAnchor": "var first = executor.submit(() -> a.run(null, null));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 323,
+      "sourceAnchor": "var second = executor.submit(() -> b.run(null, null));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 330,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 331,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 567,
+      "sourceAnchor": "Thread.currentThread().interrupt();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 573,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This test executor has a verified shutdownNow and bounded awaitTermination in finally. An implicit unbounded ExecutorService.close would violate the fixture termination requirement."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 573,
+      "sourceAnchor": "var executor = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 576,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 587,
+      "sourceAnchor": "executor.submit(",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 609,
+      "sourceAnchor": "executor.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 610,
+      "sourceAnchor": "assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceLine": 248,
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This test executor has a verified shutdownNow and bounded awaitTermination in finally. An implicit unbounded ExecutorService.close would violate the fixture termination requirement."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 248,
+      "sourceAnchor": "var pool = Executors.newVirtualThreadPerTaskExecutor();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 254,
+      "sourceAnchor": "pool.submit(() -> ResourceScope.use(closed::incrementAndGet, () -> value + 42)));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 258,
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    },
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceLine": 259,
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "disposition": "NOT_APPLICABLE",
+      "reason": "This exact site belongs to an owned JUnit worker fixture rather than a deployed application. Finite get/await and explicit cancellation and termination are verified at this fixture."
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -244,7 +245,8 @@ final class ResourceScopeTest {
   @Test
   void concurrentScopes() throws Exception {
     AtomicInteger closed = new AtomicInteger();
-    try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+    var pool = Executors.newVirtualThreadPerTaskExecutor();
+    try {
       List<Future<Integer>> futures = new ArrayList<>();
       for (int i = 0; i < 64; i++) {
         int value = i;
@@ -252,6 +254,9 @@ final class ResourceScopeTest {
             pool.submit(() -> ResourceScope.use(closed::incrementAndGet, () -> value + 42)));
       }
       for (int i = 0; i < 64; i++) assertEquals(i + 42, futures.get(i).get(10, TimeUnit.SECONDS));
+    } finally {
+      pool.shutdownNow();
+      assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(64, closed.get());
   }

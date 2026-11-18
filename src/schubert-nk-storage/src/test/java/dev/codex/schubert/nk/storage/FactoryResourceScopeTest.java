@@ -315,7 +315,8 @@ final class FactoryResourceScopeTest {
         List.of(
             "open-outer", "open-inner", "body-inner", "close-inner", "body-outer", "close-outer"),
         order);
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       var a = new Harness();
       var b = new Harness();
       var first = executor.submit(() -> a.run(null, null));
@@ -325,6 +326,9 @@ final class FactoryResourceScopeTest {
       a.closed();
       b.closed();
       assertNotSame(a.token, b.token);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -566,7 +570,8 @@ final class FactoryResourceScopeTest {
           assertTrue(owned.live);
           return owned;
         };
-    try (var executor = Executors.newFixedThreadPool(2)) {
+    var executor = Executors.newFixedThreadPool(2);
+    try {
       var first =
           executor.submit(
               () ->
@@ -600,6 +605,9 @@ final class FactoryResourceScopeTest {
       b.live = false;
       assertFalse(a.live);
       assertFalse(b.live);
+    } finally {
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
