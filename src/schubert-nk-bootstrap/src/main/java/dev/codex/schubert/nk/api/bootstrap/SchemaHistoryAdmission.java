@@ -84,15 +84,15 @@ public final class SchemaHistoryAdmission {
     var observed = new ArrayList<Row>();
     try {
       require(!Thread.currentThread().isInterrupted());
-      var query = connection.prepareStatement(SQL);
-      if (query == null) throw unavailable();
+      var statement = connection.prepareStatement(SQL);
       @Nullable Throwable primary = null;
       try {
+        var query = required(statement);
         query.setQueryTimeout(5);
-        var values = query.executeQuery();
-        if (values == null) throw unavailable();
+        var rows = query.executeQuery();
         @Nullable Throwable rowFailure = null;
         try {
+          var values = required(rows);
           for (Row row : expected) {
             require(values.next());
             int rank = required(values.getObject("installed_rank", Integer.class));
@@ -116,13 +116,13 @@ public final class SchemaHistoryAdmission {
           rowFailure = failure;
           throw failure;
         } finally {
-          closeRows(values, rowFailure);
+          closeRows(rows, rowFailure);
         }
       } catch (SQLException | RuntimeException | Error failure) {
         primary = failure;
         throw failure;
       } finally {
-        closeStatement(query, primary);
+        closeStatement(statement, primary);
       }
       return List.copyOf(observed);
     } catch (SQLException known) {
@@ -131,9 +131,10 @@ public final class SchemaHistoryAdmission {
     }
   }
 
-  // BUG-3234: each established owner closes through one typed, auditable decision.
-  private static void closeRows(@WillClose ResultSet rows, @Nullable Throwable primary)
+  // BUG-3234: each ownership scope has one decision for absent resources and close failure.
+  private static void closeRows(@WillClose @Nullable ResultSet rows, @Nullable Throwable primary)
       throws SQLException {
+    if (rows == null) return;
     try {
       rows.close();
     } catch (SQLException | RuntimeException | Error secondary) {
@@ -142,7 +143,9 @@ public final class SchemaHistoryAdmission {
   }
 
   private static void closeStatement(
-      @WillClose PreparedStatement query, @Nullable Throwable primary) throws SQLException {
+      @WillClose @Nullable PreparedStatement query, @Nullable Throwable primary)
+      throws SQLException {
+    if (query == null) return;
     try {
       query.close();
     } catch (SQLException | RuntimeException | Error secondary) {
