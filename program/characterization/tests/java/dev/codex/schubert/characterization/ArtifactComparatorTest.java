@@ -44,6 +44,13 @@ class ArtifactComparatorTest {
   private static final String FIXTURE_PASS = "PASS";
   private static final String FIXTURE_STATUS = "status";
   private static final String FIXTURE_CHR_A01_JSON = "CHR-A01.json";
+  private static final String FIXTURE_LOGIN_TITLE = "title";
+  private static final String FIXTURE_LOGIN_POINTER = "/title";
+  private static final String FIXTURE_CURRENT_LOGIN_TITLE = "schubert - ログイン";
+  private static final String FIXTURE_NK_LOGIN_TITLE = "schubert NK - ログイン";
+  private static final String FIXTURE_UNAPPROVED_LOGIN_TITLE = "public synthetic different title";
+  private static final String FIXTURE_LOGIN_TITLE_REQUIRED = "LOGIN_TITLE_DIF_REQUIRED";
+  private static final String FIXTURE_UNREGISTERED_LOGIN_TITLE = "CHR-A01:/title";
   private static final String FIXTURE_CASEID = "caseId";
   private static final String FIXTURE_SAME = "same";
   private static final String FIXTURE_CURRENT = "current";
@@ -246,8 +253,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, report.path(FIXTURE_STATUS).asText());
     assertEquals(24, report.path("expectedCaseCount").asInt());
     assertEquals(24, report.path("comparedCaseCount").asInt());
-    assertEquals(14, report.path("rawDifferenceCount").asInt());
-    assertEquals(16, report.path("observationCount").asInt());
+    assertEquals(15, report.path("rawDifferenceCount").asInt());
+    assertEquals(17, report.path("observationCount").asInt());
     assertEquals(16, report.path("usedDifferences").size());
     assertTrue(report.path("unusedDifferences").isEmpty());
     assertTrue(report.path("unregisteredDifferences").isEmpty());
@@ -261,8 +268,8 @@ class ArtifactComparatorTest {
     assertEquals(FIXTURE_PASS, direct.status());
     assertEquals(24, direct.expectedCaseCount());
     assertEquals(24, direct.comparedCaseCount());
-    assertEquals(14, direct.rawDifferenceCount());
-    assertEquals(16, direct.observationCount());
+    assertEquals(15, direct.rawDifferenceCount());
+    assertEquals(17, direct.observationCount());
     assertEquals(16, direct.usedDifferences().size());
     assertTrue(direct.unusedDifferences().isEmpty());
     assertTrue(direct.unregisteredDifferences().isEmpty());
@@ -295,7 +302,7 @@ class ArtifactComparatorTest {
 
     assertFalse(result.passed());
     assertEquals(List.of("DIF_DUPLICATE:DIF-001"), result.failures());
-    assertEquals(16, result.observationCount());
+    assertEquals(17, result.observationCount());
     assertEquals(16, result.usedDifferences().size());
   }
 
@@ -441,7 +448,7 @@ class ArtifactComparatorTest {
     assertContains(result.failures(), "OBSERVATION_VERSION");
     assertContains(result.failures(), "OBSERVATIONS_NOT_ARRAY");
     assertEquals(16, result.unusedDifferences().size());
-    assertEquals(14, result.unregisteredDifferences().size());
+    assertEquals(15, result.unregisteredDifferences().size());
   }
 
   @Test
@@ -778,13 +785,83 @@ class ArtifactComparatorTest {
             invalid.project(), invalid.current(), invalid.nk(), invalid.observations());
     assertFalse(rejected.passed());
     assertEquals(List.of("CHR-U01:/dif/DIF-001"), rejected.unregisteredDifferences());
-    assertEquals(List.of("DIF-001"), rejected.unusedDifferences());
+    assertTrue(rejected.unusedDifferences().isEmpty());
     assertEquals(
         List.of(
             "OBSERVATION_NK_VALUE:DIF-001:CHR-U01:/dif/DIF-001",
-            "UNREGISTERED_DIFF:CHR-U01:/dif/DIF-001",
-            "UNUSED_DIF:DIF-001"),
+            "UNREGISTERED_DIFF:CHR-U01:/dif/DIF-001"),
         rejected.failures());
+  }
+
+  @Test
+  void requiresLoginTitleObservationEvenWhenAnotherCaseUsesBrandDifference() throws Exception {
+    Fixture fixture = fixture("login-title-observation-missing");
+    mutate(
+        fixture.observations(),
+        envelope -> {
+          var observations = (ArrayNode) envelope.path(FIXTURE_OBSERVATIONS);
+          observations.remove(observations.size() - 1);
+        });
+
+    var result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+    assertFalse(result.passed());
+    assertTrue(result.usedDifferences().contains(FIXTURE_DIF_001));
+    assertContains(result.failures(), FIXTURE_LOGIN_TITLE_REQUIRED);
+    assertEquals(List.of(FIXTURE_UNREGISTERED_LOGIN_TITLE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsLoginTitleObservationAtAnotherPointer() throws Exception {
+    Fixture fixture = fixture("wrong-login-title-pointer");
+    mutate(
+        fixture.observations(),
+        envelope -> {
+          JsonNode observations = envelope.path(FIXTURE_OBSERVATIONS);
+          var login = (ObjectNode) observations.get(observations.size() - 1);
+          login.put("jsonPointer", "/missingLoginField");
+        });
+
+    var result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_LOGIN_TITLE_POINTER");
+    assertContains(result.failures(), FIXTURE_LOGIN_TITLE_REQUIRED);
+    assertEquals(List.of(FIXTURE_UNREGISTERED_LOGIN_TITLE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsCurrentLoginTitleOutsideTheApprovedPair() throws Exception {
+    Fixture fixture = fixture("wrong-current-login-title");
+    mutate(
+        fixture.current().resolve(FIXTURE_CHR_A01_JSON),
+        artifact -> artifact.put(FIXTURE_LOGIN_TITLE, FIXTURE_UNAPPROVED_LOGIN_TITLE));
+
+    var result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_LOGIN_TITLE_CURRENT");
+    assertContains(result.failures(), FIXTURE_LOGIN_TITLE_REQUIRED);
+    assertEquals(List.of(FIXTURE_UNREGISTERED_LOGIN_TITLE), result.unregisteredDifferences());
+  }
+
+  @Test
+  void rejectsNkLoginTitleOutsideTheApprovedPair() throws Exception {
+    Fixture fixture = fixture("wrong-nk-login-title");
+    mutate(
+        fixture.nk().resolve(FIXTURE_CHR_A01_JSON),
+        artifact -> artifact.put(FIXTURE_LOGIN_TITLE, FIXTURE_UNAPPROVED_LOGIN_TITLE));
+
+    var result =
+        ArtifactComparator.compare(
+            fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
+    assertFalse(result.passed());
+    assertContains(result.failures(), "OBSERVATION_LOGIN_TITLE_NK");
+    assertContains(result.failures(), FIXTURE_LOGIN_TITLE_REQUIRED);
+    assertEquals(List.of(FIXTURE_UNREGISTERED_LOGIN_TITLE), result.unregisteredDifferences());
   }
 
   private Fixture fixture(String name) throws Exception {
@@ -842,6 +919,19 @@ class ArtifactComparatorTest {
               oracle.currentValue(),
               oracle.nkValue()));
     }
+    currentArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_CURRENT_LOGIN_TITLE);
+    nkArtifacts.get(FIXTURE_CHR_A01).put(FIXTURE_LOGIN_TITLE, FIXTURE_NK_LOGIN_TITLE);
+    observationItems.add(
+        observation(
+            FIXTURE_DIF_001,
+            FIXTURE_CHR_A01,
+            FIXTURE_BRAND,
+            FIXTURE_DIFFERENCE,
+            FIXTURE_SEMANTIC,
+            FIXTURE_BRAND,
+            FIXTURE_LOGIN_POINTER,
+            FIXTURE_CURRENT_LOGIN_TITLE,
+            FIXTURE_NK_LOGIN_TITLE));
     currentArtifacts.forEach(
         (caseId, artifact) -> uncheckedWriteJson(current.resolve(caseId + ".json"), artifact));
     nkArtifacts.forEach(

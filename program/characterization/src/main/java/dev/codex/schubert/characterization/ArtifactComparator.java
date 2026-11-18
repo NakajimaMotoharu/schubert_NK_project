@@ -23,6 +23,11 @@ public final class ArtifactComparator {
 
   private static final String MODE_DIFFERENCE = "difference";
   private static final String MODE_CONTRACT = "contract";
+  private static final String LOGIN_CASE = "CHR-A01";
+  private static final String BRAND_DIFFERENCE = "DIF-001";
+  private static final String LOGIN_TITLE_POINTER = "/title";
+  private static final String CURRENT_LOGIN_TITLE = "schubert - ログイン";
+  private static final String NK_LOGIN_TITLE = "schubert NK - ログイン";
   private static final ObjectMapper JSON = new ObjectMapper();
   private static final Set<String> MODES = Set.of(MODE_DIFFERENCE, "required", MODE_CONTRACT);
 
@@ -116,6 +121,7 @@ public final class ArtifactComparator {
     Set<String> usedRules = new TreeSet<>();
     Set<String> claimedDifferences = new HashSet<>();
     Set<String> observationKeys = new HashSet<>();
+    boolean approvedLoginTitleObserved = false;
     int observationCount = 0;
     for (JsonNode observation : observations.path("observations")) {
       observationCount++;
@@ -182,6 +188,23 @@ public final class ArtifactComparator {
 
       JsonNode actualCurrent = currentByCase.get(caseId).at(pointer);
       JsonNode actualNk = nkByCase.get(caseId).at(pointer);
+      boolean loginBrand = LOGIN_CASE.equals(caseId) && BRAND_DIFFERENCE.equals(id);
+      if (loginBrand) {
+        // UI264 / SS355 §8 / SSC-074: A01 narrows brand to this exact title and values.
+        valid &=
+            require(
+                LOGIN_TITLE_POINTER.equals(pointer), "OBSERVATION_LOGIN_TITLE_POINTER", failures);
+        valid &=
+            require(
+                CURRENT_LOGIN_TITLE.equals(actualCurrent.textValue()),
+                "OBSERVATION_LOGIN_TITLE_CURRENT",
+                failures);
+        valid &=
+            require(
+                NK_LOGIN_TITLE.equals(actualNk.textValue()),
+                "OBSERVATION_LOGIN_TITLE_NK",
+                failures);
+      }
       valid &=
           require(
               !actualCurrent.isMissingNode(),
@@ -218,8 +241,10 @@ public final class ArtifactComparator {
         if (valid) claimedDifferences.add(differenceKey);
       }
       if (valid) usedRules.add(id);
+      approvedLoginTitleObserved |= loginBrand && valid;
     }
 
+    require(approvedLoginTitleObserved, "LOGIN_TITLE_DIF_REQUIRED", failures);
     List<String> unregistered =
         rawDifferences.stream().filter(key -> !claimedDifferences.contains(key)).toList();
     unregistered.forEach(value -> failures.add("UNREGISTERED_DIFF:" + value));
