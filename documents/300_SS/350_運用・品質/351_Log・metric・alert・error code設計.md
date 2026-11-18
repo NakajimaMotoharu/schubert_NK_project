@@ -305,6 +305,8 @@ SSC-462。EncryptedResponseSnapshot.toStringは「EncryptedResponseSnapshot[keyV
 
 SSC-463。InboxResultReference.toStringは「InboxResultReference[<redacted>]」の固定値を返す。内部enum種別と識別値を一般診断へ連結しない。必要なtype()・参照値と明示の構造化種別欄はSS324と本書§3の契約に従う。
 
+SSC-464。OutboxEntry.toStringは「OutboxEntry[<redacted>]」、OutboxRequest.toStringは「OutboxRequest[<redacted>]」を返す。実id、宛先、本文を一般診断へ連結しない。本書§3で許可する構造化欄、明示アクセサー、配送・再送の責務は維持する。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
