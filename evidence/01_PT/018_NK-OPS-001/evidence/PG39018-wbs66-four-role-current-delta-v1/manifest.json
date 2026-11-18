@@ -1,0 +1,156 @@
+{
+  "id": "W66-HANDOFF-20261118-04",
+  "run": "PG39018-wbs66-four-role-current-delta-v1",
+  "startEvent": "PGPT-20261008-5913",
+  "source": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+  "inspectionHead": "660f070180a1e764ac57c5b28f9af35da347deee",
+  "deadlineJST": "2026-11-25T23:29:00+09:00",
+  "actualExit": 0,
+  "criteriaByRole": {
+    "WBS-F02": [
+      "WBS-F02/reuse",
+      "WBS-F02/criterion/contract",
+      "WBS-F02/criterion/scope",
+      "WBS-F02/criterion/quality"
+    ],
+    "WBS-F03": [
+      "WBS-F03/reuse",
+      "WBS-F03/criterion/contract",
+      "WBS-F03/criterion/scope",
+      "WBS-F03/criterion/quality"
+    ],
+    "WBS-C02": [
+      "WBS-C02/reuse",
+      "WBS-C02/criterion/contract",
+      "WBS-C02/criterion/scope",
+      "WBS-C02/criterion/quality"
+    ],
+    "WBS-F04": [
+      "WBS-F04/reuse",
+      "WBS-F04/criterion/contract",
+      "WBS-F04/criterion/scope",
+      "WBS-F04/criterion/quality"
+    ]
+  },
+  "roles": {
+    "WBS-F02": {
+      "inherited": {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/217_F02_現行十三要求引渡し.md",
+        "sha256": "667cac05cf0f33b2d99c8931c12038ee9e2bbb0d6d274e5213e36ca20e5a2f9a"
+      },
+      "verified": "13 approved SYS requirements; latest complete four-module reactor at 13f2; single production Main delta; exact-source BackupCommitService standalone 16 and ABI at 29f3.",
+      "outstanding": "API/Web typed build and dependency edges pending QA056; Storage JDBC fence remains; effective Artemis/application environment and full 451."
+    },
+    "WBS-F03": {
+      "inherited": {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/191_F03_現行六module・比較工具の引渡し.md",
+        "sha256": "bc8a127c2dcca5ea211bdd23e3117b68e8a46f2288687cfa61b8576d6db79e16"
+      },
+      "verified": "PG38959 scoped four-module terminal and static. PG38977 exact current BackupCommitService; PG39016 exact current Web catalog 15 with local unfiltered full. Prior six Main source lint is a different candidate.",
+      "outstanding": "Whole six-module typed/static and test-scope quality; QA056/QA057 exclusions plus QA058 runtime dependencies; full current 451."
+    },
+    "WBS-C02": {
+      "inherited": {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/010_C02_十四設定・実効Unit不足引渡し.md",
+        "sha256": "dcd4d823874fef187b8bffc46d2ab53d4e66af386640138e8e3fd1655b30ab71"
+      },
+      "verified": "14 approved public Git template contents exactly current; no runtime operation issued.",
+      "outstanding": "Effective Unit, current Inspector terminal and owner, and associated 451 runtime proof."
+    },
+    "WBS-F04": {
+      "inherited": {
+        "path": "documents/400_PGPT/470_PMO/601_WBS66短期実行_20261117/011_F04_haruka既存環境引渡し.md",
+        "sha256": "b2359d833e505fb704ccaf4fcecad0095a094ee18f3f837813e1bdb11d88b4e5"
+      },
+      "verified": "Legacy direct-OS record historical, PG38454 ended 255 before read payload.",
+      "outstanding": "QA058: currently authorized access or independently attested owner/source/run/capacity/terminal evidence."
+    }
+  },
+  "previousHandoff": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38332-wbs66-first-deadline-handoff-current-v1/manifest.json",
+    "sha256": "4f4b3892baf7a38ff6efe3c02dbbd4028944559bb2cd60821ec824f21a89a1ef"
+  },
+  "ssc447Historical": {
+    "source": "e4794ddf45487268883334d0f8773d89bd47dcba",
+    "unitSource": "0601086e6ae95ba09c4fc137cff45ffa7a9ba239",
+    "tests": 152,
+    "success": 152,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "physical": 175,
+    "wholeRawMiss": {
+      "line": 4,
+      "method": 4,
+      "class": 0,
+      "branch": 58,
+      "instruction": 85
+    },
+    "rawTargetParentsFull": true,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36628-ssc447-current152-quality-return-v1/manifest.json",
+      "sha256": "eccacdc78f0ea40993950ee5a0b6b25a4981c9e54fa3a01db59bf316a9128597"
+    },
+    "laterProtocolSeparate": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38320-f03-ssc451452-protocol-full-module-byte-lineage-v1/manifest.json",
+      "sha256": "778f01c0fd1e2f8c35dcf110463a8014f4e59e0cfae96136a4fb5960c9a6a014"
+    }
+  },
+  "sourceDiff": {
+    "fourModulePhysicalPrior": 1102,
+    "fourModulePriorSource": "13f2fd9bc1345a4dceb360849add2c329bc9b90f",
+    "currentMainChanged": [
+      "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/backup/BackupCommitService.java"
+    ],
+    "otherFourMainSame": 481,
+    "wholeFourCurrentReactor": false
+  },
+  "c02PublicTemplateHashes": {
+    "src/deployment/systemd/artemis.service": "1b8fe8eaab683ac658bfe8c23816e709725431a0a2b80816bba5449d129c5266",
+    "src/deployment/systemd/caddy.service.d/schubert-nk-startup-policy.conf": "6711ce8ddf9fcf54f733acfb30c10e4970a051d55dba340bc55f70970060440e",
+    "src/deployment/systemd/caddy.service.d/schubert-nk-stop-policy.conf": "3710be0c023a4bbbf3a8f095cd2d91c5b97b40ed76056ddd4ff433d4f4e066bc",
+    "src/deployment/systemd/optional/inbox-inspector-context-previous.conf": "4e1de7eb4bee81acb1afb9fa34d41f01b26829030c225e74d92f1bce122dfd13",
+    "src/deployment/systemd/optional/inbox-inspector-response-previous.conf": "8629e3e009a38a164b9954326f25cbfcc6faa590fc838fd52307da6c9120e9b4",
+    "src/deployment/systemd/schubert-nk-api.service.template": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+    "src/deployment/systemd/schubert-nk-backup.service.template": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+    "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+    "src/deployment/systemd/schubert-nk-cleanup.service.template": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+    "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+    "src/deployment/systemd/schubert-nk-inbox-inspector.service": "225adff0cee398c1ad7d25bd587e666018b9698a3d0256788c38cf029d8262d8",
+    "src/deployment/systemd/schubert-nk-morning-controller.service.template": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+    "src/deployment/systemd/schubert-nk-morning.target.template": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+    "src/deployment/systemd/schubert-nk-web.service.template": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc"
+  },
+  "proofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38959-f02-current-four-physical-independent-v1/manifest.json",
+      "sha256": "6aae48af70d2fb968e922e9b73881dc1d69ba6419ccf7189fdf65a467776a9d3"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38977-f02-backup-commit-owner-independent-v1/manifest.json",
+      "sha256": "042fb16b654ce1dee15f38c2df4f467bc07b8e0498dad101b44d89d8b287f51c"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39016-f03-web-metric-captured-independent-v1/manifest.json",
+      "sha256": "0bdcc5bf655ef2a1b81bb150465636a6468510ff07748a8af257b0d6903008d8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38442-f03-current-six-main-source-lint-v1/manifest.json",
+      "sha256": "b1f7a1b02e9bf473fa94f09a55ca8db16319cc732e4c15ee77001db6d45d75b5"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38454-f04-haruka-readonly-owner-resource-precheck-v1/manifest.json",
+      "sha256": "6050957e80dbbe1e0bf70e3fc0d5152b2103c4cc55dfbd72b1e45307433239cc"
+    }
+  ],
+  "externalAcknowledgement": null,
+  "formalAcceptance": 17,
+  "formalAcceptanceDelta": 0,
+  "officialPt": 1964,
+  "officialScope": 53,
+  "effortCompletionRate": null,
+  "productTestsStarted": 0,
+  "externalActions": 0,
+  "terminalAtUTC": "2026-11-18T09:00:06.124229+00:00"
+}
