@@ -1,0 +1,127 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5924",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "c8a34cb564273f0c14e1fafaa547b35f8d5684a9eee9466d7af7a450576c9b48",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T09:29:29.134000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 32,
+          "remainingPercent": 68,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T09:28:38.082970+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-WEB-JVM-SYSTEM-FIXTURE-FINITE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-WEB-JVM-SYSTEM-FIXTURE-FINITE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/2-2 and P018-09 YKT2387. Close two Web JVM/System Metrics fixtures WEBJVM014/WEBSYS014. Preserve 64 independent in-memory registries each, exact 256 and 128 calls, fixed reference values, no J2EE, HTTP, DB, external JVM or runtime/approved-hold operation. Verify whole original 28 and raw counters for both bound types using same fixed one-run source.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/2837_Web標準SDK五whole73_単体テスト仕様.md",
+        "sha256": "bbd7e2eb1d7f678d5c1a054c6c2c6c0372bda9ce5632222ba846704e22016569"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39054-f03-web-standard-finite-independent-v1/manifest.json",
+        "sha256": "fe32a217574899af2daeb32bebceee8a88ddcc492d6c152245d55cfd728bb7ff"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetricsTest.java",
+        "sha256": "17ef23f2aba67dcec1fa659edb851f61f3317aedca7bee367868fc92ea2c258d"
+      },
+      {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetricsTest.java",
+        "sha256": "c468da61ae6a63ada1435ce49fa04160f06f5aaaca99dfcc5f8aefd4e1176211"
+      }
+    ],
+    "productionCoreMain": "29f3b433952ad19d4ad34c4e1a31ed310bebde6a",
+    "source": "ccc460f5c3708659b6ab6061637b20a48c60eee4",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2387"
+    ],
+    "run": "PG39120-f03-web-jvm-system-finite-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.35,
+      "high": 3.0
+    },
+    "groupCapPp": 4.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3257",
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5923",
+    "fixedTestSource": "9dcc19553d5c8f5732b2cfdb2eb6e25ed79b56b3",
+    "quotaBefore": {
+      "usedPercent": 32,
+      "remainingPercent": 68,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39120-f03-web-jvm-system-finite-independent-v1/manifest.json",
+      "sha256": "0fb8c113b430b6bd31cd0d67c4bbc3425ea5b52fcbbb91f08e2ccf9e0920afc6"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "technical": {
+      "tests": 28,
+      "successful": 28,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "firstProductAttempts": 28,
+      "firstProductSuccessful": 28,
+      "newTestDefinitions": 0,
+      "localCoreCoverageClassesFull": 2,
+      "physical": 8,
+      "positiveCrc": 3,
+      "staticApplicable": 0
+    },
+    "remainingCriteria": [
+      "F03 typed QA056/057 and global 451",
+      "YKT2387 for all remaining relevant scopes",
+      "Real monitoring scrape endpoint"
+    ]
+  }
+}
