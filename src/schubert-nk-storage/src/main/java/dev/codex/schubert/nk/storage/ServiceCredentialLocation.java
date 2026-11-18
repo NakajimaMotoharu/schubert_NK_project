@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.storage;
 
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Non-secret systemd credential-directory admission before any private file IO. This does not
  * authenticate the inode, owner, ACL, readonly filesystem or credential bytes. NK-OPS-001;
- * SYS-002/004; UI243/253; SS342/343 §4/6; PG278/PT-OPS-CREDLOC-001..005.
+ * SYS-002/004; UI243/253; SS342/343 §4/6; PG278/PT-OPS-CREDLOC-001..006; SSC-457.
  */
 @NullMarked
 public final class ServiceCredentialLocation {
@@ -35,7 +36,13 @@ public final class ServiceCredentialLocation {
         || value.indexOf('\0') >= 0
         || value.indexOf('\r') >= 0
         || value.indexOf('\n') >= 0) throw invalid();
-    Path path = Path.of(value);
+    Path path;
+    try {
+      path = Path.of(value);
+    } catch (InvalidPathException invalidPath) {
+      // The platform exception can retain the input. Return only the fixed diagnostic.
+      throw invalid();
+    }
     if (!path.isAbsolute() || path.getNameCount() == 0 || !path.equals(path.normalize()))
       throw invalid();
     return new ServiceCredentialLocation(path);
