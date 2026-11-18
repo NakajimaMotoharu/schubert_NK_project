@@ -1,0 +1,60 @@
+{
+  "eventId": "PGPT-20261008-5949",
+  "groupId": "PGPT-WBS66-G07-REVERSIBLE-PROJECTION-RETENTION-20261118",
+  "baseCore": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T10:43:31.154000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-REVERSIBLE-PROJECTION-RETENTION-20261118",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-G07-REVERSIBLE-PROJECTION-RETENTION-20261118",
+    "workAttributionKind": "TOOL_FIX",
+    "workScope": "Capacity retention for two terminal G07 owned scanner text-only projections. Independently verify every manifest and byte before packing, verify archive and receipt, release only byte-identical reconstructed copies after archive. Preserve Git, scan manifests/raw redacted scanner reports/schema, binary archive and other users/projects. No business tests, no application/runtime, no new original row cost.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39196-g07-current-published-delta-v1/final-manifest.json",
+        "sha256": "93a6ea054d30a08073d07ffca8fabfac93abde820224ac67c194929836988be7"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39284-g07-published-recorder-delta-v1/terminal-manifest.json",
+        "sha256": "66c13704faeef975d69360455c6e3a6a3d040b6db87384c17aefbd3eb61c4a8d"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "800e420b1b1641503fd1dd4a1b1d4af64b6bacfa",
+    "wbsLeafIds": [
+      "WBS-G07"
+    ],
+    "managementWorkIds": [
+      "WBS-G07",
+      "451",
+      "CAPACITY_RETENTION"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "run": "PG39286-g07-reversible-projection-retention-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.15,
+      "base": 0.45,
+      "high": 1
+    },
+    "groupCapPp": 2,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848
+  }
+}
