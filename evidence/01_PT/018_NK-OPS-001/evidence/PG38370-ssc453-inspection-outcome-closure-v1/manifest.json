@@ -1,0 +1,34 @@
+{
+  "actualExit": 0,
+  "source": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+  "oldCore": "47aeed19a157661363ffab5c4b5054f6b20230a1",
+  "externalDesignCommit": "2d99622edf380e75746705adda3f13ee4fcf5d33",
+  "oldRaw": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38368-p00404-inspection-execution-progress-independent-v1/manifest.json",
+    "sha256": "8a72b022aa6cd8541fcfab28a35cbd931ef3ca2bdfb83764f8f079109429eadc"
+  },
+  "terminalAtUTC": "2026-11-18T01:38:39.753469+00:00",
+  "main": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java",
+      "sha256": "7db64d61edb32a3df73d75d163c098eda5954afef235e1428d28b8d1e3ab8575"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java",
+      "sha256": "fe4338f4db6a24eb7c33ffe8da1b208d677caa90c29cd064b3a094dca15a58f3"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java",
+      "sha256": "a6386577f68382a34d5f58bfd81f5bd50746622c610511af3c49c110063e44af"
+    }
+  ],
+  "test": {
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.java",
+    "sha256": "9c139f6e81f5d556ca7e60ec3fe392e1dbbff30027dcd4c7be08818253df97fd"
+  },
+  "expectedTests": 5,
+  "changedProductPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java"
+  ],
+  "proof": "Single pure value Main: immutable enum stores mandatory literal code; fixed non-reflective fixture with original expected values, no backend/runtime operations. Four physical classes, strict compile and independent ABI/raw from separate fresh execution."
+}

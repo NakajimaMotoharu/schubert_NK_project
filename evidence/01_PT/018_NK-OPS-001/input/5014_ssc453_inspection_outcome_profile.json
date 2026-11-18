@@ -1,0 +1,79 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG38378-SSC453-INSPECTION-OUTCOME-CODES",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java": "WBS-P004-04",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java": "WBS-P004-04",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java": "WBS-P004-04"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4563_InspectionProgressExecution公開値・単体テスト仕様書.md",
+      "sha256": "5805ddfca0a032560993cf0d039403f9cebc7521bac4d08193f1756288db5f30"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4565_SSC453終了コード値所有・単体テスト仕様書.md",
+      "sha256": "587879a2a0b0d9cd888eb00507591b66f5e73fa2a516ae3d4157be6b848e79dc"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38370-ssc453-inspection-outcome-closure-v1/manifest.json",
+      "sha256": "571e0ea45d22fae7e1bc785b1bc653a00139e450a42b28ee33c38c7673507823"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "35167d1390bdcedd31e5c35d8ee526089347fec6",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionRun.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionProgress.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectionExecution.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionProgressExecutionValueContractTest.java",
+      "tests": 5
+    }
+  ],
+  "expectedTests": 5,
+  "resources": [],
+  "sdkJars": [],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/maintenance/InspectionRun.class",
+    "dev/codex/schubert/nk/api/maintenance/InspectionProgress.class",
+    "dev/codex/schubert/nk/api/maintenance/InspectionExecution.class",
+    "dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/maintenance/InspectionProgress",
+    "dev/codex/schubert/nk/api/maintenance/InspectionExecution",
+    "dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG38371-ssc453-inspection-outcome-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG38372-ssc453-inspection-outcome-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG38374-ssc453-inspection-outcome-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG38376-ssc453-inspection-outcome-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG38378-ssc453-inspection-outcome-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG38380-ssc453-inspection-outcome-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg38372-ssc453-inspection-outcome-prepare-v1",
+    "unit": "pg38378-ssc453-inspection-outcome-unit-v1"
+  },
+  "newTestDefinitions": 0
+}
