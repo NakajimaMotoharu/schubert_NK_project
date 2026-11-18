@@ -1,0 +1,134 @@
+{
+  "actualExit": 0,
+  "eventId": "PGPT-20261008-5954",
+  "values": {
+    "quotaAfter": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "f4f49493bc89d74e011ada26fdfca86ca51128d7753fb425661ec349f359b705",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T10:55:15.586000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 34,
+          "remainingPercent": 66,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T10:54:57.713536+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-CURRENT-MAIN-CHECKSTYLE-AND-FORMAT-RECEIPTS-20261118",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-F03-CURRENT-MAIN-CHECKSTYLE-AND-FORMAT-RECEIPTS-20261118",
+    "workAttributionKind": "SOURCE_REQUALIFICATION",
+    "workScope": "F03/2-2 check only Checkstyle/formatter inputs on current product Core. Re-bind historical read-only lint by Git blob identity/rules/tools/zero exit, current 29 Main differences and recent test lint receipts. For changed ordinary permitted inputs with no adequate prior receipt, use exact Root rules source-only spot checks. Four QA056 names and held tests stay metadata only; no type/compile/new PT/runtime or original row credit.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38442-f03-current-six-main-source-lint-v1/manifest.json",
+        "sha256": "b1f7a1b02e9bf473fa94f09a55ca8db16319cc732e4c15ee77001db6d45d75b5"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38502-f03-storage-current-full-static-v1/manifest.json",
+        "sha256": "ee58367bb956d7472120cf9de8b17efc4b84b4c29b94e9b813dd36689bdc323a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39102-f03-six-test-source-checkstyle-delta-v1/manifest.json",
+        "sha256": "e2aff42946b33e0331a980161f028e978ba2e24b007b6f9e6a3d9d251df433c5"
+      }
+    ],
+    "productionCoreMain": "bcc9e0673287c51950ecab9b36350abfcd4b2c69",
+    "source": "158b3f052b0a1b5aaef30ec054a1c050c6bf9f15",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "451",
+      "QA-056"
+    ],
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "run": "PG39306-f03-current-source-lint-join-v1",
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.35,
+      "high": 3.5
+    },
+    "groupCapPp": 5.0,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaBefore": {
+      "usedPercent": 34,
+      "remainingPercent": 66,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "fullObservationPreservedInReceipt": true,
+    "actualDedicatedPp": null,
+    "groupBoundary": "END",
+    "startEvent": "PGPT-20261008-5953",
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39310-f03-current-source-lint-join-v3/manifest.json",
+      "sha256": "dbaa8869cb19a769ca8caae9957f3f74299856cac642eb8d532aac78a4380f9a"
+    },
+    "technical": {
+      "main": {
+        "total": 1027,
+        "sameEligible": 992,
+        "storedIndependentStorageDelta": 2,
+        "existingIndividual": 29,
+        "newRequired": 0,
+        "qa056Hold": 4,
+        "currentEligibleConfirmed": 1023
+      },
+      "tests": {
+        "total": 1133,
+        "confirmed": 1101,
+        "baselineHeld": 32,
+        "revisedInputs": 15,
+        "existingIndividual": 14,
+        "legacySourceOnly": 1,
+        "newRequired": 0
+      },
+      "newProductTests": 0,
+      "newStaticToolInvocations": 0,
+      "metadataToolAttempts": 3,
+      "metadataToolInitialSuccess": 0,
+      "toolCorrectionReasons": [
+        "stream sibling vs directory",
+        "hardcoded count vs independent Git tree"
+      ]
+    },
+    "remainingCriteria": [
+      "QA056 Main 4 names and 32 test files held",
+      "full product typed static and Root11",
+      "F03 overall 451"
+    ]
+  }
+}
