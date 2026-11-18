@@ -154,12 +154,18 @@ public final class ModuleDependencyAudit {
 
   private static boolean forbiddenFramework(String module, String target) {
     boolean spring = target.startsWith("org.springframework.");
-    boolean mvc = target.startsWith("org.springframework.web.servlet.") || target.startsWith("org.thymeleaf.")
+    boolean mvc = target.startsWith("org.springframework.web.servlet.")
+        || target.startsWith("org.springframework.web.bind.annotation.")
+        || target.startsWith("org.springframework.http.server.")
+        || target.startsWith("org.thymeleaf.")
         || target.startsWith("jakarta.servlet.") || target.startsWith("javax.servlet.");
     boolean server = target.startsWith("com.sun.net.httpserver.");
     return switch (module) {
       case "protocol", "storage" -> jdbc(target) || jmsApi(target) || spring;
-      case "bootstrap" -> jmsApi(target) || mvc || server;
+      case "bootstrap" -> jms(target) || mvc || server
+          || target.startsWith("org.springframework.web.")
+          || target.startsWith("org.springframework.http.")
+          || target.startsWith("java.net.http.");
       case "api" -> mvc;
       case "batch" -> mvc || server;
       case "web" -> false;

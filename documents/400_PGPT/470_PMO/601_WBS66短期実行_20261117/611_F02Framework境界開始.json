@@ -1,0 +1,60 @@
+{
+  "eventId": "PGPT-20261008-6131",
+  "groupId": "PGPT-WBS66-F02-FRAMEWORK-FENCES-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T20:05:57.529000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 48,
+      "remainingPercent": 52,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-FRAMEWORK-FENCES-20261119",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-FRAMEWORK-FENCES-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F02"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "WBS-F02/criterion/contract"
+    ],
+    "source": "5ae82dd7ec1f1023f5ef3c2a089a67a680e33b3a",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40114-f02-framework-fences-before-v1",
+    "workScope": "WBS-F02-a / contract: Bootstrap must not directly depend on HTTP or JMS; API and Batch cannot own MVC endpoints. Use only declared synthetic bytecode canaries and a separate post; keep current Core and API/Web full JAR qualification unchanged.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.2,
+      "high": 3.0
+    },
+    "groupCapPp": 5,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "tools/quality/architecture/ModuleDependencyAudit.java",
+        "sha256": "b56ee5f27da4593fa35e7c709c220c08d0aeb0bea236d7567b756c3015f5b9c3"
+      },
+      {
+        "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+        "sha256": "422cc9febdcb165af7ceba1c58a53c39831d0458f9c8858095fcfe099b70680f"
+      }
+    ],
+    "testIds": "PT-F02-ARCH-013–022",
+    "canonicalDesignSource": "5aafdc4bff5e8a4c15db9a8000ddf3f1fd17f774"
+  }
+}
