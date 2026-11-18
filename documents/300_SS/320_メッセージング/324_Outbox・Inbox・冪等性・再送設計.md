@@ -425,3 +425,8 @@ BUG3065/YKT2556、状態:設計確定・main反映前、PG/PT/正式未完。
 BUG3100/YKT2572のInboxException.sqlState閉enum switchを、Reason五定数が既固定SQLstateをprivatefinal metadataで保持する表現へ置換する。MESSAGE_ID_REUSE/OPERATION_TOKEN_REUSE=23000、FINGERPRINT_KEY_UNAVAILABLE=55000、STATE_CORRUPT=XX000、TRANSACTION_REQUIRED=25000の順序・name/ordinal/values/valueOf/可視性を完全保持する。private enum constructorだけで五つのnonnull literalを一度代入し、package-private accessorをouter privatehelperから読む。privatehelperはObjects.requireNonNull(reason,reason)を元と同じmessageで先に行い、SQLException継承/constructor/message/SQLstate/errorCode/reason getter/throw identity・全caller public ABIを変えない。閉定数のprivate constructionへ到達しないnull guardや反射用経路を足さず、NullAwayとliteral閉包でfield invariantを確立する。生成MatchException defaultだけが表現から不要になるので、coverage除外/到達不能合格/別enum binary/私有反射/無意味instanceを使わない。BUG3101/YKT2573の新Request fixtureは独立期待retainedを保持し、単一entry Map.of.getから実HashMapへのput/getへ変えてhash-equalityを実操作で確認する。元21のTest ID・入力・期待・全assertとMain1の他bodyを逆展開formatted exactで確認する。SS範囲内の内部詳細でRD/UI/DIF/QA変更不要。先にSS324352354914だけをmainへ反映してからPGし、新Core同run全21/freshMain14Root/適用未分類0/current15physical15CRC-initXML/同singleexecraw必須四100を要求する。五SQLstateとNullableReason拒否のgoldenは元21を保持、元raw不足PG35714を残し旧exec合算0。全caller source/既public ABIの一致を確認するが、実DBcoordinatorや全module/全451/native/CHR/終了依存の受入にはしない。Actual4/Root2/鍵/VMDB/native/aru/HOLDを維持、古いRootや無関係PTを確認だけで反復しない。
 
 状態:設計確定・main反映前、実装/全21再資格/全体品質は未完。
+
+
+### SSC-462 応答snapshotの一般診断（2026-11-18）
+
+EncryptedResponseSnapshotの一般診断はSS351の固定文字列を返す。keyVersion()とciphertext()は既保存・復号の値契約を維持する。DBの列、暗号の形式、キー選択、応答の再送、byte配列の防御的copyに変更はない。PT-IDEM-007/008、PT-P01810-CATALOG-008は固定診断と、合成値に対する明示取得・既処理期待を別々に照合する。

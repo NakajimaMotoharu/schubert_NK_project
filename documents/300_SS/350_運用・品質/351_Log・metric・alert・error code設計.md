@@ -301,6 +301,8 @@ SSC-459。PendingReply.toStringは「PendingReply[correlationId/deadline/body=<r
 
 SSC-460。一般診断のFingerprint／InboxCompletion／InboxExecution／AuthenticatedActorのtoStringは、各型名と「[<redacted>]」を連結した固定値とする。鍵版ラベル、Inbox状態、認証済roleは必要な明示アクセサーと許可された構造化項目から扱う。照合用digest、状態判定、実行結果、認可の契約は従来どおり。
 
+SSC-462。EncryptedResponseSnapshot.toStringは「EncryptedResponseSnapshot[keyVersion/ciphertext=<redacted>]」の固定値を返す。鍵versionラベルと暗号文本体を一般診断へ連結しない。SS324の保存と鍵選択、明示アクセサー、記録を許可された構造化フィールドは既契約に従う。
+
 
 - DEBUGだけ機密除外を緩和、request/response/fixed body、exception/SQLの`toString()`を無制限出力。
 - Username/IP/message/token/path等の高cardinality/機密値をmetric label化。
