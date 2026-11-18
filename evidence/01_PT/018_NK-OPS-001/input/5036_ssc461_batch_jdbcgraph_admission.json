@@ -1,0 +1,25 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG38614-SSC461-BATCH-JDBCGRAPH-TRANSFER",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38604-ssc461-batch-jdbcgraph-prepare-v1/manifest.json",
+    "sha256": "dd58a8415c8622ac0bce71eb338e2961a297b0a316b0b30ad44ce213b2569557"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38606-ssc461-batch-jdbcgraph-static-v1/manifest.json",
+    "sha256": "c2016b10231e901d52088524923286cfc972419e133a750ef04ba08a7aa26c97"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageReasonValueContractTest.java",
+      "rule": "NullAssignment",
+      "sourceAnchor": "copy[0] = null;",
+      "sourceLine": 34,
+      "occurrences": 1,
+      "rawMultiplicity": 1,
+      "reason": "Original SSC439 independent ownership fixture intentionally sets a caller-owned copy of enum values to null, then checks that the independent canonical names and array retrieval remain unchanged; no production assignment.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Assigning an Object to null is a code smell.  Consider refactoring."
+    }
+  ]
+}
