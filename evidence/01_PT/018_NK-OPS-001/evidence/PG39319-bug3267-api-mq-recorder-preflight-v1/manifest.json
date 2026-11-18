@@ -1,0 +1,136 @@
+{
+  "actualExit": 0,
+  "config": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5131_bug3267_api_mq_recorder_profile.json",
+    "sha256": "45c1e8152afa6a701e989bbf14e373de15829c16ab9166231c757c546b276acc"
+  },
+  "inputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java": "ff09f8d1258c04d3b6d59136310a8d9681fe7f6172258d08d079c36f972d204d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java": "0f83ae3cc38efc4f5b0b96dac3623023a96393a6da61365111d4d3c29fb6c05c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "8dd0a4c1cf6eca2f906c5d9aee5afc0f40c990ccfa35925ecc8b5edfb2194193",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/package-info.java": "85e0d120423af8a1a8a3aa17a51f99e49a73a0a26f1486b30c880474d9f3c7b9",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java": "901e9c68a3f528bd4c5a24ae4b7bde54ed95e9e73b7404b6b0d892573af2dc4e",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java": "ec98b54dd90645384f13198144e1bf8fd912a151b0ef3fb544e3e590345dba9e",
+    "pom.xml": "b829d5353469eb17ff47d5f12530dcd58aedeb52de63b9eeacdc3b39296f8f38",
+    "src/schubert-nk-api/pom.xml": "2aff7af3d90feaee1f6c09f7ad300627ed911e8372504fcfd383391429a58114",
+    "src/schubert-nk-protocol/pom.xml": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+    "tools/quality/static/pmd.xml": "8c084d1a380bf0727b14ab8566c8d19791a8e391755d49796951fc5df7ae86de",
+    "tools/quality/static/checkstyle.xml": "a7c6086cdb7905d55026e9d5bfbb7c81f5fb3825f73cc060d060da64e3266b75"
+  },
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39316-bug3267-api-mq-recorder-prepare-v1/manifest.json",
+    "sha256": "bad21f62ac2533a0788f43a2368b0cdbc8c24abc4cde0298c3ec3bb39daad555"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39318-bug3267-api-mq-recorder-static-v1/manifest.json",
+    "sha256": "92528ab238fec92f97a4d65dbd282cf17bf790289a50e5f70eeafc00371e3937"
+  },
+  "staticAdmission": {
+    "path": "evidence/01_PT/018_NK-OPS-001/input/5132_bug3267_api_mq_recorder_admission.json",
+    "sha256": "e94938289a43b38bdc97287c4cf9d84e14615739e136bd0119490b58e0d5839d"
+  },
+  "classified": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "307",
+      "reason": "Owned fixture pool is unconditionally shut down and awaited for at most ten seconds in finally before its owned registry closes. Implicit close waits without that bound.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "307",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "309",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "312",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "313",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "rule": "EqualsNull",
+      "line": "351",
+      "reason": "This JUnit assertion explicitly specifies the generated Snapshot equality contract for a null input. Passing null is necessary to distinguish value equality from instance identity.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Avoid using equals() to compare against null"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "CloseResource",
+      "line": "280",
+      "reason": "Owned fixture pool is unconditionally shut down and awaited for at most ten seconds in finally before its owned registry closes. Implicit close waits without that bound.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "Ensure that resources like this ExecutorService object are closed after use"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "280",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "282",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "285",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "rule": "DoNotUseThreads",
+      "line": "286",
+      "reason": "The site applies to isolated unit-owned finite test threads, lifetime and results are guarded and application/service threads are never created.",
+      "disposition": "NOT_APPLICABLE",
+      "message": "To be compliant to J2EE, a webapp should not use any thread."
+    }
+  ],
+  "staticApplicable": 0,
+  "unclassified": 0,
+  "processingErrors": 0,
+  "checkstyle": 0,
+  "spotbugs": 0,
+  "rootCompilerUnchanged": true,
+  "independentSourceAnchorsExact": true,
+  "productTestsExecuted": 0,
+  "whole451Accepted": false,
+  "verifier": {
+    "path": "tools/quality/pgpt_closed_host_stages.py",
+    "sha256": "ce7b33beb41744d0042bc0fb94aee01930016254f5f08fbba03707f1b568016b"
+  }
+}
