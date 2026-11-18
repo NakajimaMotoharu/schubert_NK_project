@@ -123,7 +123,8 @@ public final class ArtifactComparator {
     List<String> failures = new ArrayList<>();
     // QA-051/SS355 §8.1: legacy DIF claims alone cannot establish correlated CHR-L01 evidence.
     failures.addAll(
-        CorrelatedLogEvidenceValidator.validate(observations.path("correlatedLogEvidence")));
+        CorrelatedLogEvidenceValidator.validateCompleteL01(
+            observations.path("correlatedLogEvidence")));
 
     Set<String> expectedCases = new LinkedHashSet<>();
     for (JsonNode item : catalog.path("cases")) {

@@ -22,13 +22,15 @@ public final class CorrelatedLogEvidenceValidator {
   private static final String FIELD_EVENT = "event";
   private static final String FIELD_CATEGORY = "category";
   private static final String FIELD_ACTION = "action";
+  private static final String FIELD_REQUEST = "request";
   private static final String FIELD_HTTP = "http";
   private static final String FIELD_METHOD = "method";
   private static final String VALUE_REQUEST = "REQUEST";
   private static final String VALUE_ACTION = "ACTION";
   private static final String VALUE_MENU = "MENU_VIEWED";
+  private static final String VALUE_LOG_SEARCH = "LOG_SEARCHED";
   private static final Map<String, String> APPROVED_ACTION_PAIRS =
-      Map.of("menu", VALUE_MENU, "log_search", "LOG_SEARCHED");
+      Map.of("menu", VALUE_MENU, "log_search", VALUE_LOG_SEARCH);
   private static final String FIELD_PATH = "path";
   private static final String FIELD_STATUS = "status";
   private static final String FIELD_ELAPSEDMS = "elapsedMs";
@@ -41,7 +43,7 @@ public final class CorrelatedLogEvidenceValidator {
   private static final Set<String> PAYLOAD_FIELDS =
       Set.of(
           FIELD_OPERATION,
-          "request",
+          FIELD_REQUEST,
           FIELD_EVENT,
           "message",
           FIELD_CATEGORY,
@@ -68,6 +70,15 @@ public final class CorrelatedLogEvidenceValidator {
 
   /** Missing, ambiguous, duplicate or changed evidence is a failure, never an empty success. */
   public static List<String> validate(@Nullable JsonNode evidence) {
+    return validate(evidence, false);
+  }
+
+  /** SS355 §8.1.1 requires both initial operations in a complete CHR-L01 comparison. */
+  static List<String> validateCompleteL01(@Nullable JsonNode evidence) {
+    return validate(evidence, true);
+  }
+
+  private static List<String> validate(@Nullable JsonNode evidence, boolean completeL01) {
     List<String> failures = new ArrayList<>();
     if (evidence == null || !shape(evidence, Set.of("version", "expected", "observed"))) {
       return List.of("LOG_PROJECTION_ENVELOPE");
@@ -92,6 +103,10 @@ public final class CorrelatedLogEvidenceValidator {
       failures.add("LOG_PROJECTION_OPERATION_SET");
     }
     approvedActionPairs(current, nk, failures);
+    if (completeL01) {
+      requireInitialOperation(nk, VALUE_MENU, "/", failures);
+      requireInitialOperation(nk, VALUE_LOG_SEARCH, "/logs", failures);
+    }
     compareSide(current, observed.path(FIELD_CURRENT), false, failures);
     compareSide(nk, observed.path("nk"), true, failures);
     return List.copyOf(failures);
@@ -144,6 +159,39 @@ public final class CorrelatedLogEvidenceValidator {
                     && operation.equals(value.path(FIELD_OPERATION).asText())
                     && action.equals(value.path(FIELD_ACTION).asText()))
         .count();
+  }
+
+  private static void requireInitialOperation(
+      Map<String, JsonNode> events, String action, String path, List<String> failures) {
+    var actions =
+        events.values().stream()
+            .filter(value -> VALUE_ACTION.equals(value.path(FIELD_CATEGORY).asText()))
+            .filter(value -> action.equals(value.path(FIELD_ACTION).asText()))
+            .toList();
+    if (actions.isEmpty()) {
+      failures.add("LOG_PROJECTION_REQUIRED_INITIAL_ACTION:" + action);
+    }
+    for (JsonNode value : actions) {
+      var requests =
+          events.values().stream()
+              .filter(event -> VALUE_REQUEST.equals(event.path(FIELD_CATEGORY).asText()))
+              .filter(event -> value.path(FIELD_OPERATION).equals(event.path(FIELD_OPERATION)))
+              .toList();
+      if (requests.size() != 1
+          || !initialRequestMatches(action, path, value, requests.getFirst())) {
+        failures.add("LOG_PROJECTION_REQUIRED_INITIAL_REQUEST:" + action);
+      }
+    }
+  }
+
+  private static boolean initialRequestMatches(
+      String action, String path, JsonNode actionPayload, JsonNode request) {
+    JsonNode http = request.path(FIELD_HTTP);
+    return "GET".equals(http.path(FIELD_METHOD).asText())
+        && path.equals(http.path(FIELD_PATH).asText())
+        && http.path(FIELD_STATUS).asInt() == 200
+        && (!VALUE_MENU.equals(action)
+            || actionPayload.path(FIELD_REQUEST).equals(request.path(FIELD_REQUEST)));
   }
 
   /** Only REQUEST and approved Web MENU use local/outbox projection. */
@@ -208,7 +256,8 @@ public final class CorrelatedLogEvidenceValidator {
   private static boolean safeProjection(JsonNode value) {
     if (!shape(value, PAYLOAD_FIELDS) || !value.path(FIELD_HTTP).isObject()) return false;
     for (String field :
-        List.of(FIELD_OPERATION, "request", FIELD_EVENT, "message", FIELD_CATEGORY, FIELD_ACTION)) {
+        List.of(
+            FIELD_OPERATION, FIELD_REQUEST, FIELD_EVENT, "message", FIELD_CATEGORY, FIELD_ACTION)) {
       JsonNode item = value.path(field);
       if (!item.isTextual() && !item.isNull()) return false;
     }
@@ -257,7 +306,7 @@ public final class CorrelatedLogEvidenceValidator {
 
   private static boolean payload(JsonNode value, boolean nk) {
     if (!shape(value, PAYLOAD_FIELDS)) return false;
-    for (String field : List.of(FIELD_OPERATION, "request", FIELD_EVENT, "message")) {
+    for (String field : List.of(FIELD_OPERATION, FIELD_REQUEST, FIELD_EVENT, "message")) {
       if (!reference(value.path(field))) return false;
     }
     if (!value.path(FIELD_CATEGORY).isTextual()

@@ -1311,6 +1311,24 @@ class ArtifactComparatorTest {
         });
   }
 
+  @Test
+  void rejectsLoginOnlyEvidenceAtTheFullL01Gate() throws Exception {
+    Fixture fixture = fixture("login-only-is-not-full-l01");
+    mutate(
+        fixture.observations(),
+        root -> root.set("correlatedLogEvidence", CorrelatedLogEvidenceValidatorTest.fixture()));
+
+    var result = compare(fixture);
+
+    assertFalse(result.passed());
+    assertTrue(result.unregisteredDifferences().isEmpty());
+    assertEquals(
+        List.of(
+            "LOG_PROJECTION_REQUIRED_INITIAL_ACTION:MENU_VIEWED",
+            "LOG_PROJECTION_REQUIRED_INITIAL_ACTION:LOG_SEARCHED"),
+        result.failures());
+  }
+
   private static ArtifactComparator.ComparisonResult compare(Fixture fixture) throws IOException {
     return ArtifactComparator.compare(
         fixture.project(), fixture.current(), fixture.nk(), fixture.observations());
@@ -1487,7 +1505,7 @@ class ArtifactComparatorTest {
     Path observations = root.resolve("observations.json");
     ObjectNode envelope = JSON.createObjectNode().put("version", 1);
     envelope.set(FIXTURE_OBSERVATIONS, observationItems);
-    envelope.set("correlatedLogEvidence", CorrelatedLogEvidenceValidatorTest.fixture());
+    envelope.set("correlatedLogEvidence", CorrelatedMenuActionContractTest.fixture());
     ObjectNode artifactBinding = envelope.putObject("correlatedLogArtifacts");
     artifactBinding.set(FIXTURE_CURRENT, currentArtifacts.get(FIXTURE_CHR_L01).deepCopy());
     artifactBinding.set("nk", nkArtifacts.get(FIXTURE_CHR_L01).deepCopy());

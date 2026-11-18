@@ -33,6 +33,16 @@ final class CorrelatedMenuActionContractTest {
   private static final String HTTP_FIELD = "http";
   private static final String MENU_EVENT = "NK_MENU";
   private static final String SEARCH_EVENT = "NK_SEARCH";
+  private static final String MENU_REQUEST_EVENT = "NK_HTTP_MENU";
+  private static final String SEARCH_REQUEST_EVENT = "NK_HTTP_SEARCH";
+  private static final String MISSING_MENU_REQUEST =
+      "LOG_PROJECTION_REQUIRED_INITIAL_REQUEST:MENU_VIEWED";
+  private static final String MISSING_SEARCH_REQUEST =
+      "LOG_PROJECTION_REQUIRED_INITIAL_REQUEST:LOG_SEARCHED";
+  private static final String REQUEST_FIELD = "request";
+  private static final String EXPECTED_SIDE = "/expected/";
+  private static final String OBSERVED_SIDE = "/observed/";
+  private static final String ROW_EVENT = "/payload/event";
   private static final String PAIR_ERROR = "LOG_PROJECTION_APPROVED_ACTION_PAIR";
   private static final String EXPECTED_ERROR = "LOG_PROJECTION_EXPECTED_PAYLOAD";
 
@@ -177,7 +187,72 @@ final class CorrelatedMenuActionContractTest {
     }
   }
 
-  private static ObjectNode fixture() {
+  @Test
+  void completeL01RequiresBothInitialOperationsAndTheirCompanionRequests() {
+    assertEquals(List.of(), CorrelatedLogEvidenceValidator.validateCompleteL01(fixture()));
+  }
+
+  @Test
+  void completeL01DoesNotAcceptBothSidesOmittingTheMenuAction() {
+    var input = fixture();
+    removeEvent(input, CURRENT, "C_MENU");
+    removeEvent(input, NK, MENU_EVENT);
+
+    assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
+    assertEquals(
+        List.of("LOG_PROJECTION_REQUIRED_INITIAL_ACTION:MENU_VIEWED"),
+        CorrelatedLogEvidenceValidator.validateCompleteL01(input));
+  }
+
+  @Test
+  void completeL01DoesNotAcceptBothSidesOmittingTheLogSearchAction() {
+    var input = fixture();
+    removeEvent(input, CURRENT, "C_SEARCH");
+    removeEvent(input, NK, SEARCH_EVENT);
+
+    assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
+    assertEquals(
+        List.of("LOG_PROJECTION_REQUIRED_INITIAL_ACTION:LOG_SEARCHED"),
+        CorrelatedLogEvidenceValidator.validateCompleteL01(input));
+  }
+
+  @Test
+  void completeL01ChecksCompanionRequestCountRouteMethodAndStatus() {
+    var missing = fixture();
+    removeEvent(missing, NK, MENU_REQUEST_EVENT);
+    assertEquals(
+        List.of(MISSING_MENU_REQUEST), CorrelatedLogEvidenceValidator.validateCompleteL01(missing));
+
+    var duplicate = fixture();
+    update(duplicate, NK, SEARCH_REQUEST_EVENT, row -> row.put(OPERATION, MENU_OPERATION));
+    assertEquals(
+        List.of(MISSING_MENU_REQUEST, MISSING_SEARCH_REQUEST),
+        CorrelatedLogEvidenceValidator.validateCompleteL01(duplicate));
+
+    for (Consumer<ObjectNode> wrong :
+        List.<Consumer<ObjectNode>>of(
+            http -> http.put("method", "POST"),
+            http -> http.put("path", "/other"),
+            http -> http.put("status", 404))) {
+      var input = fixture();
+      update(input, NK, SEARCH_REQUEST_EVENT, row -> wrong.accept(object(row, HTTP_PATH)));
+      assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
+      assertEquals(
+          List.of(MISSING_SEARCH_REQUEST),
+          CorrelatedLogEvidenceValidator.validateCompleteL01(input));
+    }
+  }
+
+  @Test
+  void completeL01MenuActionAndRequestNeedOneHttpRequestIdentity() {
+    var input = fixture();
+    update(input, NK, MENU_REQUEST_EVENT, row -> row.put(REQUEST_FIELD, "UNRELATED_HTTP"));
+    assertTrue(CorrelatedLogEvidenceValidator.validate(input).isEmpty());
+    assertEquals(
+        List.of(MISSING_MENU_REQUEST), CorrelatedLogEvidenceValidator.validateCompleteL01(input));
+  }
+
+  static ObjectNode fixture() {
     var input = JSON.createObjectNode().put("version", 1);
     var expected = input.putObject("expected").put("oracleSha256", "a".repeat(64));
     var current = expected.putArray(CURRENT);
@@ -199,11 +274,15 @@ final class CorrelatedMenuActionContractTest {
             JSON.createObjectNode()));
     nk.add(
         payload(
-            MENU_OPERATION, "NK_HTTP_MENU", REQUEST_CATEGORY, "HTTP_REQUEST_COMPLETED", http("/")));
+            MENU_OPERATION,
+            MENU_REQUEST_EVENT,
+            REQUEST_CATEGORY,
+            "HTTP_REQUEST_COMPLETED",
+            http("/")));
     nk.add(
         payload(
             SEARCH_OPERATION,
-            "NK_HTTP_SEARCH",
+            SEARCH_REQUEST_EVENT,
             REQUEST_CATEGORY,
             "HTTP_REQUEST_COMPLETED",
             http("/logs")));
@@ -211,7 +290,7 @@ final class CorrelatedMenuActionContractTest {
     for (String side : List.of(CURRENT, NK)) {
       var snapshot = observed.putObject(side);
       var old = JSON.createObjectNode();
-      for (String field : List.of(OPERATION, "request", EVENT, "message", CATEGORY, ACTION))
+      for (String field : List.of(OPERATION, REQUEST_FIELD, EVENT, "message", CATEGORY, ACTION))
         old.putNull(field);
       old.putObject(HTTP_FIELD);
       var before = snapshot.putArray("before");
@@ -250,7 +329,7 @@ final class CorrelatedMenuActionContractTest {
     var value =
         JSON.createObjectNode()
             .put(OPERATION, operation)
-            .put("request", "REQ_" + operation)
+            .put(REQUEST_FIELD, "REQ_" + operation)
             .put(EVENT, event)
             .put("message", "MSG_" + event)
             .put(CATEGORY, category)
@@ -267,15 +346,27 @@ final class CorrelatedMenuActionContractTest {
     return (ArrayNode) input.at(path);
   }
 
+  private static void removeEvent(ObjectNode input, String side, String event) {
+    removeMatching(array(input, EXPECTED_SIDE + side), "/event", event);
+    removeMatching(array(input, OBSERVED_SIDE + side + "/after"), ROW_EVENT, event);
+    removeMatching(array(input, OBSERVED_SIDE + side + "/witnesses"), ROW_EVENT, event);
+  }
+
+  private static void removeMatching(ArrayNode entries, String pointer, String event) {
+    for (int index = entries.size() - 1; index >= 0; index--) {
+      if (entries.get(index).at(pointer).asText().equals(event)) entries.remove(index);
+    }
+  }
+
   private static void update(
       ObjectNode input, String side, String event, Consumer<ObjectNode> mutation) {
-    for (var value : array(input, "/expected/" + side))
+    for (var value : array(input, EXPECTED_SIDE + side))
       if (value.path(EVENT).asText().equals(event)) mutation.accept((ObjectNode) value);
-    for (var row : array(input, "/observed/" + side + "/after"))
-      if (row.at("/payload/event").asText().equals(event))
+    for (var row : array(input, OBSERVED_SIDE + side + "/after"))
+      if (row.at(ROW_EVENT).asText().equals(event))
         mutation.accept((ObjectNode) row.path(PAYLOAD_FIELD));
-    for (var row : array(input, "/observed/" + side + "/witnesses"))
-      if (row.at("/payload/event").asText().equals(event))
+    for (var row : array(input, OBSERVED_SIDE + side + "/witnesses"))
+      if (row.at(ROW_EVENT).asText().equals(event))
         mutation.accept((ObjectNode) row.path(PAYLOAD_FIELD));
   }
 }

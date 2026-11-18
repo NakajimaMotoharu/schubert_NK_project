@@ -28,18 +28,23 @@ PHASES = {
         '549_P020*', E/'PG39965-p020-invalid-range165-v2', 165, 170),
     'PG40014-p020-game-onchange176-v1': (
         '555_P020*', E/'PG39990-p020-search-empty170-v1', 170, 176),
+    'PG40034-p020-l01-required-actions-v1': (
+        '561_P020*', E/'PG40014-p020-game-onchange176-v1', 176, 182),
 }
 TEST_PACKAGE='dev.codex.schubert.characterization.'
 JAVA_DIR=Path(TEST_PACKAGE.rstrip('.').replace('.','/'))
 CHANGES={str(B/where/JAVA_DIR/file) for where,file in (
     ('src/main/java','ArtifactComparator.java'),('tests/java','ArtifactComparatorTest.java'))}
+L01_CHANGES=CHANGES | {str(B/where/JAVA_DIR/file) for where,file in (
+    ('src/main/java','CorrelatedLogEvidenceValidator.java'),
+    ('tests/java','CorrelatedMenuActionContractTest.java'))}
 
 
-def frozen_source(snapshot, source, old_begin, plan):
+def frozen_source(snapshot, source, old_begin, plan, changed_paths):
     base=plan['values']['characterizationBase']
     assert base==old_begin['source']
     delta=set(git('diff','--name-only',base,source,'--',str(B)).decode().splitlines())
-    assert delta==CHANGES
+    assert delta==changed_paths
     assert not git('diff','--name-only','HEAD','--',str(B))
     hashes={}
     for name,old_hash in old_begin['inputHashes'].items():
@@ -75,7 +80,8 @@ def main(name):
     out.mkdir()
     owned.mkdir(mode=0o700)
     snapshot=owned/'snapshot'
-    inputs=frozen_source(snapshot,source,previous,plan)
+    changed_paths=L01_CHANGES if name=='PG40034-p020-l01-required-actions-v1' else CHANGES
+    inputs=frozen_source(snapshot,source,previous,plan,changed_paths)
     tests=owned/'testclasses'
     temp=owned/'tmp'
     xml=out/'xml'
@@ -101,7 +107,7 @@ def main(name):
           *(piece for n in selection for piece in ('--select-class',TEST_PACKAGE+n)),
           '--config=junit.jupiter.execution.parallel.enabled=false']
     save(out/'begin.json',dict(groupStart=plan['eventId'],source=source,snapshot=str(snapshot),expected=expected,
-        exactScope=selection,sourceInputsUnchangedOutside=sorted(CHANGES),inputHashes=inputs,session=session,
+        exactScope=selection,sourceInputsUnchangedOutside=sorted(changed_paths),inputHashes=inputs,session=session,
         tools=previous['tools'],jdk=previous['jdk'],javaC=ref(JDK/'javac'),original=ref(previous_run/'manifest.json'),backendActions=0,
         startedAtUTC=R['utc']()))
     stages={}
