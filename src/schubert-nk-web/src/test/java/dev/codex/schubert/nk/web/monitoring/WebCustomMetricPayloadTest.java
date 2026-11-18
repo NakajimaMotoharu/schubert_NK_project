@@ -145,7 +145,7 @@ class WebCustomMetricPayloadTest {
   @Test
   void webpay005UnknownModesNeverResolveSource() {
     var calls = new AtomicInteger();
-    for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN"))
+    for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN", "DEBTf", "STANDAQc"))
       assertEquals(
           "invalid monitoring mode",
           assertThrows(
@@ -258,7 +258,8 @@ class WebCustomMetricPayloadTest {
 
   @Test
   void webpay013FiniteConcurrentIndependentPayloads() throws Exception {
-    try (var workers = Executors.newFixedThreadPool(4)) {
+    var workers = Executors.newFixedThreadPool(4);
+    try {
       var jobs = new ArrayList<Future<?>>();
       var total = new AtomicInteger();
       for (int i = 0; i < 64; i++) {
@@ -279,6 +280,9 @@ class WebCustomMetricPayloadTest {
       }
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertEquals(64, total.get());
+    } finally {
+      workers.shutdownNow();
+      assertTrue(workers.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
@@ -576,21 +580,20 @@ class WebCustomMetricPayloadTest {
       String expected =
           "system_cpu_count{service=\"WEB\"} "
               + (double) Runtime.getRuntime().availableProcessors();
-      try (var executor = Executors.newFixedThreadPool(4)) {
-        try {
-          var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
-          for (int index = 0; index < 64; index++)
-            tasks.add(() -> payload.render(true, DEBUG_MODE, () -> bundle.source, standard));
-          for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
-            String actual = future.get(30, TimeUnit.SECONDS);
-            assertTrue(actual.startsWith(READY_ONE + CUSTOM));
-            assertTrue(actual.lines().anyMatch(expected::equals));
-          }
-          assertFalse(bundle.source.isClosed());
-        } finally {
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+      var executor = Executors.newFixedThreadPool(4);
+      try {
+        var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(() -> payload.render(true, DEBUG_MODE, () -> bundle.source, standard));
+        for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
+          String actual = future.get(30, TimeUnit.SECONDS);
+          assertTrue(actual.startsWith(READY_ONE + CUSTOM));
+          assertTrue(actual.lines().anyMatch(expected::equals));
         }
+        assertFalse(bundle.source.isClosed());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
       Reference.reachabilityFence(bundle);
     }
@@ -601,42 +604,38 @@ class WebCustomMetricPayloadTest {
     var entered = new java.util.concurrent.CountDownLatch(1);
     var release = new java.util.concurrent.CountDownLatch(1);
     var probe = new FullProbe();
-    var standard = fullOwner(probe);
-    try {
-      try (var executor = Executors.newSingleThreadExecutor()) {
-        try (var bundle = new Bundle()) {
-          var future =
-              executor.submit(
-                  () ->
-                      payload.render(
-                          true,
-                          DEBUG_MODE,
-                          () -> {
-                            entered.countDown();
-                            awaitFull(release);
-                            return bundle.source;
-                          },
-                          standard));
-          assertTrue(entered.await(30, TimeUnit.SECONDS));
-          standard.close();
-          release.countDown();
-          var failure =
-              assertThrows(
-                  java.util.concurrent.ExecutionException.class,
-                  () -> future.get(30, TimeUnit.SECONDS));
-          assertInstanceOf(IllegalStateException.class, failure.getCause());
-          assertEquals(0, probe.scrapes.get());
-          assertFalse(bundle.source.isClosed());
-          Reference.reachabilityFence(bundle);
-        } finally {
-          release.countDown();
-          executor.shutdownNow();
-          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-          standard.close();
-        }
+    try (var standard = fullOwner(probe);
+        var bundle = new Bundle()) {
+      var executor = Executors.newSingleThreadExecutor();
+      try {
+        var future =
+            executor.submit(
+                () ->
+                    payload.render(
+                        true,
+                        DEBUG_MODE,
+                        () -> {
+                          entered.countDown();
+                          awaitFull(release);
+                          return bundle.source;
+                        },
+                        standard));
+        assertTrue(entered.await(30, TimeUnit.SECONDS));
+        standard.close();
+        release.countDown();
+        var failure =
+            assertThrows(
+                java.util.concurrent.ExecutionException.class,
+                () -> future.get(30, TimeUnit.SECONDS));
+        assertInstanceOf(IllegalStateException.class, failure.getCause());
+        assertEquals(0, probe.scrapes.get());
+        assertFalse(bundle.source.isClosed());
+        Reference.reachabilityFence(bundle);
+      } finally {
+        release.countDown();
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
-    } finally {
-      standard.close();
     }
   }
 
