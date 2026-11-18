@@ -1,0 +1,120 @@
+{
+  "eventId": "PGPT-20261008-5984",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F03-WEB-METRIC-CONTEXT-FINITE-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F03-WEB-METRIC-CONTEXT-FINITE-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F03/2-2 / P018-09 WebMetricContext original all 33. Four explicit worker closings already contain bounded get/latch/await but the redundant enclosing executor close can wait indefinitely. Remove only that outer close, preserve owner teardown/negative race. Add two colliding invalid input literals in WEBMCTX004. Owned local SDK context only; all backend/native/authority remain held.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1815_MetricContext_単体テスト仕様.md",
+        "sha256": "1801305c1799553544eeb4146348a344bc32ccb83831564fada43d68b79cd91a"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/1823_MetricRefresh_単体テスト仕様.md",
+        "sha256": "ea62f06f9c6d4def2508763ae366f036af5f1be9400d8cdd3dfdbea5923d89ea"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39500-f03-web-custom-payload-independent-v1/manifest.json",
+        "sha256": "dadd6c6e4d4f8efc2139b7693f9875a9f808dc26fc0905557299dcb504c50cad"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39382-f03-api-context-finite-independent-v1/manifest.json",
+        "sha256": "2c224be355a8face8c1be2af922877f952d6bd5b187a6c87e533be57d2e396b3"
+      }
+    ],
+    "productionCoreMain": "28465379638bfee7fe6d13c7974f57ba087255ac",
+    "source": "a13bae2710a24442ea1a7915c57987200cbb18ca",
+    "wbsLeafIds": [
+      "WBS-F03",
+      "WBS-P018-09"
+    ],
+    "managementWorkIds": [
+      "WBS-F03/2-2",
+      "YKT-2387",
+      "YKT-2691",
+      "BUG-3286"
+    ],
+    "run": "PG39518-f03-web-metric-context-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.45,
+      "base": 1.85,
+      "high": 4.3
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "quotaAfter": {
+      "usedPercent": 37,
+      "remainingPercent": 63,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "47cbb486e5b56ce0455640c1866bd112a99d1838f6d239434813b6ebbb8e38b3",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T12:33:13.595000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 37,
+          "remainingPercent": 63,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T12:33:03.361677+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 37,
+      "remainingPercent": 63,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "result": "WEB_CONTEXT_FOUR_WORKERS_AND_MODE_33_FIRST_PASS",
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39518-f03-web-metric-context-independent-v1/manifest.json"
+    ],
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "applicationTrials": 33,
+    "distinctTestCasesAddedToExecutionCount": 33,
+    "newTestDefinitions": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39518-f03-web-metric-context-independent-v1/manifest.json",
+        "sha256": "1ec8c01f367d6a1e1349f6bf2129fa80ee0119c7b574f987802135ea66022573"
+      }
+    ],
+    "attempt": 1,
+    "attemptResult": "PASS_LOCAL",
+    "firstIndependentSuccess": 33,
+    "firstIndependentDenominator": 33,
+    "unaccepted": [
+      "265 uncaptured support locations retained, six-module F03, full 451 and live operation still pending."
+    ]
+  }
+}
