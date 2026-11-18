@@ -1,0 +1,68 @@
+{
+  "eventId": "PGPT-20261008-6033",
+  "groupId": "PGPT-WBS66-G07-CLEANUP-STATIC-CHR-PUBLIC-DELTA-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T15:53:21.764000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-CLEANUP-STATIC-CHR-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-CLEANUP-STATIC-CHR-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "54ecfaf9f0e87fda60f5611bf2bb576651a50841",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39840-g07-cleanup-static-and-characterization-delta-v1",
+    "fromCommit": "c0cce768150de92e757751ab579149a2d75fbcbd",
+    "volatileStaging": "/dev/shm/schubert-nk-pg39840-1000",
+    "workScope": "Scan only new remote-verified Git states, including local JDBC and offline characterization test/coverage bytes. Preserve exact cursor and real scanner output; classify only exact public provenance and explicitly qualify each recorded exec without treating failed runs as passed or rerunning any test. No prior interval, denied paths, live operations, or overall G07 acceptance.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.3,
+      "high": 3.7
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39780-g07-four-build-and-trace-delta-v1/scan/manifest.json",
+        "sha256": "c304259d038777f0519bf49296d7cff95b2877548b82d7f121f6ecf3aa329542"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      }
+    ]
+  }
+}

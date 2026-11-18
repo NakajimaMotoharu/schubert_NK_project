@@ -1,0 +1,124 @@
+{
+  "eventId": "PGPT-20261008-6034",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-CLEANUP-STATIC-CHR-PUBLIC-DELTA-20261119",
+    "workCategory": "CONTRACT_AUDIT",
+    "workDetailCategory": "PGPT-WBS66-G07-CLEANUP-STATIC-CHR-PUBLIC-DELTA-20261119",
+    "workAttributionKind": "REQUALIFICATION",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07",
+      "WBS-F03/2-3"
+    ],
+    "source": "54ecfaf9f0e87fda60f5611bf2bb576651a50841",
+    "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+    "run": "PG39840-g07-cleanup-static-and-characterization-delta-v1",
+    "fromCommit": "c0cce768150de92e757751ab579149a2d75fbcbd",
+    "volatileStaging": "/dev/shm/schubert-nk-pg39840-1000",
+    "workScope": "Scan only new remote-verified Git states, including local JDBC and offline characterization test/coverage bytes. Preserve exact cursor and real scanner output; classify only exact public provenance and explicitly qualify each recorded exec without treating failed runs as passed or rerunning any test. No prior interval, denied paths, live operations, or overall G07 acceptance.",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.4,
+      "base": 1.3,
+      "high": 3.7
+    },
+    "groupCapPp": 6,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39780-g07-four-build-and-trace-delta-v1/scan/manifest.json",
+        "sha256": "c304259d038777f0519bf49296d7cff95b2877548b82d7f121f6ecf3aa329542"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39802-cleanup-fixed-statement-raw-v1/manifest.json",
+        "sha256": "82634ac778832da63f5f19e3283835057499816054656900356a09416aec6575"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39814-f03-storage-bootstrap-static-independent-v1/manifest.json",
+        "sha256": "e3139ccf79da928f0f9ca472549a79f7935753eacfedd5aef1e60f7587cf9539"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39834-p020-definition-independent-v1/manifest.json",
+        "sha256": "c638b0e950c64fb9132b46cafaf2920e4e3e58fa245424e60a641de1b1e6b88b"
+      }
+    ],
+    "quotaAfter": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445753,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "abb242511512574ff7bc22ec7a7ed46e2fe5cf258f79c1265fe67f4999829b0c",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T15:55:56.858000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 42,
+          "remainingPercent": 58,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T15:55:14.387843+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "quotaBefore": {
+      "usedPercent": 42,
+      "remainingPercent": 58,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "actualPaths": [
+      "evidence/01_PT/018_NK-OPS-001/evidence/PG39840-g07-cleanup-static-and-characterization-delta-v1/scan/manifest.json"
+    ],
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39840-g07-cleanup-static-and-characterization-delta-v1/scan/manifest.json",
+        "sha256": "e58187410ff83899bf299c6b9c81d4dbdb716cbb6cd25c4bd60d75178d773f14"
+      }
+    ],
+    "result": "G07_CLEANUP_STATIC_AND_CHARACTERIZATION_EXACT_PUBLISHED_DELTA",
+    "throughCommit": "54ecfaf9f0e87fda60f5611bf2bb576651a50841",
+    "trackedBlobVersions": 315,
+    "physicalCommits": 17,
+    "findings": 126,
+    "confirmedSecrets": 0,
+    "unclassified": 0,
+    "qualifiedBinaries": 3,
+    "firstVerificationSuccess": 1,
+    "firstVerificationDenominator": 1,
+    "executedScannerRetries": 0,
+    "applicationTrials": 0,
+    "executedProductRetries": 0,
+    "onePinnedSDKOriginAdded": true,
+    "rawScannerExit": 1,
+    "formalUpdated": false,
+    "newAcceptance": 0,
+    "effortCompletionRate": null,
+    "remainingOriginalDetailBasePp": 1089.848,
+    "nextCommand": "Review exact F02 direct Storage fallback owner and ordinary test closures, or close the current G08 trace if the remaining product path reaches held code. Next G07 starts from throughCommit."
+  }
+}
