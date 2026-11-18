@@ -379,7 +379,7 @@ final class BackupPairPortTest {
     for (boolean replay : List.of(false, true)) {
       var tx = new TransactionFixture();
       tx.rows.observations = replay ? List.of(pair(true)) : List.of(pair(false), pair(true));
-      assertEquals(END, commit(tx));
+      assertEquals(END, completeThroughService(tx));
       assertEquals(List.of(BEGIN, COMMIT, RESTORE), tx.events);
       assertEquals(replay ? 0 : 2, tx.rows.updates.size());
       assertTrue(tx.autoCommit);
@@ -399,7 +399,7 @@ final class BackupPairPortTest {
       tx.autoCommit = scenario != 0;
       tx.readOnly = scenario == 1;
       tx.isolation = scenario == 2 ? Connection.TRANSACTION_REPEATABLE_READ : 2;
-      catalog(() -> commit(tx));
+      catalog(() -> completeThroughService(tx));
     }
     assertTrue(tx.events.isEmpty());
     assertTrue(tx.rows.sql.isEmpty());
@@ -414,7 +414,7 @@ final class BackupPairPortTest {
         SQLException graph = txGraph(edge, error);
         tx.beginFailure = primary ? graph : new SQLException(TX_FAULT);
         tx.rollbackFailure = primary ? new SQLException(TX_FAULT) : graph;
-        assertSame(error, assertThrows(AssertionError.class, () -> commit(tx)));
+        assertSame(error, assertThrows(AssertionError.class, () -> completeThroughService(tx)));
         assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
         assertEquals(0, error.getSuppressed().length);
         assertTrue(tx.rows.sql.isEmpty());
@@ -422,7 +422,7 @@ final class BackupPairPortTest {
       var outer = new TransactionFixture();
       var error = new AssertionError(TX_FAULT);
       outer.entryFailure = txGraph(edge, error);
-      assertSame(error, assertThrows(AssertionError.class, () -> commit(outer)));
+      assertSame(error, assertThrows(AssertionError.class, () -> completeThroughService(outer)));
       assertTrue(outer.events.isEmpty());
     }
   }
@@ -431,7 +431,7 @@ final class BackupPairPortTest {
   void bkpcommit461004RepositoryFailureRollsBackAndRestoresBeforeFixedFailure() {
     var tx = new TransactionFixture();
     tx.rows.faults.put("prepare", new SQLException(TX_FAULT));
-    catalog(() -> commit(tx));
+    catalog(() -> completeThroughService(tx));
     assertEquals(List.of(BEGIN, ROLLBACK, RESTORE), tx.events);
     assertTrue(tx.autoCommit);
     assertEquals(0, tx.rows.updates.size());
@@ -445,7 +445,7 @@ final class BackupPairPortTest {
         var tx = new TransactionFixture();
         tx.beginFailure = known;
         tx.rollbackFailure = second;
-        catalog(() -> commit(tx));
+        catalog(() -> completeThroughService(tx));
         assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
       }
       for (Throwable second :
@@ -453,7 +453,7 @@ final class BackupPairPortTest {
         var tx = new TransactionFixture();
         tx.beginFailure = known;
         tx.rollbackFailure = second;
-        assertSame(second, assertThrows(second.getClass(), () -> commit(tx)));
+        assertSame(second, assertThrows(second.getClass(), () -> completeThroughService(tx)));
         assertEquals(List.of(BEGIN, ROLLBACK), tx.events);
       }
     }
@@ -462,7 +462,7 @@ final class BackupPairPortTest {
       var tx = new TransactionFixture();
       tx.beginFailure = primary;
       tx.rollbackFailure = primary;
-      assertSame(primary, assertThrows(primary.getClass(), () -> commit(tx)));
+      assertSame(primary, assertThrows(primary.getClass(), () -> completeThroughService(tx)));
       var secondary = primary.getSuppressed();
       assertEquals(1, secondary.length);
       assertEquals(BatchRepositoryException.class, secondary[0].getClass());
@@ -477,7 +477,7 @@ final class BackupPairPortTest {
     var tx = new TransactionFixture();
     tx.rows.observations = List.of(pair(true));
     tx.restoreFailure = new SQLException(TX_FAULT);
-    catalog(() -> commit(tx));
+    catalog(() -> completeThroughService(tx));
     assertEquals(List.of(BEGIN, COMMIT, RESTORE), tx.events);
     assertFalse(tx.autoCommit);
     tx.rows.assertClosed();
@@ -486,7 +486,7 @@ final class BackupPairPortTest {
     interrupted.rows.observations = List.of(pair(true));
     interrupted.interruptAfterCommit = true;
     try {
-      catalog(() -> commit(interrupted));
+      catalog(() -> completeThroughService(interrupted));
       assertTrue(Thread.currentThread().isInterrupted());
       assertEquals(List.of(BEGIN, COMMIT, RESTORE), interrupted.events);
       assertTrue(interrupted.autoCommit);
@@ -496,7 +496,7 @@ final class BackupPairPortTest {
     interrupted.rows.assertClosed();
   }
 
-  private static Instant commit(TransactionFixture tx) {
+  private static Instant completeThroughService(TransactionFixture tx) {
     return new BackupCommitService().complete(tx.connection, manifest(), END);
   }
 
