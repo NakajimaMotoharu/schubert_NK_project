@@ -1,0 +1,148 @@
+{
+  "eventId": "PGPT-20261008-5864",
+  "actualExit": 0,
+  "workStatus": "PARTIAL",
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-F02-RUN-REFERENCE-JDBC-OWNER-20261118",
+    "workCategory": "IMPLEMENTATION",
+    "workDetailCategory": "PGPT-WBS66-F02-RUN-REFERENCE-JDBC-OWNER-20261118",
+    "workAttributionKind": "REWORK",
+    "workScope": "F02-a/P004-03. Reassign one existing RunReferenceRepository SQLException call to the typed JdbcFailureGraph per SSC461. Starting dependencies: passed prior whole8 isolated JDBC fixture and existing module boundary Batch to Bootstrap; same SQL and guard contracts. End criteria: exact source variation, 8 unchanged ordinary tests, exact static and CRC; any raw deficits kept; full F02 and original item not implied. ServiceDatabase companion is deferred because available bounded runner explicitly excludes DriverManager/DataSource and Storage/LinuxDirectoryCalls native dependency under its profile; no exception to that boundary.",
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG36708-run-reference-pure8-post-v3/manifest.json",
+        "sha256": "44e7524d3b12afa0cfad5bd1cd179557463d84691a28e7ee769290f3fe6974c3"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38670-f03-schema-owner-raw-independent-v3/manifest.json",
+        "sha256": "7f55734dd7bc0adcaf0cb5506c2f543da117d9a75aeb1d4e58b0ab2ec56ec643"
+      },
+      {
+        "path": "evidence/01_PT/004_NK-DAT-001/447_WBS66参照DAO純JDBC単体仕様.md",
+        "sha256": "bbff30ba4b39920569871b7aff72b4ff0e23b1bbc7473c8e52b82ed6b4458c0c"
+      }
+    ],
+    "productionCoreMain": "9179ca302fdfba5d7cee9e2b68b5c5fff00acd6f",
+    "source": "bdea127fb2ef4959c47c04c73ed065acfdd0cbfd",
+    "wbsLeafIds": [
+      "WBS-F02",
+      "WBS-P004-03"
+    ],
+    "managementWorkIds": [
+      "WBS-F02-a",
+      "SSC-461"
+    ],
+    "run": "PG38688-f02-run-reference-jdbc-owner-independent-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.35,
+      "base": 1.0,
+      "high": 2.4
+    },
+    "groupCapPp": 3.3,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "relatedBug": "BUG-3233",
+    "relatedYkt": "YKT-2680",
+    "quotaAfter": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaReceipt": {
+      "sha256": "3bbcf6418bcc7555ab3b58ccd38e5c9cc2b85762e39424bde157d7f0cc7ee5e1",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T05:17:45.289000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 29,
+          "remainingPercent": 71,
+          "resetsAt": 1795445752,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": 0,
+    "sameQuotaWindow": true,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T05:17:35.116921+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": false,
+    "quotaBefore": {
+      "usedPercent": 29,
+      "remainingPercent": 71,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "quotaAfterLegacyPrimaryOnly": true,
+    "fullObservationPreservedInReceipt": true,
+    "startEvent": "PGPT-20261008-5863",
+    "proof": {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json",
+      "sha256": "78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e"
+    },
+    "newAcceptance": 0,
+    "formalUpdated": false,
+    "effortCompletionRate": null,
+    "firstProductRunSuccess": true,
+    "firstQualityAdmitted": true,
+    "productTestsExecuted": 8,
+    "newDefinitions": 0,
+    "caseDenominator": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "notRun": 0,
+    "targetRaw": {
+      "INSTRUCTION": {
+        "missed": 0,
+        "covered": 230
+      },
+      "BRANCH": {
+        "missed": 0,
+        "covered": 24
+      },
+      "LINE": {
+        "missed": 0,
+        "covered": 59
+      },
+      "COMPLEXITY": {
+        "missed": 0,
+        "covered": 18
+      },
+      "METHOD": {
+        "missed": 0,
+        "covered": 6
+      },
+      "CLASS": {
+        "missed": 0,
+        "covered": 1
+      }
+    },
+    "transferredThis": 1,
+    "migratedUpperSites": 7,
+    "upperInitialSites": 104,
+    "completedAdditionalPriceForGroupPp": 0,
+    "additionalCompletedPriceTotalPp": 42.9,
+    "remainingCriteria": [
+      "97 upper callers plus Storage own graph",
+      "ServiceDatabase paths require independently admitted type-closed environment; Cleanup ports are independent",
+      "Whole F02 and P004-03 exit and 451"
+    ]
+  }
+}

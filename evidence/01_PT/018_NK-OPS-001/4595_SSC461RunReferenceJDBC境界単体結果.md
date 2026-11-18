@@ -1,0 +1,7 @@
+# SSC461 RunReferenceRepository JDBC境界の単体結果
+
+Core 9179ca302fdfba5d7cee9e2b68b5c5fff00acd6f、固定試験source bdea127fb2ef4959c47c04c73ed065acfdd0cbfd、PG38684のRRF-PURE-001～008が初回で8/8成功。失敗・error・skip・未実行0。SSC448の両close scope追加済み試験をbyte同一で使用し、元のSQL・借用connection・例外選択と診断を保持した。
+
+対象RunReferenceRepositoryは未フィルタ59L／6M／1C／24B／230Iすべて到達、公開ABI差0。スコープ9物理と7陽性CRCの独立照合、NullAway・Checkstyle・SpotBugs0。PMD37は最新既根拠と全位置対応のため適用0。支援4型の不足を保存した。元SSC448の早いsourceを参照した事前照合は不一致となり、当時の最新証拠PG36776で補正した。この間の試験再実行0。
+
+証跡 evidence/01_PT/018_NK-OPS-001/evidence/PG38688-f02-run-reference-jdbc-owner-independent-v1/manifest.json SHA256 78f34f3d56273bc732a7fe579f017bb6dbaac39f7d728bf19bd0a0077c7aac1e。F02全体・P004-03正式・451・実DBを未受入で継続。
