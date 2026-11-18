@@ -1,0 +1,130 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "sdkJars": [
+    "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+  },
+  "resources": [],
+  "systemProperties": {},
+  "id": "PG39798-CLEANUP-FIXED-STATEMENT-TABLE",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productionCoreMain": "278839e0272a15a40a6a42b898eb2f6429597a5f",
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/017_NK-BAT-001/4695_CleanupRepository固定statement表の単体仕様.md",
+      "sha256": "168f9eb2651e29b6f73416c1511b36b0e56a4900bd63afe26b08975abfc26c49"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39790-f03-cleanup-repository-fixed-statement-dispatch-v1/before.json",
+      "sha256": "211cd5fff84ae1647a5caf321b609a1be4f37c8e1007ac28b086c09e9b54e012"
+    }
+  ],
+  "mainSources": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupQueryPortTest.java",
+      "tests": 9
+    },
+    {
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepPortTest.java",
+      "tests": 9
+    }
+  ],
+  "expectedTests": 18,
+  "newTestDefinitions": 0,
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-batch/pom.xml",
+    "src/schubert-nk-storage/pom.xml",
+    "src/schubert-nk-bootstrap/pom.xml"
+  ],
+  "productOwnerByMainPath": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java": "WBS-P017-02",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "WBS-P017-01",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepository.java": "WBS-P004-03",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/RunReferences.java": "WBS-P017-12",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": "WBS-P003-04",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.java": "WBS-P004-05",
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/package-info.java": "WBS-P003-04",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupRepository.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepository.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupCounts.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/LogCleanupProgress.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupStepChunk.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupKind.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupChunk.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupReason.java": "WBS-P017-07",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStepAttempt.java": "WBS-P017-12",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchStep.java": "WBS-P017-02"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/batch/repository/RunReferenceRepository.class",
+    "dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRepositoryException.class",
+    "dev/codex/schubert/nk/batch/repository/RunReferences.class",
+    "dev/codex/schubert/nk/batch/repository/BatchRun.class",
+    "dev/codex/schubert/nk/storage/StorageIoException.class",
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class",
+    "dev/codex/schubert/nk/api/bootstrap/JdbcFailureGraph.class",
+    "dev/codex/schubert/nk/storage/package-info.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupCounts.class",
+    "dev/codex/schubert/nk/batch/repository/LogCleanupProgress.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupKind.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupChunk.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupReason.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStepAttempt.class",
+    "dev/codex/schubert/nk/batch/repository/BatchStep.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository$StatementFactory.class",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepChunk$Reason.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/batch/repository/CleanupRepository",
+    "dev/codex/schubert/nk/batch/repository/CleanupStepRepository"
+  ],
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39791-cleanup-fixed-statement-prestyle-v1",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39792-cleanup-fixed-statement-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39794-cleanup-fixed-statement-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39796-cleanup-fixed-statement-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39798-cleanup-fixed-statement-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39800-cleanup-fixed-statement-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39792-cleanup-fixed-statement-prepare-v1",
+    "unit": "pg39798-cleanup-fixed-statement-unit-v1"
+  }
+}
