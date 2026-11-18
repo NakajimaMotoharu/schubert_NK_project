@@ -1,0 +1,314 @@
+{
+  "schema": "PGPT_STATIC_ADMISSION_V1",
+  "profile": "PG39596-BUG3292-API-OUTBOX-TYPED-CLOSE-V1",
+  "prepare": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39588-bug3292-api-outbox-prepare-v1/manifest.json",
+    "sha256": "affffafb2225b3e26d658fb14a9c26c6f123212f7db77b44fb2f0a4ec8c88b70"
+  },
+  "static": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39590-bug3292-api-outbox-static-v1/manifest.json",
+    "sha256": "12bfb37964cb4866e37f9e67cd1644537d8a02f8986ff14113e7ffc0858523d2"
+  },
+  "sourceAnchors": [
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "sourceLine": 33,
+      "rule": "AvoidSynchronizedStatement",
+      "message": "Use ReentrantLock rather than synchronization",
+      "sourceAnchor": "synchronized (lock) {",
+      "occurrences": 1,
+      "reason": "SS351 serializes this private owner from SQL through publication and clears observations within that same lock. OUTBOXCONN006 exercises the owner boundary without exposing a lock or introducing workers.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "sourceLine": 41,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failedObservation) {",
+      "occurrences": 1,
+      "reason": "The contract requires clearing both metric families and the snapshot on SQL, RuntimeException or Error. The same exact failure is explicitly rethrown; OUTBOXCONN003 confirms the three primary types.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+      "sourceLine": 41,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Error in try-catch block",
+      "sourceAnchor": "} catch (SQLException | RuntimeException | Error failedObservation) {",
+      "occurrences": 1,
+      "reason": "The contract requires clearing both metric families and the snapshot on SQL, RuntimeException or Error. The same exact failure is explicitly rethrown; OUTBOXCONN003 confirms the three primary types.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 47,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this PreparedStatement object are closed after use",
+      "sourceAnchor": "@Nullable PreparedStatement statement = connection.prepareStatement(SQL);",
+      "occurrences": 1,
+      "reason": "The acquired JDBC handle is checked for null immediately and closed exactly once by the typed helper invoked from finally. The actual primary and acquired resources are measured in original OUTBOXDB007/008.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 52,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ResultSet object are closed after use",
+      "sourceAnchor": "@Nullable ResultSet rows = statement.executeQuery();",
+      "occurrences": 1,
+      "reason": "The acquired JDBC handle is checked for null immediately and closed exactly once by the typed helper invoked from finally. The actual primary and acquired resources are measured in original OUTBOXDB007/008.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 67,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "SSC-470 preserves the JDK cleanup contract across every Throwable. The precise primary is rethrown and any close failure is suppressed or propagated, including the language self-suppression error. The scope does not recover from a failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 73,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable failure) {",
+      "occurrences": 1,
+      "reason": "SSC-470 preserves the JDK cleanup contract across every Throwable. The precise primary is rethrown and any close failure is suppressed or propagated, including the language self-suppression error. The scope does not recover from a failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 94,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable secondary) {",
+      "occurrences": 1,
+      "reason": "SSC-470 preserves the JDK cleanup contract across every Throwable. The precise primary is rethrown and any close failure is suppressed or propagated, including the language self-suppression error. The scope does not recover from a failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "sourceLine": 104,
+      "rule": "AvoidCatchingGenericException",
+      "message": "Avoid catching Throwable in try-catch block",
+      "sourceAnchor": "} catch (Throwable secondary) {",
+      "occurrences": 1,
+      "reason": "SSC-470 preserves the JDK cleanup contract across every Throwable. The precise primary is rethrown and any close failure is suppressed or propagated, including the language self-suppression error. The scope does not recover from a failure.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 224,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The in-memory dynamic proxy implements java.sql.Connection, PreparedStatement or ResultSet. Using the defining interface loader binds the exact public JDK interface rather than inheriting a classpath or container loader.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 248,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "The named owned test executor always shuts down and awaits termination in finally with a fixed 10 second bound. This local two-owner or 64-caller fixture does not install a production scheduler.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 248,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(2);",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 259,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.submit(() -> collector.collect(gate(first.connection(), entered, release), AS_OF));",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 263,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.submit(",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 283,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 284,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 293,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The named owned test executor always shuts down and awaits termination in finally with a fixed 10 second bound. This local two-owner or 64-caller fixture does not install a production scheduler.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 293,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 311,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 318,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sourceLine": 319,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 62,
+      "rule": "UseConcurrentHashMap",
+      "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+      "sourceAnchor": "final Map<String, Throwable> faults = new HashMap<>();",
+      "occurrences": 1,
+      "reason": "Each map belongs to a single fixture. It is populated before its fixture is used by the owning task; independent fixture instances and Future completion establish publication without concurrent mutation.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 86,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "Connection.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The in-memory dynamic proxy implements java.sql.Connection, PreparedStatement or ResultSet. Using the defining interface loader binds the exact public JDK interface rather than inheriting a classpath or container loader.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 113,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "PreparedStatement.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The in-memory dynamic proxy implements java.sql.Connection, PreparedStatement or ResultSet. Using the defining interface loader binds the exact public JDK interface rather than inheriting a classpath or container loader.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 140,
+      "rule": "UseProperClassLoader",
+      "message": "In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.",
+      "sourceAnchor": "ResultSet.class.getClassLoader(),",
+      "occurrences": 1,
+      "reason": "The in-memory dynamic proxy implements java.sql.Connection, PreparedStatement or ResultSet. Using the defining interface loader binds the exact public JDK interface rather than inheriting a classpath or container loader.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 423,
+      "rule": "CloseResource",
+      "message": "Ensure that resources like this ExecutorService object are closed after use",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "The named owned test executor always shuts down and awaits termination in finally with a fixed 10 second bound. This local two-owner or 64-caller fixture does not install a production scheduler.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 423,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var pool = Executors.newFixedThreadPool(8);",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 425,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "var results = pool.invokeAll(tasks, 10, TimeUnit.SECONDS);",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 429,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "pool.shutdownNow();",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "sourceLine": 430,
+      "rule": "DoNotUseThreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "sourceAnchor": "assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));",
+      "occurrences": 1,
+      "reason": "This is the bounded SDK/JDBC proxy concurrency fixture required for tests 009 or 006/007. Latches, result waits and owner termination have explicit limits and do not introduce a production thread policy.",
+      "disposition": "NOT_APPLICABLE"
+    }
+  ]
+}

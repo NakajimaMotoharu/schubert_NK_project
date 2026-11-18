@@ -37,6 +37,9 @@ class OutboxObservationRepositoryTest {
   private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
   private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
   private static final String FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2 = "owned fixture failure";
+  private static final String COUNT_READ_POINT = "count";
+  private static final String ROWS_CLOSE_POINT = "RSclose";
+  private static final String STATEMENT_CLOSE_POINT = "PSclose";
   private static final Instant AS_OF = Instant.EPOCH;
   private static final String SQL =
       "SELECT status, COUNT(*) AS row_count, MIN(created_at) AS oldest_created_at"
@@ -123,7 +126,7 @@ class OutboxObservationRepositoryTest {
                   case "close":
                     beforeStatementClose.run();
                     closes.add("PS");
-                    fault("PSclose");
+                    fault(STATEMENT_CLOSE_POINT);
                     return null;
                   default:
                     throw new AssertionError("unexpected prepared-statement operation");
@@ -148,7 +151,7 @@ class OutboxObservationRepositoryTest {
                     return rows.get(cursor).status().orElse(null);
                   case "getLong":
                     assertEquals("row_count", arguments[0]);
-                    fault("count");
+                    fault(COUNT_READ_POINT);
                     return rows.get(cursor).count();
                   case "getObject":
                     assertEquals("oldest_created_at", arguments[0]);
@@ -160,7 +163,7 @@ class OutboxObservationRepositoryTest {
                     return rows.get(cursor).sqlNull();
                   case "close":
                     closes.add("RS");
-                    fault("RSclose");
+                    fault(ROWS_CLOSE_POINT);
                     return null;
                   default:
                     throw new AssertionError("unexpected result-set operation");
@@ -357,7 +360,14 @@ class OutboxObservationRepositoryTest {
   @Test
   void outboxDb008ReadAndCloseFailuresPreserveOriginalIdentityAndSuppressedOrder() {
     for (var point :
-        List.of("next", "status", "count", "wasNull", "oldest", "RSclose", "PSclose")) {
+        List.of(
+            "next",
+            "status",
+            COUNT_READ_POINT,
+            "wasNull",
+            "oldest",
+            ROWS_CLOSE_POINT,
+            STATEMENT_CLOSE_POINT)) {
       for (var fault :
           List.<Throwable>of(
               new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2),
@@ -377,9 +387,9 @@ class OutboxObservationRepositoryTest {
     var primary = new SQLException("owned query failure");
     var rs = new SQLException("owned rows close failure");
     var ps = new SQLException("owned statement close failure");
-    f.faults.put("count", primary);
-    f.faults.put("RSclose", rs);
-    f.faults.put("PSclose", ps);
+    f.faults.put(COUNT_READ_POINT, primary);
+    f.faults.put(ROWS_CLOSE_POINT, rs);
+    f.faults.put(STATEMENT_CLOSE_POINT, ps);
     assertSame(
         primary,
         assertThrows(
@@ -459,11 +469,12 @@ class OutboxObservationRepositoryTest {
     var rowFailure = new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2);
     var statementSecondary = new SQLException("owned fixture statement secondary");
     var rows = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
-    rows.faults.put("count", rowFailure);
-    rows.faults.put("RSclose", rowFailure);
-    rows.faults.put("PSclose", statementSecondary);
+    rows.faults.put(COUNT_READ_POINT, rowFailure);
+    rows.faults.put(ROWS_CLOSE_POINT, rowFailure);
+    rows.faults.put(STATEMENT_CLOSE_POINT, statementSecondary);
     var failedRows =
-        assertThrows(IllegalArgumentException.class, () -> repository.read(rows.connection(), AS_OF));
+        assertThrows(
+            IllegalArgumentException.class, () -> repository.read(rows.connection(), AS_OF));
     assertSame(rowFailure, failedRows.getCause());
     assertEquals(List.of(statementSecondary), List.of(failedRows.getSuppressed()));
     assertEquals(List.of(), List.of(rowFailure.getSuppressed()));
@@ -472,11 +483,10 @@ class OutboxObservationRepositoryTest {
     var statementFailure = new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2);
     var statement = new Fixture();
     statement.faults.put("timeout", statementFailure);
-    statement.faults.put("PSclose", statementFailure);
+    statement.faults.put(STATEMENT_CLOSE_POINT, statementFailure);
     var failedStatement =
         assertThrows(
-            IllegalArgumentException.class,
-            () -> repository.read(statement.connection(), AS_OF));
+            IllegalArgumentException.class, () -> repository.read(statement.connection(), AS_OF));
     assertSame(statementFailure, failedStatement.getCause());
     assertEquals(List.of(), List.of(failedStatement.getSuppressed()));
     assertEquals(List.of(), List.of(statementFailure.getSuppressed()));

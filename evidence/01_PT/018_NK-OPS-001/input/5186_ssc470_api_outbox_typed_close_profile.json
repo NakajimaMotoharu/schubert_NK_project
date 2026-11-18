@@ -1,0 +1,117 @@
+{
+  "schema": "PGPT_CLOSED_HOST_PROFILE_V1",
+  "id": "PG39596-BUG3292-API-OUTBOX-TYPED-CLOSE-V1",
+  "costWbsLeafIds": [
+    "WBS-F03"
+  ],
+  "costBoundary": "ADDITIONAL_QUALIFICATION_NO_ORIGINAL_COST_REASSIGNMENT",
+  "productOwnerByMainPath": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java": "WBS-P018-09",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java": "WBS-P018-09",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java": "WBS-P018-09",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java": "WBS-P018-09",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java": "WBS-P018-09"
+  },
+  "oracleSpecs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1664_APIOutbox\u89b3\u6e2cRepository_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+      "sha256": "99ba734001504833c6c18c2d24336f1e9b6af0a48100c9bd7ee4c0deece09ba8"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/1668_APIOutboxMetric\u7d50\u7dda_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+      "sha256": "df3eefbf6cb14a94569334b850141e30825cc94c5d7a0d397306a981952ffd5a"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/3963_API Outbox\u501f\u7528JDBC\u539f\u5341\u516b_\u6709\u9650owner\u4ed5\u69d8.md",
+      "sha256": "b5dcfedc4d2bb43af0928876a40ec362d97bb5a2efa6363a9b5f4cda506749dc"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/4686_SSC470_APIOutbox\u5358\u4e00\u578b\u4ed8\u304d\u89e3\u653e_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8.md",
+      "sha256": "cb2244f0511a5ec01fe0a0ee45b03b1c011f9892774798b2fef606875be59572"
+    }
+  ],
+  "closureProofs": [
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG25454-api-outbox-jdbc-whole18-independent-v1/manifest.json",
+      "sha256": "66ac318ff158abf1b95330988401f42e8424f6a9ff590a62791fed978b6a5ee7"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39582-p00405-api-outbox-raw-before-v1/manifest.json",
+      "sha256": "a2dc9198ddeb76c0835a0e4ee5dc4c4695e521d9785c467e9b3adbb1b9c3eff6"
+    },
+    {
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG39278-bug3264-api-recorder-generated-post-v1/manifest.json",
+      "sha256": "1df96a78800c2f15e460e58600def17ca484051b8952e1264f20b62c7bcf57c2"
+    }
+  ],
+  "qualityExceptions": [],
+  "coverageExclusions": [],
+  "productionCoreMain": "5e0b5575cf14416389a30be0175b52f7ec685983",
+  "mainSources": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/package-info.java"
+  ],
+  "testSources": [
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java",
+      "tests": 11
+    },
+    {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "tests": 8
+    }
+  ],
+  "expectedTests": 19,
+  "resources": [],
+  "sdkJars": [
+    "io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar",
+    "io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar",
+    "io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar"
+  ],
+  "preparedDependencyHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "/home/mini/codex/project1/work/toolchain/junit-platform-console-standalone-1.13.4.jar": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar": "9ca47dfa831409b40253c8dc98c17b9d3e050ebbde4d1543c5521dca2b95ad56",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar": "f2cee6ef046e72eec8128474c7f58c6217173b45ae373c30de0289f2a56ab0fd",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar": "eb34f0cd84a879393ae5c21160fc06385ccdc74f36a4d1e31b199f59acfdaf71"
+  },
+  "physicalClasses": [
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.class",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Counts.class",
+    "dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder$Status.class",
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.class",
+    "dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder$Ages.class",
+    "dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector.class",
+    "dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.class",
+    "dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository$Snapshot.class",
+    "dev/codex/schubert/nk/api/monitoring/package-info.class"
+  ],
+  "targetClasses": [
+    "dev/codex/schubert/nk/api/monitoring/OutboxMetricCollector",
+    "dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository",
+    "dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository$Snapshot"
+  ],
+  "pomInputs": [
+    "pom.xml",
+    "src/schubert-nk-api/pom.xml"
+  ],
+  "systemProperties": {},
+  "slots": {
+    "prestyle": "evidence/01_PT/018_NK-OPS-001/evidence/PG39587-bug3292-api-outbox-prestyle-v2",
+    "prepare": "evidence/01_PT/018_NK-OPS-001/evidence/PG39588-bug3292-api-outbox-prepare-v1",
+    "static": "evidence/01_PT/018_NK-OPS-001/evidence/PG39590-bug3292-api-outbox-static-v1",
+    "preflight": "evidence/01_PT/018_NK-OPS-001/evidence/PG39594-bug3292-api-outbox-preflight-v1",
+    "unit": "evidence/01_PT/018_NK-OPS-001/evidence/PG39596-bug3292-api-outbox-unit-v1",
+    "post": "evidence/01_PT/018_NK-OPS-001/evidence/PG39600-bug3292-api-outbox-post-v1"
+  },
+  "privateDirs": {
+    "prepare": "pg39588-bug3292-api-outbox-prepare-v1",
+    "unit": "pg39596-bug3292-api-outbox-unit-v1"
+  },
+  "newTestDefinitions": 1,
+  "standardCompilerSwitchMaps": [],
+  "forbiddenInitializedClasses": []
+}
