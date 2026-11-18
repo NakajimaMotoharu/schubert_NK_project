@@ -1,0 +1,105 @@
+{
+  "eventId": "PGPT-20261008-6100",
+  "actualExit": 0,
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-EXACT-LOOSE-GIT-OBJECT-PRESERVATION-20261119",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-G07-EXACT-LOOSE-GIT-OBJECT-PRESERVATION-20261119",
+    "workAttributionKind": "RECOVERY",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07"
+    ],
+    "source": "9ce1ff47ad401229dd756453fbef3e6605479e78",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40070-g07-packed-duplicate-capacity-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.6
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40044-g07-preserve-older-public-projection-v1/manifest.json",
+        "sha256": "bdbdd0250a4ed158b69dec6ba1aa884e3594bb7d437cdbdb33227cc1cd132430"
+      }
+    ],
+    "workScope": "Capacity is under the original G07 durable output reserve. Use Git native pack on every exact loose object (including unreachable), then verify all IDs/bytes before removing identical redundant loose copies only. Preserve all refs, reflogs, index, Git worktree, older packs and private artifacts. No expire or GC or remote action.",
+    "quotaAfter": {
+      "schema": "PGPT_FRESH_QUOTA_V1",
+      "observedAtUTC": "2026-11-18T19:02:45.625000+00:00",
+      "ordinaryUsageAllowed": true,
+      "primary": {
+        "usedPercent": 46,
+        "remainingPercent": 54,
+        "resetsAt": 1795445753,
+        "windowDurationMins": 10080
+      },
+      "secondary": null
+    },
+    "quotaReceipt": {
+      "sha256": "3edee252a5aa223dd94ad8eb7bccd80688b7f29edfe6272accfb01569cbcc227",
+      "observation": {
+        "schema": "PGPT_FRESH_QUOTA_V1",
+        "observedAtUTC": "2026-11-18T19:02:45.625000+00:00",
+        "ordinaryUsageAllowed": true,
+        "primary": {
+          "usedPercent": 46,
+          "remainingPercent": 54,
+          "resetsAt": 1795445753,
+          "windowDurationMins": 10080
+        },
+        "secondary": null
+      },
+      "vendorSignatureAvailable": false,
+      "origin": "FRESH_GET_USAGE_LIMITS_TOOL_RESPONSE_SANITIZED_NOT_VENDOR_ATTESTATION"
+    },
+    "observedSharedPp": null,
+    "sameQuotaWindow": false,
+    "groupCapExceeded": false,
+    "newImplementationAllowedByQuota": true,
+    "attribution": "UNKNOWN",
+    "actualAllocatedPp": null,
+    "tokenTotals": null,
+    "terminalAtUTC": "2026-11-18T19:02:41.101742+00:00",
+    "postTerminalReceiptVerified": true,
+    "missingOrChangedWindowIsNotZero": true,
+    "publicEvidence": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40070-g07-packed-duplicate-capacity-v1/manifest.json",
+        "sha256": "5eada61059dde21c7a4e05b7a4af0b8f1937b5cb0f536470569273401474f678"
+      },
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40070-g07-packed-duplicate-capacity-v1/independent.json",
+        "sha256": "3fe0ecc10cccfbdd102f104af8007c58a1bbabf1fd9e934fb3a847acfd63efe1"
+      }
+    ],
+    "result": "Retained all 3289 Git objects in independently verified pack; released only verified loose duplicates. Git fsck connectivity success. Durable G07 reserve regained; actual 20 GiB preflight remains unavailable.",
+    "netRecoveredBytes": 448233472,
+    "before": 464744448,
+    "after": 912977920,
+    "looseDuplicatesReleased": 3289,
+    "logicalObjectsRemoved": 0,
+    "firstGitChildExit": 128,
+    "firstCauseUnconfirmed": true,
+    "finalTwoGitExits": [
+      0,
+      0
+    ],
+    "formalIntake": 0,
+    "currentAccepted": 17,
+    "productTests": 0
+  }
+}

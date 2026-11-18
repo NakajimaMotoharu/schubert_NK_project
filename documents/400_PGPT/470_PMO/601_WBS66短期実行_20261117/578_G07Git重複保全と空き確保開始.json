@@ -1,0 +1,53 @@
+{
+  "eventId": "PGPT-20261008-6099",
+  "groupId": "PGPT-WBS66-G07-EXACT-LOOSE-GIT-OBJECT-PRESERVATION-20261119",
+  "quota": {
+    "schema": "PGPT_FRESH_QUOTA_V1",
+    "observedAtUTC": "2026-11-18T18:59:19.785000+00:00",
+    "ordinaryUsageAllowed": true,
+    "primary": {
+      "usedPercent": 46,
+      "remainingPercent": 54,
+      "resetsAt": 1795445752,
+      "windowDurationMins": 10080
+    },
+    "secondary": null
+  },
+  "values": {
+    "contextSchema": "PGPT_EXPLICIT_GROUP_CONTEXT_V1",
+    "contextGroupId": "PGPT-WBS66-G07-EXACT-LOOSE-GIT-OBJECT-PRESERVATION-20261119",
+    "workCategory": "ADMIN",
+    "workDetailCategory": "PGPT-WBS66-G07-EXACT-LOOSE-GIT-OBJECT-PRESERVATION-20261119",
+    "workAttributionKind": "RECOVERY",
+    "wbsLeafIds": [
+      "WBS-F03"
+    ],
+    "managementWorkIds": [
+      "G07"
+    ],
+    "source": "9ce1ff47ad401229dd756453fbef3e6605479e78",
+    "productionCoreMain": "ecf8a00fbd37720b80f8e107d59727723c706a12",
+    "run": "PG40070-g07-packed-duplicate-capacity-v1",
+    "modelRequested": "gpt-6.2-sol",
+    "modelObserved": "gpt-6.2-sol",
+    "reasoningRequested": "high",
+    "reasoningObserved": null,
+    "speedRequested": "standard",
+    "speedObserved": null,
+    "estimateAtGroupStartPp": {
+      "low": 0.25,
+      "base": 0.65,
+      "high": 1.6
+    },
+    "groupCapPp": 4,
+    "completedOriginalRowPricePp": 0,
+    "originalRemainingDetailBasePp": 1089.848,
+    "oracleReferences": [
+      {
+        "path": "evidence/01_PT/018_NK-OPS-001/evidence/PG40044-g07-preserve-older-public-projection-v1/manifest.json",
+        "sha256": "bdbdd0250a4ed158b69dec6ba1aa884e3594bb7d437cdbdb33227cc1cd132430"
+      }
+    ],
+    "workScope": "Capacity is under the original G07 durable output reserve. Use Git native pack on every exact loose object (including unreachable), then verify all IDs/bytes before removing identical redundant loose copies only. Preserve all refs, reflogs, index, Git worktree, older packs and private artifacts. No expire or GC or remote action."
+  }
+}
